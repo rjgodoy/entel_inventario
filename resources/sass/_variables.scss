@@ -1,0 +1,78 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$coolBlue: #008AFF;
+// $indigo: #6574cd;
+// $purple: #9561e2;
+// $pink: #f66d9b;
+// $red: #e3342f;
+// $orange: #f6993f;
+// $yellow: #ffed4a;
+// $green: #38c172;
+// $teal: #4dc0b5;
+// $cyan: #6cb2eb;
+$mirage: #191B22;
+$blackRussian: #23252C;
+
+$black-ter: $mirage;
+$dark: $blackRussian;
+$info: $coolBlue;
+
+
+// Background image
+.hero.has-background {
+	position: relative;
+	overflow: hidden;
+}
+.hero-background {
+	position: absolute;
+	object-fit: cover;
+	object-position: center center;
+	width: 100%;
+	height: 100%;
+}
+.hero-background.is-transparent {
+	opacity: 0.3;
+}
+
+// Navbar centered
+.navbar-item.navbar-center {
+    flex-grow: 1;
+    // flex-direction: column;
+    justify-content: center;
+}
+
+// font awesome size
+.fa-2x {
+	font-size: 1.5rem;
+}
+
+// hidden mobile
+@media (max-width: 1024px) {
+	.desktop {
+		display: none;
+	}
+	.height-40 {
+		max-width: 30px;
+		margin-left: 10px;
+	}
+}
+
+// transparent navbar
+.navbar {
+	&.is-transparent {
+		background-color: transparent;
+		background-image: none;
+	}
+}
+
+
+.hero .hero-top {
+    margin-top: 0px;
+}

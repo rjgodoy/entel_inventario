@@ -1,0 +1,147 @@
+<template>
+    <section class="section is-marginless" :class="bodyBackground">
+        <div class="container">
+            <div class="box" :class="boxBackground">
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input" :class="bodyBackground + ' ' + primaryText + ' ' + hovered" @keyup="search" v-model="searchText" type="search" arial-label="Buscar" placeholder="Buscar...">
+                        <span class="icon is-small is-left">
+                            <font-awesome-icon icon="search"/>
+                        </span>
+                        <p v-text="searchText"></p>
+                    </p>
+                </div>
+                <table class="table is-fullwidth" :class="boxBackground">
+                    <thead>
+                        <tr>
+                            <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="id"># Contrato</abbr></th>
+                            <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="id">POP</abbr></th>
+                            <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="id">Operador</abbr></th>
+                            <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="id">Fechas Contratos</abbr></th>
+                            <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="id">Propietario</abbr></th>
+                            <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="id">Rol Propiedad</abbr></th>
+                            <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr class="is-size-7 has-text-weight-light" v-for="data in comsiteData.data">
+                            <td class="has-text-weight-light" :class="primaryText">{{ data.id }}</td>
+                            <td class="">
+                                <div class="is-size-7 has-text-weight-normal" :class="primaryText">
+                                    {{ data.pop ? data.pop.nombre : '' }}
+                                </div>
+                                <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                    {{ data.pop ? data.pop.comuna.nombre : '' }}
+                                </div>
+                                <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                    {{ data.pop ? 'Zona: ' + data.pop.comuna.zona.nombre : '' }} - {{ data.pop ? 'CRM: ' + data.pop.comuna.zona.crm.nombre : '' }}
+                                </div>
+                            </td>
+                            <td class="has-text-weight-light has-text-centered" :class="primaryText">{{ data.operador }}</td>
+
+                            <td class="">
+                                <div class="has-text-weight-light" :class="primaryText">
+                                    Inicio: {{ data.started_at }}
+                                </div>
+                                <div class="has-text-weight-light" :class="primaryText">
+                                    Término: {{ data.ended_at }}
+                                </div>
+                            </td>
+                            <td class="">
+                                <div class="has-text-weight-light" :class="primaryText">
+                                    {{ data.propietario }}
+                                </div>
+                                <div class="has-text-weight-light" :class="secondaryText">
+                                    {{ data.fono_propietario || data.celular_propietario ? 'Contacto: ' : '' }}
+                                    {{ data.fono_propietario && data.celular_propietario ? data.fono_propietario + ' - ' + data.celular_propietario : (data.fono_propietario ? data.fono_propietario : data.celular_propietario) }}
+                                </div>
+                            </td>
+                            <td class="has-text-weight-light has-text-centered" :class="primaryText">{{ data.rol_propiedad }}</td>
+                            <td class="has-text-weight-light has-text-centered" :class="primaryText">
+                                <button href="/comsites/download" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
+                                    <font-awesome-icon icon="bars"/>
+                                </button>
+                            </td>
+                        </tr>    
+                    </tbody>
+                </table>
+                <nav class="pagination" role="navigation" aria-label="pagination">
+                    <vue-pagination  
+                        :pagination="comsiteData"
+                        @paginate="getComsiteData()"
+                        :offset="4"
+                        :primaryText="primaryText">
+                    </vue-pagination>
+                </nav>
+                <div class="field">
+                    <div class="field has-text-right">
+                        <a href="/comsite/create" type="submit" class="button is-link is-small">Sincronizar</a>
+                    </div>
+                    <div class="is-size-7 has-text-right" :class="secondaryText">Fecha ultima actualización: {{ last_updated }}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+    import VuePagination from './VuePagination.vue';
+    export default {
+        components: {
+            'vue-pagination': VuePagination
+        },
+        props : [
+            'last_updated',
+            'csrf'
+        ],
+        data() {
+            return {
+                comsiteData: {
+                    total: 0,
+                    per_page: 2,
+                    from: 1,
+                    to: 0,
+                    current_page: 1
+                },
+                counter: 0,
+                searchText: '',
+
+                // bodyBackground: 'has-background-light',
+                // boxBackground: 'has-background-white',
+                // primaryText: 'has-text-dark',
+                // secondaryText: 'has-text-grey',
+                // hovered: '',
+
+                bodyBackground: 'has-background-black-ter',
+                boxBackground: 'has-background-dark',
+                primaryText: 'has-text-white',
+                secondaryText: 'has-text-grey-light',
+                hovered: 'is-hovered',
+            }
+        },
+        mounted() {
+            this.getComsiteData()
+        },
+        methods: {
+            getComsiteData() {
+                axios.get(`api/comsites?page=${this.comsiteData.current_page}`)
+                    .then((response) => {
+                        this.comsiteData = response.data;
+                    })
+                    .catch(() => {
+                        console.log('handle server error from here');
+                    });
+            },
+            search() {
+                axios.get(`api/searchComsites/${this.searchText}`)
+                    .then((response) => {
+                        this.comsiteData = response.data;
+                    })
+                    .catch(() => {
+
+                    });
+            }
+        }
+    }
+</script>

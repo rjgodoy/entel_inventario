@@ -4,11 +4,10 @@
             <div class="box" :class="boxBackground">
                 <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                        <input class="input" :class="bodyBackground + ' ' + primaryText + ' ' + hovered" @keyup="search" v-model="searchText" type="search" arial-label="Buscar" placeholder="Buscar...">
+                        <input class="input is-rounded" :class="bodyBackground + ' ' + primaryText" @keyup="search" v-model="searchText" type="search" arial-label="Buscar" placeholder="Buscar..." autofocus>
                         <span class="icon is-small is-left">
                             <font-awesome-icon icon="search"/>
                         </span>
-                        <p v-text="searchText"></p>
                     </p>
                 </div>
                 <table class="table is-fullwidth" :class="boxBackground">
@@ -97,6 +96,13 @@
         ],
         data() {
             return {
+                darkMode: 1,
+                bodyBackground: '',
+                boxBackground: '',
+                primaryText: '',
+                secondaryText: '',
+                searchBodyBackground: '',
+
                 comsiteData: {
                     total: 0,
                     per_page: 2,
@@ -105,20 +111,11 @@
                     current_page: 1
                 },
                 counter: 0,
-                searchText: '',
-
-                // bodyBackground: 'has-background-light',
-                // boxBackground: 'has-background-white',
-                // primaryText: 'has-text-dark',
-                // secondaryText: 'has-text-grey',
-                // hovered: '',
-
-                bodyBackground: 'has-background-black-ter',
-                boxBackground: 'has-background-dark',
-                primaryText: 'has-text-white',
-                secondaryText: 'has-text-grey-light',
-                hovered: 'is-hovered',
+                searchText: ''
             }
+        },
+        created() {
+            this.styleMode()
         },
         mounted() {
             this.getComsiteData()
@@ -141,6 +138,34 @@
                     .catch(() => {
 
                     });
+            },
+
+            // Style mode
+            styleMode(){
+                if (this.darkMode == 1) {
+                    // dark mode
+                    this.bodyBackground = 'has-background-black-ter'
+                    this.boxBackground = 'has-background-dark'
+                    this.primaryText = 'has-text-white'
+                    this.secondaryText = 'has-text-grey-light'
+                    this.searchBodyBackground = 'has-background-dark'
+                } else {
+                    // light mode
+                    this.bodyBackground = 'has-background-light'
+                    this.boxBackground = 'has-background-white'
+                    this.primaryText = 'has-text-dark'
+                    this.secondaryText = 'has-text-grey'
+                    this.searchBodyBackground = 'has-background-white'
+                }
+            },
+            changeStyle() {
+                if (this.darkMode == 0) {
+                    this.darkMode = 1
+                    this.styleMode()
+                } else {
+                    this.darkMode = 0
+                    this.styleMode()
+                }
             }
         }
     }

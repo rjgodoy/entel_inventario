@@ -88,26 +88,26 @@
                             </div>
                         </div>
                         @else
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link has-text-grey-light has-background-black-ter">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link has-text-grey-light has-background-black-ter">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="navbar-dropdown is-size-7 has-background-black-ter">
+                                <a class="navbar-item has-text-grey-light has-background-black-ter" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="navbar-dropdown is-size-7 has-background-black-ter">
-                                    <a class="navbar-item has-text-grey-light has-background-black-ter" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
+                        </div>
                         @endguest
                     </div>
                     <div class="navbar-end">
-                        <div class="navbar-item" style="margin-top: -10px">
+                        <div class="" style="margin: 0px 20px">
                             <clock></clock>
                         </div>
                     </div>
@@ -122,6 +122,7 @@
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
 </body>
 </html>

@@ -29,7 +29,7 @@
                     </tr>
                 </tbody>
             </table>
-            <form method="POST" action="/dashboard/pops/export">
+            <form method="POST" action="/pop/export">
                 <input type="hidden" name="_token" :value="csrf" />
 
                 <div class="field has-addons">

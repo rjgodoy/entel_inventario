@@ -21,7 +21,7 @@
                             <div class="field">
                                 <label for="username" class="label">{{ __('Username') }}</label>
                                 <p class="control has-icon has-icon-right">
-                                    <input id="username" type="text" class="input @error('username') is-invalid @enderror" name="username" placeholder="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                    <input id="username" type="text" class="input @error('username') is-invalid @enderror" name="username" placeholder="" value="{{ old('username') }}" required autocomplete="username" autofocus>
 
                                     @error('username')
                                         <span class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
                             <div class="field">
                                 <label for="password" class="label">Password</label>
                                 <p class="control has-icon has-icon-right">
-                                    <input id="password" type="password" placeholder="●●●●●●●" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    <input id="password" type="password" placeholder="" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">

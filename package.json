@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@amcharts/amcharts4": "^4.7.3",
+        "@amcharts/amcharts4-geodata": "^4.1.7",
         "@fortawesome/fontawesome-svg-core": "^1.2.25",
         "@fortawesome/free-brands-svg-icons": "^5.11.2",
         "@fortawesome/free-regular-svg-icons": "^5.11.2",

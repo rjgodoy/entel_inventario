@@ -7,10 +7,8 @@
     </div>
 </section>
 
-<section class="section has-background-black-ter is-marginless">
-    <pop-detail
-        :csrf="'{{ csrf_token() }}'"
-    ></pop-detail>
-</section>
+<pop-detail
+    :csrf="'{{ csrf_token() }}'"
+></pop-detail>
 
 @endsection

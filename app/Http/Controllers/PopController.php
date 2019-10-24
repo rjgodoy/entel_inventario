@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Pop;
 use Illuminate\Http\Request;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PopsExport;
+
 class PopController extends Controller
 {
     /**
@@ -81,5 +84,16 @@ class PopController extends Controller
     public function destroy(Pop $pop)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        return Excel::download(new PopsExport(), 'listado_pops - '.date("Y-m-d h:i:sa").'.xlsx');
     }
 }

@@ -45,7 +45,7 @@
                         <font-awesome-icon icon="search"/>
                     </span>
                     <span class="icon is-small is-right">
-                        <button class="delete" @click="clear"></button>
+                        <button class="delete" @click="clearSearch"></button>
                     </span>
                 </p>
                 
@@ -67,13 +67,13 @@
                                         {{ pop ? 'Zona ' + pop.comuna.zona.nombre : '' }} - {{ pop ? 'CRM ' + pop.comuna.zona.crm.nombre : '' }}
                                     </div>
                                 </a>
-                                <div class="field is-grouped">
-                                    <div class="">
-                                        <a class="button is-small is-link" :href="'pop/' + pop.id" target="_blank">Ver detalles</a>
-                                    </div>
-                                    <div class="">
-                                        <button class="button is-small is-link" @click="selectPop(pop)" v-model="selectedPop">Ver en mapa</button>
-                                    </div>
+                                <div class="field" style="margin-top: 10px;">
+                                    <button class="button is-small is-default" @click="selectPop(pop)" v-model="selectedPop">
+                                        <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
+                                    </button>
+                                    <a class="button is-small is-link" :href="'pop/' + pop.id" target="_blank">
+                                        <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
+                                    </a>
                                 </div>
                                 <hr class="dropdown-divider">
                             </div>
@@ -115,22 +115,19 @@
                                 :selectedZona="this.selectedZona"
                                 :csrf="csrf">
                             </services-data>
-                            <div class="tile is-parent">
-                                <article class="tile is-child box">
-                                    <div class="is-size-5 has-text-weight-semibold">Contratos</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                                </article>
-                            </div>
+                            <radial-chart>
+                                
+                            </radial-chart>
                         </div>
                     </div>
                     <div class="column">
-                        <map-view
+                        <!-- <map-view
                             :selectedPop="selectedPop"
                             :selectedCrm="selectedCrm"
                             :selectedZona="selectedZona"
                             :map_attributes="map_attributes"
                             :darkMode="darkMode"
-                        ></map-view>
+                        ></map-view> -->
                     </div>
                 </div>
             </div>
@@ -178,24 +175,10 @@
 </template>
 
 <script>
-    Vue.directive('clickOutside', {
-        bind: function (el, binding, vnode) {
-            el.clickOutsideEvent = function (event) {
-                // here I check that click was outside the el and his childrens
-                if (!(el == event.target || el.contains(event.target))) {
-                    // and if it did, call method provided in attribute value
-                    vnode.context[binding.expression](event);
-                }
-            };
-            document.body.addEventListener('click', el.clickOutsideEvent)
-        },
-        unbind: function (el) {
-            document.body.removeEventListener('click', el.clickOutsideEvent)
-        },
-    });
     import DashboardPopData from './DashboardPopData.vue';
     import DashboardTechnologiesData from './DashboardTechnologiesData.vue';
     import DashboardServicesData from './DashboardServicesData.vue';
+    import RadialChart from './RadialChart.vue';
     // import LoadingComponent from './maps/LoadingComponent.vue';
     // import ErrorComponent from './maps/ErrorComponent.vue';
     const MapView = () => ({
@@ -218,6 +201,7 @@
             'technologies-data': DashboardTechnologiesData,
             'services-data': DashboardServicesData,
             'map-view': MapView,
+            'radial-chart': RadialChart,
             // 'map-view': function(resolve) {
             //     require(['./maps/MapView.vue'], resolve)
             // }
@@ -227,10 +211,10 @@
             'csrf'
         ],
         created() {
-            this.getCrms()
             this.styleMode()
         },
         mounted() {
+            this.getCrms()
             // bulmaTagsinput.attach();
         },
         data() {
@@ -258,6 +242,7 @@
             }
         },
         methods: {
+            // Triggers
             selectPop(pop) {
                 this.selectedPop = pop
             },
@@ -282,6 +267,61 @@
                     this.selectedZona = null
                 }
             },
+            
+            // APIs
+            getCrms() {
+                axios.get(`api/crms`)
+                    .then((response) => {
+                        this.crms = response.data.data;
+                        console.log(this.crms)
+                    })
+                    .catch(() => {
+                        console.log('handle server error from here');
+                    });
+            },
+            getZonas(crm) {
+                if (crm != null) {
+                    axios.get(`api/zonasCrm/${crm.id}`)
+                        .then((response) => {
+                            this.zonas = response.data.data;
+                            console.log(this.zonas)
+                        })
+                        .catch(() => {
+                            console.log('handle server error from here');
+                        });
+                } else {
+                    this.zonas = null
+                }
+            },
+
+            // Search bar
+            autoComplete(){
+                this.popSearch = [];
+                if (this.searchText.length > 2){
+                    axios.get(`api/searchPops/${this.searchText}`)
+                    .then((response) => {
+                        this.popSearch = response.data.data;
+                        this.active = 1
+                    })
+                    .catch(() => {
+
+                    });
+                }
+            },
+            clearSearch() {
+                this.popSearch = []
+                this.searchText = ''
+                this.selectedPop = null
+            },
+            clickOutside() {
+                console.log(event)
+                this.active = 0
+            },
+            setActive() {
+                this.active = 1
+            },
+
+            // Style mode
             styleMode(){
                 if (this.darkMode == 1) {
                     // dark mode
@@ -307,54 +347,6 @@
                     this.darkMode = 0
                     this.styleMode()
                 }
-            },
-            getCrms() {
-                axios.get(`api/crms`)
-                    .then((response) => {
-                        this.crms = response.data.data;
-                        console.log(this.crms)
-                    })
-                    .catch(() => {
-                        console.log('handle server error from here');
-                    });
-            },
-            getZonas(crm) {
-                if (crm != null) {
-                    axios.get(`api/zonasCrm/${crm.id}`)
-                        .then((response) => {
-                            this.zonas = response.data.data;
-                            console.log(this.zonas)
-                        })
-                        .catch(() => {
-                            console.log('handle server error from here');
-                        });
-                } else {
-                    this.zonas = null
-                }
-            },
-            autoComplete(){
-                this.popSearch = [];
-                if (this.searchText.length > 2){
-                    axios.get(`api/searchPops/${this.searchText}`)
-                    .then((response) => {
-                        this.popSearch = response.data.data;
-                        this.active = 1
-                    })
-                    .catch(() => {
-
-                    });
-                }
-            },
-            clear() {
-                this.popSearch = [];
-                this.searchText = '';
-            },
-            clickOutside() {
-                console.log(event)
-                this.active = 0
-            },
-            setActive() {
-                this.active = 1
             }
         },
         events: {

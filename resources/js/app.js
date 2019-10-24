@@ -8,6 +8,22 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+Vue.directive('clickOutside', {
+    bind: function (el, binding, vnode) {
+        el.clickOutsideEvent = function (event) {
+            // here I check that click was outside the el and his childrens
+            if (!(el == event.target || el.contains(event.target))) {
+                // and if it did, call method provided in attribute value
+                vnode.context[binding.expression](event);
+            }
+        };
+        document.body.addEventListener('click', el.clickOutsideEvent)
+    },
+    unbind: function (el) {
+        document.body.removeEventListener('click', el.clickOutsideEvent)
+    },
+});
+
 // ########################## FontAwesome Libraries ##########################
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -32,7 +48,9 @@ import {
     faExclamationTriangle,
     faSearch,
     faDownload,
-    faBars
+    faBars,
+    faMapMarkedAlt,
+    faInfoCircle
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -65,7 +83,9 @@ library.add(
 	faExclamationTriangle,
 	faSearch,
 	faDownload,
-	faBars
+	faBars,
+    faMapMarkedAlt,
+    faInfoCircle
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -91,17 +111,17 @@ Vue.use(VueGoogleMaps, {
         // v: '3.26',
     },
  
-    //// If you intend to programmatically custom event listener code
-    //// (e.g. `this.$refs.gmap.$on('zoom_changed', someFunc)`)
-    //// instead of going through Vue templates (e.g. `<GmapMap @zoom_changed="someFunc">`)
-    //// you might need to turn this on.
-    // autobindAllEvents: false,
+    // If you intend to programmatically custom event listener code
+    // (e.g. `this.$refs.gmap.$on('zoom_changed', someFunc)`)
+    // instead of going through Vue templates (e.g. `<GmapMap @zoom_changed="someFunc">`)
+    // you might need to turn this on.
+    autobindAllEvents: false,
 
-    //// If you want to manually install components, e.g.
-    //// import {GmapMarker} from 'vue2-google-maps/src/components/marker'
-    //// Vue.component('GmapMarker', GmapMarker)
-    //// then disable the following:
-    // installComponents: true,
+    // If you want to manually install components, e.g.
+    // import {GmapMarker} from 'vue2-google-maps/src/components/marker'
+    // Vue.component('GmapMarker', GmapMarker)
+    // then disable the following:
+    installComponents: true,
 })
 
 import GmapCluster from 'vue2-google-maps/dist/components/cluster' // replace src with dist if you have Babel issues

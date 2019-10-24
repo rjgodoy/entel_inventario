@@ -9,8 +9,16 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -83,7 +91,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       icon: '../img/markers/pop-32.png',
       markers: [],
-      google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__["gmapApi"],
+      google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__["gmapApi"],
       mapStyle: null,
       style1: [{
         "featureType": "water",
@@ -625,15 +633,36 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  created: function created() {
-    this.getPops();
+  created: function () {
+    var _created = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              this.getPops();
 
-    if (this.darkMode == 1) {
-      this.mapStyle = this.style2;
-    } else {
-      this.mapStyle = null;
+              if (this.darkMode == 1) {
+                this.mapStyle = this.style2;
+              } else {
+                this.mapStyle = null;
+              }
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function created() {
+      return _created.apply(this, arguments);
     }
-  },
+
+    return created;
+  }(),
   mounted: function mounted() {},
   watch: {
     selectedPop: function selectedPop(newValue, oldValue) {
@@ -678,7 +707,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getInfoWindowContent: function getInfoWindowContent(marker) {
-      return "\n                <div class=\"card\">\n                    <div class=\"card-image\">\n                        <figure class=\"image is-4by3\">\n                            <img src=\"https://bulma.io/images/placeholders/96x96.png\" alt=\"Placeholder image\">\n                        </figure>\n                    </div>\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-content\">\n                                <p class=\"title is-4\">".concat(marker.name, "</p>\n                            </div>\n                        </div>\n                        <div class=\"content\">\n                            ").concat(marker.address, "\n                            <br>\n                            <a href=\"/pops/").concat(marker.id, "\" class=\"button is-small\">Ver POP</a>\n                        </div>\n                    </div>\n                </div>\n            ");
+      return "\n                <div class=\"card\">\n                    <div class=\"card-image\">\n                        <figure class=\"image is-4by3\">\n                            <img src=\"https://bulma.io/images/placeholders/96x96.png\" alt=\"Placeholder image\">\n                        </figure>\n                    </div>\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-content\">\n                                <p class=\"title is-4\">".concat(marker.name, "</p>\n                            </div>\n                        </div>\n                        <div class=\"content\">\n                            ").concat(marker.address, "\n                            <br>\n                            <a href=\"/pop/").concat(marker.id, "\" class=\"button is-small\">Ver POP</a>\n                        </div>\n                    </div>\n                </div>\n            ");
     },
     popLocations: function popLocations(item, index) {
       this.markers.push({
@@ -704,7 +733,8 @@ __webpack_require__.r(__webpack_exports__);
 
             _this.$refs.map.$mapPromise.then(function (map) {
               // map.panTo({ lat: this.popSelected.latitude, lng: this.popSelected.longitude })
-              var bounds = new google.maps.LatLngBounds();
+              var bounds = new google.maps.LatLngBounds(); // Create bounds from markers
+
               var _iteratorNormalCompletion = true;
               var _didIteratorError = false;
               var _iteratorError = undefined;
@@ -713,7 +743,8 @@ __webpack_require__.r(__webpack_exports__);
                 for (var _iterator = _this.markers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                   var m = _step.value;
                   bounds.extend(m.position);
-                }
+                } // Don't zoom in too far on only one marker
+
               } catch (err) {
                 _didIteratorError = true;
                 _iteratorError = err;
@@ -833,7 +864,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
             _this.$refs.map.$mapPromise.then(function (map) {
-              map.setZoom(8);
+              // map.setZoom(8)
               map.panTo({
                 lat: _this.map_attributes.latitude,
                 lng: _this.map_attributes.longitude
@@ -841,7 +872,9 @@ __webpack_require__.r(__webpack_exports__);
               // for (let m of this.markers) {
               //     bounds.extend(m.position)
               // }
-              // map.fitBounds(bounds);
+              // map.fitBounds(bounds)
+
+              map.setZoom(8);
             });
           }
         })["catch"](function () {

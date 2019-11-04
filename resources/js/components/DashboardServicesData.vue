@@ -12,7 +12,7 @@
             <table class="table is-fullwidth" :class="boxBackground">
                 <thead>
                     <tr class="is-size-7">
-                        <th class="" :class="secondaryText"><abbr title="CRM">CRM</abbr></th>
+                        <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="BAFI">BAFI</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="OLT">OLT</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="OLT 3Play">OLT 3Play</abbr></th>

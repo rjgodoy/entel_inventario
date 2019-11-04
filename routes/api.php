@@ -76,9 +76,21 @@ Route::get('serviceDataZona/{zona_id}', [
 
 // Pop
 Route::apiResource('pops','Api\PopController');
+Route::get('popsCrm/{crm_id}', [
+	'as' => 'popsCrm.index',
+	'uses' => 'Api\PopController@popsCrm'
+]);
+Route::get('popsZona/{zona_id}', [
+	'as' => 'popsZona.index',
+	'uses' => 'Api\PopController@popsZona'
+]);
 Route::get('searchPops/{text}', [
 	'as' => 'pops.search',
-	'uses' => 'Api\PopController@search'
+	'uses' => 'Api\PopController@searchPops'
+]);
+Route::get('searchPopsCrm/{text}/{crm_id}', [
+	'as' => 'popsCrm.search',
+	'uses' => 'Api\PopController@searchPopsCrm'
 ]);
 
 // Comsite

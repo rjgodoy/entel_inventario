@@ -12,6 +12,4 @@
     :csrf="'{{ csrf_token() }}'"
 ></dashboard>
 
-
-
 @endsection

@@ -17,7 +17,7 @@ class CrmController extends Controller
      */
     public function index()
     {
-        $crms = Crm::get();
+        $crms = Crm::with('zonas.comunas')->get();
         return new CrmResource($crms);
     }
 

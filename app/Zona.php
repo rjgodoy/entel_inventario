@@ -17,4 +17,10 @@ class Zona extends Model
     {
         return $this->hasMany(Comuna::class);
     }
+
+    public function responsable() 
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

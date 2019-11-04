@@ -13,10 +13,10 @@ class CreateComsitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('comsites', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
-        });
+        // Schema::create('comsites', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateComsitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comsites');
+        // Schema::dropIfExists('comsites');
     }
 }

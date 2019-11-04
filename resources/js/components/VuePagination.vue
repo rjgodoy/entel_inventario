@@ -1,5 +1,5 @@
 <template>
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
         <ul class="pagination-list">
             
             <li v-if="pagination.current_page == 1">

@@ -27,7 +27,7 @@ class ZonaController extends Controller
      */
     public function zonasCrm($crm_id)
     {
-        $zonas = Zona::where('crm_id', $crm_id)->get();
+        $zonas = Zona::with('comunas', 'responsable')->where('crm_id', $crm_id)->get();
 
         return new ZonaResource($zonas);
     }

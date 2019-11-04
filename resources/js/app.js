@@ -143,6 +143,7 @@ Vue.component('GmapCluster', GmapCluster)
 var Clock = require('./components/Clock.vue').default;
 var Dashboard = require('./components/Dashboard.vue').default;
 var PopDetail = require('./components/PopDetail.vue').default;
+// var PopTable = require('./components/PopTable.vue').default;
 var PopTable = require('./components/PopTable.vue').default;
 var ComsiteTable = require('./components/ComsiteTable.vue').default;
 

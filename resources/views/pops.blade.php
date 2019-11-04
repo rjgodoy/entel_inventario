@@ -7,8 +7,8 @@
     </div>
 </section>
 
-
 <pop-table
+	:map_attributes='@json($mapAttributes)'
     :csrf="'{{ csrf_token() }}'"
 ></pop-table>
 

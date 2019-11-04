@@ -1,6 +1,6 @@
 <template>
     <gmap-map
-        class="box"
+        class="tile is-child box"
         style="height: 100%"
         ref="map"
         :center="center"
@@ -116,7 +116,7 @@
             }
         },
         mounted() {
-            
+            console.log(this.map_attributes)
         },
         watch: {
             selectedPop(newValue, oldValue) {

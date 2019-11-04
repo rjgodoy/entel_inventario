@@ -4,12 +4,35 @@
         <section class="section is-marginless" :class="bodyBackground">
             <button class="button is-link" @click="changeStyle" v-model="darkMode">Style</button>
 
+            <!-- BOTONES -->
             <div class="container">
                 <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="crm in crms">
                         <a class="tile is-child box" :class="selectedCrm == crm ? 'has-background-link' : boxBackground" @click="selectCrm(crm)">
-                            <div class="is-size-6 has-text-weight-semibold" :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText">CRM {{ crm.nombre }}</div>
-                            <div class="is-size-2 has-text-center has-text-weight-semibold" :class="selectedCrm == crm ? selectedPrimaryBoxText : primaryText">25.2<span class="is-size-5">&nbsp;Cº</span></div>
+                            <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
+                                <div class="is-size-6 has-text-weight-semibold">
+                                    CRM {{ crm.nombre }}
+                                </div>
+
+                                <div style="margin-top: 10px;">
+                                    <div class="is-size-7 has-text-weight-light">Subgerente</div> 
+                                    <div class="is-size-7 has-text-weight-semibold">{{ crm.subgerente_crm }}</div>
+                                </div>
+                                <!-- <div class="is-size-5 has-text-weight-semibold">
+                                    <div>{{ crm.zonas.length }}</div>
+                                    <div class="is-size-7 has-text-weight-normal">Zonas</div> 
+                                </div> -->
+                            </div>
+
+                            
+                            <!-- <div 
+                                class="is-size-2 has-text-center has-text-weight-semibold" 
+                                :class="selectedCrm == crm ? selectedPrimaryBoxText : primaryText"
+                                >
+                                25.2
+                                <span class="is-size-5">&nbsp;Cº</span>
+                            </div> -->
+
                         </a>
                     </div>
                 </div>
@@ -18,8 +41,20 @@
                 <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="zona in zonas">
                         <a class="tile is-child box" :class="selectedZona == zona ? 'has-background-link' : boxBackground" @click="selectZona(zona)">
-                            <div class="is-size-6 has-text-weight-semibold" :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText">Zona {{ zona.nombre }}</div>
-                            <div class="is-size-2 has-text-center has-text-weight-semibold" :class="selectedZona == zona ? selectedPrimaryBoxText : primaryText">25.2<span class="is-size-5">&nbsp;Cº</span></div>
+                            <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
+                                <div class="is-size-6 has-text-weight-semibold">
+                                    Zona {{ zona.nombre }}
+                                </div>
+
+                                <div style="margin-top: 10px;">
+                                    <div class="is-size-7 has-text-weight-light">Coordinador</div> 
+                                    <div class="is-size-7 has-text-weight-semibold">{{ zona.responsable.nombre }} {{ zona.responsable.apellido }}</div>
+                                </div>
+                                <!-- <div class="is-size-5 has-text-weight-semibold">
+                                    <div>{{ crm.zonas.length }}</div>
+                                    <div class="is-size-7 has-text-weight-normal">Zonas</div> 
+                                </div> -->
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -33,11 +68,10 @@
                         :class="searchBodyBackground + ' ' + primaryText" 
                         v-model="searchText" 
                         @keyup="autoComplete" 
-                        type="tags" 
+                        type="text" 
                         arial-label="Buscar..." 
                         placeholder="Buscar..." 
                         autofocus
-                        value="Tag1,Tag2,Tag3"
                         v-clickOutside="clickOutside"
                         @click="setActive"
                         >
@@ -82,8 +116,11 @@
                 </div>       
             </div>
 
+            <!-- CUADROS -->
             <div class="is-marginless" :class="bodyBackground">
                 <div class="columns">
+
+                    <!-- CUADROS DE INFORMACION -->
                     <div class="column is-two-thirds">
                         <div class="tile is-ancestor">
                             <pop-data
@@ -120,6 +157,8 @@
                             </radial-chart>
                         </div>
                     </div>
+
+                    <!-- MAPA -->
                     <div class="column">
                         <!-- <map-view
                             :selectedPop="selectedPop"
@@ -131,6 +170,7 @@
                     </div>
                 </div>
             </div>
+            
         </section>
 
         <section class="section is-marginless" :class="bodyBackground">

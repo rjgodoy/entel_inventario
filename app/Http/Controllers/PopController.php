@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Pop;
 use Illuminate\Http\Request;
 
+use App\Classification;
+
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PopsExport;
 
@@ -17,7 +19,13 @@ class PopController extends Controller
      */
     public function index()
     {
-        return view('pops');
+        $mapAttributes = collect([
+            'latitude' => -33.44444275,
+            'longitude' => -70.6561017,
+            'zoom' => 8
+        ]);
+
+        return view('pops', compact('mapAttributes'));
     }
 
     /**
@@ -49,7 +57,10 @@ class PopController extends Controller
      */
     public function show(Pop $pop)
     {
-        return view('pop');
+        $classifications = Classification::with('classification_type')->where('pop_id', $pop->id)->get();
+        $classification = $classifications->last();
+
+        return view('pop', compact('classification', 'classifications'));
     }
 
     /**

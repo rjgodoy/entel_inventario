@@ -90,7 +90,7 @@
                         @else
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link has-text-grey-light has-background-black-ter">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->nombre }} <span class="caret"></span>
                             </a>
 
                             <div class="navbar-dropdown is-size-7 has-background-black-ter">

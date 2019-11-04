@@ -663,7 +663,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     return created;
   }(),
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log(this.map_attributes);
+  },
   watch: {
     selectedPop: function selectedPop(newValue, oldValue) {
       this.popSelected = newValue;
@@ -906,7 +908,7 @@ var render = function() {
     "gmap-map",
     {
       ref: "map",
-      staticClass: "box",
+      staticClass: "tile is-child box",
       staticStyle: { height: "100%" },
       attrs: {
         center: _vm.center,

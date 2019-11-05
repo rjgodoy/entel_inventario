@@ -20,6 +20,11 @@ class PopController extends Controller
         $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
                 ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
                 ->join('crms', 'zonas.crm_id', '=', 'crms.id')
+                ->leftJoin('classifications', function ($join) {
+                    $join->on('pops.id', '=', 'classifications.pop_id')
+                    ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+                })
+                ->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
                 ->select(
                     'pops.id',
                     'pops.nombre as nombre_pop',
@@ -34,7 +39,9 @@ class PopController extends Controller
                     'zonas.cod_zona',
                     'crms.nombre as nombre_crm',
                     'crms.subgerente_crm',
-                    'crms.sigla'
+                    'crms.sigla',
+                    'classifications.classification_type_id',
+                    'classification_types.type'
                 )
                 ->orderBy('pops.id')
                 ->paginate(10);
@@ -54,7 +61,12 @@ class PopController extends Controller
                 ->join('crms', function($join) use ($crm_id) {
                     $join->on('zonas.crm_id', '=', 'crms.id')
                     ->where('crms.id', $crm_id);
-                })->select(
+                })->leftJoin('classifications', function ($join) {
+                    $join->on('pops.id', '=', 'classifications.pop_id')
+                    ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+                })
+                ->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+                ->select(
                     'pops.id',
                     'pops.nombre as nombre_pop',
                     'pops.nem_movil',
@@ -68,10 +80,11 @@ class PopController extends Controller
                     'zonas.cod_zona',
                     'crms.nombre as nombre_crm',
                     'crms.subgerente_crm',
-                    'crms.sigla'
+                    'crms.sigla',
+                    'classifications.classification_type_id',
+                    'classification_types.type'
                 )->orderBy('pops.id')
                 ->paginate(10);
-        // $pops = Pop::with('comuna.zona.crm')->get();
 
         return new PopResource($pops);
     }
@@ -85,7 +98,6 @@ class PopController extends Controller
     {
         $pops = Pop::with('comuna.zona.crm')
                 ->paginate(10);
-        // $pops = Pop::with('comuna.zona.crm')->get();
 
         return new PopResource($pops);
     }
@@ -151,7 +163,12 @@ class PopController extends Controller
                     $query->where('pops.nem_fijo', 'LIKE', "%$text%")
                         ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
                         ->orWhere('pops.nombre', 'LIKE', "%$text%");
-                })->select(
+                })->leftJoin('classifications', function ($join) {
+                    $join->on('pops.id', '=', 'classifications.pop_id')
+                    ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+                })
+                ->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+                ->select(
                     'pops.id',
                     'pops.nombre as nombre_pop',
                     'pops.nem_movil',
@@ -165,7 +182,9 @@ class PopController extends Controller
                     'zonas.cod_zona',
                     'crms.nombre as nombre_crm',
                     'crms.subgerente_crm',
-                    'crms.sigla'
+                    'crms.sigla',
+                    'classifications.classification_type_id',
+                    'classification_types.type'
                 )->orderBy('pops.id')
                 ->paginate(10);
         }
@@ -192,7 +211,12 @@ class PopController extends Controller
                 $query->where('pops.nem_fijo', 'LIKE', "%$text%")
                     ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
                     ->orWhere('pops.nombre', 'LIKE', "%$text%");
-            })->select(
+            })->leftJoin('classifications', function ($join) {
+                $join->on('pops.id', '=', 'classifications.pop_id')
+                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+            })
+            ->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+            ->select(
                 'pops.id',
                 'pops.nombre as nombre_pop',
                 'pops.nem_movil',
@@ -206,7 +230,9 @@ class PopController extends Controller
                 'zonas.cod_zona',
                 'crms.nombre as nombre_crm',
                 'crms.subgerente_crm',
-                'crms.sigla'
+                'crms.sigla',
+                'classifications.classification_type_id',
+                'classification_types.type'
             )->orderBy('pops.id')
             ->paginate(10);
         }
@@ -230,7 +256,12 @@ class PopController extends Controller
                     $query->where('pops.nem_fijo', 'LIKE', "%$text%")
                         ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
                         ->orWhere('pops.nombre', 'LIKE', "%$text%");
-                })->select(
+                })->leftJoin('classifications', function ($join) {
+                    $join->on('pops.id', '=', 'classifications.pop_id')
+                    ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+                })
+                ->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+                ->select(
                     'pops.id',
                     'pops.nombre as nombre_pop',
                     'pops.nem_movil',
@@ -244,7 +275,9 @@ class PopController extends Controller
                     'zonas.cod_zona',
                     'crms.nombre as nombre_crm',
                     'crms.subgerente_crm',
-                    'crms.sigla'
+                    'crms.sigla',
+                    'classifications.classification_type_id',
+                    'classification_types.type'
                 )->orderBy('pops.id')
                 ->paginate(10);
         }

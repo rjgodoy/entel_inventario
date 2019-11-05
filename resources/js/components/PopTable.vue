@@ -47,8 +47,9 @@
                     <table class="table is-fullwidth" :class="boxBackground">
                         <thead>
                             <tr>
-                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="id">Id POP</abbr></th>
-                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="id">POP</abbr></th>
+                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id POP</abbr></th>
+                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">POP</abbr></th>
+                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
                             </tr>
                         </thead>
@@ -68,6 +69,20 @@
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                         {{ pop ? 'Zona: ' + pop.nombre_zona : '' }} - {{ pop ? 'CRM: ' + pop.nombre_crm : '' }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="field is-pulled-right">
+                                        <div class="tags has-addons">
+                                            <span 
+                                                class="tag is-link has-text-weight-bold" 
+                                                :class="pop.classification_type_id == 1 ? 'is-danger' : 
+                                                    (pop.classification_type_id == 2 ? 'is-warning' : 
+                                                    (pop.classification_type_id == 3 ? 'is-blue' : 'is-link'))"
+                                            >
+                                                {{ pop ? pop.type : '' }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="has-text-weight-light has-text-centered" :class="primaryText">

@@ -92,13 +92,13 @@
                                         {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
                                     </div>
                                     <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
-                                        {{ pop ? pop.nombre : '' }}
+                                        {{ pop ? pop.nombre_pop : '' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? pop.comuna.nombre : '' }}
+                                        {{ pop ? pop.nombre_comuna : '' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? 'Zona ' + pop.comuna.zona.nombre : '' }} - {{ pop ? 'CRM ' + pop.comuna.zona.crm.nombre : '' }}
+                                        {{ pop ? 'Zona ' + pop.nombre_zona : '' }} - {{ pop ? 'CRM ' + pop.nombre_crm : '' }}
                                     </div>
                                 </a>
                                 <div class="field" style="margin-top: 10px;">
@@ -344,7 +344,6 @@
                         this.active = 1
                     })
                     .catch(() => {
-
                     });
                 }
             },

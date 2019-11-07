@@ -29,12 +29,13 @@
                     </tr>
                 </tbody>
             </table>
-            <form method="POST" action="/pop/export">
+
+            <form @submit="formSubmit">
                 <input type="hidden" name="_token" :value="csrf" />
 
                 <div class="field has-addons">
                     <p class="control">
-                        <button type="submit" class="button is-small is-link">
+                        <button type="submit" class="button is-small is-link" :class="buttonLoading" @click="dataExport">
                             <font-awesome-icon icon="download"/> 
                             &nbsp;&nbsp;Listado de POPs
                         </button>
@@ -66,7 +67,8 @@
                 crmSelected: this.selectedCrm,
                 zonaSelected: this.selectedZona,
                 popData: null,
-                total: 0
+                total: 0,
+                buttonLoading: ''
             }
         },
         created(){
@@ -87,6 +89,7 @@
         },
         methods: {
             totalPops() {
+                this.total = 0
                 this.popData.forEach(this.counter)
             },
             counter(item, index) {
@@ -122,6 +125,17 @@
                         });
                 }
             },
+            formSubmit(e) {
+                this.buttonLoading = 'is-loading'
+                e.preventDefault();
+                axios.post('/pop/export')
+                .then(function (response) {
+                    this.buttonLoading = ''
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                });
+            }            
         }
     }
 </script>

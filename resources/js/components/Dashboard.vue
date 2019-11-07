@@ -26,7 +26,7 @@
 
                             
                             <!-- <div 
-                                class="is-size-2 has-text-center has-text-weight-semibold" 
+                                class="is-size-2 has-text-centered has-text-weight-semibold" 
                                 :class="selectedCrm == crm ? selectedPrimaryBoxText : primaryText"
                                 >
                                 25.2
@@ -62,12 +62,15 @@
 
             <!-- BUSCAR -->
             <div class="container section" style="width: 50%" >
+                <span class="container is-size-7 is-right" v-if="searchText.length >= 4">
+                    <strong style="margin-left: 10px;">{{ counter | numeral('0,0')}}</strong> pops encontrados
+                </span>
                 <p class="control has-icons-left has-icons-right">
                     <input 
                         class="input is-rounded" 
                         :class="searchBodyBackground + ' ' + primaryText" 
                         v-model="searchText" 
-                        @keyup="autoComplete" 
+                        @keyup="search" 
                         type="text" 
                         arial-label="Buscar..." 
                         placeholder="Buscar..." 
@@ -81,27 +84,58 @@
                     <span class="icon is-small is-right">
                         <button class="delete" @click="clearSearch"></button>
                     </span>
+                    
                 </p>
                 
                 <div class="dropdown" :class="popSearch.length && active == 1 ? 'is-active' : ''" style="width: 100%">
                     <div class="dropdown-menu" style="width: 100%" id="dropdown-menu" role="menu">
                         <div class="dropdown-content" :class="searchBodyBackground + ' ' + primaryText" style="max-height: 400px; overflow: auto;">
                             <div v-for="pop in popSearch" class="dropdown-item">
-                                <a :href="'pop/' + pop.id" target="_blank">
-                                    <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
-                                        {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
+                                <a :href="'pop/' + pop.id" target="_blank" class="columns">
+                                    <div class="column is-6">
+                                        <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
+                                            {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
+                                        </div>
+                                        <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
+                                            {{ pop ? pop.nombre_pop : '' }}
+                                        </div>
+                                        <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                            {{ pop ? pop.nombre_comuna : '' }}
+                                        </div>
+                                        <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                            {{ pop ? 'Zona ' + pop.nombre_zona : '' }} - {{ pop ? 'CRM ' + pop.nombre_crm : '' }}
+                                        </div>
                                     </div>
-                                    <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
-                                        {{ pop ? pop.nombre_pop : '' }}
+
+                                    <div class="column is-1">
+                                        <div class="has-text-centered">
+                                            <img v-if="pop.attention_type_id == 2" alt="Servicio 24/7" class="" src="img/24_7_color.png" style="max-height: 30px;" />
+                                        </div>
+                                        <div class="has-text-centered">
+                                            <span v-if="pop.alba_project == 1" class="tag is-light is-primary has-text-weight-bold is-size-7">
+                                                {{ pop.alba_project == 1 ? 'alba' : '' }}
+                                            </span>
+                                        </div>
+                                        
                                     </div>
-                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? pop.nombre_comuna : '' }}
-                                    </div>
-                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? 'Zona ' + pop.nombre_zona : '' }} - {{ pop ? 'CRM ' + pop.nombre_crm : '' }}
+
+                                    <div class="column">
+                                        <div class="tags has-addons is-right">
+                                            <span class="tag is-dark">categoría</span>
+                                            <span 
+                                                class="tag has-text-weight-bold" 
+                                                :class="pop.classification_type_id == 1 ? 'is-danger' : 
+                                                    (pop.classification_type_id == 2 ? 'is-warning' : 
+                                                    (pop.classification_type_id == 3 ? 'is-link' : 'is-info'))"
+                                            >
+                                                {{ pop ? pop.type : '' }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </a>
-                                <div class="field" style="margin-top: 10px;">
+
+
+                                <div class="field">
                                     <button class="button is-small is-default" @click="selectPop(pop)" v-model="selectedPop">
                                         <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
                                     </button>
@@ -178,7 +212,7 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box" :class="boxBackground">
                         <div class="is-size-6 has-text-weight-semibold" :class="secondaryText">TEMPERATURE</div>
-                        <div class="is-size-2 has-text-center has-text-weight-semibold" :class="primaryText">25.2<span class="is-size-5">&nbsp;Cº</span></div>
+                        <div class="is-size-2 has-text-weight-semibold" :class="primaryText">25.2<span class="is-size-5">&nbsp;Cº</span></div>
                     </article>
                 </div>
                 <div class="tile is-parent">
@@ -252,10 +286,10 @@
         ],
         created() {
             this.styleMode()
+            this.getCrms()
         },
         mounted() {
-            this.getCrms()
-            // bulmaTagsinput.attach();
+            
         },
         data() {
             return {
@@ -278,7 +312,8 @@
                 
                 searchText: '',
                 popSearch: [],
-                active: null
+                active: null,
+                counter: 0
             }
         },
         methods: {
@@ -296,9 +331,8 @@
                     this.selectedCrm = null
                     this.selectedZona = null
                 }
-
                 this.getZonas(this.selectedCrm)
-                // console.log(this.selectedCrm)
+                this.search()
             },
             selectZona(zona) {
                 if (this.selectedZona != zona) {
@@ -306,6 +340,7 @@
                 } else {
                     this.selectedZona = null
                 }
+                this.search()
             },
             
             // APIs
@@ -313,7 +348,6 @@
                 axios.get(`api/crms`)
                     .then((response) => {
                         this.crms = response.data.data;
-                        console.log(this.crms)
                     })
                     .catch(() => {
                         console.log('handle server error from here');
@@ -324,7 +358,6 @@
                     axios.get(`api/zonasCrm/${crm.id}`)
                         .then((response) => {
                             this.zonas = response.data.data;
-                            console.log(this.zonas)
                         })
                         .catch(() => {
                             console.log('handle server error from here');
@@ -335,16 +368,40 @@
             },
 
             // Search bar
-            autoComplete(){
-                this.popSearch = [];
-                if (this.searchText.length > 2){
-                    axios.get(`api/searchPops/${this.searchText}`)
-                    .then((response) => {
-                        this.popSearch = response.data.data;
-                        this.active = 1
-                    })
-                    .catch(() => {
-                    });
+            search(){
+                if (this.searchText.length >= 4) {
+                    if (this.selectedCrm == null) {
+                        axios.get(`api/searchPops/${this.searchText}`)
+                            .then((response) => {
+                                this.popSearch = response.data
+                                this.counter = this.popSearch.length
+                                this.active = 1
+                            })
+                            .catch(() => {
+                            });
+                    } else if (this.selectedZona == null) {
+                        axios.get(`api/searchPopsCrm/${this.searchText}/${this.selectedCrm.id}`)
+                            .then((response) => {
+                                this.popSearch = response.data
+                                this.counter = this.popSearch.length
+                                this.active = 1
+                            })
+                            .catch(() => {
+                            });
+                    } else {
+                        axios.get(`api/searchPopsZona/${this.searchText}/${this.selectedZona.id}`)
+                            .then((response) => {
+                                this.popSearch = response.data
+                                this.counter = this.popSearch.length
+                                this.active = 1
+                            })
+                            .catch(() => {
+                            });
+                    }
+                } else if (this.searchText == '') {
+                    this.clearSearch()
+                } else {
+                    this.popSearch = []
                 }
             },
             clearSearch() {
@@ -353,8 +410,7 @@
                 this.selectedPop = null
             },
             clickOutside() {
-                console.log(event)
-                this.active = 0
+                this.active = null
             },
             setActive() {
                 this.active = 1

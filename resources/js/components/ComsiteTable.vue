@@ -68,7 +68,7 @@
                 <nav class="pagination" role="navigation" aria-label="pagination">
                     <vue-pagination  
                         :pagination="comsiteData"
-                        @paginate="getComsiteData()"
+                        @paginate="search()"
                         :offset="4"
                         :primaryText="primaryText">
                     </vue-pagination>
@@ -118,7 +118,7 @@
             this.styleMode()
         },
         mounted() {
-            this.getComsiteData()
+            this.search()
         },
         methods: {
             getComsiteData() {
@@ -131,13 +131,17 @@
                     });
             },
             search() {
-                axios.get(`api/searchComsites/${this.searchText}`)
-                    .then((response) => {
-                        this.comsiteData = response.data;
-                    })
-                    .catch(() => {
+                if (this.searchText != '') {
+                    axios.get(`api/searchComsites?page=${this.comsiteData.current_page}&text=${this.searchText}`)
+                        .then((response) => {
+                            this.comsiteData = response.data;
+                        })
+                        .catch(() => {
 
-                    });
+                        });
+                } else {
+                    this.getComsiteData()
+                }
             },
 
             // Style mode

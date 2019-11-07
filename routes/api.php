@@ -41,7 +41,7 @@ Route::get('dashboardMapPop/{pop_id}', [
 	'as' => 'dashboard.dashboardMapPop',
 	'uses' => 'Api\DashboardApiController@dashboardMapPop'
 ]);
- // Pop Data
+ // Pop Data box
 Route::get('popData', 'Api\DashboardApiController@popData');
 Route::get('popDataCrm/{crm_id}', [
 	'as' => 'dashboard.popDataCrm',
@@ -52,7 +52,7 @@ Route::get('popDataZona/{zona_id}', [
 	'uses' => 'Api\DashboardApiController@popDataZona'
 ]);
 
-// Technology
+// Technology box
 Route::get('technologyData', 'Api\DashboardApiController@technologyData');
 Route::get('technologyDataCrm/{crm_id}', [
 	'as' => 'dashboard.technologyDataCrm',
@@ -63,7 +63,7 @@ Route::get('technologyDataZona/{zona_id}', [
 	'uses' => 'Api\DashboardApiController@technologyDataZona'
 ]);
 
-// Services
+// Services box
 Route::get('serviceData', 'Api\DashboardApiController@serviceData');
 Route::get('serviceDataCrm/{crm_id}', [
 	'as' => 'dashboard.serviceData',
@@ -74,28 +74,49 @@ Route::get('serviceDataZona/{zona_id}', [
 	'uses' => 'Api\DashboardApiController@serviceDataZona'
 ]);
 
-// Pop
-Route::apiResource('pops','Api\PopController');
-Route::get('popsCrm/{crm_id}', [
-	'as' => 'popsCrm.index',
-	'uses' => 'Api\PopController@popsCrm'
-]);
-Route::get('popsZona/{zona_id}', [
-	'as' => 'popsZona.index',
-	'uses' => 'Api\PopController@popsZona'
-]);
+// Search
 Route::get('searchPops/{text}', [
 	'as' => 'pops.search',
 	'uses' => 'Api\PopController@searchPops'
 ]);
 Route::get('searchPopsCrm/{text}/{crm_id}', [
-	'as' => 'popsCrm.search',
+	'as' => 'pops.searchCrm',
 	'uses' => 'Api\PopController@searchPopsCrm'
+]);
+Route::get('searchPopsZona/{text}/{zona_id}', [
+	'as' => 'pops.searchZona',
+	'uses' => 'Api\PopController@searchPopsZona'
+]);
+##############################################################################################
+
+// POPs ######################################################################
+Route::apiResource('pops','Api\PopController');
+Route::get('popsCrm', [
+	'as' => 'pops.indexCrm',
+	'uses' => 'Api\PopController@popsCrm'
+]);
+Route::get('popsZona', [
+	'as' => 'pops.indexZona',
+	'uses' => 'Api\PopController@popsZona'
+]);
+
+// Filter in POPs module
+Route::get('filterPops', [
+	'as' => 'pops.filter',
+	'uses' => 'Api\PopController@filterPops'
+]);
+Route::get('filterPopsCrm', [
+	'as' => 'pops.filterCrm',
+	'uses' => 'Api\PopController@filterPopsCrm'
+]);
+Route::get('filterPopsZona', [
+	'as' => 'pops.filterZona',
+	'uses' => 'Api\PopController@filterPopsZona'
 ]);
 
 // Comsite
 Route::apiResource('comsites','Api\ComsiteController');
-Route::get('searchComsites/{text}', [
+Route::get('searchComsites', [
 	'as' => 'comsites.search',
 	'uses' => 'Api\ComsiteController@search'
 ]);

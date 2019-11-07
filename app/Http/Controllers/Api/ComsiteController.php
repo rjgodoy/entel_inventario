@@ -73,17 +73,17 @@ class ComsiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search($text)
+    public function search()
     {
-        if ($text != '') {
-            $comsites = Comsite::where(function($query) use ($text) {
-                $query->where('cod_pop', 'LIKE', "%$text%")
-                    ->orWhere('nombre_pop', 'LIKE', "%$text%")
-                    ->orWhere('operador', 'LIKE', "%$text%")
-                    ->orWhere('propietario', 'LIKE', "%$text%")
-                    ->orWhere('rol_propiedad', 'LIKE', "%$text%");
-            })->paginate(20);
-        }
+        $text = $_GET["text"];
+
+        $comsites = Comsite::where(function($query) use ($text) {
+            $query->where('cod_pop', 'LIKE', "%$text%")
+                ->orWhere('nombre_pop', 'LIKE', "%$text%")
+                ->orWhere('operador', 'LIKE', "%$text%")
+                ->orWhere('propietario', 'LIKE', "%$text%")
+                ->orWhere('rol_propiedad', 'LIKE', "%$text%");
+        })->paginate(20);
 
         return $comsites;
     }

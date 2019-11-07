@@ -23,8 +23,23 @@
 
         <div class="tile is-ancestor">
             <div class="tile is-7 is-parent">
-                <div class="tile is-child box" :class="boxBackground">
+                <div class="tile is-child box" :class="boxBackground" style="min-height: 700px;">
                     <div class="field">
+                        <div class="field">
+                            <div class="tags has-addons is-right">
+                                <span class="is-size-7" v-if="searchText.length" style="padding-left: 0">
+                                    <strong style="margin-left: 10px;">{{ pops.total | numeral('0,0')}}</strong> pops encontrados
+                                </span>
+
+                                <span class="tag is-dark">pops</span>
+                                <span class="tag has-text-weight-bold">
+                                    {{ totalPops | numeral('0,0')}}
+                                </span>
+                                
+                            </div>
+                            
+                        </div>
+                        
                         <p class="control has-icons-left has-icons-right">
                             <input 
                                 class="input is-rounded" 
@@ -47,7 +62,7 @@
                     <table class="table is-fullwidth" :class="boxBackground">
                         <thead>
                             <tr>
-                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id POP</abbr></th>
+                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">POP</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
@@ -56,7 +71,7 @@
                         
                         <tbody>
                             <tr class="is-size-7 has-text-weight-light" v-for="pop in pops.data">
-                                <th class="has-text-weight-light" :class="primaryText">{{ pop.id }}</th>
+                                <td class="has-text-weight-light" :class="primaryText">{{ pop.id }}</th>
                                 <td class="">
                                     <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
                                         {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
@@ -71,36 +86,39 @@
                                         {{ pop ? 'Zona: ' + pop.nombre_zona : '' }} - {{ pop ? 'CRM: ' + pop.nombre_crm : '' }}
                                     </div>
                                 </td>
+
                                 <td>
                                     <div class="field is-pulled-right">
-                                        <div class="tags has-addons">
+                                        <!-- <div class="tags has-addons"> -->
                                             <span 
-                                                class="tag is-link has-text-weight-bold" 
+                                                class="tag has-text-weight-bold is-light is-size-7" 
                                                 :class="pop.classification_type_id == 1 ? 'is-danger' : 
                                                     (pop.classification_type_id == 2 ? 'is-warning' : 
                                                     (pop.classification_type_id == 3 ? 'is-blue' : 'is-link'))"
                                             >
                                                 {{ pop ? pop.type : '' }}
                                             </span>
-                                        </div>
+                                        <!-- </div> -->
                                     </div>
                                 </td>
-                                <td class="has-text-weight-light has-text-centered" :class="primaryText">
-                                    <button href="/pops/download" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
-                                        <font-awesome-icon icon="bars"/>
-                                    </button>
 
-                                    <button class="button is-small is-default" @click="selectPop(pop)" v-model="selectedPop">
+                                <td class="has-text-weight-light has-text-centered" :class="primaryText">
+                                    <a :href="'/pop/' + pop.id" type="button" target="_blank" class="button is-small is-link tooltip" data-tooltip="Ver información completa">
+                                        <font-awesome-icon icon="bars"/>
+                                    </a>
+
+                                    <button class="button is-small is-default tooltip" @click="selectPop(pop)" v-model="selectedPop" data-tooltip="Ver en mapa">
                                         <font-awesome-icon icon="map-marked-alt"/>
                                     </button>
                                 </td>
+
                             </tr>    
                         </tbody>
                     </table>
                     <nav class="pagination" role="navigation" aria-label="pagination">
                         <vue-pagination  
                             :pagination="pops"
-                            @paginate="getPops()"
+                            @paginate="search()"
                             :offset="4"
                             :primaryText="primaryText">
                         </vue-pagination>
@@ -113,14 +131,14 @@
                 </div>
             </div>
             <div class="tile is-5 is-parent">
-                <map-view
+                <!-- <map-view
                     :selectedPop="selectedPop"
                     :selectedCrm="selectedCrm"
                     :selectedZona="selectedZona"
                     :map_attributes="map_attributes"
                     :darkMode="darkMode"
                     :selectedPops="selectedPops"
-                ></map-view>
+                ></map-view> -->
             </div>
         </div>
     </section>
@@ -169,12 +187,12 @@
 
                 pops: {
                     total: 0,
-                    per_page: 2,
+                    per_page: 10,
                     from: 1,
                     to: 0,
                     current_page: 1
                 },
-                counter: 0,
+                totalPops: 0,
                 searchText: '',
 
                 selectedPop: null,
@@ -188,7 +206,7 @@
             this.styleMode()
         },
         mounted() {
-            this.getPops()
+            this.search()
             this.getCrms()
         },
         methods: {
@@ -212,6 +230,7 @@
                     this.selectedPops.push(user)
                 }
             },
+
             selectCrm(crm) {
                 // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
                 // si había una zona seleccionada, la variable selectedZona será null.
@@ -226,7 +245,7 @@
                 }
 
                 this.getZonas(this.selectedCrm)
-                // console.log(this.selectedCrm)
+                this.search()
             },
             selectZona(zona) {
                 if (this.selectedZona != zona) {
@@ -236,33 +255,35 @@
                     this.selectedZona = null
                     this.getPops()
                 }
+                this.search()
             },
 
             // APIs
             getPops() {
-                if (this.selectedZona != null) {
-                    axios.get(`api/popsZona/${this.selectedZona.id}`)
+                if (this.selectedCrm == null) {
+                    axios.get(`api/pops?page=${this.pops.current_page}`)
                         .then((response) => {
+                            console.log(response.data)
                             this.pops = response.data
-                            this.counter = this.pops.length
+                            this.totalPops = this.pops.total
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
-                } else if (this.selectedCrm != null){
-                    axios.get(`api/popsCrm/${this.selectedCrm.id}`)
+                } else if (this.selectedZona == null){
+                    axios.get(`api/popsCrm?page=${this.pops.current_page}&crm_id=${this.selectedCrm.id}`)
                         .then((response) => {
                             this.pops = response.data
-                            this.counter = this.pops.length
+                            this.totalPops = this.pops.total
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/pops?page=${this.pops.current_page}`)
+                    axios.get(`api/popsZona?page=${this.pops.current_page}&zona_id=${this.selectedZona.id}`)
                         .then((response) => {
                             this.pops = response.data
-                            this.counter = this.pops.length
+                            this.totalPops = this.pops.total
                         })
                         .catch(() => {
                             console.log('handle server error from here');
@@ -273,7 +294,6 @@
                 axios.get(`api/crms`)
                     .then((response) => {
                         this.crms = response.data.data;
-                        console.log(this.crms)
                     })
                     .catch(() => {
                         console.log('handle server error from here');
@@ -284,7 +304,6 @@
                     axios.get(`api/zonasCrm/${crm.id}`)
                         .then((response) => {
                             this.zonas = response.data.data;
-                            console.log(this.zonas)
                         })
                         .catch(() => {
                             console.log('handle server error from here');
@@ -294,31 +313,32 @@
                 }
             },
             search() {
-                if (this.searchText != '' && this.selectedCrm == null) {
-                    axios.get(`api/searchPops/${this.searchText}`)
-                        .then((response) => {
-                            this.pops = response.data;
-                            this.counter = this.pops.length
-                        })
-                        .catch(() => {
-                        });
-                } else if (this.searchText != '' && this.selectedZona == null) {
-                    axios.get(`api/searchPopsCrm/${this.searchText}/${this.selectedCrm.id}`)
-                        .then((response) => {
-                            this.pops = response.data;
-                            this.counter = this.pops.length
-                        })
-                        .catch(() => {
-
-                        });
-                } else if (this.searchText != '') {
-                    axios.get(`api/searchPops/${this.searchText}`)
-                        .then((response) => {
-                            this.pops = response.data;
-                            this.counter = this.pops.length
-                        })
-                        .catch(() => {
-                        });
+                if (this.searchText != '') {
+                    if (this.selectedCrm == null) {
+                        axios.get(`api/filterPops?page=${this.pops.current_page}&text=${this.searchText}`)
+                            .then((response) => {
+                                this.pops = response.data;
+                                this.counter = this.pops.length
+                            })
+                            .catch(() => {
+                            });
+                    } else if (this.selectedZona == null) {
+                        axios.get(`api/filterPopsCrm?page=${this.pops.current_page}&crm_id=${this.selectedCrm.id}&text=${this.searchText}`)
+                            .then((response) => {
+                                this.pops = response.data;
+                                this.counter = this.pops.length
+                            })
+                            .catch(() => {
+                            });
+                    } else {
+                        axios.get(`api/filterPopsZona?page=${this.pops.current_page}&zona_id=${this.selectedZona.id}&text=${this.searchText}`)
+                            .then((response) => {
+                                this.pops = response.data;
+                                this.counter = this.pops.length
+                            })
+                            .catch(() => {
+                            });
+                    }
                 } else {
                     this.getPops()
                 }

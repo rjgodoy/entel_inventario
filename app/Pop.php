@@ -8,20 +8,15 @@ class Pop extends Model
 {
     protected $connection = 'mysql_entel_pops';
 
-    public function comuna() 
-    {
-        return $this->belongsTo(Comuna::class);
-    }
-
     // public function attention_priorities() 
     // {
     //     return $this->hasMany(AttentionPriority::class);
     // }
 
-    // public function attentions() 
-    // {
-    //     return $this->hasMany(Attention::class);
-    // }
+    public function attentions() 
+    {
+        return $this->hasMany(Attention::class);
+    }
 
     // public function autonomies() 
     // {
@@ -38,10 +33,10 @@ class Pop extends Model
     //     return $this->hasMany(Category::class);
     // }
 
-    // public function classifications() 
-    // {
-    //     return $this->hasMany(Classification::class);
-    // }
+    public function classifications() 
+    {
+        return $this->hasMany(Classification::class);
+    }
 
     // public function classes() 
     // {
@@ -51,6 +46,11 @@ class Pop extends Model
     public function comsites() 
     {
         return $this->hasMany(Comsite::class);
+    }
+
+    public function comuna() 
+    {
+        return $this->belongsTo(Comuna::class);
     }
 
     // public function coverages() 

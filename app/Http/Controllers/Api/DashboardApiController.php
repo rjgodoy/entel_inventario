@@ -123,7 +123,7 @@ class DashboardApiController extends Controller
                         FROM entel_pops.pops P 
                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                        INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.pop_class_type_id = 1
+                        INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.business_type_id = 1
                         ) AS fijo,
 
                 -- POP MOVILES
@@ -131,7 +131,7 @@ class DashboardApiController extends Controller
                         FROM entel_pops.pops P 
                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                        INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.pop_class_type_id = 2
+                        INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.business_type_id = 2
                         ) AS movil
                 FROM entel_pops.crms
                 -- GROUP BY id
@@ -158,14 +158,14 @@ class DashboardApiController extends Controller
             @fijo:=(SELECT count(P.id) 
                     FROM entel_pops.pops P 
                     INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                    INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.pop_class_type_id = 1
+                    INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.business_type_id = 1
                     ) AS fijo,
 
             -- POP MOVILES
             @movil:=(SELECT count(P.id) 
                     FROM entel_pops.pops P 
                     INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                    INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.pop_class_type_id = 2
+                    INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.business_type_id = 2
                     ) AS movil
             FROM entel_pops.zonas
             WHERE crm_id = $crm_id
@@ -189,14 +189,14 @@ class DashboardApiController extends Controller
             -- POP FIJOS
             @fijo:=(SELECT count(P.id) 
                     FROM entel_pops.pops P
-                    INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.pop_class_type_id = 1
+                    INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.business_type_id = 1
                     WHERE P.comuna_id = @comuna_id
                     ) AS fijo,
 
             -- POP MOVILES
             @movil:=(SELECT count(P.id) 
                     FROM entel_pops.pops P
-                    INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.pop_class_type_id = 2
+                    INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.business_type_id = 2
                     WHERE P.comuna_id = @comuna_id
                     ) AS movil
             FROM entel_pops.comunas

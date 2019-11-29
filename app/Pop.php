@@ -8,30 +8,31 @@ class Pop extends Model
 {
     protected $connection = 'mysql_entel_pops';
 
-    // public function attention_priorities() 
-    // {
-    //     return $this->hasMany(AttentionPriority::class);
-    // }
+    ##################### RELACIONES CON entel_pops #####################
+    public function attention_priorities() 
+    {
+        return $this->hasMany(AttentionPriority::class);
+    }
 
     public function attentions() 
     {
         return $this->hasMany(Attention::class);
     }
 
-    // public function autonomies() 
-    // {
-    //     return $this->hasMany(Autonomy::class);
-    // }
+    public function autonomies() 
+    {
+        return $this->hasMany(Autonomy::class);
+    }
 
-    // public function businesses() 
-    // {
-    //     return $this->hasMany(Business::class);
-    // }
+    public function businesses() 
+    {
+        return $this->hasMany(Business::class);
+    }
 
-    // public function categories() 
-    // {
-    //     return $this->hasMany(Category::class);
-    // }
+    public function categories() 
+    {
+        return $this->hasMany(Category::class);
+    }
 
     public function classifications() 
     {
@@ -43,11 +44,6 @@ class Pop extends Model
     //     return $this->hasMany(PopClass::class);
     // }
 
-    public function comsites() 
-    {
-        return $this->hasMany(Comsite::class);
-    }
-
     public function comuna() 
     {
         return $this->belongsTo(Comuna::class);
@@ -58,30 +54,35 @@ class Pop extends Model
     //     return $this->hasMany(Coverage::class);
     // }
 
-    // public function dependences() 
-    // {
-    //     return $this->hasMany(Dependence::class);
-    // }
+    public function dependences() 
+    {
+        return $this->hasMany(Dependence::class);
+    }
 
     // public function derivations() 
     // {
     //     return $this->hasMany(Derivation::class);
     // }
 
-    // public function nets() 
-    // {
-    //     return $this->hasMany(Net::class);
-    // }
+    public function nets() 
+    {
+        return $this->hasMany(Net::class);
+    }
 
-    // public function pop_classes() 
-    // {
-    //     return $this->hasMany(PopClass::class);
-    // }
+    public function pop_classes() 
+    {
+        return $this->hasMany(PopClass::class);
+    }
 
-    // public function sites() 
-    // {
-    //     return $this->hasMany(Site::class);
-    // }
+    public function rcas() 
+    {
+        return $this->hasMany(Rca::class);
+    }
+
+    public function sites() 
+    {
+        return $this->hasMany(Site::class);
+    }
 
     // public function states() 
     // {
@@ -127,4 +128,16 @@ class Pop extends Model
     // {
     //     return $this->hasMany(Transport::class);
     // }
+
+
+    ##################### RELACIONES CON entel_inventario #####################
+    public function comsites() 
+    {
+        return $this->hasMany(Comsite::class);
+    }
+
+    public function electric_lines() 
+    {
+        return $this->hasMany(ElectricLine::class);
+    }
 }

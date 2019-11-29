@@ -1,8 +1,8 @@
 <template>
     <div class="tile is-parent">
-        <article class="tile is-child box" :class="boxBackground">
+        <article class="tile is-child box" :class="boxBackground" style="min-height: 300px; max-height: 500px; overflow-y: scroll;">
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Servicios</div>
+                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Servicios Fijos</div>
                 <!-- <div class="column has-text-centered">
                     <button data-toggle="button" class="button is-small is-link" type="button" >CORE</button>
                 </div> -->
@@ -63,7 +63,8 @@
             'bodyBackground',
             'boxBackground',
             'primaryText',
-            'secondaryText'
+            'secondaryText',
+            'core'
         ],
         data() {
             return {
@@ -87,6 +88,9 @@
             selectedZona(newValue, oldValue) {
                 this.zonaSelected = newValue
                 this.getServiceData()
+            },
+            core(newValue, oldValue) {
+                this.getServiceData()
             }
         },
         methods: {
@@ -98,8 +102,8 @@
                 this.total = this.total = this.total + item.bafi + item.olt + item.olt_3play + item.red_minima_n1 + item.red_minima_n2;
             },
             getServiceData() {
-                if (this.zonaSelected != null) {
-                    axios.get(`api/serviceDataZona/${this.zonaSelected.id}`)
+                if (this.crmSelected == null) {
+                    axios.get(`api/serviceData/${this.core}`)
                         .then((response) => {
                             this.serviceData = response.data.data;
                             this.totalPops()
@@ -107,8 +111,8 @@
                         .catch(() => {
                             console.log('handle server error from here');
                         });
-                } else if (this.crmSelected != null){
-                    axios.get(`api/serviceDataCrm/${this.crmSelected.id}`)
+                } else if (this.zonaSelected == null){
+                    axios.get(`api/serviceDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.serviceData = response.data.data;
                             this.totalPops()
@@ -117,7 +121,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/serviceData`)
+                    axios.get(`api/serviceDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             this.serviceData = response.data.data;
                             this.totalPops()

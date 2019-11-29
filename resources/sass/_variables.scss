@@ -2,7 +2,7 @@
 $body-bg: #f8fafc;
 
 // Typography
-// $font-family-sans-serif: 'Nunito', sans-serif;
+$family-sans-serif: "Barlow Medium", sans-serif;
 $font-size-base: 0.6rem;
 $line-height-base: 1.6;
 $size-5: 1.1rem;
@@ -10,7 +10,7 @@ $size-6: 0.9rem;
 $size-7: 0.65rem;
 
 // Colors
-$coolBlue: #008AFF;
+// $coolBlue: #008AFF;
 // $indigo: #6574cd;
 // $purple: #9561e2;
 // $pink: #f66d9b;
@@ -23,10 +23,22 @@ $coolBlue: #008AFF;
 $mirage: #191B22;
 $blackRussian: #23252C;
 
-$black-ter: $mirage;
-$dark: $blackRussian;
-$info: $coolBlue;
+$entel-primary: #005cff;
+$entel-primary-corp: #10069f;
+$entel-secondary: #ff3d00;
+$entel-secondary-corp: #cccccc;
+$entel-eco: #42E8B4;
+$entel-smart: #2FCBF1;
+$entel-positive: #FD6C9B;
+
+// $link: $entel-primary;
+$danger: $entel-secondary;
+// $info: $entel-primary;
+
+// $black-ter: $mirage;
+// $dark: $blackRussian;
 $input-placeholder-color: #7a7a7a;
+
 
 
 // Background image
@@ -42,7 +54,13 @@ $input-placeholder-color: #7a7a7a;
 	height: 100%;
 }
 .hero-background.is-transparent {
-	opacity: 0.3;
+	opacity: 0.6;
+}
+
+// Image centered
+.has-image-centered {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 // Navbar centered
@@ -78,4 +96,11 @@ $input-placeholder-color: #7a7a7a;
 
 .hero .hero-top {
     margin-top: 0px;
+}
+
+
+.shadow-inset {
+   -moz-box-shadow:    inset 0 0 20px #ccc;
+   -webkit-box-shadow: inset 0 0 20px #ccc;
+   box-shadow:         inset 0 0 20px #ccc;
 }

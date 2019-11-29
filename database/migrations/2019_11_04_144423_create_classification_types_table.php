@@ -15,7 +15,7 @@ class CreateClassificationTypesTable extends Migration
     {
         // Schema::create('classification_types', function (Blueprint $table) {
         //     $table->bigIncrements('id');
-        //     $table->string('type');
+        //     $table->string('classification_type');
         // });
     }
 

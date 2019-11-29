@@ -1,0 +1,162 @@
+<template>
+    <div class="tile is-parent">
+        <article class="tile is-child box" :class="boxBackground">
+            <div class="columns">
+                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Lineas Eléctricas</div>
+                <!-- <div class="column has-text-centered">
+                    <button data-toggle="button" class="button is-small is-link" type="button">CORE</button>
+                </div> -->
+                <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
+            </div>
+            
+            <table class="table is-fullwidth" :class="boxBackground">
+                <thead>
+                    <tr class="is-size-7">
+                        <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Fija">POPs</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Info</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Lineas</abbr></th>
+                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="is-size-7" v-for="item in this.electricLineData">
+                        <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
+                        <td class="has-text-right" :class="primaryText">{{ item.q_pops | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.q_info | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.q_electric_lines | numeral('0,0') }}</td>
+                        <!-- <td class="has-text-right" :class="primaryText">{{ item.fijo + item.movil | numeral('0,0') }}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+
+            <form @submit="formSubmit">
+                <div class="field has-addons">
+                    <p class="control">
+                        <button type="submit" class="button is-small is-link" :class="buttonLoading">
+                            <font-awesome-icon icon="download"/> 
+                            &nbsp;&nbsp;Listado de POPs
+                        </button>
+                    </p>
+                    <p class="control">
+                        <a href="/pop" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
+                            <font-awesome-icon icon="bars"/>
+                        </a>
+                    </p>
+                </div>
+
+            </form>
+        </article>
+    </div>
+</template>
+
+<script>
+    export default {
+        props : [
+            'selectedCrm',
+            'selectedZona',
+            // 'csrf',
+            'bodyBackground',
+            'boxBackground',
+            'primaryText',
+            'secondaryText',
+            'core'
+        ],
+        data() {
+            return {
+                crmSelected: this.selectedCrm,
+                zonaSelected: this.selectedZona,
+                electricLineData: null,
+                total: 0,
+                buttonLoading: '',
+            }
+        },
+        created(){
+            this.getElectricLineData()
+        },
+        mounted() {      
+        },
+        watch: {
+            selectedCrm(newValue, oldValue) {
+                this.crmSelected = newValue
+                this.zonaSelected = null
+                this.getElectricLineData()
+            },
+            selectedZona(newValue, oldValue) {
+                this.zonaSelected = newValue
+                this.getElectricLineData()
+            },
+            core(newValue, oldValue) {
+                this.getElectricLineData()
+            }
+        },
+        methods: {
+            totalElectricLines() {
+                this.total = 0
+                this.electricLineData.forEach(this.counter)
+            },
+            counter(item, index) {
+                this.total = this.total + item.q_electric_lines;
+            },
+            getElectricLineData() {
+                if (this.crmSelected == null) {
+                    axios.get(`/api/electricLineData/${this.core}`)
+                        .then((response) => {
+                            this.electricLineData = response.data.data;
+                            this.totalElectricLines()
+                        })
+                        .catch(() => {
+                            console.log('handle server error from here');
+                        });
+                } else if (this.zonaSelected == null){
+                    axios.get(`api/electricLineDataCrm/${this.crmSelected.id}/${this.core}`)
+                        .then((response) => {
+                            this.electricLineData = response.data.data;
+                            this.totalElectricLines()
+                        })
+                        .catch(() => {
+                            console.log('handle server error from here');
+                        });
+                } else {
+                    axios.get(`api/electricLineDataZona/${this.zonaSelected.id}/${this.core}`)
+                        .then((response) => {
+                            this.electricLineData = response.data.data;
+                            this.totalElectricLines()
+                        })
+                        .catch(() => {
+                            console.log('handle server error from here');
+                        });
+                }
+            },
+            formSubmit(e) {
+                // Activate loading button
+                this.buttonLoading = 'is-loading'
+
+                e.preventDefault()
+                axios({
+                    url: '/pop/export',
+                    method: 'POST',
+                    responseType: 'blob',
+                    // headers: {
+                    //     'Content-Type': 'text/html; charset=utf-8',
+                    //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    // }
+                })
+                .then((response) => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]))
+                    const link = document.createElement('a')
+                    link.href = url
+                    link.setAttribute('download', 'listado_pops.xlsx')
+                    document.body.appendChild(link)
+                    link.click()
+
+                    // Deativate loading button
+                    this.buttonLoading = ''
+                })
+                .catch((error) => {
+                    console.log('Error: ' + error);
+                });
+            }
+        }
+    }
+</script>

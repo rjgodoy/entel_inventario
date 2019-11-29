@@ -17,7 +17,6 @@
             setInterval(() => this.updateCurrentTime(), 1 * 1000);
         },
         mounted() {
-            console.log('Component mounted.')
         },
         data() {
             return {

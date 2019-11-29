@@ -7,6 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+// import Buefy from 'buefy'
+// Vue.use(Buefy)
 
 Vue.directive('clickOutside', {
     bind: function (el, binding, vnode) {
@@ -50,7 +52,12 @@ import {
     faDownload,
     faBars,
     faMapMarkedAlt,
-    faInfoCircle
+    faInfoCircle,
+    faInfo,
+    faMousePointer,
+    faArrowRight,
+    faBackspace,
+    faSyncAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -85,7 +92,12 @@ library.add(
 	faDownload,
 	faBars,
     faMapMarkedAlt,
-    faInfoCircle
+    faInfoCircle,
+    faInfo,
+    faMousePointer,
+    faArrowRight,
+    faBackspace,
+    faSyncAlt
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -124,7 +136,7 @@ Vue.use(VueGoogleMaps, {
     installComponents: true,
 })
 
-import GmapCluster from 'vue2-google-maps/dist/components/cluster' // replace src with dist if you have Babel issues
+import GmapCluster from 'vue2-google-maps/src/components/cluster' // replace src with dist if you have Babel issues
 Vue.component('GmapCluster', GmapCluster)
 // #########################################################################
 
@@ -141,11 +153,11 @@ Vue.component('GmapCluster', GmapCluster)
 
 
 var Clock = require('./components/Clock.vue').default;
-var Dashboard = require('./components/Dashboard.vue').default;
-var PopDetail = require('./components/PopDetail.vue').default;
-// var PopTable = require('./components/PopTable.vue').default;
-var PopTable = require('./components/PopTable.vue').default;
+var Dashboard = require('./components/dashboard/Dashboard.vue').default;
+var PopDetail = require('./components/pops/PopDetail.vue').default;
+var PopTable = require('./components/pops/PopTable.vue').default;
 var ComsiteTable = require('./components/ComsiteTable.vue').default;
+var Admin = require('./components/admin/Admin.vue').default;
 
 
 // var LoadingComponent = require('./components/maps/LoadingComponent.vue').default;
@@ -177,10 +189,14 @@ const app = new Vue({
         'dashboard': Dashboard,
         'pop-detail': PopDetail,
         'comsite-table': ComsiteTable,
-        // 'map-view': MapView,
+        'admin': Admin,
         'pop-table': PopTable,
         // 'map-view': function(resolve) {
         //     require(['./components/maps/MapView.vue'], resolve)
         // },
+    },
+    events: {
+        clickOutside(event) {                
+        }
     }
 });

@@ -1,16 +1,17 @@
 // Fonts
-// @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import url('https://fonts.googleapis.com/css?family=Barlow&display=swap');
 
 // Variables
 @import 'variables';
 
-// Bootstrap
-// @import '~bootstrap/scss/bootstrap';
-
 // Bulma
 @import 'bulma';
-@import 'bulma-extensions/bulma-tooltip/src/sass';
-// @import 'bulma-extensions/bulma-checkradio/src/sass';
-// @import 'bulma-extensions/bulma-tagsinput/src/sass';
-// @import '~bulma-checkradio';
+@import 'bulma-checkradio';
+@import 'bulma-switch';
+@import 'bulma-tooltip';
+@import 'bulma-quickview';
+@import 'bulma-badge';
+@import 'bulma-timeline';
+@import 'bulma-divider';
+
+// @import "~buefy/src/scss/buefy";

@@ -88,20 +88,26 @@
                             </div>
                         </div>
                         @else
-                        <div class="navbar-item has-dropdown is-hoverable">
+                        <div class="navbar-item dropdown is-hoverable" style="margin: -5px 0 -5px 0;">
                             <a class="navbar-link has-text-grey-light has-background-black-ter">
                                 {{ Auth::user()->nombre }} <span class="caret"></span>
                             </a>
 
-                            <div class="navbar-dropdown is-size-7 has-background-black-ter">
-                                <a class="navbar-item has-text-grey-light has-background-black-ter" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                            <div class="dropdown-menu is-size-7">
+                                <div class="dropdown-content">
+                                    <a class="dropdown-item is-size-7 {{-- has-text-grey-light has-background-black-ter --}}" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        {{ __('Perfil') }}
+                                    </a>
+                                    <a class="dropdown-item is-size-7 {{-- has-text-grey-light has-background-black-ter --}}" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        {{ __('Salir') }}
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         @endguest

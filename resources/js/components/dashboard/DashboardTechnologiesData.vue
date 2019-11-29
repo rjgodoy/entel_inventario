@@ -1,6 +1,6 @@
 <template>
     <div class="tile is-parent">
-        <article class="tile is-child box" :class="boxBackground">
+        <article class="tile is-child box" :class="boxBackground" style="min-height: 300px; max-height: 500px; overflow-y: scroll;">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Tecnologías</div>
                 <!-- <div class="column has-text-centered">
@@ -59,7 +59,8 @@
             'bodyBackground',
             'boxBackground',
             'primaryText',
-            'secondaryText'
+            'secondaryText',
+            'core'
         ],
         data() {
             return {
@@ -83,6 +84,9 @@
             selectedZona(newValue, oldValue) {
                 this.zonaSelected = newValue
                 this.getTechnologyData()
+            },
+            core(newValue, oldValue) {
+                this.getTechnologyData()
             }
         },
         methods: {
@@ -95,7 +99,7 @@
             },
             getTechnologyData() {
                 if (this.zonaSelected != null) {
-                    axios.get(`api/technologyDataZona/${this.zonaSelected.id}`)
+                    axios.get(`api/technologyDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
                             this.totalPops()
@@ -104,7 +108,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.crmSelected != null){
-                    axios.get(`api/technologyDataCrm/${this.crmSelected.id}`)
+                    axios.get(`api/technologyDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
                             this.totalPops()
@@ -113,7 +117,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/technologyData`)
+                    axios.get(`api/technologyData/${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
                             this.totalPops()

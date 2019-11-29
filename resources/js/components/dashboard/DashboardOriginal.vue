@@ -2,10 +2,22 @@
     <div class="">
         
         <section class="section is-marginless" :class="bodyBackground">
-            <button class="button is-link" @click="changeStyle" v-model="darkMode">Style</button>
+            
 
-            <!-- BOTONES -->
-            <div class="container">
+            <!-- SWITCH CORE -->
+            <div class="container" style="margin: -20px auto 20px auto;">
+                <div class="field">
+                    <input 
+                        id="switchCore" 
+                        type="checkbox" 
+                        name="switchCore" 
+                        class="switch is-rounded is-link" 
+                        @change="switchCore"
+                    >
+                    <label for="switchCore">Mostrar POPs CORE</label>
+                    <button class="button is-link is-small is-pulled-right" @click="changeStyle" v-model="darkMode">Style</button>
+                </div>
+
                 <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="crm in crms">
                         <a class="tile is-child box" :class="selectedCrm == crm ? 'has-background-link' : boxBackground" @click="selectCrm(crm)">
@@ -36,8 +48,10 @@
                         </a>
                     </div>
                 </div>
+
+
             </div>
-            <div v-if="selectedCrm != null" class="container">
+            <div v-if="selectedCrm != null" class="container" style="margin: -20px auto 10px auto;">
                 <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="zona in zonas">
                         <a class="tile is-child box" :class="selectedZona == zona ? 'has-background-link' : boxBackground" @click="selectZona(zona)">
@@ -46,7 +60,7 @@
                                     Zona {{ zona.nombre }}
                                 </div>
 
-                                <div style="margin-top: 10px;">
+                                <div style="margin-top: 30px;">
                                     <div class="is-size-7 has-text-weight-light">Coordinador</div> 
                                     <div class="is-size-7 has-text-weight-semibold">{{ zona.responsable.nombre }} {{ zona.responsable.apellido }}</div>
                                 </div>
@@ -61,7 +75,7 @@
             </div>
 
             <!-- BUSCAR -->
-            <div class="container section" style="width: 50%" >
+            <div class="container" style="width: 50%; margin-top: 30px;">
                 <span class="container is-size-7 is-right" v-if="searchText.length >= 4">
                     <strong style="margin-left: 10px;">{{ counter | numeral('0,0')}}</strong> pops encontrados
                 </span>
@@ -128,7 +142,7 @@
                                                     (pop.classification_type_id == 2 ? 'is-warning' : 
                                                     (pop.classification_type_id == 3 ? 'is-link' : 'is-info'))"
                                             >
-                                                {{ pop ? pop.type : '' }}
+                                                {{ pop ? pop.classification_type : '' }}
                                             </span>
                                         </div>
                                     </div>
@@ -164,7 +178,7 @@
                                 :secondaryText="secondaryText"
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
-                                :csrf="csrf"
+                                :core="core"
                             ></pop-data>
                             <technologies-data
                                 :bodyBackground="bodyBackground"
@@ -173,7 +187,7 @@
                                 :secondaryText="secondaryText"
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
-                                :csrf="csrf"
+                                :core="core"
                             ></technologies-data>
                         </div>
                         <div class="tile is-ancestor">
@@ -184,7 +198,8 @@
                                 :secondaryText="secondaryText"
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
-                                :csrf="csrf">
+                                :core="core"
+                            >
                             </services-data>
                             <radial-chart>
                                 
@@ -194,13 +209,15 @@
 
                     <!-- MAPA -->
                     <div class="column">
-                        <!-- <map-view
+                        <map-view
                             :selectedPop="selectedPop"
                             :selectedCrm="selectedCrm"
                             :selectedZona="selectedZona"
                             :map_attributes="map_attributes"
                             :darkMode="darkMode"
-                        ></map-view> -->
+                            :selectedPops="selectedPops"
+                            :core="core"
+                        ></map-view>
                     </div>
                 </div>
             </div>
@@ -209,27 +226,33 @@
 
         <section class="section is-marginless" :class="bodyBackground">
             <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <div class="is-size-6 has-text-weight-semibold" :class="secondaryText">TEMPERATURE</div>
-                        <div class="is-size-2 has-text-weight-semibold" :class="primaryText">25.2<span class="is-size-5">&nbsp;Cº</span></div>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <p class="title">Foo</p>
-                        <p class="subtitle">Bar</p>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <p class="title">Third column</p>
-                        <p class="subtitle">With some content</p>
-                        <div class="content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                        </div>
-                    </article>
-                </div>
+                <electric-line-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                ></electric-line-data>
+                <generator-group-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                ></generator-group-data>
+                <power-rectifier-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                ></power-rectifier-data>
                 <div class="tile is-parent">
                     <article class="tile is-child box" :class="boxBackground">
                         <p class="title">Hello World</p>
@@ -252,12 +275,15 @@
     import DashboardPopData from './DashboardPopData.vue';
     import DashboardTechnologiesData from './DashboardTechnologiesData.vue';
     import DashboardServicesData from './DashboardServicesData.vue';
-    import RadialChart from './RadialChart.vue';
+    import DashboardElectricLinesData from './DashboardElectricLinesData.vue';
+    import DashboardGeneratorGroupsData from './DashboardGeneratorGroupsData.vue';
+    import DashboardPowerRectifiersData from './DashboardPowerRectifiersData.vue';
+    import RadialChart from '../RadialChart.vue';
     // import LoadingComponent from './maps/LoadingComponent.vue';
     // import ErrorComponent from './maps/ErrorComponent.vue';
     const MapView = () => ({
         // The component to load (should be a Promise)
-        component: import('./maps/MapView.vue'),
+        component: import('../maps/MapView.vue'),
         // A component to use while the async component is loading
         // loading: LoadingComponent,
         // A component to use if the load fails
@@ -266,7 +292,7 @@
         // delay: 200,
         // The error component will be displayed if a timeout is
         // provided and exceeded. Default: Infinity.
-        timeout: 300
+        // timeout: 300
     });
     var moment = require('moment');
     export default {
@@ -274,6 +300,9 @@
             'pop-data': DashboardPopData,
             'technologies-data': DashboardTechnologiesData,
             'services-data': DashboardServicesData,
+            'electric-line-data': DashboardElectricLinesData,
+            'generator-group-data': DashboardGeneratorGroupsData,
+            'power-rectifier-data': DashboardPowerRectifiersData,
             'map-view': MapView,
             'radial-chart': RadialChart,
             // 'map-view': function(resolve) {
@@ -282,7 +311,6 @@
         },
         props : [
             'map_attributes',
-            'csrf'
         ],
         created() {
             this.styleMode()
@@ -293,6 +321,7 @@
         },
         data() {
             return {
+                core: 0,
                 crms: null,
                 zonas: null,
 
@@ -309,6 +338,7 @@
                 selectedPop: null,
                 selectedCrm: null,
                 selectedZona: null,
+                selectedPops: [],
                 
                 searchText: '',
                 popSearch: [],
@@ -342,6 +372,16 @@
                 }
                 this.search()
             },
+
+            switchCore() {
+                if (this.core == 0) {
+                    this.core = 1
+                    this.search()
+                } else {
+                    this.core = 0
+                    this.search()
+                }
+            },
             
             // APIs
             getCrms() {
@@ -371,7 +411,7 @@
             search(){
                 if (this.searchText.length >= 4) {
                     if (this.selectedCrm == null) {
-                        axios.get(`api/searchPops/${this.searchText}`)
+                        axios.get(`api/searchPops/${this.searchText}/${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length
@@ -380,7 +420,7 @@
                             .catch(() => {
                             });
                     } else if (this.selectedZona == null) {
-                        axios.get(`api/searchPopsCrm/${this.searchText}/${this.selectedCrm.id}`)
+                        axios.get(`api/searchPopsCrm/${this.searchText}/${this.selectedCrm.id}/${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length
@@ -389,7 +429,7 @@
                             .catch(() => {
                             });
                     } else {
-                        axios.get(`api/searchPopsZona/${this.searchText}/${this.selectedZona.id}`)
+                        axios.get(`api/searchPopsZona/${this.searchText}/${this.selectedZona.id}/${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length

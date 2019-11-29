@@ -1,8 +1,8 @@
 <template>
     <div class="tile is-parent">
-        <article class="tile is-child box" :class="boxBackground">
+        <article class="tile is-child box" :class="boxBackground" style="min-height: 300px; max-height: 500px; overflow-y: scroll;">
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">POPs</div>
+                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">POP</div>
                 <!-- <div class="column has-text-centered">
                     <button data-toggle="button" class="button is-small is-link" type="button">CORE</button>
                 </div> -->
@@ -31,11 +31,9 @@
             </table>
 
             <form @submit="formSubmit">
-                <input type="hidden" name="_token" :value="csrf" />
-
                 <div class="field has-addons">
                     <p class="control">
-                        <button type="submit" class="button is-small is-link" :class="buttonLoading" @click="dataExport">
+                        <button type="submit" class="button is-small is-link" :class="buttonLoading">
                             <font-awesome-icon icon="download"/> 
                             &nbsp;&nbsp;Listado de POPs
                         </button>
@@ -46,6 +44,7 @@
                         </a>
                     </p>
                 </div>
+
             </form>
         </article>
     </div>
@@ -56,11 +55,12 @@
         props : [
             'selectedCrm',
             'selectedZona',
-            'csrf',
+            // 'csrf',
             'bodyBackground',
             'boxBackground',
             'primaryText',
-            'secondaryText'
+            'secondaryText',
+            'core'
         ],
         data() {
             return {
@@ -68,13 +68,13 @@
                 zonaSelected: this.selectedZona,
                 popData: null,
                 total: 0,
-                buttonLoading: ''
+                buttonLoading: '',
             }
         },
         created(){
             this.getPopData()
         },
-        mounted() {            
+        mounted() {      
         },
         watch: {
             selectedCrm(newValue, oldValue) {
@@ -84,6 +84,9 @@
             },
             selectedZona(newValue, oldValue) {
                 this.zonaSelected = newValue
+                this.getPopData()
+            },
+            core(newValue, oldValue) {
                 this.getPopData()
             }
         },
@@ -96,8 +99,8 @@
                 this.total = this.total + item.fijo + item.movil;
             },
             getPopData() {
-                if (this.zonaSelected != null) {
-                    axios.get(`api/popDataZona/${this.zonaSelected.id}`)
+                if (this.crmSelected == null) {
+                    axios.get(`/api/popData/${this.core}`)
                         .then((response) => {
                             this.popData = response.data.data;
                             this.totalPops()
@@ -105,8 +108,8 @@
                         .catch(() => {
                             console.log('handle server error from here');
                         });
-                } else if (this.crmSelected != null){
-                    axios.get(`api/popDataCrm/${this.crmSelected.id}`)
+                } else if (this.zonaSelected == null){
+                    axios.get(`api/popDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.popData = response.data.data;
                             this.totalPops()
@@ -115,7 +118,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/popData`)
+                    axios.get(`api/popDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             this.popData = response.data.data;
                             this.totalPops()
@@ -126,16 +129,34 @@
                 }
             },
             formSubmit(e) {
+                // Activate loading button
                 this.buttonLoading = 'is-loading'
-                e.preventDefault();
-                axios.post('/pop/export')
-                .then(function (response) {
+
+                e.preventDefault()
+                axios({
+                    url: '/pop/export',
+                    method: 'POST',
+                    responseType: 'blob',
+                    // headers: {
+                    //     'Content-Type': 'text/html; charset=utf-8',
+                    //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    // }
+                })
+                .then((response) => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]))
+                    const link = document.createElement('a')
+                    link.href = url
+                    link.setAttribute('download', 'listado_pops.xlsx')
+                    document.body.appendChild(link)
+                    link.click()
+
+                    // Deativate loading button
                     this.buttonLoading = ''
                 })
-                .catch(function (error) {
-                    currentObj.output = error;
+                .catch((error) => {
+                    console.log('Error: ' + error);
                 });
-            }            
+            }
         }
     }
 </script>

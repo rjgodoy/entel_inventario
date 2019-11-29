@@ -1,43 +1,50 @@
 <template>
+    
     <section class="section is-marginless" :class="bodyBackground">
-        <!-- Area Filter Buttons -->
-        <div class="container">
-            <div class="tile is-ancestor">
-                <div class="tile is-parent" v-for="crm in crms">
-                    <a class="tile is-child box" :class="selectedCrm == crm ? 'has-background-link' : boxBackground" @click="selectCrm(crm)">
-                        <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
-                            <div class="is-size-6 has-text-weight-semibold">
-                                CRM {{ crm.nombre }}
-                            </div>
-
-                            <div style="margin-top: 10px;">
-                                <div class="is-size-7 has-text-weight-light">Subgerente</div> 
-                                <div class="is-size-7 has-text-weight-semibold">{{ crm.subgerente_crm }}</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
         <div class="tile is-ancestor">
-            <div class="tile is-7 is-parent">
-                <div class="tile is-child box" :class="boxBackground" style="min-height: 700px;">
+            <!-- <div class="tile is-7 is-vertical"> -->
+                
+
+            <div class="tile is-6 is-parent">
+                <div class="tile is-child box" :class="boxBackground" style="max-height: 100%;">
+                    <div class="tile">
+                        <div class="tile is-parent" v-for="crm in crms">
+                            <a class="tile is-child button" :class="selectedCrm == crm ? 'has-background-link' : boxBackground" @click="selectCrm(crm)">
+                                <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
+                                    <div class="is-size-7 has-text-weight-normal">CRM</div>
+                                    <div class="is-size-6 has-text-weight-semibold">{{ crm.nombre_crm }}</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div v-if="selectedCrm != null" class="tile" style="margin-top: -15px;">
+                        <div class="tile is-parent" v-for="zona in zonas">
+                            <a class="tile is-child button" :class="selectedZona == zona ? 'has-background-link' : boxBackground" @click="selectZona(zona)">
+                                <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
+                                    <div class="is-size-7 has-text-weight-normal">Zona</div>
+                                    <div class="is-size-6 has-text-weight-semibold">{{ zona.nombre_zona }}</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
                     <div class="field">
-                        <div class="field">
-                            <div class="tags has-addons is-right">
+                        <div class="columns">
+                            <div class="column">
                                 <span class="is-size-7" v-if="searchText.length" style="padding-left: 0">
                                     <strong style="margin-left: 10px;">{{ pops.total | numeral('0,0')}}</strong> pops encontrados
                                 </span>
-
-                                <span class="tag is-dark">pops</span>
-                                <span class="tag has-text-weight-bold">
-                                    {{ totalPops | numeral('0,0')}}
-                                </span>
-                                
                             </div>
-                            
+                            <div class="column">
+                                <div class="tags has-addons is-right is-size-7">
+                                    <span class="tag is-dark">pops</span>
+                                    <span class="tag has-text-weight-bold">
+                                        {{ totalPops | numeral('0,0')}}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         
                         <p class="control has-icons-left has-icons-right">
@@ -59,6 +66,7 @@
                             </span>
                         </p>
                     </div>
+
                     <table class="table is-fullwidth" :class="boxBackground">
                         <thead>
                             <tr>
@@ -71,13 +79,13 @@
                         
                         <tbody>
                             <tr class="is-size-7 has-text-weight-light" v-for="pop in pops.data">
-                                <td class="has-text-weight-light" :class="primaryText">{{ pop.id }}</th>
+                                <td class="has-text-weight-light" :class="primaryText">{{ pop.pop_id }}</td>
                                 <td class="">
                                     <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
                                         {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal" :class="primaryText">
-                                        {{ pop ? pop.nombre_pop : '' }}
+                                        {{ pop ? pop.nombre : '' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                         {{ pop ? pop.nombre_comuna : '' }}
@@ -91,30 +99,50 @@
                                     <div class="field is-pulled-right">
                                         <!-- <div class="tags has-addons"> -->
                                             <span 
-                                                class="tag has-text-weight-bold is-light is-size-7" 
+                                                class="tag has-text-weight-bold is-size-7" 
                                                 :class="pop.classification_type_id == 1 ? 'is-danger' : 
                                                     (pop.classification_type_id == 2 ? 'is-warning' : 
                                                     (pop.classification_type_id == 3 ? 'is-blue' : 'is-link'))"
                                             >
-                                                {{ pop ? pop.type : '' }}
+                                                {{ pop ? pop.classification_type : '' }}
                                             </span>
                                         <!-- </div> -->
                                     </div>
                                 </td>
 
                                 <td class="has-text-weight-light has-text-centered" :class="primaryText">
-                                    <a :href="'/pop/' + pop.id" type="button" target="_blank" class="button is-small is-link tooltip" data-tooltip="Ver información completa">
-                                        <font-awesome-icon icon="bars"/>
+                                    <a 
+                                        class="button is-small is-link is-outlined has-tooltip-left" 
+                                        :href="'/pop/' + pop.pop_id" 
+                                        type="button" 
+                                        target="_blank"  
+                                        data-tooltip="Ver información completa"
+                                        >
+                                        <font-awesome-icon icon="info"/>
                                     </a>
 
-                                    <button class="button is-small is-default tooltip" @click="selectPop(pop)" v-model="selectedPop" data-tooltip="Ver en mapa">
+                                    <button 
+                                        class="button is-small is-default" 
+                                        @click="selectPop(pop)" 
+                                        v-model="selectedPop" 
+                                        data-tooltip="Ver en mapa"
+                                        >
                                         <font-awesome-icon icon="map-marked-alt"/>
                                     </button>
+
+                                    <a 
+                                        class="button is-info is-outlined is-size-7 has-tooltip-right"
+                                        @click="addPop(pop)"
+                                        data-tooltip="Ver en mapa"
+                                        >
+                                        <font-awesome-icon icon="mouse-pointer"/>
+                                    </a>
                                 </td>
 
                             </tr>    
                         </tbody>
                     </table>
+
                     <nav class="pagination" role="navigation" aria-label="pagination">
                         <vue-pagination  
                             :pagination="pops"
@@ -123,34 +151,71 @@
                             :primaryText="primaryText">
                         </vue-pagination>
                     </nav>
+                    <form @submit="formSubmit">
+                        <div class="field has-addons has-text-right">
+                            <p class="control">
+                                <button type="submit" class="button is-small is-link" :class="buttonLoading">
+                                    <font-awesome-icon icon="download"/> 
+                                    &nbsp;&nbsp;Listado de POPs
+                                </button>
+                            </p>
+                        </div>
+                    </form>
+                    <form @submit="formSubmit">
+                        <div class="field has-addons has-text-right">
+                            <p class="control">
+                                <button type="submit" class="button is-small is-link" :class="buttonLoading">
+                                    <font-awesome-icon icon="download"/> 
+                                    &nbsp;&nbsp;Listado de POPs filtrados
+                                </button>
+                            </p>
+                        </div>
+
+                    </form>
                     <div class="field">
-                        <div class="field has-text-right">
+                        <div class="field ">
                             <!-- <a href="{{ route('comsite.create') }}" type="submit" class="button is-link is-small">{{ __('Sincronizar') }}</a> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tile is-5 is-parent">
-                <!-- <map-view
+            <!-- </div> -->
+            <div class="tile is-parent is-vertical">
+                <div class="tile box is-child is-12">
+                    <div class="snippet">
+                        <span class="has-text-weight-normal is-size-7"><strong>{{selectedPops.length}}</strong> pops selected</span>
+                        <div class="field is-grouped is-grouped-multiline">
+                            <div class="control" v-for="pop in selectedPops">
+                                <div class="tags has-addons">
+                                    <a class="tag is-link">{{ pop.nombre }}</a>
+                                    <a class="tag is-delete" @click="removeSelectedPop(pop)"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <map-view
                     :selectedPop="selectedPop"
                     :selectedCrm="selectedCrm"
                     :selectedZona="selectedZona"
                     :map_attributes="map_attributes"
                     :darkMode="darkMode"
                     :selectedPops="selectedPops"
-                ></map-view> -->
+                    :core="core"
+                ></map-view>
+                
             </div>
         </div>
     </section>
 </template>
 
 <script>
-    import VuePagination from './VuePagination.vue';
+    import VuePagination from '../VuePagination.vue';
     // import LoadingComponent from './maps/LoadingComponent.vue';
     // import ErrorComponent from './maps/ErrorComponent.vue';
     const MapView = () => ({
         // The component to load (should be a Promise)
-        component: import('./maps/MapView.vue'),
+        component: import('../maps/MapView.vue'),
         // A component to use while the async component is loading
         // loading: LoadingComponent,
         // A component to use if the load fails
@@ -159,7 +224,7 @@
         // delay: 200,
         // The error component will be displayed if a timeout is
         // provided and exceeded. Default: Infinity.
-        timeout: 300
+        // timeout: 300
     });
     export default {
         components: {
@@ -172,6 +237,7 @@
         ],
         data() {
             return {
+                core: 0,
                 crms: null,
                 zonas: null,
 
@@ -194,6 +260,7 @@
                 },
                 totalPops: 0,
                 searchText: '',
+                buttonLoading: '',
 
                 selectedPop: null,
                 selectedCrm: null,
@@ -204,66 +271,44 @@
         },
         created() {
             this.styleMode()
+            this.getCrms()
         },
         mounted() {
             this.search()
-            this.getCrms()
         },
         methods: {
             // Triggers
             selectPop(pop) {
                 this.selectedPop = pop
             },
-
-            selectPops(user) {
-                if (this.area_id != null) {
-                    this.selectedPops = []
-                    this.area_id = null
-                    this.selectedPops.push(user)
-                } else if (this.selectedPops.includes(user)) {
-                    var index = this.selectedPops.indexOf(user);
-                    if (index > -1) {
-                      this.selectedPops.splice(index, 1);
-                    }
-                    
-                } else {
-                    this.selectedPops.push(user)
-                }
-            },
-
             selectCrm(crm) {
                 // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
                 // si había una zona seleccionada, la variable selectedZona será null.
                 if (this.selectedCrm != crm) {
-                    this.selectedCrm = crm
-                    this.selectedZona = null
-                    this.getPops()
+                    this.selectedCrm = crm                    
                 } else {
                     this.selectedCrm = null
-                    this.selectedZona = null
-                    this.getPops()
                 }
-
+                this.selectedZona = null
                 this.getZonas(this.selectedCrm)
+                this.getPops()
                 this.search()
             },
             selectZona(zona) {
                 if (this.selectedZona != zona) {
                     this.selectedZona = zona
-                    this.getPops()
                 } else {
                     this.selectedZona = null
-                    this.getPops()
                 }
+                this.getPops()
                 this.search()
             },
 
             // APIs
             getPops() {
                 if (this.selectedCrm == null) {
-                    axios.get(`api/pops?page=${this.pops.current_page}`)
+                    axios.get(`api/pop?page=${this.pops.current_page}`)
                         .then((response) => {
-                            console.log(response.data)
                             this.pops = response.data
                             this.totalPops = this.pops.total
                         })
@@ -380,6 +425,56 @@
                 this.selectedZona = null
                 this.getPops()
             },
+            addPop(pop) {
+                if (this.selectedPops.includes(pop)) {
+                    console.log('fail')
+                //     var index = this.selectedPops.indexOf(pop);
+                //     if (index > -1) {
+                //       this.selectedPops.splice(index, 1);
+                //     }
+                } else {
+                    pop.selected = true
+                    this.selectedPops.push(pop)
+                    console.log(this.selectedPops)
+                }
+            },
+            removeSelectedPop(item){
+                item.selected = false
+                for( var i = 0; i < this.selectedPops.length; i++){ 
+                   if ( this.selectedPops[i] === item) {
+                     this.selectedPops.splice(i, 1); 
+                   }
+                }
+            },
+            formSubmit(e) {
+                // Activate loading button
+                this.buttonLoading = 'is-loading'
+
+                e.preventDefault()
+                axios({
+                    url: '/pop/export',
+                    method: 'POST',
+                    responseType: 'blob',
+                    // headers: {
+                    //     'Content-Type': 'text/html; charset=utf-8',
+                    //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    // }
+                })
+                .then((response) => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]))
+                    const link = document.createElement('a')
+                    link.href = url
+                    link.setAttribute('download', 'listado_pops.xlsx')
+                    document.body.appendChild(link)
+                    link.click()
+
+                    // Deativate loading button
+                    this.buttonLoading = ''
+                })
+                .catch((error) => {
+                    console.log('Error: ' + error);
+                });
+            }
         }
     }
 </script>

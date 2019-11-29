@@ -1,12 +1,32 @@
 <template>
     <section class="section is-marginless" :class="bodyBackground">
         <div class="container">
+
+            <section class="field" v-if="message">
+                <div class="notification is-primary alert is-dismissable" role="alert">
+                    <button aria-hidden="true" data-dismiss="alert" class="delete" type="button"></button>
+                    {{ message }}
+                </div>
+            </section>
+
             <div class="box" :class="boxBackground">
                 <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                        <input class="input is-rounded" :class="bodyBackground + ' ' + primaryText" @keyup="search" v-model="searchText" type="search" arial-label="Buscar" placeholder="Buscar..." autofocus>
+                        <input 
+                            class="input is-rounded" 
+                            :class="bodyBackground + ' ' + primaryText" 
+                            @keyup="search" 
+                            v-model="searchText" 
+                            type="text" 
+                            arial-label="Buscar" 
+                            placeholder="Buscar..." 
+                            autofocus
+                        >
                         <span class="icon is-small is-left">
                             <font-awesome-icon icon="search"/>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <button class="delete" @click="clearSearch"></button>
                         </span>
                     </p>
                 </div>
@@ -75,7 +95,11 @@
                 </nav>
                 <div class="field">
                     <div class="field has-text-right">
-                        <a href="/comsite/create" type="submit" class="button is-link is-small">Sincronizar</a>
+                        <a href="/comsite/create" type="submit" class="button is-link is-small">
+                            <font-awesome-icon icon="sync-alt"/>
+                            &nbsp;
+                            Sincronizar
+                        </a>
                     </div>
                     <div class="is-size-7 has-text-right" :class="secondaryText">Fecha ultima actualización: {{ last_updated }}</div>
                 </div>
@@ -91,12 +115,13 @@
             'vue-pagination': VuePagination
         },
         props : [
+            'message',
             'last_updated',
             'csrf'
         ],
         data() {
             return {
-                darkMode: 1,
+                darkMode: 0,
                 bodyBackground: '',
                 boxBackground: '',
                 primaryText: '',
@@ -170,7 +195,16 @@
                     this.darkMode = 0
                     this.styleMode()
                 }
-            }
+            },
+            clearSearch() {
+                this.searchText = ''
+                // this.popSearch = []
+                // this.selectedPop = null
+                // this.selectedPops = []
+                // this.selectedCrm = null
+                // this.selectedZona = null
+                this.getComsiteData()
+            },
         }
     }
 </script>

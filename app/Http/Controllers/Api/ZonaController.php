@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Cache;
+
 use App\Http\Resources\Zona as ZonaResource;
 use App\Zona;
 
 class ZonaController extends Controller
 {
+    protected $minutes = 3600;
+
     /**
      * Display a listing of the resource.
      *
@@ -27,8 +31,14 @@ class ZonaController extends Controller
      */
     public function zonasCrm($crm_id)
     {
-        $zonas = Zona::with('comunas', 'responsable')->where('crm_id', $crm_id)->get();
-
+        if (Cache::has('zonas_crm'.$crm_id)) {
+            $zonas = Cache::get('zonas_crm'.$crm_id);
+        } else {
+            $zonas = Cache::remember('zonas_crm'.$crm_id, $this->minutes, function () use ($crm_id) {
+                $zonas = Zona::with('comunas', 'responsable')->where('crm_id', $crm_id)->get();
+                return $zonas;
+            });
+        }
         return new ZonaResource($zonas);
     }
 

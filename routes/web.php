@@ -17,15 +17,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', function () {
-    return redirect('/dashboard');
-});
-Route::get('/home', function () {
-    return redirect('/dashboard');
-});
+Route::middleware(['auth'])->group(function () {
 
-Route::resource('/dashboard', 'HomeController');
-Route::post('/pop/export', 'PopController@export')->name('pops.export');
+	Route::get('/', function () {
+	    return redirect('/dashboard');
+	});
+	Route::get('/home', function () {
+	    return redirect('/dashboard');
+	});
 
-Route::resource('/pop', 'PopController');
-Route::resource('/comsite', 'ComsiteController');
+	Route::resource('/dashboard', 'HomeController');
+	Route::post('/pop/export', 'PopController@export')->name('pops.export');
+
+	Route::resource('/pop', 'PopController');
+	Route::resource('/comsite', 'ComsiteController');
+
+	Route::resource('/admin', 'AdminController');
+	
+});

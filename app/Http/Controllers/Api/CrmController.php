@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Cache;
+
 use App\Http\Resources\Crm as CrmResource;
 use App\Crm;
 
 class CrmController extends Controller
 {
+    protected $minutes = 3600;
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,14 @@ class CrmController extends Controller
      */
     public function index()
     {
-        $crms = Crm::with('zonas.comunas')->get();
+        if (Cache::has('crms')) {
+            $crms = Cache::get('crms');
+        } else {
+            $crms = Cache::remember('crms', $this->minutes, function () {
+                $crms = Crm::with('zonas.comunas')->get();
+                return $crms;
+            });
+        }
         return new CrmResource($crms);
     }
 

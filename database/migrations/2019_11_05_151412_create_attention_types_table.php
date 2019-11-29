@@ -15,7 +15,7 @@ class CreateAttentionTypesTable extends Migration
     {
         // Schema::create('attention_types', function (Blueprint $table) {
         //     $table->bigIncrements('id');
-        //     $table->string('type');
+        //     $table->string('attention_type');
         // });
     }
 

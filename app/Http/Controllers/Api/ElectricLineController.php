@@ -189,7 +189,8 @@ class ElectricLineController extends Controller
      */
     public function show($id)
     {
-        //
+        $electricLines = ElectricLine::where('pop_id', $id)->get();
+        return new ElectricLineResource($electricLines);
     }
 
     /**

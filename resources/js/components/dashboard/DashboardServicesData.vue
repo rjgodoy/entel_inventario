@@ -18,7 +18,7 @@
                         <th class="has-text-right" :class="secondaryText"><abbr title="OLT 3Play">OLT 3Play</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Red Minima N1">Red Min N1</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Red Minima N2">Red Min N2</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
+                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +29,16 @@
                         <td class="has-text-right" :class="primaryText">{{ crm.olt_3play | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ crm.red_minima_n1 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ crm.red_minima_n2 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ total_crm = crm.bafi + crm.olt + crm.olt_3play + crm.red_minima_n1 + crm.red_minima_n2 | numeral('0,0') }}</td>
+                        <!-- <td class="has-text-right" :class="primaryText">{{ total_crm = crm.bafi + crm.olt + crm.olt_3play + crm.red_minima_n1 + crm.red_minima_n2 | numeral('0,0') }}</td> -->
+                    </tr>
+                    <tr class="is-size-7 has-text-weight-bold">
+                        <td><a href="" title="CRM Norte"  class="" :class="secondaryText">Total</a></td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalBafi | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalOlt | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalOlt3Play | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalRedMinimaN1 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalRedMinimaN2 | numeral('0,0') }}</td>
+                        <!-- <td class="has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</td> -->
                     </tr>
                 </tbody>
             </table>
@@ -71,7 +80,12 @@
                 crmSelected: this.selectedCrm,
                 zonaSelected: this.selectedZona,
                 serviceData: null,
-                total: 0
+                total: 0,
+                totalBafi: 0,
+                totalOlt: 0,
+                totalOlt3Play: 0,
+                totalRedMinimaN1: 0,
+                totalRedMinimaN2: 0
             }
         },
         created() {
@@ -95,10 +109,20 @@
         },
         methods: {
             totalPops() {
+                this.totalBafi = 0
+                this.totalOlt = 0
+                this.totalOlt3Play = 0
+                this.totalRedMinimaN1 = 0
+                this.totalRedMinimaN2 = 0
                 this.total = 0
                 this.serviceData.forEach(this.counter)
             },
             counter(item, index) {
+                this.totalBafi = this.totalBafi + item.bafi
+                this.totalOlt = this.totalOlt + item.olt 
+                this.totalOlt3Play = this.totalOlt3Play + item.olt_3play
+                this.totalRedMinimaN1 = this.totalRedMinimaN1 + item.red_minima_n1
+                this.totalRedMinimaN2 = this.totalRedMinimaN2 + item.red_minima_n2
                 this.total = this.total = this.total + item.bafi + item.olt + item.olt_3play + item.red_minima_n1 + item.red_minima_n2;
             },
             getServiceData() {

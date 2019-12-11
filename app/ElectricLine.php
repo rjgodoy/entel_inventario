@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ElectricLine extends Model
 {
-    public function pop() 
+    public function pop()
     {
         return $this->belongsTo(Pop::class);
     }

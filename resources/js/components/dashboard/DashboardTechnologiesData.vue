@@ -24,8 +24,15 @@
                         <td class=""><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ crm.nombre }}</a></td>
                         <td class="has-text-right" :class="primaryText">{{ crm.tec2g900 + crm.tec2g1900 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ crm.tec3g900 + crm.tec3g1900 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ crm.tec4g700 + crm.tec4g2600 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ crm.tec2g900 + crm.tec2g1900 + crm.tec3g900 + crm.tec3g1900 + crm.tec4g700 + crm.tec4g2600 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ crm.tec4g700 + crm.tec4g1900 + crm.tec4g2600 | numeral('0,0') }}</td>
+                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ crm.tec2g900 + crm.tec2g1900 + crm.tec3g900 + crm.tec3g1900 + crm.tec4g700 + crm.tec4g1900 + crm.tec4g2600 | numeral('0,0') }}</td>
+                    </tr>
+                    <tr class="is-size-7 has-text-weight-bold">
+                        <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
+                        <td class="has-text-right" :class="primaryText">{{ this.total2G | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.total3G | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.total4G | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -67,7 +74,10 @@
                 crmSelected: this.selectedCrm,
                 zonaSelected: this.selectedZona,
                 technologyData: null,
-                total: 0
+                total: 0,
+                total2G: 0,
+                total3G: 0,
+                total4G: 0
             }
         },
         created() {
@@ -90,19 +100,25 @@
             }
         },
         methods: {
-            totalPops() {
+            totalTechnologies() {
                 this.total = 0
+                this.total2G = 0
+                this.total3G = 0
+                this.total4G = 0
                 this.technologyData.forEach(this.counter)
             },
             counter(item, index) {
-                this.total = this.total + item.tec2g900 + item.tec2g1900 + item.tec3g900 + item.tec3g1900 + item.tec4g700 + item.tec4g2600;
+                this.total2G = this.total2G + item.tec2g900 + item.tec2g1900
+                this.total3G = this.total3G + item.tec3g900 + item.tec3g1900
+                this.total4G = this.total4G + item.tec4g700 + item.tec4g1900 + item.tec4g2600
+                this.total = this.total + item.tec2g900 + item.tec2g1900 + item.tec3g900 + item.tec3g1900 + item.tec4g700 + item.tec4g1900 + item.tec4g2600;
             },
             getTechnologyData() {
                 if (this.zonaSelected != null) {
                     axios.get(`api/technologyDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
-                            this.totalPops()
+                            this.totalTechnologies()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
@@ -111,7 +127,7 @@
                     axios.get(`api/technologyDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
-                            this.totalPops()
+                            this.totalTechnologies()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
@@ -120,7 +136,7 @@
                     axios.get(`api/technologyData/${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
-                            this.totalPops()
+                            this.totalTechnologies()
                         })
                         .catch(() => {
                             console.log('handle server error from here');

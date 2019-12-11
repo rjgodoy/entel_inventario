@@ -29,34 +29,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 	// Map
 		Route::get('dashboardMap','Api\DashboardApiController@dashboardMap');
-		Route::get('dashboardMapCrm/{crm_id}', [
-			'as' => 'dashboard.dashboardMapCrm',
-			'uses' => 'Api\DashboardApiController@dashboardMapCrm'
-		]);
-		Route::get('dashboardMapZona/{zona_id}', [
-			'as' => 'dashboard.dashboardMapZona',
-			'uses' => 'Api\DashboardApiController@dashboardMapZona'
-		]);
-
-		// CORE
-		Route::get('dashboardMapCore', [
-			'as' => 'dashboard.dashboardMapCore',
-			'uses' => 'Api\DashboardApiController@dashboardMapCore'
-		]);
-		Route::get('dashboardMapCrmCore/{crm_id}', [
-			'as' => 'dashboard.dashboardMapCrmCore',
-			'uses' => 'Api\DashboardApiController@dashboardMapCrmCore'
-		]);
-		Route::get('dashboardMapZonaCore/{zona_id}', [
-			'as' => 'dashboard.dashboardMapZonaCore',
-			'uses' => 'Api\DashboardApiController@dashboardMapZonaCore'
-		]);
-
-		// POP
-		Route::get('dashboardMapPop/{pop_id}', [
-			'as' => 'dashboard.dashboardMapPop',
-			'uses' => 'Api\DashboardApiController@dashboardMapPop'
-		]);
 
 	// Pop Data box
 		Route::get('popData/{core}', 'Api\DashboardApiController@popData');
@@ -91,6 +63,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 			'uses' => 'Api\DashboardApiController@serviceDataZona'
 		]);
 
+	// Infra box
+		Route::get('infraData/{core}', 'Api\DashboardApiController@infraData');
+		Route::get('infraDataCrm/{crm_id}/{core}', [
+			'as' => 'dashboard.infraData',
+			'uses' => 'Api\DashboardApiController@infraDataCrm'
+		]);
+		Route::get('infraDataZona/{zona_id}/{core}', [
+			'as' => 'dashboard.infraDataZona',
+			'uses' => 'Api\DashboardApiController@infraDataZona'
+		]);
+
 	// Search
 		Route::get('searchPops/{text}/{core}', [
 			'as' => 'pop.search',
@@ -105,7 +88,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 			'uses' => 'Api\PopController@searchPopsZona'
 		]);
 
+	
+
 	// Electric Lines
+		Route::apiResource('electricLines','Api\ElectricLineController');
 		Route::get('electricLineData/{core}', [
 			'as' => 'electricLine.data',
 			'uses' => 'Api\ElectricLineController@electricLineData'
@@ -118,6 +104,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 			'as' => 'electricLineZona.data',
 			'uses' => 'Api\ElectricLineController@electricLineDataZona'
 		]);
+
+	// Transformers
+		Route::apiResource('transformers','Api\TransformerController');
+
+	// Connection Clients
+		Route::apiResource('connectionClients','Api\ConnectionClientController');
 
 	// Generator Groups
 		Route::get('generatorGroupData/{core}', [

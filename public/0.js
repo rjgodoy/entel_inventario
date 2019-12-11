@@ -9,8 +9,16 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -96,7 +104,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       icon: '../img/markers/entel-pin-32.png',
-      google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__["gmapApi"],
       mapStyle: null,
       dependencesActive: 0,
       buttonText: '',
@@ -645,17 +652,43 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
+  computed: {
+    google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__["gmapApi"]
+  },
   created: function created() {
     if (this.darkMode == 1) {
       this.mapStyle = this.style2;
     } else {
       this.mapStyle = null;
     }
-  },
-  mounted: function mounted() {
+
     this.getPop();
-    this.dependencesButton();
   },
+  mounted: function () {
+    var _mounted = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              this.initializeMap();
+              this.dependencesButton();
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function mounted() {
+      return _mounted.apply(this, arguments);
+    }
+
+    return mounted;
+  }(),
   watch: {
     darkMode: function darkMode(newValue, oldValue) {
       if (newValue == 1) {
@@ -666,6 +699,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    initializeMap: function initializeMap() {
+      var _this = this;
+
+      this.$refs.map.$mapPromise.then(function (map) {
+        map.panTo({
+          lat: parseFloat(_this.pop.latitude),
+          lng: parseFloat(_this.pop.longitude)
+        });
+        map.setZoom(16);
+      });
+    },
     toggleInfoWindow: function toggleInfoWindow(pop, idx) {
       this.infoWindowPos = {
         lat: parseFloat(pop.latitude),
@@ -692,32 +736,10 @@ __webpack_require__.r(__webpack_exports__);
       return "\n                <div class=\"card\">\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(this.classification.classification_type_id == 1 ? 'is-danger' : this.classification.classification_type_id == 2 ? 'is-warning' : this.classification.classification_type_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(this.classification.classification_type.classification_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"title is-4\">").concat(pop.nombre, "</p>\n                                <p class=\"subtitle is-6\">").concat(pop.direccion, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.\n                            <a href=\"#\">#css</a> <a href=\"#\">#responsive</a>\n                            <br>\n                            <time datetime=\"2016-1-1\">11:09 PM - 1 Jan 2016</time>\n                            <a v-if=\"").concat(pop.id == this.pop.id, "\" href=\"/pop/").concat(pop.id, "\" class=\"button is-small\">Ver POP</a>\n                        </div>\n                    </div>\n                </div>\n            ");
     },
     getPop: function getPop() {
-      var _this = this;
-
-      this.pops = [this.pop]; //Set bounds of the map
-
-      this.$refs.map.$mapPromise.then(function (map) {
-        map.panTo({
-          lat: parseFloat(_this.pop.latitude),
-          lng: parseFloat(_this.pop.longitude)
-        });
-        map.setZoom(16);
-
-        if (_this.flightPath) {
-          _this.flightPath.setMap(null);
-        }
-      });
+      this.pops = [this.pop];
     },
     getDependences: function getDependences() {
       var _this2 = this;
-
-      this.flightPath = new google.maps.Polyline({
-        path: this.dependencesLines,
-        geodesic: true,
-        strokeColor: '#FF8001',
-        strokeOpacity: 1.0,
-        strokeWeight: 0.5
-      });
 
       if (this.dependencesActive == 0) {
         this.dependencesActive = 1;
@@ -775,10 +797,10 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       } else {
-        this.dependencesActive = 0;
         this.buttonText = 'Dependencias';
         this.getPop();
-        this.flightPath.setMap(null);
+        this.initializeMap();
+        this.dependencesActive = 0;
       }
     },
     dependencesLocations: function dependencesLocations(item, index) {

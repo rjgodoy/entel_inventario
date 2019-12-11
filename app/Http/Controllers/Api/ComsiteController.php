@@ -41,7 +41,9 @@ class ComsiteController extends Controller
      */
     public function show($id)
     {
-        //
+        $comsites = Comsite::where('pop_id', $id)->get();
+
+        return new ComsiteResource($comsites);
     }
 
     /**

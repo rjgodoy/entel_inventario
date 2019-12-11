@@ -72,6 +72,7 @@
                             <tr>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">POP</abbr></th>
+                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Dirección</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
                             </tr>
@@ -81,11 +82,16 @@
                             <tr class="is-size-7 has-text-weight-light" v-for="pop in pops.data">
                                 <td class="has-text-weight-light" :class="primaryText">{{ pop.pop_id }}</td>
                                 <td class="">
-                                    <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
+                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                         {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
                                     </div>
-                                    <div class="is-size-7 has-text-weight-normal" :class="primaryText">
+                                    <div class="is-size-7 has-text-weight-semibold" :class="primaryText">
                                         {{ pop ? pop.nombre : '' }}
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                        {{ pop ? pop.direccion : '' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                         {{ pop ? pop.nombre_comuna : '' }}

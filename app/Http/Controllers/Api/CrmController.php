@@ -24,7 +24,7 @@ class CrmController extends Controller
         if (Cache::has('crms')) {
             $crms = Cache::get('crms');
         } else {
-            $crms = Cache::remember('crms', $this->minutes, function () {
+            $crms = Cache::rememberForever('crms', function () {
                 $crms = Crm::with('zonas.comunas')->get();
                 return $crms;
             });

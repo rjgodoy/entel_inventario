@@ -10,10 +10,23 @@ use App\AttentionPriority;
 use App\Autonomy;
 use App\Category;
 use App\Classification;
+use App\Coverage;
+use App\Dependence;
+use App\Derivation;
 use App\Net;
 use App\PopClass;
-use App\Site;
 use App\Rca;
+use App\Site;
+use App\Tec2G900Cell;
+use App\Tec2G1900Cell;
+use App\Tec3G900Cell;
+use App\Tec3G1900Cell;
+use App\Tec4G700Cell;
+use App\Tec4G1900Cell;
+use App\Tec4G2600Cell;
+use App\Transport;
+
+use App\PopMenu;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PopsExport;
@@ -66,7 +79,8 @@ class PopController extends Controller
     public function show(Pop $pop)
     {
         $pop = Pop::with('comuna.zona.crm', 'comuna.zona.responsable')->where('id', $pop->id)->first();
-        // dd($pop->first());
+
+        $pop_menu = PopMenu::orderBy('order','asc')->get();
 
         $attentions = Attention::with('attention_type')->where('pop_id', $pop->id)->get();
         $attention = $attentions->last();
@@ -83,19 +97,52 @@ class PopController extends Controller
         $classifications = Classification::with('classification_type')->where('pop_id', $pop->id)->get();
         $classification = $classifications->last();
 
+        $coverages = Coverage::with('coverage_type')->where('pop_id', $pop->id)->get();
+        $coverage = $coverages->last();
+
+        $dependences = Dependence::with('dependence')->where('pop_id', $pop->id)->get();
+
+        $derivations = Derivation::with('derivation_type')->where('pop_id', $pop->id)->get();
+        $derivation = $derivations->last();
+
         $nets = Net::with('net_type')->where('pop_id', $pop->id)->get();
         $net = $nets->last();
 
         $pop_classes = PopClass::with('pop_class_type')->where('pop_id', $pop->id)->get();
         $pop_class = $pop_classes->last();
 
+        $rcas = Rca::where('pop_id', $pop->id)->get();
+
         $sites = Site::with('site_type')->where('pop_id', $pop->id)->get();
         $site = $sites->last();
 
-        $rcas = Rca::where('pop_id', $pop->id)->get();
+        $tec2g900s = Tec2G900Cell::where('pop_id', $pop->id)->get();
+        $tec2g900 = $tec2g900s->last();
+
+        $tec2g1900s = Tec2G1900Cell::where('pop_id', $pop->id)->get();
+        $tec2g1900 = $tec2g1900s->last();
+
+        $tec3g900s = Tec3G900Cell::where('pop_id', $pop->id)->get();
+        $tec3g900 = $tec3g900s->last();
+
+        $tec3g1900s = Tec3G1900Cell::where('pop_id', $pop->id)->get();
+        $tec3g1900 = $tec3g1900s->last();
+
+        $tec4g700s = Tec4G700Cell::where('pop_id', $pop->id)->get();
+        $tec4g700 = $tec4g700s->last();
+
+        $tec4g1900s = Tec4G1900Cell::where('pop_id', $pop->id)->get();
+        $tec4g1900 = $tec4g1900s->last();
+
+        $tec4g2600s = Tec4G2600Cell::where('pop_id', $pop->id)->get();
+        $tec4g2600 = $tec4g2600s->last();
+
+        $transports = Transport::with('transport_type')->where('pop_id', $pop->id)->get();
+        $transport = $transports->last();
 
         return view('pop', compact(
             'pop',
+            'pop_menu',
             'attention',
             'attentions',
             'attention_priority',
@@ -106,12 +153,26 @@ class PopController extends Controller
             'categories',
             'classification', 
             'classifications',
+            'coverage', 
+            'coverages',
+            'dependences',
+            'derivation', 
+            'derivations',
             'nets',
             'net',
             'pop_classes',
+            'rcas', 
             'sites',
             'site',
-            'rcas', 
+            'tec2g900',
+            'tec2g1900',
+            'tec3g900',
+            'tec3g1900',
+            'tec4g700',
+            'tec4g1900',
+            'tec4g2600',
+            'transports',
+            'transport',
             'pop_class'
         ));
     }

@@ -36,14 +36,14 @@ import {
     faThLarge,
     faMapMarkerAlt,
     faBroadcastTower,
-    // faSolarPanel,
+    faSolarPanel,
     faBolt,
     faTemperatureLow,
     faSignal,
     faWifi,
     faFileContract,
     faSeedling,
-    // faLeaf,
+    faLeaf,
     faWarehouse,
     faFolderOpen,
     faCog,
@@ -57,7 +57,11 @@ import {
     faMousePointer,
     faArrowRight,
     faBackspace,
-    faSyncAlt
+    faSyncAlt,
+    faTasks,
+    faDollarSign,
+    faLink,
+    faUnlink
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -76,14 +80,14 @@ library.add(
 	faThLarge,
 	faMapMarkerAlt,
 	faBroadcastTower,
-	// faSolarPanel,
+	faSolarPanel,
 	faBolt,
 	faTemperatureLow,
 	faSignal,
 	faWifi,
 	faFileContract,
 	faSeedling,
-	// faLeaf,
+	faLeaf,
 	faWarehouse,
 	faFolderOpen,
 	faCog,
@@ -97,7 +101,11 @@ library.add(
     faMousePointer,
     faArrowRight,
     faBackspace,
-    faSyncAlt
+    faSyncAlt,
+    faTasks,
+    faDollarSign,
+    faLink,
+    faUnlink
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -114,9 +122,9 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE',
-        libraries: 'places', // This is required if you use the Autocomplete plugin
-        // OR: libraries: 'places,drawing'
-        // OR: libraries: 'places,drawing,visualization'
+        // libraries: 'places', // This is required if you use the Autocomplete plugin
+        // libraries: 'places,drawing'
+        // libraries: 'places,drawing,visualization'
         // (as you require)
 
         //// If you want to set the version, you can do so:
@@ -127,17 +135,17 @@ Vue.use(VueGoogleMaps, {
     // (e.g. `this.$refs.gmap.$on('zoom_changed', someFunc)`)
     // instead of going through Vue templates (e.g. `<GmapMap @zoom_changed="someFunc">`)
     // you might need to turn this on.
-    autobindAllEvents: false,
+    // autobindAllEvents: false,
 
     // If you want to manually install components, e.g.
     // import {GmapMarker} from 'vue2-google-maps/src/components/marker'
     // Vue.component('GmapMarker', GmapMarker)
     // then disable the following:
-    installComponents: true,
+    // installComponents: true,
 })
 
-import GmapCluster from 'vue2-google-maps/src/components/cluster' // replace src with dist if you have Babel issues
-Vue.component('GmapCluster', GmapCluster)
+// import GmapCluster from 'vue2-google-maps/dist/components/cluster' // replace src with dist if you have Babel issues
+// Vue.component('GmapCluster', GmapCluster)
 // #########################################################################
 
 /**

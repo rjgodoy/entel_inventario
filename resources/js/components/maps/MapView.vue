@@ -1,10 +1,10 @@
 <template>
-    <gmap-map
+    <GmapMap
         class="tile is-child box"
         style="height: 100%"
         ref="map"
         :center="center"
-        :zoom="this.map_attributes.zoom"
+        :zoom="3"
         map-type-id="roadmap"
         :options="{
             zoomControl: true,
@@ -19,7 +19,7 @@
         >
 
         <!-- ClusterButton -->
-        <div class="" id="myClusterButton">
+        <!-- <div class="" id="myClusterButton">
             <button 
                 class="button is-default" 
                 @click="cluster" 
@@ -34,11 +34,11 @@
                 >
                 {{ buttonText }}
             </button>
-        </div>
+        </div> -->
 
         <!-- MAPA WITH CLUSTER -->
-        <gmap-cluster v-if="clusterActive == 1">
-            <gmap-marker
+        <!-- <GmapCluster v-if="clusterActive == 1"> -->
+            <GmapMarker
                 ref="myMarker"
                 :key="index"
                 v-for="(pop, index) in pops"
@@ -57,10 +57,10 @@
                 >
                 <div v-html="infoContent"></div>
             </gmap-info-window>
-        </gmap-cluster>
+        <!-- </GmapCluster> -->
 
         <!-- MAPA W/O CLUSTER -->
-        <gmap-marker v-if="clusterActive == 0"
+        <!-- <GmapMarker v-if="clusterActive == 0"
                 ref="myMarker"
                 :key="index"
                 v-for="(pop, index) in pops"
@@ -78,8 +78,8 @@
             content="Hello"
             >
             <div v-html="infoContent"></div>
-        </gmap-info-window>
-    </gmap-map>
+        </gmap-info-window> -->
+    </GmapMap>
 </template>
 
 <script>
@@ -100,6 +100,10 @@
                 popListCrm: null,
                 popListZona: null,
                 pops: null,
+                popsCrm: [],
+                popsZona: [],
+                popsCore: [],
+
                 map: null,
                 center: { lat: this.map_attributes.latitude, lng: this.map_attributes.longitude },
                 infoContent: '',
@@ -115,10 +119,9 @@
                         height: -35
                     }
                 },
-                icon: '../img/markers/entel-pin-32.png',
-                google: gmapApi,
+                icon: '../img/markers/pin_entel_sm.png',
                 mapStyle: null,
-                clusterActive: 1,
+                // clusterActive: 1,
                 buttonText: '',
 
                 style1: [
@@ -150,6 +153,9 @@
                         "elementType":"geometry","stylers":[{"color":"#1d2c4d"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#8ec3b9"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#1a3646"}]},{"featureType":"administrative.country","elementType":"geometry.stroke","stylers":[{"color":"#4b6878"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#64779e"}]},{"featureType":"administrative.neighborhood","stylers":[{"visibility":"off"}]},{"featureType":"administrative.province","elementType":"geometry.stroke","stylers":[{"color":"#4b6878"}]},{"featureType":"landscape.man_made","elementType":"geometry.stroke","stylers":[{"color":"#334e87"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#023e58"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#283d6a"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#6f9ba5"}]},{"featureType":"poi","elementType":"labels.text.stroke","stylers":[{"color":"#1d2c4d"}]},{"featureType":"poi.business","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#023e58"}]},{"featureType":"poi.park","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#3C7680"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#304a7d"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#98a5be"}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"color":"#1d2c4d"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#2c6675"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#255763"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#b0d5ce"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"color":"#023e58"}]},{"featureType":"transit","elementType":"labels.text.fill","stylers":[{"color":"#98a5be"}]},{"featureType":"transit","elementType":"labels.text.stroke","stylers":[{"color":"#1d2c4d"}]},{"featureType":"transit.line","elementType":"geometry.fill","stylers":[{"color":"#283d6a"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#3a4762"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#0e1626"}]},{"featureType":"water","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#4e6d70"}]}]
             }
         },
+        computed: {
+            google: gmapApi
+        },
         created() {
             if (this.darkMode == 1) {
                 this.mapStyle = this.style2
@@ -158,34 +164,30 @@
             }
         },
         mounted() {
-            if (this.clusterActive == 1) {
-                this.buttonText = 'Desagrupar'
-            } else {
-                this.buttonText = 'Agrupar'
-            }
+            // if (this.clusterActive == 1) {
+            //     this.buttonText = 'Desagrupar'
+            // } else {
+            //     this.buttonText = 'Agrupar'
+            // }
             this.getPops()
-            this.$refs.map.$mapPromise.then((map) => {
-                var myButton = document.getElementById('myClusterButton');
-                myButton.index = 1;
-                map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton)
-            })
+            // this.$refs.map.$mapPromise.then((map) => {
+            //     var myButton = document.getElementById('myClusterButton');
+            //     myButton.index = 1;
+            //     map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton)
+            // })
         },
         watch: {
             selectedPop(newValue, oldValue) {
                 if (newValue != null) {
-                    this.pops = []
                     this.getPop()
                 } else {
-                    this.pops = []
                     this.getPops()
                 }
             },
             selectedCrm(newValue, oldValue) {
-                this.pops = []
                 this.getPops()
             },
             selectedZona(newValue, oldValue) {
-                this.pops = []
                 this.getPops()
             },
             darkMode(newValue, oldValue) {
@@ -196,8 +198,6 @@
                 }
             },
             core(newValue, oldValue) {
-                var temp = this.pops
-                this.pops = []
                 this.getPops()
             },
             selectedPops(newValue, oldValue) {
@@ -249,11 +249,11 @@
             getInfoWindowContent: function (pop) {
                 return (`
                     <div class="card">
-                        <div class="card-image">
+                        <!--div class="card-image">
                             <figure class="image is-4by3">
                                 <img src="https://bulma.io/images/placeholders/640x480.png" alt="Placeholder image">
                             </figure>
-                        </div>
+                        </div-->
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
@@ -282,149 +282,81 @@
                 `);
             },
 
-            getPops() {
+            popsCall(item, index) {
                 if (this.core == 0) {
-                    if (this.selectedCrm == null) {
-                        axios.get(`/api/dashboardMap`)
-                            .then((response) => {
-                                if (this.popList == null) {
-                                    this.popList = response.data.data
-                                }
-                                
-                                if (this.popList != null) {
-                                    this.pops = this.popList
-                                    //Set bounds of the map
-                                    this.$refs.map.$mapPromise.then((map) => {
-                                        map.panTo({ lat: this.map_attributes.latitude, lng: this.map_attributes.longitude })
-                                        map.setZoom(this.map_attributes.zoom)
-                                    });
-                                }
-                            })
-                    } else if (this.selectedZona == null){
-                        axios.get(`/api/dashboardMapCrm/${this.selectedCrm.id}`)
-                            .then((response) => {
-                                this.popListCrm = response.data.data;
-                                if (this.popListCrm != null) {
-                                    this.pops = this.popListCrm
-                                    //Set bounds of the map
-                                    this.$refs.map.$mapPromise.then((map) => {
-                                        const bounds = new google.maps.LatLngBounds()
-                                        for (let m of this.pops) {
-                                            bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-                                        }
-                                        // Don't zoom in too far on only one pop
-                                        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                                            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                                            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                                            bounds.extend(extendPoint1);
-                                            bounds.extend(extendPoint2);
-                                        }
-                                        map.fitBounds(bounds);
-                                    });
-                                }
-                            })
-                    } else {
-                        axios.get(`/api/dashboardMapZona/${this.selectedZona.id}`)
-                            .then((response) => {
-                                this.popListZona = response.data.data;
-                                if (this.popListZona != null) {
-                                    this.pops = this.popListZona
-                                    //Set bounds of the map
-                                    this.$refs.map.$mapPromise.then((map) => {
-                                        // map.panTo({ lat: this.map_attributes.latitude, lng: this.map_attributes.longitude })
-                                        const bounds = new google.maps.LatLngBounds()
-                                        for (let m of this.pops) {
-                                            bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-                                        }
-                                        // Don't zoom in too far on only one pop
-                                        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                                            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                                            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                                            bounds.extend(extendPoint1);
-                                            bounds.extend(extendPoint2);
-                                        }
-                                        map.fitBounds(bounds);
-                                    });
-                                }
-                            })
-                    }
+                    this.pops = this.popList
                 } else {
-                    if (this.selectedCrm == null) {
-                        axios.get(`/api/dashboardMapCore`)
-                            .then((response) => {
-                                this.popList = response.data.data
-                                if (this.popList != null) {
-                                    this.pops = this.popList
-                                    //Set bounds of the map
-                                    this.$refs.map.$mapPromise.then((map) => {
-                                        map.panTo({ lat: this.map_attributes.latitude, lng: this.map_attributes.longitude })
-                                        map.setZoom(this.map_attributes.zoom)
-                                    });
-                                }
-                            })
-                    } else if (this.selectedZona == null){
-                        axios.get(`/api/dashboardMapCrmCore/${this.selectedCrm.id}`)
-                            .then((response) => {
-                                this.popListCrm = response.data.data;
-                                if (this.popListCrm != null) {
-                                    this.pops = this.popListCrm
-                                    //Set bounds of the map
-                                    this.$refs.map.$mapPromise.then((map) => {
-                                        const bounds = new google.maps.LatLngBounds()
-                                        for (let m of this.pops) {
-                                            bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-                                        }
-                                        // Don't zoom in too far on only one pop
-                                        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                                            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                                            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                                            bounds.extend(extendPoint1);
-                                            bounds.extend(extendPoint2);
-                                        }
-                                        map.fitBounds(bounds);
-                                    });
-                                }
-                            })
-                    } else {
-                        axios.get(`/api/dashboardMapZonaCore/${this.selectedZona.id}`)
-                            .then((response) => {
-                                this.popListZona = response.data.data;
-                                if (this.popListZona != null) {
-                                    this.pops = this.popListZona
-                                    //Set bounds of the map
-                                    this.$refs.map.$mapPromise.then((map) => {
-                                        // map.panTo({ lat: this.map_attributes.latitude, lng: this.map_attributes.longitude })
-                                        const bounds = new google.maps.LatLngBounds()
-                                        for (let m of this.pops) {
-                                            bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-                                        }
-                                        // Don't zoom in too far on only one pop
-                                        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                                            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                                            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                                            bounds.extend(extendPoint1);
-                                            bounds.extend(extendPoint2);
-                                        }
-                                        map.fitBounds(bounds);
-                                    });
-                                }
-                            })
+                    if (item.classification_type_id == 1) {
+                        this.popsCore.push(item)
+                        this.pops = this.popsCore
                     }
                 }
             },
+
+            popPushCrm(item, index) {
+                if (this.core == 0) {
+                    if (item.crm_id == this.selectedCrm.id) {
+                        this.popsCrm.push(item)
+                    }
+                } else {
+                    if (item.crm_id == this.selectedCrm.id && item.classification_type_id == 1) {
+                        this.popsCrm.push(item)
+                    }
+                }
+            },
+
+            popPushZona(item, index) {
+                if (this.core == 0) {
+                    if (item.zona_id == this.selectedZona.id) {
+                        this.popsZona.push(item)
+                    }
+                } else {
+                    if (item.zona_id == this.selectedZona.id && item.classification_type_id == 1) {
+                        this.popsZona.push(item)
+                    }
+                }
+            },
+
+            getPops() {
+                if (this.selectedCrm == null) {
+                    if (this.popList == null) {
+                        axios.get(`/api/dashboardMap`)
+                        .then((response) => {
+                            this.popList = response.data.data
+                            this.pops = this.popList
+                        })
+                    } else {
+                        this.popsCore = []
+                        this.popList.forEach(this.popsCall)
+                    }
+                } else if (this.selectedZona == null){
+                    this.popsCrm = []
+                    this.popList.forEach(this.popPushCrm)
+                    this.pops = this.popsCrm
+                } else {
+                    this.popsZona = []
+                    this.popList.forEach(this.popPushZona)
+                    this.pops = this.popsZona
+                }
+
+                if (this.pops != null) {
+                    this.$refs.map.$mapPromise.then((map) => {
+                        const bounds = new google.maps.LatLngBounds()
+                        for (let m of this.pops) {
+                            bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
+                        }
+                        // Don't zoom in too far on only one pop
+                        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+                            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+                            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+                            bounds.extend(extendPoint1);
+                            bounds.extend(extendPoint2);
+                        }
+                        map.fitBounds(bounds);
+                    });
+                }
+            },
             getPop() {
-                // axios.get(`/api/dashboardMapPop/${this.selectedPop.id}`)
-                //     .then((response) => {
-                //         this.pops = response.data.data;
-                //         if (this.pops != null) {
-                //             this.pops = [this.selectedPop]
-                //             //Set bounds of the map
-                //             this.$refs.map.$mapPromise.then((map) => {
-                //                 map.panTo({ lat: parseFloat(this.selectedPop.latitude), lng: parseFloat(this.selectedPop.longitude) })
-                //                 map.setZoom(15)
-                //             });
-                //         }
-                //     })
                 this.pops = [this.selectedPop]
                 this.$refs.map.$mapPromise.then((map) => {
                     map.panTo({ lat: parseFloat(this.selectedPop.latitude), lng: parseFloat(this.selectedPop.longitude) })
@@ -432,15 +364,15 @@
                 });
             },
 
-            cluster() {
-                if (this.clusterActive == 0) {
-                    this.clusterActive = 1,
-                    this.buttonText = 'Desagrupar'
-                } else {
-                    this.clusterActive = 0
-                    this.buttonText = 'Agrupar'
-                }
-            }
+            // cluster() {
+            //     if (this.clusterActive == 0) {
+            //         this.clusterActive = 1,
+            //         this.buttonText = 'Desagrupar'
+            //     } else {
+            //         this.clusterActive = 0
+            //         this.buttonText = 'Agrupar'
+            //     }
+            // }
         }
     }  
 </script>

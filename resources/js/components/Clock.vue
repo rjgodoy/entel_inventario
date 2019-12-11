@@ -8,13 +8,13 @@
 </template>
 
 <script>
-    var moment = require('moment');
+    var moment = require('moment')
     export default {
         created() {
-            this.currentDay = moment().format('MMMM Do YYYY');
-            this.currentTime = moment().format('h:mm:ss a');
-            setInterval(() => this.updateCurrentDay(), 1 * 1000);
-            setInterval(() => this.updateCurrentTime(), 1 * 1000);
+            this.currentDay = moment().format('MMMM Do YYYY')
+            this.currentTime = moment().format('h:mm:ss a')
+            setInterval(() => this.updateCurrentDay(), 1 * 1000)
+            setInterval(() => this.updateCurrentTime(), 1 * 1000)
         },
         mounted() {
         },
@@ -26,10 +26,10 @@
         },
         methods: {
             updateCurrentDay() {
-                this.currentDay = moment().format('MMMM Do YYYY');
+                this.currentDay = moment().format('MMMM Do YYYY')
             },
             updateCurrentTime() {
-                this.currentTime = moment().format('h:mm:ss a');
+                this.currentTime = moment().format('h:mm:ss a')
             }
         }
     }

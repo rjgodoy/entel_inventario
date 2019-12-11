@@ -1,6 +1,5 @@
 <template>
-    <div>
-
+    <div class="has-background-light">
         <section class="level has-background-dark is-marginless" >
             <div class="level-item" style="margin: 10px 0 10px 0;">
                 <div class="has-text-centered is-size-5 has-text-weight-bold has-text-white is-uppercase">POP</div>
@@ -11,11 +10,11 @@
             <div class="hero-body columns" style="margin-top: -50px; margin-bottom: -50px;">
                 <div class="column has-text-left">
                     <div class="columns">
-                        <div class="column is-three-fifths">
+                        <div class="column is-half">
                             <!-- <div class="is-divider" data-content="POP" style="margin: 40px auto 20px auto"></div> -->
                             <div class="columns is-four-fifths">
-                                <div class="column has-text-left">
-                                    <div class="is-size-4 has-text-weight-semibold">{{ pop.nombre }}
+                                <div class="column has-text-left is-four-fifths">
+                                    <div class="is-size-3 has-text-weight-semibold">{{ pop.nombre }}
                                         <p class="is-size-7 has-text-weight-light">NOMBRE</p>
                                     </div>
                                 </div>
@@ -30,45 +29,51 @@
 
                             <div class="columns">
                                 <div class="column has-text-left">
-                                    <div class="is-size-5 has-text-weight-normal">{{ pop.nem_fijo ? pop.nem_fijo : '-' }}
-                                        <p class="is-size-7 has-text-weight-light">NEMONICO FIJO</p>
+                                    <div class="title is-size-5 has-text-weight-normal">{{ pop.nem_fijo ? pop.nem_fijo : '-' }}
+                                        <div class="subtitle is-size-7 has-text-weight-light">NEMONICO FIJO</div>
                                     </div>
-                                </div>
-                                <div class="column has-text-centered">
-                                    <div class="is-size-5 has-text-weight-normal">{{ pop.cod_planificacion ? pop.cod_planificacion : '-' }}
-                                        <p class="is-size-7 has-text-weight-light">CODIGO PLANIFICACION</p>
-                                    </div>
-                                </div>
-                                <div class="column has-text-right">
-                                    <div class="is-size-5 has-text-weight-normal">{{ pop.nem_movil ? pop.nem_movil : '-' }}
-                                        <p class="is-size-7 has-text-weight-light">NEMONICO MOVIL</p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="is-divider" data-content="TIPO POP" style="margin: 20px auto 20px auto"></div>
+                                    <div class="title is-size-5 has-text-weight-normal">{{ pop.nem_movil ? pop.nem_movil : '-' }}
+                                        <div class="subtitle is-size-7 has-text-weight-light">NEMONICO MOVIL</div>
+                                    </div>
 
-                            <div class="columns">
-                                <div class="column has-text-left">
-                                    <div class="is-size-5 has-text-weight-normal">{{ pop_class ? pop_class.pop_class_type.pop_class_type : '-' }}
-                                        <p class="is-size-7 has-text-weight-light">TIPO POP</p>
+                                    <div class="title is-size-5 has-text-weight-normal">{{ pop.cod_planificacion ? pop.cod_planificacion : '-' }}
+                                        <div class="subtitle is-size-7 has-text-weight-light">CODIGO PLANIFICACION</div>
                                     </div>
                                 </div>
-                                <div class="column has-text-centered">
-                                    <div class="is-size-5 has-text-weight-normal">{{ site ? site.site_type.site_type : '-' }}
-                                        <p class="is-size-7 has-text-weight-light">TIPO SITIO</p>
-                                    </div>
-                                </div>
+
                                 <div class="column has-text-right">
-                                    <div class="is-size-5 has-text-weight-normal">{{ net ? net.net_type.net_type : '-' }}
-                                        <p class="is-size-7 has-text-weight-light">TIPO RED</p>
+                                    <div class="title is-size-5 has-text-weight-normal">{{ site ? site.site_type.site_type : '-' }}
+                                        <p class="subtitle is-size-7 has-text-weight-light">TIPO SITIO</p>
+                                    </div>
+
+                                    <div class="title is-size-5 has-text-weight-normal">{{ pop_class ? pop_class.pop_class_type.pop_class_type : '-' }}
+                                        <p class="subtitle is-size-7 has-text-weight-light">TIPO POP</p>
+                                    </div>
+
+                                    <div class="title is-size-5 has-text-weight-normal">{{ net ? net.net_type.net_type : '-' }}
+                                        <p class="subtitle is-size-7 has-text-weight-light">TIPO RED</p>
+                                    </div>
+
+                                    <div class="title is-size-5 has-text-weight-normal">{{ transport ? transport.transport_type.transport_type : '-' }}
+                                        <p class="subtitle is-size-7 has-text-weight-light">TIPO TRANSPORTE</p>
+                                    </div>
+
+                                    <div class="title is-size-5 has-text-weight-normal">{{ derivation ? derivation.derivation_type.derivation_type : '-' }}
+                                        <p class="subtitle is-size-7 has-text-weight-light">TIPO DERIVACION</p>
+                                    </div>
+
+                                    <div class="title is-size-5 has-text-weight-normal">{{ coverage ? coverage.coverage_type.coverage_type : '-' }}
+                                        <p class="subtitle is-size-7 has-text-weight-light">TIPO COBERTURA</p>
                                     </div>
                                 </div>
                             </div>
                             
                         </div>
 
-                        <div class="column has-text-right" style="margin-right: 48px;">
+                        <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div>
+
+                        <div class="column " style="margin-right: 48px;">
                             <div class="is-divider" data-content="DIRECCION" style="margin: 20px auto 20px auto"></div>
                             <div class="is-size-5 has-text-weight-semibold">{{ pop.direccion }}</div>
                             <div class="is-size-6 has-text-weight-normal">{{ pop.comuna.nombre_comuna }}
@@ -100,10 +105,10 @@
                                     <a :href="'mailto:' + pop.comuna.zona.responsable.email" class="is-size-7 has-text-weight-semibold has-text-link" style="margin-top: -20px;">{{ pop.comuna.zona.responsable.email }}
                                         <p class="is-size-7 has-text-weight-light has-text-dark">email</p>
                                     </a>
-                                    <a :href="'tel:' + pop.comuna.zona.responsable.telefono_movil" class="is-size-7 has-text-weight-semibold" style="margin-top: 5px;">{{ pop.comuna.zona.responsable.telefono_movil }}
+                                    <a :href="'tel:' + pop.comuna.zona.responsable.telefono_movil" class="is-size-7 has-text-weight-semibold" style="margin-top: 5px;">{{ pop.comuna.zona.responsable.telefono_movil  ? pop.comuna.zona.responsable.telefono_movil : '-'}}
                                         <p class="is-size-7 has-text-weight-light has-text-dark" style="margin-top: -4px;">telefono</p>
                                     </a>
-                                    <div class="is-size-7 has-text-weight-semibold" style="margin-top: 5px;">{{ pop.comuna.zona.responsable.anexo_fono }}
+                                    <div class="is-size-7 has-text-weight-semibold" style="margin-top: 5px;">{{ pop.comuna.zona.responsable.anexo_fono ? pop.comuna.zona.responsable.anexo_fono : '-' }}
                                         <p class="is-size-7 has-text-weight-light" style="margin-top: -4px;">anexo</p>
                                     </div>
                                 </div>
@@ -122,12 +127,12 @@
 
                             <div class="columns">
                                 <div class="column has-text-left">
-                                    <div class="is-size-6 has-text-weight-normal">{{ pop.latitude }}
+                                    <div class="is-size-6 has-text-weight-semibold">{{ pop.latitude }}
                                         <p class="is-size-7 has-text-weight-light">Latitud</p>
                                     </div>
                                 </div>
                                 <div class="column has-background-right">
-                                    <div class="is-size-6 has-text-weight-normal">{{ pop.longitude }}
+                                    <div class="is-size-6 has-text-weight-semibold">{{ pop.longitude }}
                                         <p class="is-size-7 has-text-weight-light">Longitud</p>
                                     </div>
                                 </div>
@@ -146,27 +151,77 @@
             </div>
         </section>
 
+        <section class="level has-background-dark has-text-white is-marginless">
+            <div class="level-item" style="margin: 20px auto 20px auto;">
+                <div class="is-size-7 has-text-weight-bold">2G 900
+                    <span class="has-text-weight-semibold is-size-6" :class="tec2g900 ? 'has-text-success' : ''">&nbsp;{{ tec2g900 ? tec2g900.site : '-' }}</span>
+                </div>
+            </div>
+            <div class="level-item" style="margin: 20px auto 20px auto;">
+                <div class="is-size-7 has-text-weight-bold">2G 1900
+                    <span class="has-text-weight-semibold is-size-6" :class="tec2g1900 ? 'has-text-success' : ''">&nbsp;{{ tec2g1900 ? tec2g1900.site : '-' }}</span>
+                </div>
+            </div>
+
+            <div class="is-divider-vertical" style="height: 82px;"></div>
+
+            <div class="level-item" style="margin: 20px auto 20px auto;">
+                <div class="is-size-7 has-text-weight-bold">3G 900
+                    <span class="has-text-weight-semibold is-size-6" :class="tec3g900 ? 'has-text-success' : ''">&nbsp;{{ tec3g900 ? tec3g900.site : '-' }}</span>
+                </div>
+            </div>
+            <div class="level-item" style="margin: 20px auto 20px auto;">
+                <div class="is-size-7 has-text-weight-bold">3G 1900
+                    <span class="has-text-weight-semibold is-size-6" :class="tec3g1900 ? 'has-text-success' : ''">&nbsp;{{ tec3g1900 ? tec3g1900.site : '-' }}</span>
+                </div>
+            </div>
+
+            <div class="is-divider-vertical" style="height: 82px;"></div>
+
+            <div class="level-item" style="margin: 20px auto 20px auto;">
+                <div class="is-size-7 has-text-weight-bold">LTE 700
+                    <span class="has-text-weight-semibold is-size-6" :class="tec4g700 ? 'has-text-success' : ''">&nbsp;{{ tec4g700 ? tec4g700.site : '-' }}</span>
+                </div>
+            </div>
+            <div class="level-item" style="margin: 20px auto 20px auto;">
+                <div class="is-size-7 has-text-weight-bold">LTE 1900
+                    <span class="has-text-weight-semibold is-size-6" :class="tec4g1900 ? 'has-text-success' : ''">&nbsp;{{ tec4g1900 ? tec4g1900.site : '-' }}</span>
+                </div>
+            </div>
+            <div class="level-item" style="margin: 20px auto 20px auto;">
+                <div class="is-size-7 has-text-weight-bold">LTE 2600
+                    <span class="has-text-weight-semibold is-size-6" :class="tec4g2600 ? 'has-text-success' : ''">&nbsp;{{ tec4g2600 ? tec4g2600.site : '-' }}</span>
+                </div>
+            </div>
+        </section>
+
         <section class="hero is-bold" :class="heroBackgroundBlue">
             <div class="hero-body">
                 <nav class="level">
-                    <div class="level-item has-text-centered">
+                    <!-- <div class="level-item has-text-centered">
                         <div>
                             <p class="is-size-4 has-text-weight-semibold">{{ classification ? classification.classification_type.classification_type : '-' }}</p>
                             <p class="heading has-text-weight-semibold">CLASIFICACION</p>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="is-size-4 has-text-weight-semibold">{{ attention_priority ? attention_priority.attention_priority_type.attention_priority_type : '-' }}</p>
                             <p class="heading has-text-weight-semibold">PRIORIDAD ATENCION EN TERRENO</p>
                         </div>
                     </div>
-                    <!-- <div class="level-item has-text-centered">
+                    <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ this.classification.classification_type.classification_type }}</p>
-                            <p class="heading has-text-weight-semibold">DEPENDENCIAS</p>
+                            <p class="is-size-4 has-text-weight-semibold">{{ dependences ? dependences.length : 0 }}</p>
+                            <p class="heading has-text-weight-semibold">DEPENDENCIAS DIRECTAS</p>
                         </div>
-                    </div> -->
+                    </div>
+                    <div class="level-item has-text-centered">
+                        <div>
+                            <p class="is-size-4 has-text-weight-semibold">{{ dependences ? dependences.length : 0 }}</p>
+                            <p class="heading has-text-weight-semibold">DEPENDENCIAS TOTALES</p>
+                        </div>
+                    </div>
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="is-size-4 has-text-weight-semibold">{{ category ? category.category_type.category_type : '-' }}</p>
@@ -194,116 +249,96 @@
         </section>
 
         <section class="section">
-            <div class="" :class="bodyBackground">
-                <div class="columns">
-
-                    <!-- CUADROS DE INFORMACION -->
-                    <div class="tile is-ancestor">
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-
-                                <div class="is-size-6 title has-text-weight-semibold" :class="primaryText">NEGOCIO FIJO</div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="pe_3g" type="radio" name="pe_3g" :checked="pop.pe_3g ? true : false" :disabled="pop.pe_3g ? false : true">
-                                    <label for="pe_3g" class="is-size-6" :class="pop.pe_3g ? 'has-text-weight-semibold' : ''" :disabled="pop.pe_3g ? false : true">PE 3G</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="mpls" type="radio" name="mpls" :checked="pop.mpls ? true : false" :disabled="pop.mpls ? false : true">
-                                    <label for="mpls" class="is-size-6" :class="pop.mpls ? 'has-text-weight-semibold' : ''">MPLS</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="olt" type="radio" name="olt" :checked="pop.olt ? true : false" :disabled="pop.olt ? false : true">
-                                    <label for="olt" class="is-size-6" :class="pop.olt ? 'has-text-weight-semibold' : ''">OLT</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="olt_3play" type="radio" name="olt_3play" :checked="pop.olt_3play ? true : false" :disabled="pop.olt_3play ? false : true">
-                                    <label for="olt_3play" class="is-size-6" :class="pop.olt_3play ? 'has-text-weight-semibold' : ''">OLT 3Play</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="core" type="radio" name="core" :checked="pop.core ? true : false" :disabled="pop.core ? false : true">
-                                    <label for="core" class="is-size-6" :class="pop.core ? 'has-text-weight-semibold' : ''">CORE</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="bafi" type="radio" name="bafi" :checked="pop.bafi ? true : false" :disabled="pop.bafi ? false : true">
-                                    <label for="bafi" class="is-size-6" :class="pop.bafi ? 'has-text-weight-semibold' : ''">Banda Ancha Fija Inalámbrica (BAFI)</label>
-                                </div>
+            <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
+                <div class="tile is-parent" v-for="item in pop_menu">
+                    <a class="tile is-child box" :class="tabButtonView == item.id ? 'has-background-link' : boxBackground" @click="changeView(item.id)">
+                        <font-awesome-icon :icon="item.icon" class="fa-2x" :class="tabButtonView == item.id ? selectedSecondaryBoxText : secondaryText"/>
+                        <div :class="tabButtonView == item.id ? selectedSecondaryBoxText : secondaryText"> 
+                            <div class="is-size-6 has-text-weight-normal">
+                                {{ item.title }}
                             </div>
                         </div>
-
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-
-                                <div class="is-size-6 title has-text-weight-semibold" :class="primaryText">NEGOCIO MOVIL</div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="red_minima_n1" type="radio" name="red_minima_n1" :checked="pop.red_minima_n1 ? true : false" :disabled="pop.red_minima_n1 ? false : true">
-                                    <label for="red_minima_n1" class="is-size-6" :class="pop.red_minima_n1 ? 'has-text-weight-semibold' : ''" :disabled="pop.red_minima_n1 ? false : true">Red Mínima N1</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="red_minima_n2" type="radio" name="red_minima_n2" :checked="pop.red_minima_n2 ? true : false" :disabled="pop.red_minima_n2 ? false : true">
-                                    <label for="red_minima_n2" class="is-size-6" :class="pop.red_minima_n2 ? 'has-text-weight-semibold' : ''">Red Mínima N2</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="vip" type="radio" name="vip" :checked="pop.vip ? true : false" :disabled="pop.vip ? false : true">
-                                    <label for="vip" class="is-size-6" :class="pop.vip ? 'has-text-weight-semibold' : ''">VIP</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="localidad_obligatoria" type="radio" name="localidad_obligatoria" :checked="pop.localidad_obligatoria ? true : false" :disabled="pop.localidad_obligatoria ? false : true">
-                                    <label for="localidad_obligatoria" class="is-size-6" :class="pop.localidad_obligatoria ? 'has-text-weight-semibold' : ''">Localidad Obligatoria</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="ranco" type="radio" name="ranco" :checked="pop.ranco ? true : false" :disabled="pop.ranco ? false : true">
-                                    <label for="ranco" class="is-size-6" :class="pop.ranco ? 'has-text-weight-semibold' : ''">RAN Consolidado (RANCO)</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-
-                                <div class="is-size-6 title has-text-weight-semibold" :class="primaryText">CARACTERISTICAS INFRAESTRUCTURA</div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="offgrid" type="radio" name="offgrid" :checked="pop.offgrid ? true : false" :disabled="pop.offgrid ? false : true">
-                                    <label for="offgrid" class="is-size-6" :class="pop.offgrid ? 'has-text-weight-semibold' : ''" :disabled="pop.offgrid ? false : true">Offgrid</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="solar" type="radio" name="solar" :checked="pop.solar ? true : false" :disabled="pop.solar ? false : true">
-                                    <label for="solar" class="is-size-6" :class="pop.solar ? 'has-text-weight-semibold' : ''">Paneles Solares</label>
-                                </div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="eolica" type="radio" name="eolica" :checked="pop.eolica ? true : false" :disabled="pop.eolica ? false : true">
-                                    <label for="eolica" class="is-size-6" :class="pop.eolica ? 'has-text-weight-semibold' : ''">Eólico</label>
-                                </div>
-                                
-                            </div>
-                        </div>
-
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-
-                                <div class="is-size-6 title has-text-weight-semibold" :class="primaryText">GESTION AMBIENTAL</div>
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="protected_zone" type="radio" name="protected_zone" :checked="pop.protected_zone ? true : false" :disabled="pop.protected_zone ? false : true">
-                                    <label for="protected_zone" class="is-size-6" :class="pop.protected_zone ? 'has-text-weight-semibold' : ''">Zona protegida</label>
-                                </div>
-
-                                <div class="field">
-                                    <input class="is-checkradio is-link" id="rca" type="radio" name="rca" :checked="rcas.length ? true : false" :disabled="rcas.length ? false : true">
-                                    <label for="rca" class="is-size-6" :class="rcas.length ? 'has-text-weight-semibold' : ''" :disabled="rcas.length ? false : true">R.C.A.</label>
-                                </div>
-                                
-                            </div>
-                        </div>
-
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
+
+        <characteristics v-if="tabButtonView == 1"
+            :pop="pop"
+            :rcas="rcas"
+            :bodyBackground="bodyBackground"
+            :boxBackground="boxBackground"
+            :primaryText="primaryText"
+            :secondaryText="secondaryText"
+            :csrf="csrf"
+        />
+
+        <power v-if="tabButtonView == 2"
+            :pop="pop"
+            :rcas="rcas"
+            :bodyBackground="bodyBackground"
+            :boxBackground="boxBackground"
+            :primaryText="primaryText"
+            :secondaryText="secondaryText"
+            :csrf="csrf"
+        />
+
+        <characteristics v-if="tabButtonView == 3"
+            :pop="pop"
+            :rcas="rcas"
+            :bodyBackground="bodyBackground"
+            :boxBackground="boxBackground"
+            :primaryText="primaryText"
+            :secondaryText="secondaryText"
+            :csrf="csrf"
+        />
+
+        <characteristics v-if="tabButtonView == 4"
+            :pop="pop"
+            :rcas="rcas"
+            :bodyBackground="bodyBackground"
+            :boxBackground="boxBackground"
+            :primaryText="primaryText"
+            :secondaryText="secondaryText"
+            :csrf="csrf"
+        />
+
+        <characteristics v-if="tabButtonView == 5"
+            :pop="pop"
+            :rcas="rcas"
+            :bodyBackground="bodyBackground"
+            :boxBackground="boxBackground"
+            :primaryText="primaryText"
+            :secondaryText="secondaryText"
+            :csrf="csrf"
+        />
+
+        <comsite v-if="tabButtonView == 6"
+            :pop="pop"
+            :bodyBackground="bodyBackground"
+            :boxBackground="boxBackground"
+            :primaryText="primaryText"
+            :secondaryText="secondaryText"
+        />
+
+        <documents v-if="tabButtonView == 7"
+            :pop="pop"
+            :bodyBackground="bodyBackground"
+            :boxBackground="boxBackground"
+            :primaryText="primaryText"
+            :secondaryText="secondaryText"
+        />
+
     </div>
     
 </template>
 
 <script>
     import AutonomyChart from '../AutonomyChart.vue';
+    import PopCharacteristics from './PopCharacteristics.vue';
+    import PopPower from './PopPower.vue';
+    import PopComsite from './PopComsite.vue';
+    import PopDocuments from './PopDocuments.vue';
     const PopMapView = () => ({
         // The component to load (should be a Promise)
         component: import('../maps/PopMapView.vue'),
@@ -320,10 +355,15 @@
     export default {
         components: {
             'pop-map-view': PopMapView,
-            'autonomy-chart': AutonomyChart
+            'autonomy-chart': AutonomyChart,
+            'characteristics': PopCharacteristics,
+            'power': PopPower,
+            'comsite': PopComsite,
+            'documents': PopDocuments
         },
         props : [
             'pop',
+            'pop_menu',
             'attention',
             'attentions',
             'attention_priority',
@@ -334,13 +374,27 @@
             'categories',
             'classification',
             'classifications',
+            'coverage',
+            'coverages',
+            'dependences',
+            'derivation',
+            'derivations',
             'nets',
             'net',
             'pop_classes',
             'pop_class',
+            'rcas',
             'sites',
             'site',
-            'rcas',
+            'tec2g900',
+            'tec2g1900',
+            'tec3g900',
+            'tec3g1900',
+            'tec4g700',
+            'tec4g1900',
+            'tec4g2600',
+            'transports',
+            'transport',
             'csrf'
         ],
         data() {
@@ -351,9 +405,15 @@
                 primaryText: '',
                 secondaryText: '',
                 heroBackgroundBlue: 'is-link',
+
+                selectedPrimaryBoxText: 'has-text-white',
+                selectedSecondaryBoxText: 'has-text-light',
+
+                tabButtonView: 1
             }
         },
         mounted() {
+            this.styleMode()
         },
         methods: {
             // Style mode
@@ -382,7 +442,12 @@
                     this.darkMode = 0
                     this.styleMode()
                 }
-            }
+            },
+            changeView(view) {
+                if (this.tabButtonView != view) {
+                    this.tabButtonView = view
+                }
+            },
         }
     }
 </script>

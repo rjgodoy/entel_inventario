@@ -49,20 +49,20 @@ class Pop extends Model
         return $this->belongsTo(Comuna::class);
     }
 
-    // public function coverages() 
-    // {
-    //     return $this->hasMany(Coverage::class);
-    // }
+    public function coverages() 
+    {
+        return $this->hasMany(Coverage::class);
+    }
 
     public function dependences() 
     {
         return $this->hasMany(Dependence::class);
     }
 
-    // public function derivations() 
-    // {
-    //     return $this->hasMany(Derivation::class);
-    // }
+    public function derivations() 
+    {
+        return $this->hasMany(Derivation::class);
+    }
 
     public function nets() 
     {
@@ -89,35 +89,40 @@ class Pop extends Model
     //     return $this->hasMany(State::class);
     // }
 
-    // public function tec2_g900_cells() 
-    // {
-    //     return $this->hasMany(Tec2G900Cell::class);
-    // }
+    public function tec2_g900_cells() 
+    {
+        return $this->hasMany(Tec2G900Cell::class);
+    }
 
-    // public function tec2_g1900_cells() 
-    // {
-    //     return $this->hasMany(Tec2G1900Cell::class);
-    // }
+    public function tec2_g1900_cells() 
+    {
+        return $this->hasMany(Tec2G1900Cell::class);
+    }
 
-    // public function tec3_g900_cells() 
-    // {
-    //     return $this->hasMany(Tec3G900Cell::class);
-    // }
+    public function tec3_g900_cells() 
+    {
+        return $this->hasMany(Tec3G900Cell::class);
+    }
 
-    // public function tec3_g1900_cells() 
-    // {
-    //     return $this->hasMany(Tec3G900Cell::class);
-    // }
+    public function tec3_g1900_cells() 
+    {
+        return $this->hasMany(Tec3G900Cell::class);
+    }
 
-    // public function tec4_g700_cells() 
-    // {
-    //     return $this->hasMany(Tec4G700Cell::class);
-    // }
+    public function tec4_g700_cells() 
+    {
+        return $this->hasMany(Tec4G700Cell::class);
+    }
 
-    // public function tec4_g2600_cells() 
-    // {
-    //     return $this->hasMany(Tec4G2600Cell::class);
-    // }
+    public function tec4_g1900_cells() 
+    {
+        return $this->hasMany(Tec4G1900Cell::class);
+    }
+
+    public function tec4_g2600_cells() 
+    {
+        return $this->hasMany(Tec4G2600Cell::class);
+    }
 
     // public function thresholds() 
     // {

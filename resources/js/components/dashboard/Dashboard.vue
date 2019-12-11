@@ -51,7 +51,7 @@
             </div>
 
             <!-- ZONA BUTTONS -->
-            <div v-if="selectedCrm != null" class="has-background-white shadow-inset" style="margin: 0 -24px 0 -24px">
+            <div v-if="selectedCrm != null" class="" :class="innerBackground" style="margin: 0 -24px 0 -24px">
                 <div class="container" style="margin: -20px auto 10px auto;">
                     <div class="tile is-ancestor">
                         <div class="tile is-parent" v-for="zona in zonas">
@@ -78,8 +78,8 @@
 
             <!-- BUSCAR -->
             <div class="container" style="width: 50%; margin-top: 30px;">
-                <span class="container is-size-7 is-right" v-if="searchText.length >= 3">
-                    <strong style="margin-left: 10px;">{{ counter | numeral('0,0')}}</strong> pops encontrados
+                <span v-if="searchText.length >= 3" class="container is-size-7 is-right" :class="secondaryText" >
+                    <strong style="margin-left: 10px;" :class="primaryText">{{ counter | numeral('0,0')}}</strong> pops encontrados
                 </span>
                 <p class="control has-icons-left has-icons-right">
                     <input 
@@ -113,7 +113,7 @@
                                             {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
                                         </div>
                                         <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
-                                            {{ pop ? pop.nombre_pop : '' }}
+                                            {{ pop ? pop.nombre : '' }}
                                         </div>
                                         <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                             {{ pop ? pop.nombre_comuna : '' }}
@@ -181,7 +181,7 @@
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
                                 :core="core"
-                            ></pop-data>
+                            />
                             <services-data
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
@@ -190,23 +190,21 @@
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
                                 :core="core"
-                            ></services-data>
+                            />
                         </div>
                         <!-- MAPA -->
-                        <div class="tile is-parent">
-                            <div class="tile is-vertical">
-                                <div class="tile is-parent">
-                                    <map-view
-                                        :boxBackground="boxBackground"
-                                        :selectedPop="selectedPop"
-                                        :selectedCrm="selectedCrm"
-                                        :selectedZona="selectedZona"
-                                        :map_attributes="map_attributes"
-                                        :darkMode="darkMode"
-                                        :selectedPops="selectedPops"
-                                        :core="core"
-                                        />
-                                </div>
+                        <div class="tile is-parent is-vertical">
+                            <div class="tile is-parent">
+                                <map-view
+                                    :boxBackground="boxBackground"
+                                    :selectedPop="selectedPop"
+                                    :selectedCrm="selectedCrm"
+                                    :selectedZona="selectedZona"
+                                    :map_attributes="map_attributes"
+                                    :darkMode="darkMode"
+                                    :selectedPops="selectedPops"
+                                    :core="core"
+                                />
                             </div>
                         </div>
                         <div class="tile is-parent is-vertical">
@@ -218,8 +216,17 @@
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
                                 :core="core"
-                                />
-                            <radial-chart/>
+                            />
+                            <infra-data
+                                :bodyBackground="bodyBackground"
+                                :boxBackground="boxBackground"
+                                :primaryText="primaryText"
+                                :secondaryText="secondaryText"
+                                :selectedCrm="this.selectedCrm"
+                                :selectedZona="this.selectedZona"
+                                :core="core"
+                            />
+                            <!-- <radial-chart/> -->
                         </div>
                     </div>
                 </div>
@@ -278,10 +285,11 @@
     import DashboardPopData from './DashboardPopData.vue';
     import DashboardTechnologiesData from './DashboardTechnologiesData.vue';
     import DashboardServicesData from './DashboardServicesData.vue';
+    import DashboardInfraData from './DashboardInfraData.vue';
     import DashboardElectricLinesData from './DashboardElectricLinesData.vue';
     import DashboardGeneratorGroupsData from './DashboardGeneratorGroupsData.vue';
     import DashboardPowerRectifiersData from './DashboardPowerRectifiersData.vue';
-    import RadialChart from '../RadialChart.vue';
+    // import RadialChart from '../RadialChart.vue';
     import MapView from "../maps/MapView.vue";
 
     var moment = require('moment');
@@ -290,11 +298,12 @@
             'pop-data': DashboardPopData,
             'technologies-data': DashboardTechnologiesData,
             'services-data': DashboardServicesData,
+            'infra-data': DashboardInfraData,
             'electric-line-data': DashboardElectricLinesData,
             'generator-group-data': DashboardGeneratorGroupsData,
             'power-rectifier-data': DashboardPowerRectifiersData,
             'map-view': MapView,
-            'radial-chart': RadialChart,
+            // 'radial-chart': RadialChart,
             // 'Mapa': Mapa
             // 'map-view': function(resolve) {
             //     require(['./maps/MapView.vue'], resolve)
@@ -322,6 +331,7 @@
                 primaryText: '',
                 secondaryText: '',
                 searchBodyBackground: '',
+                innerBackground: '',
                 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
@@ -376,17 +386,17 @@
             
             // APIs
             getCrms() {
-                axios.get(`api/crms`)
-                    .then((response) => {
-                        this.crms = response.data.data;
-                    })
-                    .catch(() => {
-                        console.log('handle server error from here');
-                    });
+                axios.get(`/api/crms`)
+                .then((response) => {
+                    this.crms = response.data.data;
+                })
+                .catch((error) => {
+                    console.log('Error al traer los CRM: ' + error);
+                });
             },
             getZonas(crm) {
                 if (crm != null) {
-                    axios.get(`api/zonasCrm/${crm.id}`)
+                    axios.get(`/api/zonasCrm/${crm.id}`)
                         .then((response) => {
                             this.zonas = response.data.data;
                         })
@@ -402,7 +412,7 @@
             search(){
                 if (this.searchText.length >= 3) {
                     if (this.selectedCrm == null) {
-                        axios.get(`api/searchPops/${this.searchText}/${this.core}`)
+                        axios.get(`/api/searchPops/${this.searchText}/${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length
@@ -412,7 +422,7 @@
                                 console.log('handle server error from here');
                             });
                     } else if (this.selectedZona == null) {
-                        axios.get(`api/searchPopsCrm/${this.searchText}/${this.selectedCrm.id}/${this.core}`)
+                        axios.get(`/api/searchPopsCrm/${this.searchText}/${this.selectedCrm.id}/${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length
@@ -422,7 +432,7 @@
                                 console.log('handle server error from here');
                             });
                     } else {
-                        axios.get(`api/searchPopsZona/${this.searchText}/${this.selectedZona.id}/${this.core}`)
+                        axios.get(`/api/searchPopsZona/${this.searchText}/${this.selectedZona.id}/${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length
@@ -459,6 +469,7 @@
                     this.primaryText = 'has-text-white'
                     this.secondaryText = 'has-text-grey-light'
                     this.searchBodyBackground = 'has-background-dark'
+                    this.innerBackground = 'has-background-dark-ter shadow-inset-dark'
                 } else {
                     // light mode
                     this.bodyBackground = 'has-background-light'
@@ -466,6 +477,7 @@
                     this.primaryText = 'has-text-dark'
                     this.secondaryText = 'has-text-grey'
                     this.searchBodyBackground = 'has-background-white'
+                    this.innerBackground = 'has-background-white shadow-inset'
                 }
             },
             changeStyle() {

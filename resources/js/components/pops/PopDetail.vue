@@ -6,6 +6,25 @@
             </div>
         </section>
 
+        <div id="quickviewDefault" class="quickview">
+            <header class="quickview-header">
+                <p class="title">Quickview title</p>
+                <span class="delete" data-dismiss="quickview"></span>
+            </header>
+
+            <div class="quickview-body">
+                <div class="quickview-block">
+                    ...
+                </div>
+            </div>
+
+            <footer class="quickview-footer">
+
+            </footer>
+        </div>
+
+        <button class="button is-primary" data-show="quickview" data-target="quickviewDefault">Log del POP</button>
+
         <section class="hero is-medium has-background-white">
             <div class="hero-body columns" style="margin-top: -50px; margin-bottom: -50px;">
                 <div class="column has-text-left">
@@ -68,7 +87,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
 
                         <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div>
@@ -198,12 +216,6 @@
         <section class="hero is-bold" :class="heroBackgroundBlue">
             <div class="hero-body">
                 <nav class="level">
-                    <!-- <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ classification ? classification.classification_type.classification_type : '-' }}</p>
-                            <p class="heading has-text-weight-semibold">CLASIFICACION</p>
-                        </div>
-                    </div> -->
                     <div class="level-item has-text-centered">
                         <div>
                             <p class="is-size-4 has-text-weight-semibold">{{ attention_priority ? attention_priority.attention_priority_type.attention_priority_type : '-' }}</p>
@@ -237,9 +249,6 @@
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <!-- <autonomy-chart
-                                :autonomy="autonomy"
-                            ></autonomy-chart> -->
                             <p class="is-size-4 has-text-weight-semibold">{{ autonomy ? autonomy.theoretical : '-' }} <span class="is-size-5">hrs.</span></p>
                             <p class="heading has-text-weight-semibold">AUTONOMIA TEORICA</p>
                         </div>
@@ -253,81 +262,77 @@
                 <div class="tile is-parent" v-for="item in pop_menu">
                     <a class="tile is-child box" :class="tabButtonView == item.id ? 'has-background-link' : boxBackground" @click="changeView(item.id)">
                         <font-awesome-icon :icon="item.icon" class="fa-2x" :class="tabButtonView == item.id ? selectedSecondaryBoxText : secondaryText"/>
-                        <div :class="tabButtonView == item.id ? selectedSecondaryBoxText : secondaryText"> 
-                            <div class="is-size-6 has-text-weight-normal">
-                                {{ item.title }}
+                        <div :class="tabButtonView == item.id ? selectedSecondaryBoxText : secondaryText" style="margin-top: 10px;"> 
+                            <div class="is-size-6 has-text-weight-semibold">
+                                {{ item.title.toUpperCase() }}
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
+        
+
+            <characteristics v-if="tabButtonView == 1"
+                :pop="pop"
+                :rcas="rcas"
+                :bodyBackground="bodyBackground"
+                :boxBackground="boxBackground"
+                :primaryText="primaryText"
+                :secondaryText="secondaryText"
+            />
+
+            <power v-if="tabButtonView == 2"
+                :pop="pop"
+                :bodyBackground="bodyBackground"
+                :boxBackground="boxBackground"
+                :primaryText="primaryText"
+                :secondaryText="secondaryText"
+            />
+
+            <clima v-if="tabButtonView == 3"
+                :pop="pop"
+                :bodyBackground="bodyBackground"
+                :boxBackground="boxBackground"
+                :primaryText="primaryText"
+                :secondaryText="secondaryText"
+            />
+
+            <infrastructure v-if="tabButtonView == 4"
+                :pop="pop"
+                :rcas="rcas"
+                :bodyBackground="bodyBackground"
+                :boxBackground="boxBackground"
+                :primaryText="primaryText"
+                :secondaryText="secondaryText"
+                :csrf="csrf"
+            />
+
+            <characteristics v-if="tabButtonView == 5"
+                :pop="pop"
+                :rcas="rcas"
+                :bodyBackground="bodyBackground"
+                :boxBackground="boxBackground"
+                :primaryText="primaryText"
+                :secondaryText="secondaryText"
+                :csrf="csrf"
+            />
+
+            <comsite v-if="tabButtonView == 6"
+                :pop="pop"
+                :bodyBackground="bodyBackground"
+                :boxBackground="boxBackground"
+                :primaryText="primaryText"
+                :secondaryText="secondaryText"
+            />
+
+            <documents v-if="tabButtonView == 7"
+                :pop="pop"
+                :bodyBackground="bodyBackground"
+                :boxBackground="boxBackground"
+                :primaryText="primaryText"
+                :secondaryText="secondaryText"
+            />
         </section>
-
-        <characteristics v-if="tabButtonView == 1"
-            :pop="pop"
-            :rcas="rcas"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-            :csrf="csrf"
-        />
-
-        <power v-if="tabButtonView == 2"
-            :pop="pop"
-            :rcas="rcas"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-            :csrf="csrf"
-        />
-
-        <characteristics v-if="tabButtonView == 3"
-            :pop="pop"
-            :rcas="rcas"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-            :csrf="csrf"
-        />
-
-        <characteristics v-if="tabButtonView == 4"
-            :pop="pop"
-            :rcas="rcas"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-            :csrf="csrf"
-        />
-
-        <characteristics v-if="tabButtonView == 5"
-            :pop="pop"
-            :rcas="rcas"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-            :csrf="csrf"
-        />
-
-        <comsite v-if="tabButtonView == 6"
-            :pop="pop"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-        />
-
-        <documents v-if="tabButtonView == 7"
-            :pop="pop"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-        />
 
     </div>
     
@@ -337,6 +342,8 @@
     import AutonomyChart from '../AutonomyChart.vue';
     import PopCharacteristics from './PopCharacteristics.vue';
     import PopPower from './PopPower.vue';
+    import PopClima from './PopClima.vue';
+    import PopInfrastructure from './PopInfrastructure.vue';
     import PopComsite from './PopComsite.vue';
     import PopDocuments from './PopDocuments.vue';
     const PopMapView = () => ({
@@ -358,6 +365,8 @@
             'autonomy-chart': AutonomyChart,
             'characteristics': PopCharacteristics,
             'power': PopPower,
+            'clima': PopClima,
+            'infrastructure': PopInfrastructure,
             'comsite': PopComsite,
             'documents': PopDocuments
         },
@@ -404,7 +413,7 @@
                 boxBackground: '',
                 primaryText: '',
                 secondaryText: '',
-                heroBackgroundBlue: 'is-link',
+                heroBackgroundBlue: 'is-info',
 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',

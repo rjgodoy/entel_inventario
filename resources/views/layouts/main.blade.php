@@ -38,11 +38,6 @@
                                 </div>
                             </div>
 
-                            {{-- <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                                <span aria-hidden="true"></span>
-                                <span aria-hidden="true"></span>
-                                <span aria-hidden="true"></span>
-                            </a> --}}
                             <span class="navbar-burger burger" data-target="navbarMenuHeroB">
                                 <span></span>
                                 <span></span>
@@ -56,7 +51,7 @@
                 <div class="hero-body">
                     <div class="{{-- is-fullwidth --}}">
                         <ul class="columns">
-                            @foreach(Helper::menus() as $menu)
+                            @foreach(Helper::menus(auth()->user()) as $menu)
                             <li class="column has-text-centered {{ strpos(Request::path(), $menu->path) !== false  ? 'is-active' : '' }}">
                                 <a class="" href="/{{ $menu->path }}">
                                     <i class="{{ $menu->ico }} fa-2x {{ strpos(Request::path(), $menu->path) !== false  ? 'has-text-link' : 'has-text-grey-light' }}"></i>
@@ -89,26 +84,78 @@
                         </div>
                         @else
                         <div class="navbar-item dropdown is-hoverable" style="margin: -5px 0 -5px 0;">
-                            <a class="navbar-link has-text-grey-light has-background-black-ter">
-                                {{ Auth::user()->nombre }} <span class="caret"></span>
-                            </a>
 
-                            <div class="dropdown-menu is-size-7">
-                                <div class="dropdown-content">
-                                    <a class="dropdown-item is-size-7 {{-- has-text-grey-light has-background-black-ter --}}" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        {{ __('Perfil') }}
-                                    </a>
-                                    <a class="dropdown-item is-size-7 {{-- has-text-grey-light has-background-black-ter --}}" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        {{ __('Salir') }}
-                                    </a>
+                            <div class="navbar-menu">
+                                <div class="navbar-end">
+                                    <b-dropdown                    
+                                        position="is-bottom-left"
+                                        aria-role="menu">
+                                        <a
+                                            class="navbar-item has-text-grey-light has-text-weight-semibold"
+                                            style="margin-bottom: -10px;"
+                                            slot="trigger"
+                                            role="button">
+                                            <span>{{ Auth::user()->nombre }}</span>
+                                            &nbsp;
+                                            <b-icon pack="fas" icon="angle-down"></b-icon>
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                                        <b-dropdown-item custom aria-role="menuitem">
+                                            Logged as <b>Rafael Beraldo</b>
+                                        </b-dropdown-item>
+
+                                        <hr class="dropdown-divider">
+
+                                        <b-dropdown-item has-link aria-role="menuitem">
+                                            <a href="https://google.com" target="_blank">
+                                                <b-icon pack="fas" icon="link"></b-icon>
+                                                Google (link)
+                                            </a>
+                                        </b-dropdown-item>
+
+                                        <b-dropdown-item value="home" aria-role="menuitem">
+                                            <b-icon pack="fas" icon="home"></b-icon>
+                                            Home
+                                        </b-dropdown-item>
+
+                                        <b-dropdown-item value="products" aria-role="menuitem">
+                                            <b-icon pack="fas" icon="cart"></b-icon>
+                                            Products
+                                        </b-dropdown-item>
+
+                                        <b-dropdown-item value="blog" disabled aria-role="menuitem">
+                                            <b-icon pack="fas" icon="book-open"></b-icon>
+                                            Blog
+                                        </b-dropdown-item>
+
+                                        <hr class="dropdown-divider" aria-role="menuitem">
+
+                                        <b-dropdown-item value="settings" has-link aria-role="menuitem">
+                                            <a class="" 
+                                                href="{{ route('logout') }}" 
+                                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                                <b-icon icon="user-edit"></b-icon>
+                                                {{ __('Perfil') }}
+                                            </a>
+                                        </b-dropdown-item>
+
+                                        <b-dropdown-item value="logout" has-link aria-role="menuitem">
+                                            <a class="" 
+                                                href="{{ route('logout') }}" 
+                                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                                <b-icon pack="fas" icon="sign-out-alt"></b-icon>
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </b-dropdown-item>
+                                    </b-dropdown>
                                 </div>
                             </div>
+
                         </div>
                         @endguest
                     </div>
@@ -117,10 +164,6 @@
                             <clock></clock>
                         </div>
                     </div>
-                    {{-- <div class="has-text-right">
-                        <div class="title is-5 has-text-grey-light">Subgerencia Infraestructura, Poder y Clima</div>
-                        <div class="subtitle is-6">Gerencia O&M Redes de Acceso</div>
-                    </div> --}}
                 </div>
             </div>
         </section>

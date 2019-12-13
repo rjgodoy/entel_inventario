@@ -12,8 +12,10 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles(['admin']);
+
         return view('admin')->with('message', 'Hello');
     }
 

@@ -7,14 +7,15 @@
             <!-- SWITCH CORE & CRM BUTTONS-->
             <div class="container" style="margin: -20px auto 20px auto;">
                 <div class="field">
-                    <input 
+                    <b-switch @change="switchCore">Mostrar POPs CORE</b-switch>
+                    <!-- <input 
                         id="switchCore" 
                         type="checkbox" 
                         name="switchCore" 
                         class="switch is-rounded is-link" 
                         @change="switchCore"
                     >
-                    <label for="switchCore">Mostrar POPs CORE</label>
+                    <label for="switchCore">Mostrar POPs CORE</label> -->
                     <button class="button is-link is-small is-pulled-right" @click="changeStyle" v-model="darkMode">Style</button>
                 </div>
 

@@ -190,7 +190,8 @@ class PowerRectifierController extends Controller
      */
     public function show($id)
     {
-        //
+        $powerRectifier = PowerRectifier::where('pop_id', $id)->get();
+        return new PowerRectifierResource($powerRectifier);
     }
 
     /**

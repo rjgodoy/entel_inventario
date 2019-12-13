@@ -6,9 +6,14 @@ use App\Menu;
 class Helper {
 
     // Nabvar
-    public static function menus() {
-        $menus = Menu::where('active', 1)->orderBy('order', 'asc')->get();
-        return $menus;
+    public static function menus($user) {
+    	if ($user->roles()->first()->id == 1) {
+	        $menus = Menu::where('active', 1)->orderBy('order', 'asc')->get();
+	    } else {
+	    	$menus = Menu::where('active', 1)->whereRaw('id NOT IN (12)')->orderBy('order', 'asc')->get();
+	    }
+
+	    return $menus;
     }
 
     public static function breadcrumb($path) {

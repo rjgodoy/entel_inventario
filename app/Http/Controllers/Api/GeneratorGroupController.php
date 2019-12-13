@@ -189,7 +189,8 @@ class GeneratorGroupController extends Controller
      */
     public function show($id)
     {
-        //
+        $generatorGroups = GeneratorGroup::where('pop_id', $id)->get();
+        return new GeneratorGroupResource($generatorGroups);
     }
 
     /**

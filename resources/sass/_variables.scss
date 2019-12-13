@@ -1,43 +1,90 @@
-// Body
-$body-bg: #f8fafc;
 
-// Typography
-$family-sans-serif: "Barlow Medium", sans-serif;
-$font-size-base: 0.6rem;
-$line-height-base: 1.6;
-$size-5: 1.1rem;
-$size-6: 0.9rem;
-$size-7: 0.7rem;
 
-// Colors
-// $coolBlue: #008AFF;
-// $indigo: #6574cd;
-// $purple: #9561e2;
-// $pink: #f66d9b;
-// $red: #e3342f;
-// $orange: #f6993f;
-// $yellow: #ffed4a;
-$green: #38c172;
-// $teal: #4dc0b5;
-// $cyan: #6cb2eb;
-$mirage: #191B22;
-$blackRussian: #23252C;
-
-$entel-primary: #005cff;
+// Set your colors
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
+$primary: #005cff;
+$primary-invert: findColorInvert($primary);
+$info: #FF3E00;
+$info-invert: findColorInvert($info);
 $entel-primary-corp: #10069f;
+$entel-primary-corp-invert: findColorInvert($entel-primary-corp);
 $entel-secondary: #ff3d00;
+$entel-secondary-invert: findColorInvert($entel-secondary);
 $entel-secondary-corp: #cccccc;
-$entel-eco: #42E8B4;
-$entel-smart: #2FCBF1;
-$entel-positive: #FD6C9B;
+$entel-secondary-corp-invert: findColorInvert($entel-secondary-corp);
+$eco: #42E8B4;
+$eco-invert: findColorInvert($eco);
+$smart: #2FCBF1;
+$smart-invert: findColorInvert($smart);
+$positive: #FD6C9B;
+$positive-invert: findColorInvert($positive);
+$mirage: #191B22;
+$mirage-invert: findColorInvert($mirage);
+$blackRussian: #23252C;
+$blackRussian-invert: findColorInvert($blackRussian);
 
-$success: $entel-eco;
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// Success
+$success: $eco;
+$success-invert: $eco-invert;
+$success-focus-border: $eco;
+
+// Danger
 $danger: $entel-secondary;
-// $info: $entel-primary;
+$danger-invert: $entel-secondary-invert;
+$danger-focus-border: $entel-secondary;
 
-// $black-ter: $mirage;
-// $dark: $blackRussian;
+$black-ter: $mirage;
+$black-ter-invert: $mirage-invert;
+$black-ter-focus-border: $mirage;
+
+$dark: $blackRussian;
+$dark-invert: $blackRussian-invert;
+$dark-focus-border: $blackRussian;
+
 $input-placeholder-color: #7a7a7a;
+
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "link": ($link, $link-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "twitter": ($twitter, $twitter-invert),
+    "entel-primary-corp": ($entel-primary-corp, $entel-primary-corp-invert),
+    "entel-secondary": ($entel-secondary, $entel-secondary-invert),
+    "entel-secondary-corp": ($entel-secondary-corp, $entel-secondary-corp-invert),
+    "eco": ($eco, $eco-invert),
+    "smart": ($smart, $smart-invert),
+    "positive": ($positive, $positive-invert),
+    "mirage": ($mirage, $mirage-invert),
+    "blackRussian": ($blackRussian, $blackRussian-invert)
+);
+
+$shades: (
+    "black-bis": $black-bis, 
+    "black-ter": $black-ter, 
+    "grey-darker": $grey-darker, 
+    "grey-dark": $grey-dark, 
+    "grey": $grey, 
+    "grey-light": $grey-light, 
+    "grey-lighter": $grey-lighter, 
+    "white-ter": $white-ter, 
+    "white-bis": $white-bis
+);
+
 
 
 

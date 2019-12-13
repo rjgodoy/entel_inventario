@@ -1,17 +1,27 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Barlow&display=swap');
 
+// Typography
+$family-sans-serif: "Barlow Medium", sans-serif;
+$font-size-base: 0.6rem;
+$line-height-base: 1.6;
+$size-5: 1.1rem;
+$size-6: 0.9rem;
+$size-7: 0.7rem;
+
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
 // Variables
 @import 'variables';
 
 // Bulma
 @import 'bulma';
-@import 'bulma-checkradio';
-@import 'bulma-switch';
-@import 'bulma-tooltip';
+// @import 'bulma-checkradio';
+// @import 'bulma-switch';
 @import 'bulma-quickview';
-@import 'bulma-badge';
-@import 'bulma-timeline';
+// @import 'bulma-badge';
+// @import 'bulma-timeline';
 @import 'bulma-divider';
 
-// @import "~buefy/src/scss/buefy";
+@import 'buefy/src/scss/buefy';

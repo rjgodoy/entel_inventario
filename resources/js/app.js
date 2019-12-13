@@ -7,8 +7,10 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-// import Buefy from 'buefy'
-// Vue.use(Buefy)
+import Buefy from 'buefy'
+// import 'buefy/dist/buefy.css'
+
+Vue.use(Buefy)
 
 Vue.directive('clickOutside', {
     bind: function (el, binding, vnode) {
@@ -33,6 +35,7 @@ import { dom } from '@fortawesome/fontawesome-svg-core'
 dom.watch()
 
 import { 
+    faSignOutAlt,
     faThLarge,
     faMapMarkerAlt,
     faBroadcastTower,
@@ -46,7 +49,7 @@ import {
     faLeaf,
     faWarehouse,
     faFolderOpen,
-    faCog,
+    faCogs,
     faExclamationTriangle,
     faSearch,
     faDownload,
@@ -61,7 +64,10 @@ import {
     faTasks,
     faDollarSign,
     faLink,
-    faUnlink
+    faUnlink,
+    faCarBattery,
+    faUserEdit,
+    faAngleDown
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -77,6 +83,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
+    faSignOutAlt,
 	faThLarge,
 	faMapMarkerAlt,
 	faBroadcastTower,
@@ -90,7 +97,7 @@ library.add(
 	faLeaf,
 	faWarehouse,
 	faFolderOpen,
-	faCog,
+	faCogs,
 	faExclamationTriangle,
 	faSearch,
 	faDownload,
@@ -105,7 +112,10 @@ library.add(
     faTasks,
     faDollarSign,
     faLink,
-    faUnlink
+    faUnlink,
+    faCarBattery,
+    faUserEdit,
+    faAngleDown
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

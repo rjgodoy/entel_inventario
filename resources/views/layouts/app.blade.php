@@ -23,7 +23,7 @@
     <div id="">
         <main class="">
             <section class="hero is-fullheight is-black has-background">
-                <img alt="Fill Murray" class="hero-background is-transparent" src="{{ asset('img/bg-hero-tower-3.jpg') }}" />
+                <img alt="Fill Murray" class="hero-background is-transparent" src="{{ asset('img/bg-hero-satellite.jpg') }}" />
                 <div class="hero-body">
                     <div class="container">
                         <div class="columns is-centered">

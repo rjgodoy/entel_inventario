@@ -49,9 +49,11 @@
                         </button>
                     </p>
                     <p class="control">
-                        <a href="/pop" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
-                            <font-awesome-icon icon="bars"/>
-                        </a>
+                        <b-tooltip label="Tooltip Text" position="is-right">
+                            <a href="/pop" type="button" class="button is-small is-link" data-tooltip="">
+                                <font-awesome-icon icon="bars"/>
+                            </a>
+                        </b-tooltip>
                     </p>
                 </div>
 

@@ -112,6 +112,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		Route::apiResource('connectionClients','Api\ConnectionClientController');
 
 	// Generator Groups
+		Route::apiResource('generatorGroups','Api\GeneratorGroupController');
 		Route::get('generatorGroupData/{core}', [
 			'as' => 'generatorGroup.data',
 			'uses' => 'Api\GeneratorGroupController@generatorGroupData'
@@ -126,6 +127,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		]);
 
 	// Power Rectifiers
+		Route::apiResource('powerRectifiers','Api\PowerRectifierController');
 		Route::get('powerRectifierData/{core}', [
 			'as' => 'powerRectifier.data',
 			'uses' => 'Api\PowerRectifierController@powerRectifierData'
@@ -138,6 +140,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 			'as' => 'powerRectifierZona.data',
 			'uses' => 'Api\PowerRectifierController@powerRectifierDataZona'
 		]);
+
+	// Air Conditioners
+		Route::apiResource('airConditioners','Api\AirConditionerController');
+
+	// Estructuras Verticales
+		Route::apiResource('verticalStructures','Api\VerticalStructureController');
+
+	// Infraestructuras
+		Route::apiResource('infrastructures','Api\InfrastructureController');
+
 ##############################################################################################
 
 ### POPS ######################################################################

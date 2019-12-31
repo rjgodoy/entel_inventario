@@ -12,15 +12,19 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="pop.pe_3g"
+                                    size="is-small"
+                                    type="is-info"
                                     name="pe_3g"
                                     :disabled="pop.pe_3g ? false : true"
                                     >
-                                    <label :class="pop.pe_3g ? 'has-text-weight-semibold' : ''" >PE 3G</label>
+                                    <label :class="pop.pe_3g ? 'has-text-weight-semibold is-size-7' : ''" >PE 3G</label>
                                 </b-radio>
                             </div>
                             <div class="field">
                                 <b-radio 
                                     v-model="mpls"
+                                    size="is-small"
+                                    type="is-info"
                                     name="mpls"
                                     :disabled="pop.mpls ? false : true"
                                     native-value="true"
@@ -31,6 +35,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="olt"
+                                    size="is-small"
+                                    type="is-info"
                                     name="olt"
                                     :disabled="pop.olt ? false : true"
                                     native-value="true"
@@ -41,6 +47,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="olt_3play"
+                                    size="is-small"
+                                    type="is-info"
                                     name="olt_3play"
                                     :disabled="pop.olt_3play ? false : true"
                                     native-value="true"
@@ -51,6 +59,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="core"
+                                    size="is-small"
+                                    type="is-info"
                                     name="core"
                                     :disabled="pop.core ? false : true"
                                     native-value="true"
@@ -61,6 +71,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="bafi"
+                                    size="is-small"
+                                    type="is-info"
                                     name="bafi"
                                     :disabled="pop.bafi ? false : true"
                                     native-value="true"
@@ -78,6 +90,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="red_minima_n1"
+                                    size="is-small"
+                                    type="is-info"
                                     name="red_minima_n1"
                                     :disabled="pop.red_minima_n1 ? false : true"
                                     native-value="true"
@@ -88,6 +102,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="red_minima_n2"
+                                    size="is-small"
+                                    type="is-info"
                                     name="red_minima_n2"
                                     :disabled="pop.red_minima_n2 ? false : true"
                                     native-value="true"
@@ -98,6 +114,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="vip"
+                                    size="is-small"
+                                    type="is-info"
                                     name="vip"
                                     :disabled="pop.vip ? false : true"
                                     native-value="true"
@@ -108,6 +126,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="localidad_obligatoria"
+                                    size="is-small"
+                                    type="is-info"
                                     name="localidad_obligatoria"
                                     :disabled="pop.localidad_obligatoria ? false : true"
                                     native-value="true"
@@ -118,6 +138,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="ranco"
+                                    size="is-small"
+                                    type="is-info"
                                     name="ranco"
                                     :disabled="pop.ranco ? false : true"
                                     native-value="true"
@@ -135,6 +157,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="offgrid"
+                                    size="is-small"
+                                    type="is-info"
                                     name="offgrid"
                                     :disabled="pop.offgrid ? false : true"
                                     native-value="true"
@@ -145,6 +169,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="solar"
+                                    size="is-small"
+                                    type="is-info"
                                     name="solar"
                                     :disabled="pop.solar ? false : true"
                                     native-value="true"
@@ -155,6 +181,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="eolica"
+                                    size="is-small"
+                                    type="is-info"
                                     name="eolica"
                                     :disabled="pop.eolica ? false : true"
                                     native-value="true"
@@ -173,6 +201,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="protected_zone"
+                                    size="is-small"
+                                    type="is-info"
                                     name="protected_zone"
                                     :disabled="pop.protected_zone ? false : true"
                                     native-value="true"
@@ -184,6 +214,8 @@
                             <div class="field">
                                 <b-radio 
                                     v-model="rcasInfo"
+                                    size="is-small"
+                                    type="is-info"
                                     name="rcasInfo"
                                     :disabled="rcas.length ? false : true"
                                     native-value="true"

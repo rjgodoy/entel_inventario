@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="">
+    <div id="app">
         <main class="">
             <section class="hero is-fullheight is-black has-background">
                 <img alt="Fill Murray" class="hero-background is-transparent" src="{{ asset('img/bg-hero-satellite.jpg') }}" />

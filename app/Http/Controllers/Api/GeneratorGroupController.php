@@ -13,7 +13,7 @@ use DB;
 
 class GeneratorGroupController extends Controller
 {
-    protected $minutes = 3600;
+    protected $seconds = 2592000;
 
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class GeneratorGroupController extends Controller
         if (Cache::has('generatorGroupsData_core'.$core)) {
             $generatorGroupsQuantity = Cache::get('generatorGroupsData_core'.$core);
         } else {
-            $generatorGroupsQuantity = Cache::remember('generatorGroupsData_core'.$core, $this->minutes, function () use ($core) {
+            $generatorGroupsQuantity = Cache::remember('generatorGroupsData_core'.$core, $this->seconds, function () use ($core) {
 
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
                 $generatorGroupsQuantity = DB::select(DB::raw("
@@ -84,7 +84,7 @@ class GeneratorGroupController extends Controller
         if (Cache::has('generatorGroupsData_crm'.$crm_id.'_core'.$core)) {
             $generatorGroupsQuantity = Cache::get('generatorGroupsData_crm'.$crm_id.'_core'.$core);
         } else {
-            $generatorGroupsQuantity = Cache::remember('generatorGroupsData_crm'.$crm_id.'_core'.$core, $this->minutes, function () use ($crm_id, $core) {
+            $generatorGroupsQuantity = Cache::remember('generatorGroupsData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
 
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
                 $generatorGroupsQuantity = DB::select(DB::raw("
@@ -132,7 +132,7 @@ class GeneratorGroupController extends Controller
         if (Cache::has('generatorGroupsData_zona'.$zona_id.'_core'.$core)) {
             $generatorGroupsQuantity = Cache::get('generatorGroupsData_zona'.$zona_id.'_core'.$core);
         } else {
-            $generatorGroupsQuantity = Cache::remember('generatorGroupsData_zona'.$zona_id.'_core'.$core, $this->minutes, function () use ($zona_id, $core) {
+            $generatorGroupsQuantity = Cache::remember('generatorGroupsData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
 
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
                 $generatorGroupsQuantity = DB::select(DB::raw("

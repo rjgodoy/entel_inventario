@@ -3,8 +3,7 @@
     <section class="section is-marginless" :class="bodyBackground">
         <div class="tile is-ancestor">
             <!-- <div class="tile is-7 is-vertical"> -->
-                
-
+            
             <div class="tile is-6 is-parent">
                 <div class="tile is-child box" :class="boxBackground" style="max-height: 100%;">
                     <div class="tile">
@@ -36,6 +35,11 @@
                                 <span class="is-size-7" v-if="searchText.length" style="padding-left: 0">
                                     <strong style="margin-left: 10px;">{{ pops.total | numeral('0,0')}}</strong> pops encontrados
                                 </span>
+                            </div>
+                            <div class="columns">
+                                <div class="" style="margin-top: 20px;">
+                                    <b-switch class="is-small" @input="switchCore">Red CORE</b-switch>
+                                </div>
                             </div>
                             <div class="column">
                                 <div class="tags has-addons is-right is-size-7">
@@ -189,7 +193,7 @@
             <div class="tile is-parent is-vertical">
                 <div class="tile box is-child is-12">
                     <div class="snippet">
-                        <span class="has-text-weight-normal is-size-7"><strong>{{selectedPops.length}}</strong> pops selected</span>
+                        <span class="has-text-weight-normal is-size-7"><strong>{{ selectedPops.length }}</strong> pops selected</span>
                         <div class="field is-grouped is-grouped-multiline">
                             <div class="control" v-for="pop in selectedPops">
                                 <div class="tags has-addons">
@@ -284,6 +288,15 @@
         },
         methods: {
             // Triggers
+            switchCore() {
+                if (this.core == 0) {
+                    this.core = 1
+                    this.search()
+                } else {
+                    this.core = 0
+                    this.search()
+                }
+            },
             selectPop(pop) {
                 this.selectedPop = pop
             },
@@ -313,7 +326,7 @@
             // APIs
             getPops() {
                 if (this.selectedCrm == null) {
-                    axios.get(`api/pop?page=${this.pops.current_page}`)
+                    axios.get(`/api/pop?page=${this.pops.current_page}`)
                         .then((response) => {
                             this.pops = response.data
                             this.totalPops = this.pops.total
@@ -322,7 +335,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.selectedZona == null){
-                    axios.get(`api/popsCrm?page=${this.pops.current_page}&crm_id=${this.selectedCrm.id}`)
+                    axios.get(`/api/popsCrm?page=${this.pops.current_page}&crm_id=${this.selectedCrm.id}`)
                         .then((response) => {
                             this.pops = response.data
                             this.totalPops = this.pops.total
@@ -331,7 +344,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/popsZona?page=${this.pops.current_page}&zona_id=${this.selectedZona.id}`)
+                    axios.get(`/api/popsZona?page=${this.pops.current_page}&zona_id=${this.selectedZona.id}`)
                         .then((response) => {
                             this.pops = response.data
                             this.totalPops = this.pops.total
@@ -342,7 +355,7 @@
                 }
             },
             getCrms() {
-                axios.get(`api/crms`)
+                axios.get(`/api/crms`)
                     .then((response) => {
                         this.crms = response.data.data;
                     })
@@ -352,7 +365,7 @@
             },
             getZonas(crm) {
                 if (crm != null) {
-                    axios.get(`api/zonasCrm/${crm.id}`)
+                    axios.get(`/api/zonasCrm/${crm.id}`)
                         .then((response) => {
                             this.zonas = response.data.data;
                         })
@@ -366,7 +379,7 @@
             search() {
                 if (this.searchText != '') {
                     if (this.selectedCrm == null) {
-                        axios.get(`api/filterPops?page=${this.pops.current_page}&text=${this.searchText}`)
+                        axios.get(`/api/filterPops?page=${this.pops.current_page}&text=${this.searchText}`)
                             .then((response) => {
                                 this.pops = response.data;
                                 this.counter = this.pops.length
@@ -374,7 +387,7 @@
                             .catch(() => {
                             });
                     } else if (this.selectedZona == null) {
-                        axios.get(`api/filterPopsCrm?page=${this.pops.current_page}&crm_id=${this.selectedCrm.id}&text=${this.searchText}`)
+                        axios.get(`/api/filterPopsCrm?page=${this.pops.current_page}&crm_id=${this.selectedCrm.id}&text=${this.searchText}`)
                             .then((response) => {
                                 this.pops = response.data;
                                 this.counter = this.pops.length
@@ -382,7 +395,7 @@
                             .catch(() => {
                             });
                     } else {
-                        axios.get(`api/filterPopsZona?page=${this.pops.current_page}&zona_id=${this.selectedZona.id}&text=${this.searchText}`)
+                        axios.get(`/api/filterPopsZona?page=${this.pops.current_page}&zona_id=${this.selectedZona.id}&text=${this.searchText}`)
                             .then((response) => {
                                 this.pops = response.data;
                                 this.counter = this.pops.length

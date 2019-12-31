@@ -22,7 +22,7 @@
                     <div class="has-text-weight-normal is-size-7">Fecha inicio</div>
                 </div>
                 <div class="column is-three-fifths">
-                    <progress class="progress is-link" :value="percentDate(data.started_at, data.ended_at)" max="100">{{ percentDate(data.started_at, data.ended_at) }}%</progress>
+                    <b-progress type="is-link" :value="percentDate(data.started_at, data.ended_at)" show-value format="percent" size="is-medium"></b-progress>
                 </div>
                 <div class="column has-text-left">
                     <div>{{ dateMoment(data.ended_at) }}</div>
@@ -87,7 +87,7 @@
                 var totalTime = e.diff(s, 'hours', true)
                 var dateFromStart = moment().diff(s, 'hours', true)
                 var percent = dateFromStart * 100 / totalTime
-                return percent
+                return -percent
             }
         }
     }

@@ -23,6 +23,14 @@ $mirage: #191B22;
 $mirage-invert: findColorInvert($mirage);
 $blackRussian: #23252C;
 $blackRussian-invert: findColorInvert($blackRussian);
+$red-light: #FDD9DA;
+$red-light-invert: findColorInvert($red-light);
+$green-light: #D9FEE5;
+$green-light-invert: findColorInvert($green-light);
+$blue-light: #F2FBFF;
+$blue-light-invert: findColorInvert($blue-light);
+$yellow-light: #FDF2D6;
+$yellow-light-invert: findColorInvert($yellow-light);
 
 // Links
 $link: $primary;
@@ -82,7 +90,11 @@ $shades: (
     "grey-light": $grey-light, 
     "grey-lighter": $grey-lighter, 
     "white-ter": $white-ter, 
-    "white-bis": $white-bis
+    "white-bis": $white-bis,
+    "red-light": $red-light,
+    "green-light": $green-light,
+    "blue-light": $blue-light,
+    "yellow-light": $yellow-light
 );
 
 

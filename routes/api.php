@@ -143,12 +143,48 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 	// Air Conditioners
 		Route::apiResource('airConditioners','Api\AirConditionerController');
+		Route::get('airConditionerData/{core}', [
+			'as' => 'airConditioner.data',
+			'uses' => 'Api\AirConditionerController@airConditionerData'
+		]);
+		Route::get('airConditionerDataCrm/{crm_id}/{core}', [
+			'as' => 'airConditionerCrm.data',
+			'uses' => 'Api\AirConditionerController@airConditionerDataCrm'
+		]);
+		Route::get('airConditionerDataZona/{zona_id}/{core}', [
+			'as' => 'airConditionerZona.data',
+			'uses' => 'Api\AirConditionerController@airConditionerDataZona'
+		]);
 
 	// Estructuras Verticales
 		Route::apiResource('verticalStructures','Api\VerticalStructureController');
+		Route::get('verticalStructureData/{core}', [
+			'as' => 'verticalStructure.data',
+			'uses' => 'Api\VerticalStructureController@verticalStructureData'
+		]);
+		Route::get('verticalStructureDataCrm/{crm_id}/{core}', [
+			'as' => 'verticalStructureCrm.data',
+			'uses' => 'Api\VerticalStructureController@verticalStructureDataCrm'
+		]);
+		Route::get('verticalStructureDataZona/{zona_id}/{core}', [
+			'as' => 'verticalStructureZona.data',
+			'uses' => 'Api\VerticalStructureController@verticalStructureDataZona'
+		]);
 
 	// Infraestructuras
 		Route::apiResource('infrastructures','Api\InfrastructureController');
+		Route::get('infrastructureData/{core}', [
+			'as' => 'infrastructure.data',
+			'uses' => 'Api\InfrastructureController@infrastructureData'
+		]);
+		Route::get('infrastructureDataCrm/{crm_id}/{core}', [
+			'as' => 'infrastructureCrm.data',
+			'uses' => 'Api\InfrastructureController@infrastructureDataCrm'
+		]);
+		Route::get('infrastructureDataZona/{zona_id}/{core}', [
+			'as' => 'infrastructureZona.data',
+			'uses' => 'Api\InfrastructureController@infrastructureDataZona'
+		]);
 
 ##############################################################################################
 

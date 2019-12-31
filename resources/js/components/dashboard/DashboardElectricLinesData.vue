@@ -109,7 +109,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`api/electricLineDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`/api/electricLineDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.electricLineData = response.data.data;
                             this.totalElectricLines()
@@ -118,7 +118,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/electricLineDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`/api/electricLineDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             this.electricLineData = response.data.data;
                             this.totalElectricLines()

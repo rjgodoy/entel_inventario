@@ -6,24 +6,27 @@
             </div>
         </section>
 
-        <div id="quickviewDefault" class="quickview">
-            <header class="quickview-header">
-                <p class="title">Quickview title</p>
-                <span class="delete" data-dismiss="quickview"></span>
-            </header>
+        <pop-log
+            :pop="pop"
+        />
 
-            <div class="quickview-body">
-                <div class="quickview-block">
-                    ...
-                </div>
-            </div>
-
-            <footer class="quickview-footer">
-
-            </footer>
-        </div>
-
-        <button class="button is-primary" data-show="quickview" data-target="quickviewDefault">Log del POP</button>
+        <b-button
+            type="is-primary" 
+            @click="openLog" 
+            data-target="quickviewDefault" 
+            data-show="quickview" 
+            >Log del POP
+        </b-button>
+        <b-button 
+            @click="closeLog" 
+            data-dismiss="quickview"
+            >Log dismiss
+        </b-button>
+        <button
+            class="button is-primary" 
+            @click="changeStyle" 
+            >style
+        </button>
 
         <section class="hero is-medium has-background-white">
             <div class="hero-body columns" style="margin-top: -50px; margin-bottom: -50px;">
@@ -171,13 +174,8 @@
 
         <section class="level has-background-dark has-text-white is-marginless">
             <div class="level-item" style="margin: 20px auto 20px auto;">
-                <div class="is-size-7 has-text-weight-bold">2G 900
-                    <span class="has-text-weight-semibold is-size-6" :class="tec2g900 ? 'has-text-success' : ''">&nbsp;{{ tec2g900 ? tec2g900.site : '-' }}</span>
-                </div>
-            </div>
-            <div class="level-item" style="margin: 20px auto 20px auto;">
                 <div class="is-size-7 has-text-weight-bold">2G 1900
-                    <span class="has-text-weight-semibold is-size-6" :class="tec2g1900 ? 'has-text-success' : ''">&nbsp;{{ tec2g1900 ? tec2g1900.site : '-' }}</span>
+                    <span class="has-text-weight-bold is-size-5" :class="tec2g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec2g1900 ? tec2g1900.site : '-' }}</span>
                 </div>
             </div>
 
@@ -185,12 +183,12 @@
 
             <div class="level-item" style="margin: 20px auto 20px auto;">
                 <div class="is-size-7 has-text-weight-bold">3G 900
-                    <span class="has-text-weight-semibold is-size-6" :class="tec3g900 ? 'has-text-success' : ''">&nbsp;{{ tec3g900 ? tec3g900.site : '-' }}</span>
+                    <span class="has-text-weight-bold is-size-5" :class="tec3g900 ? 'has-text-eco' : ''">&nbsp;{{ tec3g900 ? tec3g900.site : '-' }}</span>
                 </div>
             </div>
             <div class="level-item" style="margin: 20px auto 20px auto;">
                 <div class="is-size-7 has-text-weight-bold">3G 1900
-                    <span class="has-text-weight-semibold is-size-6" :class="tec3g1900 ? 'has-text-success' : ''">&nbsp;{{ tec3g1900 ? tec3g1900.site : '-' }}</span>
+                    <span class="has-text-weight-bold is-size-5" :class="tec3g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec3g1900 ? tec3g1900.site : '-' }}</span>
                 </div>
             </div>
 
@@ -198,22 +196,22 @@
 
             <div class="level-item" style="margin: 20px auto 20px auto;">
                 <div class="is-size-7 has-text-weight-bold">LTE 700
-                    <span class="has-text-weight-semibold is-size-6" :class="tec4g700 ? 'has-text-success' : ''">&nbsp;{{ tec4g700 ? tec4g700.site : '-' }}</span>
+                    <span class="has-text-weight-bold is-size-5" :class="tec4g700 ? 'has-text-eco' : ''">&nbsp;{{ tec4g700 ? tec4g700.site : '-' }}</span>
                 </div>
             </div>
             <div class="level-item" style="margin: 20px auto 20px auto;">
                 <div class="is-size-7 has-text-weight-bold">LTE 1900
-                    <span class="has-text-weight-semibold is-size-6" :class="tec4g1900 ? 'has-text-success' : ''">&nbsp;{{ tec4g1900 ? tec4g1900.site : '-' }}</span>
+                    <span class="has-text-weight-bold is-size-5" :class="tec4g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec4g1900 ? tec4g1900.site : '-' }}</span>
                 </div>
             </div>
             <div class="level-item" style="margin: 20px auto 20px auto;">
                 <div class="is-size-7 has-text-weight-bold">LTE 2600
-                    <span class="has-text-weight-semibold is-size-6" :class="tec4g2600 ? 'has-text-success' : ''">&nbsp;{{ tec4g2600 ? tec4g2600.site : '-' }}</span>
+                    <span class="has-text-weight-bold is-size-5" :class="tec4g2600 ? 'has-text-eco' : ''">&nbsp;{{ tec4g2600 ? tec4g2600.site : '-' }}</span>
                 </div>
             </div>
         </section>
 
-        <section class="hero is-bold" :class="heroBackgroundBlue">
+        <section class="hero is-bold" :class="heroBackground">
             <div class="hero-body">
                 <nav class="level">
                     <div class="level-item has-text-centered">
@@ -270,7 +268,6 @@
                     </a>
                 </div>
             </div>
-        
 
             <characteristics v-if="tabButtonView == 1"
                 :pop="pop"
@@ -346,6 +343,7 @@
     import PopInfrastructure from './PopInfrastructure.vue';
     import PopComsite from './PopComsite.vue';
     import PopDocuments from './PopDocuments.vue';
+    import PopLog from './PopLog.vue';
     const PopMapView = () => ({
         // The component to load (should be a Promise)
         component: import('../maps/PopMapView.vue'),
@@ -359,6 +357,7 @@
         // provided and exceeded. Default: Infinity.
         // timeout: 300
     });
+    const bulmaQuickview = require('../../../../node_modules/bulma-quickview/src/js/index').default;
     export default {
         components: {
             'pop-map-view': PopMapView,
@@ -368,7 +367,8 @@
             'clima': PopClima,
             'infrastructure': PopInfrastructure,
             'comsite': PopComsite,
-            'documents': PopDocuments
+            'documents': PopDocuments,
+            'pop-log': PopLog
         },
         props : [
             'pop',
@@ -395,7 +395,6 @@
             'rcas',
             'sites',
             'site',
-            'tec2g900',
             'tec2g1900',
             'tec3g900',
             'tec3g1900',
@@ -413,15 +412,17 @@
                 boxBackground: '',
                 primaryText: '',
                 secondaryText: '',
-                heroBackgroundBlue: 'is-info',
+                heroBackground: 'is-info',
 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
 
-                tabButtonView: 1
+                tabButtonView: 1,
+                logOpened: 0
             }
         },
         mounted() {
+            var quickviews = bulmaQuickview.attach();
             this.styleMode()
         },
         methods: {
@@ -444,19 +445,22 @@
                 }
             },
             changeStyle() {
-                if (this.darkMode == 0) {
-                    this.darkMode = 1
-                    this.styleMode()
-                } else {
-                    this.darkMode = 0
-                    this.styleMode()
-                }
+                this.darkMode = this.darkMode == 0 ? 1 : 0
+                this.styleMode()
             },
             changeView(view) {
                 if (this.tabButtonView != view) {
                     this.tabButtonView = view
                 }
             },
+            openLog() {
+                this.logOpened = 1
+                console.log(this.logOpened)
+            },
+            closeLog() {
+                this.logOpened = 0
+                console.log(this.logOpened)
+            }
         }
     }
 </script>

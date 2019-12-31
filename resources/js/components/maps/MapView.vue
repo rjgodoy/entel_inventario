@@ -1,7 +1,7 @@
 <template>
     <GmapMap
         class="tile is-child box"
-        style="height: 100%"
+        style="height: 100%;"
         ref="map"
         :center="center"
         :zoom="3"
@@ -270,12 +270,8 @@
                             </div>
 
                             <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                                <a href="#">#css</a> <a href="#">#responsive</a>
-                                <br>
-                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                                <a href="/pop/${pop.pop_id}" class="button is-small">Ver POP</a>
+                                <a href="/pop/${pop.pop_id}" class="button is-outlined is-primary is-small">
+                                    <font-awesome-icon icon="bars"/>Ver POP</a>
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ use App\Crm;
 
 class CrmController extends Controller
 {
-    protected $minutes = 3600;
+    protected $seconds = 2592000;
     
     /**
      * Display a listing of the resource.

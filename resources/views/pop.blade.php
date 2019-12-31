@@ -35,7 +35,6 @@
 	:rcas='@json($rcas)'
 	:sites='@json($sites)'
 	:site='@json($site)'
-	:tec2g900='@json($tec2g900)'
     :tec2g1900='@json($tec2g1900)'
     :tec3g900='@json($tec3g900)'
     :tec3g1900='@json($tec3g1900)'

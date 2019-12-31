@@ -17,7 +17,6 @@ use App\Net;
 use App\PopClass;
 use App\Rca;
 use App\Site;
-use App\Tec2G900Cell;
 use App\Tec2G1900Cell;
 use App\Tec3G900Cell;
 use App\Tec3G1900Cell;
@@ -28,6 +27,7 @@ use App\Transport;
 
 use App\PopMenu;
 
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PopsExport;
 
@@ -78,6 +78,13 @@ class PopController extends Controller
      */
     public function show(Pop $pop)
     {
+
+        $contents = Storage::get('./public/Celdas por POP.xlsx');
+        $exists = Storage::disk('public')->files();
+        $exists = Storage::allFiles('public');
+        // dd($exists);
+
+
         $pop = Pop::with('comuna.zona.crm', 'comuna.zona.responsable')->where('id', $pop->id)->first();
 
         $pop_menu = PopMenu::orderBy('order','asc')->get();
@@ -115,9 +122,6 @@ class PopController extends Controller
 
         $sites = Site::with('site_type')->where('pop_id', $pop->id)->get();
         $site = $sites->last();
-
-        $tec2g900s = Tec2G900Cell::where('pop_id', $pop->id)->get();
-        $tec2g900 = $tec2g900s->last();
 
         $tec2g1900s = Tec2G1900Cell::where('pop_id', $pop->id)->get();
         $tec2g1900 = $tec2g1900s->last();
@@ -164,7 +168,6 @@ class PopController extends Controller
             'rcas', 
             'sites',
             'site',
-            'tec2g900',
             'tec2g1900',
             'tec3g900',
             'tec3g1900',

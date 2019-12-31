@@ -6,18 +6,23 @@
 
             <!-- SWITCH CORE & CRM BUTTONS-->
             <div class="container" style="margin: -20px auto 20px auto;">
-                <div class="field">
-                    <b-switch @change="switchCore">Mostrar POPs CORE</b-switch>
-                    <!-- <input 
-                        id="switchCore" 
-                        type="checkbox" 
-                        name="switchCore" 
-                        class="switch is-rounded is-link" 
-                        @change="switchCore"
-                    >
-                    <label for="switchCore">Mostrar POPs CORE</label> -->
-                    <button class="button is-link is-small is-pulled-right" @click="changeStyle" v-model="darkMode">Style</button>
-                </div>
+                <b-field>
+                    <div class="columns">
+                        <div class="column"></div>
+                        <div class="column has-text-centered">
+                            <!-- <b-checkbox-button v-model="core"
+                                native-value="Core"
+                                type="is-danger">
+                                <span>Core</span>
+                            </b-checkbox-button> -->
+                            <b-switch  @input="switchCore">Red CORE</b-switch>
+                        </div>
+                        <div class="column">
+                            <b-button class="button is-link is-small is-pulled-right" @click="changeStyle" v-model="darkMode">Style</b-button>
+                        </div>
+                    </div>
+                    
+                </b-field>
 
                 <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="crm in crms">
@@ -79,9 +84,6 @@
 
             <!-- BUSCAR -->
             <div class="container" style="width: 50%; margin-top: 30px;">
-                <span v-if="searchText.length >= 3" class="container is-size-7 is-right" :class="secondaryText" >
-                    <strong style="margin-left: 10px;" :class="primaryText">{{ counter | numeral('0,0')}}</strong> pops encontrados
-                </span>
                 <p class="control has-icons-left has-icons-right">
                     <input 
                         class="input is-rounded" 
@@ -106,6 +108,9 @@
                 
                 <div class="dropdown" :class="popSearch.length && active == 1 ? 'is-active' : ''" style="width: 100%">
                     <div class="dropdown-menu" style="width: 100%" id="dropdown-menu" role="menu">
+                        <span v-if="searchText.length >= 3" class="container is-size-7 is-right field" :class="secondaryText" >
+                            <strong style="margin-left: 10px;" :class="primaryText">{{ counter | numeral('0,0')}}</strong> pops encontrados
+                        </span>
                         <div class="dropdown-content" :class="searchBodyBackground + ' ' + primaryText" style="max-height: 400px; overflow: auto;">
                             <div v-for="pop in popSearch" class="dropdown-item">
                                 <a :href="'pop/' + pop.id" target="_blank" class="columns">
@@ -129,7 +134,7 @@
                                             <img v-if="pop.attention_type_id == 2" alt="Servicio 24/7" class="" src="img/24_7_color.png" style="max-height: 30px;" />
                                         </div>
                                         <div class="has-text-centered">
-                                            <span v-if="pop.alba_project == 1" class="tag is-light is-primary has-text-weight-bold is-size-7">
+                                            <span v-if="pop.alba_project == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
                                                 {{ pop.alba_project == 1 ? 'alba' : '' }}
                                             </span>
                                         </div>
@@ -193,6 +198,7 @@
                                 :core="core"
                             />
                         </div>
+
                         <!-- MAPA -->
                         <div class="tile is-parent is-vertical">
                             <div class="tile is-parent">
@@ -208,6 +214,7 @@
                                 />
                             </div>
                         </div>
+
                         <div class="tile is-parent is-vertical">
                              <technologies-data
                                 :bodyBackground="bodyBackground"
@@ -229,41 +236,109 @@
                             />
                             <!-- <radial-chart/> -->
                         </div>
+
                     </div>
                 </div>
             </div>
             
         </section>
 
-        <section class="section is-marginless" :class="bodyBackground">
+        <!-- PODER -->
+        <section class="section is-marginless" :class="bodyBackgroundEnergy">
+            <div class="title">PODER</div>
             <div class="tile is-ancestor">
                 <electric-line-data
                     :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
+                    :boxBackground="boxBackgroundEnergy"
                     :primaryText="primaryText"
                     :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
-                ></electric-line-data>
+                />
                 <generator-group-data
                     :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
+                    :boxBackground="boxBackgroundEnergy"
                     :primaryText="primaryText"
                     :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
-                ></generator-group-data>
+                />
                 <power-rectifier-data
                     :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
+                    :boxBackground="boxBackgroundEnergy"
                     :primaryText="primaryText"
                     :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
-                ></power-rectifier-data>
+                />
+                <div class="tile is-parent">
+                    <article class="tile is-child box" :class="boxBackground">
+                        <p class="title">Hello World</p>
+                        <p class="subtitle">What is up?</p>
+                    </article>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box" :class="boxBackground">
+                        <p class="title">Hello World</p>
+                        <p class="subtitle">What is up?</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLIMA -->
+        <section class="section is-marginless" :class="bodyBackgroundClimate">
+            <div class="title">CLIMA</div>
+            <div class="tile is-ancestor">
+                <air-conditioner-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackgroundClimate"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
+                <div class="tile is-parent">
+                    <article class="tile is-child box" :class="boxBackground">
+                        <p class="title">Hello World</p>
+                        <p class="subtitle">What is up?</p>
+                    </article>
+                </div>
+                <div class="tile is-parent">
+                    <article class="tile is-child box" :class="boxBackground">
+                        <p class="title">Hello World</p>
+                        <p class="subtitle">What is up?</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- INFRAESTRUCTURA -->
+        <section class="section is-marginless" :class="bodyBackgroundInfrastructure">
+            <div class="title">INFRAESTRUCTURA</div>
+            <div class="tile is-ancestor">
+                <vertical-structure-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackgroundInfrastructure"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
+                <infrastructure-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackgroundInfrastructure"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
                 <div class="tile is-parent">
                     <article class="tile is-child box" :class="boxBackground">
                         <p class="title">Hello World</p>
@@ -287,9 +362,14 @@
     import DashboardTechnologiesData from './DashboardTechnologiesData.vue';
     import DashboardServicesData from './DashboardServicesData.vue';
     import DashboardInfraData from './DashboardInfraData.vue';
+
     import DashboardElectricLinesData from './DashboardElectricLinesData.vue';
     import DashboardGeneratorGroupsData from './DashboardGeneratorGroupsData.vue';
     import DashboardPowerRectifiersData from './DashboardPowerRectifiersData.vue';
+    import DashboardAirConditionersData from './DashboardAirConditionersData.vue';
+    import DashboardVerticalStructuresData from './DashboardVerticalStructuresData.vue';
+    import DashboardInfrastructuresData from './DashboardInfrastructuresData.vue';
+    
     // import RadialChart from '../RadialChart.vue';
     import MapView from "../maps/MapView.vue";
 
@@ -303,6 +383,9 @@
             'electric-line-data': DashboardElectricLinesData,
             'generator-group-data': DashboardGeneratorGroupsData,
             'power-rectifier-data': DashboardPowerRectifiersData,
+            'air-conditioner-data': DashboardAirConditionersData,
+            'vertical-structure-data': DashboardVerticalStructuresData,
+            'infrastructure-data': DashboardInfrastructuresData,
             'map-view': MapView,
             // 'radial-chart': RadialChart,
             // 'Mapa': Mapa
@@ -333,6 +416,14 @@
                 secondaryText: '',
                 searchBodyBackground: '',
                 innerBackground: '',
+
+                bodyBackgroundEnergy: '',
+                bodyBackgroundClimate: '',
+                bodyBackgroundInfrastructure: '',
+
+                boxBackgroundEnergy: '',
+                boxBackgroundClimate: '',
+                boxBackgroundInfrastructure: '',
                 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
@@ -348,6 +439,9 @@
                 counter: 0
             }
         },
+
+        
+
         methods: {
             // Triggers
             selectPop(pop) {
@@ -470,7 +564,13 @@
                     this.primaryText = 'has-text-white'
                     this.secondaryText = 'has-text-grey-light'
                     this.searchBodyBackground = 'has-background-dark'
-                    this.innerBackground = 'has-background-dark-ter shadow-inset-dark'
+                    this.innerBackground = 'has-background-dark-ter shadow-inset-dark',
+                    this.bodyBackgroundEnergy = 'has-background-black-ter',
+                    this.bodyBackgroundClimate = 'has-background-black-ter',
+                    this.bodyBackgroundInfrastructure = 'has-background-black-ter',
+                    this.boxBackgroundEnergy = 'has-background-green-light',
+                    this.boxBackgroundClimate = 'has-background-blue-light',
+                    this.boxBackgroundInfrastructure = 'has-background-yellow-light'
                 } else {
                     // light mode
                     this.bodyBackground = 'has-background-light'
@@ -478,7 +578,13 @@
                     this.primaryText = 'has-text-dark'
                     this.secondaryText = 'has-text-grey'
                     this.searchBodyBackground = 'has-background-white'
-                    this.innerBackground = 'has-background-white shadow-inset'
+                    this.innerBackground = 'has-background-white shadow-inset',
+                    this.bodyBackgroundEnergy = 'has-background-white',
+                    this.bodyBackgroundClimate = 'has-background-white',
+                    this.bodyBackgroundInfrastructure = 'has-background-white',
+                    this.boxBackgroundEnergy = 'has-background-green-light',
+                    this.boxBackgroundClimate = 'has-background-blue-light',
+                    this.boxBackgroundInfrastructure = 'has-background-yellow-light'
                 }
             },
             changeStyle() {
@@ -490,7 +596,11 @@
                     this.styleMode()
                 }
             }
-        }
+        },
+
+        computed: {
+            
+        },
     }
 </script>
 

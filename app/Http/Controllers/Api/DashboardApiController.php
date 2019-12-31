@@ -13,7 +13,7 @@ use DB;
 
 class DashboardApiController extends Controller
 {
-    protected $minutes = 3600;
+    protected $seconds = 86400;
 
     /**
      * Display a listing of the resource.
@@ -32,30 +32,35 @@ class DashboardApiController extends Controller
      */
     public function dashboardMap()
     {
-        if (Cache::has('dashboardMap')) {
-            $pops = Cache::get('dashboardMap');
-        } else {
-            $pops = Cache::remember('dashboardMap', $this->minutes, function () {
+        // if (Cache::has('dashboardMap')) {
+        //     $popsMap = Cache::get('dashboardMap');
+        // } else {
+        //     $popsMap = Cache::remember('dashboardMap', $this->seconds, function () {
                 $popsMap = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
                     ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-                    ->leftJoin('classifications', function ($join) {
-                        $join->on('pops.id', '=', 'classifications.pop_id')
-                        ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-                    })
-                    ->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+                    // ->leftJoin('classifications', function ($join) {
+                    //     $join->on('pops.id', '=', 'classifications.pop_id')
+                    //     ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+                    // })
+                    ->join('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
                     ->select(
                         'pops.id as pop_id',
-                        'pops.*',
+                        'pops.nombre',
+                        'pops.direccion',
+                        'pops.nem_fijo',
+                        'pops.nem_movil',
+                        'pops.latitude',
+                        'pops.longitude',
                         'comunas.zona_id',
                         'zonas.crm_id',
-                        'classifications.classification_type_id',
+                        'pops.classification_type_id',
                         'classification_types.classification_type'
                     )
                     ->get();
-                return $popsMap; 
-            });
-        }
-        return new PopResource($pops);
+        //         return $popsMap; 
+        //     });
+        // }
+        return new PopResource($popsMap);
     }
 
     /**
@@ -68,9 +73,9 @@ class DashboardApiController extends Controller
         if (Cache::has('popData_core'.$core)) {
             $popQuantity = Cache::get('popData_core'.$core);
         } else {
-            $popQuantity = Cache::remember('popData_core'.$core, $this->minutes, function () use ($core) {
+            $popQuantity = Cache::remember('popData_core'.$core, $this->seconds, function () use ($core) {
 
-                $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : '';
 
                 $popQuantity = DB::select(DB::raw("
                     SELECT
@@ -82,47 +87,31 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            -- INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 1
                             $condition
                             WHERE P.state = 1
                             AND P.nem_fijo IS NOT NULL
+                            AND P.nem_movil IS NULL
                             ) AS fijo,
 
-                    -- POP MOVILES
-                    @movil:=(SELECT count(P.id) 
+                    -- POP MACRO
+                    @macro:=(SELECT count(P.id) 
                             FROM entel_pops.pops P 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            -- INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 2
+                            INNER JOIN entel_pops.solutions S ON P.id = S.pop_id AND S.created_at = (SELECT MAX(solutions.created_at) FROM entel_pops.solutions WHERE solutions.pop_id = P.id) AND S.solution_type_id = 1
                             $condition
                             WHERE P.state = 1
-                            AND P.nem_fijo IS NULL
-                            AND P.nem_movil IS NOT NULL
-                            AND P.cod_planificacion IS NOT NULL
-                            ) AS movil,
+                            ) AS macro,
 
                     -- POLE SITE
-                    @poleSite:=(SELECT count(P.id) 
+                    @inbuilding:=(SELECT count(P.id) 
                             FROM entel_pops.pops P 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.created_at = (SELECT MAX(pop_classes.created_at) FROM entel_pops.pop_classes WHERE pop_classes.pop_id = P.id) AND PC.pop_class_type_id = 6
+                            INNER JOIN entel_pops.solutions S ON P.id = S.pop_id AND S.created_at = (SELECT MAX(solutions.created_at) FROM entel_pops.solutions WHERE solutions.pop_id = P.id) AND S.solution_type_id = 2
                             $condition
                             WHERE P.state = 1
-                            ) AS poleSite,
-
-                    -- POP MOVILES
-                    @others:=(SELECT count(P.id) 
-                            FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            -- INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 2
-                            $condition
-                            WHERE P.state = 1
-                            AND P.nem_fijo IS NULL
-                            AND P.nem_movil IS NOT NULL
-                            AND P.cod_planificacion IS NULL
-                            ) AS others
+                            ) AS inbuilding
 
                     FROM entel_pops.crms
                 "));
@@ -142,8 +131,8 @@ class DashboardApiController extends Controller
         if (Cache::has('popData_crm'.$crm_id.'_core'.$core)) {
             $popQuantity = Cache::get('popData_crm'.$crm_id.'_core'.$core);
         } else {
-            $popQuantity = Cache::remember('popData_crm'.$crm_id.'_core'.$core, $this->minutes, function () use ($crm_id, $core) {
-                $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
+            $popQuantity = Cache::remember('popData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : '';
 
                 $popQuantity = DB::select(DB::raw("
                     SELECT
@@ -154,44 +143,28 @@ class DashboardApiController extends Controller
                     @fijo:=(SELECT count(P.id) 
                             FROM entel_pops.pops P 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            -- INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 1
                             $condition
                             WHERE P.state = 1
                             AND P.nem_fijo IS NOT NULL
                             ) AS fijo,
 
-                    -- POP MOVILES
-                    @movil:=(SELECT count(P.id) 
+                    -- POP MACRO
+                    @macro:=(SELECT count(P.id) 
                             FROM entel_pops.pops P 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 2
+                            INNER JOIN entel_pops.solutions S ON P.id = S.pop_id AND S.created_at = (SELECT MAX(solutions.created_at) FROM entel_pops.solutions WHERE solutions.pop_id = P.id) AND S.solution_type_id = 1
                             $condition
                             WHERE P.state = 1
-                            AND P.nem_fijo IS NULL
-                            AND P.nem_movil IS NOT NULL
-                            AND P.cod_planificacion IS NOT NULL
-                            ) AS movil,
+                            ) AS macro,
 
                     -- POLE SITE
-                    @poleSite:=(SELECT count(P.id) 
+                    @inbuilding:=(SELECT count(P.id) 
                             FROM entel_pops.pops P 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.created_at = (SELECT MAX(pop_classes.created_at) FROM entel_pops.pop_classes WHERE pop_classes.pop_id = P.id) AND PC.pop_class_type_id = 6
+                            INNER JOIN entel_pops.solutions S ON P.id = S.pop_id AND S.created_at = (SELECT MAX(solutions.created_at) FROM entel_pops.solutions WHERE solutions.pop_id = P.id) AND S.solution_type_id = 2
                             $condition
                             WHERE P.state = 1
-                            ) AS poleSite,
-
-                    -- POP MOVILES
-                    @others:=(SELECT count(P.id) 
-                            FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            -- INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 2
-                            $condition
-                            WHERE P.state = 1
-                            AND P.nem_fijo IS NULL
-                            AND P.nem_movil IS NOT NULL
-                            AND P.cod_planificacion IS NULL
-                            ) AS others
+                            ) AS inbuilding
 
                     FROM entel_pops.zonas
                     WHERE crm_id = $crm_id
@@ -212,7 +185,7 @@ class DashboardApiController extends Controller
         if (Cache::has('popData_zona'.$zona_id.'_core'.$core)) {
             $popQuantity = Cache::get('popData_zona'.$zona_id.'_core'.$core);
         } else {
-            $popQuantity = Cache::remember('popData_zona'.$zona_id.'_core'.$core, $this->minutes, function () use ($zona_id, $core) {
+            $popQuantity = Cache::remember('popData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $popQuantity = DB::select(DB::raw("
@@ -223,45 +196,29 @@ class DashboardApiController extends Controller
                     -- POP FIJOS
                     @fijo:=(SELECT count(P.id) 
                             FROM entel_pops.pops P
-                            -- INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 1
                             $condition
                             WHERE P.comuna_id = @comuna_id
                             AND P.nem_fijo IS NOT NULL
                             AND P.state = 1
                             ) AS fijo,
 
-                    -- POP MOVILES
-                    @movil:=(SELECT count(P.id) 
-                            FROM entel_pops.pops P
-                            INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 2
+                    -- POP MACRO
+                    @macro:=(SELECT count(P.id) 
+                            FROM entel_pops.pops P 
+                            INNER JOIN entel_pops.solutions S ON P.id = S.pop_id AND S.created_at = (SELECT MAX(solutions.created_at) FROM entel_pops.solutions WHERE solutions.pop_id = P.id) AND S.solution_type_id = 1
                             $condition
                             WHERE P.comuna_id = @comuna_id
                             AND P.state = 1
-                            AND P.nem_fijo IS NULL
-                            AND P.nem_movil IS NOT NULL
-                            AND P.cod_planificacion IS NOT NULL
-                            ) AS movil,
+                            ) AS macro,
 
                     -- POLE SITE
-                    @poleSite:=(SELECT count(P.id) 
+                    @inbuilding:=(SELECT count(P.id) 
                             FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.pop_classes PC ON P.id = PC.pop_id AND PC.created_at = (SELECT MAX(pop_classes.created_at) FROM entel_pops.pop_classes WHERE pop_classes.pop_id = P.id) AND PC.pop_class_type_id = 6
+                            INNER JOIN entel_pops.solutions S ON P.id = S.pop_id AND S.created_at = (SELECT MAX(solutions.created_at) FROM entel_pops.solutions WHERE solutions.pop_id = P.id) AND S.solution_type_id = 2
                             $condition
                             WHERE P.comuna_id = @comuna_id
                             AND P.state = 1
-                            ) AS poleSite,
-
-                    -- POP MOVILES
-                    @others:=(SELECT count(P.id) 
-                            FROM entel_pops.pops P
-                            -- INNER JOIN entel_pops.businesses B ON P.id = B.pop_id AND B.created_at = (SELECT MAX(businesses.created_at) FROM entel_pops.businesses WHERE businesses.pop_id = P.id) AND B.business_type_id = 2
-                            $condition
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.state = 1
-                            AND P.nem_fijo IS NULL
-                            AND P.nem_movil IS NOT NULL
-                            AND P.cod_planificacion IS NULL
-                            ) AS others
+                            ) AS inbuilding
 
                     FROM entel_pops.comunas
                     WHERE zona_id = $zona_id
@@ -282,8 +239,8 @@ class DashboardApiController extends Controller
         if (Cache::has('technologyData_core'.$core)) {
             $techQuantity = Cache::get('technologyData_core'.$core);
         } else {
-            $techQuantity = Cache::remember('technologyData_core'.$core, $this->minutes, function () use ($core) {
-                $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
+            $techQuantity = Cache::remember('technologyData_core'.$core, $this->seconds, function () use ($core) {
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : '';
 
                 $techQuantity = DB::select(DB::raw("
                     SELECT
@@ -291,13 +248,6 @@ class DashboardApiController extends Controller
                     @crm:=nombre_crm AS nombre,
 
                     -- TECNOLOGIAS
-                    @2g900:=(SELECT COUNT(DISTINCT TA.pop_id) FROM entel_pops.tec2_g900_cells TA 
-                            INNER JOIN entel_pops.pops P ON TA.pop_id = P.id AND P.state = 1
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            $condition
-                            ) as tec2g900,
-                    
                     @2g1900:=(SELECT COUNT(DISTINCT TA.pop_id) FROM entel_pops.tec2_g1900_cells TA 
                             INNER JOIN entel_pops.pops P ON TA.pop_id = P.id AND P.state = 1
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
@@ -340,7 +290,6 @@ class DashboardApiController extends Controller
                             $condition
                             ) as tec4g2600
                     FROM entel_pops.crms
-                    -- GROUP BY CRM.id
                 "));
                 return $techQuantity;
             });
@@ -359,7 +308,7 @@ class DashboardApiController extends Controller
         if (Cache::has('technologyData_crm'.$crm_id.'_core'.$core)) {
             $techQuantity = Cache::get('technologyData_crm'.$crm_id.'_core'.$core);
         } else {
-            $techQuantity = Cache::remember('technologyData_crm'.$crm_id.'_core'.$core, $this->minutes, function () use ($crm_id, $core) {
+            $techQuantity = Cache::remember('technologyData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $techQuantity = DB::select(DB::raw("
@@ -368,12 +317,6 @@ class DashboardApiController extends Controller
                     @zona:=nombre_zona AS nombre,
 
                     -- TECNOLOGIAS
-                    @2g900:=(SELECT COUNT(DISTINCT TA.pop_id) FROM entel_pops.tec2_g900_cells TA 
-                            INNER JOIN entel_pops.pops P ON TA.pop_id = P.id AND P.state = 1
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            $condition
-                            ) as tec2g900,
-                    
                     @2g1900:=(SELECT COUNT(DISTINCT TA.pop_id) FROM entel_pops.tec2_g1900_cells TA 
                             INNER JOIN entel_pops.pops P ON TA.pop_id = P.id AND P.state = 1
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
@@ -430,7 +373,7 @@ class DashboardApiController extends Controller
         if (Cache::has('technologyData_zona'.$zona_id.'_core'.$core)) {
             $techQuantity = Cache::get('technologyData_zona'.$zona_id.'_core'.$core);
         } else {
-            $techQuantity = Cache::remember('technologyData_zona'.$zona_id.'_core'.$core, $this->minutes, function () use ($zona_id, $core) {
+            $techQuantity = Cache::remember('technologyData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $techQuantity = DB::select(DB::raw("
@@ -439,12 +382,6 @@ class DashboardApiController extends Controller
                     @comuna:=nombre_comuna AS nombre,
 
                     -- TECNOLOGIAS
-                    @2g900:=(SELECT COUNT(DISTINCT TA.pop_id) FROM entel_pops.tec2_g900_cells TA 
-                            INNER JOIN entel_pops.pops P ON TA.pop_id = P.id AND P.state = 1
-                            $condition
-                            WHERE P.comuna_id = @comuna_id
-                            ) as tec2g900,
-                    
                     @2g1900:=(SELECT COUNT(DISTINCT TA.pop_id) FROM entel_pops.tec2_g1900_cells TA 
                             INNER JOIN entel_pops.pops P ON TA.pop_id = P.id AND P.state = 1
                             $condition
@@ -501,7 +438,7 @@ class DashboardApiController extends Controller
         if (Cache::has('serviceData_core'.$core)) {
             $servicesQuantity = Cache::get('serviceData_core'.$core);
         } else {
-            $servicesQuantity = Cache::remember('serviceData_core'.$core, $this->minutes, function () use ($core) {
+            $servicesQuantity = Cache::remember('serviceData_core'.$core, $this->seconds, function () use ($core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $servicesQuantity = DB::select(DB::raw("
@@ -564,7 +501,7 @@ class DashboardApiController extends Controller
         if (Cache::has('serviceData_crm'.$crm_id.'_core'.$core)) {
             $servicesQuantity = Cache::get('serviceData_crm'.$crm_id.'_core'.$core);
         } else {
-            $servicesQuantity = Cache::remember('serviceData_crm'.$crm_id.'_core'.$core, $this->minutes, function () use ($crm_id, $core) {
+            $servicesQuantity = Cache::remember('serviceData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $servicesQuantity = DB::select(DB::raw("
@@ -622,7 +559,7 @@ class DashboardApiController extends Controller
         if (Cache::has('serviceData_zona'.$zona_id.'_core'.$core)) {
             $servicesQuantity = Cache::get('serviceData_zona'.$zona_id.'_core'.$core);
         } else {
-            $servicesQuantity = Cache::remember('serviceData_zona'.$zona_id.'_core'.$core, $this->minutes, function () use ($zona_id, $core) {
+            $servicesQuantity = Cache::remember('serviceData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $servicesQuantity = DB::select(DB::raw("
@@ -680,7 +617,7 @@ class DashboardApiController extends Controller
         if (Cache::has('infraData_core'.$core)) {
             $infraQuantity = Cache::get('infraData_core'.$core);
         } else {
-            $infraQuantity = Cache::remember('infraData_core'.$core, $this->minutes, function () use ($core) {
+            $infraQuantity = Cache::remember('infraData_core'.$core, $this->seconds, function () use ($core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $infraQuantity = DB::select(DB::raw("
@@ -736,7 +673,7 @@ class DashboardApiController extends Controller
         if (Cache::has('infraData_crm'.$crm_id.'_core'.$core)) {
             $infraQuantity = Cache::get('infraData_crm'.$crm_id.'_core'.$core);
         } else {
-            $infraQuantity = Cache::remember('infraData_crm'.$crm_id.'_core'.$core, $this->minutes, function () use ($crm_id, $core) {
+            $infraQuantity = Cache::remember('infraData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $infraQuantity = DB::select(DB::raw("
@@ -788,7 +725,7 @@ class DashboardApiController extends Controller
         if (Cache::has('infraData_zona'.$zona_id.'_core'.$core)) {
             $infraQuantity = Cache::get('infraData_zona'.$zona_id.'_core'.$core);
         } else {
-            $infraQuantity = Cache::remember('infraData_zona'.$zona_id.'_core'.$core, $this->minutes, function () use ($zona_id, $core) {
+            $infraQuantity = Cache::remember('infraData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.created_at = (SELECT MAX(classifications.created_at) FROM entel_pops.classifications WHERE classifications.pop_id = P.id) AND CL.classification_type_id = 1' : $condition = '';
 
                 $infraQuantity = DB::select(DB::raw("

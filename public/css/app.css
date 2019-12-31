@@ -1720,6 +1720,38 @@ a.has-text-blackRussian:focus {
   background-color: #fafafa !important;
 }
 
+.has-text-red-light {
+  color: #FDD9DA !important;
+}
+
+.has-background-red-light {
+  background-color: #FDD9DA !important;
+}
+
+.has-text-green-light {
+  color: #D9FEE5 !important;
+}
+
+.has-background-green-light {
+  background-color: #D9FEE5 !important;
+}
+
+.has-text-blue-light {
+  color: #F2FBFF !important;
+}
+
+.has-background-blue-light {
+  background-color: #F2FBFF !important;
+}
+
+.has-text-yellow-light {
+  color: #FDF2D6 !important;
+}
+
+.has-background-yellow-light {
+  background-color: #FDF2D6 !important;
+}
+
 .has-text-weight-light {
   font-weight: 300 !important;
 }

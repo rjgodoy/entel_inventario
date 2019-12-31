@@ -24,11 +24,6 @@ class Pop extends Model
         return $this->hasMany(Autonomy::class);
     }
 
-    public function businesses() 
-    {
-        return $this->hasMany(Business::class);
-    }
-
     public function categories() 
     {
         return $this->hasMany(Category::class);
@@ -84,14 +79,14 @@ class Pop extends Model
         return $this->hasMany(Site::class);
     }
 
-    // public function states() 
-    // {
-    //     return $this->hasMany(State::class);
-    // }
-
-    public function tec2_g900_cells() 
+    public function solutions() 
     {
-        return $this->hasMany(Tec2G900Cell::class);
+        return $this->hasMany(Solution::class);
+    }
+
+    public function states() 
+    {
+        return $this->hasMany(State::class);
     }
 
     public function tec2_g1900_cells() 

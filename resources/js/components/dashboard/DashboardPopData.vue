@@ -1,6 +1,6 @@
 <template>
     <div class="tile is-parent">
-        <article class="tile is-child box" :class="boxBackground" style="min-height: 300px; max-height: 500px; overflow-y: scroll;">
+        <article class="tile is-child box" :class="boxBackground" style="overflow-y: scroll;">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">POP</div>
                 <!-- <div class="column has-text-centered">
@@ -13,10 +13,9 @@
                 <thead>
                     <tr class="is-size-7">
                         <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Fija">Fija</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Movil</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Pole Site</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Otros</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Fijo">Fijo</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Macro">Macro</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Inbuilding">Inbuilding</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
                     </tr>
                 </thead>
@@ -24,17 +23,15 @@
                     <tr class="is-size-7" v-for="item in this.popData">
                         <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
                         <td class="has-text-right" :class="primaryText">{{ item.fijo | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.movil | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.poleSite | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.others | numeral('0,0') }}</td>
-                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ item.fijo + item.movil | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.macro | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.inbuilding | numeral('0,0') }}</td>
+                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ item.fijo + item.macro + item.inbuilding | numeral('0,0') }}</td>
                     </tr>
                     <tr class="is-size-7 has-text-weight-bold">
                         <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
                         <td class="has-text-right" :class="primaryText">{{ this.totalFija | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalMovil | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalPoleSite | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalOthers | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalMacro | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalInbuilding | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</td>
                     </tr>
                 </tbody>
@@ -81,9 +78,8 @@
                 popData: null,
                 total: 0,
                 totalFija: 0,
-                totalMovil: 0,
-                totalPoleSite: 0,
-                totalOthers: 0,
+                totalMacro: 0,
+                totalInbuilding: 0,
                 buttonLoading: '',
             }
         },
@@ -109,18 +105,16 @@
         methods: {
             totalPops() {
                 this.totalFija = 0
-                this.totalMovil = 0
-                this.totalPoleSite = 0
-                this.totalOthers = 0
+                this.totalMacro = 0
+                this.totalInbuilding = 0
                 this.total = 0
                 this.popData.forEach(this.counter)
             },
             counter(item, index) {
                 this.totalFija = this.totalFija + item.fijo
-                this.totalMovil = this.totalMovil + item.movil
-                this.totalPoleSite = this.totalPoleSite + item.poleSite
-                this.totalOthers = this.totalOthers + item.others
-                this.total = this.total + item.fijo + item.movil + item.poleSite + item.others
+                this.totalMacro = this.totalMacro + item.macro
+                this.totalInbuilding = this.totalInbuilding + item.inbuilding
+                this.total = this.total + item.fijo + item.macro + item.inbuilding
             },
             getPopData() {
                 if (this.crmSelected == null) {

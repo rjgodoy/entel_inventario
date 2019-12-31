@@ -1,6 +1,6 @@
 <template>
     <div class="tile is-parent">
-        <article class="tile is-child box" :class="boxBackground" style="min-height: 300px; max-height: 500px; overflow-y: scroll;">
+        <article class="tile is-child box" :class="boxBackground" style="overflow-y: scroll;">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Tecnologías</div>
                 <!-- <div class="column has-text-centered">
@@ -22,10 +22,10 @@
                 <tbody>
                     <tr class="is-size-7" v-for="crm in this.technologyData">
                         <td class=""><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ crm.nombre }}</a></td>
-                        <td class="has-text-right" :class="primaryText">{{ crm.tec2g900 + crm.tec2g1900 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ crm.tec2g1900 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ crm.tec3g900 + crm.tec3g1900 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ crm.tec4g700 + crm.tec4g1900 + crm.tec4g2600 | numeral('0,0') }}</td>
-                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ crm.tec2g900 + crm.tec2g1900 + crm.tec3g900 + crm.tec3g1900 + crm.tec4g700 + crm.tec4g1900 + crm.tec4g2600 | numeral('0,0') }}</td>
+                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ crm.tec2g1900 + crm.tec3g900 + crm.tec3g1900 + crm.tec4g700 + crm.tec4g1900 + crm.tec4g2600 | numeral('0,0') }}</td>
                     </tr>
                     <tr class="is-size-7 has-text-weight-bold">
                         <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
@@ -108,10 +108,10 @@
                 this.technologyData.forEach(this.counter)
             },
             counter(item, index) {
-                this.total2G = this.total2G + item.tec2g900 + item.tec2g1900
+                this.total2G = this.total2G + item.tec2g1900
                 this.total3G = this.total3G + item.tec3g900 + item.tec3g1900
                 this.total4G = this.total4G + item.tec4g700 + item.tec4g1900 + item.tec4g2600
-                this.total = this.total + item.tec2g900 + item.tec2g1900 + item.tec3g900 + item.tec3g1900 + item.tec4g700 + item.tec4g1900 + item.tec4g2600;
+                this.total = this.total + item.tec2g1900 + item.tec3g900 + item.tec3g1900 + item.tec4g700 + item.tec4g1900 + item.tec4g2600;
             },
             getTechnologyData() {
                 if (this.zonaSelected != null) {

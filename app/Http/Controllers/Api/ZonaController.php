@@ -12,7 +12,7 @@ use App\Zona;
 
 class ZonaController extends Controller
 {
-    protected $minutes = 3600;
+    protected $seconds = 2592000;
 
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ZonaController extends Controller
         if (Cache::has('zonas_crm'.$crm_id)) {
             $zonas = Cache::get('zonas_crm'.$crm_id);
         } else {
-            $zonas = Cache::remember('zonas_crm'.$crm_id, $this->minutes, function () use ($crm_id) {
+            $zonas = Cache::remember('zonas_crm'.$crm_id, $this->seconds, function () use ($crm_id) {
                 $zonas = Zona::with('comunas', 'responsable')->where('crm_id', $crm_id)->get();
                 return $zonas;
             });

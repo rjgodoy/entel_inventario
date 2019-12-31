@@ -1,6 +1,6 @@
 <template>
     <div class="tile is-parent">
-        <article class="tile is-child box" :class="boxBackground" style="min-height: 300px; max-height: 500px; overflow-y: scroll;">
+        <article class="tile is-child box" :class="boxBackground" style="overflow-y: scroll;">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Servicios Infraestructura</div>
                 <!-- <div class="column has-text-centered">

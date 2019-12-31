@@ -13,7 +13,7 @@ use DB;
 
 class ElectricLineController extends Controller
 {
-    protected $minutes = 3600;
+    protected $seconds = 2592000;
 
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class ElectricLineController extends Controller
         if (Cache::has('electricLinesData_core'.$core)) {
             $electricLinesQuantity = Cache::get('electricLinesData_core'.$core);
         } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_core'.$core, $this->minutes, function () use ($core) {
+            $electricLinesQuantity = Cache::remember('electricLinesData_core'.$core, $this->seconds, function () use ($core) {
 
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
                 $electricLinesQuantity = DB::select(DB::raw("
@@ -84,7 +84,7 @@ class ElectricLineController extends Controller
         if (Cache::has('electricLinesData_crm'.$crm_id.'_core'.$core)) {
             $electricLinesQuantity = Cache::get('electricLinesData_crm'.$crm_id.'_core'.$core);
         } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_crm'.$crm_id.'_core'.$core, $this->minutes, function () use ($crm_id, $core) {
+            $electricLinesQuantity = Cache::remember('electricLinesData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
 
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
                 $electricLinesQuantity = DB::select(DB::raw("
@@ -132,7 +132,7 @@ class ElectricLineController extends Controller
         if (Cache::has('electricLinesData_zona'.$zona_id.'_core'.$core)) {
             $electricLinesQuantity = Cache::get('electricLinesData_zona'.$zona_id.'_core'.$core);
         } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_zona'.$zona_id.'_core'.$core, $this->minutes, function () use ($zona_id, $core) {
+            $electricLinesQuantity = Cache::remember('electricLinesData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
 
                 $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
                 $electricLinesQuantity = DB::select(DB::raw("

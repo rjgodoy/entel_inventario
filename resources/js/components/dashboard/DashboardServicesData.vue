@@ -42,7 +42,7 @@
                     </tr>
                 </tbody>
             </table>
-            <form method="POST" action="dashboard/services/export">
+            <!-- <form method="POST" action="dashboard/services/export">
                 <input type="hidden" name="_token" :value="csrf" />
 
                 <div class="field has-addons">
@@ -58,7 +58,7 @@
                         </a>
                     </p>
                 </div>
-            </form>
+            </form> -->
         </article>
     </div>
 </template>

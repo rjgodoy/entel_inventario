@@ -10,7 +10,6 @@
 <comsite-table
 	:message="'{{ session()->get('message') }}'"
 	:last_updated="'{{ $last_updated }}'"
-	:csrf="'{{ csrf_token() }}'"
 ></comsite-table>
 
 @endsection

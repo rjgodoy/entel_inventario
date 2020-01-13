@@ -5,130 +5,133 @@ namespace App\Exports;
 use App\Pop;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
+// use Maatwebsite\Excel\Concerns\FromArray;
+// use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 // use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
-// use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithMapping;
 // use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+// use PhpOffice\PhpSpreadsheet\Shared\Date;
+// use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 // use PhpOffice\PhpSpreadsheet\Worksheet\Drawing
 
-class PopsExport implements FromCollection, WithHeadings, ShouldAutoSize, 
+class PopsExport implements FromCollection, 
+                        WithHeadings, 
+                        ShouldAutoSize,
                         // WithColumnFormatting, 
-                        WithCustomStartCell, 
-                        // WithMapping,
-                        WithEvents
+                        WithCustomStartCell,
+                        WithMapping
+                        // WithEvents
                         // WithDrawings
 {
+
+    protected $core;
+    protected $crm_id;
+    protected $zona_id;
+
+    public function __construct(int $core, int $crm_id, int $zona_id)
+    {
+        $this->core = $core;
+        $this->crm_id = $crm_id;
+        $this->zona_id = $zona_id;
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-    	$pop_data = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-            ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-            ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-      
-            // Classificación
-            ->leftJoin('classifications', function ($join) {
-                $join->on('pops.id', '=', 'classifications.pop_id')
-                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-            })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+        $core_condition = $this->core == 0 ? '' : 'AND classification_type_id = 1';
 
-            // Tipo Atención
-            ->leftJoin('attentions', function ($join) {
-                $join->on('pops.id', '=', 'attentions.pop_id')
-                ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-            })->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
+        if ($this->crm_id == 0) {
+            $pop = Pop::with('comuna.zona.crm')
+                ->whereRaw('state_type_id = 1 '.$core_condition)
+                ->get();
+        } elseif ($this->zona_id == 0) {
+            $crm_id = $this->crm_id;
+            $pop = Pop::with('comuna.zona.crm')
+                ->whereHas('comuna.zona', function($query) use ($crm_id) {
+                    $query->where('crm_id', $crm_id);
+                })
+                ->whereRaw('state_type_id = 1 '.$core_condition)
+                ->get();
+        } else {
+            $zona_id = $this->zona_id;
+            $pop = Pop::with('comuna.zona.crm')
+                ->whereHas('comuna', function($query) use ($zona_id) {
+                    $query->where('zona_id', $zona_id);
+                })
+                ->whereRaw('state_type_id = 1 '.$core_condition)
+                ->get();
+        }
 
-            ->select(
-                'pops.id',
-                'pops.nombre as nombre_pop',
-                'pops.nem_movil',
-                'pops.nem_fijo',
-                'pops.direccion',
-                'pops.latitude',
-                'pops.longitude',
-                'pops.cod_planificacion',
-                'comunas.nombre_comuna',
-                'zonas.nombre_zona',
-                'zonas.cod_zona',
-                'crms.nombre_crm',
-                'crms.subgerente_crm',
-                'crms.sigla',
-                'classifications.classification_type_id',
-                'classification_types.type',
-                'attentions.attention_type_id',
-                'attention_types.type as attention_type',
-                'pops.alba_project'
-            )
-            ->orderBy('pops.id')
-            ->get();
-        return $pop_data;
+        return $pop;
     }
 
     /**
      * @return array
      */
-   //  public function map($pop_data): array
-   //  {
-   //      return [
-   //          $pop_data->id,
-   //          $pop_data->nem_fijo,
-   //          $pop_data->nem_movil,
-   //          $pop_data->cod_planificacion,
-   //          $pop_data->nombre,
-   //          $pop_data->direccion,
-   //          $pop_data->comuna->nombre,
-   //          $pop_data->comuna->region->cod_region,
-   //          $pop_data->comuna->region->nombre,
-   //          $pop_data->comuna->zona->cod_zona,
-   //          $pop_data->comuna->zona->nombre,
-   //          $pop_data->comuna->zona->crm->nombre,
-   //          $pop_data->latitude,
-   //          $pop_data->longitude,
+    public function map($pop): array
+    {
+        return [
+            $pop->id,
+            $pop->nem_fijo,
+            $pop->nem_movil,
+            $pop->cod_planificacion,
+            $pop->nombre,
+            $pop->direccion,
+            $pop->comuna->nombre_comuna,
+            $pop->comuna->region->cod_region,
+            $pop->comuna->region->nombre_region,
+            $pop->comuna->zona->cod_zona,
+            $pop->comuna->zona->nombre_zona,
+            $pop->comuna->zona->crm->nombre_crm,
+            $pop->latitude,
+            $pop->longitude,
 
-   //          // $pop_data->classification ? $pop_data->classification->type : '',
-   //          // $pop_data->category ? $pop_data->category->type : '',
-   //          // $pop_data->attention_priority ? $pop_data->attention_priority->type : '',
+            $pop->classification_type ? $pop->classification_type->classification_type : '',
+            // $pop->category ? $pop->category->type : '',
+            // $pop->attention_priority ? $pop->attention_priority->type : '',
 
-   //          // $pop_data->pop_classes->first() ? $pop_data->pop_class->first()->pop_class_type->type : '',
-   //          // // $pop_data->pop_types->first() ? $pop_data->pops->first()->pop_type->type : '',
-   //          // $pop_data->sites->first() ? $pop_data->sites->first()->site_type->type : '',
-   //          // $pop_data->nets->first() ? $pop_data->nets->first()->net_type->type : '',
+            // $pop->pop_classes->first() ? $pop->pop_class->first()->pop_class_type->type : '',
+            // // $pop->pop_types->first() ? $pop->pops->first()->pop_type->type : '',
+            // $pop->sites->first() ? $pop->sites->first()->site_type->type : '',
+            // $pop->nets->first() ? $pop->nets->first()->net_type->type : '',
 
-   //          // $pop_data->transports->first() ? $pop_data->transports->first()->transport_type->type : '',
-   //          // // $pop_data->containers->first() ? $pop_data->history_container_types->first()->container_type->container_type : '',
-   //          // $pop_data->derivations->first() ? $pop_data->derivations->first()->derivation_type->type : '',
-   //          // $pop_data->coverages->first() ? $pop_data->coverages->first()->coverage_type->type : '',
-   //          // // $pop_data->towers->first() ? $pop_data->history_tower_types->first()->tower_type->tower_type : '',
+            // $pop->transports->first() ? $pop->transports->first()->transport_type->type : '',
+            // // $pop->containers->first() ? $pop->history_container_types->first()->container_type->container_type : '',
+            // $pop->derivations->first() ? $pop->derivations->first()->derivation_type->type : '',
+            // $pop->coverages->first() ? $pop->coverages->first()->coverage_type->type : '',
+            // // $pop->towers->first() ? $pop->history_tower_types->first()->tower_type->tower_type : '',
 
-   //          // $pop_data->dependencies->first()->quantity,
-   //          // $pop_data->autonomy->first()->theoretical,
-   //          // $pop_data->threshold->first()->limit,
+            // $pop->dependencies->first()->quantity,
+            // $pop->autonomy->first()->theoretical,
+            // $pop->threshold->first()->limit,
 
-   //          $pop_data->pe_3g ? 'SI' : 'NO',
-  	//         $pop_data->mpls ? 'SI' : 'NO',
-  	//         $pop_data->olt ? 'SI' : 'NO',
-  	//         $pop_data->olt_3play ? 'SI' : 'NO',
-  	//         $pop_data->core ? 'SI' : 'NO',
-  	//         $pop_data->red_minima_n1 ? 'SI' : 'NO',
-  	//         $pop_data->red_minima_n2 ? 'SI' : 'NO',
-  	//         $pop_data->vip ? 'SI' : 'NO',
-  	//         $pop_data->localidad_onligatoria ? 'SI' : 'NO',
-  	//         $pop_data->ranco ? 'SI' : 'NO',
-  	//         $pop_data->bafi ? 'SI' : 'NO',
-  	//         $pop_data->offgrid ? 'SI' : 'NO',
-  	//         $pop_data->solar ? 'SI' : 'NO',
-  	//         $pop_data->eolica ? 'SI' : 'NO',
-  	//         $pop_data->condiciones_ambientales ? 'SI' : 'NO'  
-  	// 	];
-  	// }
+           //  $pop->pe_3g ? 'SI' : 'NO',
+  	        // $pop->mpls ? 'SI' : 'NO',
+  	        // $pop->olt ? 'SI' : 'NO',
+  	        // $pop->olt_3play ? 'SI' : 'NO',
+  	        // $pop->core ? 'SI' : 'NO',
+  	        // $pop->red_minima_n1 ? 'SI' : 'NO',
+  	        // $pop->red_minima_n2 ? 'SI' : 'NO',
+  	        // $pop->vip ? 'SI' : 'NO',
+  	        // $pop->localidad_onligatoria ? 'SI' : 'NO',
+  	        // $pop->ranco ? 'SI' : 'NO',
+  	        // $pop->bafi ? 'SI' : 'NO',
+  	        // $pop->offgrid ? 'SI' : 'NO',
+  	        // $pop->solar ? 'SI' : 'NO',
+  	        // $pop->eolica ? 'SI' : 'NO',
+  	        // $pop->condiciones_ambientales ? 'SI' : 'NO' 
+            $pop->alba_project ? 'SI' : 'NO' 
+
+  		];
+  	}
 
     /**
      * @return array
@@ -151,7 +154,7 @@ class PopsExport implements FromCollection, WithHeadings, ShouldAutoSize,
 	        'LATITUD',
 	        'LONGITUD',
 
-	        // 'CLASIFICACION SITIO',
+	        'CLASIFICACION SITIO',
 	        // 'CATEGORIA PLANIFICACION',
 	        // 'PRIORIDAD DE ATENCION EN TERRENO',
 
@@ -166,26 +169,27 @@ class PopsExport implements FromCollection, WithHeadings, ShouldAutoSize,
 	        // 'TIPO COBERTURA',
 	        // // 'TIPO TORRE',
 
-         //    'DEPENDENCIAS',
-         //    'AUTONOMIA NOMINAL',
-         //    'UMBRAL',
+            //    'DEPENDENCIAS',
+            //    'AUTONOMIA NOMINAL',
+            //    'UMBRAL',
 
-	        'PE 3G',
-	        'MPLS',
-	        'OLT',
-	        'OLT 3PLAY',
-	        'CORE',
-	        'RED MINIMA N1',
-	        'RED MINIMA N2',
-	        'VIP',
-	        'LOCALIDAD OBLIGATORIA',
-	        'RANCO',
-	        'BAFI',
-	        'OFFGRID',
-	        'PANEL SOLAR',
-	        'EOLICA',
+	        // 'PE 3G',
+	        // 'MPLS',
+	        // 'OLT',
+	        // 'OLT 3PLAY',
+	        // 'CORE',
+	        // 'RED MINIMA N1',
+	        // 'RED MINIMA N2',
+	        // 'VIP',
+	        // 'LOCALIDAD OBLIGATORIA',
+	        // 'RANCO',
+	        // 'BAFI',
+	        // 'OFFGRID',
+	        // 'PANEL SOLAR',
+	        // 'EOLICA',
 	        // 'GESTION RECONECTADOR',
-	        'CONDICIONES AMBIENTALES',
+	        // 'CONDICIONES AMBIENTALES',
+            'PROYECTO ALBA'
 	        // 'ACTIVO'
         ];
     }

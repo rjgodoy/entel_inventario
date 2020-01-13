@@ -1,50 +1,57 @@
 <template>
     
-    <section class="section is-marginless" :class="bodyBackground">
-        <div class="tile is-ancestor">
-            <!-- <div class="tile is-7 is-vertical"> -->
-            
+    <section class="" :class="bodyBackground">
+
+        <div class="container">
+
+            <!-- SWITCH CORE -->
+            <div class="columns">
+                <div class="column has-text-centered">
+                    <b-switch class="is-small" @input="switchCore">Red CORE</b-switch>
+                </div>
+            </div>
+
+            <!-- CRM BUTTONS -->
+            <div class=" tile is-ancestor">
+                <div class="tile is-parent" v-for="crm in crms">
+                    <a class="tile is-child button" :class="selectedCrm == crm ? 'has-background-link' : boxBackground" @click="selectCrm(crm)">
+                        <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
+                            <div class="is-size-7 has-text-weight-normal">CRM</div>
+                            <div class="is-size-6 has-text-weight-semibold">{{ crm.nombre_crm }}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ZONA BUTTONS -->
+            <div v-if="selectedCrm != null" class="tile" style="margin-top: -15px;">
+                <div class="tile is-parent" v-for="zona in zonas">
+                    <a class="tile is-child button" :class="selectedZona == zona ? 'has-background-link' : boxBackground" @click="selectZona(zona)">
+                        <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
+                            <div class="is-size-7 has-text-weight-normal">Zona</div>
+                            <div class="is-size-6 has-text-weight-semibold">{{ zona.nombre_zona }}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section tile is-ancestor">            
             <div class="tile is-6 is-parent">
                 <div class="tile is-child box" :class="boxBackground" style="max-height: 100%;">
-                    <div class="tile">
-                        <div class="tile is-parent" v-for="crm in crms">
-                            <a class="tile is-child button" :class="selectedCrm == crm ? 'has-background-link' : boxBackground" @click="selectCrm(crm)">
-                                <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
-                                    <div class="is-size-7 has-text-weight-normal">CRM</div>
-                                    <div class="is-size-6 has-text-weight-semibold">{{ crm.nombre_crm }}</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
 
-                    <div v-if="selectedCrm != null" class="tile" style="margin-top: -15px;">
-                        <div class="tile is-parent" v-for="zona in zonas">
-                            <a class="tile is-child button" :class="selectedZona == zona ? 'has-background-link' : boxBackground" @click="selectZona(zona)">
-                                <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
-                                    <div class="is-size-7 has-text-weight-normal">Zona</div>
-                                    <div class="is-size-6 has-text-weight-semibold">{{ zona.nombre_zona }}</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="field">
+                    <div class=" field">
                         <div class="columns">
                             <div class="column">
                                 <span class="is-size-7" v-if="searchText.length" style="padding-left: 0">
                                     <strong style="margin-left: 10px;">{{ pops.total | numeral('0,0')}}</strong> pops encontrados
                                 </span>
                             </div>
-                            <div class="columns">
-                                <div class="" style="margin-top: 20px;">
-                                    <b-switch class="is-small" @input="switchCore">Red CORE</b-switch>
-                                </div>
-                            </div>
                             <div class="column">
-                                <div class="tags has-addons is-right is-size-7">
-                                    <span class="tag is-dark">pops</span>
-                                    <span class="tag has-text-weight-bold">
+                                <div class="is-right is-size-5">
+                                    <span class="is-dark">POP</span>
+                                    <span class="has-text-weight-bold">
                                         {{ totalPops | numeral('0,0')}}
                                     </span>
                                 </div>
@@ -242,8 +249,7 @@
             'vue-pagination': VuePagination
         },
         props : [
-            'map_attributes',
-            'csrf'
+            'map_attributes'
         ],
         data() {
             return {

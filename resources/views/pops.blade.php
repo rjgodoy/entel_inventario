@@ -17,7 +17,6 @@
 <pop-table
 	:message="'{{ session()->get('message') }}'"
 	:map_attributes='@json($mapAttributes)'
-    :csrf="'{{ csrf_token() }}'"
 />
 
 

@@ -2,7 +2,7 @@
     <div class="tile is-parent">
         <article class="tile is-child box" :class="boxBackground" style="overflow-y: scroll;">
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">POP</div>
+                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Sitios</div>
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
             </div>
             
@@ -11,8 +11,9 @@
                     <tr class="is-size-7">
                         <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Fijo">Fijo</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Macro">Macro</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Inbuilding">Inbuilding</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Móvil">Macro</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Switch">Switch</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Phone">Phone</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
                     </tr>
                 </thead>
@@ -20,15 +21,17 @@
                     <tr class="is-size-7" v-for="item in this.data">
                         <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
                         <td class="has-text-right" :class="primaryText">{{ item.fijo | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.macro | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.inbuilding | numeral('0,0') }}</td>
-                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ item.fijo + item.macro + item.inbuilding | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.movil | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.switch | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.phone | numeral('0,0') }}</td>
+                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ item.fijo + item.movil + item.switch + item.phone | numeral('0,0') }}</td>
                     </tr>
                     <tr class="is-size-7 has-text-weight-bold">
                         <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalFija | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalMacro | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalInbuilding | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalFijo | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalMovil | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalSwitch | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalPhone | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</td>
                     </tr>
                 </tbody>
@@ -40,14 +43,14 @@
                         :loading="buttonLoading ? true : false"
                         type="is-link"
                         size="is-small"
-                        @click="downloadPops">
+                        @click="downloadSites">
                         <font-awesome-icon icon="download"/> 
                         &nbsp;&nbsp;Listado de POPs
                     </b-button>
                 </p>
                 <p class="control">
                     <b-tooltip label="Tooltip Text" position="is-right">
-                        <a href="/pop" type="button" class="button is-small is-link" data-tooltip="">
+                        <a href="/sites" type="button" class="button is-small is-link" data-tooltip="">
                             <font-awesome-icon icon="bars"/>
                         </a>
                     </b-tooltip>
@@ -63,7 +66,6 @@
         props : [
             'selectedCrm',
             'selectedZona',
-            // 'csrf',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -76,9 +78,10 @@
                 zonaSelected: this.selectedZona,
                 data: null,
                 total: 0,
-                totalFija: 0,
-                totalMacro: 0,
-                totalInbuilding: 0,
+                totalFijo: 0,
+                totalMovil: 0,
+                totalSwitch: 0,
+                totalPhone: 0,
                 buttonLoading: 0,
             }
         },
@@ -102,47 +105,49 @@
             }
         },
         methods: {
-            totalPops() {
-                this.totalFija = 0
-                this.totalMacro = 0
-                this.totalInbuilding = 0
+            totalSites() {
+                this.totalFijo = 0
+                this.totalMovil = 0
+                this.totalSwitch = 0
+                this.totalPhone = 0
                 this.total = 0
                 this.data.forEach(this.counter)
             },
             counter(item, index) {
-                this.totalFija = this.totalFija + item.fijo
-                this.totalMacro = this.totalMacro + item.macro
-                this.totalInbuilding = this.totalInbuilding + item.inbuilding
-                this.total = this.total + item.fijo + item.macro + item.inbuilding
+                this.totalFijo = this.totalFijo + item.fijo
+                this.totalMovil = this.totalMovil + item.movil
+                this.totalSwitch = this.totalSwitch + item.switch
+                this.totalPhone = this.totalPhone + item.phone
+                this.total = this.total + item.fijo + item.movil + item.switch + item.phone
             },
             getData() {
                 // Si no hay un CRM seleccionado
                 if (this.crmSelected == null) {                             
 
-                    axios.get(`/api/popData?core=${this.core}`)
+                    axios.get(`/api/sitesData?core=${this.core}`)
                     .then((response) => {
                         this.data = response.data.data;
-                        this.totalPops()
+                        this.totalSites()
                     })
                 } 
                 //Si hay un CRM seleccionado, pero no hay zona seleccionada
                 else if (this.zonaSelected == null){
-                    axios.get(`api/popDataCrm?crm_id=${this.crmSelected.id}&core=${this.core}`)
+                    axios.get(`api/sitesDataCrm?crm_id=${this.crmSelected.id}&core=${this.core}`)
                     .then((response) => {
                         this.data = response.data.data;
-                        this.totalPops()
+                        this.totalSites()
                     })
                 } 
                 // Si hay una zona seleccionada
                 else {
-                    axios.get(`api/popDataZona?zona_id=${this.zonaSelected.id}&core=${this.core}`)
+                    axios.get(`api/sitesDataZona?zona_id=${this.zonaSelected.id}&core=${this.core}`)
                     .then((response) => {
                         this.data = response.data.data;
-                        this.totalPops()
+                        this.totalSites()
                     })
                 }
             },
-            downloadPops() {
+            downloadSites() {
                 this.buttonLoading = 1
 
                 axios.get(`/pop/export?core=${this.core}&crm_id=${this.crmSelected ? this.crmSelected.id : 0}&zona_id=${this.zonaSelected ? this.zonaSelected.id : 0}`, {

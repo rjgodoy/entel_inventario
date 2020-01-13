@@ -116,8 +116,7 @@
         },
         props : [
             'message',
-            'last_updated',
-            'csrf'
+            'last_updated'
         ],
         data() {
             return {

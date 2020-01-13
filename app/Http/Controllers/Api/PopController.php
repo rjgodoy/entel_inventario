@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\Pop as PopResource;
 use App\Pop;
+use App\Site;
 
 class PopController extends Controller
 {
@@ -178,9 +179,11 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($pop_id)
     {
-        //
+        $pop = Pop::with('comuna', 'classification_type')->where('id', $pop_id)->first();
+
+        return new PopResource($pop);
     }
 
     /**
@@ -276,47 +279,40 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function searchPops($text, $core)
+    public function searchPops(Request $request)
     {
-        $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
+        $text = $request->text;
+        $core = $request->core;
+
+        $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
+            ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
             ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-            ->join('crms', 'zonas.crm_id', '=', 'crms.id')
+            ->join('crms', 'zonas.crm_id', '=', 'crms.id')                                
+            ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
             ->where(function($query) use ($text) {
-                $query->where('pops.nem_fijo', 'LIKE', "%$text%")
-                    ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
+                $query->where('sites.nem_site', 'LIKE', "%$text%")
+                    ->orWhere('sites.nombre', 'LIKE', "%$text%")
                     ->orWhere('pops.nombre', 'LIKE', "%$text%")
                     ->orWhere('pops.direccion', 'LIKE', "%$text%");
             })
-            // Classificación
-            ->leftJoin('classifications', function ($join) {
-                $join->on('pops.id', '=', 'classifications.pop_id')
-                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-            })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
-
-            // Tipo Atención
-            ->leftJoin('attentions', function ($join) {
-                $join->on('pops.id', '=', 'attentions.pop_id')
-                ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-            })
-            // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
-
-            ->whereRaw('IF('.$core.' = 0, classifications.classification_type_id IN (1,2,3,4), classifications.classification_type_id IN (1))')
+            ->where('sites.state_type_id', 1)
+            ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
             ->select(
-                'pops.id as pop_id',
+                'pops.id',
+                'sites.id as site_id',
+                'sites.nem_site',
+                'sites.nombre as nombre_sitio',
+                'sites.classification_type_id',
                 'pops.nombre',
-                'pops.nem_movil',
-                'pops.nem_fijo',
                 'pops.direccion',
                 'pops.latitude',
                 'pops.longitude',
-                'pops.cod_planificacion',
-                'comunas.*',
-                'zonas.*',
-                'crms.*',
-                'classifications.classification_type_id',
+                'comunas.nombre_comuna',
+                'comunas.zona_id',
+                'zonas.crm_id',
+                'zonas.nombre_zona',
+                'crms.nombre_crm',
                 'classification_types.classification_type',
-                'attentions.attention_type_id',
-                // 'attention_types.attention_type as attention_type',
                 'pops.alba_project'
             )
             ->orderBy('pops.id')
@@ -331,51 +327,44 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function searchPopsCrm($text, $crm_id, $core)
+    public function searchPopsCrm(Request $request)
     {
-        $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
+        $text = $request->text;
+        $core = $request->core;
+        $crm_id = $request->crm_id;
+
+        $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
+            ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
             ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
             ->join('crms', function($join) use ($crm_id) {
                 $join->on('zonas.crm_id', '=', 'crms.id')
                 ->where('crms.id', $crm_id);
             })
+            ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
             ->where(function($query) use ($text) {
-            $query->where('pops.nem_fijo', 'LIKE', "%$text%")
-                ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
-                ->orWhere('pops.nombre', 'LIKE', "%$text%")
-                ->orWhere('pops.direccion', 'LIKE', "%$text%");
+                $query->where('sites.nem_site', 'LIKE', "%$text%")
+                    ->orWhere('sites.nombre', 'LIKE', "%$text%")
+                    ->orWhere('pops.nombre', 'LIKE', "%$text%")
+                    ->orWhere('pops.direccion', 'LIKE', "%$text%");
             })
-            // Classificación
-            ->leftJoin('classifications', function ($join) {
-                $join->on('pops.id', '=', 'classifications.pop_id')
-                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-            })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
-
-            // Tipo Atención
-            ->leftJoin('attentions', function ($join) {
-                $join->on('pops.id', '=', 'attentions.pop_id')
-                ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-            })
-            // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
-
-            ->whereRaw('IF('.$core.' = 0, classifications.classification_type_id IN (1,2,3,4), classifications.classification_type_id IN (1))')
-
+            ->where('sites.state_type_id', 1)
+            ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
             ->select(
-                'pops.id as pop_id',
+                'pops.id',
+                'sites.id as site_id',
+                'sites.nem_site',
+                'sites.nombre as nombre_sitio',
+                'sites.classification_type_id',
                 'pops.nombre',
-                'pops.nem_movil',
-                'pops.nem_fijo',
                 'pops.direccion',
                 'pops.latitude',
                 'pops.longitude',
-                'pops.cod_planificacion',
-                'comunas.*',
-                'zonas.*',
-                'crms.*',
-                'classifications.classification_type_id',
+                'comunas.nombre_comuna',
+                'comunas.zona_id',
+                'zonas.crm_id',
+                'zonas.nombre_zona',
+                'crms.nombre_crm',
                 'classification_types.classification_type',
-                'attentions.attention_type_id',
-                // 'attention_types.attention_type as attention_type',
                 'pops.alba_project'
             )
             ->orderBy('pops.id')
@@ -390,51 +379,44 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function searchPopsZona($text, $zona_id, $core)
+    public function searchPopsZona(Request $request)
     {
-        $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
+        $text = $request->text;
+        $core = $request->core;
+        $zona_id = $request->zona_id;
+
+        $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
+            ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
             ->join('zonas', function($join) use ($zona_id) {
                 $join->on('comunas.zona_id', '=', 'zonas.id')
                 ->where('zonas.id', $zona_id);
             })
             ->join('crms', 'zonas.crm_id', '=', 'crms.id')
+            ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
             ->where(function($query) use ($text) {
-                $query->where('pops.nem_fijo', 'LIKE', "%$text%")
-                    ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
+                $query->where('sites.nem_site', 'LIKE', "%$text%")
+                    ->orWhere('sites.nombre', 'LIKE', "%$text%")
                     ->orWhere('pops.nombre', 'LIKE', "%$text%")
                     ->orWhere('pops.direccion', 'LIKE', "%$text%");
             })
-            // Classificación
-            ->leftJoin('classifications', function ($join) {
-                $join->on('pops.id', '=', 'classifications.pop_id')
-                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-            })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
-
-            // Tipo Atención
-            ->leftJoin('attentions', function ($join) {
-                $join->on('pops.id', '=', 'attentions.pop_id')
-                ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-            })
-            // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
-
-            ->whereRaw('IF('.$core.' = 0, classifications.classification_type_id IN (1,2,3,4), classifications.classification_type_id IN (1))')
-            
+            ->where('sites.state_type_id', 1)
+            ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
             ->select(
-                'pops.id as pop_id',
+                'pops.id',
+                'sites.id as site_id',
+                'sites.nem_site',
+                'sites.nombre as nombre_sitio',
+                'sites.classification_type_id',
                 'pops.nombre',
-                'pops.nem_movil',
-                'pops.nem_fijo',
                 'pops.direccion',
                 'pops.latitude',
                 'pops.longitude',
-                'pops.cod_planificacion',
-                'comunas.*',
-                'zonas.*',
-                'crms.*',
-                'classifications.classification_type_id',
+                'comunas.nombre_comuna',
+                'comunas.zona_id',
+                'zonas.crm_id',
+                'zonas.nombre_zona',
+                'crms.nombre_crm',
                 'classification_types.classification_type',
-                'attentions.attention_type_id',
-                // 'attention_types.attention_type as attention_type',
                 'pops.alba_project'
             )
             ->orderBy('pops.id')
@@ -449,19 +431,16 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function filterPops()
+    public function filterPops(Request $request)
     {
-        $text = $_GET["text"];
+        $text = $request->text;
 
         $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
             ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
             ->join('crms', 'zonas.crm_id', '=', 'crms.id')
     
             // Classificación
-            ->leftJoin('classifications', function ($join) {
-                $join->on('pops.id', '=', 'classifications.pop_id')
-                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-            })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+            ->leftJoin('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
 
             // Tipo Atención
             ->leftJoin('attentions', function ($join) {
@@ -489,7 +468,7 @@ class PopController extends Controller
                 'comunas.*',
                 'zonas.*',
                 'crms.*',
-                'classifications.classification_type_id',
+                'pops.classification_type_id',
                 'classification_types.classification_type',
                 'attentions.attention_type_id',
                 // 'attention_types.attention_type as attention_type',
@@ -520,10 +499,7 @@ class PopController extends Controller
             })
             
             // Classificación
-            ->leftJoin('classifications', function ($join) {
-                $join->on('pops.id', '=', 'classifications.pop_id')
-                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-            })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+            ->leftJoin('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
 
             // Tipo Atención
             ->leftJoin('attentions', function ($join) {
@@ -551,7 +527,7 @@ class PopController extends Controller
                 'comunas.*',
                 'zonas.*',
                 'crms.*',
-                'classifications.classification_type_id',
+                'pops.classification_type_id',
                 'classification_types.classification_type',
                 'attentions.attention_type_id',
                 // 'attention_types.attention_type as attention_type',
@@ -581,10 +557,7 @@ class PopController extends Controller
             })
             ->join('crms', 'zonas.crm_id', '=', 'crms.id')
             // Classificación
-            ->leftJoin('classifications', function ($join) {
-                $join->on('pops.id', '=', 'classifications.pop_id')
-                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-            })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+            ->leftJoin('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
 
             // Tipo Atención
             ->leftJoin('attentions', function ($join) {
@@ -612,7 +585,7 @@ class PopController extends Controller
                 'comunas.*',
                 'zonas.*',
                 'crms.*',
-                'classifications.classification_type_id',
+                'pops.classification_type_id',
                 'classification_types.classification_type',
                 'attentions.attention_type_id',
                 // 'attention_types.attention_type as attention_type',
@@ -640,10 +613,7 @@ class PopController extends Controller
                     ->orWhere('pops.direccion', 'LIKE', "%$text%");
             })
             // Classificación
-            ->leftJoin('classifications', function ($join) {
-                $join->on('pops.id', '=', 'classifications.pop_id')
-                ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-            })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+            ->leftJoin('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
 
             // Tipo Atención
             ->leftJoin('attentions', function ($join) {

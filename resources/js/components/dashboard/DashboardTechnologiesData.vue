@@ -36,7 +36,7 @@
                     </tr>
                 </tbody>
             </table>
-            <form method="POST" action="dashboard/technologies/export">
+            <!-- <form method="POST" action="dashboard/technologies/export">
                 <input type="hidden" name="_token" :value="csrf" />
 
                 <div class="field has-addons">
@@ -52,7 +52,7 @@
                         </a>
                     </p>
                 </div>
-            </form>
+            </form> -->
         </article>
     </div>
 </template>
@@ -62,7 +62,6 @@
         props : [
             'selectedCrm',
             'selectedZona',
-            'csrf',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -115,7 +114,7 @@
             },
             getTechnologyData() {
                 if (this.zonaSelected != null) {
-                    axios.get(`api/technologyDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`api/technologyDataZona?zona_id=${this.zonaSelected.id}&core=${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
                             this.totalTechnologies()
@@ -124,7 +123,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.crmSelected != null){
-                    axios.get(`api/technologyDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`api/technologyDataCrm?crm_id=${this.crmSelected.id}&core=${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
                             this.totalTechnologies()
@@ -133,7 +132,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/technologyData/${this.core}`)
+                    axios.get(`api/technologyData?core=${this.core}`)
                         .then((response) => {
                             this.technologyData = response.data.data;
                             this.totalTechnologies()

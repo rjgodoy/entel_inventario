@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
 	});
 
 	Route::resource('/dashboard', 'HomeController');
-	Route::post('/pop/export', 'PopController@export')->name('pops.export');
+	Route::get('/pop/export', 'PopController@export')->name('pops.export');
 
 	Route::resource('/pop', 'PopController');
 	Route::resource('/comsite', 'ComsiteController');

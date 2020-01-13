@@ -34,6 +34,11 @@ class Pop extends Model
         return $this->hasMany(Classification::class);
     }
 
+    public function classification_type() 
+    {
+        return $this->belongsTo(ClassificationType::class);
+    }
+
     // public function classes() 
     // {
     //     return $this->hasMany(PopClass::class);
@@ -87,6 +92,11 @@ class Pop extends Model
     public function states() 
     {
         return $this->hasMany(State::class);
+    }
+
+    public function state_type() 
+    {
+        return $this->belongsTo(StateType::class);
     }
 
     public function tec2_g1900_cells() 

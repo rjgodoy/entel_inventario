@@ -96,6 +96,7 @@
         ],
         data() {
             return {
+                selectedPopMap: null,
                 popList: null,
                 popListCrm: null,
                 popListZona: null,
@@ -227,8 +228,11 @@
             }
         },
         methods: {
-            toggleInfoWindow: function (pop, idx) {
+            toggleInfoWindow(pop, idx) {
                 this.infoWindowPos = { lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) };
+                // this.getPopData(pop)
+                // console.log(this.selectedPopMap)
+
                 this.infoContent = this.getInfoWindowContent(pop);
 
                 //check if its the same pop that was selected if yes toggle
@@ -246,7 +250,7 @@
                 });
             },
 
-            getInfoWindowContent: function (pop) {
+            getInfoWindowContent(pop) {
                 return (`
                     <div class="card">
                         <!--div class="card-image">
@@ -264,14 +268,17 @@
                                     </span>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-4">${pop.nombre}</p>
-                                    <p class="subtitle is-6">${pop.direccion}</p>
+                                    <p class="has-text-weight-bold is-size-4">${pop.nombre}</p>
+                                    <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.nombre_comuna}</p>
+                                    <p class="has-text-weight-light is-size-6">Zona ${pop.nombre_zona}, CRM ${pop.nombre_crm}</p>
                                 </div>
                             </div>
 
                             <div class="content">
-                                <a href="/pop/${pop.pop_id}" class="button is-outlined is-primary is-small">
-                                    <font-awesome-icon icon="bars"/>Ver POP</a>
+                                <a href="/pop/${pop.pop_id}" target="_blank" class="button is-outlined is-primary is-small">
+                                    <font-awesome-icon icon="info-circle"/>
+                                    &nbsp;Ver detalles
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -359,6 +366,15 @@
                     map.setZoom(15)
                 });
             },
+
+            // getPopData(pop) { 
+            //     console.log(pop)
+            //     axios.get(`/api/pop/${pop.pop_id}`)
+            //     .then((response) => {
+            //         console.log(response.data.data)
+            //         this.selectedPopMap = response.data.data
+            //     })
+            // }
 
             // cluster() {
             //     if (this.clusterActive == 0) {

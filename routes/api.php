@@ -31,23 +31,34 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		Route::get('dashboardMap','Api\DashboardApiController@dashboardMap');
 
 	// Pop Data box
-		Route::get('popData/{core}', 'Api\DashboardApiController@popData');
-		Route::get('popDataCrm/{crm_id}/{core}', [
+		Route::get('popData', 'Api\DashboardApiController@popData');
+		Route::get('popDataCrm', [
 			'as' => 'dashboard.popDataCrm',
 			'uses' => 'Api\DashboardApiController@popDataCrm'
 		]);
-		Route::get('popDataZona/{zona_id}/{core}', [
+		Route::get('popDataZona', [
 			'as' => 'dashboard.popDataZona',
 			'uses' => 'Api\DashboardApiController@popDataZona'
 		]);
 
+	// Sites Data box
+		Route::get('sitesData', 'Api\DashboardApiController@sitesData');
+		Route::get('sitesDataCrm', [
+			'as' => 'dashboard.sitesDataCrm',
+			'uses' => 'Api\DashboardApiController@sitesDataCrm'
+		]);
+		Route::get('sitesDataZona', [
+			'as' => 'dashboard.sitesDataZona',
+			'uses' => 'Api\DashboardApiController@sitesDataZona'
+		]);
+
 	// Technology box
-		Route::get('technologyData/{core}', 'Api\DashboardApiController@technologyData');
-		Route::get('technologyDataCrm/{crm_id}/{core}', [
+		Route::get('technologyData', 'Api\DashboardApiController@technologyData');
+		Route::get('technologyDataCrm', [
 			'as' => 'dashboard.technologyDataCrm',
 			'uses' => 'Api\DashboardApiController@technologyDataCrm'
 		]);
-		Route::get('technologyDataZona/{zona_id}/{core}', [
+		Route::get('technologyDataZona', [
 			'as' => 'dashboard.technologyDataZona',
 			'uses' => 'Api\DashboardApiController@technologyDataZona'
 		]);
@@ -75,15 +86,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		]);
 
 	// Search
-		Route::get('searchPops/{text}/{core}', [
+		Route::get('searchPops', [
 			'as' => 'pop.search',
 			'uses' => 'Api\PopController@searchPops'
 		]);
-		Route::get('searchPopsCrm/{text}/{crm_id}/{core}', [
+		Route::get('searchPopsCrm', [
 			'as' => 'pop.searchCrm',
 			'uses' => 'Api\PopController@searchPopsCrm'
 		]);
-		Route::get('searchPopsZona/{text}/{zona_id}/{core}', [
+		Route::get('searchPopsZona', [
 			'as' => 'pop.searchZona',
 			'uses' => 'Api\PopController@searchPopsZona'
 		]);

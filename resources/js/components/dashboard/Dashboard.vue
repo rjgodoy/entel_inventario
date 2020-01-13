@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <!-- BUSCAR -->
+            <!-- BUSCADOR -->
             <div class="container" style="width: 50%; margin-top: 30px;">
                 <p class="control has-icons-left has-icons-right">
                     <input 
@@ -112,14 +112,16 @@
                             <strong style="margin-left: 10px;" :class="primaryText">{{ counter | numeral('0,0')}}</strong> pops encontrados
                         </span>
                         <div class="dropdown-content" :class="searchBodyBackground + ' ' + primaryText" style="max-height: 400px; overflow: auto;">
-                            <div v-for="pop in popSearch" class="dropdown-item">
+                            <div v-for="pop in popSearch" class="dropdown-item" :class="pop.alba_project ? '' : ''">
                                 <a :href="'pop/' + pop.id" target="_blank" class="columns">
                                     <div class="column is-6">
                                         <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
-                                            {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
+                                            {{ pop.nem_site }}
+                                            <!-- {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }} -->
+                                            
                                         </div>
                                         <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
-                                            {{ pop ? pop.nombre : '' }}
+                                            {{ pop ? pop.nombre_sitio : '' }}
                                         </div>
                                         <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                             {{ pop ? pop.nombre_comuna : '' }}
@@ -131,7 +133,7 @@
 
                                     <div class="column is-1">
                                         <div class="has-text-centered">
-                                            <img v-if="pop.attention_type_id == 2" alt="Servicio 24/7" class="" src="img/24_7_color.png" style="max-height: 30px;" />
+                                            <!-- <img v-if="pop.attention_type_id == 2" alt="Servicio 24/7" class="" src="img/24_7_color.png" style="max-height: 30px;" /> -->
                                         </div>
                                         <div class="has-text-centered">
                                             <span v-if="pop.alba_project == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
@@ -174,7 +176,7 @@
 
             <!-- CUADROS -->
             <div class="" :class="bodyBackground" style="margin: 20px 0 -30px 0;">
-                <div class="columns">
+                <div class="">
 
                     <!-- CUADROS DE INFORMACION -->
                     <div class="tile is-ancestor">
@@ -189,6 +191,15 @@
                                 :core="core"
                             />
                             <services-data
+                                :bodyBackground="bodyBackground"
+                                :boxBackground="boxBackground"
+                                :primaryText="primaryText"
+                                :secondaryText="secondaryText"
+                                :selectedCrm="this.selectedCrm"
+                                :selectedZona="this.selectedZona"
+                                :core="core"
+                            />
+                            <movil-services-data
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
                                 :primaryText="primaryText"
@@ -216,7 +227,16 @@
                         </div>
 
                         <div class="tile is-parent is-vertical">
-                             <technologies-data
+                            <sites-data
+                                :bodyBackground="bodyBackground"
+                                :boxBackground="boxBackground"
+                                :primaryText="primaryText"
+                                :secondaryText="secondaryText"
+                                :selectedCrm="this.selectedCrm"
+                                :selectedZona="this.selectedZona"
+                                :core="core"
+                            />
+                            <technologies-data
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
                                 :primaryText="primaryText"
@@ -237,6 +257,25 @@
                             <!-- <radial-chart/> -->
                         </div>
 
+                        <!-- <div class="tile is-parent is-vertical">
+                            
+                            
+                        </div> -->
+
+                        
+                    </div>
+
+                    <div class="tile is-ancestor">
+                        
+                        <div class="tile is-parent is-vertical">
+                            
+                        </div>
+                        <div class="tile is-parent is-vertical">
+                            
+                        </div>
+                        <div class="tile is-parent is-vertical">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -359,8 +398,10 @@
 
 <script>
     import DashboardPopData from './DashboardPopData.vue';
+    import DashboardSitesData from './DashboardSitesData.vue';
     import DashboardTechnologiesData from './DashboardTechnologiesData.vue';
     import DashboardServicesData from './DashboardServicesData.vue';
+    import DashboardMovilServicesData from './DashboardMovilServicesData.vue';
     import DashboardInfraData from './DashboardInfraData.vue';
 
     import DashboardElectricLinesData from './DashboardElectricLinesData.vue';
@@ -377,8 +418,10 @@
     export default {
         components: {
             'pop-data': DashboardPopData,
+            'sites-data': DashboardSitesData,
             'technologies-data': DashboardTechnologiesData,
             'services-data': DashboardServicesData,
+            'movil-services-data': DashboardMovilServicesData,
             'infra-data': DashboardInfraData,
             'electric-line-data': DashboardElectricLinesData,
             'generator-group-data': DashboardGeneratorGroupsData,
@@ -507,7 +550,7 @@
             search(){
                 if (this.searchText.length >= 3) {
                     if (this.selectedCrm == null) {
-                        axios.get(`/api/searchPops/${this.searchText}/${this.core}`)
+                        axios.get(`/api/searchPops?text=${this.searchText}&core=${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length
@@ -517,7 +560,7 @@
                                 console.log('handle server error from here');
                             });
                     } else if (this.selectedZona == null) {
-                        axios.get(`/api/searchPopsCrm/${this.searchText}/${this.selectedCrm.id}/${this.core}`)
+                        axios.get(`/api/searchPopsCrm?text=${this.searchText}&crm_id=${this.selectedCrm.id}&core=${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length
@@ -527,7 +570,7 @@
                                 console.log('handle server error from here');
                             });
                     } else {
-                        axios.get(`/api/searchPopsZona/${this.searchText}/${this.selectedZona.id}/${this.core}`)
+                        axios.get(`/api/searchPopsZona?text=${this.searchText}&zona_id=${this.selectedZona.id}&core=${this.core}`)
                             .then((response) => {
                                 this.popSearch = response.data
                                 this.counter = this.popSearch.length

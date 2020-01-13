@@ -43,7 +43,6 @@
     :tec4g2600='@json($tec4g2600)'
     :transports='@json($transports)'
     :transport='@json($transport)'
-    :csrf="'{{ csrf_token() }}'"
 />
 
 @endsection

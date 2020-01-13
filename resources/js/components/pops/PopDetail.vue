@@ -301,7 +301,6 @@
                 :boxBackground="boxBackground"
                 :primaryText="primaryText"
                 :secondaryText="secondaryText"
-                :csrf="csrf"
             />
 
             <characteristics v-if="tabButtonView == 5"
@@ -311,7 +310,6 @@
                 :boxBackground="boxBackground"
                 :primaryText="primaryText"
                 :secondaryText="secondaryText"
-                :csrf="csrf"
             />
 
             <comsite v-if="tabButtonView == 6"
@@ -403,7 +401,6 @@
             'tec4g2600',
             'transports',
             'transport',
-            'csrf'
         ],
         data() {
             return {

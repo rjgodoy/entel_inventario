@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
-<section class="level has-background-dark is-marginless" >
+{{-- <section class="level has-background-dark is-marginless" >
     <div class="level-item" style="margin: 10px 0 10px 0;">
         <div class="has-text-centered is-size-5 has-text-weight-bold has-text-white is-uppercase">{{ Request::path() }}</div>
     </div>
-</section>
+</section> --}}
 
 @if(session()->get('message'))
 <div class="notification is-primary alert is-dismissable" role="alert">
@@ -16,7 +16,9 @@
 
 <dashboard
 	:message="'{{ session()->get('message') }}'"
-    :map_attributes='@json($mapAttributes)'
+    :last_update_pops="'{{ $last_update_pops }}'"
+    :last_update_sites="'{{ $last_update_sites }}'"
+    :last_update_technologies="'{{ $last_update_technologies }}'"
 />
 
 @endsection

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TempSgcPop;
 
+use App\AdminTab;
+
 class AdminController extends Controller
 {
     /**
@@ -16,7 +18,11 @@ class AdminController extends Controller
     {
         $request->user()->authorizeRoles(['admin']);
 
-        return view('admin')->with('message', 'Hello');
+        $tabs = AdminTab::all();
+
+        return view('admin', compact(
+            'tabs'
+        ))->with('message', 'Hello');
     }
 
     /**

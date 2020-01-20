@@ -232,7 +232,7 @@
     // import ErrorComponent from './maps/ErrorComponent.vue';
     const MapView = () => ({
         // The component to load (should be a Promise)
-        component: import('../maps/MapView.vue'),
+        component: import('../maps/MapViewPops.vue'),
         // A component to use while the async component is loading
         // loading: LoadingComponent,
         // A component to use if the load fails

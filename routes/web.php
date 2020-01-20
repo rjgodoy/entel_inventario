@@ -33,5 +33,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('/comsite', 'ComsiteController');
 
 	Route::resource('/admin', 'AdminController');
+
 	
 });

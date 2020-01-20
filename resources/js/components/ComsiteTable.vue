@@ -2,12 +2,12 @@
     <section class="section is-marginless" :class="bodyBackground">
         <div class="container">
 
-            <section class="field" v-if="message">
+            <!-- <section class="field" v-if="message">
                 <div class="notification is-primary alert is-dismissable" role="alert">
                     <button aria-hidden="true" data-dismiss="alert" class="delete" type="button"></button>
                     {{ message }}
                 </div>
-            </section>
+            </section> -->
 
             <div class="box" :class="boxBackground">
                 <div class="field">
@@ -115,8 +115,6 @@
             'vue-pagination': VuePagination
         },
         props : [
-            'message',
-            'last_updated'
         ],
         data() {
             return {
@@ -126,6 +124,7 @@
                 primaryText: '',
                 secondaryText: '',
                 searchBodyBackground: '',
+                last_updated: '',
 
                 comsiteData: {
                     total: 0,
@@ -142,6 +141,7 @@
             this.styleMode()
         },
         mounted() {
+            this.lastUpdated()
             this.search()
         },
         methods: {
@@ -150,9 +150,6 @@
                     .then((response) => {
                         this.comsiteData = response.data;
                     })
-                    .catch(() => {
-                        console.log('handle server error from here');
-                    });
             },
             search() {
                 if (this.searchText != '') {
@@ -160,9 +157,6 @@
                         .then((response) => {
                             this.comsiteData = response.data;
                         })
-                        .catch(() => {
-
-                        });
                 } else {
                     this.getComsiteData()
                 }
@@ -203,6 +197,11 @@
                 // this.selectedCrm = null
                 // this.selectedZona = null
                 this.getComsiteData()
+            },
+            lastUpdated() {
+                axios.get(`/api/comsiteLastData`).then((response) => {
+                    this.last_updated = response.data.data
+                })
             },
         }
     }

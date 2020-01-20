@@ -1,9 +1,9 @@
 <template>
-    <div class="tile is-parent">
-        <article class="tile is-child box">
-            <div class="" ref="chartdiv" style="height: 100%;"></div>
+    <!-- <div class="tile is-parent"> -->
+        <article class="tile is-child box is-paddingless" :class="boxBackground" style="width: 100%; height: auto;">
+            <div class="" ref="chartdiv" style="height: 600px;"></div>
         </article>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -14,10 +14,15 @@
     export default {
         props : [
             // 'parentData'
+            'bodyBackground',
+            'boxBackground',
+            'primaryText',
+            'secondaryText',
+            'darkMode'
         ],
         data() {
             return {
-                // chartData: []
+                chart: null
             }
         },
         mounted() {
@@ -73,7 +78,7 @@
                 series.name = "Información";
                 series.strokeWidth = 2;
 
-                // this.chart = chart;
+                this.chart = chart;
             }
         },
         beforeDestroy() {

@@ -35,12 +35,9 @@ class ComsiteController extends Controller
     public function index(Request $request)
     {
         // $comsite_data = Comsite::paginate(20);
-        $last_updated = Comsite::orderBy('updated_at', 'desc')->first()->updated_at;
+        // $last_updated = Comsite::orderBy('updated_at', 'desc')->first()->updated_at;
 
-        return view('comsite', compact(
-            // 'comsite_data',
-            'last_updated'
-        ));
+        return view('comsite');
     }
 
     /**
@@ -130,10 +127,8 @@ class ComsiteController extends Controller
         foreach ($comsite_data as $data) {
 
             // Verifica si el Pop existe en Inventario. Si no existe, lo deja NULL
-            if (Pop::where('nem_movil', $data->val02_CodSitio)->count()) {
-                $pop_id = Pop::where('nem_movil', $data->val02_CodSitio)->first()->id;
-            } elseif (Pop::where('nem_fijo', $data->val02_CodSitio)->count()){
-                $pop_id = Pop::where('nem_fijo', $data->val02_CodSitio)->first()->id;
+            if ($pop_id = Pop::join('sites', 'pops.id', '=', 'sites.pop_id')->where('nem_site', $data->val02_CodSitio)->count()) {
+                $pop_id = Pop::join('sites', 'pops.id', '=', 'sites.pop_id')->where('nem_site', $data->val02_CodSitio)->first()->pop_id;
             } else {
                 $pop_id = null;
             }

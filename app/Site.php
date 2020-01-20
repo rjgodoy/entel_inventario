@@ -17,4 +17,9 @@ class Site extends Model
     {
         return $this->belongsTo(SiteType::class);
     }
+
+    public function technologies() 
+    {
+        return $this->hasMany(Technology::class);
+    }
 }

@@ -1,54 +1,76 @@
 <template>
-    <GmapMap
-        class="tile is-child box"
-        style="height: 100%;"
-        ref="map"
-        :center="center"
-        :zoom="3"
-        map-type-id="roadmap"
-        :options="{
-            zoomControl: true,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: true,
-            rotateControl: false,
-            fullscreenControl: true,
-            disableDefaultUi: false,
-            styles: mapStyle
-        }"
-        >
+        <GmapMap
+            class="tile is-child box"
+            style="height: 100%;"
+            ref="map"
+            :center="center"
+            :zoom="zoom"
+            map-type-id="roadmap"
+            :options="{
+                zoomControl: true,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: true,
+                rotateControl: false,
+                fullscreenControl: true,
+                disableDefaultUi: false,
+                styles: mapStyle
+            }"
+            >
 
-        <!-- ClusterButton -->
-        <!-- <div class="" id="myClusterButton">
-            <button 
-                class="button is-default" 
-                @click="cluster" 
-                style="
-                    border: 2px solid #fff;
-                    borderRadius: 3px;
-                    boxShadow: 0 1px 5px rgba(0,0,0,.15);
-                    marginTop: 10px;
-                    marginLeft: 10px;
-                    textAlign: center;
-                "
-                >
-                {{ buttonText }}
-            </button>
-        </div> -->
+            <!-- ClusterButton -->
+            <!-- <div class="" id="myClusterButton">
+                <button 
+                    class="button is-default" 
+                    @click="cluster" 
+                    style="
+                        border: 2px solid #fff;
+                        borderRadius: 3px;
+                        boxShadow: 0 1px 5px rgba(0,0,0,.15);
+                        marginTop: 10px;
+                        marginLeft: 10px;
+                        textAlign: center;
+                    "
+                    >
+                    {{ buttonText }}
+                </button>
+            </div> -->
 
-        <!-- MAPA WITH CLUSTER -->
-        <!-- <GmapCluster v-if="clusterActive == 1"> -->
-            <GmapMarker
-                ref="myMarker"
-                :key="index"
-                v-for="(pop, index) in pops"
-                :clickable="true"
-                :draggable="false"
-                @click="toggleInfoWindow(pop, index)"
-                :position="({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
-                :icon="icon"
+            <!-- MAPA WITH CLUSTER -->
+            <!-- <GmapCluster v-if="clusterActive == 1"> -->
+                <GmapMarker
+                    ref="myMarker"
+                    :key="index"
+                    v-for="(pop, index) in pops"
+                    :clickable="true"
+                    :draggable="false"
+                    @click="toggleInfoWindow(pop, index)"
+                    :position="({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
+                    :icon="icon"
+                />
+                <gmap-info-window 
+                    :options="infoOptions"
+                    :position="infoWindowPos"
+                    :opened="infoWinOpen"
+                    @closeclick="infoWinOpen=false"
+                    content="Hello"
+                    >
+                    <div v-html="infoContent"></div>
+                </gmap-info-window>
+            <!-- </GmapCluster> -->
+
+            <!-- MAPA W/O CLUSTER -->
+            <!-- <GmapMarker v-if="clusterActive == 0"
+                    ref="myMarker"
+                    :key="index"
+                    v-for="(pop, index) in pops"
+                    :clickable="true"
+                    :draggable="false"
+                    @click="toggleInfoWindow(pop, index)"
+                    :position="({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
+                    :icon="icon"
             />
-            <gmap-info-window 
+            <gmap-info-window v-if="clusterActive == 0"
                 :options="infoOptions"
                 :position="infoWindowPos"
                 :opened="infoWinOpen"
@@ -56,30 +78,9 @@
                 content="Hello"
                 >
                 <div v-html="infoContent"></div>
-            </gmap-info-window>
-        <!-- </GmapCluster> -->
-
-        <!-- MAPA W/O CLUSTER -->
-        <!-- <GmapMarker v-if="clusterActive == 0"
-                ref="myMarker"
-                :key="index"
-                v-for="(pop, index) in pops"
-                :clickable="true"
-                :draggable="false"
-                @click="toggleInfoWindow(pop, index)"
-                :position="({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
-                :icon="icon"
-        />
-        <gmap-info-window v-if="clusterActive == 0"
-            :options="infoOptions"
-            :position="infoWindowPos"
-            :opened="infoWinOpen"
-            @closeclick="infoWinOpen=false"
-            content="Hello"
-            >
-            <div v-html="infoContent"></div>
-        </gmap-info-window> -->
-    </GmapMap>
+            </gmap-info-window> -->
+        </GmapMap>
+        
 </template>
 
 <script>
@@ -87,25 +88,18 @@
     export default {
         props : [ 
             'selectedPop',
-            'selectedCrm',
-            'selectedZona',
             'selectedPops',
             'map_attributes',
             'darkMode',
-            'core'
+            'criticPopsSwitch',
+            'pops'
         ],
         data() {
             return {
                 selectedPopMap: null,
-                popList: null,
-                popListCrm: null,
-                popListZona: null,
-                pops: null,
-                popsCrm: [],
-                popsZona: [],
-                popsCore: [],
 
                 map: null,
+                zoom: this.map_attributes.zoom,
                 center: { lat: this.map_attributes.latitude, lng: this.map_attributes.longitude },
                 infoContent: '',
                 infoWindowPos: {
@@ -158,13 +152,10 @@
             google: gmapApi
         },
         created() {
-            if (this.darkMode == 1) {
-                this.mapStyle = this.style2
-            } else {
-                this.mapStyle = null
-            }
+            this.mapStyle = this.darkMode == 1 ? this.style2 : this.mapStyle = null
         },
         mounted() {
+            
             // if (this.clusterActive == 1) {
             //     this.buttonText = 'Desagrupar'
             // } else {
@@ -178,29 +169,22 @@
             // })
         },
         watch: {
+            pops(newValue, oldValue) {
+                this.getPops()
+            },
+
             selectedPop(newValue, oldValue) {
-                if (newValue != null) {
-                    this.getPop()
-                } else {
-                    this.getPops()
-                }
+                newValue != null ? this.getPop() : this.getPops()
             },
-            selectedCrm(newValue, oldValue) {
-                this.getPops()
-            },
-            selectedZona(newValue, oldValue) {
-                this.getPops()
-            },
+
             darkMode(newValue, oldValue) {
-                if (newValue == 1) {
-                    this.mapStyle = this.style2
-                } else {
-                    this.mapStyle = null
-                }
+                this.mapStyle = newValue == 1 ? this.style2 : null
             },
-            core(newValue, oldValue) {
+
+            criticPopsSwitch(newValue, oldValue) {
                 this.getPops()
             },
+
             selectedPops(newValue, oldValue) {
                 if (newValue.length != 0) {
                     this.pops = newValue
@@ -285,64 +269,8 @@
                 `);
             },
 
-            popsCall(item, index) {
-                if (this.core == 0) {
-                    this.pops = this.popList
-                } else {
-                    if (item.classification_type_id == 1) {
-                        this.popsCore.push(item)
-                        this.pops = this.popsCore
-                    }
-                }
-            },
-
-            popPushCrm(item, index) {
-                if (this.core == 0) {
-                    if (item.crm_id == this.selectedCrm.id) {
-                        this.popsCrm.push(item)
-                    }
-                } else {
-                    if (item.crm_id == this.selectedCrm.id && item.classification_type_id == 1) {
-                        this.popsCrm.push(item)
-                    }
-                }
-            },
-
-            popPushZona(item, index) {
-                if (this.core == 0) {
-                    if (item.zona_id == this.selectedZona.id) {
-                        this.popsZona.push(item)
-                    }
-                } else {
-                    if (item.zona_id == this.selectedZona.id && item.classification_type_id == 1) {
-                        this.popsZona.push(item)
-                    }
-                }
-            },
-
             getPops() {
-                if (this.selectedCrm == null) {
-                    if (this.popList == null) {
-                        axios.get(`/api/dashboardMap`)
-                        .then((response) => {
-                            this.popList = response.data.data
-                            this.pops = this.popList
-                        })
-                    } else {
-                        this.popsCore = []
-                        this.popList.forEach(this.popsCall)
-                    }
-                } else if (this.selectedZona == null){
-                    this.popsCrm = []
-                    this.popList.forEach(this.popPushCrm)
-                    this.pops = this.popsCrm
-                } else {
-                    this.popsZona = []
-                    this.popList.forEach(this.popPushZona)
-                    this.pops = this.popsZona
-                }
-
-                if (this.pops != null) {
+                if (this.pops) {
                     this.$refs.map.$mapPromise.then((map) => {
                         const bounds = new google.maps.LatLngBounds()
                         for (let m of this.pops) {
@@ -359,6 +287,7 @@
                     });
                 }
             },
+            
             getPop() {
                 this.pops = [this.selectedPop]
                 this.$refs.map.$mapPromise.then((map) => {

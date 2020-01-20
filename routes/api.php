@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('menu', 'Api\MainController@menu');
+
 ### DASHBOARD ######################################################################
 	// CRMs
 		Route::apiResource('crms','Api\CrmController');
@@ -97,6 +99,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		Route::get('searchPopsZona', [
 			'as' => 'pop.searchZona',
 			'uses' => 'Api\PopController@searchPopsZona'
+		]);
+
+	// Critic Pop Data box
+		Route::get('criticPops', 'Api\DashboardApiController@criticPops');
+		Route::get('criticPopsCrm', [
+			'as' => 'dashboard.criticPopsCrm',
+			'uses' => 'Api\DashboardApiController@criticPopsCrm'
+		]);
+		Route::get('criticPopsZona', [
+			'as' => 'dashboard.criticPopsZona',
+			'uses' => 'Api\DashboardApiController@criticPopsZona'
 		]);
 
 	
@@ -232,9 +245,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		'as' => 'comsites.search',
 		'uses' => 'Api\ComsiteController@search'
 	]);
+
+	Route::get('comsiteLastData', 'Api\ComsiteController@lastData');
 ##############################################################################################
 
 ### ADMIN ######################################################################
+	Route::get('adminTabs', 'Api\MainController@adminTabs');
+
 	Route::apiResource('tempSgcPops','Api\TempSgcPopController');
 	Route::get('popsExisting', [
 		'as' => 'tempSgcPops.popsExisting',
@@ -251,6 +268,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	]);
 
 	Route::apiResource('comunas','Api\ComunaController');
+
+	// PSG
+	Route::apiResource('psgTp','Api\PsgTpController');
+
 
 ##############################################################################################
 

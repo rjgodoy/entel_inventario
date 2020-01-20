@@ -54,6 +54,11 @@ class Pop extends Model
         return $this->hasMany(Coverage::class);
     }
 
+    public function critic_pops() 
+    {
+        return $this->hasMany(CriticPop::class);
+    }
+
     public function dependences() 
     {
         return $this->hasMany(Dependence::class);

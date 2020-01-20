@@ -18,6 +18,7 @@
 
 <admin
 	:message="'{{ session()->get('message') }}'"
+	:tabs='@json($tabs)'
 />
 
 @endsection

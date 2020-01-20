@@ -5,11 +5,11 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
-import Buefy from 'buefy'
-// import 'buefy/dist/buefy.css'
 
+Vue.prototype.$eventBus = new Vue()
+
+import Buefy from 'buefy'
 Vue.use(Buefy)
 
 Vue.directive('clickOutside', {
@@ -79,7 +79,9 @@ import {
 
 import { 
 	fab,
-	faCloudversify
+	faCloudversify,
+    faTwitter,
+    faGithub
 } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
@@ -115,7 +117,9 @@ library.add(
     faUnlink,
     faCarBattery,
     faUserEdit,
-    faAngleDown
+    faAngleDown,
+    faTwitter,
+    faGithub
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -154,8 +158,8 @@ Vue.use(VueGoogleMaps, {
     // installComponents: true,
 })
 
-// import GmapCluster from 'vue2-google-maps/dist/components/cluster' // replace src with dist if you have Babel issues
-// Vue.component('GmapCluster', GmapCluster)
+import GmapCluster from 'vue2-google-maps/dist/components/cluster' // replace src with dist if you have Babel issues
+Vue.component('GmapCluster', GmapCluster)
 // #########################################################################
 
 /**
@@ -169,7 +173,8 @@ Vue.use(VueGoogleMaps, {
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-
+var TopNavbar = require('./components/Layouts/TopNavbar.vue').default;
+var AsideNavbar = require('./components/Layouts/AsideNavbar.vue').default;
 var Clock = require('./components/Clock.vue').default;
 var Dashboard = require('./components/dashboard/Dashboard.vue').default;
 var PopDetail = require('./components/pops/PopDetail.vue').default;
@@ -203,6 +208,8 @@ var Admin = require('./components/admin/Admin.vue').default;
 const app = new Vue({
     el: '#app',
     components: {
+        'navbar': TopNavbar,
+        'asidebar': AsideNavbar,
         'clock': Clock,
         'dashboard': Dashboard,
         'pop-detail': PopDetail,

@@ -20,38 +20,39 @@ class PopController extends Controller
      */
     public function index()
     {
-        $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
+        $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
+                ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
                 ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
                 ->join('crms', 'zonas.crm_id', '=', 'crms.id')
 
                 // Classificación
-                ->leftJoin('classifications', function ($join) {
-                    $join->on('pops.id', '=', 'classifications.pop_id')
-                    ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-                })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+                // ->leftJoin('classifications', function ($join) {
+                //     $join->on('pops.id', '=', 'classifications.pop_id')
+                //     ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+                // })
+                ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
 
                 // Tipo Atención
-                ->leftJoin('attentions', function ($join) {
-                    $join->on('pops.id', '=', 'attentions.pop_id')
-                    ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-                })
+                // ->leftJoin('attentions', function ($join) {
+                //     $join->on('pops.id', '=', 'attentions.pop_id')
+                //     ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
+                // })
                 // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
 
                 ->select(
                     'pops.id as pop_id',
-                    'pops.nombre',
-                    'pops.nem_movil',
-                    'pops.nem_fijo',
+                    'sites.nombre',
+                    'sites.nem_site',
                     'pops.direccion',
                     'pops.latitude',
                     'pops.longitude',
-                    'pops.cod_planificacion',
+                    'sites.cod_planificacion',
                     'comunas.*',
                     'zonas.*',
                     'crms.*',
-                    'classifications.classification_type_id',
-                    'classification_types.classification_type',
-                    'attentions.attention_type_id'
+                    'sites.classification_type_id',
+                    'classification_types.classification_type'
+                    // 'attentions.attention_type_id'
                     // 'attention_types.attention_type as attention_type'
                 )
                 ->orderBy('pops.id')

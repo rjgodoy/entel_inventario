@@ -1,5 +1,5 @@
 <template>
-    <div class="tile is-parent">
+    <!-- <div class="tile is-parent"> -->
         <article class="tile is-child box" :class="boxBackground" style="overflow-y: scroll;">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Sitios</div>
@@ -11,7 +11,7 @@
                     <tr class="is-size-7">
                         <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Fijo">Fijo</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Móvil">Macro</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Móvil">Móvil</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Switch">Switch</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Phone">Phone</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
@@ -37,31 +37,34 @@
                 </tbody>
             </table>
 
-            <div class="field has-addons">
-                <p class="control">
-                    <b-button 
-                        :loading="buttonLoading ? true : false"
-                        type="is-link"
-                        size="is-small"
-                        @click="downloadSites">
-                        <font-awesome-icon icon="download"/> 
-                        &nbsp;&nbsp;Listado de POPs
-                    </b-button>
-                </p>
-                <p class="control">
-                    <b-tooltip label="Tooltip Text" position="is-right">
-                        <a href="/sites" type="button" class="button is-small is-link" data-tooltip="">
-                            <font-awesome-icon icon="bars"/>
-                        </a>
-                    </b-tooltip>
-                </p>
+            <div class="columns">
+                <div class="column">
+                    <b-field>
+                        <b-button 
+                            :loading="buttonLoading ? true : false"
+                            type="is-link"
+                            size="is-small"
+                            @click="downloadSites">
+                            <font-awesome-icon icon="download"/> 
+                            &nbsp;&nbsp;Listado de Sitios
+                        </b-button>
+                        <b-tooltip label="Tooltip Text" position="is-right">
+                            <a href="/sites" type="button" class="button is-small is-link" data-tooltip="">
+                                <font-awesome-icon icon="bars"/>
+                            </a>
+                        </b-tooltip>
+                    </b-field>
+                </div>
+                <div class="column is-right">
+                    <div class="is-size-7 has-text-right" style="margin-top: 10px" :class="secondaryText">Ultima actualización: {{ last_updated }}</div>
+                </div>
             </div>
-
         </article>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
+    // import EventBus from "../../constants/event-bus";
     export default {
         props : [
             'selectedCrm',
@@ -70,7 +73,9 @@
             'boxBackground',
             'primaryText',
             'secondaryText',
-            'core'
+            'core',
+            'last_updated',
+            'criticPopsSwitch'
         ],
         data() {
             return {
@@ -102,6 +107,9 @@
             },
             core(newValue, oldValue) {
                 this.getData()
+            },
+            criticPopsSwitch(newValue, oldValue) {
+                this.$eventBus.$emit('getSitesData', this.data)
             }
         },
         methods: {
@@ -128,6 +136,7 @@
                     .then((response) => {
                         this.data = response.data.data;
                         this.totalSites()
+                        this.$eventBus.$emit('getSitesData', this.data)
                     })
                 } 
                 //Si hay un CRM seleccionado, pero no hay zona seleccionada
@@ -136,6 +145,7 @@
                     .then((response) => {
                         this.data = response.data.data;
                         this.totalSites()
+                        this.$eventBus.$emit('getSitesData', this.data)
                     })
                 } 
                 // Si hay una zona seleccionada
@@ -144,8 +154,10 @@
                     .then((response) => {
                         this.data = response.data.data;
                         this.totalSites()
+                        this.$eventBus.$emit('getSitesData', this.data)
                     })
                 }
+                
             },
             downloadSites() {
                 this.buttonLoading = 1

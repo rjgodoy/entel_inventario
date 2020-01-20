@@ -9,16 +9,78 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var google_maps_api_loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! google-maps-api-loader */ "./node_modules/google-maps-api-loader/index.js");
-/* harmony import */ var google_maps_api_loader__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(google_maps_api_loader__WEBPACK_IMPORTED_MODULE_1__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -36,34 +98,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['selectedPop', 'selectedCrm', 'selectedZona', 'selectedPops', 'map_attributes', 'darkMode', 'core'],
+  props: ['selectedPop', 'selectedPops', 'map_attributes', 'darkMode', 'criticPopsSwitch', 'pops'],
   data: function data() {
     return {
-      google: null,
+      selectedPopMap: null,
       map: null,
-      apiKey: 'AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE',
-      // popList: null,
-      // popListCrm: null,
-      // popListZona: null,
-      // pops: null,
-      // center: { lat: this.map_attributes.latitude, lng: this.map_attributes.longitude },
-      // infoContent: '',
-      // infoWindowPos: {
-      //     lat: 0,
-      //     lng: 0
-      // },
-      // infoWinOpen: false,
-      // currentMidx: null,
-      // infoOptions: {
-      //     pixelOffset: {
-      //         width: 0,
-      //         height: -35
-      //     }
-      // },
-      // icon: '../img/markers/entel-pin-32.png',
+      zoom: this.map_attributes.zoom,
+      center: {
+        lat: this.map_attributes.latitude,
+        lng: this.map_attributes.longitude
+      },
+      infoContent: '',
+      infoWindowPos: {
+        lat: 0,
+        lng: 0
+      },
+      infoWinOpen: false,
+      currentMidx: null,
+      infoOptions: {
+        pixelOffset: {
+          width: 0,
+          height: -35
+        }
+      },
+      icon: '../img/markers/pin_entel_sm.png',
       mapStyle: null,
       // clusterActive: 1,
-      // buttonText: '',
+      buttonText: '',
       style1: [{
         "featureType": "water",
         "stylers": [{
@@ -604,79 +665,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }]
     };
   },
-  created: function created() {
-    if (this.darkMode == 1) {
-      this.mapStyle = this.style2;
-    } else {
-      this.mapStyle = null;
-    }
+  computed: {
+    google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__["gmapApi"]
   },
-  mounted: function () {
-    var _mounted = _asyncToGenerator(
-    /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var googleMapApi;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return google_maps_api_loader__WEBPACK_IMPORTED_MODULE_1___default()({
-                apiKey: this.apiKey
-              });
-
-            case 2:
-              googleMapApi = _context.sent;
-              this.google = googleMapApi;
-              this.initializeMap(); // if (this.clusterActive == 1) {
-              //     this.buttonText = 'Desagrupar'
-              // } else {
-              //     this.buttonText = 'Agrupar'
-              // }
-              // this.getPops()
-              // this.$refs.map.$mapPromise.then((map) => {
-              //     var myButton = document.getElementById('myClusterButton');
-              //     myButton.index = 1;
-              //     map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton)
-              // })
-
-            case 5:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
+  created: function created() {
+    this.mapStyle = this.darkMode == 1 ? this.style2 : this.mapStyle = null;
+  },
+  mounted: function mounted() {
+    // if (this.clusterActive == 1) {
+    //     this.buttonText = 'Desagrupar'
+    // } else {
+    //     this.buttonText = 'Agrupar'
+    // }
+    this.getPops(); // this.$refs.map.$mapPromise.then((map) => {
+    //     var myButton = document.getElementById('myClusterButton');
+    //     myButton.index = 1;
+    //     map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton)
+    // })
+  },
   watch: {
+    pops: function pops(newValue, oldValue) {
+      this.getPops();
+    },
     selectedPop: function selectedPop(newValue, oldValue) {
-      this.pops = [];
-      this.getPop();
-    },
-    selectedCrm: function selectedCrm(newValue, oldValue) {
-      this.pops = [];
-      this.getPops();
-    },
-    selectedZona: function selectedZona(newValue, oldValue) {
-      this.pops = [];
-      this.getPops();
+      newValue != null ? this.getPop() : this.getPops();
     },
     darkMode: function darkMode(newValue, oldValue) {
-      if (newValue == 1) {
-        this.mapStyle = this.style2;
-      } else {
-        this.mapStyle = null;
-      }
+      this.mapStyle = newValue == 1 ? this.style2 : null;
     },
-    core: function core(newValue, oldValue) {
-      var temp = this.pops;
-      this.pops = [];
+    criticPopsSwitch: function criticPopsSwitch(newValue, oldValue) {
       this.getPops();
     },
     selectedPops: function selectedPops(newValue, oldValue) {
@@ -732,366 +749,116 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    initializeMap: function initializeMap() {
-      var mapContainer = this.$refs.mapa;
-      this.map = new this.google.maps.Map(mapContainer, this.configMapa);
+    toggleInfoWindow: function toggleInfoWindow(pop, idx) {
+      this.infoWindowPos = {
+        lat: parseFloat(pop.latitude),
+        lng: parseFloat(pop.longitude)
+      }; // this.getPopData(pop)
+      // console.log(this.selectedPopMap)
+
+      this.infoContent = this.getInfoWindowContent(pop); //check if its the same pop that was selected if yes toggle
+
+      if (this.currentMidx == idx) {
+        this.infoWinOpen = !this.infoWinOpen;
+      } //if different pop set infowindow to open and reset current pop index
+      else {
+          this.infoWinOpen = true;
+          this.currentMidx = idx;
+        }
+
+      this.$refs.map.$mapPromise.then(function (map) {
+        map.panTo({
+          lat: parseFloat(pop.latitude),
+          lng: parseFloat(pop.longitude)
+        });
+      });
     },
-    // toggleInfoWindow: function (pop, idx) {
-    //     this.infoWindowPos = { lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) };
-    //     this.infoContent = this.getInfoWindowContent(pop);
-    //     //check if its the same pop that was selected if yes toggle
-    //     if (this.currentMidx == idx) {
-    //         this.infoWinOpen = !this.infoWinOpen;
-    //     }
-    //     //if different pop set infowindow to open and reset current pop index
-    //     else {
-    //         this.infoWinOpen = true;
-    //         this.currentMidx = idx;
-    //     }
-    //     this.$refs.map.$mapPromise.then((map) => {
-    //         map.panTo({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })
-    //     });
-    // },
-    // getInfoWindowContent: function (pop) {
-    //     return (`
-    //         <div class="card">
-    //             <div class="card-content">
-    //                 <div class="media">
-    //                     <div class="media-content">
-    //                         <p class="title is-4">${pop.nombre_pop}</p>
-    //                     </div>
-    //                 </div>
-    //                 <div class="content">
-    //                     ${pop.direccion}
-    //                     <br>
-    //                     <a href="/pop/${pop.pop_id}" class="button is-small">Ver POP</a>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     `);
-    // },
+    getInfoWindowContent: function getInfoWindowContent(pop) {
+      return "\n                <div class=\"card\">\n                    <!--div class=\"card-image\">\n                        <figure class=\"image is-4by3\">\n                            <img src=\"https://bulma.io/images/placeholders/640x480.png\" alt=\"Placeholder image\">\n                        </figure>\n                    </div-->\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(pop.classification_type_id == 1 ? 'is-danger' : pop.classification_type_id == 2 ? 'is-warning' : pop.classification_type_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(pop.classification_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(pop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.nombre_zona, ", CRM ").concat(pop.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/pop/").concat(pop.pop_id, "\" target=\"_blank\" class=\"button is-outlined is-primary is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
+    },
     getPops: function getPops() {
       var _this2 = this;
 
-      if (this.core == 0) {
-        if (this.selectedCrm == null) {
-          axios.get("/api/dashboardMap").then(function (response) {
-            if (_this2.popList == null) {
-              _this2.popList = response.data.data;
-            }
+      if (this.pops) {
+        this.$refs.map.$mapPromise.then(function (map) {
+          var bounds = new google.maps.LatLngBounds();
+          var _iteratorNormalCompletion2 = true;
+          var _didIteratorError2 = false;
+          var _iteratorError2 = undefined;
 
-            if (_this2.popList != null) {
-              _this2.pops = _this2.popList; //Set bounds of the map
-
-              _this2.$refs.map.$mapPromise.then(function (map) {
-                map.panTo({
-                  lat: _this2.map_attributes.latitude,
-                  lng: _this2.map_attributes.longitude
-                });
-                map.setZoom(_this2.map_attributes.zoom);
+          try {
+            for (var _iterator2 = _this2.pops[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+              var m = _step2.value;
+              bounds.extend({
+                lat: parseFloat(m.latitude),
+                lng: parseFloat(m.longitude)
               });
+            } // Don't zoom in too far on only one pop
+
+          } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+                _iterator2["return"]();
+              }
+            } finally {
+              if (_didIteratorError2) {
+                throw _iteratorError2;
+              }
             }
-          });
-        } else if (this.selectedZona == null) {
-          axios.get("/api/dashboardMapCrm/".concat(this.selectedCrm.id)).then(function (response) {
-            _this2.popListCrm = response.data.data;
+          }
 
-            if (_this2.popListCrm != null) {
-              _this2.pops = _this2.popListCrm; //Set bounds of the map
+          if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+            bounds.extend(extendPoint1);
+            bounds.extend(extendPoint2);
+          }
 
-              _this2.$refs.map.$mapPromise.then(function (map) {
-                var bounds = new google.maps.LatLngBounds();
-                var _iteratorNormalCompletion2 = true;
-                var _didIteratorError2 = false;
-                var _iteratorError2 = undefined;
-
-                try {
-                  for (var _iterator2 = _this2.pops[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var m = _step2.value;
-                    bounds.extend({
-                      lat: parseFloat(m.latitude),
-                      lng: parseFloat(m.longitude)
-                    });
-                  } // Don't zoom in too far on only one pop
-
-                } catch (err) {
-                  _didIteratorError2 = true;
-                  _iteratorError2 = err;
-                } finally {
-                  try {
-                    if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-                      _iterator2["return"]();
-                    }
-                  } finally {
-                    if (_didIteratorError2) {
-                      throw _iteratorError2;
-                    }
-                  }
-                }
-
-                if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                  var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                  var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                  bounds.extend(extendPoint1);
-                  bounds.extend(extendPoint2);
-                }
-
-                map.fitBounds(bounds);
-              });
-            }
-          });
-        } else {
-          axios.get("/api/dashboardMapZona/".concat(this.selectedZona.id)).then(function (response) {
-            _this2.popListZona = response.data.data;
-
-            if (_this2.popListZona != null) {
-              _this2.pops = _this2.popListZona; //Set bounds of the map
-
-              _this2.$refs.map.$mapPromise.then(function (map) {
-                // map.panTo({ lat: this.map_attributes.latitude, lng: this.map_attributes.longitude })
-                var bounds = new google.maps.LatLngBounds();
-                var _iteratorNormalCompletion3 = true;
-                var _didIteratorError3 = false;
-                var _iteratorError3 = undefined;
-
-                try {
-                  for (var _iterator3 = _this2.pops[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                    var m = _step3.value;
-                    bounds.extend({
-                      lat: parseFloat(m.latitude),
-                      lng: parseFloat(m.longitude)
-                    });
-                  } // Don't zoom in too far on only one pop
-
-                } catch (err) {
-                  _didIteratorError3 = true;
-                  _iteratorError3 = err;
-                } finally {
-                  try {
-                    if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-                      _iterator3["return"]();
-                    }
-                  } finally {
-                    if (_didIteratorError3) {
-                      throw _iteratorError3;
-                    }
-                  }
-                }
-
-                if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                  var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                  var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                  bounds.extend(extendPoint1);
-                  bounds.extend(extendPoint2);
-                }
-
-                map.fitBounds(bounds);
-              });
-            }
-          });
-        }
-      } else {
-        if (this.selectedCrm == null) {
-          axios.get("/api/dashboardMapCore").then(function (response) {
-            _this2.popList = response.data.data;
-
-            if (_this2.popList != null) {
-              _this2.pops = _this2.popList; //Set bounds of the map
-
-              _this2.$refs.map.$mapPromise.then(function (map) {
-                map.panTo({
-                  lat: _this2.map_attributes.latitude,
-                  lng: _this2.map_attributes.longitude
-                });
-                map.setZoom(_this2.map_attributes.zoom);
-              });
-            }
-          });
-        } else if (this.selectedZona == null) {
-          axios.get("/api/dashboardMapCrmCore/".concat(this.selectedCrm.id)).then(function (response) {
-            _this2.popListCrm = response.data.data;
-
-            if (_this2.popListCrm != null) {
-              _this2.pops = _this2.popListCrm; //Set bounds of the map
-
-              _this2.$refs.map.$mapPromise.then(function (map) {
-                var bounds = new google.maps.LatLngBounds();
-                var _iteratorNormalCompletion4 = true;
-                var _didIteratorError4 = false;
-                var _iteratorError4 = undefined;
-
-                try {
-                  for (var _iterator4 = _this2.pops[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                    var m = _step4.value;
-                    bounds.extend({
-                      lat: parseFloat(m.latitude),
-                      lng: parseFloat(m.longitude)
-                    });
-                  } // Don't zoom in too far on only one pop
-
-                } catch (err) {
-                  _didIteratorError4 = true;
-                  _iteratorError4 = err;
-                } finally {
-                  try {
-                    if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
-                      _iterator4["return"]();
-                    }
-                  } finally {
-                    if (_didIteratorError4) {
-                      throw _iteratorError4;
-                    }
-                  }
-                }
-
-                if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                  var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                  var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                  bounds.extend(extendPoint1);
-                  bounds.extend(extendPoint2);
-                }
-
-                map.fitBounds(bounds);
-              });
-            }
-          });
-        } else {
-          axios.get("/api/dashboardMapZonaCore/".concat(this.selectedZona.id)).then(function (response) {
-            _this2.popListZona = response.data.data;
-
-            if (_this2.popListZona != null) {
-              _this2.pops = _this2.popListZona; //Set bounds of the map
-
-              _this2.$refs.map.$mapPromise.then(function (map) {
-                // map.panTo({ lat: this.map_attributes.latitude, lng: this.map_attributes.longitude })
-                var bounds = new google.maps.LatLngBounds();
-                var _iteratorNormalCompletion5 = true;
-                var _didIteratorError5 = false;
-                var _iteratorError5 = undefined;
-
-                try {
-                  for (var _iterator5 = _this2.pops[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                    var m = _step5.value;
-                    bounds.extend({
-                      lat: parseFloat(m.latitude),
-                      lng: parseFloat(m.longitude)
-                    });
-                  } // Don't zoom in too far on only one pop
-
-                } catch (err) {
-                  _didIteratorError5 = true;
-                  _iteratorError5 = err;
-                } finally {
-                  try {
-                    if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
-                      _iterator5["return"]();
-                    }
-                  } finally {
-                    if (_didIteratorError5) {
-                      throw _iteratorError5;
-                    }
-                  }
-                }
-
-                if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                  var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                  var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                  bounds.extend(extendPoint1);
-                  bounds.extend(extendPoint2);
-                }
-
-                map.fitBounds(bounds);
-              });
-            }
-          });
-        }
+          map.fitBounds(bounds);
+        });
       }
     },
     getPop: function getPop() {
       var _this3 = this;
 
-      axios.get("/api/dashboardMapPop/".concat(this.selectedPop.id)).then(function (response) {
-        _this3.pops = response.data.data;
-
-        if (_this3.pops != null) {
-          _this3.pops = [_this3.selectedPop]; //Set bounds of the map
-
-          _this3.$refs.map.$mapPromise.then(function (map) {
-            map.panTo({
-              lat: parseFloat(_this3.selectedPop.latitude),
-              lng: parseFloat(_this3.selectedPop.longitude)
-            });
-            map.setZoom(15);
-          });
-        }
+      this.pops = [this.selectedPop];
+      this.$refs.map.$mapPromise.then(function (map) {
+        map.panTo({
+          lat: parseFloat(_this3.selectedPop.latitude),
+          lng: parseFloat(_this3.selectedPop.longitude)
+        });
+        map.setZoom(15);
       });
-    },
-    cluster: function cluster() {
-      if (this.clusterActive == 0) {
-        this.clusterActive = 1, this.buttonText = 'Desagrupar';
-      } else {
-        this.clusterActive = 0;
-        this.buttonText = 'Agrupar';
-      }
-    }
+    } // getPopData(pop) { 
+    //     console.log(pop)
+    //     axios.get(`/api/pop/${pop.pop_id}`)
+    //     .then((response) => {
+    //         console.log(response.data.data)
+    //         this.selectedPopMap = response.data.data
+    //     })
+    // }
+    // cluster() {
+    //     if (this.clusterActive == 0) {
+    //         this.clusterActive = 1,
+    //         this.buttonText = 'Desagrupar'
+    //     } else {
+    //         this.clusterActive = 0
+    //         this.buttonText = 'Agrupar'
+    //     }
+    // }
+
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.mapa[data-v-d5114458] {\n    width: 100%;\n    min-height: 100%;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458& ***!
+  \***************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1104,13 +871,67 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "GmapMap",
+    {
+      ref: "map",
+      staticClass: "tile is-child box",
+      staticStyle: { height: "100%" },
+      attrs: {
+        center: _vm.center,
+        zoom: _vm.zoom,
+        "map-type-id": "roadmap",
+        options: {
+          zoomControl: true,
+          mapTypeControl: false,
+          scaleControl: false,
+          streetViewControl: true,
+          rotateControl: false,
+          fullscreenControl: true,
+          disableDefaultUi: false,
+          styles: _vm.mapStyle
+        }
+      }
+    },
     [
-      _c("div", { ref: "mapa", staticClass: "mapa" }),
+      _vm._l(_vm.pops, function(pop, index) {
+        return _c("GmapMarker", {
+          key: index,
+          ref: "myMarker",
+          refInFor: true,
+          attrs: {
+            clickable: true,
+            draggable: false,
+            position: {
+              lat: parseFloat(pop.latitude),
+              lng: parseFloat(pop.longitude)
+            },
+            icon: _vm.icon
+          },
+          on: {
+            click: function($event) {
+              return _vm.toggleInfoWindow(pop, index)
+            }
+          }
+        })
+      }),
       _vm._v(" "),
-      Boolean(this.google) && Boolean(this.map)
-        ? [_vm._t("default", null, { google: _vm.google, map: _vm.map })]
-        : _vm._e()
+      _c(
+        "gmap-info-window",
+        {
+          attrs: {
+            options: _vm.infoOptions,
+            position: _vm.infoWindowPos,
+            opened: _vm.infoWinOpen,
+            content: "Hello"
+          },
+          on: {
+            closeclick: function($event) {
+              _vm.infoWinOpen = false
+            }
+          }
+        },
+        [_c("div", { domProps: { innerHTML: _vm._s(_vm.infoContent) } })]
+      )
     ],
     2
   )
@@ -1131,11 +952,9 @@ render._withStripped = true
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MapView.vue?vue&type=template&id=d5114458&scoped=true& */ "./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true&");
+/* harmony import */ var _MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MapView.vue?vue&type=template&id=d5114458& */ "./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&");
 /* harmony import */ var _MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MapView.vue?vue&type=script&lang=js& */ "./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _MapView_vue_vue_type_style_index_0_id_d5114458_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css& */ "./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1143,13 +962,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "d5114458",
+  null,
   null
   
 )
@@ -1175,35 +994,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css& ***!
-  \***********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_style_index_0_id_d5114458_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=style&index=0&id=d5114458&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_style_index_0_id_d5114458_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_style_index_0_id_d5114458_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_style_index_0_id_d5114458_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_style_index_0_id_d5114458_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_style_index_0_id_d5114458_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true& ***!
-  \*********************************************************************************************/
+/***/ "./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458& ***!
+  \*********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapView.vue?vue&type=template&id=d5114458&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapView.vue?vue&type=template&id=d5114458& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -8,13 +8,10 @@
             <div class="container" style="margin: -20px auto 20px auto;">
                 <b-field>
                     <div class="columns">
-                        <div class="column"></div>
+                        <div class="column">
+                            <b-button class="button is-warning is-small is-pulled-left" @click="viewCriticPops" v-model="criticPopsSwitch">POP Críticos</b-button>
+                        </div>
                         <div class="column has-text-centered">
-                            <!-- <b-checkbox-button v-model="core"
-                                native-value="Core"
-                                type="is-danger">
-                                <span>Core</span>
-                            </b-checkbox-button> -->
                             <b-switch  @input="switchCore">Red CORE</b-switch>
                         </div>
                         <div class="column">
@@ -86,7 +83,7 @@
             <div class="container" style="width: 50%; margin-top: 30px;">
                 <p class="control has-icons-left has-icons-right">
                     <input 
-                        class="input is-rounded" 
+                        class="input is-rounded is-medium" 
                         :class="searchBodyBackground + ' ' + primaryText" 
                         v-model="searchText" 
                         @keyup="search" 
@@ -181,49 +178,54 @@
                     <!-- CUADROS DE INFORMACION -->
                     <div class="tile is-ancestor">
                         <div class="tile is-parent is-vertical">
-                            <pop-data
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                            />
-                            <services-data
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                            />
-                            <movil-services-data
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                            />
+
+                            <keep-alive>
+                                <critic-pops-table v-if="criticPopsSwitch" 
+                                    :bodyBackground="bodyBackground"
+                                    :boxBackground="boxBackground"
+                                    :primaryText="primaryText"
+                                    :secondaryText="secondaryText"
+                                    :selectedCrm="this.selectedCrm"
+                                    :selectedZona="this.selectedZona"
+                                    :core="core"
+                                />
+                            </keep-alive>
+
+                            <keep-alive>
+                                <pop-data v-if="!criticPopsSwitch"
+                                    :bodyBackground="bodyBackground"
+                                    :boxBackground="boxBackground"
+                                    :primaryText="primaryText"
+                                    :secondaryText="secondaryText"
+                                    :selectedCrm="this.selectedCrm"
+                                    :selectedZona="this.selectedZona"
+                                    :core="core"
+                                    :last_update="last_update_pops"
+                                />
+                            </keep-alive>
+                            <keep-alive>
+                                <radial-chart v-if="!criticPopsSwitch"
+                                    :bodyBackground="bodyBackground"
+                                    :boxBackground="boxBackground"
+                                    :primaryText="primaryText"
+                                    :secondaryText="secondaryText"
+                                    :darkMode="darkMode"
+                                />
+                            </keep-alive>
                         </div>
 
                         <!-- MAPA -->
                         <div class="tile is-parent is-vertical">
-                            <div class="tile is-parent">
+                            <!-- <div class="tile is-parent"> -->
                                 <map-view
-                                    :boxBackground="boxBackground"
                                     :selectedPop="selectedPop"
-                                    :selectedCrm="selectedCrm"
-                                    :selectedZona="selectedZona"
                                     :map_attributes="map_attributes"
                                     :darkMode="darkMode"
                                     :selectedPops="selectedPops"
-                                    :core="core"
-                                />
-                            </div>
+                                    :criticPopsSwitch="criticPopsSwitch"
+                                    :pops="pops"
+                                />                                    
+                            <!-- </div> -->
                         </div>
 
                         <div class="tile is-parent is-vertical">
@@ -235,7 +237,21 @@
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
                                 :core="core"
+                                :last_update="last_update_sites"
+                                :criticPopsSwitch="criticPopsSwitch"
                             />
+                            <dashboard-chart
+                                :bodyBackground="bodyBackground"
+                                :boxBackground="boxBackground"
+                                :primaryText="primaryText"
+                                :secondaryText="secondaryText"
+                                :darkMode="darkMode"
+                            />
+                        </div>   
+                    </div>
+
+                    <div class="tile is-ancestor">
+                        <div class="tile is-parent is-5 is-vertical">
                             <technologies-data
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
@@ -244,8 +260,12 @@
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
                                 :core="core"
+                                :last_update="last_update_technologies"
                             />
-                            <infra-data
+                        </div>
+                        
+                        <div class="tile is-parent is-vertical">
+                            <!-- <services-data
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
                                 :primaryText="primaryText"
@@ -253,37 +273,39 @@
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
                                 :core="core"
-                            />
-                            <!-- <radial-chart/> -->
+                            /> -->
                         </div>
-
-                        <!-- <div class="tile is-parent is-vertical">
-                            
-                            
-                        </div> -->
-
-                        
+                        <div class="tile is-parent is-vertical">
+                            <!-- <movil-services-data
+                                :bodyBackground="bodyBackground"
+                                :boxBackground="boxBackground"
+                                :primaryText="primaryText"
+                                :secondaryText="secondaryText"
+                                :selectedCrm="this.selectedCrm"
+                                :selectedZona="this.selectedZona"
+                                :core="core"
+                            /> -->
+                        </div>
+                        <div class="tile is-parent is-vertical">
+                            <!-- <infra-data
+                                :bodyBackground="bodyBackground"
+                                :boxBackground="boxBackground"
+                                :primaryText="primaryText"
+                                :secondaryText="secondaryText"
+                                :selectedCrm="this.selectedCrm"
+                                :selectedZona="this.selectedZona"
+                                :core="core"
+                            /> -->
+                        </div>
                     </div>
 
-                    <div class="tile is-ancestor">
-                        
-                        <div class="tile is-parent is-vertical">
-                            
-                        </div>
-                        <div class="tile is-parent is-vertical">
-                            
-                        </div>
-                        <div class="tile is-parent is-vertical">
-                            
-                        </div>
-                    </div>
                 </div>
             </div>
             
         </section>
 
         <!-- PODER -->
-        <section class="section is-marginless" :class="bodyBackgroundEnergy">
+        <!-- <section class="section is-marginless" :class="bodyBackgroundEnergy">
             <div class="title">PODER</div>
             <div class="tile is-ancestor">
                 <electric-line-data
@@ -326,10 +348,10 @@
                     </article>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- CLIMA -->
-        <section class="section is-marginless" :class="bodyBackgroundClimate">
+        <!-- <section class="section is-marginless" :class="bodyBackgroundClimate">
             <div class="title">CLIMA</div>
             <div class="tile is-ancestor">
                 <air-conditioner-data
@@ -354,10 +376,10 @@
                     </article>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- INFRAESTRUCTURA -->
-        <section class="section is-marginless" :class="bodyBackgroundInfrastructure">
+        <!-- <section class="section is-marginless" :class="bodyBackgroundInfrastructure">
             <div class="title">INFRAESTRUCTURA</div>
             <div class="tile is-ancestor">
                 <vertical-structure-data
@@ -391,28 +413,73 @@
                     </article>
                 </div>
             </div>
-        </section>
+        </section> -->
 
     </div>
 </template>
 
 <script>
+    // Components
     import DashboardPopData from './DashboardPopData.vue';
     import DashboardSitesData from './DashboardSitesData.vue';
     import DashboardTechnologiesData from './DashboardTechnologiesData.vue';
     import DashboardServicesData from './DashboardServicesData.vue';
     import DashboardMovilServicesData from './DashboardMovilServicesData.vue';
     import DashboardInfraData from './DashboardInfraData.vue';
-
+    import DashboardCriticPopsTable from './DashboardCriticPopsTable.vue';
     import DashboardElectricLinesData from './DashboardElectricLinesData.vue';
     import DashboardGeneratorGroupsData from './DashboardGeneratorGroupsData.vue';
     import DashboardPowerRectifiersData from './DashboardPowerRectifiersData.vue';
     import DashboardAirConditionersData from './DashboardAirConditionersData.vue';
     import DashboardVerticalStructuresData from './DashboardVerticalStructuresData.vue';
     import DashboardInfrastructuresData from './DashboardInfrastructuresData.vue';
-    
+    import LoadingComponent from '../maps/LoadingComponent.vue';
+    import ErrorComponent from '../maps/ErrorComponent.vue';
     // import RadialChart from '../RadialChart.vue';
-    import MapView from "../maps/MapView.vue";
+    // import PolarAreaChart from '../PolarAreaChart.vue';
+    // import Mapa from "../maps/MapView.vue";
+
+    const MapView = () => ({
+        // The component to load (should be a Promise)
+        component: import('../maps/MapView.vue'),
+        // A component to use while the async component is loading
+        loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 900,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const PolarAreaChart = () => ({
+        // The component to load (should be a Promise)
+        component: import('../PolarAreaChart.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 400,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const RadialChart = () => ({
+        // The component to load (should be a Promise)
+        component: import('../RadialChart.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 400,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
 
     var moment = require('moment');
     export default {
@@ -430,27 +497,32 @@
             'vertical-structure-data': DashboardVerticalStructuresData,
             'infrastructure-data': DashboardInfrastructuresData,
             'map-view': MapView,
-            // 'radial-chart': RadialChart,
-            // 'Mapa': Mapa
-            // 'map-view': function(resolve) {
-            //     require(['./maps/MapView.vue'], resolve)
-            // }
+            'critic-pops-table': DashboardCriticPopsTable,
+            'radial-chart': RadialChart,
+            'dashboard-chart': PolarAreaChart,
         },
         props : [
-            'map_attributes',
+            'last_update_pops',
+            'last_update_sites',
+            'last_update_technologies'
         ],
         created() {
             this.styleMode()
-            this.getCrms()
         },
         mounted() {
-            
+            this.getCrms()
         },
         data() {
             return {
                 core: 0,
                 crms: null,
                 zonas: null,
+
+                map_attributes: {
+                    latitude: -33.44444275,
+                    longitude: -70.6561017,
+                    zoom: 5
+                },
 
                 darkMode: 0,
                 bodyBackground: '',
@@ -479,13 +551,139 @@
                 searchText: '',
                 popSearch: [],
                 active: null,
-                counter: 0
+                counter: 0,
+
+                criticPopsSwitch: 0,
+                criticPops: [],
+
+                pops: [],
+                popList: [],
+                popsCrm: [],
+                popsZona: [],
+                popsCore: [],
             }
         },
 
-        
+        watch: {
+            selectedCrm(newValue, oldValue) {
+                // Set zona null
+                this.selectedZona = null
+
+                // Update search
+                this.search()
+
+                if (newValue) {
+                    this.getPopsCrm()
+                    this.zonas = newValue.zonas
+                } else {
+                    this.getPops()
+                }
+            },
+
+            selectedZona(newValue, oldValue) {
+                this.search()
+
+                if (newValue) {
+                    this.popsZona = []
+                    this.popList.forEach(this.popPushZona)
+                    this.pops = this.popsZona
+                } else if (this.selectedCrm) {
+                    this.pops = this.popsCrm
+                } else {
+                    this.getPops()
+                }
+                
+            },
+
+            core(newValue, oldValue) {
+                if (!this.selectedCrm) {
+                    this.getPops()
+                    console.log('presionado en vista TODOS los POP')
+                } else if (!this.selectedZona) {
+                    this.getPopsCrm()
+                    console.log('presionado en vista CRM')
+                } else {
+                    this.getPopsZona()
+                    console.log('presionado en vista ZONA')
+                }
+            }
+        },
 
         methods: {
+            // APIs
+            getCrms() {
+                axios.get(`/api/crms`)
+                .then((response) => {
+                    this.crms = response.data.data
+                    this.getPops()
+                })
+            },
+
+            getPops() {
+                if (!this.popList.length) {
+                    axios.get(`/api/dashboardMap`)
+                    .then((response) => {
+                        this.popList = response.data.data
+                        this.pops = this.popList
+                        console.log('Busca los POP')
+                    })
+                } else {
+                    if (this.core && !this.popsCore.length) {
+                        this.popList.forEach(this.popsPushCore)
+                        console.log('Busca los POP core')
+                    } else if (this.core) {
+                        console.log('Ya estaban seteados los POP core')
+                        this.pops = this.popsCore
+                    } else {
+                        console.log('Todos los POP')
+                        this.pops = this.popList
+                    }
+                }
+            },
+
+            getPopsCrm() {
+                this.popsCrm = []
+                this.popList.forEach(this.popPushCrm)
+                this.pops = this.popsCrm
+            },
+
+            getPopsZona() {
+                this.popsZona = []
+                this.popList.forEach(this.popPushZona)
+                this.pops = this.popsZona
+            },
+
+            popsPushCore(item, index) {
+                if (item.classification_type_id == 1) {
+                    this.popsCore.push(item)
+                    this.pops = this.popsCore
+                }
+            },
+
+            popPushCrm(item, index) {
+                if (this.core) {
+                    if (item.crm_id == this.selectedCrm.id && item.classification_type_id == 1) {
+                        this.popsCrm.push(item)
+                    }
+                } else {
+                    if (item.crm_id == this.selectedCrm.id) {
+                        this.popsCrm.push(item)
+                    }
+                }
+            },
+
+            popPushZona(item, index) {
+                if (this.core) {
+                    if (item.zona_id == this.selectedZona.id && item.classification_type_id == 1) {
+                        this.popsZona.push(item)
+                    }
+                } else {
+                    if (item.zona_id == this.selectedZona.id) {
+                        this.popsZona.push(item)
+                    }
+                }
+            },
+
             // Triggers
             selectPop(pop) {
                 this.selectedPop = pop
@@ -493,92 +691,37 @@
             selectCrm(crm) {
                 // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
                 // si había una zona seleccionada, la variable selectedZona será null.
-                if (this.selectedCrm != crm) {
-                    this.selectedCrm = crm
-                    this.selectedZona = null
-                } else {
-                    this.selectedCrm = null
-                    this.selectedZona = null
-                }
-                this.getZonas(this.selectedCrm)
-                this.search()
+                this.selectedCrm = this.selectedCrm != crm ? crm : null
             },
             selectZona(zona) {
-                if (this.selectedZona != zona) {
-                    this.selectedZona = zona
-                } else {
-                    this.selectedZona = null
-                }
-                this.search()
+                this.selectedZona = this.selectedZona != zona ? zona : null
             },
-
-            switchCore() {
-                if (this.core == 0) {
-                    this.core = 1
-                    this.search()
-                } else {
-                    this.core = 0
-                    this.search()
-                }
-            },
-            
-            // APIs
-            getCrms() {
-                axios.get(`/api/crms`)
-                .then((response) => {
-                    this.crms = response.data.data;
-                })
-                .catch((error) => {
-                    console.log('Error al traer los CRM: ' + error);
-                });
-            },
-            getZonas(crm) {
-                if (crm != null) {
-                    axios.get(`/api/zonasCrm/${crm.id}`)
-                        .then((response) => {
-                            this.zonas = response.data.data;
-                        })
-                        .catch(() => {
-                            console.log('handle server error from here');
-                        });
-                } else {
-                    this.zonas = null
-                }
-            },
+        
 
             // Search bar
             search(){
                 if (this.searchText.length >= 3) {
                     if (this.selectedCrm == null) {
                         axios.get(`/api/searchPops?text=${this.searchText}&core=${this.core}`)
-                            .then((response) => {
-                                this.popSearch = response.data
-                                this.counter = this.popSearch.length
-                                this.active = 1
-                            })
-                            .catch(() => {
-                                console.log('handle server error from here');
-                            });
+                        .then((response) => {
+                            this.popSearch = response.data
+                            this.counter = this.popSearch.length
+                            this.active = 1
+                        })
                     } else if (this.selectedZona == null) {
                         axios.get(`/api/searchPopsCrm?text=${this.searchText}&crm_id=${this.selectedCrm.id}&core=${this.core}`)
-                            .then((response) => {
-                                this.popSearch = response.data
-                                this.counter = this.popSearch.length
-                                this.active = 1
-                            })
-                            .catch(() => {
-                                console.log('handle server error from here');
-                            });
+                        .then((response) => {
+                            this.popSearch = response.data
+                            this.counter = this.popSearch.length
+                            this.active = 1
+                        })
                     } else {
                         axios.get(`/api/searchPopsZona?text=${this.searchText}&zona_id=${this.selectedZona.id}&core=${this.core}`)
-                            .then((response) => {
-                                this.popSearch = response.data
-                                this.counter = this.popSearch.length
-                                this.active = 1
-                            })
-                            .catch(() => {
-                                console.log('handle server error from here');
-                            });
+                        .then((response) => {
+                            this.popSearch = response.data
+                            this.counter = this.popSearch.length
+                            this.active = 1
+                        })
                     }
                 } else if (this.searchText == '') {
                     this.clearSearch()
@@ -630,20 +773,22 @@
                     this.boxBackgroundInfrastructure = 'has-background-yellow-light'
                 }
             },
+
+            // SWITCHES
+            switchCore() {
+                this.core = this.core == 0 ? 1 : 0
+                this.search()
+            },
             changeStyle() {
-                if (this.darkMode == 0) {
-                    this.darkMode = 1
-                    this.styleMode()
-                } else {
-                    this.darkMode = 0
-                    this.styleMode()
-                }
+                this.darkMode = this.darkMode == 0 ? 1 : 0
+                this.styleMode()
+            },
+
+            viewCriticPops() {
+                this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
             }
         },
 
-        computed: {
-            
-        },
     }
 </script>
 

@@ -89,4 +89,17 @@ class ComsiteController extends Controller
 
         return $comsites;
     }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function lastData()
+    {
+        $last_updated = Comsite::orderBy('updated_at', 'desc')->first()->updated_at;
+        return new ComsiteResource($last_updated);
+    }
+
 }

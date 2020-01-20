@@ -8,20 +8,22 @@
             <div class="container">
 
                 <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
-                    <div class="tile is-parent">
-                        <a class="tile is-child box" :class="activeView == 1 ? 'has-background-link' : boxBackground" @click="changeView(1)">
-                            <div :class="activeView == 1 ? selectedSecondaryBoxText : secondaryText"> 
+
+                    <div class="tile is-parent" v-for="tab in tabs">
+                        <a class="tile is-child box" :key="tab.component" :class="currentTab === tab.component ? 'has-background-link' : boxBackground" @click="currentTab = tab.component">
+                            <div :class="currentTab === tab.component ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
-                                    POP
+                                    {{ tab.title }}
                                 </div>
 
                                 <div style="margin-top: 10px;">
-                                    <div class="is-size-7 has-text-weight-light">Ingreso, edición y sincronización de POP con inventario y otras plataformas.</div> 
+                                    <div class="is-size-7 has-text-weight-light">{{ tab.description }}</div> 
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="tile is-parent">
+
+<!--                     <div class="tile is-parent">
                         <a class="tile is-child box" :class="activeView == 2 ? 'has-background-link' : boxBackground" @click="changeView(2)">
                             <div :class="activeView == 2 ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
@@ -72,27 +74,20 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
         </section>
 
-        <admin-pop
-            v-if="activeView == 1"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-        ></admin-pop>
-
-        <admin-tps
-            v-if="activeView == 2"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-        ></admin-tps>
+        <keep-alive>
+            <admin-pop :is="currentTabComponent"
+                :bodyBackground="bodyBackground"
+                :boxBackground="boxBackground"
+                :primaryText="primaryText"
+                :secondaryText="secondaryText"
+            ></admin-pop>
+        </keep-alive>
 
     </div>
 </template>
@@ -108,6 +103,7 @@
         props : [
         ],
         created() {
+            this.getTabs()
             this.styleMode()
         },
         mounted() {
@@ -122,18 +118,11 @@
                 searchBodyBackground: '',
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
-
-                activeView: 1
+                tabs: null,
+                currentTab: 'pop'
             }
         },
         methods: {
-            changeView(view) {
-                if (this.activeView != view) {
-                    this.activeView = view
-                } else {
-                    this.activeView = 0
-                }
-            },
             // Style mode
             styleMode(){
                 if (this.darkMode == 1) {
@@ -153,13 +142,19 @@
                 }
             },
             changeStyle() {
-                if (this.darkMode == 0) {
-                    this.darkMode = 1
-                    this.styleMode()
-                } else {
-                    this.darkMode = 0
-                    this.styleMode()
-                }
+                this.darkMode = this.darkMode == 0 ? 1 : 0
+                this.styleMode()
+            },
+            getTabs() {
+                axios.get(`/api/adminTabs`).then((response) => {
+                    this.tabs = response.data.data
+                    console.log(response.data)
+                })
+            }
+        },
+        computed: {
+            currentTabComponent: function () {
+                return 'admin-' + this.currentTab
             }
         }
     }

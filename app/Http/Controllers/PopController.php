@@ -17,12 +17,6 @@ use App\Net;
 use App\PopClass;
 use App\Rca;
 use App\Site;
-use App\Tec2G1900Cell;
-use App\Tec3G900Cell;
-use App\Tec3G1900Cell;
-use App\Tec4G700Cell;
-use App\Tec4G1900Cell;
-use App\Tec4G2600Cell;
 use App\Transport;
 
 use App\PopMenu;
@@ -123,24 +117,6 @@ class PopController extends Controller
         $sites = Site::with('site_type')->where('pop_id', $pop->id)->get();
         $site = $sites->last();
 
-        $tec2g1900s = Tec2G1900Cell::where('pop_id', $pop->id)->get();
-        $tec2g1900 = $tec2g1900s->last();
-
-        $tec3g900s = Tec3G900Cell::where('pop_id', $pop->id)->get();
-        $tec3g900 = $tec3g900s->last();
-
-        $tec3g1900s = Tec3G1900Cell::where('pop_id', $pop->id)->get();
-        $tec3g1900 = $tec3g1900s->last();
-
-        $tec4g700s = Tec4G700Cell::where('pop_id', $pop->id)->get();
-        $tec4g700 = $tec4g700s->last();
-
-        $tec4g1900s = Tec4G1900Cell::where('pop_id', $pop->id)->get();
-        $tec4g1900 = $tec4g1900s->last();
-
-        $tec4g2600s = Tec4G2600Cell::where('pop_id', $pop->id)->get();
-        $tec4g2600 = $tec4g2600s->last();
-
         $transports = Transport::with('transport_type')->where('pop_id', $pop->id)->get();
         $transport = $transports->last();
 
@@ -168,12 +144,6 @@ class PopController extends Controller
             'rcas', 
             'sites',
             'site',
-            'tec2g1900',
-            'tec3g900',
-            'tec3g1900',
-            'tec4g700',
-            'tec4g1900',
-            'tec4g2600',
             'transports',
             'transport',
             'pop_class'

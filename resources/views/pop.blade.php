@@ -35,12 +35,6 @@
 	:rcas='@json($rcas)'
 	:sites='@json($sites)'
 	:site='@json($site)'
-    :tec2g1900='@json($tec2g1900)'
-    :tec3g900='@json($tec3g900)'
-    :tec3g1900='@json($tec3g1900)'
-    :tec4g700='@json($tec4g700)'
-    :tec4g1900='@json($tec4g1900)'
-    :tec4g2600='@json($tec4g2600)'
     :transports='@json($transports)'
     :transport='@json($transport)'
 />

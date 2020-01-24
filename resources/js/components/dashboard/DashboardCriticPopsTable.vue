@@ -21,13 +21,13 @@
                         <tr class="is-size-7" v-for="item in data.data">
                             <!-- <td class="has-text-right" :class="primaryText">{{ item.pop_id | numeral('0,0') }}</td> -->
                             <td class="has-text-left" :class="primaryText">{{ item.cod_planificacion }}</td>
-                            <td class="has-text-left" :class="primaryText">{{ item.nem_site }}</td>
+                            <td class="has-text-left" :class="primaryText">{{ item.pop.sites[0].nem_site }}</td>
                             <td class="has-text-centered" :class="primaryText">
-                                <b-tag type="is-info">{{ item.classification_type }}</b-tag>
+                                <!-- <b-tag type="is-info">{{ popClassification }}</b-tag> -->
                             </td>
                             <td class="has-text-left" :class="primaryText">
-                                <div>{{ item.nombre }}</div>
-                                <div>{{ item.direccion }}</div>
+                                <div>{{ item.pop.nombre }}</div>
+                                <div>{{ item.pop.direccion }}</div>
                             </td>
                             <!-- <td class="has-text-right" :class="primaryText">{{ item.direccion }}</td> -->
                         </tr>
@@ -85,11 +85,9 @@
         ],
         data() {
             return {
-                crmSelected: this.selectedCrm,
-                zonaSelected: this.selectedZona,
                 data: {
                     total: 0,
-                    per_page: 10,
+                    per_page: 12,
                     from: 1,
                     to: 0,
                     current_page: 1
@@ -104,38 +102,48 @@
         },
         watch: {
             selectedCrm(newValue, oldValue) {
-                this.crmSelected = newValue
-                this.zonaSelected = null
                 this.getData()
             },
             selectedZona(newValue, oldValue) {
-                this.zonaSelected = newValue
                 this.getData()
             },
             core(newValue, oldValue) {
                 this.getData()
             }
         },
+        computed: {
+            popClassification(cpop) {
+                var i = 6; var cat
+                if (cpop.pop.sites) {
+                    cpop.pop.sites.forEach(function(item) {
+                        if (item.classification_type_id && item.classification_type_id < i) { 
+                            i = item.classification_type_id
+                            cat = item.classification_type.classification_type
+                        }
+                    }, this)
+                }
+                return cat
+            }
+        },
         methods: {
             getData() {
                 // Si no hay un CRM seleccionado
-                if (this.crmSelected == null) {                             
+                if (this.selectedCrm == null) {                             
                     axios.get(`/api/criticPops?core=${this.core}&page=${this.data.current_page}`)
                     .then((response) => {
                         this.data = response.data;
-                        console.log(response)
                     })
                 } 
                 //Si hay un CRM seleccionado, pero no hay zona seleccionada
-                else if (this.zonaSelected == null){
-                    axios.get(`api/criticPopsCrm?crm_id=${this.crmSelected.id}&core=${this.core}&page=${this.data.current_page}`)
+                else if (this.selectedZona == null){
+                    axios.get(`/api/criticPopsCrm?crm_id=${this.selectedCrm.id}&core=${this.core}&page=${this.data.current_page}`)
                     .then((response) => {
                         this.data = response.data;
                     })
                 } 
                 // Si hay una zona seleccionada
                 else {
-                    axios.get(`api/criticPopsZona?zona_id=${this.zonaSelected.id}&core=${this.core}&page=${this.data.current_page}`)
+                    axios.get(`/api/criticPopsZona?zona_id=${this.selectedZona.id}&core=${this.core}&page=${this.data.current_page}`)
                     .then((response) => {
                         this.data = response.data;
                     })
@@ -144,7 +152,7 @@
             downloadPops() {
                 this.buttonLoading = 1
 
-                axios.get(`/pop/export?core=${this.core}&crm_id=${this.crmSelected ? this.crmSelected.id : 0}&zona_id=${this.zonaSelected ? this.zonaSelected.id : 0}`, {
+                axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
                     responseType: 'blob',
                 })
                 .then((response) => {

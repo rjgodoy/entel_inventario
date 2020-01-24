@@ -12,4 +12,9 @@ class Technology extends Model
     {
         return $this->belongsTo(Site::class);
     }
+
+    public function technology_type() 
+    {
+        return $this->belongsTo(TechnologyType::class);
+    }
 }

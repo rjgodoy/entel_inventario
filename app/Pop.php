@@ -104,36 +104,6 @@ class Pop extends Model
         return $this->belongsTo(StateType::class);
     }
 
-    public function tec2_g1900_cells() 
-    {
-        return $this->hasMany(Tec2G1900Cell::class);
-    }
-
-    public function tec3_g900_cells() 
-    {
-        return $this->hasMany(Tec3G900Cell::class);
-    }
-
-    public function tec3_g1900_cells() 
-    {
-        return $this->hasMany(Tec3G900Cell::class);
-    }
-
-    public function tec4_g700_cells() 
-    {
-        return $this->hasMany(Tec4G700Cell::class);
-    }
-
-    public function tec4_g1900_cells() 
-    {
-        return $this->hasMany(Tec4G1900Cell::class);
-    }
-
-    public function tec4_g2600_cells() 
-    {
-        return $this->hasMany(Tec4G2600Cell::class);
-    }
-
     // public function thresholds() 
     // {
     //     return $this->hasMany(Threshold::class);

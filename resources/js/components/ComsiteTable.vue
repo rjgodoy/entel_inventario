@@ -95,11 +95,17 @@
                 </nav>
                 <div class="field">
                     <div class="field has-text-right">
-                        <a href="/comsite/create" type="submit" class="button is-link is-small">
-                            <font-awesome-icon icon="sync-alt"/>
-                            &nbsp;
-                            Sincronizar
-                        </a>
+                        <!-- <b-field> -->
+                            <b-button 
+                                :loading="buttonLoading ? true : false"
+                                type="is-link"
+                                size="is-small"
+                                @click="syncComsite">
+                                <font-awesome-icon icon="sync-alt"/>
+                                &nbsp;
+                                Sincronizar
+                            </b-button>
+                        <!-- </b-field> -->
                     </div>
                     <div class="is-size-7 has-text-right" :class="secondaryText">Fecha ultima actualización: {{ last_updated }}</div>
                 </div>
@@ -134,7 +140,8 @@
                     current_page: 1
                 },
                 counter: 0,
-                searchText: ''
+                searchText: '',
+                buttonLoading: 0,
             }
         },
         created() {
@@ -146,20 +153,35 @@
         },
         methods: {
             getComsiteData() {
-                axios.get(`api/comsites?page=${this.comsiteData.current_page}`)
+                axios.get(`/api/comsites?page=${this.comsiteData.current_page}`)
                     .then((response) => {
                         this.comsiteData = response.data;
                     })
             },
             search() {
                 if (this.searchText != '') {
-                    axios.get(`api/searchComsites?page=${this.comsiteData.current_page}&text=${this.searchText}`)
+                    axios.get(`/api/searchComsites?page=${this.comsiteData.current_page}&text=${this.searchText}`)
                         .then((response) => {
                             this.comsiteData = response.data;
                         })
                 } else {
                     this.getComsiteData()
                 }
+            },
+            syncComsite() {
+                // e.preventDefault()
+                this.buttonLoading = 1
+                // let currentObj = this
+
+                axios.post(`/api/comsites`)
+                .then((response) => {
+                    // console.log(this.$route.params)
+                    console.log(response)
+                    // document.location.href = "/main#/comsite/create"
+                    // currentObj.output = response.data
+                    this.buttonLoading = 0
+                    this.getComsiteData()
+                })
             },
 
             // Style mode
@@ -200,7 +222,7 @@
             },
             lastUpdated() {
                 axios.get(`/api/comsiteLastData`).then((response) => {
-                    this.last_updated = response.data.data
+                    this.last_updated = response.data
                 })
             },
         }

@@ -154,14 +154,14 @@
         created() {
             this.mapStyle = this.darkMode == 1 ? this.style2 : this.mapStyle = null
         },
-        mounted() {
+        async mounted() {
             
             // if (this.clusterActive == 1) {
             //     this.buttonText = 'Desagrupar'
             // } else {
             //     this.buttonText = 'Agrupar'
             // }
-            this.getPops()
+            this.setPops()
             // this.$refs.map.$mapPromise.then((map) => {
             //     var myButton = document.getElementById('myClusterButton');
             //     myButton.index = 1;
@@ -170,11 +170,11 @@
         },
         watch: {
             pops(newValue, oldValue) {
-                this.getPops()
+                this.setPops()
             },
 
             selectedPop(newValue, oldValue) {
-                newValue != null ? this.getPop() : this.getPops()
+                newValue != null ? this.setPop() : this.setPops()
             },
 
             darkMode(newValue, oldValue) {
@@ -182,41 +182,38 @@
             },
 
             criticPopsSwitch(newValue, oldValue) {
-                this.getPops()
+                this.setPops()
             },
 
-            selectedPops(newValue, oldValue) {
-                if (newValue.length != 0) {
-                    this.pops = newValue
-                    //Set bounds of the map                    
-                    this.$refs.map.$mapPromise.then((map) => {
-                        var bounds = new google.maps.LatLngBounds()
-                        // Create bounds from pops
-                        for (let m of this.pops) {
-                            // console.log(m)
-                            bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-                        }
-                        // Don't zoom in too far on only one marker
-                        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                            bounds.extend(extendPoint1);
-                            bounds.extend(extendPoint2);
-                        }
+            // selectedPops(newValue, oldValue) {
+            //     if (newValue.length != 0) {
+            //         this.pops = newValue
+            //         //Set bounds of the map                    
+            //         this.$refs.map.$mapPromise.then((map) => {
+            //             var bounds = new google.maps.LatLngBounds()
+            //             // Create bounds from pops
+            //             for (let m of this.pops) {
+            //                 // console.log(m)
+            //                 bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
+            //             }
+            //             // Don't zoom in too far on only one marker
+            //             if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+            //                 var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+            //                 var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+            //                 bounds.extend(extendPoint1);
+            //                 bounds.extend(extendPoint2);
+            //             }
 
-                        map.fitBounds(bounds)
-                    });
-                } else {
-                    this.getPops()
-                }
-            }
+            //             map.fitBounds(bounds)
+            //         });
+            //     } else {
+            //         this.setPops()
+            //     }
+            // }
         },
         methods: {
             toggleInfoWindow(pop, idx) {
                 this.infoWindowPos = { lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) };
-                // this.getPopData(pop)
-                // console.log(this.selectedPopMap)
-
                 this.infoContent = this.getInfoWindowContent(pop);
 
                 //check if its the same pop that was selected if yes toggle
@@ -259,7 +256,7 @@
                             </div>
 
                             <div class="content">
-                                <a href="/pop/${pop.pop_id}" target="_blank" class="button is-outlined is-primary is-small">
+                                <a href="/main#/pop/${pop.pop_id}" target="_blank" class="button is-outlined is-primary is-small">
                                     <font-awesome-icon icon="info-circle"/>
                                     &nbsp;Ver detalles
                                 </a>
@@ -269,27 +266,24 @@
                 `);
             },
 
-            getPops() {
-                if (this.pops) {
-                    this.$refs.map.$mapPromise.then((map) => {
-                        const bounds = new google.maps.LatLngBounds()
-                        for (let m of this.pops) {
-                            bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-                        }
-                        // Don't zoom in too far on only one pop
-                        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                            bounds.extend(extendPoint1);
-                            bounds.extend(extendPoint2);
-                        }
-                        map.fitBounds(bounds);
-                    });
-                }
+            setPops() {
+                this.$refs.map.$mapPromise.then((map) => {
+                    const bounds = new google.maps.LatLngBounds()
+                    for (let m of this.pops) {
+                        bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
+                    }
+                    // Don't zoom in too far on only one pop
+                    if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+                        var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+                        var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+                        bounds.extend(extendPoint1);
+                        bounds.extend(extendPoint2);
+                    }
+                    map.fitBounds(bounds);
+                });
             },
             
-            getPop() {
-                this.pops = [this.selectedPop]
+           setPop() {
                 this.$refs.map.$mapPromise.then((map) => {
                     map.panTo({ lat: parseFloat(this.selectedPop.latitude), lng: parseFloat(this.selectedPop.longitude) })
                     map.setZoom(15)

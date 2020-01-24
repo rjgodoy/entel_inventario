@@ -20,19 +20,21 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
 	Route::get('/', function () {
-	    return redirect('/dashboard');
+	    return redirect('/main');
 	});
+
+	Route::get('/{any}', 'HomeController@index')->where('any', '.*');
 	Route::get('/home', function () {
-	    return redirect('/dashboard');
+	    return redirect('/main');
 	});
 
-	Route::resource('/dashboard', 'HomeController');
-	Route::get('/pop/export', 'PopController@export')->name('pops.export');
+	// Route::resource('/dashboard', 'HomeController');
+	// Route::get('/pop/export', 'PopController@export')->name('pops.export');
 
-	Route::resource('/pop', 'PopController');
-	Route::resource('/comsite', 'ComsiteController');
+	// Route::resource('/pop', 'PopController');
+	// Route::resource('/comsite', 'ComsiteController');
 
-	Route::resource('/admin', 'AdminController');
+	// Route::resource('/admin', 'AdminController');
 
 	
 });

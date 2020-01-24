@@ -105,6 +105,7 @@
         created() {
             this.getTabs()
             this.styleMode()
+            console.log(this.tabs)
         },
         mounted() {
         },

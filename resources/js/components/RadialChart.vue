@@ -1,7 +1,7 @@
 <template>
     <!-- <div class="tile is-parent"> -->
         <article class="tile is-child box is-paddingless" :class="boxBackground" style="width: 100%; height: auto;">
-            <div class="" ref="chartdiv" style="height: 600px;"></div>
+            <div class="" ref="chartdiv" style="height: 400px;"></div>
         </article>
     <!-- </div> -->
 </template>
@@ -13,7 +13,7 @@
     am4core.useTheme(am4themes_animated);
     export default {
         props : [
-            // 'parentData'
+            'chartData',
             'bodyBackground',
             'boxBackground',
             'primaryText',

@@ -18,6 +18,16 @@ class Site extends Model
         return $this->belongsTo(SiteType::class);
     }
 
+    public function classification_type() 
+    {
+        return $this->belongsTo(ClassificationType::class);
+    }
+
+    public function classifications() 
+    {
+        return $this->hasMany(Classification::class);
+    }
+
     public function technologies() 
     {
         return $this->hasMany(Technology::class);

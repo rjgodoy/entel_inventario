@@ -7,7 +7,8 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
-Vue.prototype.$eventBus = new Vue()
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
 import Buefy from 'buefy'
 Vue.use(Buefy)
@@ -27,6 +28,8 @@ Vue.directive('clickOutside', {
         document.body.removeEventListener('click', el.clickOutsideEvent)
     },
 });
+
+Vue.prototype.$eventBus = new Vue()
 
 // ########################## FontAwesome Libraries ##########################
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -173,15 +176,29 @@ Vue.component('GmapCluster', GmapCluster)
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-var TopNavbar = require('./components/Layouts/TopNavbar.vue').default;
-var AsideNavbar = require('./components/Layouts/AsideNavbar.vue').default;
-var Clock = require('./components/Clock.vue').default;
-var Dashboard = require('./components/dashboard/Dashboard.vue').default;
-var PopDetail = require('./components/pops/PopDetail.vue').default;
-var PopTable = require('./components/pops/PopTable.vue').default;
-var ComsiteTable = require('./components/ComsiteTable.vue').default;
-var Admin = require('./components/admin/Admin.vue').default;
+import App from './components/App.vue'
+// import AsideNavbar from './components/Layouts/AsideNavbar.vue'
 
+import Dashboard from './components/dashboard/Dashboard.vue'
+import PopTable from './components/pops/PopTable.vue'
+import Pop from './components/pops/PopDetail.vue'
+import ComsiteTable from './components/ComsiteTable.vue'
+import Admin from './components/admin/Admin.vue'
+
+const routes = [
+    { path: '/', name: 'Dashboard', component: Dashboard },
+    { path: '/dashboard', name: 'dashboard', component: Dashboard },
+    { path: '/pop', name: 'Pop', component: PopTable },
+    { path: '/pop/:id', name: 'pop', component: Pop },
+    { path: '/comsite', name: 'comsite', component: ComsiteTable },
+    { path: '/admin', name: 'administracion', component: Admin },
+    // { path: '/comsite/create', name: 'comsiteSync', component: '' },
+
+]
+
+const router = new VueRouter({
+    routes // short for `routes: routes`
+})
 
 // var LoadingComponent = require('./components/maps/LoadingComponent.vue').default;
 // var ErrorComponent = require('./components/maps/ErrorComponent.vue').default;
@@ -206,22 +223,14 @@ var Admin = require('./components/admin/Admin.vue').default;
  */
 
 const app = new Vue({
-    el: '#app',
+    router,
+    // el: '#app',
     components: {
-        'navbar': TopNavbar,
-        'asidebar': AsideNavbar,
-        'clock': Clock,
-        'dashboard': Dashboard,
-        'pop-detail': PopDetail,
-        'comsite-table': ComsiteTable,
-        'admin': Admin,
-        'pop-table': PopTable,
-        // 'map-view': function(resolve) {
-        //     require(['./components/maps/MapView.vue'], resolve)
-        // },
+        App
     },
+    mode:'history',
     events: {
         clickOutside(event) {                
         }
     }
-});
+}).$mount('#app');

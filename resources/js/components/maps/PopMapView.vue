@@ -1,7 +1,7 @@
 <template>
     <gmap-map
-        class="tile is-child box"
-        style="height: 100%"
+        class=""
+        style="min-height: 500px; height: 100%"
         ref="map"
         :center="({ lat: parseFloat(this.pop.latitude), lng: parseFloat(this.pop.longitude) })"
         :zoom="15"
@@ -45,7 +45,7 @@
             :clickable="true"
             :draggable="false"
             @click="toggleInfoWindow(pop, index)"
-            :position="({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
+            :position="position[0]"
             :icon="icon"
         />
         <gmap-info-window
@@ -70,9 +70,9 @@
         ],
         data() {
             return {
-                pops: null,
-                dependences: null,
-                center: null,
+                pops: [this.pop],
+                dependences: [],
+                position: [{ lat: parseFloat(this.pop.latitude), lng: parseFloat(this.pop.longitude) }],
                 map: null,
                 infoContent: '',
                 infoWindowPos: {
@@ -91,7 +91,7 @@
                 mapStyle: null,
                 dependencesActive: 0,
                 buttonText: '',
-                dependencesLines: [{lat: parseFloat(this.pop.latitude), lng: parseFloat(this.pop.longitude)}],
+                dependencesLines: [{ lat: parseFloat(this.pop.latitude), lng: parseFloat(this.pop.longitude) }],
                 flightPath: null,
 
                 style1: [
@@ -127,13 +127,7 @@
             google: gmapApi
         },
         created() {
-            if (this.darkMode == 1) {
-                this.mapStyle = this.style2
-            } else {
-                this.mapStyle = null
-            }
-            this.getPop()
-            
+            this.getPop()  
         },
         async mounted() {
             this.initializeMap()
@@ -141,11 +135,7 @@
         },
         watch: {
             darkMode(newValue, oldValue) {
-                if (newValue == 1) {
-                    this.mapStyle = this.style2
-                } else {
-                    this.mapStyle = null
-                }
+                this.mapStyle = newValue == 1 ? this.style2 : this.mapStyle = null
             }
         },
         methods: {
@@ -156,7 +146,7 @@
                 })
             },
 
-            toggleInfoWindow: function (pop, idx) {
+            toggleInfoWindow(pop, idx) {
                 this.infoWindowPos = { lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) };
                 this.infoContent = this.getInfoWindowContent(pop);
 
@@ -181,10 +171,10 @@
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
-                                    <span class="tag ${this.classification.classification_type_id == 1 ? 'is-danger' : 
-                                                    (this.classification.classification_type_id == 2 ? 'is-warning' : 
-                                                    (this.classification.classification_type_id == 3 ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
-                                        ${this.classification.classification_type.classification_type}
+                                    <span class="tag ${this.classification == 'A' ? 'is-danger' : 
+                                                    (this.classification == 'B' ? 'is-warning' : 
+                                                    (this.classification == 'C' ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
+                                        ${this.classification}
                                     </span>
                                 </div>
                                 <div class="media-content">
@@ -218,7 +208,8 @@
                     .then((response) => {
                         this.dependences = response.data.data
                         if (this.dependences != null) {
-                            this.dependences.forEach(this.dependencesLocations)
+                            this.dependences.forEach(element => this.pops.push(element.dependence))
+                            console.log(this.pops)
                             //Set bounds of the map
                             this.$refs.map.$mapPromise.then((map) => {
                                 // Create bounds from pops
@@ -245,19 +236,12 @@
                     this.getPop()
                     this.initializeMap()
                     this.dependencesActive = 0
+                    this.dependencesLines = [{ lat: parseFloat(this.pop.latitude), lng: parseFloat(this.pop.longitude) }]
                 }
-            },
-
-            dependencesLocations(item, index) {
-                this.pops.push(item.dependence)
             },
 
             dependencesButton() {
-                if (this.dependencesActive == 0) {
-                    this.buttonText = 'Dependencias'
-                } else {
-                    this.buttonText = 'POP'
-                }
+                this.buttonText = this.dependencesActive == 0 ? 'Dependencias' : this.buttonText = 'POP'
                 this.$refs.map.$mapPromise.then((map) => {
                     var myButton = document.getElementById('myDependencesButton')
                     myButton.index = 1

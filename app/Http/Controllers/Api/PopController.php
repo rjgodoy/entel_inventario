@@ -13,6 +13,8 @@ use App\Site;
 
 class PopController extends Controller
 {
+    protected $seconds = 86400;
+
     /**
      * Display a listing of the resource.
      *
@@ -20,44 +22,14 @@ class PopController extends Controller
      */
     public function index()
     {
-        $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
-                ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-                ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-                ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-
-                // Classificación
-                // ->leftJoin('classifications', function ($join) {
-                //     $join->on('pops.id', '=', 'classifications.pop_id')
-                //     ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-                // })
-                ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-
-                // Tipo Atención
-                // ->leftJoin('attentions', function ($join) {
-                //     $join->on('pops.id', '=', 'attentions.pop_id')
-                //     ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-                // })
-                // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
-
-                ->select(
-                    'pops.id as pop_id',
-                    'sites.nombre',
-                    'sites.nem_site',
-                    'pops.direccion',
-                    'pops.latitude',
-                    'pops.longitude',
-                    'sites.cod_planificacion',
-                    'comunas.*',
-                    'zonas.*',
-                    'crms.*',
-                    'sites.classification_type_id',
-                    'classification_types.classification_type'
-                    // 'attentions.attention_type_id'
-                    // 'attention_types.attention_type as attention_type'
-                )
-                ->orderBy('pops.id')
-                ->paginate(10);
-
+        // if (Cache::has('pops')) {
+        //     $pops = Cache::get('pops');
+        // } else {
+            // $pops = Cache::remember('pops', $this->seconds, function () {
+                $pops = Pop::with('sites.classification_type', 'comuna.zona.crm')->orderBy('id', 'asc')->paginate(20);
+                // return $pops;
+        //     });
+        // }
         return new PopResource($pops);
     }
 
@@ -66,9 +38,9 @@ class PopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function popsCrm()
+    public function popsCrm(Request $request)
     {
-        $crm_id = $_GET["crm_id"];
+        $crm_id = $request->crm_id;
         $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
                 ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
                 ->join('crms', function($join) use ($crm_id) {
@@ -182,10 +154,28 @@ class PopController extends Controller
      */
     public function show($pop_id)
     {
-        $pop = Pop::with('comuna', 'classification_type')->where('id', $pop_id)->first();
-
+        $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.technologies', 'comuna.zona.responsable', 'sites.site_type')
+                ->where('id', $pop_id)
+                ->first();
         return new PopResource($pop);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function technologies(Request $request)
+    {
+        $pop_id = $request->pop_id;
+
+        $technologies = Technology::with(['technology_type', 'site' => function($q) use($pop_id) { 
+            $q->where('pop_id', $pop_id); 
+        }])->get();
+        return new PopResource($technologies);
+    }
+
 
     /**
      * Update the specified resource in storage.

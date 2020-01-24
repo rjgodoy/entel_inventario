@@ -30,7 +30,7 @@
                                 </div>
 
                                 <div style="margin-top: 10px;">
-                                    <div class="is-size-7 has-text-weight-light">Subgerente</div> 
+                                    <div class="is-size-7 has-text-weight-light" v-text="crm.id == 3 ? 'Coordinador Metropolitano' : 'Subgerente'"></div> 
                                     <div class="is-size-7 has-text-weight-semibold">{{ crm.subgerente_crm }}</div>
                                 </div>
                                 <!-- <div class="is-size-5 has-text-weight-semibold">
@@ -100,7 +100,6 @@
                     <span class="icon is-small is-right">
                         <button class="delete" @click="clearSearch"></button>
                     </span>
-                    
                 </p>
                 
                 <div class="dropdown" :class="popSearch.length && active == 1 ? 'is-active' : ''" style="width: 100%">
@@ -110,7 +109,7 @@
                         </span>
                         <div class="dropdown-content" :class="searchBodyBackground + ' ' + primaryText" style="max-height: 400px; overflow: auto;">
                             <div v-for="pop in popSearch" class="dropdown-item" :class="pop.alba_project ? '' : ''">
-                                <a :href="'pop/' + pop.id" target="_blank" class="columns">
+                                <a :href="'/main#/pop/' + pop.id" target="_blank" class="columns">
                                     <div class="column is-6">
                                         <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
                                             {{ pop.nem_site }}
@@ -160,7 +159,7 @@
                                     <button class="button is-small is-default" @click="selectPop(pop)" v-model="selectedPop">
                                         <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
                                     </button>
-                                    <a class="button is-small is-link" :href="'pop/' + pop.id" target="_blank">
+                                    <a class="button is-small is-link" :href="'/main#/pop/' + pop.id" target="_blank">
                                         <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
                                     </a>
                                 </div>
@@ -175,61 +174,73 @@
             <div class="" :class="bodyBackground" style="margin: 20px 0 -30px 0;">
                 <div class="">
 
-                    <!-- CUADROS DE INFORMACION -->
+
                     <div class="tile is-ancestor">
-                        <div class="tile is-parent is-vertical">
 
-                            <keep-alive>
-                                <critic-pops-table v-if="criticPopsSwitch" 
-                                    :bodyBackground="bodyBackground"
-                                    :boxBackground="boxBackground"
-                                    :primaryText="primaryText"
-                                    :secondaryText="secondaryText"
-                                    :selectedCrm="this.selectedCrm"
-                                    :selectedZona="this.selectedZona"
-                                    :core="core"
-                                />
-                            </keep-alive>
 
-                            <keep-alive>
-                                <pop-data v-if="!criticPopsSwitch"
-                                    :bodyBackground="bodyBackground"
-                                    :boxBackground="boxBackground"
-                                    :primaryText="primaryText"
-                                    :secondaryText="secondaryText"
-                                    :selectedCrm="this.selectedCrm"
-                                    :selectedZona="this.selectedZona"
-                                    :core="core"
-                                    :last_update="last_update_pops"
-                                />
-                            </keep-alive>
-                            <keep-alive>
-                                <radial-chart v-if="!criticPopsSwitch"
-                                    :bodyBackground="bodyBackground"
-                                    :boxBackground="boxBackground"
-                                    :primaryText="primaryText"
-                                    :secondaryText="secondaryText"
-                                    :darkMode="darkMode"
-                                />
-                            </keep-alive>
+                        <div class="tile is-vertical">
+                            <div class="tile">
+                                <div class="tile is-vertical">
+                                    <div class="tile is-parent">
+                                        <a class="tile is-child box" @click="currentTab = 'pop'">
+                                            <div class="is-size-6 has-text-weight-semibold">POP</div>
+                                            <div class="is-size-3 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-light">Puntos de Presencia</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="tile is-parent">
+                                        <a class="tile is-child box" @click="currentTab = 'technologies'">
+                                            <div class="is-size-6 has-text-weight-semibold">TECNOLOGIAS</div>
+                                            <div class="is-size-3 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-light">Equipos de RAN</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="tile is-vertical">
+                                    <div class="tile is-parent">
+                                        <a class="tile is-child box" @click="currentTab = 'sites'">
+                                            <div class="is-size-6 has-text-weight-semibold">SITIOS</div>
+                                            <div class="is-size-3 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-light">Servicios fijos y móviles</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="tile is-parent">
+                                        <a class="tile is-child box has-background-warning" @click="currentTab = 'critics-pops'">
+                                            <div class="is-size-6 has-text-weight-semibold">CRITICOS</div>
+                                            <div class="is-size-3 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 38 | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-light">POP críticos</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tile">
+                                <div class="tile is-parent">
+                                    <chart
+                                        
+                                    ></chart>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- MAPA -->
-                        <div class="tile is-parent is-vertical">
-                            <!-- <div class="tile is-parent"> -->
-                                <map-view
-                                    :selectedPop="selectedPop"
-                                    :map_attributes="map_attributes"
-                                    :darkMode="darkMode"
-                                    :selectedPops="selectedPops"
-                                    :criticPopsSwitch="criticPopsSwitch"
-                                    :pops="pops"
-                                />                                    
-                            <!-- </div> -->
-                        </div>
+
 
                         <div class="tile is-parent is-vertical">
-                            <sites-data
+                            <map-view
+                                :selectedPop="selectedPop"
+                                :map_attributes="map_attributes"
+                                :darkMode="darkMode"
+                                :criticPopsSwitch="criticPopsSwitch"
+                                :pops="pops"
+                            />                                    
+                        </div>
+
+                        <keep-alive>
+                            <pop-data :is="currentTabComponent"
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
                                 :primaryText="primaryText"
@@ -237,22 +248,15 @@
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
                                 :core="core"
-                                :last_update="last_update_sites"
-                                :criticPopsSwitch="criticPopsSwitch"
+                                :last_updated="currentLastUpdateData"
                             />
-                            <dashboard-chart
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :darkMode="darkMode"
-                            />
-                        </div>   
+                        </keep-alive>
                     </div>
 
-                    <div class="tile is-ancestor">
-                        <div class="tile is-parent is-5 is-vertical">
-                            <technologies-data
+                    <!-- CUADROS DE INFORMACION -->
+                    <!-- <div class="tile is-ancestor">
+                        <keep-alive>
+                            <critic-pops-table v-if="criticPopsSwitch" 
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
                                 :primaryText="primaryText"
@@ -260,11 +264,81 @@
                                 :selectedCrm="this.selectedCrm"
                                 :selectedZona="this.selectedZona"
                                 :core="core"
-                                :last_update="last_update_technologies"
                             />
+                        </keep-alive>
+
+                        <keep-alive>
+                            <pop-data v-if="!criticPopsSwitch"
+                                :bodyBackground="bodyBackground"
+                                :boxBackground="boxBackground"
+                                :primaryText="primaryText"
+                                :secondaryText="secondaryText"
+                                :selectedCrm="this.selectedCrm"
+                                :selectedZona="this.selectedZona"
+                                :core="core"
+                                :last_update="last_update_pops"
+                            />
+                        </keep-alive>
+
+                        <div class="tile is-parent is-vertical">
+                            <map-view
+                                :selectedPop="selectedPop"
+                                :map_attributes="map_attributes"
+                                :darkMode="darkMode"
+                                :selectedPops="selectedPops"
+                                :criticPopsSwitch="criticPopsSwitch"
+                                :pops="pops"
+                            />                                    
+                        </div>
+
+                        <sites-data
+                            :bodyBackground="bodyBackground"
+                            :boxBackground="boxBackground"
+                            :primaryText="primaryText"
+                            :secondaryText="secondaryText"
+                            :selectedCrm="this.selectedCrm"
+                            :selectedZona="this.selectedZona"
+                            :core="core"
+                            :last_update="last_update_sites"
+                            :criticPopsSwitch="criticPopsSwitch"
+                        />
+                    </div> -->
+
+                    <div class="tile is-ancestor">
+                        <div class="tile is-parent">
+                            <div class="tile is-child box">
+                                <div class="is-size-5 has-text-weight-semibold">PRET</div>
+                                <div class="is-size-2 has-text-centered">3
+                                    <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados esta semana</p>
+                                </div>
+                                <div class="field" style="margin-top: 20px;">
+                                    <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
+                                    <a class="is-size-6" :href="'/main#/pop/2'" target="_blank">ESTAN0098 - Nombre POP</a>
+                                    <div class="is-size-7">Zona Valparaiso - CRM Centro Norte</div>
+                                </div>
+
+                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha ingreso: 08/01/2020</div>
+                            </div>
+                        </div>
+
+                        <div class="tile is-parent">
+                            <div class="tile is-child box">
+                                <div class="is-size-5 has-text-weight-semibold">PSG</div>
+                                <div class="is-size-2 has-text-centered">7
+                                    <p class="is-size-6 has-text-weight-light">Equipos ingresados esta semana</p>
+                                </div>
+                                <div class="field" style="margin-top: 20px;">
+                                    <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
+                                    <a class="is-size-6" :href="'/main#/pop/2'" target="_blank">ESTAN0098 - Nombre POP</a>
+                                    <div class="is-size-7">Zona Valparaiso - CRM Centro Norte</div>
+                                </div>
+
+                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha ingreso: 08/01/2020</div>
+                            </div>
                         </div>
                         
-                        <div class="tile is-parent is-vertical">
+                        
+                        <div class="tile is-parent">
                             <!-- <services-data
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
@@ -275,7 +349,7 @@
                                 :core="core"
                             /> -->
                         </div>
-                        <div class="tile is-parent is-vertical">
+                        <div class="tile is-parent">
                             <!-- <movil-services-data
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
@@ -286,7 +360,7 @@
                                 :core="core"
                             /> -->
                         </div>
-                        <div class="tile is-parent is-vertical">
+                        <div class="tile is-parent">
                             <!-- <infra-data
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
@@ -435,9 +509,6 @@
     import DashboardInfrastructuresData from './DashboardInfrastructuresData.vue';
     import LoadingComponent from '../maps/LoadingComponent.vue';
     import ErrorComponent from '../maps/ErrorComponent.vue';
-    // import RadialChart from '../RadialChart.vue';
-    // import PolarAreaChart from '../PolarAreaChart.vue';
-    // import Mapa from "../maps/MapView.vue";
 
     const MapView = () => ({
         // The component to load (should be a Promise)
@@ -447,21 +518,7 @@
         // A component to use if the load fails
         // error: ErrorComponent,
         // Delay before showing the loading component. Default: 200ms.
-        delay: 900,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const PolarAreaChart = () => ({
-        // The component to load (should be a Promise)
-        component: import('../PolarAreaChart.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 400,
+        delay: 200,
         // The error component will be displayed if a timeout is
         // provided and exceeded. Default: Infinity.
         timeout: 3000
@@ -475,11 +532,11 @@
         // A component to use if the load fails
         // error: ErrorComponent,
         // Delay before showing the loading component. Default: 200ms.
-        delay: 400,
+        delay: 200,
         // The error component will be displayed if a timeout is
         // provided and exceeded. Default: Infinity.
         timeout: 3000
-    })
+    })        
 
     var moment = require('moment');
     export default {
@@ -497,20 +554,19 @@
             'vertical-structure-data': DashboardVerticalStructuresData,
             'infrastructure-data': DashboardInfrastructuresData,
             'map-view': MapView,
-            'critic-pops-table': DashboardCriticPopsTable,
-            'radial-chart': RadialChart,
-            'dashboard-chart': PolarAreaChart,
+            'critics-pops-data': DashboardCriticPopsTable,
+
+            'chart': RadialChart
         },
         props : [
-            'last_update_pops',
-            'last_update_sites',
-            'last_update_technologies'
         ],
         created() {
             this.styleMode()
         },
         mounted() {
             this.getCrms()
+            this.getCounters()
+            this.lastUpdate()
         },
         data() {
             return {
@@ -535,7 +591,6 @@
                 bodyBackgroundEnergy: '',
                 bodyBackgroundClimate: '',
                 bodyBackgroundInfrastructure: '',
-
                 boxBackgroundEnergy: '',
                 boxBackgroundClimate: '',
                 boxBackgroundInfrastructure: '',
@@ -546,11 +601,10 @@
                 selectedPop: null,
                 selectedCrm: null,
                 selectedZona: null,
-                selectedPops: [],
                 
                 searchText: '',
                 popSearch: [],
-                active: null,
+                active: 0,
                 counter: 0,
 
                 criticPopsSwitch: 0,
@@ -561,51 +615,74 @@
                 popsCrm: [],
                 popsZona: [],
                 popsCore: [],
+
+                popsQuantity: 0,
+                sitesQuantity: 0,
+                technologiesQuantity: 0,
+                lastUpdateData: [],
+
+                currentTab: 'pop',
             }
         },
 
         watch: {
             selectedCrm(newValue, oldValue) {
-                // Set zona null
                 this.selectedZona = null
-
-                // Update search
                 this.search()
-
                 if (newValue) {
                     this.getPopsCrm()
                     this.zonas = newValue.zonas
                 } else {
                     this.getPops()
                 }
+                this.getCounters()
             },
 
             selectedZona(newValue, oldValue) {
                 this.search()
-
                 if (newValue) {
                     this.popsZona = []
-                    this.popList.forEach(this.popPushZona)
+                    this.popList.forEach(element => {
+                        if (this.core) {
+                            if (element.zona_id == this.selectedZona.id && element.classification_type_id == 1) {
+                                this.popsZona.push(element)
+                            }
+                        } else {
+                            if (element.zona_id == this.selectedZona.id) {
+                                this.popsZona.push(element)
+                            }
+                        }
+                    })
                     this.pops = this.popsZona
                 } else if (this.selectedCrm) {
                     this.pops = this.popsCrm
                 } else {
                     this.getPops()
                 }
-                
+                this.getCounters()
             },
 
             core(newValue, oldValue) {
                 if (!this.selectedCrm) {
                     this.getPops()
-                    console.log('presionado en vista TODOS los POP')
+                    // console.log('presionado en vista TODOS los POP')
                 } else if (!this.selectedZona) {
                     this.getPopsCrm()
-                    console.log('presionado en vista CRM')
+                    // console.log('presionado en vista CRM')
                 } else {
                     this.getPopsZona()
-                    console.log('presionado en vista ZONA')
+                    // console.log('presionado en vista ZONA')
                 }
+                this.getCounters()
+            }
+        },
+
+        computed: {
+            currentTabComponent: function () {
+                return this.currentTab + '-data'
+            },
+            currentLastUpdateData: function () {
+                return this.lastUpdateData[this.currentTab]
             }
         },
 
@@ -619,69 +696,103 @@
                 })
             },
 
+            // POP DATA
             getPops() {
                 if (!this.popList.length) {
                     axios.get(`/api/dashboardMap`)
                     .then((response) => {
                         this.popList = response.data.data
                         this.pops = this.popList
-                        console.log('Busca los POP')
+                        // console.log('Busca los POP')
                     })
                 } else {
                     if (this.core && !this.popsCore.length) {
-                        this.popList.forEach(this.popsPushCore)
-                        console.log('Busca los POP core')
+                        this.popList.forEach(element => {
+                            if (element.classification_type_id == 1) {
+                                this.popsCore.push(element)
+                                this.pops = this.popsCore
+                            }
+                        })
+                        // console.log('Busca los POP core')
                     } else if (this.core) {
-                        console.log('Ya estaban seteados los POP core')
+                        // console.log('Ya estaban seteados los POP core')
                         this.pops = this.popsCore
                     } else {
-                        console.log('Todos los POP')
+                        // console.log('Todos los POP')
                         this.pops = this.popList
                     }
                 }
             },
-
             getPopsCrm() {
                 this.popsCrm = []
-                this.popList.forEach(this.popPushCrm)
+                this.popList.forEach(element => {
+                    if (this.core) {
+                        if (element.crm_id == this.selectedCrm.id && element.classification_type_id == 1) {
+                            this.popsCrm.push(element)
+                        }
+                    } else {
+                        if (element.crm_id == this.selectedCrm.id) {
+                            this.popsCrm.push(element)
+                        }
+                    }
+                })
                 this.pops = this.popsCrm
             },
-
             getPopsZona() {
                 this.popsZona = []
-                this.popList.forEach(this.popPushZona)
+                this.popList.forEach(element => {
+                    if (this.core) {
+                        if (element.zona_id == this.selectedZona.id && element.classification_type_id == 1) {
+                            this.popsZona.push(element)
+                        }
+                    } else {
+                        if (element.zona_id == this.selectedZona.id) {
+                            this.popsZona.push(element)
+                        }
+                    }
+                })
                 this.pops = this.popsZona
             },
 
-            popsPushCore(item, index) {
-                if (item.classification_type_id == 1) {
-                    this.popsCore.push(item)
-                    this.pops = this.popsCore
-                }
-            },
+            // popsPushCore(item, index) {
+            //     if (item.classification_type_id == 1) {
+            //         this.popsCore.push(item)
+            //         this.pops = this.popsCore
+            //     }
+            // },
 
-            popPushCrm(item, index) {
-                if (this.core) {
-                    if (item.crm_id == this.selectedCrm.id && item.classification_type_id == 1) {
-                        this.popsCrm.push(item)
-                    }
-                } else {
-                    if (item.crm_id == this.selectedCrm.id) {
-                        this.popsCrm.push(item)
-                    }
-                }
-            },
+            // popPushCrm(item, index) {
+            //     if (this.core) {
+            //         if (item.crm_id == this.selectedCrm.id && item.classification_type_id == 1) {
+            //             this.popsCrm.push(item)
+            //         }
+            //     } else {
+            //         if (item.crm_id == this.selectedCrm.id) {
+            //             this.popsCrm.push(item)
+            //         }
+            //     }
+            // },
 
-            popPushZona(item, index) {
-                if (this.core) {
-                    if (item.zona_id == this.selectedZona.id && item.classification_type_id == 1) {
-                        this.popsZona.push(item)
-                    }
-                } else {
-                    if (item.zona_id == this.selectedZona.id) {
-                        this.popsZona.push(item)
-                    }
-                }
+            // popPushZona(item, index) {
+            //     if (this.core) {
+            //         if (item.zona_id == this.selectedZona.id && item.classification_type_id == 1) {
+            //             this.popsZona.push(item)
+            //         }
+            //     } else {
+            //         if (item.zona_id == this.selectedZona.id) {
+            //             this.popsZona.push(item)
+            //         }
+            //     }
+            // },
+
+            // CONTERS
+            getCounters() {
+                axios.get(`/api/dashboard?core=${this.core}&crm_id=${ this.selectedCrm ? this.selectedCrm.id : 0 }&zona_id=${ this.selectedZona ? this.selectedZona.id : 0 }`)
+                .then((response) => {
+                    this.popsQuantity = response.data.pops
+                    this.sitesQuantity = response.data.sites
+                    this.technologiesQuantity = response.data.technologies
+                })
             },
 
             // Triggers
@@ -695,6 +806,13 @@
             },
             selectZona(zona) {
                 this.selectedZona = this.selectedZona != zona ? zona : null
+            },
+
+            lastUpdate() {
+                axios.get(`/api/lastUpdateData`)
+                .then((response) => {
+                    this.lastUpdateData = response.data
+                })
             },
         
 
@@ -729,14 +847,17 @@
                     this.popSearch = []
                 }
             },
+
             clearSearch() {
                 this.popSearch = []
                 this.searchText = ''
                 this.selectedPop = null
             },
+
             clickOutside() {
                 this.active = null
             },
+
             setActive() {
                 this.active = 1
             },

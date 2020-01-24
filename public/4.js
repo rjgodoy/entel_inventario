@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/PopMapView.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/PopMapView.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapView.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -81,15 +81,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['pop', 'classification', 'darkMode'],
+  props: ['selectedPop', 'selectedPops', 'map_attributes', 'darkMode', 'criticPopsSwitch', 'pops'],
   data: function data() {
     return {
-      pops: null,
-      dependences: null,
-      center: null,
+      selectedPopMap: null,
       map: null,
+      zoom: this.map_attributes.zoom,
+      center: {
+        lat: this.map_attributes.latitude,
+        lng: this.map_attributes.longitude
+      },
       infoContent: '',
       infoWindowPos: {
         lat: 0,
@@ -103,15 +129,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           height: -35
         }
       },
-      icon: '../img/markers/entel-pin-32.png',
+      icon: '../img/markers/pin_entel_sm.png',
       mapStyle: null,
-      dependencesActive: 0,
+      // clusterActive: 1,
       buttonText: '',
-      dependencesLines: [{
-        lat: parseFloat(this.pop.latitude),
-        lng: parseFloat(this.pop.longitude)
-      }],
-      flightPath: null,
       style1: [{
         "featureType": "water",
         "stylers": [{
@@ -656,13 +677,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__["gmapApi"]
   },
   created: function created() {
-    if (this.darkMode == 1) {
-      this.mapStyle = this.style2;
-    } else {
-      this.mapStyle = null;
-    }
-
-    this.getPop();
+    this.mapStyle = this.darkMode == 1 ? this.style2 : this.mapStyle = null;
   },
   mounted: function () {
     var _mounted = _asyncToGenerator(
@@ -672,10 +687,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              this.initializeMap();
-              this.dependencesButton();
+              // if (this.clusterActive == 1) {
+              //     this.buttonText = 'Desagrupar'
+              // } else {
+              //     this.buttonText = 'Agrupar'
+              // }
+              this.setPops(); // this.$refs.map.$mapPromise.then((map) => {
+              //     var myButton = document.getElementById('myClusterButton');
+              //     myButton.index = 1;
+              //     map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton)
+              // })
 
-            case 2:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -690,26 +713,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return mounted;
   }(),
   watch: {
+    pops: function pops(newValue, oldValue) {
+      this.setPops();
+    },
+    selectedPop: function selectedPop(newValue, oldValue) {
+      newValue != null ? this.setPop() : this.setPops();
+    },
     darkMode: function darkMode(newValue, oldValue) {
-      if (newValue == 1) {
-        this.mapStyle = this.style2;
-      } else {
-        this.mapStyle = null;
-      }
-    }
+      this.mapStyle = newValue == 1 ? this.style2 : null;
+    },
+    criticPopsSwitch: function criticPopsSwitch(newValue, oldValue) {
+      this.setPops();
+    } // selectedPops(newValue, oldValue) {
+    //     if (newValue.length != 0) {
+    //         this.pops = newValue
+    //         //Set bounds of the map                    
+    //         this.$refs.map.$mapPromise.then((map) => {
+    //             var bounds = new google.maps.LatLngBounds()
+    //             // Create bounds from pops
+    //             for (let m of this.pops) {
+    //                 // console.log(m)
+    //                 bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
+    //             }
+    //             // Don't zoom in too far on only one marker
+    //             if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+    //                 var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+    //                 var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+    //                 bounds.extend(extendPoint1);
+    //                 bounds.extend(extendPoint2);
+    //             }
+    //             map.fitBounds(bounds)
+    //         });
+    //     } else {
+    //         this.setPops()
+    //     }
+    // }
+
   },
   methods: {
-    initializeMap: function initializeMap() {
-      var _this = this;
-
-      this.$refs.map.$mapPromise.then(function (map) {
-        map.panTo({
-          lat: parseFloat(_this.pop.latitude),
-          lng: parseFloat(_this.pop.longitude)
-        });
-        map.setZoom(16);
-      });
-    },
     toggleInfoWindow: function toggleInfoWindow(pop, idx) {
       this.infoWindowPos = {
         lat: parseFloat(pop.latitude),
@@ -733,101 +774,88 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     getInfoWindowContent: function getInfoWindowContent(pop) {
-      return "\n                <div class=\"card\">\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(this.classification.classification_type_id == 1 ? 'is-danger' : this.classification.classification_type_id == 2 ? 'is-warning' : this.classification.classification_type_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(this.classification.classification_type.classification_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"title is-4\">").concat(pop.nombre, "</p>\n                                <p class=\"subtitle is-6\">").concat(pop.direccion, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n                            Phasellus nec iaculis mauris. <a>@bulmaio</a>.\n                            <a href=\"#\">#css</a> <a href=\"#\">#responsive</a>\n                            <br>\n                            <time datetime=\"2016-1-1\">11:09 PM - 1 Jan 2016</time>\n                            <a v-if=\"").concat(pop.id == this.pop.id, "\" href=\"/pop/").concat(pop.id, "\" class=\"button is-small\">Ver POP</a>\n                        </div>\n                    </div>\n                </div>\n            ");
+      return "\n                <div class=\"card\">\n                    <!--div class=\"card-image\">\n                        <figure class=\"image is-4by3\">\n                            <img src=\"https://bulma.io/images/placeholders/640x480.png\" alt=\"Placeholder image\">\n                        </figure>\n                    </div-->\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(pop.classification_type_id == 1 ? 'is-danger' : pop.classification_type_id == 2 ? 'is-warning' : pop.classification_type_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(pop.classification_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(pop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.nombre_zona, ", CRM ").concat(pop.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/main#/pop/").concat(pop.pop_id, "\" target=\"_blank\" class=\"button is-outlined is-primary is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
     },
-    getPop: function getPop() {
-      this.pops = [this.pop];
-    },
-    getDependences: function getDependences() {
-      var _this2 = this;
-
-      if (this.dependencesActive == 0) {
-        this.dependencesActive = 1;
-        this.buttonText = 'POP';
-        axios.get("/api/dependence/".concat(this.pop.id)).then(function (response) {
-          _this2.dependences = response.data.data;
-
-          if (_this2.dependences != null) {
-            _this2.dependences.forEach(_this2.dependencesLocations); //Set bounds of the map
-
-
-            _this2.$refs.map.$mapPromise.then(function (map) {
-              // Create bounds from pops
-              var _iteratorNormalCompletion = true;
-              var _didIteratorError = false;
-              var _iteratorError = undefined;
-
-              try {
-                for (var _iterator = _this2.pops[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                  var m = _step.value;
-                  _this2.dependencesLines = [{
-                    lat: parseFloat(_this2.pop.latitude),
-                    lng: parseFloat(_this2.pop.longitude)
-                  }, {
-                    lat: parseFloat(m.latitude),
-                    lng: parseFloat(m.longitude)
-                  }];
-                  _this2.flightPath = new google.maps.Polyline({
-                    path: _this2.dependencesLines,
-                    geodesic: true,
-                    strokeColor: '#FF8001',
-                    strokeOpacity: 1.0,
-                    strokeWeight: 0.5
-                  });
-
-                  _this2.flightPath.setMap(map);
-                }
-              } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-              } finally {
-                try {
-                  if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                    _iterator["return"]();
-                  }
-                } finally {
-                  if (_didIteratorError) {
-                    throw _iteratorError;
-                  }
-                }
-              }
-
-              map.setZoom(15);
-            });
-          }
-        });
-      } else {
-        this.buttonText = 'Dependencias';
-        this.getPop();
-        this.initializeMap();
-        this.dependencesActive = 0;
-      }
-    },
-    dependencesLocations: function dependencesLocations(item, index) {
-      this.pops.push(item.dependence);
-    },
-    dependencesButton: function dependencesButton() {
-      if (this.dependencesActive == 0) {
-        this.buttonText = 'Dependencias';
-      } else {
-        this.buttonText = 'POP';
-      }
+    setPops: function setPops() {
+      var _this = this;
 
       this.$refs.map.$mapPromise.then(function (map) {
-        var myButton = document.getElementById('myDependencesButton');
-        myButton.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton);
+        var bounds = new google.maps.LatLngBounds();
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = _this.pops[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var m = _step.value;
+            bounds.extend({
+              lat: parseFloat(m.latitude),
+              lng: parseFloat(m.longitude)
+            });
+          } // Don't zoom in too far on only one pop
+
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+          var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+          var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+          bounds.extend(extendPoint1);
+          bounds.extend(extendPoint2);
+        }
+
+        map.fitBounds(bounds);
       });
-    }
+    },
+    setPop: function setPop() {
+      var _this2 = this;
+
+      this.$refs.map.$mapPromise.then(function (map) {
+        map.panTo({
+          lat: parseFloat(_this2.selectedPop.latitude),
+          lng: parseFloat(_this2.selectedPop.longitude)
+        });
+        map.setZoom(15);
+      });
+    } // getPopData(pop) { 
+    //     console.log(pop)
+    //     axios.get(`/api/pop/${pop.pop_id}`)
+    //     .then((response) => {
+    //         console.log(response.data.data)
+    //         this.selectedPopMap = response.data.data
+    //     })
+    // }
+    // cluster() {
+    //     if (this.clusterActive == 0) {
+    //         this.clusterActive = 1,
+    //         this.buttonText = 'Desagrupar'
+    //     } else {
+    //         this.clusterActive = 0
+    //         this.buttonText = 'Agrupar'
+    //     }
+    // }
+
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/PopMapView.vue?vue&type=template&id=6f3a01ad&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/PopMapView.vue?vue&type=template&id=6f3a01ad& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458& ***!
+  \***************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -840,17 +868,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "gmap-map",
+    "GmapMap",
     {
       ref: "map",
       staticClass: "tile is-child box",
       staticStyle: { height: "100%" },
       attrs: {
-        center: {
-          lat: parseFloat(this.pop.latitude),
-          lng: parseFloat(this.pop.longitude)
-        },
-        zoom: 15,
+        center: _vm.center,
+        zoom: _vm.zoom,
         "map-type-id": "roadmap",
         options: {
           zoomControl: true,
@@ -860,35 +885,15 @@ var render = function() {
           rotateControl: false,
           fullscreenControl: true,
           disableDefaultUi: false,
-          gestureHandling: "cooperative",
           styles: _vm.mapStyle
         }
       }
     },
     [
-      _c("div", { attrs: { id: "myDependencesButton" } }, [
-        _c(
-          "button",
-          {
-            staticClass: "button is-default",
-            staticStyle: {
-              border: "2px solid #fff",
-              borderRadius: "3px",
-              boxShadow: "0 1px 5px rgba(0,0,0,.15)",
-              marginTop: "10px",
-              marginLeft: "10px",
-              textAlign: "center"
-            },
-            on: { click: _vm.getDependences }
-          },
-          [_vm._v("\n            " + _vm._s(_vm.buttonText) + "\n        ")]
-        )
-      ]),
-      _vm._v(" "),
       _vm._l(_vm.pops, function(pop, index) {
-        return _c("gmap-marker", {
+        return _c("GmapMarker", {
           key: index,
-          ref: "myPop",
+          ref: "myMarker",
           refInFor: true,
           attrs: {
             clickable: true,
@@ -935,17 +940,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/PopMapView.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/maps/PopMapView.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/components/maps/MapView.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/maps/MapView.vue ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PopMapView_vue_vue_type_template_id_6f3a01ad___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopMapView.vue?vue&type=template&id=6f3a01ad& */ "./resources/js/components/maps/PopMapView.vue?vue&type=template&id=6f3a01ad&");
-/* harmony import */ var _PopMapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopMapView.vue?vue&type=script&lang=js& */ "./resources/js/components/maps/PopMapView.vue?vue&type=script&lang=js&");
+/* harmony import */ var _MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MapView.vue?vue&type=template&id=d5114458& */ "./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&");
+/* harmony import */ var _MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MapView.vue?vue&type=script&lang=js& */ "./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -955,9 +960,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PopMapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PopMapView_vue_vue_type_template_id_6f3a01ad___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PopMapView_vue_vue_type_template_id_6f3a01ad___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -967,38 +972,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/maps/PopMapView.vue"
+component.options.__file = "resources/js/components/maps/MapView.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/PopMapView.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/maps/PopMapView.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/maps/MapView.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopMapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopMapView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/PopMapView.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopMapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/PopMapView.vue?vue&type=template&id=6f3a01ad&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/maps/PopMapView.vue?vue&type=template&id=6f3a01ad& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458& ***!
+  \*********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopMapView_vue_vue_type_template_id_6f3a01ad___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopMapView.vue?vue&type=template&id=6f3a01ad& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/PopMapView.vue?vue&type=template&id=6f3a01ad&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopMapView_vue_vue_type_template_id_6f3a01ad___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapView.vue?vue&type=template&id=d5114458& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopMapView_vue_vue_type_template_id_6f3a01ad___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

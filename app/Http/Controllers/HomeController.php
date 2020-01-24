@@ -31,17 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $last_update_pops = Pop::orderBy('updated_at', 'desc')->first()->updated_at;
-        $last_update_sites = Site::orderBy('updated_at', 'desc')->first()->updated_at;;
-        $last_update_technologies = Technology::orderBy('updated_at', 'desc')->first()->updated_at;;
-
-        return view('home', compact(
-                'last_update_pops',
-                'last_update_sites',
-                'last_update_technologies'
-            )
-        );
-    
+        return view('main');
     }
     
 }

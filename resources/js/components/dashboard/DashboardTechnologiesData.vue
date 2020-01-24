@@ -1,18 +1,18 @@
 <template>
-    <div class="tile is-parent">
+    <div class="tile is-parent is-vertical">
         <article class="tile is-child box" :class="boxBackground" style="overflow-y: scroll;">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Tecnologías</div>
                 <!-- <div class="column has-text-centered">
                     <button data-toggle="button" class="button is-small is-link" type="button">CORE</button>
                 </div> -->
-                <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
+                <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.totalTechnologies | numeral('0,0') }}</div>
             </div>
             
             <table class="table is-fullwidth" :class="boxBackground">
                 <thead>
                     <tr class="is-size-7">
-                        <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
+                        <th class="" :class="secondaryText">{{ selectedCrm == null ? 'CRM' : (selectedZona == null ? 'Zona' : 'Comuna') }}</th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="2G">2G 1900</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="3G 900">3G 900</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="3G 1900">3G 1900</abbr></th>
@@ -47,7 +47,7 @@
                         <td class="has-text-right" :class="primaryText">{{ this.total4G1900 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ this.total4G2600 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ this.total4G3500 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalTechnologies | numeral('0,0') }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -74,116 +74,137 @@
                 </div>
             </div>
         </article>
+
+        <chart
+            :chartData="technologyData"
+        ></chart>
+
     </div>
 </template>
 
 <script>
+    const RadialChart = () => ({
+        // The component to load (should be a Promise)
+        component: import('../RadialChart.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
     export default {
+        components: {
+            'chart': RadialChart
+        },
         props : [
             'selectedCrm',
             'selectedZona',
+            'core',
+            
             'bodyBackground',
             'boxBackground',
             'primaryText',
             'secondaryText',
-            'core',
             'last_updated'
         ],
         data() {
             return {
-                crmSelected: this.selectedCrm,
-                zonaSelected: this.selectedZona,
-                technologyData: null,
-                total: 0,
-                total2G1900: 0,
-                total3G900: 0,
-                total3G1900: 0,
-                total3G3500: 0,
-                total4G700: 0,
-                total4G1900: 0,
-                total4G2600: 0,
-                total4G3500: 0,
+                technologyData: [],
                 buttonLoading: 0
             }
         },
         created() {
-            this.getTechnologyData()
         },
-        mounted() {            
+        mounted() {   
+            this.getTechnologyData()         
         },
         watch: {
             selectedCrm(newValue, oldValue) {
-                this.crmSelected = newValue
-                this.zonaSelected = null
                 this.getTechnologyData()
             },
             selectedZona(newValue, oldValue) {
-                this.zonaSelected = newValue
                 this.getTechnologyData()
             },
             core(newValue, oldValue) {
                 this.getTechnologyData()
             }
         },
-        methods: {
+        computed: {
+            total2G1900() {
+                var counter = 0
+                this.technologyData.forEach(element => counter = counter + element.tec2g1900)
+                return counter
+            },
+            total3G900() {
+                var counter = 0
+                this.technologyData.forEach(function(item) { counter = counter + item.tec3g900 })
+                return counter
+            },
+            total3G1900() {
+                var counter = 0
+                this.technologyData.forEach(function(item) { counter = counter + item.tec3g1900 })
+                return counter
+            },
+            total3G3500() {
+                var counter = 0
+                this.technologyData.forEach(function(item) { counter = counter + item.tec3g3500 })
+                return counter
+            },
+            total4G700() {
+                var counter = 0
+                this.technologyData.forEach(function(item) { counter = counter + item.tec4g700 })
+                return counter
+            },
+            total4G1900() {
+                var counter = 0
+                this.technologyData.forEach(function(item) { counter = counter + item.tec4g1900 })
+                return counter
+            },
+            total4G2600() {
+                var counter = 0
+                this.technologyData.forEach(function(item) { counter = counter + item.tec4g2600 })
+                return counter
+            },
+            total4G3500() {
+                var counter = 0
+                this.technologyData.forEach(function(item) { counter = counter + item.tec4g3500 })
+                return counter
+            },
             totalTechnologies() {
-                this.total = 0
-                this.total2G1900 = 0
-                this.total3G900 = 0
-                this.total3G1900 = 0
-                this.total3G3500 = 0
-                this.total4G700 = 0
-                this.total4G1900 = 0
-                this.total4G2600 = 0
-                this.total4G3500 = 0
-                this.technologyData.forEach(this.counter)
-            },
-            counter(item, index) {
-                this.total2G1900 = this.total2G1900 + item.tec2g1900
-                this.total3G900 = this.total3G900 + item.tec3g900
-                this.total3G1900 = this.total3G1900 + item.tec3g1900
-                this.total3G3500 = this.total3G3500 + item.tec3g3500
-                this.total4G700 = this.total4G700 + item.tec4g700
-                this.total4G1900 = this.total4G1900 + item.tec4g1900
-                this.total4G2600 = this.total4G2600 + item.tec4g2600
-                this.total4G3500 = this.total4G3500 + item.tec4g3500
-                this.total = this.total + item.tec2g1900 + item.tec3g900 + item.tec3g1900 + item.tec3g3500 + item.tec4g700 + item.tec4g1900 + item.tec4g2600 + item.tec4g3500;
-
-            },
+                return this.total2G1900 + this.total3G900 + this.total3G1900 + this.total3G3500 + this.total4G700 + this.total4G1900 + this.total4G2600 + this.total4G3500
+            }
+        },
+        methods: {
             getTechnologyData() {
-                if (this.zonaSelected != null) {
-                    axios.get(`api/technologyDataZona?zona_id=${this.zonaSelected.id}&core=${this.core}`)
-                        .then((response) => {
-                            this.technologyData = response.data.data;
-                            this.totalTechnologies()
-                        })
-                        .catch(() => {
-                            console.log('handle server error from here');
-                        });
-                } else if (this.crmSelected != null){
-                    axios.get(`api/technologyDataCrm?crm_id=${this.crmSelected.id}&core=${this.core}`)
-                        .then((response) => {
-                            this.technologyData = response.data.data;
-                            this.totalTechnologies()
-                        })
-                        .catch(() => {
-                            console.log('handle server error from here');
-                        });
+                if (!this.selectedCrm) {
+                    axios.get(`/api/technologyData?core=${this.core}`)
+                    .then((response) => {
+                        this.technologyData = response.data.data;
+                        // this.totalTechnologies()
+                    })
+                } else if (!this.selectedZona){
+                    axios.get(`/api/technologyDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
+                    .then((response) => {
+                        this.technologyData = response.data.data;
+                        // this.totalTechnologies()
+                    })
                 } else {
-                    axios.get(`api/technologyData?core=${this.core}`)
-                        .then((response) => {
-                            this.technologyData = response.data.data;
-                            this.totalTechnologies()
-                        })
-                        .catch(() => {
-                            console.log('handle server error from here');
-                        });
+                    axios.get(`/api/technologyDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
+                    .then((response) => {
+                        this.technologyData = response.data.data;
+                        // this.totalTechnologies()
+                    })
                 }
             },
             downloadTechnologies() {
                 this.buttonLoading = 1
 
-                axios.get(`/pop/export?core=${this.core}&crm_id=${this.crmSelected ? this.crmSelected.id : 0}&zona_id=${this.zonaSelected ? this.zonaSelected.id : 0}`, {
+                axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
                     responseType: 'blob',
                 })
                 .then((response) => {

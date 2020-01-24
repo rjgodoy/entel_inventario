@@ -21,10 +21,14 @@
 </head>
 <body>
     <div id="app">
-            <navbar
+        <app
+            :app_name="'{{ config('app.name') }}'"
+            :user='@json(Auth::user())'
+        ></app>
+            {{-- <navbar
                 :app_name="'{{ config('app.name') }}'"
                 :user='@json(Auth::user())'
-            ></navbar>
+            ></navbar> --}}
 
             {{-- <section class="columns has-background-black-ter" style="margin: -20px 0 -20px 0;">
                 <div class="column is-3 hero is-small">

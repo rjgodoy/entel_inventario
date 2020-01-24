@@ -15,10 +15,6 @@
 @endif
 
 <dashboard
-	:message="'{{ session()->get('message') }}'"
-    :last_update_pops="'{{ $last_update_pops }}'"
-    :last_update_sites="'{{ $last_update_sites }}'"
-    :last_update_technologies="'{{ $last_update_technologies }}'"
 />
 
 @endsection

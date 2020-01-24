@@ -91,10 +91,10 @@
                         
                         <tbody>
                             <tr class="is-size-7 has-text-weight-light" v-for="pop in pops.data">
-                                <td class="has-text-weight-light" :class="primaryText">{{ pop.pop_id }}</td>
+                                <td class="has-text-weight-light" :class="primaryText">{{ pop.id }}</td>
                                 <td class="">
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? (pop.nem_fijo && pop.nem_movil ? pop.nem_fijo + ' - ' + pop.nem_movil : (pop.nem_fijo ? pop.nem_fijo : pop.nem_movil)) : 'No tiene nemónico' }}
+                                        {{ pop ? pop.sites[0].nem_site : '' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-semibold" :class="primaryText">
                                         {{ pop ? pop.nombre : '' }}
@@ -105,24 +105,24 @@
                                         {{ pop ? pop.direccion : '' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? pop.nombre_comuna : '' }}
+                                        {{ pop.comuna ? pop.comuna.nombre : '' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? 'Zona: ' + pop.nombre_zona : '' }} - {{ pop ? 'CRM: ' + pop.nombre_crm : '' }}
+                                        {{ pop.comuna.zona ? 'Zona: ' + pop.comuna.zona.nombre : '' }} - {{ pop.comuna.zona.crm ? 'CRM: ' + pop.comuna.zona.crm.nombre : '' }}
                                     </div>
                                 </td>
 
                                 <td>
                                     <div class="field is-pulled-right">
                                         <!-- <div class="tags has-addons"> -->
-                                            <span 
+                                            <!-- span 
                                                 class="tag has-text-weight-bold is-size-7" 
                                                 :class="pop.classification_type_id == 1 ? 'is-danger' : 
                                                     (pop.classification_type_id == 2 ? 'is-warning' : 
                                                     (pop.classification_type_id == 3 ? 'is-blue' : 'is-link'))"
                                             >
-                                                {{ pop ? pop.classification_type : '' }}
-                                            </span>
+                                                {{ pop ? pop.sites : '' }}
+                                            </span> -->
                                         <!-- </div> -->
                                     </div>
                                 </td>
@@ -130,7 +130,7 @@
                                 <td class="has-text-weight-light has-text-centered" :class="primaryText">
                                     <a 
                                         class="button is-small is-link is-outlined has-tooltip-left" 
-                                        :href="'/pop/' + pop.pop_id" 
+                                        :href="'/main#/pop/' + pop.pop_id" 
                                         type="button" 
                                         target="_blank"  
                                         data-tooltip="Ver información completa"
@@ -249,13 +249,18 @@
             'vue-pagination': VuePagination
         },
         props : [
-            'map_attributes'
         ],
         data() {
             return {
                 core: 0,
                 crms: null,
                 zonas: null,
+
+                map_attributes: {
+                    latitude: -33.44444275,
+                    longitude: -70.6561017,
+                    zoom: 5
+                },
 
                 darkMode: 0,
                 bodyBackground: '',
@@ -286,7 +291,7 @@
             }
         },
         created() {
-            this.styleMode()
+            // this.styleMode()
             this.getCrms()
         },
         mounted() {
@@ -295,13 +300,8 @@
         methods: {
             // Triggers
             switchCore() {
-                if (this.core == 0) {
-                    this.core = 1
-                    this.search()
-                } else {
-                    this.core = 0
-                    this.search()
-                }
+                this.core = this.core == 0 ? 1 : 0
+                this.search()
             },
             selectPop(pop) {
                 this.selectedPop = pop
@@ -309,22 +309,14 @@
             selectCrm(crm) {
                 // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
                 // si había una zona seleccionada, la variable selectedZona será null.
-                if (this.selectedCrm != crm) {
-                    this.selectedCrm = crm                    
-                } else {
-                    this.selectedCrm = null
-                }
+                this.selectedCrm = !this.selectedCrm ? crm : null
                 this.selectedZona = null
-                this.getZonas(this.selectedCrm)
+                this.zonas = crm.zonas
                 this.getPops()
                 this.search()
             },
             selectZona(zona) {
-                if (this.selectedZona != zona) {
-                    this.selectedZona = zona
-                } else {
-                    this.selectedZona = null
-                }
+                this.selectedZona = this.selectedZona != zona ? zona : null
                 this.getPops()
                 this.search()
             },
@@ -369,19 +361,7 @@
                         console.log('handle server error from here');
                     });
             },
-            getZonas(crm) {
-                if (crm != null) {
-                    axios.get(`/api/zonasCrm/${crm.id}`)
-                        .then((response) => {
-                            this.zonas = response.data.data;
-                        })
-                        .catch(() => {
-                            console.log('handle server error from here');
-                        });
-                } else {
-                    this.zonas = null
-                }
-            },
+    
             search() {
                 if (this.searchText != '') {
                     if (this.selectedCrm == null) {

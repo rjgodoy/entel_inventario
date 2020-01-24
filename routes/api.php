@@ -20,6 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('menu', 'Api\MainController@menu');
 
 ### DASHBOARD ######################################################################
+	// POP DATA
+		Route::apiResource('dashboard','Api\DashboardApiController');
+
+		Route::get('lastUpdateData', 'Api\DashboardApiController@lastData');
+
 	// CRMs
 		Route::apiResource('crms','Api\CrmController');
 
@@ -33,6 +38,8 @@ Route::get('menu', 'Api\MainController@menu');
 		Route::get('dashboardMap','Api\DashboardApiController@dashboardMap');
 
 	// Pop Data box
+		
+
 		Route::get('popData', 'Api\DashboardApiController@popData');
 		Route::get('popDataCrm', [
 			'as' => 'dashboard.popDataCrm',
@@ -278,5 +285,7 @@ Route::get('menu', 'Api\MainController@menu');
 ### POP DETAIL ######################################################################
 
 	Route::apiResource('dependence','Api\DependenceController');
+
+	Route::get('popTechnologies', 'Api\PopController@technologies');
 
 ##############################################################################################

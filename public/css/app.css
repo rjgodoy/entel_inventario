@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Barlow&display=swap);/* (ignored) *//* (ignored) */@keyframes spinAround {
+@import url(https://fonts.googleapis.com/css?family=Barlow&display=swap);/* (ignored) *//* (ignored) *//* (ignored) */@keyframes spinAround {
   from {
     transform: rotate(0deg);
   }
@@ -946,23 +946,23 @@ table th {
 }
 
 .is-size-1 {
-  font-size: 3rem !important;
+  font-size: 2.9rem !important;
 }
 
 .is-size-2 {
-  font-size: 2.5rem !important;
+  font-size: 2.4rem !important;
 }
 
 .is-size-3 {
-  font-size: 2rem !important;
+  font-size: 1.9rem !important;
 }
 
 .is-size-4 {
-  font-size: 1.5rem !important;
+  font-size: 1.4rem !important;
 }
 
 .is-size-5 {
-  font-size: 1.1rem !important;
+  font-size: 1.15rem !important;
 }
 
 .is-size-6 {
@@ -970,28 +970,28 @@ table th {
 }
 
 .is-size-7 {
-  font-size: 0.7rem !important;
+  font-size: 0.65rem !important;
 }
 
 @media screen and (max-width: 768px) {
   .is-size-1-mobile {
-    font-size: 3rem !important;
+    font-size: 2.9rem !important;
   }
 
   .is-size-2-mobile {
-    font-size: 2.5rem !important;
+    font-size: 2.4rem !important;
   }
 
   .is-size-3-mobile {
-    font-size: 2rem !important;
+    font-size: 1.9rem !important;
   }
 
   .is-size-4-mobile {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
   }
 
   .is-size-5-mobile {
-    font-size: 1.1rem !important;
+    font-size: 1.15rem !important;
   }
 
   .is-size-6-mobile {
@@ -999,29 +999,29 @@ table th {
   }
 
   .is-size-7-mobile {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
   }
 }
 
 @media screen and (min-width: 769px), print {
   .is-size-1-tablet {
-    font-size: 3rem !important;
+    font-size: 2.9rem !important;
   }
 
   .is-size-2-tablet {
-    font-size: 2.5rem !important;
+    font-size: 2.4rem !important;
   }
 
   .is-size-3-tablet {
-    font-size: 2rem !important;
+    font-size: 1.9rem !important;
   }
 
   .is-size-4-tablet {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
   }
 
   .is-size-5-tablet {
-    font-size: 1.1rem !important;
+    font-size: 1.15rem !important;
   }
 
   .is-size-6-tablet {
@@ -1029,29 +1029,29 @@ table th {
   }
 
   .is-size-7-tablet {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
   }
 }
 
 @media screen and (max-width: 1023px) {
   .is-size-1-touch {
-    font-size: 3rem !important;
+    font-size: 2.9rem !important;
   }
 
   .is-size-2-touch {
-    font-size: 2.5rem !important;
+    font-size: 2.4rem !important;
   }
 
   .is-size-3-touch {
-    font-size: 2rem !important;
+    font-size: 1.9rem !important;
   }
 
   .is-size-4-touch {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
   }
 
   .is-size-5-touch {
-    font-size: 1.1rem !important;
+    font-size: 1.15rem !important;
   }
 
   .is-size-6-touch {
@@ -1059,29 +1059,29 @@ table th {
   }
 
   .is-size-7-touch {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .is-size-1-desktop {
-    font-size: 3rem !important;
+    font-size: 2.9rem !important;
   }
 
   .is-size-2-desktop {
-    font-size: 2.5rem !important;
+    font-size: 2.4rem !important;
   }
 
   .is-size-3-desktop {
-    font-size: 2rem !important;
+    font-size: 1.9rem !important;
   }
 
   .is-size-4-desktop {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
   }
 
   .is-size-5-desktop {
-    font-size: 1.1rem !important;
+    font-size: 1.15rem !important;
   }
 
   .is-size-6-desktop {
@@ -1089,29 +1089,29 @@ table th {
   }
 
   .is-size-7-desktop {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
   }
 }
 
 @media screen and (min-width: 1216px) {
   .is-size-1-widescreen {
-    font-size: 3rem !important;
+    font-size: 2.9rem !important;
   }
 
   .is-size-2-widescreen {
-    font-size: 2.5rem !important;
+    font-size: 2.4rem !important;
   }
 
   .is-size-3-widescreen {
-    font-size: 2rem !important;
+    font-size: 1.9rem !important;
   }
 
   .is-size-4-widescreen {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
   }
 
   .is-size-5-widescreen {
-    font-size: 1.1rem !important;
+    font-size: 1.15rem !important;
   }
 
   .is-size-6-widescreen {
@@ -1119,29 +1119,29 @@ table th {
   }
 
   .is-size-7-widescreen {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
   }
 }
 
 @media screen and (min-width: 1408px) {
   .is-size-1-fullhd {
-    font-size: 3rem !important;
+    font-size: 2.9rem !important;
   }
 
   .is-size-2-fullhd {
-    font-size: 2.5rem !important;
+    font-size: 2.4rem !important;
   }
 
   .is-size-3-fullhd {
-    font-size: 2rem !important;
+    font-size: 1.9rem !important;
   }
 
   .is-size-4-fullhd {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
   }
 
   .is-size-5-fullhd {
-    font-size: 1.1rem !important;
+    font-size: 1.15rem !important;
   }
 
   .is-size-6-fullhd {
@@ -1149,7 +1149,7 @@ table th {
   }
 
   .is-size-7-fullhd {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
   }
 }
 
@@ -4679,7 +4679,7 @@ fieldset[disabled] .button.is-blackRussian.is-inverted.is-outlined {
 
 .button.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .button.is-normal {
@@ -4687,11 +4687,11 @@ fieldset[disabled] .button.is-blackRussian.is-inverted.is-outlined {
 }
 
 .button.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .button.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .button[disabled],
@@ -4758,15 +4758,15 @@ fieldset[disabled] .button {
 
 .buttons.are-small .button:not(.is-normal):not(.is-medium):not(.is-large) {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .buttons.are-medium .button:not(.is-small):not(.is-normal):not(.is-large) {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .buttons.are-large .button:not(.is-small):not(.is-normal):not(.is-medium) {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .buttons.has-addons .button:not(:first-child) {
@@ -5067,15 +5067,15 @@ fieldset[disabled] .button {
 }
 
 .content.is-small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .content.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .content.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .icon {
@@ -5742,15 +5742,15 @@ fieldset[disabled] .button {
 }
 
 .progress.is-small {
-  height: 0.7rem;
+  height: 0.65rem;
 }
 
 .progress.is-medium {
-  height: 1.1rem;
+  height: 1.15rem;
 }
 
 .progress.is-large {
-  height: 1.5rem;
+  height: 1.4rem;
 }
 
 @-webkit-keyframes moveIndeterminate {
@@ -6061,7 +6061,7 @@ fieldset[disabled] .button {
 }
 
 .tags.are-large .tag:not(.is-normal):not(.is-medium) {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .tags.is-centered {
@@ -6106,7 +6106,7 @@ fieldset[disabled] .button {
   border-radius: 4px;
   color: #4a4a4a;
   display: inline-flex;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   height: 2em;
   justify-content: center;
   line-height: 1.5;
@@ -6216,7 +6216,7 @@ fieldset[disabled] .button {
 }
 
 .tag:not(body).is-normal {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .tag:not(body).is-medium {
@@ -6224,7 +6224,7 @@ fieldset[disabled] .button {
 }
 
 .tag:not(body).is-large {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .tag:not(body) .icon:first-child:not(:last-child) {
@@ -6317,7 +6317,7 @@ a.tag:hover {
 
 .title {
   color: #363636;
-  font-size: 2rem;
+  font-size: 1.9rem;
   font-weight: 600;
   line-height: 1.125;
 }
@@ -6336,23 +6336,23 @@ a.tag:hover {
 }
 
 .title.is-1 {
-  font-size: 3rem;
+  font-size: 2.9rem;
 }
 
 .title.is-2 {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
 }
 
 .title.is-3 {
-  font-size: 2rem;
+  font-size: 1.9rem;
 }
 
 .title.is-4 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .title.is-5 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .title.is-6 {
@@ -6360,12 +6360,12 @@ a.tag:hover {
 }
 
 .title.is-7 {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .subtitle {
   color: #4a4a4a;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 400;
   line-height: 1.25;
 }
@@ -6380,23 +6380,23 @@ a.tag:hover {
 }
 
 .subtitle.is-1 {
-  font-size: 3rem;
+  font-size: 2.9rem;
 }
 
 .subtitle.is-2 {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
 }
 
 .subtitle.is-3 {
-  font-size: 2rem;
+  font-size: 1.9rem;
 }
 
 .subtitle.is-4 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .subtitle.is-5 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .subtitle.is-6 {
@@ -6404,7 +6404,7 @@ a.tag:hover {
 }
 
 .subtitle.is-7 {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .heading {
@@ -6432,7 +6432,7 @@ a.tag:hover {
   background-color: whitesmoke;
   border-radius: 290486px;
   display: inline-flex;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   height: 2em;
   justify-content: center;
   margin-right: 1.5rem;
@@ -6996,19 +6996,19 @@ fieldset[disabled] .select select:-ms-input-placeholder,
 .taginput .is-small.taginput-container.is-focusable,
 .is-small.textarea {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .is-medium.input,
 .taginput .is-medium.taginput-container.is-focusable,
 .is-medium.textarea {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .is-large.input,
 .taginput .is-large.taginput-container.is-focusable,
 .is-large.textarea {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .is-fullwidth.input,
@@ -7530,15 +7530,15 @@ fieldset[disabled] .select select:hover {
 
 .select.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .select.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .select.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .select.is-disabled::after {
@@ -7562,15 +7562,15 @@ fieldset[disabled] .select select:hover {
 }
 
 .select.is-loading.is-small:after {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .select.is-loading.is-medium:after {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .select.is-loading.is-large:after {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .file {
@@ -8094,11 +8094,11 @@ fieldset[disabled] .select select:hover {
 }
 
 .file.is-small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .file.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .file.is-medium .file-icon .fa {
@@ -8106,7 +8106,7 @@ fieldset[disabled] .select select:hover {
 }
 
 .file.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .file.is-large .file-icon .fa {
@@ -8290,20 +8290,20 @@ fieldset[disabled] .select select:hover {
 }
 
 .label.is-small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .label.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .label.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .help {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   margin-top: 0.25rem;
 }
 
@@ -8569,7 +8569,7 @@ fieldset[disabled] .select select:hover {
   }
 
   .field-label.is-small {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     padding-top: 0.375em;
   }
 
@@ -8578,12 +8578,12 @@ fieldset[disabled] .select select:hover {
   }
 
   .field-label.is-medium {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     padding-top: 0.375em;
   }
 
   .field-label.is-large {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     padding-top: 0.375em;
   }
 }
@@ -8644,7 +8644,7 @@ fieldset[disabled] .select select:hover {
 .control.has-icons-right .taginput .is-small.taginput-container.is-focusable ~ .icon,
 .taginput .control.has-icons-right .is-small.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-small ~ .icon {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .control.has-icons-left .input.is-medium ~ .icon,
@@ -8655,7 +8655,7 @@ fieldset[disabled] .select select:hover {
 .control.has-icons-right .taginput .is-medium.taginput-container.is-focusable ~ .icon,
 .taginput .control.has-icons-right .is-medium.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-medium ~ .icon {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .control.has-icons-left .input.is-large ~ .icon,
@@ -8666,7 +8666,7 @@ fieldset[disabled] .select select:hover {
 .control.has-icons-right .taginput .is-large.taginput-container.is-focusable ~ .icon,
 .taginput .control.has-icons-right .is-large.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-large ~ .icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .control.has-icons-left .icon,
@@ -8710,15 +8710,15 @@ fieldset[disabled] .select select:hover {
 }
 
 .control.is-loading.is-small:after {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .control.is-loading.is-medium:after {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .control.is-loading.is-large:after {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .breadcrumb {
@@ -8785,15 +8785,15 @@ fieldset[disabled] .select select:hover {
 }
 
 .breadcrumb.is-small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .breadcrumb.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .breadcrumb.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .breadcrumb.has-arrow-separator li + li::before {
@@ -9190,15 +9190,15 @@ a.list-item {
 }
 
 .menu.is-small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .menu.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .menu.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .menu-list {
@@ -9259,15 +9259,15 @@ a.list-item {
 }
 
 .message.is-small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .message.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .message.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .message.is-white {
@@ -9634,7 +9634,7 @@ a.list-item {
   color: #363636;
   flex-grow: 1;
   flex-shrink: 0;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1;
 }
 
@@ -11534,15 +11534,15 @@ a.navbar-item.is-active,
 }
 
 .pagination.is-small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .pagination.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .pagination.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .pagination.is-rounded .pagination-previous,
@@ -12212,15 +12212,15 @@ label.panel-block:hover {
 }
 
 .tabs.is-small {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .tabs.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .tabs.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .column {
@@ -17078,15 +17078,15 @@ label.panel-block:hover {
 
 .autocomplete.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .autocomplete.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .autocomplete.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .carousel {
@@ -17618,15 +17618,15 @@ label.panel-block:hover {
 
 .b-checkbox.checkbox.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .b-checkbox.checkbox.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .b-checkbox.checkbox.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .b-clockpicker .card-header {
@@ -18228,15 +18228,15 @@ label.panel-block:hover {
 
 .b-clockpicker.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .b-clockpicker.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .b-clockpicker.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .collapse .collapse-trigger {
@@ -18517,15 +18517,15 @@ label.panel-block:hover {
 
 .datepicker.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .datepicker.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .datepicker.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .dialog .modal-card {
@@ -18534,7 +18534,7 @@ label.panel-block:hover {
 }
 
 .dialog .modal-card .modal-card-head {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
 }
 
@@ -18569,7 +18569,7 @@ label.panel-block:hover {
 .taginput .dialog.is-small .taginput-container.is-focusable,
 .dialog.is-small .button {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .dialog.is-medium .modal-card,
@@ -18577,7 +18577,7 @@ label.panel-block:hover {
 .dialog.is-medium .taginput .taginput-container.is-focusable,
 .taginput .dialog.is-medium .taginput-container.is-focusable,
 .dialog.is-medium .button {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .dialog.is-large .modal-card,
@@ -18585,7 +18585,7 @@ label.panel-block:hover {
 .dialog.is-large .taginput .taginput-container.is-focusable,
 .taginput .dialog.is-large .taginput-container.is-focusable,
 .dialog.is-large .button {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .dialog.has-custom-container {
@@ -18794,15 +18794,15 @@ label.panel-block:hover {
 }
 
 .field.is-floating-label .label.is-small {
-  font-size: calc(0.7rem * 3 / 4);
+  font-size: calc(0.65rem * 3 / 4);
 }
 
 .field.is-floating-label .label.is-medium {
-  font-size: calc(1.1rem * 3 / 4);
+  font-size: calc(1.15rem * 3 / 4);
 }
 
 .field.is-floating-label .label.is-large {
-  font-size: calc(1.5rem * 3 / 4);
+  font-size: calc(1.4rem * 3 / 4);
 }
 
 .field.is-floating-label .input:focus,
@@ -18840,15 +18840,15 @@ label.panel-block:hover {
 }
 
 .field.is-floating-in-label .label.is-small {
-  font-size: calc(0.7rem * 3 / 4);
+  font-size: calc(0.65rem * 3 / 4);
 }
 
 .field.is-floating-in-label .label.is-medium {
-  font-size: calc(1.1rem * 3 / 4);
+  font-size: calc(1.15rem * 3 / 4);
 }
 
 .field.is-floating-in-label .label.is-large {
-  font-size: calc(1.5rem * 3 / 4);
+  font-size: calc(1.4rem * 3 / 4);
 }
 
 .field.is-floating-in-label > .datepicker .input,
@@ -18857,7 +18857,7 @@ label.panel-block:hover {
 .field.is-floating-in-label > .timepicker .input,
 .field.is-floating-in-label > .timepicker .taginput .taginput-container.is-focusable,
 .taginput .field.is-floating-in-label > .timepicker .taginput-container.is-focusable {
-  padding-top: calc(3.25em / 2 - (1.5rem * 3 / 4) / 2);
+  padding-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
   padding-bottom: 1px;
   height: 3.25em;
 }
@@ -18867,7 +18867,7 @@ label.panel-block:hover {
 .taginput .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .taginput-container.is-focusable,
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .textarea,
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) select {
-  padding-top: calc(3.25em / 2 - (1.5rem * 3 / 4) / 2);
+  padding-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
   padding-bottom: 1px;
   height: 3.25em;
 }
@@ -18877,7 +18877,7 @@ label.panel-block:hover {
 }
 
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .select:not(multiple).is-loading::after {
-  margin-top: calc(3.25em / 2 - (1.5rem * 3 / 4) / 2);
+  margin-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
 }
 
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .select:not(multiple)::after {
@@ -18890,15 +18890,15 @@ label.panel-block:hover {
 }
 
 .field.is-floating-in-label > :not(.taginput) .is-left.icon {
-  padding-top: calc(3.25em / 2 - (1.5rem * 3 / 4) / 2);
+  padding-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
 }
 
 .field.is-floating-in-label .control.is-loading::after {
-  margin-top: calc(3.25em / 2 - (1.5rem * 3 / 4) / 2);
+  margin-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
 }
 
 .field.is-floating-in-label .taginput .taginput-container {
-  padding-top: calc(3.25em / 2 - (1.5rem * 3 / 4) / 2 + (0.275em - 1px));
+  padding-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2 + (0.275em - 1px));
 }
 
 .field.is-floating-in-label .taginput .counter {
@@ -18930,17 +18930,17 @@ label.panel-block:hover {
 
 .field.is-floating-label.has-numberinput.has-numberinput-is-small .label,
 .field.is-floating-in-label.has-numberinput.has-numberinput-is-small .label {
-  margin-left: calc(0.7rem * 3);
+  margin-left: calc(0.65rem * 3);
 }
 
 .field.is-floating-label.has-numberinput.has-numberinput-is-medium .label,
 .field.is-floating-in-label.has-numberinput.has-numberinput-is-medium .label {
-  margin-left: calc(1.1rem * 3);
+  margin-left: calc(1.15rem * 3);
 }
 
 .field.is-floating-label.has-numberinput.has-numberinput-is-large .label,
 .field.is-floating-in-label.has-numberinput.has-numberinput-is-large .label {
-  margin-left: calc(1.5rem * 3);
+  margin-left: calc(1.4rem * 3);
 }
 
 .field.is-floating-label.has-numberinput-compact .label,
@@ -18950,17 +18950,17 @@ label.panel-block:hover {
 
 .field.is-floating-label.has-numberinput-compact.has-numberinput-is-small .label,
 .field.is-floating-in-label.has-numberinput-compact.has-numberinput-is-small .label {
-  margin-left: calc(0.7rem * 2.25);
+  margin-left: calc(0.65rem * 2.25);
 }
 
 .field.is-floating-label.has-numberinput-compact.has-numberinput-is-medium .label,
 .field.is-floating-in-label.has-numberinput-compact.has-numberinput-is-medium .label {
-  margin-left: calc(1.1rem * 2.25);
+  margin-left: calc(1.15rem * 2.25);
 }
 
 .field.is-floating-label.has-numberinput-compact.has-numberinput-is-large .label,
 .field.is-floating-in-label.has-numberinput-compact.has-numberinput-is-large .label {
-  margin-left: calc(1.5rem * 2.25);
+  margin-left: calc(1.4rem * 2.25);
 }
 
 .control .help.counter {
@@ -19496,18 +19496,18 @@ label.panel-block:hover {
 }
 
 .progress-wrapper .progress.is-small + .progress-value {
-  font-size: calc(0.7rem / 1.5);
-  line-height: 0.7rem;
+  font-size: calc(0.65rem / 1.5);
+  line-height: 0.65rem;
 }
 
 .progress-wrapper .progress.is-medium + .progress-value {
-  font-size: calc(1.1rem / 1.5);
-  line-height: 1.1rem;
+  font-size: calc(1.15rem / 1.5);
+  line-height: 1.15rem;
 }
 
 .progress-wrapper .progress.is-large + .progress-value {
-  font-size: calc(1.5rem / 1.5);
-  line-height: 1.5rem;
+  font-size: calc(1.4rem / 1.5);
+  line-height: 1.4rem;
 }
 
 .progress-wrapper .progress:indeterminate::-ms-fill {
@@ -19907,15 +19907,15 @@ label.panel-block:hover {
 
 .b-radio.radio.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .b-radio.radio.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .b-radio.radio.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .rate {
@@ -19989,15 +19989,15 @@ label.panel-block:hover {
 }
 
 .rate .rate-text.is-small {
-  font-size: calc(0.7rem / 1.25);
+  font-size: calc(0.65rem / 1.25);
 }
 
 .rate .rate-text.is-medium {
-  font-size: calc(1.1rem / 1.25);
+  font-size: calc(1.15rem / 1.25);
 }
 
 .rate .rate-text.is-large {
-  font-size: calc(1.5rem / 1.25);
+  font-size: calc(1.4rem / 1.25);
 }
 
 .select select {
@@ -20122,64 +20122,64 @@ label.panel-block:hover {
 }
 
 .b-slider.is-small .b-slider-track {
-  height: 0.35rem;
+  height: 0.325rem;
 }
 
 .b-slider.is-small .b-slider-thumb {
-  height: 0.7rem;
-  width: 0.7rem;
+  height: 0.65rem;
+  width: 0.65rem;
 }
 
 .b-slider.is-small .b-slider-tick {
-  height: 0.175rem;
+  height: 0.1625rem;
 }
 
 .b-slider.is-small .b-slider-tick-label {
   font-size: 0.75rem;
   position: absolute;
-  top: calc(0.35rem / 2 + 2px);
+  top: calc(0.325rem / 2 + 2px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .b-slider.is-medium .b-slider-track {
-  height: 0.55rem;
+  height: 0.575rem;
 }
 
 .b-slider.is-medium .b-slider-thumb {
-  height: 1.1rem;
-  width: 1.1rem;
+  height: 1.15rem;
+  width: 1.15rem;
 }
 
 .b-slider.is-medium .b-slider-tick {
-  height: 0.275rem;
+  height: 0.2875rem;
 }
 
 .b-slider.is-medium .b-slider-tick-label {
   font-size: 0.75rem;
   position: absolute;
-  top: calc(0.55rem / 2 + 2px);
+  top: calc(0.575rem / 2 + 2px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .b-slider.is-large .b-slider-track {
-  height: 0.75rem;
+  height: 0.7rem;
 }
 
 .b-slider.is-large .b-slider-thumb {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1.4rem;
+  width: 1.4rem;
 }
 
 .b-slider.is-large .b-slider-tick {
-  height: 0.375rem;
+  height: 0.35rem;
 }
 
 .b-slider.is-large .b-slider-tick-label {
   font-size: 0.75rem;
   position: absolute;
-  top: calc(0.75rem / 2 + 2px);
+  top: calc(0.7rem / 2 + 2px);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -21000,31 +21000,31 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-steps .steps.is-small {
-  font-size: 0.7rem;
-  min-height: 1.4rem;
+  font-size: 0.65rem;
+  min-height: 1.3rem;
 }
 
 .b-steps .steps.is-small .step-items .step-item .step-marker {
-  height: 1.4rem;
-  width: 1.4rem;
+  height: 1.3rem;
+  width: 1.3rem;
   position: absolute;
-  left: calc(50% - 0.7rem);
+  left: calc(50% - 0.65rem);
 }
 
 .b-steps .steps.is-small .step-items .step-item .step-marker .icon *,
 .b-steps .steps.is-small .step-items .step-item .step-marker .icon *:before {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .b-steps .steps.is-small .step-items .step-item .step-details {
-  margin-top: 1.4rem;
+  margin-top: 1.3rem;
   margin-left: .5em;
   margin-right: .5em;
   padding-top: .2em;
 }
 
 .b-steps .steps.is-small .step-items .step-item .step-details .step-title {
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   font-weight: 600;
 }
 
@@ -21034,13 +21034,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   width: 100%;
   bottom: 0;
   left: -50%;
-  top: 0.7rem;
+  top: 0.65rem;
 }
 
 .b-steps .steps.is-small .step-items .step-item:only-child::after {
   height: 0.2em;
   bottom: 0;
-  top: 0.7rem;
+  top: 0.65rem;
 }
 
 .b-steps .steps.is-small .step-items .step-item:only-child::before,
@@ -21069,7 +21069,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     width: 25%;
     bottom: 0;
     left: 50%;
-    top: 0.7rem;
+    top: 0.65rem;
   }
 
   .b-steps .steps.is-small .step-items .step-item::before,
@@ -21080,31 +21080,31 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-steps .steps.is-medium {
-  font-size: 1.1rem;
-  min-height: 2.2rem;
+  font-size: 1.15rem;
+  min-height: 2.3rem;
 }
 
 .b-steps .steps.is-medium .step-items .step-item .step-marker {
-  height: 2.2rem;
-  width: 2.2rem;
+  height: 2.3rem;
+  width: 2.3rem;
   position: absolute;
-  left: calc(50% - 1.1rem);
+  left: calc(50% - 1.15rem);
 }
 
 .b-steps .steps.is-medium .step-items .step-item .step-marker .icon *,
 .b-steps .steps.is-medium .step-items .step-item .step-marker .icon *:before {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .b-steps .steps.is-medium .step-items .step-item .step-details {
-  margin-top: 2.2rem;
+  margin-top: 2.3rem;
   margin-left: .5em;
   margin-right: .5em;
   padding-top: .2em;
 }
 
 .b-steps .steps.is-medium .step-items .step-item .step-details .step-title {
-  font-size: 1.32rem;
+  font-size: 1.38rem;
   font-weight: 600;
 }
 
@@ -21114,13 +21114,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   width: 100%;
   bottom: 0;
   left: -50%;
-  top: 1.1rem;
+  top: 1.15rem;
 }
 
 .b-steps .steps.is-medium .step-items .step-item:only-child::after {
   height: 0.2em;
   bottom: 0;
-  top: 1.1rem;
+  top: 1.15rem;
 }
 
 .b-steps .steps.is-medium .step-items .step-item:only-child::before,
@@ -21149,7 +21149,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     width: 25%;
     bottom: 0;
     left: 50%;
-    top: 1.1rem;
+    top: 1.15rem;
   }
 
   .b-steps .steps.is-medium .step-items .step-item::before,
@@ -21160,31 +21160,31 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-steps .steps.is-large {
-  font-size: 1.5rem;
-  min-height: 3rem;
+  font-size: 1.4rem;
+  min-height: 2.8rem;
 }
 
 .b-steps .steps.is-large .step-items .step-item .step-marker {
-  height: 3rem;
-  width: 3rem;
+  height: 2.8rem;
+  width: 2.8rem;
   position: absolute;
-  left: calc(50% - 1.5rem);
+  left: calc(50% - 1.4rem);
 }
 
 .b-steps .steps.is-large .step-items .step-item .step-marker .icon *,
 .b-steps .steps.is-large .step-items .step-item .step-marker .icon *:before {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .b-steps .steps.is-large .step-items .step-item .step-details {
-  margin-top: 3rem;
+  margin-top: 2.8rem;
   margin-left: .5em;
   margin-right: .5em;
   padding-top: .2em;
 }
 
 .b-steps .steps.is-large .step-items .step-item .step-details .step-title {
-  font-size: 1.8rem;
+  font-size: 1.68rem;
   font-weight: 600;
 }
 
@@ -21194,13 +21194,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   width: 100%;
   bottom: 0;
   left: -50%;
-  top: 1.5rem;
+  top: 1.4rem;
 }
 
 .b-steps .steps.is-large .step-items .step-item:only-child::after {
   height: 0.2em;
   bottom: 0;
-  top: 1.5rem;
+  top: 1.4rem;
 }
 
 .b-steps .steps.is-large .step-items .step-item:only-child::before,
@@ -21229,7 +21229,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     width: 25%;
     bottom: 0;
     left: 50%;
-    top: 1.5rem;
+    top: 1.4rem;
   }
 
   .b-steps .steps.is-large .step-items .step-item::before,
@@ -21839,15 +21839,15 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .switch.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .switch.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .switch.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .switch[disabled] {
@@ -22308,15 +22308,15 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .timepicker.is-small {
   border-radius: 2px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 .timepicker.is-medium {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .timepicker.is-large {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .b-tooltip {
@@ -23271,4 +23271,3 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   }
 }
 
-/* (ignored) */

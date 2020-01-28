@@ -1,22 +1,22 @@
 <template>
-        <GmapMap
-            class="tile is-child box"
-            style="height: 100%;"
-            ref="map"
-            :center="center"
-            :zoom="zoom"
-            map-type-id="roadmap"
-            :options="{
-                zoomControl: true,
-                mapTypeControl: false,
-                scaleControl: false,
-                streetViewControl: true,
-                rotateControl: false,
-                fullscreenControl: true,
-                disableDefaultUi: false,
-                styles: mapStyle
-            }"
-            >
+    <GmapMap
+        class="tile is-child box"
+        style="height: 100%;"
+        ref="map"
+        :center="center"
+        :zoom="zoom"
+        map-type-id="roadmap"
+        :options="{
+            zoomControl: true,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: true,
+            rotateControl: false,
+            fullscreenControl: true,
+            disableDefaultUi: false,
+            styles: mapStyle
+        }"
+        >
 
             <!-- ClusterButton -->
             <!-- <div class="" id="myClusterButton">
@@ -38,25 +38,25 @@
 
             <!-- MAPA WITH CLUSTER -->
             <!-- <GmapCluster v-if="clusterActive == 1"> -->
-                <GmapMarker
-                    ref="myMarker"
-                    :key="index"
-                    v-for="(pop, index) in pops"
-                    :clickable="true"
-                    :draggable="false"
-                    @click="toggleInfoWindow(pop, index)"
-                    :position="({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
-                    :icon="icon"
-                />
-                <gmap-info-window 
-                    :options="infoOptions"
-                    :position="infoWindowPos"
-                    :opened="infoWinOpen"
-                    @closeclick="infoWinOpen=false"
-                    content="Hello"
-                    >
-                    <div v-html="infoContent"></div>
-                </gmap-info-window>
+            <GmapMarker
+                ref="myMarker"
+                :key="index"
+                v-for="(pop, index) in pops"
+                :clickable="true"
+                :draggable="false"
+                @click="toggleInfoWindow(pop, index)"
+                :position="google && new google.maps.LatLng({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
+                :icon="icon"
+            />
+            <gmap-info-window 
+                :options="infoOptions"
+                :position="infoWindowPos"
+                :opened="infoWinOpen"
+                @closeclick="infoWinOpen=false"
+                content="Hello"
+                >
+                <div v-html="infoContent"></div>
+            </gmap-info-window>
             <!-- </GmapCluster> -->
 
             <!-- MAPA W/O CLUSTER -->
@@ -80,8 +80,10 @@
                 <div v-html="infoContent"></div>
             </gmap-info-window> -->
         </GmapMap>
-        
 </template>
+
+<style lang="scss" scoped>
+</style>
 
 <script>
     import { gmapApi } from 'vue2-google-maps'
@@ -154,7 +156,7 @@
         created() {
             this.mapStyle = this.darkMode == 1 ? this.style2 : this.mapStyle = null
         },
-        async mounted() {
+        mounted() {
             
             // if (this.clusterActive == 1) {
             //     this.buttonText = 'Desagrupar'
@@ -266,7 +268,7 @@
                 `);
             },
 
-            setPops() {
+            async setPops() {
                 this.$refs.map.$mapPromise.then((map) => {
                     const bounds = new google.maps.LatLngBounds()
                     for (let m of this.pops) {

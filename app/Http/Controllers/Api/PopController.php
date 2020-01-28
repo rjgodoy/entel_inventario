@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Resources\Pop as PopResource;
 use App\Pop;
 use App\Site;
+use App\PopMenu;
 
 class PopController extends Controller
 {
@@ -152,12 +153,12 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($pop_id)
+    public function show($id)
     {
         $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.technologies', 'comuna.zona.responsable', 'sites.site_type')
-                ->where('id', $pop_id)
+                ->where('id', $id)
                 ->first();
-        return new PopResource($pop);
+        return $pop;
     }
 
     /**
@@ -274,6 +275,12 @@ class PopController extends Controller
     {
         $text = $request->text;
         $core = $request->core;
+        $crm_id = $request->crm_id;
+        $zona_id = $request->zona_id;
+
+        $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
+        $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
+        $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
 
         $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
             ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
@@ -287,7 +294,9 @@ class PopController extends Controller
                     ->orWhere('pops.direccion', 'LIKE', "%$text%");
             })
             ->where('sites.state_type_id', 1)
-            ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
+            ->whereRaw($condition_core)
+            ->whereRaw($condition_crm)
+            ->whereRaw($condition_zona)
             ->select(
                 'pops.id',
                 'sites.id as site_id',
@@ -307,7 +316,7 @@ class PopController extends Controller
                 'pops.alba_project'
             )
             ->orderBy('pops.id')
-            ->get();
+            ->paginate(20);
     
         return $pops;
     }
@@ -617,5 +626,18 @@ class PopController extends Controller
     
         return $pops;
     }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function popMenu()
+    {
+        $pop_menu = PopMenu::where('state', 1)->orderBy('order','asc')->get();
+        return new PopResource($pop_menu);
+    }
+
 
 }

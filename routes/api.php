@@ -23,7 +23,8 @@ Route::get('menu', 'Api\MainController@menu');
 	// POP DATA
 		Route::apiResource('dashboard','Api\DashboardApiController');
 
-		Route::get('lastUpdateData', 'Api\DashboardApiController@lastData');
+		Route::get('lastUpdate', 'Api\DashboardApiController@lastData');
+		Route::get('counters', 'Api\DashboardApiController@counters');
 
 	// CRMs
 		Route::apiResource('crms','Api\CrmController');
@@ -284,8 +285,10 @@ Route::get('menu', 'Api\MainController@menu');
 
 ### POP DETAIL ######################################################################
 
-	Route::apiResource('dependence','Api\DependenceController');
+	Route::apiResource('dependences','Api\DependenceController');
 
 	Route::get('popTechnologies', 'Api\PopController@technologies');
+
+	Route::get('popMenu', 'Api\PopController@popMenu');
 
 ##############################################################################################

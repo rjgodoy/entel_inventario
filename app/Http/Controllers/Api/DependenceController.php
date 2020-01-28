@@ -39,11 +39,11 @@ class DependenceController extends Controller
      */
     public function show($id)
     {
-        $dependences = Dependence::with('pop', 'dependence')
-                                ->where('pop_id', $id)
-                                ->where('dependence_id', '!=', 'pop_id')
-                                ->whereRaw('dependence_id IS NOT NULL')
-                                ->groupBy('dependence_id')->get();
+        $dependences = Dependence::with('dependence.pop')->whereHas('site.pop', function($q) use($id) {
+                            $q->where('id', $id);
+                        })
+                        ->whereRaw('dependence_id IS NOT NULL')
+                        ->get();
 
         return new DependenceResource($dependences);
     }

@@ -12,6 +12,7 @@ use App\Pop;
 use App\Site;
 use App\Technology;
 use App\CriticPop;
+use App\PsgTp;
 use DB;
 
 class DashboardApiController extends Controller
@@ -34,46 +35,56 @@ class DashboardApiController extends Controller
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
 
-        $pops = Pop::join('sites', function($join) use($core) { 
-                $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
-                $join->on('pops.id', '=', 'sites.pop_id')->where('state_type_id', 1)
-                ->whereRaw($condition_core); 
+        $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
+
+        $pops = Pop::whereHas('sites', function($q) use($condition_core) { 
+                $q->where('state_type_id', 1)
+                ->whereRaw($condition_core);
             })
-            ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-            ->join('zonas', function($join) use($crm_id, $zona_id) {
+            ->whereHas('comuna.zona', function($q) use($crm_id, $zona_id) {
                 $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
                 $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
-                $join->on('comunas.zona_id', '=', 'zonas.id')->whereRaw($condition_crm)->whereRaw($condition_zona);
+                $q->whereRaw($condition_crm)->whereRaw($condition_zona);
             })
-            ->distinct('pops.id')->count('pops.id');
+            ->distinct('pops.id')->count();
 
 
-        $sites = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
-            ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-            ->join('zonas', function($join) use($crm_id, $zona_id) {
+        $sites = Site::whereHas('pop.comuna.zona', function($q) use($crm_id, $zona_id) {
                 $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
                 $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
-                $join->on('comunas.zona_id', '=', 'zonas.id')->whereRaw($condition_crm)->whereRaw($condition_zona);
+                $q->whereRaw($condition_crm)->whereRaw($condition_zona);
             })
             ->where('state_type_id', 1)
-            ->whereRaw('IF('.$core.' = 0, sites.classification_type_id NOT IN ('.$core.'), sites.classification_type_id IN ('.$core.'))')
+            ->whereRaw($condition_core)
             ->distinct('sites.id')->count();
 
-        $technologies = Technology::join('sites', function($join) use($core) { 
-                $join->on('sites.id', '=', 'technologies.site_id')->where('state_type_id', 1)->whereRaw('IF('.$core.' = 0, sites.classification_type_id NOT IN ('.$core.'), sites.classification_type_id IN ('.$core.'))'); 
+        $technologies = Technology::whereHas('site', function($q) use($condition_core) { 
+                $q->where('state_type_id', 1)
+                ->whereRaw($condition_core); 
             })
-            ->join('pops', 'sites.pop_id', '=', 'pops.id')
-            ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-            ->join('zonas', function($join) use($crm_id, $zona_id) {
+            ->whereHas('site.pop.comuna.zona', function($q) use($crm_id, $zona_id) {
                 $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
                 $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
-                $join->on('comunas.zona_id', '=', 'zonas.id')->whereRaw($condition_crm)->whereRaw($condition_zona);
+                $q->whereRaw($condition_crm)->whereRaw($condition_zona);
             })->distinct('technologies.id')->count();
+
+        $critics = CriticPop::whereHas('pop.sites', function($q) use($condition_core) { 
+                $q->where('state_type_id', 1)
+                ->whereRaw($condition_core);
+            })
+            ->whereHas('pop.comuna.zona', function($q) use($crm_id, $zona_id) {
+                $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
+                $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
+                $q->whereRaw($condition_crm)->whereRaw($condition_zona);
+            })
+            ->distinct('pop_id')->count();
+
 
         $datos = [
             'pops' => $pops,
             'sites' => $sites,
-            'technologies' => $technologies
+            'technologies' => $technologies,
+            'critics' => $critics
         ];   
 
         return $datos;
@@ -86,10 +97,10 @@ class DashboardApiController extends Controller
      */
     public function dashboardMap()
     {
-        if (Cache::has('dashboardMap')) {
-            $popsMap = Cache::get('dashboardMap');
-        } else {
-            $popsMap = Cache::remember('dashboardMap', $this->seconds, function () {
+        // if (Cache::has('dashboardMap')) {
+        //     $popsMap = Cache::get('dashboardMap');
+        // } else {
+        //     $popsMap = Cache::remember('dashboardMap', $this->seconds, function () {
                 $popsMap = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
                     ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
                     ->join('crms', 'zonas.crm_id', '=', 'crms.id')
@@ -116,9 +127,29 @@ class DashboardApiController extends Controller
                     ->groupBy('pops.id')
                     ->get();
 
-                return $popsMap; 
-            });
-        }
+                // $popsMap = Pop::with('sites.classification_types', 'comuna.zona.crm')->whereHas('sites', function($q) {
+                //     $q->where('sites.state_type_id', 1);
+                // })->select(
+                //     'pops.id as pop_id',
+                //     'pops.nombre',
+                //     'pops.direccion',
+                //     // 'sites.nem_site',
+                //     'pops.latitude',
+                //     'pops.longitude'
+                //     // 'comunas.nombre_comuna',
+                //     // 'comunas.zona_id',
+                //     // 'zonas.crm_id',
+                //     // 'zonas.nombre_zona',
+                //     // 'crms.nombre_crm',
+                //     // 'sites.classification_type_id',
+                //     // 'classification_types.classification_type'
+                // )
+                // ->groupBy('pops.id')
+                // ->get();
+
+        //         return $popsMap; 
+        //     });
+        // }
         return new PopResource($popsMap);
     }
 
@@ -130,18 +161,21 @@ class DashboardApiController extends Controller
     public function criticPops(Request $request)
     {
         $core = $request->core;
-
-        if (Cache::has('criticPops'.$core)) {
-            $criticPops = Cache::get('criticPops'.$core);
-        } else {
-            $criticPops = Cache::remember('criticPops'.$core, $this->seconds, function () use ($core) {
-                $criticPops = CriticPop::with(['pop.comuna.zona.crm', 'pop.sites.classification_type', 'pop.sites' => function($q) use ($core) { 
+        // if (Cache::has('criticPops'.$core)) {
+        //     $criticPops = Cache::get('criticPops'.$core);
+        // } else {
+        //     $criticPops = Cache::remember('criticPops'.$core, $this->seconds, function () use ($core) {
+                $criticPops = CriticPop::with('pop.comuna.zona.crm', 'pop.sites.classification_type')
+                            ->whereHas('pop.sites', function($q) use($core) { 
+                                $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
                                 $q->where('state_type_id', 1)
-                                ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))'); 
-                            }])->groupBy('pop_id')->paginate(12);
-                return $criticPops; 
-            });
-        }
+                                ->whereRaw($condition_core); 
+                            })
+                            ->groupBy('pop_id')
+                            ->paginate(12);
+        //         return $criticPops; 
+        //     });
+        // }
         return new PopResource($criticPops);
     }
 
@@ -155,45 +189,23 @@ class DashboardApiController extends Controller
         $core = $request->core;
         $crm_id = $request->crm_id;
 
-        if (Cache::has('criticPops_crm'.$crm_id.'_core'.$core)) {
-            $criticPops = Cache::get('criticPops_crm'.$crm_id.'_core'.$core);
-        } else {
-            $criticPops = Cache::remember('criticPops_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($core) {
-                $criticPops = CriticPop::join('pops', 'critic_pops.pop_id', '=', 'pops.id')
-                    ->join('sites', 'sites.pop_id', '=', 'pops.id')
-                    ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-                    ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-                    ->join('crms', function($join) use ($crm_id) {
-                        $join->on('zonas.crm_id', '=', 'crms.id')
-                        ->where('crms.id', $crm_id);
-                    })
-                    ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-
-                    ->where('sites.state_type_id', 1)
-                    ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
-
-                    ->select(
-                        'pops.id as pop_id',
-                        'pops.nombre',
-                        'pops.direccion',
-                        'sites.nem_site',
-                        'sites.cod_planificacion',
-                        'sites.site_type_id',
-                        'pops.latitude',
-                        'pops.longitude',
-                        'comunas.nombre_comuna',
-                        'comunas.zona_id',
-                        'zonas.crm_id',
-                        'zonas.nombre_zona',
-                        'crms.nombre_crm',
-                        'sites.classification_type_id',
-                        'classification_types.classification_type'
-                    )
-                    ->groupBy('pops.id')
-                    ->paginate(10);
-                return $criticPops; 
-            });
-        }
+        // if (Cache::has('criticPops_crm'.$crm_id.'_core'.$core)) {
+        //     $criticPops = Cache::get('criticPops_crm'.$crm_id.'_core'.$core);
+        // } else {
+        //     $criticPops = Cache::remember('criticPops_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($core) {
+                $criticPops = CriticPop::with('pop.sites.classification_type')->whereHas('pop.sites', function($q) use($core) {
+                    $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
+                    $q->where('state_type_id', 1)
+                    ->whereRaw($condition_core);
+                })
+                ->whereHas('pop.comuna.zona.crm', function($q) use($crm_id) {
+                    $q->where('id', $crm_id);
+                })
+                ->groupBy('pop_id')
+                ->paginate(12);
+        //         return $criticPops; 
+        //     });
+        // }
         return new PopResource($criticPops);
     }
 
@@ -207,45 +219,23 @@ class DashboardApiController extends Controller
         $core = $request->core;
         $zona_id = $request->zona_id;
 
-        if (Cache::has('criticPops_zona'.$zona_id.'_core'.$core)) {
-            $criticPops = Cache::get('criticPops_zona'.$zona_id.'_core'.$core);
-        } else {
-            $criticPops = Cache::remember('criticPops_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($core) {
-                $criticPops = CriticPop::join('pops', 'critic_pops.pop_id', '=', 'pops.id')
-                    ->join('sites', 'sites.pop_id', '=', 'pops.id')
-                    ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-                    ->join('zonas', function($join) use ($zona_id) {
-                        $join->on('comunas.zona_id', '=', 'zonas.id')
-                        ->where('zonas.id', $zona_id);
-                    })
-                    ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-                    ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-
-                    ->where('sites.state_type_id', 1)
-                    ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
-
-                    ->select(
-                        'pops.id as pop_id',
-                        'pops.nombre',
-                        'pops.direccion',
-                        'sites.nem_site',
-                        'sites.cod_planificacion',
-                        'sites.site_type_id',
-                        'pops.latitude',
-                        'pops.longitude',
-                        'comunas.nombre_comuna',
-                        'comunas.zona_id',
-                        'zonas.crm_id',
-                        'zonas.nombre_zona',
-                        'crms.nombre_crm',
-                        'sites.classification_type_id',
-                        'classification_types.classification_type'
-                    )
-                    ->groupBy('pops.id')
-                    ->paginate(10);
-                return $criticPops; 
-            });
-        }
+        // if (Cache::has('criticPops_zona'.$zona_id.'_core'.$core)) {
+        //     $criticPops = Cache::get('criticPops_zona'.$zona_id.'_core'.$core);
+        // } else {
+        //     $criticPops = Cache::remember('criticPops_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($core) {
+                $criticPops = CriticPop::with('pop.sites.classification_type', 'pop.comuna.zona.crm')->whereHas('pop.sites', function($q) use($core) {
+                    $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
+                    $q->where('state_type_id', 1)
+                    ->whereRaw($condition_core);
+                })
+                ->whereHas('pop.comuna.zona', function($q) use($zona_id) {
+                    $q->where('id', $zona_id);
+                })
+                ->groupBy('pop_id')
+                ->paginate(12);
+        //         return $criticPops; 
+        //     });
+        // }
         return new PopResource($criticPops);
     }
 
@@ -275,7 +265,7 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.pop_type_id NOT IN (1,2,3,4,5,6)
+                            WHERE P.pop_type_id = 0
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
@@ -1423,13 +1413,13 @@ class DashboardApiController extends Controller
     public function counters(Request $request)
     {
         $pret_info = Site::whereYear('created_at', date("Y"))->whereMonth('created_at', date("m"))->count();
+        $psg_info = PsgTp::whereYear('created_at', date("Y"))->whereMonth('created_at', date("m"))->count();
 
         // $psg_info = AirConditioner::all();
 
         $datos = [
             'pret' => $pret_info,
-            // 'sites' => $sites,
-            // 'technologies' => $technologies
+            'psg' => $psg_info
         ]; 
 
         return $datos;
@@ -1448,7 +1438,7 @@ class DashboardApiController extends Controller
         $last_updated_technologies = Technology::orderBy('updated_at', 'desc')->first()->updated_at;
 
         $datos = [
-            'pop' => $last_updated_pops,
+            'pops' => $last_updated_pops,
             'sites' => $last_updated_sites,
             'technologies' => $last_updated_technologies
         ]; 

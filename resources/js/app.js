@@ -70,7 +70,8 @@ import {
     faUnlink,
     faCarBattery,
     faUserEdit,
-    faAngleDown
+    faAngleDown,
+    faServer
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -122,7 +123,8 @@ library.add(
     faUserEdit,
     faAngleDown,
     faTwitter,
-    faGithub
+    faGithub,
+    faServer
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -161,8 +163,8 @@ Vue.use(VueGoogleMaps, {
     // installComponents: true,
 })
 
-import GmapCluster from 'vue2-google-maps/dist/components/cluster' // replace src with dist if you have Babel issues
-Vue.component('GmapCluster', GmapCluster)
+// import GmapCluster from 'vue2-google-maps/dist/components/cluster' // replace src with dist if you have Babel issues
+// Vue.component('GmapCluster', GmapCluster)
 // #########################################################################
 
 /**
@@ -182,7 +184,7 @@ import App from './components/App.vue'
 import Dashboard from './components/dashboard/Dashboard.vue'
 import PopTable from './components/pops/PopTable.vue'
 import Pop from './components/pops/PopDetail.vue'
-import ComsiteTable from './components/ComsiteTable.vue'
+import ComsiteTable from './components/comsite/ComsiteTable.vue'
 import Admin from './components/admin/Admin.vue'
 
 const routes = [
@@ -192,13 +194,13 @@ const routes = [
     { path: '/pop/:id', name: 'pop', component: Pop },
     { path: '/comsite', name: 'comsite', component: ComsiteTable },
     { path: '/admin', name: 'administracion', component: Admin },
-    // { path: '/comsite/create', name: 'comsiteSync', component: '' },
-
 ]
 
 const router = new VueRouter({
     routes // short for `routes: routes`
 })
+
+import store from './constants/store'
 
 // var LoadingComponent = require('./components/maps/LoadingComponent.vue').default;
 // var ErrorComponent = require('./components/maps/ErrorComponent.vue').default;
@@ -224,6 +226,7 @@ const router = new VueRouter({
 
 const app = new Vue({
     router,
+    store,
     // el: '#app',
     components: {
         App
@@ -232,5 +235,6 @@ const app = new Vue({
     events: {
         clickOutside(event) {                
         }
-    }
+    },
+    // render: h => h(App)
 }).$mount('#app');

@@ -20,29 +20,29 @@ class PsgTpController extends Controller
      */
     public function index(Request $request, PsgTp $psgTp)
     {
-        // $psgTpsSource = PsgTpSource::join('TIPO_TRABAJO_INVENTARIO', 'TIPO_TRABAJO_INVENTARIO.ID_TIPOCLASIF', '=', 'CONSOLIDADO_INVENTARIO.ID_TPCLAS')
-        //     ->join('TRABAJO_INVENTARIO', 'TRABAJO_INVENTARIO.ID', '=', 'TIPO_TRABAJO_INVENTARIO.ID_TRABAJO')
+        $psgTpsSource = PsgTpSource::join('TIPO_TRABAJO_INVENTARIO', 'TIPO_TRABAJO_INVENTARIO.ID_TIPOCLASIF', '=', 'CONSOLIDADO_INVENTARIO.ID_TPCLAS')
+            ->join('TRABAJO_INVENTARIO', 'TRABAJO_INVENTARIO.ID', '=', 'TIPO_TRABAJO_INVENTARIO.ID_TRABAJO')
 
-        //     ->leftJoin('SITIOS_PLANNED', 'CONSOLIDADO_INVENTARIO.PLANNED_ID', '=', 'SITIOS_PLANNED.PLANNED_ID')
-        //     ->leftJoin('o_m.SITIOS', 'SITIOS.SITE_ID', '=', 'SITIOS_PLANNED.SITE_ID')
+            ->leftJoin('SITIOS_PLANNED', 'CONSOLIDADO_INVENTARIO.PLANNED_ID', '=', 'SITIOS_PLANNED.PLANNED_ID')
+            ->leftJoin('o_m.SITIOS', 'SITIOS.SITE_ID', '=', 'SITIOS_PLANNED.SITE_ID')
             
-        //     ->join('PLANNED', 'CONSOLIDADO_INVENTARIO.PLANNED_ID', '=', 'PLANNED.ID')
+            ->join('PLANNED', 'CONSOLIDADO_INVENTARIO.PLANNED_ID', '=', 'PLANNED.ID')
 
-        //     ->whereRaw('PLANNED.ESTADOS_ID NOT IN (8) AND SITIOS.SITIO IS NOT NULL')
-        //     ->select(
-        //         'CONSOLIDADO_INVENTARIO.*',
-        //         'SITIOS_PLANNED.SITE_ID',
-        //         'SITIOS.SITIO',
-        //         'TRABAJO_INVENTARIO.DESCRIPCION',
-        //         'PLANNED.ESTADOS_ID'
-        //     )
-        //     ->orderBy('CONSOLIDADO_INVENTARIO.FECHA_INGRESO')
-        //     ->get();
+            ->whereRaw('PLANNED.ESTADOS_ID NOT IN (8) AND SITIOS.SITIO IS NOT NULL')
+            ->select(
+                'CONSOLIDADO_INVENTARIO.*',
+                'SITIOS_PLANNED.SITE_ID',
+                'SITIOS.SITIO',
+                'TRABAJO_INVENTARIO.DESCRIPCION',
+                'PLANNED.ESTADOS_ID'
+            )
+            ->orderBy('CONSOLIDADO_INVENTARIO.FECHA_INGRESO')
+            ->get();
 
-        // return self::update($request, $psgTp, $psgTpsSource);
+        return self::update($request, $psgTp, $psgTpsSource);
 
-        $psgTpData = PsgTp::with('psg_tp_state', 'site')->get();
-        return $psgTpData;
+        // $psgTpData = PsgTp::with('psg_tp_state', 'site')->get();
+        // return $psgTpData;
     }
 
     /**
@@ -106,7 +106,7 @@ class PsgTpController extends Controller
             }
         } 
 
-        $psgTpData = PsgTp::with('psg_tp_state', 'site')->get();
+        $psgTpData = PsgTp::with('psg_tp_state', 'site')->orderBy('created_at', 'desc')->get();
 
         return $psgTpData;
     }

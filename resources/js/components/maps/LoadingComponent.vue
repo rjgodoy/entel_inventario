@@ -1,8 +1,8 @@
 <template>
     <div class="tile is-child box">
-        <b-notification>
+        <!-- <b-notification> -->
             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="false"></b-loading>
-        </b-notification>
+        <!-- </b-notification> -->
     </div>  
 </template>
 

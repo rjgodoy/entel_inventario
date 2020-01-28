@@ -8,13 +8,13 @@ class Dependence extends Model
 {
 	protected $connection = 'mysql_entel_pops';
 	
-    public function pop() 
+    public function site() 
     {
-        return $this->belongsTo(Pop::class);
+        return $this->belongsTo(Site::class);
     }
 
     public function dependence() 
     {
-        return $this->belongsTo(Pop::class);
+        return $this->belongsTo(Site::class);
     }
 }

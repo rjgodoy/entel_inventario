@@ -59,11 +59,6 @@ class Pop extends Model
         return $this->hasMany(CriticPop::class);
     }
 
-    public function dependences() 
-    {
-        return $this->hasMany(Dependence::class);
-    }
-
     public function derivations() 
     {
         return $this->hasMany(Derivation::class);

@@ -52,7 +52,7 @@
 
                             <div class="navbar-menu">
                                 <div class="navbar-end">
-                                    <b-navbar-dropdown class="is-hoverable is-right" :label="user.nombre" href="http://bulma.io/blog/">
+                                    <b-navbar-dropdown hoverable right :label="user.nombre" href="http://bulma.io/blog/">
 
                                         <b-navbar-item href="/2017/08/03/list-of-tags/">
                                             <div class="navbar-content">

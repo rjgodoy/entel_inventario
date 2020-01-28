@@ -28,6 +28,11 @@ class Site extends Model
         return $this->hasMany(Classification::class);
     }
 
+    public function dependences() 
+    {
+        return $this->hasMany(Dependence::class);
+    }
+
     public function technologies() 
     {
         return $this->hasMany(Technology::class);

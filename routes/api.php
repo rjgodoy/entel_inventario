@@ -98,29 +98,11 @@ Route::get('menu', 'Api\MainController@menu');
 	// Search
 		Route::get('searchPops', [
 			'as' => 'pop.search',
-			'uses' => 'Api\PopController@searchPops'
-		]);
-		Route::get('searchPopsCrm', [
-			'as' => 'pop.searchCrm',
-			'uses' => 'Api\PopController@searchPopsCrm'
-		]);
-		Route::get('searchPopsZona', [
-			'as' => 'pop.searchZona',
-			'uses' => 'Api\PopController@searchPopsZona'
+			'uses' => 'Api\PopController@search'
 		]);
 
 	// Critic Pop Data box
-		Route::get('criticPops', 'Api\DashboardApiController@criticPops');
-		Route::get('criticPopsCrm', [
-			'as' => 'dashboard.criticPopsCrm',
-			'uses' => 'Api\DashboardApiController@criticPopsCrm'
-		]);
-		Route::get('criticPopsZona', [
-			'as' => 'dashboard.criticPopsZona',
-			'uses' => 'Api\DashboardApiController@criticPopsZona'
-		]);
-
-	
+		Route::get('criticSites', 'Api\DashboardApiController@criticSites');
 
 	// Electric Lines
 		Route::apiResource('electricLines','Api\ElectricLineController');

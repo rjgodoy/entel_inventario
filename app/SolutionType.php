@@ -8,8 +8,8 @@ class SolutionType extends Model
 {
     protected $connection = 'mysql_entel_pops';
 	
-    public function solutions() 
+    public function sites() 
     {
-        return $this->hasMany(Solution::class);
+        return $this->hasMany(Site::class);
     }
 }

@@ -43,7 +43,7 @@
             v-for="(pop, index) in pops"
             :clickable="true"
             :draggable="false"
-            @click="toggleInfoWindow(pop, index)"
+            @click="pop.id == popMaster.id ? null : toggleInfoWindow(pop, index)"
             :position="google && new google.maps.LatLng({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
             :icon="pop.id == popMaster.id ? icon_pop : icon_dependence"
         />
@@ -66,6 +66,7 @@
     import { gmapApi } from 'vue2-google-maps'
     export default {
         props : [ 
+            'classification',
             'popMaster',
             'darkMode'
         ],
@@ -155,7 +156,7 @@
                 })
             },
 
-            async toggleInfoWindow(pop, idx) {
+            toggleInfoWindow(pop, idx) {
                 this.infoWindowPos = { lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) };
                 this.infoContent = this.getInfoWindowContent(pop);
 
@@ -174,32 +175,26 @@
                 });
             },
 
-            async getInfoWindowContent(pop) {
+            getInfoWindowContent(pop) {
+                console.log(pop)
                 return (`
                     <div class="card">
-                        <!--div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="https://bulma.io/images/placeholders/640x480.png" alt="Placeholder image">
-                            </figure>
-                        </div-->
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
-                                    <span class="tag ${pop.classification_type_id == 1 ? 'is-danger' : 
-                                                    (pop.classification_type_id == 2 ? 'is-warning' : 
-                                                    (pop.classification_type_id == 3 ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
-                                        ${pop.classification_type}
+                                    <span class="tag ${this.classification == 'A' ? 'is-danger' : (this.classification == 'B' ? 'is-warning' : (this.classification_type_id == 'C' ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
+                                        ${this.classification}
                                     </span>
                                 </div>
                                 <div class="media-content">
                                     <p class="has-text-weight-bold is-size-4">${pop.nombre}</p>
-                                    <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.nombre_comuna}</p>
-                                    <p class="has-text-weight-light is-size-6">Zona ${pop.nombre_zona}, CRM ${pop.nombre_crm}</p>
+                                    <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.comuna.nombre_comuna}</p>
+                                    <p class="has-text-weight-light is-size-6">Zona ${pop.comuna.zona.nombre_zona}, CRM ${pop.comuna.zona.crm.nombre_crm}</p>
                                 </div>
                             </div>
 
                             <div class="content">
-                                <a href="/main#/pop/${pop.id}" target="_blank" class="button is-outlined is-primary is-small">
+                                <a href="/pop/${pop.id}" class="button is-outlined is-primary is-small">
                                     <font-awesome-icon icon="info-circle"/>
                                     &nbsp;Ver detalles
                                 </a>

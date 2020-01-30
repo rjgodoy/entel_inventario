@@ -31,11 +31,16 @@
                         <ul class="columns">
 
                             <li v-for="menu in menuData" class="column has-text-centered" :class="currentRoute.toLowerCase() == menu.path ? 'is-active' : ''">
-                                <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? 'has-text-link' : ''">
-                                    <b-icon pack="fas" :icon="menu.icon" size="2x" :class="currentRoute.toLowerCase() === menu.path ? 'has-text-link' : 'has-text-grey-light'"></b-icon>
+                                <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
+                                    <b-icon 
+                                        :pack="menu.icon_type" 
+                                        :icon="menu.icon" 
+                                        size="2x" 
+                                        :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : 'has-text-grey-light'">
+                                    </b-icon>
                                     <p class="is-size-7" :class="currentRoute.toLowerCase() === menu.path ? 'has-text-white' : 'has-text-grey-light'">{{ menu.title }}</p>
 
-                                    <div v-if="currentRoute.toLowerCase() === menu.path" class="has-text-link" style="border-bottom: 3px solid; padding-top: 5px;"></div>
+                                    <div v-if="currentRoute.toLowerCase() === menu.path" :class="menu.path == '/eco' ? 'has-text-eco' : 'has-text-link'" style="border-bottom: 3px solid; padding-top: 5px;"></div>
                                 </router-link>
                             </li>
 
@@ -156,7 +161,7 @@
         },
         computed: {
             currentRoute () {
-                return '/' + this.$route.name
+                return this.$route.path
             }
         },
         methods: {

@@ -12,7 +12,7 @@
                             <!-- <b-button class="button is-warning is-small is-pulled-left" @click="viewCriticPops" v-model="criticPopsSwitch">POP Críticos</b-button> -->
                         </div>
                         <div class="column has-text-centered">
-                            <b-switch  @input="switchCore">Red CORE</b-switch>
+                            <b-switch  @input="switchCore" class="is-size-6 has-text-weight-semibold" :class="textSwitchCore" size="is-medium" :outlined="true">POP CORE</b-switch>
                         </div>
                         <div class="column">
                             <!-- <b-button class="button is-link is-small is-pulled-right" @click="changeStyle" v-model="darkMode">Style</b-button> -->
@@ -109,7 +109,7 @@
                         </span>
                         <div class="dropdown-content" :class="searchBodyBackground + ' ' + primaryText" style="max-height: 400px; overflow: auto;">
                             <div v-for="pop in popSearch" class="dropdown-item" :class="pop.alba_project ? '' : ''">
-                                <a :href="'/main#/pop/' + pop.id" target="_blank" class="columns">
+                                <a :href="'/pop/' + pop.id" target="_blank" class="columns">
                                     <div class="column is-6">
                                         <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
                                             {{ pop.nem_site }}
@@ -152,7 +152,7 @@
                                     <button class="button is-small is-default" @click="selectPop(pop)" v-model="selectedPop">
                                         <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
                                     </button>
-                                    <a class="button is-small is-link" :href="'/main#/pop/' + pop.id" target="_blank">
+                                    <a class="button is-small is-link" :href="'/pop/' + pop.id" target="_blank">
                                         <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
                                     </a>
                                 </div>
@@ -166,22 +166,27 @@
             <div class="container" style="width: 50%; margin-top: 30px;">
                 <b-autocomplete
                     autofocus
-                    size="is-medium"
+                    size="is-default"
                     :data="popSearch"
                     rounded
-                    icon="search"
                     icon-pack="fas"
+                    icon="search"
                     placeholder="Buscar por nemónico, nombre o direccion del sitio..."
+                    :keep-first="true"
+                    :open-on-focus="searchText ? true : false"
                     :custom-formatter="searchFormat"
                     :loading="isFetching"
                     :check-infinite-scroll="true"
                     @typing="getAsyncData"
-                    @select="option => selectedPop = option"
+                    @select="option => selected = option"
                     @infinite-scroll="getMoreAsyncData">
+                    <template slot="header">
+                        <div class="is-size-7 has-text-weight-semibold has-text-link"> {{ counter }} <span class="has-text-weight-normal">Sitios</span></div>
+                    </template>
 
                     <template slot-scope="props">
                         <div class="columns">
-                        <!-- <a :href="'/main#/pop/' + props.option.id" target="_blank" class="columns"> -->
+                        <!-- <a :href="'/pop/' + props.option.id" target="_blank" class="columns"> -->
                             <div class="column is-6">
                                 <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
                                     {{ props.option.nem_site }}
@@ -225,7 +230,7 @@
                             <button class="button is-small is-default" @click="selectPop(props.option)" v-model="selectedPop">
                                 <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
                             </button>
-                            <a class="button is-small is-link" :href="'/main#/pop/' + props.option.id" target="_blank">
+                            <a class="button is-small is-link" :href="'/pop/' + props.option.id" target="_blank">
                                 <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
                             </a>
                         </div>
@@ -241,59 +246,85 @@
                 <div class="">
                     <div class="tile is-ancestor">
                         <div class="tile is-vertical">
-                            <div class="tile">
-                                <div class="tile is-vertical">
+                            <div class="tile is-vertical">
+                                <div class="tile">
                                     <div class="tile is-parent">
                                         <a class="tile is-child box has-text-centered" @click="currentTab = 'pops'">
                                             <div class="" style="margin-top: 10px;">
                                             <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="map-marker-alt" class="has-text-link" size="2x"/>
+                                                <font-awesome-icon icon="map-marker-alt" class="has-text-smart" size="2x"/>
                                             <!-- </b-tag> -->
                                             </div>
                                             
-                                            <div class="is-size-3 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
+                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
                                                 <p class="is-size-6 has-text-weight-normal">POP</p>
                                             </div>
                                         </a>
                                     </div>
+
+                                    <div class="tile is-parent">
+                                        <a class="tile is-child box has-text-centered" @click="currentTab = 'sites'">
+                                            <div class="" style="margin-top: 10px;">
+                                            <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
+                                                <font-awesome-icon icon="server" class="has-text-positive" size="2x"/>
+                                            <!-- </b-tag> -->
+                                            </div>
+                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-normal">Sitios</p>
+                                            </div>
+                                        </a>
+                                    </div>
+
                                     <div class="tile is-parent">
                                         <a class="tile is-child box has-text-centered" @click="currentTab = 'technologies'">
                                             <div class="" style="margin-top: 10px;">
                                             <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="signal" class="has-text-info" size="2x"/>
+                                                <font-awesome-icon icon="signal" class="has-text-eco" size="2x"/>
                                             <!-- </b-tag> -->
                                             </div>
-                                            <div class="is-size-3 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">TECNOLOGIAS</p>
+                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-normal">Tecnologías</p>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
 
-                                <div class="tile is-vertical">
+                                <div class="tile">
                                     <div class="tile is-parent">
-                                        <a class="tile is-child box has-text-centered" @click="currentTab = 'sites'">
+                                        <a class="tile is-child box has-text-centered has-text-white has-background-smart" @click="currentTab = 'critics'">
                                             <div class="" style="margin-top: 10px;">
                                             <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="server" class="has-text-eco" size="2x"/>
+                                                <font-awesome-icon icon="map-marker-alt" class="has-text-white" size="2x"/>
                                             <!-- </b-tag> -->
                                             </div>
-                                            <div class="is-size-3 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">SITIOS</p>
+                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-normal">Críticos</p>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="tile is-parent">
-                                        <a class="tile is-child box has-text-centered" @click="currentTab = 'critics'">
+                                        <router-link class="tile is-child box has-text-centered has-text-white has-background-positive" to="/pop">
                                             <div class="" style="margin-top: 10px;">
                                             <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="map-marker-alt" class="has-text-warning" size="2x"/>
+                                                <font-awesome-icon icon="map-marker-alt" class="has-text-white" size="2x"/>
                                             <!-- </b-tag> -->
                                             </div>
-                                            <div class="is-size-3 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">POP CRITICOS</p>
+                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 1980 | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-normal">Alba</p>
                                             </div>
-                                        </a>
+                                        </router-link>
+                                    </div>
+                                    <div class="tile is-parent">
+                                        <router-link class="tile is-child box has-text-centered has-text-white has-background-eco" to="/eco">
+                                            <div class="" style="margin-top: 10px;">
+                                            <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
+                                                <font-awesome-icon icon="map-marker-alt" class="has-text-white" size="2x"/>
+                                            <!-- </b-tag> -->
+                                            </div>
+                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 24 | numeral('0,0') }}
+                                                <p class="is-size-6 has-text-weight-normal">Zonas Protegidas</p>
+                                            </div>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -308,11 +339,10 @@
 
                         <div class="tile is-parent is-vertical">
                             <map-view
-                                :selectedPop="selectedPop"
+                                :pops="pops"
                                 :map_attributes="map_attributes"
                                 :darkMode="darkMode"
                                 :criticPopsSwitch="criticPopsSwitch"
-                                :pops="pops"
                             />                                    
                         </div>
 
@@ -749,6 +779,10 @@
         },
 
         watch: {
+            selectedPop(newValue, oldValue) {
+                this.pops = [newValue]
+            },
+
             selectedCrm(newValue, oldValue) {
                 this.selectedZona = null
                 if (newValue) {
@@ -807,12 +841,16 @@
             },
             currentLastUpdateData: function () {
                 return this.lastUpdateData[this.currentTab]
+            },
+            textSwitchCore() {
+                return this.core ? 'has-text-link' : ''
             }
         },
 
         methods: {
             searchFormat(pop) {
-                return pop.nem_site + ' - ' + pop.nombre_sitio + ' - ' + pop.direccion
+                this.selectedPop = this.selected
+                return this.searchText
             },
 
             // APIs
@@ -850,7 +888,7 @@
                         this.pops = this.popList
                     }
                 }
-            }, 500),
+            }, 10),
             async getPopsCrm() {
                 this.popsCrm = []
                 this.popList.forEach(element => {
@@ -915,8 +953,7 @@
 
             // CONTERS
             async getCounters() {
-                axios.get(`/api/dashboard?core=${this.core}&crm_id=${ this.selectedCrm ? this.selectedCrm.id : 0 }&zona_id=${ this.selectedZona ? this.selectedZona.id : 0 }`)
-                .then((response) => {
+                axios.get(`/api/dashboard?core=${this.core}&crm_id=${ this.selectedCrm ? this.selectedCrm.id : 0 }&zona_id=${ this.selectedZona ? this.selectedZona.id : 0 }`).then((response) => {
                     this.popsQuantity = response.data.pops
                     this.sitesQuantity = response.data.sites
                     this.technologiesQuantity = response.data.technologies
@@ -933,7 +970,7 @@
 
             // Triggers
             selectPop(pop) {
-                this.selectedPop = pop
+                this.pops = [pop]
             },
             selectCrm(crm) {
                 // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
@@ -950,8 +987,6 @@
                     this.lastUpdateData = response.data
                 })
             },
-
-
 
             getAsyncData: debounce(function (text) {
                 // String update
@@ -973,12 +1008,12 @@
                     return
                 }
                 this.isFetching = true
-                axios.get(`/api/searchPops?text=${this.searchText}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}`)
+                axios.get(`/api/searchPops?text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
                     .then((response) => {
-                        console.log(response.data)
                         response.data.data.forEach((item) => this.popSearch.push(item))
                         this.page++
-                        this.totalPages = response.last_page
+                        this.totalPages = response.data.last_page
+                        this.counter = response.data.total
                     })
                     .catch((error) => {
                         throw error
@@ -990,7 +1025,7 @@
 
             getMoreAsyncData: debounce(function () {
                 this.getAsyncData(this.searchText)
-            }, 50),
+            }, 10),
         
             // Search bar
             // async search(){
@@ -1030,13 +1065,13 @@
                 this.selectedPop = null
             },
 
-            clickOutside() {
-                this.active = null
-            },
+            // clickOutside() {
+            //     this.active = null
+            // },
 
-            setActive() {
-                this.active = 1
-            },
+            // setActive() {
+            //     this.active = 1
+            // },
 
             // Style mode
             styleMode(){
@@ -1079,10 +1114,14 @@
                 this.darkMode = this.darkMode == 0 ? 1 : 0
                 this.styleMode()
             },
+            // newPop(value) {
+            //     console.log(value)
+            //     this.pops = value
+            // }
 
-            async viewCriticPops() {
-                this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
-            }
+            // async viewCriticPops() {
+            //     this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
+            // }
         },
 
     }

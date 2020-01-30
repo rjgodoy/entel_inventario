@@ -47,13 +47,13 @@ $danger: $entel-secondary;
 $danger-invert: $entel-secondary-invert;
 $danger-focus-border: $entel-secondary;
 
-$black-ter: $mirage;
-$black-ter-invert: $mirage-invert;
-$black-ter-focus-border: $mirage;
+// $black-ter: $mirage;
+// $black-ter-invert: $mirage-invert;
+// $black-ter-focus-border: $mirage;
 
-$dark: $blackRussian;
-$dark-invert: $blackRussian-invert;
-$dark-focus-border: $blackRussian;
+// $dark: $blackRussian;
+// $dark-invert: $blackRussian-invert;
+// $dark-focus-border: $blackRussian;
 
 $input-placeholder-color: #7a7a7a;
 
@@ -77,8 +77,8 @@ $colors: (
     "eco": ($eco, $eco-invert),
     "smart": ($smart, $smart-invert),
     "positive": ($positive, $positive-invert),
-    "mirage": ($mirage, $mirage-invert),
-    "blackRussian": ($blackRussian, $blackRussian-invert)
+    // "mirage": ($mirage, $mirage-invert),
+    // "blackRussian": ($blackRussian, $blackRussian-invert)
 );
 
 $shades: (

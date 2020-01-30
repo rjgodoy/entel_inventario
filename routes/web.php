@@ -20,13 +20,15 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
 	Route::get('/', function () {
-	    return redirect('/main');
+	    return redirect('/dashboard');
+	});
+
+	Route::get('/home', function () {
+	    return redirect('/dashboard');
 	});
 
 	Route::get('/{any}', 'HomeController@index')->where('any', '.*');
-	Route::get('/home', function () {
-	    return redirect('/main');
-	});
+	
 
 	// Route::resource('/dashboard', 'HomeController');
 	// Route::get('/pop/export', 'PopController@export')->name('pops.export');

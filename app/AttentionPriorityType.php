@@ -8,8 +8,8 @@ class AttentionPriorityType extends Model
 {
     protected $connection = 'mysql_entel_pops';
 	
-    public function attention_priorities() 
+    public function sites() 
     {
-        return $this->hasMany(AttentionPriority::class);
+        return $this->hasMany(Site::class);
     }
 }

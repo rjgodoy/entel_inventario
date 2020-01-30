@@ -271,7 +271,7 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function searchPops(Request $request)
+    public function search(Request $request)
     {
         $text = $request->text;
         $core = $request->core;
@@ -316,7 +316,7 @@ class PopController extends Controller
                 'pops.alba_project'
             )
             ->orderBy('pops.id')
-            ->paginate(20);
+            ->paginate(10);
     
         return $pops;
     }
@@ -327,51 +327,51 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function searchPopsCrm(Request $request)
-    {
-        $text = $request->text;
-        $core = $request->core;
-        $crm_id = $request->crm_id;
+    // public function searchPopsCrm(Request $request)
+    // {
+    //     $text = $request->text;
+    //     $core = $request->core;
+    //     $crm_id = $request->crm_id;
 
-        $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
-            ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-            ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-            ->join('crms', function($join) use ($crm_id) {
-                $join->on('zonas.crm_id', '=', 'crms.id')
-                ->where('crms.id', $crm_id);
-            })
-            ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-            ->where(function($query) use ($text) {
-                $query->where('sites.nem_site', 'LIKE', "%$text%")
-                    ->orWhere('sites.nombre', 'LIKE', "%$text%")
-                    ->orWhere('pops.nombre', 'LIKE', "%$text%")
-                    ->orWhere('pops.direccion', 'LIKE', "%$text%");
-            })
-            ->where('sites.state_type_id', 1)
-            ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
-            ->select(
-                'pops.id',
-                'sites.id as site_id',
-                'sites.nem_site',
-                'sites.nombre as nombre_sitio',
-                'sites.classification_type_id',
-                'pops.nombre',
-                'pops.direccion',
-                'pops.latitude',
-                'pops.longitude',
-                'comunas.nombre_comuna',
-                'comunas.zona_id',
-                'zonas.crm_id',
-                'zonas.nombre_zona',
-                'crms.nombre_crm',
-                'classification_types.classification_type',
-                'pops.alba_project'
-            )
-            ->orderBy('pops.id')
-            ->get();
+    //     $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
+    //         ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
+    //         ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
+    //         ->join('crms', function($join) use ($crm_id) {
+    //             $join->on('zonas.crm_id', '=', 'crms.id')
+    //             ->where('crms.id', $crm_id);
+    //         })
+    //         ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
+    //         ->where(function($query) use ($text) {
+    //             $query->where('sites.nem_site', 'LIKE', "%$text%")
+    //                 ->orWhere('sites.nombre', 'LIKE', "%$text%")
+    //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
+    //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
+    //         })
+    //         ->where('sites.state_type_id', 1)
+    //         ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
+    //         ->select(
+    //             'pops.id',
+    //             'sites.id as site_id',
+    //             'sites.nem_site',
+    //             'sites.nombre as nombre_sitio',
+    //             'sites.classification_type_id',
+    //             'pops.nombre',
+    //             'pops.direccion',
+    //             'pops.latitude',
+    //             'pops.longitude',
+    //             'comunas.nombre_comuna',
+    //             'comunas.zona_id',
+    //             'zonas.crm_id',
+    //             'zonas.nombre_zona',
+    //             'crms.nombre_crm',
+    //             'classification_types.classification_type',
+    //             'pops.alba_project'
+    //         )
+    //         ->orderBy('pops.id')
+    //         ->get();
 
-        return $pops;
-    }
+    //     return $pops;
+    // }
 
     /**
      * Search the specified resource from storage.
@@ -379,51 +379,51 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function searchPopsZona(Request $request)
-    {
-        $text = $request->text;
-        $core = $request->core;
-        $zona_id = $request->zona_id;
+    // public function searchPopsZona(Request $request)
+    // {
+    //     $text = $request->text;
+    //     $core = $request->core;
+    //     $zona_id = $request->zona_id;
 
-        $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
-            ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-            ->join('zonas', function($join) use ($zona_id) {
-                $join->on('comunas.zona_id', '=', 'zonas.id')
-                ->where('zonas.id', $zona_id);
-            })
-            ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-            ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-            ->where(function($query) use ($text) {
-                $query->where('sites.nem_site', 'LIKE', "%$text%")
-                    ->orWhere('sites.nombre', 'LIKE', "%$text%")
-                    ->orWhere('pops.nombre', 'LIKE', "%$text%")
-                    ->orWhere('pops.direccion', 'LIKE', "%$text%");
-            })
-            ->where('sites.state_type_id', 1)
-            ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
-            ->select(
-                'pops.id',
-                'sites.id as site_id',
-                'sites.nem_site',
-                'sites.nombre as nombre_sitio',
-                'sites.classification_type_id',
-                'pops.nombre',
-                'pops.direccion',
-                'pops.latitude',
-                'pops.longitude',
-                'comunas.nombre_comuna',
-                'comunas.zona_id',
-                'zonas.crm_id',
-                'zonas.nombre_zona',
-                'crms.nombre_crm',
-                'classification_types.classification_type',
-                'pops.alba_project'
-            )
-            ->orderBy('pops.id')
-            ->get();
+    //     $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
+    //         ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
+    //         ->join('zonas', function($join) use ($zona_id) {
+    //             $join->on('comunas.zona_id', '=', 'zonas.id')
+    //             ->where('zonas.id', $zona_id);
+    //         })
+    //         ->join('crms', 'zonas.crm_id', '=', 'crms.id')
+    //         ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
+    //         ->where(function($query) use ($text) {
+    //             $query->where('sites.nem_site', 'LIKE', "%$text%")
+    //                 ->orWhere('sites.nombre', 'LIKE', "%$text%")
+    //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
+    //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
+    //         })
+    //         ->where('sites.state_type_id', 1)
+    //         ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
+    //         ->select(
+    //             'pops.id',
+    //             'sites.id as site_id',
+    //             'sites.nem_site',
+    //             'sites.nombre as nombre_sitio',
+    //             'sites.classification_type_id',
+    //             'pops.nombre',
+    //             'pops.direccion',
+    //             'pops.latitude',
+    //             'pops.longitude',
+    //             'comunas.nombre_comuna',
+    //             'comunas.zona_id',
+    //             'zonas.crm_id',
+    //             'zonas.nombre_zona',
+    //             'crms.nombre_crm',
+    //             'classification_types.classification_type',
+    //             'pops.alba_project'
+    //         )
+    //         ->orderBy('pops.id')
+    //         ->get();
 
-        return $pops;
-    }
+    //     return $pops;
+    // }
 
      /**
      * Search the specified resource from storage.

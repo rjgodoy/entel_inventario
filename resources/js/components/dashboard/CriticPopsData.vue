@@ -10,26 +10,24 @@
                     <thead>
                         <tr class="is-size-7">
                             <!-- <th class="has-text-right" :class="secondaryText"><abbr title="ID">ID</abbr></th> -->
-                            <th class="has-text-left" :class="secondaryText"><abbr title="Código Planificación">Cod. Planificación</abbr></th>
                             <th class="has-text-left" :class="secondaryText"><abbr title="Nemónico">Nemónico</abbr></th>
-                            <th class="has-text-left" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
                             <th class="has-text-left" :class="secondaryText"><abbr title="Nombre y dirección del POP">Nombre / Dirección</abbr></th>
-                            <!-- <th class="has-text-left" :class="secondaryText"><abbr title="Dirección">Dirección</abbr></th> -->
+                            <th class="has-text-left" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
+                            <th class="has-text-left" :class="secondaryText"><abbr title="Código Planificación">Cod. Planificación</abbr></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="is-size-7" v-for="item in data.data">
-                            <!-- <td class="has-text-right" :class="primaryText">{{ item.pop_id | numeral('0,0') }}</td> -->
-                            <td class="has-text-left" :class="primaryText">{{ item.cod_planificacion }}</td>
-                            <td class="has-text-left" :class="primaryText">{{ item.pop.sites[0].nem_site }}</td>
-                            <td class="has-text-centered" :class="primaryText">
-                                <!-- <b-tag type="is-info">{{ popClassification }}</b-tag> -->
-                            </td>
                             <td class="has-text-left" :class="primaryText">
-                                <div>{{ item.pop.nombre }}</div>
-                                <div>{{ item.pop.direccion }}</div>
+                                <router-link :to="'/pop/' + item.site.pop.id" target="_blank">{{ item.site.nem_site }}</router-link></td>
+                            <td class="has-text-left" :class="primaryText">
+                                <div>{{ item.site.pop.nombre }}</div>
+                                <div>{{ item.site.pop.direccion }}</div>
                             </td>
-                            <!-- <td class="has-text-right" :class="primaryText">{{ item.direccion }}</td> -->
+                            <td class="has-text-centered" :class="primaryText">
+                                <b-tag :type="item.site.classification_type_id == 1 ? 'is-info' : (item.site.classification_type_id == 2 ? 'is-warning' : (item.site.classification_type_id == 3 ? 'is-smart' : (item.site.classification_type_id == 4 ? 'is-success' : 'is-link')))">{{ item.site.classification_type.classification_type }}</b-tag>
+                            </td>
+                            <td class="has-text-left" :class="primaryText">{{ item.site.cod_planificacion }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -112,10 +110,10 @@
             }
         },
         computed: {
-            popClassification(cpop) {
+            popClassification(site) {
                 var i = 6; var cat
-                if (cpop.pop.sites) {
-                    cpop.pop.sites.forEach(function(item) {
+                if (site.pop) {
+                    site.forEach(function(item) {
                         if (item.classification_type_id && item.classification_type_id < i) { 
                             i = item.classification_type_id
                             cat = item.classification_type.classification_type
@@ -128,27 +126,31 @@
         methods: {
             getData() {
                 // Si no hay un CRM seleccionado
-                if (!this.selectedCrm) {                             
-                    axios.get(`/api/criticPops?core=${this.core}&page=${this.data.current_page}`)
+                // if (!this.selectedCrm) {                             
+                    axios.get(`/api/criticSites?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
                     .then((response) => {
+                        console.log(response.data)
                         this.data = response.data;
+                        // if(true) {
+                        //     this.$emit('clicked', this.data)
+                        // }
                     })
-                } 
-                //Si hay un CRM seleccionado, pero no hay zona seleccionada
-                else if (!this.selectedZona){
-                    console.log(this.selectedCrm.id)
-                    axios.get(`/api/criticPopsCrm?crm_id=${this.selectedCrm.id}&core=${this.core}&page=${this.data.current_page}`)
-                    .then((response) => {
-                        this.data = response.data;
-                    })
-                } 
-                // Si hay una zona seleccionada
-                else {
-                    axios.get(`/api/criticPopsZona?zona_id=${this.selectedZona.id}&core=${this.core}&page=${this.data.current_page}`)
-                    .then((response) => {
-                        this.data = response.data;
-                    })
-                }
+                // } 
+                // //Si hay un CRM seleccionado, pero no hay zona seleccionada
+                // else if (!this.selectedZona){
+                //     console.log(this.selectedCrm.id)
+                //     axios.get(`/api/criticPopsCrm?crm_id=${this.selectedCrm.id}&core=${this.core}&page=${this.data.current_page}`)
+                //     .then((response) => {
+                //         this.data = response.data;
+                //     })
+                // } 
+                // // Si hay una zona seleccionada
+                // else {
+                //     axios.get(`/api/criticPopsZona?zona_id=${this.selectedZona.id}&core=${this.core}&page=${this.data.current_page}`)
+                //     .then((response) => {
+                //         this.data = response.data;
+                //     })
+                // }
             },
             downloadPops() {
                 this.buttonLoading = 1

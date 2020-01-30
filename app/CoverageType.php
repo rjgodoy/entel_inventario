@@ -8,7 +8,7 @@ class CoverageType extends Model
 {
     protected $connection = 'mysql_entel_pops';
 	
-    public function coverages() 
+    public function sites() 
     {
         return $this->hasMany(Coverage::class);
     }

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Barlow&display=swap);/* (ignored) *//* (ignored) *//* (ignored) */@keyframes spinAround {
+@import url(https://fonts.googleapis.com/css?family=Barlow&display=swap);@keyframes spinAround {
   from {
     transform: rotate(0deg);
   }
@@ -234,7 +234,7 @@
   border-radius: 4px;
   box-shadow: none;
   display: inline-flex;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   height: 2.5em;
   justify-content: flex-start;
   line-height: 1.5;
@@ -619,7 +619,7 @@ fieldset[disabled] .pagination-ellipsis {
   border-radius: 4px;
   box-shadow: none;
   display: inline-flex;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   height: 2.5em;
   justify-content: flex-start;
   line-height: 1.5;
@@ -946,210 +946,210 @@ table th {
 }
 
 .is-size-1 {
-  font-size: 2.9rem !important;
+  font-size: 2.8rem !important;
 }
 
 .is-size-2 {
-  font-size: 2.4rem !important;
+  font-size: 2.3rem !important;
 }
 
 .is-size-3 {
-  font-size: 1.9rem !important;
+  font-size: 1.8rem !important;
 }
 
 .is-size-4 {
-  font-size: 1.4rem !important;
+  font-size: 1.3rem !important;
 }
 
 .is-size-5 {
-  font-size: 1.15rem !important;
+  font-size: 1.05rem !important;
 }
 
 .is-size-6 {
-  font-size: 0.9rem !important;
+  font-size: 0.8rem !important;
 }
 
 .is-size-7 {
-  font-size: 0.65rem !important;
+  font-size: 0.6rem !important;
 }
 
 @media screen and (max-width: 768px) {
   .is-size-1-mobile {
-    font-size: 2.9rem !important;
+    font-size: 2.8rem !important;
   }
 
   .is-size-2-mobile {
-    font-size: 2.4rem !important;
+    font-size: 2.3rem !important;
   }
 
   .is-size-3-mobile {
-    font-size: 1.9rem !important;
+    font-size: 1.8rem !important;
   }
 
   .is-size-4-mobile {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
   }
 
   .is-size-5-mobile {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
   }
 
   .is-size-6-mobile {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
   }
 
   .is-size-7-mobile {
-    font-size: 0.65rem !important;
+    font-size: 0.6rem !important;
   }
 }
 
 @media screen and (min-width: 769px), print {
   .is-size-1-tablet {
-    font-size: 2.9rem !important;
+    font-size: 2.8rem !important;
   }
 
   .is-size-2-tablet {
-    font-size: 2.4rem !important;
+    font-size: 2.3rem !important;
   }
 
   .is-size-3-tablet {
-    font-size: 1.9rem !important;
+    font-size: 1.8rem !important;
   }
 
   .is-size-4-tablet {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
   }
 
   .is-size-5-tablet {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
   }
 
   .is-size-6-tablet {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
   }
 
   .is-size-7-tablet {
-    font-size: 0.65rem !important;
+    font-size: 0.6rem !important;
   }
 }
 
 @media screen and (max-width: 1023px) {
   .is-size-1-touch {
-    font-size: 2.9rem !important;
+    font-size: 2.8rem !important;
   }
 
   .is-size-2-touch {
-    font-size: 2.4rem !important;
+    font-size: 2.3rem !important;
   }
 
   .is-size-3-touch {
-    font-size: 1.9rem !important;
+    font-size: 1.8rem !important;
   }
 
   .is-size-4-touch {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
   }
 
   .is-size-5-touch {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
   }
 
   .is-size-6-touch {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
   }
 
   .is-size-7-touch {
-    font-size: 0.65rem !important;
+    font-size: 0.6rem !important;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .is-size-1-desktop {
-    font-size: 2.9rem !important;
+    font-size: 2.8rem !important;
   }
 
   .is-size-2-desktop {
-    font-size: 2.4rem !important;
+    font-size: 2.3rem !important;
   }
 
   .is-size-3-desktop {
-    font-size: 1.9rem !important;
+    font-size: 1.8rem !important;
   }
 
   .is-size-4-desktop {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
   }
 
   .is-size-5-desktop {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
   }
 
   .is-size-6-desktop {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
   }
 
   .is-size-7-desktop {
-    font-size: 0.65rem !important;
+    font-size: 0.6rem !important;
   }
 }
 
 @media screen and (min-width: 1216px) {
   .is-size-1-widescreen {
-    font-size: 2.9rem !important;
+    font-size: 2.8rem !important;
   }
 
   .is-size-2-widescreen {
-    font-size: 2.4rem !important;
+    font-size: 2.3rem !important;
   }
 
   .is-size-3-widescreen {
-    font-size: 1.9rem !important;
+    font-size: 1.8rem !important;
   }
 
   .is-size-4-widescreen {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
   }
 
   .is-size-5-widescreen {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
   }
 
   .is-size-6-widescreen {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
   }
 
   .is-size-7-widescreen {
-    font-size: 0.65rem !important;
+    font-size: 0.6rem !important;
   }
 }
 
 @media screen and (min-width: 1408px) {
   .is-size-1-fullhd {
-    font-size: 2.9rem !important;
+    font-size: 2.8rem !important;
   }
 
   .is-size-2-fullhd {
-    font-size: 2.4rem !important;
+    font-size: 2.3rem !important;
   }
 
   .is-size-3-fullhd {
-    font-size: 1.9rem !important;
+    font-size: 1.8rem !important;
   }
 
   .is-size-4-fullhd {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
   }
 
   .is-size-5-fullhd {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
   }
 
   .is-size-6-fullhd {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
   }
 
   .is-size-7-fullhd {
-    font-size: 0.65rem !important;
+    font-size: 0.6rem !important;
   }
 }
 
@@ -1441,16 +1441,16 @@ a.has-text-light:focus {
 }
 
 .has-text-dark {
-  color: #23252C !important;
+  color: #363636 !important;
 }
 
 a.has-text-dark:hover,
 a.has-text-dark:focus {
-  color: #0c0d10 !important;
+  color: #1c1c1c !important;
 }
 
 .has-background-dark {
-  background-color: #23252C !important;
+  background-color: #363636 !important;
 }
 
 .has-text-primary {
@@ -1622,32 +1622,6 @@ a.has-text-positive:focus {
   background-color: #FD6C9B !important;
 }
 
-.has-text-mirage {
-  color: #191B22 !important;
-}
-
-a.has-text-mirage:hover,
-a.has-text-mirage:focus {
-  color: #030405 !important;
-}
-
-.has-background-mirage {
-  background-color: #191B22 !important;
-}
-
-.has-text-blackRussian {
-  color: #23252C !important;
-}
-
-a.has-text-blackRussian:hover,
-a.has-text-blackRussian:focus {
-  color: #0c0d10 !important;
-}
-
-.has-background-blackRussian {
-  background-color: #23252C !important;
-}
-
 .has-text-black-bis {
   color: #121212 !important;
 }
@@ -1657,11 +1631,11 @@ a.has-text-blackRussian:focus {
 }
 
 .has-text-black-ter {
-  color: #191B22 !important;
+  color: #242424 !important;
 }
 
 .has-background-black-ter {
-  background-color: #191B22 !important;
+  background-color: #242424 !important;
 }
 
 .has-text-grey-darker {
@@ -2710,14 +2684,14 @@ fieldset[disabled] .button.is-light.is-inverted.is-outlined {
 }
 
 .button.is-dark {
-  background-color: #23252C;
+  background-color: #363636;
   border-color: transparent;
   color: #fff;
 }
 
 .button.is-dark:hover,
 .button.is-dark.is-hovered {
-  background-color: #1d1f25;
+  background-color: #2f2f2f;
   border-color: transparent;
   color: #fff;
 }
@@ -2730,26 +2704,26 @@ fieldset[disabled] .button.is-light.is-inverted.is-outlined {
 
 .button.is-dark:focus:not(:active),
 .button.is-dark.is-focused:not(:active) {
-  box-shadow: 0 0 0 0.125em rgba(35, 37, 44, 0.25);
+  box-shadow: 0 0 0 0.125em rgba(54, 54, 54, 0.25);
 }
 
 .button.is-dark:active,
 .button.is-dark.is-active {
-  background-color: #18191e;
+  background-color: #292929;
   border-color: transparent;
   color: #fff;
 }
 
 .button.is-dark[disabled],
 fieldset[disabled] .button.is-dark {
-  background-color: #23252C;
+  background-color: #363636;
   border-color: transparent;
   box-shadow: none;
 }
 
 .button.is-dark.is-inverted {
   background-color: #fff;
-  color: #23252C;
+  color: #363636;
 }
 
 .button.is-dark.is-inverted:hover,
@@ -2762,7 +2736,7 @@ fieldset[disabled] .button.is-dark.is-inverted {
   background-color: #fff;
   border-color: transparent;
   box-shadow: none;
-  color: #23252C;
+  color: #363636;
 }
 
 .button.is-dark.is-loading::after {
@@ -2771,21 +2745,21 @@ fieldset[disabled] .button.is-dark.is-inverted {
 
 .button.is-dark.is-outlined {
   background-color: transparent;
-  border-color: #23252C;
-  color: #23252C;
+  border-color: #363636;
+  color: #363636;
 }
 
 .button.is-dark.is-outlined:hover,
 .button.is-dark.is-outlined.is-hovered,
 .button.is-dark.is-outlined:focus,
 .button.is-dark.is-outlined.is-focused {
-  background-color: #23252C;
-  border-color: #23252C;
+  background-color: #363636;
+  border-color: #363636;
   color: #fff;
 }
 
 .button.is-dark.is-outlined.is-loading::after {
-  border-color: transparent transparent #23252C #23252C !important;
+  border-color: transparent transparent #363636 #363636 !important;
 }
 
 .button.is-dark.is-outlined.is-loading:hover::after,
@@ -2798,9 +2772,9 @@ fieldset[disabled] .button.is-dark.is-inverted {
 .button.is-dark.is-outlined[disabled],
 fieldset[disabled] .button.is-dark.is-outlined {
   background-color: transparent;
-  border-color: #23252C;
+  border-color: #363636;
   box-shadow: none;
-  color: #23252C;
+  color: #363636;
 }
 
 .button.is-dark.is-inverted.is-outlined {
@@ -2814,14 +2788,14 @@ fieldset[disabled] .button.is-dark.is-outlined {
 .button.is-dark.is-inverted.is-outlined:focus,
 .button.is-dark.is-inverted.is-outlined.is-focused {
   background-color: #fff;
-  color: #23252C;
+  color: #363636;
 }
 
 .button.is-dark.is-inverted.is-outlined.is-loading:hover::after,
 .button.is-dark.is-inverted.is-outlined.is-loading.is-hovered::after,
 .button.is-dark.is-inverted.is-outlined.is-loading:focus::after,
 .button.is-dark.is-inverted.is-outlined.is-loading.is-focused::after {
-  border-color: transparent transparent #23252C #23252C !important;
+  border-color: transparent transparent #363636 #363636 !important;
 }
 
 .button.is-dark.is-inverted.is-outlined[disabled],
@@ -4431,267 +4405,21 @@ fieldset[disabled] .button.is-positive.is-inverted.is-outlined {
   color: #fff;
 }
 
-.button.is-mirage {
-  background-color: #191B22;
-  border-color: transparent;
-  color: #fff;
-}
-
-.button.is-mirage:hover,
-.button.is-mirage.is-hovered {
-  background-color: #14151b;
-  border-color: transparent;
-  color: #fff;
-}
-
-.button.is-mirage:focus,
-.button.is-mirage.is-focused {
-  border-color: transparent;
-  color: #fff;
-}
-
-.button.is-mirage:focus:not(:active),
-.button.is-mirage.is-focused:not(:active) {
-  box-shadow: 0 0 0 0.125em rgba(25, 27, 34, 0.25);
-}
-
-.button.is-mirage:active,
-.button.is-mirage.is-active {
-  background-color: #0e0f13;
-  border-color: transparent;
-  color: #fff;
-}
-
-.button.is-mirage[disabled],
-fieldset[disabled] .button.is-mirage {
-  background-color: #191B22;
-  border-color: transparent;
-  box-shadow: none;
-}
-
-.button.is-mirage.is-inverted {
-  background-color: #fff;
-  color: #191B22;
-}
-
-.button.is-mirage.is-inverted:hover,
-.button.is-mirage.is-inverted.is-hovered {
-  background-color: #f2f2f2;
-}
-
-.button.is-mirage.is-inverted[disabled],
-fieldset[disabled] .button.is-mirage.is-inverted {
-  background-color: #fff;
-  border-color: transparent;
-  box-shadow: none;
-  color: #191B22;
-}
-
-.button.is-mirage.is-loading::after {
-  border-color: transparent transparent #fff #fff !important;
-}
-
-.button.is-mirage.is-outlined {
-  background-color: transparent;
-  border-color: #191B22;
-  color: #191B22;
-}
-
-.button.is-mirage.is-outlined:hover,
-.button.is-mirage.is-outlined.is-hovered,
-.button.is-mirage.is-outlined:focus,
-.button.is-mirage.is-outlined.is-focused {
-  background-color: #191B22;
-  border-color: #191B22;
-  color: #fff;
-}
-
-.button.is-mirage.is-outlined.is-loading::after {
-  border-color: transparent transparent #191B22 #191B22 !important;
-}
-
-.button.is-mirage.is-outlined.is-loading:hover::after,
-.button.is-mirage.is-outlined.is-loading.is-hovered::after,
-.button.is-mirage.is-outlined.is-loading:focus::after,
-.button.is-mirage.is-outlined.is-loading.is-focused::after {
-  border-color: transparent transparent #fff #fff !important;
-}
-
-.button.is-mirage.is-outlined[disabled],
-fieldset[disabled] .button.is-mirage.is-outlined {
-  background-color: transparent;
-  border-color: #191B22;
-  box-shadow: none;
-  color: #191B22;
-}
-
-.button.is-mirage.is-inverted.is-outlined {
-  background-color: transparent;
-  border-color: #fff;
-  color: #fff;
-}
-
-.button.is-mirage.is-inverted.is-outlined:hover,
-.button.is-mirage.is-inverted.is-outlined.is-hovered,
-.button.is-mirage.is-inverted.is-outlined:focus,
-.button.is-mirage.is-inverted.is-outlined.is-focused {
-  background-color: #fff;
-  color: #191B22;
-}
-
-.button.is-mirage.is-inverted.is-outlined.is-loading:hover::after,
-.button.is-mirage.is-inverted.is-outlined.is-loading.is-hovered::after,
-.button.is-mirage.is-inverted.is-outlined.is-loading:focus::after,
-.button.is-mirage.is-inverted.is-outlined.is-loading.is-focused::after {
-  border-color: transparent transparent #191B22 #191B22 !important;
-}
-
-.button.is-mirage.is-inverted.is-outlined[disabled],
-fieldset[disabled] .button.is-mirage.is-inverted.is-outlined {
-  background-color: transparent;
-  border-color: #fff;
-  box-shadow: none;
-  color: #fff;
-}
-
-.button.is-blackRussian {
-  background-color: #23252C;
-  border-color: transparent;
-  color: #fff;
-}
-
-.button.is-blackRussian:hover,
-.button.is-blackRussian.is-hovered {
-  background-color: #1d1f25;
-  border-color: transparent;
-  color: #fff;
-}
-
-.button.is-blackRussian:focus,
-.button.is-blackRussian.is-focused {
-  border-color: transparent;
-  color: #fff;
-}
-
-.button.is-blackRussian:focus:not(:active),
-.button.is-blackRussian.is-focused:not(:active) {
-  box-shadow: 0 0 0 0.125em rgba(35, 37, 44, 0.25);
-}
-
-.button.is-blackRussian:active,
-.button.is-blackRussian.is-active {
-  background-color: #18191e;
-  border-color: transparent;
-  color: #fff;
-}
-
-.button.is-blackRussian[disabled],
-fieldset[disabled] .button.is-blackRussian {
-  background-color: #23252C;
-  border-color: transparent;
-  box-shadow: none;
-}
-
-.button.is-blackRussian.is-inverted {
-  background-color: #fff;
-  color: #23252C;
-}
-
-.button.is-blackRussian.is-inverted:hover,
-.button.is-blackRussian.is-inverted.is-hovered {
-  background-color: #f2f2f2;
-}
-
-.button.is-blackRussian.is-inverted[disabled],
-fieldset[disabled] .button.is-blackRussian.is-inverted {
-  background-color: #fff;
-  border-color: transparent;
-  box-shadow: none;
-  color: #23252C;
-}
-
-.button.is-blackRussian.is-loading::after {
-  border-color: transparent transparent #fff #fff !important;
-}
-
-.button.is-blackRussian.is-outlined {
-  background-color: transparent;
-  border-color: #23252C;
-  color: #23252C;
-}
-
-.button.is-blackRussian.is-outlined:hover,
-.button.is-blackRussian.is-outlined.is-hovered,
-.button.is-blackRussian.is-outlined:focus,
-.button.is-blackRussian.is-outlined.is-focused {
-  background-color: #23252C;
-  border-color: #23252C;
-  color: #fff;
-}
-
-.button.is-blackRussian.is-outlined.is-loading::after {
-  border-color: transparent transparent #23252C #23252C !important;
-}
-
-.button.is-blackRussian.is-outlined.is-loading:hover::after,
-.button.is-blackRussian.is-outlined.is-loading.is-hovered::after,
-.button.is-blackRussian.is-outlined.is-loading:focus::after,
-.button.is-blackRussian.is-outlined.is-loading.is-focused::after {
-  border-color: transparent transparent #fff #fff !important;
-}
-
-.button.is-blackRussian.is-outlined[disabled],
-fieldset[disabled] .button.is-blackRussian.is-outlined {
-  background-color: transparent;
-  border-color: #23252C;
-  box-shadow: none;
-  color: #23252C;
-}
-
-.button.is-blackRussian.is-inverted.is-outlined {
-  background-color: transparent;
-  border-color: #fff;
-  color: #fff;
-}
-
-.button.is-blackRussian.is-inverted.is-outlined:hover,
-.button.is-blackRussian.is-inverted.is-outlined.is-hovered,
-.button.is-blackRussian.is-inverted.is-outlined:focus,
-.button.is-blackRussian.is-inverted.is-outlined.is-focused {
-  background-color: #fff;
-  color: #23252C;
-}
-
-.button.is-blackRussian.is-inverted.is-outlined.is-loading:hover::after,
-.button.is-blackRussian.is-inverted.is-outlined.is-loading.is-hovered::after,
-.button.is-blackRussian.is-inverted.is-outlined.is-loading:focus::after,
-.button.is-blackRussian.is-inverted.is-outlined.is-loading.is-focused::after {
-  border-color: transparent transparent #23252C #23252C !important;
-}
-
-.button.is-blackRussian.is-inverted.is-outlined[disabled],
-fieldset[disabled] .button.is-blackRussian.is-inverted.is-outlined {
-  background-color: transparent;
-  border-color: #fff;
-  box-shadow: none;
-  color: #fff;
-}
-
 .button.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .button.is-normal {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .button.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .button.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .button[disabled],
@@ -4758,15 +4486,15 @@ fieldset[disabled] .button {
 
 .buttons.are-small .button:not(.is-normal):not(.is-medium):not(.is-large) {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .buttons.are-medium .button:not(.is-small):not(.is-normal):not(.is-large) {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .buttons.are-large .button:not(.is-small):not(.is-normal):not(.is-medium) {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .buttons.has-addons .button:not(:first-child) {
@@ -5067,15 +4795,15 @@ fieldset[disabled] .button {
 }
 
 .content.is-small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .content.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .content.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .icon {
@@ -5305,7 +5033,7 @@ fieldset[disabled] .button {
 }
 
 .notification.is-dark {
-  background-color: #23252C;
+  background-color: #363636;
   color: #fff;
 }
 
@@ -5374,23 +5102,13 @@ fieldset[disabled] .button {
   color: #fff;
 }
 
-.notification.is-mirage {
-  background-color: #191B22;
-  color: #fff;
-}
-
-.notification.is-blackRussian {
-  background-color: #23252C;
-  color: #fff;
-}
-
 .progress {
   -moz-appearance: none;
   -webkit-appearance: none;
   border: none;
   border-radius: 290486px;
   display: block;
-  height: 0.9rem;
+  height: 0.8rem;
   overflow: hidden;
   padding: 0;
   width: 100%;
@@ -5462,19 +5180,19 @@ fieldset[disabled] .button {
 }
 
 .progress.is-dark::-webkit-progress-value {
-  background-color: #23252C;
+  background-color: #363636;
 }
 
 .progress.is-dark::-moz-progress-bar {
-  background-color: #23252C;
+  background-color: #363636;
 }
 
 .progress.is-dark::-ms-fill {
-  background-color: #23252C;
+  background-color: #363636;
 }
 
 .progress.is-dark:indeterminate {
-  background-image: linear-gradient(to right, #23252C 30%, #ededed 30%);
+  background-image: linear-gradient(to right, #363636 30%, #ededed 30%);
 }
 
 .progress.is-primary::-webkit-progress-value {
@@ -5685,38 +5403,6 @@ fieldset[disabled] .button {
   background-image: linear-gradient(to right, #FD6C9B 30%, #ededed 30%);
 }
 
-.progress.is-mirage::-webkit-progress-value {
-  background-color: #191B22;
-}
-
-.progress.is-mirage::-moz-progress-bar {
-  background-color: #191B22;
-}
-
-.progress.is-mirage::-ms-fill {
-  background-color: #191B22;
-}
-
-.progress.is-mirage:indeterminate {
-  background-image: linear-gradient(to right, #191B22 30%, #ededed 30%);
-}
-
-.progress.is-blackRussian::-webkit-progress-value {
-  background-color: #23252C;
-}
-
-.progress.is-blackRussian::-moz-progress-bar {
-  background-color: #23252C;
-}
-
-.progress.is-blackRussian::-ms-fill {
-  background-color: #23252C;
-}
-
-.progress.is-blackRussian:indeterminate {
-  background-image: linear-gradient(to right, #23252C 30%, #ededed 30%);
-}
-
 .progress:indeterminate {
   -webkit-animation-duration: 1.5s;
           animation-duration: 1.5s;
@@ -5742,15 +5428,15 @@ fieldset[disabled] .button {
 }
 
 .progress.is-small {
-  height: 0.65rem;
+  height: 0.6rem;
 }
 
 .progress.is-medium {
-  height: 1.15rem;
+  height: 1.05rem;
 }
 
 .progress.is-large {
-  height: 1.4rem;
+  height: 1.3rem;
 }
 
 @-webkit-keyframes moveIndeterminate {
@@ -5809,8 +5495,8 @@ fieldset[disabled] .button {
 
 .table td.is-dark,
 .table th.is-dark {
-  background-color: #23252C;
-  border-color: #23252C;
+  background-color: #363636;
+  border-color: #363636;
   color: #fff;
 }
 
@@ -5902,20 +5588,6 @@ fieldset[disabled] .button {
 .table th.is-positive {
   background-color: #FD6C9B;
   border-color: #FD6C9B;
-  color: #fff;
-}
-
-.table td.is-mirage,
-.table th.is-mirage {
-  background-color: #191B22;
-  border-color: #191B22;
-  color: #fff;
-}
-
-.table td.is-blackRussian,
-.table th.is-blackRussian {
-  background-color: #23252C;
-  border-color: #23252C;
   color: #fff;
 }
 
@@ -6057,11 +5729,11 @@ fieldset[disabled] .button {
 }
 
 .tags.are-medium .tag:not(.is-normal):not(.is-large) {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .tags.are-large .tag:not(.is-normal):not(.is-medium) {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .tags.is-centered {
@@ -6106,7 +5778,7 @@ fieldset[disabled] .button {
   border-radius: 4px;
   color: #4a4a4a;
   display: inline-flex;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   height: 2em;
   justify-content: center;
   line-height: 1.5;
@@ -6136,7 +5808,7 @@ fieldset[disabled] .button {
 }
 
 .tag:not(body).is-dark {
-  background-color: #23252C;
+  background-color: #363636;
   color: #fff;
 }
 
@@ -6205,26 +5877,16 @@ fieldset[disabled] .button {
   color: #fff;
 }
 
-.tag:not(body).is-mirage {
-  background-color: #191B22;
-  color: #fff;
-}
-
-.tag:not(body).is-blackRussian {
-  background-color: #23252C;
-  color: #fff;
-}
-
 .tag:not(body).is-normal {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .tag:not(body).is-medium {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .tag:not(body).is-large {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .tag:not(body) .icon:first-child:not(:last-child) {
@@ -6317,7 +5979,7 @@ a.tag:hover {
 
 .title {
   color: #363636;
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.125;
 }
@@ -6336,36 +5998,36 @@ a.tag:hover {
 }
 
 .title.is-1 {
-  font-size: 2.9rem;
+  font-size: 2.8rem;
 }
 
 .title.is-2 {
-  font-size: 2.4rem;
+  font-size: 2.3rem;
 }
 
 .title.is-3 {
-  font-size: 1.9rem;
+  font-size: 1.8rem;
 }
 
 .title.is-4 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .title.is-5 {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .title.is-6 {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .title.is-7 {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .subtitle {
   color: #4a4a4a;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.25;
 }
@@ -6380,31 +6042,31 @@ a.tag:hover {
 }
 
 .subtitle.is-1 {
-  font-size: 2.9rem;
+  font-size: 2.8rem;
 }
 
 .subtitle.is-2 {
-  font-size: 2.4rem;
+  font-size: 2.3rem;
 }
 
 .subtitle.is-3 {
-  font-size: 1.9rem;
+  font-size: 1.8rem;
 }
 
 .subtitle.is-4 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .subtitle.is-5 {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .subtitle.is-6 {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .subtitle.is-7 {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .heading {
@@ -6432,7 +6094,7 @@ a.tag:hover {
   background-color: whitesmoke;
   border-radius: 290486px;
   display: inline-flex;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   height: 2em;
   justify-content: center;
   margin-right: 1.5rem;
@@ -6659,7 +6321,7 @@ fieldset[disabled] .select select:-ms-input-placeholder,
 .is-dark.input,
 .taginput .is-dark.taginput-container.is-focusable,
 .is-dark.textarea {
-  border-color: #23252C;
+  border-color: #363636;
 }
 
 .is-dark.input:focus,
@@ -6674,7 +6336,7 @@ fieldset[disabled] .select select:-ms-input-placeholder,
 .is-dark.is-active.input,
 .taginput .is-dark.is-active.taginput-container.is-focusable,
 .is-dark.is-active.textarea {
-  box-shadow: 0 0 0 0.125em rgba(35, 37, 44, 0.25);
+  box-shadow: 0 0 0 0.125em rgba(54, 54, 54, 0.25);
 }
 
 .is-primary.input,
@@ -6950,65 +6612,23 @@ fieldset[disabled] .select select:-ms-input-placeholder,
   box-shadow: 0 0 0 0.125em rgba(253, 108, 155, 0.25);
 }
 
-.is-mirage.input,
-.taginput .is-mirage.taginput-container.is-focusable,
-.is-mirage.textarea {
-  border-color: #191B22;
-}
-
-.is-mirage.input:focus,
-.taginput .is-mirage.taginput-container.is-focusable:focus,
-.is-mirage.textarea:focus,
-.is-mirage.is-focused.input,
-.taginput .is-mirage.is-focused.taginput-container.is-focusable,
-.is-mirage.is-focused.textarea,
-.is-mirage.input:active,
-.taginput .is-mirage.taginput-container.is-focusable:active,
-.is-mirage.textarea:active,
-.is-mirage.is-active.input,
-.taginput .is-mirage.is-active.taginput-container.is-focusable,
-.is-mirage.is-active.textarea {
-  box-shadow: 0 0 0 0.125em rgba(25, 27, 34, 0.25);
-}
-
-.is-blackRussian.input,
-.taginput .is-blackRussian.taginput-container.is-focusable,
-.is-blackRussian.textarea {
-  border-color: #23252C;
-}
-
-.is-blackRussian.input:focus,
-.taginput .is-blackRussian.taginput-container.is-focusable:focus,
-.is-blackRussian.textarea:focus,
-.is-blackRussian.is-focused.input,
-.taginput .is-blackRussian.is-focused.taginput-container.is-focusable,
-.is-blackRussian.is-focused.textarea,
-.is-blackRussian.input:active,
-.taginput .is-blackRussian.taginput-container.is-focusable:active,
-.is-blackRussian.textarea:active,
-.is-blackRussian.is-active.input,
-.taginput .is-blackRussian.is-active.taginput-container.is-focusable,
-.is-blackRussian.is-active.textarea {
-  box-shadow: 0 0 0 0.125em rgba(35, 37, 44, 0.25);
-}
-
 .is-small.input,
 .taginput .is-small.taginput-container.is-focusable,
 .is-small.textarea {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .is-medium.input,
 .taginput .is-medium.taginput-container.is-focusable,
 .is-medium.textarea {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .is-large.input,
 .taginput .is-large.taginput-container.is-focusable,
 .is-large.textarea {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .is-fullwidth.input,
@@ -7209,23 +6829,23 @@ fieldset[disabled] .select select:hover {
 }
 
 .select.is-dark:not(:hover)::after {
-  border-color: #23252C;
+  border-color: #363636;
 }
 
 .select.is-dark select {
-  border-color: #23252C;
+  border-color: #363636;
 }
 
 .select.is-dark select:hover,
 .select.is-dark select.is-hovered {
-  border-color: #18191e;
+  border-color: #292929;
 }
 
 .select.is-dark select:focus,
 .select.is-dark select.is-focused,
 .select.is-dark select:active,
 .select.is-dark select.is-active {
-  box-shadow: 0 0 0 0.125em rgba(35, 37, 44, 0.25);
+  box-shadow: 0 0 0 0.125em rgba(54, 54, 54, 0.25);
 }
 
 .select.is-primary:not(:hover)::after {
@@ -7488,57 +7108,17 @@ fieldset[disabled] .select select:hover {
   box-shadow: 0 0 0 0.125em rgba(253, 108, 155, 0.25);
 }
 
-.select.is-mirage:not(:hover)::after {
-  border-color: #191B22;
-}
-
-.select.is-mirage select {
-  border-color: #191B22;
-}
-
-.select.is-mirage select:hover,
-.select.is-mirage select.is-hovered {
-  border-color: #0e0f13;
-}
-
-.select.is-mirage select:focus,
-.select.is-mirage select.is-focused,
-.select.is-mirage select:active,
-.select.is-mirage select.is-active {
-  box-shadow: 0 0 0 0.125em rgba(25, 27, 34, 0.25);
-}
-
-.select.is-blackRussian:not(:hover)::after {
-  border-color: #23252C;
-}
-
-.select.is-blackRussian select {
-  border-color: #23252C;
-}
-
-.select.is-blackRussian select:hover,
-.select.is-blackRussian select.is-hovered {
-  border-color: #18191e;
-}
-
-.select.is-blackRussian select:focus,
-.select.is-blackRussian select.is-focused,
-.select.is-blackRussian select:active,
-.select.is-blackRussian select.is-active {
-  box-shadow: 0 0 0 0.125em rgba(35, 37, 44, 0.25);
-}
-
 .select.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .select.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .select.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .select.is-disabled::after {
@@ -7562,15 +7142,15 @@ fieldset[disabled] .select select:hover {
 }
 
 .select.is-loading.is-small:after {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .select.is-loading.is-medium:after {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .select.is-loading.is-large:after {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .file {
@@ -7662,14 +7242,14 @@ fieldset[disabled] .select select:hover {
 }
 
 .file.is-dark .file-cta {
-  background-color: #23252C;
+  background-color: #363636;
   border-color: transparent;
   color: #fff;
 }
 
 .file.is-dark:hover .file-cta,
 .file.is-dark.is-hovered .file-cta {
-  background-color: #1d1f25;
+  background-color: #2f2f2f;
   border-color: transparent;
   color: #fff;
 }
@@ -7677,13 +7257,13 @@ fieldset[disabled] .select select:hover {
 .file.is-dark:focus .file-cta,
 .file.is-dark.is-focused .file-cta {
   border-color: transparent;
-  box-shadow: 0 0 0.5em rgba(35, 37, 44, 0.25);
+  box-shadow: 0 0 0.5em rgba(54, 54, 54, 0.25);
   color: #fff;
 }
 
 .file.is-dark:active .file-cta,
 .file.is-dark.is-active .file-cta {
-  background-color: #18191e;
+  background-color: #292929;
   border-color: transparent;
   color: #fff;
 }
@@ -8039,66 +7619,12 @@ fieldset[disabled] .select select:hover {
   color: #fff;
 }
 
-.file.is-mirage .file-cta {
-  background-color: #191B22;
-  border-color: transparent;
-  color: #fff;
-}
-
-.file.is-mirage:hover .file-cta,
-.file.is-mirage.is-hovered .file-cta {
-  background-color: #14151b;
-  border-color: transparent;
-  color: #fff;
-}
-
-.file.is-mirage:focus .file-cta,
-.file.is-mirage.is-focused .file-cta {
-  border-color: transparent;
-  box-shadow: 0 0 0.5em rgba(25, 27, 34, 0.25);
-  color: #fff;
-}
-
-.file.is-mirage:active .file-cta,
-.file.is-mirage.is-active .file-cta {
-  background-color: #0e0f13;
-  border-color: transparent;
-  color: #fff;
-}
-
-.file.is-blackRussian .file-cta {
-  background-color: #23252C;
-  border-color: transparent;
-  color: #fff;
-}
-
-.file.is-blackRussian:hover .file-cta,
-.file.is-blackRussian.is-hovered .file-cta {
-  background-color: #1d1f25;
-  border-color: transparent;
-  color: #fff;
-}
-
-.file.is-blackRussian:focus .file-cta,
-.file.is-blackRussian.is-focused .file-cta {
-  border-color: transparent;
-  box-shadow: 0 0 0.5em rgba(35, 37, 44, 0.25);
-  color: #fff;
-}
-
-.file.is-blackRussian:active .file-cta,
-.file.is-blackRussian.is-active .file-cta {
-  background-color: #18191e;
-  border-color: transparent;
-  color: #fff;
-}
-
 .file.is-small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .file.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .file.is-medium .file-icon .fa {
@@ -8106,7 +7632,7 @@ fieldset[disabled] .select select:hover {
 }
 
 .file.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .file.is-large .file-icon .fa {
@@ -8281,7 +7807,7 @@ fieldset[disabled] .select select:hover {
 .label {
   color: #363636;
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -8290,20 +7816,20 @@ fieldset[disabled] .select select:hover {
 }
 
 .label.is-small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .label.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .label.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .help {
   display: block;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   margin-top: 0.25rem;
 }
 
@@ -8320,7 +7846,7 @@ fieldset[disabled] .select select:hover {
 }
 
 .help.is-dark {
-  color: #23252C;
+  color: #363636;
 }
 
 .help.is-primary {
@@ -8373,14 +7899,6 @@ fieldset[disabled] .select select:hover {
 
 .help.is-positive {
   color: #FD6C9B;
-}
-
-.help.is-mirage {
-  color: #191B22;
-}
-
-.help.is-blackRussian {
-  color: #23252C;
 }
 
 .field:not(:last-child) {
@@ -8569,7 +8087,7 @@ fieldset[disabled] .select select:hover {
   }
 
   .field-label.is-small {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     padding-top: 0.375em;
   }
 
@@ -8578,12 +8096,12 @@ fieldset[disabled] .select select:hover {
   }
 
   .field-label.is-medium {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     padding-top: 0.375em;
   }
 
   .field-label.is-large {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     padding-top: 0.375em;
   }
 }
@@ -8620,7 +8138,7 @@ fieldset[disabled] .select select:hover {
 .control {
   box-sizing: border-box;
   clear: both;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   position: relative;
   text-align: left;
 }
@@ -8644,7 +8162,7 @@ fieldset[disabled] .select select:hover {
 .control.has-icons-right .taginput .is-small.taginput-container.is-focusable ~ .icon,
 .taginput .control.has-icons-right .is-small.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-small ~ .icon {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .control.has-icons-left .input.is-medium ~ .icon,
@@ -8655,7 +8173,7 @@ fieldset[disabled] .select select:hover {
 .control.has-icons-right .taginput .is-medium.taginput-container.is-focusable ~ .icon,
 .taginput .control.has-icons-right .is-medium.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-medium ~ .icon {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .control.has-icons-left .input.is-large ~ .icon,
@@ -8666,7 +8184,7 @@ fieldset[disabled] .select select:hover {
 .control.has-icons-right .taginput .is-large.taginput-container.is-focusable ~ .icon,
 .taginput .control.has-icons-right .is-large.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-large ~ .icon {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .control.has-icons-left .icon,
@@ -8710,19 +8228,19 @@ fieldset[disabled] .select select:hover {
 }
 
 .control.is-loading.is-small:after {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .control.is-loading.is-medium:after {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .control.is-loading.is-large:after {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .breadcrumb {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   white-space: nowrap;
 }
 
@@ -8785,15 +8303,15 @@ fieldset[disabled] .select select:hover {
 }
 
 .breadcrumb.is-small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .breadcrumb.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .breadcrumb.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .breadcrumb.has-arrow-separator li + li::before {
@@ -9186,19 +8704,19 @@ a.list-item {
 }
 
 .menu {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .menu.is-small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .menu.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .menu.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .menu-list {
@@ -9246,7 +8764,7 @@ a.list-item {
 .message {
   background-color: whitesmoke;
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .message strong {
@@ -9259,15 +8777,15 @@ a.list-item {
 }
 
 .message.is-small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .message.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .message.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .message.is-white {
@@ -9310,16 +8828,16 @@ a.list-item {
 }
 
 .message.is-dark {
-  background-color: #f9fafa;
+  background-color: #fafafa;
 }
 
 .message.is-dark .message-header {
-  background-color: #23252C;
+  background-color: #363636;
   color: #fff;
 }
 
 .message.is-dark .message-body {
-  border-color: #23252C;
+  border-color: #363636;
 }
 
 .message.is-primary {
@@ -9491,32 +9009,6 @@ a.list-item {
   border-color: #FD6C9B;
 }
 
-.message.is-mirage {
-  background-color: #f9f9fb;
-}
-
-.message.is-mirage .message-header {
-  background-color: #191B22;
-  color: #fff;
-}
-
-.message.is-mirage .message-body {
-  border-color: #191B22;
-}
-
-.message.is-blackRussian {
-  background-color: #f9fafa;
-}
-
-.message.is-blackRussian .message-header {
-  background-color: #23252C;
-  color: #fff;
-}
-
-.message.is-blackRussian .message-body {
-  border-color: #23252C;
-}
-
 .message-header {
   align-items: center;
   background-color: #4a4a4a;
@@ -9634,7 +9126,7 @@ a.list-item {
   color: #363636;
   flex-grow: 1;
   flex-shrink: 0;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   line-height: 1;
 }
 
@@ -9875,7 +9367,7 @@ a.list-item {
 }
 
 .navbar.is-dark {
-  background-color: #23252C;
+  background-color: #363636;
   color: #fff;
 }
 
@@ -9890,7 +9382,7 @@ a.list-item {
 .navbar.is-dark .navbar-brand .navbar-link:focus,
 .navbar.is-dark .navbar-brand .navbar-link:hover,
 .navbar.is-dark .navbar-brand .navbar-link.is-active {
-  background-color: #18191e;
+  background-color: #292929;
   color: #fff;
 }
 
@@ -9922,7 +9414,7 @@ a.list-item {
   .navbar.is-dark .navbar-end .navbar-link:focus,
   .navbar.is-dark .navbar-end .navbar-link:hover,
   .navbar.is-dark .navbar-end .navbar-link.is-active {
-    background-color: #18191e;
+    background-color: #292929;
     color: #fff;
   }
 
@@ -9934,12 +9426,12 @@ a.list-item {
   .navbar.is-dark .navbar-item.has-dropdown:focus .navbar-link,
   .navbar.is-dark .navbar-item.has-dropdown:hover .navbar-link,
   .navbar.is-dark .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: #18191e;
+    background-color: #292929;
     color: #fff;
   }
 
   .navbar.is-dark .navbar-dropdown a.navbar-item.is-active {
-    background-color: #23252C;
+    background-color: #363636;
     color: #fff;
   }
 }
@@ -10854,146 +10346,6 @@ a.list-item {
   }
 }
 
-.navbar.is-mirage {
-  background-color: #191B22;
-  color: #fff;
-}
-
-.navbar.is-mirage .navbar-brand > .navbar-item,
-.navbar.is-mirage .navbar-brand .navbar-link {
-  color: #fff;
-}
-
-.navbar.is-mirage .navbar-brand > a.navbar-item:focus,
-.navbar.is-mirage .navbar-brand > a.navbar-item:hover,
-.navbar.is-mirage .navbar-brand > a.navbar-item.is-active,
-.navbar.is-mirage .navbar-brand .navbar-link:focus,
-.navbar.is-mirage .navbar-brand .navbar-link:hover,
-.navbar.is-mirage .navbar-brand .navbar-link.is-active {
-  background-color: #0e0f13;
-  color: #fff;
-}
-
-.navbar.is-mirage .navbar-brand .navbar-link::after {
-  border-color: #fff;
-}
-
-.navbar.is-mirage .navbar-burger {
-  color: #fff;
-}
-
-@media screen and (min-width: 1024px) {
-  .navbar.is-mirage .navbar-start > .navbar-item,
-  .navbar.is-mirage .navbar-start .navbar-link,
-  .navbar.is-mirage .navbar-end > .navbar-item,
-  .navbar.is-mirage .navbar-end .navbar-link {
-    color: #fff;
-  }
-
-  .navbar.is-mirage .navbar-start > a.navbar-item:focus,
-  .navbar.is-mirage .navbar-start > a.navbar-item:hover,
-  .navbar.is-mirage .navbar-start > a.navbar-item.is-active,
-  .navbar.is-mirage .navbar-start .navbar-link:focus,
-  .navbar.is-mirage .navbar-start .navbar-link:hover,
-  .navbar.is-mirage .navbar-start .navbar-link.is-active,
-  .navbar.is-mirage .navbar-end > a.navbar-item:focus,
-  .navbar.is-mirage .navbar-end > a.navbar-item:hover,
-  .navbar.is-mirage .navbar-end > a.navbar-item.is-active,
-  .navbar.is-mirage .navbar-end .navbar-link:focus,
-  .navbar.is-mirage .navbar-end .navbar-link:hover,
-  .navbar.is-mirage .navbar-end .navbar-link.is-active {
-    background-color: #0e0f13;
-    color: #fff;
-  }
-
-  .navbar.is-mirage .navbar-start .navbar-link::after,
-  .navbar.is-mirage .navbar-end .navbar-link::after {
-    border-color: #fff;
-  }
-
-  .navbar.is-mirage .navbar-item.has-dropdown:focus .navbar-link,
-  .navbar.is-mirage .navbar-item.has-dropdown:hover .navbar-link,
-  .navbar.is-mirage .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: #0e0f13;
-    color: #fff;
-  }
-
-  .navbar.is-mirage .navbar-dropdown a.navbar-item.is-active {
-    background-color: #191B22;
-    color: #fff;
-  }
-}
-
-.navbar.is-blackRussian {
-  background-color: #23252C;
-  color: #fff;
-}
-
-.navbar.is-blackRussian .navbar-brand > .navbar-item,
-.navbar.is-blackRussian .navbar-brand .navbar-link {
-  color: #fff;
-}
-
-.navbar.is-blackRussian .navbar-brand > a.navbar-item:focus,
-.navbar.is-blackRussian .navbar-brand > a.navbar-item:hover,
-.navbar.is-blackRussian .navbar-brand > a.navbar-item.is-active,
-.navbar.is-blackRussian .navbar-brand .navbar-link:focus,
-.navbar.is-blackRussian .navbar-brand .navbar-link:hover,
-.navbar.is-blackRussian .navbar-brand .navbar-link.is-active {
-  background-color: #18191e;
-  color: #fff;
-}
-
-.navbar.is-blackRussian .navbar-brand .navbar-link::after {
-  border-color: #fff;
-}
-
-.navbar.is-blackRussian .navbar-burger {
-  color: #fff;
-}
-
-@media screen and (min-width: 1024px) {
-  .navbar.is-blackRussian .navbar-start > .navbar-item,
-  .navbar.is-blackRussian .navbar-start .navbar-link,
-  .navbar.is-blackRussian .navbar-end > .navbar-item,
-  .navbar.is-blackRussian .navbar-end .navbar-link {
-    color: #fff;
-  }
-
-  .navbar.is-blackRussian .navbar-start > a.navbar-item:focus,
-  .navbar.is-blackRussian .navbar-start > a.navbar-item:hover,
-  .navbar.is-blackRussian .navbar-start > a.navbar-item.is-active,
-  .navbar.is-blackRussian .navbar-start .navbar-link:focus,
-  .navbar.is-blackRussian .navbar-start .navbar-link:hover,
-  .navbar.is-blackRussian .navbar-start .navbar-link.is-active,
-  .navbar.is-blackRussian .navbar-end > a.navbar-item:focus,
-  .navbar.is-blackRussian .navbar-end > a.navbar-item:hover,
-  .navbar.is-blackRussian .navbar-end > a.navbar-item.is-active,
-  .navbar.is-blackRussian .navbar-end .navbar-link:focus,
-  .navbar.is-blackRussian .navbar-end .navbar-link:hover,
-  .navbar.is-blackRussian .navbar-end .navbar-link.is-active {
-    background-color: #18191e;
-    color: #fff;
-  }
-
-  .navbar.is-blackRussian .navbar-start .navbar-link::after,
-  .navbar.is-blackRussian .navbar-end .navbar-link::after {
-    border-color: #fff;
-  }
-
-  .navbar.is-blackRussian .navbar-item.has-dropdown:focus .navbar-link,
-  .navbar.is-blackRussian .navbar-item.has-dropdown:hover .navbar-link,
-  .navbar.is-blackRussian .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: #18191e;
-    color: #fff;
-  }
-
-  .navbar.is-blackRussian .navbar-dropdown a.navbar-item.is-active {
-    background-color: #23252C;
-    color: #fff;
-  }
-}
-
 .navbar > .container {
   align-items: stretch;
   display: flex;
@@ -11529,20 +10881,20 @@ a.navbar-item.is-active,
 }
 
 .pagination {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   margin: -0.25rem;
 }
 
 .pagination.is-small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .pagination.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .pagination.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .pagination.is-rounded .pagination-previous,
@@ -11702,7 +11054,7 @@ a.navbar-item.is-active,
 .panel {
   border-radius: 6px;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .panel:not(:last-child) {
@@ -11749,16 +11101,16 @@ a.navbar-item.is-active,
 }
 
 .panel.is-dark .panel-heading {
-  background-color: #23252C;
+  background-color: #363636;
   color: #fff;
 }
 
 .panel.is-dark .panel-tabs a.is-active {
-  border-bottom-color: #23252C;
+  border-bottom-color: #363636;
 }
 
 .panel.is-dark .panel-block.is-active .panel-icon {
-  color: #23252C;
+  color: #363636;
 }
 
 .panel.is-primary .panel-heading {
@@ -11930,32 +11282,6 @@ a.navbar-item.is-active,
   color: #FD6C9B;
 }
 
-.panel.is-mirage .panel-heading {
-  background-color: #191B22;
-  color: #fff;
-}
-
-.panel.is-mirage .panel-tabs a.is-active {
-  border-bottom-color: #191B22;
-}
-
-.panel.is-mirage .panel-block.is-active .panel-icon {
-  color: #191B22;
-}
-
-.panel.is-blackRussian .panel-heading {
-  background-color: #23252C;
-  color: #fff;
-}
-
-.panel.is-blackRussian .panel-tabs a.is-active {
-  border-bottom-color: #23252C;
-}
-
-.panel.is-blackRussian .panel-block.is-active .panel-icon {
-  color: #23252C;
-}
-
 .panel-tabs:not(:last-child),
 .panel-block:not(:last-child) {
   border-bottom: 1px solid #ededed;
@@ -12064,7 +11390,7 @@ label.panel-block:hover {
   -webkit-overflow-scrolling: touch;
   align-items: stretch;
   display: flex;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   justify-content: space-between;
   overflow: hidden;
   overflow-x: auto;
@@ -12212,15 +11538,15 @@ label.panel-block:hover {
 }
 
 .tabs.is-small {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .tabs.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .tabs.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .column {
@@ -14707,7 +14033,7 @@ label.panel-block:hover {
 }
 
 .hero.is-dark {
-  background-color: #23252C;
+  background-color: #363636;
   color: #fff;
 }
 
@@ -14731,7 +14057,7 @@ label.panel-block:hover {
 
 @media screen and (max-width: 1023px) {
   .hero.is-dark .navbar-menu {
-    background-color: #23252C;
+    background-color: #363636;
   }
 }
 
@@ -14744,7 +14070,7 @@ label.panel-block:hover {
 .hero.is-dark a.navbar-item.is-active,
 .hero.is-dark .navbar-link:hover,
 .hero.is-dark .navbar-link.is-active {
-  background-color: #18191e;
+  background-color: #292929;
   color: #fff;
 }
 
@@ -14777,16 +14103,16 @@ label.panel-block:hover {
 .hero.is-dark .tabs.is-toggle li.is-active a:hover {
   background-color: #fff;
   border-color: #fff;
-  color: #23252C;
+  color: #363636;
 }
 
 .hero.is-dark.is-bold {
-  background-image: linear-gradient(141deg, #0b0d11 0%, #23252C 71%, #2c2d3d 100%);
+  background-image: linear-gradient(141deg, #1f191a 0%, #363636 71%, #46403f 100%);
 }
 
 @media screen and (max-width: 768px) {
   .hero.is-dark.is-bold .navbar-menu {
-    background-image: linear-gradient(141deg, #0b0d11 0%, #23252C 71%, #2c2d3d 100%);
+    background-image: linear-gradient(141deg, #1f191a 0%, #363636 71%, #46403f 100%);
   }
 }
 
@@ -15882,174 +15208,6 @@ label.panel-block:hover {
   }
 }
 
-.hero.is-mirage {
-  background-color: #191B22;
-  color: #fff;
-}
-
-.hero.is-mirage a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
-.hero.is-mirage strong {
-  color: inherit;
-}
-
-.hero.is-mirage .title {
-  color: #fff;
-}
-
-.hero.is-mirage .subtitle {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.hero.is-mirage .subtitle a:not(.button),
-.hero.is-mirage .subtitle strong {
-  color: #fff;
-}
-
-@media screen and (max-width: 1023px) {
-  .hero.is-mirage .navbar-menu {
-    background-color: #191B22;
-  }
-}
-
-.hero.is-mirage .navbar-item,
-.hero.is-mirage .navbar-link {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.hero.is-mirage a.navbar-item:hover,
-.hero.is-mirage a.navbar-item.is-active,
-.hero.is-mirage .navbar-link:hover,
-.hero.is-mirage .navbar-link.is-active {
-  background-color: #0e0f13;
-  color: #fff;
-}
-
-.hero.is-mirage .tabs a {
-  color: #fff;
-  opacity: 0.9;
-}
-
-.hero.is-mirage .tabs a:hover {
-  opacity: 1;
-}
-
-.hero.is-mirage .tabs li.is-active a {
-  opacity: 1;
-}
-
-.hero.is-mirage .tabs.is-boxed a,
-.hero.is-mirage .tabs.is-toggle a {
-  color: #fff;
-}
-
-.hero.is-mirage .tabs.is-boxed a:hover,
-.hero.is-mirage .tabs.is-toggle a:hover {
-  background-color: rgba(10, 10, 10, 0.1);
-}
-
-.hero.is-mirage .tabs.is-boxed li.is-active a,
-.hero.is-mirage .tabs.is-boxed li.is-active a:hover,
-.hero.is-mirage .tabs.is-toggle li.is-active a,
-.hero.is-mirage .tabs.is-toggle li.is-active a:hover {
-  background-color: #fff;
-  border-color: #fff;
-  color: #191B22;
-}
-
-.hero.is-mirage.is-bold {
-  background-image: linear-gradient(141deg, #030405 0%, #191B22 71%, #222333 100%);
-}
-
-@media screen and (max-width: 768px) {
-  .hero.is-mirage.is-bold .navbar-menu {
-    background-image: linear-gradient(141deg, #030405 0%, #191B22 71%, #222333 100%);
-  }
-}
-
-.hero.is-blackRussian {
-  background-color: #23252C;
-  color: #fff;
-}
-
-.hero.is-blackRussian a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
-.hero.is-blackRussian strong {
-  color: inherit;
-}
-
-.hero.is-blackRussian .title {
-  color: #fff;
-}
-
-.hero.is-blackRussian .subtitle {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.hero.is-blackRussian .subtitle a:not(.button),
-.hero.is-blackRussian .subtitle strong {
-  color: #fff;
-}
-
-@media screen and (max-width: 1023px) {
-  .hero.is-blackRussian .navbar-menu {
-    background-color: #23252C;
-  }
-}
-
-.hero.is-blackRussian .navbar-item,
-.hero.is-blackRussian .navbar-link {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.hero.is-blackRussian a.navbar-item:hover,
-.hero.is-blackRussian a.navbar-item.is-active,
-.hero.is-blackRussian .navbar-link:hover,
-.hero.is-blackRussian .navbar-link.is-active {
-  background-color: #18191e;
-  color: #fff;
-}
-
-.hero.is-blackRussian .tabs a {
-  color: #fff;
-  opacity: 0.9;
-}
-
-.hero.is-blackRussian .tabs a:hover {
-  opacity: 1;
-}
-
-.hero.is-blackRussian .tabs li.is-active a {
-  opacity: 1;
-}
-
-.hero.is-blackRussian .tabs.is-boxed a,
-.hero.is-blackRussian .tabs.is-toggle a {
-  color: #fff;
-}
-
-.hero.is-blackRussian .tabs.is-boxed a:hover,
-.hero.is-blackRussian .tabs.is-toggle a:hover {
-  background-color: rgba(10, 10, 10, 0.1);
-}
-
-.hero.is-blackRussian .tabs.is-boxed li.is-active a,
-.hero.is-blackRussian .tabs.is-boxed li.is-active a:hover,
-.hero.is-blackRussian .tabs.is-toggle li.is-active a,
-.hero.is-blackRussian .tabs.is-toggle li.is-active a:hover {
-  background-color: #fff;
-  border-color: #fff;
-  color: #23252C;
-}
-
-.hero.is-blackRussian.is-bold {
-  background-image: linear-gradient(141deg, #0b0d11 0%, #23252C 71%, #2c2d3d 100%);
-}
-
-@media screen and (max-width: 768px) {
-  .hero.is-blackRussian.is-bold .navbar-menu {
-    background-image: linear-gradient(141deg, #0b0d11 0%, #23252C 71%, #2c2d3d 100%);
-  }
-}
-
 .hero.is-small .hero-body {
   padding-bottom: 1.5rem;
   padding-top: 1.5rem;
@@ -17078,15 +16236,15 @@ label.panel-block:hover {
 
 .autocomplete.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .autocomplete.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .autocomplete.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .carousel {
@@ -17261,8 +16419,8 @@ label.panel-block:hover {
 }
 
 .b-checkbox.checkbox input[type=checkbox]:checked + .check.is-dark {
-  background: #23252C url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
-  border-color: #23252C;
+  background: #363636 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
+  border-color: #363636;
 }
 
 .b-checkbox.checkbox input[type=checkbox]:checked + .check.is-primary {
@@ -17330,16 +16488,6 @@ label.panel-block:hover {
   border-color: #FD6C9B;
 }
 
-.b-checkbox.checkbox input[type=checkbox]:checked + .check.is-mirage {
-  background: #191B22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
-  border-color: #191B22;
-}
-
-.b-checkbox.checkbox input[type=checkbox]:checked + .check.is-blackRussian {
-  background: #23252C url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
-  border-color: #23252C;
-}
-
 .b-checkbox.checkbox input[type=checkbox]:indeterminate + .check {
   background: #005cff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect style='fill:%23fff' width='0.7' height='0.2' x='.15' y='.4'%3E%3C/rect%3E%3C/svg%3E") no-repeat center center;
   border-color: #005cff;
@@ -17361,8 +16509,8 @@ label.panel-block:hover {
 }
 
 .b-checkbox.checkbox input[type=checkbox]:indeterminate + .check.is-dark {
-  background: #23252C url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect style='fill:%23fff' width='0.7' height='0.2' x='.15' y='.4'%3E%3C/rect%3E%3C/svg%3E") no-repeat center center;
-  border-color: #23252C;
+  background: #363636 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect style='fill:%23fff' width='0.7' height='0.2' x='.15' y='.4'%3E%3C/rect%3E%3C/svg%3E") no-repeat center center;
+  border-color: #363636;
 }
 
 .b-checkbox.checkbox input[type=checkbox]:indeterminate + .check.is-primary {
@@ -17430,16 +16578,6 @@ label.panel-block:hover {
   border-color: #FD6C9B;
 }
 
-.b-checkbox.checkbox input[type=checkbox]:indeterminate + .check.is-mirage {
-  background: #191B22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect style='fill:%23fff' width='0.7' height='0.2' x='.15' y='.4'%3E%3C/rect%3E%3C/svg%3E") no-repeat center center;
-  border-color: #191B22;
-}
-
-.b-checkbox.checkbox input[type=checkbox]:indeterminate + .check.is-blackRussian {
-  background: #23252C url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect style='fill:%23fff' width='0.7' height='0.2' x='.15' y='.4'%3E%3C/rect%3E%3C/svg%3E") no-repeat center center;
-  border-color: #23252C;
-}
-
 .b-checkbox.checkbox input[type=checkbox]:focus + .check {
   box-shadow: 0 0 0.5em rgba(122, 122, 122, 0.8);
 }
@@ -17461,7 +16599,7 @@ label.panel-block:hover {
 }
 
 .b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-dark {
-  box-shadow: 0 0 0.5em rgba(35, 37, 44, 0.8);
+  box-shadow: 0 0 0.5em rgba(54, 54, 54, 0.8);
 }
 
 .b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-primary {
@@ -17516,14 +16654,6 @@ label.panel-block:hover {
   box-shadow: 0 0 0.5em rgba(253, 108, 155, 0.8);
 }
 
-.b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-mirage {
-  box-shadow: 0 0 0.5em rgba(25, 27, 34, 0.8);
-}
-
-.b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-blackRussian {
-  box-shadow: 0 0 0.5em rgba(35, 37, 44, 0.8);
-}
-
 .b-checkbox.checkbox .control-label {
   padding-left: 0.5em;
 }
@@ -17553,7 +16683,7 @@ label.panel-block:hover {
 }
 
 .b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-dark {
-  border-color: #23252C;
+  border-color: #363636;
 }
 
 .b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-primary {
@@ -17608,25 +16738,17 @@ label.panel-block:hover {
   border-color: #FD6C9B;
 }
 
-.b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-mirage {
-  border-color: #191B22;
-}
-
-.b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-blackRussian {
-  border-color: #23252C;
-}
-
 .b-checkbox.checkbox.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .b-checkbox.checkbox.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .b-checkbox.checkbox.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .b-clockpicker .card-header {
@@ -17706,21 +16828,21 @@ label.panel-block:hover {
 }
 
 .b-clockpicker.is-dark .card-header {
-  background-color: #23252C;
+  background-color: #363636;
   color: #fff;
 }
 
 .b-clockpicker.is-dark .b-clockpicker-face:after {
-  background-color: #23252C;
+  background-color: #363636;
 }
 
 .b-clockpicker.is-dark .b-clockpicker-face-hand {
-  background-color: #23252C;
-  border-color: #23252C;
+  background-color: #363636;
+  border-color: #363636;
 }
 
 .b-clockpicker.is-dark .b-clockpicker-face-number.active {
-  background-color: #23252C;
+  background-color: #363636;
   color: #fff;
 }
 
@@ -17971,44 +17093,6 @@ label.panel-block:hover {
   color: #fff;
 }
 
-.b-clockpicker.is-mirage .card-header {
-  background-color: #191B22;
-  color: #fff;
-}
-
-.b-clockpicker.is-mirage .b-clockpicker-face:after {
-  background-color: #191B22;
-}
-
-.b-clockpicker.is-mirage .b-clockpicker-face-hand {
-  background-color: #191B22;
-  border-color: #191B22;
-}
-
-.b-clockpicker.is-mirage .b-clockpicker-face-number.active {
-  background-color: #191B22;
-  color: #fff;
-}
-
-.b-clockpicker.is-blackRussian .card-header {
-  background-color: #23252C;
-  color: #fff;
-}
-
-.b-clockpicker.is-blackRussian .b-clockpicker-face:after {
-  background-color: #23252C;
-}
-
-.b-clockpicker.is-blackRussian .b-clockpicker-face-hand {
-  background-color: #23252C;
-  border-color: #23252C;
-}
-
-.b-clockpicker.is-blackRussian .b-clockpicker-face-number.active {
-  background-color: #23252C;
-  color: #fff;
-}
-
 .b-clockpicker .dropdown-menu {
   min-width: 0;
 }
@@ -18228,15 +17312,15 @@ label.panel-block:hover {
 
 .b-clockpicker.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .b-clockpicker.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .b-clockpicker.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .collapse .collapse-trigger {
@@ -18432,7 +17516,7 @@ label.panel-block:hover {
 }
 
 .datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-dark {
-  background-color: #23252C;
+  background-color: #363636;
 }
 
 .datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-primary {
@@ -18487,14 +17571,6 @@ label.panel-block:hover {
   background-color: #FD6C9B;
 }
 
-.datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-mirage {
-  background-color: #191B22;
-}
-
-.datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-blackRussian {
-  background-color: #23252C;
-}
-
 .datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event.dots .event {
   border-radius: 50%;
   height: .35em;
@@ -18517,15 +17593,15 @@ label.panel-block:hover {
 
 .datepicker.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .datepicker.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .datepicker.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .dialog .modal-card {
@@ -18534,7 +17610,7 @@ label.panel-block:hover {
 }
 
 .dialog .modal-card .modal-card-head {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
 }
 
@@ -18569,7 +17645,7 @@ label.panel-block:hover {
 .taginput .dialog.is-small .taginput-container.is-focusable,
 .dialog.is-small .button {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .dialog.is-medium .modal-card,
@@ -18577,7 +17653,7 @@ label.panel-block:hover {
 .dialog.is-medium .taginput .taginput-container.is-focusable,
 .taginput .dialog.is-medium .taginput-container.is-focusable,
 .dialog.is-medium .button {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .dialog.is-large .modal-card,
@@ -18585,7 +17661,7 @@ label.panel-block:hover {
 .dialog.is-large .taginput .taginput-container.is-focusable,
 .taginput .dialog.is-large .taginput-container.is-focusable,
 .dialog.is-large .button {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .dialog.has-custom-container {
@@ -18774,7 +17850,7 @@ label.panel-block:hover {
   position: absolute;
   top: -0.775em;
   left: 1em;
-  font-size: calc(0.9rem * 3 / 4);
+  font-size: calc(0.8rem * 3 / 4);
   background-color: transparent;
   padding-left: 0.125em;
   padding-right: 0.125em;
@@ -18794,15 +17870,15 @@ label.panel-block:hover {
 }
 
 .field.is-floating-label .label.is-small {
-  font-size: calc(0.65rem * 3 / 4);
+  font-size: calc(0.6rem * 3 / 4);
 }
 
 .field.is-floating-label .label.is-medium {
-  font-size: calc(1.15rem * 3 / 4);
+  font-size: calc(1.05rem * 3 / 4);
 }
 
 .field.is-floating-label .label.is-large {
-  font-size: calc(1.4rem * 3 / 4);
+  font-size: calc(1.3rem * 3 / 4);
 }
 
 .field.is-floating-label .input:focus,
@@ -18834,21 +17910,21 @@ label.panel-block:hover {
   position: absolute;
   top: 0.25em;
   left: 1em;
-  font-size: calc(0.9rem * 3 / 4);
+  font-size: calc(0.8rem * 3 / 4);
   background-color: transparent;
   z-index: 5;
 }
 
 .field.is-floating-in-label .label.is-small {
-  font-size: calc(0.65rem * 3 / 4);
+  font-size: calc(0.6rem * 3 / 4);
 }
 
 .field.is-floating-in-label .label.is-medium {
-  font-size: calc(1.15rem * 3 / 4);
+  font-size: calc(1.05rem * 3 / 4);
 }
 
 .field.is-floating-in-label .label.is-large {
-  font-size: calc(1.4rem * 3 / 4);
+  font-size: calc(1.3rem * 3 / 4);
 }
 
 .field.is-floating-in-label > .datepicker .input,
@@ -18857,7 +17933,7 @@ label.panel-block:hover {
 .field.is-floating-in-label > .timepicker .input,
 .field.is-floating-in-label > .timepicker .taginput .taginput-container.is-focusable,
 .taginput .field.is-floating-in-label > .timepicker .taginput-container.is-focusable {
-  padding-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
+  padding-top: calc(3.25em / 2 - (1.3rem * 3 / 4) / 2);
   padding-bottom: 1px;
   height: 3.25em;
 }
@@ -18867,7 +17943,7 @@ label.panel-block:hover {
 .taginput .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .taginput-container.is-focusable,
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .textarea,
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) select {
-  padding-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
+  padding-top: calc(3.25em / 2 - (1.3rem * 3 / 4) / 2);
   padding-bottom: 1px;
   height: 3.25em;
 }
@@ -18877,7 +17953,7 @@ label.panel-block:hover {
 }
 
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .select:not(multiple).is-loading::after {
-  margin-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
+  margin-top: calc(3.25em / 2 - (1.3rem * 3 / 4) / 2);
 }
 
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .select:not(multiple)::after {
@@ -18890,15 +17966,15 @@ label.panel-block:hover {
 }
 
 .field.is-floating-in-label > :not(.taginput) .is-left.icon {
-  padding-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
+  padding-top: calc(3.25em / 2 - (1.3rem * 3 / 4) / 2);
 }
 
 .field.is-floating-in-label .control.is-loading::after {
-  margin-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2);
+  margin-top: calc(3.25em / 2 - (1.3rem * 3 / 4) / 2);
 }
 
 .field.is-floating-in-label .taginput .taginput-container {
-  padding-top: calc(3.25em / 2 - (1.4rem * 3 / 4) / 2 + (0.275em - 1px));
+  padding-top: calc(3.25em / 2 - (1.3rem * 3 / 4) / 2 + (0.275em - 1px));
 }
 
 .field.is-floating-in-label .taginput .counter {
@@ -18925,42 +18001,42 @@ label.panel-block:hover {
 
 .field.is-floating-label.has-numberinput .label,
 .field.is-floating-in-label.has-numberinput .label {
-  margin-left: calc(0.9rem * 3);
+  margin-left: calc(0.8rem * 3);
 }
 
 .field.is-floating-label.has-numberinput.has-numberinput-is-small .label,
 .field.is-floating-in-label.has-numberinput.has-numberinput-is-small .label {
-  margin-left: calc(0.65rem * 3);
+  margin-left: calc(0.6rem * 3);
 }
 
 .field.is-floating-label.has-numberinput.has-numberinput-is-medium .label,
 .field.is-floating-in-label.has-numberinput.has-numberinput-is-medium .label {
-  margin-left: calc(1.15rem * 3);
+  margin-left: calc(1.05rem * 3);
 }
 
 .field.is-floating-label.has-numberinput.has-numberinput-is-large .label,
 .field.is-floating-in-label.has-numberinput.has-numberinput-is-large .label {
-  margin-left: calc(1.4rem * 3);
+  margin-left: calc(1.3rem * 3);
 }
 
 .field.is-floating-label.has-numberinput-compact .label,
 .field.is-floating-in-label.has-numberinput-compact .label {
-  margin-left: calc(0.9rem * 2.25);
+  margin-left: calc(0.8rem * 2.25);
 }
 
 .field.is-floating-label.has-numberinput-compact.has-numberinput-is-small .label,
 .field.is-floating-in-label.has-numberinput-compact.has-numberinput-is-small .label {
-  margin-left: calc(0.65rem * 2.25);
+  margin-left: calc(0.6rem * 2.25);
 }
 
 .field.is-floating-label.has-numberinput-compact.has-numberinput-is-medium .label,
 .field.is-floating-in-label.has-numberinput-compact.has-numberinput-is-medium .label {
-  margin-left: calc(1.15rem * 2.25);
+  margin-left: calc(1.05rem * 2.25);
 }
 
 .field.is-floating-label.has-numberinput-compact.has-numberinput-is-large .label,
 .field.is-floating-in-label.has-numberinput-compact.has-numberinput-is-large .label {
-  margin-left: calc(1.4rem * 2.25);
+  margin-left: calc(1.3rem * 2.25);
 }
 
 .control .help.counter {
@@ -19136,7 +18212,7 @@ label.panel-block:hover {
 
 .notices .toast.is-dark {
   color: #fff;
-  background: #23252C;
+  background: #363636;
 }
 
 .notices .toast.is-primary {
@@ -19204,16 +18280,6 @@ label.panel-block:hover {
   background: #FD6C9B;
 }
 
-.notices .toast.is-mirage {
-  color: #fff;
-  background: #191B22;
-}
-
-.notices .toast.is-blackRussian {
-  color: #fff;
-  background: #23252C;
-}
-
 .notices .snackbar {
   display: inline-flex;
   align-items: center;
@@ -19224,7 +18290,7 @@ label.panel-block:hover {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
   pointer-events: auto;
-  background: #23252C;
+  background: #363636;
   color: #fff;
   min-height: 3em;
 }
@@ -19242,16 +18308,16 @@ label.panel-block:hover {
 .notices .snackbar .action .button {
   font-weight: 600;
   text-transform: uppercase;
-  background: #23252C;
+  background: #363636;
   border: transparent;
 }
 
 .notices .snackbar .action .button:hover {
-  background: #18191e;
+  background: #292929;
 }
 
 .notices .snackbar .action .button:active {
-  background: #18191e;
+  background: #292929;
 }
 
 .notices .snackbar .action.is-white .button {
@@ -19267,7 +18333,7 @@ label.panel-block:hover {
 }
 
 .notices .snackbar .action.is-dark .button {
-  color: #23252C;
+  color: #363636;
 }
 
 .notices .snackbar .action.is-primary .button {
@@ -19320,14 +18386,6 @@ label.panel-block:hover {
 
 .notices .snackbar .action.is-positive .button {
   color: #FD6C9B;
-}
-
-.notices .snackbar .action.is-mirage .button {
-  color: #191B22;
-}
-
-.notices .snackbar .action.is-blackRussian .button {
-  color: #23252C;
 }
 
 @media screen and (max-width: 768px) {
@@ -19485,8 +18543,8 @@ label.panel-block:hover {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  font-size: calc(0.9rem / 1.5);
-  line-height: 0.9rem;
+  font-size: calc(0.8rem / 1.5);
+  line-height: 0.8rem;
   font-weight: bold;
   color: white;
 }
@@ -19496,18 +18554,18 @@ label.panel-block:hover {
 }
 
 .progress-wrapper .progress.is-small + .progress-value {
-  font-size: calc(0.65rem / 1.5);
-  line-height: 0.65rem;
+  font-size: calc(0.6rem / 1.5);
+  line-height: 0.6rem;
 }
 
 .progress-wrapper .progress.is-medium + .progress-value {
-  font-size: calc(1.15rem / 1.5);
-  line-height: 1.15rem;
+  font-size: calc(1.05rem / 1.5);
+  line-height: 1.05rem;
 }
 
 .progress-wrapper .progress.is-large + .progress-value {
-  font-size: calc(1.4rem / 1.5);
-  line-height: 1.4rem;
+  font-size: calc(1.3rem / 1.5);
+  line-height: 1.3rem;
 }
 
 .progress-wrapper .progress:indeterminate::-ms-fill {
@@ -19582,7 +18640,7 @@ label.panel-block:hover {
 }
 
 .b-radio.radio input[type=radio] + .check.is-dark:before {
-  background: #23252C;
+  background: #363636;
 }
 
 .b-radio.radio input[type=radio] + .check.is-primary:before {
@@ -19637,14 +18695,6 @@ label.panel-block:hover {
   background: #FD6C9B;
 }
 
-.b-radio.radio input[type=radio] + .check.is-mirage:before {
-  background: #191B22;
-}
-
-.b-radio.radio input[type=radio] + .check.is-blackRussian:before {
-  background: #23252C;
-}
-
 .b-radio.radio input[type=radio]:checked + .check {
   border-color: #005cff;
 }
@@ -19662,7 +18712,7 @@ label.panel-block:hover {
 }
 
 .b-radio.radio input[type=radio]:checked + .check.is-dark {
-  border-color: #23252C;
+  border-color: #363636;
 }
 
 .b-radio.radio input[type=radio]:checked + .check.is-primary {
@@ -19717,14 +18767,6 @@ label.panel-block:hover {
   border-color: #FD6C9B;
 }
 
-.b-radio.radio input[type=radio]:checked + .check.is-mirage {
-  border-color: #191B22;
-}
-
-.b-radio.radio input[type=radio]:checked + .check.is-blackRussian {
-  border-color: #23252C;
-}
-
 .b-radio.radio input[type=radio]:checked + .check:before {
   transform: scale(0.5);
 }
@@ -19750,7 +18792,7 @@ label.panel-block:hover {
 }
 
 .b-radio.radio input[type=radio]:focus:checked + .check.is-dark {
-  box-shadow: 0 0 0.5em rgba(35, 37, 44, 0.8);
+  box-shadow: 0 0 0.5em rgba(54, 54, 54, 0.8);
 }
 
 .b-radio.radio input[type=radio]:focus:checked + .check.is-primary {
@@ -19805,14 +18847,6 @@ label.panel-block:hover {
   box-shadow: 0 0 0.5em rgba(253, 108, 155, 0.8);
 }
 
-.b-radio.radio input[type=radio]:focus:checked + .check.is-mirage {
-  box-shadow: 0 0 0.5em rgba(25, 27, 34, 0.8);
-}
-
-.b-radio.radio input[type=radio]:focus:checked + .check.is-blackRussian {
-  box-shadow: 0 0 0.5em rgba(35, 37, 44, 0.8);
-}
-
 .b-radio.radio .control-label {
   padding-left: 0.5em;
 }
@@ -19842,7 +18876,7 @@ label.panel-block:hover {
 }
 
 .b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-dark {
-  border-color: #23252C;
+  border-color: #363636;
 }
 
 .b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-primary {
@@ -19897,25 +18931,17 @@ label.panel-block:hover {
   border-color: #FD6C9B;
 }
 
-.b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-mirage {
-  border-color: #191B22;
-}
-
-.b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-blackRussian {
-  border-color: #23252C;
-}
-
 .b-radio.radio.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .b-radio.radio.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .b-radio.radio.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .rate {
@@ -19984,20 +19010,20 @@ label.panel-block:hover {
 }
 
 .rate .rate-text {
-  font-size: calc(0.9rem / 1.25);
+  font-size: calc(0.8rem / 1.25);
   margin-left: 0.35rem;
 }
 
 .rate .rate-text.is-small {
-  font-size: calc(0.65rem / 1.25);
+  font-size: calc(0.6rem / 1.25);
 }
 
 .rate .rate-text.is-medium {
-  font-size: calc(1.15rem / 1.25);
+  font-size: calc(1.05rem / 1.25);
 }
 
 .rate .rate-text.is-large {
-  font-size: calc(1.4rem / 1.25);
+  font-size: calc(1.3rem / 1.25);
 }
 
 .select select {
@@ -20101,85 +19127,85 @@ label.panel-block:hover {
 }
 
 .b-slider .b-slider-track {
-  height: 0.45rem;
+  height: 0.4rem;
 }
 
 .b-slider .b-slider-thumb {
-  height: 0.9rem;
-  width: 0.9rem;
+  height: 0.8rem;
+  width: 0.8rem;
 }
 
 .b-slider .b-slider-tick {
-  height: 0.225rem;
+  height: 0.2rem;
 }
 
 .b-slider .b-slider-tick-label {
   font-size: 0.75rem;
   position: absolute;
-  top: calc(0.45rem / 2 + 2px);
+  top: calc(0.4rem / 2 + 2px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .b-slider.is-small .b-slider-track {
-  height: 0.325rem;
+  height: 0.3rem;
 }
 
 .b-slider.is-small .b-slider-thumb {
-  height: 0.65rem;
-  width: 0.65rem;
+  height: 0.6rem;
+  width: 0.6rem;
 }
 
 .b-slider.is-small .b-slider-tick {
-  height: 0.1625rem;
+  height: 0.15rem;
 }
 
 .b-slider.is-small .b-slider-tick-label {
   font-size: 0.75rem;
   position: absolute;
-  top: calc(0.325rem / 2 + 2px);
+  top: calc(0.3rem / 2 + 2px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .b-slider.is-medium .b-slider-track {
-  height: 0.575rem;
+  height: 0.525rem;
 }
 
 .b-slider.is-medium .b-slider-thumb {
-  height: 1.15rem;
-  width: 1.15rem;
+  height: 1.05rem;
+  width: 1.05rem;
 }
 
 .b-slider.is-medium .b-slider-tick {
-  height: 0.2875rem;
+  height: 0.2625rem;
 }
 
 .b-slider.is-medium .b-slider-tick-label {
   font-size: 0.75rem;
   position: absolute;
-  top: calc(0.575rem / 2 + 2px);
+  top: calc(0.525rem / 2 + 2px);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .b-slider.is-large .b-slider-track {
-  height: 0.7rem;
+  height: 0.65rem;
 }
 
 .b-slider.is-large .b-slider-thumb {
-  height: 1.4rem;
-  width: 1.4rem;
+  height: 1.3rem;
+  width: 1.3rem;
 }
 
 .b-slider.is-large .b-slider-tick {
-  height: 0.35rem;
+  height: 0.325rem;
 }
 
 .b-slider.is-large .b-slider-tick-label {
   font-size: 0.75rem;
   position: absolute;
-  top: calc(0.7rem / 2 + 2px);
+  top: calc(0.65rem / 2 + 2px);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -20197,7 +19223,7 @@ label.panel-block:hover {
 }
 
 .b-slider.is-dark .b-slider-fill {
-  background: #23252C !important;
+  background: #363636 !important;
 }
 
 .b-slider.is-primary .b-slider-fill {
@@ -20252,14 +19278,6 @@ label.panel-block:hover {
   background: #FD6C9B !important;
 }
 
-.b-slider.is-mirage .b-slider-fill {
-  background: #191B22 !important;
-}
-
-.b-slider.is-blackRussian .b-slider-fill {
-  background: #23252C !important;
-}
-
 .b-slider .b-slider-tick {
   position: absolute;
   width: 3px;
@@ -20281,8 +19299,8 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 */
 
 .b-steps .steps {
-  font-size: 0.9rem;
-  min-height: 1.8rem;
+  font-size: 0.8rem;
+  min-height: 1.6rem;
 }
 
 .b-steps .steps .step-items {
@@ -20403,15 +19421,15 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .b-steps .steps .step-items .step-item.is-dark::before,
 .b-steps .steps .step-items .step-item.is-dark::after {
-  background: linear-gradient(to left, #dbdbdb 50%, #23252C 50%);
+  background: linear-gradient(to left, #dbdbdb 50%, #363636 50%);
   background-size: 200% 100%;
   background-position: right bottom;
 }
 
 .b-steps .steps .step-items .step-item.is-dark.is-active .step-marker {
   background-color: white;
-  border-color: #23252C;
-  color: #23252C;
+  border-color: #363636;
+  color: #363636;
 }
 
 .b-steps .steps .step-items .step-item.is-dark.is-active::before,
@@ -20421,7 +19439,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .b-steps .steps .step-items .step-item.is-dark.is-previous .step-marker {
   color: #fff;
-  background-color: #23252C;
+  background-color: #363636;
 }
 
 .b-steps .steps .step-items .step-item.is-dark.is-previous::before,
@@ -20793,62 +19811,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background-position: left bottom;
 }
 
-.b-steps .steps .step-items .step-item.is-mirage::before,
-.b-steps .steps .step-items .step-item.is-mirage::after {
-  background: linear-gradient(to left, #dbdbdb 50%, #191B22 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-}
-
-.b-steps .steps .step-items .step-item.is-mirage.is-active .step-marker {
-  background-color: white;
-  border-color: #191B22;
-  color: #191B22;
-}
-
-.b-steps .steps .step-items .step-item.is-mirage.is-active::before,
-.b-steps .steps .step-items .step-item.is-mirage.is-active::after {
-  background-position: left bottom;
-}
-
-.b-steps .steps .step-items .step-item.is-mirage.is-previous .step-marker {
-  color: #fff;
-  background-color: #191B22;
-}
-
-.b-steps .steps .step-items .step-item.is-mirage.is-previous::before,
-.b-steps .steps .step-items .step-item.is-mirage.is-previous::after {
-  background-position: left bottom;
-}
-
-.b-steps .steps .step-items .step-item.is-blackRussian::before,
-.b-steps .steps .step-items .step-item.is-blackRussian::after {
-  background: linear-gradient(to left, #dbdbdb 50%, #23252C 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-}
-
-.b-steps .steps .step-items .step-item.is-blackRussian.is-active .step-marker {
-  background-color: white;
-  border-color: #23252C;
-  color: #23252C;
-}
-
-.b-steps .steps .step-items .step-item.is-blackRussian.is-active::before,
-.b-steps .steps .step-items .step-item.is-blackRussian.is-active::after {
-  background-position: left bottom;
-}
-
-.b-steps .steps .step-items .step-item.is-blackRussian.is-previous .step-marker {
-  color: #fff;
-  background-color: #23252C;
-}
-
-.b-steps .steps .step-items .step-item.is-blackRussian.is-previous::before,
-.b-steps .steps .step-items .step-item.is-blackRussian.is-previous::after {
-  background-position: left bottom;
-}
-
 .b-steps .steps .step-items .step-item .step-marker {
   color: white;
 }
@@ -20925,26 +19887,26 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-steps .steps .step-items .step-item .step-marker {
-  height: 1.8rem;
-  width: 1.8rem;
+  height: 1.6rem;
+  width: 1.6rem;
   position: absolute;
-  left: calc(50% - 0.9rem);
+  left: calc(50% - 0.8rem);
 }
 
 .b-steps .steps .step-items .step-item .step-marker .icon *,
 .b-steps .steps .step-items .step-item .step-marker .icon *:before {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .b-steps .steps .step-items .step-item .step-details {
-  margin-top: 1.8rem;
+  margin-top: 1.6rem;
   margin-left: .5em;
   margin-right: .5em;
   padding-top: .2em;
 }
 
 .b-steps .steps .step-items .step-item .step-details .step-title {
-  font-size: 1.08rem;
+  font-size: 0.96rem;
   font-weight: 600;
 }
 
@@ -20954,13 +19916,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   width: 100%;
   bottom: 0;
   left: -50%;
-  top: 0.9rem;
+  top: 0.8rem;
 }
 
 .b-steps .steps .step-items .step-item:only-child::after {
   height: 0.2em;
   bottom: 0;
-  top: 0.9rem;
+  top: 0.8rem;
 }
 
 .b-steps .steps .step-items .step-item:only-child::before,
@@ -20989,7 +19951,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     width: 25%;
     bottom: 0;
     left: 50%;
-    top: 0.9rem;
+    top: 0.8rem;
   }
 
   .b-steps .steps .step-items .step-item::before,
@@ -21000,31 +19962,31 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-steps .steps.is-small {
-  font-size: 0.65rem;
-  min-height: 1.3rem;
+  font-size: 0.6rem;
+  min-height: 1.2rem;
 }
 
 .b-steps .steps.is-small .step-items .step-item .step-marker {
-  height: 1.3rem;
-  width: 1.3rem;
+  height: 1.2rem;
+  width: 1.2rem;
   position: absolute;
-  left: calc(50% - 0.65rem);
+  left: calc(50% - 0.6rem);
 }
 
 .b-steps .steps.is-small .step-items .step-item .step-marker .icon *,
 .b-steps .steps.is-small .step-items .step-item .step-marker .icon *:before {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .b-steps .steps.is-small .step-items .step-item .step-details {
-  margin-top: 1.3rem;
+  margin-top: 1.2rem;
   margin-left: .5em;
   margin-right: .5em;
   padding-top: .2em;
 }
 
 .b-steps .steps.is-small .step-items .step-item .step-details .step-title {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
 }
 
@@ -21034,13 +19996,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   width: 100%;
   bottom: 0;
   left: -50%;
-  top: 0.65rem;
+  top: 0.6rem;
 }
 
 .b-steps .steps.is-small .step-items .step-item:only-child::after {
   height: 0.2em;
   bottom: 0;
-  top: 0.65rem;
+  top: 0.6rem;
 }
 
 .b-steps .steps.is-small .step-items .step-item:only-child::before,
@@ -21069,7 +20031,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     width: 25%;
     bottom: 0;
     left: 50%;
-    top: 0.65rem;
+    top: 0.6rem;
   }
 
   .b-steps .steps.is-small .step-items .step-item::before,
@@ -21080,31 +20042,31 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-steps .steps.is-medium {
-  font-size: 1.15rem;
-  min-height: 2.3rem;
+  font-size: 1.05rem;
+  min-height: 2.1rem;
 }
 
 .b-steps .steps.is-medium .step-items .step-item .step-marker {
-  height: 2.3rem;
-  width: 2.3rem;
+  height: 2.1rem;
+  width: 2.1rem;
   position: absolute;
-  left: calc(50% - 1.15rem);
+  left: calc(50% - 1.05rem);
 }
 
 .b-steps .steps.is-medium .step-items .step-item .step-marker .icon *,
 .b-steps .steps.is-medium .step-items .step-item .step-marker .icon *:before {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .b-steps .steps.is-medium .step-items .step-item .step-details {
-  margin-top: 2.3rem;
+  margin-top: 2.1rem;
   margin-left: .5em;
   margin-right: .5em;
   padding-top: .2em;
 }
 
 .b-steps .steps.is-medium .step-items .step-item .step-details .step-title {
-  font-size: 1.38rem;
+  font-size: 1.26rem;
   font-weight: 600;
 }
 
@@ -21114,13 +20076,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   width: 100%;
   bottom: 0;
   left: -50%;
-  top: 1.15rem;
+  top: 1.05rem;
 }
 
 .b-steps .steps.is-medium .step-items .step-item:only-child::after {
   height: 0.2em;
   bottom: 0;
-  top: 1.15rem;
+  top: 1.05rem;
 }
 
 .b-steps .steps.is-medium .step-items .step-item:only-child::before,
@@ -21149,7 +20111,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     width: 25%;
     bottom: 0;
     left: 50%;
-    top: 1.15rem;
+    top: 1.05rem;
   }
 
   .b-steps .steps.is-medium .step-items .step-item::before,
@@ -21160,31 +20122,31 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-steps .steps.is-large {
-  font-size: 1.4rem;
-  min-height: 2.8rem;
+  font-size: 1.3rem;
+  min-height: 2.6rem;
 }
 
 .b-steps .steps.is-large .step-items .step-item .step-marker {
-  height: 2.8rem;
-  width: 2.8rem;
+  height: 2.6rem;
+  width: 2.6rem;
   position: absolute;
-  left: calc(50% - 1.4rem);
+  left: calc(50% - 1.3rem);
 }
 
 .b-steps .steps.is-large .step-items .step-item .step-marker .icon *,
 .b-steps .steps.is-large .step-items .step-item .step-marker .icon *:before {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .b-steps .steps.is-large .step-items .step-item .step-details {
-  margin-top: 2.8rem;
+  margin-top: 2.6rem;
   margin-left: .5em;
   margin-right: .5em;
   padding-top: .2em;
 }
 
 .b-steps .steps.is-large .step-items .step-item .step-details .step-title {
-  font-size: 1.68rem;
+  font-size: 1.56rem;
   font-weight: 600;
 }
 
@@ -21194,13 +20156,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   width: 100%;
   bottom: 0;
   left: -50%;
-  top: 1.4rem;
+  top: 1.3rem;
 }
 
 .b-steps .steps.is-large .step-items .step-item:only-child::after {
   height: 0.2em;
   bottom: 0;
-  top: 1.4rem;
+  top: 1.3rem;
 }
 
 .b-steps .steps.is-large .step-items .step-item:only-child::before,
@@ -21229,7 +20191,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     width: 25%;
     bottom: 0;
     left: 50%;
-    top: 1.4rem;
+    top: 1.3rem;
   }
 
   .b-steps .steps.is-large .step-items .step-item::before,
@@ -21308,7 +20270,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .switch input[type=checkbox]:checked + .check.is-dark {
-  background: #23252C;
+  background: #363636;
 }
 
 .switch input[type=checkbox]:checked + .check.is-primary {
@@ -21363,14 +20325,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #FD6C9B;
 }
 
-.switch input[type=checkbox]:checked + .check.is-mirage {
-  background: #191B22;
-}
-
-.switch input[type=checkbox]:checked + .check.is-blackRussian {
-  background: #23252C;
-}
-
 .switch input[type=checkbox]:checked + .check:before {
   transform: translate3d(100%, 0, 0);
 }
@@ -21404,7 +20358,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .switch input[type=checkbox]:focus:checked + .check.is-dark {
-  box-shadow: 0 0 0.5em rgba(35, 37, 44, 0.8);
+  box-shadow: 0 0 0.5em rgba(54, 54, 54, 0.8);
 }
 
 .switch input[type=checkbox]:focus:checked + .check.is-primary {
@@ -21459,14 +20413,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   box-shadow: 0 0 0.5em rgba(253, 108, 155, 0.8);
 }
 
-.switch input[type=checkbox]:focus:checked + .check.is-mirage {
-  box-shadow: 0 0 0.5em rgba(25, 27, 34, 0.8);
-}
-
-.switch input[type=checkbox]:focus:checked + .check.is-blackRussian {
-  box-shadow: 0 0 0.5em rgba(35, 37, 44, 0.8);
-}
-
 .switch .control-label {
   padding-left: 0.5em;
 }
@@ -21492,7 +20438,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .switch:hover input[type=checkbox]:checked + .check.is-dark {
-  background: rgba(35, 37, 44, 0.9);
+  background: rgba(54, 54, 54, 0.9);
 }
 
 .switch:hover input[type=checkbox]:checked + .check.is-primary {
@@ -21547,14 +20493,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: rgba(253, 108, 155, 0.9);
 }
 
-.switch:hover input[type=checkbox]:checked + .check.is-mirage {
-  background: rgba(25, 27, 34, 0.9);
-}
-
-.switch:hover input[type=checkbox]:checked + .check.is-blackRussian {
-  background: rgba(35, 37, 44, 0.9);
-}
-
 .switch.is-rounded input[type=checkbox] + .check {
   border-radius: 290486px;
 }
@@ -21605,11 +20543,11 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .switch.is-outlined input[type=checkbox]:checked + .check.is-dark {
   background: transparent;
-  border-color: #23252C;
+  border-color: #363636;
 }
 
 .switch.is-outlined input[type=checkbox]:checked + .check.is-dark:before {
-  background: #23252C;
+  background: #363636;
 }
 
 .switch.is-outlined input[type=checkbox]:checked + .check.is-primary {
@@ -21729,24 +20667,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #FD6C9B;
 }
 
-.switch.is-outlined input[type=checkbox]:checked + .check.is-mirage {
-  background: transparent;
-  border-color: #191B22;
-}
-
-.switch.is-outlined input[type=checkbox]:checked + .check.is-mirage:before {
-  background: #191B22;
-}
-
-.switch.is-outlined input[type=checkbox]:checked + .check.is-blackRussian {
-  background: transparent;
-  border-color: #23252C;
-}
-
-.switch.is-outlined input[type=checkbox]:checked + .check.is-blackRussian:before {
-  background: #23252C;
-}
-
 .switch.is-outlined input[type=checkbox]:checked + .check:before {
   background: #005cff;
 }
@@ -21774,7 +20694,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .switch.is-outlined:hover input[type=checkbox]:checked + .check.is-dark {
-  border-color: rgba(35, 37, 44, 0.9);
+  border-color: rgba(54, 54, 54, 0.9);
 }
 
 .switch.is-outlined:hover input[type=checkbox]:checked + .check.is-primary {
@@ -21829,25 +20749,17 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   border-color: rgba(253, 108, 155, 0.9);
 }
 
-.switch.is-outlined:hover input[type=checkbox]:checked + .check.is-mirage {
-  border-color: rgba(25, 27, 34, 0.9);
-}
-
-.switch.is-outlined:hover input[type=checkbox]:checked + .check.is-blackRussian {
-  border-color: rgba(35, 37, 44, 0.9);
-}
-
 .switch.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .switch.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .switch.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .switch[disabled] {
@@ -22308,15 +21220,15 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .timepicker.is-small {
   border-radius: 2px;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
 .timepicker.is-medium {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .timepicker.is-large {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .b-tooltip {
@@ -22355,7 +21267,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-tooltip.is-top.is-dark:before {
-  border-top: 5px solid #23252C;
+  border-top: 5px solid #363636;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
   bottom: calc(100% + 2px);
@@ -22452,20 +21364,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-mirage:before {
-  border-top: 5px solid #191B22;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
-}
-
-.b-tooltip.is-top.is-blackRussian:before {
-  border-top: 5px solid #23252C;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
-}
-
 .b-tooltip.is-top.is-multiline.is-small:after {
   width: 180px;
 }
@@ -22510,7 +21408,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .b-tooltip.is-right.is-dark:before {
   border-top: 5px solid transparent;
-  border-right: 5px solid #23252C;
+  border-right: 5px solid #363636;
   border-bottom: 5px solid transparent;
   left: calc(100% + 2px);
 }
@@ -22606,20 +21504,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-mirage:before {
-  border-top: 5px solid transparent;
-  border-right: 5px solid #191B22;
-  border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
-}
-
-.b-tooltip.is-right.is-blackRussian:before {
-  border-top: 5px solid transparent;
-  border-right: 5px solid #23252C;
-  border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
-}
-
 .b-tooltip.is-right.is-multiline.is-small:after {
   width: 180px;
 }
@@ -22664,7 +21548,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .b-tooltip.is-bottom.is-dark:before {
   border-right: 5px solid transparent;
-  border-bottom: 5px solid #23252C;
+  border-bottom: 5px solid #363636;
   border-left: 5px solid transparent;
   top: calc(100% + 2px);
 }
@@ -22760,20 +21644,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-mirage:before {
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid #191B22;
-  border-left: 5px solid transparent;
-  top: calc(100% + 2px);
-}
-
-.b-tooltip.is-bottom.is-blackRussian:before {
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid #23252C;
-  border-left: 5px solid transparent;
-  top: calc(100% + 2px);
-}
-
 .b-tooltip.is-bottom.is-multiline.is-small:after {
   width: 180px;
 }
@@ -22819,7 +21689,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 .b-tooltip.is-left.is-dark:before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-left: 5px solid #23252C;
+  border-left: 5px solid #363636;
   right: calc(100% + 2px);
 }
 
@@ -22914,20 +21784,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-mirage:before {
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #191B22;
-  right: calc(100% + 2px);
-}
-
-.b-tooltip.is-left.is-blackRussian:before {
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #23252C;
-  right: calc(100% + 2px);
-}
-
 .b-tooltip.is-left.is-multiline.is-small:after {
   width: 180px;
 }
@@ -22988,7 +21844,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .b-tooltip.is-dark:after {
-  background: #23252C;
+  background: #363636;
   color: #fff;
 }
 
@@ -23054,16 +21910,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .b-tooltip.is-positive:after {
   background: #FD6C9B;
-  color: #fff;
-}
-
-.b-tooltip.is-mirage:after {
-  background: #191B22;
-  color: #fff;
-}
-
-.b-tooltip.is-blackRussian:after {
-  background: #23252C;
   color: #fff;
 }
 
@@ -23167,8 +22013,8 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .upload .upload-draggable:hover.is-dark,
 .upload .upload-draggable.is-hovered.is-dark {
-  border-color: #23252C;
-  background: rgba(35, 37, 44, 0.05);
+  border-color: #363636;
+  background: rgba(54, 54, 54, 0.05);
 }
 
 .upload .upload-draggable:hover.is-primary,
@@ -23249,18 +22095,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: rgba(253, 108, 155, 0.05);
 }
 
-.upload .upload-draggable:hover.is-mirage,
-.upload .upload-draggable.is-hovered.is-mirage {
-  border-color: #191B22;
-  background: rgba(25, 27, 34, 0.05);
-}
-
-.upload .upload-draggable:hover.is-blackRussian,
-.upload .upload-draggable.is-hovered.is-blackRussian {
-  border-color: #23252C;
-  background: rgba(35, 37, 44, 0.05);
-}
-
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
   .upload input[type=file] {
     z-index: auto;
@@ -23271,3 +22105,4 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   }
 }
 
+/* (ignored) *//* (ignored) *//* (ignored) */

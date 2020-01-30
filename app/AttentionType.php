@@ -8,8 +8,8 @@ class AttentionType extends Model
 {
     protected $connection = 'mysql_entel_pops';
 	
-    public function attentions() 
+    public function sites() 
     {
-        return $this->hasMany(Attention::class);
+        return $this->hasMany(Site::class);
     }
 }

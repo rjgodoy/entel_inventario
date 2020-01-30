@@ -8,8 +8,8 @@ class NetType extends Model
 {
     protected $connection = 'mysql_entel_pops';
 	
-    public function nets() 
+    public function pops() 
     {
-        return $this->hasMany(Net::class);
+        return $this->hasMany(Pop::class);
     }
 }

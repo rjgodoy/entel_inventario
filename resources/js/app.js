@@ -7,27 +7,27 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+// import VueRouter from 'vue-router'
+// Vue.use(VueRouter)
 
 import Buefy from 'buefy'
 Vue.use(Buefy)
 
-Vue.directive('clickOutside', {
-    bind: function (el, binding, vnode) {
-        el.clickOutsideEvent = function (event) {
-            // here I check that click was outside the el and his childrens
-            if (!(el == event.target || el.contains(event.target))) {
-                // and if it did, call method provided in attribute value
-                vnode.context[binding.expression](event);
-            }
-        };
-        document.body.addEventListener('click', el.clickOutsideEvent)
-    },
-    unbind: function (el) {
-        document.body.removeEventListener('click', el.clickOutsideEvent)
-    },
-});
+// Vue.directive('clickOutside', {
+//     bind: function (el, binding, vnode) {
+//         el.clickOutsideEvent = function (event) {
+//             // here I check that click was outside the el and his childrens
+//             if (!(el == event.target || el.contains(event.target))) {
+//                 // and if it did, call method provided in attribute value
+//                 vnode.context[binding.expression](event);
+//             }
+//         };
+//         document.body.addEventListener('click', el.clickOutsideEvent)
+//     },
+//     unbind: function (el) {
+//         document.body.removeEventListener('click', el.clickOutsideEvent)
+//     },
+// });
 
 Vue.prototype.$eventBus = new Vue()
 
@@ -71,14 +71,17 @@ import {
     faCarBattery,
     faUserEdit,
     faAngleDown,
-    faServer
+    faServer,
+    faClipboardList,
+    faClipboard
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
 	faCircle as farCircle,
 	faCheckCircle as farCheckCircle,
 	faFile as farFile,
-	faPaperPlane as farPaperPlane
+	faPaperPlane as farPaperPlane,
+    faClipboard as farClipboard
 } from '@fortawesome/free-regular-svg-icons'
 
 import { 
@@ -124,11 +127,14 @@ library.add(
     faAngleDown,
     faTwitter,
     faGithub,
-    faServer
+    faServer,
+    faClipboardList,
+    faClipboard,
+    farClipboard
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.config.productionTip = false
+
 // #########################################################################
 
 // ########################## NumeralJs ##########################
@@ -147,7 +153,7 @@ Vue.use(VueGoogleMaps, {
         // (as you require)
 
         //// If you want to set the version, you can do so:
-        // v: '3.26',
+        v: '3.39',
     },
  
     // If you intend to programmatically custom event listener code
@@ -167,6 +173,8 @@ Vue.use(VueGoogleMaps, {
 // Vue.component('GmapCluster', GmapCluster)
 // #########################################################################
 
+Vue.config.productionTip = false
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -181,42 +189,8 @@ Vue.use(VueGoogleMaps, {
 import App from './components/App.vue'
 // import AsideNavbar from './components/Layouts/AsideNavbar.vue'
 
-import Dashboard from './components/dashboard/Dashboard.vue'
-import PopTable from './components/pops/PopTable.vue'
-import Pop from './components/pops/PopDetail.vue'
-import ComsiteTable from './components/comsite/ComsiteTable.vue'
-import Admin from './components/admin/Admin.vue'
-
-const routes = [
-    { path: '/', name: 'Dashboard', component: Dashboard },
-    { path: '/dashboard', name: 'dashboard', component: Dashboard },
-    { path: '/pop', name: 'Pop', component: PopTable },
-    { path: '/pop/:id', name: 'pop', component: Pop },
-    { path: '/comsite', name: 'comsite', component: ComsiteTable },
-    { path: '/admin', name: 'administracion', component: Admin },
-]
-
-const router = new VueRouter({
-    routes // short for `routes: routes`
-})
-
+import router from './constants/router'
 import store from './constants/store'
-
-// var LoadingComponent = require('./components/maps/LoadingComponent.vue').default;
-// var ErrorComponent = require('./components/maps/ErrorComponent.vue').default;
-// const MapView = () => ({
-//     // The component to load (should be a Promise)
-//     component: import('./components/maps/MapView.vue'),
-//     // A component to use while the async component is loading
-//     loading: LoadingComponent,
-//     // A component to use if the load fails
-//     error: ErrorComponent,
-//     // Delay before showing the loading component. Default: 200ms.
-//     delay: 0,
-//     // The error component will be displayed if a timeout is
-//     // provided and exceeded. Default: Infinity.
-//     timeout: 3000
-// })
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -231,10 +205,9 @@ const app = new Vue({
     components: {
         App
     },
-    mode:'history',
-    events: {
-        clickOutside(event) {                
-        }
-    },
+    // events: {
+    //     clickOutside(event) {                
+    //     }
+    // },
     // render: h => h(App)
 }).$mount('#app');

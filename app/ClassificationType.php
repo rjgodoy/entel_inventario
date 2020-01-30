@@ -13,8 +13,8 @@ class ClassificationType extends Model
         return $this->hasMany(Classification::class);
     }
 
-    public function pops() 
+    public function sites() 
     {
-        return $this->hasMany(Pop::class);
+        return $this->hasMany(Site::class);
     }
 }

@@ -130,7 +130,7 @@
                                 <td class="has-text-weight-light has-text-centered" :class="primaryText">
                                     <a 
                                         class="button is-small is-link is-outlined has-tooltip-left" 
-                                        :href="'/main#/pop/' + pop.pop_id" 
+                                        :href="'/pop/' + pop.pop_id" 
                                         type="button" 
                                         target="_blank"  
                                         data-tooltip="Ver información completa"

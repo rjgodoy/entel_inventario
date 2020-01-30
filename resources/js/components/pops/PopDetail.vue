@@ -153,6 +153,7 @@
                     <div class="card">
                         <figure class="">
                             <pop-map
+                                :classification="popClassification"
                                 :popMaster="pop"
                                 :darkMode="darkMode"
                             ></pop-map>

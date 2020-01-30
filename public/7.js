@@ -1,115 +1,115 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var SitesDataChart = function SitesDataChart() {
+  return {
+    // The component to load (should be a Promise)
+    component: Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./SitesDataChart.vue */ "./resources/js/components/dashboard/SitesDataChart.vue")),
+    // A component to use while the async component is loading
+    // loading: LoadingComponent,
+    // A component to use if the load fails
+    // error: ErrorComponent,
+    // Delay before showing the loading component. Default: 200ms.
+    delay: 200,
+    // The error component will be displayed if a timeout is
+    // provided and exceeded. Default: Infinity.
+    timeout: 3000
+  };
+};
 
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    PopDataChart: function PopDataChart() {
-      return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./PopDataChart */ "./resources/js/components/dashboard/PopDataChart.vue"));
-    }
+    'chart': SitesDataChart
   },
   props: ['selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
   data: function data() {
     return {
-      popsData: [],
+      sitesData: [],
       buttonLoading: 0
     };
   },
-  created: function created() {},
-  mounted: function mounted() {
+  created: function created() {
     this.getData();
   },
+  mounted: function mounted() {},
   watch: {
     selectedCrm: function selectedCrm(newValue, oldValue) {
       this.getData();
@@ -122,95 +122,63 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   computed: {
-    totalOpto: function totalOpto() {
+    totalFijo: function totalFijo() {
       var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.opto;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element.fijo;
       });
       return counter;
     },
-    totalRadio: function totalRadio() {
+    totalMovil: function totalMovil() {
       var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.radio;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element.movil;
       });
       return counter;
     },
-    totalRepetidor: function totalRepetidor() {
+    totalSwitch: function totalSwitch() {
       var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.repetidor;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element["switch"];
       });
       return counter;
     },
-    totalIndoor: function totalIndoor() {
+    totalPhone: function totalPhone() {
       var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.indoor;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element.phone;
       });
       return counter;
     },
-    totalOutdoor: function totalOutdoor() {
-      var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.outdoor;
-      });
-      return counter;
-    },
-    totalPoleSite: function totalPoleSite() {
-      var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.pole_site;
-      });
-      return counter;
-    },
-    totalPops: function totalPops() {
-      return this.totalOpto + this.totalRadio + this.totalRepetidor + this.totalIndoor + this.totalOutdoor + this.totalPoleSite;
+    totalSites: function totalSites() {
+      return this.totalFijo + this.totalMovil + this.totalSwitch + this.totalPhone;
     }
   },
   methods: {
-    getData: function () {
-      var _getData = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
+    getData: function getData() {
+      var _this = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                // Si no hay un CRM seleccionado
-                if (!this.selectedCrm) {
-                  axios.get("/api/popData?core=".concat(this.core)).then(function (response) {
-                    _this.popsData = response.data.data;
-                  });
-                } //Si hay un CRM seleccionado, pero no hay zona seleccionada
-                else if (!this.selectedZona) {
-                    axios.get("/api/popDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
-                      _this.popsData = response.data.data;
-                    });
-                  } // Si hay una zona seleccionada
-                  else {
-                      axios.get("/api/popDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
-                        _this.popsData = response.data.data;
-                      });
-                    }
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
+      // Si no hay un CRM seleccionado
+      if (!this.selectedCrm) {
+        axios.get("/api/sitesData?core=".concat(this.core)).then(function (response) {
+          _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+        })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+        });
+      } //Si hay un CRM seleccionado, pero no hay zona seleccionada
+      else if (!this.selectedZona) {
+          axios.get("/api/sitesDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
+            _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+          })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+          });
+        } // Si hay una zona seleccionada
+        else {
+            axios.get("/api/sitesDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
+              _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+            })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+            });
           }
-        }, _callee, this);
-      }));
-
-      function getData() {
-        return _getData.apply(this, arguments);
-      }
-
-      return getData;
-    }(),
-    downloadPops: function downloadPops() {
+    },
+    downloadSites: function downloadSites() {
       var _this2 = this;
 
       this.buttonLoading = 1;
@@ -234,10 +202,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80& ***!
+  \**********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -269,7 +237,7 @@ var render = function() {
                   "column is-size-5 has-text-weight-semibold has-text-left",
                 class: _vm.primaryText
               },
-              [_vm._v("POP")]
+              [_vm._v("Sitios")]
             ),
             _vm._v(" "),
             _c(
@@ -279,7 +247,7 @@ var render = function() {
                   "column is-size-4 has-text-weight-semibold has-text-right",
                 class: _vm.primaryText
               },
-              [_vm._v(_vm._s(_vm._f("numeral")(this.totalPops, "0,0")))]
+              [_vm._v(_vm._s(_vm._f("numeral")(this.totalSites, "0,0")))]
             )
           ]),
           _vm._v(" "),
@@ -304,9 +272,15 @@ var render = function() {
                   _c(
                     "th",
                     { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [_c("abbr", { attrs: { title: "Fijo" } }, [_vm._v("Fijo")])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
                     [
-                      _c("abbr", { attrs: { title: "Opto Estación" } }, [
-                        _vm._v("Opto Estación")
+                      _c("abbr", { attrs: { title: "Móvil" } }, [
+                        _vm._v("Móvil")
                       ])
                     ]
                   ),
@@ -315,8 +289,8 @@ var render = function() {
                     "th",
                     { staticClass: "has-text-right", class: _vm.secondaryText },
                     [
-                      _c("abbr", { attrs: { title: "Radio Estación" } }, [
-                        _vm._v("Radio Estación")
+                      _c("abbr", { attrs: { title: "Switch" } }, [
+                        _vm._v("Switch")
                       ])
                     ]
                   ),
@@ -325,38 +299,8 @@ var render = function() {
                     "th",
                     { staticClass: "has-text-right", class: _vm.secondaryText },
                     [
-                      _c("abbr", { attrs: { title: "Repetidor" } }, [
-                        _vm._v("Repetidor")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    { staticClass: "has-text-right", class: _vm.secondaryText },
-                    [
-                      _c("abbr", { attrs: { title: "Indoor" } }, [
-                        _vm._v("Indoor")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    { staticClass: "has-text-right", class: _vm.secondaryText },
-                    [
-                      _c("abbr", { attrs: { title: "Outdoor" } }, [
-                        _vm._v("Outdoor")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    { staticClass: "has-text-right", class: _vm.secondaryText },
-                    [
-                      _c("abbr", { attrs: { title: "Pole Site" } }, [
-                        _vm._v("Pole Site")
+                      _c("abbr", { attrs: { title: "Phone" } }, [
+                        _vm._v("Phone")
                       ])
                     ]
                   ),
@@ -376,7 +320,7 @@ var render = function() {
               _c(
                 "tbody",
                 [
-                  _vm._l(_vm.popsData, function(item) {
+                  _vm._l(_vm.sitesData, function(item) {
                     return _c("tr", { staticClass: "is-size-7" }, [
                       _c("td", [
                         _c(
@@ -396,7 +340,7 @@ var render = function() {
                           staticClass: "has-text-right",
                           class: _vm.primaryText
                         },
-                        [_vm._v(_vm._s(_vm._f("numeral")(item.opto, "0,0")))]
+                        [_vm._v(_vm._s(_vm._f("numeral")(item.fijo, "0,0")))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -405,7 +349,7 @@ var render = function() {
                           staticClass: "has-text-right",
                           class: _vm.primaryText
                         },
-                        [_vm._v(_vm._s(_vm._f("numeral")(item.radio, "0,0")))]
+                        [_vm._v(_vm._s(_vm._f("numeral")(item.movil, "0,0")))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -414,11 +358,7 @@ var render = function() {
                           staticClass: "has-text-right",
                           class: _vm.primaryText
                         },
-                        [
-                          _vm._v(
-                            _vm._s(_vm._f("numeral")(item.repetidor, "0,0"))
-                          )
-                        ]
+                        [_vm._v(_vm._s(_vm._f("numeral")(item.switch, "0,0")))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -427,29 +367,7 @@ var render = function() {
                           staticClass: "has-text-right",
                           class: _vm.primaryText
                         },
-                        [_vm._v(_vm._s(_vm._f("numeral")(item.indoor, "0,0")))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass: "has-text-right",
-                          class: _vm.primaryText
-                        },
-                        [_vm._v(_vm._s(_vm._f("numeral")(item.outdoor, "0,0")))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass: "has-text-right",
-                          class: _vm.primaryText
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(_vm._f("numeral")(item.pole_site, "0,0"))
-                          )
-                        ]
+                        [_vm._v(_vm._s(_vm._f("numeral")(item.phone, "0,0")))]
                       ),
                       _vm._v(" "),
                       _c(
@@ -462,12 +380,10 @@ var render = function() {
                           _vm._v(
                             _vm._s(
                               _vm._f("numeral")(
-                                item.opto +
-                                  item.radio +
-                                  item.repetidor +
-                                  item.indoor +
-                                  item.outdoor +
-                                  item.pole_site,
+                                item.fijo +
+                                  item.movil +
+                                  item.switch +
+                                  item.phone,
                                 "0,0"
                               )
                             )
@@ -492,7 +408,7 @@ var render = function() {
                     _c(
                       "td",
                       { staticClass: "has-text-right", class: _vm.primaryText },
-                      [_vm._v(_vm._s(_vm._f("numeral")(this.totalOpto, "0,0")))]
+                      [_vm._v(_vm._s(_vm._f("numeral")(this.totalFijo, "0,0")))]
                     ),
                     _vm._v(" "),
                     _c(
@@ -500,7 +416,7 @@ var render = function() {
                       { staticClass: "has-text-right", class: _vm.primaryText },
                       [
                         _vm._v(
-                          _vm._s(_vm._f("numeral")(this.totalRadio, "0,0"))
+                          _vm._s(_vm._f("numeral")(this.totalMovil, "0,0"))
                         )
                       ]
                     ),
@@ -510,7 +426,7 @@ var render = function() {
                       { staticClass: "has-text-right", class: _vm.primaryText },
                       [
                         _vm._v(
-                          _vm._s(_vm._f("numeral")(this.totalRepetidor, "0,0"))
+                          _vm._s(_vm._f("numeral")(this.totalSwitch, "0,0"))
                         )
                       ]
                     ),
@@ -520,7 +436,7 @@ var render = function() {
                       { staticClass: "has-text-right", class: _vm.primaryText },
                       [
                         _vm._v(
-                          _vm._s(_vm._f("numeral")(this.totalIndoor, "0,0"))
+                          _vm._s(_vm._f("numeral")(this.totalPhone, "0,0"))
                         )
                       ]
                     ),
@@ -530,25 +446,9 @@ var render = function() {
                       { staticClass: "has-text-right", class: _vm.primaryText },
                       [
                         _vm._v(
-                          _vm._s(_vm._f("numeral")(this.totalOutdoor, "0,0"))
+                          _vm._s(_vm._f("numeral")(this.totalSites, "0,0"))
                         )
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "has-text-right", class: _vm.primaryText },
-                      [
-                        _vm._v(
-                          _vm._s(_vm._f("numeral")(this.totalPoleSite, "0,0"))
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "has-text-right", class: _vm.primaryText },
-                      [_vm._v(_vm._s(_vm._f("numeral")(this.totalPops, "0,0")))]
                     )
                   ])
                 ],
@@ -573,14 +473,14 @@ var render = function() {
                           type: "is-link",
                           size: "is-small"
                         },
-                        on: { click: _vm.downloadPops }
+                        on: { click: _vm.downloadSites }
                       },
                       [
                         _c("font-awesome-icon", {
                           attrs: { icon: "download" }
                         }),
                         _vm._v(
-                          " \n                          Listado de POPs\n                    "
+                          " \n                          Listado de Sitios\n                    "
                         )
                       ],
                       1
@@ -597,7 +497,7 @@ var render = function() {
                           {
                             staticClass: "button is-small is-link",
                             attrs: {
-                              href: "/pop",
+                              href: "/sites",
                               type: "button",
                               "data-tooltip": ""
                             }
@@ -631,7 +531,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("pop-data-chart", { attrs: { chartData: _vm.popsData } })
+      _c("chart", { attrs: { chartData: _vm.sitesData } })
     ],
     1
   )
@@ -643,17 +543,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopsData.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/dashboard/PopsData.vue ***!
-  \********************************************************/
+/***/ "./resources/js/components/dashboard/SitesData.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesData.vue ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopsData.vue?vue&type=template&id=31b5635c& */ "./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c&");
-/* harmony import */ var _PopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopsData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SitesData.vue?vue&type=template&id=3c843e80& */ "./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80&");
+/* harmony import */ var _SitesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SitesData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -663,9 +563,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SitesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -675,38 +575,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/PopsData.vue"
+component.options.__file = "resources/js/components/dashboard/SitesData.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopsData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SitesData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80& ***!
+  \****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopsData.vue?vue&type=template&id=31b5635c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SitesData.vue?vue&type=template&id=3c843e80& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

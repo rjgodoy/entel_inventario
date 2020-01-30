@@ -109,7 +109,7 @@
                         </span>
                         <div class="dropdown-content" :class="searchBodyBackground + ' ' + primaryText" style="max-height: 400px; overflow: auto;">
                             <div v-for="pop in popSearch" class="dropdown-item" :class="pop.alba_project ? '' : ''">
-                                <a :href="'/main#/pop/' + pop.id" target="_blank" class="columns">
+                                <a :href="'/pop/' + pop.id" target="_blank" class="columns">
                                     <div class="column is-6">
                                         <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
                                             {{ pop.nem_site }}
@@ -159,7 +159,7 @@
                                     <button class="button is-small is-default" @click="selectPop(pop)" v-model="selectedPop">
                                         <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
                                     </button>
-                                    <a class="button is-small is-link" :href="'/main#/pop/' + pop.id" target="_blank">
+                                    <a class="button is-small is-link" :href="'/pop/' + pop.id" target="_blank">
                                         <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
                                     </a>
                                 </div>

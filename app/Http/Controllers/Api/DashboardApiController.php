@@ -11,7 +11,7 @@ use App\Http\Resources\Pop as PopResource;
 use App\Pop;
 use App\Site;
 use App\Technology;
-use App\CriticPop;
+use App\CriticSite;
 use App\PsgTp;
 use DB;
 
@@ -68,16 +68,16 @@ class DashboardApiController extends Controller
                 $q->whereRaw($condition_crm)->whereRaw($condition_zona);
             })->distinct('technologies.id')->count();
 
-        $critics = CriticPop::whereHas('pop.sites', function($q) use($condition_core) { 
+        $critics = CriticSite::whereHas('site', function($q) use($condition_core) { 
                 $q->where('state_type_id', 1)
                 ->whereRaw($condition_core);
             })
-            ->whereHas('pop.comuna.zona', function($q) use($crm_id, $zona_id) {
+            ->whereHas('site.pop.comuna.zona', function($q) use($crm_id, $zona_id) {
                 $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
                 $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
                 $q->whereRaw($condition_crm)->whereRaw($condition_zona);
             })
-            ->distinct('pop_id')->count();
+            ->distinct('site_id')->count();
 
 
         $datos = [
@@ -158,85 +158,36 @@ class DashboardApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function criticPops(Request $request)
-    {
-        $core = $request->core;
-        // if (Cache::has('criticPops'.$core)) {
-        //     $criticPops = Cache::get('criticPops'.$core);
-        // } else {
-        //     $criticPops = Cache::remember('criticPops'.$core, $this->seconds, function () use ($core) {
-                $criticPops = CriticPop::with('pop.comuna.zona.crm', 'pop.sites.classification_type')
-                            ->whereHas('pop.sites', function($q) use($core) { 
-                                $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
-                                $q->where('state_type_id', 1)
-                                ->whereRaw($condition_core); 
-                            })
-                            ->groupBy('pop_id')
-                            ->paginate(12);
-        //         return $criticPops; 
-        //     });
-        // }
-        return new PopResource($criticPops);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function criticPopsCrm(Request $request)
+    public function criticSites(Request $request)
     {
         $core = $request->core;
         $crm_id = $request->crm_id;
-
-        // if (Cache::has('criticPops_crm'.$crm_id.'_core'.$core)) {
-        //     $criticPops = Cache::get('criticPops_crm'.$crm_id.'_core'.$core);
-        // } else {
-        //     $criticPops = Cache::remember('criticPops_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($core) {
-                $criticPops = CriticPop::with('pop.sites.classification_type')->whereHas('pop.sites', function($q) use($core) {
-                    $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
-                    $q->where('state_type_id', 1)
-                    ->whereRaw($condition_core);
-                })
-                ->whereHas('pop.comuna.zona.crm', function($q) use($crm_id) {
-                    $q->where('id', $crm_id);
-                })
-                ->groupBy('pop_id')
-                ->paginate(12);
-        //         return $criticPops; 
-        //     });
-        // }
-        return new PopResource($criticPops);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function criticPopsZona(Request $request)
-    {
-        $core = $request->core;
         $zona_id = $request->zona_id;
 
-        // if (Cache::has('criticPops_zona'.$zona_id.'_core'.$core)) {
-        //     $criticPops = Cache::get('criticPops_zona'.$zona_id.'_core'.$core);
+        $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
+        $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
+        $condition_zona = $zona_id != 0 ? 'id = '.$zona_id : 'id != '.$zona_id;
+
+        // if (Cache::has('criticSites'.$core)) {
+        //     $criticSites = Cache::get('criticSites'.$core);
         // } else {
-        //     $criticPops = Cache::remember('criticPops_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($core) {
-                $criticPops = CriticPop::with('pop.sites.classification_type', 'pop.comuna.zona.crm')->whereHas('pop.sites', function($q) use($core) {
-                    $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
-                    $q->where('state_type_id', 1)
-                    ->whereRaw($condition_core);
-                })
-                ->whereHas('pop.comuna.zona', function($q) use($zona_id) {
-                    $q->where('id', $zona_id);
-                })
-                ->groupBy('pop_id')
-                ->paginate(12);
-        //         return $criticPops; 
+        //     $criticSites = Cache::remember('criticSites'.$core, $this->seconds, function () use ($core) {
+
+                $criticSites = CriticSite::with('site.pop.comuna.zona.crm', 'site.classification_type')
+                    ->whereHas('site', function($q) use($condition_core) { 
+                        $q->where('state_type_id', 1)
+                        ->whereRaw($condition_core);
+                    })
+                    ->whereHas('site.pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                        $q->whereRaw($condition_crm)->whereRaw($condition_zona);
+                    })
+                    ->groupBy('site_id')
+                    ->paginate(12);
+
+        //         return $criticSites; 
         //     });
         // }
-        return new PopResource($criticPops);
+        return new PopResource($criticSites);
     }
 
     /**

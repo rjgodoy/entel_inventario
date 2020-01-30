@@ -8,8 +8,8 @@ class PopClassType extends Model
 {
     protected $connection = 'mysql_entel_pops';
 	
-    public function pop_classes() 
+    public function pops() 
     {
-        return $this->hasMany(PopClass::class);
+        return $this->hasMany(Pop::class);
     }
 }

@@ -8,8 +8,8 @@ class CategoryType extends Model
 {
     protected $connection = 'mysql_entel_pops';
 	
-    public function categories() 
+    public function sites() 
     {
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Site::class);
     }
 }

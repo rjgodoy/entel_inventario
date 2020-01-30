@@ -8,8 +8,8 @@ class DerivationType extends Model
 {
     protected $connection = 'mysql_entel_pops';
 	
-    public function derivations() 
+    public function sites() 
     {
-        return $this->hasMany(Derivation::class);
+        return $this->hasMany(Site::class);
     }
 }

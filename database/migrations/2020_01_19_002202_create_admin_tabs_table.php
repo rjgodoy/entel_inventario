@@ -12,7 +12,7 @@ class CreateAdminTabsTable extends Migration
      * @return void
      */
     public function up()
-    // {
+    {
     //     Schema::create('admin_tabs', function (Blueprint $table) {
     //         $table->bigIncrements('id');
     //         $table->string('title');

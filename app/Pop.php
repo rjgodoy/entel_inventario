@@ -45,4 +45,14 @@ class Pop extends Model
     {
         return $this->hasMany(ElectricLine::class);
     }
+
+    public function temporary_storage() 
+    {
+        return $this->hasMany(TemporaryStorage::class);
+    }
+
+    public function documents() 
+    {
+        return $this->belongsToMany(Document::class);
+    }
 }

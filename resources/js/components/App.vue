@@ -173,15 +173,17 @@
             goBack() {
                 window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
             },
-            logout(){
-                axios.post('/logout').then(response => {
-                    if (response.status === 302 || 401) {
-                        document.location.href = "/login";
-                    }
-                    else {
-                        console.log('Fuck me!')
-                    }
-                })
+            logout: function(e){
+                // var token = document.head.querySelector('meta[name="csrf-token"]');
+                // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+                axios.post(`/logout`).then((response) => {
+                    console.log(response)
+                }, function() {
+                    console.log('failed');
+                }).finally(() =>{
+                    window.location.href = "/login";
+                });
+                e.preventDefault();
             },
         }
     }

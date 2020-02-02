@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\Eco as EcoResource;
-use App\Eco;
+use App\ProtectedZone;
+use App\Site;
 
 class EcoController extends Controller
 {
@@ -17,7 +18,8 @@ class EcoController extends Controller
      */
     public function index()
     {
-        //
+        $protectedZonesSites = Site::with('protected_zones', 'pop.comuna.zona')->has('protected_zones')->get();
+        return new EcoResource($protectedZonesSites);
     }
 
     /**
@@ -39,7 +41,39 @@ class EcoController extends Controller
      */
     public function show($id)
     {
-        //
+        // $directory_path = '../resources/views';
+        $directory_path = 'ftp://developer:Entel@123RepoDev@172.16.100.110/var/www/html/storage';
+
+        // $directory_path = 'ftp://developer:Entel@123RepoDev@172.16.100.110/var/www/html/storage';
+
+        // Files
+        $files = [];
+        $filesInFolder = \File::files($directory_path, true);
+        // $filesInFolder = \File::allFiles($directory_path, true);
+
+        foreach($filesInFolder as $path)
+        {
+            $files[] = pathinfo($path);
+        }
+
+        // Directories
+        $folders = [];
+        $Folders = \File::directories($directory_path, true);
+        // $Folders = \File::allDirectories($directory_path);
+
+        foreach($Folders as $folder_path)
+        {
+            $folders[] = pathinfo($folder_path);
+        }
+
+        // dd($folders, $files);
+
+        // $folders = json_encode($folders[0]);
+        // $files = json_encode($files[0]);
+
+        // dd($folders, $files);
+
+        return $folders;
     }
 
     /**

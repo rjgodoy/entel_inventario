@@ -21,7 +21,13 @@
 </head>
 <body>
     <div id="app">
-        <main class="">
+
+        <welcome
+            :app_name="'{{ config('app.name') }}'"
+        ></welcome>
+
+
+        {{-- <main class="">
             <section class="hero is-fullheight is-black has-background">
                 <img alt="Fill Murray" class="hero-background is-transparent" src="{{ asset('img/bg-hero-satellite.jpg') }}" />
                 <div class="hero-body">
@@ -47,7 +53,7 @@
                     </div>
                 </div>
             </section>
-        </main>
+        </main> --}}
     </div>
 </body>
 </html>

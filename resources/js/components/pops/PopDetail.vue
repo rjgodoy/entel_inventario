@@ -99,10 +99,10 @@
                                             </div>
                                             <div class="column">
                                                 <b-taglist attached class="is-right">
-                                                    <b-tag type="is-smart" size="is-normal">
+                                                    <b-tag :type="site.site_type.service_type_id == 1 ? 'is-smart' : 'is-eco'" size="is-normal" class="has-text-weight-bold">
                                                         {{ site.site_type.site_type.toUpperCase() }}
                                                     </b-tag>
-                                                    <b-tag type="is-positive" size="is-normal">
+                                                    <b-tag type="is-positive" size="is-normal" class="has-text-weight-bold">
                                                         {{ site.classification_type ? site.classification_type.classification_type : '' }}
                                                     </b-tag>
                                                 </b-taglist>
@@ -304,13 +304,13 @@
                 :secondaryText="secondaryText"
             />
 
-            <!-- <power v-if="tabButtonView == 2"
+            <power v-if="tabButtonView == 2"
                 :pop="pop"
                 :bodyBackground="bodyBackground"
                 :boxBackground="boxBackground"
                 :primaryText="primaryText"
                 :secondaryText="secondaryText"
-            /> -->
+            />
 
 <!--             <clima v-if="tabButtonView == 3"
                 :pop="pop"
@@ -361,7 +361,7 @@
 
 <script>
     // import AutonomyChart from '../AutonomyChart.vue';
-    import PopCharacteristics from './PopCharacteristics.vue';
+    // import PopCharacteristics from './PopCharacteristics.vue';
     // import PopPower from './PopPower.vue';
     // import PopClima from './PopClima.vue';
     // import PopInfrastructure from './PopInfrastructure.vue';
@@ -371,9 +371,9 @@
         components: {
             PopMap: () => import("./PopMapView"),
             // 'autonomy-chart': AutonomyChart,
-            'pop-characteristics': PopCharacteristics,
+            PopCharacteristics: () => import("./PopCharacteristics"),
             // 'pop-power': PopPower,
-            // 'pop-climate': PopClima,
+            PopClimate: () => import("./PopClimate"),
             // 'pop-infrastructure': PopInfrastructure,
             PopComsite: () => import("./PopComsite"),
             // 'pop-documents': PopDocuments,

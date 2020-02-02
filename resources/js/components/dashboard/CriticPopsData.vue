@@ -124,33 +124,15 @@
             }
         },
         methods: {
-            getData() {
-                // Si no hay un CRM seleccionado
-                // if (!this.selectedCrm) {                             
-                    axios.get(`/api/criticSites?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
-                    .then((response) => {
-                        console.log(response.data)
-                        this.data = response.data;
-                        // if(true) {
-                        //     this.$emit('clicked', this.data)
-                        // }
-                    })
-                // } 
-                // //Si hay un CRM seleccionado, pero no hay zona seleccionada
-                // else if (!this.selectedZona){
-                //     console.log(this.selectedCrm.id)
-                //     axios.get(`/api/criticPopsCrm?crm_id=${this.selectedCrm.id}&core=${this.core}&page=${this.data.current_page}`)
-                //     .then((response) => {
-                //         this.data = response.data;
-                //     })
-                // } 
-                // // Si hay una zona seleccionada
-                // else {
-                //     axios.get(`/api/criticPopsZona?zona_id=${this.selectedZona.id}&core=${this.core}&page=${this.data.current_page}`)
-                //     .then((response) => {
-                //         this.data = response.data;
-                //     })
-                // }
+            getData() {                          
+                axios.get(`/api/criticSites?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
+                .then((response) => {
+                    console.log(response.data)
+                    this.data = response.data;
+                    // if(true) {
+                    //     this.$emit('clicked', this.data)
+                    // }
+                })
             },
             downloadPops() {
                 this.buttonLoading = 1

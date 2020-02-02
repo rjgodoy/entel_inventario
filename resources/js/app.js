@@ -62,6 +62,8 @@ import {
     faInfo,
     faMousePointer,
     faArrowRight,
+    faArrowUp,
+    faChevronUp,
     faBackspace,
     faSyncAlt,
     faTasks,
@@ -73,7 +75,11 @@ import {
     faAngleDown,
     faServer,
     faClipboardList,
-    faClipboard
+    faClipboard,
+    faFan,
+    faSuitcaseRolling,
+    faCompress,
+    faCompressArrowsAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -116,6 +122,8 @@ library.add(
     faInfo,
     faMousePointer,
     faArrowRight,
+    faArrowUp,
+    faChevronUp,
     faBackspace,
     faSyncAlt,
     faTasks,
@@ -130,7 +138,11 @@ library.add(
     faServer,
     faClipboardList,
     faClipboard,
-    farClipboard
+    farClipboard,
+    faFan,
+    faSuitcaseRolling,
+    faCompress,
+    faCompressArrowsAlt
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -175,34 +187,31 @@ Vue.use(VueGoogleMaps, {
 
 Vue.config.productionTip = false
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+// 0. If using a module system (e.g. via vue-cli), import Vue and VueRouter
+// and then call `Vue.use(VueRouter)`.
 
+// 1. Define route components.
+// These can be imported from other files
+import Welcome from './components/Welcome.vue'
 import App from './components/App.vue'
-// import AsideNavbar from './components/Layouts/AsideNavbar.vue'
 
+// 2. Define some routes
+// Each route should map to a component. The "component" can
+// either be an actual component constructor created via
+// `Vue.extend()`, or just a component options object.
+// We'll talk about nested routes later.
 import router from './constants/router'
 import store from './constants/store'
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+// 4. Create and mount the root instance.
+// Make sure to inject the router with the router option to make the
+// whole app router-aware.
 const app = new Vue({
     router,
     store,
-    // el: '#app',
     components: {
+        Welcome,
         App
     },
     // events: {
@@ -211,3 +220,9 @@ const app = new Vue({
     // },
     // render: h => h(App)
 }).$mount('#app');
+
+
+
+
+
+

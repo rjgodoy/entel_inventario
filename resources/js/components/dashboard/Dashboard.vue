@@ -557,10 +557,10 @@
         </section> -->
 
         <!-- CLIMA -->
-        <!-- <section class="section is-marginless" :class="bodyBackgroundClimate">
+        <section class="section is-marginless" :class="bodyBackgroundClimate">
             <div class="title">CLIMA</div>
             <div class="tile is-ancestor">
-                <air-conditioner-data
+                <air-conditioners-data
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackgroundClimate"
                     :primaryText="primaryText"
@@ -582,7 +582,7 @@
                     </article>
                 </div>
             </div>
-        </section> -->
+        </section>
 
         <!-- INFRAESTRUCTURA -->
        <!--  <section class="section is-marginless" :class="bodyBackgroundInfrastructure">
@@ -636,7 +636,6 @@
     // import DashboardElectricLinesData from './DashboardElectricLinesData.vue';
     // import DashboardGeneratorGroupsData from './DashboardGeneratorGroupsData.vue';
     // import DashboardPowerRectifiersData from './DashboardPowerRectifiersData.vue';
-    // import DashboardAirConditionersData from './DashboardAirConditionersData.vue';
     // import DashboardVerticalStructuresData from './DashboardVerticalStructuresData.vue';
     // import DashboardInfrastructuresData from './DashboardInfrastructuresData.vue';
     // import LoadingComponent from '../maps/LoadingComponent.vue';
@@ -704,8 +703,10 @@
             PretDataChart: () => import("./PretDataChart"),
             MapView: () => import('../maps/MapView.vue'),
             RadialChart: () => import('../RadialChart.vue'),
+            AirConditionersData: () => import('./AirConditionersData.vue'),
         },
         props : [
+            'message'
         ],
         created() {
             this.styleMode()
@@ -715,6 +716,7 @@
             this.getCounters()
             this.lastUpdate()
             this.syncCounter()
+            this.loadMessage()
         },
         data: () => {
             return {
@@ -1114,6 +1116,15 @@
                 this.darkMode = this.darkMode == 0 ? 1 : 0
                 this.styleMode()
             },
+            loadMessage() {
+                if(this.message) {
+                    this.$buefy.toast.open({
+                        message: this.message,
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                }
+            }
             // newPop(value) {
             //     console.log(value)
             //     this.pops = value

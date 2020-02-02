@@ -21,7 +21,9 @@
 </head>
 <body>
     <div id="app">
+        {{ dd(session()->get('message')) }}
         <app
+            :message="'{{ session()->get('message') }}'"
             :app_name="'{{ config('app.name') }}'"
             :user='@json(Auth::user())'
         ></app>

@@ -1,24 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapView.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/TechnologiesData.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/TechnologiesData.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
@@ -103,885 +93,155 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
+var RadialChart = function RadialChart() {
+  return {
+    // The component to load (should be a Promise)
+    component: Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../RadialChart.vue */ "./resources/js/components/RadialChart.vue")),
+    // A component to use while the async component is loading
+    // loading: LoadingComponent,
+    // A component to use if the load fails
+    // error: ErrorComponent,
+    // Delay before showing the loading component. Default: 200ms.
+    delay: 200,
+    // The error component will be displayed if a timeout is
+    // provided and exceeded. Default: Infinity.
+    timeout: 3000
+  };
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['pops', 'map_attributes', 'darkMode', 'criticPopsSwitch'],
+  components: {
+    'chart': RadialChart
+  },
+  props: ['selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
   data: function data() {
     return {
-      selectedPopMap: null,
-      map: null,
-      zoom: this.map_attributes.zoom,
-      center: {
-        lat: this.map_attributes.latitude,
-        lng: this.map_attributes.longitude
-      },
-      infoContent: '',
-      infoWindowPos: {
-        lat: 0,
-        lng: 0
-      },
-      infoWinOpen: false,
-      currentMidx: null,
-      infoOptions: {
-        pixelOffset: {
-          width: 0,
-          height: -35
-        }
-      },
-      icon: '../img/markers/entel-pin-32.png',
-      iconDark: '../img/markers/entel-pin-core-32.png',
-      // clusterActive: 1,
-      buttonText: '',
-      style1: [{
-        "featureType": "water",
-        "stylers": [{
-          "saturation": 43
-        }, {
-          "lightness": -11
-        }, {
-          "hue": "#0088ff"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "hue": "#ff0000"
-        }, {
-          "saturation": -100
-        }, {
-          "lightness": 99
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#808080"
-        }, {
-          "lightness": 54
-        }]
-      }, {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ece2d9"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ccdca1"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#767676"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#ffffff"
-        }]
-      }, {
-        "featureType": "poi",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "visibility": "on"
-        }, {
-          "color": "#b8cb93"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.sports_complex",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.medical",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.business",
-        "stylers": [{
-          "visibility": "simplified"
-        }]
-      }],
-      style2: [{
-        "featureType": "all",
-        "elementType": "all",
-        "stylers": [{
-          "invert_lightness": true
-        }, {
-          "saturation": 10
-        }, {
-          "lightness": 30
-        }, {
-          "gamma": 0.5
-        }, {
-          "hue": "#435158"
-        }]
-      }],
-      style3: [{
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#fffffa"
-        }]
-      }, {
-        "featureType": "water",
-        "stylers": [{
-          "lightness": 50
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "transit",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [{
-          "lightness": 40
-        }]
-      }],
-      style4: [{
-        "stylers": [{
-          "hue": "#18a689"
-        }, {
-          "visibility": "on"
-        }, {
-          "invert_lightness": true
-        }, {
-          "saturation": 40
-        }, {
-          "lightness": 10
-        }]
-      }],
-      style5: [{
-        featureType: "landscape",
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 65
-        }, {
-          visibility: "on"
-        }]
-      }, {
-        featureType: "poi",
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 51
-        }, {
-          visibility: "simplified"
-        }]
-      }, {
-        featureType: "road.highway",
-        stylers: [{
-          saturation: -100
-        }, {
-          visibility: "simplified"
-        }]
-      }, {
-        featureType: "road.arterial",
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 30
-        }, {
-          visibility: "on"
-        }]
-      }, {
-        featureType: "road.local",
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 40
-        }, {
-          visibility: "on"
-        }]
-      }, {
-        featureType: "transit",
-        stylers: [{
-          saturation: -100
-        }, {
-          visibility: "simplified"
-        }]
-      }, {
-        featureType: "administrative.province",
-        stylers: [{
-          visibility: "off"
-        }]
-        /**/
-
-      }, {
-        featureType: "administrative.locality",
-        stylers: [{
-          visibility: "off"
-        }]
-      }, {
-        featureType: "administrative.neighborhood",
-        stylers: [{
-          visibility: "on"
-        }]
-        /**/
-
-      }, {
-        featureType: "water",
-        elementType: "labels",
-        stylers: [{
-          visibility: "on"
-        }, {
-          lightness: -25
-        }, {
-          saturation: -100
-        }]
-      }, {
-        featureType: "water",
-        elementType: "geometry",
-        stylers: [{
-          hue: "#ffff00"
-        }, {
-          lightness: -25
-        }, {
-          saturation: -97
-        }]
-      }],
-      style6: [{
-        elementType: 'geometry',
-        stylers: [{
-          color: '#242f3e'
-        }]
-      }, {
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          color: '#242f3e'
-        }]
-      }, {
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#746855'
-        }]
-      }, {
-        featureType: 'administrative.locality',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#d59563'
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#d59563'
-        }]
-      }, {
-        featureType: 'poi.park',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#263c3f'
-        }]
-      }, {
-        featureType: 'poi.park',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#6b9a76'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#38414e'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#212a37'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#9ca5b3'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#746855'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#1f2835'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#f3d19c'
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#2f3948'
-        }]
-      }, {
-        featureType: 'transit.station',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#d59563'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#17263c'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#515c6d'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          color: '#17263c'
-        }]
-      }],
-      style7: [{
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#1d2c4d"
-        }]
-      }, {
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#8ec3b9"
-        }]
-      }, {
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1a3646"
-        }]
-      }, {
-        "featureType": "administrative.country",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#4b6878"
-        }]
-      }, {
-        "featureType": "administrative.land_parcel",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#64779e"
-        }]
-      }, {
-        "featureType": "administrative.neighborhood",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "administrative.province",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#4b6878"
-        }]
-      }, {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#334e87"
-        }]
-      }, {
-        "featureType": "landscape.natural",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#023e58"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#283d6a"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "labels.text",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#6f9ba5"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1d2c4d"
-        }]
-      }, {
-        "featureType": "poi.business",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#023e58"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "labels.text",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#3C7680"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#304a7d"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#98a5be"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1d2c4d"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#2c6675"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#255763"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#b0d5ce"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#023e58"
-        }]
-      }, {
-        "featureType": "transit",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#98a5be"
-        }]
-      }, {
-        "featureType": "transit",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1d2c4d"
-        }]
-      }, {
-        "featureType": "transit.line",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#283d6a"
-        }]
-      }, {
-        "featureType": "transit.station",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#3a4762"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#0e1626"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "labels.text",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#4e6d70"
-        }]
-      }],
-      style8: [{
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#212121"
-        }]
-      }, {
-        "elementType": "labels.icon",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#757575"
-        }]
-      }, {
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#212121"
-        }]
-      }, {
-        "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#757575"
-        }]
-      }, {
-        "featureType": "administrative.country",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#9e9e9e"
-        }]
-      }, {
-        "featureType": "administrative.locality",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#bdbdbd"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#757575"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#181818"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#616161"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1b1b1b"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#2c2c2c"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#8a8a8a"
-        }]
-      }, {
-        "featureType": "road.arterial",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#373737"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#3c3c3c"
-        }]
-      }, {
-        "featureType": "road.highway.controlled_access",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#4e4e4e"
-        }]
-      }, {
-        "featureType": "road.local",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#616161"
-        }]
-      }, {
-        "featureType": "transit",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#757575"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#000000"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#3d3d3d"
-        }]
-      }],
-      style9: [{
-        "featureType": "poi.business",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "labels.text",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }]
+      technologyData: [],
+      buttonLoading: 0
     };
-  },
-  computed: {
-    google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__["gmapApi"],
-    mapStyle: function mapStyle() {
-      return this.darkMode == 1 ? this.style8 : this.style9;
-    }
   },
   created: function created() {},
   mounted: function mounted() {
-    // if (this.clusterActive == 1) {
-    //     this.buttonText = 'Desagrupar'
-    // } else {
-    //     this.buttonText = 'Agrupar'
-    // }
-    this.setPops(); // this.$refs.map.$mapPromise.then((map) => {
-    //     var myButton = document.getElementById('myClusterButton');
-    //     myButton.index = 1;
-    //     map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton)
-    // })
+    this.getTechnologyData();
   },
   watch: {
-    pops: function pops(newValue, oldValue) {
-      newValue.length == 1 ? this.setPop() : this.setPops();
+    selectedCrm: function selectedCrm(newValue, oldValue) {
+      this.getTechnologyData();
     },
-    criticPopsSwitch: function criticPopsSwitch(newValue, oldValue) {
-      this.setPops();
-    } // selectedPops(newValue, oldValue) {
-    //     if (newValue.length != 0) {
-    //         this.pops = newValue
-    //         //Set bounds of the map                    
-    //         this.$refs.map.$mapPromise.then((map) => {
-    //             var bounds = new google.maps.LatLngBounds()
-    //             // Create bounds from pops
-    //             for (let m of this.pops) {
-    //                 // console.log(m)
-    //                 bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-    //             }
-    //             // Don't zoom in too far on only one marker
-    //             if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-    //                 var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-    //                 var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-    //                 bounds.extend(extendPoint1);
-    //                 bounds.extend(extendPoint2);
-    //             }
-    //             map.fitBounds(bounds)
-    //         });
-    //     } else {
-    //         this.setPops()
-    //     }
-    // }
-
+    selectedZona: function selectedZona(newValue, oldValue) {
+      this.getTechnologyData();
+    },
+    core: function core(newValue, oldValue) {
+      this.getTechnologyData();
+    }
+  },
+  computed: {
+    total2G1900: function total2G1900() {
+      var counter = 0;
+      this.technologyData.forEach(function (element) {
+        return counter = counter + element.tec2g1900;
+      });
+      return counter;
+    },
+    total3G900: function total3G900() {
+      var counter = 0;
+      this.technologyData.forEach(function (item) {
+        counter = counter + item.tec3g900;
+      });
+      return counter;
+    },
+    total3G1900: function total3G1900() {
+      var counter = 0;
+      this.technologyData.forEach(function (item) {
+        counter = counter + item.tec3g1900;
+      });
+      return counter;
+    },
+    total3G3500: function total3G3500() {
+      var counter = 0;
+      this.technologyData.forEach(function (item) {
+        counter = counter + item.tec3g3500;
+      });
+      return counter;
+    },
+    total4G700: function total4G700() {
+      var counter = 0;
+      this.technologyData.forEach(function (item) {
+        counter = counter + item.tec4g700;
+      });
+      return counter;
+    },
+    total4G1900: function total4G1900() {
+      var counter = 0;
+      this.technologyData.forEach(function (item) {
+        counter = counter + item.tec4g1900;
+      });
+      return counter;
+    },
+    total4G2600: function total4G2600() {
+      var counter = 0;
+      this.technologyData.forEach(function (item) {
+        counter = counter + item.tec4g2600;
+      });
+      return counter;
+    },
+    total4G3500: function total4G3500() {
+      var counter = 0;
+      this.technologyData.forEach(function (item) {
+        counter = counter + item.tec4g3500;
+      });
+      return counter;
+    },
+    totalTechnologies: function totalTechnologies() {
+      return this.total2G1900 + this.total3G900 + this.total3G1900 + this.total3G3500 + this.total4G700 + this.total4G1900 + this.total4G2600 + this.total4G3500;
+    }
   },
   methods: {
-    toggleInfoWindow: function toggleInfoWindow(pop, idx) {
-      this.infoWindowPos = {
-        lat: parseFloat(pop.latitude),
-        lng: parseFloat(pop.longitude)
-      };
-      this.infoContent = this.getInfoWindowContent(pop); //check if its the same pop that was selected if yes toggle
+    getTechnologyData: function getTechnologyData() {
+      var _this = this;
 
-      if (this.currentMidx == idx) {
-        this.infoWinOpen = !this.infoWinOpen;
-      } //if different pop set infowindow to open and reset current pop index
-      else {
-          this.infoWinOpen = true;
-          this.currentMidx = idx;
-        }
-
-      this.$refs.map.$mapPromise.then(function (map) {
-        map.panTo({
-          lat: parseFloat(pop.latitude),
-          lng: parseFloat(pop.longitude)
+      if (!this.selectedCrm) {
+        axios.get("/api/technologyData?core=".concat(this.core)).then(function (response) {
+          _this.technologyData = response.data.data; // this.totalTechnologies()
         });
-      });
-    },
-    getInfoWindowContent: function getInfoWindowContent(pop) {
-      return "\n                <div class=\"card\">\n                    <!--div class=\"card-image\">\n                        <figure class=\"image is-4by3\">\n                            <img src=\"https://bulma.io/images/placeholders/640x480.png\" alt=\"Placeholder image\">\n                        </figure>\n                    </div-->\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(pop.classification_type_id == 1 ? 'is-danger' : pop.classification_type_id == 2 ? 'is-warning' : pop.classification_type_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(pop.classification_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(pop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.nombre_zona, ", CRM ").concat(pop.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/pop/").concat(pop.pop_id, "\" target=\"_blank\" class=\"button is-outlined is-primary is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
-    },
-    setPops: function () {
-      var _setPops = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                this.$refs.map.$mapPromise.then(function (map) {
-                  var bounds = new google.maps.LatLngBounds();
-                  var _iteratorNormalCompletion = true;
-                  var _didIteratorError = false;
-                  var _iteratorError = undefined;
-
-                  try {
-                    for (var _iterator = _this.pops[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                      var m = _step.value;
-                      bounds.extend({
-                        lat: parseFloat(m.latitude),
-                        lng: parseFloat(m.longitude)
-                      });
-                    } // Don't zoom in too far on only one pop
-
-                  } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                  } finally {
-                    try {
-                      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                        _iterator["return"]();
-                      }
-                    } finally {
-                      if (_didIteratorError) {
-                        throw _iteratorError;
-                      }
-                    }
-                  }
-
-                  if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                    var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                    var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                    bounds.extend(extendPoint1);
-                    bounds.extend(extendPoint2);
-                  }
-
-                  map.fitBounds(bounds);
-                });
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function setPops() {
-        return _setPops.apply(this, arguments);
+      } else if (!this.selectedZona) {
+        axios.get("/api/technologyDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
+          _this.technologyData = response.data.data; // this.totalTechnologies()
+        });
+      } else {
+        axios.get("/api/technologyDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
+          _this.technologyData = response.data.data; // this.totalTechnologies()
+        });
       }
-
-      return setPops;
-    }(),
-    setPop: function setPop() {
+    },
+    downloadTechnologies: function downloadTechnologies() {
       var _this2 = this;
 
-      this.$refs.map.$mapPromise.then(function (map) {
-        map.panTo({
-          lat: parseFloat(_this2.pops[0].latitude),
-          lng: parseFloat(_this2.pops[0].longitude)
-        });
-        map.setZoom(14);
-      });
-    } // getPopData(pop) { 
-    //     console.log(pop)
-    //     axios.get(`/api/pop/${pop.pop_id}`)
-    //     .then((response) => {
-    //         console.log(response.data.data)
-    //         this.selectedPopMap = response.data.data
-    //     })
-    // }
-    // cluster() {
-    //     if (this.clusterActive == 0) {
-    //         this.clusterActive = 1,
-    //         this.buttonText = 'Desagrupar'
-    //     } else {
-    //         this.clusterActive = 0
-    //         this.buttonText = 'Agrupar'
-    //     }
-    // }
+      this.buttonLoading = 1;
+      axios.get("/pop/export?core=".concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0), {
+        responseType: 'blob'
+      }).then(function (response) {
+        console.log(response.data);
+        var blob = new Blob([response.data], {
+          type: 'application/xls'
+        }); // const objectUrl = window.URL.createObjectURL(blob)
 
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'test.xlsx';
+        link.click();
+        _this2.buttonLoading = 0;
+      });
+    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/TechnologiesData.vue?vue&type=template&id=7c88fa8c&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/TechnologiesData.vue?vue&type=template&id=7c88fa8c& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -994,71 +254,476 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "GmapMap",
-    {
-      ref: "map",
-      staticClass: "tile is-child box",
-      staticStyle: { height: "100%" },
-      attrs: {
-        center: _vm.center,
-        zoom: _vm.zoom,
-        "map-type-id": "roadmap",
-        options: {
-          zoomControl: true,
-          mapTypeControl: false,
-          scaleControl: false,
-          streetViewControl: true,
-          rotateControl: false,
-          fullscreenControl: true,
-          disableDefaultUi: false,
-          styles: _vm.mapStyle
-        }
-      }
-    },
+    "div",
+    { staticClass: "tile is-parent is-vertical" },
     [
-      _vm._l(_vm.pops, function(pop, index) {
-        return _c("GmapMarker", {
-          key: index,
-          ref: "myMarker",
-          refInFor: true,
-          attrs: {
-            clickable: true,
-            draggable: false,
-            position:
-              _vm.google &&
-              new _vm.google.maps.LatLng({
-                lat: parseFloat(pop.latitude),
-                lng: parseFloat(pop.longitude)
-              }),
-            icon: _vm.darkMode ? _vm.iconDark : _vm.icon
-          },
-          on: {
-            click: function($event) {
-              return _vm.toggleInfoWindow(pop, index)
-            }
-          }
-        })
-      }),
-      _vm._v(" "),
       _c(
-        "gmap-info-window",
+        "article",
         {
-          attrs: {
-            options: _vm.infoOptions,
-            position: _vm.infoWindowPos,
-            opened: _vm.infoWinOpen,
-            content: "Hello"
-          },
-          on: {
-            closeclick: function($event) {
-              _vm.infoWinOpen = false
-            }
-          }
+          staticClass: "tile is-child box",
+          class: _vm.boxBackground,
+          staticStyle: { "overflow-y": "scroll" }
         },
-        [_c("div", { domProps: { innerHTML: _vm._s(_vm.infoContent) } })]
-      )
+        [
+          _c("div", { staticClass: "columns" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "column is-size-5 has-text-weight-semibold has-text-left",
+                class: _vm.primaryText
+              },
+              [_vm._v("Tecnologías")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "column is-size-4 has-text-weight-semibold has-text-right",
+                class: _vm.primaryText
+              },
+              [_vm._v(_vm._s(_vm._f("numeral")(this.totalTechnologies, "0,0")))]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "table",
+            { staticClass: "table is-fullwidth", class: _vm.boxBackground },
+            [
+              _c("thead", [
+                _c("tr", { staticClass: "is-size-7" }, [
+                  _c("th", { class: _vm.secondaryText }, [
+                    _vm._v(
+                      _vm._s(
+                        _vm.selectedCrm == null
+                          ? "CRM"
+                          : _vm.selectedZona == null
+                          ? "Zona"
+                          : "Comuna"
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "2G" } }, [
+                        _vm._v("2G 1900")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "3G 900" } }, [
+                        _vm._v("3G 900")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "3G 1900" } }, [
+                        _vm._v("3G 1900")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "3G 3500" } }, [
+                        _vm._v("3G 3500")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "4G 700" } }, [
+                        _vm._v("4G 700")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "4G 1900" } }, [
+                        _vm._v("4G 1900")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "4G 2600" } }, [
+                        _vm._v("4G 2600")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "4G 3500" } }, [
+                        _vm._v("4G 3500")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "Total" } }, [
+                        _vm._v("Total")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                [
+                  _vm._l(this.technologyData, function(crm) {
+                    return _c("tr", { staticClass: "is-size-7" }, [
+                      _c("td", {}, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "has-text-weight-bold",
+                            class: _vm.secondaryText,
+                            attrs: { href: "", title: "CRM Norte" }
+                          },
+                          [_vm._v(_vm._s(crm.nombre))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm._f("numeral")(crm.tec2g1900, "0,0"))
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [_vm._v(_vm._s(_vm._f("numeral")(crm.tec3g900, "0,0")))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm._f("numeral")(crm.tec3g1900, "0,0"))
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm._f("numeral")(crm.tec3g3500, "0,0"))
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [_vm._v(_vm._s(_vm._f("numeral")(crm.tec4g700, "0,0")))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm._f("numeral")(crm.tec4g1900, "0,0"))
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm._f("numeral")(crm.tec4g2600, "0,0"))
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm._f("numeral")(crm.tec4g3500, "0,0"))
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right has-text-weight-bold",
+                          class: _vm.primaryText
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm._f("numeral")(
+                                crm.tec2g1900 +
+                                  crm.tec3g900 +
+                                  crm.tec3g1900 +
+                                  crm.tec3g3500 +
+                                  crm.tec4g700 +
+                                  crm.tec4g1900 +
+                                  crm.tec4g2600 +
+                                  crm.tec4g3500,
+                                "0,0"
+                              )
+                            )
+                          )
+                        ]
+                      )
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          class: _vm.secondaryText,
+                          attrs: { href: "", title: "Total" }
+                        },
+                        [_vm._v("Total")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.total2G1900, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.total3G900, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.total3G1900, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.total3G3500, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.total4G700, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.total4G1900, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.total4G2600, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.total4G3500, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("numeral")(this.totalTechnologies, "0,0")
+                          )
+                        )
+                      ]
+                    )
+                  ])
+                ],
+                2
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "columns" }, [
+            _c(
+              "div",
+              { staticClass: "column" },
+              [
+                _c(
+                  "b-field",
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: {
+                          loading: _vm.buttonLoading ? true : false,
+                          type: "is-link",
+                          size: "is-small"
+                        },
+                        on: { click: _vm.downloadTechnologies }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: "download" }
+                        }),
+                        _vm._v(
+                          " \n                          Listado de Tecnologías\n                    "
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-tooltip",
+                      {
+                        attrs: { label: "Tooltip Text", position: "is-right" }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "button is-small is-link",
+                            attrs: {
+                              href: "/technologies",
+                              type: "button",
+                              "data-tooltip": ""
+                            }
+                          },
+                          [
+                            _c("font-awesome-icon", { attrs: { icon: "bars" } })
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "column is-right" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "is-size-7 has-text-right",
+                  class: _vm.secondaryText,
+                  staticStyle: { "margin-top": "10px" }
+                },
+                [_vm._v("Ultima actualización: " + _vm._s(_vm.last_updated))]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("chart", { attrs: { chartData: _vm.technologyData } })
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -1068,17 +733,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/MapView.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/components/maps/MapView.vue ***!
-  \**************************************************/
+/***/ "./resources/js/components/dashboard/TechnologiesData.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/dashboard/TechnologiesData.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MapView.vue?vue&type=template&id=d5114458&scoped=true& */ "./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true&");
-/* harmony import */ var _MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MapView.vue?vue&type=script&lang=js& */ "./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&");
+/* harmony import */ var _TechnologiesData_vue_vue_type_template_id_7c88fa8c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TechnologiesData.vue?vue&type=template&id=7c88fa8c& */ "./resources/js/components/dashboard/TechnologiesData.vue?vue&type=template&id=7c88fa8c&");
+/* harmony import */ var _TechnologiesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TechnologiesData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/TechnologiesData.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1088,50 +753,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TechnologiesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TechnologiesData_vue_vue_type_template_id_7c88fa8c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TechnologiesData_vue_vue_type_template_id_7c88fa8c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "d5114458",
+  null,
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/maps/MapView.vue"
+component.options.__file = "resources/js/components/dashboard/TechnologiesData.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/maps/MapView.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
+/***/ "./resources/js/components/dashboard/TechnologiesData.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/TechnologiesData.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnologiesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TechnologiesData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/TechnologiesData.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnologiesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true& ***!
-  \*********************************************************************************************/
+/***/ "./resources/js/components/dashboard/TechnologiesData.vue?vue&type=template&id=7c88fa8c&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/TechnologiesData.vue?vue&type=template&id=7c88fa8c& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapView.vue?vue&type=template&id=d5114458&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapView.vue?vue&type=template&id=d5114458&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnologiesData_vue_vue_type_template_id_7c88fa8c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TechnologiesData.vue?vue&type=template&id=7c88fa8c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/TechnologiesData.vue?vue&type=template&id=7c88fa8c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnologiesData_vue_vue_type_template_id_7c88fa8c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapView_vue_vue_type_template_id_d5114458_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TechnologiesData_vue_vue_type_template_id_7c88fa8c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

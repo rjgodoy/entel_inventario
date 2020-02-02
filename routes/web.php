@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+// Route::post('/login', 'Auth\LoginController@login');
 
 Auth::routes();
 
@@ -24,6 +26,10 @@ Route::middleware(['auth'])->group(function () {
 	});
 
 	Route::get('/home', function () {
+	    return redirect('/dashboard');
+	});
+
+	Route::get('/js/popper.js.map', function () {
 	    return redirect('/dashboard');
 	});
 

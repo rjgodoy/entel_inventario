@@ -12,4 +12,9 @@ class SiteType extends Model
     {
         return $this->hasMany(Site::class);
     }
+
+    public function service_type() 
+    {
+        return $this->belongsTo(ServiceType::class);
+    }
 }

@@ -37,18 +37,11 @@ class ElectricLineController extends Controller
         } else {
             $electricLinesQuantity = Cache::remember('electricLinesData_core'.$core, $this->seconds, function () use ($core) {
 
-                $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_type_id = 1' : '';
                 $electricLinesQuantity = DB::select(DB::raw("
                     SELECT
                     @crm_id:=id AS id,
                     @crm:=nombre_crm AS nombre,
-
-                    @q_pops:=(SELECT count(DISTINCT P.id) 
-                            FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            $condition
-                            ) AS q_pops,
 
                     @q_info:=(SELECT count(DISTINCT EL.pop_id) 
                             FROM entel_g_redes_inventario.electric_lines EL 
@@ -86,18 +79,11 @@ class ElectricLineController extends Controller
         } else {
             $electricLinesQuantity = Cache::remember('electricLinesData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
 
-                $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_type_id = 1' : '';
                 $electricLinesQuantity = DB::select(DB::raw("
                     SELECT
                     @zona_id:=id AS id,
                     @zona:=nombre_zona AS nombre,
-
-                    -- POP FIJOS
-                    @q_pops:=(SELECT count(DISTINCT P.id) 
-                            FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            $condition
-                            ) AS q_pops,
 
                     @q_info:=(SELECT count(DISTINCT EL.pop_id) 
                             FROM entel_g_redes_inventario.electric_lines EL 
@@ -134,18 +120,11 @@ class ElectricLineController extends Controller
         } else {
             $electricLinesQuantity = Cache::remember('electricLinesData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
 
-                $core == 1 ? $condition = 'INNER JOIN entel_pops.classifications CL ON P.id = CL.pop_id AND CL.classification_type_id IN (1)' : $condition = '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_type_id = 1' : '';
                 $electricLinesQuantity = DB::select(DB::raw("
                     SELECT
                     @comuna_id:=id AS id,
                     @comuna:=nombre_comuna AS nombre,
-
-                    -- POP FIJOS
-                    @q_pops:=(SELECT count(DISTINCT P.id) 
-                            FROM entel_pops.pops P 
-                            $condition
-                            WHERE P.comuna_id = @comuna_id
-                            ) AS q_pops,
 
                     @q_info:=(SELECT count(DISTINCT EL.pop_id) 
                             FROM entel_g_redes_inventario.electric_lines EL 
@@ -189,7 +168,7 @@ class ElectricLineController extends Controller
      */
     public function show($id)
     {
-        $electricLines = ElectricLine::where('pop_id', $id)->get();
+        $electricLines = ElectricLine::with('electric_line_type', 'phase_type', 'transformers')->where('pop_id', $id)->get();
         return new ElectricLineResource($electricLines);
     }
 

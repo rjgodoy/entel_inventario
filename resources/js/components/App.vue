@@ -148,6 +148,7 @@
             'clock': Clock
         },
         props: [
+            'message',
             'app_name',
             'user'
         ],

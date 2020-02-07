@@ -16,7 +16,7 @@
                     <div>{{ data.rol_propiedad ? data.rol_propiedad : 'Sin daots de ROL' }}</div>
                 </div>
             </div>
-            <div class="columns">
+            <div class="columns" v-if="data.started_at != '1969-12-31'">
                 <div class="column has-text-right is-one-fifth">
                     <div>{{ dateMoment(data.started_at) }}</div>
                     <div class="has-text-weight-normal is-size-7">Fecha inicio</div>
@@ -29,7 +29,7 @@
                     <div class="has-text-weight-normal is-size-7">Fecha término</div>
                 </div>
             </div>
-            <div class="has-text-centered has-text-weight-normal is-size-6" style="margin-top: -20px;">{{ dateFromNow(data.started_at) }}</div>
+            <div class="has-text-centered has-text-weight-normal is-size-6" style="margin-top: -20px;" v-if="data.started_at != '1969-12-31'">{{ dateFromNow(data.started_at) }}</div>
             
         </div>
         <div class="box" v-if="comsites.length == 0">

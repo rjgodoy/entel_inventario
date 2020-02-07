@@ -69,37 +69,7 @@ class ComsiteController extends Controller
      */
     public function show(Comsite $comsite)
     {
-        // $directory_path = '../resources/views';
-        $directory_path = 'ftp://developer:Entel@123RepoDev@172.16.100.110/var/www/html';
-
-        // Files
-        $files = [];
-        $filesInFolder = \File::files($directory_path, true);
-        // $filesInFolder = \File::allFiles($directory_path, true);
-
-        foreach($filesInFolder as $path)
-        {
-            $files[] = pathinfo($path);
-        }
-
-        // Directories
-        $folders = [];
-        $Folders = \File::directories($directory_path, true);
-        // $Folders = \File::allDirectories($directory_path);
-
-        foreach($Folders as $folder_path)
-        {
-            $folders[] = pathinfo($folder_path);
-        }
-
-        // dd($folders, $files);
-
-        // $folders = json_encode($folders[0]);
-        // $files = json_encode($files[0]);
-
-        // dd($folders, $files);
-
-        return view('repository', compact('folders', 'files'));
+        //
     }
 
     /**

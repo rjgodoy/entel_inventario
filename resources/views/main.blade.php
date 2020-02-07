@@ -22,6 +22,7 @@
 <body>
     <div id="app">
         <app
+            :message="'{{ session()->get('message') }}'"
             :app_name="'{{ config('app.name') }}'"
             :user='@json(Auth::user())'
         ></app>

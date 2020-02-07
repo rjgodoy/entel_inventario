@@ -21,8 +21,14 @@
             }
         },
         mounted() {
+            this.getDocuments()
         },
         methods: {
+            getDocuments() {
+                axios.get(`/api/documents/${this.pop.id}`).then((response) => {
+                    console.log(response.data.data)
+                })
+            }
         }
     }
 </script>

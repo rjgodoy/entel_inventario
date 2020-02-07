@@ -123,8 +123,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		// Transformers
 			Route::apiResource('transformers','Api\Infraestructura\TransformerController');
 
-		// Connection Clients
-			Route::apiResource('connectionClients','Api\ConnectionClientController');
+		// Clients Connection
+			Route::apiResource('clientConnections','Api\ClientConnectionController');
 
 		// Generator Groups
 			Route::apiResource('generatorGroups','Api\Infraestructura\GeneratorGroupController');
@@ -245,6 +245,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	##############################################################################################
 
 
+	### GESTION AMBIENTAL ######################################################################
+		Route::apiResource('eco','Api\EcoController');
+	##############################################################################################
+
+
+	### POP DETAIL ######################################################################
+
+		Route::apiResource('dependences','Api\DependenceController');
+
+		Route::get('popTechnologies', 'Api\PopController@technologies');
+
+		Route::get('popMenu', 'Api\PopController@popMenu');
+
+		Route::apiResource('documents', 'Api\DocumentController');
+
+	##############################################################################################
+
 
 	### ADMIN ######################################################################
 		Route::get('adminTabs', 'Api\MainController@adminTabs');
@@ -268,24 +285,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 		// PSG
 		Route::apiResource('psgTp','Api\PsgTpController');
+
+
+		Route::apiResource('client_connection','Api\ClientConnectionController');
+		Route::post('client_connection/efizity','Api\ClientConnectionController@syncEfizity');
 	##############################################################################################
 
 
-
-	### ADMIN ######################################################################
-		Route::apiResource('eco','Api\EcoController');
-	##############################################################################################
-
-
-	### POP DETAIL ######################################################################
-
-		Route::apiResource('dependences','Api\DependenceController');
-
-		Route::get('popTechnologies', 'Api\PopController@technologies');
-
-		Route::get('popMenu', 'Api\PopController@popMenu');
-
-	##############################################################################################
     // return $request->user();
 // });
 

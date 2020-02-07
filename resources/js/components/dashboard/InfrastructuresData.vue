@@ -13,16 +13,16 @@
                 <thead>
                     <tr class="is-size-7">
                         <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Fija">POPs</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Info</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Lineas</abbr></th>
+                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Fija">POPs</abbr></th> -->
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Q POP con infraestructura</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Q Infraestructuras</abbr></th>
                         <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="is-size-7" v-for="item in this.infrastructureData">
                         <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
-                        <td class="has-text-right" :class="primaryText">{{ item.q_pops | numeral('0,0') }}</td>
+                        <!-- <td class="has-text-right" :class="primaryText">{{ item.q_pops | numeral('0,0') }}</td> -->
                         <td class="has-text-right" :class="primaryText">{{ item.q_info | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ item.q_infrastructures | numeral('0,0') }}</td>
                         <!-- <td class="has-text-right" :class="primaryText">{{ item.fijo + item.movil | numeral('0,0') }}</td> -->

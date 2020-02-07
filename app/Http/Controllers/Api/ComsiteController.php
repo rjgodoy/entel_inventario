@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\Comsite as ComsiteResource;
+use App\Http\Resources\ComsiteCollection;
 use App\Comsite;
 use App\Pop;
 

@@ -2,7 +2,7 @@
     <div class="tile is-parent">
         <article class="tile is-child box" :class="boxBackground">
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Lineas Eléctricas</div>
+                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Plantas Rectificadoras</div>
                 <!-- <div class="column has-text-centered">
                     <button data-toggle="button" class="button is-small is-link" type="button">CORE</button>
                 </div> -->
@@ -13,18 +13,18 @@
                 <thead>
                     <tr class="is-size-7">
                         <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Fija">POPs</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Info</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Lineas</abbr></th>
+                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Fija">POPs</abbr></th> -->
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Q POP con equipamiento</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Q Plantas Rectificadoras</abbr></th>
                         <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="is-size-7" v-for="item in this.electricLineData">
+                    <tr class="is-size-7" v-for="item in this.powerRectifierData">
                         <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
-                        <td class="has-text-right" :class="primaryText">{{ item.q_pops | numeral('0,0') }}</td>
+                        <!-- <td class="has-text-right" :class="primaryText">{{ item.q_pops | numeral('0,0') }}</td> -->
                         <td class="has-text-right" :class="primaryText">{{ item.q_info | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.q_electric_lines | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.q_power_rectifiers | numeral('0,0') }}</td>
                         <!-- <td class="has-text-right" :class="primaryText">{{ item.fijo + item.movil | numeral('0,0') }}</td> -->
                     </tr>
                 </tbody>
@@ -66,13 +66,13 @@
             return {
                 crmSelected: this.selectedCrm,
                 zonaSelected: this.selectedZona,
-                electricLineData: null,
+                powerRectifierData: null,
                 total: 0,
                 buttonLoading: '',
             }
         },
         created(){
-            this.getElectricLineData()
+            this.getPowerRectifierData()
         },
         mounted() {      
         },
@@ -80,48 +80,48 @@
             selectedCrm(newValue, oldValue) {
                 this.crmSelected = newValue
                 this.zonaSelected = null
-                this.getElectricLineData()
+                this.getPowerRectifierData()
             },
             selectedZona(newValue, oldValue) {
                 this.zonaSelected = newValue
-                this.getElectricLineData()
+                this.getPowerRectifierData()
             },
             core(newValue, oldValue) {
-                this.getElectricLineData()
+                this.getPowerRectifierData()
             }
         },
         methods: {
-            totalElectricLines() {
+            totalPowerRectifiers() {
                 this.total = 0
-                this.electricLineData.forEach(this.counter)
+                this.powerRectifierData.forEach(this.counter)
             },
             counter(item, index) {
-                this.total = this.total + item.q_electric_lines;
+                this.total = this.total + item.q_power_rectifiers;
             },
-            getElectricLineData() {
+            getPowerRectifierData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/electricLineData/${this.core}`)
+                    axios.get(`/api/powerRectifierData/${this.core}`)
                         .then((response) => {
-                            this.electricLineData = response.data.data;
-                            this.totalElectricLines()
+                            this.powerRectifierData = response.data.data;
+                            this.totalPowerRectifiers()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/electricLineDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`api/powerRectifierDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.electricLineData = response.data.data;
-                            this.totalElectricLines()
+                            this.powerRectifierData = response.data.data;
+                            this.totalPowerRectifiers()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/electricLineDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`api/powerRectifierDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.electricLineData = response.data.data;
-                            this.totalElectricLines()
+                            this.powerRectifierData = response.data.data;
+                            this.totalPowerRectifiers()
                         })
                         .catch(() => {
                             console.log('handle server error from here');

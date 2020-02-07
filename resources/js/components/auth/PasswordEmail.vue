@@ -47,6 +47,7 @@
         data() {
             return {
                 buttonLoading: 0,
+                errors: [],
                 state: {
                     email: ''
                 }
@@ -59,26 +60,37 @@
         },
         methods: {
             resetEmail(e) {
-                this.buttonLoading = 1
-                var token = document.head.querySelector('meta[name="csrf-token"]');
-                window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-                axios.post('/password/email', this.state).then((response) => {
-                    if (response.status === 200) {
-                        this.buttonLoading = 0
-                        this.$buefy.toast.open({
-                            message: response.data,
-                            type: response.data.includes('enviado') ? 'is-success' : 'is-danger',
-                            duration: 5000
-                        })
-                    } else {
-                        this.buttonLoading = 0
-                        this.$buefy.toast.open({
-                            message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
-                            type: 'is-danger',
-                            duration: 5000
-                        })
-                    }
-                })
+                this.errors = [];
+                if (!this.state.email) {
+                    this.$buefy.toast.open({
+                        message: 'Email required.',
+                        type: 'is-danger',
+                        duration: 5000
+                    })
+                    this.errors.push('Password required.');
+                }
+                else {
+                    this.buttonLoading = 1
+                    var token = document.head.querySelector('meta[name="csrf-token"]');
+                    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+                    axios.post('/password/email', this.state).then((response) => {
+                        if (response.status === 200) {
+                            this.buttonLoading = 0
+                            this.$buefy.toast.open({
+                                message: response.data,
+                                type: response.data.includes('enviado') ? 'is-success' : 'is-danger',
+                                duration: 5000
+                            })
+                        } else {
+                            this.buttonLoading = 0
+                            this.$buefy.toast.open({
+                                message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
+                                type: 'is-danger',
+                                duration: 5000
+                            })
+                        }
+                    })
+                }
                 e.preventDefault()
             }
         }

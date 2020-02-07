@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[12],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -79,205 +79,133 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var SitesDataChart = function SitesDataChart() {
+  return {
+    // The component to load (should be a Promise)
+    component: Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./SitesDataChart.vue */ "./resources/js/components/dashboard/SitesDataChart.vue")),
+    // A component to use while the async component is loading
+    // loading: LoadingComponent,
+    // A component to use if the load fails
+    // error: ErrorComponent,
+    // Delay before showing the loading component. Default: 200ms.
+    delay: 200,
+    // The error component will be displayed if a timeout is
+    // provided and exceeded. Default: Infinity.
+    timeout: 3000
+  };
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
-  props: ['pop', 'rcas', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'csrf'],
+  components: {
+    'chart': SitesDataChart
+  },
+  props: ['selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
   data: function data() {
     return {
-      pe_3g: this.pop.pe_3g ? 'true' : 'false',
-      mpls: this.pop.mpls ? 'true' : 'false',
-      olt: this.pop.olt ? 'true' : 'false',
-      olt_3play: this.pop.olt_3play ? 'true' : 'false',
-      core: this.pop.core ? 'true' : 'false',
-      bafi: this.pop.bafi ? 'true' : 'false',
-      red_minima_n1: this.pop.red_minima_n1 ? 'true' : 'false',
-      red_minima_n2: this.pop.red_minima_n2 ? 'true' : 'false',
-      vip: this.pop.vip ? 'true' : 'false',
-      localidad_obligatoria: this.pop.localidad_obligatoria ? 'true' : 'false',
-      ranco: this.pop.ranco ? 'true' : 'false',
-      offgrid: this.pop.offgrid ? 'true' : 'false',
-      solar: this.pop.solar ? 'true' : 'false',
-      eolica: this.pop.eolica ? 'true' : 'false',
-      protected_zone: this.pop.protected_zone ? 'true' : 'false',
-      rcasInfo: this.rcas.length ? 'true' : 'false'
+      sitesData: [],
+      buttonLoading: 0
     };
   },
+  created: function created() {
+    this.getData();
+  },
   mounted: function mounted() {},
-  methods: {}
+  watch: {
+    selectedCrm: function selectedCrm(newValue, oldValue) {
+      this.getData();
+    },
+    selectedZona: function selectedZona(newValue, oldValue) {
+      this.getData();
+    },
+    core: function core(newValue, oldValue) {
+      this.getData();
+    }
+  },
+  computed: {
+    totalFijo: function totalFijo() {
+      var counter = 0;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element.fijo;
+      });
+      return counter;
+    },
+    totalMovil: function totalMovil() {
+      var counter = 0;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element.movil;
+      });
+      return counter;
+    },
+    totalSwitch: function totalSwitch() {
+      var counter = 0;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element["switch"];
+      });
+      return counter;
+    },
+    totalPhone: function totalPhone() {
+      var counter = 0;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element.phone;
+      });
+      return counter;
+    },
+    totalSites: function totalSites() {
+      return this.totalFijo + this.totalMovil + this.totalSwitch + this.totalPhone;
+    }
+  },
+  methods: {
+    getData: function getData() {
+      var _this = this;
+
+      // Si no hay un CRM seleccionado
+      if (!this.selectedCrm) {
+        axios.get("/api/sitesData?core=".concat(this.core)).then(function (response) {
+          _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+        })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+        });
+      } //Si hay un CRM seleccionado, pero no hay zona seleccionada
+      else if (!this.selectedZona) {
+          axios.get("/api/sitesDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
+            _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+          })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+          });
+        } // Si hay una zona seleccionada
+        else {
+            axios.get("/api/sitesDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
+              _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+            })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+            });
+          }
+    },
+    downloadSites: function downloadSites() {
+      var _this2 = this;
+
+      this.buttonLoading = 1;
+      axios.get("/pop/export?core=".concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0), {
+        responseType: 'blob'
+      }).then(function (response) {
+        console.log(response.data);
+        var blob = new Blob([response.data], {
+          type: 'application/xls'
+        }); // const objectUrl = window.URL.createObjectURL(blob)
+
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'test.xlsx';
+        link.click();
+        _this2.buttonLoading = 0;
+      });
+    }
+  }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80& ***!
+  \**********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -290,676 +218,322 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "section",
-    { staticClass: "section", staticStyle: { "min-height": "500px" } },
+    "div",
+    { staticClass: "tile is-parent is-vertical" },
     [
-      _c("div", { class: _vm.bodyBackground }, [
-        _c("div", { staticClass: "column" }, [
-          _c("div", { staticClass: "tile is-ancestor" }, [
-            _c("div", { staticClass: "tile is-parent" }, [
-              _c("div", { staticClass: "tile is-child box" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "is-size-6 title has-text-weight-semibold",
-                    class: _vm.primaryText
-                  },
-                  [_vm._v("NEGOCIO FIJO")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "pe_3g",
-                          disabled: _vm.pop.pe_3g ? false : true
-                        },
-                        model: {
-                          value: _vm.pop.pe_3g,
-                          callback: function($$v) {
-                            _vm.$set(_vm.pop, "pe_3g", $$v)
-                          },
-                          expression: "pop.pe_3g"
-                        }
-                      },
-                      [
+      _c(
+        "article",
+        {
+          staticClass: "tile is-child box",
+          class: _vm.boxBackground,
+          staticStyle: { "overflow-y": "scroll" }
+        },
+        [
+          _c("div", { staticClass: "columns" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "column is-size-5 has-text-weight-semibold has-text-left",
+                class: _vm.primaryText
+              },
+              [_vm._v("Sitios")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "column is-size-4 has-text-weight-semibold has-text-right",
+                class: _vm.primaryText
+              },
+              [_vm._v(_vm._s(_vm._f("numeral")(this.totalSites, "0,0")))]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "table",
+            { staticClass: "table is-fullwidth", class: _vm.boxBackground },
+            [
+              _c("thead", [
+                _c("tr", { staticClass: "is-size-7" }, [
+                  _c("th", { class: _vm.secondaryText }, [
+                    _vm._v(
+                      _vm._s(
+                        _vm.selectedCrm == null
+                          ? "CRM"
+                          : _vm.selectedZona == null
+                          ? "Zona"
+                          : "Comuna"
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [_c("abbr", { attrs: { title: "Fijo" } }, [_vm._v("Fijo")])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "Móvil" } }, [
+                        _vm._v("Móvil")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "Switch" } }, [
+                        _vm._v("Switch")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "Phone" } }, [
+                        _vm._v("Phone")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "has-text-right", class: _vm.secondaryText },
+                    [
+                      _c("abbr", { attrs: { title: "Total" } }, [
+                        _vm._v("Total")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                [
+                  _vm._l(_vm.sitesData, function(item) {
+                    return _c("tr", { staticClass: "is-size-7" }, [
+                      _c("td", [
                         _c(
-                          "label",
+                          "a",
                           {
-                            class: _vm.pop.pe_3g
-                              ? "has-text-weight-semibold is-size-7"
-                              : ""
+                            staticClass: "has-text-weight-bold",
+                            class: _vm.secondaryText,
+                            attrs: { href: "", title: "CRM Norte" }
                           },
-                          [_vm._v("PE 3G")]
+                          [_vm._v(_vm._s(item.nombre))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [_vm._v(_vm._s(_vm._f("numeral")(item.fijo, "0,0")))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [_vm._v(_vm._s(_vm._f("numeral")(item.movil, "0,0")))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [_vm._v(_vm._s(_vm._f("numeral")(item.switch, "0,0")))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right",
+                          class: _vm.primaryText
+                        },
+                        [_vm._v(_vm._s(_vm._f("numeral")(item.phone, "0,0")))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "has-text-right has-text-weight-bold",
+                          class: _vm.primaryText
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm._f("numeral")(
+                                item.fijo +
+                                  item.movil +
+                                  item.switch +
+                                  item.phone,
+                                "0,0"
+                              )
+                            )
+                          )
+                        ]
+                      )
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          class: _vm.secondaryText,
+                          attrs: { href: "", title: "Total" }
+                        },
+                        [_vm._v("Total")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [_vm._v(_vm._s(_vm._f("numeral")(this.totalFijo, "0,0")))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.totalMovil, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.totalSwitch, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.totalPhone, "0,0"))
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "has-text-right", class: _vm.primaryText },
+                      [
+                        _vm._v(
+                          _vm._s(_vm._f("numeral")(this.totalSites, "0,0"))
                         )
                       ]
                     )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
+                  ])
+                ],
+                2
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "columns" }, [
+            _c(
+              "div",
+              { staticClass: "column" },
+              [
                 _c(
-                  "div",
-                  { staticClass: "field" },
+                  "b-field",
                   [
                     _c(
-                      "b-radio",
+                      "b-button",
                       {
                         attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "mpls",
-                          disabled: _vm.pop.mpls ? false : true,
-                          "native-value": "true"
+                          loading: _vm.buttonLoading ? true : false,
+                          type: "is-link",
+                          size: "is-small"
                         },
-                        model: {
-                          value: _vm.mpls,
-                          callback: function($$v) {
-                            _vm.mpls = $$v
-                          },
-                          expression: "mpls"
-                        }
+                        on: { click: _vm.downloadSites }
                       },
                       [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.mpls
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("MPLS")]
+                        _c("font-awesome-icon", {
+                          attrs: { icon: "download" }
+                        }),
+                        _vm._v(
+                          " \n                          Listado de Sitios\n                    "
                         )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
                     _c(
-                      "b-radio",
+                      "b-tooltip",
                       {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "olt",
-                          disabled: _vm.pop.olt ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.olt,
-                          callback: function($$v) {
-                            _vm.olt = $$v
-                          },
-                          expression: "olt"
-                        }
+                        attrs: { label: "Tooltip Text", position: "is-right" }
                       },
                       [
                         _c(
-                          "label",
+                          "a",
                           {
-                            class: _vm.pop.olt ? "has-text-weight-semibold" : ""
+                            staticClass: "button is-small is-link",
+                            attrs: {
+                              href: "/sites",
+                              type: "button",
+                              "data-tooltip": ""
+                            }
                           },
-                          [_vm._v("OLT")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "olt_3play",
-                          disabled: _vm.pop.olt_3play ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.olt_3play,
-                          callback: function($$v) {
-                            _vm.olt_3play = $$v
-                          },
-                          expression: "olt_3play"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.olt_3play
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("OLT 3Play")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "core",
-                          disabled: _vm.pop.core ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.core,
-                          callback: function($$v) {
-                            _vm.core = $$v
-                          },
-                          expression: "core"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.core
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("CORE")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "bafi",
-                          disabled: _vm.pop.bafi ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.bafi,
-                          callback: function($$v) {
-                            _vm.bafi = $$v
-                          },
-                          expression: "bafi"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.bafi
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("Banda Ancha Fija Inalámbrica (BAFI)")]
+                          [
+                            _c("font-awesome-icon", { attrs: { icon: "bars" } })
+                          ],
+                          1
                         )
                       ]
                     )
                   ],
                   1
                 )
-              ])
-            ]),
+              ],
+              1
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "tile is-parent" }, [
-              _c("div", { staticClass: "tile is-child box" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "is-size-6 title has-text-weight-semibold",
-                    class: _vm.primaryText
-                  },
-                  [_vm._v("NEGOCIO MOVIL")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "red_minima_n1",
-                          disabled: _vm.pop.red_minima_n1 ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.red_minima_n1,
-                          callback: function($$v) {
-                            _vm.red_minima_n1 = $$v
-                          },
-                          expression: "red_minima_n1"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.red_minima_n1
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("Red Mínima N1")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "red_minima_n2",
-                          disabled: _vm.pop.red_minima_n2 ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.red_minima_n2,
-                          callback: function($$v) {
-                            _vm.red_minima_n2 = $$v
-                          },
-                          expression: "red_minima_n2"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.red_minima_n2
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("Red Mínima N2")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "vip",
-                          disabled: _vm.pop.vip ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.vip,
-                          callback: function($$v) {
-                            _vm.vip = $$v
-                          },
-                          expression: "vip"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.vip ? "has-text-weight-semibold" : ""
-                          },
-                          [_vm._v("VIP")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "localidad_obligatoria",
-                          disabled: _vm.pop.localidad_obligatoria
-                            ? false
-                            : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.localidad_obligatoria,
-                          callback: function($$v) {
-                            _vm.localidad_obligatoria = $$v
-                          },
-                          expression: "localidad_obligatoria"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.localidad_obligatoria
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("Localidad Obligatoria")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "ranco",
-                          disabled: _vm.pop.ranco ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.ranco,
-                          callback: function($$v) {
-                            _vm.ranco = $$v
-                          },
-                          expression: "ranco"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.ranco
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("RAN Consolidado (RANCO)")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-parent" }, [
-              _c("div", { staticClass: "tile is-child box" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "is-size-6 title has-text-weight-semibold",
-                    class: _vm.primaryText
-                  },
-                  [_vm._v("CARACTERISTICAS INFRAESTRUCTURA")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "offgrid",
-                          disabled: _vm.pop.offgrid ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.offgrid,
-                          callback: function($$v) {
-                            _vm.offgrid = $$v
-                          },
-                          expression: "offgrid"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.offgrid
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("Offgrid")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "solar",
-                          disabled: _vm.pop.solar ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.solar,
-                          callback: function($$v) {
-                            _vm.solar = $$v
-                          },
-                          expression: "solar"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.solar
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("Paneles Solares")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "field" },
-                  [
-                    _c(
-                      "b-radio",
-                      {
-                        attrs: {
-                          size: "is-small",
-                          type: "is-info",
-                          name: "eolica",
-                          disabled: _vm.pop.eolica ? false : true,
-                          "native-value": "true"
-                        },
-                        model: {
-                          value: _vm.eolica,
-                          callback: function($$v) {
-                            _vm.eolica = $$v
-                          },
-                          expression: "eolica"
-                        }
-                      },
-                      [
-                        _c(
-                          "label",
-                          {
-                            class: _vm.pop.eolica
-                              ? "has-text-weight-semibold"
-                              : ""
-                          },
-                          [_vm._v("Eólico")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-parent" }, [
+            _c("div", { staticClass: "column is-right" }, [
               _c(
                 "div",
-                { staticClass: "tile is-child box has-background-success" },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "is-size-6 title has-text-weight-semibold",
-                      class: _vm.primaryText
-                    },
-                    [_vm._v("GESTION AMBIENTAL")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c(
-                        "b-radio",
-                        {
-                          attrs: {
-                            size: "is-small",
-                            type: "is-info",
-                            name: "protected_zone",
-                            disabled: _vm.pop.protected_zone ? false : true,
-                            "native-value": "true"
-                          },
-                          model: {
-                            value: _vm.protected_zone,
-                            callback: function($$v) {
-                              _vm.protected_zone = $$v
-                            },
-                            expression: "protected_zone"
-                          }
-                        },
-                        [
-                          _c(
-                            "label",
-                            {
-                              class: _vm.pop.protected_zone
-                                ? "has-text-weight-semibold"
-                                : ""
-                            },
-                            [_vm._v("Zona protegida")]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c(
-                        "b-radio",
-                        {
-                          attrs: {
-                            size: "is-small",
-                            type: "is-info",
-                            name: "rcasInfo",
-                            disabled: _vm.rcas.length ? false : true,
-                            "native-value": "true"
-                          },
-                          model: {
-                            value: _vm.rcasInfo,
-                            callback: function($$v) {
-                              _vm.rcasInfo = $$v
-                            },
-                            expression: "rcasInfo"
-                          }
-                        },
-                        [
-                          _c(
-                            "label",
-                            {
-                              class: _vm.rcas.length
-                                ? "has-text-weight-semibold"
-                                : ""
-                            },
-                            [_vm._v("R.C.A.")]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ]
+                {
+                  staticClass: "is-size-7 has-text-right",
+                  class: _vm.secondaryText,
+                  staticStyle: { "margin-top": "10px" }
+                },
+                [_vm._v("Ultima actualización: " + _vm._s(_vm.last_updated))]
               )
             ])
           ])
-        ])
-      ])
-    ]
+        ]
+      ),
+      _vm._v(" "),
+      _c("chart", { attrs: { chartData: _vm.sitesData } })
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -969,17 +543,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/PopCharacteristics.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/pops/PopCharacteristics.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/components/dashboard/SitesData.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesData.vue ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopCharacteristics.vue?vue&type=template&id=2ca99439& */ "./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439&");
-/* harmony import */ var _PopCharacteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopCharacteristics.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SitesData.vue?vue&type=template&id=3c843e80& */ "./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80&");
+/* harmony import */ var _SitesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SitesData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -989,9 +563,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PopCharacteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SitesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1001,38 +575,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pops/PopCharacteristics.vue"
+component.options.__file = "resources/js/components/dashboard/SitesData.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopCharacteristics.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SitesData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesData.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80& ***!
+  \****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopCharacteristics.vue?vue&type=template&id=2ca99439& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SitesData.vue?vue&type=template&id=3c843e80& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesData.vue?vue&type=template&id=3c843e80&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesData_vue_vue_type_template_id_3c843e80___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

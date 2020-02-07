@@ -38,6 +38,7 @@ import { dom } from '@fortawesome/fontawesome-svg-core'
 dom.watch()
 
 import { 
+    faHome,
     faSignOutAlt,
     faThLarge,
     faMapMarkerAlt,
@@ -79,7 +80,11 @@ import {
     faFan,
     faSuitcaseRolling,
     faCompress,
-    faCompressArrowsAlt
+    faCompressArrowsAlt,
+    faUpload,
+    faPlug,
+    faChargingStation,
+    faRandom
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -98,6 +103,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
+    faHome,
     faSignOutAlt,
 	faThLarge,
 	faMapMarkerAlt,
@@ -142,7 +148,12 @@ library.add(
     faFan,
     faSuitcaseRolling,
     faCompress,
-    faCompressArrowsAlt
+    faCompressArrowsAlt,
+    faUpload,
+    faPlug,
+    faChargingStation,
+    faRandom,
+    farCheckCircle
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

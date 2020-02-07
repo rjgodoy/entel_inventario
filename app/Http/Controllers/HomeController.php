@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ClientConnection;
 
-use App\CriticSite;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
 {

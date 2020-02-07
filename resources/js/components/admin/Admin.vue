@@ -22,90 +22,37 @@
                             </div>
                         </a>
                     </div>
-
-<!--                     <div class="tile is-parent">
-                        <a class="tile is-child box" :class="activeView == 2 ? 'has-background-link' : boxBackground" @click="changeView(2)">
-                            <div :class="activeView == 2 ? selectedSecondaryBoxText : secondaryText"> 
-                                <div class="is-size-6 has-text-weight-semibold">
-                                    Aprobación TPs
-                                </div>
-
-                                <div style="margin-top: 10px;">
-                                    <div class="is-size-7 has-text-weight-light">Ingreso de activos en los POP e incorporación de éstos en Inventario.</div> 
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="tile is-parent">
-                        <a class="tile is-child box" :class="activeView == 3 ? 'has-background-link' : boxBackground" @click="changeView(3)">
-                            <div :class="activeView == 3 ? selectedSecondaryBoxText : secondaryText"> 
-                                <div class="is-size-6 has-text-weight-semibold">
-                                    Aprobación de Cambios
-                                </div>
-
-                                <div style="margin-top: 10px;">
-                                    <div class="is-size-7 has-text-weight-light">Módulo de aprobación de cambios generados por usuarios de la plataforma.</div> 
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="tile is-parent">
-                        <a class="tile is-child box" :class="activeView == 4 ? 'has-background-link' : boxBackground" @click="changeView(4)">
-                            <div :class="activeView == 4 ? selectedSecondaryBoxText : secondaryText"> 
-                                <div class="is-size-6 has-text-weight-semibold">
-                                    Carga Masiva
-                                </div>
-
-                                <div style="margin-top: 10px;">
-                                    <div class="is-size-7 has-text-weight-light">Ingreso de información mediante planillas excel estandarizadas.</div> 
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="tile is-parent">
-                        <a class="tile is-child box" :class="activeView == 5 ? 'has-background-link' : boxBackground" @click="changeView(5)">
-                            <div :class="activeView == 5 ? selectedSecondaryBoxText : secondaryText"> 
-                                <div class="is-size-6 has-text-weight-semibold">
-                                    Usuarios y Permisos
-                                </div>
-
-                                <div style="margin-top: 10px;">
-                                    <div class="is-size-7 has-text-weight-light">Administración de usuarios y permisos de ingreso.</div> 
-                                </div>
-                            </div>
-                        </a>
-                    </div> -->
                 </div>
             </div>
             
         </section>
 
         <keep-alive>
-            <admin-pop :is="currentTabComponent"
+            <admin-pop-data :is="currentTabComponent"
                 :bodyBackground="bodyBackground"
                 :boxBackground="boxBackground"
                 :primaryText="primaryText"
                 :secondaryText="secondaryText"
-            ></admin-pop>
+            ></admin-pop-data>
         </keep-alive>
 
     </div>
 </template>
 
 <script>
-    import AdminPopData from './AdminPopData.vue';
-    import AdminTPsData from './AdminTPsData.vue';
     export default {
         components: {
-            'admin-pop': AdminPopData,
-            'admin-tps': AdminTPsData
+            AdminPops: () => import("./AdminPops"),
+            AdminTps: () => import("./AdminTps"),
+            AdminApprove: () => import("./AdminApprove"),
+            AdminMassive: () => import("./AdminMassive"),
+            AdminPermissions: () => import("./AdminPermissions"),
         },
         props : [
         ],
         created() {
             this.getTabs()
             this.styleMode()
-            console.log(this.tabs)
         },
         mounted() {
         },
@@ -120,7 +67,7 @@
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
                 tabs: null,
-                currentTab: 'pop'
+                currentTab: 'pops'
             }
         },
         methods: {
@@ -149,7 +96,6 @@
             getTabs() {
                 axios.get(`/api/adminTabs`).then((response) => {
                     this.tabs = response.data.data
-                    console.log(response.data)
                 })
             }
         },

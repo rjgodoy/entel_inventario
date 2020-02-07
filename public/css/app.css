@@ -1596,6 +1596,19 @@ a.has-text-eco:focus {
   background-color: #42E8B4 !important;
 }
 
+.has-text-eco-light {
+  color: #A4F2D9 !important;
+}
+
+a.has-text-eco-light:hover,
+a.has-text-eco-light:focus {
+  color: #77ecc6 !important;
+}
+
+.has-background-eco-light {
+  background-color: #A4F2D9 !important;
+}
+
 .has-text-smart {
   color: #2FCBF1 !important;
 }
@@ -4159,6 +4172,129 @@ fieldset[disabled] .button.is-eco.is-inverted.is-outlined {
   color: rgba(0, 0, 0, 0.7);
 }
 
+.button.is-eco-light {
+  background-color: #A4F2D9;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.button.is-eco-light:hover,
+.button.is-eco-light.is-hovered {
+  background-color: #99f0d4;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.button.is-eco-light:focus,
+.button.is-eco-light.is-focused {
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.button.is-eco-light:focus:not(:active),
+.button.is-eco-light.is-focused:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(164, 242, 217, 0.25);
+}
+
+.button.is-eco-light:active,
+.button.is-eco-light.is-active {
+  background-color: #8eefd0;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.button.is-eco-light[disabled],
+fieldset[disabled] .button.is-eco-light {
+  background-color: #A4F2D9;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.button.is-eco-light.is-inverted {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #A4F2D9;
+}
+
+.button.is-eco-light.is-inverted:hover,
+.button.is-eco-light.is-inverted.is-hovered {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.button.is-eco-light.is-inverted[disabled],
+fieldset[disabled] .button.is-eco-light.is-inverted {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: transparent;
+  box-shadow: none;
+  color: #A4F2D9;
+}
+
+.button.is-eco-light.is-loading::after {
+  border-color: transparent transparent rgba(0, 0, 0, 0.7) rgba(0, 0, 0, 0.7) !important;
+}
+
+.button.is-eco-light.is-outlined {
+  background-color: transparent;
+  border-color: #A4F2D9;
+  color: #A4F2D9;
+}
+
+.button.is-eco-light.is-outlined:hover,
+.button.is-eco-light.is-outlined.is-hovered,
+.button.is-eco-light.is-outlined:focus,
+.button.is-eco-light.is-outlined.is-focused {
+  background-color: #A4F2D9;
+  border-color: #A4F2D9;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.button.is-eco-light.is-outlined.is-loading::after {
+  border-color: transparent transparent #A4F2D9 #A4F2D9 !important;
+}
+
+.button.is-eco-light.is-outlined.is-loading:hover::after,
+.button.is-eco-light.is-outlined.is-loading.is-hovered::after,
+.button.is-eco-light.is-outlined.is-loading:focus::after,
+.button.is-eco-light.is-outlined.is-loading.is-focused::after {
+  border-color: transparent transparent rgba(0, 0, 0, 0.7) rgba(0, 0, 0, 0.7) !important;
+}
+
+.button.is-eco-light.is-outlined[disabled],
+fieldset[disabled] .button.is-eco-light.is-outlined {
+  background-color: transparent;
+  border-color: #A4F2D9;
+  box-shadow: none;
+  color: #A4F2D9;
+}
+
+.button.is-eco-light.is-inverted.is-outlined {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.button.is-eco-light.is-inverted.is-outlined:hover,
+.button.is-eco-light.is-inverted.is-outlined.is-hovered,
+.button.is-eco-light.is-inverted.is-outlined:focus,
+.button.is-eco-light.is-inverted.is-outlined.is-focused {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #A4F2D9;
+}
+
+.button.is-eco-light.is-inverted.is-outlined.is-loading:hover::after,
+.button.is-eco-light.is-inverted.is-outlined.is-loading.is-hovered::after,
+.button.is-eco-light.is-inverted.is-outlined.is-loading:focus::after,
+.button.is-eco-light.is-inverted.is-outlined.is-loading.is-focused::after {
+  border-color: transparent transparent #A4F2D9 #A4F2D9 !important;
+}
+
+.button.is-eco-light.is-inverted.is-outlined[disabled],
+fieldset[disabled] .button.is-eco-light.is-inverted.is-outlined {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.7);
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .button.is-smart {
   background-color: #2FCBF1;
   border-color: transparent;
@@ -5092,6 +5228,11 @@ fieldset[disabled] .button {
   color: rgba(0, 0, 0, 0.7);
 }
 
+.notification.is-eco-light {
+  background-color: #A4F2D9;
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .notification.is-smart {
   background-color: #2FCBF1;
   color: #fff;
@@ -5371,6 +5512,22 @@ fieldset[disabled] .button {
   background-image: linear-gradient(to right, #42E8B4 30%, #ededed 30%);
 }
 
+.progress.is-eco-light::-webkit-progress-value {
+  background-color: #A4F2D9;
+}
+
+.progress.is-eco-light::-moz-progress-bar {
+  background-color: #A4F2D9;
+}
+
+.progress.is-eco-light::-ms-fill {
+  background-color: #A4F2D9;
+}
+
+.progress.is-eco-light:indeterminate {
+  background-image: linear-gradient(to right, #A4F2D9 30%, #ededed 30%);
+}
+
 .progress.is-smart::-webkit-progress-value {
   background-color: #2FCBF1;
 }
@@ -5574,6 +5731,13 @@ fieldset[disabled] .button {
 .table th.is-eco {
   background-color: #42E8B4;
   border-color: #42E8B4;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.table td.is-eco-light,
+.table th.is-eco-light {
+  background-color: #A4F2D9;
+  border-color: #A4F2D9;
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -5864,6 +6028,11 @@ fieldset[disabled] .button {
 
 .tag:not(body).is-eco {
   background-color: #42E8B4;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.tag:not(body).is-eco-light {
+  background-color: #A4F2D9;
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -6570,6 +6739,27 @@ fieldset[disabled] .select select:-ms-input-placeholder,
   box-shadow: 0 0 0 0.125em rgba(66, 232, 180, 0.25);
 }
 
+.is-eco-light.input,
+.taginput .is-eco-light.taginput-container.is-focusable,
+.is-eco-light.textarea {
+  border-color: #A4F2D9;
+}
+
+.is-eco-light.input:focus,
+.taginput .is-eco-light.taginput-container.is-focusable:focus,
+.is-eco-light.textarea:focus,
+.is-eco-light.is-focused.input,
+.taginput .is-eco-light.is-focused.taginput-container.is-focusable,
+.is-eco-light.is-focused.textarea,
+.is-eco-light.input:active,
+.taginput .is-eco-light.taginput-container.is-focusable:active,
+.is-eco-light.textarea:active,
+.is-eco-light.is-active.input,
+.taginput .is-eco-light.is-active.taginput-container.is-focusable,
+.is-eco-light.is-active.textarea {
+  box-shadow: 0 0 0 0.125em rgba(164, 242, 217, 0.25);
+}
+
 .is-smart.input,
 .taginput .is-smart.taginput-container.is-focusable,
 .is-smart.textarea {
@@ -7066,6 +7256,26 @@ fieldset[disabled] .select select:hover {
 .select.is-eco select:active,
 .select.is-eco select.is-active {
   box-shadow: 0 0 0 0.125em rgba(66, 232, 180, 0.25);
+}
+
+.select.is-eco-light:not(:hover)::after {
+  border-color: #A4F2D9;
+}
+
+.select.is-eco-light select {
+  border-color: #A4F2D9;
+}
+
+.select.is-eco-light select:hover,
+.select.is-eco-light select.is-hovered {
+  border-color: #8eefd0;
+}
+
+.select.is-eco-light select:focus,
+.select.is-eco-light select.is-focused,
+.select.is-eco-light select:active,
+.select.is-eco-light select.is-active {
+  box-shadow: 0 0 0 0.125em rgba(164, 242, 217, 0.25);
 }
 
 .select.is-smart:not(:hover)::after {
@@ -7565,6 +7775,33 @@ fieldset[disabled] .select select:hover {
   color: rgba(0, 0, 0, 0.7);
 }
 
+.file.is-eco-light .file-cta {
+  background-color: #A4F2D9;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.file.is-eco-light:hover .file-cta,
+.file.is-eco-light.is-hovered .file-cta {
+  background-color: #99f0d4;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.file.is-eco-light:focus .file-cta,
+.file.is-eco-light.is-focused .file-cta {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(164, 242, 217, 0.25);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.file.is-eco-light:active .file-cta,
+.file.is-eco-light.is-active .file-cta {
+  background-color: #8eefd0;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .file.is-smart .file-cta {
   background-color: #2FCBF1;
   border-color: transparent;
@@ -7891,6 +8128,10 @@ fieldset[disabled] .select select:hover {
 
 .help.is-eco {
   color: #42E8B4;
+}
+
+.help.is-eco-light {
+  color: #A4F2D9;
 }
 
 .help.is-smart {
@@ -8981,6 +9222,19 @@ a.list-item {
 
 .message.is-eco .message-body {
   border-color: #42E8B4;
+}
+
+.message.is-eco-light {
+  background-color: #f6fefb;
+}
+
+.message.is-eco-light .message-header {
+  background-color: #A4F2D9;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.message.is-eco-light .message-body {
+  border-color: #A4F2D9;
 }
 
 .message.is-smart {
@@ -10206,6 +10460,76 @@ a.list-item {
   }
 }
 
+.navbar.is-eco-light {
+  background-color: #A4F2D9;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar.is-eco-light .navbar-brand > .navbar-item,
+.navbar.is-eco-light .navbar-brand .navbar-link {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar.is-eco-light .navbar-brand > a.navbar-item:focus,
+.navbar.is-eco-light .navbar-brand > a.navbar-item:hover,
+.navbar.is-eco-light .navbar-brand > a.navbar-item.is-active,
+.navbar.is-eco-light .navbar-brand .navbar-link:focus,
+.navbar.is-eco-light .navbar-brand .navbar-link:hover,
+.navbar.is-eco-light .navbar-brand .navbar-link.is-active {
+  background-color: #8eefd0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar.is-eco-light .navbar-brand .navbar-link::after {
+  border-color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar.is-eco-light .navbar-burger {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar.is-eco-light .navbar-start > .navbar-item,
+  .navbar.is-eco-light .navbar-start .navbar-link,
+  .navbar.is-eco-light .navbar-end > .navbar-item,
+  .navbar.is-eco-light .navbar-end .navbar-link {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .navbar.is-eco-light .navbar-start > a.navbar-item:focus,
+  .navbar.is-eco-light .navbar-start > a.navbar-item:hover,
+  .navbar.is-eco-light .navbar-start > a.navbar-item.is-active,
+  .navbar.is-eco-light .navbar-start .navbar-link:focus,
+  .navbar.is-eco-light .navbar-start .navbar-link:hover,
+  .navbar.is-eco-light .navbar-start .navbar-link.is-active,
+  .navbar.is-eco-light .navbar-end > a.navbar-item:focus,
+  .navbar.is-eco-light .navbar-end > a.navbar-item:hover,
+  .navbar.is-eco-light .navbar-end > a.navbar-item.is-active,
+  .navbar.is-eco-light .navbar-end .navbar-link:focus,
+  .navbar.is-eco-light .navbar-end .navbar-link:hover,
+  .navbar.is-eco-light .navbar-end .navbar-link.is-active {
+    background-color: #8eefd0;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .navbar.is-eco-light .navbar-start .navbar-link::after,
+  .navbar.is-eco-light .navbar-end .navbar-link::after {
+    border-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .navbar.is-eco-light .navbar-item.has-dropdown:focus .navbar-link,
+  .navbar.is-eco-light .navbar-item.has-dropdown:hover .navbar-link,
+  .navbar.is-eco-light .navbar-item.has-dropdown.is-active .navbar-link {
+    background-color: #8eefd0;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .navbar.is-eco-light .navbar-dropdown a.navbar-item.is-active {
+    background-color: #A4F2D9;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+
 .navbar.is-smart {
   background-color: #2FCBF1;
   color: #fff;
@@ -11254,6 +11578,19 @@ a.navbar-item.is-active,
 
 .panel.is-eco .panel-block.is-active .panel-icon {
   color: #42E8B4;
+}
+
+.panel.is-eco-light .panel-heading {
+  background-color: #A4F2D9;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.panel.is-eco-light .panel-tabs a.is-active {
+  border-bottom-color: #A4F2D9;
+}
+
+.panel.is-eco-light .panel-block.is-active .panel-icon {
+  color: #A4F2D9;
 }
 
 .panel.is-smart .panel-heading {
@@ -15040,6 +15377,90 @@ label.panel-block:hover {
   }
 }
 
+.hero.is-eco-light {
+  background-color: #A4F2D9;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.hero.is-eco-light a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
+.hero.is-eco-light strong {
+  color: inherit;
+}
+
+.hero.is-eco-light .title {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.hero.is-eco-light .subtitle {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.hero.is-eco-light .subtitle a:not(.button),
+.hero.is-eco-light .subtitle strong {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+@media screen and (max-width: 1023px) {
+  .hero.is-eco-light .navbar-menu {
+    background-color: #A4F2D9;
+  }
+}
+
+.hero.is-eco-light .navbar-item,
+.hero.is-eco-light .navbar-link {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.hero.is-eco-light a.navbar-item:hover,
+.hero.is-eco-light a.navbar-item.is-active,
+.hero.is-eco-light .navbar-link:hover,
+.hero.is-eco-light .navbar-link.is-active {
+  background-color: #8eefd0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.hero.is-eco-light .tabs a {
+  color: rgba(0, 0, 0, 0.7);
+  opacity: 0.9;
+}
+
+.hero.is-eco-light .tabs a:hover {
+  opacity: 1;
+}
+
+.hero.is-eco-light .tabs li.is-active a {
+  opacity: 1;
+}
+
+.hero.is-eco-light .tabs.is-boxed a,
+.hero.is-eco-light .tabs.is-toggle a {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.hero.is-eco-light .tabs.is-boxed a:hover,
+.hero.is-eco-light .tabs.is-toggle a:hover {
+  background-color: rgba(10, 10, 10, 0.1);
+}
+
+.hero.is-eco-light .tabs.is-boxed li.is-active a,
+.hero.is-eco-light .tabs.is-boxed li.is-active a:hover,
+.hero.is-eco-light .tabs.is-toggle li.is-active a,
+.hero.is-eco-light .tabs.is-toggle li.is-active a:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: rgba(0, 0, 0, 0.7);
+  color: #A4F2D9;
+}
+
+.hero.is-eco-light.is-bold {
+  background-image: linear-gradient(141deg, #70f3b3 0%, #A4F2D9 71%, #b8f7ed 100%);
+}
+
+@media screen and (max-width: 768px) {
+  .hero.is-eco-light.is-bold .navbar-menu {
+    background-image: linear-gradient(141deg, #70f3b3 0%, #A4F2D9 71%, #b8f7ed 100%);
+  }
+}
+
 .hero.is-smart {
   background-color: #2FCBF1;
   color: #fff;
@@ -16478,6 +16899,11 @@ label.panel-block:hover {
   border-color: #42E8B4;
 }
 
+.b-checkbox.checkbox input[type=checkbox]:checked + .check.is-eco-light {
+  background: #A4F2D9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:rgba(0, 0, 0, 0.7)' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
+  border-color: #A4F2D9;
+}
+
 .b-checkbox.checkbox input[type=checkbox]:checked + .check.is-smart {
   background: #2FCBF1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
   border-color: #2FCBF1;
@@ -16568,6 +16994,11 @@ label.panel-block:hover {
   border-color: #42E8B4;
 }
 
+.b-checkbox.checkbox input[type=checkbox]:indeterminate + .check.is-eco-light {
+  background: #A4F2D9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect style='fill:rgba(0, 0, 0, 0.7)' width='0.7' height='0.2' x='.15' y='.4'%3E%3C/rect%3E%3C/svg%3E") no-repeat center center;
+  border-color: #A4F2D9;
+}
+
 .b-checkbox.checkbox input[type=checkbox]:indeterminate + .check.is-smart {
   background: #2FCBF1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect style='fill:%23fff' width='0.7' height='0.2' x='.15' y='.4'%3E%3C/rect%3E%3C/svg%3E") no-repeat center center;
   border-color: #2FCBF1;
@@ -16644,6 +17075,10 @@ label.panel-block:hover {
 
 .b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-eco {
   box-shadow: 0 0 0.5em rgba(66, 232, 180, 0.8);
+}
+
+.b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-eco-light {
+  box-shadow: 0 0 0.5em rgba(164, 242, 217, 0.8);
 }
 
 .b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-smart {
@@ -16728,6 +17163,10 @@ label.panel-block:hover {
 
 .b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-eco {
   border-color: #42E8B4;
+}
+
+.b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-eco-light {
+  border-color: #A4F2D9;
 }
 
 .b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-smart {
@@ -17052,6 +17491,25 @@ label.panel-block:hover {
 
 .b-clockpicker.is-eco .b-clockpicker-face-number.active {
   background-color: #42E8B4;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.b-clockpicker.is-eco-light .card-header {
+  background-color: #A4F2D9;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.b-clockpicker.is-eco-light .b-clockpicker-face:after {
+  background-color: #A4F2D9;
+}
+
+.b-clockpicker.is-eco-light .b-clockpicker-face-hand {
+  background-color: #A4F2D9;
+  border-color: #A4F2D9;
+}
+
+.b-clockpicker.is-eco-light .b-clockpicker-face-number.active {
+  background-color: #A4F2D9;
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -17561,6 +18019,10 @@ label.panel-block:hover {
 
 .datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-eco {
   background-color: #42E8B4;
+}
+
+.datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-eco-light {
+  background-color: #A4F2D9;
 }
 
 .datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-smart {
@@ -18270,6 +18732,11 @@ label.panel-block:hover {
   background: #42E8B4;
 }
 
+.notices .toast.is-eco-light {
+  color: rgba(0, 0, 0, 0.7);
+  background: #A4F2D9;
+}
+
 .notices .toast.is-smart {
   color: #fff;
   background: #2FCBF1;
@@ -18378,6 +18845,10 @@ label.panel-block:hover {
 
 .notices .snackbar .action.is-eco .button {
   color: #42E8B4;
+}
+
+.notices .snackbar .action.is-eco-light .button {
+  color: #A4F2D9;
 }
 
 .notices .snackbar .action.is-smart .button {
@@ -18687,6 +19158,10 @@ label.panel-block:hover {
   background: #42E8B4;
 }
 
+.b-radio.radio input[type=radio] + .check.is-eco-light:before {
+  background: #A4F2D9;
+}
+
 .b-radio.radio input[type=radio] + .check.is-smart:before {
   background: #2FCBF1;
 }
@@ -18757,6 +19232,10 @@ label.panel-block:hover {
 
 .b-radio.radio input[type=radio]:checked + .check.is-eco {
   border-color: #42E8B4;
+}
+
+.b-radio.radio input[type=radio]:checked + .check.is-eco-light {
+  border-color: #A4F2D9;
 }
 
 .b-radio.radio input[type=radio]:checked + .check.is-smart {
@@ -18837,6 +19316,10 @@ label.panel-block:hover {
 
 .b-radio.radio input[type=radio]:focus:checked + .check.is-eco {
   box-shadow: 0 0 0.5em rgba(66, 232, 180, 0.8);
+}
+
+.b-radio.radio input[type=radio]:focus:checked + .check.is-eco-light {
+  box-shadow: 0 0 0.5em rgba(164, 242, 217, 0.8);
 }
 
 .b-radio.radio input[type=radio]:focus:checked + .check.is-smart {
@@ -18921,6 +19404,10 @@ label.panel-block:hover {
 
 .b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-eco {
   border-color: #42E8B4;
+}
+
+.b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-eco-light {
+  border-color: #A4F2D9;
 }
 
 .b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-smart {
@@ -19268,6 +19755,10 @@ label.panel-block:hover {
 
 .b-slider.is-eco .b-slider-fill {
   background: #42E8B4 !important;
+}
+
+.b-slider.is-eco-light .b-slider-fill {
+  background: #A4F2D9 !important;
 }
 
 .b-slider.is-smart .b-slider-fill {
@@ -19752,6 +20243,34 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .b-steps .steps .step-items .step-item.is-eco.is-previous::before,
 .b-steps .steps .step-items .step-item.is-eco.is-previous::after {
+  background-position: left bottom;
+}
+
+.b-steps .steps .step-items .step-item.is-eco-light::before,
+.b-steps .steps .step-items .step-item.is-eco-light::after {
+  background: linear-gradient(to left, #dbdbdb 50%, #A4F2D9 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.b-steps .steps .step-items .step-item.is-eco-light.is-active .step-marker {
+  background-color: white;
+  border-color: #A4F2D9;
+  color: #A4F2D9;
+}
+
+.b-steps .steps .step-items .step-item.is-eco-light.is-active::before,
+.b-steps .steps .step-items .step-item.is-eco-light.is-active::after {
+  background-position: left bottom;
+}
+
+.b-steps .steps .step-items .step-item.is-eco-light.is-previous .step-marker {
+  color: rgba(0, 0, 0, 0.7);
+  background-color: #A4F2D9;
+}
+
+.b-steps .steps .step-items .step-item.is-eco-light.is-previous::before,
+.b-steps .steps .step-items .step-item.is-eco-light.is-previous::after {
   background-position: left bottom;
 }
 
@@ -20317,6 +20836,10 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #42E8B4;
 }
 
+.switch input[type=checkbox]:checked + .check.is-eco-light {
+  background: #A4F2D9;
+}
+
 .switch input[type=checkbox]:checked + .check.is-smart {
   background: #2FCBF1;
 }
@@ -20405,6 +20928,10 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   box-shadow: 0 0 0.5em rgba(66, 232, 180, 0.8);
 }
 
+.switch input[type=checkbox]:focus:checked + .check.is-eco-light {
+  box-shadow: 0 0 0.5em rgba(164, 242, 217, 0.8);
+}
+
 .switch input[type=checkbox]:focus:checked + .check.is-smart {
   box-shadow: 0 0 0.5em rgba(47, 203, 241, 0.8);
 }
@@ -20483,6 +21010,10 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .switch:hover input[type=checkbox]:checked + .check.is-eco {
   background: rgba(66, 232, 180, 0.9);
+}
+
+.switch:hover input[type=checkbox]:checked + .check.is-eco-light {
+  background: rgba(164, 242, 217, 0.9);
 }
 
 .switch:hover input[type=checkbox]:checked + .check.is-smart {
@@ -20649,6 +21180,15 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #42E8B4;
 }
 
+.switch.is-outlined input[type=checkbox]:checked + .check.is-eco-light {
+  background: transparent;
+  border-color: #A4F2D9;
+}
+
+.switch.is-outlined input[type=checkbox]:checked + .check.is-eco-light:before {
+  background: #A4F2D9;
+}
+
 .switch.is-outlined input[type=checkbox]:checked + .check.is-smart {
   background: transparent;
   border-color: #2FCBF1;
@@ -20739,6 +21279,10 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .switch.is-outlined:hover input[type=checkbox]:checked + .check.is-eco {
   border-color: rgba(66, 232, 180, 0.9);
+}
+
+.switch.is-outlined:hover input[type=checkbox]:checked + .check.is-eco-light {
+  border-color: rgba(164, 242, 217, 0.9);
 }
 
 .switch.is-outlined:hover input[type=checkbox]:checked + .check.is-smart {
@@ -21350,6 +21894,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   bottom: calc(100% + 2px);
 }
 
+.b-tooltip.is-top.is-eco-light:before {
+  border-top: 5px solid #A4F2D9;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  bottom: calc(100% + 2px);
+}
+
 .b-tooltip.is-top.is-smart:before {
   border-top: 5px solid #2FCBF1;
   border-right: 5px solid transparent;
@@ -21486,6 +22037,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 .b-tooltip.is-right.is-eco:before {
   border-top: 5px solid transparent;
   border-right: 5px solid #42E8B4;
+  border-bottom: 5px solid transparent;
+  left: calc(100% + 2px);
+}
+
+.b-tooltip.is-right.is-eco-light:before {
+  border-top: 5px solid transparent;
+  border-right: 5px solid #A4F2D9;
   border-bottom: 5px solid transparent;
   left: calc(100% + 2px);
 }
@@ -21630,6 +22188,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   top: calc(100% + 2px);
 }
 
+.b-tooltip.is-bottom.is-eco-light:before {
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #A4F2D9;
+  border-left: 5px solid transparent;
+  top: calc(100% + 2px);
+}
+
 .b-tooltip.is-bottom.is-smart:before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #2FCBF1;
@@ -21770,6 +22335,13 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   right: calc(100% + 2px);
 }
 
+.b-tooltip.is-left.is-eco-light:before {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #A4F2D9;
+  right: calc(100% + 2px);
+}
+
 .b-tooltip.is-left.is-smart:before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
@@ -21900,6 +22472,11 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .b-tooltip.is-eco:after {
   background: #42E8B4;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.b-tooltip.is-eco-light:after {
+  background: #A4F2D9;
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -22081,6 +22658,12 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 .upload .upload-draggable.is-hovered.is-eco {
   border-color: #42E8B4;
   background: rgba(66, 232, 180, 0.05);
+}
+
+.upload .upload-draggable:hover.is-eco-light,
+.upload .upload-draggable.is-hovered.is-eco-light {
+  border-color: #A4F2D9;
+  background: rgba(164, 242, 217, 0.05);
 }
 
 .upload .upload-draggable:hover.is-smart,

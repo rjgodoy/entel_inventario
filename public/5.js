@@ -61,6 +61,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['selectedCrm', 'selectedZona', // 'csrf',
   'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
@@ -224,13 +255,11 @@ var render = function() {
                 _c(
                   "th",
                   { staticClass: "has-text-right", class: _vm.secondaryText },
-                  [_c("abbr", { attrs: { title: "Fija" } }, [_vm._v("POPs")])]
-                ),
-                _vm._v(" "),
-                _c(
-                  "th",
-                  { staticClass: "has-text-right", class: _vm.secondaryText },
-                  [_c("abbr", { attrs: { title: "Movil" } }, [_vm._v("Info")])]
+                  [
+                    _c("abbr", { attrs: { title: "Movil" } }, [
+                      _vm._v("Q POP con equipamiento")
+                    ])
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
@@ -238,7 +267,7 @@ var render = function() {
                   { staticClass: "has-text-right", class: _vm.secondaryText },
                   [
                     _c("abbr", { attrs: { title: "Otros" } }, [
-                      _vm._v("Lineas")
+                      _vm._v("Q Aires Acondicionados")
                     ])
                   ]
                 )
@@ -260,12 +289,6 @@ var render = function() {
                       [_vm._v(_vm._s(item.nombre))]
                     )
                   ]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "has-text-right", class: _vm.primaryText },
-                    [_vm._v(_vm._s(_vm._f("numeral")(item.q_pops, "0,0")))]
-                  ),
                   _vm._v(" "),
                   _c(
                     "td",

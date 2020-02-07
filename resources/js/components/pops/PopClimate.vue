@@ -33,11 +33,13 @@
                                 <div class="columns">
                                     <div class="column">
                                         <div class="has-text-weight-light is-size-7">Capacidad</div>
-                                        <div class="has-text-weight-normal is-size-6">{{ data.capacity }}</div>
+                                        <div class="has-text-weight-normal is-size-6">{{ data.capacity | numeral('0,0') }} <span class="is-size-7">BTU</span></div>
                                     </div>
-                                    <div class="column">
+                                    <div class="column has-text-right">
                                         <div class="has-text-weight-light is-size-7">Nº Serie</div>
-                                        <div class="has-text-weight-normal is-size-6">{{ data.serial_number ? data.serial_number : 'Sin Información' }}</div>
+                                        <div class="has-text-weight-normal is-size-7">{{ data.serial_number ? data.serial_number : 'Sin Información' }}</div>
+                                        <div class="has-text-weight-light is-size-7">Año instalación</div>
+                                        <div class="has-text-weight-normal is-size-7">{{ data.installed_at ? data.installed_at : 'Sin Información' }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -47,10 +49,10 @@
             </div>
         </section>
 
-        <section class="section has-background-primary" v-if="airConditioners.length == 0">
+        <section class="section" v-if="airConditioners.length == 0">
             <div class="container">
                 <div class="box">
-                    No hay datos de clima.
+                    POP no tiene equipos de clima.
                 </div>
             </div>
         </section>

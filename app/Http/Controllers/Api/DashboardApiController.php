@@ -110,7 +110,7 @@ class DashboardApiController extends Controller
                     })
                     ->join('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
                     ->select(
-                        'pops.id as pop_id',
+                        'pops.id',
                         'pops.nombre',
                         'pops.direccion',
                         'sites.nem_site',
@@ -977,339 +977,339 @@ class DashboardApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function serviceData($core)
-    {
-        if (Cache::has('serviceData_core'.$core)) {
-            $servicesQuantity = Cache::get('serviceData_core'.$core);
-        } else {
-            $servicesQuantity = Cache::remember('serviceData_core'.$core, $this->seconds, function () use ($core) {
-                $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
+    // public function serviceData($core)
+    // {
+    //     if (Cache::has('serviceData_core'.$core)) {
+    //         $servicesQuantity = Cache::get('serviceData_core'.$core);
+    //     } else {
+    //         $servicesQuantity = Cache::remember('serviceData_core'.$core, $this->seconds, function () use ($core) {
+    //             $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
 
-                $servicesQuantity = DB::select(DB::raw("
-                    SELECT
-                    @crm_id:=id AS id,
-                    @crm:=nombre_crm AS nombre,
-                    -- BAFI Y OLT
-                    @bafi:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.bafi = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) AS bafi,
-                    @olt:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.olt = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as olt,
-                    @olt_3play:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.olt_3play = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as olt_3play,
-                    @rmn1:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.red_minima_n1 = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as red_minima_n1,
-                    @rmn2:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.red_minima_n1 = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as red_minima_n2
-                    FROM entel_pops.crms
-                    -- GROUP BY CRM.id
-                "));
-                return $servicesQuantity;
-            });
-        }
+    //             $servicesQuantity = DB::select(DB::raw("
+    //                 SELECT
+    //                 @crm_id:=id AS id,
+    //                 @crm:=nombre_crm AS nombre,
+    //                 -- BAFI Y OLT
+    //                 @bafi:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.bafi = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) AS bafi,
+    //                 @olt:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.olt = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as olt,
+    //                 @olt_3play:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.olt_3play = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as olt_3play,
+    //                 @rmn1:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.red_minima_n1 = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as red_minima_n1,
+    //                 @rmn2:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.red_minima_n1 = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as red_minima_n2
+    //                 FROM entel_pops.crms
+    //                 -- GROUP BY CRM.id
+    //             "));
+    //             return $servicesQuantity;
+    //         });
+    //     }
 
-        return new PopResource($servicesQuantity);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function serviceDataCrm($crm_id, $core)
-    {
-        if (Cache::has('serviceData_crm'.$crm_id.'_core'.$core)) {
-            $servicesQuantity = Cache::get('serviceData_crm'.$crm_id.'_core'.$core);
-        } else {
-            $servicesQuantity = Cache::remember('serviceData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
-                $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
-
-                $servicesQuantity = DB::select(DB::raw("
-                    SELECT
-                    @zona_id:=id AS id,
-                    @zona:=nombre_zona AS nombre,
-                    -- BAFI Y OLT
-                    @bafi:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.bafi = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) AS bafi,
-                    @olt:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.olt = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as olt,
-                    @olt_3play:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.olt_3play = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as olt_3play,
-                    @rmn1:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.red_minima_n1 = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as red_minima_n1,
-                    @rmn2:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.red_minima_n1 = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as red_minima_n2
-                    FROM entel_pops.zonas
-                    WHERE crm_id = $crm_id
-                "));
-                return $servicesQuantity;
-            });
-        }
-
-        return new PopResource($servicesQuantity);
-    }
+    //     return new PopResource($servicesQuantity);
+    // }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function serviceDataZona($zona_id, $core)
-    {
-        if (Cache::has('serviceData_zona'.$zona_id.'_core'.$core)) {
-            $servicesQuantity = Cache::get('serviceData_zona'.$zona_id.'_core'.$core);
-        } else {
-            $servicesQuantity = Cache::remember('serviceData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
-                $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
+    // public function serviceDataCrm($crm_id, $core)
+    // {
+    //     if (Cache::has('serviceData_crm'.$crm_id.'_core'.$core)) {
+    //         $servicesQuantity = Cache::get('serviceData_crm'.$crm_id.'_core'.$core);
+    //     } else {
+    //         $servicesQuantity = Cache::remember('serviceData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
+    //             $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
 
-                $servicesQuantity = DB::select(DB::raw("
-                    SELECT
-                    @comuna_id:=id AS id,
-                    @comuna:=nombre_comuna AS nombre,
-                    -- BAFI Y OLT
-                    @bafi:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.bafi = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) AS bafi,
-                    @olt:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.olt = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as olt,
-                    @olt_3play:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.olt_3play = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as olt_3play,
-                    @rmn1:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.red_minima_n1 = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as red_minima_n1,
-                    @rmn2:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.red_minima_n1 = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as red_minima_n2
-                    FROM entel_pops.comunas
-                    WHERE zona_id = $zona_id
-                "));
-                return $servicesQuantity;
-            });
-        }
+    //             $servicesQuantity = DB::select(DB::raw("
+    //                 SELECT
+    //                 @zona_id:=id AS id,
+    //                 @zona:=nombre_zona AS nombre,
+    //                 -- BAFI Y OLT
+    //                 @bafi:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.bafi = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) AS bafi,
+    //                 @olt:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.olt = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as olt,
+    //                 @olt_3play:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.olt_3play = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as olt_3play,
+    //                 @rmn1:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.red_minima_n1 = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as red_minima_n1,
+    //                 @rmn2:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.red_minima_n1 = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as red_minima_n2
+    //                 FROM entel_pops.zonas
+    //                 WHERE crm_id = $crm_id
+    //             "));
+    //             return $servicesQuantity;
+    //         });
+    //     }
 
-        return new PopResource($servicesQuantity);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function infraData($core)
-    {
-        if (Cache::has('infraData_core'.$core)) {
-            $infraQuantity = Cache::get('infraData_core'.$core);
-        } else {
-            $infraQuantity = Cache::remember('infraData_core'.$core, $this->seconds, function () use ($core) {
-                $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
-
-                $infraQuantity = DB::select(DB::raw("
-                    SELECT
-                    @crm_id:=id AS id,
-                    @crm:=nombre_crm AS nombre,
-                    -- BAFI Y OLT
-                    @offgrid:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.offgrid = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) AS offgrid,
-                    @solar:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.solar = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as solar,
-                    @eolica:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.eolica = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as eolica,
-                    @alba:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.alba_project = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as alba_project
-                    FROM entel_pops.crms
-                    -- GROUP BY CRM.id
-                "));
-                return $infraQuantity;
-            });
-        }
-
-        return new PopResource($infraQuantity);
-    }
+    //     return new PopResource($servicesQuantity);
+    // }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function infraDataCrm($crm_id, $core)
-    {
-        if (Cache::has('infraData_crm'.$crm_id.'_core'.$core)) {
-            $infraQuantity = Cache::get('infraData_crm'.$crm_id.'_core'.$core);
-        } else {
-            $infraQuantity = Cache::remember('infraData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
-                $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
+    // public function serviceDataZona($zona_id, $core)
+    // {
+    //     if (Cache::has('serviceData_zona'.$zona_id.'_core'.$core)) {
+    //         $servicesQuantity = Cache::get('serviceData_zona'.$zona_id.'_core'.$core);
+    //     } else {
+    //         $servicesQuantity = Cache::remember('serviceData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
+    //             $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
 
-                $infraQuantity = DB::select(DB::raw("
-                    SELECT
-                    @zona_id:=id AS id,
-                    @zona:=nombre_zona AS nombre,
-                    -- BAFI Y OLT
-                    @offgrid:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.offgrid = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) AS offgrid,
-                    @solar:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.solar = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as solar,
-                    @eolica:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.eolica = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as eolica,
-                    @alba:=(SELECT count(P.id) FROM entel_pops.pops P 
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.alba_project = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as alba_project
-                    FROM entel_pops.zonas
-                    WHERE crm_id = $crm_id
-                "));
-                return $infraQuantity;
-            });
-        }
+    //             $servicesQuantity = DB::select(DB::raw("
+    //                 SELECT
+    //                 @comuna_id:=id AS id,
+    //                 @comuna:=nombre_comuna AS nombre,
+    //                 -- BAFI Y OLT
+    //                 @bafi:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.bafi = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) AS bafi,
+    //                 @olt:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.olt = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as olt,
+    //                 @olt_3play:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.olt_3play = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as olt_3play,
+    //                 @rmn1:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.red_minima_n1 = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as red_minima_n1,
+    //                 @rmn2:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.red_minima_n1 = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as red_minima_n2
+    //                 FROM entel_pops.comunas
+    //                 WHERE zona_id = $zona_id
+    //             "));
+    //             return $servicesQuantity;
+    //         });
+    //     }
 
-        return new PopResource($infraQuantity);
-    }
+    //     return new PopResource($servicesQuantity);
+    // }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function infraDataZona($zona_id, $core)
-    {
-        if (Cache::has('infraData_zona'.$zona_id.'_core'.$core)) {
-            $infraQuantity = Cache::get('infraData_zona'.$zona_id.'_core'.$core);
-        } else {
-            $infraQuantity = Cache::remember('infraData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
-                $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
+    // public function infraData($core)
+    // {
+    //     if (Cache::has('infraData_core'.$core)) {
+    //         $infraQuantity = Cache::get('infraData_core'.$core);
+    //     } else {
+    //         $infraQuantity = Cache::remember('infraData_core'.$core, $this->seconds, function () use ($core) {
+    //             $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
 
-                $infraQuantity = DB::select(DB::raw("
-                    SELECT
-                    @comuna_id:=id AS id,
-                    @comuna:=nombre_comuna AS nombre,
-                    -- BAFI Y OLT
-                    @offgrid:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.offgrid = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) AS offgrid,
-                    @solar:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.solar = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as solar,
-                    @eolica:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.eolica = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as eolica,
-                    @alba:=(SELECT count(P.id) FROM entel_pops.pops P
-                            WHERE P.comuna_id = @comuna_id
-                            AND P.alba_project = 1
-                            AND P.state_type_id = 1
-                            $condition
-                            ) as alba_project
-                    FROM entel_pops.comunas
-                    WHERE zona_id = $zona_id
-                "));
-                return $infraQuantity;
-            });
-        }
+    //             $infraQuantity = DB::select(DB::raw("
+    //                 SELECT
+    //                 @crm_id:=id AS id,
+    //                 @crm:=nombre_crm AS nombre,
+    //                 -- BAFI Y OLT
+    //                 @offgrid:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.offgrid = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) AS offgrid,
+    //                 @solar:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.solar = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as solar,
+    //                 @eolica:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.eolica = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as eolica,
+    //                 @alba:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+    //                         INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+    //                         WHERE P.alba_project = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as alba_project
+    //                 FROM entel_pops.crms
+    //                 -- GROUP BY CRM.id
+    //             "));
+    //             return $infraQuantity;
+    //         });
+    //     }
 
-        return new PopResource($infraQuantity);
-    }
+    //     return new PopResource($infraQuantity);
+    // }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // public function infraDataCrm($crm_id, $core)
+    // {
+    //     if (Cache::has('infraData_crm'.$crm_id.'_core'.$core)) {
+    //         $infraQuantity = Cache::get('infraData_crm'.$crm_id.'_core'.$core);
+    //     } else {
+    //         $infraQuantity = Cache::remember('infraData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
+    //             $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
+
+    //             $infraQuantity = DB::select(DB::raw("
+    //                 SELECT
+    //                 @zona_id:=id AS id,
+    //                 @zona:=nombre_zona AS nombre,
+    //                 -- BAFI Y OLT
+    //                 @offgrid:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.offgrid = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) AS offgrid,
+    //                 @solar:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.solar = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as solar,
+    //                 @eolica:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.eolica = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as eolica,
+    //                 @alba:=(SELECT count(P.id) FROM entel_pops.pops P 
+    //                         INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+    //                         WHERE P.alba_project = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as alba_project
+    //                 FROM entel_pops.zonas
+    //                 WHERE crm_id = $crm_id
+    //             "));
+    //             return $infraQuantity;
+    //         });
+    //     }
+
+    //     return new PopResource($infraQuantity);
+    // }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // public function infraDataZona($zona_id, $core)
+    // {
+    //     if (Cache::has('infraData_zona'.$zona_id.'_core'.$core)) {
+    //         $infraQuantity = Cache::get('infraData_zona'.$zona_id.'_core'.$core);
+    //     } else {
+    //         $infraQuantity = Cache::remember('infraData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
+    //             $condition = $core == 1 ? 'AND P.classification_type_id = 1' : '';
+
+    //             $infraQuantity = DB::select(DB::raw("
+    //                 SELECT
+    //                 @comuna_id:=id AS id,
+    //                 @comuna:=nombre_comuna AS nombre,
+    //                 -- BAFI Y OLT
+    //                 @offgrid:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.offgrid = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) AS offgrid,
+    //                 @solar:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.solar = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as solar,
+    //                 @eolica:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.eolica = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as eolica,
+    //                 @alba:=(SELECT count(P.id) FROM entel_pops.pops P
+    //                         WHERE P.comuna_id = @comuna_id
+    //                         AND P.alba_project = 1
+    //                         AND P.state_type_id = 1
+    //                         $condition
+    //                         ) as alba_project
+    //                 FROM entel_pops.comunas
+    //                 WHERE zona_id = $zona_id
+    //             "));
+    //             return $infraQuantity;
+    //         });
+    //     }
+
+    //     return new PopResource($infraQuantity);
+    // }
 
     /**
      * Store a newly created resource in storage.

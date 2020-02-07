@@ -226,7 +226,7 @@
         </section>
 
         <!-- CARACTERISTICAS -->
-        <!-- <section class="hero is-bold" :class="heroBackground">
+       <!--  <section class="hero is-bold" :class="heroBackground">
             <div class="hero-body">
                 <nav class="level">
                     <div class="level-item has-text-centered">
@@ -303,58 +303,7 @@
                 :primaryText="primaryText"
                 :secondaryText="secondaryText"
             />
-
-            <power v-if="tabButtonView == 2"
-                :pop="pop"
-                :bodyBackground="bodyBackground"
-                :boxBackground="boxBackground"
-                :primaryText="primaryText"
-                :secondaryText="secondaryText"
-            />
-
-<!--             <clima v-if="tabButtonView == 3"
-                :pop="pop"
-                :bodyBackground="bodyBackground"
-                :boxBackground="boxBackground"
-                :primaryText="primaryText"
-                :secondaryText="secondaryText"
-            />
-
-            <infrastructure v-if="tabButtonView == 4"
-                :pop="pop"
-                :rcas="rcas"
-                :bodyBackground="bodyBackground"
-                :boxBackground="boxBackground"
-                :primaryText="primaryText"
-                :secondaryText="secondaryText"
-            />
-
-            <characteristics v-if="tabButtonView == 5"
-                :pop="pop"
-                :rcas="rcas"
-                :bodyBackground="bodyBackground"
-                :boxBackground="boxBackground"
-                :primaryText="primaryText"
-                :secondaryText="secondaryText"
-            />
-
-            <comsite v-if="tabButtonView == 6"
-                :pop="pop"
-                :bodyBackground="bodyBackground"
-                :boxBackground="boxBackground"
-                :primaryText="primaryText"
-                :secondaryText="secondaryText"
-            />
-
-            <documents v-if="tabButtonView == 7"
-                :pop="pop"
-                :bodyBackground="bodyBackground"
-                :boxBackground="boxBackground"
-                :primaryText="primaryText"
-                :secondaryText="secondaryText"
-            /> -->
         </section>
-
     </div>
     
 </template>
@@ -372,11 +321,11 @@
             PopMap: () => import("./PopMapView"),
             // 'autonomy-chart': AutonomyChart,
             PopCharacteristics: () => import("./PopCharacteristics"),
-            // 'pop-power': PopPower,
+            PopPower: () => import("./PopPower"),
             PopClimate: () => import("./PopClimate"),
-            // 'pop-infrastructure': PopInfrastructure,
+            PopInfrastructure: () => import("./PopInfrastructure"),
             PopComsite: () => import("./PopComsite"),
-            // 'pop-documents': PopDocuments,
+            PopDocuments: () => import("./PopDocuments"),
             PopLog: () => import("./PopLog")
         },
         props : [
@@ -413,7 +362,7 @@
                 boxBackground: '',
                 primaryText: '',
                 secondaryText: '',
-                heroBackground: 'is-info',
+                heroBackground: 'is-eco',
 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',

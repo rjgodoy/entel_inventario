@@ -2,7 +2,7 @@
     <div class="tile is-parent">
         <article class="tile is-child box" :class="boxBackground">
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Estructuras Verticales</div>
+                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Grupos Electrógenos</div>
                 <!-- <div class="column has-text-centered">
                     <button data-toggle="button" class="button is-small is-link" type="button">CORE</button>
                 </div> -->
@@ -13,18 +13,18 @@
                 <thead>
                     <tr class="is-size-7">
                         <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Fija">POPs</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Info</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Estructuras</abbr></th>
+                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Fija">POPs</abbr></th> -->
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Q POP con equipamiento</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Q Grupos Electrógenos</abbr></th>
                         <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="is-size-7" v-for="item in this.verticalStructureData">
+                    <tr class="is-size-7" v-for="item in this.generatorGroupData">
                         <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
-                        <td class="has-text-right" :class="primaryText">{{ item.q_pops | numeral('0,0') }}</td>
+                        <!-- <td class="has-text-right" :class="primaryText">{{ item.q_pops | numeral('0,0') }}</td> -->
                         <td class="has-text-right" :class="primaryText">{{ item.q_info | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.q_vertical_structures | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ item.q_generator_groups | numeral('0,0') }}</td>
                         <!-- <td class="has-text-right" :class="primaryText">{{ item.fijo + item.movil | numeral('0,0') }}</td> -->
                     </tr>
                 </tbody>
@@ -66,13 +66,13 @@
             return {
                 crmSelected: this.selectedCrm,
                 zonaSelected: this.selectedZona,
-                verticalStructureData: null,
+                generatorGroupData: null,
                 total: 0,
                 buttonLoading: '',
             }
         },
         created(){
-            this.getVerticalStructureData()
+            this.getGeneratorGroupData()
         },
         mounted() {      
         },
@@ -80,49 +80,48 @@
             selectedCrm(newValue, oldValue) {
                 this.crmSelected = newValue
                 this.zonaSelected = null
-                this.getVerticalStructureData()
+                this.getGeneratorGroupData()
             },
             selectedZona(newValue, oldValue) {
                 this.zonaSelected = newValue
-                this.getVerticalStructureData()
+                this.getGeneratorGroupData()
             },
             core(newValue, oldValue) {
-                this.getVerticalStructureData()
+                this.getGeneratorGroupData()
             }
         },
         methods: {
-            totalVerticalStructures() {
+            totalGeneratorGroups() {
                 this.total = 0
-                this.verticalStructureData.forEach(this.counter)
+                this.generatorGroupData.forEach(this.counter)
             },
             counter(item, index) {
-                this.total = this.total + item.q_vertical_structures;
+                this.total = this.total + item.q_generator_groups;
             },
-            getVerticalStructureData() {
+            getGeneratorGroupData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/verticalStructureData/${this.core}`)
+                    axios.get(`/api/generatorGroupData/${this.core}`)
                         .then((response) => {
-                            this.verticalStructureData = response.data.data;
-                            this.totalVerticalStructures()
+                            this.generatorGroupData = response.data.data;
+                            this.totalGeneratorGroups()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/verticalStructureDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`api/generatorGroupDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.verticalStructureData = response.data.data;
-                            this.totalVerticalStructures()
+                            this.generatorGroupData = response.data.data;
+                            this.totalGeneratorGroups()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/verticalStructureDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`api/generatorGroupDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
-                            console.log(response)
-                            this.verticalStructureData = response.data.data;
-                            this.totalVerticalStructures()
+                            this.generatorGroupData = response.data.data;
+                            this.totalGeneratorGroups()
                         })
                         .catch(() => {
                             console.log('handle server error from here');

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Comsite;
+use App\ComsitePolicy;
+
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,7 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        // Comsite::class => ComsitePolicy::class,
+        // 'App\Comsite' => 'App\Policies\ComsitePolicy',
     ];
 
     /**
@@ -25,6 +29,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('sync-comsite', function ($user) {
+            return $user->id == 5;
+        });
+
+        Gate::define('sync-comsite', 'App\Policies\ComsitePolicy@create');
     }
 }

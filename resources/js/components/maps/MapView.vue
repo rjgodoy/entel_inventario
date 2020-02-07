@@ -260,7 +260,7 @@
                             </div>
 
                             <div class="content">
-                                <a href="/pop/${pop.pop_id}" target="_blank" class="button is-outlined is-primary is-small">
+                                <a href="/pop/${pop.id}" target="_blank" class="button is-outlined is-primary is-small">
                                     <font-awesome-icon icon="info-circle"/>
                                     &nbsp;Ver detalles
                                 </a>

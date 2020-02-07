@@ -511,115 +511,109 @@
         </section>
 
         <!-- PODER -->
-        <!-- <section class="section is-marginless" :class="bodyBackgroundEnergy">
-            <div class="title">PODER</div>
+        <section class="section is-marginless" :class="bodyBackgroundEnergy">
+            <div class="title">Equipamiento</div>
             <div class="tile is-ancestor">
-                <electric-line-data
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackgroundEnergy"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
-                    :selectedCrm="this.selectedCrm"
-                    :selectedZona="this.selectedZona"
-                    :core="core"
-                />
-                <generator-group-data
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackgroundEnergy"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
-                    :selectedCrm="this.selectedCrm"
-                    :selectedZona="this.selectedZona"
-                    :core="core"
-                />
-                <power-rectifier-data
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackgroundEnergy"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
-                    :selectedCrm="this.selectedCrm"
-                    :selectedZona="this.selectedZona"
-                    :core="core"
-                />
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <p class="title">Hello World</p>
-                        <p class="subtitle">What is up?</p>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <p class="title">Hello World</p>
-                        <p class="subtitle">What is up?</p>
-                    </article>
-                </div>
-            </div>
-        </section> -->
+                <div class="tile is-vertical">
+                    <div class="tile">
+                        <electric-lines-data
+                            :bodyBackground="bodyBackground"
+                            :boxBackground="boxBackgroundEnergy"
+                            :primaryText="primaryText"
+                            :secondaryText="secondaryText"
+                            :selectedCrm="this.selectedCrm"
+                            :selectedZona="this.selectedZona"
+                            :core="core"
+                        />
+                        <generator-groups-data
+                            :bodyBackground="bodyBackground"
+                            :boxBackground="boxBackgroundEnergy"
+                            :primaryText="primaryText"
+                            :secondaryText="secondaryText"
+                            :selectedCrm="this.selectedCrm"
+                            :selectedZona="this.selectedZona"
+                            :core="core"
+                        />
+                        <power-rectifiers-data
+                            :bodyBackground="bodyBackground"
+                            :boxBackground="boxBackgroundEnergy"
+                            :primaryText="primaryText"
+                            :secondaryText="secondaryText"
+                            :selectedCrm="this.selectedCrm"
+                            :selectedZona="this.selectedZona"
+                            :core="core"
+                        />
+                        <!-- <div class="tile is-parent">
+                            <article class="tile is-child box" :class="boxBackground">
+                                <p class="title">Hello World</p>
+                                <p class="subtitle">What is up?</p>
+                            </article>
+                        </div> -->
+                        <!-- <div class="tile is-parent">
+                            <article class="tile is-child box" :class="boxBackground">
+                                <p class="title">Hello World</p>
+                                <p class="subtitle">What is up?</p>
+                            </article>
+                        </div> -->
+                    </div>
 
-        <!-- CLIMA -->
-        <section class="section is-marginless" :class="bodyBackgroundClimate">
-            <div class="title">CLIMA</div>
-            <div class="tile is-ancestor">
-                <air-conditioners-data
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackgroundClimate"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
-                    :selectedCrm="this.selectedCrm"
-                    :selectedZona="this.selectedZona"
-                    :core="core"
-                />
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <p class="title">Hello World</p>
-                        <p class="subtitle">What is up?</p>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <p class="title">Hello World</p>
-                        <p class="subtitle">What is up?</p>
-                    </article>
+                    <div class="tile">
+                        <air-conditioners-data
+                            :bodyBackground="bodyBackground"
+                            :boxBackground="boxBackgroundClimate"
+                            :primaryText="primaryText"
+                            :secondaryText="secondaryText"
+                            :selectedCrm="this.selectedCrm"
+                            :selectedZona="this.selectedZona"
+                            :core="core"
+                        />
+                        <!-- <div class="tile is-parent">
+                            <article class="tile is-child box" :class="boxBackground">
+                                <p class="title">Hello World</p>
+                                <p class="subtitle">What is up?</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child box" :class="boxBackground">
+                                <p class="title">Hello World</p>
+                                <p class="subtitle">What is up?</p>
+                            </article>
+                        </div> -->
+
+                        <vertical-structures-data
+                            :bodyBackground="bodyBackground"
+                            :boxBackground="boxBackgroundInfrastructure"
+                            :primaryText="primaryText"
+                            :secondaryText="secondaryText"
+                            :selectedCrm="this.selectedCrm"
+                            :selectedZona="this.selectedZona"
+                            :core="core"
+                        />
+                        <infrastructures-data
+                            :bodyBackground="bodyBackground"
+                            :boxBackground="boxBackgroundInfrastructure"
+                            :primaryText="primaryText"
+                            :secondaryText="secondaryText"
+                            :selectedCrm="this.selectedCrm"
+                            :selectedZona="this.selectedZona"
+                            :core="core"
+                        />
+                        <!-- <div class="tile is-parent">
+                            <article class="tile is-child box" :class="boxBackground">
+                                <p class="title">Hello World</p>
+                                <p class="subtitle">What is up?</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child box" :class="boxBackground">
+                                <p class="title">Hello World</p>
+                                <p class="subtitle">What is up?</p>
+                            </article>
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- INFRAESTRUCTURA -->
-       <!--  <section class="section is-marginless" :class="bodyBackgroundInfrastructure">
-            <div class="title">INFRAESTRUCTURA</div>
-            <div class="tile is-ancestor">
-                <vertical-structure-data
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackgroundInfrastructure"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
-                    :selectedCrm="this.selectedCrm"
-                    :selectedZona="this.selectedZona"
-                    :core="core"
-                />
-                <infrastructure-data
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackgroundInfrastructure"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
-                    :selectedCrm="this.selectedCrm"
-                    :selectedZona="this.selectedZona"
-                    :core="core"
-                />
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <p class="title">Hello World</p>
-                        <p class="subtitle">What is up?</p>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box" :class="boxBackground">
-                        <p class="title">Hello World</p>
-                        <p class="subtitle">What is up?</p>
-                    </article>
-                </div>
-            </div>
-        </section> -->
 
     </div>
 </template>
@@ -701,9 +695,15 @@
             TechnologiesData: () => import("./TechnologiesData"),
             CriticsData: () => import("./CriticPopsData"),
             PretDataChart: () => import("./PretDataChart"),
-            MapView: () => import('../maps/MapView.vue'),
-            RadialChart: () => import('../RadialChart.vue'),
-            AirConditionersData: () => import('./AirConditionersData.vue'),
+            MapView: () => import('../maps/MapView'),
+            RadialChart: () => import('../RadialChart'),
+
+            ElectricLinesData: () => import('./ElectricLinesData'),
+            GeneratorGroupsData: () => import('./GeneratorGroupsData'),
+            PowerRectifiersData: () => import('./PowerRectifiersData'),
+            AirConditionersData: () => import('./AirConditionersData'),
+            VerticalStructuresData: () => import('./VerticalStructuresData'),
+            InfrastructuresData: () => import('./InfrastructuresData')
         },
         props : [
             'message'
@@ -717,6 +717,7 @@
             this.lastUpdate()
             this.syncCounter()
             this.loadMessage()
+            this.getPops()
         },
         data: () => {
             return {
@@ -860,7 +861,6 @@
                 axios.get(`/api/crms`)
                 .then((response) => {
                     this.crms = response.data.data
-                    this.getPops()
                 })
             },
 
@@ -869,6 +869,7 @@
                 if (!this.popList.length) {
                     axios.get(`/api/dashboardMap`)
                     .then((response) => {
+                        console.log(response)
                         try {
                             this.$store.commit("setPops", response.data.data);
                         } catch (ex) {
@@ -1089,7 +1090,7 @@
                     this.bodyBackgroundClimate = 'has-background-black-ter',
                     this.bodyBackgroundInfrastructure = 'has-background-black-ter',
                     this.boxBackgroundEnergy = 'has-background-green-light',
-                    this.boxBackgroundClimate = 'has-background-blue-light',
+                    this.boxBackgroundClimate = 'has-background-light',
                     this.boxBackgroundInfrastructure = 'has-background-yellow-light'
                 } else {
                     // light mode
@@ -1103,7 +1104,7 @@
                     this.bodyBackgroundClimate = 'has-background-white',
                     this.bodyBackgroundInfrastructure = 'has-background-white',
                     this.boxBackgroundEnergy = 'has-background-green-light',
-                    this.boxBackgroundClimate = 'has-background-blue-light',
+                    this.boxBackgroundClimate = 'has-background-light',
                     this.boxBackgroundInfrastructure = 'has-background-yellow-light'
                 }
             },

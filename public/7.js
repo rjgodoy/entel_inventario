@@ -1,169 +1,192 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
+/***/ "./node_modules/@amcharts/amcharts4/.internal/themes/entel.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/.internal/themes/entel.js ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ITheme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ITheme */ "./node_modules/@amcharts/amcharts4/.internal/themes/ITheme.js");
+/* harmony import */ var _core_utils_Color__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
+/**
+ * A color scheme inspired by {@link https://datavizproject.com/}
+ */
+
+
+var theme = function (object) {
+    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "ColorSet")) {
+        object.list = [
+            Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#005CFF"), // azul
+            Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#FF3C00"), // rojo oscuro
+            Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#FF3C00"), // rojo claro
+            Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#f05440") //  rojo más claro
+        ];
+        object.reuse = false;
+        object.stepOptions = {
+            lightness: 0.05,
+            hue: 0
+        };
+        object.passOptions = {};
+    }
+};
+/* harmony default export */ __webpack_exports__["default"] = (theme);
+//# sourceMappingURL=dataviz.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@amcharts/amcharts4/themes/entel.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/themes/entel.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _internal_themes_entel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../.internal/themes/entel */ "./node_modules/@amcharts/amcharts4/.internal/themes/entel.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _internal_themes_entel__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+//# sourceMappingURL=dataviz.js.map
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @amcharts/amcharts4/core */ "./node_modules/@amcharts/amcharts4/core.js");
+/* harmony import */ var _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @amcharts/amcharts4/charts */ "./node_modules/@amcharts/amcharts4/charts.js");
+/* harmony import */ var _amcharts_amcharts4_themes_entel_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @amcharts/amcharts4/themes/entel.js */ "./node_modules/@amcharts/amcharts4/themes/entel.js");
 //
 //
 //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+ // import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
+// import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+// this.darkMode ? 
+// am4core.useTheme(am4themes_dark) 
+// : 
+
+_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amcharts4_themes_entel_js__WEBPACK_IMPORTED_MODULE_2__["default"]); // am4core.useTheme(am4themes_animated);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['selectedCrm', 'selectedZona', // 'csrf',
-  'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
+  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode', 'chartData'],
   data: function data() {
     return {
-      crmSelected: this.selectedCrm,
-      zonaSelected: this.selectedZona,
-      electricLineData: null,
-      total: 0,
-      buttonLoading: ''
+      chart: null
     };
   },
-  created: function created() {
-    this.getElectricLineData();
+  mounted: function mounted() {
+    this.graph(); // this.$eventBus.$on('getSitesData', this.graph)
   },
-  mounted: function mounted() {},
+  beforeDestroy: function beforeDestroy() {
+    if (this.chart) {
+      this.chart.destroy();
+      this.chart.dispose();
+    } // this.$eventBus.$off('getSitesData')
+
+  },
   watch: {
-    selectedCrm: function selectedCrm(newValue, oldValue) {
-      this.crmSelected = newValue;
-      this.zonaSelected = null;
-      this.getElectricLineData();
-    },
-    selectedZona: function selectedZona(newValue, oldValue) {
-      this.zonaSelected = newValue;
-      this.getElectricLineData();
-    },
-    core: function core(newValue, oldValue) {
-      this.getElectricLineData();
+    chartData: function chartData(newValue, oldValue) {
+      this.graph();
     }
   },
   methods: {
-    totalElectricLines: function totalElectricLines() {
-      this.total = 0;
-      this.electricLineData.forEach(this.counter);
-    },
-    counter: function counter(item, index) {
-      this.total = this.total + item.q_electric_lines;
-    },
-    getElectricLineData: function getElectricLineData() {
-      var _this = this;
+    graph: function graph() {
+      // data.forEach(element => console.log(element))
 
-      if (this.crmSelected == null) {
-        axios.get("/api/electricLineData/".concat(this.core)).then(function (response) {
-          _this.electricLineData = response.data.data;
+      /* Create chart instance */
+      var chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarChart"]); // let chart = am4core.create("chartdiv", am4charts.RadarChart);
 
-          _this.totalElectricLines();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
-      } else if (this.zonaSelected == null) {
-        axios.get("/api/electricLineDataCrm/".concat(this.crmSelected.id, "/").concat(this.core)).then(function (response) {
-          _this.electricLineData = response.data.data;
+      chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-          _this.totalElectricLines();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
-      } else {
-        axios.get("/api/electricLineDataZona/".concat(this.zonaSelected.id, "/").concat(this.core)).then(function (response) {
-          _this.electricLineData = response.data.data;
+      chart.data = this.chartData;
+      chart.padding(20, 20, 20, 20);
+      var categoryAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["CategoryAxis"]());
+      categoryAxis.dataFields.category = "nombre";
+      categoryAxis.renderer.labels.template.location = 0.5;
+      categoryAxis.renderer.tooltipLocation = 0.5;
+      var valueAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ValueAxis"]());
+      valueAxis.tooltip.disabled = true;
+      valueAxis.renderer.labels.template.horizontalCenter = "left";
+      valueAxis.min = 0;
+      var series1 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series1.columns.template.tooltipText = "{name}: {valueY.value}";
+      series1.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series1.name = "Opto Estación";
+      series1.dataFields.categoryX = "nombre";
+      series1.dataFields.valueY = "opto";
+      series1.stacked = true;
+      var series2 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series2.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series2.columns.template.tooltipText = "{name}: {valueY.value}";
+      series2.name = "Radio Estación";
+      series2.dataFields.categoryX = "nombre";
+      series2.dataFields.valueY = "radio";
+      series2.stacked = true;
+      var series3 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series3.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series3.columns.template.tooltipText = "{name}: {valueY.value}";
+      series3.name = "Repetidor";
+      series3.dataFields.categoryX = "nombre";
+      series3.dataFields.valueY = "repetidor";
+      series3.stacked = true;
+      var series4 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series4.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series4.columns.template.tooltipText = "{name}: {valueY.value}";
+      series4.name = "Indoor";
+      series4.dataFields.categoryX = "nombre";
+      series4.dataFields.valueY = "indoor";
+      series4.stacked = true;
+      var series5 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series5.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series5.columns.template.tooltipText = "{name}: {valueY.value}";
+      series5.name = "Outdoor";
+      series5.dataFields.categoryX = "nombre";
+      series5.dataFields.valueY = "outdoor";
+      series5.stacked = true;
+      var series6 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series6.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series6.columns.template.tooltipText = "{name}: {valueY.value}";
+      series6.name = "Pole Site";
+      series6.dataFields.categoryX = "nombre";
+      series6.dataFields.valueY = "pole_site";
+      series6.stacked = true;
+      chart.seriesContainer.zIndex = -1; // chart.scrollbarX = new am4core.Scrollbar();
+      // chart.scrollbarX.exportable = false;
+      // chart.scrollbarY = new am4core.Scrollbar();
+      // chart.scrollbarY.exportable = false;
 
-          _this.totalElectricLines();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
-      }
-    },
-    formSubmit: function formSubmit(e) {
-      var _this2 = this;
-
-      // Activate loading button
-      this.buttonLoading = 'is-loading';
-      e.preventDefault();
-      axios({
-        url: '/pop/export',
-        method: 'POST',
-        responseType: 'blob' // headers: {
-        //     'Content-Type': 'text/html; charset=utf-8',
-        //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        // }
-
-      }).then(function (response) {
-        var url = window.URL.createObjectURL(new Blob([response.data]));
-        var link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'listado_pops.xlsx');
-        document.body.appendChild(link);
-        link.click(); // Deativate loading button
-
-        _this2.buttonLoading = '';
-      })["catch"](function (error) {
-        console.log('Error: ' + error);
-      });
+      chart.cursor = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarCursor"]();
+      chart.cursor.xAxis = categoryAxis;
+      chart.cursor.fullWidthXLine = true;
+      chart.cursor.lineX.strokeOpacity = 0;
+      chart.cursor.lineX.fillOpacity = 0.1;
+      chart.cursor.lineX.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"]("#000000");
+      this.chart = chart;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -175,151 +198,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tile is-parent" }, [
-    _c(
-      "article",
-      { staticClass: "tile is-child box", class: _vm.boxBackground },
-      [
-        _c("div", { staticClass: "columns" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "column is-size-5 has-text-weight-semibold has-text-left",
-              class: _vm.primaryText
-            },
-            [_vm._v("Lineas Eléctricas")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "column is-size-4 has-text-weight-semibold has-text-right",
-              class: _vm.primaryText
-            },
-            [_vm._v(_vm._s(_vm._f("numeral")(this.total, "0,0")))]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "table",
-          { staticClass: "table is-fullwidth", class: _vm.boxBackground },
-          [
-            _c("thead", [
-              _c("tr", { staticClass: "is-size-7" }, [
-                _c("th", { class: _vm.secondaryText }, [
-                  _vm._v(
-                    _vm._s(
-                      _vm.crmSelected == null
-                        ? "CRM"
-                        : _vm.zonaSelected == null
-                        ? "Zona"
-                        : "Comuna"
-                    )
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "th",
-                  { staticClass: "has-text-right", class: _vm.secondaryText },
-                  [
-                    _c("abbr", { attrs: { title: "Movil" } }, [
-                      _vm._v("Q POP con equipamiento")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "th",
-                  { staticClass: "has-text-right", class: _vm.secondaryText },
-                  [
-                    _c("abbr", { attrs: { title: "Otros" } }, [
-                      _vm._v("Q Lineas Eléctricas")
-                    ])
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(this.electricLineData, function(item) {
-                return _c("tr", { staticClass: "is-size-7" }, [
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "has-text-weight-bold",
-                        class: _vm.secondaryText,
-                        attrs: { href: "", title: "CRM Norte" }
-                      },
-                      [_vm._v(_vm._s(item.nombre))]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "has-text-right", class: _vm.primaryText },
-                    [_vm._v(_vm._s(_vm._f("numeral")(item.q_info, "0,0")))]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "has-text-right", class: _vm.primaryText },
-                    [
-                      _vm._v(
-                        _vm._s(_vm._f("numeral")(item.q_electric_lines, "0,0"))
-                      )
-                    ]
-                  )
-                ])
-              }),
-              0
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("form", { on: { submit: _vm.formSubmit } }, [
-          _c("div", { staticClass: "field has-addons" }, [
-            _c("p", { staticClass: "control" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "button is-small is-link",
-                  class: _vm.buttonLoading,
-                  attrs: { type: "submit" }
-                },
-                [
-                  _c("font-awesome-icon", { attrs: { icon: "download" } }),
-                  _vm._v(
-                    " \n                          Listado de POPs\n                    "
-                  )
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "control" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "button is-small is-link tooltip",
-                  attrs: {
-                    href: "/pop",
-                    type: "button",
-                    "data-tooltip": "Tooltip Text"
-                  }
-                },
-                [_c("font-awesome-icon", { attrs: { icon: "bars" } })],
-                1
-              )
-            ])
-          ])
-        ])
-      ]
-    )
-  ])
+  return _c(
+    "article",
+    {
+      staticClass: "tile is-child box is-paddingless",
+      class: _vm.boxBackground,
+      staticStyle: { width: "100%", height: "auto" }
+    },
+    [_c("div", { ref: "chartdiv", staticStyle: { height: "400px" } })]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -328,17 +215,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/ElectricLinesData.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/dashboard/ElectricLinesData.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/components/dashboard/PopDataChart.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/dashboard/PopDataChart.vue ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ElectricLinesData.vue?vue&type=template&id=19a62056& */ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&");
-/* harmony import */ var _ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ElectricLinesData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&");
+/* harmony import */ var _PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopDataChart.vue?vue&type=template&id=2a5dd86e& */ "./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e&");
+/* harmony import */ var _PopDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopDataChart.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -348,9 +235,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _PopDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -360,38 +247,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/ElectricLinesData.vue"
+component.options.__file = "resources/js/components/dashboard/PopDataChart.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ElectricLinesData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopDataChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e& ***!
+  \*******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ElectricLinesData.vue?vue&type=template&id=19a62056& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopDataChart.vue?vue&type=template&id=2a5dd86e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

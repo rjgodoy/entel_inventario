@@ -8,12 +8,6 @@
                 <label for="email" class="label has-text-weight-normal">Email</label>
                 <p class="control has-icon has-icon-right">
                     <input v-model="state.email" id="email" type="email" class="input" name="email" disabled>
-
-                    <!-- @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror -->
                 </p>
             </div>
 
@@ -22,12 +16,6 @@
 
                 <p class="control has-icon has-icon-right">
                     <input v-model="state.password" id="password" type="password" class="input" name="password" autofocus>
-
-                    <!-- @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror -->
                 </p>
             </div>
 
@@ -65,7 +53,6 @@
         data() {
             return {
                 buttonLoading: 0,
-                errors: [],
                 state: {
                     token: this.$route.params.token,
                     email:  this.$route.query.email,
@@ -80,14 +67,12 @@
         },
         methods: {
             resetPassword(e) {
-                this.errors = [];
                 if (!this.state.password || !this.state.password_confirmation) {
                     this.$buefy.toast.open({
-                        message: 'Password required.',
+                        message: 'Ingresa tu nuevo password.',
                         type: 'is-danger',
                         duration: 5000
                     })
-                    this.errors.push('Password required.');
                 }
                 else if (this.state.password != this.state.password_confirmation) {
                     this.$buefy.toast.open({
@@ -95,24 +80,19 @@
                         type: 'is-danger',
                         duration: 5000
                     })
-                    this.errors.push('Confirmation required.');
                 }
                 else
                 {
                     this.buttonLoading = 1
-                    // var token = document.head.querySelector('meta[name="csrf-token"]');
-                    // var token = this.$route.params.token
-                    // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
-                    // axios.post(`/password/reset?token=${this.state.token}&email=${this.state.email}&password=${this.state.password}&password_confirmation=${this.state.password_confirmation}`).then((response) => {
                     axios.post('/password/reset', this.state).then((response) => {
                         console.log(response)
                         if (response.status === 200) {
                             this.buttonLoading = 0
-                            this.$buefy.toast.open({
-                                message: response.data,
-                                type: response.data.includes('contraseña ha sido actualizada') ? 'is-success' : 'is-danger',
-                                duration: 5000
-                            })
+                            // this.$buefy.toast.open({
+                            //     message: response.data,
+                            //     type: response.data.includes('contraseña ha sido actualizada') ? 'is-success' : 'is-danger',
+                            //     duration: 5000
+                            // })
                         } else {
                             this.buttonLoading = 0
                             this.$buefy.toast.open({

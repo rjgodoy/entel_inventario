@@ -17,4 +17,9 @@ class Technology extends Model
     {
         return $this->belongsTo(TechnologyType::class);
     }
+
+    public function state() 
+    {
+        return $this->belongsTo(State::class);
+    }
 }

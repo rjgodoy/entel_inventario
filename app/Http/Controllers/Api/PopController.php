@@ -155,7 +155,7 @@ class PopController extends Controller
      */
     public function show($id)
     {
-        $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.technologies', 'comuna.zona.responsable', 'sites.site_type')
+        $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.technologies', 'comuna.zona.responsable', 'sites.site_type', 'sites.attention_priority_type', 'sites.dependences', 'sites.category_type', 'sites.attention_type')
                 ->where('id', $id)
                 ->first();
         return $pop;
@@ -293,7 +293,7 @@ class PopController extends Controller
                     ->orWhere('pops.nombre', 'LIKE', "%$text%")
                     ->orWhere('pops.direccion', 'LIKE', "%$text%");
             })
-            ->where('sites.state_type_id', 1)
+            ->where('sites.state_id', 1)
             ->whereRaw($condition_core)
             ->whereRaw($condition_crm)
             ->whereRaw($condition_zona)
@@ -347,7 +347,7 @@ class PopController extends Controller
     //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
     //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
     //         })
-    //         ->where('sites.state_type_id', 1)
+    //         ->where('sites.state_id', 1)
     //         ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
     //         ->select(
     //             'pops.id',
@@ -399,7 +399,7 @@ class PopController extends Controller
     //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
     //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
     //         })
-    //         ->where('sites.state_type_id', 1)
+    //         ->where('sites.state_id', 1)
     //         ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
     //         ->select(
     //             'pops.id',
@@ -637,6 +637,24 @@ class PopController extends Controller
     {
         $pop_menu = PopMenu::where('state', 1)->orderBy('order','asc')->get();
         return new PopResource($pop_menu);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        return $request;
+        // $core = $request->core;
+        // $crm_id = $request->crm_id;
+        // $zona_id = $request->zona_id;
+
+        // return Excel::download(new PopsExport($core, $crm_id, $zona_id), 'listado_pops - '.date("Y-m-d h:i:sa").'.xlsx');
+        // return Excel::download(new PopsExport(), 'listado_pops - '.date("Y-m-d h:i:sa").'.xlsx');
+        // return Excel::download(new PopsExport, 'pops.xlsx');
     }
 
 

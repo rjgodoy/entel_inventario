@@ -10,7 +10,7 @@
                 
                 <div :class="airConditioners.length > 4 ? '' : 'container'">
                     <div class="tile is-ancestor">
-                        <div class="tile is-parent" v-for="data in airConditioners">
+                        <div class="tile is-parent is-tablet" v-for="data in airConditioners">
                             <div class="tile is-child box" style="max-width: 350px; position: center;">
                                 <div class="columns">
                                     <div class="column">

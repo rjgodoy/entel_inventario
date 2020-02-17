@@ -84,7 +84,8 @@ import {
     faUpload,
     faPlug,
     faChargingStation,
-    faRandom
+    faRandom,
+    faFileInvoiceDollar
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -153,7 +154,8 @@ library.add(
     faPlug,
     faChargingStation,
     faRandom,
-    farCheckCircle
+    farCheckCircle,
+    faFileInvoiceDollar
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

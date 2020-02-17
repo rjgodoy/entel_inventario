@@ -201,6 +201,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 				'uses' => 'Api\Infraestructura\InfrastructureController@infrastructureDataZona'
 			]);
 
+		// Exports
+			Route::get('pop/export', 'PopController@export')->name('pops.export');
+
 	##############################################################################################
 
 

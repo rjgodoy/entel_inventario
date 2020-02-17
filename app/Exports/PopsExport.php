@@ -30,47 +30,56 @@ class PopsExport implements FromCollection,
                         // WithDrawings
 {
 
-    protected $core;
-    protected $crm_id;
-    protected $zona_id;
+    // protected $core;
+    // protected $crm_id;
+    // protected $zona_id;
 
-    public function __construct(int $core, int $crm_id, int $zona_id)
-    {
-        $this->core = $core;
-        $this->crm_id = $crm_id;
-        $this->zona_id = $zona_id;
-    }
+    // public function __construct(int $core, int $crm_id, int $zona_id)
+    // {
+    //     $this->core = $core;
+    //     $this->crm_id = $crm_id;
+    //     $this->zona_id = $zona_id;
+    // }
 
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        $core_condition = $this->core == 0 ? '' : 'AND classification_type_id = 1';
+        // $core_condition = $this->core == 0 ? '' : 'AND classification_type_id = 1';
 
-        if ($this->crm_id == 0) {
-            $pop = Pop::with('comuna.zona.crm')
-                ->whereRaw('state_type_id = 1 '.$core_condition)
-                ->get();
-        } elseif ($this->zona_id == 0) {
-            $crm_id = $this->crm_id;
-            $pop = Pop::with('comuna.zona.crm')
-                ->whereHas('comuna.zona', function($query) use ($crm_id) {
-                    $query->where('crm_id', $crm_id);
-                })
-                ->whereRaw('state_type_id = 1 '.$core_condition)
-                ->get();
-        } else {
-            $zona_id = $this->zona_id;
-            $pop = Pop::with('comuna.zona.crm')
-                ->whereHas('comuna', function($query) use ($zona_id) {
-                    $query->where('zona_id', $zona_id);
-                })
-                ->whereRaw('state_type_id = 1 '.$core_condition)
-                ->get();
-        }
+        // if ($this->crm_id == 0) {
+            $pop = Pop::with('comuna.zona.crm', 'comuna.region')
+                ->whereHas('sites', function($q) {
+                    $q->where('state_id', 1);
+                })->get();
+        // } elseif ($this->zona_id == 0) {
+        //     $crm_id = $this->crm_id;
+        //     $pop = Pop::with('comuna.zona.crm', 'comuna.region')
+        //         ->whereHas('comuna.zona', function($query) use ($crm_id) {
+        //             $query->where('crm_id', $crm_id);
+        //         })
+        //         ->whereRaw('state_id = 1 '.$core_condition)
+        //         ->get();
+        // } else {
+        //     $zona_id = $this->zona_id;
+        //     $pop = Pop::with('comuna.zona.crm', 'comuna.region')
+        //         ->whereHas('comuna', function($query) use ($zona_id) {
+        //             $query->where('zona_id', $zona_id);
+        //         })
+        //         ->whereRaw('state_id = 1 '.$core_condition)
+        //         ->get();
+        // }
 
         return $pop;
+    }
+
+    /**
+     * @return array
+     */
+    public function startCell(): string
+    {
+        return 'A2';
     }
 
     /**
@@ -80,9 +89,9 @@ class PopsExport implements FromCollection,
     {
         return [
             $pop->id,
-            $pop->nem_fijo,
-            $pop->nem_movil,
-            $pop->cod_planificacion,
+            // $pop->nem_fijo,
+            // $pop->nem_movil,
+            $pop->pop_e_id,
             $pop->nombre,
             $pop->direccion,
             $pop->comuna->nombre_comuna,
@@ -94,7 +103,7 @@ class PopsExport implements FromCollection,
             $pop->latitude,
             $pop->longitude,
 
-            $pop->classification_type ? $pop->classification_type->classification_type : '',
+            // $pop->classification_type ? $pop->classification_type->classification_type : '',
             // $pop->category ? $pop->category->type : '',
             // $pop->attention_priority ? $pop->attention_priority->type : '',
 
@@ -113,21 +122,21 @@ class PopsExport implements FromCollection,
             // $pop->autonomy->first()->theoretical,
             // $pop->threshold->first()->limit,
 
-           //  $pop->pe_3g ? 'SI' : 'NO',
-  	        // $pop->mpls ? 'SI' : 'NO',
-  	        // $pop->olt ? 'SI' : 'NO',
-  	        // $pop->olt_3play ? 'SI' : 'NO',
-  	        // $pop->core ? 'SI' : 'NO',
-  	        // $pop->red_minima_n1 ? 'SI' : 'NO',
-  	        // $pop->red_minima_n2 ? 'SI' : 'NO',
-  	        // $pop->vip ? 'SI' : 'NO',
-  	        // $pop->localidad_onligatoria ? 'SI' : 'NO',
-  	        // $pop->ranco ? 'SI' : 'NO',
-  	        // $pop->bafi ? 'SI' : 'NO',
-  	        // $pop->offgrid ? 'SI' : 'NO',
-  	        // $pop->solar ? 'SI' : 'NO',
-  	        // $pop->eolica ? 'SI' : 'NO',
-  	        // $pop->condiciones_ambientales ? 'SI' : 'NO' 
+            $pop->pe_3g ? 'SI' : 'NO',
+  	        $pop->mpls ? 'SI' : 'NO',
+  	        $pop->olt ? 'SI' : 'NO',
+  	        $pop->olt_3play ? 'SI' : 'NO',
+  	        $pop->core ? 'SI' : 'NO',
+  	        $pop->red_minima_n1 ? 'SI' : 'NO',
+  	        $pop->red_minima_n2 ? 'SI' : 'NO',
+  	        $pop->vip ? 'SI' : 'NO',
+  	        $pop->localidad_onligatoria ? 'SI' : 'NO',
+  	        $pop->ranco ? 'SI' : 'NO',
+  	        $pop->bafi ? 'SI' : 'NO',
+  	        $pop->offgrid ? 'SI' : 'NO',
+  	        $pop->solar ? 'SI' : 'NO',
+  	        $pop->eolica ? 'SI' : 'NO',
+  	        $pop->gestion_ambiental ? 'SI' : 'NO' ,
             $pop->alba_project ? 'SI' : 'NO' 
 
   		];
@@ -139,9 +148,9 @@ class PopsExport implements FromCollection,
     public function headings(): array
     {
         return [
-            'ID POP',
-	        'NEM FIJO',
-	        'NEM MOVIL',
+          'ID POP',
+	        // 'NEM FIJO',
+	        // 'NEM MOVIL',
 	        'COD PLANIFICACION',
 	        'NOMBRE',
 	        'DIRECCION',
@@ -154,42 +163,32 @@ class PopsExport implements FromCollection,
 	        'LATITUD',
 	        'LONGITUD',
 
-	        'CLASIFICACION SITIO',
+	        // 'CLASIFICACION SITIO',
 	        // 'CATEGORIA PLANIFICACION',
 	        // 'PRIORIDAD DE ATENCION EN TERRENO',
 
 	        // 'CLASE POP',
 	        // 'TIPO POP',
-	        // 'TIPO SITIO',
-	        // 'TIPO RED',
-
-	        // 'TIPO TRANSPORTE',
-	        // // 'TIPO CONTENEDOR',
-	        // 'TIPO DERIVACION',
-	        // 'TIPO COBERTURA',
-	        // // 'TIPO TORRE',
 
             //    'DEPENDENCIAS',
             //    'AUTONOMIA NOMINAL',
-            //    'UMBRAL',
 
-	        // 'PE 3G',
-	        // 'MPLS',
-	        // 'OLT',
-	        // 'OLT 3PLAY',
-	        // 'CORE',
-	        // 'RED MINIMA N1',
-	        // 'RED MINIMA N2',
-	        // 'VIP',
-	        // 'LOCALIDAD OBLIGATORIA',
-	        // 'RANCO',
-	        // 'BAFI',
-	        // 'OFFGRID',
-	        // 'PANEL SOLAR',
-	        // 'EOLICA',
-	        // 'GESTION RECONECTADOR',
-	        // 'CONDICIONES AMBIENTALES',
-            'PROYECTO ALBA'
+	        'PE 3G',
+	        'MPLS',
+	        'OLT',
+	        'OLT 3PLAY',
+	        'CORE',
+	        'RED MINIMA N1',
+	        'RED MINIMA N2',
+	        'VIP',
+	        'LOCALIDAD OBLIGATORIA',
+	        'RANCO',
+	        'BAFI',
+	        'OFFGRID',
+	        'PANEL SOLAR',
+	        'EOLICA',
+	        'GESTION AMBIENTAL',
+          'PROYECTO ALBA'
 	        // 'ACTIVO'
         ];
     }
@@ -209,140 +208,132 @@ class PopsExport implements FromCollection,
     /**
      * @return array
      */
-    public function registerEvents(): array
-    {
-        return [
-            BeforeExport::class  => function(BeforeExport $event) {
-                $event->writer->setCreator('Subgerencia de Infraestructura Poder y Clima');
-            },
-            AfterSheet::class    => function(AfterSheet $event) {
+    // public function registerEvents(): array
+    // {
+    //     return [
+    //         BeforeExport::class  => function(BeforeExport $event) {
+    //             $event->writer->setCreator('Subgerencia de Infraestructura Poder y Clima');
+    //         },
+    //         AfterSheet::class    => function(AfterSheet $event) {
 
-            	// Set font to 12
-            	$event->sheet->getDelegate()->getStyle('A1:AH10000')->getFont()->setSize(12);
+    //         	// Set font to 12
+    //         	$event->sheet->getDelegate()->getStyle('A1:AH10000')->getFont()->setSize(12);
 
-            	// Set second row to height 30
-                // $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(30);
+    //         	// Set second row to height 30
+    //             // $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(30);
 
-                // $event->sheet->setCellValue('B2', 'LISTADO DE POP');
-                // $event->sheet->getDelegate()->getStyle('B2')->getFont()->setSize(24);
+    //             // $event->sheet->setCellValue('B2', 'LISTADO DE POP');
+    //             // $event->sheet->getDelegate()->getStyle('B2')->getFont()->setSize(24);
 
-                $event->sheet->getDelegate()->mergeCells('A1:N1');
-                $event->sheet->setCellValue('A1', 'DATOS DEL POP');
-                $event->sheet->getStyle('A1')->getFill()
-          					->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-          					->getStartColor()->setARGB('FFEA9C');
-                $event->sheet->getStyle('A1')->applyFromArray(
-          			[
-          				'font' => [
-          					// 'name' => 'Arial',
-          					// 'bold' => true,
-          					// 'italic' => false,
-          					// 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
-          					'strikethrough' => false,
-          					'color' => [
-          						'rgb' => '9C5701'
-          					]
-          				],
-          				'alignment' => [
-          					'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-          					'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-          					'wrapText' => true,
-          				],
-          				'quotePrefix'    => true
-          			]
-          		);
+    //             $event->sheet->getDelegate()->mergeCells('A1:N1');
+    //             $event->sheet->setCellValue('A1', 'DATOS DEL POP');
+    //             $event->sheet->getStyle('A1')->getFill()
+    //       					->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+    //       					->getStartColor()->setARGB('FFEA9C');
+    //             $event->sheet->getStyle('A1')->applyFromArray(
+    //       			[
+    //       				'font' => [
+    //       					// 'name' => 'Arial',
+    //       					// 'bold' => true,
+    //       					// 'italic' => false,
+    //       					// 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+    //       					'strikethrough' => false,
+    //       					'color' => [
+    //       						'rgb' => '9C5701'
+    //       					]
+    //       				],
+    //       				'alignment' => [
+    //       					'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+    //       					'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+    //       					'wrapText' => true,
+    //       				],
+    //       				'quotePrefix'    => true
+    //       			]
+    //       		);
 
 
-                $event->sheet->getStyle('A2:N2')->getFill()
-          					->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-          					->getStartColor()->setARGB('FFEA9C');
-          		$event->sheet->getStyle('A2:N2')->applyFromArray(
-          			[
-          				'font' => [
-          					'color' => [
-          						'rgb' => '9C5701'
-          					]
-          				]
-          			]
-          		);
+    //             $event->sheet->getStyle('A2:N2')->getFill()
+    //       					->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+    //       					->getStartColor()->setARGB('FFEA9C');
+    //       		$event->sheet->getStyle('A2:N2')->applyFromArray(
+    //       			[
+    //       				'font' => [
+    //       					'color' => [
+    //       						'rgb' => '9C5701'
+    //       					]
+    //       				]
+    //       			]
+    //       		);
 
           		
-                // $event->sheet->styleCells(
-                //     'A1:N1',
-                //     [
-                //         'font' => [
-                //                 'bold'  => true,
-                //                 'color' => ['argb' => '9C5701'],
-                //         ]
-                //     ]
-                //     'O4:Q4',
-                //     [
-                //         // 'borders' => [
-                //         //     'outline' => [
-                //         //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-                //         //         'color' => ['argb' => 'FFFF0000'],
-                //         //     ],
-                //         // ]
-                //         'cell' => [
-                //             'fill' => [
-                //                 'type'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                //                 'color' => ['argb' => 'F4D35E']
-                //             ]
-                //         ]
-                //     ],
-                //     'R4:AC4',
-                //     [
-                //         // 'borders' => [
-                //         //     'outline' => [
-                //         //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-                //         //         'color' => ['argb' => 'FFFF0000'],
-                //         //     ],
-                //         // ]
-                //         'cell' => [
-                //             'fill' => [
-                //                 'type'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                //                 'color' => ['argb' => 'F87500']
-                //             ]
-                //         ]
-                //     ]
-                // );
+    //             // $event->sheet->styleCells(
+    //             //     'A1:N1',
+    //             //     [
+    //             //         'font' => [
+    //             //                 'bold'  => true,
+    //             //                 'color' => ['argb' => '9C5701'],
+    //             //         ]
+    //             //     ]
+    //             //     'O4:Q4',
+    //             //     [
+    //             //         // 'borders' => [
+    //             //         //     'outline' => [
+    //             //         //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+    //             //         //         'color' => ['argb' => 'FFFF0000'],
+    //             //         //     ],
+    //             //         // ]
+    //             //         'cell' => [
+    //             //             'fill' => [
+    //             //                 'type'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+    //             //                 'color' => ['argb' => 'F4D35E']
+    //             //             ]
+    //             //         ]
+    //             //     ],
+    //             //     'R4:AC4',
+    //             //     [
+    //             //         // 'borders' => [
+    //             //         //     'outline' => [
+    //             //         //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+    //             //         //         'color' => ['argb' => 'FFFF0000'],
+    //             //         //     ],
+    //             //         // ]
+    //             //         'cell' => [
+    //             //             'fill' => [
+    //             //                 'type'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+    //             //                 'color' => ['argb' => 'F87500']
+    //             //             ]
+    //             //         ]
+    //             //     ]
+    //             // );
 
 
-                // $cellRange = 'A1:W1'; // All headers
-                // $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
+    //             // $cellRange = 'A1:W1'; // All headers
+    //             // $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
 
-                // Apply array of styles to B2:G8 cell range
-                // $styleArray = [
-                //     // 'borders' => [
-                //     //     'outline' => [
-                //     //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-                //     //         'color' => ['argb' => 'FFFF0000'],
-                //     //     ]
-                //     // ],
-                //     'cell' => [
-                //         'fill' => [
-                //             'type'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                //             'color' => ['rgb' => '343434']
-                //         ]
-                //     ]
-                // ];
-                // $event->sheet->getDelegate()->getStyle('A4:N4')->applyFromArray($styleArray);
+    //             // Apply array of styles to B2:G8 cell range
+    //             // $styleArray = [
+    //             //     // 'borders' => [
+    //             //     //     'outline' => [
+    //             //     //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+    //             //     //         'color' => ['argb' => 'FFFF0000'],
+    //             //     //     ]
+    //             //     // ],
+    //             //     'cell' => [
+    //             //         'fill' => [
+    //             //             'type'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+    //             //             'color' => ['rgb' => '343434']
+    //             //         ]
+    //             //     ]
+    //             // ];
+    //             // $event->sheet->getDelegate()->getStyle('A4:N4')->applyFromArray($styleArray);
 
 
 
-                // Set A1:D4 range to wrap text in cells
-                // $event->sheet->getDelegate()->getStyle('A1:D4')->getAlignment()->setWrapText(true);
-            },
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function startCell(): string
-    {
-        return 'A2';
-    }
+    //             // Set A1:D4 range to wrap text in cells
+    //             // $event->sheet->getDelegate()->getStyle('A1:D4')->getAlignment()->setWrapText(true);
+    //         },
+    //     ];
+    // }
 
     // public function drawings()
     // {

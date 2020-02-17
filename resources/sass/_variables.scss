@@ -15,23 +15,23 @@ $entel-secondary-corp: #cccccc;
 $entel-secondary-corp-invert: findColorInvert($entel-secondary-corp);
 $eco: #42E8B4;
 $eco-invert: findColorInvert($eco);
-$eco-light: #A4F2D9;
+$eco-light: #DBFAF0;
 $eco-light-invert: findColorInvert($eco-light);
 $smart: #2FCBF1;
 $smart-invert: findColorInvert($smart);
+$smart-light: #EBFAFD;
+$smart-light-invert: findColorInvert($smart-light);
 $positive: #FD6C9B;
 $positive-invert: findColorInvert($positive);
+$positive-light: #FFE2EB;
+$positive-light-invert: findColorInvert($positive-light);
 $mirage: #191B22;
 $mirage-invert: findColorInvert($mirage);
 $blackRussian: #23252C;
 $blackRussian-invert: findColorInvert($blackRussian);
-$red-light: #FDD9DA;
-$red-light-invert: findColorInvert($red-light);
-$green-light: #D9FEE5;
-$green-light-invert: findColorInvert($green-light);
-$blue-light: #F2FBFF;
-$blue-light-invert: findColorInvert($blue-light);
-$yellow-light: #FDF2D6;
+$yellow: #FDE74C;
+$yellow-invert: findColorInvert($yellow);
+$yellow-light: #FDFFD6;
 $yellow-light-invert: findColorInvert($yellow-light);
 
 // Links
@@ -79,7 +79,10 @@ $colors: (
     "eco": ($eco, $eco-invert),
     "eco-light": ($eco-light, $eco-light-invert),
     "smart": ($smart, $smart-invert),
-    "positive": ($positive, $positive-invert),
+    "smart-light": ($smart-light, $smart-invert),
+    "positive": ($positive, $positive-light-invert),
+    "positive-light": ($positive-light, $positive-light-invert),
+    "yellow": ($yellow, $yellow-light-invert),
     // "mirage": ($mirage, $mirage-invert),
     // "blackRussian": ($blackRussian, $blackRussian-invert)
 );
@@ -94,10 +97,14 @@ $shades: (
     "grey-lighter": $grey-lighter, 
     "white-ter": $white-ter, 
     "white-bis": $white-bis,
-    "red-light": $red-light,
-    "green-light": $green-light,
-    "blue-light": $blue-light,
-    "yellow-light": $yellow-light
+    "positive": $positive,
+    "eco": $eco,
+    "smart": $smart,
+    "yellow": $yellow,
+    "positive-light": $positive-light,
+    "eco-light": $eco-light,
+    "smart-light": $smart-light,
+    "yellow-light": $yellow-light,
 );
 
 

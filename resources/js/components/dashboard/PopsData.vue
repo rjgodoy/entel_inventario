@@ -175,7 +175,7 @@
             downloadPops() {
                 this.buttonLoading = 1
 
-                axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
+                axios.get(`/api/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
                     responseType: 'blob',
                 })
                 .then((response) => {

@@ -1,7 +1,6 @@
 <template>
     <GmapMap
-        class="tile is-child box"
-        style="height: 100%;"
+        style="height: 100%; margin: -14px -14px -14px -14px; padding-bottom: -14px"
         ref="map"
         :center="center"
         :zoom="zoom"
@@ -291,7 +290,7 @@
                 
                 this.$refs.map.$mapPromise.then((map) => {
                     map.panTo({ lat: parseFloat(this.pops[0].latitude), lng: parseFloat(this.pops[0].longitude) })
-                    map.setZoom(14)
+                    map.setZoom(17)
                 });
             },
 

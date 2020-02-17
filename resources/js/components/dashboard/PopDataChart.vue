@@ -37,15 +37,13 @@
 
         beforeDestroy(){
             if (this.chart) {
+                this.chart.destroy()
                 this.chart.dispose()
             }
             // this.$eventBus.$off('getSitesData')
         },
         watch: {
             chartData(newValue, oldValue) {
-                if (this.chart) {
-                    this.chart.dispose()
-                }
                 this.graph()
             }
         },

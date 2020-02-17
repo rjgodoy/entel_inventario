@@ -7,6 +7,8 @@ use App\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Resources\Document as DocumentResource;
 use App\Document;
 
@@ -19,7 +21,13 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        //
+        $directories = Storage::disk('local')->directories('/public');
+
+        $folders = [];
+        foreach ($directories as $directory) {
+            array_push($folders, pathinfo($directory));
+        }
+        return $folders;
     }
 
     /**
@@ -39,60 +47,41 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $sites = Site::whereHas('pop', function($q) use($id) {
             $q->where('id', $id);
         })->get();
 
+        $files = []; $folders = [];
+
+        $directories = Storage::directories('public/'.$request->path);
+
+        // Folders
         foreach ($sites as $site) {
-            return $site;
+            foreach($directories as $folder_path) {
+                $f = explode(' ', explode('public/'.$request->path.'/', $folder_path, 2)[1], 2);
+                if($f[0] == $site->nem_site) {
+                    $folders[] = pathinfo($folder_path);
+                    // if (Storage::files($folder_path)) {
+                    //     $files[] = pathinfo(Storage::files($folder_path)[0]);
+                    // }
+                }
+            }
         }
-            // $directory_path = 'ftp://developer:Entel.123@172.16.100.123/OOCC/'.$site->nem_site;
 
-        //     // Files
-        //     $files = [];
-        //     $filesInFolder = \File::files($directory_path, true);
-        //     // $filesInFolder = \File::allFiles($directory_path, true);
+        // Files
+        $filesInFolder = Storage::files('public/'.$request->path);
+        foreach ($filesInFolder as $f) {
+            $files[] = pathinfo($f);
+        }
 
-        //     foreach($filesInFolder as $path)
-        //     {
-        //         $files[] = pathinfo($path);
-        //     }
-
-        //     // Directories
-        //     $folders = [];
-        //     $Folders = \File::directories($directory_path, true);
-        //     // $Folders = \File::allDirectories($directory_path);
-
-        //     foreach($Folders as $folder_path)
-        //     {
-        //         $folders[] = pathinfo($folder_path);
-        //     }
-        // }
-        // $directory_path = 'ftp://developer:Entel.123@172.16.100.123/OOCC/';
-
-        // // Files
-        // $files = [];
-        // $filesInFolder = \File::files($directory_path, true);
-        // // $filesInFolder = \File::allFiles($directory_path, true);
-
-        // foreach($filesInFolder as $path)
-        // {
-        //     $files[] = pathinfo($path);
-        // }
-
-        // // Directories
-        // $folders = [];
-        // $Folders = \File::directories($directory_path, true);
-        // // $Folders = \File::allDirectories($directory_path);
-
-        // foreach($Folders as $folder_path)
-        // {
-        //     $folders[] = pathinfo($folder_path);
-        // }
-
-        // return new DocumentResource($sites[0]);
+        return [
+            'directories' => $directories, 
+            'folders' => $folders, 
+            'files' => $files
+        ];
+        
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Resources\Eco as EcoResource;
 use App\ProtectedZone;
-use App\Site;
+use App\Pop;
 
 class EcoController extends Controller
 {
@@ -18,8 +18,8 @@ class EcoController extends Controller
      */
     public function index()
     {
-        $protectedZonesSites = Site::with('protected_zones', 'pop.comuna.zona')->has('protected_zones')->get();
-        return new EcoResource($protectedZonesSites);
+        $protectedZonesPops = Pop::with('protected_zones', 'comuna.zona', 'sites')->has('protected_zones')->get();
+        return new EcoResource($protectedZonesPops);
     }
 
     /**

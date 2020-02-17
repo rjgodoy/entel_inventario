@@ -7,18 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Site extends Model
 {
     protected $connection = 'mysql_entel_pops';
+    protected $guarded = [];
 
     public function attention_priority_type() 
     {
         return $this->belongsTo(AttentionPriorityType::class);
     }
 
-    public function attention_types() 
+    public function attention_type() 
     {
         return $this->belongsTo(AttentionType::class);
     }
 
-    public function category_types() 
+    public function category_type() 
     {
         return $this->belongsTo(CategoryType::class);
     }
@@ -68,9 +69,9 @@ class Site extends Model
         return $this->belongsTo(SolutionType::class);
     }
 
-    public function state_type() 
+    public function state() 
     {
-        return $this->belongsTo(StateType::class);
+        return $this->belongsTo(State::class);
     }
 
     public function technologies() 
@@ -78,14 +79,9 @@ class Site extends Model
         return $this->hasMany(Technology::class);
     }
 
-    public function transport_types() 
+    public function transport_type() 
     {
         return $this->belongsTo(TransportType::class);
-    }
-
-    public function protected_zones()
-    {
-        return $this->belongsToMany(ProtectedZone::class)->withTimestamps();
     }
 
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pop extends Model
 {
     protected $connection = 'mysql_entel_pops';
+    protected $guarded = [];
 
     ##################### RELACIONES CON entel_pops #####################
 
@@ -23,6 +24,11 @@ class Pop extends Model
     public function pop_classes() 
     {
         return $this->hasMany(PopClass::class);
+    }
+
+    public function protected_zones()
+    {
+        return $this->belongsToMany(ProtectedZone::class)->withTimestamps();
     }
 
     public function rcas() 

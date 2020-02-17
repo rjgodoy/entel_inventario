@@ -192,10 +192,12 @@ class PopController extends Controller
      */
     public function export(Request $request)
     {
-        $core = $request->core;
-        $crm_id = $request->crm_id;
-        $zona_id = $request->zona_id;
+        // $core = $request->core;
+        // $crm_id = $request->crm_id;
+        // $zona_id = $request->zona_id;
 
-        return Excel::download(new PopsExport($core, $crm_id, $zona_id), 'listado_pops - '.date("Y-m-d h:i:sa").'.xlsx');
+        // return Excel::download(new PopsExport($core, $crm_id, $zona_id), 'listado_pops - '.date("Y-m-d h:i:sa").'.xlsx');
+        // return Excel::download(new PopsExport(), 'listado_pops - '.date("Y-m-d h:i:sa").'.xlsx');
+        return Excel::download(new PopsExport, 'pops.xlsx');
     }
 }

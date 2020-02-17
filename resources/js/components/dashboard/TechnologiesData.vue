@@ -16,11 +16,10 @@
                         <th class="has-text-right" :class="secondaryText"><abbr title="2G">2G 1900</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="3G 900">3G 900</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="3G 1900">3G 1900</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="3G 3500">3G 3500</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="4G 700">4G 700</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="4G 1900">4G 1900</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="4G 2600">4G 2600</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="4G 3500">4G 3500</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="LTE 700">LTE 700</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="LTE 1900">LTE 1900</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="LTE 2600">LTE 2600</abbr></th>
+                        <th class="has-text-right" :class="secondaryText"><abbr title="LTE 3500">LTE 3500</abbr></th>
                         <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
                     </tr>
                 </thead>
@@ -30,23 +29,21 @@
                         <td class="has-text-right" :class="primaryText">{{ crm.tec2g1900 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ crm.tec3g900 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ crm.tec3g1900 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ crm.tec3g3500 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ crm.tec4g700 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ crm.tec4g1900 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ crm.tec4g2600 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ crm.tec4g3500 | numeral('0,0') }}</td>
-                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ crm.tec2g1900 + crm.tec3g900 + crm.tec3g1900 + crm.tec3g3500 + crm.tec4g700 + crm.tec4g1900 + crm.tec4g2600 + crm.tec4g3500 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ crm.tecLTE700 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ crm.tecLTE1900 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ crm.tecLTE2600 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ crm.tecLTE3500 | numeral('0,0') }}</td>
+                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ crm.tec2g1900 + crm.tec3g900 + crm.tec3g1900 + crm.tecLTE700 + crm.tecLTE1900 + crm.tecLTE2600 + crm.tecLTE3500 | numeral('0,0') }}</td>
                     </tr>
                     <tr class="is-size-7 has-text-weight-bold">
                         <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
                         <td class="has-text-right" :class="primaryText">{{ this.total2G1900 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ this.total3G900 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ this.total3G1900 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.total3G3500 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.total4G700 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.total4G1900 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.total4G2600 | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.total4G3500 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalLTE700 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalLTE1900 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalLTE2600 | numeral('0,0') }}</td>
+                        <td class="has-text-right" :class="primaryText">{{ this.totalLTE3500 | numeral('0,0') }}</td>
                         <td class="has-text-right" :class="primaryText">{{ this.totalTechnologies | numeral('0,0') }}</td>
                     </tr>
                 </tbody>
@@ -150,33 +147,28 @@
                 this.technologyData.forEach(function(item) { counter = counter + item.tec3g1900 })
                 return counter
             },
-            total3G3500() {
+            totalLTE700() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tec3g3500 })
+                this.technologyData.forEach(function(item) { counter = counter + item.tecLTE700 })
                 return counter
             },
-            total4G700() {
+            totalLTE1900() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tec4g700 })
+                this.technologyData.forEach(function(item) { counter = counter + item.tecLTE1900 })
                 return counter
             },
-            total4G1900() {
+            totalLTE2600() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tec4g1900 })
+                this.technologyData.forEach(function(item) { counter = counter + item.tecLTE2600 })
                 return counter
             },
-            total4G2600() {
+            totalLTE3500() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tec4g2600 })
-                return counter
-            },
-            total4G3500() {
-                var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tec4g3500 })
+                this.technologyData.forEach(function(item) { counter = counter + item.tecLTE3500 })
                 return counter
             },
             totalTechnologies() {
-                return this.total2G1900 + this.total3G900 + this.total3G1900 + this.total3G3500 + this.total4G700 + this.total4G1900 + this.total4G2600 + this.total4G3500
+                return this.total2G1900 + this.total3G900 + this.total3G1900 + this.total3G3500 + this.totalLTE700 + this.totalLTE1900 + this.totalLTE2600 + this.totalLTE3500
             }
         },
         methods: {

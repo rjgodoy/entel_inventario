@@ -16,9 +16,7 @@ class CreateGeneratorGroupsTable extends Migration
         // Schema::create('generator_groups', function (Blueprint $table) {
         //     $table->bigIncrements('id');
         //     $table->bigInteger('pop_id');
-        //     $table->bigInteger('generator_group_type_id');
-        //     $table->bigInteger('generator_group_model_id');
-        //     $table->double('power');
+        //     $table->bigInteger('generator_set_type_id');
         //     $table->string('serial_number');
         //     $table->timestamps();
         // });

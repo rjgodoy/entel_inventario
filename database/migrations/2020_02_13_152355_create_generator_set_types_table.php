@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStateTypesTable extends Migration
+class CreateGeneratorSetTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateStateTypesTable extends Migration
      */
     public function up()
     {
-        // Schema::create('state_types', function (Blueprint $table) {
+        // Schema::create('generator_set_types', function (Blueprint $table) {
         //     $table->bigIncrements('id');
-        //     $table->string('state_type');
+        //     $table->string('generator_set_type');
+        //     $table->string('generator_set_model');
+        //     $table->timestamps();
         // });
     }
 
@@ -26,6 +28,6 @@ class CreateStateTypesTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('state_types');
+        // Schema::dropIfExists('generator_set_types');
     }
 }

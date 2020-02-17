@@ -44,7 +44,7 @@ class ClientConnectionController extends Controller
     {
         $clientConnection = ClientConnection::with('client_connection_state', 'electric_company')
         ->join('entel_pops.sites', function($q) {
-            $q->on('client_connections.site_id', '=', 'sites.id')->where('sites.state_type_id', 1);
+            $q->on('client_connections.site_id', '=', 'sites.id')->where('sites.state_id', 1);
         })
         ->join('entel_pops.pops', function($q) use($id) {
             $q->on('sites.pop_id', '=', 'pops.id')->where('pops.id', $id);

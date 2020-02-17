@@ -8,12 +8,6 @@
                 <label for="email" class="label has-text-weight-normal">Email</label>
                 <p class="control has-icon has-icon-right">
                     <input v-model="state.email" id="email" type="email" class="input" name="email" placeholder="" autofocus>
-
-                    <!-- @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror -->
                 </p>
             </div>
 
@@ -47,7 +41,6 @@
         data() {
             return {
                 buttonLoading: 0,
-                errors: [],
                 state: {
                     email: ''
                 }
@@ -60,14 +53,12 @@
         },
         methods: {
             resetEmail(e) {
-                this.errors = [];
                 if (!this.state.email) {
                     this.$buefy.toast.open({
                         message: 'Email required.',
                         type: 'is-danger',
-                        duration: 5000
+                        duration: 3000
                     })
-                    this.errors.push('Password required.');
                 }
                 else {
                     this.buttonLoading = 1

@@ -83,7 +83,8 @@
         },
         beforeDestroy() {
             if (this.chart) {
-                this.chart.dispose();
+                this.chart.destroy()
+                this.chart.dispose()
             }
         }
     }  

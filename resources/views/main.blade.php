@@ -22,6 +22,10 @@
 <body>
     <div id="app">
         <app
+            {{-- :pops='@json($pops)' --}}
+            :crms='@json($crms)'
+            :menu_data='@json($menu)'
+            :last_data_counters='@json($last_data_counters)'
             :message="'{{ session()->get('message') }}'"
             :app_name="'{{ config('app.name') }}'"
             :user='@json(Auth::user())'

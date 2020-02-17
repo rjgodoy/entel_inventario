@@ -37,7 +37,7 @@ class GeneratorGroupController extends Controller
         } else {
             $generatorGroupsQuantity = Cache::remember('generatorGroupsData_core'.$core, $this->seconds, function () use ($core) {
 
-                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_type_id = 1' : '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
                 $generatorGroupsQuantity = DB::select(DB::raw("
                     SELECT
                     @crm_id:=id AS id,
@@ -79,7 +79,7 @@ class GeneratorGroupController extends Controller
         } else {
             $generatorGroupsQuantity = Cache::remember('generatorGroupsData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
 
-                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_type_id = 1' : '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
                 $generatorGroupsQuantity = DB::select(DB::raw("
                     SELECT
                     @zona_id:=id AS id,
@@ -120,7 +120,7 @@ class GeneratorGroupController extends Controller
         } else {
             $generatorGroupsQuantity = Cache::remember('generatorGroupsData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
 
-                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_type_id = 1' : '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
                 $generatorGroupsQuantity = DB::select(DB::raw("
                     SELECT
                     @comuna_id:=id AS id,

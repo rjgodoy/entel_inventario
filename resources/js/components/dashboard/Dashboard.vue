@@ -244,90 +244,97 @@
             <!-- CUADROS -->
             <div class="" :class="bodyBackground" style="margin: 20px 0 -30px 0;">
                 <div class="">
+
+                    <!-- cuadros superiores -->
                     <div class="tile is-ancestor">
                         <div class="tile is-vertical">
-                            <div class="tile is-vertical">
-                                <div class="tile">
-                                    <div class="tile is-parent">
-                                        <a class="tile is-child box has-text-centered" @click="currentTab = 'pops'">
-                                            <div class="" style="margin-top: 10px;">
-                                            <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="map-marker-alt" class="has-text-smart" size="2x"/>
-                                            <!-- </b-tag> -->
-                                            </div>
-                                            
-                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">POP</p>
-                                            </div>
-                                        </a>
+                            <div class="tile">
+                                <div class="tile is-vertical">
+                                    <div class="tile">
+                                        <div class="tile is-parent">
+                                            <a class="tile is-child box has-text-centered" :class="currentTab === 'pops' ? 'has-background-link' : boxBackground" @click="currentTab = 'pops'">
+                                                <div class="" style="margin-top: 10px;" >
+                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
+                                                    <font-awesome-icon icon="map-marker-alt" :class="currentTab === 'pops' ? 'has-text-smart-light' : 'has-text-smart'" size="2x"/>
+                                                <!-- </b-tag> -->
+                                                </div>
+                                                
+                                                <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'pops' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
+                                                    <p class="is-size-6 has-text-weight-normal">POP</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="tile is-parent">
+                                            <a class="tile is-child box has-text-centered" :class="currentTab === 'sites' ? 'has-background-link' : boxBackground" @click="currentTab = 'sites'">
+                                                <div class="" style="margin-top: 10px;">
+                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
+                                                    <font-awesome-icon icon="server" :class="currentTab === 'sites' ? 'has-text-positive-light' : 'has-text-positive'" size="2x"/>
+                                                <!-- </b-tag> -->
+                                                </div>
+                                                <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'sites' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
+                                                    <p class="is-size-6 has-text-weight-normal">Sitios</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="tile is-parent">
+                                            <a class="tile is-child box has-text-centered" :class="currentTab === 'technologies' ? 'has-background-link' : boxBackground" @click="currentTab = 'technologies'">
+                                                <div class="" style="margin-top: 10px;">
+                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
+                                                    <font-awesome-icon icon="signal" :class="currentTab === 'technologies' ? 'has-text-eco-light' : 'has-text-eco'" size="2x"/>
+                                                <!-- </b-tag> -->
+                                                </div>
+                                                <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'technologies' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
+                                                    <p class="is-size-6 has-text-weight-normal">Tecnologías</p>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
 
-                                    <div class="tile is-parent">
-                                        <a class="tile is-child box has-text-centered" @click="currentTab = 'sites'">
-                                            <div class="" style="margin-top: 10px;">
-                                            <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="server" class="has-text-positive" size="2x"/>
-                                            <!-- </b-tag> -->
-                                            </div>
-                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">Sitios</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    <div class="tile">
+                                        <div class="tile is-parent">
+                                            <a class="tile is-child box has-text-centered has-text-yellow has-background-yellow-light" @click="currentTab = 'critics'">
+                                                <div class="" style="margin-top: 10px;">
+                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
+                                                    <font-awesome-icon icon="exclamation-triangle" class="has-text-yellow" size="2x"/>
+                                                <!-- </b-tag> -->
+                                                </div>
+                                                <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
+                                                    <p class="is-size-6 has-text-weight-normal">POP Críticos</p>
+                                                </div>
+                                            </a>
+                                        </div>
 
-                                    <div class="tile is-parent">
-                                        <a class="tile is-child box has-text-centered" @click="currentTab = 'technologies'">
-                                            <div class="" style="margin-top: 10px;">
-                                            <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="signal" class="has-text-eco" size="2x"/>
-                                            <!-- </b-tag> -->
-                                            </div>
-                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">Tecnologías</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                                        <div class="tile is-parent">
+                                            <router-link class="tile is-child box has-text-centered has-text-positive has-background-positive-light" to="/pop">
+                                                <div class="" style="margin-top: 10px;">
+                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
+                                                    <font-awesome-icon icon="file-invoice-dollar" class="has-text-positive" size="2x"/>
+                                                <!-- </b-tag> -->
+                                                </div>
+                                                <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ albaQuantity | numeral('0,0') }}
+                                                    <p class="is-size-6 has-text-weight-normal">POP Alba</p>
+                                                </div>
+                                            </router-link>
+                                        </div>
 
-                                <div class="tile">
-                                    <div class="tile is-parent">
-                                        <a class="tile is-child box has-text-centered has-text-white has-background-smart" @click="currentTab = 'critics'">
-                                            <div class="" style="margin-top: 10px;">
-                                            <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="map-marker-alt" class="has-text-white" size="2x"/>
-                                            <!-- </b-tag> -->
-                                            </div>
-                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">Críticos</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="tile is-parent">
-                                        <router-link class="tile is-child box has-text-centered has-text-white has-background-positive" to="/pop">
-                                            <div class="" style="margin-top: 10px;">
-                                            <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="map-marker-alt" class="has-text-white" size="2x"/>
-                                            <!-- </b-tag> -->
-                                            </div>
-                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 1980 | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">Alba</p>
-                                            </div>
-                                        </router-link>
-                                    </div>
-                                    <div class="tile is-parent">
-                                        <router-link class="tile is-child box has-text-centered has-text-white has-background-eco" to="/eco">
-                                            <div class="" style="margin-top: 10px;">
-                                            <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                <font-awesome-icon icon="map-marker-alt" class="has-text-white" size="2x"/>
-                                            <!-- </b-tag> -->
-                                            </div>
-                                            <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 24 | numeral('0,0') }}
-                                                <p class="is-size-6 has-text-weight-normal">Zonas Protegidas</p>
-                                            </div>
-                                        </router-link>
+                                        <div class="tile is-parent">
+                                            <router-link class="tile is-child box has-text-centered has-text-eco has-background-eco-light" to="/eco">
+                                                <div class="" style="margin-top: 10px;">
+                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
+                                                    <font-awesome-icon icon="leaf" class="has-text-eco" size="2x"/>
+                                                <!-- </b-tag> -->
+                                                </div>
+                                                <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 24 | numeral('0,0') }}
+                                                    <p class="is-size-6 has-text-weight-normal">POP en Zonas Protegidas</p>
+                                                </div>
+                                            </router-link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="tile">
                                 <div class="tile is-parent">
                                     <radial-chart></radial-chart>
@@ -338,14 +345,21 @@
 
 
                         <div class="tile is-parent is-vertical">
-                            <map-view
-                                :pops="pops"
-                                :map_attributes="map_attributes"
-                                :darkMode="darkMode"
-                                :criticPopsSwitch="criticPopsSwitch"
-                            />                                    
+                            <div class="tile is-child box">
+                                <map-view
+                                    :pops="pops"
+                                    :map_attributes="map_attributes"
+                                    :darkMode="darkMode"
+                                    :criticPopsSwitch="criticPopsSwitch"
+                                />   
+                                <!-- <PopsMap 
+                                    style="height: 100%; margin: -14px -14px -14px -14px;"
+                                    :pops="pops"
+                                    :darkMode="darkMode"/> -->
+                            </div>                               
                         </div>
 
+                        <div class="tile">
                         <keep-alive>
                             <component :is="currentTabComponent"
                                 :bodyBackground="bodyBackground"
@@ -358,105 +372,66 @@
                                 :last_updated="currentLastUpdateData"
                             />
                         </keep-alive>
+                        </div>
                     </div>
 
-                    <!-- CUADROS DE INFORMACION -->
-                    <!-- <div class="tile is-ancestor">
-                        <keep-alive>
-                            <critic-pops-table v-if="criticPopsSwitch" 
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                            />
-                        </keep-alive>
-
-                        <keep-alive>
-                            <pop-data v-if="!criticPopsSwitch"
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                                :last_update="last_update_pops"
-                            />
-                        </keep-alive>
-
-                        <div class="tile is-parent is-vertical">
-                            <map-view
-                                :selectedPop="selectedPop"
-                                :map_attributes="map_attributes"
-                                :darkMode="darkMode"
-                                :selectedPops="selectedPops"
-                                :criticPopsSwitch="criticPopsSwitch"
-                                :pops="pops"
-                            />                                    
-                        </div>
-
-                        <sites-data
-                            :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackground"
-                            :primaryText="primaryText"
-                            :secondaryText="secondaryText"
-                            :selectedCrm="this.selectedCrm"
-                            :selectedZona="this.selectedZona"
-                            :core="core"
-                            :last_update="last_update_sites"
-                            :criticPopsSwitch="criticPopsSwitch"
-                        />
-                    </div> -->
-
+                    <!-- cuadros inferiores -->
                     <div class="tile is-ancestor">
                         <div class="tile is-parent">
                             <div class="tile is-child box">
-                                <div class="is-size-5 has-text-weight-semibold">PRET</div>
-                                <div class="is-size-2 has-text-centered">{{ lastDataCounter.pret }}
-                                    <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados esta semana</p>
+                                <div class="is-size-5 has-text-weight-semibold title">Nuevos POP</div>
+                                <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.pop_news }}
+                                    <p class="is-size-6 has-text-weight-light">POP nuevos ingresados esta semana</p>
                                 </div>
                                 <div class="field" style="margin-top: 20px;">
                                     <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
-                                    <a class="is-size-6" :href="'/main#/pop/2'" target="_blank">ESTAN0098 - Nombre POP</a>
-                                    <div class="is-size-7">Zona Valparaiso - CRM Centro Norte</div>
+                                    <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_site.pop.id" target="_blank">
+                                        {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
+                                    </router-link>
+                                    <div class="is-size-7">
+                                        {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}
+                                    </div>
                                 </div>
 
-                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha ingreso: 08/01/2020</div>
+                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha actualización: {{ last_data_counters.last_updated_pops }}</div>
                             </div>
                         </div>
 
                         <div class="tile is-parent">
                             <div class="tile is-child box">
-                                <div class="is-size-5 has-text-weight-semibold">PSG</div>
-                                <div class="is-size-2 has-text-centered">{{ lastDataCounter.psg }}
+                                <div class="is-size-5 has-text-weight-semibold title">Nuevos Sitios</div>
+                                <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.sites_news }}
+                                    <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados esta semana</p>
+                                </div>
+                                <div class="field" style="margin-top: 20px;">
+                                    <div class="is-size-7 has-text-weight-light">Utimo Sitio ingresado:</div>
+                                    <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_site.pop.id" target="_blank">
+                                        {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
+                                    </router-link>
+                                    <div class="is-size-7">
+                                        {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}
+                                    </div>
+                                </div>
+
+                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha actualización: {{ last_data_counters.last_updated_sites }}</div>
+                            </div>
+                        </div>
+
+                        <div class="tile is-parent">
+                            <div class="tile is-child box">
+                                <div class="is-size-5 has-text-weight-semibold title">Nuevas Tecnologías</div>
+                                <div class="is-size-2 has-text-centered">{{ last_data_counters.technologies_news }}
                                     <p class="is-size-6 has-text-weight-light">Equipos ingresados esta semana</p>
                                 </div>
                                 <div class="field" style="margin-top: 20px;">
                                     <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
-                                    <a class="is-size-6" :href="'/main#/pop/2'" target="_blank">ESTAN0098 - Nombre POP</a>
+                                    <a class="is-size-6" :href="'/pop/2'" target="_blank">ESTAN0098 - Nombre POP</a>
                                     <div class="is-size-7">Zona Valparaiso - CRM Centro Norte</div>
                                 </div>
 
-                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha ingreso: 08/01/2020</div>
-                            </div>
-                        </div>
-
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-                                <div class="is-size-5 has-text-weight-semibold">Sitios Eliminados</div>
-                                <div class="is-size-2 has-text-centered">{{ lastDataCounter.psg }}
-                                    <p class="is-size-6 has-text-weight-light">Sitios eliminados estas semana</p>
+                                <div class="has-text-right is-size-7 has-text-weight-light">
+                                    Fecha actualización: {{ last_data_counters.last_updated_technologies }}
                                 </div>
-                                <div class="field" style="margin-top: 20px;">
-                                    <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
-                                    <a class="is-size-6" :href="'/main#/pop/2'" target="_blank">ESTAN0098 - Nombre POP</a>
-                                    <div class="is-size-7">Zona Valparaiso - CRM Centro Norte</div>
-                                </div>
-
-                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha ingreso: 08/01/2020</div>
                             </div>
                         </div>
 
@@ -468,41 +443,6 @@
                                 :secondaryText="secondaryText"
                             ></pret-data-chart>
                         </div>
-                        
-                        
-                        <!-- <div class="tile is-parent"> -->
-                            <!-- <services-data
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                            /> -->
-                        <!-- </div> -->
-                        <!-- <div class="tile is-parent"> -->
-                            <!-- <movil-services-data
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                            /> -->
-                        <!-- </div> -->
-                        <!-- <div class="tile is-parent"> -->
-                            <!-- <infra-data
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                            /> -->
-                        <!-- </div> -->
                     </div>
 
                 </div>
@@ -525,7 +465,7 @@
                             :selectedZona="this.selectedZona"
                             :core="core"
                         />
-                        <generator-groups-data
+                        <!-- <generator-groups-data
                             :bodyBackground="bodyBackground"
                             :boxBackground="boxBackgroundEnergy"
                             :primaryText="primaryText"
@@ -533,7 +473,7 @@
                             :selectedCrm="this.selectedCrm"
                             :selectedZona="this.selectedZona"
                             :core="core"
-                        />
+                        /> -->
                         <power-rectifiers-data
                             :bodyBackground="bodyBackground"
                             :boxBackground="boxBackgroundEnergy"
@@ -619,110 +559,246 @@
 </template>
 
 <script>
-    // Components
-    // import DashboardPopData from './DashboardPopData.vue';
-    // import DashboardSitesData from './DashboardSitesData.vue';
-    // import DashboardTechnologiesData from './DashboardTechnologiesData.vue';
-    // import DashboardServicesData from './DashboardServicesData.vue';
-    // import DashboardMovilServicesData from './DashboardMovilServicesData.vue';
-    // import DashboardInfraData from './DashboardInfraData.vue';
-    // import DashboardCriticPopsTable from './DashboardCriticPopsTable.vue';
-    // import DashboardElectricLinesData from './DashboardElectricLinesData.vue';
-    // import DashboardGeneratorGroupsData from './DashboardGeneratorGroupsData.vue';
-    // import DashboardPowerRectifiersData from './DashboardPowerRectifiersData.vue';
-    // import DashboardVerticalStructuresData from './DashboardVerticalStructuresData.vue';
-    // import DashboardInfrastructuresData from './DashboardInfrastructuresData.vue';
-    // import LoadingComponent from '../maps/LoadingComponent.vue';
-    // import ErrorComponent from '../maps/ErrorComponent.vue';
+    // import LoadingComponent from '../helpers/LoadingComponent'
+    // import ErrorComponent from '../helpers/ErrorComponent'
+    const PopsData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./PopsData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
 
+    const SitesData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./SitesData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
 
+    const TechnologiesData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./TechnologiesData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
 
-    // const MapView = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('../maps/MapView.vue'),
-    //     // A component to use while the async component is loading
-    //     loading: LoadingComponent,
-    //     // A component to use if the load fails
-    //     // error: ErrorComponent,
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })
+    const CriticsData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./CriticPopsData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
 
-    // const RadialChart = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('../RadialChart.vue'),
-    //     // A component to use while the async component is loading
-    //     // loading: LoadingComponent,
-    //     // A component to use if the load fails
-    //     // error: ErrorComponent,
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })  
+    const PretDataChart = () => ({
+        // The component to load (should be a Promise)
+        component: import('./PretDataChart.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
 
-    // const PretDataChart = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('./PretDataChart.vue'),
-    //     // A component to use while the async component is loading
-    //     // loading: LoadingComponent,
-    //     // A component to use if the load fails
-    //     // error: ErrorComponent,
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })      
-    // const MapView = () => ({
-    //     component: import('../maps/MapView.vue'),
-    //     loading: import("../maps/LoadingComponent"),
-    //     error: import("../maps/ErrorComponent"),
-    //     delay: 0,
-    //     timeout: 3000
-    // })
+    const PopsMap = () => ({
+        // The component to load (should be a Promise)
+        component: import('../maps/PopsMap.vue'),
+        // A component to use while the async component is loading
+        loading: import('../helpers/LoadingComponent'),
+        // A component to use if the load fails
+        error: import('../helpers/ErrorComponent'),
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const MapView = () => ({
+        // The component to load (should be a Promise)
+        component: import('../maps/MapView.vue'),
+        // A component to use while the async component is loading
+        loading: import('../helpers/LoadingComponent'),
+        // A component to use if the load fails
+        error: import('../helpers/ErrorComponent'),
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const RadialChart = () => ({
+        // The component to load (should be a Promise)
+        component: import('../RadialChart.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const ElectricLinesData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./ElectricLinesData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const GeneratorGroupsData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./GeneratorGroupsData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const PowerRectifiersData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./PowerRectifiersData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const AirConditionersData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./AirConditionersData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const VerticalStructuresData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./VerticalStructuresData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const InfrastructuresData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./InfrastructuresData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
 
     var moment = require('moment');
     import debounce from 'lodash/debounce'
     export default {
         components: {
-            PopsData: () => import("./PopsData"),
-            SitesData: () => import("./SitesData"),
-            TechnologiesData: () => import("./TechnologiesData"),
-            CriticsData: () => import("./CriticPopsData"),
-            PretDataChart: () => import("./PretDataChart"),
-            MapView: () => import('../maps/MapView'),
-            RadialChart: () => import('../RadialChart'),
-
-            ElectricLinesData: () => import('./ElectricLinesData'),
-            GeneratorGroupsData: () => import('./GeneratorGroupsData'),
-            PowerRectifiersData: () => import('./PowerRectifiersData'),
-            AirConditionersData: () => import('./AirConditionersData'),
-            VerticalStructuresData: () => import('./VerticalStructuresData'),
-            InfrastructuresData: () => import('./InfrastructuresData')
+            PopsData,
+            SitesData,
+            TechnologiesData,
+            CriticsData,
+            PretDataChart,
+            PopsMap,
+            MapView,
+            RadialChart,
+            ElectricLinesData,
+            GeneratorGroupsData,
+            PowerRectifiersData,
+            AirConditionersData,
+            VerticalStructuresData,
+            InfrastructuresData
         },
         props : [
-            'message'
+            'message',
+            // 'popList',
+            'last_data_counters',
+            'crms'
         ],
         created() {
             this.styleMode()
         },
         mounted() {
-            this.getCrms()
+            // console.log(this.last_data_counters)
+            // this.getCrms()
             this.getCounters()
-            this.lastUpdate()
-            this.syncCounter()
+            // this.lastUpdate()
+            // this.syncCounter()
             this.loadMessage()
             this.getPops()
         },
         data: () => {
             return {
                 core: 0,
-                crms: null,
+                // crms: null,
                 zonas: null,
 
                 isFetching: false,
@@ -774,8 +850,10 @@
                 sitesQuantity: 0,
                 technologiesQuantity: 0,
                 criticsQuantity: 0,
-                lastUpdateData: [],
-                lastDataCounter: [],
+                albaQuantity: 0,
+
+                // lastUpdateData: [],
+                // lastDataCounter: [],
 
                 currentTab: 'pops',
             }
@@ -843,7 +921,7 @@
                 return this.currentTab + '-data'
             },
             currentLastUpdateData: function () {
-                return this.lastUpdateData[this.currentTab]
+                return this.last_data_counters['last_updated_' + this.currentTab]
             },
             textSwitchCore() {
                 return this.core ? 'has-text-link' : ''
@@ -857,41 +935,42 @@
             },
 
             // APIs
-            async getCrms() {
-                axios.get(`/api/crms`)
-                .then((response) => {
-                    this.crms = response.data.data
-                })
-            },
+            // async getCrms() {
+            //     axios.get(`/api/crms`)
+            //     .then((response) => {
+            //         this.crms = response.data
+            //     })
+            // },
 
             // POP DATA
-            getPops: debounce(function () {
-                if (!this.popList.length) {
-                    axios.get(`/api/dashboardMap`)
-                    .then((response) => {
-                        console.log(response)
-                        try {
-                            this.$store.commit("setPops", response.data.data);
-                        } catch (ex) {
-                            console.log(ex);
-                        }
-                        this.pops = this.popList
-                    })
-                } else {
-                    if (this.core && !this.popsCore.length) {
-                        this.popList.forEach(element => {
-                            if (element.classification_type_id == 1) {
-                                this.popsCore.push(element)
-                                this.pops = this.popsCore
-                            }
-                        })
-                    } else if (this.core) {
-                        this.pops = this.popsCore
-                    } else {
-                        this.pops = this.popList
-                    }
-                }
-            }, 10),
+            // getPops: debounce(function () {
+            //     if (!this.popList.length) {
+            //         axios.get(`/api/dashboardMap`)
+            //         .then((response) => {
+            //             // console.log(response.data)
+            //             try {
+            //                 this.$store.commit("setPops", response.data);
+            //             } catch (ex) {
+            //                 console.log(ex);
+            //             }
+            //             this.pops = this.popList
+            //         })
+            //     } else {
+            //         if (this.core && !this.popsCore.length) {
+            //             this.popList.forEach(element => {
+            //                 if (element.classification_type_id == 1) {
+            //                     this.popsCore.push(element)
+            //                     this.pops = this.popsCore
+            //                 }
+            //             })
+            //         } else if (this.core) {
+            //             this.pops = this.popsCore
+            //         } else {
+            //             this.pops = this.popList
+            //         }
+            //     }
+            // }, 10),
+
             async getPopsCrm() {
                 this.popsCrm = []
                 this.popList.forEach(element => {
@@ -907,6 +986,7 @@
                 })
                 this.pops = this.popsCrm
             },
+
             async getPopsZona() {
                 this.popsZona = []
                 this.popList.forEach(element => {
@@ -922,6 +1002,21 @@
                 })
                 this.pops = this.popsZona
             },
+
+            getPops: debounce(function () {
+                var crm_id = this.selectedCrm ? this.selectedCrm : 0
+                var zona_id = this.selectedZona ? this.selectedZona : 0
+                axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
+                .then((response) => {
+                    console.log(response.data)
+                    try {
+                        this.$store.commit("setPops", response.data);
+                    } catch (ex) {
+                        console.log(ex);
+                    }
+                    this.pops = this.popList
+                })
+            }, 200),
 
             // popsPushCore(item, index) {
             //     if (item.classification_type_id == 1) {
@@ -961,15 +1056,16 @@
                     this.sitesQuantity = response.data.sites
                     this.technologiesQuantity = response.data.technologies
                     this.criticsQuantity = response.data.critics
+                    this.albaQuantity = response.data.alba_project
                 })
             },
 
-            async syncCounter() {
-                axios.get(`/api/counters`)
-                .then((response) => {
-                    this.lastDataCounter = response.data
-                })
-            },
+            // async syncCounter() {
+            //     axios.get(`/api/counters`)
+            //     .then((response) => {
+            //         this.lastDataCounter = response.data
+            //     })
+            // },
 
             // Triggers
             selectPop(pop) {
@@ -984,12 +1080,12 @@
                 this.selectedZona = this.selectedZona != zona ? zona : null
             },
 
-            async lastUpdate() {
-                axios.get(`/api/lastUpdate`)
-                .then((response) => {
-                    this.lastUpdateData = response.data
-                })
-            },
+            // async lastUpdate() {
+            //     axios.get(`/api/lastUpdate`)
+            //     .then((response) => {
+            //         this.lastUpdateData = response.data
+            //     })
+            // },
 
             getAsyncData: debounce(function (text) {
                 // String update
@@ -1089,9 +1185,9 @@
                     this.bodyBackgroundEnergy = 'has-background-black-ter',
                     this.bodyBackgroundClimate = 'has-background-black-ter',
                     this.bodyBackgroundInfrastructure = 'has-background-black-ter',
-                    this.boxBackgroundEnergy = 'has-background-green-light',
+                    this.boxBackgroundEnergy = 'has-background-light',
                     this.boxBackgroundClimate = 'has-background-light',
-                    this.boxBackgroundInfrastructure = 'has-background-yellow-light'
+                    this.boxBackgroundInfrastructure = 'has-background-light'
                 } else {
                     // light mode
                     this.bodyBackground = 'has-background-light'
@@ -1103,9 +1199,9 @@
                     this.bodyBackgroundEnergy = 'has-background-white',
                     this.bodyBackgroundClimate = 'has-background-white',
                     this.bodyBackgroundInfrastructure = 'has-background-white',
-                    this.boxBackgroundEnergy = 'has-background-green-light',
+                    this.boxBackgroundEnergy = 'has-background-light',
                     this.boxBackgroundClimate = 'has-background-light',
-                    this.boxBackgroundInfrastructure = 'has-background-yellow-light'
+                    this.boxBackgroundInfrastructure = 'has-background-light'
                 }
             },
 

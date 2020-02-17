@@ -1,32 +1,15 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapViewPops.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapViewPops.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VuePagination.vue */ "./resources/js/components/VuePagination.vue");
 //
 //
 //
@@ -97,831 +80,93 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['selectedPop', 'selectedCrm', 'selectedZona', 'selectedPops', 'map_attributes', 'darkMode', 'core', 'criticPopsSwitch'],
+  components: {
+    'vue-pagination': _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['selectedCrm', 'selectedZona', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
   data: function data() {
     return {
-      selectedPopMap: null,
-      popList: null,
-      popListCrm: null,
-      popListZona: null,
-      pops: null,
-      popsCrm: [],
-      popsZona: [],
-      popsCore: [],
-      map: null,
-      center: {
-        lat: this.map_attributes.latitude,
-        lng: this.map_attributes.longitude
+      data: {
+        total: 0,
+        per_page: 12,
+        from: 1,
+        to: 0,
+        current_page: 1
       },
-      infoContent: '',
-      infoWindowPos: {
-        lat: 0,
-        lng: 0
-      },
-      infoWinOpen: false,
-      currentMidx: null,
-      infoOptions: {
-        pixelOffset: {
-          width: 0,
-          height: -35
-        }
-      },
-      icon: '../img/markers/pin_entel_sm.png',
-      mapStyle: null,
-      // clusterActive: 1,
-      buttonText: '',
-      style1: [{
-        "featureType": "water",
-        "stylers": [{
-          "saturation": 43
-        }, {
-          "lightness": -11
-        }, {
-          "hue": "#0088ff"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "hue": "#ff0000"
-        }, {
-          "saturation": -100
-        }, {
-          "lightness": 99
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#808080"
-        }, {
-          "lightness": 54
-        }]
-      }, {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ece2d9"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ccdca1"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#767676"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#ffffff"
-        }]
-      }, {
-        "featureType": "poi",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "visibility": "on"
-        }, {
-          "color": "#b8cb93"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.sports_complex",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.medical",
-        "stylers": [{
-          "visibility": "on"
-        }]
-      }, {
-        "featureType": "poi.business",
-        "stylers": [{
-          "visibility": "simplified"
-        }]
-      }],
-      style2: [{
-        "featureType": "all",
-        "elementType": "all",
-        "stylers": [{
-          "invert_lightness": true
-        }, {
-          "saturation": 10
-        }, {
-          "lightness": 30
-        }, {
-          "gamma": 0.5
-        }, {
-          "hue": "#435158"
-        }]
-      }],
-      style3: [{
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#fffffa"
-        }]
-      }, {
-        "featureType": "water",
-        "stylers": [{
-          "lightness": 50
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "transit",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [{
-          "lightness": 40
-        }]
-      }],
-      style4: [{
-        "stylers": [{
-          "hue": "#18a689"
-        }, {
-          "visibility": "on"
-        }, {
-          "invert_lightness": true
-        }, {
-          "saturation": 40
-        }, {
-          "lightness": 10
-        }]
-      }],
-      style5: [{
-        featureType: "landscape",
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 65
-        }, {
-          visibility: "on"
-        }]
-      }, {
-        featureType: "poi",
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 51
-        }, {
-          visibility: "simplified"
-        }]
-      }, {
-        featureType: "road.highway",
-        stylers: [{
-          saturation: -100
-        }, {
-          visibility: "simplified"
-        }]
-      }, {
-        featureType: "road.arterial",
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 30
-        }, {
-          visibility: "on"
-        }]
-      }, {
-        featureType: "road.local",
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 40
-        }, {
-          visibility: "on"
-        }]
-      }, {
-        featureType: "transit",
-        stylers: [{
-          saturation: -100
-        }, {
-          visibility: "simplified"
-        }]
-      }, {
-        featureType: "administrative.province",
-        stylers: [{
-          visibility: "off"
-        }]
-        /**/
-
-      }, {
-        featureType: "administrative.locality",
-        stylers: [{
-          visibility: "off"
-        }]
-      }, {
-        featureType: "administrative.neighborhood",
-        stylers: [{
-          visibility: "on"
-        }]
-        /**/
-
-      }, {
-        featureType: "water",
-        elementType: "labels",
-        stylers: [{
-          visibility: "on"
-        }, {
-          lightness: -25
-        }, {
-          saturation: -100
-        }]
-      }, {
-        featureType: "water",
-        elementType: "geometry",
-        stylers: [{
-          hue: "#ffff00"
-        }, {
-          lightness: -25
-        }, {
-          saturation: -97
-        }]
-      }],
-      style6: [{
-        elementType: 'geometry',
-        stylers: [{
-          color: '#242f3e'
-        }]
-      }, {
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          color: '#242f3e'
-        }]
-      }, {
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#746855'
-        }]
-      }, {
-        featureType: 'administrative.locality',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#d59563'
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#d59563'
-        }]
-      }, {
-        featureType: 'poi.park',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#263c3f'
-        }]
-      }, {
-        featureType: 'poi.park',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#6b9a76'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#38414e'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#212a37'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#9ca5b3'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#746855'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#1f2835'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#f3d19c'
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#2f3948'
-        }]
-      }, {
-        featureType: 'transit.station',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#d59563'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#17263c'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#515c6d'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          color: '#17263c'
-        }]
-      }],
-      style7: [{
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#1d2c4d"
-        }]
-      }, {
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#8ec3b9"
-        }]
-      }, {
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1a3646"
-        }]
-      }, {
-        "featureType": "administrative.country",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#4b6878"
-        }]
-      }, {
-        "featureType": "administrative.land_parcel",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#64779e"
-        }]
-      }, {
-        "featureType": "administrative.neighborhood",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "administrative.province",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#4b6878"
-        }]
-      }, {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#334e87"
-        }]
-      }, {
-        "featureType": "landscape.natural",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#023e58"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#283d6a"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "labels.text",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#6f9ba5"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1d2c4d"
-        }]
-      }, {
-        "featureType": "poi.business",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#023e58"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "labels.text",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#3C7680"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#304a7d"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#98a5be"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1d2c4d"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#2c6675"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#255763"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#b0d5ce"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#023e58"
-        }]
-      }, {
-        "featureType": "transit",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#98a5be"
-        }]
-      }, {
-        "featureType": "transit",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "color": "#1d2c4d"
-        }]
-      }, {
-        "featureType": "transit.line",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#283d6a"
-        }]
-      }, {
-        "featureType": "transit.station",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#3a4762"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#0e1626"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "labels.text",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#4e6d70"
-        }]
-      }]
+      buttonLoading: 0
     };
   },
-  computed: {
-    google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_0__["gmapApi"]
-  },
-  created: function created() {
-    this.mapStyle = this.darkMode == 1 ? this.style2 : this.mapStyle = null;
-  },
+  created: function created() {},
   mounted: function mounted() {
-    // if (this.clusterActive == 1) {
-    //     this.buttonText = 'Desagrupar'
-    // } else {
-    //     this.buttonText = 'Agrupar'
-    // }
-    this.getPops(); // this.$refs.map.$mapPromise.then((map) => {
-    //     var myButton = document.getElementById('myClusterButton');
-    //     myButton.index = 1;
-    //     map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton)
-    // })
+    this.getData();
   },
   watch: {
-    selectedPop: function selectedPop(newValue, oldValue) {
-      newValue != null ? this.getPop() : this.getPops();
-    },
     selectedCrm: function selectedCrm(newValue, oldValue) {
-      this.getPops();
+      this.getData();
     },
     selectedZona: function selectedZona(newValue, oldValue) {
-      this.getPops();
-    },
-    darkMode: function darkMode(newValue, oldValue) {
-      this.mapStyle = newValue == 1 ? this.style2 : null;
+      this.getData();
     },
     core: function core(newValue, oldValue) {
-      this.getPops();
-    },
-    criticPopsSwitch: function criticPopsSwitch(newValue, oldValue) {
-      this.getPops();
-    },
-    selectedPops: function selectedPops(newValue, oldValue) {
-      var _this = this;
+      this.getData();
+    }
+  },
+  computed: {
+    popClassification: function popClassification(site) {
+      var i = 6;
+      var cat;
 
-      if (newValue.length != 0) {
-        this.pops = newValue; //Set bounds of the map                    
-
-        this.$refs.map.$mapPromise.then(function (map) {
-          var bounds = new google.maps.LatLngBounds(); // Create bounds from pops
-
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
-
-          try {
-            for (var _iterator = _this.pops[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-              var m = _step.value;
-              // console.log(m)
-              bounds.extend({
-                lat: parseFloat(m.latitude),
-                lng: parseFloat(m.longitude)
-              });
-            } // Don't zoom in too far on only one marker
-
-          } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                _iterator["return"]();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
+      if (site.pop) {
+        site.forEach(function (item) {
+          if (item.classification_type_id && item.classification_type_id < i) {
+            i = item.classification_type_id;
+            cat = item.classification_type.classification_type;
           }
-
-          if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-            bounds.extend(extendPoint1);
-            bounds.extend(extendPoint2);
-          }
-
-          map.fitBounds(bounds);
-        });
-      } else {
-        this.getPops();
+        }, this);
       }
+
+      return cat;
     }
   },
   methods: {
-    toggleInfoWindow: function toggleInfoWindow(pop, idx) {
-      this.infoWindowPos = {
-        lat: parseFloat(pop.latitude),
-        lng: parseFloat(pop.longitude)
-      }; // this.getPopData(pop)
-      // console.log(this.selectedPopMap)
+    getData: function getData() {
+      var _this = this;
 
-      this.infoContent = this.getInfoWindowContent(pop); //check if its the same pop that was selected if yes toggle
-
-      if (this.currentMidx == idx) {
-        this.infoWinOpen = !this.infoWinOpen;
-      } //if different pop set infowindow to open and reset current pop index
-      else {
-          this.infoWinOpen = true;
-          this.currentMidx = idx;
-        }
-
-      this.$refs.map.$mapPromise.then(function (map) {
-        map.panTo({
-          lat: parseFloat(pop.latitude),
-          lng: parseFloat(pop.longitude)
-        });
+      axios.get("/api/criticSites?core=".concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&page=").concat(this.data.current_page)).then(function (response) {
+        console.log(response.data);
+        _this.data = response.data; // if(true) {
+        //     this.$emit('clicked', this.data)
+        // }
       });
     },
-    getInfoWindowContent: function getInfoWindowContent(pop) {
-      return "\n                <div class=\"card\">\n                    <!--div class=\"card-image\">\n                        <figure class=\"image is-4by3\">\n                            <img src=\"https://bulma.io/images/placeholders/640x480.png\" alt=\"Placeholder image\">\n                        </figure>\n                    </div-->\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(pop.classification_type_id == 1 ? 'is-danger' : pop.classification_type_id == 2 ? 'is-warning' : pop.classification_type_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(pop.classification_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(pop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.nombre_zona, ", CRM ").concat(pop.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/pop/").concat(pop.pop_id, "\" target=\"_blank\" class=\"button is-outlined is-primary is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
-    },
-    popsCall: function popsCall(item, index) {
-      if (this.core == 0) {
-        this.pops = this.popList;
-      } else {
-        if (item.classification_type_id == 1) {
-          this.popsCore.push(item);
-          this.pops = this.popsCore;
-        }
-      }
-    },
-    popPushCrm: function popPushCrm(item, index) {
-      if (this.core == 0) {
-        if (item.crm_id == this.selectedCrm.id) {
-          this.popsCrm.push(item);
-        }
-      } else {
-        if (item.crm_id == this.selectedCrm.id && item.classification_type_id == 1) {
-          this.popsCrm.push(item);
-        }
-      }
-    },
-    popPushZona: function popPushZona(item, index) {
-      if (this.core == 0) {
-        if (item.zona_id == this.selectedZona.id) {
-          this.popsZona.push(item);
-        }
-      } else {
-        if (item.zona_id == this.selectedZona.id && item.classification_type_id == 1) {
-          this.popsZona.push(item);
-        }
-      }
-    },
-    getPops: function getPops() {
+    downloadPops: function downloadPops() {
       var _this2 = this;
 
-      if (this.selectedCrm == null) {
-        if (this.popList == null) {
-          axios.get("/api/dashboardMap").then(function (response) {
-            _this2.popList = response.data.data;
-            _this2.pops = _this2.popList;
-          });
-        } else {
-          this.popsCore = [];
-          this.popList.forEach(this.popsCall);
-        }
-      } else if (this.selectedZona == null) {
-        this.popsCrm = [];
-        this.popList.forEach(this.popPushCrm);
-        this.pops = this.popsCrm;
-      } else {
-        this.popsZona = [];
-        this.popList.forEach(this.popPushZona);
-        this.pops = this.popsZona;
-      } // if (this.pops != null) {
-      // }
+      this.buttonLoading = 1;
+      axios.get("/pop/export?core=".concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0), {
+        responseType: 'blob'
+      }).then(function (response) {
+        console.log(response.data);
+        var blob = new Blob([response.data], {
+          type: 'application/xls'
+        }); // const objectUrl = window.URL.createObjectURL(blob)
 
-
-      this.$refs.map.$mapPromise.then(function (map) {
-        var bounds = new google.maps.LatLngBounds();
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = _this2.pops[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var m = _step2.value;
-            bounds.extend({
-              lat: parseFloat(m.latitude),
-              lng: parseFloat(m.longitude)
-            });
-          } // Don't zoom in too far on only one pop
-
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
-        }
-
-        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-          var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-          var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-          bounds.extend(extendPoint1);
-          bounds.extend(extendPoint2);
-        }
-
-        map.fitBounds(bounds);
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'test.xlsx';
+        link.click();
+        _this2.buttonLoading = 0;
       });
-    },
-    getPop: function getPop() {
-      var _this3 = this;
-
-      this.pops = [this.selectedPop];
-      this.$refs.map.$mapPromise.then(function (map) {
-        map.panTo({
-          lat: parseFloat(_this3.selectedPop.latitude),
-          lng: parseFloat(_this3.selectedPop.longitude)
-        });
-        map.setZoom(15);
-      });
-    } // getPopData(pop) { 
-    //     console.log(pop)
-    //     axios.get(`/api/pop/${pop.pop_id}`)
-    //     .then((response) => {
-    //         console.log(response.data.data)
-    //         this.selectedPopMap = response.data.data
-    //     })
-    // }
-    // cluster() {
-    //     if (this.clusterActive == 0) {
-    //         this.clusterActive = 1,
-    //         this.buttonText = 'Desagrupar'
-    //     } else {
-    //         this.clusterActive = 0
-    //         this.buttonText = 'Agrupar'
-    //     }
-    // }
-
+    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapViewPops.vue?vue&type=template&id=7e1c6b36&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/maps/MapViewPops.vue?vue&type=template&id=7e1c6b36& ***!
-  \*******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -933,71 +178,242 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "GmapMap",
-    {
-      ref: "map",
-      staticClass: "tile is-child box",
-      staticStyle: { height: "100%" },
-      attrs: {
-        center: _vm.center,
-        zoom: 3,
-        "map-type-id": "roadmap",
-        options: {
-          zoomControl: true,
-          mapTypeControl: false,
-          scaleControl: false,
-          streetViewControl: true,
-          rotateControl: false,
-          fullscreenControl: true,
-          disableDefaultUi: false,
-          styles: _vm.mapStyle
-        }
-      }
-    },
-    [
-      _vm._l(_vm.pops, function(pop, index) {
-        return _c("GmapMarker", {
-          key: index,
-          ref: "myMarker",
-          refInFor: true,
-          attrs: {
-            clickable: true,
-            draggable: false,
-            position: {
-              lat: parseFloat(pop.latitude),
-              lng: parseFloat(pop.longitude)
+  return _c("div", { staticClass: "tile is-parent" }, [
+    _c(
+      "article",
+      { staticClass: "tile is-child box", class: _vm.boxBackground },
+      [
+        _c("div", { staticClass: "columns" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "column is-size-5 has-text-weight-semibold has-text-left",
+              class: _vm.primaryText
             },
-            icon: _vm.icon
+            [_vm._v("POP Críticos")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "column is-size-4 has-text-weight-semibold has-text-right",
+              class: _vm.primaryText
+            },
+            [_vm._v(_vm._s(_vm._f("numeral")(_vm.data.total, "0,0")))]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "table",
+          { staticClass: "table is-fullwidth", class: _vm.boxBackground },
+          [
+            _c("thead", [
+              _c("tr", { staticClass: "is-size-7" }, [
+                _c(
+                  "th",
+                  { staticClass: "has-text-left", class: _vm.secondaryText },
+                  [
+                    _c("abbr", { attrs: { title: "Nemónico" } }, [
+                      _vm._v("Nemónico")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  { staticClass: "has-text-left", class: _vm.secondaryText },
+                  [
+                    _c(
+                      "abbr",
+                      { attrs: { title: "Nombre y dirección del POP" } },
+                      [_vm._v("Nombre / Dirección")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  { staticClass: "has-text-left", class: _vm.secondaryText },
+                  [
+                    _c("abbr", { attrs: { title: "Categoría" } }, [
+                      _vm._v("Categoría")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  { staticClass: "has-text-left", class: _vm.secondaryText },
+                  [
+                    _c("abbr", { attrs: { title: "Código Planificación" } }, [
+                      _vm._v("Cod. Planificación")
+                    ])
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.data.data, function(item) {
+                return _c("tr", { staticClass: "is-size-7" }, [
+                  _c(
+                    "td",
+                    { staticClass: "has-text-left", class: _vm.primaryText },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: "/pop/" + item.site.pop.id,
+                            target: "_blank"
+                          }
+                        },
+                        [_vm._v(_vm._s(item.site.nem_site))]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-left", class: _vm.primaryText },
+                    [
+                      _c("div", [_vm._v(_vm._s(item.site.pop.nombre))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(item.site.pop.direccion))])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "has-text-centered",
+                      class: _vm.primaryText
+                    },
+                    [
+                      _c(
+                        "b-tag",
+                        {
+                          attrs: {
+                            type:
+                              item.site.classification_type_id == 1
+                                ? "is-info"
+                                : item.site.classification_type_id == 2
+                                ? "is-warning"
+                                : item.site.classification_type_id == 3
+                                ? "is-smart"
+                                : item.site.classification_type_id == 4
+                                ? "is-success"
+                                : "is-link"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              item.site.classification_type.classification_type
+                            )
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-left", class: _vm.primaryText },
+                    [_vm._v(_vm._s(item.site.cod_planificacion))]
+                  )
+                ])
+              }),
+              0
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "nav",
+          {
+            staticClass: "pagination",
+            attrs: { role: "navigation", "aria-label": "pagination" }
           },
-          on: {
-            click: function($event) {
-              return _vm.toggleInfoWindow(pop, index)
-            }
-          }
-        })
-      }),
-      _vm._v(" "),
-      _c(
-        "gmap-info-window",
-        {
-          attrs: {
-            options: _vm.infoOptions,
-            position: _vm.infoWindowPos,
-            opened: _vm.infoWinOpen,
-            content: "Hello"
-          },
-          on: {
-            closeclick: function($event) {
-              _vm.infoWinOpen = false
-            }
-          }
-        },
-        [_c("div", { domProps: { innerHTML: _vm._s(_vm.infoContent) } })]
-      )
-    ],
-    2
-  )
+          [
+            _c("vue-pagination", {
+              attrs: {
+                pagination: _vm.data,
+                offset: 4,
+                primaryText: _vm.primaryText
+              },
+              on: {
+                paginate: function($event) {
+                  return _vm.getData()
+                }
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "field has-addons" }, [
+          _c(
+            "p",
+            { staticClass: "control" },
+            [
+              _c(
+                "b-button",
+                {
+                  attrs: {
+                    loading: _vm.buttonLoading ? true : false,
+                    type: "is-link",
+                    size: "is-small"
+                  },
+                  on: { click: _vm.downloadPops }
+                },
+                [
+                  _c("font-awesome-icon", { attrs: { icon: "download" } }),
+                  _vm._v(
+                    " \n                      Listado de POPs\n                "
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "p",
+            { staticClass: "control" },
+            [
+              _c(
+                "b-tooltip",
+                { attrs: { label: "Tooltip Text", position: "is-right" } },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "button is-small is-link",
+                      attrs: {
+                        href: "/pop",
+                        type: "button",
+                        "data-tooltip": ""
+                      }
+                    },
+                    [_c("font-awesome-icon", { attrs: { icon: "bars" } })],
+                    1
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1006,17 +422,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/MapViewPops.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/maps/MapViewPops.vue ***!
-  \******************************************************/
+/***/ "./resources/js/components/dashboard/CriticPopsData.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/dashboard/CriticPopsData.vue ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MapViewPops_vue_vue_type_template_id_7e1c6b36___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MapViewPops.vue?vue&type=template&id=7e1c6b36& */ "./resources/js/components/maps/MapViewPops.vue?vue&type=template&id=7e1c6b36&");
-/* harmony import */ var _MapViewPops_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MapViewPops.vue?vue&type=script&lang=js& */ "./resources/js/components/maps/MapViewPops.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CriticPopsData.vue?vue&type=template&id=5a0f1266& */ "./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266&");
+/* harmony import */ var _CriticPopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CriticPopsData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1026,9 +442,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _MapViewPops_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _MapViewPops_vue_vue_type_template_id_7e1c6b36___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _MapViewPops_vue_vue_type_template_id_7e1c6b36___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CriticPopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1038,38 +454,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/maps/MapViewPops.vue"
+component.options.__file = "resources/js/components/dashboard/CriticPopsData.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/MapViewPops.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/maps/MapViewPops.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MapViewPops_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapViewPops.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapViewPops.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MapViewPops_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CriticPopsData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/maps/MapViewPops.vue?vue&type=template&id=7e1c6b36&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/maps/MapViewPops.vue?vue&type=template&id=7e1c6b36& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266& ***!
+  \*********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapViewPops_vue_vue_type_template_id_7e1c6b36___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MapViewPops.vue?vue&type=template&id=7e1c6b36& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/maps/MapViewPops.vue?vue&type=template&id=7e1c6b36&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapViewPops_vue_vue_type_template_id_7e1c6b36___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CriticPopsData.vue?vue&type=template&id=5a0f1266& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapViewPops_vue_vue_type_template_id_7e1c6b36___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

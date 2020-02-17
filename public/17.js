@@ -1,138 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[17],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -186,23 +62,108 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
-  props: ['pop', 'rcas', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'csrf'],
+  props: ['selectedCrm', 'selectedZona', // 'csrf',
+  'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
   data: function data() {
     return {
-      radio_pe_3g: this.pop.pe_3g
+      crmSelected: this.selectedCrm,
+      zonaSelected: this.selectedZona,
+      electricLineData: null,
+      total: 0,
+      buttonLoading: ''
     };
   },
+  created: function created() {
+    this.getElectricLineData();
+  },
   mounted: function mounted() {},
-  methods: {}
+  watch: {
+    selectedCrm: function selectedCrm(newValue, oldValue) {
+      this.crmSelected = newValue;
+      this.zonaSelected = null;
+      this.getElectricLineData();
+    },
+    selectedZona: function selectedZona(newValue, oldValue) {
+      this.zonaSelected = newValue;
+      this.getElectricLineData();
+    },
+    core: function core(newValue, oldValue) {
+      this.getElectricLineData();
+    }
+  },
+  methods: {
+    totalElectricLines: function totalElectricLines() {
+      this.total = 0;
+      this.electricLineData.forEach(this.counter);
+    },
+    counter: function counter(item, index) {
+      this.total = this.total + item.q_electric_lines;
+    },
+    getElectricLineData: function getElectricLineData() {
+      var _this = this;
+
+      if (this.crmSelected == null) {
+        axios.get("/api/electricLineData/".concat(this.core)).then(function (response) {
+          _this.electricLineData = response.data.data;
+
+          _this.totalElectricLines();
+        })["catch"](function () {
+          console.log('handle server error from here');
+        });
+      } else if (this.zonaSelected == null) {
+        axios.get("/api/electricLineDataCrm/".concat(this.crmSelected.id, "/").concat(this.core)).then(function (response) {
+          _this.electricLineData = response.data.data;
+
+          _this.totalElectricLines();
+        })["catch"](function () {
+          console.log('handle server error from here');
+        });
+      } else {
+        axios.get("/api/electricLineDataZona/".concat(this.zonaSelected.id, "/").concat(this.core)).then(function (response) {
+          _this.electricLineData = response.data.data;
+
+          _this.totalElectricLines();
+        })["catch"](function () {
+          console.log('handle server error from here');
+        });
+      }
+    },
+    formSubmit: function formSubmit(e) {
+      var _this2 = this;
+
+      // Activate loading button
+      this.buttonLoading = 'is-loading';
+      e.preventDefault();
+      axios({
+        url: '/pop/export',
+        method: 'POST',
+        responseType: 'blob' // headers: {
+        //     'Content-Type': 'text/html; charset=utf-8',
+        //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        // }
+
+      }).then(function (response) {
+        var url = window.URL.createObjectURL(new Blob([response.data]));
+        var link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'listado_pops.xlsx');
+        document.body.appendChild(link);
+        link.click(); // Deativate loading button
+
+        _this2.buttonLoading = '';
+      })["catch"](function (error) {
+        console.log('Error: ' + error);
+      });
+    }
+  }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056& ***!
+  \******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -214,529 +175,151 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "section", staticStyle: { "min-height": "500px" } },
-    [
-      _c("div", { class: _vm.bodyBackground }, [
-        _c("div", { staticClass: "column" }, [
-          _c("div", { staticClass: "tile is-ancestor" }, [
-            _c("div", { staticClass: "tile is-parent" }, [
-              _c("div", { staticClass: "tile is-child box" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "is-size-5 title has-text-weight-semibold",
-                    class: _vm.primaryText
-                  },
-                  [_vm._v("NEGOCIO FIJO")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticStyle: { padding: "10px" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.pe_3g
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.pe_3g ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.pe_3g
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("PE 3G")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.mpls
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.mpls ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.mpls
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("MPLS")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.olt
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.olt ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.olt
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("OLT")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.olt_3play
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.olt_3play ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.olt_3play
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("OLT 3Play")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.core
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.core ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.core
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("CORE")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.bafi
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.bafi ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.bafi
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("Banda Ancha Fija Inalámbrica (BAFI)")]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-parent" }, [
-              _c("div", { staticClass: "tile is-child box" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "is-size-5 title has-text-weight-semibold",
-                    class: _vm.primaryText
-                  },
-                  [_vm._v("NEGOCIO MOVIL")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticStyle: { padding: "10px" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.red_minima_n1
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.red_minima_n1 ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.red_minima_n1
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("Red Mínima N1")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.red_minima_n2
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.red_minima_n2 ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.red_minima_n2
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("Red Mínima N2")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.vip
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.vip ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.vip
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("VIP")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.localidad_obligatoria
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.localidad_obligatoria ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.localidad_obligatoria
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("Localidad Obligatoria")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.ranco
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.ranco ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.ranco
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("RAN Consolidado (RANCO)")]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-parent" }, [
-              _c("div", { staticClass: "tile is-child box" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "is-size-5 title has-text-weight-semibold",
-                    class: _vm.primaryText
-                  },
-                  [_vm._v("CARACTERISTICAS INFRAESTRUCTURA")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticStyle: { padding: "10px" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.offgrid
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.offgrid ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.offgrid
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("Offgrid")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.solar
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.solar ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.solar
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("Paneles Solares")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "field" },
-                    [
-                      _c("font-awesome-icon", {
-                        class: _vm.pop.eolica
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
-                        attrs: {
-                          icon: ["far", "check-circle"],
-                          disabled: _vm.pop.eolica ? false : true
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "is-size-6",
-                          class: _vm.pop.eolica
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
-                        },
-                        [_vm._v("Eólico")]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-parent" }, [
-              _c(
-                "div",
-                { staticClass: "tile is-child box has-background-eco-light" },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "is-size-5 title has-text-weight-semibold",
-                      class: _vm.primaryText
-                    },
-                    [_vm._v("GESTION AMBIENTAL")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticStyle: { padding: "10px" } }, [
-                    _c(
-                      "div",
-                      { staticClass: "field" },
-                      [
-                        _c("font-awesome-icon", {
-                          class: _vm.pop.protected_zone
-                            ? "has-text-eco"
-                            : "has-text-grey-light",
-                          attrs: {
-                            icon: ["far", "check-circle"],
-                            disabled: _vm.pop.protected_zone ? false : true
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "is-size-6",
-                            class: _vm.pop.protected_zone
-                              ? "has-text-weight-normal"
-                              : "has-text-grey-light"
-                          },
-                          [_vm._v("Zona protegida")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "field" },
-                      [
-                        _c("font-awesome-icon", {
-                          class: _vm.rcas.length
-                            ? "has-text-info"
-                            : "has-text-grey-light",
-                          attrs: {
-                            icon: ["far", "check-circle"],
-                            disabled: _vm.rcas.length ? false : true
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "is-size-6",
-                            class: _vm.rcas.length
-                              ? "has-text-weight-normal"
-                              : "has-text-grey-light"
-                          },
-                          [_vm._v("R.C.A.")]
-                        )
-                      ],
-                      1
+  return _c("div", { staticClass: "tile is-parent" }, [
+    _c(
+      "article",
+      { staticClass: "tile is-child box", class: _vm.boxBackground },
+      [
+        _c("div", { staticClass: "columns" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "column is-size-5 has-text-weight-semibold has-text-left",
+              class: _vm.primaryText
+            },
+            [_vm._v("Lineas Eléctricas")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "column is-size-4 has-text-weight-semibold has-text-right",
+              class: _vm.primaryText
+            },
+            [_vm._v(_vm._s(_vm._f("numeral")(this.total, "0,0")))]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "table",
+          { staticClass: "table is-fullwidth", class: _vm.boxBackground },
+          [
+            _c("thead", [
+              _c("tr", { staticClass: "is-size-7" }, [
+                _c("th", { class: _vm.secondaryText }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm.crmSelected == null
+                        ? "CRM"
+                        : _vm.zonaSelected == null
+                        ? "Zona"
+                        : "Comuna"
                     )
-                  ])
-                ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  { staticClass: "has-text-right", class: _vm.secondaryText },
+                  [
+                    _c("abbr", { attrs: { title: "Movil" } }, [
+                      _vm._v("Q POP con equipamiento")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  { staticClass: "has-text-right", class: _vm.secondaryText },
+                  [
+                    _c("abbr", { attrs: { title: "Otros" } }, [
+                      _vm._v("Q Lineas Eléctricas")
+                    ])
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(this.electricLineData, function(item) {
+                return _c("tr", { staticClass: "is-size-7" }, [
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "has-text-weight-bold",
+                        class: _vm.secondaryText,
+                        attrs: { href: "", title: "CRM Norte" }
+                      },
+                      [_vm._v(_vm._s(item.nombre))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.q_info, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [
+                      _vm._v(
+                        _vm._s(_vm._f("numeral")(item.q_electric_lines, "0,0"))
+                      )
+                    ]
+                  )
+                ])
+              }),
+              0
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("form", { on: { submit: _vm.formSubmit } }, [
+          _c("div", { staticClass: "field has-addons" }, [
+            _c("p", { staticClass: "control" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "button is-small is-link",
+                  class: _vm.buttonLoading,
+                  attrs: { type: "submit" }
+                },
+                [
+                  _c("font-awesome-icon", { attrs: { icon: "download" } }),
+                  _vm._v(
+                    " \n                          Listado de POPs\n                    "
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "control" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "button is-small is-link tooltip",
+                  attrs: {
+                    href: "/pop",
+                    type: "button",
+                    "data-tooltip": "Tooltip Text"
+                  }
+                },
+                [_c("font-awesome-icon", { attrs: { icon: "bars" } })],
+                1
               )
             ])
           ])
         ])
-      ])
-    ]
-  )
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -745,17 +328,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/PopCharacteristics.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/pops/PopCharacteristics.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/components/dashboard/ElectricLinesData.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/dashboard/ElectricLinesData.vue ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopCharacteristics.vue?vue&type=template&id=2ca99439& */ "./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439&");
-/* harmony import */ var _PopCharacteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopCharacteristics.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ElectricLinesData.vue?vue&type=template&id=19a62056& */ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&");
+/* harmony import */ var _ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ElectricLinesData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -765,9 +348,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PopCharacteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -777,38 +360,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pops/PopCharacteristics.vue"
+component.options.__file = "resources/js/components/dashboard/ElectricLinesData.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopCharacteristics.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/PopCharacteristics.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ElectricLinesData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopCharacteristics.vue?vue&type=template&id=2ca99439& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/PopCharacteristics.vue?vue&type=template&id=2ca99439&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ElectricLinesData.vue?vue&type=template&id=19a62056& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopCharacteristics_vue_vue_type_template_id_2ca99439___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

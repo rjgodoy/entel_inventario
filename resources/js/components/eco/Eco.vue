@@ -2,11 +2,11 @@
     <section class="section is-marginless" :class="bodyBackground">
         <div class="container">
             <div class="tile is-ancestor">
-                <div class="tile is-parent">
+                <div class="tile">
                     <div class="tile is-vertical">
                         <div class="tile is-parent">
                             <div class="tile is-child box">
-                                <div class="title">Zonas protegidas</div>
+                                <div class="title is-size-4">POP en zonas protegidas</div>
 
                                 <b-field grouped group-multiline>
                                     <b-select v-model="defaultSortDirection">
@@ -19,31 +19,31 @@
                                         <option value="15">15 per page</option>
                                         <option value="20">20 per page</option>
                                     </b-select>
-                                    <div class="control">
+                                    <!-- <div class="control">
                                         <button class="button" @click="currentPage = 2" :disabled="!isPaginated">Set page to 2</button>
-                                    </div>
-                                    <div class="control is-flex">
+                                    </div> -->
+                                    <!-- <div class="control is-flex">
                                         <b-switch v-model="isPaginated">Paginated</b-switch>
-                                    </div>
+                                    </div> -->
                                     <div class="control is-flex">
                                         <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Simple pagination</b-switch>
                                     </div>
-                                    <b-select v-model="paginationPosition" :disabled="!isPaginated">
+                                    <!-- <b-select v-model="paginationPosition" :disabled="!isPaginated">
                                         <option value="bottom">bottom pagination</option>
                                         <option value="top">top pagination</option>
                                         <option value="both">both</option>
-                                    </b-select>
-                                    <b-select v-model="sortIcon">
+                                    </b-select> -->
+                                    <!-- <b-select v-model="sortIcon">
                                         <option value="arrow-up">Arrow sort icon</option>
                                         <option value="menu-up">Caret sort icon</option>
                                         <option value="chevron-up">Chevron sort icon </option>
-                                    </b-select>
-                                    <b-select v-model="sortIconSize">
+                                    </b-select> -->
+                                    <!-- <b-select v-model="sortIconSize">
                                         <option value="is-small">Small sort icon</option>
                                         <option value="">Regular sort icon</option>
                                         <option value="is-medium">Medium sort icon</option>
                                         <option value="is-large">Large sort icon</option>
-                                    </b-select>
+                                    </b-select> -->
                                 </b-field>
 
                                 <b-table
@@ -70,7 +70,9 @@
                                                     {{ column.label }}
                                                 </b-tooltip>
                                             </template>
-                                            {{ props.row.nem_site }}
+                                            <router-link v-for="site in props.row.sites" :key="props.row.id" class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
+                                                {{ site.nem_site }}
+                                            </router-link>
                                         </b-table-column>
 
                                         <b-table-column class="is-size-6" field="user.first_name" label="Nombre POP" sortable>
@@ -89,7 +91,7 @@
                                                 </b-tooltip>
                                             </template>
                                             {{ props.row.protected_zones[0].cod_zone }}
-                                            {{ props.row.pop.comuna.zona.nombre_zona }}
+                                            {{ props.row.comuna.zona.nombre_zona }}
                                         </b-table-column>
 
                                         <!-- <b-table-column class="is-size-6" field="date" label="Date" sortable centered>
@@ -108,15 +110,17 @@
 
                             </div>
                         </div>
+                    </div>
+                    <div class="tile is-vertical">
+                        <div class="tile is-parent">
+                            <div class="tile is-child box">
+                                <div class="title">Zonas de acopio temporal</div>
+                            </div>
+                        </div>
                         <div class="tile is-parent">
                             <div class="tile is-child box">
                                 <div class="title">RCA</div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tile is-parent">
-                        <div class="tile is-child box">
-                            <div class="title">Zonas de acopio temporal</div>
                         </div>
                     </div>
                 </div>
@@ -142,7 +146,7 @@
                 sortIcon: 'arrow-up',
                 sortIconSize: 'is-small',
                 currentPage: 1,
-                perPage: 10,
+                perPage: 20,
 
                 darkMode: 0,
                 bodyBackground: '',

@@ -31,7 +31,7 @@
             <div class="hero-body columns" style="margin-top: 46px; margin-bottom: -60px;">
                 <div class="column has-text-left">
                     <div class="columns">
-                        <div class="column is-half">
+                        <div class="column is-6">
                             <div class="columns is-four-fifths">
                                 <div class="column has-text-left is-four-fifths">
                                     <div class="is-size-3 has-text-weight-semibold">{{ pop.nombre }}
@@ -46,8 +46,8 @@
                                 </div>
                             </div>
 
-                            <div class="title is-size-5 has-text-weight-normal">{{ pop.cod_planificacion ? pop.cod_planificacion : '-' }}
-                                <div class="subtitle is-size-7 has-text-weight-light">CODIGO PLANIFICACION</div>
+                            <div class="is-size-4 has-text-weight-normal">{{ pop.pop_e_id ? pop.pop_e_id : '-' }}
+                                <div class="is-size-7 has-text-weight-light">CODIGO PLANIFICACION</div>
                             </div>
                             
                             <div class="is-divider" data-content="CENTRO REGIONAL MANTENIMIENTO" style="margin: 40px auto 20px auto"></div>
@@ -88,14 +88,80 @@
                         <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div>
 
                         <div class="column">
-                            <div class="is-divider" :data-content="sites.length + ' SITIOS'" style="margin: 20px auto 20px auto"></div>
+                            <div class="box" style="margin-top: -96px; max-height: 558px; overflow-y: scroll">
+                                <div class="is-size-5 has-text-centered has-text-weight-semibold">SITIOS: {{ sites.length }}</div>
+                                <b-table
+                                    :data="isEmpty ? [] : sites"
+                                    :bordered="isBordered"
+                                    :striped="isStriped"
+                                    :narrowed="isNarrowed"
+                                    :hoverable="isHoverable"
+                                    :loading="isLoading"
+                                    :focusable="isFocusable"
+                                    :mobile-cards="hasMobileCards"
+                                    class="">
+                                    <template slot-scope="props">
+                                        <b-table-column field="site" label="Sitio" class="">
+                                            <template slot="header" slot-scope="{ column }">
+                                                <b-tooltip label="Sitio" type="is-dark" class="is-size-6">
+                                                    {{ column.label }}
+                                                </b-tooltip>
+                                            </template> 
+                                            <div class="is-size-7 has-text-weight-semibold">{{ props.row.nem_site }}</div>
+                                            <div class="is-size-6">{{ props.row.nombre }}</div>
+                                        </b-table-column>
+
+                                        <b-table-column field="classification" label="Tipo / Categoría" class="" centered>
+                                            <template slot="header" slot-scope="{ column }">
+                                                <b-tooltip label="Tipo sitio / categoría de infraestructura" type="is-dark" class="is-size-6">
+                                                    {{ column.label }}
+                                                </b-tooltip>
+                                            </template>
+                                            <b-taglist attached class="is-centered">
+                                                <b-tag :type="props.row.site_type.service_type_id == 1 ? 'is-smart' : 'is-eco'" size="is-normal" class="has-text-weight-bold">
+                                                    {{ props.row.site_type.site_type.toUpperCase() }}
+                                                </b-tag>
+                                                <b-tag type="is-positive" size="is-normal" class="has-text-weight-bold">
+                                                    {{ props.row.classification_type ? props.row.classification_type.classification_type : '' }}
+                                                </b-tag>
+                                            </b-taglist>
+                                        </b-table-column>
+
+                                        <!-- <b-table-column field="attention_priority_type" label="Prioridad" class="is-right" centered>
+                                            <template slot="header" slot-scope="{ column }">
+                                                <b-tooltip label="Prioridad de atención" type="is-dark" class="is-size-6">
+                                                    {{ column.label }}
+                                                </b-tooltip>
+                                            </template>
+                                            <b-taglist attached class="is-centered">
+                                                <b-tag type="is-info" size="is-normal" class="has-text-weight-bold">
+                                                    {{ props.row.attention_priority_type ? props.row.attention_priority_type.attention_priority_type : '' }}
+                                                </b-tag>
+                                            </b-taglist>
+                                        </b-table-column> -->
+
+                                        <!-- <b-table-column field="technologies" label="Q Tec." class="" numeric>
+                                            <template slot="header" slot-scope="{ column }">
+                                                <b-tooltip label="Cantidad de tecnologías en el sitio" type="is-dark" class="is-size-6">
+                                                    {{ column.label }}
+                                                </b-tooltip>
+                                            </template>
+                                            <div class="is-size-6">{{ props.row.technologies ? props.row.technologies.length : '' }}</div>
+                                        </b-table-column> -->
+                                    </template>
+                                </b-table>
+                            </div>
+
+
+                            <!-- <div class="is-divider" :data-content="sites.length + ' SITIOS'" style="margin: 20px auto 20px auto;"></div>
                             <div class="tile is-ancestor">
                                 <div class="tile is-parent is-vertical">
                                     <div v-for="site in sites" class="tile is-child box has-background-light">
                                         <div class="columns">
                                             <div class="column is-8">
-                                                <div class="is-size-5 has-text-weight-normal">{{ site.nem_site ? site.nombre : '-' }}</div>
                                                 <div class="is-size-6 has-text-weight-semibold">{{ site.nem_site ? site.nem_site : '-' }}</div>
+                                                <div class="is-size-5 has-text-weight-light">{{ site.nem_site ? site.nombre : '-' }}</div>
+                                                
                                             </div>
                                             <div class="column">
                                                 <b-taglist attached class="is-right">
@@ -111,12 +177,12 @@
                                         
                                         <div v-if="site.technologies.length" class="is-divider" data-content="TECNOLOGIAS" style="margin: 10px auto 10px auto"></div>
 
-                                        <div class="tile is-ancestor">
+                                        <div class="tile is-ancestor is-12">
                                             <div class="tile is-vertical">
                                                 <div class="tile">
-                                                    <div v-for="tech in site.technologies" class="tile is-parent">
+                                                    <div v-for="tech in site.technologies" class="tile is-parent is-6" v-if="tech">
                                                         <div class="tile is-child box">
-                                                            <div class="title is-size-5 has-text-weight-normal">{{ tech.nem_tech }}
+                                                            <div class="title is-size-6 has-text-weight-normal">{{ tech.nem_tech }}
                                                                 <div class="subtitle is-size-7 has-text-weight-light">Tecnología</div>
                                                             </div>
                                                         </div>
@@ -124,26 +190,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="title is-size-5 has-text-weight-normal">{{ site }}</div> -->
                                     </div>
-                                    <!-- <div class="tile is-child box">
-                                        <div class="title is-size-5 has-text-weight-normal">{{ pop.nem_site ? pop.nem_site : technologies }}
-                                            <div class="subtitle is-size-7 has-text-weight-light">NEMONICO SWITCH</div>
-                                        </div>
-                                    </div> -->
                                 </div>
-                                <!-- <div class="tile is-parent is-vertical">
-                                    <div class="tile is-child box">
-                                        <div class="title is-size-5 has-text-weight-normal">{{ pop.nem_movil ? pop.nem_movil : 'No existe sitio Movil' }}
-                                            <div class="subtitle is-size-7 has-text-weight-light">NEMONICO MOVIL</div>
-                                        </div>
-                                    </div>
-                                    <div class="tile is-child box">
-                                        PHONE
-                                    </div>
-                                </div> -->
-                            </div>
+                            </div> -->
+
                         </div>
 
                     </div>
@@ -226,48 +276,48 @@
         </section>
 
         <!-- CARACTERISTICAS -->
-       <!--  <section class="hero is-bold" :class="heroBackground">
+        <section class="hero is-bold" :class="heroBackground">
             <div class="hero-body">
                 <nav class="level">
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ attention_priority ? attention_priority.attention_priority_type.attention_priority_type : '-' }}</p>
+                            <p class="is-size-4 has-text-weight-semibold">{{ popAttentionPriority }}</p>
                             <p class="heading has-text-weight-semibold">PRIORIDAD ATENCION EN TERRENO</p>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ dependences ? dependences.length : 0 }}</p>
+                            <p class="is-size-4 has-text-weight-semibold">{{ popDependences }}</p>
                             <p class="heading has-text-weight-semibold">DEPENDENCIAS DIRECTAS</p>
                         </div>
                     </div>
-                    <div class="level-item has-text-centered">
+                    <!-- <div class="level-item has-text-centered">
                         <div>
                             <p class="is-size-4 has-text-weight-semibold">{{ dependences ? dependences.length : 0 }}</p>
                             <p class="heading has-text-weight-semibold">DEPENDENCIAS TOTALES</p>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ category ? category.category_type.category_type : '-' }}</p>
+                            <p class="is-size-4 has-text-weight-semibold">{{ popCategory }}</p>
                             <p class="heading has-text-weight-semibold">CLASIFICACION PLANIFICACION</p>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ attention ? attention.attention_type.attention_type : '-' }}</p>
+                            <p class="is-size-4 has-text-weight-semibold">{{ popAttentionType }}</p>
                             <p class="heading has-text-weight-semibold">TIPO ATENCION EN TERRENO</p>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ autonomy ? autonomy.theoretical : '-' }} <span class="is-size-5">hrs.</span></p>
+                            <!-- <p class="is-size-4 has-text-weight-semibold">{{ autonomy ? autonomy.theoretical : '-' }} <span class="is-size-5">hrs.</span></p> -->
                             <p class="heading has-text-weight-semibold">AUTONOMIA TEORICA</p>
                         </div>
                     </div>
                 </nav>
             </div>
-        </section> -->
+        </section>
 
 
         <section class="section">
@@ -309,24 +359,38 @@
 </template>
 
 <script>
-    // import AutonomyChart from '../AutonomyChart.vue';
-    // import PopCharacteristics from './PopCharacteristics.vue';
-    // import PopPower from './PopPower.vue';
-    // import PopClima from './PopClima.vue';
-    // import PopInfrastructure from './PopInfrastructure.vue';
-    // import PopDocuments from './PopDocuments.vue';
+    // const PopsData = () => ({
+    //     // The component to load (should be a Promise)
+    //     component: import('./PopsData.vue'),
+    //     // A component to use while the async component is loading
+    //     // loading: LoadingComponent,
+    //     // A component to use if the load fails
+    //     // error: ErrorComponent,
+    //     // Delay before showing the loading component. Default: 200ms.
+    //     delay: 200,
+    //     // The error component will be displayed if a timeout is
+    //     // provided and exceeded. Default: Infinity.
+    //     timeout: 3000
+    // })
+
+    import PopCharacteristics from './PopCharacteristics.vue';
+    import PopPower from './PopPower.vue';
+    import PopClimate from './PopClimate.vue';
+    import PopInfrastructure from './PopInfrastructure.vue';
+    import PopComsite from './PopComsite.vue';
+    import PopDocuments from './PopDocuments.vue';
+    import PopLog from './PopLog.vue';
     const bulmaQuickview = require('../../../../node_modules/bulma-quickview/src/js/index').default;
     export default {
         components: {
-            PopMap: () => import("./PopMapView"),
-            // 'autonomy-chart': AutonomyChart,
-            PopCharacteristics: () => import("./PopCharacteristics"),
-            PopPower: () => import("./PopPower"),
-            PopClimate: () => import("./PopClimate"),
-            PopInfrastructure: () => import("./PopInfrastructure"),
-            PopComsite: () => import("./PopComsite"),
-            PopDocuments: () => import("./PopDocuments"),
-            PopLog: () => import("./PopLog")
+            PopMap: () => import("../maps/PopMapView"),
+            PopCharacteristics,
+            PopPower,
+            PopClimate,
+            PopInfrastructure,
+            PopComsite,
+            PopDocuments,
+            PopLog
         },
         props : [
             // 'pop_menu',
@@ -356,13 +420,14 @@
             return {
                 pop: [],
                 technologiesArray: [],
+                i: 0,
 
                 darkMode: 0,
                 bodyBackground: '',
                 boxBackground: '',
                 primaryText: '',
                 secondaryText: '',
-                heroBackground: 'is-eco',
+                heroBackground: 'is-info',
 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
@@ -371,7 +436,17 @@
                 logOpened: 0,
 
                 tabs: null,
-                currentTab: 'characteristics'
+                currentTab: 'characteristics',
+
+
+                isEmpty: false,
+                isBordered: false,
+                isStriped: true,
+                isNarrowed: false,
+                isHoverable: true,
+                isFocusable: false,
+                isLoading: false,
+                hasMobileCards: true
             }
         },
 
@@ -451,6 +526,55 @@
                         if (item.classification_type_id && item.classification_type_id < i) { 
                             i = item.classification_type_id
                             cat = item.classification_type.classification_type
+                        }
+                    })
+                }
+                return cat
+            },
+
+            popAttentionPriority() {
+                var i = 10; var cat
+                if (this.pop.sites) {
+                    this.pop.sites.forEach(function(item) {
+                        if (item.attention_priority_type_id && item.attention_priority_type_id < i) { 
+                            i = item.attention_priority_type_id
+                            cat = item.attention_priority_type.attention_priority_type
+                        }
+                    })
+                }
+                return cat
+            },
+
+            popCategory() {
+                var i = 10; var cat
+                if (this.pop.sites) {
+                    this.pop.sites.forEach(function(item) {
+                        if (item.category_type_id && item.category_type_id < i) { 
+                            i = item.category_type_id
+                            cat = item.category_type.category_type
+                        }
+                    })
+                }
+                return cat
+            },
+
+            popDependences() {
+                var dependences = 0
+                if (this.pop.sites) {
+                    this.pop.sites.forEach(function(item) {
+                        dependences = dependences + item.dependences.length
+                    })
+                }
+                return dependences
+            },
+
+            popAttentionType() {
+                var i = 10; var cat
+                if (this.pop.sites) {
+                    this.pop.sites.forEach(function(item) {
+                        if (item.attention_type_id && item.attention_type_id < i) { 
+                            i = item.attention_type_id
+                            cat = item.attention_type.attention_type
                         }
                     })
                 }

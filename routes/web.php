@@ -29,9 +29,9 @@ Route::middleware(['auth'])->group(function () {
 	    return redirect('/dashboard');
 	});
 
-	Route::get('/js/popper.js.map', function () {
-	    return redirect('/dashboard');
-	});
+	// Route::get('/js/popper.js.map', function () {
+	//     return redirect('/dashboard');
+	// });
 
 	Route::get('/{any}', 'HomeController@index')->where('any', '.*');
 	

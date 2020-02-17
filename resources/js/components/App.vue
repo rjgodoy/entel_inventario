@@ -30,7 +30,7 @@
                     <div class="">
                         <ul class="columns">
 
-                            <li v-for="menu in menuData" class="column has-text-centered" :class="currentRoute.toLowerCase() == menu.path ? 'is-active' : ''">
+                            <li v-for="menu in menu_data" class="column has-text-centered" :class="currentRoute.toLowerCase() == menu.path ? 'is-active' : ''">
                                 <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
                                     <b-icon 
                                         :pack="menu.icon_type" 
@@ -134,7 +134,11 @@
         </section>
 
         <keep-alive>
-            <router-view></router-view>
+            <router-view
+                :popList="pops"
+                :crms="crms"
+                :last_data_counters='last_data_counters'
+            ></router-view>
         </keep-alive>
 
     </div>
@@ -148,17 +152,22 @@
             'clock': Clock
         },
         props: [
-            'message',
             'app_name',
+            'crms',
+            'menu_data',
+            'pops',
+            'last_data_counters',
             'user'
         ],
-        data() {
-            return {
-                menuData: null
+        created() {
+            // console.log(this.$route)
+            if (this.$route.query.message) {
+                this.$buefy.toast.open({
+                    message: this.$route.query.message,
+                    type: 'is-success',
+                    duration: 3000
+                })
             }
-        },
-        mounted() {
-            this.getMenu()
         },
         computed: {
             currentRoute () {
@@ -166,24 +175,19 @@
             }
         },
         methods: {
-            getMenu() {
-                axios.get(`/api/menu`).then((response) => {
-                    this.menuData = response.data.data
-                })
-            },
             goBack() {
                 window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
             },
             logout: function(e){
-                // var token = document.head.querySelector('meta[name="csrf-token"]');
-                // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
                 axios.post(`/logout`).then((response) => {
-                    console.log(response)
-                }, function() {
-                    console.log('failed');
-                }).finally(() =>{
-                    window.location.href = "/login";
-                });
+                    if (response.status === 200) {
+                        console.log(response)
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                }).finally(() => {
+                    this.$router.go('/welcome');
+                })
                 e.preventDefault();
             },
         }

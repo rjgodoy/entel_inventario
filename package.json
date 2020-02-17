@@ -40,7 +40,9 @@
         "bulma-switch": "^2.0.0",
         "bulma-timeline": "^3.0.4",
         "bulma-tooltip": "^3.0.2",
+        "canvas": "^2.6.1",
         "google-maps-api-loader": "^1.1.1",
+        "jsdom": "^13.2.0",
         "moment": "^2.24.0",
         "node-sass": "^4.13.1",
         "vee-validate": "^3.2.2",
@@ -48,6 +50,7 @@
         "vue-numeral-filter": "^1.1.1",
         "vue-router": "^3.1.5",
         "vue2-google-maps": "^0.10.7",
-        "vuex": "^3.1.2"
+        "vuex": "^3.1.2",
+        "xmldom": "^0.1.31"
     }
 }

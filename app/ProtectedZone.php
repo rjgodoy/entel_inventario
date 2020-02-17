@@ -8,8 +8,8 @@ class ProtectedZone extends Model
 {
     protected $connection = 'mysql_entel_pops';
 
-    public function sites()
+    public function pops()
     {
-        return $this->belongsToMany(Site::class)->withTimestamps();
+        return $this->belongsToMany(Pop::class)->withTimestamps();
     }
 }

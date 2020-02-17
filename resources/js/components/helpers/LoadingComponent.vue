@@ -1,5 +1,5 @@
 <template>
-    <div class="tile is-child box">
+    <div class="tile is-child box" :class="isLoading">
         <!-- <b-notification> -->
             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="false"></b-loading>
         <!-- </b-notification> -->

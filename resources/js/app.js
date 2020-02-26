@@ -85,7 +85,8 @@ import {
     faPlug,
     faChargingStation,
     faRandom,
-    faFileInvoiceDollar
+    faFileInvoiceDollar,
+    faTrafficLight
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -155,7 +156,8 @@ library.add(
     faChargingStation,
     faRandom,
     farCheckCircle,
-    faFileInvoiceDollar
+    faFileInvoiceDollar,
+    faTrafficLight
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -178,7 +180,7 @@ Vue.use(VueGoogleMaps, {
         // (as you require)
 
         //// If you want to set the version, you can do so:
-        v: '3.39',
+        // v: '3.39',
     },
  
     // If you intend to programmatically custom event listener code
@@ -215,14 +217,14 @@ import App from './components/App.vue'
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 import router from './constants/router'
-import store from './constants/store'
+// import store from './constants/store'
 
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.
 const app = new Vue({
     router,
-    store,
+    // store,
     components: {
         Welcome,
         App

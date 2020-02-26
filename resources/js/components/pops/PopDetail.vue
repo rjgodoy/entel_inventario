@@ -1,7 +1,7 @@
 <template>
     <div class="has-background-light">
 
-        <pop-log 
+        <!-- <pop-log 
             :pop="pop"
         />
 
@@ -24,13 +24,17 @@
             size="is-small"
             @click="changeStyle" 
             >style
-        </b-button>
+        </b-button> -->
 
         <!-- DATOS BASICOS -->
+        <!-- ############# -->
         <section class="hero has-background-white">
             <div class="hero-body columns" style="margin-top: 46px; margin-bottom: -60px;">
                 <div class="column has-text-left">
                     <div class="columns">
+
+                        <!-- CUADRO INFO POP -->
+                        <!-- ############### -->
                         <div class="column is-6">
                             <div class="columns is-four-fifths">
                                 <div class="column has-text-left is-four-fifths">
@@ -87,8 +91,10 @@
 
                         <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div>
 
+                        <!-- CUANDRO INFO SITIOS -->
+                        <!-- ################### -->
                         <div class="column">
-                            <div class="box" style="margin-top: -96px; max-height: 558px; overflow-y: scroll">
+                            <!-- <div class="box" style="margin-top: -96px; max-height: 558px; overflow-y: scroll">
                                 <div class="is-size-5 has-text-centered has-text-weight-semibold">SITIOS: {{ sites.length }}</div>
                                 <b-table
                                     :data="isEmpty ? [] : sites"
@@ -127,7 +133,7 @@
                                             </b-taglist>
                                         </b-table-column>
 
-                                        <!-- <b-table-column field="attention_priority_type" label="Prioridad" class="is-right" centered>
+                                        <b-table-column field="attention_priority_type" label="Prioridad" class="is-right" centered>
                                             <template slot="header" slot-scope="{ column }">
                                                 <b-tooltip label="Prioridad de atención" type="is-dark" class="is-size-6">
                                                     {{ column.label }}
@@ -138,22 +144,22 @@
                                                     {{ props.row.attention_priority_type ? props.row.attention_priority_type.attention_priority_type : '' }}
                                                 </b-tag>
                                             </b-taglist>
-                                        </b-table-column> -->
+                                        </b-table-column>
 
-                                        <!-- <b-table-column field="technologies" label="Q Tec." class="" numeric>
+                                        <b-table-column field="technologies" label="Q Tec." class="" numeric>
                                             <template slot="header" slot-scope="{ column }">
                                                 <b-tooltip label="Cantidad de tecnologías en el sitio" type="is-dark" class="is-size-6">
                                                     {{ column.label }}
                                                 </b-tooltip>
                                             </template>
                                             <div class="is-size-6">{{ props.row.technologies ? props.row.technologies.length : '' }}</div>
-                                        </b-table-column> -->
+                                        </b-table-column>
                                     </template>
                                 </b-table>
-                            </div>
+                            </div> -->
 
+                            <div class="is-divider" :data-content="sites.length + ' SITIOS'" style="margin: 20px auto 20px auto;"></div>
 
-                            <!-- <div class="is-divider" :data-content="sites.length + ' SITIOS'" style="margin: 20px auto 20px auto;"></div>
                             <div class="tile is-ancestor">
                                 <div class="tile is-parent is-vertical">
                                     <div v-for="site in sites" class="tile is-child box has-background-light">
@@ -180,7 +186,7 @@
                                         <div class="tile is-ancestor is-12">
                                             <div class="tile is-vertical">
                                                 <div class="tile">
-                                                    <div v-for="tech in site.technologies" class="tile is-parent is-6" v-if="tech">
+                                                    <div v-for="tech in site.technologies" class="tile is-parent is-3" v-if="tech">
                                                         <div class="tile is-child box">
                                                             <div class="title is-size-6 has-text-weight-normal">{{ tech.nem_tech }}
                                                                 <div class="subtitle is-size-7 has-text-weight-light">Tecnología</div>
@@ -190,15 +196,17 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
-                            </div> -->
-
+                            </div>
                         </div>
 
                     </div>
                 </div>
 
+                <!-- CUADRO DE MAPA Y DIRECCIÓN -->
+                <!-- ########################## -->
                 <div class="column" style="margin: -106px -24px 0 0px;">
                     <div class="card">
                         <figure class="">
@@ -232,10 +240,12 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- TECNOLOGIAS -->
+        <!-- ########### -->
         <section class="level has-background-dark has-text-white is-marginless">
             <div class="level-item" style="margin: 20px auto 20px auto;">
                 <div class="is-size-7 has-text-weight-bold">2G 1900
@@ -276,6 +286,7 @@
         </section>
 
         <!-- CARACTERISTICAS -->
+        <!-- ############### -->
         <section class="hero is-bold" :class="heroBackground">
             <div class="hero-body">
                 <nav class="level">
@@ -311,7 +322,7 @@
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <!-- <p class="is-size-4 has-text-weight-semibold">{{ autonomy ? autonomy.theoretical : '-' }} <span class="is-size-5">hrs.</span></p> -->
+                            <p class="is-size-4 has-text-weight-semibold">{{ pop.theoretical_autonomy ? pop.theoretical_autonomy : '-' }} <span class="is-size-5">hrs.</span></p>
                             <p class="heading has-text-weight-semibold">AUTONOMIA TEORICA</p>
                         </div>
                     </div>
@@ -321,6 +332,9 @@
 
 
         <section class="section">
+
+            <!-- TABS DE INFORMACIÓN DIFERENCIAL -->
+            <!-- ############################### -->
             <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
                 <div class="tile is-parent" v-for="tab in tabs">
                     <a class="tile is-child box" :key="tab.component" :class="currentTab === tab.component ? 'has-background-link' : boxBackground" @click="currentTab = tab.component">
@@ -345,6 +359,8 @@
                 </div>
             </div>
 
+            <!-- DETELLE DEL TAB -->
+            <!-- ############### -->
             <characteristics :is="currentTabComponent"
                 :pop="pop"
                 :rcas="[]"

@@ -90,7 +90,7 @@
                     }
                 },
                 zoom: 17,
-                icon_pop: '../img/markers/entel-pin-32.png',
+                // icon_pop: '../img/markers/entelPin_red-white.png',
                 icon_dependence: '../img/markers/pop-32.png',
                 // mapStyle: null,
                 markers: [],
@@ -143,7 +143,15 @@
             },
             center() {
                 return { lat: parseFloat(this.popMaster.latitude), lng: parseFloat(this.popMaster.longitude) }
-            }
+            },
+            icon_pop() {
+                return {
+                    url: '../img/markers/entelPin_red-white.png',
+                    scaledSize: new google.maps.Size(30, 54),
+                    origin: new google.maps.Point(0,0),
+                    anchor: new google.maps.Point(0,0)
+                }
+            },
         },
         created() {
         },

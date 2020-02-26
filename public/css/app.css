@@ -17925,7 +17925,7 @@ label.panel-block:hover {
 
 .autocomplete .dropdown-content {
   overflow: auto;
-  max-height: 200px;
+  max-height: 400px;
 }
 
 .autocomplete .dropdown-item,

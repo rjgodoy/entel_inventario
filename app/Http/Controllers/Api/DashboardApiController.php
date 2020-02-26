@@ -72,8 +72,7 @@ class DashboardApiController extends Controller
             ->distinct('technologies.id')->count();
 
         $critics = CriticSite::whereHas('site', function($q) use($condition_core) { 
-                $q->where('state_id', 1)
-                ->whereRaw($condition_core);
+                $q->whereRaw($condition_core);
             })
             ->whereHas('site.pop.comuna.zona', function($q) use($crm_id, $zona_id) {
                 $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
@@ -83,7 +82,7 @@ class DashboardApiController extends Controller
             ->distinct('site_id')->count();
 
         $alba_project = Pop::join('sites', function($query) use($condition_core) { 
-                $query->on('sites.pop_id', '=', 'pops.id')->where('state_id', 1)
+                $query->on('sites.pop_id', '=', 'pops.id')
                 ->whereRaw($condition_core);
             })
             ->whereHas('comuna.zona', function($q) use($crm_id, $zona_id) {
@@ -121,10 +120,29 @@ class DashboardApiController extends Controller
         $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
         $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
 
-        if (Cache::has('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id)) {
-            $popsMap = Cache::get('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id);
-        } else {
-            $popsMap = Cache::remember('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id, $this->seconds, function () use ($condition_core, $condition_crm, $condition_zona) {
+        // if (Cache::has('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id)) {
+        //     $popsMap = Cache::get('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id);
+        // } else {
+        //     $popsMap = Cache::remember('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id, $this->seconds, function () use ($condition_core, $condition_crm, $condition_zona) {
+
+                // $popsMap = Pop::with('comuna.zona.crm', 'sites.classification_type')
+                //     ->whereHas('comuna.zona', function($query) use($condition_crm, $condition_zona) {
+                //         $query->whereRaw($condition_crm)
+                //             ->whereRaw($condition_zona);
+                //     })->whereHas('sites', function($query) use($condition_core) {
+                //         $query->whereRaw($condition_core)
+                //             ->where(function($query) {
+                //                 $query->whereIn('site_type_id', [1,4])
+                //                     ->orWhere(function($query) {
+                //                         $query->whereIn('site_type_id', [2,3])
+                //                             ->whereHas('technologies', function($q) {
+                //                                 $q->where('state_id', 1);
+                //                             });
+                //                     });
+                //             });
+                //     })
+                //     ->get();
+                    
 
                 $popsMap = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
                     ->join('zonas', function($join) use($condition_crm, $condition_zona) {
@@ -156,11 +174,12 @@ class DashboardApiController extends Controller
                     )
                     ->groupBy('pops.id')
                     // ->limit($core == 1 || $crm_id != 0 || $zona_id != 0 ? 10000 : 2000 )
+                    // ->chunk(1000);
                     ->get();
 
-                return $popsMap; 
-            });
-        }
+        //         return $popsMap; 
+        //     });
+        // }
 
         // $popsMap = Pop::whereHas('sites', function($q) {
         //     $q->where('state_id', 1);
@@ -184,9 +203,9 @@ class DashboardApiController extends Controller
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
 
-        $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
-        $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
-        $condition_zona = $zona_id != 0 ? 'id = '.$zona_id : 'id != '.$zona_id;
+        $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
+        $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
+        $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
 
         // if (Cache::has('criticSites'.$core)) {
         //     $criticSites = Cache::get('criticSites'.$core);
@@ -195,19 +214,169 @@ class DashboardApiController extends Controller
 
                 $criticSites = CriticSite::with('site.pop.comuna.zona.crm', 'site.classification_type')
                     ->whereHas('site', function($q) use($condition_core) { 
-                        $q->where('state_id', 1)
-                        ->whereRaw($condition_core);
+                        $q->whereRaw($condition_core);
                     })
                     ->whereHas('site.pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
                         $q->whereRaw($condition_crm)->whereRaw($condition_zona);
                     })
                     ->groupBy('site_id')
-                    ->paginate(12);
+                    ->paginate(15);
 
         //         return $criticSites; 
         //     });
         // }
         return new PopResource($criticSites);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function criticPops(Request $request)
+    {
+        $core = $request->core;
+        $crm_id = $request->crm_id;
+        $zona_id = $request->zona_id;
+
+        $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
+        $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
+        $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
+
+        // if (Cache::has('criticPops'.$core)) {
+        //     $criticPops = Cache::get('criticPops'.$core);
+        // } else {
+        //     $criticPops = Cache::remember('criticPops'.$core, $this->seconds, function () use ($core) {
+
+                $criticPops = CriticSite::join('sites', function($join) use($condition_core) {
+                        $join->on('critic_sites.site_id', '=', 'sites.id')
+                            ->whereRaw($condition_core);
+                    })
+                    ->join('pops', 'sites.pop_id', '=', 'pops.id')
+                    ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
+                    ->join('zonas', function($join) use($condition_crm, $condition_zona) {
+                        $join->on('comunas.zona_id', '=', 'zonas.id')
+                            ->whereRaw($condition_zona)
+                            ->whereRaw($condition_crm);
+                    })
+                    ->join('crms', 'zonas.crm_id', '=', 'crms.id')
+                    ->join('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
+                    ->select(
+                        'pops.id',
+                        'pops.nombre',
+                        'pops.direccion',
+                        'sites.nem_site',
+                        'pops.latitude',
+                        'pops.longitude',
+                        'comunas.nombre_comuna',
+                        'comunas.zona_id',
+                        'zonas.crm_id',
+                        'zonas.nombre_zona',
+                        'crms.nombre_crm',
+                        'sites.classification_type_id',
+                        'classification_types.classification_type'
+                    )
+                    ->groupBy('pops.id')
+                    // ->limit($core == 1 || $crm_id != 0 || $zona_id != 0 ? 10000 : 2000 )
+                    ->get();
+
+        //         return $criticPops; 
+        //     });
+        // }
+        return new PopResource($criticPops);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function albaPopList(Request $request)
+    {
+        $core = $request->core;
+        $crm_id = $request->crm_id;
+        $zona_id = $request->zona_id;
+
+        $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
+        $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
+        $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
+
+        // if (Cache::has('albaPopList'.$core)) {
+        //     $albaPopList = Cache::get('albaPopList'.$core);
+        // } else {
+        //     $albaSites = Cache::remember('albaPopList'.$core, $this->seconds, function () use ($core) {
+
+                $albaPopList = Pop::with('comuna.zona.crm', 'sites.classification_type')
+                    ->whereHas('sites', function($q) use($condition_core) { 
+                        $q->whereRaw($condition_core);
+                    })
+                    ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                        $q->whereRaw($condition_crm)->whereRaw($condition_zona);
+                    })
+                    ->where('alba_project', 1)
+                    ->paginate(15);
+
+        //         return $albaPopList;
+        //     });
+        // }
+        return new PopResource($albaPopList);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function albaPops(Request $request)
+    {
+        
+        $core = $request->core;
+        $crm_id = $request->crm_id;
+        $zona_id = $request->zona_id;
+
+        $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
+        $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
+        $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
+
+        // if (Cache::has('albaPops'.$core)) {
+        //     $albaPops = Cache::get('albaPops'.$core);
+        // } else {
+        //     $albaPops = Cache::remember('albaPops'.$core, $this->seconds, function () use ($core) {
+
+                $albaPops = Pop::join('sites', function($join) use($condition_core) {
+                        $join->on('pops.id', '=', 'sites.pop_id')
+                            ->whereRaw($condition_core);
+                    })
+                    ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
+                    ->join('zonas', function($join) use($condition_crm, $condition_zona) {
+                        $join->on('comunas.zona_id', '=', 'zonas.id')
+                            ->whereRaw($condition_zona)
+                            ->whereRaw($condition_crm);
+                    })
+                    ->join('crms', 'zonas.crm_id', '=', 'crms.id')
+                    ->join('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
+                    ->where('pops.alba_project', 1)
+                    ->select(
+                        'pops.id',
+                        'pops.nombre',
+                        'pops.direccion',
+                        'sites.nem_site',
+                        'pops.latitude',
+                        'pops.longitude',
+                        'comunas.nombre_comuna',
+                        'comunas.zona_id',
+                        'zonas.crm_id',
+                        'zonas.nombre_zona',
+                        'crms.nombre_crm',
+                        'sites.classification_type_id',
+                        'classification_types.classification_type'
+                    )
+                    ->get();
+
+        //         return $albaPops; 
+        //     });
+        // }
+        return new PopResource($albaPops);
     }
 
     /**

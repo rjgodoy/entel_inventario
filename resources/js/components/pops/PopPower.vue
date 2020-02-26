@@ -22,11 +22,12 @@
                                             <div class="has-text-weight-semibold is-size-6">{{ data.phase_type ? data.phase_type.phase_type : 'Sin información' }}</div>
                                         </div>
                                         <div class="column has-text-right">
-                                            <font-awesome-icon 
-                                                :icon="['fas', 'bolt']"
-                                                size="3x" 
-                                                class="is-right has-text-grey-lighter"
-                                            />
+                                            <b-icon
+                                                pack="fad" 
+                                                icon="bolt"
+                                                class="fa-3x is-right has-text-grey-lighter"
+                                                style="padding: 30px;">
+                                            </b-icon>
                                         </div>
                                     </div>
 
@@ -88,11 +89,12 @@
                                             <div class="has-text-weight-semibold is-size-6">{{ data.nem_site ? data.nem_site : 'Sin información' }}</div>
                                         </div>
                                         <div class="column has-text-right">
-                                            <font-awesome-icon 
-                                                :icon="['fas', 'plug']"
-                                                size="3x" 
-                                                class="is-right has-text-grey-lighter"
-                                            />
+                                            <b-icon
+                                                pack="fad" 
+                                                icon="plug"
+                                                class="fa-3x is-right has-text-grey-lighter"
+                                                style="padding: 30px;">
+                                            </b-icon>
                                         </div>
                                     </div>
 
@@ -142,11 +144,12 @@
                                             <div class="has-text-weight-semibold is-size-6">{{ data.generator_group_type ? data.generator_group_type.generator_group_model : 'Sin información' }}</div>
                                         </div>
                                         <div class="column has-text-right">
-                                            <font-awesome-icon 
-                                                :icon="['fas', 'charging-station']"
-                                                size="3x" 
-                                                class="is-right has-text-grey-lighter"
-                                            />
+                                            <b-icon
+                                                pack="fad" 
+                                                icon="charging-station"
+                                                class="fa-3x is-right has-text-grey-lighter"
+                                                style="padding: 30px;">
+                                            </b-icon>
                                         </div>
                                     </div>
 
@@ -186,11 +189,12 @@
                                             <div class="has-text-weight-semibold is-size-6">{{ data.power_rectifier_type ? data.power_rectifier_type.power_rectifier_model : 'Sin información' }}</div>
                                         </div>
                                         <div class="column has-text-right">
-                                            <font-awesome-icon 
-                                                :icon="['fas', 'random']"
-                                                size="3x" 
-                                                class="is-right has-text-grey-lighter"
-                                            />
+                                            <b-icon
+                                                pack="fad" 
+                                                icon="random"
+                                                class="fa-3x is-right has-text-grey-lighter"
+                                                style="padding: 30px;">
+                                            </b-icon>
                                         </div>
                                     </div>
 

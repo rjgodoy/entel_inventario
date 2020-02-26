@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link href="https://pro.fontawesome.com/releases/v5.11.2/css/all.css" rel="stylesheet" type="text/css">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

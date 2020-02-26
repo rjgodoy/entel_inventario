@@ -86,11 +86,13 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
   props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
-      chart: null
+      chart: null,
+      chartData: []
     };
   },
   mounted: function mounted() {
-    this.graph(); // this.$eventBus.$on('getSitesData', this.graph)
+    this.graph();
+    this.graphData(); // this.$eventBus.$on('getSitesData', this.graph)
   },
   watch: {
     chartData: function chartData(newValue, oldValue) {
@@ -102,34 +104,45 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
     }
   },
   methods: {
+    graphData: function graphData() {
+      var _this = this;
+
+      axios.get("/api/siteStats").then(function (response) {
+        console.log(response.data);
+        _this.chartData = response.data;
+      });
+    },
     graph: function graph() {
       var chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["XYChart"]); // Add data
 
-      chart.data = [{
-        "month": "Julio",
-        "new": 4,
-        "eliminated": 2
-      }, {
-        "month": "Agosto",
-        "new": 10,
-        "eliminated": 5
-      }, {
-        "month": "Septiembre",
-        "new": 3,
-        "eliminated": 0
-      }, {
-        "month": "Octubre",
-        "new": 5,
-        "eliminated": 1
-      }, {
-        "month": "Noviembre",
-        "new": 6,
-        "eliminated": 1
-      }, {
-        "month": "Diciembre",
-        "new": 3,
-        "eliminated": 4
-      }];
+      chart.data = this.chartData.data; // chart.data = [ 
+      //     {
+      //         "month": "Julio",
+      //         "new": 4,
+      //         "eliminated": 2
+      //     }, {
+      //         "month": "Agosto",
+      //         "new": 10,
+      //         "eliminated": 5
+      //     }, {
+      //         "month": "Septiembre",
+      //         "new": 3,
+      //         "eliminated": 0
+      //     }, {
+      //         "month": "Octubre",
+      //         "new": 5,
+      //         "eliminated": 1
+      //     }, {
+      //         "month": "Noviembre",
+      //         "new": 6,
+      //         "eliminated": 1
+      //     }, {
+      //         "month": "Diciembre",
+      //         "new": 3,
+      //         "eliminated": 4
+      //     } 
+      // ];
+
       var title = chart.titles.create();
       title.text = "Ingresos y retiros de sitios";
       title.fontSize = 16;
@@ -138,14 +151,14 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
       title.fontWeight = 'bold'; // Create axes
 
       var categoryAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["CategoryAxis"]());
-      categoryAxis.dataFields.category = "month"; // categoryAxis.title.text = "Ingresos y retiros de sitios";
+      categoryAxis.dataFields.category = "mes"; // categoryAxis.title.text = "Ingresos y retiros de sitios";
       // categoryAxis.title.fontSize = 16;
       // categoryAxis.title.align = 'left'
 
       categoryAxis.renderer.grid.template.location = 0;
       categoryAxis.renderer.minGridDistance = 5;
-      categoryAxis.renderer.cellStartLocation = 0.2;
-      categoryAxis.renderer.cellEndLocation = 0.8;
+      categoryAxis.renderer.cellStartLocation = 0.4;
+      categoryAxis.renderer.cellEndLocation = 0.6;
       var valueAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ValueAxis"]());
       valueAxis.min = 0;
       valueAxis.title.text = "Cantidad (Q)";
@@ -154,7 +167,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
       function createSeries(field, name, stacked) {
         var series = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ColumnSeries"]());
         series.dataFields.valueY = field;
-        series.dataFields.categoryX = "month";
+        series.dataFields.categoryX = "mes";
         series.name = name;
         series.columns.template.tooltipText = "[font-size: 12px]{name}: [bold font-size: 12px]{valueY}[/]";
         series.stacked = stacked;
@@ -162,8 +175,8 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
         series.fontSize = 12;
       }
 
-      createSeries("new", "Nuevos", false);
-      createSeries("eliminated", "Eliminados", false); // Add legend
+      createSeries("new", "Nuevos", false); // createSeries("eliminated", "Eliminados", false);
+      // Add legend
       // chart.legend = new am4charts.Legend();
 
       this.chart = chart;

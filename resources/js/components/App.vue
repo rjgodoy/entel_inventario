@@ -5,7 +5,7 @@
                 <div class="hero-body">
                     <nav class="navbar">
                         <div class="navbar-brand">
-                            <a class="navbar-item" href="#" style="background: url('img/iconografia/entel-logo-negativo.png') no-repeat center center; background-size: contain; width: 60px;">
+                            <a class="navbar-item" href="#" style="background: url('/img/iconografia/entel-logo-negativo.png') no-repeat center center; background-size: contain; width: 60px;">
                             </a>
                             <div class="navbar-item">
                                 <div class="title is-5 has-text-grey-light">
@@ -35,7 +35,6 @@
                                     <b-icon 
                                         :pack="menu.icon_type" 
                                         :icon="menu.icon" 
-                                        size="2x" 
                                         :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : 'has-text-grey-light'">
                                     </b-icon>
                                     <p class="is-size-7" :class="currentRoute.toLowerCase() === menu.path ? 'has-text-white' : 'has-text-grey-light'">{{ menu.title }}</p>
@@ -86,8 +85,8 @@
                                             </div>
                                         </b-navbar-item>
 
-                                        <b-navbar-item href="http://bulma.io/blog/">
-                                            More posts
+                                        <b-navbar-item @click="changeStyle" v-model="darkMode">
+                                            {{ style }}
                                         </b-navbar-item>
 
                                         <hr class="navbar-divider">
@@ -113,6 +112,7 @@
                                                 </div>
                                             </div>
                                         </b-navbar-item>
+                                        
                                     </b-navbar-dropdown>
                                 </div>
                             </div>
@@ -133,13 +133,14 @@
             </div>
         </section>
 
-        <keep-alive>
+        <!-- <keep-alive> -->
             <router-view
                 :popList="pops"
                 :crms="crms"
                 :last_data_counters='last_data_counters'
+                :darkMode="darkMode"
             ></router-view>
-        </keep-alive>
+        <!-- </keep-alive> -->
 
     </div>
 </template>
@@ -159,6 +160,13 @@
             'last_data_counters',
             'user'
         ],
+
+        data() {
+            return {
+                darkMode: 0,
+            }
+        },
+
         created() {
             // console.log(this.$route)
             if (this.$route.query.message) {
@@ -169,14 +177,22 @@
                 })
             }
         },
+
         computed: {
             currentRoute () {
                 return this.$route.path
+            },
+            style() {
+                return this.darkMode == 1 ? 'Light mode' : 'Dark mode'
             }
         },
+
         methods: {
             goBack() {
                 window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+            },
+            changeStyle() {
+                this.darkMode = this.darkMode == 0 ? 1 : 0
             },
             logout: function(e){
                 axios.post(`/logout`).then((response) => {

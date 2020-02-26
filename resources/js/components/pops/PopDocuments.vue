@@ -1,18 +1,16 @@
 <template>
     <div>
+
+        <!-- ITEMS BUTTONS -->
+        <!-- ############# -->
         <section class="section" :class="bodyBackground">
-            <!-- <button class="button is-link" @click="changeStyle" v-model="darkMode">Style</button> -->
-
-            <!-- ITEMS BUTTONS -->
-            <div class="container">
-
+            <div class="">
                 <div class="tile is-ancestor">
-
                     <div class="tile is-parent" v-for="tab in tabs">
                         <a class="tile is-child box" :key="tab.filename" :class="currentTab === tab.filename ? 'has-background-link' : boxBackground" @click="currentTab = tab.filename">
                             <div :class="currentTab === tab.filename ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
-                                    {{ tab.filename }}
+                                    {{ tab.filename.substr(5) }}
                                 </div>
 
                                 <div style="margin-top: 10px;">
@@ -22,7 +20,7 @@
                         </a>
                     </div>
                 </div>
-            </div>    
+            </div>  
         </section>
 
        <!--  <section class="section" v-if="files.lenght == 0 && folders.lenght == 0">
@@ -83,7 +81,7 @@
                 {{ file.filename }}
             </a> -->
         </section>
-        <section  v-if="files.lenght == 0 && folders.lenght == 0">No hay archivos en esta sección.</section>
+        <!-- <section  v-if="files.lenght == 0 && folders.lenght == 0">No hay archivos en esta sección.</section> -->
     </div>
 </template>
 
@@ -106,7 +104,7 @@
                 isActive: false,
 
                 tabs: [],
-                currentTab: 'archivos',
+                currentTab: '',
 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
@@ -114,7 +112,7 @@
         },
         mounted() {
             this.getFolders()
-            this.getDocuments()
+            // this.getDocuments()
         },
         watch: {
             currentTab(newValue, oldValue) {

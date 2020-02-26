@@ -185,9 +185,9 @@
                     </template>
 
                     <template slot-scope="props">
-                        <div class="columns">
-                        <!-- <a :href="'/pop/' + props.option.id" target="_blank" class="columns"> -->
-                            <div class="column is-6">
+                        <div class="columns" style="padding: 10px;">
+
+                            <div class="column is-5">
                                 <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
                                     {{ props.option.nem_site }}
                                 </div>
@@ -202,37 +202,42 @@
                                 </div>
                             </div>
 
-                            <div class="column is-1">
-                                <div class="has-text-centered">
-                                    <span v-if="props.option.alba_project == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
-                                        {{ props.option.alba_project == 1 ? 'alba' : '' }}
-                                    </span>
-                                </div>
-                                
-                            </div>
+                            <div class="column is-2">
 
-                            <div class="column">
-                                <div class="tags has-addons is-right">
+                                <div class="tags has-addons">
                                     <span class="tag is-dark">categoría</span>
                                     <span 
                                         class="tag has-text-weight-bold" 
                                         :class="props.option.classification_type_id == 1 ? 'is-danger' : 
                                             (props.option.classification_type_id == 2 ? 'is-warning' : 
                                             (props.option.classification_type_id == 3 ? 'is-link' : 'is-info'))"
-                                    >
+                                        >
                                         {{ props.option ? props.option.classification_type : '' }}
                                     </span>
                                 </div>
+                                <div class="">
+                                    <span v-if="props.option.alba_project == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
+                                        {{ props.option.alba_project == 1 ? 'alba' : '' }}
+                                    </span>
+                                </div>
+
                             </div>
-                        <!-- </a> -->
-                        </div>
-                        <div class="field">
-                            <button class="button is-small is-default" @click="selectPop(props.option)" v-model="selectedPop">
-                                <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
-                            </button>
-                            <a class="button is-small is-link" :href="'/pop/' + props.option.id" target="_blank">
-                                <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
-                            </a>
+
+                            <div class="column is-3">
+                            </div>
+
+                            <div class="column has-text-right">
+                                <div class="">
+                                    <button class="button is-small is-default is-fullwidth" @click="selectPop(props.option)" v-model="selectedPop">
+                                        <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
+                                    </button>
+                                </div>
+                                <div class="">
+                                    <router-link :to="'/pop/' + props.option.id" class="button is-small is-link is-fullwidth" target="_blank">
+                                        <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
+                                    </router-link>
+                                </div>
+                            </div>
                         </div>
                     </template>
                     <template slot="footer">
@@ -248,90 +253,118 @@
                     <!-- cuadros superiores -->
                     <div class="tile is-ancestor">
                         <div class="tile is-vertical">
-                            <div class="tile">
-                                <div class="tile is-vertical">
-                                    <div class="tile">
-                                        <div class="tile is-parent">
-                                            <a class="tile is-child box has-text-centered" :class="currentTab === 'pops' ? 'has-background-link' : boxBackground" @click="currentTab = 'pops'">
-                                                <div class="" style="margin-top: 10px;" >
-                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                    <font-awesome-icon icon="map-marker-alt" :class="currentTab === 'pops' ? 'has-text-smart-light' : 'has-text-smart'" size="2x"/>
-                                                <!-- </b-tag> -->
-                                                </div>
-                                                
-                                                <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'pops' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
-                                                    <p class="is-size-6 has-text-weight-normal">POP</p>
-                                                </div>
-                                            </a>
-                                        </div>
 
-                                        <div class="tile is-parent">
-                                            <a class="tile is-child box has-text-centered" :class="currentTab === 'sites' ? 'has-background-link' : boxBackground" @click="currentTab = 'sites'">
-                                                <div class="" style="margin-top: 10px;">
-                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                    <font-awesome-icon icon="server" :class="currentTab === 'sites' ? 'has-text-positive-light' : 'has-text-positive'" size="2x"/>
-                                                <!-- </b-tag> -->
-                                                </div>
-                                                <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'sites' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
-                                                    <p class="is-size-6 has-text-weight-normal">Sitios</p>
-                                                </div>
-                                            </a>
+                            <div class="tile" style="max-height: 100px">
+                                <div class="tile is-parent">
+                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'pops' ? 'has-background-link' : boxBackground" @click="currentTab = 'pops'">
+                                        <div class="" style="margin-top: 10px;" >
+                                            <b-icon 
+                                                pack="fad" 
+                                                icon="map-marker-alt" 
+                                                class="fa-2x"
+                                                :class="currentTab === 'pops' ? 'has-text-smart-light' : 'has-text-smart'">
+                                            </b-icon>
                                         </div>
+                                        
+                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'pops' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal">POP</p>
+                                        </div>
+                                    </a>
+                                </div>
 
-                                        <div class="tile is-parent">
-                                            <a class="tile is-child box has-text-centered" :class="currentTab === 'technologies' ? 'has-background-link' : boxBackground" @click="currentTab = 'technologies'">
-                                                <div class="" style="margin-top: 10px;">
-                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                    <font-awesome-icon icon="signal" :class="currentTab === 'technologies' ? 'has-text-eco-light' : 'has-text-eco'" size="2x"/>
-                                                <!-- </b-tag> -->
-                                                </div>
-                                                <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'technologies' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
-                                                    <p class="is-size-6 has-text-weight-normal">Tecnologías</p>
-                                                </div>
-                                            </a>
+                                <div class="tile is-parent">
+                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'sites' ? 'has-background-link' : boxBackground" @click="currentTab = 'sites'">
+                                        <div class="" style="margin-top: 10px;">
+                                            <b-icon 
+                                                pack="fad" 
+                                                icon="server" 
+                                                class="fa-2x"
+                                                :class="currentTab === 'sites' ? 'has-text-eco' : 'has-text-eco'">
+                                            </b-icon>
                                         </div>
-                                    </div>
+                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'sites' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal">Sitios</p>
+                                        </div>
+                                    </a>
+                                </div>
 
-                                    <div class="tile">
-                                        <div class="tile is-parent">
-                                            <a class="tile is-child box has-text-centered has-text-yellow has-background-yellow-light" @click="currentTab = 'critics'">
-                                                <div class="" style="margin-top: 10px;">
-                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                    <font-awesome-icon icon="exclamation-triangle" class="has-text-yellow" size="2x"/>
-                                                <!-- </b-tag> -->
-                                                </div>
-                                                <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
-                                                    <p class="is-size-6 has-text-weight-normal">POP Críticos</p>
-                                                </div>
-                                            </a>
+                                <div class="tile is-parent">
+                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'technologies' ? 'has-background-link' : boxBackground" @click="currentTab = 'technologies'">
+                                        <div class="" style="margin-top: 10px;">
+                                            <b-icon 
+                                                pack="fad" 
+                                                icon="signal" 
+                                                class="fa-2x"
+                                                :class="currentTab === 'technologies' ? 'has-text-positive' : 'has-text-positive'">
+                                            </b-icon>
                                         </div>
+                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'technologies' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal">Tecnologías</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
 
-                                        <div class="tile is-parent">
-                                            <router-link class="tile is-child box has-text-centered has-text-positive has-background-positive-light" to="/pop">
-                                                <div class="" style="margin-top: 10px;">
-                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                    <font-awesome-icon icon="file-invoice-dollar" class="has-text-positive" size="2x"/>
-                                                <!-- </b-tag> -->
-                                                </div>
-                                                <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ albaQuantity | numeral('0,0') }}
-                                                    <p class="is-size-6 has-text-weight-normal">POP Alba</p>
-                                                </div>
-                                            </router-link>
+                            <div class="tile" style="max-height: 100px">
+                                <div class="tile is-parent">
+                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'critics' ? 'has-background-link' : boxBackground" @click="viewCriticPops">
+                                        <div class="" style="margin-top: 10px;">
+                                            <b-icon 
+                                                pack="fad" 
+                                                icon="exclamation-triangle" 
+                                                class="has-text-yellow fa-2x"
+                                                >
+                                            </b-icon>
                                         </div>
+                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'critics' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal">POP Críticos</p>
+                                        </div>
+                                    </a>
+                                </div>
 
-                                        <div class="tile is-parent">
-                                            <router-link class="tile is-child box has-text-centered has-text-eco has-background-eco-light" to="/eco">
-                                                <div class="" style="margin-top: 10px;">
-                                                <!-- <b-tag rounded style="margin-top: 10px;" type="is-warning is-light" size="is-large"> -->
-                                                    <font-awesome-icon icon="leaf" class="has-text-eco" size="2x"/>
-                                                <!-- </b-tag> -->
-                                                </div>
-                                                <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 24 | numeral('0,0') }}
-                                                    <p class="is-size-6 has-text-weight-normal">POP en Zonas Protegidas</p>
-                                                </div>
-                                            </router-link>
+                                <div class="tile is-parent">
+                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'alba' ? 'has-background-link' : boxBackground" @click="viewAlbaPops">
+                                        <div class="" style="margin-top: 10px;">
+                                            <b-icon 
+                                                pack="fad" 
+                                                icon="file-invoice-dollar" 
+                                                class="has-text-smart fa-2x"
+                                                >
+                                            </b-icon>
                                         </div>
-                                    </div>
+                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'alba' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ albaQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal">Proyecto Alba</p>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="tile is-parent">
+                                    <a class="tile is-child box has-background-dark has-text-white has-text-centered" style="position: relative;" 
+                                        @click="downloadPops">
+                                        <b-icon 
+                                            style="margin-top: 10px;"
+                                            pack="fad" 
+                                            icon="download" 
+                                            class="has-text-eco fa-2x">
+                                        </b-icon> 
+                                        <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">
+                                            <p class="is-size-6 has-text-weight-normal">Descargar listado de POP</p>
+                                        </div>
+                                        <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
+                                    </a>
+                                    <!-- <router-link class="tile is-child box has-text-centered" :class="boxBackground" to="/eco">
+                                        <div class="" style="margin-top: 10px;">
+                                            <b-icon 
+                                                pack="fad" 
+                                                icon="leaf" 
+                                                class="has-text-eco fa-2x"
+                                                >
+                                            </b-icon>
+                                        </div>
+                                        <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 24 | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal">POP en Zonas Protegidas</p>
+                                        </div>
+                                    </router-link> -->
                                 </div>
                             </div>
 
@@ -351,6 +384,7 @@
                                     :map_attributes="map_attributes"
                                     :darkMode="darkMode"
                                     :criticPopsSwitch="criticPopsSwitch"
+                                    :albaPopsSwitch="albaPopsSwitch"
                                 />   
                                 <!-- <PopsMap 
                                     style="height: 100%; margin: -14px -14px -14px -14px;"
@@ -465,7 +499,7 @@
                             :selectedZona="this.selectedZona"
                             :core="core"
                         />
-                        <!-- <generator-groups-data
+                        <generator-groups-data
                             :bodyBackground="bodyBackground"
                             :boxBackground="boxBackgroundEnergy"
                             :primaryText="primaryText"
@@ -473,7 +507,7 @@
                             :selectedCrm="this.selectedCrm"
                             :selectedZona="this.selectedZona"
                             :core="core"
-                        /> -->
+                        />
                         <power-rectifiers-data
                             :bodyBackground="bodyBackground"
                             :boxBackground="boxBackgroundEnergy"
@@ -483,21 +517,7 @@
                             :selectedZona="this.selectedZona"
                             :core="core"
                         />
-                        <!-- <div class="tile is-parent">
-                            <article class="tile is-child box" :class="boxBackground">
-                                <p class="title">Hello World</p>
-                                <p class="subtitle">What is up?</p>
-                            </article>
-                        </div> -->
-                        <!-- <div class="tile is-parent">
-                            <article class="tile is-child box" :class="boxBackground">
-                                <p class="title">Hello World</p>
-                                <p class="subtitle">What is up?</p>
-                            </article>
-                        </div> -->
-                    </div>
 
-                    <div class="tile">
                         <air-conditioners-data
                             :bodyBackground="bodyBackground"
                             :boxBackground="boxBackgroundClimate"
@@ -507,18 +527,6 @@
                             :selectedZona="this.selectedZona"
                             :core="core"
                         />
-                        <!-- <div class="tile is-parent">
-                            <article class="tile is-child box" :class="boxBackground">
-                                <p class="title">Hello World</p>
-                                <p class="subtitle">What is up?</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent">
-                            <article class="tile is-child box" :class="boxBackground">
-                                <p class="title">Hello World</p>
-                                <p class="subtitle">What is up?</p>
-                            </article>
-                        </div> -->
 
                         <vertical-structures-data
                             :bodyBackground="bodyBackground"
@@ -538,18 +546,6 @@
                             :selectedZona="this.selectedZona"
                             :core="core"
                         />
-                        <!-- <div class="tile is-parent">
-                            <article class="tile is-child box" :class="boxBackground">
-                                <p class="title">Hello World</p>
-                                <p class="subtitle">What is up?</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent">
-                            <article class="tile is-child box" :class="boxBackground">
-                                <p class="title">Hello World</p>
-                                <p class="subtitle">What is up?</p>
-                            </article>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -617,6 +613,20 @@
         timeout: 3000
     })
 
+    const AlbaData = () => ({
+        // The component to load (should be a Promise)
+        component: import('./AlbaPopsData.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
     const PretDataChart = () => ({
         // The component to load (should be a Promise)
         component: import('./PretDataChart.vue'),
@@ -662,6 +672,20 @@
     const RadialChart = () => ({
         // The component to load (should be a Promise)
         component: import('../RadialChart.vue'),
+        // A component to use while the async component is loading
+        // loading: LoadingComponent,
+        // A component to use if the load fails
+        // error: ErrorComponent,
+        // Delay before showing the loading component. Default: 200ms.
+        delay: 200,
+        // The error component will be displayed if a timeout is
+        // provided and exceeded. Default: Infinity.
+        timeout: 3000
+    })
+
+    const RedCoreChart = () => ({
+        // The component to load (should be a Promise)
+        component: import('./RedCoreChart.vue'),
         // A component to use while the async component is loading
         // loading: LoadingComponent,
         // A component to use if the load fails
@@ -766,10 +790,12 @@
             SitesData,
             TechnologiesData,
             CriticsData,
+            AlbaData,
             PretDataChart,
             PopsMap,
             MapView,
             RadialChart,
+            RedCoreChart,
             ElectricLinesData,
             GeneratorGroupsData,
             PowerRectifiersData,
@@ -781,7 +807,8 @@
             'message',
             // 'popList',
             'last_data_counters',
-            'crms'
+            'crms',
+            'darkMode'
         ],
         created() {
             this.styleMode()
@@ -816,7 +843,6 @@
                     zoom: 5
                 },
 
-                darkMode: 0,
                 bodyBackground: '',
                 boxBackground: '',
                 primaryText: '',
@@ -839,9 +865,12 @@
                 selectedZona: null,
 
                 criticPopsSwitch: 0,
-                criticPops: [],
+                // criticPops: [],
+
+                albaPopsSwitch: 0,
 
                 pops: [],
+                popList: [],
                 popsCrm: [],
                 popsZona: [],
                 popsCore: [],
@@ -851,6 +880,8 @@
                 technologiesQuantity: 0,
                 criticsQuantity: 0,
                 albaQuantity: 0,
+
+                isLoading: false,
 
                 // lastUpdateData: [],
                 // lastDataCounter: [],
@@ -866,7 +897,13 @@
 
             selectedCrm(newValue, oldValue) {
                 this.selectedZona = null
-                if (newValue) {
+                if (this.currentTab == 'critics') {
+                    this.viewCriticPops()
+                }
+                else if (this.currentTab == 'alba') {
+                    this.viewAlbaPops()
+                }
+                else if (newValue) {
                     this.getPopsCrm()
                     this.zonas = newValue.zonas
                 } else {
@@ -876,7 +913,13 @@
             },
 
             selectedZona(newValue, oldValue) {
-                if (newValue) {
+                if (this.currentTab == 'critics'){
+                    this.viewCriticPops()
+                }
+                else if (this.currentTab == 'alba') {
+                    this.viewAlbaPops()
+                }
+                else if (newValue) {
                     this.popsZona = []
                     this.popList.forEach(element => {
                         if (this.core) {
@@ -899,29 +942,65 @@
             },
 
             core(newValue, oldValue) {
-                if (!this.selectedCrm) {
-                    this.getPops()
-                    // console.log('presionado en vista TODOS los POP')
-                } else if (!this.selectedZona) {
-                    this.getPopsCrm()
-                    // console.log('presionado en vista CRM')
-                } else {
-                    this.getPopsZona()
-                    // console.log('presionado en vista ZONA')
+                if (this.currentTab == 'critics') {
+                    this.viewCriticPops()
+                } 
+                else if (this.currentTab == 'alba') {
+                    this.viewAlbaPops()
+                }
+                else {
+                    if (!this.selectedCrm) {
+                        this.getPops()
+                        // console.log('presionado en vista TODOS los POP')
+                    } else if (!this.selectedZona) {
+                        this.getPopsCrm()
+                        // console.log('presionado en vista CRM')
+                    } else {
+                        this.getPopsZona()
+                        // console.log('presionado en vista ZONA')
+                    }
                 }
                 this.getCounters()
+            },
+            darkMode(newValue, oldValue) {
+                this.styleMode()
+            },
+            currentTab(newValue, oldValue) {
+                if (newValue == 'critics') {
+                    this.viewCriticPops()
+                } 
+                else if (this.currentTab == 'alba') {
+                    this.viewAlbaPops()
+                }
+                else {
+                    if (!this.selectedCrm) {
+                        this.getPops()
+                        // console.log('presionado en vista TODOS los POP')
+                    } else if (!this.selectedZona) {
+                        this.getPopsCrm()
+                        // console.log('presionado en vista CRM')
+                    } else {
+                        this.getPopsZona()
+                        // console.log('presionado en vista ZONA')
+                    }
+                }
             }
         },
 
         computed: {
-            popList: function() {
-                return this.$store.state.popList
-            },
+            // popList: function() {
+            //     return this.$store.state.popList
+            // },
             currentTabComponent: function () {
                 return this.currentTab + '-data'
             },
             currentLastUpdateData: function () {
-                return this.last_data_counters['last_updated_' + this.currentTab]
+                if (this.currentTab != 'critics' || this.currentTab != 'alba') {
+                    return this.last_data_counters['last_updated_' + this.currentTab]
+                } else {
+                    return
+                }
+                
             },
             textSwitchCore() {
                 return this.core ? 'has-text-link' : ''
@@ -971,6 +1050,28 @@
             //     }
             // }, 10),
 
+            getPops: debounce(function () {
+                if (!this.popList.length) {
+                    var crm_id = this.selectedCrm ? this.selectedCrm : 0
+                    var zona_id = this.selectedZona ? this.selectedZona : 0
+
+                    axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
+                    .then((response) => {
+                        // console.log(response.data)
+                        try {
+                            this.popList = response.data
+                            // this.$store.commit("setPops", response.data);
+                        } catch (ex) {
+                            console.log(ex);
+                        }
+                        // console.log(this.popList)
+                        this.pops = this.popList
+                    })
+                } else {
+                    this.pops = this.popList
+                }
+            }, 200),
+
             async getPopsCrm() {
                 this.popsCrm = []
                 this.popList.forEach(element => {
@@ -1003,51 +1104,29 @@
                 this.pops = this.popsZona
             },
 
-            getPops: debounce(function () {
-                var crm_id = this.selectedCrm ? this.selectedCrm : 0
-                var zona_id = this.selectedZona ? this.selectedZona : 0
-                axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
-                .then((response) => {
+            async viewCriticPops() {
+                this.currentTab = 'critics'
+
+                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+                var zona_id = this.selectedZona ? this.selectedZona.id : 0
+                axios.get(`/api/criticPops?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     console.log(response.data)
-                    try {
-                        this.$store.commit("setPops", response.data);
-                    } catch (ex) {
-                        console.log(ex);
-                    }
-                    this.pops = this.popList
+                    this.pops = response.data.data
                 })
-            }, 200),
+                this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
+            },
 
-            // popsPushCore(item, index) {
-            //     if (item.classification_type_id == 1) {
-            //         this.popsCore.push(item)
-            //         this.pops = this.popsCore
-            //     }
-            // },
+            async viewAlbaPops() {
+                this.currentTab = 'alba'
 
-            // popPushCrm(item, index) {
-            //     if (this.core) {
-            //         if (item.crm_id == this.selectedCrm.id && item.classification_type_id == 1) {
-            //             this.popsCrm.push(item)
-            //         }
-            //     } else {
-            //         if (item.crm_id == this.selectedCrm.id) {
-            //             this.popsCrm.push(item)
-            //         }
-            //     }
-            // },
-
-            // popPushZona(item, index) {
-            //     if (this.core) {
-            //         if (item.zona_id == this.selectedZona.id && item.classification_type_id == 1) {
-            //             this.popsZona.push(item)
-            //         }
-            //     } else {
-            //         if (item.zona_id == this.selectedZona.id) {
-            //             this.popsZona.push(item)
-            //         }
-            //     }
-            // },
+                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+                var zona_id = this.selectedZona ? this.selectedZona.id : 0
+                axios.get(`/api/albaPops?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                    console.log(response.data)
+                    this.pops = response.data
+                })
+                this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0
+            },
 
             // CONTERS
             async getCounters() {
@@ -1059,13 +1138,6 @@
                     this.albaQuantity = response.data.alba_project
                 })
             },
-
-            // async syncCounter() {
-            //     axios.get(`/api/counters`)
-            //     .then((response) => {
-            //         this.lastDataCounter = response.data
-            //     })
-            // },
 
             // Triggers
             selectPop(pop) {
@@ -1079,13 +1151,6 @@
             selectZona(zona) {
                 this.selectedZona = this.selectedZona != zona ? zona : null
             },
-
-            // async lastUpdate() {
-            //     axios.get(`/api/lastUpdate`)
-            //     .then((response) => {
-            //         this.lastUpdateData = response.data
-            //     })
-            // },
 
             getAsyncData: debounce(function (text) {
                 // String update
@@ -1221,15 +1286,26 @@
                         duration: 5000
                     })
                 }
-            }
-            // newPop(value) {
-            //     console.log(value)
-            //     this.pops = value
-            // }
+            },
 
-            // async viewCriticPops() {
-            //     this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
-            // }
+            downloadPops() {
+                this.isLoading = true
+
+                axios.get(`/api/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
+                    responseType: 'blob',
+                })
+                .then((response) => {
+                    console.log(response.data)
+                    const blob = new Blob([response.data], { type: 'application/xls' })
+                    // const objectUrl = window.URL.createObjectURL(blob)
+
+                    let link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = 'test.xlsx'
+                    link.click()
+                    this.isLoading = false
+                })
+            },
         },
 
     }

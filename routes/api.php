@@ -104,6 +104,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 		// Critic Pop Data box
 			Route::get('criticSites', 'Api\DashboardApiController@criticSites');
+			Route::get('criticPops', 'Api\DashboardApiController@criticPops');
+
+		// Alba Pop Data box
+			Route::get('albaSites', 'Api\DashboardApiController@albaSites');
+			Route::get('albaPopList', 'Api\DashboardApiController@albaPopList');
 
 		// Electric Lines
 			Route::apiResource('electricLines','Api\Infraestructura\ElectricLineController');
@@ -203,6 +208,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 		// Exports
 			Route::get('pop/export', 'PopController@export')->name('pops.export');
+
+		// Sites Stats Chart
+			Route::get('siteStats', 'Api\SiteController@stats')->name('site.stats');
 
 	##############################################################################################
 

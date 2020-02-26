@@ -25,11 +25,13 @@
         ],
         data() {
             return {
-                chart: null
+                chart: null,
+                chartData: []
             }
         },
         mounted() {
             this.graph()
+            this.graphData()
             // this.$eventBus.$on('getSitesData', this.graph)
         },
 
@@ -43,37 +45,45 @@
         },
 
         methods : {
+            graphData() {
+                axios.get(`/api/siteStats`).then((response) => {
+                    console.log(response.data)
+                    this.chartData = response.data
+                })
+            },
+
             graph() {
                 var chart = am4core.create(this.$refs.chartdiv, am4charts.XYChart)
 
                 // Add data
-                chart.data = [ 
-                    {
-                        "month": "Julio",
-                        "new": 4,
-                        "eliminated": 2
-                    }, {
-                        "month": "Agosto",
-                        "new": 10,
-                        "eliminated": 5
-                    }, {
-                        "month": "Septiembre",
-                        "new": 3,
-                        "eliminated": 0
-                    }, {
-                        "month": "Octubre",
-                        "new": 5,
-                        "eliminated": 1
-                    }, {
-                        "month": "Noviembre",
-                        "new": 6,
-                        "eliminated": 1
-                    }, {
-                        "month": "Diciembre",
-                        "new": 3,
-                        "eliminated": 4
-                    } 
-                ];
+                chart.data = this.chartData.data
+                // chart.data = [ 
+                //     {
+                //         "month": "Julio",
+                //         "new": 4,
+                //         "eliminated": 2
+                //     }, {
+                //         "month": "Agosto",
+                //         "new": 10,
+                //         "eliminated": 5
+                //     }, {
+                //         "month": "Septiembre",
+                //         "new": 3,
+                //         "eliminated": 0
+                //     }, {
+                //         "month": "Octubre",
+                //         "new": 5,
+                //         "eliminated": 1
+                //     }, {
+                //         "month": "Noviembre",
+                //         "new": 6,
+                //         "eliminated": 1
+                //     }, {
+                //         "month": "Diciembre",
+                //         "new": 3,
+                //         "eliminated": 4
+                //     } 
+                // ];
 
                 var title = chart.titles.create();
                 title.text = "Ingresos y retiros de sitios";
@@ -84,14 +94,14 @@
 
                 // Create axes
                 let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-                categoryAxis.dataFields.category = "month";
+                categoryAxis.dataFields.category = "mes";
                 // categoryAxis.title.text = "Ingresos y retiros de sitios";
                 // categoryAxis.title.fontSize = 16;
                 // categoryAxis.title.align = 'left'
                 categoryAxis.renderer.grid.template.location = 0;
                 categoryAxis.renderer.minGridDistance = 5;
-                categoryAxis.renderer.cellStartLocation = 0.2;
-                categoryAxis.renderer.cellEndLocation = 0.8;
+                categoryAxis.renderer.cellStartLocation = 0.4;
+                categoryAxis.renderer.cellEndLocation = 0.6;
 
                 let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
                 valueAxis.min = 0;
@@ -102,7 +112,7 @@
                 function createSeries(field, name, stacked) {
                     let series = chart.series.push(new am4charts.ColumnSeries());
                     series.dataFields.valueY = field;
-                    series.dataFields.categoryX = "month";
+                    series.dataFields.categoryX = "mes";
                     series.name = name;
                     series.columns.template.tooltipText = "[font-size: 12px]{name}: [bold font-size: 12px]{valueY}[/]";
                     series.stacked = stacked;
@@ -111,7 +121,7 @@
                 }
 
                 createSeries("new", "Nuevos", false);
-                createSeries("eliminated", "Eliminados", false);
+                // createSeries("eliminated", "Eliminados", false);
 
                 // Add legend
                 // chart.legend = new am4charts.Legend();

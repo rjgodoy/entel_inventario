@@ -60,11 +60,12 @@
                                             <!-- <div class="has-text-weight-semibold is-size-6 subtitle">{{ data.air_conditioner_brand.air_conditioner_type.air_conditioner_type }}</div> -->
                                         </div>
                                         <div class="column has-text-right">
-                                            <font-awesome-icon 
-                                                :icon="[data.infrastructure_type.icon_type, data.infrastructure_type.icon]"
-                                                size="3x" 
-                                                class="is-right has-text-grey-lighter"
-                                            />
+                                            <b-icon
+                                                :pack="data.infrastructure_type.icon_type" 
+                                                :icon="data.infrastructure_type.icon"
+                                                class="fa-3x is-right has-text-grey-lighter"
+                                                style="padding: 30px;">
+                                            </b-icon>
                                         </div>
                                     </div>
 

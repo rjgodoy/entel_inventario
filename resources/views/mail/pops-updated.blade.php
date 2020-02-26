@@ -2,10 +2,11 @@
 # Base de POP actualizada
 
 <div>
-    El número total de pops ingresados el día de hoy es: {{ $count->totalPops }}
+    El número total de pops ingresados el día de hoy es: {{ $counter['totalPops'] }}
 </div>
+
 <div>
-    El número total de sitios ingresados el día de hoy es: {{ $count->totalSites }}
+    El número total de sitios ingresados el día de hoy es: {{ $counter['totalSites'] }}
 </div>
 
 @component('mail::button', ['url' => url('/pop')])

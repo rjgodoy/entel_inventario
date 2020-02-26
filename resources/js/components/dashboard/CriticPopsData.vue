@@ -27,7 +27,7 @@
                             <td class="has-text-centered" :class="primaryText">
                                 <b-tag :type="item.site.classification_type_id == 1 ? 'is-info' : (item.site.classification_type_id == 2 ? 'is-warning' : (item.site.classification_type_id == 3 ? 'is-smart' : (item.site.classification_type_id == 4 ? 'is-success' : 'is-link')))">{{ item.site.classification_type.classification_type }}</b-tag>
                             </td>
-                            <td class="has-text-left" :class="primaryText">{{ item.site.cod_planificacion }}</td>
+                            <td class="has-text-left" :class="primaryText">{{ item.site.pop.pop_e_id }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -42,7 +42,7 @@
                 </vue-pagination>
             </nav>
 
-            <div class="field has-addons">
+            <!-- <div class="field has-addons">
                 <p class="control">
                     <b-button 
                         :loading="buttonLoading ? true : false"
@@ -60,7 +60,7 @@
                         </a>
                     </b-tooltip>
                 </p>
-            </div>
+            </div> -->
 
         </article>
     </div>
@@ -134,24 +134,24 @@
                     // }
                 })
             },
-            downloadPops() {
-                this.buttonLoading = 1
+            // downloadPops() {
+            //     this.buttonLoading = 1
 
-                axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
-                    responseType: 'blob',
-                })
-                .then((response) => {
-                    console.log(response.data)
-                    const blob = new Blob([response.data], { type: 'application/xls' })
-                    // const objectUrl = window.URL.createObjectURL(blob)
+            //     axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
+            //         responseType: 'blob',
+            //     })
+            //     .then((response) => {
+            //         // console.log(response.data)
+            //         const blob = new Blob([response.data], { type: 'application/xls' })
+            //         // const objectUrl = window.URL.createObjectURL(blob)
 
-                    let link = document.createElement('a')
-                    link.href = window.URL.createObjectURL(blob)
-                    link.download = 'test.xlsx'
-                    link.click()
-                    this.buttonLoading = 0
-                })
-            }
+            //         let link = document.createElement('a')
+            //         link.href = window.URL.createObjectURL(blob)
+            //         link.download = 'test.xlsx'
+            //         link.click()
+            //         this.buttonLoading = 0
+            //     })
+            // }
         }
     }
 </script>

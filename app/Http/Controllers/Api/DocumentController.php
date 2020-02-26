@@ -21,7 +21,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $directories = Storage::disk('local')->directories('/public');
+        $directories = Storage::disk('ftp')->directories('/');
 
         $folders = [];
         foreach ($directories as $directory) {
@@ -49,37 +49,54 @@ class DocumentController extends Controller
      */
     public function show(Request $request, $id)
     {
+        // return $request->path;
+
         $sites = Site::whereHas('pop', function($q) use($id) {
             $q->where('id', $id);
         })->get();
 
+
+
         $files = []; $folders = [];
 
-        $directories = Storage::directories('public/'.$request->path);
+        $directories = Storage::disk('ftp')->directories('/'.$request->path);
+
+        // return $directories;
 
         // Folders
         foreach ($sites as $site) {
-            foreach($directories as $folder_path) {
-                $f = explode(' ', explode('public/'.$request->path.'/', $folder_path, 2)[1], 2);
-                if($f[0] == $site->nem_site) {
-                    $folders[] = pathinfo($folder_path);
-                    // if (Storage::files($folder_path)) {
-                    //     $files[] = pathinfo(Storage::files($folder_path)[0]);
-                    // }
+            // if (count($directories)) {
+                foreach($directories as $folder_path) {
+                    try {
+                        $f = explode(' ', explode('/'.$request->path.'/', $folder_path, 2)[1], 2);
+                    } catch (Exception $e) {
+
+                    }
+
+                    
+
+                    if($f[0] == $site->nem_site) {
+                        $folders[] = pathinfo($folder_path);
+                        // if (Storage::files($folder_path)) {
+                        //     $files[] = pathinfo(Storage::files($folder_path)[0]);
+                        // }
+                    }
                 }
-            }
+            // } else {
+            //     return explode('/'.$request->path.'/', $folder_path, 2);
+            // }
         }
 
         // Files
-        $filesInFolder = Storage::files('public/'.$request->path);
-        foreach ($filesInFolder as $f) {
-            $files[] = pathinfo($f);
-        }
+        // $filesInFolder = Storage::disk('ftp')->files('/'.$request->path);
+        // foreach ($filesInFolder as $f) {
+        //     $files[] = pathinfo($f);
+        // }
 
         return [
             'directories' => $directories, 
-            'folders' => $folders, 
-            'files' => $files
+            // 'folders' => $folders, 
+            // 'files' => $files
         ];
         
     }

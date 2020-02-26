@@ -34,5 +34,6 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('sync-comsite', 'App\Policies\ComsitePolicy@create');
+
     }
 }

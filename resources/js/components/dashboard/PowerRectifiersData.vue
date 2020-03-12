@@ -8,41 +8,27 @@
                 </div> -->
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
             </div>
-            
-            <table class="table is-fullwidth" :class="boxBackground">
-                <thead>
-                    <tr class="is-size-7">
-                        <th class="" :class="secondaryText">{{ crmSelected == null ? 'CRM' : (zonaSelected == null ? 'Zona' : 'Comuna') }}</th>
-                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Fija">POPs</abbr></th> -->
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Movil">Q POP con equipamiento</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Otros">Q Plantas Rectificadoras</abbr></th>
-                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="is-size-7" v-for="item in this.powerRectifierData">
-                        <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
-                        <!-- <td class="has-text-right" :class="primaryText">{{ item.q_pops | numeral('0,0') }}</td> -->
-                        <td class="has-text-right" :class="primaryText">{{ item.q_info | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.q_power_rectifiers | numeral('0,0') }}</td>
-                        <!-- <td class="has-text-right" :class="primaryText">{{ item.fijo + item.movil | numeral('0,0') }}</td> -->
-                    </tr>
-                </tbody>
-            </table>
 
+            <div class="columns is-multiline">
+                <div class="column is-6" v-for="item in this.powerRectifierData">
+                    <div class="is-size-5 has-text-weight-semibold">{{ item.q_power_rectifiers | numeral('0,0') }}</div>
+                    <div class="is-size-7">{{ item.nombre }}</div>
+                </div>
+            </div>
+            
             <form @submit="formSubmit">
                 <div class="field has-addons">
                     <p class="control">
-                        <button type="submit" class="button is-small is-link" :class="buttonLoading">
+                        <button type="submit" class="button is-small is-link is-outlined" :class="buttonLoading">
                             <font-awesome-icon icon="download"/> 
                             &nbsp;&nbsp;Listado de POPs
                         </button>
                     </p>
-                    <p class="control">
+                    <!-- <p class="control">
                         <a href="/pop" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
                             <font-awesome-icon icon="bars"/>
                         </a>
-                    </p>
+                    </p> -->
                 </div>
 
             </form>

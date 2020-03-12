@@ -88,11 +88,7 @@
                         console.log(response)
                         if (response.status === 200) {
                             this.buttonLoading = 0
-                            // this.$buefy.toast.open({
-                            //     message: response.data,
-                            //     type: response.data.includes('contraseña ha sido actualizada') ? 'is-success' : 'is-danger',
-                            //     duration: 5000
-                            // })
+                            // this.$eventBus.$emit('password-changed');
                         } else {
                             this.buttonLoading = 0
                             this.$buefy.toast.open({

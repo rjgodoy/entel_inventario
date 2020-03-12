@@ -1,7 +1,5 @@
 <template>
-    <article class="tile is-child box is-paddingless" :class="boxBackground" style="width: 100%; height: auto;">
-        <div class="" ref="chartdiv" style="height: 400px;"></div>
-    </article>
+    <div class="" ref="chartdiv" style="height: 250px;"></div>
 </template>
 
 <script>
@@ -22,17 +20,16 @@
             'boxBackground',
             'primaryText',
             'secondaryText',
-            'darkMode',
-            'chartData'
+            'darkMode'
         ],
         data() {
             return {
                 chart: null
             }
         },
-        mounted() {
-            this.graph()
-            // this.$eventBus.$on('getSitesData', this.graph)
+        created() {
+            // this.graph()
+            this.$eventBus.$on('graphData', this.graph)
         },
 
         beforeDestroy(){
@@ -40,16 +37,17 @@
                 this.chart.destroy()
                 this.chart.dispose()
             }
-            // this.$eventBus.$off('getSitesData')
+            this.$eventBus.$off('graphData')
         },
-        watch: {
-            chartData(newValue, oldValue) {
-                this.graph()
-            }
-        },
+        // watch: {
+        //     chartData(newValue, oldValue) {
+        //         this.graph()
+        //     }
+        // },
 
         methods : {
-            graph() {
+            graph(data) {
+                console.log(data)
                 // data.forEach(element => console.log(element))
 
                 /* Create chart instance */
@@ -57,7 +55,7 @@
                 // let chart = am4core.create("chartdiv", am4charts.RadarChart);
                 chart.hiddenState.properties.opacity = 0 // this creates initial fade-in
 
-                chart.data = this.chartData
+                chart.data = data
 
                 chart.padding(20, 20, 20, 20);
 

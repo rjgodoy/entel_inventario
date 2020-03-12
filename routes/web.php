@@ -29,6 +29,10 @@ Route::middleware(['auth'])->group(function () {
 	    return redirect('/dashboard');
 	});
 
+	Route::get('/storage/app', function () {
+	    return redirect('/storage/app');
+	});
+
 	// Route::get('/js/popper.js.map', function () {
 	//     return redirect('/dashboard');
 	// });

@@ -14,6 +14,10 @@
             marker: {
                 type: Object,
                 required: true
+            },
+            icon: {
+                type: Object,
+                required: false
             }
         },
 
@@ -23,7 +27,7 @@
                 position: { lat: parseFloat(this.marker.latitude), lng: parseFloat(this.marker.longitude) },
                 marker: this.marker,
                 map: this.map,
-                icon: '../img/markers/entel-pin-32.png',
+                icon: this.icon,
             });
         },
 

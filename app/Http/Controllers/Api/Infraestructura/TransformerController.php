@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\Transformer as TransformerResource;
-use App\Transformer;
+use App\Models\Transformer;
 
 class TransformerController extends Controller
 {

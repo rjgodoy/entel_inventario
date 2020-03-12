@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\Crm as CrmResource;
-use App\Crm;
+use App\Models\Crm;
 
 class CrmController extends Controller
 {

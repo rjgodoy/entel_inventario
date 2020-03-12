@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\Eco as EcoResource;
-use App\ProtectedZone;
-use App\Pop;
+use App\Models\ProtectedZone;
+use App\Models\Pop;
 
 class EcoController extends Controller
 {

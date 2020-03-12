@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Comsite;
-use App\ComsitePolicy;
+use App\Models\Comsite;
+use App\Models\ComsitePolicy;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;

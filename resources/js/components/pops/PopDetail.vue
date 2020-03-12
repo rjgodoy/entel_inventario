@@ -1,436 +1,148 @@
 <template>
-    <div class="has-background-light">
-
-        <!-- <pop-log 
-            :pop="pop"
-        />
-
-        <b-button
-            type="is-primary" 
-            @click="openLog" 
-            data-target="quickviewDefault" 
-            data-show="quickview" 
-            size="is-small"
-            >Log del POP
-        </b-button>
-        <b-button 
-            @click="closeLog" 
-            data-dismiss="quickview"
-            size="is-small"
-            >Log dismiss
-        </b-button>
-        <b-button
-            type="is-primary" 
-            size="is-small"
-            @click="changeStyle" 
-            >style
-        </b-button> -->
-
-        <!-- DATOS BASICOS -->
-        <!-- ############# -->
-        <section class="hero has-background-white">
-            <div class="hero-body columns" style="margin-top: 46px; margin-bottom: -60px;">
-                <div class="column has-text-left">
-                    <div class="columns">
-
-                        <!-- CUADRO INFO POP -->
-                        <!-- ############### -->
-                        <div class="column is-6">
-                            <div class="columns is-four-fifths">
-                                <div class="column has-text-left is-four-fifths">
-                                    <div class="is-size-3 has-text-weight-semibold">{{ pop.nombre }}
-                                        <p class="is-size-7 has-text-weight-light">NOMBRE POP</p>
-                                    </div>
-                                </div>
-                                <div class="column has-text-right">
-                                    <b-tooltip label="Categoría: corresponde a la mayor categoría entre todos los sitios del POP" type="is-dark" position="is-right">
-                                        <b-tag type="is-info" size="is-large">{{ popClassification }}</b-tag>
-                                        <!-- <p class="is-size-7 has-text-weight-light">CATEGORIA</p> -->
-                                    </b-tooltip>
-                                </div>
-                            </div>
-
-                            <div class="is-size-4 has-text-weight-normal">{{ pop.pop_e_id ? pop.pop_e_id : '-' }}
-                                <div class="is-size-7 has-text-weight-light">CODIGO PLANIFICACION</div>
-                            </div>
-                            
-                            <div class="is-divider" data-content="CENTRO REGIONAL MANTENIMIENTO" style="margin: 40px auto 20px auto"></div>
-
-                            <div class="columns">
-                                <div class="column has-text-left">
-                                    <div class="is-size-6 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }}
-                                        <p class="is-size-7 has-text-weight-light">ZONA</p>
-                                    </div>
-                                </div>
-                                <div class="column has-background-right">
-                                    <div class="is-size-6 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}
-                                        <p class="is-size-7 has-text-weight-light">CRM</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column has-text-left">
-                                    <div class="is-size-6 has-text-weight-semibold">{{ responsableZona.nombre }} {{ responsableZona.apellido }}
-                                        <p class="is-size-7 has-text-weight-light">{{ responsableZona.nombre_cargo_especifico }}</p>
-                                    </div>
-                                </div>
-                                <div class="column has-background-right">
-                                    <a :href="'mailto:' + responsableZona.email" class="is-size-7 has-text-weight-semibold has-text-link" style="margin-top: -20px;">{{ responsableZona.email ? responsableZona.email : '-' }}
-                                        <p class="is-size-7 has-text-weight-light has-text-dark">email</p>
-                                    </a>
-                                    <a :href="'tel:' + responsableZona.telefono_movil" class="is-size-7 has-text-weight-semibold" style="margin-top: 5px;">{{ responsableZona.telefono_movil ? responsableZona.telefono_movil : '-' }}
-                                        <p class="is-size-7 has-text-weight-light has-text-dark" style="margin-top: -4px;">telefono</p>
-                                    </a>
-                                    <div class="is-size-7 has-text-weight-semibold" style="margin-top: 5px;">{{ responsableZona.anexo_fono ? responsableZona.anexo_fono : '-' }}
-                                        <p class="is-size-7 has-text-weight-light" style="margin-top: -4px;">anexo</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div>
-
-                        <!-- CUANDRO INFO SITIOS -->
-                        <!-- ################### -->
-                        <div class="column">
-                            <!-- <div class="box" style="margin-top: -96px; max-height: 558px; overflow-y: scroll">
-                                <div class="is-size-5 has-text-centered has-text-weight-semibold">SITIOS: {{ sites.length }}</div>
-                                <b-table
-                                    :data="isEmpty ? [] : sites"
-                                    :bordered="isBordered"
-                                    :striped="isStriped"
-                                    :narrowed="isNarrowed"
-                                    :hoverable="isHoverable"
-                                    :loading="isLoading"
-                                    :focusable="isFocusable"
-                                    :mobile-cards="hasMobileCards"
-                                    class="">
-                                    <template slot-scope="props">
-                                        <b-table-column field="site" label="Sitio" class="">
-                                            <template slot="header" slot-scope="{ column }">
-                                                <b-tooltip label="Sitio" type="is-dark" class="is-size-6">
-                                                    {{ column.label }}
-                                                </b-tooltip>
-                                            </template> 
-                                            <div class="is-size-7 has-text-weight-semibold">{{ props.row.nem_site }}</div>
-                                            <div class="is-size-6">{{ props.row.nombre }}</div>
-                                        </b-table-column>
-
-                                        <b-table-column field="classification" label="Tipo / Categoría" class="" centered>
-                                            <template slot="header" slot-scope="{ column }">
-                                                <b-tooltip label="Tipo sitio / categoría de infraestructura" type="is-dark" class="is-size-6">
-                                                    {{ column.label }}
-                                                </b-tooltip>
-                                            </template>
-                                            <b-taglist attached class="is-centered">
-                                                <b-tag :type="props.row.site_type.service_type_id == 1 ? 'is-smart' : 'is-eco'" size="is-normal" class="has-text-weight-bold">
-                                                    {{ props.row.site_type.site_type.toUpperCase() }}
-                                                </b-tag>
-                                                <b-tag type="is-positive" size="is-normal" class="has-text-weight-bold">
-                                                    {{ props.row.classification_type ? props.row.classification_type.classification_type : '' }}
-                                                </b-tag>
-                                            </b-taglist>
-                                        </b-table-column>
-
-                                        <b-table-column field="attention_priority_type" label="Prioridad" class="is-right" centered>
-                                            <template slot="header" slot-scope="{ column }">
-                                                <b-tooltip label="Prioridad de atención" type="is-dark" class="is-size-6">
-                                                    {{ column.label }}
-                                                </b-tooltip>
-                                            </template>
-                                            <b-taglist attached class="is-centered">
-                                                <b-tag type="is-info" size="is-normal" class="has-text-weight-bold">
-                                                    {{ props.row.attention_priority_type ? props.row.attention_priority_type.attention_priority_type : '' }}
-                                                </b-tag>
-                                            </b-taglist>
-                                        </b-table-column>
-
-                                        <b-table-column field="technologies" label="Q Tec." class="" numeric>
-                                            <template slot="header" slot-scope="{ column }">
-                                                <b-tooltip label="Cantidad de tecnologías en el sitio" type="is-dark" class="is-size-6">
-                                                    {{ column.label }}
-                                                </b-tooltip>
-                                            </template>
-                                            <div class="is-size-6">{{ props.row.technologies ? props.row.technologies.length : '' }}</div>
-                                        </b-table-column>
-                                    </template>
-                                </b-table>
-                            </div> -->
-
-                            <div class="is-divider" :data-content="sites.length + ' SITIOS'" style="margin: 20px auto 20px auto;"></div>
-
-                            <div class="tile is-ancestor">
-                                <div class="tile is-parent is-vertical">
-                                    <div v-for="site in sites" class="tile is-child box has-background-light">
-                                        <div class="columns">
-                                            <div class="column is-8">
-                                                <div class="is-size-6 has-text-weight-semibold">{{ site.nem_site ? site.nem_site : '-' }}</div>
-                                                <div class="is-size-5 has-text-weight-light">{{ site.nem_site ? site.nombre : '-' }}</div>
-                                                
-                                            </div>
-                                            <div class="column">
-                                                <b-taglist attached class="is-right">
-                                                    <b-tag :type="site.site_type.service_type_id == 1 ? 'is-smart' : 'is-eco'" size="is-normal" class="has-text-weight-bold">
-                                                        {{ site.site_type.site_type.toUpperCase() }}
-                                                    </b-tag>
-                                                    <b-tag type="is-positive" size="is-normal" class="has-text-weight-bold">
-                                                        {{ site.classification_type ? site.classification_type.classification_type : '' }}
-                                                    </b-tag>
-                                                </b-taglist>
-                                            </div>
-                                        </div>
-                                        
-                                        <div v-if="site.technologies.length" class="is-divider" data-content="TECNOLOGIAS" style="margin: 10px auto 10px auto"></div>
-
-                                        <div class="tile is-ancestor is-12">
-                                            <div class="tile is-vertical">
-                                                <div class="tile">
-                                                    <div v-for="tech in site.technologies" class="tile is-parent is-3" v-if="tech">
-                                                        <div class="tile is-child box">
-                                                            <div class="title is-size-6 has-text-weight-normal">{{ tech.nem_tech }}
-                                                                <div class="subtitle is-size-7 has-text-weight-light">Tecnología</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- CUADRO DE MAPA Y DIRECCIÓN -->
-                <!-- ########################## -->
-                <div class="column" style="margin: -106px -24px 0 0px;">
-                    <div class="card">
-                        <figure class="">
-                            <pop-map
-                                :classification="popClassification"
-                                :popMaster="pop"
-                                :darkMode="darkMode"
-                            ></pop-map>
-                        </figure>
-                        <div class="card-content">
-                            <div class="columns">
-                                <div class="column is-8">
-                                    <div class="is-size-6 has-text-weight-semibold">{{ pop.direccion }}</div>
-                                    <div class="is-size-7 has-text-weight-normal">Comuna de {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}</div>
-                                </div>
-                                <div class="column">
-                                    <div class="level">
-                                        <div class="level-item">
-                                            <div class="is-size-6 has-text-weight-semibold">{{ pop.latitude }}
-                                                <p class="is-size-7 has-text-weight-light">Latitud</p>
-                                            </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="is-size-6 has-text-weight-semibold">{{ pop.longitude }}
-                                                <p class="is-size-7 has-text-weight-light">Longitud</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- TECNOLOGIAS -->
-        <!-- ########### -->
-        <section class="level has-background-dark has-text-white is-marginless">
-            <div class="level-item" style="margin: 20px auto 20px auto;">
-                <div class="is-size-7 has-text-weight-bold">2G 1900
-                    <span class="has-text-weight-bold is-size-5" :class="tec2g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec2g1900 ? tec2g1900.nem_tech : '-' }}</span>
-                </div>
-            </div>
-
-            <div class="is-divider-vertical" style="height: 82px;"></div>
-
-            <div class="level-item" style="margin: 20px auto 20px auto;">
-                <div class="is-size-7 has-text-weight-bold">3G 900
-                    <span class="has-text-weight-bold is-size-5" :class="tec3g900 ? 'has-text-eco' : ''">&nbsp;{{ tec3g900 ? tec3g900.nem_tech : '-' }}</span>
-                </div>
-            </div>
-            <div class="level-item" style="margin: 20px auto 20px auto;">
-                <div class="is-size-7 has-text-weight-bold">3G 1900
-                    <span class="has-text-weight-bold is-size-5" :class="tec3g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec3g1900 ? tec3g1900.nem_tech : '-' }}</span>
-                </div>
-            </div>
-
-            <div class="is-divider-vertical" style="height: 82px;"></div>
-
-            <div class="level-item" style="margin: 20px auto 20px auto;">
-                <div class="is-size-7 has-text-weight-bold">LTE 700
-                    <span class="has-text-weight-bold is-size-5" :class="tec4g700 ? 'has-text-eco' : ''">&nbsp;{{ tec4g700 ? tec4g700.nem_tech : '-' }}</span>
-                </div>
-            </div>
-            <div class="level-item" style="margin: 20px auto 20px auto;">
-                <div class="is-size-7 has-text-weight-bold">LTE 1900
-                    <span class="has-text-weight-bold is-size-5" :class="tec4g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec4g1900 ? tec4g1900.nem_tech : '-' }}</span>
-                </div>
-            </div>
-            <div class="level-item" style="margin: 20px auto 20px auto;">
-                <div class="is-size-7 has-text-weight-bold">LTE 2600
-                    <span class="has-text-weight-bold is-size-5" :class="tec4g2600 ? 'has-text-eco' : ''">&nbsp;{{ tec4g2600 ? tec4g2600.nem_tech : '-' }}</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- CARACTERISTICAS -->
-        <!-- ############### -->
-        <section class="hero is-bold" :class="heroBackground">
+    <div>
+        <!-- POP Name -->
+        <section class="hero is-info is-bold">
             <div class="hero-body">
-                <nav class="level">
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ popAttentionPriority }}</p>
-                            <p class="heading has-text-weight-semibold">PRIORIDAD ATENCION EN TERRENO</p>
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-8">
+                            <div class="is-size-4">
+                                <h1 class="title">{{ pop.nombre }}</h1>
+                            </div>
                         </div>
+                        <div class="column is-4">
+                            <div class="columns is-multiline">
+                                <div class="column is-6" v-for="site in pop.sites">
+                                    <b-button class="is-size-6 has-text-weight-bold is-light is-fullwidth" >{{ site.nem_site }}</b-button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="column is-2">
+                            <div class="columns is-multiline has-text-centered">
+                                <div class="column is-6">
+                                    <b-button type="is-success" disabled class="is-fullwidth">Critico</b-button>
+                                </div>
+                                <div class="column is-6">
+                                    <b-button type="is-success" class="is-fullwidth">CORE</b-button>
+                                </div>
+                                <div class="column is-6">
+                                    <b-button type="is-success" class="is-fullwidth">DWDR</b-button>
+                                </div>
+                                <div class="column is-6">
+                                    <b-button type="is-success" class="is-fullwidth">ALBA</b-button>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                        <log 
+                            :pop="pop"
+                        />
+                        <b-button
+                            type="is-primary" 
+                            @click="openLog" 
+                            data-target="quickviewDefault" 
+                            data-show="quickview" 
+                            size="is-small"
+                            >Log del POP
+                        </b-button>
+                        <!-- <b-button 
+                            @click="closeLog" 
+                            data-dismiss="quickview"
+                            size="is-small"
+                            >Log dismiss
+                        </b-button> -->
                     </div>
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ popDependences }}</p>
-                            <p class="heading has-text-weight-semibold">DEPENDENCIAS DIRECTAS</p>
-                        </div>
-                    </div>
-                    <!-- <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ dependences ? dependences.length : 0 }}</p>
-                            <p class="heading has-text-weight-semibold">DEPENDENCIAS TOTALES</p>
-                        </div>
-                    </div> -->
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ popCategory }}</p>
-                            <p class="heading has-text-weight-semibold">CLASIFICACION PLANIFICACION</p>
-                        </div>
-                    </div>
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ popAttentionType }}</p>
-                            <p class="heading has-text-weight-semibold">TIPO ATENCION EN TERRENO</p>
-                        </div>
-                    </div>
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-4 has-text-weight-semibold">{{ pop.theoretical_autonomy ? pop.theoretical_autonomy : '-' }} <span class="is-size-5">hrs.</span></p>
-                            <p class="heading has-text-weight-semibold">AUTONOMIA TEORICA</p>
-                        </div>
-                    </div>
-                </nav>
+                </div>
             </div>
         </section>
 
+        <section class="has-background-light">
+            <div class="columns is-marginless">
 
-        <section class="section">
+                <!-- BUTTONS -->
+                <div class="column is-2 has-background-white is-paddingless">
+                    <!-- <section class="section">
+                        <div class="is-size-3 has-text-weight-semibold">{{ pop.nombre }}
+                            <p class="is-size-7 has-text-weight-light">NOMBRE POP</p>
+                        </div>
+                        <b-tooltip label="Categoría: corresponde a la mayor categoría entre todos los sitios del POP" type="is-dark" position="is-right">
+                            <b-tag type="is-info" size="is-large">{{ popClassification.classification }}</b-tag>
+                        </b-tooltip>
 
-            <!-- TABS DE INFORMACIÓN DIFERENCIAL -->
-            <!-- ############################### -->
-            <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
-                <div class="tile is-parent" v-for="tab in tabs">
-                    <a class="tile is-child box" :key="tab.component" :class="currentTab === tab.component ? 'has-background-link' : boxBackground" @click="currentTab = tab.component">
-                        <div :class="currentTab === tab.component ? selectedSecondaryBoxText : secondaryText"> 
-                            <div class="is-size-6 has-text-weight-semibold">
-                                {{ tab.title }}
-                            </div>
+                        <div class="is-size-4 has-text-weight-normal">{{ pop.pop_e_id ? pop.pop_e_id : '-' }}
+                            <div class="is-size-7 has-text-weight-light">CODIGO PLANIFICACION</div>
+                        </div>
+                    </section> -->
 
-                            <div style="margin-top: 10px;">
-                                <!-- <div class="is-size-7 has-text-weight-light">{{ tab.description }}</div>  -->
+                    <!-- BOTONES MODULOS -->
+                    <!-- ############################### -->
+                    <section class="section">
+                        <div class="columns has-background-white is-multiline tile is-ancestor">
+                            <!-- TABS DE INFORMACIÓN -->
+                            <!-- ############################### -->
+                            <div class="column is-6 tile is-parent" 
+                                v-for="tab in tabs" 
+                                :key="tab.component" 
+                                @click="currentTab = tab.component">
+                                <div class="tile is-child box has-text-centered" :class="currentTab === tab.component && 'has-background-link'">
+                                    <b-icon 
+                                        :pack="tab.icon_type" 
+                                        :icon="tab.icon" 
+                                        :class="currentTab === tab.component && 'has-text-white'"
+                                        >
+                                    </b-icon>
+                                    <div :class="currentTab === tab.component && 'has-text-white'" style="padding-top: 5px;"> 
+                                        <div class="is-size-7 has-text-weight-normal">
+                                            {{ tab.title }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </a>
-                    <!-- <a class="tile is-child box" :class="tabButtonView == item.id ? 'has-background-link' : boxBackground" @click="changeView(item.id)">
-                        <font-awesome-icon :icon="item.icon" class="fa-2x" :class="tabButtonView == item.id ? selectedSecondaryBoxText : secondaryText"/>
-                        <div :class="tabButtonView == item.id ? selectedSecondaryBoxText : secondaryText" style="margin-top: 10px;"> 
-                            <div class="is-size-6 has-text-weight-semibold">
-                                {{ item.title.toUpperCase() }}
-                            </div>
-                        </div>
-                    </a> -->
+                    </section>
+                </div>
+
+                <!-- INFO -->
+                <div class="column is-paddingless">
+
+                    <!-- DETELLE DEL TAB -->
+                    <!-- ############### -->
+                    <keep-alive>
+                        <detail :is="currentTabComponent"
+                            :pop="pop"
+                            :rcas="[]"
+                            :bodyBackground="bodyBackground"
+                            :boxBackground="boxBackground"
+                            :primaryText="primaryText"
+                            :secondaryText="secondaryText"
+                            :darkMode="darkMode"
+                        />
+                    </keep-alive>
+
                 </div>
             </div>
-
-            <!-- DETELLE DEL TAB -->
-            <!-- ############### -->
-            <characteristics :is="currentTabComponent"
-                :pop="pop"
-                :rcas="[]"
-                :bodyBackground="bodyBackground"
-                :boxBackground="boxBackground"
-                :primaryText="primaryText"
-                :secondaryText="secondaryText"
-            />
         </section>
     </div>
     
 </template>
 
 <script>
-    // const PopsData = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('./PopsData.vue'),
-    //     // A component to use while the async component is loading
-    //     // loading: LoadingComponent,
-    //     // A component to use if the load fails
-    //     // error: ErrorComponent,
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })
-
-    import PopCharacteristics from './PopCharacteristics.vue';
-    import PopPower from './PopPower.vue';
-    import PopClimate from './PopClimate.vue';
-    import PopInfrastructure from './PopInfrastructure.vue';
-    import PopComsite from './PopComsite.vue';
-    import PopDocuments from './PopDocuments.vue';
-    import PopLog from './PopLog.vue';
-    const bulmaQuickview = require('../../../../node_modules/bulma-quickview/src/js/index').default;
     export default {
         components: {
-            PopMap: () => import("../maps/PopMapView"),
-            PopCharacteristics,
-            PopPower,
-            PopClimate,
-            PopInfrastructure,
-            PopComsite,
-            PopDocuments,
-            PopLog
+            Location: () => import('./Location'),
+            Sites: () => import('./Sites'),
+            Characteristics: () => import('./Characteristics'),
+            Capacity: () => import('./Capacity'),
+            Power: () => import('./Power'),
+            Climate: () => import('./Climate'),
+            Infrastructure: () => import('./Infrastructure'),
+            Eco: () => import('./Eco'),
+            Comsite: () => import('./Comsite'),
+            Documents: () => import('./Documents'),
+            Log: () => import('./Log'),
         },
         props : [
-            // 'pop_menu',
-            // 'attention',
-            // 'attentions',
-            // 'attention_priority',
-            // 'attention_priorities',
-            // 'autonomy',
-            // 'autonomies',
-            // 'category',
-            // 'categories',
-            // 'coverage',
-            // 'coverages',
-            // 'dependences',
-            // 'derivation',
-            // 'derivations',
-            // 'nets',
-            // 'net',
-            // 'pop_classes',
-            // 'pop_class',
-            // 'rcas',
-            // 'site',
-            // 'transports',
-            // 'transport',
         ],
         data() {
             return {
@@ -443,7 +155,6 @@
                 boxBackground: '',
                 primaryText: '',
                 secondaryText: '',
-                heroBackground: 'is-info',
 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
@@ -452,8 +163,7 @@
                 logOpened: 0,
 
                 tabs: null,
-                currentTab: 'characteristics',
-
+                currentTab: 'location',
 
                 isEmpty: false,
                 isBordered: false,
@@ -473,129 +183,132 @@
         mounted() {
             this.getAllData()
             this.getTabs()
-            var quickviews = bulmaQuickview.attach();
+            
         },
 
         computed: {
-            sites() {
-                var array = []
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) { 
-                        array.push(item) 
-                    })
-                } 
-                return array
-            },
-            sitesFijo() {
-                return this.sites ? this.sites.find(elemnent => element.site_type_id == 1) : null
-            },
-            sitesMovil() {
-                return this.sites ? this.sites.find(elemnent => element.site_type_id == 2) : null
-            },
-            sitesSwitch() {
-                return this.sites ? this.sites.find(elemnent => element.site_type_id == 3) : null
-            },
-            sitesPhone() {
-                return this.sites ? this.sites.find(elemnent => element.site_type_id == 4) : null
-            },
+            // sites() {
+            //     var array = []
+            //     if (this.pop.sites) {
+            //         this.pop.sites.forEach(function(item) { 
+            //             array.push(item) 
+            //         })
+            //     } 
+            //     return array
+            // },
+            // sitesFijo() {
+            //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 1) : null
+            // },
+            // sitesMovil() {
+            //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 2) : null
+            // },
+            // sitesSwitch() {
+            //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 3) : null
+            // },
+            // sitesPhone() {
+            //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 4) : null
+            // },
 
-            technologies() {
-                var array = []
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        if (item.technologies.length > 0) { 
-                            array.push(item.technologies) 
-                        }
-                    })
-                }
-                return array[0]
-            },
-            tec2g1900() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 1) : null
-            },
-            tec3g900() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 2) : null
-            },
-            tec3g1900() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 3) : null
-            },
-            tec3g3500() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 4) : null
-            },
-            tec4g700() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 5) : null
-            },
-            tec4g1900() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 6) : null
-            },
-            tec4g2600() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 7) : null
-            },
-            tec4g3500() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
-            },
+            // technologies() {
+            //     var array = []
+            //     if (this.pop.sites) {
+            //         this.pop.sites.forEach(function(item) {
+            //             if (item.technologies.length > 0) { 
+            //                 array.push(item.technologies) 
+            //             }
+            //         })
+            //     }
+            //     return array[0]
+            // },
+            // tec2g1900() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 1) : null
+            // },
+            // tec3g900() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 2) : null
+            // },
+            // tec3g1900() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 3) : null
+            // },
+            // tec3g3500() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 4) : null
+            // },
+            // tec4g700() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 5) : null
+            // },
+            // tec4g1900() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 6) : null
+            // },
+            // tec4g2600() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 7) : null
+            // },
+            // tec4g3500() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
+            // },
 
-            popClassification() {
-                var i = 6; var cat
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        if (item.classification_type_id && item.classification_type_id < i) { 
-                            i = item.classification_type_id
-                            cat = item.classification_type.classification_type
-                        }
-                    })
-                }
-                return cat
-            },
+            // popClassification() {
+            //     var id = 6; var classification
+            //     if (this.pop.sites) {
+            //         this.pop.sites.forEach(function(item) {
+            //             if (item.classification_type_id && item.classification_type_id < id) { 
+            //                 id = item.classification_type_id
+            //                 classification = item.classification_type.classification_type
+            //             }
+            //         })
+            //     }
+            //     return {
+            //         'classification': classification, 
+            //         'id': id
+            //         }
+            // },
 
-            popAttentionPriority() {
-                var i = 10; var cat
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        if (item.attention_priority_type_id && item.attention_priority_type_id < i) { 
-                            i = item.attention_priority_type_id
-                            cat = item.attention_priority_type.attention_priority_type
-                        }
-                    })
-                }
-                return cat
-            },
+            // popAttentionPriority() {
+            //     var i = 10; var cat
+            //     if (this.pop.sites) {
+            //         this.pop.sites.forEach(function(item) {
+            //             if (item.attention_priority_type_id && item.attention_priority_type_id < i) { 
+            //                 i = item.attention_priority_type_id
+            //                 cat = item.attention_priority_type.attention_priority_type
+            //             }
+            //         })
+            //     }
+            //     return cat
+            // },
 
-            popCategory() {
-                var i = 10; var cat
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        if (item.category_type_id && item.category_type_id < i) { 
-                            i = item.category_type_id
-                            cat = item.category_type.category_type
-                        }
-                    })
-                }
-                return cat
-            },
+            // popCategory() {
+            //     var i = 10; var cat
+            //     if (this.pop.sites) {
+            //         this.pop.sites.forEach(function(item) {
+            //             if (item.category_type_id && item.category_type_id < i) { 
+            //                 i = item.category_type_id
+            //                 cat = item.category_type.category_type
+            //             }
+            //         })
+            //     }
+            //     return cat
+            // },
 
-            popDependences() {
-                var dependences = 0
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        dependences = dependences + item.dependences.length
-                    })
-                }
-                return dependences
-            },
+            // popDependences() {
+            //     var dependences = 0
+            //     if (this.pop.sites) {
+            //         this.pop.sites.forEach(function(item) {
+            //             dependences = dependences + item.dependences.length
+            //         })
+            //     }
+            //     return dependences
+            // },
 
-            popAttentionType() {
-                var i = 10; var cat
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        if (item.attention_type_id && item.attention_type_id < i) { 
-                            i = item.attention_type_id
-                            cat = item.attention_type.attention_type
-                        }
-                    })
-                }
-                return cat
-            },
+            // popAttentionType() {
+            //     var i = 10; var cat
+            //     if (this.pop.sites) {
+            //         this.pop.sites.forEach(function(item) {
+            //             if (item.attention_type_id && item.attention_type_id < i) { 
+            //                 i = item.attention_type_id
+            //                 cat = item.attention_type.attention_type
+            //             }
+            //         })
+            //     }
+            //     return cat
+            // },
 
             responsableZona() {
                 var array = []
@@ -611,9 +324,13 @@
                 }
                 return array
             },
-            currentTabComponent: function () {
-                return 'pop-' + this.currentTab
-            }
+            currentTabComponent() {
+                return this.currentTab
+            },
+
+            // heroBackground() {
+            //     return this.popClassification.id == 1 ? 'is-info' : (this.popClassification.id == 2 ? 'is-warning' : (this.popClassification.id == 3 ? 'is-primary' : (this.popClassification.id == 4 ? 'is-smart' : (this.popClassification.id == 5 ? 'is-eco' : 'is-white'))))
+            // }
         },
         methods: {
             getTabs() {
@@ -622,8 +339,9 @@
                 })
             },
             getAllData() {
+                // console.log(this.$route.params.id)
                 axios.get(`/api/pop/${this.$route.params.id}`).then((response) => {
-                    this.pop = response.data
+                    this.pop = response.data.data
                     // console.log(this.pop)
                 })
 

@@ -1,8 +1,8 @@
 <template>
     <!-- <div class="tile is-parent"> -->
-        <article class="tile is-child box is-paddingless" :class="boxBackground" style="width: 100%; height: auto;">
-            <div class="" ref="chartdiv" style="height: 400px;"></div>
-        </article>
+        <!-- <article class="tile is-child box is-paddingless" :class="boxBackground" style="width: 100%; height: auto;"> -->
+            <div class="" ref="chartdiv" style="height: 300px;"></div>
+        <!-- </article> -->
     <!-- </div> -->
 </template>
 

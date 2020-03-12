@@ -1,14 +1,17 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[20],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/AdminPermissions.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/AdminPermissions.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AdminPopDataAdd_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminPopDataAdd.vue */ "./resources/js/components/admin/AdminPopDataAdd.vue");
+/* harmony import */ var _AdminPopDataEdit_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminPopDataEdit.vue */ "./resources/js/components/admin/AdminPopDataEdit.vue");
+/* harmony import */ var _AdminPopDataSync_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdminPopDataSync.vue */ "./resources/js/components/admin/AdminPopDataSync.vue");
 //
 //
 //
@@ -61,110 +64,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['selectedCrm', 'selectedZona', // 'csrf',
-  'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
+  components: {
+    'pop-data-add': _AdminPopDataAdd_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    'pop-data-edit': _AdminPopDataEdit_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    'pop-data-sync': _AdminPopDataSync_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  created: function created() {},
+  mounted: function mounted() {},
   data: function data() {
     return {
-      crmSelected: this.selectedCrm,
-      zonaSelected: this.selectedZona,
-      infrastructureData: null,
-      total: 0,
-      buttonLoading: ''
+      selectedPrimaryBoxText: 'has-text-white',
+      selectedSecondaryBoxText: 'has-text-light',
+      popActiveView: 2
     };
   },
-  created: function created() {
-    this.getInfrastructureData();
-  },
-  mounted: function mounted() {},
-  watch: {
-    selectedCrm: function selectedCrm(newValue, oldValue) {
-      this.crmSelected = newValue;
-      this.zonaSelected = null;
-      this.getInfrastructureData();
-    },
-    selectedZona: function selectedZona(newValue, oldValue) {
-      this.zonaSelected = newValue;
-      this.getInfrastructureData();
-    },
-    core: function core(newValue, oldValue) {
-      this.getInfrastructureData();
-    }
-  },
   methods: {
-    totalInfrastructures: function totalInfrastructures() {
-      this.total = 0;
-      this.infrastructureData.forEach(this.counter);
-    },
-    counter: function counter(item, index) {
-      this.total = this.total + item.q_infrastructures;
-    },
-    getInfrastructureData: function getInfrastructureData() {
-      var _this = this;
-
-      if (this.crmSelected == null) {
-        axios.get("/api/infrastructureData/".concat(this.core)).then(function (response) {
-          _this.infrastructureData = response.data.data;
-
-          _this.totalInfrastructures();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
-      } else if (this.zonaSelected == null) {
-        axios.get("/api/infrastructureDataCrm/".concat(this.crmSelected.id, "/").concat(this.core)).then(function (response) {
-          _this.infrastructureData = response.data.data;
-
-          _this.totalInfrastructures();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
+    changeView: function changeView(view) {
+      if (this.popActiveView != view) {
+        this.popActiveView = view;
       } else {
-        axios.get("/api/infrastructureDataZona/".concat(this.zonaSelected.id, "/").concat(this.core)).then(function (response) {
-          console.log(response);
-          _this.infrastructureData = response.data.data;
-
-          _this.totalInfrastructures();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
+        this.popActiveView = 0;
       }
-    },
-    formSubmit: function formSubmit(e) {
-      var _this2 = this;
-
-      // Activate loading button
-      this.buttonLoading = 'is-loading';
-      e.preventDefault();
-      axios({
-        url: '/pop/export',
-        method: 'POST',
-        responseType: 'blob' // headers: {
-        //     'Content-Type': 'text/html; charset=utf-8',
-        //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        // }
-
-      }).then(function (response) {
-        var url = window.URL.createObjectURL(new Blob([response.data]));
-        var link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'listado_pops.xlsx');
-        document.body.appendChild(link);
-        link.click(); // Deativate loading button
-
-        _this2.buttonLoading = '';
-      })["catch"](function (error) {
-        console.log('Error: ' + error);
-      });
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=template&id=6c835db8&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=template&id=6c835db8& ***!
-  \********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/AdminPermissions.vue?vue&type=template&id=3a93b3c0&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/AdminPermissions.vue?vue&type=template&id=3a93b3c0& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -176,151 +122,178 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tile is-parent" }, [
-    _c(
-      "article",
-      { staticClass: "tile is-child box", class: _vm.boxBackground },
-      [
-        _c("div", { staticClass: "columns" }, [
+  return _c(
+    "div",
+    {},
+    [
+      _c("div", { staticClass: "section shadow-inset" }, [
+        _c("div", { staticClass: "container" }, [
           _c(
             "div",
             {
-              staticClass:
-                "column is-size-5 has-text-weight-semibold has-text-left",
-              class: _vm.primaryText
+              staticClass: "tile is-ancestor",
+              staticStyle: { margin: "-40px 0 -40px 0" }
             },
-            [_vm._v("Infraestructuras")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "column is-size-4 has-text-weight-semibold has-text-right",
-              class: _vm.primaryText
-            },
-            [_vm._v(_vm._s(_vm._f("numeral")(this.total, "0,0")))]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "table",
-          { staticClass: "table is-fullwidth", class: _vm.boxBackground },
-          [
-            _c("thead", [
-              _c("tr", { staticClass: "is-size-7" }, [
-                _c("th", { class: _vm.secondaryText }, [
-                  _vm._v(
-                    _vm._s(
-                      _vm.crmSelected == null
-                        ? "CRM"
-                        : _vm.zonaSelected == null
-                        ? "Zona"
-                        : "Comuna"
+            [
+              _c("div", { staticClass: "tile is-parent" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "tile is-child box",
+                    class:
+                      _vm.popActiveView == 1
+                        ? "has-background-link"
+                        : _vm.boxBackground,
+                    on: {
+                      click: function($event) {
+                        return _vm.changeView(1)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        class:
+                          _vm.popActiveView == 1
+                            ? _vm.selectedSecondaryBoxText
+                            : _vm.secondaryText
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "is-size-6 has-text-weight-semibold" },
+                          [
+                            _vm._v(
+                              "\n                                Ingreso\n                            "
+                            )
+                          ]
+                        )
+                      ]
                     )
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "th",
-                  { staticClass: "has-text-right", class: _vm.secondaryText },
-                  [
-                    _c("abbr", { attrs: { title: "Movil" } }, [
-                      _vm._v("Q POP con infraestructura")
-                    ])
                   ]
-                ),
-                _vm._v(" "),
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tile is-parent" }, [
                 _c(
-                  "th",
-                  { staticClass: "has-text-right", class: _vm.secondaryText },
+                  "a",
+                  {
+                    staticClass: "tile is-child box",
+                    class:
+                      _vm.popActiveView == 2
+                        ? "has-background-link"
+                        : _vm.boxBackground,
+                    on: {
+                      click: function($event) {
+                        return _vm.changeView(2)
+                      }
+                    }
+                  },
                   [
-                    _c("abbr", { attrs: { title: "Otros" } }, [
-                      _vm._v("Q Infraestructuras")
-                    ])
+                    _c(
+                      "div",
+                      {
+                        class:
+                          _vm.popActiveView == 2
+                            ? _vm.selectedSecondaryBoxText
+                            : _vm.secondaryText
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "is-size-6 has-text-weight-semibold" },
+                          [
+                            _vm._v(
+                              "\n                                Edición\n                            "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tile is-parent" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "tile is-child box",
+                    class:
+                      _vm.popActiveView == 3
+                        ? "has-background-link"
+                        : _vm.boxBackground,
+                    on: {
+                      click: function($event) {
+                        return _vm.changeView(3)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        class:
+                          _vm.popActiveView == 3
+                            ? _vm.selectedSecondaryBoxText
+                            : _vm.secondaryText
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "is-size-6 has-text-weight-semibold" },
+                          [
+                            _vm._v(
+                              "\n                                Sincronización con SGC\n                            "
+                            )
+                          ]
+                        )
+                      ]
+                    )
                   ]
                 )
               ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(this.infrastructureData, function(item) {
-                return _c("tr", { staticClass: "is-size-7" }, [
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "has-text-weight-bold",
-                        class: _vm.secondaryText,
-                        attrs: { href: "", title: "CRM Norte" }
-                      },
-                      [_vm._v(_vm._s(item.nombre))]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "has-text-right", class: _vm.primaryText },
-                    [_vm._v(_vm._s(_vm._f("numeral")(item.q_info, "0,0")))]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "has-text-right", class: _vm.primaryText },
-                    [
-                      _vm._v(
-                        _vm._s(_vm._f("numeral")(item.q_infrastructures, "0,0"))
-                      )
-                    ]
-                  )
-                ])
-              }),
-              0
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("form", { on: { submit: _vm.formSubmit } }, [
-          _c("div", { staticClass: "field has-addons" }, [
-            _c("p", { staticClass: "control" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "button is-small is-link",
-                  class: _vm.buttonLoading,
-                  attrs: { type: "submit" }
-                },
-                [
-                  _c("font-awesome-icon", { attrs: { icon: "download" } }),
-                  _vm._v(
-                    " \n                          Listado de POPs\n                    "
-                  )
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "control" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "button is-small is-link tooltip",
-                  attrs: {
-                    href: "/pop",
-                    type: "button",
-                    "data-tooltip": "Tooltip Text"
-                  }
-                },
-                [_c("font-awesome-icon", { attrs: { icon: "bars" } })],
-                1
-              )
-            ])
-          ])
+            ]
+          )
         ])
-      ]
-    )
-  ])
+      ]),
+      _vm._v(" "),
+      _vm.popActiveView == 1
+        ? _c("pop-data-add", {
+            attrs: {
+              bodyBackground: _vm.bodyBackground,
+              boxBackground: _vm.boxBackground,
+              primaryText: _vm.primaryText,
+              secondaryText: _vm.secondaryText
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.popActiveView == 2
+        ? _c("pop-data-edit", {
+            attrs: {
+              bodyBackground: _vm.bodyBackground,
+              boxBackground: _vm.boxBackground,
+              primaryText: _vm.primaryText,
+              secondaryText: _vm.secondaryText
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.popActiveView == 3
+        ? _c("pop-data-sync", {
+            attrs: {
+              bodyBackground: _vm.bodyBackground,
+              boxBackground: _vm.boxBackground,
+              primaryText: _vm.primaryText,
+              secondaryText: _vm.secondaryText
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -329,17 +302,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/InfrastructuresData.vue":
-/*!*******************************************************************!*\
-  !*** ./resources/js/components/dashboard/InfrastructuresData.vue ***!
-  \*******************************************************************/
+/***/ "./resources/js/components/admin/AdminPermissions.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/admin/AdminPermissions.vue ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _InfrastructuresData_vue_vue_type_template_id_6c835db8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InfrastructuresData.vue?vue&type=template&id=6c835db8& */ "./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=template&id=6c835db8&");
-/* harmony import */ var _InfrastructuresData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InfrastructuresData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AdminPermissions_vue_vue_type_template_id_3a93b3c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminPermissions.vue?vue&type=template&id=3a93b3c0& */ "./resources/js/components/admin/AdminPermissions.vue?vue&type=template&id=3a93b3c0&");
+/* harmony import */ var _AdminPermissions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminPermissions.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/AdminPermissions.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -349,9 +322,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _InfrastructuresData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _InfrastructuresData_vue_vue_type_template_id_6c835db8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _InfrastructuresData_vue_vue_type_template_id_6c835db8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AdminPermissions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AdminPermissions_vue_vue_type_template_id_3a93b3c0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AdminPermissions_vue_vue_type_template_id_3a93b3c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -361,38 +334,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/InfrastructuresData.vue"
+component.options.__file = "resources/js/components/admin/AdminPermissions.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/components/admin/AdminPermissions.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/admin/AdminPermissions.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InfrastructuresData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./InfrastructuresData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InfrastructuresData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPermissions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPermissions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/AdminPermissions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPermissions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=template&id=6c835db8&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=template&id=6c835db8& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/components/admin/AdminPermissions.vue?vue&type=template&id=3a93b3c0&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/admin/AdminPermissions.vue?vue&type=template&id=3a93b3c0& ***!
+  \*******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InfrastructuresData_vue_vue_type_template_id_6c835db8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./InfrastructuresData.vue?vue&type=template&id=6c835db8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/InfrastructuresData.vue?vue&type=template&id=6c835db8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InfrastructuresData_vue_vue_type_template_id_6c835db8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPermissions_vue_vue_type_template_id_3a93b3c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPermissions.vue?vue&type=template&id=3a93b3c0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/AdminPermissions.vue?vue&type=template&id=3a93b3c0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPermissions_vue_vue_type_template_id_3a93b3c0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InfrastructuresData_vue_vue_type_template_id_6c835db8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPermissions_vue_vue_type_template_id_3a93b3c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Pop;
+use App\Models\Pop;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 // use Maatwebsite\Excel\Concerns\FromArray;

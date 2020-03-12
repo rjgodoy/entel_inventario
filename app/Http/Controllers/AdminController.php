@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TempSgcPop;
+use App\Models\TempSgcPop;
 
-use App\AdminTab;
+use App\Models\AdminTab;
 
 class AdminController extends Controller
 {

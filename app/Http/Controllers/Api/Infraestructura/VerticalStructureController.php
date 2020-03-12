@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\VerticalStructure as VerticalStructureResource;
-use App\VerticalStructure;
+use App\Models\VerticalStructure;
 use DB;
 
 class VerticalStructureController extends Controller

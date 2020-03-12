@@ -2,10 +2,10 @@
 
 namespace App\Imports;
 
-use App\ClientConnection;
-use App\ClientConnectionState;
-use App\ElectricCompany;
-use App\Site;
+use App\Models\ClientConnection;
+use App\Models\ClientConnectionState;
+use App\Models\ElectricCompany;
+use App\Models\Site;
 
 use Carbon\Carbon;
 

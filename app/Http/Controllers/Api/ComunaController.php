@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\Comuna as ComunaResource;
-use App\Comuna;
+use App\Models\Comuna;
 
 class ComunaController extends Controller
 {

@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\PsgTp as PsgTpResource;
-use App\PsgTpSource;
-use App\PsgTp;
-use App\Site;
+use App\Models\PsgTpSource;
+use App\Models\PsgTp;
+use App\Models\Site;
 use DB;
 
 class PsgTpController extends Controller

@@ -1,7 +1,7 @@
 <?php
 namespace App\Helpers;
 
-use App\Menu;
+use App\Models\Menu;
 
 class Helper {
 

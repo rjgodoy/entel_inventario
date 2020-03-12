@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Comsite;
 use Illuminate\Http\Request;
 
-use App\Pop;
+use App\Models\Comsite;
+use App\Models\Pop;
 
 use Artisaninweb\SoapWrapper\SoapWrapper;
 use App\Http\Requests\GetComsiteData;

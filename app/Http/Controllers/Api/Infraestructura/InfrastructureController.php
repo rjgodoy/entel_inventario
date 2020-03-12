@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\Infrastructure as InfrastructureResource;
-use App\Infrastructure;
+use App\Models\Infrastructure;
 use DB;
 
 class InfrastructureController extends Controller

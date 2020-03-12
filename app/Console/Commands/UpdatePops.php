@@ -7,9 +7,9 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-use App\Pop;
-use App\Site;
-use App\SolutionType;
+use App\Models\Pop;
+use App\Models\Site;
+use App\Models\SolutionType;
 use Carbon\Carbon;
 
 class UpdatePops extends Command

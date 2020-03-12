@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\Zona as ZonaResource;
-use App\Zona;
+use App\Models\Zona;
 
 class ZonaController extends Controller
 {

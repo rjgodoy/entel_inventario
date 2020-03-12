@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Pop;
-use App\User;
+use App\Models\Pop;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PopPolicy

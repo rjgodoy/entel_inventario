@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Resources\Comsite as ComsiteResource;
 use App\Http\Resources\ComsiteCollection;
-use App\Comsite;
-use App\Pop;
+use App\Models\Comsite;
+use App\Models\Pop;
 
 use Artisaninweb\SoapWrapper\SoapWrapper;
 use App\Http\Requests\GetComsiteData;

@@ -28,12 +28,12 @@
         </section>
 
         <keep-alive>
-            <admin-pop-data :is="currentTabComponent"
+            <admin-content :is="currentTabComponent"
                 :bodyBackground="bodyBackground"
                 :boxBackground="boxBackground"
                 :primaryText="primaryText"
                 :secondaryText="secondaryText"
-            ></admin-pop-data>
+            ></admin-content>
         </keep-alive>
 
     </div>

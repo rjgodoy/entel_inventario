@@ -52,8 +52,7 @@
                 :position="infoWindowPos"
                 :opened="infoWinOpen"
                 @closeclick="infoWinOpen=false"
-                content="Hello"
-                >
+                content="Hello">
                 <div v-html="infoContent"></div>
             </gmap-info-window>
             <!-- </GmapCluster> -->
@@ -153,7 +152,6 @@
                     {
                         "featureType": "poi.business","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]}]
 
-
             }
         },
         computed: {
@@ -167,14 +165,14 @@
                         url: '../img/markers/pin_entel_sm.png',
                         scaledSize: new google.maps.Size(30, 54),
                         origin: new google.maps.Point(0,0),
-                        anchor: new google.maps.Point(0,0)
+                        anchor: new google.maps.Point(15,54)
                     }
                 } else {
                     return {
                         url: '../img/markers/entelPin_red-white.png',
                         scaledSize: new google.maps.Size(30, 54),
                         origin: new google.maps.Point(0,0),
-                        anchor: new google.maps.Point(0,0)
+                        anchor: new google.maps.Point(15,54)
                     }
                 }
             },
@@ -189,7 +187,6 @@
             // } else {
             //     this.buttonText = 'Agrupar'
             // }
-            this.setPops()
             // this.$refs.map.$mapPromise.then((map) => {
             //     var myButton = document.getElementById('myClusterButton');
             //     myButton.index = 1;
@@ -234,7 +231,11 @@
         methods: {
             toggleInfoWindow(pop, idx) {
                 this.infoWindowPos = { lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) };
-                this.infoContent = this.getInfoWindowContent(pop);
+                axios.get(`/api/popInfo?pop_id=${pop.id}`).then((response) => {
+                    console.log(response.data)
+                    this.infoContent = this.getInfoWindowContent(response.data);
+                })
+                // this.infoContent = this.getInfoPop(pop);
 
                 //check if its the same pop that was selected if yes toggle
                 if (this.currentMidx == idx) {
@@ -252,6 +253,47 @@
             },
 
             getInfoWindowContent(pop) {
+                var class_id = 6; var class_type
+                if (pop.sites) {
+                    pop.sites.forEach(function(item) {
+                        if (item.classification_type_id && item.classification_type_id < class_id) { 
+                            class_id = item.classification_type_id
+                            class_type = item.classification_type.classification_type
+                        }
+                    })
+                }
+                return (`
+                    <div class="card">
+                        <!--div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="https://bulma.io/images/placeholders/640x480.png" alt="Placeholder image">
+                            </figure>
+                        </div-->
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <span class="tag ${class_id == 1 ? 'is-danger' : 
+                                                    (class_id == 2 ? 'is-warning' : 
+                                                    (class_id == 3 ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
+                                        ${class_type}
+                                    </span>
+                                </div>
+                                <div class="media-content">
+                                    <p class="has-text-weight-bold is-size-4">${pop.nombre}</p>
+                                    <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.comuna.nombre_comuna}</p>
+                                    <p class="has-text-weight-light is-size-6">Zona ${pop.comuna.zona.nombre_zona}, CRM ${pop.comuna.zona.crm.nombre_crm}</p>
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                <a href="/pop/${pop.id}" target="_blank" class="button is-outlined is-primary is-small">
+                                    <font-awesome-icon icon="info-circle"/>
+                                    &nbsp;Ver detalles
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `);
                 // var class_id = 6; var class_type
                 // if (pop.sites) {
                 //     pop.sites.forEach(function(item) {
@@ -292,40 +334,7 @@
                 //             </div>
                 //         </div>
                 //     </div>
-                // `);
-
-                return (`
-                    <div class="card">
-                        <!--div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="https://bulma.io/images/placeholders/640x480.png" alt="Placeholder image">
-                            </figure>
-                        </div-->
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-left">
-                                    <span class="tag ${pop.classification_type_id == 1 ? 'is-danger' : 
-                                                    (pop.classification_type_id == 2 ? 'is-warning' : 
-                                                    (pop.classification_type_id == 3 ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
-                                        ${pop.classification_type}
-                                    </span>
-                                </div>
-                                <div class="media-content">
-                                    <p class="has-text-weight-bold is-size-4">${pop.nombre}</p>
-                                    <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.nombre_comuna}</p>
-                                    <p class="has-text-weight-light is-size-6">Zona ${pop.nombre_zona}, CRM ${pop.nombre_crm}</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                <a href="/pop/${pop.id}" target="_blank" class="button is-outlined is-primary is-small">
-                                    <font-awesome-icon icon="info-circle"/>
-                                    &nbsp;Ver detalles
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `);
+                // `);  
             },
 
             async setPops() {
@@ -346,7 +355,6 @@
             },
             
            setPop() {
-                
                 this.$refs.map.$mapPromise.then((map) => {
                     map.panTo({ lat: parseFloat(this.pops[0].latitude), lng: parseFloat(this.pops[0].longitude) })
                     map.setZoom(17)

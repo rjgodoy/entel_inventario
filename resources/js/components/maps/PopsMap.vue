@@ -1,135 +1,138 @@
 <template>
-	<GoogleMapLoader
-		:mapConfig="mapConfig"
-		apiKey="AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE"
-		ref="map"
-	>
-	<template slot-scope="{ google, map }">
-		<GoogleMapMarker
-			v-for="pop in pops"
-			:key="pop.id"
-			:marker="pop"
-			:google="google"
-			:map="map"
-			@click="toggleInfoWindow(pop, index)"
-			/>
-		<!-- <GoogleMapInfoWindow
-			:options="infoOptions"
-            :position="infoWindowPos"
-            :opened="infoWinOpen"
-            :content="infoContent"
-			>
-			<div v-html="infoContent"></div>
-		</GoogleMapInfoWindow>		 -->
-		<!-- <GoogleMapLine
-			v-for="line in lines"
-			:key="line.id"
-			:path.sync="line.path"
-			:google="google"
-			:map="map"
-		/> -->
-	</template>
-</GoogleMapLoader>
+    <GoogleMapLoader
+        :mapConfig="mapConfig"
+        apiKey="AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE"
+        ref="map"
+        :pops="pops"
+        >
+        <template slot-scope="{ google, map }">
+            <GoogleMapMarker
+                v-for="pop in pops"
+                :key="pop.id"
+                :marker="pop"
+                :google="google"
+                :map="map"
+                :icon="icon"
+                @click="toggleInfoWindow(pop, index)"
+            />
+            <!-- <GoogleMapInfoWindow
+                :options="infoOptions"
+                :position="infoWindowPos"
+                :opened="infoWinOpen"
+                :content="infoContent"
+                >
+                <div v-html="infoContent"></div>
+                </GoogleMapInfoWindow>		 -->
+                <!-- <GoogleMapLine
+                v-for="line in lines"
+                :key="line.id"
+                :path.sync="line.path"
+                :google="google"
+                :map="map"
+            /> -->
+        </template>
+    </GoogleMapLoader>
 </template>
 
 <script>
-	import GoogleMapLoader from "./GoogleMapLoader";
-	import GoogleMapMarker from "./GoogleMapMarker";
-	// import GoogleMapInfoWindow from "./GoogleMapInfoWindow";
-	// import GoogleMapLine from "./GoogleMapLine";
+    import GoogleMapLoader from "./GoogleMapLoader";
+    import GoogleMapMarker from "./GoogleMapMarker";
+    // import GoogleMapInfoWindow from "./GoogleMapInfoWindow";
+    // import GoogleMapLine from "./GoogleMapLine";
 
-	import { mapSettings } from "../../constants/mapSettings";
+    import { mapSettings } from "../../constants/mapSettings";
 
-	export default {
-		components: {
-			GoogleMapLoader,
-			GoogleMapMarker,
-			// GoogleMapInfoWindow,
-			// GoogleMapLine
-		},
+export default {
+    components: {
+        GoogleMapLoader,
+        GoogleMapMarker,
+        // GoogleMapInfoWindow,
+        // GoogleMapLine
+    },
 
-		props: [
-			'pops',
-			'darkMode'
-		],
+    props: [
+        'pops',
+        'darkMode'
+    ],
 
-		data() {
-			return {
-				map_attributes: {
-					position: {
-						lat: -33.44444275,
-	                    lng: -70.6561017
-					},
-                    zoom: 5
+    data() {
+        return {
+            map_attributes: {
+                position: {
+                    lat: -33.44444275,
+                    lng: -70.6561017
                 },
+                zoom: 5
+            },
 
-                infoWinOpen: false,
-                infoWindowPos: {
-                    lat: 0,
-                    lng: 0
-                },
-                infoOptions: {
-                    pixelOffset: {
-                        width: 0,
-                        height: -35
-                    }
-                },
-                infoContent: '',
+            infoWinOpen: false,
+            infoWindowPos: {
+                lat: 0,
+                lng: 0
+            },
 
-				style8: [
-                    {"elementType": "geometry","stylers": [{"color": "#212121"}]},{"elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"elementType": "labels.text.stroke","stylers": [{
-                            "color": "#212121"}]},{"featureType": "administrative","elementType": "geometry","stylers": [{"color": "#757575"}]},{"featureType": "administrative.country","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "administrative.locality","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#181818"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "poi.park","elementType": "labels.text.stroke","stylers": [{"color": "#1b1b1b"}]},{"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#2c2c2c"}]},{"featureType": "road","elementType": "labels.text.fill","stylers": [{"color": "#8a8a8a"}]},{"featureType": "road.arterial","elementType": "geometry","stylers": [{"color": "#373737"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#3c3c3c"}]},{"featureType": "road.highway.controlled_access","elementType": "geometry","stylers": [{"color": "#4e4e4e"}]},{"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "transit","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#000000"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#3d3d3d"}]}],
+            infoOptions: {
+                pixelOffset: {
+                    width: 0,
+                    height: -35
+                }
+            },
+            infoContent: '',
 
-				style9: [
-                    {
-                        "featureType": "poi.business","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]}]
-			};
-		},
+            style8: [
+                {"elementType": "geometry","stylers": [{"color": "#212121"}]},{"elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"elementType": "labels.text.stroke","stylers": [{
+                    "color": "#212121"}]},{"featureType": "administrative","elementType": "geometry","stylers": [{"color": "#757575"}]},{"featureType": "administrative.country","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "administrative.locality","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#181818"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "poi.park","elementType": "labels.text.stroke","stylers": [{"color": "#1b1b1b"}]},{"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#2c2c2c"}]},{"featureType": "road","elementType": "labels.text.fill","stylers": [{"color": "#8a8a8a"}]},{"featureType": "road.arterial","elementType": "geometry","stylers": [{"color": "#373737"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#3c3c3c"}]},{"featureType": "road.highway.controlled_access","elementType": "geometry","stylers": [{"color": "#4e4e4e"}]},{"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "transit","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#000000"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#3d3d3d"}]}],
 
-		watch: {
-            pops(newValue, oldValue) {
-                console.log(newValue)
+            style9: [
+                {
+                    "featureType": "poi.business","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]}]
+                };
+        },
+
+        watch: {
+            pops() {
+                // console.log('New POP')
+            },
+
+            darkMode(newValue){
+                // console.log(newValue)
             }
         },
 
-		computed: {
+        computed: {
+            icon() {
+                if (this.darkMode) {
+                    return {
+                        url: '../img/markers/pin_entel_sm.png',
+                        scaledSize: new google.maps.Size(30, 54),
+                        origin: new google.maps.Point(0,0),
+                        anchor: new google.maps.Point(0,0)
+                    }
+                } else {
+                    return {
+                        url: '../img/markers/entelPin_red-white.png',
+                        scaledSize: new google.maps.Size(30, 54),
+                        origin: new google.maps.Point(0,0),
+                        anchor: new google.maps.Point(0,0)
+                    }
+                }
+            },
 
-			mapConfig() {
-				return {
-					...mapSettings,
-					center: this.map_attributes.position,
-					styles: this.darkMode == 1 ? this.style8 : this.style9,
-					backgroundColor: this.darkMode == 1 ? '#fff' : '#DBFAF0',
-					zoom: 3
-				};
-			}
-		},
+            mapConfig() {
+                return {
+                    ...mapSettings,
+                    center: this.map_attributes.position,
+                    styles: this.mapStyle,
+                    backgroundColor: this.darkMode == 1 ? '#fff' : '#DBFAF0',
+                    zoom: 3
+                };
+            },
+            mapStyle() {
+                return this.darkMode == 1 ? this.style8 : this.style9
+            },
+        },
 
-		methods: {
-			// async setPops() {
-   //              // this.$refs.map.$mapPromise.then((map) => {
-   //                  // const bounds = new google.maps.LatLngBounds()
-   //                  // for (let m of this.pops) {
-   //                  //     bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-   //                  // }
-   //                  // // Don't zoom in too far on only one pop
-   //                  // if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-   //                  //     var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-   //                  //     var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-   //                  //     bounds.extend(extendPoint1);
-   //                  //     bounds.extend(extendPoint2);
-   //                  // }
-   //                  // map.fitBounds(bounds);
-   //              // });
-   //          },
-
-   //          setPop() {
-                
-   //              // this.$refs.map.$mapPromise.then((map) => {
-   //   //            	map = new google.map.LatLng({ lat: parseFloat(this.pops[0].latitude), lng: parseFloat(this.pops[0].longitude) })
-			// 		// map.setZoom(17)
-   //              // });
-   //          },
+        methods: {
 
             // toggleInfoWindow(pop, idx) {
             // 	console.log(pop)
@@ -181,8 +184,6 @@
             //             </div>
             //         </div>`)
             // },
-
-            
-		}
-	};
+        }
+    };
 </script>

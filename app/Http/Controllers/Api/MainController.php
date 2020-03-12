@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\Main as MainResource;
-use App\Menu;
-use App\User;
-use App\AdminTab;
+use App\Models\Menu;
+use App\Models\User;
+use App\Models\AdminTab;
 
 class MainController extends Controller
 {

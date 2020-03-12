@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\Site as SiteResource;
-
 use DB;
 
 class SiteController extends Controller

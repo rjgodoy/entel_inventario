@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\ClientConnection as ClientConnectionResource;
-use App\ClientConnection;
+use App\Models\ClientConnection;
 
 use App\Imports\ClientConnectionImport;
 use Maatwebsite\Excel\Facades\Excel;

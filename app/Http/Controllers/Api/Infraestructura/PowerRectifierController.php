@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\PowerRectifier as PowerRectifierResource;
-use App\PowerRectifier;
+use App\Models\PowerRectifier;
 use DB;
 
 class PowerRectifierController extends Controller
@@ -169,7 +169,7 @@ class PowerRectifierController extends Controller
      */
     public function show($id)
     {
-        $powerRectifier = PowerRectifier::with('power_rectifier_type')->where('pop_id', $id)->get();
+        $powerRectifier = PowerRectifier::with('power_rectifier_type', 'power_rectifier_modules', 'room.site')->where('pop_id', $id)->get();
         return new PowerRectifierResource($powerRectifier);
     }
 

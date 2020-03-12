@@ -1,68 +1,64 @@
 <template>
-    <div class="tile is-parent">
-        <article class="tile is-child box" :class="boxBackground">
-            <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">POP Críticos</div>
-                <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ data.total | numeral('0,0') }}</div>
-            </div>
-            <!-- <div style="min-height: 300px; max-height: 500px; overflow-y: scroll;"> -->
-                <table class="table is-fullwidth" :class="boxBackground">
-                    <thead>
-                        <tr class="is-size-7">
-                            <!-- <th class="has-text-right" :class="secondaryText"><abbr title="ID">ID</abbr></th> -->
-                            <th class="has-text-left" :class="secondaryText"><abbr title="Nemónico">Nemónico</abbr></th>
-                            <th class="has-text-left" :class="secondaryText"><abbr title="Nombre y dirección del POP">Nombre / Dirección</abbr></th>
-                            <th class="has-text-left" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
-                            <th class="has-text-left" :class="secondaryText"><abbr title="Código Planificación">Cod. Planificación</abbr></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="is-size-7" v-for="item in data.data">
-                            <td class="has-text-left" :class="primaryText">
-                                <router-link :to="'/pop/' + item.site.pop.id" target="_blank">{{ item.site.nem_site }}</router-link></td>
-                            <td class="has-text-left" :class="primaryText">
-                                <div>{{ item.site.pop.nombre }}</div>
-                                <div>{{ item.site.pop.direccion }}</div>
-                            </td>
-                            <td class="has-text-centered" :class="primaryText">
-                                <b-tag :type="item.site.classification_type_id == 1 ? 'is-info' : (item.site.classification_type_id == 2 ? 'is-warning' : (item.site.classification_type_id == 3 ? 'is-smart' : (item.site.classification_type_id == 4 ? 'is-success' : 'is-link')))">{{ item.site.classification_type.classification_type }}</b-tag>
-                            </td>
-                            <td class="has-text-left" :class="primaryText">{{ item.site.pop.pop_e_id }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            <!-- </div> -->
+    <div>
+        <div class="columns">
+            <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">POP Críticos</div>
+            <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ data.total | numeral('0,0') }}</div>
+        </div>
+        <!-- <div style="min-height: 300px; max-height: 500px; overflow-y: scroll;"> -->
+            <table class="table is-fullwidth" :class="boxBackground">
+                <thead>
+                    <tr class="is-size-7">
+                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="ID">ID</abbr></th> -->
+                        <th class="has-text-left" :class="secondaryText"><abbr title="Nemónico">Nemónico</abbr></th>
+                        <th class="has-text-left" :class="secondaryText"><abbr title="Nombre y dirección del POP">Nombre / Dirección</abbr></th>
+                        <th class="has-text-left" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="is-size-7" v-for="item in data.data">
+                        <td class="has-text-left" :class="primaryText">
+                            <router-link :to="'/pop/' + item.site.pop.id" target="_blank">{{ item.site.nem_site }}</router-link></td>
+                        <td class="has-text-left" :class="primaryText">
+                            <div>{{ item.site.pop.nombre }}</div>
+                            <div>{{ item.site.pop.direccion }}</div>
+                        </td>
+                        <td class="has-text-centered" :class="primaryText">
+                            <b-tag :type="item.site.classification_type_id == 1 ? 'is-info' : (item.site.classification_type_id == 2 ? 'is-warning' : (item.site.classification_type_id == 3 ? 'is-smart' : (item.site.classification_type_id == 4 ? 'is-success' : 'is-link')))">{{ item.site.classification_type.classification_type }}</b-tag>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <!-- </div> -->
 
-            <nav class="pagination" role="navigation" aria-label="pagination">
-                <vue-pagination  
-                    :pagination="data"
-                    @paginate="getData()"
-                    :offset="4"
-                    :primaryText="primaryText">
-                </vue-pagination>
-            </nav>
+        <nav class="pagination" role="navigation" aria-label="pagination">
+            <vue-pagination  
+                :pagination="data"
+                @paginate="getData()"
+                :offset="4"
+                :primaryText="primaryText">
+            </vue-pagination>
+        </nav>
 
-            <!-- <div class="field has-addons">
-                <p class="control">
-                    <b-button 
-                        :loading="buttonLoading ? true : false"
-                        type="is-link"
-                        size="is-small"
-                        @click="downloadPops">
-                        <font-awesome-icon icon="download"/> 
-                        &nbsp;&nbsp;Listado de POPs
-                    </b-button>
-                </p>
-                <p class="control">
-                    <b-tooltip label="Tooltip Text" position="is-right">
-                        <a href="/pop" type="button" class="button is-small is-link" data-tooltip="">
-                            <font-awesome-icon icon="bars"/>
-                        </a>
-                    </b-tooltip>
-                </p>
-            </div> -->
+        <!-- <div class="field has-addons">
+            <p class="control">
+                <b-button 
+                    :loading="buttonLoading ? true : false"
+                    type="is-link"
+                    size="is-small"
+                    @click="downloadPops">
+                    <font-awesome-icon icon="download"/> 
+                    &nbsp;&nbsp;Listado de POPs
+                </b-button>
+            </p>
+            <p class="control">
+                <b-tooltip label="Tooltip Text" position="is-right">
+                    <a href="/pop" type="button" class="button is-small is-link" data-tooltip="">
+                        <font-awesome-icon icon="bars"/>
+                    </a>
+                </b-tooltip>
+            </p>
+        </div> -->
 
-        </article>
     </div>
 </template>
 
@@ -125,9 +121,9 @@
         },
         methods: {
             getData() {                          
-                axios.get(`/api/criticSites?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
+                axios.get(`/api/criticPopList?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
                 .then((response) => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.data = response.data;
                     // if(true) {
                     //     this.$emit('clicked', this.data)

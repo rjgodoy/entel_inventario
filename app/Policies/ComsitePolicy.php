@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Comsite;
-use App\User;
+use App\Models\Comsite;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ComsitePolicy

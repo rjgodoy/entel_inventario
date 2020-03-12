@@ -1,70 +1,70 @@
 <template>
-    <div class="tile is-parent is-vertical">
-        <article class="tile is-child box" :class="boxBackground" style="overflow-y: scroll;">
-            <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Sitios</div>
-                <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.totalSites | numeral('0,0') }}</div>
+    <div>
+        <div class="columns">
+            <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Sitios</div>
+            <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.totalSites | numeral('0,0') }}</div>
+        </div>
+        
+        <table class="table is-fullwidth" :class="boxBackground">
+            <thead>
+                <tr class="is-size-7">
+                    <th class="" :class="secondaryText">{{ selectedCrm == null ? 'CRM' : (selectedZona == null ? 'Zona' : 'Comuna') }}</th>
+                    <th class="has-text-right" :class="secondaryText"><abbr title="Fijo">Fijo</abbr></th>
+                    <th class="has-text-right" :class="secondaryText"><abbr title="Móvil">Móvil</abbr></th>
+                    <th class="has-text-right" :class="secondaryText"><abbr title="Switch">Switch</abbr></th>
+                    <th class="has-text-right" :class="secondaryText"><abbr title="Phone">Phone</abbr></th>
+                    <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="is-size-7" v-for="item in sitesData">
+                    <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
+                    <td class="has-text-right" :class="primaryText">{{ item.fijo | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ item.movil | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ item.switch | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ item.phone | numeral('0,0') }}</td>
+                    <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ item.fijo + item.movil + item.switch + item.phone | numeral('0,0') }}</td>
+                </tr>
+                <tr class="is-size-7 has-text-weight-bold">
+                    <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
+                    <td class="has-text-right" :class="primaryText">{{ this.totalFijo | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ this.totalMovil | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ this.totalSwitch | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ this.totalPhone | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ this.totalSites | numeral('0,0') }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="columns">
+            <div class="column">
+                <!-- <b-field>
+                    <b-button 
+                        :loading="buttonLoading ? true : false"
+                        type="is-link"
+                        size="is-small"
+                        @click="downloadSites">
+                        <font-awesome-icon icon="download"/> 
+                        &nbsp;&nbsp;Listado de Sitios
+                    </b-button>
+                    <b-tooltip label="Tooltip Text" position="is-right">
+                        <a href="/sites" type="button" class="button is-small is-link" data-tooltip="">
+                            <font-awesome-icon icon="bars"/>
+                        </a>
+                    </b-tooltip>
+                </b-field> -->
             </div>
-            
-            <table class="table is-fullwidth" :class="boxBackground">
-                <thead>
-                    <tr class="is-size-7">
-                        <th class="" :class="secondaryText">{{ selectedCrm == null ? 'CRM' : (selectedZona == null ? 'Zona' : 'Comuna') }}</th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Fijo">Fijo</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Móvil">Móvil</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Switch">Switch</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Phone">Phone</abbr></th>
-                        <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="is-size-7" v-for="item in sitesData">
-                        <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
-                        <td class="has-text-right" :class="primaryText">{{ item.fijo | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.movil | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.switch | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ item.phone | numeral('0,0') }}</td>
-                        <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ item.fijo + item.movil + item.switch + item.phone | numeral('0,0') }}</td>
-                    </tr>
-                    <tr class="is-size-7 has-text-weight-bold">
-                        <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalFijo | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalMovil | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalSwitch | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalPhone | numeral('0,0') }}</td>
-                        <td class="has-text-right" :class="primaryText">{{ this.totalSites | numeral('0,0') }}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="columns">
-                <div class="column">
-                    <b-field>
-                        <b-button 
-                            :loading="buttonLoading ? true : false"
-                            type="is-link"
-                            size="is-small"
-                            @click="downloadSites">
-                            <font-awesome-icon icon="download"/> 
-                            &nbsp;&nbsp;Listado de Sitios
-                        </b-button>
-                        <b-tooltip label="Tooltip Text" position="is-right">
-                            <a href="/sites" type="button" class="button is-small is-link" data-tooltip="">
-                                <font-awesome-icon icon="bars"/>
-                            </a>
-                        </b-tooltip>
-                    </b-field>
-                </div>
-                <div class="column is-right">
-                    <div class="is-size-7 has-text-right" style="margin-top: 10px" :class="secondaryText">Ultima actualización: {{ last_updated }}</div>
-                </div>
+            <div class="column is-right">
+                <div class="is-size-7 has-text-right" style="margin-top: 10px" :class="secondaryText">Ultima actualización: {{ last_updated }}</div>
             </div>
-        </article>
 
-        <chart
-            :chartData="sitesData"
-        ></chart>
 
+
+    <!--         <chart
+                :chartData="sitesData"
+            ></chart> -->
+
+        </div>
     </div>
 </template>
 

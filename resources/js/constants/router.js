@@ -8,6 +8,7 @@ import PasswordReset from '../components/auth/PasswordReset.vue'
 import Dashboard from '../components/dashboard/Dashboard.vue'
 import PopTable from '../components/pops/PopTable.vue'
 import Pop from '../components/pops/PopDetail.vue'
+import CapacityPlanning from '../components/capacity/CapacityPlanning.vue'
 import Eco from '../components/eco/Eco.vue'
 import Comsite from '../components/comsite/Comsite.vue'
 import Documents from '../components/documents/Documents.vue'
@@ -25,6 +26,7 @@ export default new VueRouter({
         { path: '/dashboard', name: 'Dashboard', component: Dashboard },
         { path: '/pop', name: 'Pop', component: PopTable },
         { path: '/pop/:id', name: 'Detalle Pop', component: Pop },
+        { path: '/capacity', name: 'Capacity Planning', component: CapacityPlanning },
         { path: '/comsite', name: 'Comsite', component: Comsite },
         { path: '/eco', name: 'Gestion Ambiental', component: Eco },
         { path: '/docs', name: 'Documents', component: Documents },

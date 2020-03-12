@@ -103,12 +103,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 			]);
 
 		// Critic Pop Data box
-			Route::get('criticSites', 'Api\DashboardApiController@criticSites');
-			Route::get('criticPops', 'Api\DashboardApiController@criticPops');
+			Route::get('criticPopList', 'Api\DashboardApiController@criticPopList');
+			Route::get('criticPopsMap', 'Api\DashboardApiController@criticPopsMap');
 
 		// Alba Pop Data box
-			Route::get('albaSites', 'Api\DashboardApiController@albaSites');
 			Route::get('albaPopList', 'Api\DashboardApiController@albaPopList');
+			Route::get('albaPopsMap', 'Api\DashboardApiController@albaPopsMap');
 
 		// Electric Lines
 			Route::apiResource('electricLines','Api\Infraestructura\ElectricLineController');
@@ -133,18 +133,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 		// Generator Groups
 			Route::apiResource('generatorGroups','Api\Infraestructura\GeneratorGroupController');
-			Route::get('generatorGroupData/{core}', [
-				'as' => 'generatorGroup.data',
-				'uses' => 'Api\Infraestructura\GeneratorGroupController@generatorGroupData'
-			]);
-			Route::get('generatorGroupDataCrm/{crm_id}/{core}', [
-				'as' => 'generatorGroupCrm.data',
-				'uses' => 'Api\Infraestructura\GeneratorGroupController@generatorGroupDataCrm'
-			]);
-			Route::get('generatorGroupDataZona/{zona_id}/{core}', [
-				'as' => 'generatorGroupZona.data',
-				'uses' => 'Api\Infraestructura\GeneratorGroupController@generatorGroupDataZona'
-			]);
+			Route::get('generatorGroupData', 'Api\Infraestructura\GeneratorGroupController@generatorGroupData');
+			Route::get('generatorGroupDataCrm', 'Api\Infraestructura\GeneratorGroupController@generatorGroupDataCrm');
+			Route::get('generatorGroupDataZona', 'Api\Infraestructura\GeneratorGroupController@generatorGroupDataZona');
 
 		// Power Rectifiers
 			Route::apiResource('powerRectifiers','Api\Infraestructura\PowerRectifierController');
@@ -216,6 +207,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
+
+
+	### MAPS ######################################################################
+		// Pop info window
+			Route::get('popInfo', 'Api\PopController@popInfo')->name('site.stats');
+	##############################################################################################
+
+
+
+
 	### POPS ######################################################################
 
 		Route::apiResource('pop','Api\PopController');
@@ -229,20 +230,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		]);
 
 		// Filter in POPs module
-		Route::get('filterPops', [
-			'as' => 'pop.filter',
-			'uses' => 'Api\PopController@filterPops'
-		]);
-		Route::get('filterPopsCrm', [
-			'as' => 'pop.filterCrm',
-			'uses' => 'Api\PopController@filterPopsCrm'
-		]);
-		Route::get('filterPopsZona', [
-			'as' => 'pop.filterZona',
-			'uses' => 'Api\PopController@filterPopsZona'
-		]);
+		Route::get('filterPops', 'Api\PopController@filterPops');
+		Route::get('popsMap', 'Api\PopController@popsMap');
+		Route::get('filters', 'Api\PopController@filters');
 	##############################################################################################
 
+
+	### CAPACITY PLANNING ######################################################################
+		Route::apiResource('rooms','Api\RoomController');
+	##############################################################################################
 
 
 	### COMSITE ######################################################################
@@ -270,6 +266,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		Route::get('popMenu', 'Api\PopController@popMenu');
 
 		Route::apiResource('documents', 'Api\DocumentController');
+		Route::get('directories/{id}', 'Api\DocumentController@directories');
+		Route::get('folders/{id}/{path}', 'Api\DocumentController@folders');
+		Route::get('files/{id}/{path}/{path2}', 'Api\DocumentController@files');
 
 	##############################################################################################
 

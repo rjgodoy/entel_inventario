@@ -40,7 +40,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     mapConfig: Object,
     apiKey: String,
-    pops: Object
+    pops: Array
   },
   data: function data() {
     return {
@@ -95,58 +95,77 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _setPops = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this = this;
+        var bounds, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, m, extendPoint1, extendPoint2;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                this.$refs.map.$mapPromise.then(function (map) {
-                  var bounds = new google.maps.LatLngBounds();
-                  var _iteratorNormalCompletion = true;
-                  var _didIteratorError = false;
-                  var _iteratorError = undefined;
+                // console.log('Holly Shit!!!!!!')
+                bounds = new google.maps.LatLngBounds();
+                _iteratorNormalCompletion = true;
+                _didIteratorError = false;
+                _iteratorError = undefined;
+                _context2.prev = 4;
 
-                  try {
-                    for (var _iterator = _this.pops[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                      var m = _step.value;
-                      bounds.extend({
-                        lat: parseFloat(m.latitude),
-                        lng: parseFloat(m.longitude)
-                      });
-                    } // Don't zoom in too far on only one pop
+                for (_iterator = this.pops[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                  m = _step.value;
+                  bounds.extend({
+                    lat: parseFloat(m.latitude),
+                    lng: parseFloat(m.longitude)
+                  });
+                } // Don't zoom in too far on only one pop
 
-                  } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                  } finally {
-                    try {
-                      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                        _iterator["return"]();
-                      }
-                    } finally {
-                      if (_didIteratorError) {
-                        throw _iteratorError;
-                      }
-                    }
-                  }
 
-                  if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                    var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                    var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                    bounds.extend(extendPoint1);
-                    bounds.extend(extendPoint2);
-                  }
+                _context2.next = 12;
+                break;
 
-                  map.fitBounds(bounds);
-                });
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](4);
+                _didIteratorError = true;
+                _iteratorError = _context2.t0;
 
-              case 1:
+              case 12:
+                _context2.prev = 12;
+                _context2.prev = 13;
+
+                if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                  _iterator["return"]();
+                }
+
+              case 15:
+                _context2.prev = 15;
+
+                if (!_didIteratorError) {
+                  _context2.next = 18;
+                  break;
+                }
+
+                throw _iteratorError;
+
+              case 18:
+                return _context2.finish(15);
+
+              case 19:
+                return _context2.finish(12);
+
+              case 20:
+                if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+                  extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+                  extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+                  bounds.extend(extendPoint1);
+                  bounds.extend(extendPoint2);
+                }
+
+                this.map.fitBounds(bounds);
+
+              case 22:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee2, this, [[4, 8, 12, 20], [13,, 15, 19]]);
       }));
 
       function setPops() {
@@ -156,15 +175,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return setPops;
     }(),
     setPop: function setPop() {
-      var _this2 = this;
-
-      this.$refs.map.$mapPromise.then(function (map) {
-        map = new google.map.LatLng({
-          lat: parseFloat(_this2.pops[0].latitude),
-          lng: parseFloat(_this2.pops[0].longitude)
-        });
-        map.setZoom(17);
-      });
+      // console.log('FUCK YEAH!!!!')
+      this.map = new google.maps.LatLng({
+        lat: parseFloat(this.pops[0].latitude),
+        lng: parseFloat(this.pops[0].longitude)
+      }); // this.map.setZoom(17)
     }
   }
 });
@@ -194,6 +209,10 @@ __webpack_require__.r(__webpack_exports__);
     marker: {
       type: Object,
       required: true
+    },
+    icon: {
+      type: Object,
+      required: false
     }
   },
   mounted: function mounted() {
@@ -205,7 +224,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       marker: this.marker,
       map: this.map,
-      icon: '../img/markers/entel-pin-32.png'
+      icon: this.icon
     });
   },
   render: function render() {}
@@ -231,6 +250,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -431,43 +452,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   watch: {
-    pops: function pops(newValue, oldValue) {
-      console.log(newValue);
+    pops: function pops() {// console.log('New POP')
+    },
+    darkMode: function darkMode(newValue) {// console.log(newValue)
     }
   },
   computed: {
+    icon: function icon() {
+      if (this.darkMode) {
+        return {
+          url: '../img/markers/pin_entel_sm.png',
+          scaledSize: new google.maps.Size(30, 54),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 0)
+        };
+      } else {
+        return {
+          url: '../img/markers/entelPin_red-white.png',
+          scaledSize: new google.maps.Size(30, 54),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 0)
+        };
+      }
+    },
     mapConfig: function mapConfig() {
       return _objectSpread({}, _constants_mapSettings__WEBPACK_IMPORTED_MODULE_2__["mapSettings"], {
         center: this.map_attributes.position,
-        styles: this.darkMode == 1 ? this.style8 : this.style9,
+        styles: this.mapStyle,
         backgroundColor: this.darkMode == 1 ? '#fff' : '#DBFAF0',
         zoom: 3
       });
+    },
+    mapStyle: function mapStyle() {
+      return this.darkMode == 1 ? this.style8 : this.style9;
     }
   },
-  methods: {// async setPops() {
-    //              // this.$refs.map.$mapPromise.then((map) => {
-    //                  // const bounds = new google.maps.LatLngBounds()
-    //                  // for (let m of this.pops) {
-    //                  //     bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-    //                  // }
-    //                  // // Don't zoom in too far on only one pop
-    //                  // if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-    //                  //     var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-    //                  //     var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-    //                  //     bounds.extend(extendPoint1);
-    //                  //     bounds.extend(extendPoint2);
-    //                  // }
-    //                  // map.fitBounds(bounds);
-    //              // });
-    //          },
-    //          setPop() {
-    //              // this.$refs.map.$mapPromise.then((map) => {
-    //   //            	map = new google.map.LatLng({ lat: parseFloat(this.pops[0].latitude), lng: parseFloat(this.pops[0].longitude) })
-    // 		// map.setZoom(17)
-    //              // });
-    //          },
-    // toggleInfoWindow(pop, idx) {
+  methods: {// toggleInfoWindow(pop, idx) {
     // 	console.log(pop)
     //     this.infoWindowPos = { 
     //     	lat: parseFloat(pop.latitude), 
@@ -626,7 +646,8 @@ var render = function() {
     ref: "map",
     attrs: {
       mapConfig: _vm.mapConfig,
-      apiKey: "AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE"
+      apiKey: "AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE",
+      pops: _vm.pops
     },
     scopedSlots: _vm._u([
       {
@@ -637,7 +658,7 @@ var render = function() {
           return _vm._l(_vm.pops, function(pop) {
             return _c("GoogleMapMarker", {
               key: pop.id,
-              attrs: { marker: pop, google: google, map: map },
+              attrs: { marker: pop, google: google, map: map, icon: _vm.icon },
               on: {
                 click: function($event) {
                   return _vm.toggleInfoWindow(pop, _vm.index)

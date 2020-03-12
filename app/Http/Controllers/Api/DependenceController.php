@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\Dependence as DependenceResource;
-use App\Dependence;
+use App\Models\Dependence;
 
 class DependenceController extends Controller
 {

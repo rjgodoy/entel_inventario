@@ -21,7 +21,7 @@
         props: {
             mapConfig: Object,
             apiKey: String,
-            pops: Object
+            pops: Array
         },
 
         data() {
@@ -52,28 +52,25 @@
             },
 
             async setPops() {
-                this.$refs.map.$mapPromise.then((map) => {
-                    const bounds = new google.maps.LatLngBounds()
-                    for (let m of this.pops) {
-                        bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-                    }
-                    // Don't zoom in too far on only one pop
-                    if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                        var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-                        var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-                        bounds.extend(extendPoint1);
-                        bounds.extend(extendPoint2);
-                    }
-                    map.fitBounds(bounds);
-                });
+                // console.log('Holly Shit!!!!!!')
+                const bounds = new google.maps.LatLngBounds()
+                for (let m of this.pops) {
+                    bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
+                }
+                // Don't zoom in too far on only one pop
+                if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+                    var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+                    var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+                    bounds.extend(extendPoint1);
+                    bounds.extend(extendPoint2);
+                }
+                this.map.fitBounds(bounds);
             },
 
             setPop() {
-                
-                this.$refs.map.$mapPromise.then((map) => {
-                    map = new google.map.LatLng({ lat: parseFloat(this.pops[0].latitude), lng: parseFloat(this.pops[0].longitude) })
-                    map.setZoom(17)
-                });
+                // console.log('FUCK YEAH!!!!')
+                this.map = new google.maps.LatLng({ lat: parseFloat(this.pops[0].latitude), lng: parseFloat(this.pops[0].longitude) })
+                // this.map.setZoom(17)
             },
         },
     };

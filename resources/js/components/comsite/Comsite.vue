@@ -163,7 +163,7 @@
                     axios.get(`/api/comsites?page=${this.comsiteData.current_page}`)
                     .then((response) => {
                         this.comsiteData = response.data;
-                        console.log(response.data.can.update)
+                        // console.log(response.data.can.update)
                     })
                 }
             },

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\TempSgcPop as TempSgcPopResource;
-use App\TempSgcPop;
-use App\SgcRequest;
+use App\Models\TempSgcPop;
+use App\Models\SgcRequest;
 
 class TempSgcPopController extends Controller
 {

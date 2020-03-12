@@ -149,7 +149,7 @@
                     url: '../img/markers/entelPin_red-white.png',
                     scaledSize: new google.maps.Size(30, 54),
                     origin: new google.maps.Point(0,0),
-                    anchor: new google.maps.Point(0,0)
+                    anchor: new google.maps.Point(15,54)
                 }
             },
         },

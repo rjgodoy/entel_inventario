@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 use App\Http\Resources\AirConditioner as AirConditionerResource;
-use App\AirConditioner;
+use App\Models\AirConditioner;
 use DB;
 
 class AirConditionerController extends Controller

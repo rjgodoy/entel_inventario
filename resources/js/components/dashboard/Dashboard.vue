@@ -12,7 +12,15 @@
                             <!-- <b-button class="button is-warning is-small is-pulled-left" @click="viewCriticPops" v-model="criticPopsSwitch">POP Críticos</b-button> -->
                         </div>
                         <div class="column has-text-centered">
-                            <b-switch  @input="switchCore" class="is-size-6 has-text-weight-semibold" :class="textSwitchCore" size="is-medium" :outlined="true">POP CORE</b-switch>
+                            <b-switch  
+                                @input="switchCore" 
+                                class="is-size-6 has-text-weight-semibold" 
+                                :class="textSwitchCore" 
+                                type="is-link"
+                                size="is-medium" 
+                                :outlined="true">
+                                POP CORE
+                            </b-switch>
                         </div>
                         <div class="column">
                             <!-- <b-button class="button is-link is-small is-pulled-right" @click="changeStyle" v-model="darkMode">Style</b-button> -->
@@ -241,7 +249,7 @@
                         </div>
                     </template>
                     <template slot="footer">
-                        <span v-show="page > totalPages" class="has-text-grey"> Thats it! No more movies found. </span>
+                        <span v-show="page > totalPages" class="has-text-grey"> No hay más sitios. </span>
                     </template>
                 </b-autocomplete>
             </div>
@@ -254,10 +262,10 @@
                     <div class="tile is-ancestor">
                         <div class="tile is-vertical">
 
-                            <div class="tile" style="max-height: 100px">
+                            <div class="tile">
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'pops' ? 'has-background-link' : boxBackground" @click="currentTab = 'pops'">
-                                        <div class="" style="margin-top: 10px;" >
+                                    <a class="tile is-child box" :class="currentTab === 'pops' ? 'has-background-link' : boxBackground" @click="currentTab = 'pops'">
+                                        <div class="" style="padding-top: 10px; padding-left: 5px;" >
                                             <b-icon 
                                                 pack="fad" 
                                                 icon="map-marker-alt" 
@@ -266,15 +274,15 @@
                                             </b-icon>
                                         </div>
                                         
-                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'pops' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'pops' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
                                             <p class="is-size-6 has-text-weight-normal">POP</p>
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'sites' ? 'has-background-link' : boxBackground" @click="currentTab = 'sites'">
-                                        <div class="" style="margin-top: 10px;">
+                                    <a class="tile is-child box" :class="currentTab === 'sites' ? 'has-background-link' : boxBackground" @click="currentTab = 'sites'">
+                                        <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
                                                 pack="fad" 
                                                 icon="server" 
@@ -282,15 +290,15 @@
                                                 :class="currentTab === 'sites' ? 'has-text-eco' : 'has-text-eco'">
                                             </b-icon>
                                         </div>
-                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'sites' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'sites' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
                                             <p class="is-size-6 has-text-weight-normal">Sitios</p>
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'technologies' ? 'has-background-link' : boxBackground" @click="currentTab = 'technologies'">
-                                        <div class="" style="margin-top: 10px;">
+                                    <a class="tile is-child box" :class="currentTab === 'technologies' ? 'has-background-link' : boxBackground" @click="currentTab = 'technologies'">
+                                        <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
                                                 pack="fad" 
                                                 icon="signal" 
@@ -298,17 +306,17 @@
                                                 :class="currentTab === 'technologies' ? 'has-text-positive' : 'has-text-positive'">
                                             </b-icon>
                                         </div>
-                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'technologies' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'technologies' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
                                             <p class="is-size-6 has-text-weight-normal">Tecnologías</p>
                                         </div>
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="tile" style="max-height: 100px">
+                            <div class="tile">
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'critics' ? 'has-background-link' : boxBackground" @click="viewCriticPops">
-                                        <div class="" style="margin-top: 10px;">
+                                    <a class="tile is-child box" :class="currentTab === 'critics' ? 'has-background-link' : boxBackground" @click="viewCriticPops">
+                                        <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
                                                 pack="fad" 
                                                 icon="exclamation-triangle" 
@@ -316,15 +324,15 @@
                                                 >
                                             </b-icon>
                                         </div>
-                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'critics' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'critics' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
                                             <p class="is-size-6 has-text-weight-normal">POP Críticos</p>
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box has-text-centered" :class="currentTab === 'alba' ? 'has-background-link' : boxBackground" @click="viewAlbaPops">
-                                        <div class="" style="margin-top: 10px;">
+                                    <a class="tile is-child box" :class="currentTab === 'alba' ? 'has-background-link' : boxBackground" @click="viewAlbaPops">
+                                        <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
                                                 pack="fad" 
                                                 icon="file-invoice-dollar" 
@@ -332,45 +340,37 @@
                                                 >
                                             </b-icon>
                                         </div>
-                                        <div class="is-size-4 has-text-weight-bold has-text-centered" :class="currentTab === 'alba' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ albaQuantity | numeral('0,0') }}
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'alba' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ albaQuantity | numeral('0,0') }}
                                             <p class="is-size-6 has-text-weight-normal">Proyecto Alba</p>
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box has-background-dark has-text-white has-text-centered" style="position: relative;" 
+                                    <a class="tile is-child box has-background-dark has-text-white" style="position: relative;" 
                                         @click="downloadPops">
                                         <b-icon 
-                                            style="margin-top: 10px;"
+                                            style="padding-top: 10px; padding-left: 5px;"
                                             pack="fad" 
                                             icon="download" 
                                             class="has-text-eco fa-2x">
                                         </b-icon> 
-                                        <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">
+                                        <div class="is-size-4 has-text-weight-bold" style="margin-top: 10px;">
                                             <p class="is-size-6 has-text-weight-normal">Descargar listado de POP</p>
                                         </div>
                                         <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
                                     </a>
-                                    <!-- <router-link class="tile is-child box has-text-centered" :class="boxBackground" to="/eco">
-                                        <div class="" style="margin-top: 10px;">
-                                            <b-icon 
-                                                pack="fad" 
-                                                icon="leaf" 
-                                                class="has-text-eco fa-2x"
-                                                >
-                                            </b-icon>
-                                        </div>
-                                        <div class="is-size-4 has-text-weight-bold has-text-centered" style="margin-top: 10px;">{{ 24 | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal">POP en Zonas Protegidas</p>
-                                        </div>
-                                    </router-link> -->
                                 </div>
                             </div>
 
                             <div class="tile">
                                 <div class="tile is-parent">
-                                    <radial-chart></radial-chart>
+                                    <article
+                                        class="tile is-child box" 
+                                        :class="boxBackground" 
+                                        style="width: 100%; height: auto;">
+                                        <radial-chart></radial-chart>
+                                    </article>
                                 </div>
                             </div>
                         </div>
@@ -378,13 +378,11 @@
 
 
                         <div class="tile is-parent is-vertical">
-                            <div class="tile is-child box">
+                            <div class="tile is-child box" :class="boxBackground">
                                 <map-view
                                     :pops="pops"
                                     :map_attributes="map_attributes"
                                     :darkMode="darkMode"
-                                    :criticPopsSwitch="criticPopsSwitch"
-                                    :albaPopsSwitch="albaPopsSwitch"
                                 />   
                                 <!-- <PopsMap 
                                     style="height: 100%; margin: -14px -14px -14px -14px;"
@@ -394,18 +392,29 @@
                         </div>
 
                         <div class="tile">
-                        <keep-alive>
-                            <component :is="currentTabComponent"
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                                :selectedCrm="this.selectedCrm"
-                                :selectedZona="this.selectedZona"
-                                :core="core"
-                                :last_updated="currentLastUpdateData"
-                            />
-                        </keep-alive>
+                            <div class="tile is-parent is-vertical">
+                                <article class="tile is-child box" :class="boxBackground">
+                                <!-- <keep-alive> -->
+                                    <component :is="currentTabComponent"
+                                        :bodyBackground="bodyBackground"
+                                        :boxBackground="boxBackground"
+                                        :primaryText="primaryText"
+                                        :secondaryText="secondaryText"
+                                        :selectedCrm="this.selectedCrm"
+                                        :selectedZona="this.selectedZona"
+                                        :core="core"
+                                        :last_updated="currentLastUpdateData"
+                                    />
+                                <!-- </keep-alive> -->
+                                </article>
+
+                                <article v-if="(this.currentTab !== 'critics') && (this.currentTab !== 'alba')"
+                                    class="tile is-child box" 
+                                    :class="boxBackground" 
+                                    style="width: 100%; height: auto;">
+                                    <data-chart></data-chart>
+                                </article>
+                            </div>
                         </div>
                     </div>
 
@@ -484,15 +493,15 @@
             
         </section>
 
-        <!-- PODER -->
-        <section class="section is-marginless" :class="bodyBackgroundEnergy">
-            <div class="title">Equipamiento</div>
+        <!-- Equipamiento -->
+        <section class="section is-marginless" :class="bodyBackground">
+            <!-- <div class="title">Equipamiento</div> -->
             <div class="tile is-ancestor">
                 <div class="tile is-vertical">
                     <div class="tile">
                         <electric-lines-data
                             :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackgroundEnergy"
+                            :boxBackground="boxBackground"
                             :primaryText="primaryText"
                             :secondaryText="secondaryText"
                             :selectedCrm="this.selectedCrm"
@@ -501,7 +510,7 @@
                         />
                         <generator-groups-data
                             :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackgroundEnergy"
+                            :boxBackground="boxBackground"
                             :primaryText="primaryText"
                             :secondaryText="secondaryText"
                             :selectedCrm="this.selectedCrm"
@@ -510,7 +519,7 @@
                         />
                         <power-rectifiers-data
                             :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackgroundEnergy"
+                            :boxBackground="boxBackground"
                             :primaryText="primaryText"
                             :secondaryText="secondaryText"
                             :selectedCrm="this.selectedCrm"
@@ -520,7 +529,7 @@
 
                         <air-conditioners-data
                             :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackgroundClimate"
+                            :boxBackground="boxBackground"
                             :primaryText="primaryText"
                             :secondaryText="secondaryText"
                             :selectedCrm="this.selectedCrm"
@@ -530,7 +539,7 @@
 
                         <vertical-structures-data
                             :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackgroundInfrastructure"
+                            :boxBackground="boxBackground"
                             :primaryText="primaryText"
                             :secondaryText="secondaryText"
                             :selectedCrm="this.selectedCrm"
@@ -539,7 +548,7 @@
                         />
                         <infrastructures-data
                             :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackgroundInfrastructure"
+                            :boxBackground="boxBackground"
                             :primaryText="primaryText"
                             :secondaryText="secondaryText"
                             :selectedCrm="this.selectedCrm"
@@ -557,75 +566,6 @@
 <script>
     // import LoadingComponent from '../helpers/LoadingComponent'
     // import ErrorComponent from '../helpers/ErrorComponent'
-    const PopsData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./PopsData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const SitesData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./SitesData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const TechnologiesData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./TechnologiesData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const CriticsData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./CriticPopsData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const AlbaData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./AlbaPopsData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
 
     const PretDataChart = () => ({
         // The component to load (should be a Promise)
@@ -697,121 +637,55 @@
         timeout: 3000
     })
 
-    const ElectricLinesData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./ElectricLinesData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const GeneratorGroupsData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./GeneratorGroupsData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const PowerRectifiersData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./PowerRectifiersData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const AirConditionersData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./AirConditionersData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const VerticalStructuresData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./VerticalStructuresData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-    const InfrastructuresData = () => ({
-        // The component to load (should be a Promise)
-        component: import('./InfrastructuresData.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
-
-
     var moment = require('moment');
     import debounce from 'lodash/debounce'
     export default {
         components: {
-            PopsData,
-            SitesData,
-            TechnologiesData,
-            CriticsData,
-            AlbaData,
-            PretDataChart,
-            PopsMap,
+            // ###### Info ##########
+            PopsData: () => import('./PopsData'),
+            DataChart: () => import("./PopDataChart"),
+            SitesData: () => import("./SitesData"),
+            TechnologiesData: () => import("./TechnologiesData"),
+            CriticsData: () => import("./CriticPopsData"),
+            AlbaData: () => import("./AlbaPopsData"),
+            
+            // ###### Map ###########
+            // PopsMap,
             MapView,
+
+            // ###### Charts ########
+            PretDataChart,
             RadialChart,
-            RedCoreChart,
-            ElectricLinesData,
-            GeneratorGroupsData,
-            PowerRectifiersData,
-            AirConditionersData,
-            VerticalStructuresData,
-            InfrastructuresData
+            // RedCoreChart,
+
+            // ###### Equipment #####
+            ElectricLinesData: () => import('./ElectricLinesData'),
+            GeneratorGroupsData: () => import('./GeneratorGroupsData'),
+            PowerRectifiersData: () => import('./PowerRectifiersData'),
+            AirConditionersData: () => import('./AirConditionersData'),
+            VerticalStructuresData: () => import('./VerticalStructuresData'),
+            InfrastructuresData: () => import('./InfrastructuresData')
         },
         props : [
             'message',
-            // 'popList',
             'last_data_counters',
             'crms',
             'darkMode'
         ],
         created() {
             this.styleMode()
+            // this.$eventBus.$on('password-changed', function() {
+            //     console.log('Se cambió la contraseña!!')
+            //     this.$buefy.toast.open({
+            //         message: 'Tu password se ha actualizado exitosamente.',
+            //         type: 'is-success',
+            //         duration: 5000
+            //     })
+            // });
+        },
+        beforeDestroy() {
+            this.$eventBus.$off('graphData')
+            // this.$eventBus.$off('password-changed');
         },
         mounted() {
             // console.log(this.last_data_counters)
@@ -825,8 +699,8 @@
         data: () => {
             return {
                 core: 0,
-                // crms: null,
-                zonas: null,
+                pops: [],
+                zonas: [],
 
                 isFetching: false,
                 selected: null,
@@ -865,15 +739,7 @@
                 selectedZona: null,
 
                 criticPopsSwitch: 0,
-                // criticPops: [],
-
                 albaPopsSwitch: 0,
-
-                pops: [],
-                popList: [],
-                popsCrm: [],
-                popsZona: [],
-                popsCore: [],
 
                 popsQuantity: 0,
                 sitesQuantity: 0,
@@ -902,9 +768,8 @@
                 }
                 else if (this.currentTab == 'alba') {
                     this.viewAlbaPops()
-                }
-                else if (newValue) {
-                    this.getPopsCrm()
+                } else if (newValue) {
+                    this.getPops()
                     this.zonas = newValue.zonas
                 } else {
                     this.getPops()
@@ -918,23 +783,6 @@
                 }
                 else if (this.currentTab == 'alba') {
                     this.viewAlbaPops()
-                }
-                else if (newValue) {
-                    this.popsZona = []
-                    this.popList.forEach(element => {
-                        if (this.core) {
-                            if (element.zona_id == this.selectedZona.id && element.classification_type_id == 1) {
-                                this.popsZona.push(element)
-                            }
-                        } else {
-                            if (element.zona_id == this.selectedZona.id) {
-                                this.popsZona.push(element)
-                            }
-                        }
-                    })
-                    this.pops = this.popsZona
-                } else if (this.selectedCrm) {
-                    this.pops = this.popsCrm
                 } else {
                     this.getPops()
                 }
@@ -949,22 +797,15 @@
                     this.viewAlbaPops()
                 }
                 else {
-                    if (!this.selectedCrm) {
-                        this.getPops()
-                        // console.log('presionado en vista TODOS los POP')
-                    } else if (!this.selectedZona) {
-                        this.getPopsCrm()
-                        // console.log('presionado en vista CRM')
-                    } else {
-                        this.getPopsZona()
-                        // console.log('presionado en vista ZONA')
-                    }
+                    this.getPops()
                 }
                 this.getCounters()
             },
+
             darkMode(newValue, oldValue) {
                 this.styleMode()
             },
+
             currentTab(newValue, oldValue) {
                 if (newValue == 'critics') {
                     this.viewCriticPops()
@@ -973,35 +814,28 @@
                     this.viewAlbaPops()
                 }
                 else {
-                    if (!this.selectedCrm) {
-                        this.getPops()
-                        // console.log('presionado en vista TODOS los POP')
-                    } else if (!this.selectedZona) {
-                        this.getPopsCrm()
-                        // console.log('presionado en vista CRM')
-                    } else {
-                        this.getPopsZona()
-                        // console.log('presionado en vista ZONA')
-                    }
+                    this.getPops()
                 }
             }
         },
 
         computed: {
-            // popList: function() {
-            //     return this.$store.state.popList
+            // zonas: function() {
+            //     return this.selectedCrm ? this.selectedCrm.zona : null
             // },
+
             currentTabComponent: function () {
                 return this.currentTab + '-data'
             },
+
             currentLastUpdateData: function () {
                 if (this.currentTab != 'critics' || this.currentTab != 'alba') {
                     return this.last_data_counters['last_updated_' + this.currentTab]
                 } else {
                     return
                 }
-                
             },
+
             textSwitchCore() {
                 return this.core ? 'has-text-link' : ''
             }
@@ -1013,104 +847,28 @@
                 return this.searchText
             },
 
-            // APIs
-            // async getCrms() {
-            //     axios.get(`/api/crms`)
-            //     .then((response) => {
-            //         this.crms = response.data
-            //     })
-            // },
-
-            // POP DATA
-            // getPops: debounce(function () {
-            //     if (!this.popList.length) {
-            //         axios.get(`/api/dashboardMap`)
-            //         .then((response) => {
-            //             // console.log(response.data)
-            //             try {
-            //                 this.$store.commit("setPops", response.data);
-            //             } catch (ex) {
-            //                 console.log(ex);
-            //             }
-            //             this.pops = this.popList
-            //         })
-            //     } else {
-            //         if (this.core && !this.popsCore.length) {
-            //             this.popList.forEach(element => {
-            //                 if (element.classification_type_id == 1) {
-            //                     this.popsCore.push(element)
-            //                     this.pops = this.popsCore
-            //                 }
-            //             })
-            //         } else if (this.core) {
-            //             this.pops = this.popsCore
-            //         } else {
-            //             this.pops = this.popList
-            //         }
-            //     }
-            // }, 10),
-
             getPops: debounce(function () {
-                if (!this.popList.length) {
-                    var crm_id = this.selectedCrm ? this.selectedCrm : 0
-                    var zona_id = this.selectedZona ? this.selectedZona : 0
+                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+                var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                    axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
-                    .then((response) => {
-                        // console.log(response.data)
-                        try {
-                            this.popList = response.data
-                            // this.$store.commit("setPops", response.data);
-                        } catch (ex) {
-                            console.log(ex);
-                        }
-                        // console.log(this.popList)
-                        this.pops = this.popList
-                    })
-                } else {
-                    this.pops = this.popList
-                }
+                axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
+                .then((response) => {
+                    try {
+                        this.pops = response.data
+                    } catch (ex) {
+                        console.log(ex);
+                    }
+                })
             }, 200),
-
-            async getPopsCrm() {
-                this.popsCrm = []
-                this.popList.forEach(element => {
-                    if (this.core) {
-                        if (element.crm_id == this.selectedCrm.id && element.classification_type_id == 1) {
-                            this.popsCrm.push(element)
-                        }
-                    } else {
-                        if (element.crm_id == this.selectedCrm.id) {
-                            this.popsCrm.push(element)
-                        }
-                    }
-                })
-                this.pops = this.popsCrm
-            },
-
-            async getPopsZona() {
-                this.popsZona = []
-                this.popList.forEach(element => {
-                    if (this.core) {
-                        if (element.zona_id == this.selectedZona.id && element.classification_type_id == 1) {
-                            this.popsZona.push(element)
-                        }
-                    } else {
-                        if (element.zona_id == this.selectedZona.id) {
-                            this.popsZona.push(element)
-                        }
-                    }
-                })
-                this.pops = this.popsZona
-            },
 
             async viewCriticPops() {
                 this.currentTab = 'critics'
 
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
-                axios.get(`/api/criticPops?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
-                    console.log(response.data)
+
+                axios.get(`/api/criticPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                    // console.log(response.data)
                     this.pops = response.data.data
                 })
                 this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
@@ -1121,8 +879,9 @@
 
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
-                axios.get(`/api/albaPops?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
-                    console.log(response.data)
+
+                axios.get(`/api/albaPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                    // console.log(response.data)
                     this.pops = response.data
                 })
                 this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0
@@ -1130,7 +889,10 @@
 
             // CONTERS
             async getCounters() {
-                axios.get(`/api/dashboard?core=${this.core}&crm_id=${ this.selectedCrm ? this.selectedCrm.id : 0 }&zona_id=${ this.selectedZona ? this.selectedZona.id : 0 }`).then((response) => {
+                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+                var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+                axios.get(`/api/dashboard?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     this.popsQuantity = response.data.pops
                     this.sitesQuantity = response.data.sites
                     this.technologiesQuantity = response.data.technologies
@@ -1276,7 +1038,6 @@
             },
             changeStyle() {
                 this.darkMode = this.darkMode == 0 ? 1 : 0
-                this.styleMode()
             },
             loadMessage() {
                 if(this.message) {

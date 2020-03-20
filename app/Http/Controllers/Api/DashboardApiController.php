@@ -42,47 +42,57 @@ class DashboardApiController extends Controller
 
         $pops = Pop::whereHas('sites', function($q) use($condition_core) { 
                     $q->where(function($p) {
-                        $p->whereIn('site_type_id', [1,3,4])
-                        ->orWhere(function($query) {
-                            $query->whereIn('site_type_id', [2])
+                        $p->where(function($w) {
+                            $w->whereIn('site_type_id', [1,3,4])
+                            ->where('state_id', 1);
+                        })
+                        ->orWhere(function($s) {
+                            $s->whereIn('site_type_id', [2])
                             ->whereHas('technologies', function($r) {
                                 $r->where('state_id', 1);
                             });
                         });
                     })
                     ->whereRaw($condition_core);
-                })
-                ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
-                    $q->whereRaw($condition_crm)
-                    ->whereRaw($condition_zona);
-                })
-                ->distinct('pops.id')->count();
+                    })
+                    ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                        $q->whereRaw($condition_crm)
+                        ->whereRaw($condition_zona);
+                    })
+                    ->distinct('pops.id')->count();
 
 
         $sites = Site::where(function($q) use ($condition_core) {
-                    $q->whereIn('site_type_id', [1,3,4])
-                    ->orWhere(function($query) {
-                        $query->whereIn('site_type_id', [2])
-                        ->whereHas('technologies', function($p) {
-                            $p->where('state_id', 1);
+                        $q->where(function($w) {
+                            $w->whereIn('site_type_id', [1,3,4])
+                            ->where('state_id', 1);
+                        })->orWhere(function($s) {
+                            $s->whereIn('site_type_id', [2])
+                            ->whereHas('technologies', function($r) {
+                                $r->where('state_id', 1);
+                            });
+                        });
+                    })
+                    ->whereRaw($condition_core)
+                    ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                        $q->whereRaw($condition_crm)->whereRaw($condition_zona);
+                    })
+                    ->distinct('sites.id')->count();
+
+        $technologies = Technology::whereHas('site', function($p) use($condition_core) { 
+                $p->where(function($q) {
+                    $q->where(function($w) {
+                        $w->whereIn('site_type_id', [1,3,4])
+                        ->where('state_id', 1);
+                    })
+                    ->orWhere(function($s) {
+                        $s->whereIn('site_type_id', [2])
+                        ->whereHas('technologies', function($r) {
+                            $r->where('state_id', 1);
                         });
                     });
                 })
-                ->whereRaw($condition_core)
-                ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
-                    $q->whereRaw($condition_crm)->whereRaw($condition_zona);
-                })
-                ->distinct('sites.id')->count();
-
-        $technologies = Technology::whereHas('site', function($q) use($condition_core) { 
-                $q->whereIn('site_type_id', [1,3,4])
-                    ->orWhere(function($query) {
-                        $query->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($q) {
-                                $q->where('state_id', 1);
-                            });
-                    })
-                ->whereRaw($condition_core); 
+                ->whereRaw($condition_core);
             })
             ->whereHas('site.pop.comuna.zona', function($q) use($crm_id, $zona_id) {
                 $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
@@ -172,53 +182,10 @@ class DashboardApiController extends Controller
                         'id',
                         'nombre',
                         'direccion',
-                        'pops.latitude',
-                        'pops.longitude'
+                        'latitude',
+                        'longitude'
                     )
                     ->get();
-                    
-
-                // $popsMap = Pop::join('sites', function($join) use($condition_core) {
-
-                //         $join->on('pops.id', '=', 'sites.pop_id')
-                //         ->where(function($q) {
-                //             $q->whereIn('sites.site_type_id', [1,3,4])
-                //             ->orWhere(function($query) {
-                //                 $query->whereIn('sites.site_type_id', [2])
-                //                 ->join('technologies', function($query) {
-                //                     $query->on('sites.id', '=', 'technologies.site_id')
-                //                     ->where('technologies.state_id', 1);
-                //                 });
-                //             });
-                //         })
-                //         ->whereRaw($condition_core);
-
-                //     })
-                //     ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-                //     ->join('zonas', function($join) use($condition_crm, $condition_zona) {
-                //         $join->on('comunas.zona_id', '=', 'zonas.id')
-                //             ->whereRaw($condition_zona)
-                //             ->whereRaw($condition_crm);
-                //     })
-                //     ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-                //     ->join('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-                //     ->select(
-                //         'pops.id',
-                //         'pops.nombre',
-                //         'pops.direccion',
-                //         'sites.nem_site',
-                //         'pops.latitude',
-                //         'pops.longitude',
-                //         'comunas.nombre_comuna',
-                //         'comunas.zona_id',
-                //         'zonas.crm_id',
-                //         'zonas.nombre_zona',
-                //         'crms.nombre_crm',
-                //         'sites.classification_type_id',
-                //         'classification_types.classification_type'
-                //     )
-                //     ->groupBy('pops.id')
-                //     ->get();
 
         //         return $popsMap; 
         //     });
@@ -255,7 +222,7 @@ class DashboardApiController extends Controller
                         $q->whereRaw($condition_crm)->whereRaw($condition_zona);
                     })
                     ->groupBy('pop_id')
-                    ->paginate(12);
+                    ->paginate(10);
 
         //         return $criticSites; 
         //     });
@@ -301,39 +268,6 @@ class DashboardApiController extends Controller
                     )
                     ->get();
 
-
-
-                // $criticPops = CriticSite::join('sites', function($join) use($condition_core) {
-                //         $join->on('critic_sites.site_id', '=', 'sites.id')
-                //             ->whereRaw($condition_core);
-                //     })
-                //     ->join('pops', 'sites.pop_id', '=', 'pops.id')
-                //     ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-                //     ->join('zonas', function($join) use($condition_crm, $condition_zona) {
-                //         $join->on('comunas.zona_id', '=', 'zonas.id')
-                //             ->whereRaw($condition_zona)
-                //             ->whereRaw($condition_crm);
-                //     })
-                //     ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-                //     ->join('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-                //     ->select(
-                //         'pops.id',
-                //         'pops.nombre',
-                //         'pops.direccion',
-                //         'sites.nem_site',
-                //         'pops.latitude',
-                //         'pops.longitude',
-                //         'comunas.nombre_comuna',
-                //         'comunas.zona_id',
-                //         'zonas.crm_id',
-                //         'zonas.nombre_zona',
-                //         'crms.nombre_crm',
-                //         'sites.classification_type_id',
-                //         'classification_types.classification_type'
-                //     )
-                //     ->groupBy('pops.id')
-                //     ->get();
-
         //         return $criticPops; 
         //     });
         // }
@@ -368,7 +302,7 @@ class DashboardApiController extends Controller
                         $q->whereRaw($condition_crm)->whereRaw($condition_zona);
                     })
                     ->where('alba_project', 1)
-                    ->paginate(12);
+                    ->paginate(10);
 
         //         return $albaPopList;
         //     });
@@ -442,10 +376,10 @@ class DashboardApiController extends Controller
     {
         $core = $request->core;
 
-        if (Cache::has('popData_core'.$core)) {
-            $popQuantity = Cache::get('popData_core'.$core);
-        } else {
-            $popQuantity = Cache::remember('popData_core'.$core, $this->seconds, function () use ($core) {
+        // if (Cache::has('popData_core'.$core)) {
+        //     $popQuantity = Cache::get('popData_core'.$core);
+        // } else {
+        //     $popQuantity = Cache::remember('popData_core'.$core, $this->seconds, function () use ($core) {
 
                 $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
@@ -459,12 +393,12 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE P.pop_type_id = 0
+                            WHERE (P.pop_type_id IS NULL OR P.pop_type_id = 0 OR P.pop_type_id = 1)
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S
-                                INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE (T.state_id = 1 AND S.site_type_id IN (2)) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4))
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
                                 $condition
                                 )
                             ) AS opto,
@@ -478,8 +412,8 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE (T.state_id = 1 AND S.site_type_id IN (2)) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4))
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
                                 $condition
                                 )
                             ) AS radio,
@@ -493,8 +427,8 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id
                                 FROM entel_pops.sites S
-                                INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE (T.state_id = 1 AND S.site_type_id IN (2)) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4))
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
                                 $condition
                                 )
                             ) AS repetidor,
@@ -508,8 +442,8 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE (T.state_id = 1 AND S.site_type_id IN (2)) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4))
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
                                 $condition
                                 )
                             ) AS indoor,
@@ -523,8 +457,8 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE (T.state_id = 1 AND S.site_type_id IN (2)) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4))
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
                                 $condition
                                 )
                             ) AS outdoor,
@@ -538,17 +472,17 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE (T.state_id = 1 AND S.site_type_id IN (2)) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4))
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
                                 $condition
                                 )
                             ) AS pole_site
 
                     FROM entel_pops.crms
                 "));
-                return $popQuantity;
-            });
-        }
+        //         return $popQuantity;
+        //     });
+        // }
         return new PopResource($popQuantity);
     }
 
@@ -566,7 +500,7 @@ class DashboardApiController extends Controller
         //     $popQuantity = Cache::get('popData_crm'.$crm_id.'_core'.$core);
         // } else {
         //     $popQuantity = Cache::remember('popData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
-        //         $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
+                $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
                 $popQuantity = DB::select(DB::raw("
                     SELECT
@@ -577,11 +511,13 @@ class DashboardApiController extends Controller
                     @opto:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE P.pop_type_id NOT IN (1,2,3,4,5,6)
+                            WHERE (P.pop_type_id IS NULL OR P.pop_type_id = 0 OR P.pop_type_id = 1)
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS opto,
 
@@ -593,7 +529,9 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS radio,
 
@@ -603,9 +541,11 @@ class DashboardApiController extends Controller
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
                             WHERE P.pop_type_id = 3
                             AND P.id IN (
-                                SELECT S.pop_id
-                                FROM entel_pops.sites S
-                                WHERE S.state_id = 1 $condition
+                                SELECT S.pop_id 
+                                FROM entel_pops.sites S  
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS repetidor,
 
@@ -617,7 +557,9 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS indoor,
 
@@ -629,7 +571,9 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS outdoor,
 
@@ -641,7 +585,9 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS pole_site
 
@@ -664,10 +610,10 @@ class DashboardApiController extends Controller
         $core = $request->core;
         $zona_id = $request->zona_id;
 
-        if (Cache::has('popData_zona'.$zona_id.'_core'.$core)) {
-            $popQuantity = Cache::get('popData_zona'.$zona_id.'_core'.$core);
-        } else {
-            $popQuantity = Cache::remember('popData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
+        // if (Cache::has('popData_zona'.$zona_id.'_core'.$core)) {
+        //     $popQuantity = Cache::get('popData_zona'.$zona_id.'_core'.$core);
+        // } else {
+        //     $popQuantity = Cache::remember('popData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
                 $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
                 $popQuantity = DB::select(DB::raw("
@@ -679,11 +625,13 @@ class DashboardApiController extends Controller
                     @opto:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
                             WHERE P.comuna_id = @comuna_id
-                            AND P.pop_type_id NOT IN (1,2,3,4,5,6)
+                            AND (P.pop_type_id IS NULL OR P.pop_type_id = 0 OR P.pop_type_id = 1)
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS opto,
 
@@ -695,7 +643,9 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS radio,
 
@@ -705,9 +655,11 @@ class DashboardApiController extends Controller
                             WHERE P.comuna_id = @comuna_id
                             AND P.pop_type_id = 3
                             AND P.id IN (
-                                SELECT S.pop_id
-                                FROM entel_pops.sites S
-                                WHERE S.state_id = 1 $condition
+                                SELECT S.pop_id 
+                                FROM entel_pops.sites S  
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS repetidor,
 
@@ -719,7 +671,9 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS indoor,
 
@@ -731,7 +685,9 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS outdoor,
 
@@ -743,16 +699,18 @@ class DashboardApiController extends Controller
                             AND P.id IN (
                                 SELECT S.pop_id 
                                 FROM entel_pops.sites S  
-                                WHERE S.state_id = 1 $condition
+                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                $condition
                                 )
                             ) AS pole_site
 
                     FROM entel_pops.comunas
                     WHERE zona_id = $zona_id
                 "));
-                return $popQuantity;
-            });
-        }
+        //         return $popQuantity;
+        //     });
+        // }
         return new PopResource($popQuantity);
     }
 
@@ -765,10 +723,10 @@ class DashboardApiController extends Controller
     {
         $core = $request->core;
 
-        if (Cache::has('sitesData_core'.$core)) {
-            $popQuantity = Cache::get('sitesData_core'.$core);
-        } else {
-            $popQuantity = Cache::remember('sitesData_core'.$core, $this->seconds, function () use ($core) {
+        // if (Cache::has('sitesData_core'.$core)) {
+        //     $popQuantity = Cache::get('sitesData_core'.$core);
+        // } else {
+        //     $popQuantity = Cache::remember('sitesData_core'.$core, $this->seconds, function () use ($core) {
 
                 $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
@@ -784,7 +742,7 @@ class DashboardApiController extends Controller
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
                             WHERE S.site_type_id = 1
-                            AND S.state_id = 1 
+                            AND S.state_id = 1
                             $condition
                             ) AS fijo,
 
@@ -794,8 +752,8 @@ class DashboardApiController extends Controller
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id AND T.state_id = 1 
                             WHERE S.site_type_id = 2
-                            AND S.state_id = 1
                             $condition
                             ) AS movil,
 
@@ -823,9 +781,9 @@ class DashboardApiController extends Controller
 
                     FROM entel_pops.crms
                 "));
-                return $popQuantity;
-            });
-        }
+        //         return $popQuantity;
+        //     });
+        // }
         return new PopResource($popQuantity);
     }
 
@@ -839,10 +797,10 @@ class DashboardApiController extends Controller
         $core = $request->core;
         $crm_id = $request->crm_id;
 
-        if (Cache::has('sitesData_crm'.$crm_id.'_core'.$core)) {
-            $sitesQuantity = Cache::get('sitesData_crm'.$crm_id.'_core'.$core);
-        } else {
-            $sitesQuantity = Cache::remember('sitesData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
+        // if (Cache::has('sitesData_crm'.$crm_id.'_core'.$core)) {
+        //     $sitesQuantity = Cache::get('sitesData_crm'.$crm_id.'_core'.$core);
+        // } else {
+        //     $sitesQuantity = Cache::remember('sitesData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
                 $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
                 $sitesQuantity = DB::select(DB::raw("
@@ -865,8 +823,8 @@ class DashboardApiController extends Controller
                             FROM entel_pops.sites S
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id AND T.state_id = 1 
                             WHERE S.site_type_id = 2
-                            AND S.state_id = 1
                             $condition
                             ) AS movil,
 
@@ -893,9 +851,9 @@ class DashboardApiController extends Controller
                     FROM entel_pops.zonas
                     WHERE crm_id = $crm_id
                 "));
-                return $sitesQuantity;
-            });
-        }
+        //         return $sitesQuantity;
+        //     });
+        // }
         return new PopResource($sitesQuantity);
     }
 
@@ -909,10 +867,10 @@ class DashboardApiController extends Controller
         $core = $request->core;
         $zona_id = $request->zona_id;
         
-        if (Cache::has('sitesData_zona'.$zona_id.'_core'.$core)) {
-            $popQuantity = Cache::get('sitesData_zona'.$zona_id.'_core'.$core);
-        } else {
-            $popQuantity = Cache::remember('sitesData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
+        // if (Cache::has('sitesData_zona'.$zona_id.'_core'.$core)) {
+        //     $popQuantity = Cache::get('sitesData_zona'.$zona_id.'_core'.$core);
+        // } else {
+        //     $popQuantity = Cache::remember('sitesData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
                 $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
                 $popQuantity = DB::select(DB::raw("
@@ -933,8 +891,8 @@ class DashboardApiController extends Controller
                     @movil:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
+                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id AND T.state_id = 1 
                             WHERE S.site_type_id = 2
-                            AND S.state_id = 1 
                             $condition
                             ) AS movil,
 
@@ -959,9 +917,9 @@ class DashboardApiController extends Controller
                     FROM entel_pops.comunas
                     WHERE zona_id = $zona_id
                 "));
-                return $popQuantity;
-            });
-        }
+        //         return $popQuantity;
+        //     });
+        // }
         return new PopResource($popQuantity);
     }
 

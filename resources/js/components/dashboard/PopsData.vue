@@ -105,6 +105,9 @@
             },
             core(newValue, oldValue) {
                 this.getData()
+            },
+            totalPops(newValue) {
+                this.$eventCounters.$emit('pops', newValue)
             }
         },
         computed: {
@@ -142,6 +145,7 @@
                 return this.totalOpto + this.totalRadio + this.totalRepetidor + this.totalIndoor + this.totalOutdoor + this.totalPoleSite
             }
         },
+
         methods: {
             async getData() {
                 // Si no hay un CRM seleccionado
@@ -169,8 +173,6 @@
                         this.$eventBus.$emit('graphData', this.popsData)
                     })
                 }
-
-                this.$emit('graphData', this.popsData)
 
             },
             downloadPops() {

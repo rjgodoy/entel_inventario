@@ -41,8 +41,8 @@ class ComsitePolicy
      */
     public function create(User $user)
     {
-        // return $user->roles->first()->name === 'admin';
-        return true;
+        // return $user->isAdmin();
+        // return true;
     }
 
     /**
@@ -54,8 +54,7 @@ class ComsitePolicy
      */
     public function update(User $user, Comsite $comsite)
     {
-        // return $user->roles->first()->name === 'admin';
-        return true;
+        //
     }
 
     /**
@@ -67,7 +66,7 @@ class ComsitePolicy
      */
     public function delete(User $user, Comsite $comsite)
     {
-        return $user->roles->first()->name === 'admin';
+        // return $user->roles->first()->name === 'admin';
     }
 
     /**
@@ -79,7 +78,7 @@ class ComsitePolicy
      */
     public function restore(User $user, Comsite $comsite)
     {
-        return $user->roles->first()->name === 'admin';
+        //
     }
 
     /**
@@ -91,6 +90,6 @@ class ComsitePolicy
      */
     public function forceDelete(User $user, Comsite $comsite)
     {
-        return $user->roles->first()->name === 'admin';
+        //
     }
 }

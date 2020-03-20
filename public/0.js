@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var ChartDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ChartDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ChartDataItem, _super);
     /**
      * Constructor
      */
@@ -84,7 +84,7 @@ var ChartDataItem = /** @class */ (function (_super) {
  * @see {@link IChartAdapters} for a list of available Adapters
  */
 var Chart = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Chart, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Chart, _super);
     /**
      * Constructor
      */
@@ -139,7 +139,7 @@ var Chart = /** @class */ (function (_super) {
         // mess up the whole focus event system - getting a focus on an inside
         // object also trigger focus on parent
         //this.focusable = true;
-        _this.role = "widget";
+        _this.role = "region";
         _this.defaultState.transitionDuration = 1;
         // Apply theme
         _this.applyTheme();
@@ -179,30 +179,18 @@ var Chart = /** @class */ (function (_super) {
             switch (legend.position) {
                 case "left":
                     chartAndLegendContainer.layout = "horizontal";
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["isNumber"](legend.width)) {
-                        legend.width = 200;
-                    }
-                    //legend.maxWidth = legend.width;
                     legend.toBack();
                     break;
                 case "right":
                     chartAndLegendContainer.layout = "horizontal";
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["isNumber"](legend.width)) {
-                        legend.width = 200;
-                    }
-                    //legend.maxWidth = legend.width;
                     legend.toFront();
                     break;
                 case "top":
                     chartAndLegendContainer.layout = "vertical";
-                    legend.maxWidth = undefined;
-                    legend.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["percent"])(100);
                     legend.toBack();
                     break;
                 case "bottom":
                     chartAndLegendContainer.layout = "vertical";
-                    legend.maxWidth = undefined;
-                    legend.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["percent"])(100);
                     legend.toFront();
             }
         }
@@ -278,10 +266,11 @@ var Chart = /** @class */ (function (_super) {
         var _this = this;
         if (this._legend.get() !== legend) {
             if (legend) {
+                legend.maxWidth = 200;
                 // Set legend options
                 legend.parent = this.chartAndLegendContainer;
                 this._legend.set(legend, legend.events.on("propertychanged", function (event) {
-                    if (event.property == "position" || event.property == "width") {
+                    if (event.property == "position") {
                         _this.fixLayout();
                     }
                 }, undefined, false));
@@ -324,6 +313,7 @@ var Chart = /** @class */ (function (_super) {
      */
     Chart.prototype.copyFrom = function (source) {
         this.titles.copyFrom(source.titles);
+        this.chartContainer.copyFrom(source.chartContainer);
         if (source.legend) {
             this.legend = source.legend.clone();
             this.legend.removeChildren();
@@ -494,10 +484,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
 /* harmony import */ var _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
 /* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _core_Sprite__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../core/Sprite */ "./node_modules/@amcharts/amcharts4/.internal/core/Sprite.js");
-/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony import */ var _core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../core/interaction/Mouse */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Mouse.js");
-/* harmony import */ var _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
+/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
+/* harmony import */ var _core_Sprite__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../core/Sprite */ "./node_modules/@amcharts/amcharts4/.internal/core/Sprite.js");
+/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony import */ var _core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../core/interaction/Mouse */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Mouse.js");
+/* harmony import */ var _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
+/* harmony import */ var _core_elements_Scrollbar__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../core/elements/Scrollbar */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Scrollbar.js");
 /**
  * Legend-related functionality.
  */
@@ -508,6 +500,8 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
+
 
 
 
@@ -537,7 +531,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var LegendDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LegendDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LegendDataItem, _super);
     /**
      * Constructor
      */
@@ -565,7 +559,7 @@ var LegendDataItem = /** @class */ (function (_super) {
                 this.addSprite(label_1);
                 this._disposers.push(label_1);
                 label_1.parent = this.itemContainer;
-                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_15__["Disposer"](function () {
+                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_16__["Disposer"](function () {
                     if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](_this.component)) {
                         _this.component.labels.removeValue(label_1);
                     }
@@ -632,7 +626,7 @@ var LegendDataItem = /** @class */ (function (_super) {
                 this.addSprite(valueLabel_1);
                 this._disposers.push(valueLabel_1);
                 valueLabel_1.parent = this.itemContainer;
-                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_15__["Disposer"](function () {
+                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_16__["Disposer"](function () {
                     if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](_this.component)) {
                         _this.component.valueLabels.removeValue(valueLabel_1);
                     }
@@ -655,6 +649,7 @@ var LegendDataItem = /** @class */ (function (_super) {
             if (!this._itemContainer) {
                 var component_1 = this.component;
                 var itemContainer_1 = component_1.itemContainers.create();
+                itemContainer_1.parent = component_1;
                 this._itemContainer = itemContainer_1;
                 this.addSprite(itemContainer_1);
                 this._disposers.push(itemContainer_1);
@@ -667,6 +662,11 @@ var LegendDataItem = /** @class */ (function (_super) {
                 // Add focus event so that we can track which object is currently in focus
                 // for keyboard toggling
                 if (itemContainer_1.focusable) {
+                    itemContainer_1.events.on("hit", function (ev) {
+                        // We need this here in order to reset focused item when it is clicked
+                        // normally so that it is not toggled by ENTER afterwards
+                        component_1.focusedItem = undefined;
+                    }, undefined, false);
                     itemContainer_1.events.on("focus", function (ev) {
                         component_1.focusedItem = ev.target.dataItem;
                     }, undefined, false);
@@ -674,7 +674,7 @@ var LegendDataItem = /** @class */ (function (_super) {
                         component_1.focusedItem = undefined;
                     }, undefined, false);
                 }
-                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_15__["Disposer"](function () {
+                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_16__["Disposer"](function () {
                     if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](_this.component)) {
                         _this.component.itemContainers.removeValue(itemContainer_1);
                     }
@@ -684,19 +684,20 @@ var LegendDataItem = /** @class */ (function (_super) {
                     itemContainer_1.readerLabelledBy = this.dataContext.uidAttr();
                 }
                 var sprite = this.dataContext;
-                if ((sprite instanceof _core_DataItem__WEBPACK_IMPORTED_MODULE_2__["DataItem"] || sprite instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_14__["Sprite"]) && !sprite.isDisposed()) {
-                    itemContainer_1.addDisposer(sprite.events.on("visibilitychanged", function (ev) {
+                if ((sprite instanceof _core_DataItem__WEBPACK_IMPORTED_MODULE_2__["DataItem"] || sprite instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_15__["Sprite"]) && !sprite.isDisposed()) {
+                    var visibilitychanged = function (ev) {
                         itemContainer_1.readerChecked = ev.visible;
                         itemContainer_1.events.disableType("toggled");
                         itemContainer_1.isActive = !ev.visible;
                         itemContainer_1.events.enableType("toggled");
-                    }, undefined, false));
-                    sprite.addDisposer(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_15__["Disposer"](function () {
+                    };
+                    sprite.addDisposer(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_16__["Disposer"](function () {
                         if (_this.component) {
                             _this.component.dataItems.remove(_this);
                         }
                     }));
-                    if (sprite instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_14__["Sprite"]) {
+                    if (sprite instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_15__["Sprite"]) {
+                        itemContainer_1.addDisposer(sprite.events.on("visibilitychanged", visibilitychanged, undefined, false));
                         itemContainer_1.addDisposer(sprite.events.on("hidden", function (ev) {
                             itemContainer_1.readerChecked = false;
                             itemContainer_1.events.disableType("toggled");
@@ -709,6 +710,9 @@ var LegendDataItem = /** @class */ (function (_super) {
                             itemContainer_1.isActive = false;
                             itemContainer_1.events.enableType("toggled");
                         }, undefined, false));
+                    }
+                    else {
+                        itemContainer_1.addDisposer(sprite.events.on("visibilitychanged", visibilitychanged, undefined, false));
                     }
                 }
             }
@@ -731,7 +735,7 @@ var LegendDataItem = /** @class */ (function (_super) {
                 marker_1.parent = this.itemContainer;
                 this.addSprite(marker_1);
                 this._disposers.push(marker_1);
-                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_15__["Disposer"](function () {
+                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_16__["Disposer"](function () {
                     if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](_this.component)) {
                         _this.component.markers.removeValue(marker_1);
                     }
@@ -784,7 +788,7 @@ var LegendSettings = /** @class */ (function () {
  * @see {@link ILegendAdapters} for a list of available Adapters
  */
 var Legend = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Legend, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Legend, _super);
     /**
      * Constructor
      */
@@ -794,18 +798,19 @@ var Legend = /** @class */ (function (_super) {
         // Set defaults
         _this.layout = "grid";
         _this.setPropertyValue("useDefaultMarker", false);
+        _this.setPropertyValue("scrollable", false);
         _this.setPropertyValue("contentAlign", "center");
         // Create a template container and list for legend items
         var itemContainer = new _core_Container__WEBPACK_IMPORTED_MODULE_5__["Container"]();
         itemContainer.applyOnClones = true;
-        itemContainer.padding(10, 0, 10, 0);
-        itemContainer.margin(0, 10, 0, 0);
+        itemContainer.padding(8, 0, 8, 0);
+        itemContainer.margin(0, 10, 0, 10);
         itemContainer.layout = "horizontal";
         itemContainer.clickable = true;
         itemContainer.focusable = true;
         itemContainer.role = "switch";
         itemContainer.togglable = true;
-        itemContainer.cursorOverStyle = _core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_16__["MouseCursorStyle"].pointer;
+        itemContainer.cursorOverStyle = _core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_17__["MouseCursorStyle"].pointer;
         itemContainer.background.fillOpacity = 0; // creates hit area
         // Create container list using item template we just created
         _this.itemContainers = new _core_utils_List__WEBPACK_IMPORTED_MODULE_3__["ListTemplate"](itemContainer);
@@ -857,6 +862,8 @@ var Legend = /** @class */ (function (_super) {
         _this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_3__["ListDisposer"](_this.labels));
         _this._disposers.push(_this.labels.template);
         label.interactionsEnabled = false;
+        label.truncate = true;
+        label.fullWords = false;
         // Create a template container and list for item value labels
         var valueLabel = new _core_elements_Label__WEBPACK_IMPORTED_MODULE_6__["Label"]();
         valueLabel.margin(0, 5, 0, 0);
@@ -876,6 +883,7 @@ var Legend = /** @class */ (function (_super) {
         itemContainer.setStateOnChildren = true;
         // Apply accessibility settings
         _this.role = "group";
+        _this.events.on("layoutvalidated", _this.handleScrollbar, _this, false);
         _this.applyTheme();
         return _this;
     }
@@ -915,15 +923,18 @@ var Legend = /** @class */ (function (_super) {
         _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__["used"](dataItem.label);
         var valueLabel = dataItem.valueLabel;
         // Set parent and update current state
-        container.parent = this;
         container.readerChecked = dataItem.dataContext.visible;
         // Tell series its legend data item
         dataItem.dataContext.legendDataItem = dataItem;
+        dataItem.label.width = undefined;
+        if (valueLabel.align == "right") {
+            valueLabel.width = undefined;
+        }
         var legendSettings = dataItem.dataContext.legendSettings;
         // If we are not using default markers, create a unique legend marker based
         // on the data item type
         var dataContext = dataItem.dataContext;
-        if (dataContext.createLegendMarker && (!this.useDefaultMarker || !(dataContext instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_14__["Sprite"]))) {
+        if (dataContext.createLegendMarker && (!this.useDefaultMarker || !(dataContext instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_15__["Sprite"]))) {
             if (!dataItem.childrenCreated) {
                 dataContext.createLegendMarker(marker);
                 dataItem.childrenCreated = true;
@@ -938,7 +949,7 @@ var Legend = /** @class */ (function (_super) {
         if (valueLabel.invalid) {
             valueLabel.validate();
         }
-        if (valueLabel.currentText == "" || valueLabel.currentText == undefined) {
+        if (valueLabel.text == "" || valueLabel.text == undefined) {
             valueLabel.__disabled = true;
         }
         else {
@@ -955,7 +966,85 @@ var Legend = /** @class */ (function (_super) {
         dataItem.dataContext.visible = visible;
         container.events.disableType("toggled");
         container.isActive = !visible;
+        if (container.isActive) {
+            container.setState("active", 0);
+        }
+        else {
+            container.setState("default", 0);
+        }
         container.events.enableType("toggled");
+    };
+    Legend.prototype.afterDraw = function () {
+        var _this = this;
+        var maxWidth = this.getPropertyValue("maxWidth");
+        var maxLabelWidth = 0;
+        this.labels.each(function (label) {
+            if (label.invalid) {
+                label.validate();
+            }
+            if (label.measuredWidth + label.pixelMarginLeft + label.pixelMarginRight > maxLabelWidth) {
+                maxLabelWidth = label.measuredWidth + label.pixelMarginLeft + label.pixelMarginRight;
+            }
+        });
+        var maxValueLabelWidth = 0;
+        this.valueLabels.each(function (label) {
+            if (label.invalid) {
+                label.validate();
+            }
+            if (label.measuredWidth + label.pixelMarginLeft + label.pixelMarginRight > maxValueLabelWidth) {
+                maxValueLabelWidth = label.measuredWidth + label.pixelMarginLeft + label.pixelMarginRight;
+            }
+        });
+        var maxMarkerWidth = 0;
+        this.markers.each(function (marker) {
+            if (marker.invalid) {
+                marker.validate();
+            }
+            if (marker.measuredWidth + marker.pixelMarginLeft + marker.pixelMarginRight > maxMarkerWidth) {
+                maxMarkerWidth = marker.measuredWidth + marker.pixelMarginLeft + marker.pixelMarginRight;
+            }
+        });
+        var itemContainer = this.itemContainers.template;
+        var margin = itemContainer.pixelMarginRight + itemContainer.pixelMarginLeft;
+        var maxAdjustedLabelWidth;
+        var trueMaxWidth = maxLabelWidth + maxValueLabelWidth + maxMarkerWidth;
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](maxWidth)) {
+            maxAdjustedLabelWidth = maxLabelWidth;
+        }
+        else {
+            maxWidth = maxWidth - margin;
+            if (maxWidth > trueMaxWidth) {
+                maxWidth = trueMaxWidth;
+            }
+            maxAdjustedLabelWidth = maxWidth - maxMarkerWidth - maxValueLabelWidth;
+        }
+        this.labels.each(function (label) {
+            if (_this.valueLabels.template.align == "right" || label.measuredWidth > maxAdjustedLabelWidth) {
+                label.width = maxAdjustedLabelWidth - label.pixelMarginLeft - label.pixelMarginRight;
+            }
+        });
+        if (this.valueLabels.template.align == "right") {
+            this.valueLabels.each(function (valueLabel) {
+                valueLabel.width = maxValueLabelWidth - valueLabel.pixelMarginRight - valueLabel.pixelMarginLeft;
+            });
+        }
+        _super.prototype.afterDraw.call(this);
+    };
+    Legend.prototype.handleScrollbar = function () {
+        var scrollbar = this.scrollbar;
+        if (this.scrollable && scrollbar) {
+            scrollbar.height = this.measuredHeight;
+            scrollbar.x = this.measuredWidth - scrollbar.pixelWidth - scrollbar.pixelMarginLeft;
+            if (this.contentHeight > this.measuredHeight) {
+                scrollbar.visible = true;
+                scrollbar.thumb.height = scrollbar.height * this.measuredHeight / this.contentHeight;
+                this.paddingRight = scrollbar.pixelWidth + scrollbar.pixelMarginLeft + +scrollbar.pixelMarginRight;
+            }
+            else {
+                scrollbar.visible = false;
+            }
+            this.updateMasks();
+        }
     };
     Object.defineProperty(Legend.prototype, "position", {
         /**
@@ -981,19 +1070,20 @@ var Legend = /** @class */ (function (_super) {
         set: function (value) {
             if (this.setPropertyValue("position", value)) {
                 if (value == "left" || value == "right") {
-                    this.margin(10, 20, 10, 20);
+                    this.margin(10, 5, 10, 10);
                     this.valign = "middle";
-                    this.itemContainers.template.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
-                    this.valueLabels.template.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
-                    this.labels.template.truncate = true;
-                    this.labels.template.fullWords = false;
+                    this.contentAlign = "none";
+                    this.valueLabels.template.align = "right";
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](this.maxColumns)) {
+                        this.maxColumns = 1;
+                    }
+                    this.width = undefined;
+                    this.maxWidth = 220;
                 }
                 else {
-                    this.itemContainers.template.width = undefined;
-                    this.itemContainers.template.maxWidth = undefined;
-                    this.valueLabels.template.width = 50;
-                    this.labels.template.truncate = false;
+                    this.maxColumns = undefined;
                     this.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
+                    this.valueLabels.template.align = "left";
                 }
                 this.invalidate();
             }
@@ -1027,6 +1117,86 @@ var Legend = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Legend.prototype, "scrollable", {
+        /**
+         * @return Legend Scrollable?
+         */
+        get: function () {
+            return this.getPropertyValue("scrollable");
+        },
+        /**
+         * If set to `true` the Legend will display a scrollbar if its contents do
+         * not fit into its `maxHeight`.
+         *
+         * Please note that `maxHeight` is automatically set for Legend when its
+         * `position` is set to `"left"` or `"right"`.
+         *
+         * @default false
+         * @since 4.8.0
+         * @param  value  Legend Scrollable?
+         */
+        set: function (value) {
+            if (this.setPropertyValue("scrollable", value, true)) {
+                if (value) {
+                    var scrollbar = this.createChild(_core_elements_Scrollbar__WEBPACK_IMPORTED_MODULE_19__["Scrollbar"]);
+                    this.scrollbar = scrollbar;
+                    scrollbar.isMeasured = false;
+                    scrollbar.orientation = "vertical";
+                    scrollbar.endGrip.__disabled = true;
+                    scrollbar.startGrip.__disabled = true;
+                    scrollbar.visible = false;
+                    scrollbar.marginLeft = 5;
+                    this._mouseWheelDisposer = this.events.on("wheel", this.handleWheel, this, false);
+                    this._disposers.push(this._mouseWheelDisposer);
+                    this._disposers.push(scrollbar.events.on("rangechanged", this.updateMasks, this, false));
+                }
+                else {
+                    if (this._mouseWheelDisposer) {
+                        this._mouseWheelDisposer.dispose();
+                        if (this.scrollbar) {
+                            this.scrollbar.dispose();
+                            this.scrollbar = undefined;
+                        }
+                    }
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Handles mouse wheel scrolling of legend.
+     *
+     * @param  event  Event
+     */
+    Legend.prototype.handleWheel = function (event) {
+        var shift = event.shift.y;
+        var scrollbar = this.scrollbar;
+        if (scrollbar) {
+            var ds = (shift / 1000 * this.measuredHeight / this.contentHeight);
+            var delta = scrollbar.end - scrollbar.start;
+            if (shift > 0) {
+                scrollbar.start = _core_utils_Math__WEBPACK_IMPORTED_MODULE_14__["max"](0, scrollbar.start - ds);
+                scrollbar.end = scrollbar.start + delta;
+            }
+            else {
+                scrollbar.end = _core_utils_Math__WEBPACK_IMPORTED_MODULE_14__["min"](1, scrollbar.end - ds);
+                scrollbar.start = scrollbar.end - delta;
+            }
+        }
+    };
+    /**
+     * @ignore
+     */
+    Legend.prototype.updateMasks = function () {
+        var _this = this;
+        if (this.scrollbar) {
+            this.itemContainers.each(function (itemContainer) {
+                itemContainer.dy = -_this.scrollbar.thumb.pixelY * _this.contentHeight / _this.measuredHeight;
+                itemContainer.maskRectangle = { x: 0, y: -itemContainer.dy, width: _this.measuredWidth, height: _this.measuredHeight };
+            });
+        }
+    };
     /**
      * Toggles a legend item.
      *
@@ -1036,7 +1206,7 @@ var Legend = /** @class */ (function (_super) {
      */
     Legend.prototype.toggleDataItem = function (item) {
         var dataContext = item.dataContext;
-        if (!dataContext.visible || dataContext.isHiding || (dataContext instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_14__["Sprite"] && dataContext.isHidden)) {
+        if (!dataContext.visible || dataContext.isHiding || (dataContext instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_15__["Sprite"] && dataContext.isHidden)) {
             item.color = item.colorOrig;
             item.itemContainer.isActive = false;
             if (dataContext.hidden === true) {
@@ -1048,6 +1218,7 @@ var Legend = /** @class */ (function (_super) {
             else {
                 dataContext.visible = true;
             }
+            this.svgContainer.readerAlert(this.language.translate("%1 shown", this.language.locale, item.label.readerTitle));
         }
         else {
             item.itemContainer.isActive = true;
@@ -1057,6 +1228,7 @@ var Legend = /** @class */ (function (_super) {
             else {
                 dataContext.visible = false;
             }
+            this.svgContainer.readerAlert(this.language.translate("%1 hidden", this.language.locale, item.label.readerTitle));
             item.color = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_11__["InterfaceColorSet"]().getFor("disabledBackground");
         }
     };
@@ -1099,8 +1271,8 @@ _core_Registry__WEBPACK_IMPORTED_MODULE_8__["registry"].registeredClasses["Legen
 /**
  * Move legend to below the chart if chart is narrow
  */
-_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__["defaultRules"].push({
-    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__["ResponsiveBreakpoints"].widthXS,
+_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_18__["defaultRules"].push({
+    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_18__["ResponsiveBreakpoints"].widthXS,
     state: function (target, stateId) {
         if (target instanceof Legend && (target.position == "left" || target.position == "right")) {
             var state = target.states.create(stateId);
@@ -1113,8 +1285,8 @@ _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__["defaultRules"].push({
 /**
  * Move legend to the right if chart is very short
  */
-_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__["defaultRules"].push({
-    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__["ResponsiveBreakpoints"].heightXS,
+_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_18__["defaultRules"].push({
+    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_18__["ResponsiveBreakpoints"].heightXS,
     state: function (target, stateId) {
         if (target instanceof Legend && (target.position == "top" || target.position == "bottom")) {
             var state = target.states.create(stateId);
@@ -1127,8 +1299,8 @@ _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__["defaultRules"].push({
 /**
  * Disable legend altogether on small charts
  */
-_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__["defaultRules"].push({
-    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_17__["ResponsiveBreakpoints"].isXS,
+_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_18__["defaultRules"].push({
+    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_18__["ResponsiveBreakpoints"].isXS,
     state: function (target, stateId) {
         if (target instanceof Legend) {
             var state = target.states.create(stateId);
@@ -1213,7 +1385,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var AxisDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisDataItem, _super);
     /**
      * Constructor
      */
@@ -1754,7 +1926,7 @@ var AxisItemLocation;
  * @see {@link IAxisAdapters} for a list of available Adapters
  */
 var Axis = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Axis, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Axis, _super);
     /**
      * Constructor
      */
@@ -1777,9 +1949,14 @@ var Axis = /** @class */ (function (_super) {
          * @default true
          */
         _this.autoDispose = true;
+        /**
+         * @ignore
+         */
+        _this._axisItemCount = 0;
         if (_this.constructor === Axis) {
             throw new Error("'Axis' cannot be instantiated directly. Please use a specific axis type.");
         }
+        _this.hideTooltipWhileZooming = true;
         _this.minWidth = 0.0001;
         _this.minHeight = 0.0001;
         _this.className = "Axis";
@@ -1817,6 +1994,30 @@ var Axis = /** @class */ (function (_super) {
         _this.tooltip = tooltip;
         // Accessibility
         _this.readerHidden = true;
+        _this.events.on("rangechangestarted", function () {
+            _this.series.each(function (series) {
+                if (series.hideTooltipWhileZooming) {
+                    series.tooltip.hide();
+                    series.tooltip.preventShow = true;
+                }
+            });
+            if (_this.hideTooltipWhileZooming) {
+                _this.tooltip.hide();
+                _this.tooltip.preventShow = true;
+            }
+        }, undefined, false);
+        _this.events.on("rangechangeended", function () {
+            _this.series.each(function (series) {
+                if (series.hideTooltipWhileZooming) {
+                    series.tooltip.hide();
+                    series.tooltip.preventShow = false;
+                }
+            });
+            if (_this.hideTooltipWhileZooming) {
+                _this.tooltip.hide();
+                _this.tooltip.preventShow = false;
+            }
+        }, undefined, false);
         _this.applyTheme();
         return _this;
     }
@@ -1878,6 +2079,7 @@ var Axis = /** @class */ (function (_super) {
      * @ignore
      */
     Axis.prototype.validateDataElements = function () {
+        this._axisItemCount = 0;
         if (this.ghostLabel) {
             this.renderer.updateLabelElement(this.ghostLabel, this.start, this.end);
             this.ghostLabel.validate();
@@ -1888,7 +2090,11 @@ var Axis = /** @class */ (function (_super) {
      */
     Axis.prototype.updateGridCount = function () {
         if (this.renderer) {
-            this._gridCount = this.axisLength / this.renderer.minGridDistance;
+            var gridCount = this.axisLength / this.renderer.minGridDistance;
+            if (gridCount != this._gridCount) {
+                this._gridCount = gridCount;
+                this.clearCache();
+            }
         }
     };
     /**
@@ -1900,9 +2106,12 @@ var Axis = /** @class */ (function (_super) {
         this.axisFullLength = this.axisLength / (this.end - this.start);
         _super.prototype.validateLayout.call(this);
         this.updateGridCount();
-        this.renderer.updateAxisLine();
-        this.renderer.updateTooltip();
-        this.renderer.updateBaseGridElement();
+        var renderer = this.renderer;
+        if (renderer) {
+            renderer.updateAxisLine();
+            renderer.updateTooltip();
+            renderer.updateBaseGridElement();
+        }
         if (this._prevLength != this.axisLength) {
             this.dispatchImmediately("lengthchanged");
             this._prevLength = this.axisLength;
@@ -2033,11 +2242,7 @@ var Axis = /** @class */ (function (_super) {
             this.events.on("lengthchanged", series.invalidate, series, false),
             this.events.on("lengthchanged", series.createMask, series, false),
             this.events.on("startchanged", series.invalidate, series, false),
-            this.events.on("endchanged", series.invalidate, series, false)
-            // TODO should these be disposed of ?
-            //series.events.on("datavalidated", this.processSeriesDataItems, this),
-            //series.events.on("visibilitychanged", this.processSeriesDataItems, this),
-            //series.events.on("hidden", this.processSeriesDataItems, this)
+            this.events.on("endchanged", series.invalidate, series, false),
         ]);
     };
     Object.defineProperty(Axis.prototype, "renderer", {
@@ -2117,6 +2322,16 @@ var Axis = /** @class */ (function (_super) {
         return this.renderer.pointToPosition(point);
     };
     /**
+     * Converts relative position to coordinate.
+     *
+     * @since 4.7.15
+     * @param position (0-1)
+     * @return coordinate (px)
+     */
+    Axis.prototype.positionToCoordinate = function (position) {
+        return this.renderer.positionToCoordinate(position);
+    };
+    /**
      * [getAnyRangePath description]
      *
      * @ignore Exclude from docs
@@ -2158,7 +2373,10 @@ var Axis = /** @class */ (function (_super) {
      * @return [description]
      */
     Axis.prototype.getPositionRangePath = function (startPosition, endPosition) {
-        return this.renderer.getPositionRangePath(startPosition, endPosition);
+        if (this.renderer) {
+            return this.renderer.getPositionRangePath(startPosition, endPosition);
+        }
+        return "";
     };
     Object.defineProperty(Axis.prototype, "axisLength", {
         /**
@@ -2167,7 +2385,10 @@ var Axis = /** @class */ (function (_super) {
          * @return Axis length (px)
          */
         get: function () {
-            return this.renderer.axisLength;
+            if (this.renderer) {
+                return this.renderer.axisLength;
+            }
+            return 0;
         },
         enumerable: true,
         configurable: true
@@ -2189,7 +2410,7 @@ var Axis = /** @class */ (function (_super) {
                 if (value && this.renderer) {
                     this.renderer.updateTooltip();
                 }
-                else {
+                else if (this.tooltip) {
                     this.tooltip.hide(0);
                 }
             }
@@ -2246,7 +2467,7 @@ var Axis = /** @class */ (function (_super) {
             if (!local) {
                 position = this.toAxisPosition(position);
             }
-            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](position) || position < 0 || position > 1) {
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](position) || position < this.start || position > this.end) {
                 tooltip.hide(0);
                 this._tooltipPosition = undefined;
                 return;
@@ -2495,7 +2716,7 @@ var Axis = /** @class */ (function (_super) {
      *
      * @ignore Exclude from docs
      */
-    Axis.prototype.postProcessSeriesDataItems = function () {
+    Axis.prototype.postProcessSeriesDataItems = function (series) {
     };
     /**
      * Post-processes Serie's single data item.
@@ -3005,6 +3226,27 @@ var Axis = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Axis.prototype, "hideTooltipWhileZooming", {
+        /**
+         * @return Hide tooltip while zooming?
+         */
+        get: function () {
+            return this.getPropertyValue("hideTooltipWhileZooming");
+        },
+        /**
+         * Indicates if axis' tooltip should be hidden while axis range is animating
+         * (zooming)
+         *
+         * @default true
+         * @since 4.7.16
+         * @param  value  Hide tooltip while zooming?
+         */
+        set: function (value) {
+            this.setPropertyValue("hideTooltipWhileZooming", value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Axis;
 }(_core_Component__WEBPACK_IMPORTED_MODULE_1__["Component"]));
 
@@ -3086,7 +3328,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var AxisBreak = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisBreak, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisBreak, _super);
     /**
      * Constructor
      */
@@ -3261,7 +3503,7 @@ var AxisBreak = /** @class */ (function (_super) {
         /**
          * A size of the break relative to the actual size of the scope break spans.
          *
-         * For example, if `breakSize = 0.1` and unbroken scope of balues it spans
+         * For example, if `breakSize = 0.1` and unbroken scope of values it spans
          * would be 100 pixels, the break would be 10 pixels wide.
          *
          * 0 means the break will completely collapse and hide the values.
@@ -3491,7 +3733,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var AxisBullet = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisBullet, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisBullet, _super);
     function AxisBullet() {
         var _this = _super.call(this) || this;
         _this.className = "AxisBullet";
@@ -3638,7 +3880,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var AxisFill = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisFill, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisFill, _super);
     /**
      * Constructor.
      *
@@ -3681,6 +3923,9 @@ var AxisFill = /** @class */ (function (_super) {
         if (this.axis && _core_utils_Type__WEBPACK_IMPORTED_MODULE_4__["isNumber"](this.startPosition) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_4__["isNumber"](this.endPosition)) {
             this.fillPath = this.axis.getPositionRangePath(this.startPosition, this.endPosition);
             this.path = this.fillPath;
+            if (this.isMeasured) {
+                this.measure();
+            }
         }
     };
     Object.defineProperty(AxisFill.prototype, "startPosition", {
@@ -3823,7 +4068,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Needs description
  */
 var AxisFillCircular = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisFillCircular, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisFillCircular, _super);
     /**
      * Constructor.
      *
@@ -3960,7 +4205,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var AxisLabel = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisLabel, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisLabel, _super);
     /**
      * Constructor
      */
@@ -4084,7 +4329,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IAxisLabelCircularAdapters} for a list of available Adapters
  */
 var AxisLabelCircular = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisLabelCircular, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisLabelCircular, _super);
     /**
      * Constructor
      */
@@ -4156,7 +4401,7 @@ var AxisLabelCircular = /** @class */ (function (_super) {
     });
     Object.defineProperty(AxisLabelCircular.prototype, "bent", {
         /**
-         * @return {number} Bent?
+         * @return Bent?
          */
         get: function () {
             return this.getPropertyValue("bent");
@@ -4168,7 +4413,7 @@ var AxisLabelCircular = /** @class */ (function (_super) {
          *
          * @since 4.1.2
          * @default false
-         * @param {boolean} value Bent?
+         * @param  value  Bent?
          */
         set: function (value) {
             this.setPropertyValue("bent", value, true);
@@ -4184,6 +4429,9 @@ var AxisLabelCircular = /** @class */ (function (_super) {
     });
     /**
      * Returns label radius in pixels.
+     *
+     * @param   axisRadius  Radius
+     * @return              Pixel radius
      */
     AxisLabelCircular.prototype.pixelRadius = function (axisRadius) {
         var sign = 1;
@@ -4194,6 +4442,10 @@ var AxisLabelCircular = /** @class */ (function (_super) {
     };
     /**
      * Returns label horizontal radius in pixels.
+     *
+     * @param   axisRadius   Radius
+     * @param   axisRadiusY  Vertical radius
+     * @return               Radius
      */
     AxisLabelCircular.prototype.pixelRadiusY = function (axisRadius, axisRadiusY) {
         var sign = 1;
@@ -4376,7 +4628,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IAxisLineAdapters} for a list of available Adapters
  */
 var AxisLine = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisLine, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisLine, _super);
     /**
      * Constructor
      */
@@ -4468,7 +4720,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IAxisRendererAdapters} for a list of available Adapters
  */
 var AxisRenderer = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisRenderer, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisRenderer, _super);
     /**
      * Constructor.
      *
@@ -4657,22 +4909,16 @@ var AxisRenderer = /** @class */ (function (_super) {
     AxisRenderer.prototype.updateGridContainer = function () {
     };
     AxisRenderer.prototype.getHeight = function () {
-        var axis = this.axis;
-        if (axis && axis.chart) {
-            var chart = this.axis.chart;
-            if (chart.plotContainer) {
-                return chart.plotContainer.pixelHeight || 0;
-            }
+        var gridContainer = this.gridContainer;
+        if (gridContainer.parent) {
+            return gridContainer.parent.pixelHeight;
         }
         return this.gridContainer.pixelHeight || 0;
     };
     AxisRenderer.prototype.getWidth = function () {
-        var axis = this.axis;
-        if (axis && axis.chart) {
-            var chart = this.axis.chart;
-            if (chart.plotContainer) {
-                return chart.plotContainer.pixelWidth || 0;
-            }
+        var gridContainer = this.gridContainer;
+        if (gridContainer.parent) {
+            return gridContainer.parent.pixelWidth;
         }
         return this.gridContainer.pixelWidth || 0;
     };
@@ -5435,7 +5681,7 @@ __webpack_require__.r(__webpack_exports__);
  * A renderer for circular axis.
  */
 var AxisRendererCircular = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisRendererCircular, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisRendererCircular, _super);
     /**
      * Constructor.
      *
@@ -5617,6 +5863,10 @@ var AxisRendererCircular = /** @class */ (function (_super) {
         var angle = this.startAngle + (this.endAngle - this.startAngle) * coordinate / this.axisLength;
         var radius = this.pixelRadius;
         var innerRadius = this.pixelInnerRadius;
+        if (this.axisRendererY) {
+            var realRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["fitToRange"](this.axisRendererY.positionToCoordinate(position2), 0, Infinity);
+            return { x: realRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle), y: realRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) };
+        }
         return { x: _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle) * innerRadius + (radius - innerRadius) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle) * position2, y: _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) * innerRadius + (radius - innerRadius) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) * position2 };
     };
     /**
@@ -5636,6 +5886,24 @@ var AxisRendererCircular = /** @class */ (function (_super) {
             angle = this.startAngle + (position - axis.start) * arc;
         }
         return _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["round"](angle, 3);
+    };
+    /**
+     * Converts angle on axis to relative position(0-1).
+     *
+     * @param angle Angle in degrees
+     * @return Position (0-1)
+     */
+    AxisRendererCircular.prototype.angleToPosition = function (angle) {
+        var axis = this.axis;
+        var arc = (this.endAngle - this.startAngle) / (axis.end - axis.start);
+        var position;
+        if (axis.renderer.inversed) {
+            position = axis.end - (angle - this.startAngle) / arc;
+        }
+        else {
+            position = (angle - this.startAngle) / arc + axis.start;
+        }
+        return _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["round"](position, 5);
     };
     /**
      * Updates and positions the axis line element.
@@ -5920,7 +6188,7 @@ __webpack_require__.r(__webpack_exports__);
  * A renderer for radial axis.
  */
 var AxisRendererRadial = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisRendererRadial, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisRendererRadial, _super);
     /**
      * Constructor.
      *
@@ -6378,7 +6646,8 @@ var AxisRendererRadial = /** @class */ (function (_super) {
      * @param tick      Tick element
      * @param position  Position
      */
-    AxisRendererRadial.prototype.updateTickElement = function (tick, position) {
+    AxisRendererRadial.prototype.updateTickElement = function (tick, position, endPosition) {
+        position = position + (endPosition - position) * tick.location;
         var point = this.positionToPoint(position);
         if (tick.element) {
             var angle = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["normalizeAngle"](this.axisAngle + 90);
@@ -6516,7 +6785,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IAxisRendererAdapters} for a list of available Adapters
  */
 var AxisRendererX = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisRendererX, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisRendererX, _super);
     /**
      * Constructor.
      *
@@ -6856,11 +7125,20 @@ var AxisRendererX = /** @class */ (function (_super) {
     AxisRendererX.prototype.toAxisPosition = function (value) {
         var inversedPosition = value;
         var axis = this.axis;
-        var parent = axis.parent;
-        if (axis && parent) {
-            var relativeX = axis.pixelX / parent.innerWidth;
-            var relativeWidth = axis.axisLength / parent.innerWidth;
-            return (inversedPosition - relativeX) / relativeWidth;
+        if (axis) {
+            var relativePositionSprite = axis.relativePositionSprite;
+            var x = axis.pixelX;
+            if (relativePositionSprite) {
+                x = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_9__["spritePointToSprite"]({ x: this.pixelX, y: 0 }, this.parent, relativePositionSprite).x;
+            }
+            else {
+                relativePositionSprite = axis.parent;
+            }
+            if (relativePositionSprite) {
+                var relativeX = x / relativePositionSprite.innerWidth;
+                var relativeWidth = axis.axisLength / relativePositionSprite.innerWidth;
+                return (inversedPosition - relativeX) / relativeWidth;
+            }
         }
         return value;
     };
@@ -6973,7 +7251,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IAxisRendererX3DAdapters} for a list of available Adapters
  */
 var AxisRendererX3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisRendererX3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisRendererX3D, _super);
     /**
      * Constructor.
      *
@@ -7126,7 +7404,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IAxisRendererYAdapters} for a list of available Adapters
  */
 var AxisRendererY = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisRendererY, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisRendererY, _super);
     /**
      * Constructor.
      *
@@ -7164,13 +7442,22 @@ var AxisRendererY = /** @class */ (function (_super) {
      * @ignore
      */
     AxisRendererY.prototype.toAxisPosition = function (value) {
-        var inversedPosition = 1 - value;
         var axis = this.axis;
-        var parent = axis.parent;
-        if (axis && parent) {
-            var relativeY = axis.pixelY / parent.innerHeight;
-            var relativeHeight = axis.axisLength / parent.innerHeight;
-            return 1 - (inversedPosition - relativeY) / relativeHeight;
+        if (axis) {
+            var inversedPosition = 1 - value;
+            var relativePositionSprite = axis.relativePositionSprite;
+            var y = axis.pixelY;
+            if (relativePositionSprite) {
+                y = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_8__["spritePointToSprite"]({ x: 0, y: this.pixelY }, this.parent, relativePositionSprite).y;
+            }
+            else {
+                relativePositionSprite = axis.parent;
+            }
+            if (relativePositionSprite) {
+                var relativeY = y / relativePositionSprite.innerHeight;
+                var relativeHeight = axis.axisLength / relativePositionSprite.innerHeight;
+                return 1 - (inversedPosition - relativeY) / relativeHeight;
+            }
         }
         return value;
     };
@@ -7271,6 +7558,25 @@ var AxisRendererY = /** @class */ (function (_super) {
      */
     AxisRendererY.prototype.pointToPosition = function (point) {
         return this.coordinateToPosition(point.y, point.x);
+    };
+    /**
+     * Converts a coordinate in pixels to a relative position. (0-1)
+     *
+     * @param coordinate  Coordinate (px)
+     * @param coordinate2  Coordinate of a second axis, only needed for complex axes systems, like timeline (px)
+     * @return Position (0-1)
+     */
+    AxisRendererY.prototype.coordinateToPosition = function (coordinate, coordinate2) {
+        var position;
+        var axis = this.axis;
+        var axisFullLength = axis.axisFullLength;
+        if (axis.renderer.inversed) {
+            position = (1 - axis.start) - coordinate / axisFullLength;
+        }
+        else {
+            position = coordinate / axisFullLength + (1 - axis.end);
+        }
+        return _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](position, 5);
     };
     /**
      * [getPositionRangePath description]
@@ -7603,7 +7909,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IAxisRendererY3DAdapters} for a list of available Adapters
  */
 var AxisRendererY3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisRendererY3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisRendererY3D, _super);
     /**
      * Constructor.
      *
@@ -7732,7 +8038,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IAxisTickAdapters} for a list of available Adapters
  */
 var AxisTick = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AxisTick, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AxisTick, _super);
     function AxisTick() {
         var _this = _super.call(this) || this;
         _this.className = "AxisTick";
@@ -7792,7 +8098,7 @@ var AxisTick = /** @class */ (function (_super) {
             return this.getPropertyValue("above");
         },
         /**
-         * Normally fill goes below series. Set this to `true` to go above.
+         * Normally tick goes below series. Set this to `true` to go above.
          *
          * @default false
          * @since 4.5.9
@@ -7882,7 +8188,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var CategoryAxisDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CategoryAxisDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CategoryAxisDataItem, _super);
     /**
      * Constructor
      */
@@ -7893,6 +8199,7 @@ var CategoryAxisDataItem = /** @class */ (function (_super) {
         _this.text = "{category}";
         _this.locations.category = 0;
         _this.locations.endCategory = 1;
+        _this.deltaPosition = 0;
         _this.applyTheme();
         return _this;
     }
@@ -7952,6 +8259,22 @@ var CategoryAxisDataItem = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(CategoryAxisDataItem.prototype, "deltaPosition", {
+        get: function () {
+            return this.properties.deltaCoordinate;
+        },
+        set: function (value) {
+            if (value != this.properties.deltaCoordinate) {
+                this.setProperty("deltaCoordinate", value);
+                if (this.component) {
+                    this.component.invalidateDataItems();
+                    this.component.invalidateSeries();
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     return CategoryAxisDataItem;
 }(_Axis__WEBPACK_IMPORTED_MODULE_1__["AxisDataItem"]));
 
@@ -7992,7 +8315,7 @@ var CategoryAxisDataItem = /** @class */ (function (_super) {
  * @important
  */
 var CategoryAxis = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CategoryAxis, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CategoryAxis, _super);
     /**
      * Constructor
      */
@@ -8218,6 +8541,8 @@ var CategoryAxis = /** @class */ (function (_super) {
      */
     CategoryAxis.prototype.validateDataElement = function (dataItem, itemIndex, index) {
         _super.prototype.validateDataElement.call(this, dataItem);
+        dataItem.itemIndex = this._axisItemCount;
+        this._axisItemCount++;
         //dataItem.__disabled = false;
         var renderer = this.renderer;
         if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isNumber"](index)) {
@@ -8349,7 +8674,7 @@ var CategoryAxis = /** @class */ (function (_super) {
             _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["eachContinue"](axisBreaks.iterator(), function (axisBreak) {
                 var breakStartIndex = axisBreak.adjustedStartValue;
                 var breakEndIndex = axisBreak.adjustedEndValue;
-                if (index < startIndex) {
+                if (index < startIndex || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isNumber"](breakStartIndex) || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isNumber"](breakEndIndex)) {
                     return false;
                 }
                 if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["intersect"]({ start: breakStartIndex, end: breakEndIndex }, { start: startIndex, end: endIndex })) {
@@ -8371,7 +8696,12 @@ var CategoryAxis = /** @class */ (function (_super) {
                 return true;
             });
         }
-        return _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["round"]((index + location - startLocation - startIndex) / difference, 5);
+        var deltaPosition = 0;
+        var dataItem = this.dataItems.getIndex(index);
+        if (dataItem) {
+            deltaPosition = dataItem.deltaPosition;
+        }
+        return _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["round"](deltaPosition + (index + location - startLocation - startIndex) / difference, 5);
     };
     /**
      * Converts a string category name to relative position on axis.
@@ -8518,6 +8848,24 @@ var CategoryAxis = /** @class */ (function (_super) {
                 }
             }
         }
+    };
+    // todo: optimize
+    CategoryAxis.prototype.getSeriesDataItemByCategory = function (category, series) {
+        var _this = this;
+        var seriesDataItem;
+        series.dataItems.each(function (dataItem) {
+            if (series.xAxis == _this) {
+                if (dataItem.categoryX == category) {
+                    seriesDataItem = dataItem;
+                }
+            }
+            else if (series.yAxis == _this) {
+                if (dataItem.categoryY == category) {
+                    seriesDataItem = dataItem;
+                }
+            }
+        });
+        return seriesDataItem;
     };
     /**
      * Returns a data item from Series that corresponds to a specific absolute
@@ -8710,6 +9058,11 @@ var CategoryAxis = /** @class */ (function (_super) {
     CategoryAxis.prototype.getTooltipText = function (position) {
         var dataItem = this.dataItems.getIndex(this.positionToIndex(position));
         if (dataItem) {
+            this.tooltipDataItem = dataItem;
+            this.tooltip.dataItem = dataItem;
+            if (this.tooltipText) {
+                return this.tooltipText;
+            }
             if (!this._adapterO) {
                 return dataItem.category;
             }
@@ -8856,6 +9209,72 @@ var CategoryAxis = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(CategoryAxis.prototype, "sortBySeries", {
+        /**
+         * @return Sort categories?
+         */
+        get: function () {
+            return this.getPropertyValue("sortBySeries");
+        },
+        /**
+         * If set to a reference of [[ColumnSeries]] the categories will be sorted
+         * by actual values.
+         *
+         * The categories are ordered in descending order (from highest values to
+         * lowest). To reverse the order, use axis renderer's `inversed` setting.
+         * E.g.:
+         *
+         * ```TypeScript
+         * categoryAxis.sortBySeries = series;
+         * categoryAxis.renderer.inversed = true;
+         * ```
+         * ```JavaScript
+         * categoryAxis.sortBySeries = series;
+         * categoryAxis.renderer.inversed = true;
+         * ```
+         * ```JSON
+         * {
+         *   // ...
+         *   "xAxes": [{
+         *     // ...
+         *     "sortBySeries": "s1",
+         *     "renderer": {
+         *       // ...
+         *       "inversed": true
+         *     }
+         *   }]
+         * }
+         * ```
+         *
+         * @since 4.8.7
+         * @param  value  Sort categories?
+         */
+        set: function (value) {
+            this.setPropertyValue("sortBySeries", value, true);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Processes JSON-based config before it is applied to the object.
+     *
+     * @ignore Exclude from docs
+     * @param config  Config
+     */
+    CategoryAxis.prototype.processConfig = function (config) {
+        if (config) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["hasValue"](config.sortBySeries) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isString"](config.sortBySeries)) {
+                if (this.map.hasKey(config.sortBySeries)) {
+                    config.sortBySeries = this.map.getKey(config.sortBySeries);
+                }
+                else {
+                    this.addDelayedMap("sortBySeries", config.sortBySeries);
+                    delete config.sortBySeries;
+                }
+            }
+        }
+        _super.prototype.processConfig.call(this, config);
+    };
     return CategoryAxis;
 }(_Axis__WEBPACK_IMPORTED_MODULE_1__["Axis"]));
 
@@ -8908,7 +9327,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ICategoryAxisBreakAdapters} for a list of available Adapters
  */
 var CategoryAxisBreak = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CategoryAxisBreak, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CategoryAxisBreak, _super);
     /**
      * Constructor
      */
@@ -9126,7 +9545,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var DateAxisDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DateAxisDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DateAxisDataItem, _super);
     /**
      * Constructor
      */
@@ -9213,10 +9632,11 @@ var DateAxisDataItem = /** @class */ (function (_super) {
  *
  * @see {@link IDateAxisEvents} for a list of available Events
  * @see {@link IDateAxisAdapters} for a list of available Adapters
+ * @see {@link https://www.amcharts.com/docs/v4/concepts/axes/date-axis/} got `DateAxis` documention
  * @important
  */
 var DateAxis = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DateAxis, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DateAxis, _super);
     /**
      * Constructor
      */
@@ -9224,6 +9644,7 @@ var DateAxis = /** @class */ (function (_super) {
         var _this = 
         // Init
         _super.call(this) || this;
+        _this._gapBreaks = false;
         /**
          * A list of date/time intervals for Date axis.
          *
@@ -9303,6 +9724,7 @@ var DateAxis = /** @class */ (function (_super) {
          *   { timeUnit: "year", count: 1 }
          * ]
          * ```
+         * `groupData = true` does not work in combination with `skipEmptyPeriods = true`.
          *
          * @since 4.7.0
          * @see {@link https://www.amcharts.com/docs/v4/concepts/axes/date-axis/#Dynamic_data_item_grouping} for more information about dynamic data item grouping.
@@ -9360,6 +9782,9 @@ var DateAxis = /** @class */ (function (_super) {
          */
         _this._baseIntervalReal = { timeUnit: "day", count: 1 };
         /**
+         */
+        _this._prevSeriesTime = {};
+        /**
          * [_minDifference description]
          *
          * @todo Description
@@ -9389,7 +9814,7 @@ var DateAxis = /** @class */ (function (_super) {
         _this.setPropertyValue("markUnitChange", true);
         _this.snapTooltip = true;
         _this.tooltipPosition = "pointer";
-        _this.groupData = false;
+        _this.setPropertyValue("groupData", false);
         _this.groupCount = 200;
         _this.events.on("parentset", _this.getDFFormatter, _this, false);
         // Translatable defaults are applied in `applyInternalDefaults()`
@@ -9594,8 +10019,8 @@ var DateAxis = /** @class */ (function (_super) {
         if (this.groupData && _core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](difference)) {
             var mainBaseInterval = this.mainBaseInterval;
             var groupInterval = this.chooseInterval(0, difference, this.groupCount, this.groupIntervals);
-            if ((groupInterval.timeUnit == mainBaseInterval.timeUnit && groupInterval.count < mainBaseInterval.count) || _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](groupInterval.timeUnit, 1) < _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](mainBaseInterval.timeUnit, 1)) {
-                groupInterval = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, mainBaseInterval);
+            if (_core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](groupInterval.timeUnit, groupInterval.count) < _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](mainBaseInterval.timeUnit, mainBaseInterval.count)) {
+                groupInterval = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, mainBaseInterval);
             }
             this._groupInterval = groupInterval;
             this._currentDataSetId = groupInterval.timeUnit + groupInterval.count;
@@ -9609,7 +10034,7 @@ var DateAxis = /** @class */ (function (_super) {
         }
         var gridInterval = this.chooseInterval(0, difference, this._gridCount);
         if (_core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](gridInterval.timeUnit, gridInterval.count) < this.baseDuration) {
-            gridInterval = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, this.baseInterval);
+            gridInterval = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.baseInterval);
         }
         this._gridInterval = gridInterval;
         this._nextGridUnit = _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getNextUnit"](gridInterval.timeUnit);
@@ -9620,7 +10045,7 @@ var DateAxis = /** @class */ (function (_super) {
         _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_8__["each"](this.series.iterator(), function (series) {
             if (series.baseAxis == _this) {
                 var field_1 = series.getAxisField(_this);
-                var minZoomed = _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["round"](new Date(_this._minZoomed), _this.baseInterval.timeUnit, _this.baseInterval.count).getTime();
+                var minZoomed = _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["round"](new Date(_this._minZoomed), _this.baseInterval.timeUnit, _this.baseInterval.count, _this._firstWeekDay, _this._df.utc).getTime();
                 var minZoomedStr = minZoomed.toString();
                 var startDataItem = series.dataItemsByAxis.getKey(_this.uid).getKey(minZoomedStr + series.currentDataSetId);
                 var startIndex = 0;
@@ -9646,7 +10071,7 @@ var DateAxis = /** @class */ (function (_super) {
                     else {
                         maxZoomed -= 1;
                         endIndex = series.dataItems.findClosestIndex(maxZoomed, function (x) { return x[field_1]; }, "right");
-                        if (endIndex > 0) {
+                        if (endIndex < series.dataItems.length) {
                             endIndex++;
                         }
                     }
@@ -9723,19 +10148,36 @@ var DateAxis = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      * @todo Description
      */
-    DateAxis.prototype.postProcessSeriesDataItems = function () {
+    DateAxis.prototype.postProcessSeriesDataItems = function (series) {
         var _this = this;
-        this.series.each(function (series) {
-            if (JSON.stringify(series._baseInterval[_this.uid]) != JSON.stringify(_this.mainBaseInterval)) {
-                series.mainDataSet.each(function (dataItem) {
-                    _this.postProcessSeriesDataItem(dataItem);
-                });
-                series._baseInterval[_this.uid] = _this.mainBaseInterval;
-                _this.groupSeriesData(series);
-            }
-        });
+        if (series) {
+            this.seriesGroupUpdate(series);
+        }
+        else {
+            this.series.each(function (series) {
+                _this.seriesGroupUpdate(series);
+            });
+        }
         this.addEmptyUnitsBreaks();
     };
+    DateAxis.prototype.seriesGroupUpdate = function (series) {
+        var _this = this;
+        if (JSON.stringify(series._baseInterval[this.uid]) != JSON.stringify(this.mainBaseInterval)) {
+            series._baseInterval[this.uid] = this.mainBaseInterval;
+            series.mainDataSet.each(function (dataItem) {
+                _this.postProcessSeriesDataItem(dataItem);
+            });
+            if (this.groupData) {
+                this.groupSeriesData(series);
+            }
+        }
+    };
+    /**
+     * Calculates series group data.
+     *
+     * @param  series  Series
+     * @ignore
+     */
     DateAxis.prototype.groupSeriesData = function (series) {
         var _this = this;
         if (series.baseAxis == this && series.dataItems.length > 0 && !series.dataGrouped) {
@@ -9785,8 +10227,9 @@ var DateAxis = /** @class */ (function (_super) {
                         var roundedDate = _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["round"](new Date(time), interval.timeUnit, interval.count, _this._df.firstDayOfWeek, _this._df.utc);
                         var currentTime = roundedDate.getTime();
                         // changed period								
-                        if (previousTime < roundedDate.getTime()) {
+                        if (previousTime < currentTime) {
                             newDataItem = dataSet.create();
+                            newDataItem.dataContext = {};
                             newDataItem.component = series;
                             // other Dates?
                             newDataItem.setDate(key, roundedDate);
@@ -9794,18 +10237,24 @@ var DateAxis = /** @class */ (function (_super) {
                             i++;
                             _core_utils_Array__WEBPACK_IMPORTED_MODULE_10__["each"](dataFields, function (vkey) {
                                 //let groupFieldName = vkey + "Group";
-                                var value = dataItem.values[vkey].value;
-                                if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](value)) {
+                                var dvalues = dataItem.values[vkey];
+                                if (dvalues) {
+                                    var value = dvalues.value;
                                     var values = newDataItem.values[vkey];
-                                    values.value = value;
-                                    values.workingValue = value;
-                                    values.open = value;
-                                    values.close = value;
-                                    values.low = value;
-                                    values.high = value;
-                                    values.sum = value;
-                                    values.average = value;
-                                    values.count = 1;
+                                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](value)) {
+                                        values.value = value;
+                                        values.workingValue = value;
+                                        values.open = value;
+                                        values.close = value;
+                                        values.low = value;
+                                        values.high = value;
+                                        values.sum = value;
+                                        values.average = value;
+                                        values.count = 1;
+                                    }
+                                    else {
+                                        values.count = 0;
+                                    }
                                 }
                             });
                             _this.postProcessSeriesDataItem(newDataItem, interval);
@@ -9824,29 +10273,34 @@ var DateAxis = /** @class */ (function (_super) {
                             if (newDataItem) {
                                 _core_utils_Array__WEBPACK_IMPORTED_MODULE_10__["each"](dataFields, function (vkey) {
                                     var groupFieldName = series.groupFields[vkey];
-                                    var value = dataItem.values[vkey].value;
-                                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](value)) {
-                                        var values = newDataItem.values[vkey];
-                                        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values.open)) {
-                                            values.open = value;
+                                    var dvalues = dataItem.values[vkey];
+                                    if (dvalues) {
+                                        var value = dvalues.value;
+                                        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](value)) {
+                                            var values = newDataItem.values[vkey];
+                                            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values.open)) {
+                                                values.open = value;
+                                            }
+                                            values.close = value;
+                                            if (values.low > value || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values.low)) {
+                                                values.low = value;
+                                            }
+                                            if (values.high < value || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values.high)) {
+                                                values.high = value;
+                                            }
+                                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values.sum)) {
+                                                values.sum += value;
+                                            }
+                                            else {
+                                                values.sum = value;
+                                            }
+                                            values.count++;
+                                            values.average = values.sum / values.count;
+                                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values[groupFieldName])) {
+                                                values.value = values[groupFieldName];
+                                                values.workingValue = values.value;
+                                            }
                                         }
-                                        values.close = value;
-                                        if (values.low > value || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values.low)) {
-                                            values.low = value;
-                                        }
-                                        if (values.high < value || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values.high)) {
-                                            values.high = value;
-                                        }
-                                        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](values.sum)) {
-                                            values.sum += value;
-                                        }
-                                        else {
-                                            values.sum = value;
-                                        }
-                                        values.count++;
-                                        values.average = values.sum / values.count;
-                                        values.value = values[groupFieldName];
-                                        values.workingValue = values.value;
                                     }
                                 });
                                 _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__["copyProperties"](dataItem.properties, newDataItem.properties);
@@ -9861,6 +10315,9 @@ var DateAxis = /** @class */ (function (_super) {
                                 newDataItem.groupDataItems.push(dataItem);
                             }
                         }
+                    }
+                    if (newDataItem) {
+                        _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__["copyProperties"](dataItem.dataContext, newDataItem.dataContext);
                     }
                 });
             });
@@ -9936,6 +10393,7 @@ var DateAxis = /** @class */ (function (_super) {
                     if (!axisBreak) {
                         axisBreak = this_1.axisBreaks.create();
                         axisBreak.startDate = new Date(startTime);
+                        this_1._gapBreaks = true;
                     }
                 }
                 else {
@@ -10151,7 +10609,8 @@ var DateAxis = /** @class */ (function (_super) {
      * @param dataItem Data item
      */
     DateAxis.prototype.validateDataElement = function (dataItem) {
-        //super.validateDataElement(dataItem);
+        dataItem.itemIndex = this._axisItemCount;
+        this._axisItemCount++;
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](this.max) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](this.min)) {
             var renderer = this.renderer;
             var timestamp = dataItem.value;
@@ -10271,21 +10730,21 @@ var DateAxis = /** @class */ (function (_super) {
         var intervalDuration = _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](gridInterval.timeUnit, gridInterval.count);
         var lastIndex = intervals.length - 1;
         if (index >= lastIndex) {
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, intervals.getIndex(lastIndex));
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, intervals.getIndex(lastIndex));
         }
         var count = Math.ceil(duration / intervalDuration);
         if (duration < intervalDuration && index > 0) {
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, intervals.getIndex(index - 1));
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, intervals.getIndex(index - 1));
         }
         if (count <= gridCount) {
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, intervals.getIndex(index));
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, intervals.getIndex(index));
         }
         else {
             if (index + 1 < intervals.length) {
                 return this.chooseInterval(index + 1, duration, gridCount, intervals);
             }
             else {
-                return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, intervals.getIndex(index));
+                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, intervals.getIndex(index));
             }
         }
     };
@@ -10464,6 +10923,10 @@ var DateAxis = /** @class */ (function (_super) {
         var series = dataItem.component;
         var time;
         var date = dataItem["date" + axisLetter];
+        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](this.timezoneOffset)) {
+            date.setTime(date.getTime() + (date.getTimezoneOffset() - this.timezoneOffset) * 60000);
+            dataItem.setValue("date" + axisLetter, date.getTime(), 0);
+        }
         if (date) {
             time = date.getTime();
         }
@@ -10471,7 +10934,7 @@ var DateAxis = /** @class */ (function (_super) {
             return;
         }
         var openDate = dataItem["openDate" + axisLetter];
-        var prevSeriesTime = this._prevSeriesTime;
+        var prevSeriesTime = this._prevSeriesTime[series.uid];
         var openTime;
         if (openDate) {
             openTime = openDate.getTime();
@@ -10488,15 +10951,9 @@ var DateAxis = /** @class */ (function (_super) {
                 this._minDifference[series.uid] = differece;
             }
         }
-        this._prevSeriesTime = time;
+        this._prevSeriesTime[series.uid] = time;
         if (series._baseInterval[this.uid]) {
             this.postProcessSeriesDataItem(dataItem);
-        }
-        else {
-            if (this._baseInterval) {
-                series._baseInterval[this.uid] = this._baseInterval;
-                this.postProcessSeriesDataItem(dataItem);
-            }
         }
     };
     /**
@@ -10634,20 +11091,29 @@ var DateAxis = /** @class */ (function (_super) {
          * * If you set this property to `true`, you can not add your custom axis breaks to this axis anymore.
          * * Using this feature affects performance. Use only if you need it.
          * * Setting this to `true` will reset appearance of breaks. If you want to modify appearance, do it *after* you set `skipEmptyPeriods`.
+         * * Some axis label overlapping might happen.
          *
          * @default false
          * @param value  Remove empty stretches of time?
          */
         set: function (value) {
-            if (this.setPropertyValue("skipEmptyPeriods", value)) {
-                this.invalidateData();
-            }
             if (value) {
                 var breakTemplate = this.axisBreaks.template;
                 breakTemplate.startLine.disabled = true;
                 breakTemplate.endLine.disabled = true;
                 breakTemplate.fillShape.disabled = true;
                 breakTemplate.breakSize = 0;
+            }
+            else {
+                if (this._gapBreaks) {
+                    this.axisBreaks.clear();
+                    this._gapBreaks = false;
+                }
+            }
+            if (this.setPropertyValue("skipEmptyPeriods", value)) {
+                this.invalidate();
+                this.postProcessSeriesDataItems();
+                this.invalidateSeries();
             }
         },
         enumerable: true,
@@ -10710,6 +11176,7 @@ var DateAxis = /** @class */ (function (_super) {
         var text;
         var date = this.positionToDate(position);
         date = _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["round"](date, this.baseInterval.timeUnit, this.baseInterval.count, this._firstWeekDay, this._df.utc, new Date(this.min));
+        this.tooltipDate = date;
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](this.tooltipDateFormat)) {
             text = this._df.format(date, this.tooltipDateFormat);
         }
@@ -10875,14 +11342,25 @@ var DateAxis = /** @class */ (function (_super) {
         configurable: true
     });
     /**
+     * @ignore
+     */
+    DateAxis.prototype.animateMinMax = function (min, max) {
+        var _this = this;
+        var animation = this.animate([{ property: "_minAdjusted", from: this._minAdjusted, to: min }, { property: "_maxAdjusted", from: this._maxAdjusted, to: max }], this.rangeChangeDuration, this.rangeChangeEasing);
+        animation.events.on("animationprogress", function () {
+            _this.dispatch("extremeschanged");
+        });
+        return animation;
+    };
+    /**
      * Invalidates axis data items when series extremes change
      */
     DateAxis.prototype.handleExtremesChange = function () {
         _super.prototype.handleExtremesChange.call(this);
         if (this.groupData) {
             var id = this.baseInterval.timeUnit + this.baseInterval.count;
-            this.groupMin[id] = this.min;
-            this.groupMax[id] = this.max;
+            this.groupMin[id] = this._finalMin;
+            this.groupMax[id] = this._finalMax;
         }
     };
     /**
@@ -10925,11 +11403,11 @@ var DateAxis = /** @class */ (function (_super) {
             }
             if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](difference)) {
                 var mainBaseInterval = this.mainBaseInterval;
-                var groupInterval = this.chooseInterval(0, difference, this.groupCount, this.groupIntervals);
-                if ((groupInterval.timeUnit == mainBaseInterval.timeUnit && groupInterval.count < mainBaseInterval.count) || _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](groupInterval.timeUnit, 1) < _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](mainBaseInterval.timeUnit, 1)) {
-                    groupInterval = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, mainBaseInterval);
+                var groupInterval_1 = this.chooseInterval(0, difference, this.groupCount, this.groupIntervals);
+                if ((groupInterval_1.timeUnit == mainBaseInterval.timeUnit && groupInterval_1.count < mainBaseInterval.count) || _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](groupInterval_1.timeUnit, 1) < _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](mainBaseInterval.timeUnit, 1)) {
+                    groupInterval_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, mainBaseInterval);
                 }
-                var id = groupInterval.timeUnit + groupInterval.count;
+                var id = groupInterval_1.timeUnit + groupInterval_1.count;
                 var min_1 = this.groupMin[id];
                 var max_1 = this.groupMax[id];
                 if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](min_1) || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](max_1)) {
@@ -10938,10 +11416,34 @@ var DateAxis = /** @class */ (function (_super) {
                     this.series.each(function (series) {
                         var seriesMin = series.min(_this);
                         var seriesMax = series.max(_this);
+                        if (series._dataSets) {
+                            var ds = series._dataSets.getKey(groupInterval_1.timeUnit + groupInterval_1.count);
+                            if (ds) {
+                                var mindi = ds.getIndex(0);
+                                var maxdi = ds.getIndex(ds.length - 1);
+                                if (mindi) {
+                                    if (series.xAxis == _this) {
+                                        seriesMin = mindi.dateX.getTime();
+                                    }
+                                    else if (series.yAxis == _this) {
+                                        seriesMin = mindi.dateY.getTime();
+                                    }
+                                }
+                                if (maxdi) {
+                                    if (series.xAxis == _this) {
+                                        seriesMax = maxdi.dateX.getTime();
+                                    }
+                                    else if (series.yAxis == _this) {
+                                        seriesMax = maxdi.dateY.getTime();
+                                    }
+                                }
+                            }
+                        }
+                        seriesMax = _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["round"](_core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["add"](new Date(seriesMax), groupInterval_1.timeUnit, 1, _this._df.utc), groupInterval_1.timeUnit, 1, _this._df.firstDayOfWeek, _this._df.utc).getTime();
                         if (seriesMin < min_1) {
                             min_1 = seriesMin;
                         }
-                        if (seriesMax < max_1) {
+                        if (seriesMax > max_1) {
                             max_1 = seriesMax;
                         }
                     });
@@ -10987,11 +11489,11 @@ var DateAxis = /** @class */ (function (_super) {
         this.periodChangeDateFormats = source.periodChangeDateFormats;
         this.groupIntervals.clear();
         source.groupIntervals.each(function (interval) {
-            _this.groupIntervals.push(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, interval));
+            _this.groupIntervals.push(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, interval));
         });
         this.gridIntervals.clear();
         source.gridIntervals.each(function (interval) {
-            _this.gridIntervals.push(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, interval));
+            _this.gridIntervals.push(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, interval));
         });
         if (source._baseInterval) {
             this.baseInterval = source._baseInterval;
@@ -11045,19 +11547,24 @@ var DateAxis = /** @class */ (function (_super) {
                 }
                 closestDate_1 = new Date(closestDate_1.getTime() + this.baseDuration * tooltipLocation);
                 position = this.dateToPosition(closestDate_1);
-                this.series.each(function (series) {
-                    var dataItem = series.dataItemsByAxis.getKey(_this.uid).getKey(closestTime_1 + series.currentDataSetId);
-                    var point = series.showTooltipAtDataItem(dataItem);
-                    if (point) {
-                        _this.chart._seriesPoints.push({ series: series, point: point });
-                    }
-                    else {
-                        // check, otherwise column tooltip will be hidden
-                        if (series.tooltipText || series.tooltipHTML) {
-                            series.hideTooltip();
+                if (this.chart.cursor && this.chart.cursor.snapToSeries) {
+                    //void
+                }
+                else {
+                    this.series.each(function (series) {
+                        var dataItem = series.dataItemsByAxis.getKey(_this.uid).getKey(closestTime_1 + series.currentDataSetId);
+                        var point = series.showTooltipAtDataItem(dataItem);
+                        if (point) {
+                            _this.chart._seriesPoints.push({ series: series, point: point });
                         }
-                    }
-                });
+                        else {
+                            // check, otherwise column tooltip will be hidden
+                            if (series.tooltipText || series.tooltipHTML) {
+                                series.hideTooltip();
+                            }
+                        }
+                    });
+                }
                 //this.chart.sortSeriesTooltips(seriesPoints);
             }
         }
@@ -11156,7 +11663,20 @@ var DateAxis = /** @class */ (function (_super) {
          * @param  value  Group data points?
          */
         set: function (value) {
-            this.setPropertyValue("groupData", value);
+            var _this = this;
+            if (this.setPropertyValue("groupData", value)) {
+                this.series.each(function (series) {
+                    series.setDataSet("");
+                    if (value && !series.dataGrouped && series.inited) {
+                        series._baseInterval[_this.uid] = _this.mainBaseInterval;
+                        _this.groupSeriesData(series);
+                    }
+                });
+                this._currentDataSetId = "";
+                this._groupInterval = undefined;
+                this.invalidate();
+                this.invalidateSeries();
+            }
         },
         enumerable: true,
         configurable: true
@@ -11182,6 +11702,31 @@ var DateAxis = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DateAxis.prototype, "timezoneOffset", {
+        /**
+         * @todo Timezone offset in minutes
+         */
+        get: function () {
+            return this.getPropertyValue("timezoneOffset");
+        },
+        /**
+         *
+         * Indicates by how many minutes the timestamps in your data are offset from GMT.
+         * This is useful when you have timestamps as your data and you want all the users to see
+         * the same result and not the time which was at users's location at the given timestamp.
+         * Note, you do not need to set timezoneOffset both here and on DateFormatter, as this will
+         * distort the result.
+         *
+         * @default undefined
+         * @since 4.8.5
+         * @param  value Time zone offset in minutes
+         */
+        set: function (value) {
+            this.setPropertyValue("timezoneOffset", value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(DateAxis.prototype, "gridInterval", {
         /**
          * Current grid interval.
@@ -11202,10 +11747,14 @@ var DateAxis = /** @class */ (function (_super) {
         if (dataItem && previous) {
             if (!series.connect && _core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](series.autoGapCount)) {
                 if (series.baseAxis == this) {
-                    var time = dataItem.dates["date" + this.axisLetter].getTime();
-                    var prevTime = previous.dates["date" + this.axisLetter].getTime();
-                    if (time - prevTime > series.autoGapCount * this.baseDuration) {
-                        return true;
+                    var date = dataItem.dates["date" + this.axisLetter];
+                    var prevDate = previous.dates["date" + this.axisLetter];
+                    if (date && prevDate) {
+                        var time = date.getTime();
+                        var prevTime = prevDate.getTime();
+                        if (time - prevTime > series.autoGapCount * this.baseDuration) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -11282,7 +11831,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var DateAxisBreak = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DateAxisBreak, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DateAxisBreak, _super);
     /**
      * Constructor
      */
@@ -11394,7 +11943,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var DurationAxisDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DurationAxisDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DurationAxisDataItem, _super);
     /**
      * Constructor
      */
@@ -11445,7 +11994,7 @@ var DurationAxisDataItem = /** @class */ (function (_super) {
  * @important
  */
 var DurationAxis = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DurationAxis, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DurationAxis, _super);
     /**
      * Constructor
      */
@@ -11491,6 +12040,7 @@ var DurationAxis = /** @class */ (function (_super) {
      * @return [description]
      */
     DurationAxis.prototype.adjustMinMax = function (min, max, difference, gridCount, strictMode) {
+        var e_1, _a;
         var minMaxStep;
         var timeUnit = this.baseUnit;
         // we don't allow to go to smaller units, setting so to avoid invalidation
@@ -11514,7 +12064,7 @@ var DurationAxis = /** @class */ (function (_super) {
                 divisors = [24, 12, 6, 4, 2, 1];
             }
             try {
-                for (var divisors_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](divisors), divisors_1_1 = divisors_1.next(); !divisors_1_1.done; divisors_1_1 = divisors_1.next()) {
+                for (var divisors_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(divisors), divisors_1_1 = divisors_1.next(); !divisors_1_1.done; divisors_1_1 = divisors_1.next()) {
                     var divisor = divisors_1_1.value;
                     if (difference / divisor > gridCount) {
                         realDivisor = divisor;
@@ -11559,7 +12109,6 @@ var DurationAxis = /** @class */ (function (_super) {
         // choose duration formatter based on step
         this.axisDurationFormat = this.durationFormatter.getFormat(minMaxStep.step, minMaxStep.max, this.baseUnit);
         return minMaxStep;
-        var e_1, _a;
     };
     Object.defineProperty(DurationAxis.prototype, "tooltipDurationFormat", {
         /**
@@ -11701,7 +12250,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Grid = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Grid, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Grid, _super);
     /**
      * Constructor
      */
@@ -11842,7 +12391,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Review: container is better, as we'll be able to attach something to the GridCircular, also with 3d charts we might need some additional elements
  */
 var GridCircular = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](GridCircular, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(GridCircular, _super);
     /**
      * Constructor
      */
@@ -11957,7 +12506,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var ValueAxisDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ValueAxisDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ValueAxisDataItem, _super);
     /**
      * Constructor
      */
@@ -12045,7 +12594,7 @@ var ValueAxisDataItem = /** @class */ (function (_super) {
  * @important
  */
 var ValueAxis = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ValueAxis, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ValueAxis, _super);
     /**
      * Constructor
      */
@@ -12098,6 +12647,7 @@ var ValueAxis = /** @class */ (function (_super) {
         _this.setPropertyValue("extraMax", 0);
         _this.setPropertyValue("strictMinMax", false);
         _this.setPropertyValue("maxPrecision", Number.MAX_VALUE);
+        _this.setPropertyValue("extraTooltipPrecision", 0);
         _this.keepSelection = false;
         _this.includeRangesInMinMax = false;
         // Apply theme
@@ -12149,6 +12699,7 @@ var ValueAxis = /** @class */ (function (_super) {
      * @todo Description
      */
     ValueAxis.prototype.dataChangeUpdate = function () {
+        this.clearCache();
         if (!this.keepSelection) {
             if (this._start != 0 || this._end != 1) {
                 this._start = 0;
@@ -12193,6 +12744,7 @@ var ValueAxis = /** @class */ (function (_super) {
                 var _loop_1 = function (i) {
                     // This has to be `var` in order to avoid garbage collection
                     var total = {};
+                    var sum = {};
                     this_1.series.each(function (series) {
                         if (!series.excludeFromTotal) {
                             var dataItem_1 = series.dataItems.getIndex(i);
@@ -12205,6 +12757,12 @@ var ValueAxis = /** @class */ (function (_super) {
                                         }
                                         else {
                                             total[key] += Math.abs(value);
+                                        }
+                                        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](sum[key])) {
+                                            sum[key] = value;
+                                        }
+                                        else {
+                                            sum[key] += value;
                                         }
                                     }
                                 });
@@ -12220,6 +12778,7 @@ var ValueAxis = /** @class */ (function (_super) {
                                     if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](value)) {
                                         dataItem_2.setCalculatedValue(key, total[key], "total");
                                         dataItem_2.setCalculatedValue(key, 100 * value / total[key], "totalPercent");
+                                        dataItem_2.setCalculatedValue(key, sum[key], "sum");
                                     }
                                 });
                             }
@@ -12267,21 +12826,28 @@ var ValueAxis = /** @class */ (function (_super) {
             var max = this.positionToValue(this.end);
             var differece = this.adjustDifference(min, max);
             var minMaxStep = this.adjustMinMax(min, max, differece, this._gridCount, true);
-            min = minMaxStep.min;
-            max = minMaxStep.max;
-            this._adjustedStart = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"]((min - this.min) / (this.max - this.min), 5);
-            this._adjustedEnd = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"]((max - this.min) / (this.max - this.min), 5);
-            this._step = minMaxStep.step;
-            this._stepDecimalPlaces = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_10__["decimalPlaces"](this._step);
-            if (this._minZoomed != min || this._maxZoomed != max) {
+            var stepDecimalPlaces = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_10__["decimalPlaces"](minMaxStep.step);
+            this._stepDecimalPlaces = stepDecimalPlaces;
+            min = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](min, stepDecimalPlaces);
+            max = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](max, stepDecimalPlaces);
+            minMaxStep = this.adjustMinMax(min, max, differece, this._gridCount, true);
+            var step = minMaxStep.step;
+            if (this.syncWithAxis) {
+                var calculated = this.getCache(min + "-" + max);
+                if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](calculated)) {
+                    step = calculated;
+                }
+            }
+            else {
+                min = minMaxStep.min;
+                max = minMaxStep.max;
+            }
+            if (this._minZoomed != min || this._maxZoomed != max || this._step != step) {
                 this._minZoomed = min;
                 this._maxZoomed = max;
+                this._step = step;
                 this.dispatchImmediately("selectionextremeschanged");
             }
-        }
-        else {
-            this._adjustedStart = this.start;
-            this._adjustedEnd = this.end;
         }
     };
     /**
@@ -12407,6 +12973,8 @@ var ValueAxis = /** @class */ (function (_super) {
     ValueAxis.prototype.validateDataElement = function (dataItem) {
         _super.prototype.validateDataElement.call(this, dataItem);
         //dataItem.__disabled = false;
+        dataItem.itemIndex = this._axisItemCount;
+        this._axisItemCount++;
         var renderer = this.renderer;
         var value = dataItem.value;
         var endValue = dataItem.endValue;
@@ -12477,11 +13045,15 @@ var ValueAxis = /** @class */ (function (_super) {
          * @return base value
          */
         get: function () {
+            var baseValue = this._baseValue;
             if (this.logarithmic) {
-                return this.min;
+                baseValue = this.min;
+            }
+            if (!this._adapterO) {
+                return baseValue;
             }
             else {
-                return this._baseValue;
+                return this._adapterO.apply("baseValue", baseValue);
             }
         },
         /**
@@ -12591,6 +13163,18 @@ var ValueAxis = /** @class */ (function (_super) {
         return 0;
     };
     /**
+     * When fontSize of fontFamily changes we need to hard-invalidate all Labels of this container to position them properly.
+     */
+    ValueAxis.prototype.invalidateLabels = function () {
+        _super.prototype.invalidateLabels.call(this);
+        if (this.dataItems) {
+            this.dataItems.each(function (dataItem) {
+                dataItem.value = undefined;
+            });
+            this.invalidate();
+        }
+    };
+    /**
      * Converts an relative position to a corresponding value within
      * axis' scale.
      *
@@ -12686,6 +13270,12 @@ var ValueAxis = /** @class */ (function (_super) {
         }
     };
     /**
+     * @ignore
+     */
+    ValueAxis.prototype.animateMinMax = function (min, max) {
+        return this.animate([{ property: "_minAdjusted", from: this._minAdjusted, to: min }, { property: "_maxAdjusted", from: this._maxAdjusted, to: max }], this.rangeChangeDuration, this.rangeChangeEasing);
+    };
+    /**
      * Calculates smallest and biggest value for the axis scale.
      * @ignore
      * @todo Description (review)
@@ -12728,7 +13318,7 @@ var ValueAxis = /** @class */ (function (_super) {
         }
         if (this.logarithmic) {
             if (min <= 0) {
-                throw Error("Logarithmic value axis can not have vales <= 0.");
+                this.raiseCriticalError(new Error("Logarithmic value axis can not have values <= 0."), true);
             }
         }
         if (min == 0 && max == 0) {
@@ -12741,6 +13331,12 @@ var ValueAxis = /** @class */ (function (_super) {
         }
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](this._maxDefined)) {
             max = this._maxDefined;
+        }
+        if (this._adapterO) {
+            min = this._adapterO.apply("min", min);
+        }
+        if (this._adapterO) {
+            max = this._adapterO.apply("max", max);
         }
         if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](min) || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](max)) {
             return;
@@ -12808,6 +13404,13 @@ var ValueAxis = /** @class */ (function (_super) {
             min -= (max - min) * this.extraMin;
             max += (max - min) * this.extraMax;
         }
+        if (this._adapterO) {
+            min = this._adapterO.apply("min", min);
+        }
+        if (this._adapterO) {
+            max = this._adapterO.apply("max", max);
+        }
+        this._step = minMaxStep.step;
         // checking isNumber is good when all series are hidden
         if ((this._minAdjusted != min || this._maxAdjusted != max) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](min) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](max)) {
             var animation = this._minMaxAnimation;
@@ -12818,7 +13421,7 @@ var ValueAxis = /** @class */ (function (_super) {
                 else {
                     this._finalMin = min;
                     this._finalMax = max;
-                    animation = this.animate([{ property: "_minAdjusted", from: this._minAdjusted, to: min }, { property: "_maxAdjusted", from: this._maxAdjusted, to: max }], this.rangeChangeDuration, this.rangeChangeEasing);
+                    animation = this.animateMinMax(min, max);
                     if (animation && !animation.isFinished()) {
                         animation.events.on("animationprogress", this.validateDataItems, this);
                         animation.events.on("animationended", function () {
@@ -12947,7 +13550,7 @@ var ValueAxis = /** @class */ (function (_super) {
         }
         else {
             if (min <= 0) {
-                //throw Error("Logarithmic value axis can not have vales <= 0.");
+                //throw Error("Logarithmic value axis can not have values <= 0.");
                 min = this.baseValue;
             }
             // @todo: think of a better way or to restrict zooming when no series are selected
@@ -13297,18 +13900,35 @@ var ValueAxis = /** @class */ (function (_super) {
             selectionMin = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](selectionMin, this._minDefined);
             selectionMax = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["min"](selectionMax, this._maxDefined);
         }
-        this._minZoomed = selectionMin;
-        this._maxZoomed = selectionMax;
-        this._step = minMaxStep.step;
+        var step = minMaxStep.step;
+        if (this.syncWithAxis) {
+            minMaxStep = this.syncAxes(selectionMin, selectionMax, step);
+            selectionMin = minMaxStep.min;
+            selectionMax = minMaxStep.max;
+            this.invalidate();
+        }
+        step = minMaxStep.step;
+        // needed because of grouping
+        this._difference = this.adjustDifference(this.min, this.max);
         var start = this.valueToPosition(selectionMin);
         var end = this.valueToPosition(selectionMax);
         // in case all series are hidden or hiding, full zoomout
-        if (allHidden) {
+        if (allHidden && !this.syncWithAxis) {
             start = 0;
             end = 1;
         }
+        var declination = 0;
+        if (this.syncWithAxis) {
+            declination = 5;
+            this.setCache(selectionMin + "-" + selectionMax, step);
+        }
+        else {
+            this._step = step;
+            this._minZoomed = selectionMin;
+            this._maxZoomed = selectionMax;
+        }
         if (!this.keepSelection) {
-            this.zoom({ start: start, end: end }, false, false, 0);
+            this.zoom({ start: start, end: end }, false, false, declination);
         }
     };
     Object.defineProperty(ValueAxis.prototype, "strictMinMax", {
@@ -13453,6 +14073,36 @@ var ValueAxis = /** @class */ (function (_super) {
          */
         set: function (value) {
             if (this.setPropertyValue("maxPrecision", value)) {
+                this.invalidate();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ValueAxis.prototype, "extraTooltipPrecision", {
+        /**
+         * @return Extra decimals
+         */
+        get: function () {
+            return this.getPropertyValue("extraTooltipPrecision");
+        },
+        /**
+         * This setting allows using bigger precision for numbers displayed in axis
+         * tooltip.
+         *
+         * Please note that this setting indicates additional decimal places to
+         * automatically-calculated axis number precision.
+         *
+         * So if your axis displays numbers like 0.1, 0.2, etc. (one decimal place),
+         * and you set `extraTooltipPrecision = 1`, tooltips will display numbers
+         * like 0.12, 0.25, etc. (two decimal places).
+         *
+         * @default 0
+         * @since 4.8.3
+         * @param  value  Extra decimals
+         */
+        set: function (value) {
+            if (this.setPropertyValue("extraTooltipPrecision", value)) {
                 this.invalidate();
             }
         },
@@ -13614,7 +14264,7 @@ var ValueAxis = /** @class */ (function (_super) {
      * @return Label (numeric value)
      */
     ValueAxis.prototype.getTooltipText = function (position) {
-        var value = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](this.positionToValue(position), this._stepDecimalPlaces);
+        var value = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](this.positionToValue(position), this._stepDecimalPlaces + this.extraTooltipPrecision);
         var valueStr = this.tooltip.numberFormatter.format(value);
         if (!this._adapterO) {
             return valueStr;
@@ -13643,7 +14293,12 @@ var ValueAxis = /** @class */ (function (_super) {
          * @return Min zoom value
          */
         get: function () {
-            return _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](this.min, this._minZoomed);
+            if (!this.syncWithAxis) {
+                return _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](this.min, this._minZoomed);
+            }
+            else {
+                return this._minZoomed;
+            }
         },
         enumerable: true,
         configurable: true
@@ -13654,7 +14309,12 @@ var ValueAxis = /** @class */ (function (_super) {
          * @return [description]
          */
         get: function () {
-            return _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["min"](this.max, this._maxZoomed);
+            if (!this.syncWithAxis) {
+                return _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["min"](this.max, this._maxZoomed);
+            }
+            else {
+                return this._maxZoomed;
+            }
         },
         enumerable: true,
         configurable: true
@@ -13721,6 +14381,143 @@ var ValueAxis = /** @class */ (function (_super) {
         this.calculateTotals = source.calculateTotals;
         this._baseValue = source.baseValue;
     };
+    Object.defineProperty(ValueAxis.prototype, "syncWithAxis", {
+        /**
+         * @return Target axis
+         */
+        get: function () {
+            return this.getPropertyValue("syncWithAxis");
+        },
+        /**
+         * Enables syncing of grid with another axis.
+         *
+         * To enable, set to a reference of the other `ValueAxis`. This axis will try
+         * to maintain its scale in such way that its grid matches target axis grid.
+         *
+         * IMPORTANT #1: At this stage it's an experimental feature. Use it at your
+         * own risk, as it may not work in 100% of the scenarios.
+         *
+         * IMPORTANT #2: `syncWithAxis` is not compatible with `strictMinMax` and
+         * `sequencedInterpolation` settings.
+         *
+         * @since 4.8.1
+         * @param  axis  Target axis
+         */
+        set: function (axis) {
+            var _this = this;
+            if (this.setPropertyValue("syncWithAxis", axis, true)) {
+                if (axis) {
+                    this._disposers.push(axis.events.on("extremeschanged", this.handleSelectionExtremesChange, this, false));
+                    this._disposers.push(axis.events.on("selectionextremeschanged", this.handleSelectionExtremesChange, this, false));
+                    this.events.on("shown", this.handleSelectionExtremesChange, this, false);
+                    this.events.on("maxsizechanged", function () {
+                        _this.clearCache();
+                        _this._disposers.push(_core_Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].events.once("exitframe", function () {
+                            _this.handleSelectionExtremesChange();
+                        }));
+                    }, this, false);
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Syncs with a target axis.
+     *
+     * @param  min  Min
+     * @param  max  Max
+     * @param  step Step
+     */
+    ValueAxis.prototype.syncAxes = function (min, max, step) {
+        var axis = this.syncWithAxis;
+        if (axis) {
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](min)) {
+                min = this.min;
+            }
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](max)) {
+                max = this.max;
+            }
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](step)) {
+                step = this._step;
+            }
+            var count = Math.round((axis.maxZoomed - axis.minZoomed) / axis.step);
+            var currentCount = Math.round((max - min) / step);
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](count) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](currentCount)) {
+                var synced = false;
+                var c = 0;
+                var diff = (max - min) * 0.01;
+                var omin = min;
+                var omax = max;
+                var ostep = step;
+                while (synced != true) {
+                    synced = this.checkSync(omin, omax, ostep, count);
+                    c++;
+                    if (c > 1000) {
+                        synced = true;
+                    }
+                    if (!synced) {
+                        //omin = min - diff * c;
+                        if (c / 3 == Math.round(c / 3)) {
+                            omin = min - diff * c;
+                            if (min >= 0 && omin < 0) {
+                                omin = 0;
+                            }
+                        }
+                        else {
+                            omax = max + diff * c;
+                            if (omax <= 0 && omax > 0) {
+                                omax = 0;
+                            }
+                        }
+                        var minMaxStep = this.adjustMinMax(omin, omax, omax - omin, this._gridCount, true);
+                        omin = minMaxStep.min;
+                        omax = minMaxStep.max;
+                        ostep = minMaxStep.step;
+                    }
+                    else {
+                        min = omin;
+                        max = omax;
+                        step = ostep;
+                    }
+                }
+            }
+        }
+        return { min: min, max: max, step: step };
+    };
+    /**
+     * Returns `true` if axis needs to be resunced with some other axis.
+     */
+    ValueAxis.prototype.checkSync = function (min, max, step, count) {
+        var currentCount = (max - min) / step;
+        for (var i = 1; i < count; i++) {
+            if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](currentCount / i, 1) == count || currentCount * i == count) {
+                return true;
+            }
+        }
+        return false;
+    };
+    /**
+     * Processes JSON-based config before it is applied to the object.
+     *
+     * @ignore Exclude from docs
+     * @param config  Config
+     */
+    ValueAxis.prototype.processConfig = function (config) {
+        if (config) {
+            // Set up axes
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["hasValue"](config.syncWithAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isString"](config.syncWithAxis)) {
+                if (this.map.hasKey(config.syncWithAxis)) {
+                    config.syncWithAxis = this.map.getKey(config.syncWithAxis);
+                }
+                else {
+                    this.processingErrors.push("[ValueAxis] No axis with id \"" + config.syncWithAxis + "\" found for `syncWithAxis`");
+                    delete config.xAxis;
+                }
+            }
+        }
+        _super.prototype.processConfig.call(this, config);
+    };
     return ValueAxis;
 }(_Axis__WEBPACK_IMPORTED_MODULE_1__["Axis"]));
 
@@ -13780,7 +14577,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var ValueAxisBreak = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ValueAxisBreak, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ValueAxisBreak, _super);
     /**
      * Constructor
      */
@@ -13890,7 +14687,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Should we allow changing `_generalBehavior`?
  */
 var Cursor = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Cursor, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Cursor, _super);
     /**
      * Constructor
      */
@@ -13984,10 +14781,16 @@ var Cursor = /** @class */ (function (_super) {
      * `"hard"` - cursor will stay in place no matter what, until it is moved by
      * another `triggerMove()` call.
      *
+     * The third parameter - `force` (since `4.9.5`) - if set to `true` will
+     * make cursor execute all of the actions associated with cursor move,
+     * including line redraws, tooltip updates, etc. Useful when underlying
+     * chart data is dynamically being updated.
+     *
      * @param point  Point to place cursor at
      * @param stick  Level of cursor stickiness to the place
+     * @param force  Force cursor move
      */
-    Cursor.prototype.triggerMove = function (point, stick) {
+    Cursor.prototype.triggerMove = function (point, stick, force) {
         point.x = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](point.x, 1);
         point.y = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](point.y, 1);
         if (stick) {
@@ -13996,15 +14799,15 @@ var Cursor = /** @class */ (function (_super) {
         if (stick == "hard" || stick == "soft") {
             this._stickPoint = point;
         }
-        this.triggerMoveReal(point);
+        this.triggerMoveReal(point, force);
     };
     /**
      * Places the cursor at specific point.
      *
      * @param point Point to place cursor at
      */
-    Cursor.prototype.triggerMoveReal = function (point) {
-        if (this.point.x != point.x || this.point.y != point.y) {
+    Cursor.prototype.triggerMoveReal = function (point, force) {
+        if (this.point.x != point.x || this.point.y != point.y || force) {
             this.point = point;
             this.invalidatePosition();
             // hide cursor if it's out of bounds
@@ -14083,14 +14886,16 @@ var Cursor = /** @class */ (function (_super) {
             this.downPoint = undefined;
             this.updateSelection();
         }
+        /*
         else {
-            if (this._generalBehavior == "select") {
+            
+            if(this._generalBehavior == "select"){
                 this.dispatchImmediately("selectended");
             }
             this.dispatchImmediately("behaviorcanceled");
-            interaction.setGlobalStyle(_core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_5__["MouseCursorStyle"].default);
+            interaction.setGlobalStyle(MouseCursorStyle.default);
             this.downPoint = undefined;
-        }
+        }*/
     };
     /**
      * Updates selection dimensions on size change.
@@ -14119,6 +14924,9 @@ var Cursor = /** @class */ (function (_super) {
         }
         // Get local point
         var local = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_7__["documentPointToSprite"](event.pointer.point, this);
+        if (this._stick == "hard" && this._stickPoint) {
+            local = this._stickPoint;
+        }
         this._downPointOrig = { x: local.x, y: local.y };
         // We need to cancel the event to prevent gestures on touch devices
         if (event.event.cancelable && this.shouldPreventGestures(event.touch) && this.fitsToBounds(local)) {
@@ -14158,6 +14966,9 @@ var Cursor = /** @class */ (function (_super) {
             return;
         }
         var local = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_7__["documentPointToSprite"](event.pointer.point, this);
+        if (this._stick == "hard" && this._stickPoint) {
+            local = this._stickPoint;
+        }
         this._upPointOrig = { x: local.x, y: local.y };
         this.triggerMove(local);
         this.triggerUp(local);
@@ -14236,7 +15047,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IRadarCursorAdapters} for a list of available Adapters
  */
 var RadarCursor = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadarCursor, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadarCursor, _super);
     /**
      * Constructor
      */
@@ -14305,7 +15116,7 @@ var RadarCursor = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    RadarCursor.prototype.triggerMoveReal = function (point) {
+    RadarCursor.prototype.triggerMoveReal = function (point, force) {
         if (!this.xAxis || (this.xAxis && (!this.xAxis.cursorTooltipEnabled || this.xAxis.tooltip.disabled))) {
             this.updateLineX(this.point);
         }
@@ -14313,7 +15124,7 @@ var RadarCursor = /** @class */ (function (_super) {
             this.updateLineY(this.point);
         }
         this.updateSelection();
-        _super.prototype.triggerMoveReal.call(this, point);
+        _super.prototype.triggerMoveReal.call(this, point, force);
     };
     /**
      * (Re)draws the horizontal (circular) cursor's line.
@@ -14665,15 +15476,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Cursor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cursor */ "./node_modules/@amcharts/amcharts4/.internal/charts/cursors/Cursor.js");
 /* harmony import */ var _core_Sprite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/Sprite */ "./node_modules/@amcharts/amcharts4/.internal/core/Sprite.js");
 /* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-/* harmony import */ var _core_utils_Color__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
-/* harmony import */ var _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
-/* harmony import */ var _core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/interaction/Interaction */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Interaction.js");
-/* harmony import */ var _core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/interaction/Mouse */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Mouse.js");
-/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
-/* harmony import */ var _core_utils_Utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
-/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _core_rendering_Path__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
+/* harmony import */ var _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../axes/ValueAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/ValueAxis.js");
+/* harmony import */ var _axes_DateAxis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../axes/DateAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/DateAxis.js");
+/* harmony import */ var _series_XYSeries__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../series/XYSeries */ "./node_modules/@amcharts/amcharts4/.internal/charts/series/XYSeries.js");
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/* harmony import */ var _core_utils_Color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
+/* harmony import */ var _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
+/* harmony import */ var _core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/interaction/Interaction */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Interaction.js");
+/* harmony import */ var _core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/interaction/Mouse */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Mouse.js");
+/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
+/* harmony import */ var _core_utils_Utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
+/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
 /**
  * Cursor for XY chart
  */
@@ -14684,6 +15499,10 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
+
+
+
 
 
 
@@ -14710,7 +15529,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Add description, examples
  */
 var XYCursor = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](XYCursor, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(XYCursor, _super);
     /**
      * Constructor
      */
@@ -14734,11 +15553,12 @@ var XYCursor = /** @class */ (function (_super) {
          * Vertical [[Axis]].
          */
         _this._yAxis = new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_3__["MutableValueDisposer"]();
+        _this._snapToDisposers = [];
         _this.className = "XYCursor";
         // Defaults
         _this.behavior = "zoomX";
         _this.maxPanOut = 0.1;
-        var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_6__["InterfaceColorSet"]();
+        var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_9__["InterfaceColorSet"]();
         // Create selection element
         var selection = _this.createChild(_core_Sprite__WEBPACK_IMPORTED_MODULE_2__["Sprite"]);
         selection.shouldClone = false;
@@ -14753,7 +15573,7 @@ var XYCursor = /** @class */ (function (_super) {
         var lineX = _this.createChild(_core_Sprite__WEBPACK_IMPORTED_MODULE_2__["Sprite"]);
         lineX.shouldClone = false;
         lineX.stroke = interfaceColors.getFor("grid");
-        lineX.fill = Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_5__["color"])();
+        lineX.fill = Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_8__["color"])();
         lineX.strokeDasharray = "3,3";
         lineX.isMeasured = false;
         lineX.strokeOpacity = 0.4;
@@ -14765,7 +15585,7 @@ var XYCursor = /** @class */ (function (_super) {
         var lineY = _this.createChild(_core_Sprite__WEBPACK_IMPORTED_MODULE_2__["Sprite"]);
         lineY.shouldClone = false;
         lineY.stroke = interfaceColors.getFor("grid");
-        lineY.fill = Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_5__["color"])();
+        lineY.fill = Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_8__["color"])();
         lineY.strokeDasharray = "3,3";
         lineY.isMeasured = false;
         lineY.strokeOpacity = 0.4;
@@ -14792,10 +15612,10 @@ var XYCursor = /** @class */ (function (_super) {
      */
     XYCursor.prototype.updateSize = function () {
         if (this.lineX) {
-            this.lineX.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_12__["moveTo"]({ x: 0, y: 0 }) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_12__["lineTo"]({ x: 0, y: this.innerHeight });
+            this.lineX.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__["moveTo"]({ x: 0, y: 0 }) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__["lineTo"]({ x: 0, y: this.innerHeight });
         }
         if (this.lineY) {
-            this.lineY.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_12__["moveTo"]({ x: 0, y: 0 }) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_12__["lineTo"]({ x: this.innerWidth, y: 0 });
+            this.lineY.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__["moveTo"]({ x: 0, y: 0 }) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__["lineTo"]({ x: this.innerWidth, y: 0 });
         }
     };
     /**
@@ -14818,8 +15638,8 @@ var XYCursor = /** @class */ (function (_super) {
                 var selection = this.selection;
                 var x = Math.min(point.x, downPoint.x);
                 var y = Math.min(point.y, downPoint.y);
-                var w = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"](Math.abs(downPoint.x - point.x), this._positionPrecision);
-                var h = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"](Math.abs(downPoint.y - point.y), this._positionPrecision);
+                var w = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](Math.abs(downPoint.x - point.x), this._positionPrecision);
+                var h = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](Math.abs(downPoint.y - point.y), this._positionPrecision);
                 switch (behavior) {
                     case "zoomX":
                         y = 0;
@@ -14840,7 +15660,7 @@ var XYCursor = /** @class */ (function (_super) {
                 }
                 selection.x = x;
                 selection.y = y;
-                selection.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_12__["rectangle"](w, h);
+                selection.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__["rectangle"](w, h);
                 selection.validatePosition(); // otherwise Edge shoes some incorrect size rectangle
             }
             else {
@@ -14866,14 +15686,31 @@ var XYCursor = /** @class */ (function (_super) {
      *
      * @param point Point to place cursor at
      */
-    XYCursor.prototype.triggerMoveReal = function (point) {
-        _super.prototype.triggerMoveReal.call(this, point);
-        if ((this.snapToSeries && !this.snapToSeries.isHidden)) {
+    XYCursor.prototype.triggerMoveReal = function (point, force) {
+        _super.prototype.triggerMoveReal.call(this, point, force);
+        var snapToSeries = this.snapToSeries;
+        if ((snapToSeries && !this.downPoint)) {
+            if (snapToSeries instanceof _series_XYSeries__WEBPACK_IMPORTED_MODULE_6__["XYSeries"]) {
+                if (snapToSeries.isHidden) {
+                    this.updateLinePositions(point);
+                }
+            }
+            else {
+                var allHidden_1 = true;
+                _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__["each"](snapToSeries, function (s) {
+                    if (!s.isHidden) {
+                        allHidden_1 = false;
+                    }
+                });
+                if (allHidden_1) {
+                    this.updateLinePositions(point);
+                }
+            }
         }
         else {
             this.updateLinePositions(point);
         }
-        if (this.downPoint && _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["getDistance"](this.downPoint, point) > 3) {
+        if (this.downPoint && _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["getDistance"](this.downPoint, point) > 3) {
             if (this._generalBehavior == "pan") {
                 this.getPanningRanges();
                 this.dispatch("panning");
@@ -14936,8 +15773,14 @@ var XYCursor = /** @class */ (function (_super) {
             point.y = this.lineY.pixelY;
         }
     };
+    /**
+     * Handle action when cursor is released, which should perform an operation
+     * based on its `behavior`, like zoom.
+     *
+     * @param  point  Release point
+     */
     XYCursor.prototype.triggerUpReal = function (point) {
-        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["getDistance"](this._upPointOrig, this._downPointOrig) > Object(_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_7__["getInteraction"])().getHitOption(this.interactions, "hitTolerance")) {
+        if (this.hasMoved()) {
             if (this.downPoint) {
                 this.upPoint = point;
                 this.updatePoint(this.upPoint);
@@ -14954,14 +15797,38 @@ var XYCursor = /** @class */ (function (_super) {
             if (this._generalBehavior != "select") {
                 this.selection.hide(0);
             }
+            else {
+                this.xRange = undefined;
+                this.yRange = undefined;
+                this.dispatchImmediately("selectended");
+            }
             // reset cursor style, just in case
             if (this._generalBehavior == "pan") {
-                var interaction = Object(_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_7__["getInteraction"])();
-                interaction.setGlobalStyle(_core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_8__["MouseCursorStyle"].default);
+                var interaction = Object(_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_10__["getInteraction"])();
+                interaction.setGlobalStyle(_core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_11__["MouseCursorStyle"].default);
             }
+            this.dispatchImmediately("behaviorcanceled");
         }
         this.downPoint = undefined;
         this.dispatch("cursorpositionchanged");
+    };
+    /**
+     * Calculates if the cursor has moved enough based on its `behavior`.
+     *
+     * @return Moved?
+     */
+    XYCursor.prototype.hasMoved = function () {
+        var distance;
+        if (this.behavior == "zoomX" || this.behavior == "panX") {
+            distance = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["getHorizontalDistance"](this._upPointOrig, this._downPointOrig);
+        }
+        else if (this.behavior == "zoomY" || this.behavior == "panY") {
+            distance = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["getVerticalDistance"](this._upPointOrig, this._downPointOrig);
+        }
+        else {
+            distance = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["getDistance"](this._upPointOrig, this._downPointOrig);
+        }
+        return distance > Object(_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_10__["getInteraction"])().getHitOption(this.interactions, "hitTolerance");
     };
     /**
      * [getRanges description]
@@ -14969,12 +15836,12 @@ var XYCursor = /** @class */ (function (_super) {
      * @todo Description
      */
     XYCursor.prototype.getPanningRanges = function () {
-        var startX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"](this.downPoint.x / this.innerWidth, 5);
-        var startY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"](this.downPoint.y / this.innerHeight, 5);
-        var currentX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"](this.point.x / this.innerWidth, 5);
-        var currentY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"](this.point.y / this.innerHeight, 5);
+        var startX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](this.downPoint.x / this.innerWidth, 5);
+        var startY = 1 - _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](this.downPoint.y / this.innerHeight, 5);
+        var currentX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](this.point.x / this.innerWidth, 5);
+        var currentY = 1 - _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](this.point.y / this.innerHeight, 5);
         var deltaX = startX - currentX;
-        var deltaY = -startY + currentY;
+        var deltaY = startY - currentY;
         this.xRange = { start: deltaX, end: 1 + deltaX };
         this.yRange = { start: deltaY, end: 1 + deltaY };
         if (this.behavior == "panX") {
@@ -14999,13 +15866,13 @@ var XYCursor = /** @class */ (function (_super) {
             this.upPoint.y = this.lineY.pixelY;
         }
         // @todo Is this needed?
-        _core_utils_Utils__WEBPACK_IMPORTED_MODULE_10__["used"](this.selection);
-        var startX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"](this.downPoint.x / this.innerWidth, 5);
-        var endX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"]((this.upPoint.x) / this.innerWidth, 5);
-        var startY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"](this.downPoint.y / this.innerHeight, 5);
-        var endY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["round"]((this.upPoint.y) / this.innerHeight, 5);
-        this.xRange = { start: _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["min"](startX, endX), end: _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["max"](startX, endX) };
-        this.yRange = { start: _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["min"](startY, endY), end: _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["max"](startY, endY) };
+        _core_utils_Utils__WEBPACK_IMPORTED_MODULE_13__["used"](this.selection);
+        var startX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](this.downPoint.x / this.innerWidth, 5);
+        var endX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"]((this.upPoint.x) / this.innerWidth, 5);
+        var startY = 1 - _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](this.downPoint.y / this.innerHeight, 5);
+        var endY = 1 - _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"]((this.upPoint.y) / this.innerHeight, 5);
+        this.xRange = { start: _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["min"](startX, endX), end: _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["max"](startX, endX) };
+        this.yRange = { start: _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["min"](startY, endY), end: _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["max"](startY, endY) };
     };
     Object.defineProperty(XYCursor.prototype, "behavior", {
         /**
@@ -15131,6 +15998,30 @@ var XYCursor = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(XYCursor.prototype, "maxTooltipDistance", {
+        /**
+         * @return Distance
+         */
+        get: function () {
+            return this.getPropertyValue("maxTooltipDistance");
+        },
+        /**
+         * If set to a numeric value, cursor will display closest series' tooltips
+         * plus tooltips from series that are closer to than `maxTooltipDistance` to
+         * it.
+         *
+         * Set it to `-1` to always force one tooltip, even if there are multiple
+         * data items in exactly same place.
+         *
+         * @since 4.7.18
+         * @param  value  Distance
+         */
+        set: function (value) {
+            this.setPropertyValue("maxTooltipDistance", value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(XYCursor.prototype, "maxPanOut", {
         /**
          * @return Full width?
@@ -15171,9 +16062,19 @@ var XYCursor = /** @class */ (function (_super) {
          * @param axis X axis
          */
         set: function (axis) {
+            var _this = this;
             if (this._xAxis.get() != axis) {
                 this._xAxis.set(axis, new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_3__["MultiDisposer"]([
                     axis.tooltip.events.on("positionchanged", this.handleXTooltipPosition, this, false),
+                    axis.events.on("rangechangestarted", function (event) {
+                        _this.hide(0);
+                        _this.preventShow = true;
+                    }, undefined, false),
+                    axis.events.on("rangechangeended", function (event) {
+                        _this.preventShow = false;
+                        _this.hide(0);
+                        _this.dispatch("cursorpositionchanged");
+                    }, undefined, false)
                 ]));
             }
         },
@@ -15201,9 +16102,19 @@ var XYCursor = /** @class */ (function (_super) {
          * @param axis Y axis
          */
         set: function (axis) {
+            var _this = this;
             if (this._yAxis.get() != axis) {
                 this._yAxis.set(axis, new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_3__["MultiDisposer"]([
                     axis.tooltip.events.on("positionchanged", this.handleYTooltipPosition, this, false),
+                    axis.events.on("rangechangestarted", function (event) {
+                        _this.hide(0);
+                        _this.__disabled = true;
+                    }, undefined, false),
+                    axis.events.on("rangechangeended", function (event) {
+                        _this.__disabled = false;
+                        _this.hide(0);
+                        _this.dispatch("cursorpositionchanged");
+                    }, undefined, false)
                 ]));
             }
         },
@@ -15218,7 +16129,7 @@ var XYCursor = /** @class */ (function (_super) {
      */
     XYCursor.prototype.handleXTooltipPosition = function (event) {
         var tooltip = this.xAxis.tooltip;
-        var point = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_10__["svgPointToSprite"]({ x: tooltip.pixelX, y: tooltip.pixelY }, this);
+        var point = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_13__["svgPointToSprite"]({ x: tooltip.pixelX, y: tooltip.pixelY }, this);
         var x = point.x;
         point.y = 1;
         if (this.lineX) {
@@ -15233,7 +16144,7 @@ var XYCursor = /** @class */ (function (_super) {
             if (startPoint && endPoint) {
                 this.lineX.x = x;
                 var width = endPoint.x - startPoint.x;
-                this.lineX.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_12__["rectangle"](width, this.innerHeight, -width / 2);
+                this.lineX.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__["rectangle"](width, this.innerHeight, -width / 2);
             }
         }
     };
@@ -15245,7 +16156,7 @@ var XYCursor = /** @class */ (function (_super) {
      */
     XYCursor.prototype.handleYTooltipPosition = function (event) {
         var tooltip = this.yAxis.tooltip;
-        var point = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_10__["svgPointToSprite"]({ x: tooltip.pixelX, y: tooltip.pixelY }, this);
+        var point = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_13__["svgPointToSprite"]({ x: tooltip.pixelX, y: tooltip.pixelY }, this);
         var y = point.y;
         point.x = 1;
         if (this.lineY) {
@@ -15260,7 +16171,7 @@ var XYCursor = /** @class */ (function (_super) {
             if (startPoint && endPoint) {
                 this.lineY.y = y;
                 var height = endPoint.y - startPoint.y;
-                this.lineY.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_12__["rectangle"](this.innerWidth, height, 0, -height / 2);
+                this.lineY.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__["rectangle"](this.innerWidth, height, 0, -height / 2);
             }
         }
     };
@@ -15350,7 +16261,7 @@ var XYCursor = /** @class */ (function (_super) {
     XYCursor.prototype.processConfig = function (config) {
         if (config) {
             // Set up axes
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](config.xAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["isString"](config.xAxis)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["hasValue"](config.xAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["isString"](config.xAxis)) {
                 if (this.map.hasKey(config.xAxis)) {
                     config.xAxis = this.map.getKey(config.xAxis);
                 }
@@ -15359,7 +16270,7 @@ var XYCursor = /** @class */ (function (_super) {
                     delete config.xAxis;
                 }
             }
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](config.yAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["isString"](config.yAxis)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["hasValue"](config.yAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["isString"](config.yAxis)) {
                 if (this.map.hasKey(config.yAxis)) {
                     config.yAxis = this.map.getKey(config.yAxis);
                 }
@@ -15368,7 +16279,7 @@ var XYCursor = /** @class */ (function (_super) {
                     delete config.yAxis;
                 }
             }
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](config.snapToSeries) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["isString"](config.snapToSeries)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["hasValue"](config.snapToSeries) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["isString"](config.snapToSeries)) {
                 if (this.map.hasKey(config.snapToSeries)) {
                     config.snapToSeries = this.map.getKey(config.snapToSeries);
                 }
@@ -15382,24 +16293,34 @@ var XYCursor = /** @class */ (function (_super) {
     };
     Object.defineProperty(XYCursor.prototype, "snapToSeries", {
         /**
-         * @return {XYSeries}
+         * @return {XYSeries | XYSeries[]}
          */
         get: function () {
             return this.getPropertyValue("snapToSeries");
         },
         /**
-         * Specifies to which series cursor lines should be snapped. Works when one
-         * of the axis is `DateAxis` or `CategoryAxis`.
+         * Specifies to which series cursor lines should be snapped.
          *
-         * @param {XYSeries}
+         * Can be a single series instance or an array of series.
+         *
+         * @param {XYSeries | XYSeries[]}
          */
         set: function (series) {
+            var _this = this;
             if (this.setPropertyValue("snapToSeries", series)) {
-                if (this._snapToDisposer) {
-                    this._snapToDisposer.dispose();
+                if (series instanceof _series_XYSeries__WEBPACK_IMPORTED_MODULE_6__["XYSeries"]) {
+                    series = [series];
                 }
+                if (this._snapToDisposers) {
+                    _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__["each"](this._snapToDisposers, function (disposer) {
+                        disposer.dispose();
+                    });
+                }
+                this._snapToDisposers = [];
                 if (series) {
-                    this._snapToDisposer = series.events.on("tooltipshownat", this.handleSnap, this, false);
+                    _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__["each"](series, function (s) {
+                        _this._snapToDisposers.push(s.events.on("tooltipshownat", function () { _this.handleSnap(s); }, undefined, false));
+                    });
                 }
             }
         },
@@ -15412,41 +16333,50 @@ var XYCursor = /** @class */ (function (_super) {
      * @ignore
      * @todo Description
      */
-    XYCursor.prototype.handleSnap = function () {
-        var series = this.snapToSeries;
-        var y = series.tooltipY;
-        var x = series.tooltipX;
-        if (this.xAxis) {
-            if (this.xAxis.renderer.opposite) {
-                y -= this.pixelHeight;
+    XYCursor.prototype.handleSnap = function (series) {
+        if (!this.downPoint) {
+            var x = series.getTooltipX() + series.xAxis.pixelX;
+            var y = series.getTooltipY() + series.yAxis.pixelY;
+            if (this.xAxis) {
+                if (this.xAxis.renderer.opposite) {
+                    y -= this.pixelHeight;
+                }
             }
-        }
-        this.point = { x: x, y: y };
-        this.getPositions();
-        var xx = x;
-        var yy = y;
-        x -= this.pixelWidth;
-        if (this.yAxis) {
-            if (this.yAxis.renderer.opposite) {
-                x += this.pixelWidth;
+            this.point = { x: x, y: y };
+            this.getPositions();
+            var xx = x;
+            var yy = y;
+            x -= this.pixelWidth;
+            if (this.yAxis) {
+                if (this.yAxis.renderer.opposite) {
+                    x += this.pixelWidth;
+                }
             }
-        }
-        var tooltip = series.tooltip;
-        var duration = tooltip.animationDuration;
-        var easing = tooltip.animationEasing;
-        if (series.baseAxis == series.xAxis) {
-            series.yAxis.showTooltipAtPosition(this.yPosition);
-        }
-        if (series.baseAxis == series.yAxis) {
-            series.xAxis.showTooltipAtPosition(this.xPosition);
-        }
-        this.lineX.animate([{ property: "y", to: y }], duration, easing);
-        this.lineY.animate([{ property: "x", to: x }], duration, easing);
-        if (!this.xAxis) {
-            this.lineX.animate([{ property: "x", to: xx }], duration, easing);
-        }
-        if (!this.yAxis) {
-            this.lineY.animate([{ property: "y", to: yy }], duration, easing);
+            var tooltip = series.tooltip;
+            var duration = tooltip.animationDuration;
+            var easing = tooltip.animationEasing;
+            var xAxis = series.xAxis;
+            var yAxis = series.yAxis;
+            if (xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_4__["ValueAxis"] && !(xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_5__["DateAxis"]) && yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_4__["ValueAxis"] && !(yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_5__["DateAxis"])) {
+                series.yAxis.showTooltipAtPosition(this.yPosition);
+                series.xAxis.showTooltipAtPosition(this.xPosition);
+            }
+            else {
+                if (series.baseAxis == series.xAxis) {
+                    series.yAxis.showTooltipAtPosition(this.yPosition);
+                }
+                if (series.baseAxis == series.yAxis) {
+                    series.xAxis.showTooltipAtPosition(this.xPosition);
+                }
+            }
+            this.lineX.animate([{ property: "y", to: y }], duration, easing);
+            this.lineY.animate([{ property: "x", to: x }], duration, easing);
+            if (!this.xAxis) {
+                this.lineX.animate([{ property: "x", to: xx }], duration, easing);
+            }
+            if (!this.yAxis) {
+                this.lineY.animate([{ property: "y", to: yy }], duration, easing);
+            }
         }
     };
     /**
@@ -15465,7 +16395,7 @@ var XYCursor = /** @class */ (function (_super) {
  *
  * @ignore
  */
-_core_Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].registeredClasses["XYCursor"] = XYCursor;
+_core_Registry__WEBPACK_IMPORTED_MODULE_7__["registry"].registeredClasses["XYCursor"] = XYCursor;
 //# sourceMappingURL=XYCursor.js.map
 
 /***/ }),
@@ -15512,7 +16442,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Bullet = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Bullet, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Bullet, _super);
     /**
      * Constructor
      */
@@ -15732,7 +16662,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Candlestick = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Candlestick, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Candlestick, _super);
     /**
      * Constructor
      */
@@ -15820,7 +16750,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var ChordLink = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ChordLink, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ChordLink, _super);
     /**
      * Constructor
      */
@@ -16008,7 +16938,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var ChordNode = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ChordNode, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ChordNode, _super);
     /**
      * Constructor
      */
@@ -16220,7 +17150,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var CircleBullet = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CircleBullet, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CircleBullet, _super);
     /**
      * Constructor
      */
@@ -16314,7 +17244,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var ClockHand = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ClockHand, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ClockHand, _super);
     /**
      * Constructor
      */
@@ -16559,6 +17489,19 @@ var ClockHand = /** @class */ (function (_super) {
             }
         }
     };
+    Object.defineProperty(ClockHand.prototype, "currentPosition", {
+        /**
+         * Returns hand's relative position on axis
+         */
+        get: function () {
+            if (this.axis) {
+                var renderer = this.axis.renderer;
+                return renderer.angleToPosition(this.rotation);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ClockHand.prototype, "value", {
         /**
          * @return Value
@@ -16697,7 +17640,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Column = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Column, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Column, _super);
     /**
      * Constructor
      */
@@ -16836,7 +17779,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Column3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Column3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Column3D, _super);
     /**
      * Constructor
      */
@@ -16947,7 +17890,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var ConeColumn = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ConeColumn, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ConeColumn, _super);
     /**
      * Constructor
      */
@@ -17040,7 +17983,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var CurvedColumn = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CurvedColumn, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CurvedColumn, _super);
     /**
      * Constructor
      */
@@ -17210,7 +18153,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var ErrorBullet = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ErrorBullet, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ErrorBullet, _super);
     /**
      * Constructor
      */
@@ -17315,7 +18258,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var FlowDiagramLink = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FlowDiagramLink, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FlowDiagramLink, _super);
     /**
      * Constructor
      */
@@ -17493,7 +18436,7 @@ var FlowDiagramLink = /** @class */ (function (_super) {
          * Should link bullets be masked or not
          *
          * @param value
-         * @default false;
+         * @default false
          */
         set: function (value) {
             this.setPropertyValue("maskBullets", value, true);
@@ -17695,7 +18638,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var FlowDiagramNode = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FlowDiagramNode, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FlowDiagramNode, _super);
     /**
      * Constructor
      */
@@ -18069,7 +19012,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var FunnelSlice = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FunnelSlice, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FunnelSlice, _super);
     /**
      * Constructor
      */
@@ -18333,7 +19276,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IFunnelTickAdapters} for a list of available Adapters
  */
 var FunnelTick = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FunnelTick, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FunnelTick, _super);
     /**
      * Constructor
      */
@@ -18368,15 +19311,21 @@ var FunnelTick = /** @class */ (function (_super) {
         if (point) {
             var label = this.label;
             var series = slice.dataItem.component;
+            var p0 = void 0;
+            var p1 = void 0;
+            var p2 = void 0;
             if (series.orientation == "vertical") {
                 var x1 = label.pixelX;
                 var y1 = label.pixelY;
                 if (!series.labelsOpposite) {
                     x1 += label.maxRight;
                 }
-                var p0 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["spritePointToSprite"](point, slice, this.parent);
-                var p1 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["spritePointToSprite"]({ x: x1, y: y1 }, label.parent, this.parent);
-                this.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["moveTo"](p0) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["lineTo"](p1);
+                p0 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["spritePointToSprite"](point, slice, this.parent);
+                p2 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["spritePointToSprite"]({ x: x1, y: y1 }, label.parent, this.parent);
+                p1 = { x: label.parent.pixelX - this.length, y: p2.y };
+                if (!series.labelsOpposite) {
+                    p1.x = label.parent.measuredWidth + this.length;
+                }
             }
             else {
                 var x1 = label.pixelX;
@@ -18384,10 +19333,14 @@ var FunnelTick = /** @class */ (function (_super) {
                 if (!series.labelsOpposite) {
                     y1 += label.maxBottom;
                 }
-                var p0 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["spritePointToSprite"](point, slice, this.parent);
-                var p1 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["spritePointToSprite"]({ x: x1, y: y1 }, label.parent, this.parent);
-                this.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["moveTo"](p0) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["lineTo"](p1);
+                p0 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["spritePointToSprite"](point, slice, this.parent);
+                p2 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["spritePointToSprite"]({ x: x1, y: y1 }, label.parent, this.parent);
+                p1 = { x: p2.x, y: label.parent.pixelY - this.length };
+                if (!series.labelsOpposite) {
+                    p1.y = label.parent.measuredHeight + this.length;
+                }
             }
+            this.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["moveTo"](p0) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["lineTo"](p1) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["lineTo"](p2);
         }
     };
     Object.defineProperty(FunnelTick.prototype, "slice", {
@@ -18555,7 +19508,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var HeatLegend = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](HeatLegend, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(HeatLegend, _super);
     /**
      * Constructor
      */
@@ -18615,6 +19568,7 @@ var HeatLegend = /** @class */ (function (_super) {
      */
     HeatLegend.prototype.validate = function () {
         _super.prototype.validate.call(this);
+        this.valueAxis.renderer.inversed = this.reverseOrder;
         var series = this.series;
         var minColor = this.minColor;
         var maxColor = this.maxColor;
@@ -18665,16 +19619,28 @@ var HeatLegend = /** @class */ (function (_super) {
             }
             if (this.markerCount == 1) {
                 var gradient = new _core_rendering_fills_LinearGradient__WEBPACK_IMPORTED_MODULE_2__["LinearGradient"]();
-                gradient.addColor(minColor, minOpacity);
-                gradient.addColor(maxColor, maxOpacity);
+                if (this.reverseOrder) {
+                    gradient.addColor(maxColor, maxOpacity);
+                    gradient.addColor(minColor, minOpacity);
+                }
+                else {
+                    gradient.addColor(minColor, minOpacity);
+                    gradient.addColor(maxColor, maxOpacity);
+                }
                 if (this.orientation == "vertical") {
                     gradient.rotation = -90;
                 }
                 marker.fill = gradient;
                 if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](minStroke) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](maxStroke)) {
                     var strokeGradient = new _core_rendering_fills_LinearGradient__WEBPACK_IMPORTED_MODULE_2__["LinearGradient"]();
-                    strokeGradient.addColor(minStroke, minStrokeOpacity);
-                    strokeGradient.addColor(maxStroke, maxStrokeOpacity);
+                    if (this.reverseOrder) {
+                        strokeGradient.addColor(maxStroke, maxStrokeOpacity);
+                        strokeGradient.addColor(minStroke, minStrokeOpacity);
+                    }
+                    else {
+                        strokeGradient.addColor(minStroke, minStrokeOpacity);
+                        strokeGradient.addColor(maxStroke, maxStrokeOpacity);
+                    }
                     if (this.orientation == "vertical") {
                         strokeGradient.rotation = -90;
                     }
@@ -18682,14 +19648,18 @@ var HeatLegend = /** @class */ (function (_super) {
                 }
             }
             else {
-                var color = new _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"](_core_utils_Colors__WEBPACK_IMPORTED_MODULE_12__["interpolate"](minColor.rgb, maxColor.rgb, i / this.markerCount));
+                var c = i;
+                if (this.reverseOrder) {
+                    c = this.markerCount - i - 1;
+                }
+                var color = new _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"](_core_utils_Colors__WEBPACK_IMPORTED_MODULE_12__["interpolate"](minColor.rgb, maxColor.rgb, c / this.markerCount));
                 marker.fill = color;
-                var opacity = minOpacity + (maxOpacity - minOpacity) * i / this.markerCount;
+                var opacity = minOpacity + (maxOpacity - minOpacity) * c / this.markerCount;
                 marker.fillOpacity = opacity;
                 if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](minStroke) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](maxStroke)) {
-                    var color_1 = new _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"](_core_utils_Colors__WEBPACK_IMPORTED_MODULE_12__["interpolate"](minStroke.rgb, maxStroke.rgb, i / this.markerCount));
+                    var color_1 = new _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"](_core_utils_Colors__WEBPACK_IMPORTED_MODULE_12__["interpolate"](minStroke.rgb, maxStroke.rgb, c / this.markerCount));
                     marker.stroke = color_1;
-                    var opacity_1 = minStrokeOpacity + (maxStrokeOpacity - minStrokeOpacity) * i / this.markerCount;
+                    var opacity_1 = minStrokeOpacity + (maxStrokeOpacity - minStrokeOpacity) * c / this.markerCount;
                     marker.strokeOpacity = opacity_1;
                 }
             }
@@ -19043,7 +20013,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var LabelBullet = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LabelBullet, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LabelBullet, _super);
     /**
      * Constructor
      */
@@ -19149,7 +20119,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var NavigationBarDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](NavigationBarDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(NavigationBarDataItem, _super);
     /**
      * Constructor
      */
@@ -19196,7 +20166,7 @@ var NavigationBarDataItem = /** @class */ (function (_super) {
  * @important
  */
 var NavigationBar = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](NavigationBar, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(NavigationBar, _super);
     /**
      * Constructor
      */
@@ -19335,7 +20305,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var OHLC = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](OHLC, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OHLC, _super);
     /**
      * Constructor
      */
@@ -19428,7 +20398,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPieTickAdapters} for a list of available Adapters
  */
 var PieTick = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieTick, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieTick, _super);
     /**
      * Constructor
      */
@@ -19584,7 +20554,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var RadarColumn = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadarColumn, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadarColumn, _super);
     /**
      * Constructor
      */
@@ -19618,11 +20588,12 @@ var RadarColumn = /** @class */ (function (_super) {
      * X coordinate for the slice tooltip.
      *
      * @return X
+     * @ignore
      */
     RadarColumn.prototype.getTooltipX = function () {
         var value = this.getPropertyValue("tooltipX");
         if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_4__["isNumber"](value)) {
-            value = this.radarColumn.tooltipX;
+            return this.radarColumn.getTooltipX();
         }
         return value;
     };
@@ -19630,11 +20601,12 @@ var RadarColumn = /** @class */ (function (_super) {
      * Y coordinate for the slice tooltip.
      *
      * @return Y
+     * @ignore
      */
     RadarColumn.prototype.getTooltipY = function () {
         var value = this.getPropertyValue("tooltipX");
         if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_4__["isNumber"](value)) {
-            value = this.radarColumn.tooltipY;
+            return this.radarColumn.getTooltipY();
         }
         return value;
     };
@@ -19698,7 +20670,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var SankeyLink = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SankeyLink, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SankeyLink, _super);
     /**
      * Constructor
      */
@@ -20019,7 +20991,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var SankeyNode = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SankeyNode, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SankeyNode, _super);
     /**
      * Constructor
      */
@@ -20299,7 +21271,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Tick = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Tick, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Tick, _super);
     /**
      * Constructor
      */
@@ -20418,7 +21390,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var XYChartScrollbar = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](XYChartScrollbar, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(XYChartScrollbar, _super);
     /**
      * Constructor
      */
@@ -20437,6 +21409,7 @@ var XYChartScrollbar = /** @class */ (function (_super) {
         scrollbarChart.padding(0, 0, 0, 0);
         scrollbarChart.interactionsEnabled = false;
         _this._scrollbarChart = scrollbarChart;
+        scrollbarChart.plotContainer.filters.push(new _core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_10__["DesaturateFilter"]());
         _this._disposers.push(_this._scrollbarChart);
         _this.minHeight = 60;
         _this.minWidth = 60;
@@ -20492,31 +21465,41 @@ var XYChartScrollbar = /** @class */ (function (_super) {
      * @param event Event
      */
     XYChartScrollbar.prototype.handleSeriesAdded = function (event) {
+        var _this = this;
         var sourceSeries = event.newValue;
+        if (!sourceSeries.xAxis || !sourceSeries.yAxis) {
+            return;
+        }
         var scrollbarChart = this.scrollbarChart;
         scrollbarChart.zoomOutButton.disabled = true;
         this.chart = sourceSeries.chart;
+        // Ensure that scrollbar chart shares the same locale as parent chart
+        scrollbarChart.language.locale = this.chart.language.locale;
         var addXAxis = true;
         var addYAxis = true;
         // check if we haven't added clone of x or y axis before
         _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_11__["each"](this.series.iterator(), function (series) {
             if (series != sourceSeries) {
-                if (series.xAxis == sourceSeries.xAxis) {
+                if (series.xAxis == sourceSeries.xAxis && _this.scrollbarChart.xAxes.length > 0) {
                     addXAxis = false;
                 }
-                if (series.yAxis == sourceSeries.yAxis) {
+                if (series.yAxis == sourceSeries.yAxis && _this.scrollbarChart.yAxes.length > 0) {
                     addYAxis = false;
                 }
             }
         });
+        sourceSeries.events.on("beforedisposed", function () {
+            _this.series.removeValue(sourceSeries);
+        });
         var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_9__["InterfaceColorSet"]();
         var series = sourceSeries.clone();
+        sourceSeries.scrollbarSeries = series;
         if (addXAxis) {
             var xAxis = sourceSeries.xAxis.clone();
             scrollbarChart.xAxes.moveValue(xAxis);
             xAxis.title.disabled = true;
             xAxis.rangeChangeDuration = 0;
-            xAxis.id = sourceSeries.uid;
+            //xAxis.id = sourceSeries.uid;
             var renderer = xAxis.renderer;
             renderer.ticks.template.disabled = true;
             renderer.inside = true;
@@ -20541,7 +21524,9 @@ var XYChartScrollbar = /** @class */ (function (_super) {
             if (xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"]) {
                 var vAxis_1 = xAxis;
                 var sourceAxis = sourceSeries.xAxis;
-                xAxis.groupCount = sourceAxis.groupCount * 5;
+                vAxis_1.groupCount = sourceAxis.groupCount * 5;
+                vAxis_1.min = undefined;
+                vAxis_1.max = undefined;
                 this._disposers.push(vAxis_1.clonedFrom.events.on("extremeschanged", function () {
                     if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](vAxis_1.clonedFrom.minDefined)) {
                         vAxis_1.min = vAxis_1.clonedFrom.minDefined;
@@ -20553,6 +21538,14 @@ var XYChartScrollbar = /** @class */ (function (_super) {
             }
             else if (xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_6__["ValueAxis"]) {
                 var vAxis_2 = xAxis;
+                vAxis_2.min = undefined;
+                vAxis_2.max = undefined;
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](vAxis_2.clonedFrom.minDefined)) {
+                    vAxis_2.min = undefined;
+                }
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](vAxis_2.clonedFrom.maxDefined)) {
+                    vAxis_2.max = undefined;
+                }
                 this._disposers.push(vAxis_2.clonedFrom.events.on("extremeschanged", function () {
                     if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](vAxis_2.clonedFrom.minDefined)) {
                         vAxis_2.min = vAxis_2.clonedFrom.min;
@@ -20601,6 +21594,8 @@ var XYChartScrollbar = /** @class */ (function (_super) {
             yAxis.minZoomCount = undefined;
             if (yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"]) {
                 var vAxis_3 = yAxis;
+                vAxis_3.min = undefined;
+                vAxis_3.max = undefined;
                 var sourceAxis = sourceSeries.yAxis;
                 yAxis.groupCount = sourceAxis.groupCount * 5;
                 this._disposers.push(vAxis_3.clonedFrom.events.on("extremeschanged", function () {
@@ -20614,6 +21609,14 @@ var XYChartScrollbar = /** @class */ (function (_super) {
             }
             else if (yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_6__["ValueAxis"]) {
                 var vAxis_4 = yAxis;
+                vAxis_4.min = undefined;
+                vAxis_4.max = undefined;
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](vAxis_4.clonedFrom.minDefined)) {
+                    vAxis_4.min = undefined;
+                }
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](vAxis_4.clonedFrom.maxDefined)) {
+                    vAxis_4.max = undefined;
+                }
                 this._disposers.push(vAxis_4.clonedFrom.events.on("extremeschanged", function () {
                     if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](vAxis_4.clonedFrom.minDefined)) {
                         vAxis_4.min = vAxis_4.clonedFrom.minDefined;
@@ -20643,7 +21646,6 @@ var XYChartScrollbar = /** @class */ (function (_super) {
             }
         }, undefined, false));
         series.defaultState.properties.visible = true;
-        series.filters.push(new _core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_10__["DesaturateFilter"]());
         scrollbarChart.series.push(series);
         this.updateByOrientation();
     };
@@ -20688,7 +21690,21 @@ var XYChartScrollbar = /** @class */ (function (_super) {
      */
     XYChartScrollbar.prototype.handleSeriesRemoved = function (event) {
         var sourceSeries = event.oldValue;
-        sourceSeries.events.off("validated", this.zoomOutAxes, this);
+        var scrollbarChart = this.scrollbarChart;
+        scrollbarChart.series.each(function (series) {
+            if (series && series.clonedFrom == sourceSeries) {
+                scrollbarChart.series.removeValue(series);
+            }
+        });
+        if (scrollbarChart.series.length == 0) {
+            scrollbarChart.xAxes.clear();
+            scrollbarChart.yAxes.clear();
+        }
+        try {
+            sourceSeries.events.off("validated", this.zoomOutAxes, this);
+        }
+        catch (err) {
+        }
     };
     Object.defineProperty(XYChartScrollbar.prototype, "scrollbarChart", {
         /**
@@ -20756,9 +21772,13 @@ var XYChartScrollbar = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     XYChartScrollbar.prototype.handleDataChanged = function () {
-        //@todo: what if raw data changed?
         if (this.chart.data != this.scrollbarChart.data) {
             this.scrollbarChart.data = this.chart.data;
+        }
+        else {
+            // add data is handled in XYChart
+            // invalidating all data caused the problem: https://github.com/amcharts/amcharts4/issues/2096
+            this.scrollbarChart.invalidateRawData();
         }
     };
     /**
@@ -20906,7 +21926,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var CandlestickSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CandlestickSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CandlestickSeriesDataItem, _super);
     /**
      * Defines a type of [[Component]] this data item is used for
      * @todo Disabled to work around TS bug (see if we can re-enable it again)
@@ -21055,7 +22075,7 @@ var CandlestickSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var CandlestickSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CandlestickSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CandlestickSeries, _super);
     /**
      * Constructor
      */
@@ -21235,20 +22255,24 @@ var CandlestickSeries = /** @class */ (function (_super) {
      */
     CandlestickSeries.prototype.defineFields = function () {
         _super.prototype.defineFields.call(this);
-        if (this.baseAxis == this.xAxis) {
-            var yAxisFieldName = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_6__["capitalize"](this.yAxis.axisFieldName);
-            this._yLowField = ("low" + yAxisFieldName + "Y");
-            this._yHighField = ("high" + yAxisFieldName + "Y");
+        var xAxis = this.xAxis;
+        var yAxis = this.yAxis;
+        if (xAxis && yAxis) {
+            if (this.baseAxis == xAxis) {
+                var yAxisFieldName = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_6__["capitalize"](yAxis.axisFieldName);
+                this._yLowField = ("low" + yAxisFieldName + "Y");
+                this._yHighField = ("high" + yAxisFieldName + "Y");
+            }
+            if (this.baseAxis == yAxis) {
+                var xAxisFieldName = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_6__["capitalize"](xAxis.axisFieldName);
+                this._xLowField = ("low" + xAxisFieldName + "X");
+                this._xHighField = ("high" + xAxisFieldName + "X");
+            }
+            this.addValueField(xAxis, this._xValueFields, this._xLowField);
+            this.addValueField(xAxis, this._xValueFields, this._xHighField);
+            this.addValueField(yAxis, this._yValueFields, this._yLowField);
+            this.addValueField(yAxis, this._yValueFields, this._yHighField);
         }
-        if (this.baseAxis == this.yAxis) {
-            var xAxisFieldName = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_6__["capitalize"](this.xAxis.axisFieldName);
-            this._xLowField = ("low" + xAxisFieldName + "X");
-            this._xHighField = ("high" + xAxisFieldName + "X");
-        }
-        this.addValueField(this.xAxis, this._xValueFields, this._xLowField);
-        this.addValueField(this.xAxis, this._xValueFields, this._xHighField);
-        this.addValueField(this.yAxis, this._yValueFields, this._yLowField);
-        this.addValueField(this.yAxis, this._yValueFields, this._yHighField);
     };
     /**
      * Creates elements in related legend container, that mimics the look of this
@@ -21389,7 +22413,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var ColumnSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ColumnSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ColumnSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -21473,7 +22497,7 @@ var ColumnSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var ColumnSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ColumnSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ColumnSeries, _super);
     /**
      * Constructor
      */
@@ -21544,26 +22568,61 @@ var ColumnSeries = /** @class */ (function (_super) {
         //@todo Check if we can do better than use `instanceof`
         // find start/end locations based on clustered/stacked settings
         // go through chart series instead of base axis series, because axis series doesn't maintain order
-        var baseAxisSeries = this.chart.series;
-        var clusterCount = 0;
-        var index = 0;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](baseAxisSeries.iterator(), function (series) {
-            if (series instanceof ColumnSeries) {
-                if (_this.baseAxis == series.baseAxis) {
-                    if ((!series.stacked && series.clustered) || clusterCount === 0) {
-                        clusterCount++;
-                    }
-                    if (series == _this) {
-                        index = clusterCount - 1;
+        if (this.chart && this.xAxis && this.yAxis) {
+            var baseAxisSeries = this.chart.series;
+            var clusterCount_1 = 0;
+            var index_1 = 0;
+            var sortedByAxis_1 = [];
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](baseAxisSeries.iterator(), function (series) {
+                if (series instanceof ColumnSeries) {
+                    if (_this.baseAxis == series.baseAxis) {
+                        var index_2;
+                        if (_this.baseAxis == _this.xAxis) {
+                            index_2 = _this.chart.yAxes.indexOf(series.yAxis);
+                        }
+                        else {
+                            index_2 = _this.chart.xAxes.indexOf(series.xAxis);
+                        }
+                        sortedByAxis_1.push({ series: series, axis: index_2 });
                     }
                 }
+            });
+            sortedByAxis_1.sort(function (a, b) { return a.axis - b.axis; });
+            var prevAxisIndex_1;
+            _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__["each"](sortedByAxis_1, function (sortedItem) {
+                var series = sortedItem.series;
+                if (series instanceof ColumnSeries) {
+                    if ((!series.stacked && series.clustered) || (prevAxisIndex_1 != sortedItem.axis && series.clustered)) {
+                        clusterCount_1++;
+                    }
+                    if (series == _this) {
+                        index_1 = clusterCount_1 - 1;
+                    }
+                }
+                prevAxisIndex_1 = sortedItem.axis;
+            });
+            if (!this.clustered) {
+                index_1 = 0;
+                clusterCount_1 = 1;
             }
-        });
-        var renderer = this.baseAxis.renderer;
-        var cellStartLocation = renderer.cellStartLocation;
-        var cellEndLocation = renderer.cellEndLocation;
-        this._startLocation = cellStartLocation + (index / clusterCount) * (cellEndLocation - cellStartLocation);
-        this._endLocation = cellStartLocation + (index + 1) / clusterCount * (cellEndLocation - cellStartLocation);
+            var renderer = this.baseAxis.renderer;
+            var cellStartLocation = renderer.cellStartLocation;
+            var cellEndLocation = renderer.cellEndLocation;
+            this._startLocation = cellStartLocation + (index_1 / clusterCount_1) * (cellEndLocation - cellStartLocation);
+            this._endLocation = cellStartLocation + (index_1 + 1) / clusterCount_1 * (cellEndLocation - cellStartLocation);
+            var xAxis = this.xAxis;
+            var yAxis = this.yAxis;
+            if (xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"] && yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_6__["ValueAxis"]) {
+                if (xAxis.sortBySeries == this) {
+                    this.sortCategoryAxis(xAxis, "valueY");
+                }
+            }
+            if (yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"] && xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_6__["ValueAxis"]) {
+                if (yAxis.sortBySeries == this) {
+                    this.sortCategoryAxis(yAxis, "valueX");
+                }
+            }
+        }
         _super.prototype.validate.call(this);
         for (var i = 0; i < this.startIndex; i++) {
             var dataItem = this.dataItems.getIndex(i);
@@ -21573,6 +22632,41 @@ var ColumnSeries = /** @class */ (function (_super) {
             var dataItem = this.dataItems.getIndex(i);
             this.disableUnusedColumns(dataItem);
         }
+        this._propertiesChanged = false;
+    };
+    ColumnSeries.prototype.sortCategoryAxis = function (axis, key) {
+        var _this = this;
+        this.dataItems.values.sort(function (x, y) {
+            return y.values[key].workingValue - x.values[key].workingValue;
+        });
+        var i = 0;
+        this.dataItems.each(function (dataItem) {
+            dataItem._index = i;
+            i++;
+        });
+        axis.dataItems.each(function (dataItem) {
+            var axis = dataItem.component;
+            var currentPosition = axis.categoryToPosition(dataItem.category) - dataItem.deltaPosition;
+            var seriesDataItem = axis.getSeriesDataItemByCategory(dataItem.category, _this);
+            if (seriesDataItem) {
+                var index = _this.dataItems.indexOf(seriesDataItem);
+                dataItem._index = index;
+                var deltaPosition = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"]((index + 0.5) / _this.dataItems.length - currentPosition, 3);
+                if (dataItem.deltaAnimation && !dataItem.deltaAnimation.isDisposed() && dataItem.deltaAnimation.animationOptions[0].to == deltaPosition) {
+                    // void
+                }
+                else if (deltaPosition != _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["round"](dataItem.deltaPosition, 3)) {
+                    if (dataItem.deltaAnimation) {
+                        dataItem.deltaAnimation.stop();
+                    }
+                    dataItem.deltaAnimation = dataItem.animate({ property: "deltaPosition", from: -deltaPosition, to: 0 }, axis.interpolationDuration, axis.interpolationEasing);
+                    _this._disposers.push(dataItem.deltaAnimation);
+                }
+            }
+        });
+        axis.dataItems.values.sort(function (x, y) {
+            return x.index - y.index;
+        });
     };
     /**
      * Validates data item's element, effectively redrawing it.
@@ -21582,8 +22676,10 @@ var ColumnSeries = /** @class */ (function (_super) {
      */
     ColumnSeries.prototype.validateDataElement = function (dataItem) {
         // important oder here, first real, then super. we need this to know size
-        this.validateDataElementReal(dataItem);
-        _super.prototype.validateDataElement.call(this, dataItem);
+        if (this.chart && this.xAxis && this.yAxis) {
+            this.validateDataElementReal(dataItem);
+            _super.prototype.validateDataElement.call(this, dataItem);
+        }
     };
     /**
      * Returns relative start location for the data item.
@@ -21824,10 +22920,12 @@ var ColumnSeries = /** @class */ (function (_super) {
                 column_1.paper = this.paper; // sometimes pattern is not drawn if is set with adapter without this.
                 // accessibility
                 if (this.itemsFocusable()) {
+                    this.role = "menu";
                     column_1.role = "menuitem";
                     column_1.focusable = true;
                 }
                 else {
+                    this.role = "list";
                     column_1.role = "listitem";
                     column_1.focusable = false;
                 }
@@ -21850,6 +22948,13 @@ var ColumnSeries = /** @class */ (function (_super) {
             }
             else {
                 column_1 = dataItem.column;
+                if (this._propertiesChanged) {
+                    _core_utils_Object__WEBPACK_IMPORTED_MODULE_13__["copyProperties"](this, column_1, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+                    _core_utils_Object__WEBPACK_IMPORTED_MODULE_13__["copyProperties"](this.columns.template, column_1, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+                    _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__["each"](_core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"], function (property) {
+                        column_1[property] = column_1[property];
+                    });
+                }
             }
             column_1.width = w;
             column_1.height = h;
@@ -21875,7 +22980,7 @@ var ColumnSeries = /** @class */ (function (_super) {
                     _core_utils_Object__WEBPACK_IMPORTED_MODULE_13__["copyProperties"](axisRange.contents, rangeColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]); // need this because 3d columns are not in the same container
                     dataItem.addSprite(rangeColumn);
                     dataItem.rangesColumns.setKey(axisRange.uid, rangeColumn);
-                    rangeColumn.paper = _this.paper; // sometimes pattern is not drawn if is set with adapter without this.					
+                    rangeColumn.paper = _this.paper; // sometimes pattern is not drawn if is set with adapter without this.
                 }
                 rangeColumn.parent = axisRange.contents;
                 rangeColumn.width = w;
@@ -22331,7 +23436,7 @@ __webpack_require__.r(__webpack_exports__);
  * @hidden
  */
 var ColumnSeries3DDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ColumnSeries3DDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ColumnSeries3DDataItem, _super);
     /**
      * Constructor
      */
@@ -22359,7 +23464,7 @@ var ColumnSeries3DDataItem = /** @class */ (function (_super) {
  * @important
  */
 var ColumnSeries3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ColumnSeries3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ColumnSeries3D, _super);
     /**
      * Constructor
      */
@@ -22376,8 +23481,9 @@ var ColumnSeries3D = /** @class */ (function (_super) {
          * @ignore
          */
         get: function () {
-            if (this.chart && this.chart.columnsContainer) {
-                return this.chart.columnsContainer;
+            var chart = this.chart;
+            if (chart && chart.columnsContainer && chart.leftAxesContainer.layout != "vertical" && chart.rightAxesContainer.layout != "vertical" && chart.bottomAxesContainer.layout != "horizontal" && chart.topAxesContainer.layout != "horizontal") {
+                return chart.columnsContainer;
             }
             else {
                 return this._columnsContainer;
@@ -22520,7 +23626,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var ConeSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ConeSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ConeSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -22548,7 +23654,7 @@ var ConeSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var ConeSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ConeSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ConeSeries, _super);
     /**
      * Constructor
      */
@@ -22577,10 +23683,10 @@ var ConeSeries = /** @class */ (function (_super) {
         var column = this.columns.getIndex(0);
         if (column) {
             if (this.baseAxis == this.xAxis) {
-                dy = column.coneColumn.bottom.radiusY + 1;
+                dy = column.coneColumn.innerWidth / 2 + 1;
             }
             else {
-                dx = column.coneColumn.bottom.radiusY + 1;
+                dx = column.coneColumn.innerHeight / 2 + 1;
             }
             return _core_rendering_Path__WEBPACK_IMPORTED_MODULE_4__["rectToPath"]({
                 x: -dx,
@@ -22667,7 +23773,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var CurvedColumnSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CurvedColumnSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CurvedColumnSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -22694,7 +23800,7 @@ var CurvedColumnSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var CurvedColumnSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CurvedColumnSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CurvedColumnSeries, _super);
     /**
      * Constructor
      */
@@ -22769,8 +23875,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
 /* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
 /* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
-/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
 /**
  * Defines Funnel Chart Series.
  */
@@ -22781,6 +23888,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -22804,13 +23912,19 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var FunnelSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FunnelSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FunnelSeriesDataItem, _super);
     /**
      * Constructor
      */
     function FunnelSeriesDataItem() {
         var _this = _super.call(this) || this;
         _this.className = "FunnelSeriesDataItem";
+        // this helps to invalidate series when value is 0 an it is hidden (no other events are triggered then)
+        _this.events.on("visibilitychanged", function () {
+            if (_this.component) {
+                _this.component.invalidateDataItems();
+            }
+        }, _this, false);
         _this.applyTheme();
         return _this;
     }
@@ -22828,7 +23942,7 @@ var FunnelSeriesDataItem = /** @class */ (function (_super) {
                 this._sliceLink = sliceLink_1;
                 this._disposers.push(sliceLink_1);
                 sliceLink_1.parent = this.component.slicesContainer;
-                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_10__["Disposer"](function () {
+                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__["Disposer"](function () {
                     if (_this.component) {
                         _this.component.sliceLinks.removeValue(sliceLink_1);
                     }
@@ -22859,7 +23973,7 @@ var FunnelSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var FunnelSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FunnelSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FunnelSeries, _super);
     /**
      * Constructor
      */
@@ -22868,10 +23982,10 @@ var FunnelSeries = /** @class */ (function (_super) {
         _this._nextY = 0;
         _this.className = "FunnelSeries";
         _this.orientation = "vertical";
-        _this.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["percent"])(100);
-        _this.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["percent"])(100);
-        _this.slicesContainer.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["percent"])(100);
-        _this.slicesContainer.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["percent"])(100);
+        _this.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
+        _this.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
+        _this.slicesContainer.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
+        _this.slicesContainer.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
         _this._disposers.push(_this.slicesContainer.events.on("maxsizechanged", _this.invalidateDataItems, _this, false));
         _this.labelsOpposite = true;
         _this.labelsContainer.layout = "absolute";
@@ -22957,6 +24071,7 @@ var FunnelSeries = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     FunnelSeries.prototype.validateDataElements = function () {
+        var _this = this;
         var slicesContainer = this.slicesContainer;
         var labelsContainer = this.labelsContainer;
         var labelTemplate = this.labels.template;
@@ -22976,10 +24091,20 @@ var FunnelSeries = /** @class */ (function (_super) {
             if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["hasValue"](dItem.value)) {
                 count++;
                 if (dItem.value > 0) {
-                    total += dItem.getWorkingValue("value") / dItem.value;
+                    total += Math.abs(dItem.getWorkingValue("value") / dItem.value);
                 }
                 else {
-                    total += 1;
+                    if (_this.ignoreZeroValues) {
+                        count--;
+                    }
+                    else {
+                        if (!dItem.visible || dItem.__disabled || dItem.isHiding) {
+                            count--;
+                        }
+                        else {
+                            total += 1;
+                        }
+                    }
                 }
             }
         });
@@ -23001,7 +24126,7 @@ var FunnelSeries = /** @class */ (function (_super) {
         if (index < this.dataItems.length - 1) {
             var nextItem = this.dataItems.getIndex(index + 1);
             nextValue = nextItem.getWorkingValue("value");
-            if (!nextItem.visible || nextItem.isHiding) {
+            if (!nextItem.visible || nextItem.isHiding || nextItem.__disabled || (nextItem.value == 0 && this.ignoreZeroValues)) {
                 return this.getNextValue(nextItem);
             }
         }
@@ -23021,24 +24146,40 @@ var FunnelSeries = /** @class */ (function (_super) {
      * @param dataItem  Data item
      */
     FunnelSeries.prototype.validateDataElement = function (dataItem) {
+        var _this = this;
+        //if ($type.hasValue(dataItem.value)) {
+        // FunnelSlice
+        var slice = dataItem.slice;
+        slice.orientation = this.orientation;
+        var sliceLink = dataItem.sliceLink;
+        sliceLink.orientation = this.orientation;
+        var tick = dataItem.tick;
+        var label = dataItem.label;
+        tick.slice = slice;
+        tick.label = label;
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["hasValue"](dataItem.value)) {
-            // FunnelSlice
-            var slice = dataItem.slice;
-            slice.orientation = this.orientation;
-            var sliceLink = dataItem.sliceLink;
-            sliceLink.orientation = this.orientation;
-            var tick = dataItem.tick;
-            var label = dataItem.label;
-            tick.slice = slice;
-            tick.label = label;
             this.decorateSlice(dataItem);
-            sliceLink.fill = slice.fill;
-            if (dataItem.index == this.dataItems.length - 1) {
-                sliceLink.disabled = true;
-            }
-            // do this at the end, otherwise bullets won't be positioned properly
-            _super.prototype.validateDataElement.call(this, dataItem);
+            _core_utils_Array__WEBPACK_IMPORTED_MODULE_9__["each"](dataItem.sprites, function (sprite) {
+                if (dataItem.value == 0 && _this.ignoreZeroValues) {
+                    sprite.__disabled = true;
+                }
+                else {
+                    sprite.__disabled = false;
+                }
+            });
         }
+        else {
+            _core_utils_Array__WEBPACK_IMPORTED_MODULE_9__["each"](dataItem.sprites, function (sprite) {
+                sprite.__disabled = true;
+            });
+        }
+        if (dataItem.index == this.dataItems.length - 1) {
+            sliceLink.disabled = true;
+        }
+        // do this at the end, otherwise bullets won't be positioned properly
+        _super.prototype.validateDataElement.call(this, dataItem);
+        sliceLink.fill = slice.fill;
+        //}
     };
     /**
      * [decorateSlice description]
@@ -23054,11 +24195,26 @@ var FunnelSeries = /** @class */ (function (_super) {
         var maxWidth = this.slicesContainer.innerWidth;
         var maxHeight = this.slicesContainer.innerHeight;
         var nextValue = this.getNextValue(dataItem);
-        var workingValue = dataItem.getWorkingValue("value");
+        var workingValue = Math.abs(dataItem.getWorkingValue("value"));
         var bottomRatio = this.bottomRatio;
         var d = 1;
-        if (dataItem.value > 0) {
-            d = workingValue / dataItem.value;
+        if (dataItem.value != 0) {
+            d = workingValue / Math.abs(dataItem.value);
+        }
+        else {
+            if (dataItem.__disabled || dataItem.isHiding || !dataItem.visible) {
+                d = 0.000001;
+            }
+        }
+        if (this.ignoreZeroValues && dataItem.value == 0) {
+            dataItem.__disabled = true;
+            return;
+        }
+        else {
+            dataItem.__disabled = false;
+        }
+        if (this._nextY == Infinity) {
+            this._nextY = 0;
         }
         if (this.orientation == "vertical") {
             var linkHeight = sliceLink.pixelHeight * d;
@@ -23068,7 +24224,7 @@ var FunnelSeries = /** @class */ (function (_super) {
             sliceLink.topWidth = slice.bottomWidth;
             sliceLink.bottomWidth = (workingValue - (workingValue - nextValue)) / this.dataItem.values.value.high * maxWidth;
             slice.y = this._nextY;
-            slice.height = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](0, maxHeight / this._count * d / this._total - linkHeight);
+            slice.height = Math.min(100000, _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](0, maxHeight / this._count * d / this._total - linkHeight));
             slice.x = maxWidth / 2;
             if (!this.alignLabels) {
                 label.x = slice.x;
@@ -23089,7 +24245,7 @@ var FunnelSeries = /** @class */ (function (_super) {
             sliceLink.topWidth = slice.bottomWidth;
             sliceLink.bottomWidth = (workingValue - (workingValue - nextValue)) / this.dataItem.values.value.high * maxHeight;
             slice.x = this._nextY;
-            slice.width = maxWidth / this._count * d * 1 / this._total - linkWidth;
+            slice.width = Math.min(100000, maxWidth / this._count * d * 1 / this._total - linkWidth);
             slice.y = maxHeight / 2;
             if (!this.alignLabels) {
                 label.y = slice.y;
@@ -23103,6 +24259,17 @@ var FunnelSeries = /** @class */ (function (_super) {
             sliceLink.y = slice.y;
         }
     };
+    FunnelSeries.prototype.getLastLabel = function (index) {
+        if (index > 0) {
+            var lastLabel = this.labels.getIndex(index);
+            if (lastLabel.__disabled || !lastLabel.visible) {
+                return this.getLastLabel(index - 1);
+            }
+            else {
+                return lastLabel;
+            }
+        }
+    };
     /**
      * [arrangeLabels description]
      *
@@ -23112,52 +24279,54 @@ var FunnelSeries = /** @class */ (function (_super) {
         if (this.alignLabels) {
             var count = this.labels.length;
             if (count > 1) {
-                var lastLabel = this.labels.getIndex(count - 1);
-                var lastY = lastLabel.pixelY;
-                var lastX = lastLabel.pixelX;
-                if (count > 1) {
-                    for (var i = count - 2; i >= 0; i--) {
-                        var label = this.labels.getIndex(i);
-                        if (label.visible) {
-                            if (label.invalid) {
-                                label.validate();
-                            }
-                            if (this.orientation == "vertical") {
-                                if (label.pixelY + label.measuredHeight > lastY) {
-                                    label.y = lastY - label.measuredHeight;
+                var lastLabel = this.getLastLabel(count - 1);
+                if (lastLabel) {
+                    var lastY = lastLabel.pixelY;
+                    var lastX = lastLabel.pixelX;
+                    if (count > 1) {
+                        for (var i = count - 2; i >= 0; i--) {
+                            var label = this.labels.getIndex(i);
+                            if (label.visible && !label.__disabled) {
+                                if (label.invalid) {
+                                    label.validate();
                                 }
-                            }
-                            // horizontal
-                            else {
-                                if (label.pixelX + label.measuredWidth > lastX) {
-                                    label.x = lastX - label.measuredWidth;
+                                if (this.orientation == "vertical") {
+                                    if (label.pixelY + label.measuredHeight > lastY) {
+                                        label.y = Math.min(1000000, lastY - label.measuredHeight);
+                                    }
                                 }
+                                // horizontal
+                                else {
+                                    if (label.pixelX + label.measuredWidth > lastX) {
+                                        label.x = Math.min(1000000, lastX - label.measuredWidth);
+                                    }
+                                }
+                                lastY = label.pixelY;
+                                lastX = label.pixelX;
                             }
-                            lastY = label.pixelY;
-                            lastX = label.pixelX;
                         }
-                    }
-                    lastY = 0;
-                    lastX = 0;
-                    for (var i = 0; i < count; i++) {
-                        var label = this.labels.getIndex(i);
-                        if (label.visible) {
-                            if (label.invalid) {
-                                label.validate();
-                            }
-                            if (this.orientation == "vertical") {
-                                if (label.pixelY < lastY) {
-                                    label.y = lastY;
+                        lastY = 0;
+                        lastX = 0;
+                        for (var i = 0; i < count; i++) {
+                            var label = this.labels.getIndex(i);
+                            if (label.visible && !label.__disabled) {
+                                if (label.invalid) {
+                                    label.validate();
                                 }
-                            }
-                            // horizontal
-                            else {
-                                if (label.pixelX < lastX) {
-                                    label.x = lastX;
+                                if (this.orientation == "vertical") {
+                                    if (label.pixelY < lastY) {
+                                        label.y = Math.min(1000000, lastY);
+                                    }
                                 }
+                                // horizontal
+                                else {
+                                    if (label.pixelX < lastX) {
+                                        label.x = Math.min(1000000, lastX);
+                                    }
+                                }
+                                lastY += label.measuredHeight;
+                                lastX += label.measuredWidth;
                             }
-                            lastY += label.measuredHeight;
-                            lastX += label.measuredWidth;
                         }
                     }
                 }
@@ -23373,8 +24542,8 @@ var FunnelSeries = /** @class */ (function (_super) {
         if (labelsContainer) {
             // do not align
             if (!value) {
-                labelsContainer.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["percent"])(100);
-                labelsContainer.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["percent"])(100);
+                labelsContainer.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
+                labelsContainer.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__["percent"])(100);
             }
             //align
             else {
@@ -23497,16 +24666,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LineSeriesSegment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LineSeriesSegment */ "./node_modules/@amcharts/amcharts4/.internal/charts/series/LineSeriesSegment.js");
 /* harmony import */ var _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../axes/ValueAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/ValueAxis.js");
 /* harmony import */ var _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../axes/DateAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/DateAxis.js");
-/* harmony import */ var _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../axes/CategoryAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/CategoryAxis.js");
-/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-/* harmony import */ var _core_elements_Line__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/elements/Line */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Line.js");
-/* harmony import */ var _core_elements_Label__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/elements/Label */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Label.js");
-/* harmony import */ var _core_elements_Rectangle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/elements/Rectangle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Rectangle.js");
-/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony import */ var _core_utils_Object__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
-/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
-/* harmony import */ var _elements_Bullet__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../elements/Bullet */ "./node_modules/@amcharts/amcharts4/.internal/charts/elements/Bullet.js");
+/* harmony import */ var _axes_DurationAxis__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../axes/DurationAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/DurationAxis.js");
+/* harmony import */ var _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../axes/CategoryAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/CategoryAxis.js");
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/* harmony import */ var _core_elements_Line__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/elements/Line */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Line.js");
+/* harmony import */ var _core_elements_Label__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/elements/Label */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Label.js");
+/* harmony import */ var _core_elements_Rectangle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/elements/Rectangle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Rectangle.js");
+/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
+/* harmony import */ var _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
+/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _elements_Bullet__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../elements/Bullet */ "./node_modules/@amcharts/amcharts4/.internal/charts/elements/Bullet.js");
 /**
  * Line series module.
  */
@@ -23517,6 +24687,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -23546,7 +24717,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var LineSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LineSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LineSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -23573,7 +24744,7 @@ var LineSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var LineSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LineSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LineSeries, _super);
     /**
      * Constructor
      */
@@ -23593,7 +24764,7 @@ var LineSeries = /** @class */ (function (_super) {
         _this.segments.template.applyOnClones = true;
         _this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_4__["ListDisposer"](_this.segments));
         _this._disposers.push(_this.segments.template);
-        _this._segmentsIterator = new _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_13__["ListIterator"](_this.segments, function () { return _this.segments.create(); });
+        _this._segmentsIterator = new _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["ListIterator"](_this.segments, function () { return _this.segments.create(); });
         _this._segmentsIterator.createNewItems = true;
         _this.className = "LineSeries";
         _this.strokeOpacity = 1;
@@ -23617,7 +24788,7 @@ var LineSeries = /** @class */ (function (_super) {
      */
     LineSeries.prototype.applyInternalDefaults = function () {
         _super.prototype.applyInternalDefaults.call(this);
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](this.readerTitle)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](this.readerTitle)) {
             this.readerTitle = this.language.translate("Line Series");
         }
     };
@@ -23662,6 +24833,13 @@ var LineSeries = /** @class */ (function (_super) {
                         dataItem.setWorkingLocation("dateX", dataItem.locations.dateX - 1, 0); // instantly move it to previous
                         dataItem.setWorkingLocation("dateX", dataItem.locations.dateX); // animate to it's location
                     }
+                    else if (xAxis instanceof _axes_DurationAxis__WEBPACK_IMPORTED_MODULE_8__["DurationAxis"]) {
+                        if (previousDataItem) {
+                            var value = dataItem.valueX;
+                            dataItem.setWorkingValue("valueX", previousDataItem.valueX, 0); // instantly move it to previous
+                            dataItem.setWorkingValue("valueX", value); // animate to new value
+                        }
+                    }
                 }
             }
             if (this.baseAxis == yAxis) {
@@ -23676,6 +24854,13 @@ var LineSeries = /** @class */ (function (_super) {
                         dataItem.setWorkingLocation("dateY", dataItem.locations.dateX - 1, 0); // instantly move it to previous
                         dataItem.setWorkingLocation("dateY", dataItem.locations.dateY); // animate to it's location
                     }
+                    else if (yAxis instanceof _axes_DurationAxis__WEBPACK_IMPORTED_MODULE_8__["DurationAxis"]) {
+                        if (previousDataItem) {
+                            var value = dataItem.valueY;
+                            dataItem.setWorkingValue("valueY", previousDataItem.valueY, 0); // instantly move it to previous
+                            dataItem.setWorkingValue("valueY", value); // animate to new value
+                        }
+                    }
                 }
             }
         }
@@ -23685,7 +24870,7 @@ var LineSeries = /** @class */ (function (_super) {
                     if (xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"]) {
                         dataItem.setWorkingLocation("dateX", dataItem.locations.dateX);
                     }
-                    if (xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_8__["CategoryAxis"]) {
+                    if (xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_9__["CategoryAxis"]) {
                         dataItem.setWorkingLocation("categoryX", dataItem.locations.categoryX);
                     }
                 }
@@ -23695,7 +24880,7 @@ var LineSeries = /** @class */ (function (_super) {
                     if (yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"]) {
                         dataItem.setWorkingLocation("dateY", dataItem.locations.dateY);
                     }
-                    if (yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_8__["CategoryAxis"]) {
+                    if (yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_9__["CategoryAxis"]) {
                         dataItem.setWorkingLocation("categoryY", dataItem.locations.categoryY);
                     }
                 }
@@ -23723,14 +24908,16 @@ var LineSeries = /** @class */ (function (_super) {
     LineSeries.prototype.validate = function () {
         var _this = this;
         _super.prototype.validate.call(this);
-        this._segmentsIterator.reset();
-        this.openSegmentWrapper(this._adjustedStartIndex);
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_13__["each"](this.axisRanges.iterator(), function (range) {
-            _this.openSegmentWrapper(_this._adjustedStartIndex, range);
-        });
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_13__["each"](this._segmentsIterator.iterator(), function (segment) {
-            segment.__disabled = true;
-        });
+        if (this.xAxis && this.yAxis) {
+            this._segmentsIterator.reset();
+            this.openSegmentWrapper(this._adjustedStartIndex);
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](this.axisRanges.iterator(), function (range) {
+                _this.openSegmentWrapper(_this._adjustedStartIndex, range);
+            });
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](this._segmentsIterator.iterator(), function (segment) {
+                segment.__disabled = true;
+            });
+        }
     };
     /**
      * [sliceData description]
@@ -23770,12 +24957,12 @@ var LineSeries = /** @class */ (function (_super) {
         var _this = this;
         var propertyFields = this.propertyFields;
         var startIndex = adjustedIndex;
-        _core_utils_Array__WEBPACK_IMPORTED_MODULE_16__["each"](properties, function (property) {
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](propertyFields[property])) {
+        _core_utils_Array__WEBPACK_IMPORTED_MODULE_17__["each"](properties, function (property) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](propertyFields[property])) {
                 for (var i = startIndex; i >= 0; i--) {
                     var dataItem = _this.dataItems.getIndex(i);
                     if (dataItem) {
-                        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](dataItem.properties[property])) {
+                        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](dataItem.properties[property])) {
                             if (adjustedIndex > i) {
                                 adjustedIndex = i;
                             }
@@ -23821,10 +25008,10 @@ var LineSeries = /** @class */ (function (_super) {
         segment.__disabled = false;
         if (axisRange) {
             segment.parent = axisRange.contents;
-            _core_utils_Object__WEBPACK_IMPORTED_MODULE_14__["copyProperties"](axisRange.contents, segment, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+            _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__["copyProperties"](axisRange.contents, segment, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
         }
         else {
-            _core_utils_Object__WEBPACK_IMPORTED_MODULE_14__["copyProperties"](this, segment, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+            _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__["copyProperties"](this, segment, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
             segment.filters.clear();
             segment.parent = this.segmentsContainer;
         }
@@ -23964,9 +25151,9 @@ var LineSeries = /** @class */ (function (_super) {
      */
     LineSeries.prototype.updateSegmentProperties = function (itemProperties, segment, checkOnly) {
         var changed = false;
-        _core_utils_Object__WEBPACK_IMPORTED_MODULE_14__["each"](itemProperties, function (propertyName, value) {
+        _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__["each"](itemProperties, function (propertyName, value) {
             // some value must be defined
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](value)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](value)) {
                 var currentValue = segment[propertyName];
                 var currentValueStr = void 0;
                 // current value can be Color, number, anything. So we check if it has toString, otherwise just do String().
@@ -24055,6 +25242,10 @@ var LineSeries = /** @class */ (function (_super) {
          * such way that it never goes below or above connecting points. To enable
          * vertical bending as well, use `tensionY`.
          *
+         * IMPORTANT: line smoothing works best when data items are placed at regular
+         * intervals. For setups where data items are spaced erratically, enabling
+         * smoothing might result in awkwardly looking lines.
+         *
          * @default 1
          * @param value  Horizontal tension (0-1)
          */
@@ -24110,17 +25301,17 @@ var LineSeries = /** @class */ (function (_super) {
         var w = marker.pixelWidth;
         var h = marker.pixelHeight;
         marker.disposeChildren();
-        var line = marker.createChild(_core_elements_Line__WEBPACK_IMPORTED_MODULE_10__["Line"]);
+        var line = marker.createChild(_core_elements_Line__WEBPACK_IMPORTED_MODULE_11__["Line"]);
         line.shouldClone = false;
         //line.copyFrom(<any>this); coppies events which is not good
-        _core_utils_Object__WEBPACK_IMPORTED_MODULE_14__["copyProperties"](this, line, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+        _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__["copyProperties"](this, line, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
         line.x2 = w;
         line.y = h / 2;
         line.visible = true;
         if (this.fillOpacity > 0) {
-            var fill = marker.createChild(_core_elements_Rectangle__WEBPACK_IMPORTED_MODULE_12__["Rectangle"]);
+            var fill = marker.createChild(_core_elements_Rectangle__WEBPACK_IMPORTED_MODULE_13__["Rectangle"]);
             //fill.copyFrom(<any>this); coppies events which is not good
-            _core_utils_Object__WEBPACK_IMPORTED_MODULE_14__["copyProperties"](this, fill, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+            _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__["copyProperties"](this, fill, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
             fill.width = w;
             fill.height = h;
             fill.y = 0;
@@ -24131,15 +25322,15 @@ var LineSeries = /** @class */ (function (_super) {
         var legendDataItem = marker.dataItem;
         legendDataItem.color = this.stroke;
         legendDataItem.colorOrig = this.fill;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_13__["eachContinue"](this.bullets.iterator(), function (bullet) {
-            if ((bullet instanceof _elements_Bullet__WEBPACK_IMPORTED_MODULE_17__["Bullet"]) && !bullet.copyToLegendMarker) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["eachContinue"](this.bullets.iterator(), function (bullet) {
+            if ((bullet instanceof _elements_Bullet__WEBPACK_IMPORTED_MODULE_18__["Bullet"]) && !bullet.copyToLegendMarker) {
                 return false;
             }
             var hasLabels = false;
             if (bullet instanceof _core_Container__WEBPACK_IMPORTED_MODULE_3__["Container"]) {
                 // do not copy bullets with labels
-                _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_13__["each"](bullet.children.iterator(), function (child) {
-                    if (child instanceof _core_elements_Label__WEBPACK_IMPORTED_MODULE_11__["Label"]) {
+                _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](bullet.children.iterator(), function (child) {
+                    if (child instanceof _core_elements_Label__WEBPACK_IMPORTED_MODULE_12__["Label"]) {
                         hasLabels = true;
                         return true;
                     }
@@ -24159,10 +25350,10 @@ var LineSeries = /** @class */ (function (_super) {
                 }
                 clone.visible = true;
                 // otherwise will not transit to color after hiding
-                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](clone.fill)) {
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](clone.fill)) {
                     clone.fill = _this.fill;
                 }
-                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](clone.stroke)) {
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](clone.stroke)) {
                     clone.stroke = _this.stroke;
                 }
                 return false;
@@ -24205,8 +25396,8 @@ var LineSeries = /** @class */ (function (_super) {
  *
  * @ignore
  */
-_core_Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].registeredClasses["LineSeries"] = LineSeries;
-_core_Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].registeredClasses["LineSeriesDataItem"] = LineSeriesDataItem;
+_core_Registry__WEBPACK_IMPORTED_MODULE_10__["registry"].registeredClasses["LineSeries"] = LineSeries;
+_core_Registry__WEBPACK_IMPORTED_MODULE_10__["registry"].registeredClasses["LineSeriesDataItem"] = LineSeriesDataItem;
 //# sourceMappingURL=LineSeries.js.map
 
 /***/ }),
@@ -24264,7 +25455,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Example
  */
 var LineSeriesSegment = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LineSeriesSegment, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LineSeriesSegment, _super);
     /**
      * Constructor
      */
@@ -24405,7 +25596,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var OHLCSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](OHLCSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OHLCSeriesDataItem, _super);
     /**
      * Defines a type of [[Component]] this data item is used for
      * @todo Disabled to work around TS bug (see if we can re-enable it again)
@@ -24438,7 +25629,7 @@ var OHLCSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var OHLCSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](OHLCSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OHLCSeries, _super);
     /**
      * Constructor
      */
@@ -24633,15 +25824,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Series__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Series */ "./node_modules/@amcharts/amcharts4/.internal/charts/series/Series.js");
 /* harmony import */ var _core_Sprite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/Sprite */ "./node_modules/@amcharts/amcharts4/.internal/core/Sprite.js");
 /* harmony import */ var _core_elements_Label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../core/elements/Label */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Label.js");
-/* harmony import */ var _elements_Tick__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../elements/Tick */ "./node_modules/@amcharts/amcharts4/.internal/charts/elements/Tick.js");
-/* harmony import */ var _core_utils_List__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
-/* harmony import */ var _core_Container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/Container */ "./node_modules/@amcharts/amcharts4/.internal/core/Container.js");
-/* harmony import */ var _core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/utils/ColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/ColorSet.js");
-/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony import */ var _core_utils_Ease__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Ease */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Ease.js");
-/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony import */ var _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
+/* harmony import */ var _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
+/* harmony import */ var _elements_Tick__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../elements/Tick */ "./node_modules/@amcharts/amcharts4/.internal/charts/elements/Tick.js");
+/* harmony import */ var _core_utils_List__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
+/* harmony import */ var _core_Container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/Container */ "./node_modules/@amcharts/amcharts4/.internal/core/Container.js");
+/* harmony import */ var _core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/utils/ColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/ColorSet.js");
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
+/* harmony import */ var _core_utils_Ease__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Ease */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Ease.js");
+/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony import */ var _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
 /**
  * Defines Percent Chart Series.
  */
@@ -24652,6 +25845,8 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
+
 
 
 
@@ -24677,7 +25872,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var PercentSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PercentSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PercentSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -24726,7 +25921,7 @@ var PercentSeriesDataItem = /** @class */ (function (_super) {
         _super.prototype.setVisibility.call(this, value, noChangeValues);
     };
     /**
-     * Show hidden data item (and corresponding cisual elements).
+     * Show hidden data item (and corresponding visual elements).
      *
      * @param duration  Duration (ms)
      * @param delay     Delay hiding (ms)
@@ -24801,14 +25996,14 @@ var PercentSeriesDataItem = /** @class */ (function (_super) {
             if (!this._tick) {
                 var tick_1 = this.component.ticks.create();
                 this._tick = tick_1;
+                this.addSprite(tick_1);
                 this._disposers.push(tick_1);
                 tick_1.parent = this.component.ticksContainer;
-                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__["Disposer"](function () {
+                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_13__["Disposer"](function () {
                     if (_this.component) {
                         _this.component.ticks.removeValue(tick_1);
                     }
                 }));
-                this.addSprite(tick_1);
                 tick_1.visible = this.visible;
             }
             return this._tick;
@@ -24827,15 +26022,15 @@ var PercentSeriesDataItem = /** @class */ (function (_super) {
             var _this = this;
             if (!this._label) {
                 var label_1 = this.component.labels.create();
+                this.addSprite(label_1);
                 this._label = label_1;
                 this._disposers.push(label_1);
                 label_1.parent = this.component.labelsContainer;
-                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__["Disposer"](function () {
+                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_13__["Disposer"](function () {
                     if (_this.component) {
                         _this.component.labels.removeValue(label_1);
                     }
                 }));
-                this.addSprite(label_1);
                 label_1.visible = this.visible;
             }
             return this._label;
@@ -24855,20 +26050,22 @@ var PercentSeriesDataItem = /** @class */ (function (_super) {
             if (!this._slice) {
                 var component_1 = this.component;
                 var slice_1 = component_1.slices.create();
+                this.addSprite(slice_1);
                 this._slice = slice_1;
                 this._disposers.push(slice_1);
                 slice_1.parent = component_1.slicesContainer;
-                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__["Disposer"](function () {
+                this._disposers.push(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_13__["Disposer"](function () {
                     component_1.slices.removeValue(slice_1);
                 }));
-                this.addSprite(slice_1);
                 slice_1.visible = this.visible;
                 // Apply accessibility
                 if (component_1.itemsFocusable()) {
+                    this.component.role = "menu";
                     slice_1.role = "menuitem";
                     slice_1.focusable = true;
                 }
                 else {
+                    this.component.role = "list";
                     slice_1.role = "listitem";
                     slice_1.focusable = false;
                 }
@@ -24930,7 +26127,7 @@ var PercentSeriesDataItem = /** @class */ (function (_super) {
  * @see {@link IPercentSeriesAdapters} for a list of available Adapters
  */
 var PercentSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PercentSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PercentSeries, _super);
     /**
      * Constructor
      */
@@ -24938,20 +26135,20 @@ var PercentSeries = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.className = "PercentSeries";
         _this._addAllDataItems = false;
-        _this.colors = new _core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_7__["ColorSet"]();
+        _this.colors = new _core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_8__["ColorSet"]();
         _this.colors.step = 1;
         _this.isMeasured = true;
         _this.calculatePercent = true;
-        var slicesContainer = _this.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_6__["Container"]);
+        var slicesContainer = _this.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_7__["Container"]);
         slicesContainer.shouldClone = false;
         slicesContainer.isMeasured = false;
         _this.slicesContainer = slicesContainer;
-        var ticksContainer = _this.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_6__["Container"]);
+        var ticksContainer = _this.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_7__["Container"]);
         ticksContainer.shouldClone = false;
         ticksContainer.isMeasured = false;
         ticksContainer.layout = "none";
         _this.ticksContainer = ticksContainer;
-        var labelsContainer = _this.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_6__["Container"]);
+        var labelsContainer = _this.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_7__["Container"]);
         labelsContainer.shouldClone = false;
         labelsContainer.isMeasured = false;
         labelsContainer.layout = "none";
@@ -24961,7 +26158,7 @@ var PercentSeries = /** @class */ (function (_super) {
         // Make all slices focusable
         _this.skipFocusThreshold = 50;
         var defaultState = _this.defaultState;
-        defaultState.transitionEasing = _core_utils_Ease__WEBPACK_IMPORTED_MODULE_10__["sinOut"];
+        defaultState.transitionEasing = _core_utils_Ease__WEBPACK_IMPORTED_MODULE_11__["sinOut"];
         // Accessibility
         _this.itemReaderText = "{category}: {value.percent.formatNumber('#.#')}%";
         _this.applyTheme();
@@ -24981,7 +26178,7 @@ var PercentSeries = /** @class */ (function (_super) {
      * @return Tick
      */
     PercentSeries.prototype.createTick = function () {
-        return new _elements_Tick__WEBPACK_IMPORTED_MODULE_4__["Tick"]();
+        return new _elements_Tick__WEBPACK_IMPORTED_MODULE_5__["Tick"]();
     };
     /**
      * Sreates label element.
@@ -25027,8 +26224,8 @@ var PercentSeries = /** @class */ (function (_super) {
                 slice.applyOnClones = true;
                 this._disposers.push(slice);
                 this.initSlice(slice);
-                this._slices = new _core_utils_List__WEBPACK_IMPORTED_MODULE_5__["ListTemplate"](slice);
-                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_5__["ListDisposer"](this._slices));
+                this._slices = new _core_utils_List__WEBPACK_IMPORTED_MODULE_6__["ListTemplate"](slice);
+                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_6__["ListDisposer"](this._slices));
             }
             return this._slices;
         },
@@ -25060,7 +26257,7 @@ var PercentSeries = /** @class */ (function (_super) {
          * ```
          *
          * @see {@link https://www.amcharts.com/docs/v4/concepts/list-templates/} for more information about list templates
-         * @return Slices
+         * @return Ticks
          */
         get: function () {
             if (!this._ticks) {
@@ -25068,8 +26265,8 @@ var PercentSeries = /** @class */ (function (_super) {
                 tick.applyOnClones = true;
                 this._disposers.push(tick);
                 this.initTick(tick);
-                this._ticks = new _core_utils_List__WEBPACK_IMPORTED_MODULE_5__["ListTemplate"](tick);
-                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_5__["ListDisposer"](this._ticks));
+                this._ticks = new _core_utils_List__WEBPACK_IMPORTED_MODULE_6__["ListTemplate"](tick);
+                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_6__["ListDisposer"](this._ticks));
             }
             return this._ticks;
         },
@@ -25104,7 +26301,7 @@ var PercentSeries = /** @class */ (function (_super) {
          * ```
          *
          * @see {@link https://www.amcharts.com/docs/v4/concepts/list-templates/} for more information about list templates
-         * @return Slices
+         * @return Labels
          */
         get: function () {
             if (!this._labels) {
@@ -25112,8 +26309,8 @@ var PercentSeries = /** @class */ (function (_super) {
                 label.applyOnClones = true;
                 this._disposers.push(label);
                 this.initLabel(label);
-                this._labels = new _core_utils_List__WEBPACK_IMPORTED_MODULE_5__["ListTemplate"](label);
-                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_5__["ListDisposer"](this._labels));
+                this._labels = new _core_utils_List__WEBPACK_IMPORTED_MODULE_6__["ListTemplate"](label);
+                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_6__["ListDisposer"](this._labels));
             }
             return this._labels;
         },
@@ -25151,6 +26348,9 @@ var PercentSeries = /** @class */ (function (_super) {
      */
     PercentSeries.prototype.validateDataItems = function () {
         this.colors.reset();
+        if (this.patterns) {
+            this.patterns.reset();
+        }
         _super.prototype.validateDataItems.call(this);
     };
     /**
@@ -25163,7 +26363,25 @@ var PercentSeries = /** @class */ (function (_super) {
         var slice = dataItem.slice;
         if (slice) {
             if (slice.fill == undefined) {
-                slice.fill = this.colors.next();
+                if (this.patterns) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](slice.stroke)) {
+                        slice.stroke = this.colors.next();
+                    }
+                    slice.fill = this.patterns.next();
+                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](slice.fillOpacity)) {
+                        slice.fill.backgroundOpacity = slice.fillOpacity;
+                    }
+                    if (slice.stroke instanceof _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"]) {
+                        slice.fill.stroke = slice.stroke;
+                        slice.fill.fill = slice.stroke;
+                    }
+                }
+                else {
+                    slice.fill = this.colors.next();
+                }
+            }
+            else {
+                this.colors.currentStep += this.colors.step;
             }
             if (slice.stroke == undefined) {
                 slice.stroke = slice.fill;
@@ -25205,6 +26423,9 @@ var PercentSeries = /** @class */ (function (_super) {
             var dataItem = dataItems[i];
             var label = dataItem.label;
             if (label) {
+                if (label.invalid) {
+                    label.validate();
+                }
                 var lh = label.measuredHeight;
                 if (!label.visible) {
                     lh = 0;
@@ -25213,9 +26434,6 @@ var PercentSeries = /** @class */ (function (_super) {
                     label.y = -this.maxHeight / 2 + lh / 2;
                 }
                 var nextLabel = this.getNextLabel(i + 1, dataItems);
-                if (label.invalid) {
-                    label.validate();
-                }
                 var bottom = label.pixelY + lh;
                 if (nextLabel) {
                     if (nextLabel.y < bottom) {
@@ -25294,6 +26512,25 @@ var PercentSeries = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(PercentSeries.prototype, "patterns", {
+        /**
+         * @return Pattern set
+         */
+        get: function () {
+            return this.getPropertyValue("patterns");
+        },
+        /**
+         * A [[PatternSet]] to use when creating patterned fills for slices.
+         *
+         * @since 4.7.5
+         * @param value  Pattern set
+         */
+        set: function (value) {
+            this.setPropertyValue("patterns", value, true);
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Binds related legend data item's visual settings to this series' visual
      * settings.
@@ -25303,7 +26540,7 @@ var PercentSeries = /** @class */ (function (_super) {
      * @param dataItem  Data item
      */
     PercentSeries.prototype.createLegendMarker = function (marker, dataItem) {
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["each"](marker.children.iterator(), function (child) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](marker.children.iterator(), function (child) {
             var slice = dataItem.slice;
             child.defaultState.properties.fill = slice.fill;
             child.defaultState.properties.stroke = slice.stroke;
@@ -25348,7 +26585,7 @@ var PercentSeries = /** @class */ (function (_super) {
         var _this = this;
         var slice = event.target;
         var dataItem = slice.dataItem;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["each"](dataItem.bullets.iterator(), function (a) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](dataItem.bullets.iterator(), function (a) {
             var value = a[1];
             _this.positionBullet(value);
         });
@@ -25371,6 +26608,7 @@ var PercentSeries = /** @class */ (function (_super) {
         this.slices.template.copyFrom(source.slices.template);
         this.labels.template.copyFrom(source.labels.template);
         this.ticks.template.copyFrom(source.ticks.template);
+        this.colors = source.colors.clone();
     };
     Object.defineProperty(PercentSeries.prototype, "alignLabels", {
         /**
@@ -25405,6 +26643,26 @@ var PercentSeries = /** @class */ (function (_super) {
     PercentSeries.prototype.setAlignLabels = function (value) {
         this.setPropertyValue("alignLabels", value, true);
     };
+    Object.defineProperty(PercentSeries.prototype, "ignoreZeroValues", {
+        /**
+         * @return Ignore zero values
+         */
+        get: function () {
+            return this.getPropertyValue("ignoreZeroValues");
+        },
+        /**
+         * If set to `true` the chart will not show slices with zero values.
+         *
+         * @default false
+         * @since 4.7.9
+         * @param  value  Ignore zero values
+         */
+        set: function (value) {
+            this.setPropertyValue("ignoreZeroValues", value, true);
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Updates corresponding legend data item with current values.
      *
@@ -25442,16 +26700,16 @@ var PercentSeries = /** @class */ (function (_super) {
  *
  * @ignore
  */
-_core_Registry__WEBPACK_IMPORTED_MODULE_8__["registry"].registeredClasses["PercentSeries"] = PercentSeries;
-_core_Registry__WEBPACK_IMPORTED_MODULE_8__["registry"].registeredClasses["PercentSeriesDataItem"] = PercentSeriesDataItem;
+_core_Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].registeredClasses["PercentSeries"] = PercentSeries;
+_core_Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].registeredClasses["PercentSeriesDataItem"] = PercentSeriesDataItem;
 /**
  * Add default responsive rules
  */
 /**
  * Disable labels and ticks.
  */
-_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_12__["defaultRules"].push({
-    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_12__["ResponsiveBreakpoints"].maybeXS,
+_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_14__["defaultRules"].push({
+    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_14__["ResponsiveBreakpoints"].maybeXS,
     state: function (target, stateId) {
         if (target instanceof PercentSeries) {
             var state = target.states.create(stateId);
@@ -25515,7 +26773,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var PictorialStackedSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PictorialStackedSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PictorialStackedSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -25543,7 +26801,7 @@ var PictorialStackedSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var PictorialStackedSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PictorialStackedSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PictorialStackedSeries, _super);
     /**
      * Constructor
      */
@@ -25556,6 +26814,8 @@ var PictorialStackedSeries = /** @class */ (function (_super) {
         _this.applyTheme();
         _this.startLocation = 0;
         _this.endLocation = 1;
+        _this.align = "center";
+        _this.valign = "middle";
         _this._maskSprite = _this.slicesContainer.createChild(_core_Sprite__WEBPACK_IMPORTED_MODULE_2__["Sprite"]);
         _this._maskSprite.visible = false;
         _this._maskSprite.zIndex = 100;
@@ -25602,22 +26862,64 @@ var PictorialStackedSeries = /** @class */ (function (_super) {
         maskSprite.verticalCenter = "middle";
         maskSprite.horizontalCenter = "middle";
         _super.prototype.validateDataElements.call(this);
+        var y;
+        var x;
         if (this.orientation == "vertical") {
-            var y = (maxHeight - newHeight) / 2;
-            this.slicesContainer.y = y;
-            this.labelsContainer.y = y;
-            this.ticksContainer.y = y;
+            if (this.valign == "bottom") {
+                y = (maxHeight - newHeight);
+            }
+            if (this.valign == "middle") {
+                y = (maxHeight - newHeight) / 2;
+            }
+            if (this.valign == "top") {
+                y = 0;
+            }
+            if (this.align == "left") {
+                x = -(maxWidth - newWidth) / 2;
+            }
+            if (this.align == "center") {
+                x = 0;
+            }
+            if (this.align == "right") {
+                x = (maxWidth - newWidth) / 2;
+            }
             this.slices.template.dy = startLocation * newHeight;
+            if (this.alignLabels) {
+                this.slicesContainer.dx = x;
+            }
         }
         else {
-            var x = (maxWidth - newWidth) / 2;
-            this.slicesContainer.x = x;
-            this.labelsContainer.x = x;
-            this.ticksContainer.x = x;
+            if (this.valign == "bottom") {
+                y = (maxHeight - newHeight) / 2;
+            }
+            if (this.valign == "middle") {
+                y = 0;
+            }
+            if (this.valign == "top") {
+                y = -(maxHeight - newHeight) / 2;
+            }
+            if (this.align == "left") {
+                x = 0;
+            }
+            if (this.align == "center") {
+                x = (maxWidth - newWidth) / 2;
+            }
+            if (this.align == "right") {
+                x = (maxWidth - newWidth);
+            }
             this.slices.template.dx = startLocation * newWidth;
+            if (this.alignLabels) {
+                this.slicesContainer.dy = y;
+            }
         }
+        this.slicesContainer.x = x;
+        this.labelsContainer.x = x;
+        this.ticksContainer.x = x;
+        this.slicesContainer.y = y;
+        this.labelsContainer.y = y;
+        this.ticksContainer.y = y;
         if (newWidth > 0 && newHeight > 0) {
-            this.slicesContainer.mask = this._maskSprite;
+            this.slicesContainer.mask = maskSprite;
         }
     };
     /**
@@ -25879,7 +27181,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var PieSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -25920,7 +27222,7 @@ var PieSeriesDataItem = /** @class */ (function (_super) {
         return _super.prototype.hide.call(this, duration, delay, 0, ["value", "radiusValue"]);
     };
     /**
-     * Show hidden data item (and corresponding cisual elements).
+     * Show hidden data item (and corresponding visual elements).
      *
      * @param duration  Duration (ms)
      * @param delay     Delay hiding (ms)
@@ -25947,7 +27249,7 @@ var PieSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var PieSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieSeries, _super);
     /**
      * Constructor
      */
@@ -25955,8 +27257,8 @@ var PieSeries = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.className = "PieSeries";
         _this.alignLabels = true;
-        _this.startAngle = -90;
-        _this.endAngle = 270;
+        //this.startAngle = -90;
+        //this.endAngle = 270;
         _this.layout = "none";
         _this.labels.template.radius = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_8__["percent"])(5);
         _this.addDisposer(_this.labels.template.events.on("enabled", _this.invalidate, _this, false));
@@ -26088,6 +27390,12 @@ var PieSeries = /** @class */ (function (_super) {
      */
     PieSeries.prototype.validateDataElement = function (dataItem) {
         if (this.pixelRadius > 0) {
+            if (this.ignoreZeroValues && dataItem.value == 0) {
+                dataItem.__disabled = true;
+            }
+            else {
+                dataItem.__disabled = false;
+            }
             // SLICE
             var slice = dataItem.slice;
             slice.radius = this.pixelRadius;
@@ -26098,7 +27406,7 @@ var PieSeries = /** @class */ (function (_super) {
                 slice.innerRadius = this.pixelInnerRadius;
             }
             slice.startAngle = this._currentStartAngle;
-            slice.arc = dataItem.values.value.percent * (this.endAngle - this.startAngle) / 100;
+            slice.arc = Math.abs(dataItem.values.value.percent) * (this.endAngle - this.startAngle) / 100;
             // LABEL
             if (!this.labels.template.disabled) {
                 var label = dataItem.label;
@@ -26115,7 +27423,7 @@ var PieSeries = /** @class */ (function (_super) {
                     label.verticalCenter = "middle";
                     var arcRect = this._arcRect;
                     // right half
-                    if (normalizedMiddleAngle >= 270 || normalizedMiddleAngle <= 90) { // 91 makes less chances for flickering
+                    if (normalizedMiddleAngle > 270 || normalizedMiddleAngle <= 90) {
                         x += (arcRect.width + arcRect.x) * this.pixelRadius;
                         label.horizontalCenter = "left";
                         this._rightItems.push(dataItem);
@@ -26227,17 +27535,20 @@ var PieSeries = /** @class */ (function (_super) {
     });
     Object.defineProperty(PieSeries.prototype, "startAngle", {
         /**
-         * @ignore Exclude from docs
          * @return Angle
          */
         get: function () {
-            return this.getPropertyValue("startAngle");
+            var startAngle = this.getPropertyValue("startAngle");
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](startAngle)) {
+                return startAngle;
+            }
+            else {
+                return this._startAngleInternal;
+            }
         },
         /**
          * Start angle for the series' slices in degrees. (0-360)
          *
-         * @ignore Exclude from docs
-         * @todo Redo so that users can set it
          * @param value  Angle
          */
         set: function (value) {
@@ -26248,17 +27559,20 @@ var PieSeries = /** @class */ (function (_super) {
     });
     Object.defineProperty(PieSeries.prototype, "endAngle", {
         /**
-         * @ignore Exclude from docs
          * @return Angle
          */
         get: function () {
-            return this.getPropertyValue("endAngle");
+            var endAngle = this.getPropertyValue("endAngle");
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](endAngle)) {
+                return endAngle;
+            }
+            else {
+                return this._endAngleInternal;
+            }
         },
         /**
          * End angle for the series' slices in degrees. (0-360)
          *
-         * @ignore Exclude from docs
-         * @todo Redo so that users can set it
          * @param value  Angle
          */
         set: function (value) {
@@ -26383,7 +27697,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var PieSeries3DDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieSeries3DDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieSeries3DDataItem, _super);
     /**
      * Constructor
      */
@@ -26430,7 +27744,7 @@ var PieSeries3DDataItem = /** @class */ (function (_super) {
  * @important
  */
 var PieSeries3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieSeries3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieSeries3D, _super);
     /**
      * Constructor
      */
@@ -26608,7 +27922,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var PyramidSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PyramidSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PyramidSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -26636,7 +27950,7 @@ var PyramidSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var PyramidSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PyramidSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PyramidSeries, _super);
     /**
      * Constructor
      */
@@ -26710,13 +28024,15 @@ var PyramidSeries = /** @class */ (function (_super) {
         var maxWidth = this.slicesContainer.innerWidth;
         var maxHeight = this.slicesContainer.innerHeight;
         this.dataItems.each(function (dataItem) {
-            var relValue = dataItem.getWorkingValue("value") / dataItem.value;
-            var sliceLink = dataItem.sliceLink;
-            if (_this.orientation == "vertical") {
-                maxHeight -= (sliceLink.pixelHeight * relValue);
-            }
-            else {
-                maxWidth -= (sliceLink.pixelWidth * relValue);
+            if (dataItem.value > 0) {
+                var relValue = dataItem.getWorkingValue("value") / dataItem.value;
+                var sliceLink = dataItem.sliceLink;
+                if (_this.orientation == "vertical") {
+                    maxHeight -= (sliceLink.pixelHeight * relValue);
+                }
+                else {
+                    maxWidth -= (sliceLink.pixelWidth * relValue);
+                }
             }
         });
         this._pyramidHeight = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["relativeToValue"](this.pyramidHeight, maxHeight);
@@ -26742,7 +28058,7 @@ var PyramidSeries = /** @class */ (function (_super) {
      * @param dataItem [description]
      */
     PyramidSeries.prototype.decorateSlice = function (dataItem) {
-        var sum = this.dataItem.values.value.sum;
+        var sum = this.dataItem.values.value.absoluteSum;
         if (sum == 0) {
             return;
         }
@@ -26752,16 +28068,19 @@ var PyramidSeries = /** @class */ (function (_super) {
         var tick = dataItem.tick;
         // TODO can this be removed ?
         this.getNextValue(dataItem);
-        var workingValue = dataItem.getWorkingValue("value");
-        if (workingValue == 0) {
-            workingValue = 0.000001;
-        }
+        var workingValue = Math.abs(dataItem.getWorkingValue("value"));
         var pyramidWidth = this._pyramidWidth;
         var pyramidHeight = this._pyramidHeight;
         var maxWidth = this.slicesContainer.innerWidth;
         var maxHeight = this.slicesContainer.innerHeight;
         var linkWidth = sliceLink.pixelWidth;
         var linkHeight = sliceLink.pixelHeight;
+        if (dataItem.value == 0 && this.ignoreZeroValues) {
+            dataItem.__disabled = true;
+        }
+        else {
+            dataItem.__disabled = false;
+        }
         if (this.orientation == "vertical") {
             var topWidth = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_4__["relativeToValue"](this.topWidth, maxWidth);
             if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_3__["isNumber"](this._nextWidth)) {
@@ -26781,11 +28100,15 @@ var PyramidSeries = /** @class */ (function (_super) {
                 var square = totalSquare * workingValue / sum;
                 var s = Math.abs(sliceTopWidth * sliceTopWidth - 2 * square * c);
                 sliceHeight = (sliceTopWidth - Math.sqrt(s)) / c;
-                sliceBottomWidth = (2 * square - sliceHeight * sliceTopWidth) / sliceHeight;
+                if (sliceHeight > 0) {
+                    sliceBottomWidth = (2 * square - sliceHeight * sliceTopWidth) / sliceHeight;
+                }
+                else {
+                    sliceBottomWidth = sliceTopWidth;
+                }
             }
             else {
-                var sum_1 = this.dataItem.values.value.sum;
-                sliceHeight = pyramidHeight * workingValue / sum_1;
+                sliceHeight = pyramidHeight * workingValue / sum;
                 sliceBottomWidth = sliceTopWidth - sliceHeight * c;
             }
             slice.height = sliceHeight;
@@ -26803,7 +28126,7 @@ var PyramidSeries = /** @class */ (function (_super) {
                 label.x = 0;
             }
             label.y = slice.pixelY + slice.pixelHeight * tick.locationY + slice.dy;
-            this._nextY += slice.pixelHeight + linkHeight * workingValue / dataItem.value;
+            this._nextY += slice.pixelHeight + linkHeight * workingValue / Math.max(Math.abs(dataItem.value), 0.00000001);
             sliceLink.y = this._nextY - linkHeight;
             sliceLink.x = maxWidth / 2;
         }
@@ -26823,12 +28146,12 @@ var PyramidSeries = /** @class */ (function (_super) {
             var sliceBottomWidth = void 0;
             if (this.valueIs == "area") {
                 var totalSquare = (topWidth + bottomWidth) / 2 * pyramidWidth;
-                var square = totalSquare * workingValue / this.dataItem.values.value.sum;
+                var square = totalSquare * workingValue / sum;
                 sliceWidth = (sliceTopWidth - Math.sqrt(sliceTopWidth * sliceTopWidth - 2 * square * c)) / c;
                 sliceBottomWidth = (2 * square - sliceWidth * sliceTopWidth) / sliceWidth;
             }
             else {
-                sliceWidth = pyramidWidth * workingValue / this.dataItem.values.value.sum;
+                sliceWidth = pyramidWidth * workingValue / sum;
                 sliceBottomWidth = sliceTopWidth - sliceWidth * c;
             }
             slice.width = sliceWidth;
@@ -26845,7 +28168,7 @@ var PyramidSeries = /** @class */ (function (_super) {
                 label.y = this.labelsContainer.measuredHeight;
             }
             label.x = slice.pixelX + slice.pixelWidth * tick.locationX + slice.dx;
-            this._nextY += slice.pixelWidth + linkWidth * workingValue / dataItem.value;
+            this._nextY += slice.pixelWidth + linkWidth * workingValue / Math.max(Math.abs(dataItem.value), 0.00000001);
             sliceLink.x = this._nextY - linkWidth;
             sliceLink.y = maxHeight / 2;
         }
@@ -26995,14 +28318,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _series_ColumnSeries__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../series/ColumnSeries */ "./node_modules/@amcharts/amcharts4/.internal/charts/series/ColumnSeries.js");
 /* harmony import */ var _core_Sprite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/Sprite */ "./node_modules/@amcharts/amcharts4/.internal/core/Sprite.js");
-/* harmony import */ var _elements_RadarColumn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../elements/RadarColumn */ "./node_modules/@amcharts/amcharts4/.internal/charts/elements/RadarColumn.js");
-/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-/* harmony import */ var _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
-/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
-/* harmony import */ var _core_utils_Object__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
-/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
-/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../axes/CategoryAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/CategoryAxis.js");
+/* harmony import */ var _elements_RadarColumn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../elements/RadarColumn */ "./node_modules/@amcharts/amcharts4/.internal/charts/elements/RadarColumn.js");
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/* harmony import */ var _core_rendering_Path__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
+/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
+/* harmony import */ var _core_utils_Object__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
+/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
+/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
 /**
  * Radar column series module.
  */
@@ -27015,7 +28339,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-//import { AxisRendererCircular } from "../axes/AxisRendererCircular";
+
 
 
 
@@ -27036,7 +28360,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var RadarColumnSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadarColumnSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadarColumnSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -27064,7 +28388,7 @@ var RadarColumnSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var RadarColumnSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadarColumnSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadarColumnSeries, _super);
     /**
      * Constructor
      */
@@ -27080,7 +28404,7 @@ var RadarColumnSeries = /** @class */ (function (_super) {
      * @return RadarColumn.
      */
     RadarColumnSeries.prototype.createColumnTemplate = function () {
-        return new _elements_RadarColumn__WEBPACK_IMPORTED_MODULE_3__["RadarColumn"]();
+        return new _elements_RadarColumn__WEBPACK_IMPORTED_MODULE_4__["RadarColumn"]();
     };
     /**
      * (Re)validates the whole series, effectively causing it to redraw.
@@ -27102,7 +28426,7 @@ var RadarColumnSeries = /** @class */ (function (_super) {
             if (dataItem.column) {
                 dataItem.column.__disabled = true;
             }
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["each"](this.axisRanges.iterator(), function (axisRange) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](this.axisRanges.iterator(), function (axisRange) {
                 var rangeColumn = dataItem.rangesColumns.getKey(axisRange.uid);
                 if (rangeColumn) {
                     rangeColumn.__disabled = true;
@@ -27135,30 +28459,39 @@ var RadarColumnSeries = /** @class */ (function (_super) {
         if (!radarColumn) {
             radarColumn = this.columns.create();
             dataItem.column = radarColumn;
-            _core_utils_Object__WEBPACK_IMPORTED_MODULE_7__["forceCopyProperties"](this.columns.template, radarColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+            _core_utils_Object__WEBPACK_IMPORTED_MODULE_8__["forceCopyProperties"](this.columns.template, radarColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
             dataItem.addSprite(radarColumn);
             radarColumn.paper = this.paper; // sometimes pattern is not drawn if is set with adapter without this.
             this.setColumnStates(radarColumn);
         }
         var width = radarColumn.width;
         var percentWidth = 100;
-        if (width instanceof _core_utils_Percent__WEBPACK_IMPORTED_MODULE_8__["Percent"]) {
+        if (width instanceof _core_utils_Percent__WEBPACK_IMPORTED_MODULE_9__["Percent"]) {
             percentWidth = width.percent;
         }
-        var offset = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"]((endLocation - startLocation) * (1 - percentWidth / 100) / 2, 5);
+        var offset = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["round"]((endLocation - startLocation) * (1 - percentWidth / 100) / 2, 5);
         startLocation += offset;
         endLocation -= offset;
-        if (this.baseAxis == this.xAxis) {
-            tRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["getDistance"]({ x: this.yAxis.getX(dataItem, yField, dataItem.locations[yField], "valueY"), y: this.yAxis.getY(dataItem, yField, dataItem.locations[yField], "valueY") });
-            bRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["getDistance"]({ x: this.yAxis.getX(dataItem, yOpenField, dataItem.locations[yOpenField], "valueY"), y: this.yAxis.getY(dataItem, yOpenField, dataItem.locations[yOpenField], "valueY") });
+        // two category axes
+        if ((this.xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_3__["CategoryAxis"]) && (this.yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_3__["CategoryAxis"])) {
+            tRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["getDistance"]({ x: this.yAxis.getX(dataItem, yField, 0, "valueY"), y: this.yAxis.getY(dataItem, yField, 0, "valueY") });
+            bRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["getDistance"]({ x: this.yAxis.getX(dataItem, yOpenField, 1, "valueY"), y: this.yAxis.getY(dataItem, yOpenField, 1, "valueY") });
+            lAngle = this.xAxis.getAngle(dataItem, xOpenField, 0, "valueX");
+            rAngle = this.xAxis.getAngle(dataItem, xField, 1, "valueX");
+            startAngle = startAngle + startLocation * cellAngle;
+            endAngle = endAngle - (1 - endLocation) * cellAngle;
+        }
+        else if (this.baseAxis == this.xAxis) {
+            tRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["getDistance"]({ x: this.yAxis.getX(dataItem, yField, dataItem.locations[yField], "valueY"), y: this.yAxis.getY(dataItem, yField, dataItem.locations[yField], "valueY") });
+            bRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["getDistance"]({ x: this.yAxis.getX(dataItem, yOpenField, dataItem.locations[yOpenField], "valueY"), y: this.yAxis.getY(dataItem, yOpenField, dataItem.locations[yOpenField], "valueY") });
             lAngle = this.xAxis.getAngle(dataItem, xOpenField, startLocation, "valueX");
             rAngle = this.xAxis.getAngle(dataItem, xField, endLocation, "valueX");
             startAngle = startAngle + startLocation * cellAngle;
             endAngle = endAngle - (1 - endLocation) * cellAngle;
         }
         else {
-            tRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["getDistance"]({ x: this.yAxis.getX(dataItem, yField, startLocation, "valueY"), y: this.yAxis.getY(dataItem, yField, startLocation, "valueY") });
-            bRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["getDistance"]({ x: this.yAxis.getX(dataItem, yOpenField, endLocation, "valueY"), y: this.yAxis.getY(dataItem, yOpenField, endLocation, "valueY") });
+            tRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["getDistance"]({ x: this.yAxis.getX(dataItem, yField, startLocation, "valueY"), y: this.yAxis.getY(dataItem, yField, startLocation, "valueY") });
+            bRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["getDistance"]({ x: this.yAxis.getX(dataItem, yOpenField, endLocation, "valueY"), y: this.yAxis.getY(dataItem, yOpenField, endLocation, "valueY") });
             lAngle = this.xAxis.getAngle(dataItem, xField, dataItem.locations[xField], "valueX");
             rAngle = this.xAxis.getAngle(dataItem, xOpenField, dataItem.locations[xOpenField], "valueX");
         }
@@ -27167,8 +28500,8 @@ var RadarColumnSeries = /** @class */ (function (_super) {
             rAngle = lAngle;
             lAngle = temp;
         }
-        lAngle = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["fitToRange"](lAngle, startAngle, endAngle);
-        rAngle = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["fitToRange"](rAngle, startAngle, endAngle);
+        lAngle = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["fitToRange"](lAngle, startAngle, endAngle);
+        rAngle = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["fitToRange"](rAngle, startAngle, endAngle);
         var slice = radarColumn.radarColumn;
         slice.startAngle = lAngle;
         var arc = rAngle - lAngle;
@@ -27178,14 +28511,14 @@ var RadarColumnSeries = /** @class */ (function (_super) {
             slice.innerRadius = bRadius;
             radarColumn.__disabled = false;
             radarColumn.parent = this.columnsContainer;
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["each"](this.axisRanges.iterator(), function (axisRange) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](this.axisRanges.iterator(), function (axisRange) {
                 var rangeColumn = dataItem.rangesColumns.getKey(axisRange.uid);
                 if (!rangeColumn) {
                     rangeColumn = _this.columns.create();
-                    _core_utils_Object__WEBPACK_IMPORTED_MODULE_7__["forceCopyProperties"](_this.columns.template, rangeColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
-                    _core_utils_Object__WEBPACK_IMPORTED_MODULE_7__["copyProperties"](axisRange.contents, rangeColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]); // need this because 3d columns are not in the same container
+                    _core_utils_Object__WEBPACK_IMPORTED_MODULE_8__["forceCopyProperties"](_this.columns.template, rangeColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+                    _core_utils_Object__WEBPACK_IMPORTED_MODULE_8__["copyProperties"](axisRange.contents, rangeColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]); // need this because 3d columns are not in the same container
                     if (rangeColumn.dataItem) {
-                        _core_utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](rangeColumn.dataItem.sprites, rangeColumn);
+                        _core_utils_Array__WEBPACK_IMPORTED_MODULE_11__["remove"](rangeColumn.dataItem.sprites, rangeColumn);
                     }
                     dataItem.addSprite(rangeColumn);
                     rangeColumn.paper = _this.paper; // sometimes pattern is not drawn if is set with adapter without this.					
@@ -27230,13 +28563,13 @@ var RadarColumnSeries = /** @class */ (function (_super) {
         }
         var x = this.yAxis.getX(dataItem, yKey, locationY, stackKeyY);
         var y = this.yAxis.getY(dataItem, yKey, locationY, stackKeyY);
-        var radius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["getDistance"]({ x: x, y: y });
+        var radius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["getDistance"]({ x: x, y: y });
         // hack to be able to determine angle later
         if (radius == 0) {
             radius = 0.00001;
         }
         var angle = this.xAxis.getAngle(dataItem, xKey, locationX, stackKeyX);
-        return { x: radius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["cos"](angle), y: radius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_6__["sin"](angle) };
+        return { x: radius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle), y: radius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) };
     };
     /**
      * Returns an SVG path to be used as a mask for the series.
@@ -27245,7 +28578,7 @@ var RadarColumnSeries = /** @class */ (function (_super) {
      */
     RadarColumnSeries.prototype.getMaskPath = function () {
         var renderer = this.yAxis.renderer;
-        return _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["arc"](renderer.startAngle, renderer.endAngle - renderer.startAngle, renderer.pixelRadius, renderer.pixelInnerRadius);
+        return _core_rendering_Path__WEBPACK_IMPORTED_MODULE_6__["arc"](renderer.startAngle, renderer.endAngle - renderer.startAngle, renderer.pixelRadius, renderer.pixelInnerRadius);
     };
     RadarColumnSeries.prototype.positionBulletReal = function (bullet, positionX, positionY) {
         var xAxis = this.xAxis;
@@ -27254,6 +28587,19 @@ var RadarColumnSeries = /** @class */ (function (_super) {
             bullet.visible = false;
         }
         bullet.moveTo(this.xAxis.renderer.positionToPoint(positionX, positionY));
+    };
+    RadarColumnSeries.prototype.setXAxis = function (axis) {
+        _super.prototype.setXAxis.call(this, axis);
+        this.updateRendererRefs();
+    };
+    RadarColumnSeries.prototype.setYAxis = function (axis) {
+        _super.prototype.setYAxis.call(this, axis);
+        this.updateRendererRefs();
+    };
+    RadarColumnSeries.prototype.updateRendererRefs = function () {
+        var rendererX = this.xAxis.renderer;
+        var rendererY = this.yAxis.renderer;
+        rendererX.axisRendererY = rendererY;
     };
     return RadarColumnSeries;
 }(_series_ColumnSeries__WEBPACK_IMPORTED_MODULE_1__["ColumnSeries"]));
@@ -27264,8 +28610,8 @@ var RadarColumnSeries = /** @class */ (function (_super) {
  *
  * @ignore
  */
-_core_Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].registeredClasses["RadarColumnSeries"] = RadarColumnSeries;
-_core_Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].registeredClasses["RadarColumnSeriesDataItem"] = RadarColumnSeriesDataItem;
+_core_Registry__WEBPACK_IMPORTED_MODULE_5__["registry"].registeredClasses["RadarColumnSeries"] = RadarColumnSeries;
+_core_Registry__WEBPACK_IMPORTED_MODULE_5__["registry"].registeredClasses["RadarColumnSeriesDataItem"] = RadarColumnSeriesDataItem;
 //# sourceMappingURL=RadarColumnSeries.js.map
 
 /***/ }),
@@ -27314,7 +28660,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var RadarSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadarSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadarSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -27346,7 +28692,7 @@ var RadarSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var RadarSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadarSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadarSeries, _super);
     /**
      * Constructor
      */
@@ -27492,6 +28838,19 @@ var RadarSeries = /** @class */ (function (_super) {
         }
         bullet.moveTo(this.xAxis.renderer.positionToPoint(positionX, positionY));
     };
+    RadarSeries.prototype.setXAxis = function (axis) {
+        _super.prototype.setXAxis.call(this, axis);
+        this.updateRendererRefs();
+    };
+    RadarSeries.prototype.setYAxis = function (axis) {
+        _super.prototype.setYAxis.call(this, axis);
+        this.updateRendererRefs();
+    };
+    RadarSeries.prototype.updateRendererRefs = function () {
+        var rendererX = this.xAxis.renderer;
+        var rendererY = this.yAxis.renderer;
+        rendererX.axisRendererY = rendererY;
+    };
     return RadarSeries;
 }(_LineSeries__WEBPACK_IMPORTED_MODULE_1__["LineSeries"]));
 
@@ -27582,7 +28941,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var SeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -27652,7 +29011,7 @@ var SeriesDataItem = /** @class */ (function (_super) {
  * @todo Separate axis-related stuff to some other class so that MapSeries would not have unrelated stuff
  */
 var Series = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Series, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Series, _super);
     /**
      * Constructor
      */
@@ -27967,6 +29326,7 @@ var Series = /** @class */ (function (_super) {
             var dataItems = this.dataItems;
             var count_1 = {};
             var sum_1 = {};
+            var absoluteSum_1 = {};
             var low_1 = {};
             var high_1 = {};
             var open_1 = {};
@@ -28010,6 +29370,11 @@ var Series = /** @class */ (function (_super) {
                             sum_1[key] = 0;
                         }
                         sum_1[key] += value;
+                        // absolute sum values
+                        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](absoluteSum_1[key])) {
+                            absoluteSum_1[key] = 0;
+                        }
+                        absoluteSum_1[key] += Math.abs(value);
                         // open
                         if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](open_1[key])) {
                             open_1[key] = value;
@@ -28067,7 +29432,7 @@ var Series = /** @class */ (function (_super) {
                 var _loop_2 = function (i) {
                     var dataItem_3 = dataItems.getIndex(i);
                     _core_utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataItem_3.values, function (key) {
-                        var ksum = sum_1[key];
+                        var ksum = absoluteSum_1[key];
                         var value = dataItem_3.getActualWorkingValue(key);
                         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](value)) {
                             if (ksum > 0) {
@@ -28107,6 +29472,7 @@ var Series = /** @class */ (function (_super) {
             var dataItem_4 = this.dataItem;
             _core_utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataItem_4.values, function (key) {
                 dataItem_4.setCalculatedValue(key, sum_1[key], "sum");
+                dataItem_4.setCalculatedValue(key, absoluteSum_1[key], "absoluteSum");
                 dataItem_4.setCalculatedValue(key, sum_1[key] / count_1[key], "average");
                 dataItem_4.setCalculatedValue(key, open_1[key], "open");
                 dataItem_4.setCalculatedValue(key, close_1[key], "close");
@@ -28165,7 +29531,12 @@ var Series = /** @class */ (function (_super) {
      */
     Series.prototype.updateTooltipBounds = function () {
         if (this.topParent) {
-            this.tooltip.setBounds({ x: 0, y: 0, width: this.topParent.maxWidth, height: this.topParent.maxHeight });
+            var x = 0;
+            var y = 0;
+            var w = this.topParent.maxWidth;
+            var h = this.topParent.maxHeight;
+            var rect = { x: x, y: y, width: w, height: h };
+            this.tooltip.setBounds(rect);
         }
     };
     Series.prototype.shouldCreateBullet = function (dataItem, bulletTemplate) {
@@ -28250,6 +29621,11 @@ var Series = /** @class */ (function (_super) {
                     bullet.maxHeight = dataItem.itemHeight;
                     bullet.__disabled = false;
                     _this.positionBullet(bullet);
+                }
+                else {
+                    if (bullet) {
+                        bullet.__disabled = true;
+                    }
                 }
             });
         }
@@ -28343,11 +29719,12 @@ var Series = /** @class */ (function (_super) {
             return this.getPropertyValue("minBulletDistance");
         },
         /**
-         * Minimal distance between two adjacent bullets in pixels.
+         * Minimal distance between data points in pixels.
          *
-         * If bullet is closer, it will be skipped and not shown.
+         * If distance gets smaller than this, bullets are turned off to avoid
+         * overlapping.
          *
-         * This allows to avoid crammed up graphs wil a lot of bullets.
+         * `0` (zero) disables this behavior.
          *
          * IMPORTANT: This setting will work only when Series' base axis
          * is [[CategoryAxis]] or [[DateAxis]]. If base axis is [[ValueAxis]] the
@@ -28580,10 +29957,12 @@ var Series = /** @class */ (function (_super) {
      * @param e Error
      */
     Series.prototype.raiseCriticalError = function (e) {
-        this._chart.modal.content = this._chart.adapter.apply("criticalError", e).message;
-        this._chart.modal.closable = false;
-        this._chart.modal.open();
-        this._chart.disabled = true;
+        if (this._chart && this._chart.modal) {
+            this._chart.modal.content = this._chart.adapter.apply("criticalError", e).message;
+            this._chart.modal.closable = false;
+            this._chart.modal.open();
+            this._chart.disabled = true;
+        }
         if (_core_Options__WEBPACK_IMPORTED_MODULE_10__["options"].verbose) {
             console.log(e);
         }
@@ -28604,7 +29983,50 @@ var Series = /** @class */ (function (_super) {
     };
     Object.defineProperty(Series.prototype, "heatRules", {
         /**
-         * @todo Description
+         * A list of heat rules to apply to series' elements based on the value
+         * of the data item.
+         *
+         * Heat rules can be any "numeric" (including `Color`) property, and can also
+         * be applied to child objects of series, like columns, bullets, etc.
+         *
+         * E.g.:
+         *
+         * ```TypeScript
+         * series.heatRules.push({
+         *  "target": series.columns.template,
+         *  "property": "fill",
+         *  "min": am4core.color("#F5DBCB"),
+         *  "max": am4core.color("#ED7B84"),
+         *  "dataField": "valueY"
+         *});
+         *```
+         * ```Javacript
+         * series.heatRules.push({
+         *  "target": series.columns.template,
+         *  "property": "fill",
+         *  "min": am4core.color("#F5DBCB"),
+         *  "max": am4core.color("#ED7B84"),
+         *  "dataField": "valueY"
+         *});
+         *```
+         *```JSON
+         *{
+         *  // ...
+         *  "series": [{
+         *    "type": "ColumnSeries",
+         *    "heatRules": [{
+         *      "target": "columns.template",
+         *      "property": "fill",
+         *      "min": "#F5DBCB",
+         *      "max": "#ED7B84",
+         *      "dataField": "valueY"
+         *    }]
+         *  }]
+         *}
+         *```
+         *
+         * @see {@link https://www.amcharts.com/docs/v4/concepts/series/#Heat_maps} for more about heat rules
+         * @return  Heat rules
          */
         get: function () {
             var _this = this;
@@ -28912,7 +30334,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var StepLineSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](StepLineSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(StepLineSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -28940,7 +30362,7 @@ var StepLineSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var StepLineSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](StepLineSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(StepLineSeries, _super);
     /**
      * Constructor
      */
@@ -29166,7 +30588,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Example
  */
 var StepLineSeriesSegment = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](StepLineSeriesSegment, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(StepLineSeriesSegment, _super);
     /**
      * Constructor
      */
@@ -29286,7 +30708,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var TreeMapSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TreeMapSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(TreeMapSeriesDataItem, _super);
     /**
      * Constructor
      */
@@ -29405,7 +30827,7 @@ var TreeMapSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var TreeMapSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TreeMapSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(TreeMapSeries, _super);
     /**
      * Constructor
      */
@@ -29457,6 +30879,9 @@ var TreeMapSeries = /** @class */ (function (_super) {
      * @return Animation
      */
     TreeMapSeries.prototype.show = function (duration) {
+        if (this.preventShow) {
+            return;
+        }
         var interpolationDuration = this.defaultState.transitionDuration;
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_5__["isNumber"](duration)) {
             interpolationDuration = duration;
@@ -29554,6 +30979,12 @@ var TreeMapSeries = /** @class */ (function (_super) {
         legendDataItem.color = column.fill;
         legendDataItem.colorOrig = column.fill;
     };
+    TreeMapSeries.prototype.disableUnusedColumns = function (dataItem) {
+        _super.prototype.disableUnusedColumns.call(this, dataItem);
+        if (dataItem.column) {
+            dataItem.column.__disabled = false;
+        }
+    };
     return TreeMapSeries;
 }(_ColumnSeries__WEBPACK_IMPORTED_MODULE_1__["ColumnSeries"]));
 
@@ -29586,17 +31017,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../axes/ValueAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/ValueAxis.js");
 /* harmony import */ var _core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/utils/Dictionary */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Dictionary.js");
 /* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony import */ var _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../axes/CategoryAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/CategoryAxis.js");
-/* harmony import */ var _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../axes/DateAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/DateAxis.js");
-/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
-/* harmony import */ var _core_utils_Utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
-/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _core_utils_Time__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/utils/Time */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Time.js");
-/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
-/* harmony import */ var _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
-/* harmony import */ var _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
+/* harmony import */ var _types_XYChart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../types/XYChart */ "./node_modules/@amcharts/amcharts4/.internal/charts/types/XYChart.js");
+/* harmony import */ var _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../axes/CategoryAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/CategoryAxis.js");
+/* harmony import */ var _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../axes/DateAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/DateAxis.js");
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
+/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
+/* harmony import */ var _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
+/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _core_utils_Time__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/utils/Time */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Time.js");
+/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _core_utils_Object__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
+/* harmony import */ var _core_rendering_Path__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
 /**
  * XY series module.
  */
@@ -29607,6 +31039,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -29635,13 +31068,14 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var XYSeriesDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](XYSeriesDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(XYSeriesDataItem, _super);
     /**
      * Constructor
      */
     function XYSeriesDataItem() {
         var _this = _super.call(this) || this;
         _this.className = "XYSeriesDataItem";
+        _this.values.customValue = {};
         _this.values.valueX = { stack: 0 };
         _this.values.valueY = { stack: 0 };
         _this.values.openValueX = {};
@@ -29671,6 +31105,24 @@ var XYSeriesDataItem = /** @class */ (function (_super) {
          */
         set: function (value) {
             this.setValue("valueX", value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XYSeriesDataItem.prototype, "customValue", {
+        /**
+         * @return Value
+         */
+        get: function () {
+            return this.values.customValue.value;
+        },
+        /**
+         * Item's custom numeric value.
+         *
+         * @param value  Value
+         */
+        set: function (value) {
+            this.setValue("customValue", value);
         },
         enumerable: true,
         configurable: true
@@ -29886,10 +31338,10 @@ var XYSeriesDataItem = /** @class */ (function (_super) {
         var _this = this;
         //if (this.visible) {  // dumped because of non smooth zooming
         var min;
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](stackValue)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](stackValue)) {
             stackValue = 0;
         }
-        _core_utils_Array__WEBPACK_IMPORTED_MODULE_14__["each"](fields, function (field) {
+        _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__["each"](fields, function (field) {
             var value;
             if (working) {
                 value = _this.getWorkingValue(field);
@@ -29898,7 +31350,7 @@ var XYSeriesDataItem = /** @class */ (function (_super) {
                 value = _this.getValue(field);
             }
             value += stackValue;
-            if (value < min || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](min)) {
+            if (value < min || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](min)) {
                 min = value;
             }
         });
@@ -29918,10 +31370,10 @@ var XYSeriesDataItem = /** @class */ (function (_super) {
         var _this = this;
         //if (this.visible) { // dumped because of non smooth zooming
         var max;
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](stackValue)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](stackValue)) {
             stackValue = 0;
         }
-        _core_utils_Array__WEBPACK_IMPORTED_MODULE_14__["each"](fields, function (field) {
+        _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__["each"](fields, function (field) {
             var value;
             if (working) {
                 value = _this.getWorkingValue(field);
@@ -29930,7 +31382,7 @@ var XYSeriesDataItem = /** @class */ (function (_super) {
                 value = _this.getValue(field);
             }
             value += stackValue;
-            if (value > max || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](max)) {
+            if (value > max || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](max)) {
                 max = value;
             }
         });
@@ -29954,7 +31406,7 @@ var XYSeriesDataItem = /** @class */ (function (_super) {
  * @important
  */
 var XYSeries = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](XYSeries, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(XYSeries, _super);
     /**
      * Constructor
      */
@@ -30078,10 +31530,18 @@ var XYSeries = /** @class */ (function (_super) {
          * @ignore
          */
         _this.usesShowFields = false;
+        /**
+         * @ignore
+         */
+        _this._dataSetChanged = false;
+        _this._maxxX = 100000;
+        _this._maxxY = 100000;
+        _this._propertiesChanged = false;
         _this.className = "XYSeries";
         _this.isMeasured = false;
         _this.groupFields.valueX = "close";
         _this.groupFields.valueY = "close";
+        _this.groupFields.customValue = "close";
         _this.groupFields.openValueX = "open";
         _this.groupFields.openValueY = "open";
         _this.cursorTooltipEnabled = true;
@@ -30091,12 +31551,27 @@ var XYSeries = /** @class */ (function (_super) {
         _this.mainContainer.mask.setElement(_this.paper.add("path"));
         _this.stacked = false;
         _this.snapTooltip = false;
+        _this._showBullets = false;
         _this.tooltip.pointerOrientation = "horizontal";
+        _this.hideTooltipWhileZooming = true;
+        _this.setPropertyValue("maskBullets", true);
         _this.tooltip.events.on("hidden", function () {
             _this.returnBulletDefaultState();
         }, undefined, false);
         _this._disposers.push(_this._xAxis);
         _this._disposers.push(_this._yAxis);
+        _this.observe(_core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"], function () {
+            if (_this.inited) {
+                _this._propertiesChanged = true;
+                if (_this.legendDataItem) {
+                    _this.legendDataItem.childrenCreated = false;
+                }
+                if (_this.chart && _this.chart.legend) {
+                    _this.chart.legend.invalidateDataItems();
+                }
+                _this.invalidate();
+            }
+        }, undefined, false);
         _this.applyTheme();
         return _this;
     }
@@ -30106,7 +31581,7 @@ var XYSeries = /** @class */ (function (_super) {
      */
     XYSeries.prototype.applyInternalDefaults = function () {
         _super.prototype.applyInternalDefaults.call(this);
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](this.readerTitle)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.readerTitle)) {
             this.readerTitle = this.language.translate("X/Y Series");
         }
     };
@@ -30122,11 +31597,20 @@ var XYSeries = /** @class */ (function (_super) {
     /**
      * @ignore
      */
-    XYSeries.prototype.dataChangeUpdate = function () {
+    XYSeries.prototype.resetExtremes = function () {
         this._tmin.clear();
         this._tmax.clear();
         this._smin.clear();
         this._smax.clear();
+    };
+    /**
+     * @ignore
+     */
+    XYSeries.prototype.dataChangeUpdate = function () {
+        this.dataGrouped = false;
+        this._baseInterval = {};
+        this._currentDataSetId = "";
+        this.resetExtremes();
         if (this.xAxis) {
             this.xAxis.seriesDataChangeUpdate(this);
         }
@@ -30142,7 +31626,7 @@ var XYSeries = /** @class */ (function (_super) {
     XYSeries.prototype.validateData = function () {
         this._baseInterval = {};
         var dataFields = this.dataFields;
-        if (dataFields.valueYShow || dataFields.openValueXShow || dataFields.openValueXShow || dataFields.openValueYShow || (this.xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"] && this.xAxis.groupData == true) || (this.yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"] && this.yAxis.groupData == true)) {
+        if (dataFields.valueYShow || dataFields.openValueXShow || dataFields.openValueXShow || dataFields.openValueYShow) {
             this.usesShowFields = true;
         }
         else {
@@ -30154,8 +31638,14 @@ var XYSeries = /** @class */ (function (_super) {
         }
         _super.prototype.validateData.call(this);
         this.updateItemReaderText();
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](this.dataFields[this._xField]) || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](this.dataFields[this._yField])) {
-            throw Error("Data fields for series \"" + (this.name ? this.name : this.uid) + "\" are not properly defined.");
+        if (this.chart) {
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.dataFields[this._xField]) || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.dataFields[this._yField])) {
+                throw Error("Data fields for series \"" + (this.name ? this.name : this.uid) + "\" are not properly defined.");
+            }
+        }
+        // 4.7.21 solves 51540
+        if (this.inited && this.isHidden) {
+            this.hide(0);
         }
         this.dataGrouped = false;
     };
@@ -30174,7 +31664,9 @@ var XYSeries = /** @class */ (function (_super) {
             this.setInitialWorkingValues(dataItem);
         }
         catch (e) {
-            this._chart.raiseCriticalError(e);
+            if (this._chart) {
+                this._chart.raiseCriticalError(e);
+            }
         }
     };
     /**
@@ -30204,22 +31696,24 @@ var XYSeries = /** @class */ (function (_super) {
      */
     XYSeries.prototype.disposeData = function () {
         _super.prototype.disposeData.call(this);
-        if (this.xAxis) {
-            var dataItemsX = this.dataItemsByAxis.getKey(this.xAxis.uid);
+        var xAxis = this.xAxis;
+        var yAxis = this.yAxis;
+        if (xAxis) {
+            var dataItemsX = this.dataItemsByAxis.getKey(xAxis.uid);
             if (dataItemsX) {
                 dataItemsX.clear();
             }
-            if (this.xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__["CategoryAxis"]) {
-                this.clearCatAxis(this.xAxis);
+            if (xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"]) {
+                this.clearCatAxis(xAxis);
             }
         }
-        if (this.yAxis) {
-            var dataItemsY = this.dataItemsByAxis.getKey(this.yAxis.uid);
+        if (yAxis) {
+            var dataItemsY = this.dataItemsByAxis.getKey(yAxis.uid);
             if (dataItemsY) {
                 dataItemsY.clear();
             }
-            if (this.yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__["CategoryAxis"]) {
-                this.clearCatAxis(this.yAxis);
+            if (yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"]) {
+                this.clearCatAxis(yAxis);
             }
         }
     };
@@ -30240,43 +31734,45 @@ var XYSeries = /** @class */ (function (_super) {
     XYSeries.prototype.defineFields = function () {
         var xAxis = this.xAxis;
         var yAxis = this.yAxis;
-        var xAxisFieldName = xAxis.axisFieldName;
-        var xField = (xAxisFieldName + "X");
-        var xOpenField = ("open" + _core_utils_Utils__WEBPACK_IMPORTED_MODULE_11__["capitalize"](xAxisFieldName) + "X");
-        var yAxisFieldName = yAxis.axisFieldName;
-        var yField = (yAxisFieldName + "Y");
-        var yOpenField = ("open" + _core_utils_Utils__WEBPACK_IMPORTED_MODULE_11__["capitalize"](yAxisFieldName) + "Y");
-        this._xField = xField;
-        this._yField = yField;
-        if (this.dataFields[xOpenField]) {
-            this._xOpenField = xOpenField;
-        }
-        if (this.dataFields[yOpenField]) {
-            this._yOpenField = yOpenField;
-        }
-        if (!this.dataFields[yOpenField] && this.baseAxis == this.yAxis) {
-            this._yOpenField = yField;
-        }
-        if (!this.dataFields[xOpenField] && this.baseAxis == this.xAxis) {
-            this._xOpenField = xField;
-        }
-        if (this.stacked && this.baseAxis == this.xAxis) {
-            this._xOpenField = xField;
-        }
-        if (this.stacked && this.baseAxis == this.yAxis) {
-            this._yOpenField = yField;
-        }
-        if ((this.xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__["CategoryAxis"]) && (this.yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__["CategoryAxis"])) {
-            if (!this._yOpenField) {
+        if (xAxis && yAxis) {
+            var xAxisFieldName = xAxis.axisFieldName;
+            var xField = (xAxisFieldName + "X");
+            var xOpenField = ("open" + _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__["capitalize"](xAxisFieldName) + "X");
+            var yAxisFieldName = yAxis.axisFieldName;
+            var yField = (yAxisFieldName + "Y");
+            var yOpenField = ("open" + _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__["capitalize"](yAxisFieldName) + "Y");
+            this._xField = xField;
+            this._yField = yField;
+            if (this.dataFields[xOpenField]) {
+                this._xOpenField = xOpenField;
+            }
+            if (this.dataFields[yOpenField]) {
+                this._yOpenField = yOpenField;
+            }
+            if (!this.dataFields[yOpenField] && this.baseAxis == yAxis) {
                 this._yOpenField = yField;
             }
+            if (!this.dataFields[xOpenField] && this.baseAxis == xAxis) {
+                this._xOpenField = xField;
+            }
+            if (this.stacked && this.baseAxis == xAxis) {
+                this._xOpenField = xField;
+            }
+            if (this.stacked && this.baseAxis == yAxis) {
+                this._yOpenField = yField;
+            }
+            if ((xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"]) && (yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"])) {
+                if (!this._yOpenField) {
+                    this._yOpenField = yField;
+                }
+            }
+            this._xValueFields = [];
+            this._yValueFields = [];
+            this.addValueField(xAxis, this._xValueFields, this._xField);
+            this.addValueField(xAxis, this._xValueFields, this._xOpenField);
+            this.addValueField(yAxis, this._yValueFields, this._yField);
+            this.addValueField(yAxis, this._yValueFields, this._yOpenField);
         }
-        this._xValueFields = [];
-        this._yValueFields = [];
-        this.addValueField(this.xAxis, this._xValueFields, this._xField);
-        this.addValueField(this.xAxis, this._xValueFields, this._xOpenField);
-        this.addValueField(this.yAxis, this._yValueFields, this._yField);
-        this.addValueField(this.yAxis, this._yValueFields, this._yOpenField);
     };
     /**
      * [axis description]
@@ -30288,7 +31784,7 @@ var XYSeries = /** @class */ (function (_super) {
      */
     XYSeries.prototype.addValueField = function (axis, fields, field) {
         if (axis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](this.dataFields[field]) && fields.indexOf(field) == -1) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.dataFields[field]) && fields.indexOf(field) == -1) {
                 fields.push(field);
             }
         }
@@ -30303,7 +31799,7 @@ var XYSeries = /** @class */ (function (_super) {
      * @param axis   Axis
      */
     XYSeries.prototype.setCategoryAxisField = function (field, axis) {
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](this.dataFields[field])) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.dataFields[field])) {
             this.dataFields[field] = axis.dataFields.category;
         }
     };
@@ -30317,7 +31813,7 @@ var XYSeries = /** @class */ (function (_super) {
      * @param axis   Axis
      */
     XYSeries.prototype.setDateAxisField = function (field, axis) {
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](this.dataFields[field])) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.dataFields[field])) {
             this.dataFields[field] = axis.dataFields.date;
         }
     };
@@ -30338,7 +31834,7 @@ var XYSeries = /** @class */ (function (_super) {
         if (this.mainContainer.mask) {
             var path_1 = this.getMaskPath();
             // @todo: this approach won't work well on circluar or other non x/y axes
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["each"](this.axisRanges.iterator(), function (range) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](this.axisRanges.iterator(), function (range) {
                 if (range.axisFill.fillPath) {
                     range.axisFill.validate();
                     path_1 += range.axisFill.fillPath;
@@ -30353,12 +31849,15 @@ var XYSeries = /** @class */ (function (_super) {
      * @return SVG path
      */
     XYSeries.prototype.getMaskPath = function () {
-        return _core_rendering_Path__WEBPACK_IMPORTED_MODULE_16__["rectToPath"]({
-            x: 0,
-            y: 0,
-            width: this.xAxis.axisLength,
-            height: this.yAxis.axisLength
-        });
+        if (this.xAxis && this.yAxis) {
+            return _core_rendering_Path__WEBPACK_IMPORTED_MODULE_17__["rectToPath"]({
+                x: 0,
+                y: 0,
+                width: this.xAxis.axisLength,
+                height: this.yAxis.axisLength
+            });
+        }
+        return "";
     };
     /**
      * Returns axis data field to use.
@@ -30380,12 +31879,23 @@ var XYSeries = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     XYSeries.prototype.validateDataItems = function () {
+        var chart = this.chart;
+        if (chart) {
+            this._maxxX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["max"](100000, chart.plotContainer.maxWidth * 2);
+            this._maxxY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["max"](100000, chart.plotContainer.maxHeight * 2);
+        }
         // this helps date axis to check which baseInterval we should use
-        this.xAxis.updateAxisBySeries();
-        this.yAxis.updateAxisBySeries();
+        var xAxis = this.xAxis;
+        var yAxis = this.yAxis;
+        if (xAxis && yAxis) {
+            xAxis.updateAxisBySeries();
+            yAxis.updateAxisBySeries();
+        }
         _super.prototype.validateDataItems.call(this);
-        this.xAxis.postProcessSeriesDataItems();
-        this.yAxis.postProcessSeriesDataItems();
+        if (xAxis && yAxis) {
+            xAxis.postProcessSeriesDataItems(this);
+            yAxis.postProcessSeriesDataItems(this);
+        }
     };
     /**
      * Validates data range.
@@ -30393,11 +31903,15 @@ var XYSeries = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     XYSeries.prototype.validateDataRange = function () {
-        if (this.xAxis.dataRangeInvalid) {
-            this.xAxis.validateDataRange();
-        }
-        if (this.yAxis.dataRangeInvalid) {
-            this.yAxis.validateDataRange();
+        var xAxis = this.xAxis;
+        var yAxis = this.yAxis;
+        if (xAxis && yAxis) {
+            if (xAxis.dataRangeInvalid) {
+                xAxis.validateDataRange();
+            }
+            if (yAxis.dataRangeInvalid) {
+                yAxis.validateDataRange();
+            }
         }
         _super.prototype.validateDataRange.call(this);
     };
@@ -30407,22 +31921,49 @@ var XYSeries = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     XYSeries.prototype.validate = function () {
-        if (this.xAxis.invalid) {
-            this.xAxis.validate();
-        }
-        if (this.yAxis.invalid) {
-            this.yAxis.validate();
-        }
-        this.y = this.yAxis.pixelY;
-        this.x = this.xAxis.pixelX;
-        this._showBullets = true;
-        var minBulletDistance = this.minBulletDistance;
-        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](minBulletDistance)) {
-            if (this.baseAxis.axisLength / (this.endIndex - this.startIndex) < minBulletDistance) {
-                this._showBullets = false;
+        var xAxis = this.xAxis;
+        var yAxis = this.yAxis;
+        if (xAxis && yAxis) {
+            if (xAxis.invalid) {
+                xAxis.validate();
+            }
+            if (yAxis.invalid) {
+                yAxis.validate();
+            }
+            this.y = yAxis.pixelY;
+            this.x = xAxis.pixelX;
+            this._showBullets = true;
+            var minBulletDistance = this.minBulletDistance;
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](minBulletDistance)) {
+                if (this.baseAxis.axisLength / (this.endIndex - this.startIndex) < minBulletDistance) {
+                    this._showBullets = false;
+                }
             }
         }
+        this.updateTooltip();
         _super.prototype.validate.call(this);
+        var chart = this.chart;
+        var maskBullets = this.maskBullets;
+        if (chart && maskBullets) {
+            if (chart.className == "XYChart") {
+                if (chart.leftAxesContainer.layout == "vertical" || chart.rightAxesContainer.layout == "vertical") {
+                    if (this.yAxis) {
+                        this.bulletsContainer.mask = this.yAxis.renderer.gridContainer;
+                    }
+                    else {
+                        this.bulletsContainer.mask = undefined;
+                    }
+                }
+                if (chart.topAxesContainer.layout == "horizontal" || chart.bottomAxesContainer.layout == "horizontal") {
+                    if (this.xAxis) {
+                        this.bulletsContainer.mask = this.xAxis.renderer.gridContainer;
+                    }
+                    else {
+                        this.bulletsContainer.mask = undefined;
+                    }
+                }
+            }
+        }
     };
     Object.defineProperty(XYSeries.prototype, "xAxis", {
         /**
@@ -30504,6 +32045,9 @@ var XYSeries = /** @class */ (function (_super) {
                 oldAxis.series.removeValue(this);
             }
             this._yAxis.set(axis, axis.registerSeries(this));
+            if (axis.chart instanceof _types_XYChart__WEBPACK_IMPORTED_MODULE_6__["XYChart"]) {
+                axis.chart.handleYAxisSet(this);
+            }
             this.dataItemsByAxis.setKey(axis.uid, new _core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_4__["Dictionary"]());
             this.invalidateData();
         }
@@ -30513,21 +32057,23 @@ var XYSeries = /** @class */ (function (_super) {
          * @return Axis
          */
         get: function () {
-            if (!this._baseAxis) {
-                if (this.yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"]) {
-                    this._baseAxis = this.yAxis;
+            var xAxis = this.xAxis;
+            var yAxis = this.yAxis;
+            if (!this._baseAxis && xAxis && yAxis) {
+                if (yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"]) {
+                    this._baseAxis = yAxis;
                 }
-                if (this.xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"]) {
-                    this._baseAxis = this.xAxis;
+                if (xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"]) {
+                    this._baseAxis = xAxis;
                 }
-                if (this.yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__["CategoryAxis"]) {
-                    this._baseAxis = this.yAxis;
+                if (yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"]) {
+                    this._baseAxis = yAxis;
                 }
-                if (this.xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__["CategoryAxis"]) {
-                    this._baseAxis = this.xAxis;
+                if (xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"]) {
+                    this._baseAxis = xAxis;
                 }
                 if (!this._baseAxis) {
-                    this._baseAxis = this.xAxis;
+                    this._baseAxis = xAxis;
                 }
             }
             return this._baseAxis;
@@ -30550,6 +32096,23 @@ var XYSeries = /** @class */ (function (_super) {
         configurable: true
     });
     /**
+     * Adds one or several (array) of data items to the existing data.
+     *
+     * @param rawDataItem One or many raw data item objects
+     */
+    XYSeries.prototype.addData = function (rawDataItem, removeCount) {
+        _super.prototype.addData.call(this, rawDataItem, removeCount);
+        if (this.scrollbarSeries) {
+            this.scrollbarSeries.addData(rawDataItem, removeCount);
+        }
+    };
+    XYSeries.prototype.setData = function (value) {
+        _super.prototype.setData.call(this, value);
+        if (this.scrollbarSeries) {
+            this.scrollbarSeries.setData(value);
+        }
+    };
+    /**
      * Makes the chart use particular data set.
      *
      * If `id` is not provided or there is no such data set, main data will be
@@ -30562,18 +32125,27 @@ var XYSeries = /** @class */ (function (_super) {
     XYSeries.prototype.setDataSet = function (id) {
         var changed = _super.prototype.setDataSet.call(this, id);
         if (changed) {
+            this._dataSetChanged = true;
             var dataItems = this.dataItems;
+            this.resetExtremes();
             var xAxis = this.xAxis;
             var yAxis = this.yAxis;
-            if (xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"] && xAxis == this.baseAxis) {
+            this._prevStartIndex = undefined;
+            this._prevEndIndex = undefined;
+            this._startIndex = undefined;
+            this._endIndex = undefined;
+            if (!this.appeared) {
+                this.processValues(false); // this will slow down!
+            }
+            if (xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"] && xAxis == this.baseAxis) {
                 this._tmin.setKey(xAxis.uid, dataItems.getIndex(0).dateX.getTime());
                 this._tmax.setKey(xAxis.uid, dataItems.getIndex(dataItems.length - 1).dateX.getTime());
-                this.dispatchImmediately("extremeschanged");
+                this.dispatch("extremeschanged");
             }
-            if (yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"] && yAxis == this.baseAxis) {
+            if (yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"] && yAxis == this.baseAxis) {
                 this._tmin.setKey(yAxis.uid, dataItems.getIndex(0).dateY.getTime());
                 this._tmax.setKey(yAxis.uid, dataItems.getIndex(dataItems.length - 1).dateY.getTime());
-                this.dispatchImmediately("extremeschanged");
+                this.dispatch("extremeschanged");
             }
         }
         return changed;
@@ -30586,6 +32158,11 @@ var XYSeries = /** @class */ (function (_super) {
      */
     XYSeries.prototype.processValues = function (working) {
         _super.prototype.processValues.call(this, working);
+        var xAxis = this.xAxis;
+        var yAxis = this.yAxis;
+        if (!xAxis || !yAxis) {
+            return;
+        }
         var dataItems = this.dataItems;
         var minX = Infinity;
         var maxX = -Infinity;
@@ -30604,13 +32181,13 @@ var XYSeries = /** @class */ (function (_super) {
             this.getStackValue(dataItem, working);
             var stackX = dataItem.getValue("valueX", "stack");
             var stackY = dataItem.getValue("valueY", "stack");
-            minX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["min"](dataItem.getMin(this._xValueFields, working, stackX), minX);
-            minY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["min"](dataItem.getMin(this._yValueFields, working, stackY), minY);
-            maxX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["max"](dataItem.getMax(this._xValueFields, working, stackX), maxX);
-            maxY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["max"](dataItem.getMax(this._yValueFields, working, stackY), maxY);
+            minX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["min"](dataItem.getMin(this._xValueFields, working, stackX), minX);
+            minY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["min"](dataItem.getMin(this._yValueFields, working, stackY), minY);
+            maxX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["max"](dataItem.getMax(this._xValueFields, working, stackX), maxX);
+            maxY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["max"](dataItem.getMax(this._yValueFields, working, stackY), maxY);
             // if it's stacked, pay attention to stack value
             if (this.stacked) {
-                if (this.baseAxis == this.xAxis) {
+                if (this.baseAxis == xAxis) {
                     if (stackY < minY) {
                         minY = stackY;
                     }
@@ -30618,7 +32195,7 @@ var XYSeries = /** @class */ (function (_super) {
                         maxY = stackY;
                     }
                 }
-                if (this.baseAxis == this.yAxis) {
+                if (this.baseAxis == yAxis) {
                     if (stackX < minX) {
                         minX = stackX;
                     }
@@ -30629,10 +32206,16 @@ var XYSeries = /** @class */ (function (_super) {
             }
         }
         // this is mainly for value axis to calculate total and perecent.total of each series category
-        this.xAxis.processSeriesDataItems();
-        this.yAxis.processSeriesDataItems();
-        var xAxisId = this.xAxis.uid;
-        var yAxisId = this.yAxis.uid;
+        xAxis.processSeriesDataItems();
+        yAxis.processSeriesDataItems();
+        var xAxisId = xAxis.uid;
+        var yAxisId = yAxis.uid;
+        if (this.xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && (minX == Infinity || maxX == -Infinity)) {
+            return;
+        }
+        if (this.yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && (minY == Infinity || maxY == -Infinity)) {
+            return;
+        }
         if (!working) {
             if (this._tmin.getKey(xAxisId) != minX || this._tmax.getKey(xAxisId) != maxX || this._tmin.getKey(yAxisId) != minY || this._tmax.getKey(yAxisId) != maxY) {
                 this._tmin.setKey(xAxisId, minX);
@@ -30661,13 +32244,13 @@ var XYSeries = /** @class */ (function (_super) {
                 this.getStackValue(dataItem, working);
                 var stackX = dataItem.getValue("valueX", "stack");
                 var stackY = dataItem.getValue("valueY", "stack");
-                minX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["min"](dataItem.getMin(this._xValueFields, working, stackX), minX);
-                minY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["min"](dataItem.getMin(this._yValueFields, working, stackY), minY);
-                maxX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["max"](dataItem.getMax(this._xValueFields, working, stackX), maxX);
-                maxY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["max"](dataItem.getMax(this._yValueFields, working, stackY), maxY);
+                minX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["min"](dataItem.getMin(this._xValueFields, working, stackX), minX);
+                minY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["min"](dataItem.getMin(this._yValueFields, working, stackY), minY);
+                maxX = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["max"](dataItem.getMax(this._xValueFields, working, stackX), maxX);
+                maxY = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["max"](dataItem.getMax(this._yValueFields, working, stackY), maxY);
                 // if it's stacked, pay attention to stack value
                 if (this.stacked) {
-                    if (this.baseAxis == this.xAxis) {
+                    if (this.baseAxis == xAxis) {
                         if (stackY < minY) {
                             minY = stackY;
                         }
@@ -30675,7 +32258,7 @@ var XYSeries = /** @class */ (function (_super) {
                             maxY = stackY;
                         }
                     }
-                    if (this.baseAxis == this.yAxis) {
+                    if (this.baseAxis == yAxis) {
                         if (stackX < minX) {
                             minX = stackX;
                         }
@@ -30686,6 +32269,12 @@ var XYSeries = /** @class */ (function (_super) {
                 }
             }
         }
+        if (this.xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && (minX == Infinity || maxX == -Infinity)) {
+            return;
+        }
+        if (this.yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && (minY == Infinity || maxY == -Infinity)) {
+            return;
+        }
         if (this._smin.getKey(xAxisId) != minX || this._smax.getKey(xAxisId) != maxX || this._smin.getKey(yAxisId) != minY || this._smax.getKey(yAxisId) != maxY) {
             this._smin.setKey(xAxisId, minX);
             this._smax.setKey(xAxisId, maxX);
@@ -30694,32 +32283,36 @@ var XYSeries = /** @class */ (function (_super) {
             if (this.appeared || this.start != 0 || this.end != 1 || this.dataItems != this.mainDataSet) {
                 /// new, helps to handle issues with change percent
                 var changed = false;
-                if (this.yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !(this.yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"])) {
+                if (yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !(yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"])) {
                     var tmin = this._tmin.getKey(yAxisId);
-                    if (this.usesShowFields || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](tmin) || minY < tmin) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmin) || ((this.usesShowFields || this._dataSetChanged) && minY < tmin) || this.stackedSeries) {
                         this._tmin.setKey(yAxisId, minY);
                         changed = true;
                     }
                     var tmax = this._tmax.getKey(yAxisId);
-                    if (this.usesShowFields || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](tmax) || maxY > tmax) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmax) || ((this.usesShowFields || this._dataSetChanged) && maxY > tmax) || this.stackedSeries) {
                         this._tmax.setKey(yAxisId, maxY);
                         changed = true;
                     }
                 }
-                if (this.xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !(this.xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"])) {
+                if (xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !(xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"])) {
                     var tmin = this._tmin.getKey(xAxisId);
-                    if (this.usesShowFields || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](tmin) || minX < tmin) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmin) || ((this.usesShowFields || this._dataSetChanged) && minX < tmin) || this.stackedSeries) {
                         this._tmin.setKey(xAxisId, minX);
                         changed = true;
                     }
                     var tmax = this._tmax.getKey(xAxisId);
-                    if (this.usesShowFields || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](tmax) || maxX > tmax) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmax) || ((this.usesShowFields || this._dataSetChanged) && maxX > tmax) || this.stackedSeries) {
                         this._tmax.setKey(xAxisId, maxX);
                         changed = true;
                     }
                 }
                 if (changed) {
                     this.dispatchImmediately("extremeschanged");
+                }
+                if (this.start == 0 && this.end == 1) {
+                    // yes, its ok. otherwise min/max won't be updated when zooming out
+                    this._dataSetChanged = false;
                 }
                 this.dispatchImmediately("selectionextremeschanged");
             }
@@ -30778,6 +32371,7 @@ var XYSeries = /** @class */ (function (_super) {
      * @param dataItem
      */
     XYSeries.prototype.showTooltipAtDataItem = function (dataItem) {
+        var e_1, _a;
         var cursor = this.chart.cursor;
         if (cursor && cursor.hideSeriesTooltipsOnSelection && cursor.selection.visible && cursor.downPoint) {
             this.hideTooltip();
@@ -30791,42 +32385,51 @@ var XYSeries = /** @class */ (function (_super) {
                 // todo: add tooltipXField and tooltipYField.
                 var tooltipXField = this.tooltipXField;
                 var tooltipYField = this.tooltipYField;
-                if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](dataItem[tooltipXField]) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](dataItem[tooltipYField])) {
+                if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](dataItem[tooltipXField]) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](dataItem[tooltipYField])) {
                     var tooltipPoint = this.getPoint(dataItem, tooltipXField, tooltipYField, this.getAdjustedXLocation(dataItem, tooltipXField), this.getAdjustedYLocation(dataItem, tooltipYField));
                     if (tooltipPoint) {
-                        this.tooltipX = tooltipPoint.x;
-                        this.tooltipY = tooltipPoint.y;
-                        if (this._prevTooltipDataItem != dataItem) {
-                            this.dispatchImmediately("tooltipshownat", {
-                                type: "tooltipshownat",
-                                target: this,
-                                dataItem: dataItem
-                            });
-                            this._prevTooltipDataItem = dataItem;
+                        if (this.chart.className == "XYChart" && (tooltipPoint.y < -1 || tooltipPoint.y > this.yAxis.pixelHeight + 1 || tooltipPoint.x < -1 || tooltipPoint.x > this.xAxis.pixelWidth + 1)) {
+                            // void
                         }
-                        if (this.cursorHoverEnabled) {
-                            try {
-                                for (var _a = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](dataItem.sprites), _b = _a.next(); !_b.done; _b = _a.next()) {
-                                    var sprite = _b.value;
-                                    if (!sprite.parent.visible || sprite.isHidden || sprite.__disabled || sprite.disabled || sprite.isHiding) {
-                                    }
-                                    else {
-                                        sprite.isHover = true;
-                                    }
-                                }
+                        else {
+                            this.tooltipX = tooltipPoint.x;
+                            this.tooltipY = tooltipPoint.y;
+                            if (this._prevTooltipDataItem != dataItem) {
+                                this.dispatchImmediately("tooltipshownat", {
+                                    type: "tooltipshownat",
+                                    target: this,
+                                    dataItem: dataItem
+                                });
+                                this._prevTooltipDataItem = dataItem;
                             }
-                            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                            finally {
+                            if (this.cursorHoverEnabled) {
                                 try {
-                                    if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                                    for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(dataItem.sprites), _c = _b.next(); !_c.done; _c = _b.next()) {
+                                        var sprite = _c.value;
+                                        if (!sprite.parent.visible || sprite.isHidden || sprite.__disabled || sprite.disabled || sprite.isHiding) {
+                                        }
+                                        else {
+                                            if (!sprite.interactions.isRealHover) {
+                                                sprite.dispatchImmediately("over");
+                                                sprite.interactions.isRealHover = true;
+                                            }
+                                            sprite.isHover = true;
+                                        }
+                                    }
                                 }
-                                finally { if (e_1) throw e_1.error; }
+                                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                                finally {
+                                    try {
+                                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                                    }
+                                    finally { if (e_1) throw e_1.error; }
+                                }
                             }
+                            if (this.showTooltip()) {
+                                return _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__["spritePointToSvg"]({ x: tooltipPoint.x, y: tooltipPoint.y }, this);
+                            }
+                            return;
                         }
-                        if (this.showTooltip()) {
-                            return _core_utils_Utils__WEBPACK_IMPORTED_MODULE_11__["spritePointToSvg"]({ x: tooltipPoint.x, y: tooltipPoint.y }, this);
-                        }
-                        return;
                     }
                 }
             }
@@ -30834,20 +32437,23 @@ var XYSeries = /** @class */ (function (_super) {
         else {
             this.updateLegendValue(dataItem, true);
         }
-        var e_1, _c;
     };
     /**
-     * returns default state to bullets when tooltip is shown at some other data item or hidden
-     *
-     * @ignore Exclude from docs
+     * Returns default state to bullets when tooltip is shown at some other data
+     * item or hidden
      */
     XYSeries.prototype.returnBulletDefaultState = function (dataItem) {
+        var e_2, _a;
         if (this._prevTooltipDataItem && this._prevTooltipDataItem != dataItem) {
             try {
-                for (var _a = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](this._prevTooltipDataItem.sprites), _b = _a.next(); !_b.done; _b = _a.next()) {
-                    var sprite = _b.value;
+                for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(this._prevTooltipDataItem.sprites), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var sprite = _c.value;
                     if (!sprite.isDisposed()) {
+                        var fireEvent = sprite.interactions.isRealHover;
                         sprite.isHover = false;
+                        if (fireEvent) {
+                            sprite.dispatchImmediately("out");
+                        }
                     }
                     else {
                         this._prevTooltipDataItem = undefined;
@@ -30857,21 +32463,20 @@ var XYSeries = /** @class */ (function (_super) {
             catch (e_2_1) { e_2 = { error: e_2_1 }; }
             finally {
                 try {
-                    if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
                 }
                 finally { if (e_2) throw e_2.error; }
             }
         }
-        var e_2, _c;
     };
     XYSeries.prototype.shouldCreateBullet = function (dataItem, bulletTemplate) {
         // use series xField/yField if bullet doesn't have fields set
         var xField = bulletTemplate.xField;
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](xField)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](xField)) {
             xField = this.xField;
         }
         var yField = bulletTemplate.yField;
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](yField)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](yField)) {
             yField = this.yField;
         }
         if ((this.xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !dataItem.hasValue([xField])) || (this.yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !dataItem.hasValue([yField]))) {
@@ -30889,19 +32494,32 @@ var XYSeries = /** @class */ (function (_super) {
         }
         return true;
     };
+    /**
+     * @ignore
+     */
+    XYSeries.prototype.updateTooltip = function () {
+        if (!this.hideTooltipWhileZooming && this.tooltip && !this.tooltip.isHidden && !this.isHiding && !this.isHidden && this.tooltipDataItem) {
+            this.showTooltipAtDataItem(this.tooltipDataItem);
+        }
+    };
+    /**
+     * @ignore
+     */
     XYSeries.prototype.positionBullet = function (bullet) {
         _super.prototype.positionBullet.call(this, bullet);
         var dataItem = bullet.dataItem;
         // use series xField/yField if bullet doesn't have fields set
         var xField = bullet.xField;
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](xField)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](xField)) {
             xField = this.xField;
         }
         var yField = bullet.yField;
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](yField)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](yField)) {
             yField = this.yField;
         }
-        if ((this.xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !dataItem.hasValue([xField])) || (this.yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !dataItem.hasValue([yField]))) {
+        var xAxis = this.xAxis;
+        var yAxis = this.yAxis;
+        if ((xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !dataItem.hasValue([xField])) || (yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !dataItem.hasValue([yField]))) {
             bullet.visible = false;
         }
         else {
@@ -30911,12 +32529,10 @@ var XYSeries = /** @class */ (function (_super) {
             if (point) {
                 var xOpenField = this.xOpenField;
                 var yOpenField = this.yOpenField;
-                var xAxis = this.xAxis;
-                var yAxis = this.yAxis;
                 var positionX = void 0;
                 var positionY = void 0;
-                if (xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"]) {
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](bulletLocationX)) {
+                if (xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"]) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](bulletLocationX)) {
                         bulletLocationX = 0;
                     }
                     var openValue = void 0;
@@ -30929,7 +32545,7 @@ var XYSeries = /** @class */ (function (_super) {
                     else {
                         openValue = dataItem.getWorkingValue(xOpenField);
                     }
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](openValue)) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](openValue)) {
                         openValue = closeValue;
                     }
                     var stack = dataItem.getValue("valueX", "stack");
@@ -30937,8 +32553,9 @@ var XYSeries = /** @class */ (function (_super) {
                     closeValue += stack;
                     if (openValue == closeValue) {
                         var baseInterval = xAxis.baseInterval;
-                        openValue = _core_utils_Time__WEBPACK_IMPORTED_MODULE_13__["round"](new Date(openValue), baseInterval.timeUnit, baseInterval.count, xAxis.dateFormatter.firstDayOfWeek).getTime();
-                        closeValue = _core_utils_Time__WEBPACK_IMPORTED_MODULE_13__["add"](new Date(openValue), baseInterval.timeUnit, baseInterval.count).getTime();
+                        var dateFormatter = xAxis.dateFormatter;
+                        openValue = _core_utils_Time__WEBPACK_IMPORTED_MODULE_14__["round"](new Date(openValue), baseInterval.timeUnit, baseInterval.count, dateFormatter.firstDayOfWeek, dateFormatter.utc).getTime();
+                        closeValue = _core_utils_Time__WEBPACK_IMPORTED_MODULE_14__["add"](new Date(openValue), baseInterval.timeUnit, baseInterval.count, dateFormatter.utc).getTime();
                     }
                     var middleValue = void 0;
                     if (xAxis == this.baseAxis) {
@@ -30950,7 +32567,7 @@ var XYSeries = /** @class */ (function (_super) {
                     positionX = xAxis.valueToPosition(middleValue);
                 }
                 else if (xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](bulletLocationX)) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](bulletLocationX)) {
                         bulletLocationX = 0;
                     }
                     var openValue = void 0;
@@ -30967,7 +32584,7 @@ var XYSeries = /** @class */ (function (_super) {
                     var middleValue = openValue + (closeValue - openValue) * (1 - bulletLocationX);
                     positionX = xAxis.valueToPosition(middleValue);
                 }
-                else if (xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__["CategoryAxis"]) {
+                else if (xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"]) {
                     var rightLocation = this.getAdjustedXLocation(dataItem, xField);
                     var leftLocation = this.getAdjustedXLocation(dataItem, xOpenField);
                     positionX = xAxis.categoryToPosition(dataItem[xField], rightLocation);
@@ -30975,13 +32592,13 @@ var XYSeries = /** @class */ (function (_super) {
                     if (xOpenField) {
                         openPositionX = xAxis.categoryToPosition(dataItem[xOpenField], leftLocation);
                     }
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](openPositionX)) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](openPositionX)) {
                         openPositionX = 1;
                     }
                     positionX = openPositionX + (positionX - openPositionX) * bulletLocationX;
                 }
-                if (yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_7__["DateAxis"]) {
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](bulletLocationY)) {
+                if (yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"]) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](bulletLocationY)) {
                         bulletLocationY = 0;
                     }
                     var openValue = void 0;
@@ -30994,7 +32611,7 @@ var XYSeries = /** @class */ (function (_super) {
                     else {
                         openValue = dataItem.getWorkingValue(yOpenField);
                     }
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](openValue)) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](openValue)) {
                         openValue = closeValue;
                     }
                     var stack = dataItem.getValue("valueY", "stack");
@@ -31002,8 +32619,9 @@ var XYSeries = /** @class */ (function (_super) {
                     closeValue += stack;
                     if (openValue == closeValue) {
                         var baseInterval = yAxis.baseInterval;
-                        openValue = _core_utils_Time__WEBPACK_IMPORTED_MODULE_13__["round"](new Date(openValue), baseInterval.timeUnit, baseInterval.count, yAxis.dateFormatter.firstDayOfWeek).getTime();
-                        closeValue = _core_utils_Time__WEBPACK_IMPORTED_MODULE_13__["add"](new Date(openValue), baseInterval.timeUnit, baseInterval.count).getTime();
+                        var dateFormatter = yAxis.dateFormatter;
+                        openValue = _core_utils_Time__WEBPACK_IMPORTED_MODULE_14__["round"](new Date(openValue), baseInterval.timeUnit, baseInterval.count, dateFormatter.firstDayOfWeek, dateFormatter.utc).getTime();
+                        closeValue = _core_utils_Time__WEBPACK_IMPORTED_MODULE_14__["add"](new Date(openValue), baseInterval.timeUnit, baseInterval.count, dateFormatter.utc).getTime();
                     }
                     var middleValue = void 0;
                     if (yAxis == this.baseAxis) {
@@ -31015,7 +32633,7 @@ var XYSeries = /** @class */ (function (_super) {
                     positionY = yAxis.valueToPosition(middleValue);
                 }
                 else if (yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](bulletLocationY)) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](bulletLocationY)) {
                         bulletLocationY = 0;
                     }
                     var openValue = void 0;
@@ -31032,7 +32650,7 @@ var XYSeries = /** @class */ (function (_super) {
                     var middleValue = openValue + (closeValue - openValue) * (1 - bulletLocationY);
                     positionY = yAxis.valueToPosition(middleValue);
                 }
-                else if (yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_6__["CategoryAxis"]) {
+                else if (yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"]) {
                     positionY = yAxis.categoryToPosition(dataItem[yField], bulletLocationY);
                     var topLocation = this.getAdjustedYLocation(dataItem, yField);
                     var bottomLocation = this.getAdjustedYLocation(dataItem, yOpenField);
@@ -31041,7 +32659,7 @@ var XYSeries = /** @class */ (function (_super) {
                     if (yOpenField) {
                         openPositionY = yAxis.categoryToPosition(dataItem[yOpenField], bottomLocation);
                     }
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](openPositionY)) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](openPositionY)) {
                         openPositionY = 1;
                     }
                     positionY = openPositionY + (positionY - openPositionY) * bulletLocationY;
@@ -31059,83 +32677,50 @@ var XYSeries = /** @class */ (function (_super) {
         bullet.y = this.yAxis.renderer.positionToPoint(positionY, positionX).y;
     };
     /**
-     * Positions series bullet.
-     *
-     * @ignore Exclude from docs
-     * @param bullet  Bullet
+     * returns bullet x location
+     * @ignore
      */
-    /*
-   public positionBullet(bullet: Bullet) {
-       super.positionBullet(bullet);
-
-       let dataItem: XYSeriesDataItem = <XYSeriesDataItem>bullet.dataItem;
-
-       // use series xField/yField if bullet doesn't have fields set
-       let xField: string = bullet.xField;
-       if (!$type.hasValue(xField)) {
-           xField = this.xField;
-       }
-
-       let yField: string = bullet.yField;
-       if (!$type.hasValue(yField)) {
-           yField = this.yField;
-       }
-
-       if ((this.xAxis instanceof ValueAxis && !dataItem.hasValue([xField])) || (this.yAxis instanceof ValueAxis && !dataItem.hasValue([yField]))) {
-           bullet.visible = false;
-       }
-       else {
-           let bulletLocationX: number = this.getBulletLocationX(bullet, xField);
-           let bulletLocationY: number = this.getBulletLocationY(bullet, yField);
-
-           let point = this.getPoint(dataItem, xField, yField, bulletLocationX, bulletLocationY);
-           if (point) {
-               let x: number = point.x;
-               let y: number = point.y;
-
-               if ($type.isNumber(bullet.locationX) && this.xOpenField != this.xField) {
-                   let openX: number = this.xAxis.getX(dataItem, this.xOpenField);
-                   x = x - (x - openX) * bullet.locationX;
-               }
-
-
-               if ($type.isNumber(bullet.locationY) && this.yOpenField != this.yField) {
-                   let openY: number = this.yAxis.getY(dataItem, this.yOpenField);
-                   y = y - (y - openY) * bullet.locationY;
-               }
-
-               bullet.moveTo({ x: x, y: y });
-
-               bullet.visible = true;
-           }
-           else {
-               bullet.visible = false;
-           }
-       }
-   }*/
-    /**
-    * returns bullet x location
-    * @ignore
-    */
     XYSeries.prototype.getBulletLocationX = function (bullet, field) {
         var bulletLocation = bullet.locationX;
         var dataItem = bullet.dataItem;
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](bulletLocation)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](bulletLocation)) {
             bulletLocation = dataItem.workingLocations[field];
         }
         return bulletLocation;
     };
     /**
-    * returns bullet x location
-    * @ignore
-    */
+     * Returns bullet x location
+     * @ignore
+     */
     XYSeries.prototype.getBulletLocationY = function (bullet, field) {
         var bulletLocation = bullet.locationY;
         var dataItem = bullet.dataItem;
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](bulletLocation)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](bulletLocation)) {
             bulletLocation = dataItem.workingLocations[field];
         }
         return bulletLocation;
+    };
+    /**
+     * This method must be called if you update Series' data fields that might
+     * affect stacking of the series.
+     *
+     * Since individual `dataField` changes are not being monitored, you need
+     * todo it manually for changes to take affect.
+     *
+     * @since 4.7.21
+     */
+    XYSeries.prototype.updateStacking = function () {
+        var _this = this;
+        this.invalidateDataItems();
+        if (this.chart) {
+            this.chart.series.each(function (series) {
+                if (series.baseAxis == _this.baseAxis) {
+                    series.stackedSeries = undefined;
+                    series.invalidateDataItems();
+                    series.invalidateProcessedData();
+                }
+            });
+        }
     };
     Object.defineProperty(XYSeries.prototype, "stacked", {
         /**
@@ -31155,7 +32740,25 @@ var XYSeries = /** @class */ (function (_super) {
          * @param stacked  Can be stacked?
          */
         set: function (stacked) {
-            this.setPropertyValue("stacked", stacked, true);
+            if (this.setPropertyValue("stacked", stacked, true)) {
+                this.updateStacking();
+                var xAxis = this.xAxis;
+                var yAxis = this.yAxis;
+                if (!stacked) {
+                    var field_1;
+                    if (xAxis != this.baseAxis && xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
+                        field_1 = this.xField;
+                    }
+                    if (yAxis != this.baseAxis && yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
+                        field_1 = this.yField;
+                    }
+                    if (field_1) {
+                        this.dataItems.each(function (dataItem) {
+                            dataItem.setCalculatedValue(field_1, 0, "stack");
+                        });
+                    }
+                }
+            }
         },
         enumerable: true,
         configurable: true
@@ -31199,11 +32802,11 @@ var XYSeries = /** @class */ (function (_super) {
         var endIndex = this.endIndex;
         var delay = 0;
         var interpolationDuration = this.defaultState.transitionDuration;
-        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](duration)) {
+        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](duration)) {
             interpolationDuration = duration;
         }
         var anim;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["each"](_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["indexed"](this.dataItems.iterator()), function (a) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["indexed"](this.dataItems.iterator()), function (a) {
             var i = a[0];
             var dataItem = a[1];
             if (_this.sequencedInterpolation && interpolationDuration > 0) {
@@ -31231,6 +32834,10 @@ var XYSeries = /** @class */ (function (_super) {
         var animation = _super.prototype.show.call(this, duration);
         if (anim && !anim.isFinished()) {
             animation = anim;
+        }
+        if (this.hidden) {
+            this.dispatchImmediately("selectionextremeschanged");
+            this.hidden = false;
         }
         return animation;
     };
@@ -31270,12 +32877,12 @@ var XYSeries = /** @class */ (function (_super) {
         var startIndex = this.startIndex;
         var endIndex = this.endIndex;
         var interpolationDuration = this.hiddenState.transitionDuration;
-        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](duration)) {
+        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](duration)) {
             interpolationDuration = duration;
         }
         var delay = 0;
         var anim;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["each"](_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["indexed"](this.dataItems.iterator()), function (a) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["indexed"](this.dataItems.iterator()), function (a) {
             var i = a[0];
             var dataItem = a[1];
             if (interpolationDuration == 0) {
@@ -31309,8 +32916,8 @@ var XYSeries = /** @class */ (function (_super) {
         _super.prototype.handleDataItemWorkingValueChange.call(this, dataItem, name);
         // to calculate stack values
         var axisSeries = this.baseAxis.series;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["each"](axisSeries.iterator(), function (series) {
-            if (series.stacked) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](axisSeries.iterator(), function (series) {
+            if (series.stacked || series.stackedSeries) {
                 series.invalidateProcessedData();
             }
         });
@@ -31326,44 +32933,46 @@ var XYSeries = /** @class */ (function (_super) {
         // todo: here wer stack x and y values only. question is - what should we do with other values, like openX, openY?
         // if this series is not stacked or new stack begins, return.
         var _this = this;
-        if (!this.stacked) {
+        var xAxis = this.xAxis;
+        var yAxis = this.yAxis;
+        if (!this.stacked || !xAxis || !yAxis) {
             return;
         }
         else {
             // it might seem that it's better to go through base axis series, but we do not maintain the same order as in chart.series there.
             var chart = this.chart;
             var index = chart.series.indexOf(this);
-            var field_1;
-            if (this.xAxis != this.baseAxis && this.xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
-                field_1 = this.xField;
+            var field_2;
+            if (xAxis != this.baseAxis && xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
+                field_2 = this.xField;
             }
-            if (this.yAxis != this.baseAxis && this.yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
-                field_1 = this.yField;
+            if (yAxis != this.baseAxis && yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"]) {
+                field_2 = this.yField;
             }
-            if (!field_1) {
+            if (!field_2) {
                 return;
             }
             //this is good for removing series, otherwise stack values will remain the same and chart won't pay atention when adding/removing series			
-            dataItem.setCalculatedValue(field_1, 0, "stack");
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__["eachContinue"](chart.series.range(0, index).backwards().iterator(), function (prevSeries) {
+            dataItem.setCalculatedValue(field_2, 0, "stack");
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["eachContinue"](chart.series.range(0, index).backwards().iterator(), function (prevSeries) {
                 // stacking is only possible if both axes are the same
-                if (prevSeries.xAxis == _this.xAxis && prevSeries.yAxis == _this.yAxis) {
+                if (prevSeries.xAxis == xAxis && prevSeries.yAxis == yAxis) {
                     // saving value
                     prevSeries.stackedSeries = _this;
                     var prevDataItem = prevSeries.dataItems.getIndex(dataItem.index); // indexes should match
                     if (prevDataItem && prevDataItem.hasValue(_this._xValueFields) && prevDataItem.hasValue(_this._yValueFields)) {
-                        var value = dataItem.getValue(field_1);
+                        var value = dataItem.getValue(field_2);
                         var prevValue = void 0;
-                        var prevRealValue = prevDataItem.getValue(field_1) + prevDataItem.getValue(field_1, "stack");
+                        var prevRealValue = prevDataItem.getValue(field_2) + prevDataItem.getValue(field_2, "stack");
                         if (working) {
-                            prevValue = prevDataItem.getWorkingValue(field_1) + prevDataItem.getValue(field_1, "stack");
+                            prevValue = prevDataItem.getWorkingValue(field_2) + prevDataItem.getValue(field_2, "stack");
                         }
                         else {
-                            prevValue = prevDataItem.getValue(field_1) + prevDataItem.getValue(field_1, "stack");
+                            prevValue = prevDataItem.getValue(field_2) + prevDataItem.getValue(field_2, "stack");
                         }
                         if ((value >= 0 && prevRealValue >= 0) || (value < 0 && prevRealValue < 0)) {
                             //dataItem.events.disable();
-                            dataItem.setCalculatedValue(field_1, prevValue, "stack");
+                            dataItem.setCalculatedValue(field_2, prevValue, "stack");
                             //dataItem.events.enable();
                             return false;
                         }
@@ -31512,7 +33121,7 @@ var XYSeries = /** @class */ (function (_super) {
      */
     XYSeries.prototype.selectionMin = function (axis) {
         var value = this._smin.getKey(axis.uid);
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](value)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](value)) {
             value = this.min(axis);
         }
         return value;
@@ -31527,7 +33136,7 @@ var XYSeries = /** @class */ (function (_super) {
      */
     XYSeries.prototype.selectionMax = function (axis) {
         var value = this._smax.getKey(axis.uid);
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isNumber"](value)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](value)) {
             value = this.max(axis);
         }
         return value;
@@ -31541,7 +33150,7 @@ var XYSeries = /** @class */ (function (_super) {
     XYSeries.prototype.processConfig = function (config) {
         if (config) {
             // Set up base axes
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](config.baseAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isString"](config.baseAxis)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](config.baseAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isString"](config.baseAxis)) {
                 if (this.map.hasKey(config.baseAxis)) {
                     config.baseAxis = this.map.getKey(config.baseAxis);
                 }
@@ -31551,7 +33160,7 @@ var XYSeries = /** @class */ (function (_super) {
                 }
             }
             // Set up axes
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](config.xAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isString"](config.xAxis)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](config.xAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isString"](config.xAxis)) {
                 if (this.map.hasKey(config.xAxis)) {
                     config.xAxis = this.map.getKey(config.xAxis);
                 }
@@ -31560,7 +33169,7 @@ var XYSeries = /** @class */ (function (_super) {
                     delete config.xAxis;
                 }
             }
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](config.yAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isString"](config.yAxis)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](config.yAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isString"](config.yAxis)) {
                 if (this.map.hasKey(config.yAxis)) {
                     config.yAxis = this.map.getKey(config.yAxis);
                 }
@@ -31570,22 +33179,22 @@ var XYSeries = /** @class */ (function (_super) {
                 }
             }
             // Set up axis ranges
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](config.axisRanges) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isArray"](config.axisRanges)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](config.axisRanges) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isArray"](config.axisRanges)) {
                 for (var i = 0, len = config.axisRanges.length; i < len; i++) {
                     var range = config.axisRanges[i];
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](range.type)) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](range.type)) {
                         range.type = "AxisDataItem";
                     }
-                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](range.axis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isString"](range.axis) && this.map.hasKey(range.axis)) {
+                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](range.axis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isString"](range.axis) && this.map.hasKey(range.axis)) {
                         range.component = this.map.getKey(range.axis);
                     }
-                    else if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](range.component) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isString"](range.component) && this.map.hasKey(range.component)) {
+                    else if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](range.component) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isString"](range.component) && this.map.hasKey(range.component)) {
                         range.component = this.map.getKey(range.component);
                     }
                 }
             }
             // Parse date fields based on the series fields
-            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["hasValue"](config.dataFields) || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_12__["isObject"](config.dataFields)) {
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](config.dataFields) || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isObject"](config.dataFields)) {
                 this.processingErrors.push("`dataFields` is not set for series [" + (this.name || "unnamed") + "]");
             }
         }
@@ -31604,11 +33213,13 @@ var XYSeries = /** @class */ (function (_super) {
      * @returns             Coordinates
      */
     XYSeries.prototype.getPoint = function (dataItem, xKey, yKey, locationX, locationY, stackKeyX, stackKeyY) {
-        var x = this.xAxis.getX(dataItem, xKey, locationX);
-        var y = this.yAxis.getY(dataItem, yKey, locationY);
-        x = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["fitToRange"](x, -100000, 100000); // from geometric point of view this is not right, but practically it's ok. this is done to avoid too big objects.
-        y = _core_utils_Math__WEBPACK_IMPORTED_MODULE_10__["fitToRange"](y, -100000, 100000); // from geometric point of view this is not right, but practically it's ok. this is done to avoid too big objects.
-        return { x: x, y: y };
+        if (this.xAxis && this.yAxis) {
+            var x = this.xAxis.getX(dataItem, xKey, locationX);
+            var y = this.yAxis.getY(dataItem, yKey, locationY);
+            x = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["fitToRange"](x, -this._maxxX, this._maxxX); // from geometric point of view this is not right, but practically it's ok. this is done to avoid too big objects.
+            y = _core_utils_Math__WEBPACK_IMPORTED_MODULE_11__["fitToRange"](y, -this._maxxY, this._maxxY); // from geometric point of view this is not right, but practically it's ok. this is done to avoid too big objects.
+            return { x: x, y: y };
+        }
     };
     /**
      * Updates item reader text based on the type and set up of axis.
@@ -31620,7 +33231,7 @@ var XYSeries = /** @class */ (function (_super) {
             return;
         }
         var text = "";
-        _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__["each"](this.dataFields, function (key, val) {
+        _core_utils_Object__WEBPACK_IMPORTED_MODULE_16__["each"](this.dataFields, function (key, val) {
             text += "{" + key + "} ";
         });
         this.itemReaderText = text;
@@ -31698,6 +33309,74 @@ var XYSeries = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(XYSeries.prototype, "hideTooltipWhileZooming", {
+        /**
+         * @return Hide tooltip while zooming?
+         */
+        get: function () {
+            return this.getPropertyValue("hideTooltipWhileZooming");
+        },
+        /**
+         * Indicates if series' tooltip should be hidden while series axis range is
+         * animating (zooming).
+         *
+         * @default true
+         * @since 4.7.16
+         * @param  value  Hide tooltip while zooming?
+         */
+        set: function (value) {
+            this.setPropertyValue("hideTooltipWhileZooming", value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(XYSeries.prototype, "maskBullets", {
+        /**
+         * @return Mask bullets?
+         */
+        get: function () {
+            return this.getPropertyValue("maskBullets");
+        },
+        /**
+         * Indicates if series' bullets should be masked.
+         *
+         * @default true
+         * @since 4.7.17
+         * @param  value  Mask bullets?
+         */
+        set: function (value) {
+            this.setPropertyValue("maskBullets", value);
+            var chart = this.chart;
+            if (chart) {
+                if (value) {
+                    this.bulletsContainer.parent = chart.bulletsContainer;
+                }
+                else {
+                    this.bulletsContainer.parent = chart.axisBulletsContainer;
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Copies all properties from another instance of [[Series]].
+     *
+     * @param source  Source series
+     */
+    XYSeries.prototype.copyFrom = function (source) {
+        this.groupFields = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_12__["copyProperties"](source.groupFields, {});
+        _super.prototype.copyFrom.call(this, source);
+    };
+    /**
+     * Destroys this object and all related data.
+     */
+    XYSeries.prototype.dispose = function () {
+        if (this.scrollbarSeries) {
+            this.scrollbarSeries.dispose();
+        }
+        _super.prototype.dispose.call(this);
+    };
     return XYSeries;
 }(_Series__WEBPACK_IMPORTED_MODULE_1__["Series"]));
 
@@ -31707,8 +33386,8 @@ var XYSeries = /** @class */ (function (_super) {
  *
  * @ignore
  */
-_core_Registry__WEBPACK_IMPORTED_MODULE_8__["registry"].registeredClasses["XYSeries"] = XYSeries;
-_core_Registry__WEBPACK_IMPORTED_MODULE_8__["registry"].registeredClasses["XYSeriesDataItem"] = XYSeriesDataItem;
+_core_Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].registeredClasses["XYSeries"] = XYSeries;
+_core_Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].registeredClasses["XYSeriesDataItem"] = XYSeriesDataItem;
 //# sourceMappingURL=XYSeries.js.map
 
 /***/ }),
@@ -31768,7 +33447,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var ChordDiagramDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ChordDiagramDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ChordDiagramDataItem, _super);
     /**
      * Constructor
      */
@@ -31796,7 +33475,7 @@ var ChordDiagramDataItem = /** @class */ (function (_super) {
  * @important
  */
 var ChordDiagram = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ChordDiagram, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ChordDiagram, _super);
     /**
      * Constructor
      */
@@ -32139,7 +33818,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var FlowDiagramDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FlowDiagramDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FlowDiagramDataItem, _super);
     /**
      * Constructor
      */
@@ -32265,7 +33944,7 @@ var FlowDiagramDataItem = /** @class */ (function (_super) {
  * @important
  */
 var FlowDiagram = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FlowDiagram, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FlowDiagram, _super);
     /**
      * Constructor
      */
@@ -32664,7 +34343,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var GaugeChartDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](GaugeChartDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(GaugeChartDataItem, _super);
     /**
      * Constructor
      */
@@ -32692,7 +34371,7 @@ var GaugeChartDataItem = /** @class */ (function (_super) {
  * @important
  */
 var GaugeChart = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](GaugeChart, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(GaugeChart, _super);
     /**
      * Constructor
      */
@@ -32815,7 +34494,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var PercentChartDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PercentChartDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PercentChartDataItem, _super);
     /**
      * Constructor
      */
@@ -32843,7 +34522,7 @@ var PercentChartDataItem = /** @class */ (function (_super) {
  * @see {@link https://www.amcharts.com/docs/v4/chart-types/sliced-chart/} for Sliced chart documentation
  */
 var PercentChart = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PercentChart, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PercentChart, _super);
     /**
      * Constructor
      */
@@ -32911,14 +34590,19 @@ var PercentChart = /** @class */ (function (_super) {
             legend.labels.template.text = "{category}";
             legend.valueLabels.template.text = "{value.percent.formatNumber('#.0')}%";
             legend.itemContainers.template.events.on("over", function (event) {
-                var PercentSeriesDataItem = event.target.dataItem.dataContext;
-                if (PercentSeriesDataItem.visible && !PercentSeriesDataItem.isHiding) {
-                    PercentSeriesDataItem.slice.isHover = true;
+                var percentSeriesDataItem = event.target.dataItem.dataContext;
+                if (percentSeriesDataItem.visible && !percentSeriesDataItem.isHiding) {
+                    var slice = percentSeriesDataItem.slice;
+                    slice.dispatchImmediately("over");
+                    slice.isHover = true;
+                    slice.interactions.isRealHover = true;
                 }
             });
             legend.itemContainers.template.events.on("out", function (event) {
-                var PercentSeriesDataItem = event.target.dataItem.dataContext;
-                PercentSeriesDataItem.slice.isHover = false;
+                var percentSeriesDataItem = event.target.dataItem.dataContext;
+                var slice = percentSeriesDataItem.slice;
+                slice.dispatchImmediately("out");
+                slice.isHover = false;
             });
         }
     };
@@ -32987,7 +34671,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var PieChartDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieChartDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieChartDataItem, _super);
     /**
      * Constructor
      */
@@ -33091,7 +34775,7 @@ var PieChartDataItem = /** @class */ (function (_super) {
  * @important
  */
 var PieChart = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieChart, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieChart, _super);
     /**
      * Constructor
      */
@@ -33158,10 +34842,10 @@ var PieChart = /** @class */ (function (_super) {
     PieChart.prototype.updateSeriesAngles = function () {
         var _this = this;
         this.series.each(function (series) {
-            series.startAngle = _this.startAngle;
-            series.endAngle = _this.endAngle;
-            series.defaultState.properties.startAngle = _this.startAngle;
-            series.defaultState.properties.endAngle = _this.endAngle;
+            series._startAngleInternal = _this.startAngle;
+            series._endAngleInternal = _this.endAngle;
+            //series.defaultState.properties.startAngle = this.startAngle;
+            //series.defaultState.properties.endAngle = this.endAngle;
         });
     };
     /**
@@ -33440,7 +35124,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var PieChart3DDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieChart3DDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieChart3DDataItem, _super);
     /**
      * Constructor
      */
@@ -33544,7 +35228,7 @@ var PieChart3DDataItem = /** @class */ (function (_super) {
  * @important
  */
 var PieChart3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PieChart3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PieChart3D, _super);
     /**
      * Constructor
      */
@@ -33686,7 +35370,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var RadarChartDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadarChartDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadarChartDataItem, _super);
     /**
      * Constructor
      */
@@ -33714,7 +35398,7 @@ var RadarChartDataItem = /** @class */ (function (_super) {
  * @important
  */
 var RadarChart = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadarChart, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadarChart, _super);
     /**
      * Constructor
      */
@@ -33750,6 +35434,7 @@ var RadarChart = /** @class */ (function (_super) {
         _this.bulletsContainer.parent = radarContainer;
         _this.axisBulletsContainer = radarContainer;
         _this._cursorContainer = radarContainer;
+        _this.chartContainer.events.on("maxsizechanged", _this.invalidate, _this, false); // need this for the chart to change radius if legend is removed/disabled
         _this._bulletMask = radarContainer.createChild(_core_elements_Circle__WEBPACK_IMPORTED_MODULE_5__["Circle"]);
         _this._bulletMask.shouldClone = false;
         _this._bulletMask.element = _this.paper.add("path");
@@ -34118,7 +35803,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var SankeyDiagramDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SankeyDiagramDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SankeyDiagramDataItem, _super);
     /**
      * Constructor
      */
@@ -34146,7 +35831,7 @@ var SankeyDiagramDataItem = /** @class */ (function (_super) {
  * @important
  */
 var SankeyDiagram = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SankeyDiagram, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SankeyDiagram, _super);
     /**
      * Constructor
      */
@@ -34203,7 +35888,7 @@ var SankeyDiagram = /** @class */ (function (_super) {
                 }
             }
         });
-        return Math.max.apply(Math, tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"](levels));
+        return Math.max.apply(Math, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(levels));
     };
     /**
      * Calculates relation between pixel height and total value.
@@ -34249,10 +35934,13 @@ var SankeyDiagram = /** @class */ (function (_super) {
             availableHeight = this.chartContainer.maxWidth - 1;
         }
         var maxSumLevel;
+        var minHeight;
         _core_utils_Object__WEBPACK_IMPORTED_MODULE_10__["each"](this._levelSum, function (key, value) {
             var realValue = value;
-            value = value * availableHeight / (availableHeight - (_this._levelNodesCount[key] - 1) * _this.nodePadding);
-            if (_this.maxSum < value) {
+            var levelNodeCount = _this._levelNodesCount[key];
+            var valueHeight = (availableHeight - (levelNodeCount - 1) * _this.nodePadding) / realValue;
+            if (minHeight > valueHeight || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](minHeight)) {
+                minHeight = valueHeight;
                 _this.maxSum = realValue;
                 maxSumLevel = _core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["toNumber"](key);
             }
@@ -34350,6 +36038,9 @@ var SankeyDiagram = /** @class */ (function (_super) {
      */
     SankeyDiagram.prototype.showReal = function (duration) {
         var _this = this;
+        if (this.preventShow) {
+            return;
+        }
         if (this.interpolationDuration > 0) {
             var container_1 = this.nodesContainer;
             var i_1 = 0;
@@ -34360,11 +36051,11 @@ var SankeyDiagram = /** @class */ (function (_super) {
                 var node = strNode[1];
                 var property;
                 if (_this.orientation == "horizontal") {
-                    node.dx = -(container_1.pixelWidth - node.pixelWidth) / _this._levelCount;
+                    node.dx = -(container_1.pixelWidth - node.pixelWidth) / Math.max(_this._levelCount, 1);
                     property = "dx";
                 }
                 else {
-                    node.dy = -(container_1.pixelHeight - node.pixelHeight) / _this._levelCount;
+                    node.dy = -(container_1.pixelHeight - node.pixelHeight) / Math.max(_this._levelCount, 1);
                     property = "dy";
                 }
                 var delay = 0;
@@ -34567,7 +36258,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
 /* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
 /* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
 /**
  * Serial chart module.
  */
@@ -34578,6 +36270,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -34600,7 +36293,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var SerialChartDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SerialChartDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SerialChartDataItem, _super);
     /**
      * Constructor
      */
@@ -34628,7 +36321,7 @@ var SerialChartDataItem = /** @class */ (function (_super) {
  * @see {@link ISerialChartAdapters} for a list of available Adapters
  */
 var SerialChart = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SerialChart, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SerialChart, _super);
     /**
      * Constructor
      */
@@ -34666,6 +36359,9 @@ var SerialChart = /** @class */ (function (_super) {
         if (this.colors) {
             this.colors.dispose();
         }
+        if (this.patterns) {
+            this.patterns.dispose();
+        }
     };
     /**
      * Sets defaults that instantiate some objects that rely on parent, so they
@@ -34686,24 +36382,11 @@ var SerialChart = /** @class */ (function (_super) {
          * @return Chart's series
          */
         get: function () {
-            var _this = this;
             if (!this._series) {
                 this._series = new _core_utils_List__WEBPACK_IMPORTED_MODULE_2__["ListTemplate"](this.createSeries());
-                this._series.events.on("inserted", function (event) {
-                    _this.handleSeriesAdded(event);
-                }, undefined, false);
-                this._series.events.on("removed", function (event) {
-                    var series = event.oldValue;
-                    _this.dataUsers.removeValue(series);
-                    _this.dataUsers.each(function (dataUser) {
-                        dataUser.invalidateDataItems();
-                    });
-                    if (series.autoDispose) {
-                        series.dispose();
-                    }
-                    _this.feedLegend();
-                }, undefined, false);
-                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_2__["ListDisposer"](this._series));
+                this._series.events.on("inserted", this.handleSeriesAdded, this, false);
+                this._series.events.on("removed", this.handleSeriesRemoved, this, false);
+                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_2__["ListDisposer"](this._series, false));
                 this._disposers.push(this._series.template);
             }
             return this._series;
@@ -34711,6 +36394,31 @@ var SerialChart = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    SerialChart.prototype.handleSeriesRemoved = function (event) {
+        var series = event.oldValue;
+        this.dataUsers.removeValue(series);
+        this.dataUsers.each(function (dataUser) {
+            dataUser.invalidateDataItems();
+        });
+        if (series.autoDispose) {
+            series.dispose();
+        }
+        else {
+            series.parent = undefined;
+            series.bulletsContainer.parent = undefined;
+        }
+        //this.feedLegend();
+        if (this.legend) {
+            var dataItems = this.legend.dataItems;
+            for (var i = dataItems.length - 1; i >= 0; i--) {
+                var dataItem = dataItems.getIndex(i);
+                if (dataItem && dataItem.dataContext == series) {
+                    _core_utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.legend.data, dataItem.dataContext);
+                    this.legend.dataItems.remove(dataItem);
+                }
+            }
+        }
+    };
     /**
      * Decorates a new [[Series]] object with required parameters when it is
      * added to the chart.
@@ -34728,15 +36436,34 @@ var SerialChart = /** @class */ (function (_super) {
         series.parent = this.seriesContainer;
         series.bulletsContainer.parent = this.bulletsContainer;
         this._dataUsers.moveValue(series);
-        series.addDisposer(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_10__["Disposer"](function () {
+        series.addDisposer(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__["Disposer"](function () {
             _this.dataUsers.removeValue(series);
         }));
         this.handleSeriesAdded2(series);
-        this.feedLegend();
+        if (!series.hiddenInLegend) {
+            if (this.legend) {
+                this.legend.addData(series);
+            }
+        }
     };
     SerialChart.prototype.handleSeriesAdded2 = function (series) {
+        var _this = this;
         if (!this.dataInvalid) {
-            this.invalidateData();
+            this._disposers.push(
+            // on exit only as data is usually passed after push
+            _core_Registry__WEBPACK_IMPORTED_MODULE_7__["registry"].events.once("exitframe", function () {
+                if (!series.data || series.data.length == 0) {
+                    series.data = _this.data;
+                    if (series.showOnInit) {
+                        series.reinit();
+                        series.setPropertyValue("showOnInit", false);
+                        series.showOnInit = true;
+                    }
+                    series.events.on("datavalidated", function () {
+                        series._data = [];
+                    });
+                }
+            }));
         }
     };
     /**
@@ -34787,6 +36514,25 @@ var SerialChart = /** @class */ (function (_super) {
          */
         set: function (value) {
             this.setPropertyValue("colors", value, true);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SerialChart.prototype, "patterns", {
+        /**
+         * @return Pattern set
+         */
+        get: function () {
+            return this.getPropertyValue("patterns");
+        },
+        /**
+         * A [[PatternSet]] to use when creating patterned fills for slices.
+         *
+         * @since 4.7.5
+         * @param value  Pattern set
+         */
+        set: function (value) {
+            this.setPropertyValue("patterns", value, true);
         },
         enumerable: true,
         configurable: true
@@ -34865,7 +36611,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var SlicedChartDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SlicedChartDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SlicedChartDataItem, _super);
     /**
      * Constructor
      */
@@ -34893,7 +36639,7 @@ var SlicedChartDataItem = /** @class */ (function (_super) {
  * @important
  */
 var SlicedChart = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SlicedChart, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SlicedChart, _super);
     /**
      * Constructor
      */
@@ -35000,7 +36746,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var TreeMapDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TreeMapDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(TreeMapDataItem, _super);
     /**
      * Constructor
      */
@@ -35104,6 +36850,9 @@ var TreeMapDataItem = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(TreeMapDataItem.prototype, "percent", {
+        /**
+         * Percent value of a node
+         */
         get: function () {
             if (this.parent) {
                 return this.value / this.parent.value * 100;
@@ -35335,6 +37084,13 @@ var TreeMapDataItem = /** @class */ (function (_super) {
                 child.hide(duration, delay, toValue, fields);
             });
         }
+        var seriesDataItem = this.seriesDataItem;
+        if (seriesDataItem) {
+            seriesDataItem.bullets.each(function (key, value) {
+                value.hide();
+                value.preventShow = true;
+            });
+        }
         return _super.prototype.hide.call(this, duration, delay, toValue, fields);
     };
     /**
@@ -35349,6 +37105,12 @@ var TreeMapDataItem = /** @class */ (function (_super) {
         if (this.children) {
             this.children.each(function (child) {
                 child.show(duration, delay, fields);
+            });
+        }
+        var seriesDataItem = this.seriesDataItem;
+        if (seriesDataItem) {
+            seriesDataItem.bullets.each(function (key, value) {
+                value.preventShow = false;
             });
         }
         return _super.prototype.show.call(this, duration, delay, fields);
@@ -35370,7 +37132,7 @@ var TreeMapDataItem = /** @class */ (function (_super) {
  * @see {@link https://www.amcharts.com/docs/v4/chart-types/treemap/} for documentation
  */
 var TreeMap = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TreeMap, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(TreeMap, _super);
     /**
      * Constructor
      */
@@ -35414,6 +37176,7 @@ var TreeMap = /** @class */ (function (_super) {
         _this._usesData = true;
         _this.maxLevels = 2;
         _this.currentLevel = 0;
+        _this.hideParentColumns = false;
         _this.colors = new _core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_6__["ColorSet"]();
         _this.sorting = "descending";
         // create two value axes for the chart
@@ -35524,6 +37287,7 @@ var TreeMap = /** @class */ (function (_super) {
         this.yAxis.getMinMax();
         this.layoutItems(homeDataItem);
         this.createTreeSeries(homeDataItem);
+        this.feedLegend();
     };
     /**
      * Layouts and sizes all items according to their value and
@@ -35711,6 +37475,9 @@ var TreeMap = /** @class */ (function (_super) {
                     });
                 });
                 if (series.level < _this.currentLevel) {
+                    if (_this.hideParentColumns) {
+                        series.columnsContainer.hide();
+                    }
                     series.bulletsContainer.hide(duration);
                 }
                 else if (series.level == _this.currentLevel) {
@@ -35736,13 +37503,16 @@ var TreeMap = /** @class */ (function (_super) {
         this.zoomToChartDataItem(dataItem.treeMapDataItem);
     };
     /**
-     * Zooms to particular item.
+     * Zooms to particular item. If dataItem is not specified, the chart will zoom-out.
      *
      * @ignore Exclude from docs
      * @param dataItem  Data item
      */
     TreeMap.prototype.zoomToChartDataItem = function (dataItem) {
         var _this = this;
+        if (!dataItem) {
+            dataItem = this._homeDataItem;
+        }
         var zoomOutButton = this.zoomOutButton;
         // this is needed because if there is only one fist level, it wont' be shown
         if (zoomOutButton) {
@@ -35826,6 +37596,27 @@ var TreeMap = /** @class */ (function (_super) {
          */
         set: function (value) {
             this.setPropertyValue("currentLevel", value, true);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TreeMap.prototype, "hideParentColumns", {
+        /**
+         * @return Hide?
+         */
+        get: function () {
+            return this.getPropertyValue("hideParentColumns");
+        },
+        /**
+         * If set to `true`, columns of parent nodes will be hidden when user
+         * drills-down into deeper levels.
+         *
+         * @sice 4.7.4
+         * @default false
+         * @param  value  Hide?
+         */
+        set: function (value) {
+            this.setPropertyValue("hideParentColumns", value);
         },
         enumerable: true,
         configurable: true
@@ -36199,6 +37990,18 @@ var TreeMap = /** @class */ (function (_super) {
             return dataItem;
         }
     };
+    Object.defineProperty(TreeMap.prototype, "homeDataItem", {
+        /**
+         * A data item associated with top node.
+         *
+         * @since 4.8.2
+         */
+        get: function () {
+            return this._homeDataItem;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Setups the legend to use the chart's data.
      * @ignore
@@ -36280,23 +38083,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SerialChart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SerialChart */ "./node_modules/@amcharts/amcharts4/.internal/charts/types/SerialChart.js");
 /* harmony import */ var _core_Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/Container */ "./node_modules/@amcharts/amcharts4/.internal/core/Container.js");
 /* harmony import */ var _core_utils_List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../core/utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
-/* harmony import */ var _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../axes/ValueAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/ValueAxis.js");
-/* harmony import */ var _axes_DateAxis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../axes/DateAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/DateAxis.js");
-/* harmony import */ var _axes_AxisRendererX__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../axes/AxisRendererX */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/AxisRendererX.js");
-/* harmony import */ var _axes_AxisRendererY__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../axes/AxisRendererY */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/AxisRendererY.js");
-/* harmony import */ var _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../axes/CategoryAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/CategoryAxis.js");
-/* harmony import */ var _series_XYSeries__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../series/XYSeries */ "./node_modules/@amcharts/amcharts4/.internal/charts/series/XYSeries.js");
-/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony import */ var _core_elements_ZoomOutButton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/elements/ZoomOutButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/ZoomOutButton.js");
-/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
-/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-/* harmony import */ var _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../elements/XYChartScrollbar */ "./node_modules/@amcharts/amcharts4/.internal/charts/elements/XYChartScrollbar.js");
-/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
-/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
-/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
-/* harmony import */ var _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
+/* harmony import */ var _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
+/* harmony import */ var _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../axes/ValueAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/ValueAxis.js");
+/* harmony import */ var _axes_DateAxis__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../axes/DateAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/DateAxis.js");
+/* harmony import */ var _axes_AxisRendererX__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../axes/AxisRendererX */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/AxisRendererX.js");
+/* harmony import */ var _axes_AxisRendererY__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../axes/AxisRendererY */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/AxisRendererY.js");
+/* harmony import */ var _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../axes/CategoryAxis */ "./node_modules/@amcharts/amcharts4/.internal/charts/axes/CategoryAxis.js");
+/* harmony import */ var _series_XYSeries__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../series/XYSeries */ "./node_modules/@amcharts/amcharts4/.internal/charts/series/XYSeries.js");
+/* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony import */ var _core_elements_ZoomOutButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/elements/ZoomOutButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/ZoomOutButton.js");
+/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/* harmony import */ var _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../elements/XYChartScrollbar */ "./node_modules/@amcharts/amcharts4/.internal/charts/elements/XYChartScrollbar.js");
+/* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
+/* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
+/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
+/* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _core_utils_Number__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../core/utils/Number */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Number.js");
+/* harmony import */ var _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
 /**
  * XY Chart module.
  */
@@ -36307,6 +38112,8 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
+
 
 
 
@@ -36339,7 +38146,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var XYChartDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](XYChartDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(XYChartDataItem, _super);
     /**
      * Constructor
      */
@@ -36484,7 +38291,7 @@ var XYChartDataItem = /** @class */ (function (_super) {
  * @important
  */
 var XYChart = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](XYChart, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(XYChart, _super);
     /**
      * Constructor
      */
@@ -36495,11 +38302,11 @@ var XYChart = /** @class */ (function (_super) {
         /**
          * Defines the type of horizontal axis rederer.
          */
-        _this._axisRendererX = _axes_AxisRendererX__WEBPACK_IMPORTED_MODULE_6__["AxisRendererX"];
+        _this._axisRendererX = _axes_AxisRendererX__WEBPACK_IMPORTED_MODULE_7__["AxisRendererX"];
         /**
          * Defines the type of vertical axis rederer.
          */
-        _this._axisRendererY = _axes_AxisRendererY__WEBPACK_IMPORTED_MODULE_7__["AxisRendererY"];
+        _this._axisRendererY = _axes_AxisRendererY__WEBPACK_IMPORTED_MODULE_8__["AxisRendererY"];
         /**
          * @ignore
          */
@@ -36517,7 +38324,7 @@ var XYChart = /** @class */ (function (_super) {
         var topAxesCont = chartContainer.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_2__["Container"]);
         topAxesCont.shouldClone = false;
         topAxesCont.layout = "vertical";
-        topAxesCont.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
+        topAxesCont.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
         topAxesCont.zIndex = 1;
         _this.topAxesContainer = topAxesCont;
         // Create vertical axes and plot area container
@@ -36527,14 +38334,14 @@ var XYChart = /** @class */ (function (_super) {
         var yAxesAndPlotCont = chartContainer.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_2__["Container"]);
         yAxesAndPlotCont.shouldClone = false;
         yAxesAndPlotCont.layout = "horizontal";
-        yAxesAndPlotCont.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
-        yAxesAndPlotCont.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
+        yAxesAndPlotCont.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
+        yAxesAndPlotCont.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
         yAxesAndPlotCont.zIndex = 0;
         _this.yAxesAndPlotContainer = yAxesAndPlotCont;
         // Create a container for bottom axes
         var bottomAxesCont = chartContainer.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_2__["Container"]);
         bottomAxesCont.shouldClone = false;
-        bottomAxesCont.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
+        bottomAxesCont.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
         bottomAxesCont.layout = "vertical";
         bottomAxesCont.zIndex = 1;
         _this.bottomAxesContainer = bottomAxesCont;
@@ -36542,7 +38349,7 @@ var XYChart = /** @class */ (function (_super) {
         var leftAxesCont = yAxesAndPlotCont.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_2__["Container"]);
         leftAxesCont.shouldClone = false;
         leftAxesCont.layout = "horizontal";
-        leftAxesCont.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
+        leftAxesCont.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
         leftAxesCont.contentAlign = "right";
         leftAxesCont.events.on("transformed", _this.updateXAxesMargins, _this, false);
         leftAxesCont.zIndex = 1;
@@ -36550,8 +38357,8 @@ var XYChart = /** @class */ (function (_super) {
         // Create a container for plot area
         var plotCont = yAxesAndPlotCont.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_2__["Container"]);
         plotCont.shouldClone = false;
-        plotCont.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
-        plotCont.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
+        plotCont.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
+        plotCont.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
         // Create transparend background for plot container so that hover works
         // on all of it
         plotCont.background.fillOpacity = 0;
@@ -36563,13 +38370,13 @@ var XYChart = /** @class */ (function (_super) {
         var rightAxesCont = yAxesAndPlotCont.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_2__["Container"]);
         rightAxesCont.shouldClone = false;
         rightAxesCont.layout = "horizontal";
-        rightAxesCont.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
+        rightAxesCont.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
         rightAxesCont.zIndex = 1;
         rightAxesCont.events.on("transformed", _this.updateXAxesMargins, _this, false);
         _this.rightAxesContainer = rightAxesCont;
         _this.seriesContainer.parent = plotCont;
         _this.bulletsContainer.parent = plotCont;
-        var zoomOutButton = plotCont.createChild(_core_elements_ZoomOutButton__WEBPACK_IMPORTED_MODULE_11__["ZoomOutButton"]);
+        var zoomOutButton = plotCont.createChild(_core_elements_ZoomOutButton__WEBPACK_IMPORTED_MODULE_12__["ZoomOutButton"]);
         zoomOutButton.shouldClone = false;
         zoomOutButton.align = "right";
         zoomOutButton.valign = "top";
@@ -36581,8 +38388,8 @@ var XYChart = /** @class */ (function (_super) {
         // Create a container for bullets
         var axisBulletsContainer = _this.plotContainer.createChild(_core_Container__WEBPACK_IMPORTED_MODULE_2__["Container"]);
         axisBulletsContainer.shouldClone = false;
-        axisBulletsContainer.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
-        axisBulletsContainer.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_12__["percent"])(100);
+        axisBulletsContainer.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
+        axisBulletsContainer.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_13__["percent"])(100);
         axisBulletsContainer.isMeasured = false;
         axisBulletsContainer.zIndex = 4;
         axisBulletsContainer.layout = "none";
@@ -36607,7 +38414,7 @@ var XYChart = /** @class */ (function (_super) {
         this.zoomOutButton.exportable = false;
         // Add a default screen reader title for accessibility
         // This will be overridden in screen reader if there are any `titles` set
-        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](this.readerTitle)) {
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](this.readerTitle)) {
             this.readerTitle = this.language.translate("X/Y chart");
         }
     };
@@ -36631,7 +38438,7 @@ var XYChart = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     XYChart.prototype.updatePlotElements = function () {
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](this.series.iterator(), function (series) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](this.series.iterator(), function (series) {
             series.invalidate();
         });
     };
@@ -36644,13 +38451,13 @@ var XYChart = /** @class */ (function (_super) {
     XYChart.prototype.validateData = function () {
         // tell axes that data changed
         if (this._parseDataFrom == 0) {
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](this.xAxes.iterator(), function (axis) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](this.xAxes.iterator(), function (axis) {
                 axis.dataChangeUpdate();
             });
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](this.yAxes.iterator(), function (axis) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](this.yAxes.iterator(), function (axis) {
                 axis.dataChangeUpdate();
             });
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](this.series.iterator(), function (series) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](this.series.iterator(), function (series) {
                 series.dataChangeUpdate();
             });
         }
@@ -36773,17 +38580,17 @@ var XYChart = /** @class */ (function (_super) {
     XYChart.prototype.toggleZoomOutButton = function () {
         if (this.zoomOutButton) {
             var show_1 = false;
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["eachContinue"](this.xAxes.iterator(), function (axis) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["eachContinue"](this.xAxes.iterator(), function (axis) {
                 if (axis.toggleZoomOutButton) {
                     if (axis.maxZoomCount > 0) {
                         var minZoomFactor = axis.maxZoomFactor / axis.maxZoomCount;
-                        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["round"](axis.end - axis.start, 3) < 1 / minZoomFactor) {
+                        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["round"](axis.end - axis.start, 3) < 1 / minZoomFactor) {
                             show_1 = true;
                             return false;
                         }
                     }
                     else {
-                        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["round"](axis.start, 3) != 0 || _core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["round"](axis.end, 3) != 1) {
+                        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["round"](axis.start, 3) > 0 || _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["round"](axis.end, 3) < 1) {
                             show_1 = true;
                             return false;
                         }
@@ -36791,17 +38598,17 @@ var XYChart = /** @class */ (function (_super) {
                 }
                 return true;
             });
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["eachContinue"](this.yAxes.iterator(), function (axis) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["eachContinue"](this.yAxes.iterator(), function (axis) {
                 if (axis.toggleZoomOutButton) {
                     if (axis.maxZoomCount > 0) {
                         var minZoomFactor = axis.maxZoomFactor / axis.maxZoomCount;
-                        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["round"](axis.end - axis.start, 3) < 1 / minZoomFactor) {
+                        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["round"](axis.end - axis.start, 3) < 1 / minZoomFactor) {
                             show_1 = true;
                             return false;
                         }
                     }
                     else {
-                        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["round"](axis.start, 3) != 0 || _core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["round"](axis.end, 3) != 1) {
+                        if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["round"](axis.start, 3) > 0 || _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["round"](axis.end, 3) < 1) {
                             show_1 = true;
                             return false;
                         }
@@ -36826,7 +38633,7 @@ var XYChart = /** @class */ (function (_super) {
      */
     XYChart.prototype.seriesAppeared = function () {
         var appeared = false;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](this.series.iterator(), function (series) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](this.series.iterator(), function (series) {
             if (!series.appeared) {
                 appeared = false;
                 return false;
@@ -36871,17 +38678,17 @@ var XYChart = /** @class */ (function (_super) {
     XYChart.prototype.getCommonAxisRange = function (axes) {
         var start;
         var end;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](axes.iterator(), function (axis) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](axes.iterator(), function (axis) {
             var axisStart = axis.start;
             var axisEnd = axis.end;
             if (axis.renderer.inversed) {
                 axisStart = 1 - axis.end;
                 axisEnd = 1 - axis.start;
             }
-            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](start) || (axisStart < start)) {
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](start) || (axisStart < start)) {
                 start = axisStart;
             }
-            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](end) || (axisEnd > end)) {
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](end) || (axisEnd > end)) {
                 end = axisEnd;
             }
         });
@@ -36936,7 +38743,7 @@ var XYChart = /** @class */ (function (_super) {
     XYChart.prototype.processAxis = function (axis) {
         var _this = this;
         // Value axis does not use data directly, only category axis does
-        if (axis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_8__["CategoryAxis"]) {
+        if (axis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_9__["CategoryAxis"]) {
             this._dataUsers.moveValue(axis);
         }
         var renderer = axis.renderer;
@@ -36945,10 +38752,19 @@ var XYChart = /** @class */ (function (_super) {
         renderer.breakContainer.parent = this.plotContainer;
         renderer.breakContainer.toFront();
         renderer.breakContainer.zIndex = 10;
-        axis.addDisposer(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_10__["Disposer"](function () {
+        axis.addDisposer(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__["Disposer"](function () {
             _this.dataUsers.removeValue(axis);
         }));
         renderer.bulletsContainer.parent = this.axisBulletsContainer;
+        this._disposers.push(axis.events.on("positionchanged", function () {
+            var point = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSprite"]({ x: 0, y: 0 }, axis, _this.axisBulletsContainer);
+            if (axis.renderer instanceof _axes_AxisRendererY__WEBPACK_IMPORTED_MODULE_8__["AxisRendererY"]) {
+                renderer.bulletsContainer.y = point.y;
+            }
+            if (axis.renderer instanceof _axes_AxisRendererX__WEBPACK_IMPORTED_MODULE_7__["AxisRendererX"]) {
+                renderer.bulletsContainer.x = point.x;
+            }
+        }, undefined, false));
         this.plotContainer.events.on("maxsizechanged", function () {
             if (_this.inited) {
                 axis.invalidateDataItems();
@@ -36961,13 +38777,31 @@ var XYChart = /** @class */ (function (_super) {
      * mask changes.
      */
     XYChart.prototype.updateSeriesMasks = function () {
-        if (_core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["isIE"]()) {
+        if (_core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["isIE"]()) {
             this.series.each(function (series) {
                 var mask = series.mainContainer.mask;
                 series.mainContainer.mask = undefined;
                 series.mainContainer.mask = mask;
             });
         }
+    };
+    XYChart.prototype.handleSeriesRemoved = function (event) {
+        var series = event.oldValue;
+        if (series) {
+            if (series.xAxis) {
+                series.xAxis.series.removeValue(series);
+                series.xAxis.invalidateProcessedData();
+            }
+            if (series.yAxis) {
+                series.yAxis.series.removeValue(series);
+                series.yAxis.invalidateProcessedData();
+            }
+            // otherwise extremes won't change
+            this.series.each(function (series) {
+                series.resetExtremes();
+            });
+        }
+        _super.prototype.handleSeriesRemoved.call(this, event);
     };
     Object.defineProperty(XYChart.prototype, "xAxes", {
         /**
@@ -36980,6 +38814,7 @@ var XYChart = /** @class */ (function (_super) {
                 this._xAxes = new _core_utils_List__WEBPACK_IMPORTED_MODULE_3__["List"]();
                 this._xAxes.events.on("inserted", this.processXAxis, this, false);
                 this._xAxes.events.on("removed", this.handleAxisRemoval, this, false);
+                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_3__["ListDisposer"](this._xAxes, false));
             }
             return this._xAxes;
         },
@@ -37007,6 +38842,7 @@ var XYChart = /** @class */ (function (_super) {
                 this._yAxes = new _core_utils_List__WEBPACK_IMPORTED_MODULE_3__["List"]();
                 this._yAxes.events.on("inserted", this.processYAxis, this, false);
                 this._yAxes.events.on("removed", this.handleAxisRemoval, this, false);
+                this._disposers.push(new _core_utils_List__WEBPACK_IMPORTED_MODULE_3__["ListDisposer"](this._yAxes, false));
             }
             return this._yAxes;
         },
@@ -37025,15 +38861,31 @@ var XYChart = /** @class */ (function (_super) {
             _super.prototype.handleSeriesAdded.call(this, event);
             var series = event.newValue;
             if (this.xAxes.length == 0 || this.yAxes.length == 0) {
-                _core_Registry__WEBPACK_IMPORTED_MODULE_13__["registry"].removeFromInvalidComponents(series);
+                _core_Registry__WEBPACK_IMPORTED_MODULE_14__["registry"].removeFromInvalidComponents(series);
                 series.dataInvalid = false;
             }
-            _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["used"](series.xAxis); // this is enough to get axis, handled in getter
-            _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["used"](series.yAxis); // this is enough to get axis, handled in getter
+            _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["used"](series.xAxis); // this is enough to get axis, handled in getter
+            _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["used"](series.yAxis); // this is enough to get axis, handled in getter
+            series.maskBullets = series.maskBullets;
             if (series.fill == undefined) {
-                series.fill = this.colors.next();
+                if (this.patterns) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](series.stroke)) {
+                        series.stroke = this.colors.next();
+                    }
+                    series.fill = this.patterns.next();
+                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](series.fillOpacity)) {
+                        series.fill.backgroundOpacity = series.fillOpacity;
+                    }
+                    if (series.stroke instanceof _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"]) {
+                        series.fill.stroke = series.stroke;
+                        series.fill.fill = series.stroke;
+                    }
+                }
+                else {
+                    series.fill = this.colors.next();
+                }
             }
-            if (series.stroke == undefined) {
+            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](series.stroke)) {
                 series.stroke = series.fill;
             }
         }
@@ -37099,45 +38951,91 @@ var XYChart = /** @class */ (function (_super) {
                 x: xPosition_1,
                 y: yPosition_1
             });
-            var exceptAxis = void 0;
+            var exceptAxes_1 = [];
             var snapToSeries = cursor.snapToSeries;
-            if (snapToSeries) {
-                if (snapToSeries.baseAxis == snapToSeries.xAxis) {
-                    exceptAxis = snapToSeries.yAxis;
+            if (snapToSeries && !cursor.downPoint) {
+                if (snapToSeries instanceof _series_XYSeries__WEBPACK_IMPORTED_MODULE_10__["XYSeries"]) {
+                    snapToSeries = [snapToSeries];
                 }
-                if (snapToSeries.baseAxis == snapToSeries.yAxis) {
-                    exceptAxis = snapToSeries.xAxis;
-                }
-                var xAxis_1 = snapToSeries.xAxis;
-                var yAxis_1 = snapToSeries.yAxis;
-                if (xAxis_1 instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_4__["ValueAxis"] && !(xAxis_1 instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_5__["DateAxis"]) && yAxis_1 instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_4__["ValueAxis"] && !(yAxis_1 instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_5__["DateAxis"])) {
-                    var closestDataItem_1;
-                    var minDistance_1 = Infinity;
-                    snapToSeries.dataItems.each(function (dataItem) {
-                        //let xxPosition = xAxis.toAxisPosition(xPosition);
-                        //let yyPosition = yAxis.toAxisPosition(xPosition);
-                        var dxPosition = xAxis_1.toGlobalPosition(xAxis_1.getPositionX(dataItem, "valueX")) * xAxis_1.axisFullLength;
-                        var dyPosition = yAxis_1.toGlobalPosition(yAxis_1.getPositionY(dataItem, "valueY")) * yAxis_1.axisFullLength;
-                        var distance = Math.sqrt(Math.pow(xPosition_1 * xAxis_1.axisFullLength - dxPosition, 2) + Math.pow(yPosition_1 * yAxis_1.axisFullLength - dyPosition, 2));
-                        if (distance < minDistance_1) {
-                            minDistance_1 = distance;
-                            closestDataItem_1 = dataItem;
+                var dataItems_1 = [];
+                _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](snapToSeries, function (snpSeries) {
+                    var xAxis = snpSeries.xAxis;
+                    var yAxis = snpSeries.yAxis;
+                    if (xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_5__["ValueAxis"] && !(xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_6__["DateAxis"]) && yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_5__["ValueAxis"] && !(yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_6__["DateAxis"])) {
+                        snpSeries.dataItems.each(function (dataItem) {
+                            dataItems_1.push(dataItem);
+                        });
+                        _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["move"](exceptAxes_1, snpSeries.yAxis);
+                        _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["move"](exceptAxes_1, snpSeries.xAxis);
+                    }
+                    else {
+                        if (snpSeries.baseAxis == snpSeries.xAxis) {
+                            _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["move"](exceptAxes_1, snpSeries.yAxis);
+                            dataItems_1.push(xAxis.getSeriesDataItem(snpSeries, xAxis.toAxisPosition(xPosition_1)));
+                        }
+                        if (snpSeries.baseAxis == snpSeries.yAxis) {
+                            _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["move"](exceptAxes_1, snpSeries.xAxis);
+                            dataItems_1.push(yAxis.getSeriesDataItem(snpSeries, yAxis.toAxisPosition(yPosition_1)));
+                        }
+                    }
+                });
+                var closestDataItem_1 = this.getClosest(dataItems_1, xPosition_1, yPosition_1);
+                if (closestDataItem_1) {
+                    this.series.each(function (series) {
+                        var closestSeries = closestDataItem_1.component;
+                        if (series != closestSeries) {
+                            series.hideTooltip();
+                            if (series.xAxis != closestSeries.xAxis) {
+                                series.xAxis.hideTooltip();
+                            }
+                            if (series.yAxis != closestSeries.yAxis) {
+                                series.yAxis.hideTooltip();
+                            }
                         }
                     });
-                    if (closestDataItem_1) {
-                        snapToSeries.showTooltipAtDataItem(closestDataItem_1);
+                    closestDataItem_1.component.showTooltipAtDataItem(closestDataItem_1);
+                    cursor.handleSnap(closestDataItem_1.component);
+                }
+            }
+            //}
+            this._seriesPoints = [];
+            if (this._cursorXPosition != xPosition_1) {
+                this.showAxisTooltip(this.xAxes, xPosition_1, exceptAxes_1);
+            }
+            if (this._cursorYPosition != yPosition_1) {
+                this.showAxisTooltip(this.yAxes, yPosition_1, exceptAxes_1);
+            }
+            if (this.arrangeTooltips) {
+                this.sortSeriesTooltips(this._seriesPoints);
+            }
+            if (this.legend) {
+                this.legend.afterDraw();
+            }
+        }
+    };
+    XYChart.prototype.getClosest = function (dataItems, xPosition, yPosition) {
+        var minDistance = Infinity;
+        var closestDataItem;
+        _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](dataItems, function (dataItem) {
+            if (dataItem) {
+                var xAxis = dataItem.component.xAxis;
+                var yAxis = dataItem.component.yAxis;
+                var xPos = xAxis.positionToCoordinate(xAxis.toGlobalPosition(xAxis.toAxisPosition(xPosition)));
+                var yPos = yAxis.positionToCoordinate(yAxis.toGlobalPosition(yAxis.toAxisPosition(yPosition)));
+                var xField = dataItem.component.xField;
+                var yField = dataItem.component.yField;
+                if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](dataItem.getValue(xField)) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](dataItem.getValue(yField))) {
+                    var dxPosition = xAxis.positionToCoordinate(xAxis.toGlobalPosition(xAxis.getPositionX(dataItem, xField, dataItem.locations[xField], "valueX")));
+                    var dyPosition = yAxis.positionToCoordinate(yAxis.toGlobalPosition(yAxis.getPositionY(dataItem, yField, dataItem.locations[yField], "valueY")));
+                    var distance = Math.sqrt(Math.pow(xPos - dxPosition, 2) + Math.pow(yPos - dyPosition, 2));
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestDataItem = dataItem;
                     }
                 }
             }
-            this._seriesPoints = [];
-            if (this._cursorXPosition != xPosition_1) {
-                this.showAxisTooltip(this.xAxes, xPosition_1, exceptAxis);
-            }
-            if (this._cursorYPosition != yPosition_1) {
-                this.showAxisTooltip(this.yAxes, yPosition_1, exceptAxis);
-            }
-            this.sortSeriesTooltips(this._seriesPoints);
-        }
+        });
+        return closestDataItem;
     };
     /**
      * Hides all cursor-related tooltips when the cursor itself is hidden.
@@ -37158,7 +39056,7 @@ var XYChart = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     XYChart.prototype.updateSeriesLegend = function () {
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](this.series.iterator(), function (series) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](this.series.iterator(), function (series) {
             series.updateLegendValue();
         });
     };
@@ -37169,7 +39067,7 @@ var XYChart = /** @class */ (function (_super) {
      * @param sprites  A list of sprites to hide tooltip for
      */
     XYChart.prototype.hideObjectTooltip = function (sprites) {
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](sprites.iterator(), function (sprite) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](sprites.iterator(), function (sprite) {
             sprite.hideTooltip(0);
         });
     };
@@ -37194,13 +39092,13 @@ var XYChart = /** @class */ (function (_super) {
         var seriesPoints = [];
         this.series.each(function (series) {
             //if (series.tooltipText || series.tooltipHTML) { // not good, bullets are not hovered then
-            if ((series.xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_5__["DateAxis"] && series.xAxis.snapTooltip) || (series.yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_5__["DateAxis"] && series.yAxis.snapTooltip)) {
+            if ((series.xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_6__["DateAxis"] && series.xAxis.snapTooltip) || (series.yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_6__["DateAxis"] && series.yAxis.snapTooltip)) {
                 // void
             }
             else {
                 var point = series.showTooltipAtPosition(position.x, position.y);
                 if (point) {
-                    series.tooltip.setBounds({ x: 0, y: 0, width: _this.pixelWidth, height: _this.pixelHeight });
+                    series.tooltip.setBounds(_core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spriteRectToSvg"]({ x: 0, y: 0, width: _this.pixelWidth, height: _this.pixelHeight }, _this));
                     seriesPoints.push({ series: series, point: point });
                 }
             }
@@ -37214,36 +39112,79 @@ var XYChart = /** @class */ (function (_super) {
      * @ignore
      */
     XYChart.prototype.sortSeriesTooltips = function (seriesPoints) {
-        var topLeft = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["spritePointToSvg"]({ x: -0.5, y: -0.5 }, this.plotContainer);
-        var bottomRight = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["spritePointToSvg"]({ x: this.plotContainer.pixelWidth + 0.5, y: this.plotContainer.pixelHeight + 0.5 }, this.plotContainer);
+        var cursor = this.cursor;
+        if (cursor && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](cursor.maxTooltipDistance)) {
+            var cursorPoint_1 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: cursor.point.x, y: cursor.point.y }, cursor);
+            var nearestSeries_1;
+            var nearestPoint_1;
+            var smallestDistance_1 = Infinity;
+            _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](seriesPoints, function (seriesPoint) {
+                var series = seriesPoint.series;
+                var fixedPoint = seriesPoint.point;
+                if (fixedPoint) {
+                    var point = { x: fixedPoint.x, y: fixedPoint.y };
+                    var distance = Math.abs(_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["getDistance"](point, cursorPoint_1));
+                    if (distance < smallestDistance_1) {
+                        nearestPoint_1 = point;
+                        smallestDistance_1 = distance;
+                        nearestSeries_1 = series;
+                    }
+                }
+            });
+            var newSeriesPoints_1 = [];
+            if (nearestSeries_1) {
+                _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](seriesPoints, function (seriesPoint) {
+                    if (Math.abs(_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["getDistance"](seriesPoint.point, nearestPoint_1)) <= Math.abs(cursor.maxTooltipDistance)) {
+                        newSeriesPoints_1.push({ series: seriesPoint.series, point: seriesPoint.point });
+                    }
+                    else {
+                        var tooltipDataItem = seriesPoint.series.tooltipDataItem;
+                        if (tooltipDataItem) {
+                            _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](tooltipDataItem.sprites, function (sprite) {
+                                sprite.isHover = false;
+                                sprite.handleOutReal(); // to avoid flicker
+                            });
+                        }
+                        seriesPoint.series.tooltip.hide(0);
+                    }
+                });
+                if (cursor.maxTooltipDistance < 0) {
+                    newSeriesPoints_1 = [{ series: nearestSeries_1, point: nearestPoint_1 }];
+                }
+            }
+            seriesPoints = newSeriesPoints_1;
+        }
+        var topLeft = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: -0.5, y: -0.5 }, this.plotContainer);
+        var bottomRight = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: this.plotContainer.pixelWidth + 0.5, y: this.plotContainer.pixelHeight + 0.5 }, this.plotContainer);
         var sum = 0;
         var filteredSeriesPoints = [];
-        _core_utils_Array__WEBPACK_IMPORTED_MODULE_19__["each"](seriesPoints, function (seriesPoint) {
+        _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](seriesPoints, function (seriesPoint) {
             var point = seriesPoint.point;
-            if (point && _core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["isInRectangle"](point, { x: topLeft.x, y: topLeft.y, width: bottomRight.x - topLeft.x, height: bottomRight.y - topLeft.y })) {
+            if (point && _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["isInRectangle"](point, { x: topLeft.x, y: topLeft.y, width: bottomRight.x - topLeft.x, height: bottomRight.y - topLeft.y })) {
                 filteredSeriesPoints.push({ point: point, series: seriesPoint.series });
                 sum += point.y;
             }
         });
         seriesPoints = filteredSeriesPoints;
-        seriesPoints.sort(function (a, b) {
-            if (a.point.y > b.point.y) {
-                return 1;
-            }
-            else if (a.point.y < b.point.y) {
-                return -1;
-            }
-            else {
-                return 0;
-            }
-        });
+        var firstSeries = this.series.getIndex(0);
+        var inversed = false;
+        if (firstSeries && firstSeries.yAxis && firstSeries.yAxis.renderer.inversed) {
+            inversed = true;
+        }
+        if (inversed) {
+            seriesPoints.sort(function (a, b) { return _core_utils_Number__WEBPACK_IMPORTED_MODULE_21__["order"](a.point.y, b.point.y); });
+        }
+        else {
+            seriesPoints.sort(function (a, b) { return _core_utils_Number__WEBPACK_IMPORTED_MODULE_21__["order"](b.point.y, a.point.y); });
+            seriesPoints.reverse();
+        }
         var averageY = sum / seriesPoints.length;
-        var maxY = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["svgPointToDocument"]({ x: 0, y: 0 }, this.svgContainer.SVGContainer).y;
+        var maxY = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["svgPointToDocument"]({ x: 0, y: 0 }, this.svgContainer.SVGContainer).y;
         if (seriesPoints.length > 0) {
             var top_1 = topLeft.y;
             var bottom = bottomRight.y;
             // TODO is this needed ?
-            _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["spritePointToDocument"]({ x: 0, y: top_1 }, this);
+            _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToDocument"]({ x: 0, y: top_1 }, this);
             var dropped = false;
             if (averageY > top_1 + (bottom - top_1) / 2) {
                 var nextHeight = bottom;
@@ -37256,7 +39197,7 @@ var XYChart = /** @class */ (function (_super) {
                         tooltip.validate();
                     }
                     tooltip.toBack();
-                    nextHeight = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["spritePointToSvg"]({ x: 0, y: tooltip.label.pixelY - tooltip.pixelY + pointY - tooltip.pixelMarginTop }, tooltip).y;
+                    nextHeight = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: 0, y: tooltip.label.pixelY - tooltip.pixelY + pointY - tooltip.pixelMarginTop }, tooltip).y;
                     if (nextHeight < -maxY) {
                         dropped = true;
                         break;
@@ -37274,7 +39215,7 @@ var XYChart = /** @class */ (function (_super) {
                         tooltip.validate();
                     }
                     tooltip.toBack();
-                    nextY = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["spritePointToSvg"]({ x: 0, y: tooltip.label.pixelY + tooltip.label.measuredHeight - tooltip.pixelY + pointY + tooltip.pixelMarginBottom }, tooltip).y;
+                    nextY = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: 0, y: tooltip.label.pixelY + tooltip.label.measuredHeight - tooltip.pixelY + pointY + tooltip.pixelMarginBottom }, tooltip).y;
                 }
             }
         }
@@ -37291,8 +39232,8 @@ var XYChart = /** @class */ (function (_super) {
      */
     XYChart.prototype.showAxisTooltip = function (axes, position, except) {
         var _this = this;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](axes.iterator(), function (axis) {
-            if (axis != except) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](axes.iterator(), function (axis) {
+            if (!except || except.indexOf(axis) == -1) {
                 if (_this.dataItems.length > 0 || axis.dataItems.length > 0) {
                     axis.showTooltipAtPosition(position);
                 }
@@ -37313,11 +39254,8 @@ var XYChart = /** @class */ (function (_super) {
         var start;
         var end;
         var inversed = axis.renderer.inversed;
-        if (axis.renderer instanceof _axes_AxisRendererY__WEBPACK_IMPORTED_MODULE_7__["AxisRendererY"]) {
-            range = _core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["invertRange"](range);
-        }
         if (inversed) {
-            _core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["invertRange"](range);
+            _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["invertRange"](range);
             start = 1 - axis.end;
             end = 1 - axis.start;
         }
@@ -37466,6 +39404,11 @@ var XYChart = /** @class */ (function (_super) {
         this.handleHideCursor();
     };
     /**
+     * @ignore
+     */
+    XYChart.prototype.handleYAxisSet = function (series) {
+    };
+    /**
      * Performs zoom and other operations when user starts zooming using chart
      * cursor, e.g. zooms axes.
      *
@@ -37507,7 +39450,9 @@ var XYChart = /** @class */ (function (_super) {
                 scrollbar.adapter.add("positionValue", function (arg) {
                     var xAxis = _this.xAxes.getIndex(0);
                     if (xAxis) {
-                        arg.value = xAxis.getPositionLabel(arg.position);
+                        arg.value = xAxis.getPositionLabel(xAxis.renderer.inversed
+                            ? 1 - arg.position
+                            : arg.position);
                     }
                     return arg;
                 });
@@ -37608,14 +39553,14 @@ var XYChart = /** @class */ (function (_super) {
         var realRange = { start: 0, end: 1 };
         this.showSeriesTooltip(); // hides
         if (!this.dataInvalid) {
-            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](axes.iterator(), function (axis) {
+            _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](axes.iterator(), function (axis) {
                 if (axis.renderer.inversed) {
-                    range = _core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["invertRange"](range);
+                    range = _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["invertRange"](range);
                 }
                 axis.hideTooltip(0);
                 if (round) {
                     //let diff = range.end - range.start;
-                    if (axis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_8__["CategoryAxis"]) {
+                    if (axis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_9__["CategoryAxis"]) {
                         var cellWidth = axis.getCellEndPosition(0) - axis.getCellStartPosition(0);
                         range.start = axis.roundPosition(range.start + cellWidth / 2 - (axis.startLocation) * cellWidth, axis.startLocation);
                         range.end = axis.roundPosition(range.end - cellWidth / 2 + (1 - axis.endLocation) * cellWidth, axis.endLocation);
@@ -37627,7 +39572,7 @@ var XYChart = /** @class */ (function (_super) {
                 }
                 var axisRange = axis.zoom(range, instantly, instantly, declination);
                 if (axis.renderer.inversed) {
-                    axisRange = _core_utils_Math__WEBPACK_IMPORTED_MODULE_15__["invertRange"](axisRange);
+                    axisRange = _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["invertRange"](axisRange);
                 }
                 realRange = axisRange;
             });
@@ -37651,7 +39596,14 @@ var XYChart = /** @class */ (function (_super) {
          * @param value Mask bullet container?
          */
         set: function (value) {
-            this.setPropertyValue("maskBullets", value, true);
+            if (this.setPropertyValue("maskBullets", value, true) && this.bulletsContainer) {
+                if (value) {
+                    this.bulletsContainer.mask = this._bulletMask;
+                }
+                else {
+                    this.bulletsContainer.mask = undefined;
+                }
+            }
         },
         enumerable: true,
         configurable: true
@@ -37690,54 +39642,75 @@ var XYChart = /** @class */ (function (_super) {
      */
     XYChart.prototype.handleWheel = function (event) {
         var plotContainer = this.plotContainer;
-        var svgPoint = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["documentPointToSvg"](event.point, this.htmlContainer, this.svgContainer.cssScale);
-        var plotPoint = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_18__["svgPointToSprite"](svgPoint, plotContainer);
+        var svgPoint = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["documentPointToSvg"](event.point, this.htmlContainer, this.svgContainer.cssScale);
+        var plotPoint = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["svgPointToSprite"](svgPoint, plotContainer);
         var shift = event.shift.y;
-        var rangeX = this.getCommonAxisRange(this.xAxes);
-        var rangeY = this.getCommonAxisRange(this.yAxes);
-        var shiftStep = 0.05;
-        var maxPanOut = 0;
-        var mouseWheelBehavior = this.mouseWheelBehavior;
-        if (mouseWheelBehavior == "panX" || mouseWheelBehavior == "panXY") {
-            var differenceX = rangeX.end - rangeX.start;
-            var newStartX = Math.max(-maxPanOut, rangeX.start + shiftStep * shift / 100);
-            var newEndX = Math.min(rangeX.end + shiftStep * shift / 100, 1 + maxPanOut);
-            if (newStartX <= 0) {
-                newEndX = newStartX + differenceX;
+        this.handleWheelReal(shift, this.mouseWheelBehavior, plotPoint);
+    };
+    /**
+     * Handles mouse wheel event.
+     *
+     * @param event  Original event
+     */
+    XYChart.prototype.handleHorizontalWheel = function (event) {
+        var plotContainer = this.plotContainer;
+        var svgPoint = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["documentPointToSvg"](event.point, this.htmlContainer, this.svgContainer.cssScale);
+        var plotPoint = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["svgPointToSprite"](svgPoint, plotContainer);
+        this.handleWheelReal(event.shift.x, this.horizontalMouseWheelBehavior, plotPoint);
+    };
+    /**
+     * @ignore
+     */
+    XYChart.prototype.handleWheelReal = function (shift, mouseWheelBehavior, plotPoint) {
+        if (shift != 0) {
+            var plotContainer = this.plotContainer;
+            var rangeX = this.getCommonAxisRange(this.xAxes);
+            var rangeY = this.getCommonAxisRange(this.yAxes);
+            var shiftStep = 0.1;
+            var maxPanOut = 0;
+            if (mouseWheelBehavior == "panX" || mouseWheelBehavior == "panXY") {
+                var differenceX = rangeX.end - rangeX.start;
+                var newStartX = Math.max(-maxPanOut, rangeX.start + shiftStep * shift / 100 * (rangeX.end - rangeX.start));
+                var newEndX = Math.min(rangeX.end + shiftStep * shift / 100 * (rangeX.end - rangeX.start), 1 + maxPanOut);
+                if (newStartX <= 0) {
+                    newEndX = newStartX + differenceX;
+                }
+                if (newEndX >= 1) {
+                    newStartX = newEndX - differenceX;
+                }
+                this.zoomAxes(this.xAxes, { start: newStartX, end: newEndX });
             }
-            if (newEndX >= 1) {
-                newStartX = newEndX - differenceX;
+            if (mouseWheelBehavior == "panY" || mouseWheelBehavior == "panXY") {
+                shift *= -1;
+                var differenceY = rangeY.end - rangeY.start;
+                var newStartY = Math.max(-maxPanOut, rangeY.start + shiftStep * shift / 100 * (rangeY.end - rangeY.start));
+                var newEndY = Math.min(rangeY.end + shiftStep * shift / 100 * (rangeY.end - rangeY.start), 1 + maxPanOut);
+                if (newStartY <= 0) {
+                    newEndY = newStartY + differenceY;
+                }
+                if (newEndY >= 1) {
+                    newStartY = newEndY - differenceY;
+                }
+                this.zoomAxes(this.yAxes, { start: newStartY, end: newEndY });
             }
-            this.zoomAxes(this.xAxes, { start: newStartX, end: newEndX });
-        }
-        if (mouseWheelBehavior == "panY" || mouseWheelBehavior == "panXY") {
-            shift *= -1;
-            var differenceY = rangeY.end - rangeY.start;
-            var newStartY = Math.max(-maxPanOut, rangeY.start + shiftStep * shift / 100);
-            var newEndY = Math.min(rangeY.end + shiftStep * shift / 100, 1 + maxPanOut);
-            if (newStartY <= 0) {
-                newEndY = newStartY + differenceY;
+            if (mouseWheelBehavior == "zoomX" || mouseWheelBehavior == "zoomXY") {
+                var locationX = plotPoint.x / plotContainer.maxWidth;
+                var location2X = this.xAxes.getIndex(0).toAxisPosition(locationX);
+                var newStartX = Math.max(-maxPanOut, rangeX.start - shiftStep * (rangeX.end - rangeX.start) * shift / 100 * locationX);
+                newStartX = Math.min(newStartX, location2X);
+                var newEndX = Math.min(rangeX.end + shiftStep * (rangeX.end - rangeX.start) * shift / 100 * (1 - locationX), 1 + maxPanOut);
+                newEndX = Math.max(newEndX, location2X);
+                this.zoomAxes(this.xAxes, { start: newStartX, end: newEndX });
             }
-            if (newEndY >= 1) {
-                newStartY = newEndY - differenceY;
+            if (mouseWheelBehavior == "zoomY" || mouseWheelBehavior == "zoomXY") {
+                var locationY = plotPoint.y / plotContainer.maxHeight;
+                var location2Y = this.yAxes.getIndex(0).toAxisPosition(locationY);
+                var newStartY = Math.max(-maxPanOut, rangeY.start - shiftStep * (rangeY.end - rangeY.start) * shift / 100 * (1 - locationY));
+                newStartY = Math.min(newStartY, location2Y);
+                var newEndY = Math.min(rangeY.end + shiftStep * shift / 100 * locationY * (rangeY.end - rangeY.start), 1 + maxPanOut);
+                newEndY = Math.max(newEndY, location2Y);
+                this.zoomAxes(this.yAxes, { start: newStartY, end: newEndY });
             }
-            this.zoomAxes(this.yAxes, { start: newStartY, end: newEndY });
-        }
-        if (mouseWheelBehavior == "zoomX" || mouseWheelBehavior == "zoomXY") {
-            var locationX = plotPoint.x / plotContainer.maxWidth;
-            var newStartX = Math.max(-maxPanOut, rangeX.start - shiftStep * shift / 100 * locationX);
-            newStartX = Math.min(newStartX, rangeX.start + (rangeX.end - rangeX.start) * locationX - shiftStep * 0.05);
-            var newEndX = Math.min(rangeX.end + shiftStep * shift / 100 * (1 - locationX), 1 + maxPanOut);
-            newEndX = Math.max(newEndX, rangeX.start + (rangeX.end - rangeX.start) * locationX + shiftStep * 0.05);
-            this.zoomAxes(this.xAxes, { start: newStartX, end: newEndX });
-        }
-        if (mouseWheelBehavior == "zoomY" || mouseWheelBehavior == "zoomXY") {
-            var locationY = plotPoint.y / plotContainer.maxHeight;
-            var newStartY = Math.max(-maxPanOut, rangeY.start - shiftStep * shift / 100 * (1 - locationY));
-            newStartY = Math.min(newStartY, rangeY.start + (rangeY.end - rangeY.start) * locationY - shiftStep * 0.05);
-            var newEndY = Math.min(rangeY.end + shiftStep * shift / 100 * locationY, 1 + maxPanOut);
-            newEndY = Math.max(newEndY, rangeY.start + (rangeY.end - rangeY.start) * locationY + shiftStep * 0.05);
-            this.zoomAxes(this.yAxes, { start: newStartY, end: newEndY });
         }
     };
     Object.defineProperty(XYChart.prototype, "mouseWheelBehavior", {
@@ -37750,9 +39723,12 @@ var XYChart = /** @class */ (function (_super) {
         /**
          * Specifies action for when mouse wheel is used when over the chart.
          *
-         * Options: Options: `"zoomX"`, `"zoomY"`, `"zoomXY"`, `"panX"`, `"panY"`, `"panXY"`, `"none"` (default).
+         * Options: Options: `"zoomX"`, `"zoomY"`, `"zoomXY"`, `"panX"`, `"panY"`,`"panXY"`, `"none"` (default).
+         *
+         * You can control sensitivity of wheel zooming via `mouseOptions`.
          *
          * @default "none"
+         * @see {@link https://www.amcharts.com/docs/v4/reference/sprite/#mouseOptions_property} More information about `mouseOptions`
          * @param mouse wheel behavior
          */
         set: function (value) {
@@ -37773,6 +39749,40 @@ var XYChart = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(XYChart.prototype, "horizontalMouseWheelBehavior", {
+        /**
+         * @return Horizontal mouse wheel behavior
+         */
+        get: function () {
+            return this.getPropertyValue("horizontalMouseWheelBehavior");
+        },
+        /**
+         * Specifies action for when horizontal mouse wheel is used when over the chart.
+         *
+         * Options: Options: `"zoomX"`, `"zoomY"`, `"zoomXY"`, `"panX"`, `"panY"`, `"panXY"`, `"none"` (default).
+         *
+         * @default "none"
+         * @see {@link https://www.amcharts.com/docs/v4/reference/sprite/#mouseOptions_property} More information about `mouseOptions`
+         * @param mouse wheel behavior
+         */
+        set: function (value) {
+            if (this.setPropertyValue("horizontalMouseWheelBehavior", value)) {
+                if (value != "none") {
+                    this._mouseWheelDisposer2 = this.plotContainer.events.on("wheel", this.handleHorizontalWheel, this, false);
+                    this._disposers.push(this._mouseWheelDisposer2);
+                }
+                else {
+                    if (this._mouseWheelDisposer2) {
+                        this.plotContainer.wheelable = false;
+                        this.plotContainer.hoverable = false;
+                        this._mouseWheelDisposer2.dispose();
+                    }
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * This function is called by the [[DataSource]]'s `dateFields` adapater
      * so that particular chart types can popuplate this setting with their
@@ -37786,7 +39796,7 @@ var XYChart = /** @class */ (function (_super) {
         // Process parent
         fields = _super.prototype.dataSourceDateFields.call(this, fields);
         // Check if we have any series with date-fields
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](this.series.iterator(), function (series) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](this.series.iterator(), function (series) {
             fields = _this.populateDataSourceFields(fields, series.dataFields, ["dateX", "dateY", "openDateX", "openDateY"]);
         });
         return fields;
@@ -37803,7 +39813,7 @@ var XYChart = /** @class */ (function (_super) {
         var _this = this;
         fields = _super.prototype.dataSourceDateFields.call(this, fields);
         // Check if we have any series with date-fields
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_16__["each"](this.series.iterator(), function (series) {
+        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](this.series.iterator(), function (series) {
             fields = _this.populateDataSourceFields(fields, series.dataFields, ["valueX", "valueY", "openValueX", "openValueY"]);
         });
         return fields;
@@ -37820,19 +39830,19 @@ var XYChart = /** @class */ (function (_super) {
             var xAxes = [];
             var yAxes = [];
             // Set up axes
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.xAxes) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isArray"](config.xAxes)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.xAxes) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isArray"](config.xAxes)) {
                 for (var i = 0, len = config.xAxes.length; i < len; i++) {
                     if (!config.xAxes[i].type) {
                         throw Error("[XYChart error] No type set for xAxes[" + i + "].");
                     }
-                    else if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.xAxes[i]["axisRanges"])) {
+                    else if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.xAxes[i]["axisRanges"])) {
                         // Maybe convert string dates?
                         for (var x = 0, len_1 = config.xAxes[i]["axisRanges"].length; x < len_1; x++) {
                             var range = config.xAxes[i]["axisRanges"][x];
-                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](range.date) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isString"](range.date)) {
+                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](range.date) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isString"](range.date)) {
                                 range.date = this.dateFormatter.parse(range.date);
                             }
-                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](range.endDate) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isString"](range.endDate)) {
+                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](range.endDate) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isString"](range.endDate)) {
                                 range.endDate = this.dateFormatter.parse(range.endDate);
                             }
                         }
@@ -37844,19 +39854,19 @@ var XYChart = /** @class */ (function (_super) {
                     }
                 }
             }
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.yAxes) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isArray"](config.yAxes)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.yAxes) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isArray"](config.yAxes)) {
                 for (var i = 0, len = config.yAxes.length; i < len; i++) {
                     if (!config.yAxes[i].type) {
                         throw Error("[XYChart error] No type set for yAxes[" + i + "].");
                     }
-                    else if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.yAxes[i]["axisRanges"])) {
+                    else if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.yAxes[i]["axisRanges"])) {
                         // Maybe convert string dates?
                         for (var x = 0, len_2 = config.yAxes[i]["axisRanges"].length; x < len_2; x++) {
                             var range = config.yAxes[i]["axisRanges"][x];
-                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](range.date) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isString"](range.date)) {
+                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](range.date) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isString"](range.date)) {
                                 range.date = this.dateFormatter.parse(range.date);
                             }
-                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](range.endDate) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isString"](range.endDate)) {
+                            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](range.endDate) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isString"](range.endDate)) {
                                 range.endDate = this.dateFormatter.parse(range.endDate);
                             }
                         }
@@ -37869,20 +39879,20 @@ var XYChart = /** @class */ (function (_super) {
                 }
             }
             // Set up series
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.series) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isArray"](config.series)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.series) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isArray"](config.series)) {
                 for (var i = 0, len = config.series.length; i < len; i++) {
                     config.series[i].type = config.series[i].type || "LineSeries";
                 }
             }
             // Set up cursor
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.cursor) && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.cursor.type)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.cursor) && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.cursor.type)) {
                 config.cursor.type = "XYCursor";
             }
             // Set up scrollbars
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.scrollbarX) && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.scrollbarX.type)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.scrollbarX) && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.scrollbarX.type)) {
                 config.scrollbarX.type = "Scrollbar";
             }
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.scrollbarY) && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](config.scrollbarY.type)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.scrollbarY) && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](config.scrollbarY.type)) {
                 config.scrollbarY.type = "Scrollbar";
             }
             _super.prototype.processConfig.call(this, config);
@@ -37955,7 +39965,7 @@ var XYChart = /** @class */ (function (_super) {
      * @return New series
      */
     XYChart.prototype.createSeries = function () {
-        return new _series_XYSeries__WEBPACK_IMPORTED_MODULE_9__["XYSeries"]();
+        return new _series_XYSeries__WEBPACK_IMPORTED_MODULE_10__["XYSeries"]();
     };
     Object.defineProperty(XYChart.prototype, "zoomOutButton", {
         /**
@@ -38019,11 +40029,11 @@ var XYChart = /** @class */ (function (_super) {
     XYChart.prototype.disposeData = function () {
         _super.prototype.disposeData.call(this);
         var scrollbarX = this.scrollbarX;
-        if (scrollbarX && scrollbarX instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_14__["XYChartScrollbar"]) {
+        if (scrollbarX && scrollbarX instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_15__["XYChartScrollbar"]) {
             scrollbarX.scrollbarChart.disposeData();
         }
         var scrollbarY = this.scrollbarY;
-        if (scrollbarY && scrollbarY instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_14__["XYChartScrollbar"]) {
+        if (scrollbarY && scrollbarY instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_15__["XYChartScrollbar"]) {
             scrollbarY.scrollbarChart.disposeData();
         }
         this.xAxes.each(function (axis) {
@@ -38039,10 +40049,10 @@ var XYChart = /** @class */ (function (_super) {
      * @param rawDataItem One or many raw data item objects
      */
     XYChart.prototype.addData = function (rawDataItem, removeCount) {
-        if (this.scrollbarX instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_14__["XYChartScrollbar"]) {
+        if (this.scrollbarX instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_15__["XYChartScrollbar"]) {
             this.addScrollbarData(this.scrollbarX, removeCount);
         }
-        if (this.scrollbarY instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_14__["XYChartScrollbar"]) {
+        if (this.scrollbarY instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_15__["XYChartScrollbar"]) {
             this.addScrollbarData(this.scrollbarY, removeCount);
         }
         _super.prototype.addData.call(this, rawDataItem, removeCount);
@@ -38060,7 +40070,7 @@ var XYChart = /** @class */ (function (_super) {
      */
     XYChart.prototype.removeScrollbarData = function (scrollbar, removeCount) {
         var chart = scrollbar.scrollbarChart;
-        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](removeCount)) {
+        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](removeCount)) {
             while (removeCount > 0) {
                 var dataItem = this.dataItems.getIndex(0);
                 if (dataItem) {
@@ -38084,10 +40094,10 @@ var XYChart = /** @class */ (function (_super) {
      * @param count number of elements to remove
      */
     XYChart.prototype.removeData = function (count) {
-        if (this.scrollbarX instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_14__["XYChartScrollbar"]) {
+        if (this.scrollbarX instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_15__["XYChartScrollbar"]) {
             this.removeScrollbarData(this.scrollbarX, count);
         }
-        if (this.scrollbarY instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_14__["XYChartScrollbar"]) {
+        if (this.scrollbarY instanceof _elements_XYChartScrollbar__WEBPACK_IMPORTED_MODULE_15__["XYChartScrollbar"]) {
             this.removeScrollbarData(this.scrollbarY, count);
         }
         _super.prototype.removeData.call(this, count);
@@ -38125,15 +40135,15 @@ var XYChart = /** @class */ (function (_super) {
  *
  * @ignore
  */
-_core_Registry__WEBPACK_IMPORTED_MODULE_13__["registry"].registeredClasses["XYChart"] = XYChart;
+_core_Registry__WEBPACK_IMPORTED_MODULE_14__["registry"].registeredClasses["XYChart"] = XYChart;
 /**
  * Add default responsive rules
  */
 /**
  * Remove horizontal scrollbar on narrow charts.
  */
-_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_20__["defaultRules"].push({
-    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_20__["ResponsiveBreakpoints"].maybeXS,
+_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_22__["defaultRules"].push({
+    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_22__["ResponsiveBreakpoints"].maybeXS,
     state: function (target, stateId) {
         if (target instanceof XYChart && target.scrollbarX) {
             var state = target.states.create(stateId);
@@ -38147,8 +40157,8 @@ _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_20__["defaultRules"].push({
 /**
  * Remove vertical scrollbar on short charts.
  */
-_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_20__["defaultRules"].push({
-    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_20__["ResponsiveBreakpoints"].maybeXS,
+_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_22__["defaultRules"].push({
+    relevant: _core_utils_Responsive__WEBPACK_IMPORTED_MODULE_22__["ResponsiveBreakpoints"].maybeXS,
     state: function (target, stateId) {
         if (target instanceof XYChart && target.scrollbarY) {
             var state = target.states.create(stateId);
@@ -38221,7 +40231,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link DataItem}
  */
 var XYChart3DDataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](XYChart3DDataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(XYChart3DDataItem, _super);
     function XYChart3DDataItem() {
         var _this = _super.call(this) || this;
         _this.className = "XYChart3DDataItem";
@@ -38246,7 +40256,7 @@ var XYChart3DDataItem = /** @class */ (function (_super) {
  * @important
  */
 var XYChart3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](XYChart3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(XYChart3D, _super);
     /**
      * Constructor
      */
@@ -38406,19 +40416,24 @@ var XYChart3D = /** @class */ (function (_super) {
             if (series instanceof _series_ColumnSeries3D__WEBPACK_IMPORTED_MODULE_6__["ColumnSeries3D"]) {
                 series.depth = _this.depth / (count);
                 series.angle = _this.angle;
-                series.dx = _this.depth / (count) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["cos"](_this.angle) * (series.depthIndex);
-                series.dy = -_this.depth / (count) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["sin"](_this.angle) * (series.depthIndex);
+                if (series.columnsContainer == _this.columnsContainer) {
+                    series.dx = _this.depth / (count) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["cos"](_this.angle) * (series.depthIndex);
+                    series.dy = -_this.depth / (count) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_9__["sin"](_this.angle) * (series.depthIndex);
+                }
                 var inversed_1 = false;
                 if ((series.baseAxis == series.xAxis && series.xAxis.renderer.inversed) || (series.baseAxis == series.yAxis && series.yAxis.renderer.inversed)) {
                     inversed_1 = true;
                 }
                 var i_1 = 1;
-                series.columns.each(function (column) {
-                    if (inversed_1) {
-                        column.zIndex = 1000 * (1000 - i_1) + s - series.depthIndex * 100;
-                    }
-                    else {
-                        column.zIndex = 1000 * i_1 + s - series.depthIndex * 100;
+                series.dataItems.each(function (dataItem) {
+                    var column = dataItem.column;
+                    if (column) {
+                        if (inversed_1) {
+                            column.zIndex = 1000 * (1000 - i_1) + s - series.depthIndex * 100;
+                        }
+                        else {
+                            column.zIndex = 1000 * i_1 + s - series.depthIndex * 100;
+                        }
                     }
                     i_1++;
                 });
@@ -38533,14 +40548,10 @@ var BaseObject = /** @class */ (function () {
          * destruction/disposal code should take this into account when deciding
          * wheter to run potentially costly disposal operations if they already have
          * been run.
-         *
-         * @ignore Exclude from docs
          */
         this._disposed = false;
         /**
          * List of IDisposer which will be disposed when the BaseObject is disposed.
-         *
-         * @ignore Exclude from docs
          */
         this._disposers = [];
         this.className = "BaseObject";
@@ -38600,6 +40611,59 @@ var BaseObject = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(BaseObject.prototype, "delayedMap", {
+        /**
+         * Returns mapping for objects referenced by id in JSON config that are not yet
+         * available at processing time.
+         *
+         * @ignore Exclude from docs
+         * @return Map collection
+         */
+        get: function () {
+            if (!this._delayedMap) {
+                this._delayedMap = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_3__["Dictionary"]();
+            }
+            return this._delayedMap;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Logs an id and property of the target element that is not yet available
+     * for later assignment.
+     *
+     * @ignore
+     * @param  property  Property to set
+     * @param  id        ID of the target element
+     */
+    BaseObject.prototype.addDelayedMap = function (property, id) {
+        var map = this.delayedMap;
+        if (!map.hasKey(id)) {
+            map.setKey(id, []);
+        }
+        var list = map.getKey(id);
+        list.push({
+            property: property,
+            target: this
+        });
+    };
+    /**
+     * Processes delayed JSON config items.
+     *
+     * @ignore
+     */
+    BaseObject.prototype.processDelayedMap = function () {
+        var _this = this;
+        this.delayedMap.each(function (id, list) {
+            if (_this.map.hasKey(id)) {
+                var target_1 = _this.map.getKey(id);
+                _utils_Array__WEBPACK_IMPORTED_MODULE_11__["each"](list, function (item) {
+                    item.target[item.property] = target_1;
+                });
+                _this.delayedMap.removeKey(id);
+            }
+        });
+    };
     /**
      * Applies properties from all assigned themes.
      *
@@ -38910,7 +40974,8 @@ var BaseObject = /** @class */ (function () {
                     && (!_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isObject"](target[configKey])
                         || !_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](target[configKey].className)
                         || configValue["forceCreate"]
-                        || target[configKey].className != configValue["type"])) {
+                        || target[configKey].className != configValue["type"])
+                    && !_this.asIs(configKey)) {
                     item_1 = _this.createClassInstance(configValue["type"]);
                     // Create new instance
                     if (item_1) {
@@ -38953,7 +41018,7 @@ var BaseObject = /** @class */ (function () {
                         target[configKey] = parent_1;
                     }
                     else {
-                        throw Error("Non-existing ID in config: \"" + configValue + "\".");
+                        _this.addDelayedMap("parent", configValue);
                     }
                 }
                 else if (_this.asIs(configKey)) {
@@ -39442,7 +41507,9 @@ var BaseObject = /** @class */ (function () {
         if (_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](_Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].registeredClasses[className])) {
             return new _Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].registeredClasses[className]();
         }
-        return;
+        else {
+            throw Error("Invalid type: \"" + className + "\".");
+        }
     };
     /**
      * Creates a class instance for a config entry using it's type. (as set in
@@ -39524,7 +41591,7 @@ var BaseObject = /** @class */ (function () {
  * [[BaseObject]] directly.
  */
 var BaseObjectEvents = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](BaseObjectEvents, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(BaseObjectEvents, _super);
     /**
      * Constructor
      */
@@ -39692,7 +41759,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Component = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Component, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Component, _super);
     /**
      * Constructor
      */
@@ -40126,22 +42193,28 @@ var Component = /** @class */ (function (_super) {
      * @param count number of elements to remove
      */
     Component.prototype.removeData = function (count) {
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](count)) {
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](count) && count > 0) {
             while (count > 0) {
                 var dataItem = this.mainDataSet.getIndex(0);
                 if (dataItem) {
                     this.mainDataSet.remove(dataItem);
                 }
                 this.dataUsers.each(function (dataUser) {
-                    var dataItem = dataUser.dataItems.getIndex(0);
-                    if (dataItem) {
-                        dataUser.dataItems.remove(dataItem);
+                    if (!dataUser.data || dataUser.data.length == 0) {
+                        var dataItem_1 = dataUser.mainDataSet.getIndex(0);
+                        if (dataItem_1) {
+                            dataUser.mainDataSet.remove(dataItem_1);
+                        }
                     }
                 });
                 this.data.shift();
-                this._parseDataFrom--;
+                if (this._parseDataFrom > 0) {
+                    this._parseDataFrom--;
+                }
                 count--;
             }
+            // changed from invalidateData since 4.7.19 to solve #51551
+            this.invalidateDataItems();
         }
     };
     /**
@@ -40489,7 +42562,11 @@ var Component = /** @class */ (function (_super) {
         if (value && value.length > 0) {
             this.invalidateData();
         }
-        //}		
+        else {
+            this.dispatchImmediately("beforedatavalidated");
+            this.dispatch("datavalidated");
+        }
+        //}
     };
     /**
      * Returns (creates if necessary) a [[DataSource]] bound to any specific
@@ -40677,7 +42754,7 @@ var Component = /** @class */ (function (_super) {
     };
     Object.defineProperty(Component.prototype, "responsive", {
         /**
-         * @return Data source
+         * @return Responsive rules handler
          */
         get: function () {
             if (!this._responsive) {
@@ -40693,7 +42770,7 @@ var Component = /** @class */ (function (_super) {
          * NOTE: Responsive features are currently in development and may not work
          * as expected, if at all.
          *
-         * @param value  Data source
+         * @param value  Responsive rules handler
          */
         set: function (value) {
             this._responsive = value;
@@ -40726,6 +42803,10 @@ var Component = /** @class */ (function (_super) {
         var start = range.start;
         var end = range.end;
         var priority = range.priority;
+        if (range.start == range.end) {
+            range.start = range.start - 0.5 / this.maxZoomFactor;
+            range.end = range.end + 0.5 / this.maxZoomFactor;
+        }
         if (priority == "end" && end == 1 && start != 0) {
             if (start < this.start) {
                 priority = "start";
@@ -40795,6 +42876,7 @@ var Component = /** @class */ (function (_super) {
             this._finalEnd = end;
             this._finalStart = start;
             this.skipRangeEvent = skipRangeEvent;
+            this.dispatchImmediately("rangechangestarted");
             if (this.rangeChangeDuration > 0 && !instantly) {
                 // todo: maybe move this to Animation
                 var rangeChangeAnimation = this.rangeChangeAnimation;
@@ -40805,11 +42887,12 @@ var Component = /** @class */ (function (_super) {
                             return { start: start, end: end };
                         }
                         else {
-                            this.rangeChangeAnimation.stop();
+                            if (!rangeChangeAnimation.isDisposed()) {
+                                rangeChangeAnimation.stop();
+                            }
                         }
                     }
                 }
-                this.dispatchImmediately("rangechangestarted");
                 if (this.rangeChangeAnimation) {
                     this.rangeChangeAnimation.kill();
                 }
@@ -40827,6 +42910,7 @@ var Component = /** @class */ (function (_super) {
             else {
                 this.start = start;
                 this.end = end;
+                this.dispatch("rangechangeended");
             }
         }
         return { start: start, end: end };
@@ -40968,8 +43052,9 @@ var Component = /** @class */ (function (_super) {
          * @return End index
          */
         get: function () {
-            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](this._endIndex)) {
-                this._endIndex = this.dataItems.length;
+            var count = this.dataItems.length;
+            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](this._endIndex) || this._endIndex > count) {
+                this._endIndex = count;
             }
             return this._endIndex;
         },
@@ -41319,8 +43404,8 @@ var Component = /** @class */ (function (_super) {
      */
     Component.prototype.getExporting = function () {
         var _export = _super.prototype.getExporting.call(this);
-        if (!_export.adapter.has("data", this._exportData, null, this)) {
-            _export.adapter.add("data", this._exportData, null, this);
+        if (!_export.adapter.has("data", this._exportData, -1, this)) {
+            _export.adapter.add("data", this._exportData, -1, this);
             this.events.on("datavalidated", function (ev) {
                 if (_export.menu) {
                     _export.menu.invalidate();
@@ -41352,7 +43437,7 @@ var Component = /** @class */ (function (_super) {
             }
             else {
                 if (this._showOnInitDisposer2) {
-                    this._showOnInitDisposer2.dispose();
+                    this.removeDispose(this._showOnInitDisposer2);
                 }
             }
         }
@@ -41522,7 +43607,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Container = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Container, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Container, _super);
     /**
      * Constructor
      */
@@ -41616,7 +43701,7 @@ var Container = /** @class */ (function (_super) {
         catch (err) {
             // void
         }
-        if (this.element && !child.disabled) {
+        if (this.element) {
             var group = this.element;
             group.add(child.group);
         }
@@ -42602,6 +44687,7 @@ var Container = /** @class */ (function (_super) {
                 this.events.dispatchImmediately("transformed", event_1);
             }
         }
+        this.dispatchImmediately("layoutvalidated");
     };
     /**
      * Positions element according its center settings.
@@ -42641,7 +44727,7 @@ var Container = /** @class */ (function (_super) {
         var columnWidth = [];
         var column = 0;
         _utils_Array__WEBPACK_IMPORTED_MODULE_12__["each"](children, function (child) {
-            if (child.isMeasured) {
+            if (child.isMeasured && !child.disabled && !child.__disabled) {
                 if (_this.fixedWidthGrid) {
                     columnWidth[column] = maxCellWidth;
                 }
@@ -42932,24 +45018,6 @@ var Container = /** @class */ (function (_super) {
         else {
             this.validateLayout();
         }
-    };
-    /**
-     * Returns Tooltip X coordinate if it's set, or middle of the element.
-     *
-     * @ignore Exclude from docs
-     * @return X (px)
-     */
-    Container.prototype.getTooltipX = function () {
-        return _super.prototype.getTooltipX.call(this);
-    };
-    /**
-     * Returns Tooltip Y coordinate if it's set, or middle of the element.
-     *
-     * @ignore Exclude from docs
-     * @return Y (px)
-     */
-    Container.prototype.getTooltipY = function () {
-        return _super.prototype.getTooltipY.call(this);
     };
     Object.defineProperty(Container.prototype, "fontFamily", {
         /**
@@ -43355,7 +45423,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var DataItem = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DataItem, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DataItem, _super);
     /**
      * Constructor
      * @todo Adding events to disposers produces errors in some cases, which means that chart is using disposed Data Items which is not right
@@ -43397,6 +45465,8 @@ var DataItem = /** @class */ (function (_super) {
          *
          * A location is a position within date or category, or, in some other cases,
          * where there is no single point but rather some period.
+         *
+         * @see {@link https://www.amcharts.com/docs/v4/concepts/series/#Data_item_locations} for info how data item locations work
          */
         _this.locations = {};
         /**
@@ -43638,7 +45708,7 @@ var DataItem = /** @class */ (function (_super) {
             }
         });
         this._visible = value;
-        if (this._eventDispatcher) {
+        if (this._eventDispatcher && !this.__disabled) {
             if (this.events.isEnabled("visibilitychanged")) {
                 var event_1 = {
                     type: "visibilitychanged",
@@ -43847,7 +45917,7 @@ var DataItem = /** @class */ (function (_super) {
         value = _utils_Type__WEBPACK_IMPORTED_MODULE_6__["toNumber"](value);
         if (currentValue !== value) {
             this.values[name].value = value;
-            if (this._eventDispatcher) {
+            if (this._eventDispatcher && !this.__disabled) {
                 if (this.events.isEnabled("valuechanged")) {
                     var event_2 = {
                         type: "valuechanged",
@@ -43867,7 +45937,7 @@ var DataItem = /** @class */ (function (_super) {
         var currentValue = this.values[name][calculated];
         if (currentValue !== value && _utils_Type__WEBPACK_IMPORTED_MODULE_6__["isNumber"](value)) {
             this.values[name][calculated] = value;
-            if (this._eventDispatcher) {
+            if (this._eventDispatcher && !this.__disabled) {
                 if (this.events.isEnabled("calculatedvaluechanged")) {
                     var event_3 = {
                         type: "calculatedvaluechanged",
@@ -43922,7 +45992,7 @@ var DataItem = /** @class */ (function (_super) {
                     valueAnimation.stop();
                 }
                 this.values[name].workingValue = value;
-                if (this._eventDispatcher) {
+                if (this._eventDispatcher && !this.__disabled) {
                     if (this.events.isEnabled("workingvaluechanged")) {
                         var event_4 = {
                             type: "workingvaluechanged",
@@ -43954,7 +46024,7 @@ var DataItem = /** @class */ (function (_super) {
         var currentLocation = this.locations[name];
         if (currentLocation !== value) {
             this.locations[name] = value;
-            if (this._eventDispatcher) {
+            if (this._eventDispatcher && !this.__disabled) {
                 if (this.events.isEnabled("locationchanged")) {
                     var event_5 = {
                         type: "locationchanged",
@@ -44008,7 +46078,7 @@ var DataItem = /** @class */ (function (_super) {
                 locationAnimation.stop();
             }
             this.workingLocations[name] = value;
-            if (this._eventDispatcher) {
+            if (this._eventDispatcher && !this.__disabled) {
                 if (this.events.isEnabled("workinglocationchanged")) {
                     var event_6 = {
                         type: "workinglocationchanged",
@@ -44067,7 +46137,7 @@ var DataItem = /** @class */ (function (_super) {
         if (this.properties[name] !== value) {
             this.hasProperties = true;
             this.properties[name] = value;
-            if (this._eventDispatcher) {
+            if (this._eventDispatcher && !this.__disabled) {
                 if (this.events.isEnabled("propertychanged")) {
                     var event_7 = {
                         type: "propertychanged",
@@ -44167,7 +46237,7 @@ var DataItem = /** @class */ (function (_super) {
          */
         set: function (value) {
             this._ignoreMinMax = value;
-            if (this._eventDispatcher) {
+            if (this._eventDispatcher && !this.__disabled) {
                 if (this.events.isEnabled("propertychanged")) {
                     var event_8 = {
                         type: "propertychanged",
@@ -44210,7 +46280,7 @@ var DataItem = /** @class */ (function (_super) {
         // it's always only one options, no need cycle
         var animationOptions = animation.animationOptions[0];
         if (animationOptions) {
-            if (this._eventDispatcher) {
+            if (this._eventDispatcher && !this.__disabled) {
                 if (this.events.isEnabled("workingvaluechanged")) {
                     var event_9 = {
                         type: "workingvaluechanged",
@@ -44339,13 +46409,14 @@ var options = {
 /*!*********************************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/.internal/core/Registry.js ***!
   \*********************************************************************/
-/*! exports provided: Registry, registry */
+/*! exports provided: Registry, registry, is */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Registry", function() { return Registry; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registry", function() { return registry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "is", function() { return is; });
 /* harmony import */ var _utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/EventDispatcher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/EventDispatcher.js");
 /* harmony import */ var _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/Dictionary */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Dictionary.js");
 /* harmony import */ var _utils_Cache__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/Cache */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Cache.js");
@@ -44406,11 +46477,11 @@ var Registry = /** @class */ (function () {
          */
         this._placeholders = {};
         /**
-     * A list of invalid(ated) [[Sprite]] objects that need to be re-validated
-     * during next cycle.
-     *
-     * @ignore Exclude from docs
-     */
+         * A list of invalid(ated) [[Sprite]] objects that need to be re-validated
+         * during next cycle.
+         *
+         * @ignore Exclude from docs
+         */
         this.invalidSprites = {};
         /**
          * Components are added to this list when their data provider changes to
@@ -44670,6 +46741,17 @@ var Registry = /** @class */ (function () {
  * @ignore Exclude from docs
  */
 var registry = new Registry();
+/**
+ * Returns `true` if object is an instance of the class. It's the same as `instanceof` except it doesn't need to import the class.
+ *
+ * @param object Object
+ * @param name Class name
+ * @return Is instance of class
+ */
+function is(object, name) {
+    var x = registry.registeredClasses[name];
+    return x != null && object instanceof x;
+}
 //# sourceMappingURL=Registry.js.map
 
 /***/ }),
@@ -44771,7 +46853,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Defines list ofvisual properties
  */
-var visualProperties = ["fill", "fillOpacity", "stroke", "strokeOpacity", "strokeWidth", "strokeDasharray", "strokeDashoffset"]; // do not add opacity here, as it is used for showing/hiding
+var visualProperties = ["fill", "fillOpacity", "stroke", "strokeOpacity", "strokeWidth", "strokeDasharray", "strokeDashoffset", "strokeLinecap", "strokeLinejoin"]; // do not add opacity here, as it is used for showing/hiding
 ;
 /**
  * ============================================================================
@@ -44799,7 +46881,7 @@ var visualProperties = ["fill", "fillOpacity", "stroke", "strokeOpacity", "strok
  * @important
  */
 var Sprite = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Sprite, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Sprite, _super);
     /**
      * Constructor:
      * * Creates initial node
@@ -44947,6 +47029,9 @@ var Sprite = /** @class */ (function (_super) {
          * @default false
          */
         _this.applyOnClones = false;
+        // unrotated unscaled
+        _this._measuredWidthSelf = 0;
+        _this._measuredHeightSelf = 0;
         // read only, sprite extreme coordinates
         /**
          * @ignore
@@ -44964,6 +47049,23 @@ var Sprite = /** @class */ (function (_super) {
          * @ignore
          */
         _this.maxBottom = 0;
+        // not rotated and not scaled
+        /**
+         * @ignore
+         */
+        _this.maxLeftSelf = 0;
+        /**
+         * @ignore
+         */
+        _this.maxRightSelf = 0;
+        /**
+         * @ignore
+         */
+        _this.maxTopSelf = 0;
+        /**
+         * @ignore
+         */
+        _this.maxBottomSelf = 0;
         _this._isDragged = false;
         _this._isResized = false;
         /**
@@ -45019,6 +47121,21 @@ var Sprite = /** @class */ (function (_super) {
          * @ignore
          */
         _this.dragWhileResize = false;
+        /**
+         *  @ignore
+         */
+        _this.measureFailed = false;
+        /**
+         * If this flag is set to true, calling show() will not reveal the sprite.
+         *
+         * @ignore
+         */
+        _this.preventShow = false;
+        /**
+         * When cloning a sprite, if the template has it's own tooltip assigned, this tooltip is also cloned by default.
+         * This is not good for cpu and sometimes you might only need one single tooltip for all clones. Set this to false in order not to clone tooltip.
+         */
+        _this.cloneTooltip = true;
         _this.className = "Sprite";
         _this._disposers.push(_this._eventDispatcher);
         // Generate a unique ID
@@ -45036,6 +47153,8 @@ var Sprite = /** @class */ (function (_super) {
         _this.setPropertyValue("tooltipPosition", "fixed");
         _this.setPropertyValue("verticalCenter", "none");
         _this.setPropertyValue("horizontalCenter", "none");
+        _this.setPropertyValue("tooltipX", Object(_utils_Percent__WEBPACK_IMPORTED_MODULE_33__["percent"])(50));
+        _this.setPropertyValue("tooltipX", Object(_utils_Percent__WEBPACK_IMPORTED_MODULE_33__["percent"])(50));
         _this.setPropertyValue("marginTop", 0);
         _this.setPropertyValue("marginBottom", 0);
         _this.setPropertyValue("marginLeft", 0);
@@ -45050,6 +47169,7 @@ var Sprite = /** @class */ (function (_super) {
         _this.setPropertyValue("hidden", false);
         _this.setPropertyValue("urlTarget", "_self");
         _this.setPropertyValue("alwaysShowTooltip", false);
+        _this.setPropertyValue("showTooltipOn", "hover");
         _this._prevMeasuredWidth = 0;
         _this._prevMeasuredHeight = 0;
         _this._measuredWidth = 0;
@@ -45277,7 +47397,7 @@ var Sprite = /** @class */ (function (_super) {
             }
             // TODO clear existing positionchanged dispatches ?
             this.dispatch("positionchanged");
-            if (this.alwaysShowTooltip) {
+            if (this.showTooltipOn == "hit" || this.showTooltipOn == "always") {
                 this.updateTooltipPosition();
             }
         }
@@ -45314,6 +47434,7 @@ var Sprite = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     Sprite.prototype.afterDraw = function () {
+        var e_1, _a;
         if (this.isMeasured || this.horizontalCenter !== "none" || this.verticalCenter !== "none") {
             this.measureElement();
         }
@@ -45322,8 +47443,8 @@ var Sprite = /** @class */ (function (_super) {
             if (this._adapterO) {
                 try {
                     // used to be applySVGAttrbutes here, this is more efficient
-                    for (var _a = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](this._adapterO.keys()), _b = _a.next(); !_b.done; _b = _a.next()) {
-                        var key = _b.value;
+                    for (var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__values"])(this._adapterO.keys()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var key = _c.value;
                         switch (key) {
                             case "mask":
                             case "fill":
@@ -45352,7 +47473,7 @@ var Sprite = /** @class */ (function (_super) {
                 catch (e_1_1) { e_1 = { error: e_1_1 }; }
                 finally {
                     try {
-                        if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
                     }
                     finally { if (e_1) throw e_1.error; }
                 }
@@ -45375,7 +47496,7 @@ var Sprite = /** @class */ (function (_super) {
         else {
             this.dispatch("validated");
         }
-        if (this.alwaysShowTooltip) {
+        if (this.showTooltipOn == "always") {
             if (this.visible && !this.disabled && !this.__disabled) {
                 this.showTooltip();
             }
@@ -45383,7 +47504,6 @@ var Sprite = /** @class */ (function (_super) {
                 this.hideTooltip(0);
             }
         }
-        var e_1, _c;
     };
     /**
      * Dispatches `"ready"` event. Sprite dispatches it right after `"inited"` event.
@@ -45485,7 +47605,12 @@ var Sprite = /** @class */ (function (_super) {
                 this._tooltip.copyFrom(source.tooltip);
             }
             else {
-                this.tooltip = source.tooltip.clone();
+                if (source.cloneTooltip) {
+                    this.tooltip = source.tooltip.clone();
+                }
+                else {
+                    this._tooltip = source.tooltip;
+                }
             }
         }
         //if ((<any>source)["_tooltip"] && !this._tooltip) {
@@ -45506,6 +47631,9 @@ var Sprite = /** @class */ (function (_super) {
      */
     Sprite.prototype.dispose = function () {
         if (!this.isDisposed()) {
+            if (this.showTooltipOn == "always" && this.tooltip) {
+                this.tooltip.hide();
+            }
             this.dispatchImmediately("beforedisposed");
             if (this.isBaseSprite) {
                 if (this.htmlContainer) {
@@ -45763,7 +47891,7 @@ var Sprite = /** @class */ (function (_super) {
             });
         }
         this._alwaysShowDisposers = [];
-        if (this.alwaysShowTooltip) {
+        if (this.showTooltipOn == "always") {
             while (sprite != undefined) {
                 var disposer = sprite.events.on("visibilitychanged", this.handleAlwaysShow, this, false);
                 this.addDisposer(disposer);
@@ -45865,6 +47993,24 @@ var Sprite = /** @class */ (function (_super) {
                 this._map = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_5__["Dictionary"]();
             }
             return this._map;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Sprite.prototype, "delayedMap", {
+        /**
+         * @ignore
+         * @return Map collection
+         */
+        get: function () {
+            var top = this.topParent;
+            if (top) {
+                return top.delayedMap;
+            }
+            else if (!this._delayedMap) {
+                this._delayedMap = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_5__["Dictionary"]();
+            }
+            return this._delayedMap;
         },
         enumerable: true,
         configurable: true
@@ -46436,6 +48582,10 @@ var Sprite = /** @class */ (function (_super) {
         this._measuredWidthSelf = measuredWidth;
         this._measuredHeightSelf = measuredHeight;
         var positionPrecision = this._positionPrecision;
+        this.maxLeftSelf = this.maxLeft;
+        this.maxRightSelf = this.maxRight;
+        this.maxTopSelf = this.maxTop;
+        this.maxBottomSelf = this.maxBottom;
         // if a sprite is rotated or scaled, calculate measured size after transformations
         if (this.rotation !== 0 || this.scale !== 1) {
             // not good to handleGlobalScale here.
@@ -46486,7 +48636,7 @@ var Sprite = /** @class */ (function (_super) {
             this._prevMeasuredWidth = this._measuredWidth;
             // TODO clear existing sizechanged dispatches ?
             this.dispatch("sizechanged");
-            if ((this.isHover || this.alwaysShowTooltip) && this.tooltip && this.tooltip.visible && (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipText) || _utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipHTML))) {
+            if ((this.isHover || this.showTooltipOn == "hit" || this.showTooltipOn == "always") && this.tooltip && this.tooltip.visible && (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipText) || _utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipHTML))) {
                 this.updateTooltipPosition();
             }
             return true;
@@ -46653,10 +48803,10 @@ var Sprite = /** @class */ (function (_super) {
         }
         if (point) {
             if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](point.x)) {
-                this.setPropertyValue("x", point.x);
+                this.setPropertyValue("x", _utils_Math__WEBPACK_IMPORTED_MODULE_26__["round"](point.x, this._positionPrecision, true));
             }
             if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](point.y)) {
-                this.setPropertyValue("y", point.y);
+                this.setPropertyValue("y", _utils_Math__WEBPACK_IMPORTED_MODULE_26__["round"](point.y, this._positionPrecision, true));
             }
         }
         if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](rotation)) {
@@ -46923,10 +49073,10 @@ var Sprite = /** @class */ (function (_super) {
         var state = event.newValue;
         state.sprite = this;
         state.name = event.key;
-        if (this.states.hasKey("hover") || _utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipHTML) || _utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipText)) {
+        if (this.states.hasKey("hover") || (this.showTooltipOn == "hover" && (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipHTML) || _utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipText)))) {
             this.hoverable = true;
         }
-        if (this.states.hasKey("down")) {
+        if (this.states.hasKey("down") || (this.showTooltipOn == "hover" && (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipHTML) || _utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.tooltipText)))) {
             this.clickable = true;
         }
         if (this.states.hasKey("focus")) {
@@ -47108,7 +49258,7 @@ var Sprite = /** @class */ (function (_super) {
                 _this.defaultState.properties[propertyName] = currentValue;
             }
             //if (finalValue != currentValue && $type.hasValue(finalValue)) {
-            if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](finalValue)) {
+            if (finalValue != "__unset") {
                 var option = { from: currentValue, to: finalValue, property: propertyName };
                 options.push(option);
             }
@@ -47194,6 +49344,7 @@ var Sprite = /** @class */ (function (_super) {
                         this.handleOver();
                     }
                     else {
+                        this.interactions.isRealHover = false;
                         this.handleOut();
                     }
                 }
@@ -47383,6 +49534,9 @@ var Sprite = /** @class */ (function (_super) {
                 }
                 if (this instanceof _Container__WEBPACK_IMPORTED_MODULE_10__["Container"]) {
                     this.deepInvalidate();
+                    if (this._background) {
+                        this._background.invalidate();
+                    }
                 }
                 else {
                     this.invalidate();
@@ -48122,7 +50276,7 @@ var Sprite = /** @class */ (function (_super) {
      */
     Sprite.prototype.applyAccessibility = function () {
         // Check if we need to add label and description
-        var title = this.readerTitle, description = this.readerDescription, role = this.role, hidden = this.readerHidden, checked = this.readerChecked, controls = this.readerControls, live = this.readerLive;
+        var title = this.readerTitle, description = this.readerDescription, role = this.role, hidden = this.readerHidden, checked = this.readerChecked, controls = this.readerControls, live = this.readerLive, orientation = this.readerOrientation, valueNow = this.readerValueNow, valueText = this.readerValueText;
         // Init label/describe ids
         var labelledByIds = [], describedByIds = [];
         var labelledBy = this.readerLabelledBy;
@@ -48242,6 +50396,27 @@ var Sprite = /** @class */ (function (_super) {
         else {
             this.removeSVGAttribute("aria-live");
         }
+        // Apply aria-orientation
+        if (orientation) {
+            this.setSVGAttribute({ "aria-orientation": orientation });
+        }
+        else {
+            this.removeSVGAttribute("aria-orientation");
+        }
+        // Apply aria-valuenow
+        if (valueNow) {
+            this.setSVGAttribute({ "aria-valuenow": valueNow });
+        }
+        else {
+            this.removeSVGAttribute("aria-valuenow");
+        }
+        // Apply aria-valuetext
+        if (valueText) {
+            this.setSVGAttribute({ "aria-valuetext": valueText });
+        }
+        else {
+            this.removeSVGAttribute("aria-valuetext");
+        }
     };
     Object.defineProperty(Sprite.prototype, "readerTitle", {
         /**
@@ -48306,6 +50481,10 @@ var Sprite = /** @class */ (function (_super) {
             value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toText"](value);
             if (this.setPropertyValue("role", value)) {
                 this.applyAccessibility();
+                if (value == "slider") {
+                    this.setSVGAttribute({ "aria-valuemin": "0" });
+                    this.setSVGAttribute({ "aria-valuemax": "100" });
+                }
             }
         },
         enumerable: true,
@@ -48453,6 +50632,72 @@ var Sprite = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Sprite.prototype, "readerOrientation", {
+        /**
+         * @return Orientation
+         */
+        get: function () {
+            return this.getPropertyValue("readerOrientation");
+        },
+        /**
+         * Orientation of the element.
+         *
+         * @since 4.7.16
+         * @param value Orientation
+         */
+        set: function (value) {
+            value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toText"](value);
+            if (this.setPropertyValue("readerOrientation", value)) {
+                this.applyAccessibility();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Sprite.prototype, "readerValueNow", {
+        /**
+         * @return Current value
+         */
+        get: function () {
+            return this.getPropertyValue("readerValueNow");
+        },
+        /**
+         * Current value of the element.
+         *
+         * @since 4.7.16
+         * @param value Current value
+         */
+        set: function (value) {
+            value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toText"](value);
+            if (this.setPropertyValue("readerValueNow", value)) {
+                this.applyAccessibility();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Sprite.prototype, "readerValueText", {
+        /**
+         * @return Current value (text)
+         */
+        get: function () {
+            return this.getPropertyValue("readerValueText");
+        },
+        /**
+         * Text representation of the current value of the element.
+         *
+         * @since 4.7.16
+         * @param value Current value (text)
+         */
+        set: function (value) {
+            value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toText"](value);
+            if (this.setPropertyValue("readerValueText", value)) {
+                this.applyAccessibility();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Sprite.prototype, "keyboardOptions", {
         /**
          * ==========================================================================
@@ -48481,7 +50726,30 @@ var Sprite = /** @class */ (function (_super) {
     });
     Object.defineProperty(Sprite.prototype, "mouseOptions", {
         /**
-         * Returns elements mouse options.
+         * Mouse options.
+         *
+         * Enables controlling options related to the mouse, for example sensitivity
+         * of its mouse wheel.
+         *
+         * E.g. the below will reduce chart's wheel-zoom speed to half its default
+         * speed:
+         *
+         * ```TypeScript
+         * chart.plotContainer.mouseOptions.sensitivity = 0.5;
+         * ```
+         * ```JavaScript
+         * chart.plotContainer.mouseOptions.sensitivity = 0.5;
+         * ```
+         * ```JSON
+         * {
+         *   // ...
+         *   "plotContainer": {
+         *     "mouseOptions": {
+         *       "sensitivity": 0.5
+         *     }
+         *   }
+         * }
+         * ```
          *
          * @return Mouse options
          */
@@ -48582,9 +50850,13 @@ var Sprite = /** @class */ (function (_super) {
                     this.interactions.focusable = value;
                     if (value) {
                         this.setSVGAttribute({ "focusable": value });
+                        if (!this._tabindex) {
+                            this.tabindex = 0;
+                        }
                     }
                     else {
                         this.removeSVGAttribute("focusable");
+                        this.tabindex = undefined;
                     }
                     // Set focus events that would apply "focus" state
                     // setEventDisposer will also remove listeners if value == false
@@ -48772,6 +51044,7 @@ var Sprite = /** @class */ (function (_super) {
             if (this.setPropertyValue("tabindex", value) && _utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](value)) {
                 this.interactions.tabindex = value;
                 this.setSVGAttribute({ "tabindex": value });
+                this._tabindex = value;
                 if (value > -1) {
                     this.focusable = true;
                 }
@@ -49049,10 +51322,14 @@ var Sprite = /** @class */ (function (_super) {
             if (ev && ev.pointer) {
                 point = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["documentPointToSvg"](ev.pointer.point, this.svgContainer.SVGContainer, this.svgContainer.cssScale);
             }
-            this.showTooltip(point);
+            if (this.showTooltipOn == "hover") {
+                this.showTooltip(point);
+            }
         }
         else {
-            this.hideTooltip();
+            if (this.showTooltipOn == "hover") {
+                this.hideTooltip();
+            }
             if (!this.isHidden && this.states.hasKey("hover")) {
                 this.applyCurrentState();
             }
@@ -49080,7 +51357,9 @@ var Sprite = /** @class */ (function (_super) {
             }, 10);
             return;
         }
-        this.hideTooltip();
+        if (this.showTooltipOn == "hover") {
+            this.hideTooltip();
+        }
         this._outTimeout = this.setTimeout(this.handleOutReal.bind(this), this.rollOutDelay);
     };
     /**
@@ -49149,6 +51428,7 @@ var Sprite = /** @class */ (function (_super) {
      * @param ev Event
      */
     Sprite.prototype.handleUp = function (ev) {
+        var _this = this;
         /*if (!this.isDown) {
             this.interactions.originalPosition = null;
             this.interactions.originalAngle = null;
@@ -49157,6 +51437,12 @@ var Sprite = /** @class */ (function (_super) {
         this._isResized = false;
         if (this.states.hasKey("down")) {
             this.applyCurrentState();
+        }
+        if (this.showTooltipOn == "hit") {
+            this.showTooltip();
+            this._disposers.push(Object(_interaction_Interaction__WEBPACK_IMPORTED_MODULE_15__["getInteraction"])().body.events.once("down", function (ev) {
+                _this.hideTooltip();
+            }));
         }
     };
     Object.defineProperty(Sprite.prototype, "clickable", {
@@ -50310,6 +52596,9 @@ var Sprite = /** @class */ (function (_super) {
         /**
          * Rotation of the element in degrees. (0-360)
          *
+         * Note: For convenience purposes, negative values (for counter-clockwise
+         * rotation) and values exceeding 360 can also be used.
+         *
          * @param value  Rotation (0-360)
          */
         set: function (value) {
@@ -50428,7 +52717,11 @@ var Sprite = /** @class */ (function (_super) {
             var maxWidth = this.getPropertyValue("maxWidth");
             if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](maxWidth)) {
                 if (this.parent) {
-                    return this.parent.maxWidth;
+                    var parentWidth = this.parent.maxWidth;
+                    if (this.parent.layout != "absolute" && this.align != "none" && this.align != undefined) {
+                        parentWidth = parentWidth - this.pixelMarginLeft - this.pixelMarginRight;
+                    }
+                    return parentWidth;
                 }
             }
             return maxWidth;
@@ -50474,7 +52767,11 @@ var Sprite = /** @class */ (function (_super) {
             var maxHeight = this.getPropertyValue("maxHeight");
             if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](maxHeight)) {
                 if (this.parent) {
-                    return this.parent.maxHeight;
+                    var parentHeight = this.parent.maxHeight;
+                    if (this.parent.layout != "absolute" && this.valign != "none" && this.valign != undefined) {
+                        parentHeight = parentHeight - this.pixelMarginTop - this.pixelMarginBottom;
+                    }
+                    return parentHeight;
                 }
             }
             return maxHeight;
@@ -51419,13 +53716,21 @@ var Sprite = /** @class */ (function (_super) {
      */
     Sprite.prototype.setPath = function (value) {
         if (this.setPropertyValue("path", value)) {
+            if (this._adapterO) {
+                value = this._adapterO.apply("path", value);
+            }
             if (!this._isPath) {
                 if (!this.element || (this.element.node && !(this.element.node instanceof SVGPathElement))) {
                     this.element = this.paper.add("path");
                 }
                 this._isPath = true;
             }
-            this.element.attr({ "d": value });
+            if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](value)) {
+                this.element.attr({ "d": value });
+            }
+            else {
+                this.element.removeAttr("d");
+            }
             this.invalidatePosition();
             // otherwise is 0x0
             if (!this.inited) {
@@ -51938,6 +54243,9 @@ var Sprite = /** @class */ (function (_super) {
      */
     Sprite.prototype.showReal = function (duration) {
         var _this = this;
+        if (this.preventShow) {
+            return;
+        }
         var transition;
         var properties = this.defaultState.properties;
         if (!this.disabled && (this.isHidden || !this.visible || this.isHiding || (properties.opacity != null && this.opacity < properties.opacity && !this.isShowing)) && !this.isDisposed()) {
@@ -52021,7 +54329,10 @@ var Sprite = /** @class */ (function (_super) {
         var _this = this;
         var transition;
         if (!this.isHiding && this.visible && !this.isDisposed()) {
-            this.hideTooltip(0);
+            // added to solve 51375
+            if (this.tooltip && this.tooltip.currentSprite == this) {
+                this.hideTooltip(0);
+            }
             if (this._hideAnimation) {
                 this._hideAnimation.kill();
                 this._hideAnimation = undefined;
@@ -52280,8 +54591,11 @@ var Sprite = /** @class */ (function (_super) {
      * @return returns true if the tooltip was shown and false if it wasn't (no text was found)
      */
     Sprite.prototype.showTooltip = function (point) {
-        if (this.alwaysShowTooltip && !this._tooltip && this.tooltip) {
+        if (this.showTooltipOn == "always" && !this._tooltip && this.tooltip) {
             this._tooltip = this.tooltip.clone();
+        }
+        if (!point && this.tooltipPosition == "pointer" && this.isHover) {
+            point = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["documentPointToSvg"](Object(_interaction_Interaction__WEBPACK_IMPORTED_MODULE_15__["getInteraction"])().lastPointer.point, this.svgContainer.SVGContainer, this.svgContainer.cssScale);
         }
         // do not show if hidden
         var sprite = this;
@@ -52398,6 +54712,7 @@ var Sprite = /** @class */ (function (_super) {
                             duration = 1;
                         }
                         tooltip.show(duration);
+                        tooltip.currentSprite = this;
                         return true;
                     }
                     else {
@@ -52430,8 +54745,8 @@ var Sprite = /** @class */ (function (_super) {
         else {
             // Point to the X/Y of this Sprite
             var globalPoint = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["spritePointToSvg"]({
-                "x": this.tooltipX,
-                "y": this.tooltipY
+                "x": this.getTooltipX(),
+                "y": this.getTooltipY()
             }, this);
             return this.pointTooltipTo(globalPoint);
         }
@@ -52462,7 +54777,7 @@ var Sprite = /** @class */ (function (_super) {
      * @see {@link Tooltip}
      */
     Sprite.prototype.hideTooltip = function (duration) {
-        if (this.alwaysShowTooltip) {
+        if (this.showTooltipOn == "always") {
             return;
         }
         var tooltip = this.tooltip;
@@ -52584,8 +54899,7 @@ var Sprite = /** @class */ (function (_super) {
          * @param value  Tooltip X (px)
          */
         set: function (value) {
-            value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toNumber"](value);
-            if (this.setPropertyValue("tooltipX", value) && this.tooltip) {
+            if (this.setPercentProperty("tooltipX", value) && this.tooltip) {
                 this.tooltip.invalidate();
             }
         },
@@ -52597,21 +54911,52 @@ var Sprite = /** @class */ (function (_super) {
          * @return Always show tooltip?
          */
         get: function () {
-            return this.getPropertyValue("alwaysShowTooltip");
+            return this.getPropertyValue("showTooltipOn") == "always";
         },
         /**
+         * DEPRECATION NOTICE: This setting is deprecated in favor of a more flexible
+         * setting: `showTooltipOn`. Please use `showTooltipOn = "always"` instead.
+         *
          * Indicates if this element should display a tooltip permanently.
          *
          * Useful, if you want to show permanent tooltips on some items.
+         *
+         * @default false
+         * @since 4.5.4
+         * @deprecated Use `showTooltipOn = "always"` instead
+         * @param  value  Always show tooltip?
+         */
+        set: function (value) {
+            value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toBoolean"](value);
+            if (value) {
+                this.showTooltipOn = "always";
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Sprite.prototype, "showTooltipOn", {
+        /**
+         * @return When to show tooltip
+         */
+        get: function () {
+            return this.getPropertyValue("showTooltipOn");
+        },
+        /**
+         * Indicates when tooltip needs to be shown on this element:
+         *
+         * * `"hover"` (default) - Tooltip will be shown when element is hovered on.
+         * * `"hit"` - Tooltip will be shown when element is clicked/tapped. Tooltip will be hidden when clicked/tapped anywhere else.
+         * * `"always"` - Tooltip will be shown on the element permanently.
          *
          * For example, if you would like to show tooltips on all of the columns of
          * a [[ColumnSeries]]:
          *
          * ```TypeScript
-         * series.columns.template.alwaysShowTooltip = true;
+         * series.columns.template.showTooltipOn = "always";
          * ```
          * ```JavaScript
-         * series.columns.template.alwaysShowTooltip = true;
+         * series.columns.template.showTooltipOn = "always";
          * ```
          * ```JSON
          * {
@@ -52619,7 +54964,7 @@ var Sprite = /** @class */ (function (_super) {
          *   "series": [{
          *     // ...
          *     "columns": {
-         *       "alwaysShowTooltip": true
+         *       "showTooltipOn": "always"
          *     }
          *   }]
          * }
@@ -52628,10 +54973,10 @@ var Sprite = /** @class */ (function (_super) {
          * It can even be set to display on a selected columns via `propertyFields`:
          *
          * ```TypeScript
-         * series.columns.template.propertyFields.alwaysShowTooltip = "tooltip";
+         * series.columns.template.propertyFields.showTooltipOn = "tooltip";
          * ```
          * ```JavaScript
-         * series.columns.template.propertyFields.alwaysShowTooltip = "tooltip";
+         * series.columns.template.propertyFields.showTooltipOn = "tooltip";
          * ```
          * ```JSON
          * {
@@ -52640,24 +54985,30 @@ var Sprite = /** @class */ (function (_super) {
          *     // ...
          *     "columns": {
          *       "propertyFields": {
-         *         "alwaysShowTooltip": "tooltip"
+         *         "showTooltipOn": "tooltip"
          *       }
          *     }
          *   }]
          * }
          * ```
          *
-         * @default false
-         * @since 4.5.4
-         * @param  value  Always show tooltip?
+         * @default "hover"
+         * @since 4.7.9
+         * @param  value  When to show tooltip
          */
         set: function (value) {
-            value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toBoolean"](value);
-            if (this.setPropertyValue("alwaysShowTooltip", value) && this.tooltip) {
-                if (value) {
-                    this.showTooltip();
+            if (this.setPropertyValue("showTooltipOn", value)) {
+                if (value == "hit") {
+                    this.clickable = true;
                 }
-                this.handleAlwaysShowTooltip();
+                if (this.tooltip) {
+                    if (value == "always") {
+                        this.showTooltip();
+                    }
+                    else {
+                        this.handleAlwaysShowTooltip();
+                    }
+                }
             }
         },
         enumerable: true,
@@ -52695,8 +55046,7 @@ var Sprite = /** @class */ (function (_super) {
          * @param value  Tooltip Y (px)
          */
         set: function (value) {
-            value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toNumber"](value);
-            if (this.setPropertyValue("tooltipY", value) && this.tooltip) {
+            if (this.setPercentProperty("tooltipY", value) && this.tooltip) {
                 this.tooltip.invalidate();
             }
         },
@@ -52711,10 +55061,20 @@ var Sprite = /** @class */ (function (_super) {
      */
     Sprite.prototype.getTooltipX = function () {
         var x = this.getPropertyValue("tooltipX");
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](x)) {
-            x = this.maxLeft + this.measuredWidth / 2 - this.pixelPaddingLeft - this.ex; // overflow is know only for measured items, so this is not always good
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](x)) {
+            x = Object(_utils_Percent__WEBPACK_IMPORTED_MODULE_33__["percent"])(50);
         }
-        return x;
+        var value;
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](x)) {
+            value = x;
+        }
+        if (x instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_33__["Percent"]) {
+            value = this.maxLeftSelf + this._measuredWidthSelf * x.value - this.pixelPaddingLeft - this.ex; // overflow is know only for measured items, so this is not always good
+        }
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](value)) {
+            value = 0;
+        }
+        return value;
     };
     /**
      * Returns Tooltip Y coordinate if it's set, or middle of the element.
@@ -52724,10 +55084,20 @@ var Sprite = /** @class */ (function (_super) {
      */
     Sprite.prototype.getTooltipY = function () {
         var y = this.getPropertyValue("tooltipY");
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](y)) {
-            y = this.maxTop + this.measuredHeight / 2 - this.pixelPaddingTop - this.ey; // overflow is know only for measured items, so this is not always good
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](y)) {
+            y = Object(_utils_Percent__WEBPACK_IMPORTED_MODULE_33__["percent"])(50);
         }
-        return y;
+        var value;
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](y)) {
+            value = y;
+        }
+        if (y instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_33__["Percent"]) {
+            value = this.maxTopSelf + this._measuredHeightSelf * y.value - this.pixelPaddingTop - this.ey; // overflow is know only for measured items, so this is not always good
+        }
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](value)) {
+            value = 0;
+        }
+        return value;
     };
     /**
      * Displays a modal or console message with error, and halts any further
@@ -52737,7 +55107,7 @@ var Sprite = /** @class */ (function (_super) {
      * @param e Error
      * @todo Implement from applying further actions to this item
      */
-    Sprite.prototype.raiseCriticalError = function (e) {
+    Sprite.prototype.raiseCriticalError = function (e, closable) {
         if (this.svgContainer) {
             if (!this._adapterO) {
                 this.modal.content = e.message;
@@ -52745,9 +55115,13 @@ var Sprite = /** @class */ (function (_super) {
             else {
                 this.modal.content = this._adapterO.apply("criticalError", e).message;
             }
-            this.modal.closable = false;
+            if (!closable) {
+                this.disabled = true;
+            }
+            else {
+                this.modal.closable = true;
+            }
             this.modal.open();
-            this.disabled = true;
         }
         if (_Options__WEBPACK_IMPORTED_MODULE_17__["options"].verbose) {
             console.log(e);
@@ -52782,6 +55156,7 @@ var Sprite = /** @class */ (function (_super) {
             }
         }
         _super.prototype.processConfig.call(this, config);
+        this.processDelayedMap();
     };
     /**
      * Converts string name of the cursor into actual [[MouseCursorStyle]].
@@ -52921,10 +55296,10 @@ var Sprite = /** @class */ (function (_super) {
         if (!this.hidden) {
             var animation = this.show();
             if (animation && !animation.isFinished()) {
-                animation.events.on("animationended", function () {
+                this.addDisposer(animation.events.on("animationended", function () {
                     _this.appeared = true;
                     _this.dispatch("appeared");
-                });
+                }));
             }
             else {
                 this.appeared = true;
@@ -53068,7 +55443,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var SpriteEventDispatcher = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SpriteEventDispatcher, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SpriteEventDispatcher, _super);
     function SpriteEventDispatcher() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         /**
@@ -53355,7 +55730,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var SpriteState = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SpriteState, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SpriteState, _super);
     /**
      * Constructor
      */
@@ -53463,6 +55838,9 @@ var SpriteState = /** @class */ (function (_super) {
             if (_utils_Type__WEBPACK_IMPORTED_MODULE_10__["hasValue"](fieldName)) {
                 if (sprite.dataItem) {
                     propValue = sprite.dataItem.dataContext[fieldName];
+                }
+                if (propValue == undefined) {
+                    propValue = "__unset";
                 }
             }
             // Apply adapters
@@ -53611,16 +55989,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "System", function() { return System; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "system", function() { return system; });
 /* harmony import */ var _Registry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-/* harmony import */ var _utils_AsyncPending__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/AsyncPending */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/AsyncPending.js");
-/* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
-/* harmony import */ var _utils_Object__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
-/* harmony import */ var _utils_Log__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/Log */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Log.js");
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Container */ "./node_modules/@amcharts/amcharts4/.internal/core/Container.js");
+/* harmony import */ var _utils_AsyncPending__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/AsyncPending */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/AsyncPending.js");
+/* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _utils_Object__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
+/* harmony import */ var _utils_Log__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/Log */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Log.js");
 /**
  * ============================================================================
  * IMPORTS
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -53720,7 +56100,7 @@ var System = /** @class */ (function () {
         // important to go backwards, as items are removed!
         // TODO use iterator instead
         for (var key in _Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDatas) {
-            if (_utils_Object__WEBPACK_IMPORTED_MODULE_3__["hasKey"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDatas, key)) {
+            if (_utils_Object__WEBPACK_IMPORTED_MODULE_4__["hasKey"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDatas, key)) {
                 var invalidData = _Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDatas[key];
                 while (invalidData.length > 0) {
                     var component = invalidData[0];
@@ -53734,7 +56114,7 @@ var System = /** @class */ (function () {
                                 }
                             }
                             catch (e) {
-                                _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidData, dataProvider);
+                                _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidData, dataProvider);
                                 dataProvider.raiseCriticalError(e);
                             }
                         }
@@ -53746,13 +56126,13 @@ var System = /** @class */ (function () {
                                 }
                             }
                             catch (e) {
-                                _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidData, component);
+                                _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidData, component);
                                 component.raiseCriticalError(e);
                             }
                         }
                     }
                     else {
-                        _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidData, component);
+                        _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidData, component);
                     }
                 }
                 if (Date.now() - time > this.updateStepDuration) {
@@ -53767,12 +56147,12 @@ var System = /** @class */ (function () {
                     component.validateRawData();
                 }
                 catch (e) {
-                    _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidRawDatas, component);
+                    _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidRawDatas, component);
                     component.raiseCriticalError(e);
                 }
             }
             else {
-                _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidRawDatas, component);
+                _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidRawDatas, component);
             }
         }
         // TODO use iterator instead
@@ -53788,12 +56168,12 @@ var System = /** @class */ (function () {
                     component.validateDataItems();
                 }
                 catch (e) {
-                    _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataItems, component);
+                    _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataItems, component);
                     component.raiseCriticalError(e);
                 }
             }
             // this might seem too much, as validateValues removes from invalidDataItems aswell, but just to be sure (in case validateData is overriden and no super is called)
-            _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataItems, component);
+            _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataItems, component);
         }
         // TODO use iterator instead
         while (_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataRange.length > 0) {
@@ -53811,25 +56191,25 @@ var System = /** @class */ (function () {
                     component.skipRangeEvent = false;
                 }
                 catch (e) {
-                    _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataRange, component);
+                    _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataRange, component);
                     component.raiseCriticalError(e);
                 }
             }
             // this might seem too much, as validateDataRange removes from invalidDataRange aswell, but just to be sure (in case validateData is overriden and no super is called)
-            _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataRange, component);
+            _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDataRange, component);
         }
         var skippedSprites = [];
         // display objects later
         // TODO use iterator instead
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidLayouts, function (key) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidLayouts, function (key) {
             _this.validateLayouts(key);
         });
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidPositions, function (key) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidPositions, function (key) {
             _this.validatePositions(key);
         });
         var hasSkipped = false;
         time = Date.now();
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidSprites, function (key, invalidSprites) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidSprites, function (key, invalidSprites) {
             var count = 0;
             while (invalidSprites.length > 0) {
                 _this.validateLayouts(key);
@@ -53859,7 +56239,7 @@ var System = /** @class */ (function () {
                             }
                             catch (e) {
                                 sprite.invalid = false;
-                                _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidSprites, sprite);
+                                _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidSprites, sprite);
                                 sprite.raiseCriticalError(e);
                             }
                         }
@@ -53867,38 +56247,38 @@ var System = /** @class */ (function () {
                     // this might seem too much, but it's ok
                     sprite.invalid = false;
                 }
-                _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidSprites, sprite);
+                _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidSprites, sprite);
             }
             _Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidSprites[key] = _Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidSprites[key].concat(skippedSprites);
         });
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidSprites, function (key, value) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidSprites, function (key, value) {
             if (value.length > 0) {
                 hasSkipped = true;
             }
         });
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDatas, function (key, value) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDatas, function (key, value) {
             if (value.length > 0) {
                 hasSkipped = true;
             }
         });
         // TODO make this more efficient
         // TODO don't copy the array
-        _utils_Array__WEBPACK_IMPORTED_MODULE_2__["each"](_utils_Array__WEBPACK_IMPORTED_MODULE_2__["copy"](this.animations), function (x) {
+        _utils_Array__WEBPACK_IMPORTED_MODULE_3__["each"](_utils_Array__WEBPACK_IMPORTED_MODULE_3__["copy"](this.animations), function (x) {
             x.update();
         });
         //if(!hasSkipped){
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidLayouts, function (key) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidLayouts, function (key) {
             _this.validateLayouts(key);
         });
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidPositions, function (key) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidPositions, function (key) {
             _this.validatePositions(key);
         });
         //}
-        Object(_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_1__["triggerIdle"])();
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidLayouts, function (key) {
+        Object(_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_2__["triggerIdle"])();
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidLayouts, function (key) {
             _this.validateLayouts(key);
         });
-        _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidPositions, function (key) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidPositions, function (key) {
             _this.validatePositions(key);
         });
         _Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].dispatchImmediately("exitframe");
@@ -53907,12 +56287,12 @@ var System = /** @class */ (function () {
         }
         if (this.updateStepDuration < 200) {
             var all0_1 = true;
-            _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDatas, function (key, value) {
+            _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidDatas, function (key, value) {
                 if (value.length > 0) {
                     all0_1 = false;
                 }
             });
-            _utils_Object__WEBPACK_IMPORTED_MODULE_3__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidSprites, function (key, value) {
+            _utils_Object__WEBPACK_IMPORTED_MODULE_4__["each"](_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].invalidSprites, function (key, value) {
                 if (value.length > 0) {
                     all0_1 = false;
                 }
@@ -53936,11 +56316,36 @@ var System = /** @class */ (function () {
     System.prototype.requestFrame = function () {
         var _this = this;
         if (!this._frameRequested) {
-            Object(_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_1__["raf"])(function () {
+            Object(_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_2__["raf"])(function () {
                 _this.update();
             });
             this._frameRequested = true;
         }
+    };
+    /**
+     * Call this method if you update data or config of a chart that is in
+     * hidden container, after revealing the container, so that labels and
+     * possibly other elements can correctly arrange themselves.
+     *
+     * @since 4.7.10
+     * @param  container  Target container
+     */
+    System.prototype.softInvalidate = function (container) {
+        var _this = this;
+        container.children.each(function (child) {
+            if (child instanceof _Container__WEBPACK_IMPORTED_MODULE_1__["Container"]) {
+                _this.softInvalidate(child);
+            }
+            if (child.measureFailed) {
+                if (Object(_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(child, "Label")) {
+                    child.hardInvalidate();
+                }
+                else {
+                    child.invalidate();
+                }
+                child.measureFailed = false;
+            }
+        });
     };
     /**
      * Triggers position re-validation on all [[Sprite]] elements that have
@@ -53961,12 +56366,12 @@ var System = /** @class */ (function () {
                 }
                 catch (e) {
                     sprite.positionInvalid = false;
-                    _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidPositions, sprite);
+                    _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidPositions, sprite);
                     sprite.raiseCriticalError(e);
                 }
             }
             else {
-                _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidPositions, sprite);
+                _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidPositions, sprite);
             }
         }
     };
@@ -53992,12 +56397,12 @@ var System = /** @class */ (function () {
                 }
                 catch (e) {
                     container.layoutInvalid = false;
-                    _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidLayouts, container);
+                    _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidLayouts, container);
                     container.raiseCriticalError(e);
                 }
             }
             else {
-                _utils_Array__WEBPACK_IMPORTED_MODULE_2__["remove"](invalidLayouts, container);
+                _utils_Array__WEBPACK_IMPORTED_MODULE_3__["remove"](invalidLayouts, container);
             }
         }
     };
@@ -54007,7 +56412,7 @@ var System = /** @class */ (function () {
      * @param value Message to output to console
      */
     System.prototype.log = function (value) {
-        _utils_Log__WEBPACK_IMPORTED_MODULE_4__["log"](value);
+        _utils_Log__WEBPACK_IMPORTED_MODULE_5__["log"](value);
     };
     Object.defineProperty(System.prototype, "isPaused", {
         /**
@@ -54038,7 +56443,7 @@ var System = /** @class */ (function () {
      *
      * @see {@link https://docs.npmjs.com/misc/semver}
      */
-    System.VERSION = "4.7.3";
+    System.VERSION = "4.9.9";
     return System;
 }());
 
@@ -54090,7 +56495,7 @@ var separators = [",", ";", "\t"];
  * @important
  */
 var CSVParser = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CSVParser, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CSVParser, _super);
     function CSVParser() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         /**
@@ -54710,7 +57115,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IDataSourceAdapters} for a list of available Adapters
  */
 var DataSource = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DataSource, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DataSource, _super);
     /**
      * Constructor
      */
@@ -55283,7 +57688,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var JSONParser = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](JSONParser, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(JSONParser, _super);
     function JSONParser() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         /**
@@ -55458,7 +57863,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IConeAdapters} for a list of available Adapters
  */
 var Cone = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Cone, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Cone, _super);
     /**
      * Constructor
      */
@@ -55639,6 +58044,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../rendering/fills/RadialGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradient.js");
 /* harmony import */ var _rendering_fills_LinearGradient__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../rendering/fills/LinearGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinearGradient.js");
 /* harmony import */ var _rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../rendering/filters/LightenFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/LightenFilter.js");
+/* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
 /**
  * Creates a 3D rectangle.
  */
@@ -55649,6 +58055,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -55669,7 +58076,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IRectangle3DAdapters} for a list of available Adapters
  */
 var Rectangle3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Rectangle3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Rectangle3D, _super);
     /**
      * Constructor
      */
@@ -55793,6 +58200,9 @@ var Rectangle3D = /** @class */ (function (_super) {
      */
     Rectangle3D.prototype.setFill = function (value) {
         _super.prototype.setFill.call(this, value);
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isString"](value)) {
+            value = Object(_utils_Color__WEBPACK_IMPORTED_MODULE_5__["toColor"])(value);
+        }
         var colorStr;
         if (value instanceof _utils_Color__WEBPACK_IMPORTED_MODULE_5__["Color"]) {
             colorStr = value.hex;
@@ -55897,7 +58307,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ISlice3DAdapters} for a list of available Adapters
  */
 var Slice3D = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Slice3D, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Slice3D, _super);
     /**
      * Constructor
      */
@@ -56252,7 +58662,7 @@ __webpack_require__.r(__webpack_exports__);
  * @ignore Exclude from docs
  */
 var AmChartsLogo = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](AmChartsLogo, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(AmChartsLogo, _super);
     /**
      * Constructor
      */
@@ -56362,7 +58772,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IButtonAdapters} for a list of available Adapters
  */
 var Button = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Button, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Button, _super);
     /**
      * Constructor
      */
@@ -56556,7 +58966,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ICircleAdapters} for a list of available Adapters
  */
 var Circle = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Circle, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Circle, _super);
     /**
      * Constructor
      */
@@ -56678,7 +59088,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IEllipseAdapters} for a list of available Adapters
  */
 var Ellipse = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Ellipse, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Ellipse, _super);
     /**
      * Constructor
      */
@@ -56801,7 +59211,7 @@ __webpack_require__.r(__webpack_exports__);
  * @since 4.4.0
  */
 var Grip = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Grip, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Grip, _super);
     /**
      * Constructor
      */
@@ -57012,7 +59422,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IImageAdapters} for a list of available Adapters
  */
 var Image = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Image, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Image, _super);
     /**
      * Constructor
      */
@@ -57223,7 +59633,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Label = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Label, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Label, _super);
     /**
      * Constructor
      */
@@ -57245,11 +59655,13 @@ var Label = /** @class */ (function (_super) {
         _this.wrap = false;
         _this.truncate = false;
         _this.fullWords = true;
-        _this.ellipsis = "...";
+        _this.ellipsis = "…";
         _this.textAlign = "start";
         _this.textValign = "top";
         _this.layout = "absolute";
         _this.baseLineRatio = -0.27;
+        //this.pixelPerfect = true;
+        _this._positionPrecision = 1;
         // Add events to watch for maxWidth/maxHeight changes so that we can
         // invalidate this
         _this.events.on("maxsizechanged", function () {
@@ -57334,6 +59746,10 @@ var Label = /** @class */ (function (_super) {
         else {
             output = "svg";
             text = this.text;
+        }
+        // Need to toString source?
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isObject"](text)) {
+            text = text.toString();
         }
         // Need to format text all the time
         if (_utils_Type__WEBPACK_IMPORTED_MODULE_8__["hasValue"](text) && text !== "") {
@@ -57467,6 +59883,12 @@ var Label = /** @class */ (function (_super) {
                         currentHeight += offset;
                     }
                     group.removeElement(tempElement);
+                    // Clear cache if necessary
+                    var lineInfo_1 = this.getLineInfo(i);
+                    if (lineInfo_1) {
+                        lineInfo_1.text = "";
+                        lineInfo_1.element.textContent = "";
+                    }
                     continue;
                 }
                 // Chunk up the line and process each chunk
@@ -57478,11 +59900,13 @@ var Label = /** @class */ (function (_super) {
                 var lineInfo = this.getLineInfo(i);
                 if (lineInfo) {
                     // Empty line
+                    lineInfo.text = "";
                     lineInfo.element.textContent = "";
                 }
                 else {
                     // Init new line info
                     lineInfo = {
+                        "text": "",
                         "element": this.getSVGLineElement("", 0),
                         "complex": false
                     };
@@ -57596,7 +60020,7 @@ var Label = /** @class */ (function (_super) {
                                         // Do this until we fit
                                         while ((lineInfo.bbox.width > maxWidth) && (excessChars <= lineText.length) && (excessChars > 0)) {
                                             // Calculate max available chars
-                                            var maxChars = _utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](elementText.length - excessChars - this.ellipsis.length, 1);
+                                            var maxChars = _utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](lineText.length - excessChars - this.ellipsis.length, 1);
                                             // Is there anything left?
                                             if (maxChars <= 1) {
                                                 // Nope, let's jump to the previous item
@@ -57753,9 +60177,13 @@ var Label = /** @class */ (function (_super) {
             }
             // Check if maybe we need to hide the whole label if it doesn't fit
             this.maybeHideOversized();
+            this.measureFailed = false;
+            if (this.bbox.width == 0 || this.bbox.height == 0) {
+                this.measureFailed = true;
+            }
             // Updated measured dims
-            this._measuredWidth = _utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](this.bbox.width, this.pixelWidth - this.pixelPaddingLeft - this.pixelPaddingRight);
-            this._measuredHeight = _utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](this.bbox.height, this.pixelHeight - this.pixelPaddingTop - this.pixelPaddingBottom);
+            this._measuredWidth = _utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](_utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](this.bbox.width, this.pixelWidth - this.pixelPaddingLeft - this.pixelPaddingRight));
+            this._measuredHeight = _utils_Math__WEBPACK_IMPORTED_MODULE_6__["round"](_utils_Math__WEBPACK_IMPORTED_MODULE_6__["max"](this.bbox.height, this.pixelHeight - this.pixelPaddingTop - this.pixelPaddingBottom));
             // Align the lines
             this.alignSVGText();
             this.bbox.width = this._measuredWidth;
@@ -57777,6 +60205,18 @@ var Label = /** @class */ (function (_super) {
             // Create a ForeignObject to use as HTML container
             var fo = this.paper.foreignObject();
             group.add(fo);
+            // Set widths on foreignObject so that autosizing measurements work
+            // This will bet reset to actual content width/height
+            if (this.maxWidth) {
+                fo.attr({
+                    width: this.maxWidth
+                });
+            }
+            if (this.maxHeight) {
+                fo.attr({
+                    height: this.maxHeight
+                });
+            }
             // Create line element
             //let lineElement: HTMLElement = this.getHTMLLineElement(getTextFormatter().format(this.html, output));
             var lineElement = this.getHTMLLineElement(text);
@@ -58562,7 +61002,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ILineAdapters} for a list of available Adapters
  */
 var Line = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Line, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Line, _super);
     /**
      * Constructor
      */
@@ -58756,7 +61196,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link https://www.amcharts.com/docs/v4/concepts/popups-and-modals/} For examples and docs on Popups and Modals.
  */
 var Modal = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Modal, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Modal, _super);
     /**
      * Constructor
      */
@@ -58824,7 +61264,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPlayButtonAdapters} for a list of available Adapters
  */
 var PlayButton = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PlayButton, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PlayButton, _super);
     /**
      * Constructor
      */
@@ -58935,7 +61375,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPointedRectangleAdapters} for a list of available Adapters
  */
 var PointedRectangle = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PointedRectangle, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PointedRectangle, _super);
     /**
      * Constructor
      */
@@ -59094,7 +61534,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPointedShapeAdapters} for a list of available Adapters
  */
 var PointedShape = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](PointedShape, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PointedShape, _super);
     /**
      * Constructor
      */
@@ -59245,7 +61685,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPolyarcAdapters} for a list of available Adapters
  */
 var Polyarc = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Polyarc, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Polyarc, _super);
     /**
      * Constructor
      */
@@ -59408,7 +61848,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPolygonAdapters} for a list of available Adapters
  */
 var Polygon = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Polygon, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Polygon, _super);
     /**
      * Constructor
      */
@@ -59669,7 +62109,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPolylineAdapters} for a list of available Adapters
  */
 var Polyline = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Polyline, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Polyline, _super);
     /**
      * Constructor
      */
@@ -59867,7 +62307,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPolysplineAdapters} for a list of available Adapters
  */
 var Polyspline = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Polyspline, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Polyspline, _super);
     /**
      * Constructor
      */
@@ -60168,7 +62608,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Positioning over whole window
  */
 var Popup = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Popup, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Popup, _super);
     /**
      * Constructor
      */
@@ -60402,15 +62842,15 @@ var Popup = /** @class */ (function (_super) {
     Popup.prototype.setupDragging = function () {
         var _this = this;
         if (this.draggable) {
-            if (!this._IOs.wrapper.events.has("drag")) {
-                this._IOs.wrapper.events.on("drag", function (ev) {
+            if (!this._IOs.header.events.has("drag")) {
+                this._IOs.header.events.on("drag", function (ev) {
                     _this._tempShift.x = ev.shift.x;
                     _this._tempShift.y = ev.shift.y;
                     _this.positionElement(false);
                 });
             }
-            if (!this._IOs.wrapper.events.has("dragstop")) {
-                this._IOs.wrapper.events.on("dragstop", function (ev) {
+            if (!this._IOs.header.events.has("dragstop")) {
+                this._IOs.header.events.on("dragstop", function (ev) {
                     _this._shift.x += _this._tempShift.x;
                     _this._shift.y += _this._tempShift.y;
                     _this._tempShift.x = 0;
@@ -60420,12 +62860,13 @@ var Popup = /** @class */ (function (_super) {
             }
         }
         else {
-            if (this._IOs.wrapper) {
-                if (this._IOs.wrapper.events.has("drag")) {
-                    this._IOs.wrapper.events.off("drag");
+            if (this._IOs.header) {
+                Object(_interaction_Interaction__WEBPACK_IMPORTED_MODULE_4__["getInteraction"])().unprepElement(this._IOs.header);
+                if (this._IOs.header.events.has("drag")) {
+                    this._IOs.header.events.off("drag");
                 }
-                if (this._IOs.wrapper.events.has("dragstop")) {
-                    this._IOs.wrapper.events.off("dragstop");
+                if (this._IOs.header.events.has("dragstop")) {
+                    this._IOs.header.events.off("dragstop");
                 }
             }
         }
@@ -60502,8 +62943,10 @@ var Popup = /** @class */ (function (_super) {
     Popup.prototype.getClassNames = function () {
         return this.adapter.apply("classNames", {
             wrapperClass: this.classPrefix + "",
+            headerClass: this.classPrefix + "-header",
             titleClass: this.classPrefix + "-title",
             contentClass: this.classPrefix + "-content",
+            insideClass: this.classPrefix + "-inside",
             curtainClass: this.classPrefix + "-curtain",
             closeClass: this.classPrefix + "-close"
         });
@@ -60525,6 +62968,9 @@ var Popup = /** @class */ (function (_super) {
         // Create close button
         var close = document.createElement("a");
         close.className = classNames.closeClass;
+        // header title
+        var header = document.createElement("div");
+        header.className = classNames.headerClass;
         // Content title
         var title = document.createElement("div");
         title.innerHTML = this.title;
@@ -60534,9 +62980,11 @@ var Popup = /** @class */ (function (_super) {
         }
         // Content div
         var content = document.createElement("div");
+        content.className = classNames.insideClass;
         content.innerHTML = this.content;
         // Set up events for content
         this._IOs.wrapper = Object(_interaction_Interaction__WEBPACK_IMPORTED_MODULE_4__["getInteraction"])().getInteraction(wrapper);
+        this._IOs.header = Object(_interaction_Interaction__WEBPACK_IMPORTED_MODULE_4__["getInteraction"])().getInteraction(header);
         this._disposers.push(this._IOs.wrapper);
         // Set hover/out events
         this._IOs.wrapper.events.on("over", this.disablePointers, this);
@@ -60549,12 +62997,14 @@ var Popup = /** @class */ (function (_super) {
         // Add accessible stuff
         wrapper.setAttribute("role", "dialog");
         // Add to wrapper
-        wrapper.appendChild(close);
-        wrapper.appendChild(title);
+        header.appendChild(close);
+        header.appendChild(title);
+        wrapper.appendChild(header);
         wrapper.appendChild(content);
         this.container.appendChild(wrapper);
         // Save for later access
         this._elements.wrapper = wrapper;
+        this._elements.header = header;
         this._elements.content = content;
         this._elements.title = title;
         this._elements.close = close;
@@ -61054,6 +63504,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_DOM__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
 /* harmony import */ var _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/Dictionary */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Dictionary.js");
 /* harmony import */ var _utils_Disposer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony import */ var _utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
+
 
 
 
@@ -61069,6 +63521,12 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__["Dictionary"]();
     if (!prefix) {
         prefix = "ampopup";
     }
+    var cs = new _utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_3__["InterfaceColorSet"]();
+    var fg = cs.getFor("text");
+    var bg = cs.getFor("background");
+    bg.alpha = 0.8;
+    var abg = cs.getFor("alternativeBackground");
+    abg.alpha = 0.05;
     var counter = rules.insertKeyIfEmpty(prefix, function () {
         var disposer = new _utils_Disposer__WEBPACK_IMPORTED_MODULE_2__["MultiDisposer"]([
             new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix, {
@@ -61087,20 +63545,27 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__["Dictionary"]();
                 "top": "0",
                 "left": "0",
                 "z-index": "2001",
-                "background": "#fff",
+                "background-color": bg.hex,
                 "opacity": "0.5"
+            }),
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-header", {
+                "display": "block",
+                "width": "100%",
+                "min-height": "1.8em",
+                "background": abg.rgba
             }),
             new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-title", {
                 "font-weight": "bold",
-                "font-size": "120%"
+                "font-size": "110%",
+                "padding": "0.5em 1.2em 0.5em 1em"
             }),
             new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-content", {
                 /*"width": "100%",
                 "height": "100%",*/
-                "padding": "1em 2em",
-                "background": "rgb(255, 255, 255);",
-                "background-color": "rgba(255, 255, 255, 0.8)",
-                "color": "#000",
+                // "padding": "2em 1em 1em 1em",
+                "background": bg.hex,
+                "background-color": bg.rgba,
+                "color": fg.hex,
                 "display": "inline-block",
                 "position": "absolute",
                 "top": "0",
@@ -61109,6 +63574,9 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__["Dictionary"]();
                 "max-height": "90%",
                 "overflow": "auto",
                 "z-index": "2002"
+            }),
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-inside", {
+                "padding": "1em"
             }),
             new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-close", {
                 "display": "block",
@@ -61182,7 +63650,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IPreloaderAdapters} for a list of available Adapters
  */
 var Preloader = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Preloader, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Preloader, _super);
     /**
      * Constructor
      */
@@ -61403,7 +63871,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IQuadraticCurveAdapters} for a list of available Adapters
  */
 var QuadraticCurve = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](QuadraticCurve, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(QuadraticCurve, _super);
     /**
      * Constructor
      */
@@ -61528,7 +63996,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IRectangleAdapters} for a list of available Adapters
  */
 var Rectangle = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Rectangle, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Rectangle, _super);
     /**
      * Constructor
      * * Creates a `<rect>` element
@@ -61650,7 +64118,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IResizeButtonAdapters} for a list of available Adapters
  */
 var ResizeButton = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ResizeButton, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ResizeButton, _super);
     /**
      * Constructor
      */
@@ -61768,7 +64236,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IRoundedRectangleAdapters} for a list of available Adapters
  */
 var RoundedRectangle = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RoundedRectangle, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RoundedRectangle, _super);
     /**
      * Constructor
      */
@@ -62014,7 +64482,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IScrollbarAdapters} for a list of available Adapters
  */
 var Scrollbar = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Scrollbar, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Scrollbar, _super);
     /**
      * Construtor
      */
@@ -62093,6 +64561,9 @@ var Scrollbar = /** @class */ (function (_super) {
         }, undefined, false);
         _this.hideGrips = false;
         _this.orientation = "horizontal";
+        // Min/max values for accessibility
+        _this.setSVGAttribute({ "aria-valuemin": "0" });
+        _this.setSVGAttribute({ "aria-valuemax": "100" });
         _this.applyTheme();
         return _this;
     }
@@ -62116,6 +64587,7 @@ var Scrollbar = /** @class */ (function (_super) {
             if (!_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.endGrip.readerDescription)) {
                 this.endGrip.readerDescription = this.language.translate("Use left and right arrows to move right selection");
             }
+            this.readerOrientation = "horizontal";
         }
         else {
             if (!_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.readerTitle)) {
@@ -62130,7 +64602,9 @@ var Scrollbar = /** @class */ (function (_super) {
             if (!_utils_Type__WEBPACK_IMPORTED_MODULE_13__["hasValue"](this.endGrip.readerDescription)) {
                 this.endGrip.readerDescription = this.language.translate("Use up and down arrows to move lower selection");
             }
+            this.readerOrientation = "vertical";
         }
+        this.readerControls = this.baseSprite.uidAttr();
     };
     /**
      * Validates the layout of the scrollbar's elements.
@@ -62275,10 +64749,14 @@ var Scrollbar = /** @class */ (function (_super) {
                 value: Math.round(start * 100) + "%",
                 position: start
             }).value);
+            startGrip.readerValueNow = "" + Math.round(start * 100);
+            startGrip.readerValueText = startGrip.readerTitle;
             endGrip.readerTitle = this.language.translate("To %1", undefined, this.adapter.apply("positionValue", {
                 value: Math.round(end * 100) + "%",
                 position: end
             }).value);
+            endGrip.readerValueNow = "" + Math.round(end * 100);
+            endGrip.readerValueText = endGrip.readerTitle;
         }
         else {
             var innerHeight_1 = this.innerHeight;
@@ -62291,10 +64769,14 @@ var Scrollbar = /** @class */ (function (_super) {
                 value: Math.round((1 - start) * 100) + "%",
                 position: (1 - start)
             }).value);
+            startGrip.readerValueNow = "" + Math.round(start * 100);
+            startGrip.readerValueText = startGrip.readerTitle;
             endGrip.readerTitle = this.language.translate("From %1", undefined, this.adapter.apply("positionValue", {
                 value: Math.round((1 - end) * 100) + "%",
                 position: (1 - end)
             }).value);
+            endGrip.readerValueNow = "" + Math.round(end * 100);
+            endGrip.readerValueText = endGrip.readerTitle;
         }
         // Add accessibility
         thumb.readerTitle = this.language.translate("From %1 to %2", undefined, this.adapter.apply("positionValue", {
@@ -62304,6 +64786,10 @@ var Scrollbar = /** @class */ (function (_super) {
             value: Math.round(end * 100) + "%",
             position: end
         }).value);
+        thumb.readerValueNow = "" + Math.round(start * 100);
+        thumb.readerValueText = thumb.readerTitle;
+        this.readerValueNow = "" + Math.round(start * 100);
+        this.readerValueText = thumb.readerTitle;
         if (!this._skipRangeEvents && this.updateWhileMoving) {
             this.dispatchRangeChange();
         }
@@ -62388,6 +64874,18 @@ var Scrollbar = /** @class */ (function (_super) {
             }
         }
     };
+    Object.defineProperty(Scrollbar.prototype, "isBusy", {
+        /**
+         * Indicates if the Scrollbar is currently "busy" (animating and or
+         * performing zoom by user interaction).
+         * @return boolean
+         */
+        get: function () {
+            return this._isBusy;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Scrollbar.prototype, "start", {
         /**
          * @return Position (0-1)
@@ -62915,7 +65413,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _rendering_Path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
 /* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
 /* harmony import */ var _utils_Utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
-/* harmony import */ var _rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../rendering/fills/RadialGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradient.js");
+/* harmony import */ var _utils_Percent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony import */ var _rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../rendering/fills/RadialGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradient.js");
 /**
  * Slice module.
  */
@@ -62926,6 +65425,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -62947,7 +65447,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ISliceAdapters} for a list of available Adapters
  */
 var Slice = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Slice, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Slice, _super);
     /**
      * Constructor
      */
@@ -62989,10 +65489,10 @@ var Slice = /** @class */ (function (_super) {
         this.slice.path = _rendering_Path__WEBPACK_IMPORTED_MODULE_5__["arc"](this.startAngle, this.arc, this.radius, this.pixelInnerRadius, radiusY, this.cornerRadius, this.innerCornerRadius);
         this.slice.invalidate();
         this.shiftRadius = this.shiftRadius;
-        if (this.realFill instanceof _rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_8__["RadialGradient"]) {
+        if (this.realFill instanceof _rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_9__["RadialGradient"]) {
             this.updateGradient(this.realFill);
         }
-        if (this.realStroke instanceof _rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_8__["RadialGradient"]) {
+        if (this.realStroke instanceof _rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_9__["RadialGradient"]) {
             this.updateGradient(this.realStroke);
         }
     };
@@ -63257,11 +65757,15 @@ var Slice = /** @class */ (function (_super) {
      */
     Slice.prototype.getTooltipX = function () {
         var value = this.getPropertyValue("tooltipX");
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_6__["isNumber"](value)) {
-            var innerRadius = _utils_Utils__WEBPACK_IMPORTED_MODULE_7__["relativeToValue"](this.innerRadius, this.radius);
-            value = this.ix * (innerRadius + (this.radius - innerRadius) / 2);
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_6__["isNumber"](value)) {
+            return value;
         }
-        return value;
+        var p = 0.5;
+        if (value instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_8__["Percent"]) {
+            p = value.value;
+        }
+        var innerRadius = _utils_Utils__WEBPACK_IMPORTED_MODULE_7__["relativeToValue"](this.innerRadius, this.radius);
+        return this.ix * (innerRadius + (this.radius - innerRadius) * p);
     };
     /**
      * Y coordinate for the slice tooltip.
@@ -63270,11 +65774,15 @@ var Slice = /** @class */ (function (_super) {
      */
     Slice.prototype.getTooltipY = function () {
         var value = this.getPropertyValue("tooltipY");
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_6__["isNumber"](value)) {
-            var innerRadius = _utils_Utils__WEBPACK_IMPORTED_MODULE_7__["relativeToValue"](this.innerRadius, this.radius);
-            value = this.iy * (innerRadius + (this.radiusY - innerRadius) / 2) + this.slice.dy;
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_6__["isNumber"](value)) {
+            return value;
         }
-        return value;
+        var p = 0.5;
+        if (value instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_8__["Percent"]) {
+            p = value.value;
+        }
+        var innerRadius = _utils_Utils__WEBPACK_IMPORTED_MODULE_7__["relativeToValue"](this.innerRadius, this.radius);
+        return this.iy * (innerRadius + (this.radius - innerRadius) * p) + this.slice.dy;
     };
     return Slice;
 }(_Container__WEBPACK_IMPORTED_MODULE_1__["Container"]));
@@ -63328,7 +65836,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ISliderAdapters} for a list of available Adapters
  */
 var Slider = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Slider, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Slider, _super);
     /**
      * Constructor
      */
@@ -63451,7 +65959,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ITextLinkAdapters} for a list of available Adapters
  */
 var TextLink = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TextLink, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(TextLink, _super);
     /**
      * Constructor
      */
@@ -63537,7 +66045,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ITooltipAdapters} for a list of available Adapters
  */
 var Tooltip = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Tooltip, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Tooltip, _super);
     /**
      * Constructor
      */
@@ -64008,28 +66516,35 @@ var Tooltip = /** @class */ (function (_super) {
      * @param y  Y coordinate
      */
     Tooltip.prototype.pointTo = function (point, instantly) {
+        var _this = this;
         if (this._pointTo.x != point.x || this._pointTo.y != point.y) {
             this._pointTo = point;
             this.invalidate();
-            // this helps to avoid strange animation from nowhere on initial show or when balloon was hidden already
-            if (!this.visible || instantly) {
-                this.moveTo(this._pointTo);
-                if (this._animation) {
-                    this._animation.kill();
-                }
+            if (this._pointToDisposer) {
+                this._pointToDisposer.dispose();
             }
-            else {
-                // helps to avoid flicker on top/left corner
-                if (this.pixelX == 0 && this.pixelY == 0) {
-                    this.moveTo(this._pointTo);
+            this._pointToDisposer = _core_Registry__WEBPACK_IMPORTED_MODULE_2__["registry"].events.once("exitframe", function () {
+                // this helps to avoid strange animation from nowhere on initial show or when balloon was hidden already
+                if (!_this.visible || instantly) {
+                    _this.moveTo(_this._pointTo);
+                    if (_this._animation) {
+                        _this._animation.kill();
+                    }
                 }
                 else {
-                    if (this._animation) {
-                        this._animation.kill();
+                    // helps to avoid flicker on top/left corner
+                    if (_this.pixelX == 0 && _this.pixelY == 0) {
+                        _this.moveTo(_this._pointTo);
                     }
-                    this._animation = new _utils_Animation__WEBPACK_IMPORTED_MODULE_5__["Animation"](this, [{ property: "x", to: point.x, from: this.pixelX }, { property: "y", to: point.y, from: this.pixelY }], this.animationDuration, this.animationEasing).start();
+                    else {
+                        if (_this._animation) {
+                            _this._animation.kill();
+                        }
+                        _this._animation = new _utils_Animation__WEBPACK_IMPORTED_MODULE_5__["Animation"](_this, [{ property: "x", to: point.x, from: _this.pixelX }, { property: "y", to: point.y, from: _this.pixelY }], _this.animationDuration, _this.animationEasing).start();
+                    }
                 }
-            }
+            });
+            this.addDisposer(this._pointToDisposer);
         }
     };
     /**
@@ -64184,7 +66699,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ITrapezoidAdapters} for a list of available Adapters
  */
 var Trapezoid = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Trapezoid, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Trapezoid, _super);
     /**
      * Constructor
      */
@@ -64418,7 +66933,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link ITriangleAdapters} for a list of available Adapters
  */
 var Triangle = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Triangle, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Triangle, _super);
     /**
      * Constructor
      */
@@ -64548,7 +67063,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IWavedCircleAdapters} for a list of available Adapters
  */
 var WavedCircle = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](WavedCircle, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(WavedCircle, _super);
     /**
      * Constructor
      */
@@ -64754,7 +67269,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IWavedLineAdapters} for a list of available Adapters
  */
 var WavedLine = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](WavedLine, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(WavedLine, _super);
     /**
      * Constructor
      */
@@ -64888,7 +67403,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IWavedRectangleAdapters} for a list of available Adapters
  */
 var WavedRectangle = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](WavedRectangle, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(WavedRectangle, _super);
     /**
      * Constructor
      */
@@ -65152,7 +67667,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link IZoomOutButtonAdapters} for a list of available Adapters
  */
 var ZoomOutButton = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ZoomOutButton, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ZoomOutButton, _super);
     /**
      * Constructor
      */
@@ -65307,9 +67822,9 @@ var pdfmakePromise;
  * @async
  */
 function _pdfmake() {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
         var a, pdfmake, vfs_fonts, global;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, Promise.all([
                         __webpack_require__.e(/*! import() | pdfmake */ "vendors~pdfmake").then(__webpack_require__.t.bind(null, /*! pdfmake/build/pdfmake.js */ "./node_modules/pdfmake/build/pdfmake.js", 7)),
@@ -65345,9 +67860,9 @@ function blobToDataUri(blob) {
     });
 }
 function getCssRules(s) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
         var sheet, e_1;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     sheet = s.sheet;
@@ -65379,30 +67894,38 @@ function getCssRules(s) {
 // This loads a stylesheet by URL and then calls the function with it
 // TODO this should be moved into utils or something
 function loadStylesheet(doc, url, f) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-        var response, s, rules;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+        var response, e_2, s, rules;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, _utils_Net__WEBPACK_IMPORTED_MODULE_18__["load"](url)];
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, _utils_Net__WEBPACK_IMPORTED_MODULE_18__["load"](url)];
                 case 1:
                     response = _a.sent();
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_2 = _a.sent();
+                    console.error("Failed to load stylesheet", url, e_2);
+                    return [2 /*return*/];
+                case 3:
                     s = doc.createElement("style");
                     s.textContent = response.response;
                     doc.head.appendChild(s);
-                    _a.label = 2;
-                case 2:
-                    _a.trys.push([2, , 5, 6]);
+                    _a.label = 4;
+                case 4:
+                    _a.trys.push([4, , 7, 8]);
                     return [4 /*yield*/, getCssRules(s)];
-                case 3:
+                case 5:
                     rules = _a.sent();
                     return [4 /*yield*/, eachStylesheet(doc, url, rules, f)];
-                case 4:
+                case 6:
                     _a.sent();
-                    return [3 /*break*/, 6];
-                case 5:
+                    return [3 /*break*/, 8];
+                case 7:
                     doc.head.removeChild(s);
                     return [7 /*endfinally*/];
-                case 6: return [2 /*return*/];
+                case 8: return [2 /*return*/];
             }
         });
     });
@@ -65411,9 +67934,9 @@ function loadStylesheet(doc, url, f) {
 // If the CSSStyleSheet has any @import, then it will recursively call the function for those CSSRules too.
 // TODO this should be moved into utils or something
 function eachStylesheet(doc, topUrl, rules, f) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
         var promises, length, i, rule, url;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     promises = [];
@@ -65445,9 +67968,9 @@ function eachStylesheet(doc, topUrl, rules, f) {
 // If the CSSStyleSheet has any @import, then it will recursively call the function for those CSSRules too.
 // TODO this should be moved into utils or something
 function eachStylesheets(f) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
         var iframe, doc_1;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     iframe = document.createElement("iframe");
@@ -65537,7 +68060,7 @@ function eachStylesheets(f) {
  * @important
  */
 var Export = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Export, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Export, _super);
     /**
      * Constructor
      */
@@ -65562,6 +68085,16 @@ var Export = /** @class */ (function (_super) {
          * commences.
          */
         _this._validateSprites = [];
+        /**
+         * Holds an array of data field names. If set, exported data fields will try
+         * to maintain this order.
+         *
+         * If not set (default), the export will try to maintain the same order as
+         * in source data, or as in `dataFields` (if set).
+         *
+         * @since 4.9.7
+         */
+        _this.dataFieldsOrder = [];
         /**
          * Indicates whether data fields were generated dynamically (`true`) or
          * if they were pre-set by the user (`false`).
@@ -65637,6 +68170,7 @@ var Export = /** @class */ (function (_super) {
          * show a modal saying export operation took longer than expected.
          */
         _this.timeoutDelay = 2000;
+        _this._exportRunning = false;
         _this._container = container;
         _this.className = "Export";
         // Set default options
@@ -65752,7 +68286,7 @@ var Export = /** @class */ (function (_super) {
                 _this._disablePointers();
             });
             this._menu.events.on("out", function (ev) {
-                _this._releasePointers();
+                setTimeout(function () { _this._releasePointers(); }, 10);
             });
             // Dispatch event
             this.dispatchImmediately("menucreated");
@@ -65785,7 +68319,7 @@ var Export = /** @class */ (function (_super) {
         else if (type == "print" && !window.print) {
             supported = false;
         }
-        else if (["json", "csv"].indexOf(type) !== -1 && !this._hasData()) {
+        else if (["json", "csv", "html", "pdfdata"].indexOf(type) !== -1 && !this._hasData()) {
             supported = false;
         }
         return this.adapter.apply("supported", {
@@ -65840,10 +68374,10 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.export = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _this = this;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var event_1, func, data, event_2, event_3;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            var _this = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         // Check if it's a custom item, and do nothing or execute custom callback
@@ -65851,6 +68385,8 @@ var Export = /** @class */ (function (_super) {
                             this.handleCustom(options);
                             return [2 /*return*/, true];
                         }
+                        // Set export running flag
+                        this._exportRunning = true;
                         // Dispatch event
                         if (this.events.isEnabled("exportstarted")) {
                             event_1 = {
@@ -65897,6 +68433,9 @@ var Export = /** @class */ (function (_super) {
                         return [4 /*yield*/, func.call(this, type, options)];
                     case 1:
                         data = _a.sent();
+                        // Release pointers
+                        this._exportRunning = false;
+                        this._releasePointers();
                         // Restore temporarily hidden elements
                         this.restoreNonExportableSprites();
                         if (data) {
@@ -65960,8 +68499,8 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.unsupported = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 // TODO should this return `undefined`?
                 return [2 /*return*/, ""];
             });
@@ -65989,8 +68528,8 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.getPrint = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 return [2 /*return*/, this.getImage("png", options)];
             });
         });
@@ -66003,10 +68542,10 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.getFontFamilies = function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _this = this;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var DOMURL, blobs, promises, a;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            var _this = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         DOMURL = this.getDOMURL();
@@ -66019,9 +68558,9 @@ var Export = /** @class */ (function (_super) {
                                     var src = fontFamilySrcRegexp.exec(cssText_1);
                                     if (src !== null) {
                                         // TODO make this faster (don't create Promises for non-url stuff)
-                                        var urls = src[1].split(/ *, */).map(function (url) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                            var a, after, fullUrl, response, url_1, e_2;
-                                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                        var urls = src[1].split(/ *, */).map(function (url) { return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
+                                            var a, after, fullUrl, response, url_1, e_3;
+                                            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                                                 switch (_a.label) {
                                                     case 0:
                                                         a = /^url\(["']?([^"'\)]+)["']?\)([^,]*)$/.exec(url);
@@ -66048,8 +68587,8 @@ var Export = /** @class */ (function (_super) {
                                                     // TODO should it should escape the URI ?
                                                     return [2 /*return*/, "url(\"" + url_1 + "\")" + after];
                                                     case 7:
-                                                        e_2 = _a.sent();
-                                                        console.error("Failed to load font", fullUrl, e_2);
+                                                        e_3 = _a.sent();
+                                                        console.error("Failed to load font", fullUrl, e_3);
                                                         return [2 /*return*/, null];
                                                     case 8: return [2 /*return*/];
                                                 }
@@ -66115,9 +68654,9 @@ var Export = /** @class */ (function (_super) {
      * @return Promise
      */
     Export.prototype.getImage = function (type, options, includeExtras) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var prehidden, canvas, uri, e_3, data, data;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            var prehidden, canvas, uri, e_4, data, data;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         prehidden = this._objectsAlreadyHidden;
@@ -66155,8 +68694,8 @@ var Export = /** @class */ (function (_super) {
                         }
                         return [2 /*return*/, uri];
                     case 7:
-                        e_3 = _a.sent();
-                        console.error(e_3.message + "\n" + e_3.stack);
+                        e_4 = _a.sent();
+                        console.error(e_4.message + "\n" + e_4.stack);
                         console.warn("Simple export failed, falling back to advanced export");
                         return [4 /*yield*/, this.getImageAdvanced(type, options, includeExtras)];
                     case 8:
@@ -66185,10 +68724,10 @@ var Export = /** @class */ (function (_super) {
      * @param  options  Options
      */
     Export.prototype.addExtras = function (canvas, options, advanced) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _this = this;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var middleLeft_1, middleTop_1, middleWidth_1, middleHeight_1, extraRight_1, extraBottom_1, extras, newCanvas, ctx_1, background, left_1, top_1, right_1, bottom_1;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            var _this = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!this.extraSprites.length) return [3 /*break*/, 2];
@@ -66198,9 +68737,9 @@ var Export = /** @class */ (function (_super) {
                         middleHeight_1 = canvas.height;
                         extraRight_1 = 0;
                         extraBottom_1 = 0;
-                        return [4 /*yield*/, Promise.all(_utils_Array__WEBPACK_IMPORTED_MODULE_21__["map"](this.extraSprites, function (extraSprite) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                        return [4 /*yield*/, Promise.all(_utils_Array__WEBPACK_IMPORTED_MODULE_21__["map"](this.extraSprites, function (extraSprite) { return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, function () {
                                 var extra, extraCanvas, extraWidth, extraHeight;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                                     switch (_a.label) {
                                         case 0:
                                             if (extraSprite instanceof _Sprite__WEBPACK_IMPORTED_MODULE_3__["Sprite"]) {
@@ -66306,9 +68845,9 @@ var Export = /** @class */ (function (_super) {
      * @return           Canvas
      */
     Export.prototype.getCanvas = function (options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var background, DOMURL, url, blobs, canvas, width, height, font, fontSize, pixelRatio, ctx, promises, a, data, svg, img;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         // Options are set?
@@ -66385,9 +68924,9 @@ var Export = /** @class */ (function (_super) {
      * @return           Canvas
      */
     Export.prototype.getCanvasAdvanced = function (options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var background, canvg, width, height, font, fontSize, data, canvas, pixelRatio, config;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         // Options are set?
@@ -66438,9 +68977,9 @@ var Export = /** @class */ (function (_super) {
      * @return Data uri
      */
     Export.prototype.getImageAdvanced = function (type, options, includeExtras) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var prehidden, canvas, uri;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         prehidden = this._objectsAlreadyHidden;
@@ -66512,9 +69051,9 @@ var Export = /** @class */ (function (_super) {
      * @return Promise
      */
     Export.prototype.imagesToDataURI = function (el, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var images, promises, count, i, image, href;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         images = el.querySelectorAll("image");
@@ -66564,9 +69103,9 @@ var Export = /** @class */ (function (_super) {
      * @return Promise
      */
     Export.prototype.prepForeignObjects = function (el, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var objects, count, i;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 objects = el.querySelectorAll("foreignObject");
                 if (objects.length) {
                     // There are foreign objects, process each of them
@@ -66590,9 +69129,9 @@ var Export = /** @class */ (function (_super) {
      * @param options  Options
      */
     Export.prototype.imageToDataURI = function (el, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var img, canvas, uri, e_4;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            var img, canvas, uri, e_5;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
@@ -66627,7 +69166,7 @@ var Export = /** @class */ (function (_super) {
                         }
                         return [3 /*break*/, 3];
                     case 2:
-                        e_4 = _a.sent();
+                        e_5 = _a.sent();
                         // Give up and temporarily remove the element's href
                         if (!options || options.keepTainted !== false) {
                             /*this._removedObjects.push({
@@ -66655,9 +69194,9 @@ var Export = /** @class */ (function (_super) {
      * @param options   Options
      */
     Export.prototype.svgToDataURI = function (el, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var href, data, charset, uri, e_5;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            var href, data, charset, uri, e_6;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         href = el.getAttributeNS(Export.XLINK, "href");
@@ -66679,7 +69218,7 @@ var Export = /** @class */ (function (_super) {
                         el.setAttributeNS(Export.XLINK, "href", uri);
                         return [2 /*return*/, uri];
                     case 3:
-                        e_5 = _a.sent();
+                        e_6 = _a.sent();
                         // Disable temporarily
                         if (!options || options.keepTainted !== false) {
                             /*this._removedObjects.push({
@@ -66763,9 +69302,9 @@ var Export = /** @class */ (function (_super) {
      * @return `true` if simplified export can be used
      */
     Export.prototype.simplifiedImageExport = function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var cache, canvas, ctx, DOMURL, svg, url, img, e_6, e_7;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            var cache, canvas, ctx, DOMURL, svg, url, img, e_7, e_8;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (this.useSimplifiedExport === false) {
@@ -66794,7 +69333,7 @@ var Export = /** @class */ (function (_super) {
                         img = _a.sent();
                         return [3 /*break*/, 5];
                     case 4:
-                        e_6 = _a.sent();
+                        e_7 = _a.sent();
                         return [2 /*return*/, false];
                     case 5:
                         ctx.drawImage(img, 0, 0);
@@ -66810,7 +69349,7 @@ var Export = /** @class */ (function (_super) {
                         }
                         return [3 /*break*/, 7];
                     case 6:
-                        e_7 = _a.sent();
+                        e_8 = _a.sent();
                         _Registry__WEBPACK_IMPORTED_MODULE_13__["registry"].setCache("simplifiedImageExport", false);
                         return [2 /*return*/, false];
                     case 7: return [2 /*return*/];
@@ -66895,9 +69434,9 @@ var Export = /** @class */ (function (_super) {
      * @return Promise
      */
     Export.prototype.getSVG = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var prehidden, width, height, font, fontSize, svg, charset, uri;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         prehidden = this._objectsAlreadyHidden;
@@ -67020,9 +69559,9 @@ var Export = /** @class */ (function (_super) {
      * @todo Account for header when calculating vertical fit
      */
     Export.prototype.getPDF = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var image, pdfmake, defaultMargins, doc, title, _a, _b, _c;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_d) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_d) {
                 switch (_d.label) {
                     case 0: return [4 /*yield*/, this.getImage(options.imageFormat || "png", options)];
                     case 1:
@@ -67104,10 +69643,10 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.getPDFData = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            var content, dataFields, data, dataFieldsOrder_1, len, i;
             var _this = this;
-            var content, dataFields, data, len, i;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 content = {
                     "body": []
                 };
@@ -67118,16 +69657,31 @@ var Export = /** @class */ (function (_super) {
                 data = this.data;
                 // Vertical or horizontal (default) layout
                 if (options.pivot) {
-                    _utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataFields, function (key, val) {
+                    dataFieldsOrder_1 = this.adapter.apply("dataFieldsOrder", {
+                        dataFieldsOrder: this.dataFieldsOrder,
+                        format: "pdfdata"
+                    }).dataFieldsOrder;
+                    _utils_Object__WEBPACK_IMPORTED_MODULE_17__["eachOrdered"](dataFields, function (key, val) {
                         var dataRow = [];
                         if (options.addColumnNames) {
                             dataRow.push(val);
                         }
-                        for (var len = _this.data.length, i = 0; i < len; i++) {
-                            var dataValue = _this.data[i][key];
+                        for (var len = data.length, i = 0; i < len; i++) {
+                            var dataValue = data[i][key];
                             dataRow.push(_this.convertToSpecialFormat(key, dataValue, options, true));
                         }
                         content.body.push(_this.getPDFDataRow(dataRow, options, undefined, true));
+                    }, function (a, b) {
+                        //console.log(a, b)
+                        var ai = dataFieldsOrder_1.indexOf(a);
+                        var bi = dataFieldsOrder_1.indexOf(b);
+                        if (ai > bi) {
+                            return 1;
+                        }
+                        else if (ai < bi) {
+                            return -1;
+                        }
+                        return 0;
                     });
                 }
                 else {
@@ -67167,8 +69721,13 @@ var Export = /** @class */ (function (_super) {
         if (!dataFields) {
             dataFields = row;
         }
+        // Data fields order
+        var dataFieldsOrder = this.adapter.apply("dataFieldsOrder", {
+            dataFieldsOrder: this.dataFieldsOrder,
+            format: "pdfdata"
+        }).dataFieldsOrder;
         // Process each row item
-        _utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataFields, function (key, name) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_17__["eachOrdered"](dataFields, function (key, name) {
             // Get value
             var value = _this.convertEmptyValue(key, row[key], options);
             // Convert dates
@@ -67176,6 +69735,17 @@ var Export = /** @class */ (function (_super) {
             item = "" + item;
             // Add to item
             items.push(item);
+        }, function (a, b) {
+            //console.log(a, b)
+            var ai = dataFieldsOrder.indexOf(a);
+            var bi = dataFieldsOrder.indexOf(b);
+            if (ai > bi) {
+                return 1;
+            }
+            else if (ai < bi) {
+                return -1;
+            }
+            return 0;
         });
         return items;
     };
@@ -67271,10 +69841,10 @@ var Export = /** @class */ (function (_super) {
      * @todo Support for multi-sheet
      */
     Export.prototype.getExcel = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            var XLSX, wbOptions, sheetName, wb, data, dataFields, dataFieldsOrder_2, len, i, uri;
             var _this = this;
-            var XLSX, wbOptions, sheetName, wb, data, dataFields, len, i, uri;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.xlsx];
                     case 1:
@@ -67300,7 +69870,11 @@ var Export = /** @class */ (function (_super) {
                         }).dataFields;
                         // Vertical or horizontal (default) layout
                         if (options.pivot) {
-                            _utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataFields, function (key, val) {
+                            dataFieldsOrder_2 = this.adapter.apply("dataFieldsOrder", {
+                                dataFieldsOrder: this.dataFieldsOrder,
+                                format: "xlsx"
+                            }).dataFieldsOrder;
+                            _utils_Object__WEBPACK_IMPORTED_MODULE_17__["eachOrdered"](dataFields, function (key, val) {
                                 var dataRow = [];
                                 if (options.addColumnNames) {
                                     dataRow.push(val);
@@ -67310,6 +69884,17 @@ var Export = /** @class */ (function (_super) {
                                     dataRow.push(_this.convertToSpecialFormat(key, dataValue, options, true));
                                 }
                                 data.push(_this.getExcelRow(dataRow, options, undefined, true));
+                            }, function (a, b) {
+                                //console.log(a, b)
+                                var ai = dataFieldsOrder_2.indexOf(a);
+                                var bi = dataFieldsOrder_2.indexOf(b);
+                                if (ai > bi) {
+                                    return 1;
+                                }
+                                else if (ai < bi) {
+                                    return -1;
+                                }
+                                return 0;
                             });
                         }
                         else {
@@ -67362,13 +69947,29 @@ var Export = /** @class */ (function (_super) {
         if (!dataFields) {
             dataFields = row;
         }
+        // Data fields order
+        var dataFieldsOrder = this.adapter.apply("dataFieldsOrder", {
+            dataFieldsOrder: this.dataFieldsOrder,
+            format: "xlsx"
+        }).dataFieldsOrder;
         // Process each row item
-        _utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataFields, function (key, name) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_17__["eachOrdered"](dataFields, function (key, name) {
             // Get value
             var value = _this.convertEmptyValue(key, row[key], options);
             // Convert dates
             var item = asIs ? value : _this.convertToSpecialFormat(key, value, options, true);
             items.push(item);
+        }, function (a, b) {
+            //console.log(a, b)
+            var ai = dataFieldsOrder.indexOf(a);
+            var bi = dataFieldsOrder.indexOf(b);
+            if (ai > bi) {
+                return 1;
+            }
+            else if (ai < bi) {
+                return -1;
+            }
+            return 0;
         });
         return items;
     };
@@ -67384,10 +69985,10 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.getCSV = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            var csv, dataFields, br, data, dataFieldsOrder_3, len, i, row, charset, uri;
             var _this = this;
-            var csv, dataFields, br, data, len, i, row, charset, uri;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 csv = "";
                 dataFields = this.adapter.apply("formatDataFields", {
                     dataFields: this.dataFields,
@@ -67397,17 +69998,31 @@ var Export = /** @class */ (function (_super) {
                 data = this.data;
                 // Vertical or horizontal (default) layout
                 if (options.pivot) {
-                    _utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataFields, function (key, val) {
+                    dataFieldsOrder_3 = this.adapter.apply("dataFieldsOrder", {
+                        dataFieldsOrder: this.dataFieldsOrder,
+                        format: "csv"
+                    }).dataFieldsOrder;
+                    _utils_Object__WEBPACK_IMPORTED_MODULE_17__["eachOrdered"](dataFields, function (key, val) {
                         var dataRow = [];
                         if (options.addColumnNames) {
                             dataRow.push(val);
                         }
-                        for (var len = _this.data.length, i = 0; i < len; i++) {
-                            var dataValue = _this.data[i][key];
+                        for (var len = data.length, i = 0; i < len; i++) {
+                            var dataValue = data[i][key];
                             dataRow.push(_this.convertToSpecialFormat(key, dataValue, options, true));
                         }
                         csv += br + _this.getCSVRow(dataRow, options, undefined, true);
                         br = "\n";
+                    }, function (a, b) {
+                        var ai = dataFieldsOrder_3.indexOf(a);
+                        var bi = dataFieldsOrder_3.indexOf(b);
+                        if (ai > bi) {
+                            return -1;
+                        }
+                        else if (ai < bi) {
+                            return 1;
+                        }
+                        return 0;
                     });
                 }
                 else {
@@ -67459,8 +70074,13 @@ var Export = /** @class */ (function (_super) {
         if (!dataFields) {
             dataFields = row;
         }
+        // Data fields order
+        var dataFieldsOrder = this.adapter.apply("dataFieldsOrder", {
+            dataFieldsOrder: this.dataFieldsOrder,
+            format: "csv"
+        }).dataFieldsOrder;
         // Process each row item
-        _utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataFields, function (key, name) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_17__["eachOrdered"](dataFields, function (key, name) {
             // Get value
             var value = _this.convertEmptyValue(key, row[key], options);
             // Check if we need to skip
@@ -67479,6 +70099,17 @@ var Export = /** @class */ (function (_super) {
             }
             // Add to item
             items.push(item);
+        }, function (a, b) {
+            //console.log(a, b)
+            var ai = dataFieldsOrder.indexOf(a);
+            var bi = dataFieldsOrder.indexOf(b);
+            if (ai > bi) {
+                return 1;
+            }
+            else if (ai < bi) {
+                return -1;
+            }
+            return 0;
         });
         return items.join(separator);
     };
@@ -67495,10 +70126,10 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.getHTML = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            var html, dataFields, data, dataFieldsOrder_4, len, i, charset, uri;
             var _this = this;
-            var html, dataFields, data, len, i, charset, uri;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 html = "<table>";
                 if (options.tableClass) {
                     html = "<table class=\"" + options.tableClass + "\">";
@@ -67510,16 +70141,30 @@ var Export = /** @class */ (function (_super) {
                 data = this.data;
                 // Vertical or horizontal (default) layout
                 if (options.pivot) {
-                    _utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataFields, function (key, val) {
+                    dataFieldsOrder_4 = this.adapter.apply("dataFieldsOrder", {
+                        dataFieldsOrder: this.dataFieldsOrder,
+                        format: "html"
+                    }).dataFieldsOrder;
+                    _utils_Object__WEBPACK_IMPORTED_MODULE_17__["eachOrdered"](dataFields, function (key, val) {
                         var dataRow = [];
                         if (options.addColumnNames) {
                             dataRow.push(val);
                         }
-                        for (var len = _this.data.length, i = 0; i < len; i++) {
-                            var dataValue = _this.data[i][key];
+                        for (var len = data.length, i = 0; i < len; i++) {
+                            var dataValue = data[i][key];
                             dataRow.push(_this.convertToSpecialFormat(key, dataValue, options, true));
                         }
                         html += "\n" + _this.getHTMLRow(dataRow, options, undefined, true);
+                    }, function (a, b) {
+                        var ai = dataFieldsOrder_4.indexOf(a);
+                        var bi = dataFieldsOrder_4.indexOf(b);
+                        if (ai > bi) {
+                            return -1;
+                        }
+                        else if (ai < bi) {
+                            return 1;
+                        }
+                        return 0;
                     });
                 }
                 else {
@@ -67569,11 +70214,16 @@ var Export = /** @class */ (function (_super) {
         if (!dataFields) {
             dataFields = row;
         }
+        // Data fields order
+        var dataFieldsOrder = this.adapter.apply("dataFieldsOrder", {
+            dataFieldsOrder: this.dataFieldsOrder,
+            format: "html"
+        }).dataFieldsOrder;
         // th or dh?
         var tag = headerRow ? "th" : "td";
         // Process each row item
         var first = true;
-        _utils_Object__WEBPACK_IMPORTED_MODULE_17__["each"](dataFields, function (key, name) {
+        _utils_Object__WEBPACK_IMPORTED_MODULE_17__["eachOrdered"](dataFields, function (key, name) {
             // Get value
             var value = _this.convertEmptyValue(key, row[key], options);
             // Convert dates
@@ -67596,6 +70246,16 @@ var Export = /** @class */ (function (_super) {
                 html += "\n\t\t<" + useTag + ">" + item + "</" + useTag + ">";
             }
             first = false;
+        }, function (a, b) {
+            var ai = dataFieldsOrder.indexOf(a);
+            var bi = dataFieldsOrder.indexOf(b);
+            if (ai > bi) {
+                return 1;
+            }
+            else if (ai < bi) {
+                return -1;
+            }
+            return 0;
         });
         html += "\n\t</tr>";
         return html;
@@ -67612,10 +70272,10 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.getJSON = function (type, options) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _this = this;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var data, dataFields, sourceData, _loop_1, len, i, json, charset, uri;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            var _this = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 dataFields = this.adapter.apply("formatDataFields", {
                     dataFields: this.dataFields,
                     format: "csv"
@@ -67724,9 +70384,9 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.download = function (uri, fileName) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var parts, contentType, decoded, blob_1, chars, i, charCode, blob, link_1, parts, contentType, decoded, blob_2, url_2, chars, i, charCode, blob, url_3, link, parts, contentType, iframe, idoc;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 if (this.msBlobDownloadSupport()) {
                     parts = uri.split(";");
                     contentType = parts.shift().replace(/data:/, "");
@@ -67932,8 +70592,8 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype.print = function (data, options, title) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 if (options.printMethod == "css") {
                     return [2 /*return*/, this.printViaCSS(data, options, title)];
                 }
@@ -67945,9 +70605,9 @@ var Export = /** @class */ (function (_super) {
         });
     };
     Export.prototype.printViaCSS = function (data, options, title) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var scroll, rule, originalTitle, img, isIOS;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 scroll = document.documentElement.scrollTop || document.body.scrollTop;
                 rule = new _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["StyleRule"]("body > *", {
                     "display": "none",
@@ -68004,9 +70664,9 @@ var Export = /** @class */ (function (_super) {
         });
     };
     Export.prototype.printViaIframe = function (data, options, title) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var iframe, img, isIOS;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 iframe = document.createElement("iframe");
                 iframe.style.visibility = "hidden";
                 document.body.appendChild(iframe);
@@ -68130,7 +70790,7 @@ var Export = /** @class */ (function (_super) {
             }).extraSprites;
         },
         /**
-         * An array of extra [[Sprite] elements to include in export.
+         * An array of extra [[Sprite]] elements to include in export.
          *
          * It can be used to export any external elements, or even other charts.
          *
@@ -68257,6 +70917,7 @@ var Export = /** @class */ (function (_super) {
          * Data fields in `{ field: fieldName }` format. Those are used for
          * exporting in data formats to name the columns.
          *
+         * @see {@link https://www.amcharts.com/docs/v4/concepts/exporting/#Changing_order_and_names_of_columns} for examples and details
          * @param value Field names
          */
         set: function (value) {
@@ -68266,6 +70927,11 @@ var Export = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /**
+     * Called after target chart's data updates.
+     *
+     * @ignore
+     */
     Export.prototype.handleDataUpdated = function () {
         if (this._dynamicDataFields) {
             this._dataFields = undefined;
@@ -68359,7 +71025,7 @@ var Export = /** @class */ (function (_super) {
          * @param value NumberFormatter instance
          */
         set: function (value) {
-            this._dateFormatter = value;
+            this._numberFormatter = value;
         },
         enumerable: true,
         configurable: true
@@ -68791,13 +71457,13 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype._canvg = function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var canvg;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, __webpack_require__.e(/*! import() | canvg */ "vendors~canvg").then(__webpack_require__.t.bind(null, /*! canvg */ "./node_modules/canvg/dist/browser/canvg.min.js", 7))];
                     case 1:
-                        canvg = _a.sent();
+                        canvg = (_a.sent());
                         if (canvg.default != null) {
                             return [2 /*return*/, canvg.default];
                         }
@@ -68849,8 +71515,8 @@ var Export = /** @class */ (function (_super) {
      * @async
      */
     Export.prototype._xlsx = function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, Promise.all(/*! import() | xlsx */[__webpack_require__.e("vendors~xlsx"), __webpack_require__.e("xlsx")]).then(__webpack_require__.t.bind(null, /*! xlsx */ "./node_modules/xlsx/xlsx.js", 7))];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -68896,7 +71562,7 @@ var Export = /** @class */ (function (_super) {
      * Releases temporarily disabled pointers on parent chart.
      */
     Export.prototype._releasePointers = function () {
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_19__["hasValue"](this._spriteInteractionsEnabled)) {
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_19__["hasValue"](this._spriteInteractionsEnabled) && !this._exportRunning) {
             this.sprite.interactionsEnabled = this._spriteInteractionsEnabled;
         }
     };
@@ -68911,7 +71577,7 @@ var Export = /** @class */ (function (_super) {
         var svgContainer = this.sprite.svgContainer;
         if (svgContainer) {
             _utils_Array__WEBPACK_IMPORTED_MODULE_21__["each"](svgContainer.nonExportableSprites, function (item) {
-                if (!item.isHidden && !item.isHiding) {
+                if (!item.isHidden && !item.isHiding && item.visible) {
                     _this._hiddenObjects.push(item);
                 }
                 item.hide(0);
@@ -68941,9 +71607,9 @@ var Export = /** @class */ (function (_super) {
      * @return Promise
      */
     Export.prototype.awaitValidSprites = function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
             var promises;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         promises = [];
@@ -69035,6 +71701,9 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_2__["Dictionary"]();
             new StyleRule(`div:hover .${newPrefix}-menu, .${newPrefix}-menu.active`, {
                 "opacity": "0.9",
             }),*/
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu *", {
+                "box-sizing": "border-box"
+            }),
             new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu-level-0", {
                 "position": "absolute",
                 "top": "5px",
@@ -69144,8 +71813,8 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_2__["Dictionary"]();
                 "padding": "0.2em 0.4em",
                 "width": "1.2em",
                 "height": "1.2em",
-                "min-width": "20px",
-                "min-height": "20px",
+                "min-width": "32px",
+                "min-height": "32px",
                 "margin": "auto auto",
                 "border-radius": "3px",
             }),
@@ -69241,7 +71910,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var ExportMenu = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ExportMenu, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ExportMenu, _super);
     /**
      * Constructor
      */
@@ -70434,7 +73103,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Escape a.m./p.m. properly when used in RegEx
  */
 var DateFormatter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DateFormatter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DateFormatter, _super);
     /**
      * Constructor
      */
@@ -70558,7 +73227,7 @@ var DateFormatter = /** @class */ (function (_super) {
                 return new Intl.DateTimeFormat(this.intlLocales, format).format(date);
             }
             else {
-                return new Intl.DateTimeFormat(null, format).format(date);
+                return new Intl.DateTimeFormat(undefined, format).format(date);
             }
         }
         else {
@@ -71494,7 +74163,7 @@ var DateFormatter = /** @class */ (function (_super) {
             return this._firstDayOfWeek;
         },
         /**
-         * Dirst day of the week:
+         * First day of the week:
          *
          * * 0 - Sunday
          * * 1 - Monday
@@ -71587,7 +74256,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link https://www.amcharts.com/docs/v4/concepts/formatters/formatting-duration/} Tutorial on duration formatting
  */
 var DurationFormatter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DurationFormatter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DurationFormatter, _super);
     /**
      * Constructor
      */
@@ -72180,9 +74849,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_Object__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
 /* harmony import */ var _utils_Utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
 /* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _utils_Math__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
 /**
  * Number formatting-related functionality.
  */
+
 
 
 
@@ -72198,7 +74869,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Apply translations to suffixes/prefixes
  */
 var NumberFormatter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](NumberFormatter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(NumberFormatter, _super);
     /**
      * Constructor
      */
@@ -72278,29 +74949,42 @@ var NumberFormatter = /** @class */ (function (_super) {
      */
     NumberFormatter.prototype.format = function (value, format) {
         // no format passed in or "Number"
-        if (typeof format === "undefined" || format.toLowerCase() === "number") {
+        if (typeof format === "undefined" || (_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isString"](format) && format.toLowerCase() === "number")) {
             format = this._numberFormat;
         }
-        // Clean format
-        format = _utils_Utils__WEBPACK_IMPORTED_MODULE_7__["cleanFormat"](format);
-        // Get format info (it will also deal with parser caching)
-        var info = this.parseFormat(format, this.language);
-        // cast to number just in case
+        // Init return value
+        var formatted;
+        // Cast to number just in case
         // TODO: maybe use better casting
         var source = Number(value);
-        // format and replace the number
-        var details;
-        if (source > this._negativeBase) {
-            details = info.positive;
-        }
-        else if (source < this._negativeBase) {
-            details = info.negative;
+        // Is it a built-in format or Intl.NumberFormatOptions
+        if (format instanceof Object) {
+            if (this.intlLocales) {
+                return new Intl.NumberFormat(this.intlLocales, format).format(source);
+            }
+            else {
+                return new Intl.NumberFormat(undefined, format).format(source);
+            }
         }
         else {
-            details = info.zero;
+            // Clean format
+            format = _utils_Utils__WEBPACK_IMPORTED_MODULE_7__["cleanFormat"](format);
+            // Get format info (it will also deal with parser caching)
+            var info = this.parseFormat(format, this.language);
+            // format and replace the number
+            var details = void 0;
+            if (source > this._negativeBase) {
+                details = info.positive;
+            }
+            else if (source < this._negativeBase) {
+                details = info.negative;
+            }
+            else {
+                details = info.zero;
+            }
+            // Format
+            formatted = details.template.split(_utils_Strings__WEBPACK_IMPORTED_MODULE_5__["PLACEHOLDER"]).join(this.applyFormat(source, details));
         }
-        // Format
-        var formatted = details.template.split(_utils_Strings__WEBPACK_IMPORTED_MODULE_5__["PLACEHOLDER"]).join(this.applyFormat(source, details));
         return formatted;
     };
     /**
@@ -72400,7 +75084,7 @@ var NumberFormatter = /** @class */ (function (_super) {
             var partFormat = item.source;
             // Just "Number"?
             if (partFormat.toLowerCase() === "number") {
-                partFormat = _this._numberFormat;
+                partFormat = _utils_Type__WEBPACK_IMPORTED_MODULE_8__["isString"](_this._numberFormat) ? _this._numberFormat : "#,###.#####";
             }
             // Let TextFormatter split into chunks
             var chunks = Object(_formatters_TextFormatter__WEBPACK_IMPORTED_MODULE_3__["getTextFormatter"])().chunk(partFormat, true);
@@ -72485,7 +75169,7 @@ var NumberFormatter = /** @class */ (function (_super) {
      * Applies parsed format to a numeric value.
      *
      * @param value    Value
-     * @param details  Parsed format as returned by {parseFormat}
+     * @param details  Parsed format as returned by parseFormat()
      * @return Formatted number
      */
     NumberFormatter.prototype.applyFormat = function (value, details) {
@@ -72514,15 +75198,15 @@ var NumberFormatter = /** @class */ (function (_super) {
             }
         }
         else if (mods.indexOf("%") !== -1) {
-            var ol = value.toString().length;
+            var ol = _utils_Math__WEBPACK_IMPORTED_MODULE_9__["min"](value.toString().length + 2, 21);
             value *= 100;
-            value = parseFloat(value.toPrecision(ol + 2));
+            value = parseFloat(value.toPrecision(ol));
             suffix = "%";
         }
         else if (mods.indexOf("‰") !== -1) {
-            var ol = value.toString().length;
+            var ol = _utils_Math__WEBPACK_IMPORTED_MODULE_9__["min"](value.toString().length + 3, 21);
             value *= 1000;
-            value = parseFloat(value.toPrecision(ol + 3));
+            value = parseFloat(value.toPrecision(ol));
             suffix = "‰";
         }
         // Round to passive
@@ -72638,7 +75322,7 @@ var NumberFormatter = /** @class */ (function (_super) {
             applied = true;
         }
         if (applied) {
-            newvalue = parseFloat(newvalue.toPrecision(k.toString().length + Math.floor(newvalue).toString().replace(/[^0-9]*/g, "").length));
+            newvalue = parseFloat(newvalue.toPrecision(_utils_Math__WEBPACK_IMPORTED_MODULE_9__["min"](k.toString().length + Math.floor(newvalue).toString().replace(/[^0-9]*/g, "").length, 21)));
         }
         return [newvalue, prefix, suffix];
     };
@@ -72660,11 +75344,32 @@ var NumberFormatter = /** @class */ (function (_super) {
         /**
          * Number format.
          *
+         * @default "#,###.#####"
          * @see {@link https://www.amcharts.com/docs/v4/concepts/formatters/formatting-numbers/} Tutorial on number formatting
          * @param format  A format to use for number formatting
          */
         set: function (format) {
             this._numberFormat = format;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NumberFormatter.prototype, "intlLocales", {
+        /**
+         * @return Date format
+         */
+        get: function () {
+            return this._intlLocales;
+        },
+        /**
+         * Locales if you are using date formats in `Intl.NumberFormatOptions` syntax.
+         *
+         * @see (@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat) about using Intl for number formatting
+         * @param value Locales
+         */
+        set: function (value) {
+            this._intlLocales = value;
+            this.invalidateSprite();
         },
         enumerable: true,
         configurable: true
@@ -72967,7 +75672,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var TextFormatter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TextFormatter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(TextFormatter, _super);
     /**
      * Constructor
      */
@@ -73040,6 +75745,7 @@ var TextFormatter = /** @class */ (function (_super) {
         return text.
             replace(/\[\[/g, _Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].getPlaceholder("1")).
             replace(/([^\/]{1})\]\]/g, "$1" + _Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].getPlaceholder("2")).
+            replace(/\]\]/g, _Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].getPlaceholder("2")).
             replace(/\{\{/g, _Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].getPlaceholder("3")).
             replace(/\}\}/g, _Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].getPlaceholder("4")).
             replace(/\'\'/g, _Registry__WEBPACK_IMPORTED_MODULE_4__["registry"].getPlaceholder("5"));
@@ -73398,7 +76104,7 @@ __webpack_require__.r(__webpack_exports__);
  * decreasing speed.
  */
 var Inertia = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Inertia, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Inertia, _super);
     /**
      * Constructor
      */
@@ -73595,7 +76301,7 @@ __webpack_require__.r(__webpack_exports__);
 * @see {@link IInteractionEvents} for a list of available events
 */
 var Interaction = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Interaction, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Interaction, _super);
     /**
      * Constructor. Sets up universal document-wide move events to handle stuff
      * outside particular chart container.
@@ -73758,6 +76464,11 @@ var Interaction = /** @class */ (function (_super) {
             // Oh looky, an MSIE that does not support PointerEvent. Hi granpa IE9!
             _this._usePointerEventsOnly = true;
         }
+        else if (_this.fullFF()) {
+            // Old FF, let's use regular events.
+            // (Newer FFs would be detected by the PointerEvent availability check)
+            _this._usePointerEventsOnly = true;
+        }
         else {
             // Uses defaults for normal browsers
             // We also assume that this must be a touch device that does not have
@@ -73831,6 +76542,11 @@ var Interaction = /** @class */ (function (_super) {
                 this._disposers.push(Object(_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["addEventListener"])(document, this._pointerEvents.pointermove, function (ev) { _this.handleGlobalPointerMove(ev); }));
                 this._disposers.push(Object(_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["addEventListener"])(document, this._pointerEvents.pointerup, function (ev) { _this.handleGlobalPointerUp(ev); }));
                 this._disposers.push(Object(_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["addEventListener"])(document, this._pointerEvents.pointercancel, function (ev) { _this.handleGlobalPointerUp(ev, true); }));
+                this._disposers.push(Object(_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["addEventListener"])(document, "mouseenter", function (ev) {
+                    if (!_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev.relatedTarget) && (ev.buttons == 0 || ev.which == 0)) {
+                        _this.handleDocumentLeave(ev);
+                    }
+                }));
             }
             // No need to duplicate events for hubrid systems that support both
             // pointer events and touch events. Touch events are need only for
@@ -74612,9 +77328,10 @@ var Interaction = /** @class */ (function (_super) {
         // Add pointer
         io.overPointers.moveValue(pointer);
         // Check if object is not yet hovered
-        if (!io.isHover) {
+        if (!io.isRealHover) {
             // Set element as hovered
             io.isHover = true;
+            io.isRealHover = true;
             this.overObjects.moveValue(io);
             // Generate body track event. This is needed so that if element loads
             // under unmoved mouse cursor, we still need all the actions that are
@@ -74806,6 +77523,21 @@ var Interaction = /** @class */ (function (_super) {
             if (io && io.downPointers.contains(pointer)) {
                 _this.handleUp(io, pointer, ev, cancelled);
             }
+        });
+    };
+    /**
+     * Simulates all pointers being up once mouse leaves document area.
+     *
+     * @ignore Exclude from docs
+     * @param ev       Original event
+     */
+    Interaction.prototype.handleDocumentLeave = function (ev) {
+        var _this = this;
+        // Process all down objects
+        _utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](this.downObjects.backwards().iterator(), function (io) {
+            io.downPointers.each(function (pointer) {
+                _this.handleUp(io, pointer, ev);
+            });
         });
     };
     /**
@@ -75532,6 +78264,7 @@ var Interaction = /** @class */ (function (_super) {
         }
         // Log last event
         pointer.lastEvent = ev;
+        this.lastPointer = pointer;
         return pointer;
     };
     /**
@@ -76191,6 +78924,31 @@ var Interaction = /** @class */ (function (_super) {
             }
         }
     };
+    /**
+     * Checks whether there are currently any objects being transformed (dragged
+     * or resized).
+     *
+     * If `except` is set, that object will be ignored.
+     *
+     * @since 4.9.3
+     * @param   except  Ignore this object(s)
+     * @return          Objects are being transformed
+     */
+    Interaction.prototype.areTransformed = function (except) {
+        var count = this.transformedObjects.length;
+        if (except) {
+            var ex = _utils_Type__WEBPACK_IMPORTED_MODULE_15__["isArray"](except) ? except : [except];
+            for (var i = 0; i < ex.length; i++) {
+                if (this.transformedObjects.contains(ex[i])) {
+                    count--;
+                }
+            }
+        }
+        return count > 0;
+    };
+    /**
+     * Log.
+     */
     Interaction.prototype.logTouch = function (text, type, ev) {
         console.log(text + "  " + type + "  " + "touch" + "  " + ev.identifier);
     };
@@ -76425,7 +79183,7 @@ __webpack_require__.r(__webpack_exports__);
  * `interaction.getInteraction(element: HTMLElement)`
  */
 var InteractionObject = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](InteractionObject, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(InteractionObject, _super);
     /**
      * Constructor
      */
@@ -76464,6 +79222,13 @@ var InteractionObject = /** @class */ (function (_super) {
          * Is element currently hovered?
          */
         _this._isHover = false;
+        /**
+         * Was this element hovered via pointer or is it just "pretenting" to be
+         * hovered.
+         *
+         * @ignore
+         */
+        _this.isRealHover = false;
         /**
          * Is the element hovered by touch pointer?
          */
@@ -76557,6 +79322,7 @@ var InteractionObject = /** @class */ (function (_super) {
                     Object(_Interaction__WEBPACK_IMPORTED_MODULE_5__["getInteraction"])().overObjects.moveValue(this);
                 }
                 else {
+                    this.isRealHover = false;
                     Object(_Interaction__WEBPACK_IMPORTED_MODULE_5__["getInteraction"])().overObjects.removeValue(this);
                 }
             }
@@ -77146,6 +79912,29 @@ var InteractionObject = /** @class */ (function (_super) {
         /**
          * Mouse options.
          *
+         * Enables controlling options related to the mouse, for example sensitivity
+         * of its mouse wheel.
+         *
+         * E.g. the below will reduce chart's wheel-zoom speed to half its default
+         * speed:
+         *
+         * ```TypeScript
+         * chart.plotContainer.mouseOptions.sensitivity = 0.5;
+         * ```
+         * ```JavaScript
+         * chart.plotContainer.mouseOptions.sensitivity = 0.5;
+         * ```
+         * ```JSON
+         * {
+         *   // ...
+         *   "plotContainer": {
+         *     "mouseOptions": {
+         *       "sensitivity": 0.5
+         *     }
+         *   }
+         * }
+         * ```
+         *
          * @since 4.5.14
          * @param value  Options
          */
@@ -77262,7 +80051,7 @@ __webpack_require__.r(__webpack_exports__);
  * but can turn into something else moving forward.
  */
 var InteractionObjectEventDispatcher = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](InteractionObjectEventDispatcher, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(InteractionObjectEventDispatcher, _super);
     function InteractionObjectEventDispatcher() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         /**
@@ -77441,6 +80230,14 @@ var MouseCursorStyle = /** @class */ (function () {
             "property": "cursor",
             "value": "ns-resize"
         }];
+    /**
+     * Styles for "no-allowed" cursor.
+     * @since 4.7.15
+     */
+    MouseCursorStyle.notAllowed = [{
+            "property": "cursor",
+            "value": "not-allowed"
+        }];
     return MouseCursorStyle;
 }());
 
@@ -77497,6 +80294,14 @@ var AMElement = /** @class */ (function () {
          * Current Y coordinate.
          */
         this._y = 0;
+        /**
+         *
+         */
+        this._rotationY = 0;
+        /**
+         *
+         */
+        this._rotationX = 0;
         /**
          * Current rotation.
          */
@@ -77555,7 +80360,11 @@ var AMElement = /** @class */ (function () {
             transfromString += ((transfromString ? " " : "") + "scale(" + this._scale + ")");
         }
         if (this._rotation != 0) {
-            transfromString += ((transfromString ? " " : "") + "rotate(" + this._rotation + ")");
+            var rotateString = "rotate(" + this._rotation + ")";
+            if (this._rotationX && this._rotationY) {
+                rotateString = "rotate(" + this._rotation + " " + this._rotationX + " " + this._rotationY + ")";
+            }
+            transfromString += ((transfromString ? " " : "") + rotateString);
         }
         this._transformString = transfromString;
         this.node.setAttribute("transform", transfromString);
@@ -77702,6 +80511,44 @@ var AMElement = /** @class */ (function () {
         set: function (angle) {
             if (this._rotation != angle) {
                 this._rotation = angle;
+                this.transform();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AMElement.prototype, "rotationX", {
+        /**
+         * @ignore
+         */
+        get: function () {
+            return this._rotationX;
+        },
+        /**
+         * @ignore
+         */
+        set: function (x) {
+            if (this._rotationX != x) {
+                this._rotationX = x;
+                this.transform();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AMElement.prototype, "rotationY", {
+        /**
+         * @ignore
+         */
+        get: function () {
+            return this._rotationY;
+        },
+        /**
+         * @ignore
+         */
+        set: function (y) {
+            if (this._rotationY != y) {
+                this._rotationY = y;
                 this.transform();
             }
         },
@@ -77919,7 +80766,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g} About `<g>` element
  */
 var Group = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Group, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Group, _super);
     /**
      * Constructor.
      *
@@ -78939,6 +81786,49 @@ var SVGContainer = /** @class */ (function () {
             popup.close();
         });
     };
+    Object.defineProperty(SVGContainer.prototype, "readerAlertElement", {
+        /**
+         * ==========================================================================
+         * ACCESSIBILITY STUFF
+         * ==========================================================================
+         * @hidden
+         */
+        /**
+         * A `<div>` element used as as placeholder to trigger screen alerts.
+         *
+         * @sunce 4.9.2
+         * @return Element
+         */
+        get: function () {
+            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](this._readerAlertElement)) {
+                // Create element
+                var div = document.createElement("div");
+                div.setAttribute("role", "alert");
+                div.style.zIndex = "-100000";
+                div.style.opacity = "0";
+                this.SVGContainer.appendChild(div);
+                this._readerAlertElement = div;
+            }
+            return this._readerAlertElement;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Triggers screen reader read out a message.
+     *
+     * @since 4.9.2
+     * @param  text  Alert text
+     */
+    SVGContainer.prototype.readerAlert = function (text) {
+        this.readerAlertElement.innerHTML = text;
+    };
+    /**
+     * ==========================================================================
+     * OTHER STUFF
+     * ==========================================================================
+     * @hidden
+     */
     SVGContainer.prototype.checkTransform = function (div) {
         if (window.getComputedStyle) {
             if (div && div.style) {
@@ -79251,6 +82141,96 @@ var Basis = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/CirclePattern.js":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/CirclePattern.js ***!
+  \******************************************************************************************/
+/*! exports provided: CirclePattern */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CirclePattern", function() { return CirclePattern; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _Pattern__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/Pattern.js");
+/* harmony import */ var _Registry__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/**
+ * Rectangular pattern module.
+ */
+
+/**
+ * ============================================================================
+ * IMPORTS
+ * ============================================================================
+ * @hidden
+ */
+
+
+;
+/**
+ * ============================================================================
+ * MAIN CLASS
+ * ============================================================================
+ * @hidden
+ */
+/**
+ * Circular pattern
+ */
+var CirclePattern = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CirclePattern, _super);
+    /**
+     * Constructor
+     */
+    function CirclePattern() {
+        var _this = _super.call(this) || this;
+        _this.properties["radius"] = 2;
+        _this._circle = _this.paper.add("circle");
+        _this.addElement(_this._circle);
+        _this.shapeRendering = "auto";
+        return _this;
+    }
+    /**
+     * Draws the circle element.
+     */
+    CirclePattern.prototype.draw = function () {
+        _super.prototype.draw.call(this);
+        if (this._circle) {
+            this._circle.attr({ "r": this.radius, "cx": this.width / 2, "cy": this.height / 2 });
+        }
+    };
+    Object.defineProperty(CirclePattern.prototype, "radius", {
+        /**
+         * @return Radius (px)
+         */
+        get: function () {
+            return this.properties["radius"];
+        },
+        /**
+         * Circle radius in pixels.
+         *
+         * @param value Radius (px)
+         */
+        set: function (value) {
+            this.properties["radius"] = value;
+            this.draw();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return CirclePattern;
+}(_Pattern__WEBPACK_IMPORTED_MODULE_1__["Pattern"]));
+
+/**
+ * Register class in system, so that it can be instantiated using its name from
+ * anywhere.
+ *
+ * @ignore
+ */
+_Registry__WEBPACK_IMPORTED_MODULE_2__["registry"].registeredClasses["CirclePattern"] = CirclePattern;
+//# sourceMappingURL=CirclePattern.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/ColorModifier.js":
 /*!******************************************************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/ColorModifier.js ***!
@@ -79285,7 +82265,7 @@ __webpack_require__.r(__webpack_exports__);
  * @ignore Exclude from docs
  */
 var ColorModifier = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ColorModifier, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ColorModifier, _super);
     /**
      * Constructor
      */
@@ -79387,7 +82367,7 @@ __webpack_require__.r(__webpack_exports__);
  * ```
  */
 var GradientModifier = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](GradientModifier, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(GradientModifier, _super);
     /**
      * Constructor.
      */
@@ -79564,6 +82544,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _Pattern__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/Pattern.js");
 /* harmony import */ var _Registry__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/* harmony import */ var _rendering_Path__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
 
 /**
  * ============================================================================
@@ -79573,6 +82554,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
+;
 /**
  * ============================================================================
  * MAIN CLASS
@@ -79583,13 +82566,14 @@ __webpack_require__.r(__webpack_exports__);
  * Line pattern.
  */
 var LinePattern = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LinePattern, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LinePattern, _super);
     /**
      * Constructor
      */
     function LinePattern() {
         var _this = _super.call(this) || this;
-        _this._line = _this.paper.add("line");
+        _this.properties["gap"] = 0;
+        _this._line = _this.paper.add("path");
         _this.addElement(_this._line);
         return _this;
     }
@@ -79598,10 +82582,65 @@ var LinePattern = /** @class */ (function (_super) {
      */
     LinePattern.prototype.draw = function () {
         _super.prototype.draw.call(this);
+        if (Math.round(this.rotation / 90) != this.rotation / 90) {
+            this.properties["shapeRendering"] = "auto";
+        }
         if (this._line) {
-            this._line.attr({ "x2": this.width * 2 }); // to solve rotation
+            var w = this.width;
+            var h = this.height;
+            var path = "";
+            if (!this.gap) {
+                if (Math.round(this.rotation / 90) != this.rotation / 90) {
+                    path = _rendering_Path__WEBPACK_IMPORTED_MODULE_3__["moveTo"]({ x: -w, y: h / 2 }) + _rendering_Path__WEBPACK_IMPORTED_MODULE_3__["lineTo"]({ x: w * 2, y: h / 2 });
+                    this.properties["rotationX"] = this.width / 2;
+                    this.properties["rotationY"] = this.height / 2;
+                }
+                else {
+                    path = _rendering_Path__WEBPACK_IMPORTED_MODULE_3__["moveTo"]({ x: 0, y: 0 }) + _rendering_Path__WEBPACK_IMPORTED_MODULE_3__["lineTo"]({ x: w, y: 0 });
+                }
+            }
+            else {
+                var step = this.gap + this.strokeWidth;
+                var count = this.height / step;
+                for (var i = -count / 2; i < count * 1.5; i++) {
+                    if (Math.round(this.rotation / 90) != this.rotation / 90) {
+                        path += _rendering_Path__WEBPACK_IMPORTED_MODULE_3__["moveTo"]({ x: -w, y: (i + 0.5) * step }) + _rendering_Path__WEBPACK_IMPORTED_MODULE_3__["lineTo"]({ x: w * 2, y: (i + 0.5) * step });
+                        this.properties["rotationX"] = this.width / 2;
+                        this.properties["rotationY"] = this.height / 2;
+                    }
+                    else {
+                        path += _rendering_Path__WEBPACK_IMPORTED_MODULE_3__["moveTo"]({ x: -w, y: i * step }) + _rendering_Path__WEBPACK_IMPORTED_MODULE_3__["lineTo"]({ x: w * 2, y: i * step });
+                    }
+                }
+            }
+            this._line.attr({ "d": path });
         }
     };
+    Object.defineProperty(LinePattern.prototype, "gap", {
+        /**
+         * @return gap
+         */
+        get: function () {
+            return this.properties["gap"];
+        },
+        /**
+         * Number of pixels between pattern lines.
+         *
+         * The pattern will automatically draw required number of lines to fill
+         * pattern area maintaining `gap` distance between them.
+         *
+         * 0 (zero) means only single line will be drawn.
+         *
+         * @default 0
+         * @since 4.7.7
+         */
+        set: function (value) {
+            this.properties["gap"] = value;
+            this.draw();
+        },
+        enumerable: true,
+        configurable: true
+    });
     return LinePattern;
 }(_Pattern__WEBPACK_IMPORTED_MODULE_1__["Pattern"]));
 
@@ -79661,7 +82700,7 @@ __webpack_require__.r(__webpack_exports__);
  * Linear gradient class.
  */
 var LinearGradient = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LinearGradient, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LinearGradient, _super);
     /**
      * Constructor.
      */
@@ -79886,7 +82925,7 @@ __webpack_require__.r(__webpack_exports__);
  * ```
  */
 var LinearGradientModifier = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LinearGradientModifier, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LinearGradientModifier, _super);
     /**
      * Constructor.
      */
@@ -79965,7 +83004,7 @@ __webpack_require__.r(__webpack_exports__);
  * Base class to define patterns.
  */
 var Pattern = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Pattern, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Pattern, _super);
     //public propertyValues = new Dictionary<PatternProperties, any>();
     /**
      * Constructor
@@ -80028,9 +83067,11 @@ var Pattern = /** @class */ (function (_super) {
             var background = this.paper.add("rect");
             background.attr({ "width": this.width, "height": this.height, "shape-rendering": "crispEdges", "fill": this.backgroundFill.hex, "fill-opacity": this.backgroundOpacity, "stroke": this.backgroundFill.hex, "stroke-opacity": this.backgroundOpacity });
             patternElement.add(background);
-            patternElement.attr({ "x": this.x, "y": this.y, "width": this.width, "height": this.height, "stroke": this.stroke.hex, "fill": this.fill.hex, "fill-opacity": this.fillOpacity, "stroke-opacity": this.strokeOpacity, "stroke-width": this.strokeWidth, "shape-rendering": this.shapeRendering, "patternUnits": this.patternUnits });
+            patternElement.attr({ "x": this.x, "y": this.y, "width": this.width, "height": this.height, "stroke": this.stroke.hex, "fill": this.fill.hex, "fill-opacity": this.fillOpacity, "stroke-opacity": this.strokeOpacity, "stroke-width": this.strokeWidth, "shape-rendering": this.shapeRendering, "patternUnits": this.patternUnits, "stroke-dasharray": this.strokeDasharray });
             _utils_Iterator__WEBPACK_IMPORTED_MODULE_7__["each"](this._elements.iterator(), function (element) {
                 element.rotation = _this.rotation;
+                element.rotationX = _this.properties["rotationX"];
+                element.rotationY = _this.properties["rotationY"];
                 _this.element.add(element);
             });
         }
@@ -80397,6 +83438,28 @@ var Pattern = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Pattern.prototype, "strokeDasharray", {
+        /**
+         * @return `stroke-dasharray`
+         */
+        get: function () {
+            return this.properties["strokeDashArray"];
+        },
+        /**
+         * A `stroke-dasharray` for the stroke (outline).
+         *
+         * "Dasharray" allows setting rules to make lines dashed, dotted, etc.
+         *
+         * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray} for more info on `stroke-dasharray`
+         * @param value  `stroke-dasharray`
+         */
+        set: function (value) {
+            this.properties["strokeDashArray"] = value;
+            this.draw();
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Processes JSON-based config before it is applied to the object.
      *
@@ -80482,7 +83545,7 @@ __webpack_require__.r(__webpack_exports__);
  * Radial gradient class.
  */
 var RadialGradient = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadialGradient, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadialGradient, _super);
     /**
      * Constructor
      */
@@ -80764,7 +83827,7 @@ __webpack_require__.r(__webpack_exports__);
  * ```
  */
 var RadialGradientModifier = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RadialGradientModifier, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RadialGradientModifier, _super);
     /**
      * Constructor.
      */
@@ -80829,7 +83892,7 @@ __webpack_require__.r(__webpack_exports__);
  * Rectangular pattern
  */
 var RectPattern = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](RectPattern, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(RectPattern, _super);
     /**
      * Constructor
      */
@@ -80837,19 +83900,20 @@ var RectPattern = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.rectHeight = 1;
         _this.rectWidth = 1;
+        _this._rect = _this.paper.add("rect");
+        _this.addElement(_this._rect);
         return _this;
     }
     /**
      * Draws the rectangular element.
      */
     RectPattern.prototype.draw = function () {
-        if (this._rect) {
-            this.removeElement(this._rect);
-        }
-        this._rect = this.paper.add("rect");
-        this._rect.attr({ "width": this.rectWidth, "height": this.rectHeight });
-        this.addElement(this._rect);
         _super.prototype.draw.call(this);
+        this.properties["rotationX"] = this.width / 2;
+        this.properties["rotationY"] = this.height / 2;
+        if (this._rect) {
+            this._rect.attr({ "width": this.rectWidth, "height": this.rectHeight, "x": (this.width - this.rectWidth) / 2, "y": (this.height - this.rectHeight) / 2 });
+        }
     };
     Object.defineProperty(RectPattern.prototype, "rectWidth", {
         /**
@@ -80939,7 +84003,7 @@ __webpack_require__.r(__webpack_exports__);
  * Creates a "Blur" filter.
  */
 var BlurFilter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](BlurFilter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(BlurFilter, _super);
     /**
      * Constructor
      */
@@ -81032,7 +84096,7 @@ __webpack_require__.r(__webpack_exports__);
  * Creates a "Colorize" filter.
  */
 var ColorizeFilter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ColorizeFilter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ColorizeFilter, _super);
     /**
      * Constructor
      */
@@ -81175,7 +84239,7 @@ __webpack_require__.r(__webpack_exports__);
  * Creats a "Desaturate" filter
  */
 var DesaturateFilter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DesaturateFilter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DesaturateFilter, _super);
     /**
      * Constructor
      */
@@ -81270,7 +84334,7 @@ __webpack_require__.r(__webpack_exports__);
  * Creats a "Drop Shadow" filter.
  */
 var DropShadowFilter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DropShadowFilter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DropShadowFilter, _super);
     /**
      * Constructor
      */
@@ -81494,7 +84558,7 @@ __webpack_require__.r(__webpack_exports__);
  * @todo Example
  */
 var Filter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Filter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Filter, _super);
     /**
      * Constructor
      */
@@ -81784,7 +84848,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link https://www.amcharts.com/docs/v4/tutorials/changing-appearance-of-focused-items/} cusomizing focus appearance
  */
 var FocusFilter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](FocusFilter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(FocusFilter, _super);
     /**
      * Constructor
      */
@@ -81933,7 +84997,7 @@ __webpack_require__.r(__webpack_exports__);
  * Creates a "Lighten" filter.
  */
 var LightenFilter = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](LightenFilter, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(LightenFilter, _super);
     /**
      * Constructor
      */
@@ -82134,8 +85198,7 @@ var GlobalAdapter = /** @class */ (function () {
      * @return {boolean}
      */
     GlobalAdapter.prototype.isEnabled = function (type, key) {
-        // TODO check the type and key
-        return this._callbacks.length > 0;
+        return _utils_Array__WEBPACK_IMPORTED_MODULE_4__["any"](this._callbacks.values, function (x) { return x.key === key && type instanceof x.type; });
     };
     /**
      * Applies global adapters for the object of the specific type.
@@ -82251,6 +85314,7 @@ var Adapter = /** @class */ (function () {
         this._callbacks = new _SortedList__WEBPACK_IMPORTED_MODULE_0__["SortedList"](function (left, right) {
             return _Order__WEBPACK_IMPORTED_MODULE_2__["or"](_Number__WEBPACK_IMPORTED_MODULE_1__["order"](left.priority, right.priority), _Number__WEBPACK_IMPORTED_MODULE_1__["order"](left.id, right.id));
         });
+        this._disabled = {};
         this.object = c;
         // TODO this exposes the internal events
         this.events = this._callbacks.events;
@@ -82326,8 +85390,9 @@ var Adapter = /** @class */ (function () {
      */
     Adapter.prototype.has = function (key, callback, priority, scope) {
         if (priority === void 0) { priority = 0; }
-        // @todo Implement actual check
-        return false;
+        return _utils_Iterator__WEBPACK_IMPORTED_MODULE_3__["contains"](this._callbacks.iterator(), function (item) {
+            return item.key === key && item.callback === callback && item.priority === priority && item.scope === scope;
+        });
     };
     /**
      * Removes adapter callbacks for the specific `key`.
@@ -82342,6 +85407,7 @@ var Adapter = /** @class */ (function () {
         var _this = this;
         // It has to make a copy because it removes the elements while iterating
         // TODO inefficient
+        // TODO should this re-enable the key ?
         _utils_Array__WEBPACK_IMPORTED_MODULE_4__["each"](_utils_Iterator__WEBPACK_IMPORTED_MODULE_3__["toArray"](this._callbacks.iterator()), function (item) {
             // TODO test this
             if (item.key === key && (!_utils_Type__WEBPACK_IMPORTED_MODULE_5__["isNumber"](priority) || priority === item.priority)) {
@@ -82350,13 +85416,52 @@ var Adapter = /** @class */ (function () {
         });
     };
     /**
-     * Returns if there are any adapters set for the specific `key`.
+     * Enable applying adapters for a certain key, if it was disabled before by
+     * `disableKey()`.
+     *
+     * @param key Key
+     */
+    Adapter.prototype.enableKey = function (key) {
+        delete this._disabled[key];
+    };
+    /**
+     * Disable applying adapters for a certain key.
+     *
+     * Optionally, can set how many applies to skip before automatically
+     * re-enabling the applying.
+     *
+     * @param key     Key
+     * @param amount  Number of applies to skip
+     */
+    Adapter.prototype.disableKey = function (key, amount) {
+        if (amount === void 0) { amount = Infinity; }
+        this._disabled[key] = amount;
+    };
+    Adapter.prototype._hasListenersByType = function (key) {
+        return _utils_Array__WEBPACK_IMPORTED_MODULE_4__["any"](this._callbacks.values, function (x) { return x.key === key; });
+    };
+    /**
+     * Returns if there are any enabled adapters set for the specific `key`.
      *
      * @returns Are there any adapters for the key?
      */
     Adapter.prototype.isEnabled = function (key) {
-        // TODO check the key
-        return this._callbacks.length > 0 || globalAdapter.isEnabled(this.object, key);
+        return this._disabled[key] == null && (this._hasListenersByType(key) || globalAdapter.isEnabled(this.object, key));
+    };
+    Adapter.prototype._shouldDispatch = function (key) {
+        var count = this._disabled[key];
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_5__["isNumber"](count)) {
+            return true;
+        }
+        else {
+            if (count <= 1) {
+                delete this._disabled[key];
+            }
+            else {
+                --this._disabled[key];
+            }
+            return false;
+        }
     };
     /**
      * Passes the input value through all the callbacks for the defined `key`.
@@ -82367,23 +85472,28 @@ var Adapter = /** @class */ (function () {
      * @return Output value
      */
     Adapter.prototype.apply = function (key, value) {
-        // This is needed to improve the performance and reduce garbage collection
-        var callbacks = this._callbacks.values;
-        var length = callbacks.length;
-        if (length > 0) {
-            for (var i = 0; i < length; ++i) {
-                var item = callbacks[i];
-                if (item.key === key) {
-                    value = item.callback.call(item.scope, value, this.object, key);
+        if (this._shouldDispatch(key)) {
+            // This is needed to improve the performance and reduce garbage collection
+            var callbacks = this._callbacks.values;
+            var length_1 = callbacks.length;
+            if (length_1 > 0) {
+                for (var i = 0; i < length_1; ++i) {
+                    var item = callbacks[i];
+                    if (item.key === key) {
+                        value = item.callback.call(item.scope, value, this.object, key);
+                    }
                 }
             }
+            // Apply global adapters
+            value = globalAdapter.applyAll(this.object, key, value);
+            return value;
         }
-        // Apply global adapters
-        value = globalAdapter.applyAll(this.object, key, value);
-        return value;
+        else {
+            return value;
+        }
     };
     /**
-     * Returns all adapter keys that are currently in effect.
+     * Returns all adapter keys which are in this adapter.
      *
      * @return Adapter keys
      */
@@ -82406,6 +85516,7 @@ var Adapter = /** @class */ (function () {
      * Clears all callbacks from this Adapter.
      */
     Adapter.prototype.clear = function () {
+        // TODO should this also re-enable all the keys ?
         this._callbacks.clear();
     };
     return Adapter;
@@ -82525,7 +85636,11 @@ function getProgressPercent(progress, from, to) {
  * @return Color according to progress
  */
 function getProgressColor(progress, from, to) {
-    return new _utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"](_utils_Colors__WEBPACK_IMPORTED_MODULE_8__["interpolate"](from.rgb, to.rgb, progress));
+    var color = new _utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"](_utils_Colors__WEBPACK_IMPORTED_MODULE_8__["interpolate"](from.rgb, to.rgb, progress));
+    if (from.alpha != to.alpha) {
+        color.alpha = from.alpha + (to.alpha - from.alpha) * progress;
+    }
+    return color;
 }
 /**
  * [getHybridProperty description]
@@ -82562,7 +85677,7 @@ var AnimationDisposer = /** @class */ (function () {
  * @see {@link IAnimationEvents} for a list of available events
  */
 var Animation = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Animation, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Animation, _super);
     /**
      * Constructor
      *
@@ -82706,7 +85821,7 @@ var Animation = /** @class */ (function (_super) {
             if (options.from == options.to) { // || options.to == (<any>this.object)[options.property]){ this is not good, as dataItem.value is set to final at once, and we animate workingValue
                 _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options);
             }
-            else if (!_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](options.from)) {
+            else if (!_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](options.from) || (!(options.from instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) && (options.to instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"])) || ((options.from instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) && !(options.to instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]))) {
                 // Initial value is undefined, treat it as static
                 this.staticOptions.push(options);
                 _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options);
@@ -84183,7 +87298,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link https://www.amcharts.com/docs/v4/concepts/colors/} for color-related info
  */
 var ColorSet = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ColorSet, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ColorSet, _super);
     /**
      * Constructor
      */
@@ -84466,12 +87581,12 @@ var ColorSet = /** @class */ (function (_super) {
         var hues = [];
         var startIndex = this.list.length == 0 ? 0 : 1;
         if (this.reuse) {
-            for (var i = startIndex; i < count; i++) {
+            for (var i = startIndex; i <= count; i++) {
                 hues.push(_Colors__WEBPACK_IMPORTED_MODULE_4__["rgbToHsl"](_Type__WEBPACK_IMPORTED_MODULE_5__["getValue"](this._list[i].rgb)).h);
             }
         }
         else {
-            for (var i = startIndex; i < count; i++) {
+            for (var i = startIndex; i <= count; i++) {
                 var h = hsl.h + hueStep * i;
                 if (this.wrap && (h > 1)) {
                     h -= 1;
@@ -84495,11 +87610,11 @@ var ColorSet = /** @class */ (function (_super) {
                 hsl.h = hues.shift();
             }
             // Apply HSL mods
-            this.applyStepOptions(hsl, mods, i + 1, this._currentPass);
+            this.applyStepOptions(hsl, mods, i, this._currentPass);
             // Convert back to Color
             var c = Object(_Color__WEBPACK_IMPORTED_MODULE_2__["color"])(_Colors__WEBPACK_IMPORTED_MODULE_4__["hslToRgb"](hsl));
             // Apply regular color mods
-            var brighten = (this.stepOptions.brighten || 0) * (i + 1) + (this.passOptions.brighten || 0) * this._currentPass;
+            var brighten = (this.stepOptions.brighten || 0) * i + (this.passOptions.brighten || 0) * this._currentPass;
             if (brighten != 0) {
                 if (this.wrap) {
                     brighten = _Utils__WEBPACK_IMPORTED_MODULE_6__["fitNumberRelative"](brighten, this.minLightness, this.maxLightness);
@@ -84509,7 +87624,7 @@ var ColorSet = /** @class */ (function (_super) {
                 }
                 c = c.brighten(brighten);
             }
-            var lighten = (this.stepOptions.lighten || 0) * (i + 1) + (this.passOptions.lighten || 0) * this._currentPass;
+            var lighten = (this.stepOptions.lighten || 0) * i + (this.passOptions.lighten || 0) * this._currentPass;
             if (lighten != 0) {
                 if (this.wrap) {
                     lighten = _Utils__WEBPACK_IMPORTED_MODULE_6__["fitNumberRelative"](lighten, this.minLightness, this.maxLightness);
@@ -85716,7 +88831,7 @@ function makeStylesheet(selector) {
  * Can be used to dynamically add CSS to the document.
  */
 var StyleRule = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](StyleRule, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(StyleRule, _super);
     /**
      * Constructor.
      *
@@ -85805,7 +88920,7 @@ var styleId = 0;
  * @todo Description
  */
 var StyleClass = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](StyleClass, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(StyleClass, _super);
     /**
      * Constructor.
      *
@@ -85932,8 +89047,22 @@ function isHidden(element) {
  * @param   el Element
  * @return     Within viewport?
  */
-function isElementInViewport(el) {
+function isElementInViewport(el, viewportTarget) {
+    // Get position data of the element
     var rect = el.getBoundingClientRect();
+    // Should we measure against specific viewport element?
+    if (viewportTarget) {
+        // Check if viewport itself is visible
+        if (!isElementInViewport(viewportTarget)) {
+            return false;
+        }
+        // Check if element is visible within the viewport
+        var viewportRect = viewportTarget.getBoundingClientRect();
+        return (rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.top <= (viewportRect.top + viewportRect.height) &&
+            rect.left <= (viewportRect.left + viewportRect.width));
+    }
     return (rect.top >= 0 &&
         rect.left >= 0 &&
         rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
@@ -85978,7 +89107,7 @@ __webpack_require__.r(__webpack_exports__);
  * method on all its items.
  */
 var DictionaryDisposer = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DictionaryDisposer, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DictionaryDisposer, _super);
     function DictionaryDisposer(dict) {
         var _this = this;
         var disposer = dict.events.on("removed", function (x) {
@@ -86233,7 +89362,7 @@ var Dictionary = /** @class */ (function () {
      */
     Dictionary.prototype[Symbol.iterator] = function () {
         var _a, _b, _i, key;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_c) {
             switch (_c.label) {
                 case 0:
                     _a = [];
@@ -86261,7 +89390,7 @@ var Dictionary = /** @class */ (function () {
      */
     Dictionary.prototype.each = function (f) {
         _Iterator__WEBPACK_IMPORTED_MODULE_4__["each"](this.iterator(), function (_a) {
-            var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__read"](_a, 2), key = _b[0], value = _b[1];
+            var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__read"])(_a, 2), key = _b[0], value = _b[1];
             return f(key, value);
         });
     };
@@ -86289,7 +89418,7 @@ var Dictionary = /** @class */ (function () {
  * other attributes), inserted into the list and returned.
  */
 var DictionaryTemplate = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](DictionaryTemplate, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DictionaryTemplate, _super);
     /**
      * Constructor
      *
@@ -86417,7 +89546,7 @@ var Disposer = /** @class */ (function () {
  * @ignore Exclude from docs
  */
 var MultiDisposer = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](MultiDisposer, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(MultiDisposer, _super);
     function MultiDisposer(disposers) {
         return _super.call(this, function () {
             _Array__WEBPACK_IMPORTED_MODULE_1__["each"](disposers, function (x) {
@@ -86438,7 +89567,7 @@ var MultiDisposer = /** @class */ (function (_super) {
  * @todo Description
  */
 var MutableValueDisposer = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](MutableValueDisposer, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(MutableValueDisposer, _super);
     /**
      * Constructor.
      */
@@ -86486,7 +89615,7 @@ var MutableValueDisposer = /** @class */ (function (_super) {
  * @todo Description
  */
 var CounterDisposer = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CounterDisposer, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CounterDisposer, _super);
     function CounterDisposer() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         /**
@@ -87370,7 +90499,7 @@ var EventDispatcher = /** @class */ (function () {
  * @important
  */
 var TargetedEventDispatcher = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](TargetedEventDispatcher, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(TargetedEventDispatcher, _super);
     /**
      * Constructor
      *
@@ -87532,14 +90661,14 @@ function createChild(htmlElement, classType) {
         sprite_1.focusFilter = new _rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_6__["FocusFilter"]();
         _Registry__WEBPACK_IMPORTED_MODULE_1__["registry"].baseSprites.push(sprite_1);
         _Registry__WEBPACK_IMPORTED_MODULE_1__["registry"].baseSpritesByUid[uid] = sprite_1;
-        sprite_1.maskRectangle = { x: 0, y: 0, width: svgDiv_1.width, height: svgDiv_1.height };
+        sprite_1.maskRectangle = { x: 0, y: 0, width: Math.max(svgDiv_1.width, 0), height: Math.max(svgDiv_1.height, 0) };
         // this solves issues with display:none, as all children are measured as 0x0
         container_1.events.on("maxsizechanged", function (event) {
             if (event.previousWidth == 0 || event.previousHeight == 0) {
                 container_1.deepInvalidate();
             }
             if (sprite_1.maskRectangle) {
-                sprite_1.maskRectangle = { x: 0, y: 0, width: svgDiv_1.width, height: svgDiv_1.height };
+                sprite_1.maskRectangle = { x: 0, y: 0, width: Math.max(svgDiv_1.width, 0), height: Math.max(svgDiv_1.height, 0) };
             }
         });
         var loopTimer_1 = null;
@@ -87551,7 +90680,7 @@ function createChild(htmlElement, classType) {
                     loopTimer_1 = null;
                 }
                 else {
-                    loopTimer_1 = setTimeout(loop_1, 1000);
+                    loopTimer_1 = window.setTimeout(loop_1, 1000);
                 }
             }
             else {
@@ -87607,15 +90736,20 @@ function createChild(htmlElement, classType) {
         // Controls like Preloader, Export will use this.
         container_1.isStandaloneInstance = true;
         if (_Options__WEBPACK_IMPORTED_MODULE_12__["options"].onlyShowOnViewport) {
-            if (!_DOM__WEBPACK_IMPORTED_MODULE_15__["isElementInViewport"](htmlContainer)) {
+            if (!_DOM__WEBPACK_IMPORTED_MODULE_15__["isElementInViewport"](htmlContainer, _Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget)) {
                 sprite_1.__disabled = true;
                 sprite_1.tooltipContainer.__disabled = true;
-                var disposer = new _utils_Disposer__WEBPACK_IMPORTED_MODULE_10__["MultiDisposer"]([
+                var disposers = [
                     _DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](window, "DOMContentLoaded", function () { viewPortHandler(sprite_1); }),
                     _DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](window, "load", function () { viewPortHandler(sprite_1); }),
                     _DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](window, "resize", function () { viewPortHandler(sprite_1); }),
                     _DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](window, "scroll", function () { viewPortHandler(sprite_1); })
-                ]);
+                ];
+                if (_Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget) {
+                    disposers.push(_DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](_Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget, "resize", function () { viewPortHandler(sprite_1); }));
+                    disposers.push(_DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](_Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget, "scroll", function () { viewPortHandler(sprite_1); }));
+                }
+                var disposer = new _utils_Disposer__WEBPACK_IMPORTED_MODULE_10__["MultiDisposer"](disposers);
                 sprite_1.addDisposer(disposer);
                 sprite_1.vpDisposer = disposer;
             }
@@ -87666,7 +90800,7 @@ function removeFromQueue(sprite) {
     }
 }
 function viewPortHandler(sprite) {
-    if (sprite.__disabled && _DOM__WEBPACK_IMPORTED_MODULE_15__["isElementInViewport"](sprite.htmlContainer)) {
+    if (sprite.__disabled && _DOM__WEBPACK_IMPORTED_MODULE_15__["isElementInViewport"](sprite.htmlContainer, _Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget)) {
         if (sprite.vpDisposer) {
             sprite.vpDisposer.dispose();
         }
@@ -87972,7 +91106,7 @@ __webpack_require__.r(__webpack_exports__);
  * @see {@link https://www.amcharts.com/docs/v4/concepts/colors/} for color-related info
  */
 var InterfaceColorSet = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](InterfaceColorSet, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(InterfaceColorSet, _super);
     /**
      * Constructor
      */
@@ -88688,7 +91822,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Language = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Language, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Language, _super);
     /**
      * Constructor
      */
@@ -88777,7 +91911,7 @@ var Language = /** @class */ (function (_super) {
         }
         else if (locale !== this._defaultLocale) {
             // Try to look in default language
-            return this.translate.apply(this, tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"]([prompt, this._defaultLocale], rest));
+            return this.translate.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])([prompt, this._defaultLocale], rest));
         }
         // Replace %1, %2, etc params
         if (rest.length) {
@@ -88826,7 +91960,7 @@ var Language = /** @class */ (function (_super) {
         for (var _i = 2; _i < arguments.length; _i++) {
             rest[_i - 2] = arguments[_i];
         }
-        var translation = this.translate.apply(this, tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"]([prompt, locale], rest));
+        var translation = this.translate.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])([prompt, locale], rest));
         return translation == prompt ? "" : translation;
     };
     /**
@@ -89046,7 +92180,7 @@ var IndexedIterable = /** @class */ (function () {
  * @ignore Exclude from docs
  */
 var ListGrouper = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ListGrouper, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ListGrouper, _super);
     /**
      * Constructor.
      */
@@ -89155,19 +92289,30 @@ var ListGrouper = /** @class */ (function (_super) {
  * on all its items.
  */
 var ListDisposer = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ListDisposer, _super);
-    function ListDisposer(list) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ListDisposer, _super);
+    function ListDisposer(list, disposeOnRemove) {
+        if (disposeOnRemove === void 0) { disposeOnRemove = true; }
         var _this = this;
-        var disposer = list.events.on("removed", function (x) {
-            x.oldValue.dispose();
-        }, undefined, false);
-        _this = _super.call(this, function () {
-            disposer.dispose();
-            // TODO clear the list ?
-            _Iterator__WEBPACK_IMPORTED_MODULE_4__["each"](list.iterator(), function (x) {
-                x.dispose();
-            });
-        }) || this;
+        if (disposeOnRemove) {
+            var disposer_1 = list.events.on("removed", function (x) {
+                x.oldValue.dispose();
+            }, undefined, false);
+            _this = _super.call(this, function () {
+                disposer_1.dispose();
+                // TODO clear the list ?
+                _Iterator__WEBPACK_IMPORTED_MODULE_4__["each"](list.iterator(), function (x) {
+                    x.dispose();
+                });
+            }) || this;
+        }
+        else {
+            _this = _super.call(this, function () {
+                // TODO clear the list ?
+                _Iterator__WEBPACK_IMPORTED_MODULE_4__["each"](list.iterator(), function (x) {
+                    x.dispose();
+                });
+            }) || this;
+        }
         return _this;
     }
     return ListDisposer;
@@ -89648,7 +92793,7 @@ var List = /** @class */ (function () {
      */
     List.prototype[Symbol.iterator] = function () {
         var length, i;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     length = this._values.length;
@@ -89719,7 +92864,7 @@ var List = /** @class */ (function () {
  * other attributes), inserted into the list and returned.
  */
 var ListTemplate = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ListTemplate, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ListTemplate, _super);
     /**
      * Constructor
      *
@@ -89814,7 +92959,7 @@ function log() {
     }
     if (_Options__WEBPACK_IMPORTED_MODULE_1__["options"].verbose) {
         if (console) {
-            console.log.apply(console, tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"](messages));
+            console.log.apply(console, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(messages));
         }
     }
 }
@@ -89827,7 +92972,7 @@ function warn() {
         messages[_i] = arguments[_i];
     }
     if (console) {
-        console.warn.apply(console, tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"](messages));
+        console.warn.apply(console, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(messages));
     }
 }
 //# sourceMappingURL=Log.js.map
@@ -89838,7 +92983,7 @@ function warn() {
 /*!***********************************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js ***!
   \***********************************************************************/
-/*! exports provided: PI, HALFPI, RADIANS, DEGREES, toNumberRange, round, ceil, stretch, fitToRange, sin, tan, cos, max, min, closest, intersect, invertRange, intersection, getDistance, getCubicCurveDistance, getScale, getMidPoint, getRotation, getAngle, getCenterShift, getBBox, getCommonRectangle, getPointOnQuadraticCurve, getPointOnCubicCurve, getCubicControlPointA, getCubicControlPointB, adjustTension, normalizeAngle, fitAngleToRange, getArcRect, getArcPoint, isInRectangle, getLineIntersection */
+/*! exports provided: PI, HALFPI, RADIANS, DEGREES, toNumberRange, round, ceil, stretch, fitToRange, sin, tan, cos, max, min, closest, intersect, invertRange, intersection, getDistance, getHorizontalDistance, getVerticalDistance, getCubicCurveDistance, getScale, getMidPoint, getRotation, getAngle, getCenterShift, getBBox, getCommonRectangle, getPointOnQuadraticCurve, getPointOnCubicCurve, getCubicControlPointA, getCubicControlPointB, adjustTension, normalizeAngle, fitAngleToRange, getArcRect, getArcPoint, isInRectangle, getLineIntersection */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -89862,6 +93007,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "invertRange", function() { return invertRange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "intersection", function() { return intersection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDistance", function() { return getDistance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHorizontalDistance", function() { return getHorizontalDistance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getVerticalDistance", function() { return getVerticalDistance; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCubicCurveDistance", function() { return getCubicCurveDistance; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getScale", function() { return getScale; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMidPoint", function() { return getMidPoint; });
@@ -90133,6 +93280,44 @@ function getDistance(point1, point2) {
         point2 = { x: 0, y: 0 };
     }
     return Math.sqrt(Math.pow(Math.abs(point1.x - point2.x), 2) + Math.pow(Math.abs(point1.y - point2.y), 2));
+}
+/**
+ * Returns pixel "horizontal distance" between two points.
+ *
+ * If second point is not specified, distance from {x:0, y:0} point is
+ * calculated.
+ *
+ * @param point1  Point 1
+ * @param point2  Point 2
+ * @return Distance in relative pixels
+ */
+function getHorizontalDistance(point1, point2) {
+    if (!point1) {
+        return 0;
+    }
+    if (!point2) {
+        point2 = { x: 0, y: 0 };
+    }
+    return Math.abs(point1.x - point2.x);
+}
+/**
+ * Returns pixel "vertical distance" between two points.
+ *
+ * If second point is not specified, distance from {x:0, y:0} point is
+ * calculated.
+ *
+ * @param point1  Point 1
+ * @param point2  Point 2
+ * @return Distance in relative pixels
+ */
+function getVerticalDistance(point1, point2) {
+    if (!point1) {
+        return 0;
+    }
+    if (!point2) {
+        point2 = { x: 0, y: 0 };
+    }
+    return Math.abs(point1.y - point2.y);
 }
 /**
  * Returns approximate pixel "distance" between two points of cubic curve
@@ -90584,7 +93769,7 @@ __webpack_require__.r(__webpack_exports__);
  * Morpher can be used to morph one polygon to some other polygon.
  */
 var Morpher = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Morpher, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Morpher, _super);
     /**
      * Constructor.
      *
@@ -91484,6 +94669,311 @@ function or(a, b) {
 
 /***/ }),
 
+/***/ "./node_modules/@amcharts/amcharts4/.internal/core/utils/PatternSet.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/.internal/core/utils/PatternSet.js ***!
+  \*****************************************************************************/
+/*! exports provided: PatternSet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PatternSet", function() { return PatternSet; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _Base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Base */ "./node_modules/@amcharts/amcharts4/.internal/core/Base.js");
+/* harmony import */ var _Color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
+/* harmony import */ var _InterfaceColorSet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
+/* harmony import */ var _rendering_fills_LinePattern__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../rendering/fills/LinePattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinePattern.js");
+/* harmony import */ var _rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../rendering/fills/RectPattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RectPattern.js");
+/* harmony import */ var _rendering_fills_CirclePattern__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../rendering/fills/CirclePattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/CirclePattern.js");
+/* harmony import */ var _Registry__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/**
+ * This module contains PatternSet object definition
+ */
+
+/**
+ * ============================================================================
+ * IMPORTS
+ * ============================================================================
+ * @hidden
+ */
+
+
+
+
+
+
+
+/**
+ * ============================================================================
+ * REQUISITES
+ * ============================================================================
+ * @hidden
+ */
+/**
+ * ============================================================================
+ * MAIN CLASS
+ * ============================================================================
+ * @hidden
+ */
+/**
+ * Defines an interable list of distinctive patterns that can be used in
+ * conjunction to colors to generate various fill patterns.
+ *
+ * @important
+ * @since 4.7.5
+ * @see {@link https://www.amcharts.com/docs/v4/concepts/colors/} for color-related info
+ */
+var PatternSet = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(PatternSet, _super);
+    /**
+     * Constructor
+     */
+    function PatternSet() {
+        var _this = _super.call(this) || this;
+        /**
+         * Holds the list of the colors in this set. (preset or auto-generated)
+         */
+        _this._list = [];
+        /**
+         * Current step.
+         */
+        _this._currentStep = 0;
+        /**
+         * If set to non-zero value, the PatternSet will start iterating patterns from
+         * that particular index, not the first pattern in the list.
+         */
+        _this._startIndex = 0;
+        /**
+         * Current pass in cycle. Once all patterns in the list are iterated,
+         * iteration restarts from beginning and currentPass is incremented.
+         */
+        _this._currentPass = 0;
+        /**
+         * A base color. If there are no colors pre-set in the color list, ColorSet
+         * will use this color as a base when generating new ones, applying
+         * `stepOptions` and `passOptions` to this base color.
+         */
+        _this.baseColor = new _Color__WEBPACK_IMPORTED_MODULE_2__["Color"]({
+            r: 103,
+            g: 183,
+            b: 220
+        });
+        _this.className = "PatternSet";
+        // Set base color to be used for pattern elements
+        var interfaceColors = new _InterfaceColorSet__WEBPACK_IMPORTED_MODULE_3__["InterfaceColorSet"]();
+        // Set default patterns
+        _this.list = [
+            _this.getLinePattern(1000, 45, 1, 6),
+            _this.getRectPattern(10, 0, 4),
+            _this.getLinePattern(1000, -45, 1, 6),
+            _this.getCirclePattern(11, 2, true),
+            _this.getLinePattern(6, 90, 1),
+            _this.getRectPattern(12, 45, 6, true),
+            _this.getLinePattern(6, 0, 1),
+            _this.getRectPattern(7, 0, 4),
+            _this.getLinePattern(1000, 45, 2, 3, "4,2"),
+            _this.getCirclePattern(9, 3, false),
+            _this.getLinePattern(1000, -45, 2, 3, "4,2"),
+            _this.getRectPattern(10, 45, Math.sqrt(50)),
+            _this.getLinePattern(1000, -45, 2, 1),
+            _this.getRectPattern(10, 0, 9),
+            _this.getLinePattern(1000, 45, 2, 1),
+            _this.getLinePattern(1000, 0, 3, 1),
+            _this.getRectPattern(10, 45, 10),
+            _this.getLinePattern(1000, 90, 3, 1)
+        ];
+        _this.baseColor = interfaceColors.getFor("stroke");
+        _this.applyTheme();
+        return _this;
+    }
+    PatternSet.prototype.getLinePattern = function (size, rotation, thickness, gap, strokeDashArray) {
+        var pattern = new _rendering_fills_LinePattern__WEBPACK_IMPORTED_MODULE_4__["LinePattern"]();
+        pattern.width = size;
+        pattern.height = size;
+        pattern.stroke = this.baseColor;
+        pattern.gap = gap;
+        pattern.strokeDasharray = strokeDashArray;
+        pattern.strokeWidth = thickness;
+        pattern.rotation = rotation;
+        return pattern;
+    };
+    PatternSet.prototype.getRectPattern = function (size, rotation, thickness, outline) {
+        var pattern = new _rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_5__["RectPattern"]();
+        pattern.width = size;
+        pattern.height = size;
+        pattern.rectWidth = thickness;
+        pattern.rectHeight = thickness;
+        if (outline) {
+            pattern.stroke = this.baseColor;
+            pattern.strokeWidth = 1;
+            pattern.fillOpacity = 0;
+        }
+        else {
+            pattern.fill = this.baseColor;
+            pattern.strokeWidth = 0;
+        }
+        if (rotation != 0) {
+            pattern.shapeRendering = "auto";
+        }
+        pattern.rotation = rotation;
+        return pattern;
+    };
+    PatternSet.prototype.getCirclePattern = function (size, radius, outline) {
+        var pattern = new _rendering_fills_CirclePattern__WEBPACK_IMPORTED_MODULE_6__["CirclePattern"]();
+        pattern.width = size;
+        pattern.height = size;
+        pattern.shapeRendering = "auto";
+        pattern.radius = radius;
+        if (outline) {
+            pattern.stroke = this.baseColor;
+            pattern.strokeWidth = 1;
+            pattern.fillOpacity = 0;
+        }
+        else {
+            pattern.fill = this.baseColor;
+            pattern.strokeWidth = 0;
+        }
+        return pattern;
+    };
+    Object.defineProperty(PatternSet.prototype, "list", {
+        /**
+         * @return Pattern list
+         */
+        get: function () {
+            return this._list;
+        },
+        /**
+         * List of pre-defined patterns to be used in set.
+         *
+         * @param value Pattern list
+         */
+        set: function (value) {
+            this._list = value;
+            this.reset();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Returns the next pattern in list.
+     *
+     * @return Pattern
+     */
+    PatternSet.prototype.next = function () {
+        var pattern = this.getIndex(this.currentStep);
+        this._currentStep++;
+        return pattern;
+    };
+    /**
+     * Returns a color at specific index in the list.
+     *
+     * @param  i  Index
+     * @return Pattern
+     */
+    PatternSet.prototype.getIndex = function (i) {
+        var pattern;
+        while (this.list.length <= i) {
+            this.generatePatterns();
+        }
+        pattern = this.list[i];
+        return pattern.clone();
+    };
+    /**
+     * Generates a new set of patterns.
+     */
+    PatternSet.prototype.generatePatterns = function () {
+        var count = this.list.length / (this._currentPass + 1);
+        this._currentPass++;
+        for (var i = 0; i < count; i++) {
+            this.list.push(this.list[i].clone());
+        }
+    };
+    /**
+     * Resets internal iterator.
+     *
+     * Calling `next()` after this will return the very first color in the color
+     * list, even if it was already returned before.
+     */
+    PatternSet.prototype.reset = function () {
+        this._currentStep = this._startIndex;
+    };
+    Object.defineProperty(PatternSet.prototype, "currentStep", {
+        /**
+         * @return Step
+         */
+        get: function () {
+            return this._currentStep;
+        },
+        /**
+         * Sets current color iteration. You can use this property to skip some
+         * colors from iteration. E.g. setting it to `10` will skip first ten
+         * colors.
+         *
+         * Please note that the number is zero-based.
+         *
+         * @param value  Step
+         */
+        set: function (value) {
+            this._currentStep = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PatternSet.prototype, "startIndex", {
+        /**
+         * @return Index
+         */
+        get: function () {
+            return this._startIndex;
+        },
+        /**
+         * If set to non-zero value, the ColorSet will start iterating colors from
+         * that particular index, not the first color in the list.
+         *
+         * @default 0
+         * @param  value  Index
+         */
+        set: function (value) {
+            this._startIndex = value;
+            this.reset();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Processes JSON-based config before it is applied to the object.
+     *
+     * @ignore Exclude from docs
+     * @param config  Config
+     */
+    PatternSet.prototype.processConfig = function (config) {
+        // if (config) {
+        // 	// Set up axis ranges
+        // 	if ($type.hasValue(config.list) && $type.isArray(config.list)) {
+        // 		for (let i = 0, len = config.list.length; i < len; i++) {
+        // 			if (!(config.list[i] instanceof Color)) {
+        // 				config.list[i] = color(config.list[i]);
+        // 			}
+        // 		}
+        // 	}
+        // }
+        _super.prototype.processConfig.call(this, config);
+    };
+    return PatternSet;
+}(_Base__WEBPACK_IMPORTED_MODULE_1__["BaseObject"]));
+
+/**
+ * Register class in system, so that it can be instantiated using its name from
+ * anywhere.
+ *
+ * @ignore
+ */
+_Registry__WEBPACK_IMPORTED_MODULE_7__["registry"].registeredClasses["PatternSet"] = PatternSet;
+//# sourceMappingURL=PatternSet.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js ***!
@@ -91782,7 +95272,7 @@ __webpack_require__.r(__webpack_exports__);
  * @important
  */
 var Responsive = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Responsive, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Responsive, _super);
     /**
      * Constructor
      */
@@ -91804,6 +95294,10 @@ var Responsive = /** @class */ (function (_super) {
          */
         _this._appliedRules = {};
         /**
+         * Used to keep track of objects that have rules applied at the moment.
+         */
+        _this._appliedTargets = [];
+        /**
          * Use default rules in addition to the user-defined ones?
          */
         _this._useDefault = true;
@@ -91816,13 +95310,17 @@ var Responsive = /** @class */ (function (_super) {
          */
         _this._enabled = false;
         /**
+         * Holds disposers for all events added by this class.
+         */
+        _this._responsiveDisposers = [];
+        /**
          * Collection of objects and state ids that do not have any properties set.
          */
         _this._noStates = [];
         _this.className = "Responsive";
         // Set up rules list events
-        _this.rules.events.on("inserted", _this.checkRules, true);
-        _this.rules.events.on("removed", _this.checkRules, true);
+        _this.rules.events.on("inserted", function () { _this.checkRules(); }, true);
+        _this.rules.events.on("removed", function () { _this.checkRules(); }, true);
         _this._disposers.push(_this.rules.events);
         // Apply theme
         _this.applyTheme();
@@ -91841,19 +95339,22 @@ var Responsive = /** @class */ (function (_super) {
          * @param value  Target object
          */
         set: function (value) {
+            var _this = this;
             // Check if it's the same
             if (value == this._component) {
                 return;
             }
             // Check if we already have a set up component and remove its events
-            if (this._sizeEventDisposer) {
-                this.removeDispose(this._sizeEventDisposer);
-            }
+            this.disposeResponsiveHandlers();
             // Set
             this._component = value;
             // Set up resize monitoring events
-            this._sizeEventDisposer = _utils_Type__WEBPACK_IMPORTED_MODULE_7__["getValue"](this.component).events.on("sizechanged", this.checkRules, this);
-            this._disposers.push(this._sizeEventDisposer);
+            this._responsiveDisposers.push(_utils_Type__WEBPACK_IMPORTED_MODULE_7__["getValue"](this.component).events.on("sizechanged", function () { _this.checkRules(); }, this));
+            this._responsiveDisposers.push(_utils_Type__WEBPACK_IMPORTED_MODULE_7__["getValue"](this.component).events.on("datavalidated", function () {
+                if (_this._component.isReady()) {
+                    _this.checkRules(true);
+                }
+            }, this));
             // Enable resoponsive
             this.enabled = true;
         },
@@ -91989,8 +95490,9 @@ var Responsive = /** @class */ (function (_super) {
      *
      * @ignore Exclude from docs
      */
-    Responsive.prototype.checkRules = function () {
+    Responsive.prototype.checkRules = function (force) {
         var _this = this;
+        if (force === void 0) { force = false; }
         // Check if there are any rules
         var rules = this.allRules;
         if (!rules || rules.length == 0) {
@@ -92013,6 +95515,9 @@ var Responsive = /** @class */ (function (_super) {
             }
             _this._appliedRules[rule.id] = apply;
         });
+        if (force) {
+            rulesChanged = true;
+        }
         // Check if we need to re-apply the rules
         if (rulesChanged) {
             if (!this.component.isReady()) {
@@ -92022,8 +95527,8 @@ var Responsive = /** @class */ (function (_super) {
                 //component.hide(0);
                 component.hidden = true;
                 component.events.once("ready", function (ev) {
-                    _this.applyRules();
                     ev.target.show(0);
+                    _this.applyRules();
                 });
                 return;
             }
@@ -92047,6 +95552,7 @@ var Responsive = /** @class */ (function (_super) {
         // Check each rule
         var defaultStateApplied = false;
         if (this.enabled) {
+            var isApplied_1 = false;
             _utils_Iterator__WEBPACK_IMPORTED_MODULE_5__["each"](this.allRules.iterator(), function (rule) {
                 // Get relevant state
                 var state = _this.getState(rule, newTarget);
@@ -92057,7 +95563,11 @@ var Responsive = /** @class */ (function (_super) {
                     // if they don't have responsive states.
                     if (!defaultStateApplied) {
                         // Nope, reset states (instantly).
-                        newTarget.applyCurrentState(0);
+                        if (_utils_Array__WEBPACK_IMPORTED_MODULE_6__["indexOf"](_this._appliedTargets, newTarget.uid) !== -1) {
+                            // But only if this element has any rules applied, otherwise no
+                            // point in setting current state
+                            newTarget.applyCurrentState(0);
+                        }
                         defaultStateApplied = true;
                     }
                     // Is this rule currently applied?
@@ -92068,9 +95578,16 @@ var Responsive = /** @class */ (function (_super) {
                         _this.dispatchImmediately("ruleapplied", {
                             rule: rule
                         });
+                        isApplied_1 = true;
                     }
                 }
             });
+            if (isApplied_1) {
+                _utils_Array__WEBPACK_IMPORTED_MODULE_6__["replace"](this._appliedTargets, newTarget.uid);
+            }
+            else {
+                _utils_Array__WEBPACK_IMPORTED_MODULE_6__["remove"](this._appliedTargets, newTarget.uid);
+            }
         }
         // Apply rules to the children
         if (newTarget.children) {
@@ -92079,32 +95596,6 @@ var Responsive = /** @class */ (function (_super) {
             });
         }
     };
-    /**
-     * Applies specific oresponsive overrides to the element.
-     *
-     * @ignore Exclude from docs
-     * @param rule    Responsive rule
-     * @param target  Target element
-     * @deprecated
-     * @hidden
-     */
-    /*	public applyRule(rule: IResponsiveRule, target: any): void {
-
-            // Construct state id
-            //let stateId = "responsive-" + rule.id;
-
-            // Check if we need to create a state for the element
-            let state = this.getState(rule, target);
-
-            // Apply the state
-            if (state) {
-                //if (target.className == "Container" && target.parent.className == "ZoomControl") {
-                console.log("Applying state to " + target.className + " (" + target.uid + "): " + JSON.stringify(state.properties));
-                //}
-                target.setState(state);
-            }
-
-        }*/
     /**
      * Returns a relative state for the rule/target, or `undefined` if no state is
      * needed.
@@ -92146,6 +95637,23 @@ var Responsive = /** @class */ (function (_super) {
             value = target[property];
         }
         return value;
+    };
+    /**
+     * Disposes the object.
+     */
+    Responsive.prototype.dispose = function () {
+        this.disposeResponsiveHandlers();
+        _super.prototype.dispose.call(this);
+    };
+    /**
+     * Disposes all event handlers.
+     */
+    Responsive.prototype.disposeResponsiveHandlers = function () {
+        var disposer = this._responsiveDisposers.pop();
+        while (disposer) {
+            disposer.dispose();
+            disposer = this._responsiveDisposers.pop();
+        }
     };
     return Responsive;
 }(_Base__WEBPACK_IMPORTED_MODULE_1__["BaseObjectEvents"]));
@@ -92560,7 +96068,7 @@ var OrderedList = /** @class */ (function () {
      */
     OrderedList.prototype[Symbol.iterator] = function () {
         var length, i;
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     length = this._values.length;
@@ -92594,7 +96102,7 @@ var OrderedList = /** @class */ (function () {
  * [[SortedList]].
  */
 var SortedList = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SortedList, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SortedList, _super);
     /**
      * Constructor.
      *
@@ -92668,7 +96176,7 @@ var SortedList = /** @class */ (function (_super) {
  * other attributes), inserted into the list and returned.
  */
 var OrderedListTemplate = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](OrderedListTemplate, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(OrderedListTemplate, _super);
     /**
      * Constructor
      *
@@ -92744,7 +96252,7 @@ var OrderedListTemplate = /** @class */ (function (_super) {
  * other attributes), inserted into the list and returned.
  */
 var SortedListTemplate = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](SortedListTemplate, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SortedListTemplate, _super);
     /**
      * Constructor
      *
@@ -93714,7 +97222,7 @@ function isNumber(value) {
  * @return Is object?
  */
 function isObject(value) {
-    return typeof value === "object";
+    return typeof value === "object" && value != null;
 }
 /**
  * Checks if parameter is `Array`.
@@ -94043,7 +97551,7 @@ function splitTextByCharCount(text, maxChars, fullWords, rtl) {
         // Split by words first
         // Split by spacing
         var currentIndex = -1;
-        var tmpText = text.replace(/([,;:!?\\\/\.\s]+)/g, _Strings__WEBPACK_IMPORTED_MODULE_5__["PLACEHOLDER"] + "$1" + _Strings__WEBPACK_IMPORTED_MODULE_5__["PLACEHOLDER"]);
+        var tmpText = text.replace(/([,;:!?\\\/\.]+[\s]+|[\s])/g, _Strings__WEBPACK_IMPORTED_MODULE_5__["PLACEHOLDER"] + "$1" + _Strings__WEBPACK_IMPORTED_MODULE_5__["PLACEHOLDER"]);
         var words = tmpText.split(_Strings__WEBPACK_IMPORTED_MODULE_5__["PLACEHOLDER"]);
         // Process each word
         for (var i = 0; i < words.length; i++) {
@@ -94631,12 +98139,6 @@ function spritePointToSvg(point, sprite) {
             var angle = sprite.rotation;
             x += sprite.pixelPaddingLeft + sprite.ex;
             y += sprite.pixelPaddingTop + sprite.ey;
-            if (sprite.dx) {
-                x += sprite.dx;
-            }
-            if (sprite.dy) {
-                y += sprite.dy;
-            }
             var scale = sprite.scale;
             // this handles nonscaling
             if (sprite.group) {
@@ -94644,6 +98146,12 @@ function spritePointToSvg(point, sprite) {
             }
             var relativeX = sprite.pixelX + ((x * _utils_Math__WEBPACK_IMPORTED_MODULE_2__["cos"](angle) - y * _utils_Math__WEBPACK_IMPORTED_MODULE_2__["sin"](angle))) * scale;
             var relativeY = sprite.pixelY + ((x * _utils_Math__WEBPACK_IMPORTED_MODULE_2__["sin"](angle) + y * _utils_Math__WEBPACK_IMPORTED_MODULE_2__["cos"](angle))) * scale;
+            if (sprite.dx) {
+                relativeX += sprite.dx;
+            }
+            if (sprite.dy) {
+                relativeY += sprite.dy;
+            }
             x = relativeX;
             y = relativeY;
             sprite = sprite.parent;
@@ -94943,13 +98451,13 @@ __webpack_require__.r(__webpack_exports__);
  * @ignore Exclude from docs
  */
 var Validatable = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](Validatable, _super);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(Validatable, _super);
     function Validatable() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         /**
          * Is invalid and should be revalidated?
          */
-        _this._invalid = false;
+        _this._validateDisposer = null;
         return _this;
     }
     /**
@@ -94959,9 +98467,8 @@ var Validatable = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     Validatable.prototype.invalidate = function () {
-        if (this._invalid === false) {
-            this._invalid = true;
-            _Registry__WEBPACK_IMPORTED_MODULE_2__["registry"].events.on("exitframe", this.validate, this);
+        if (this._validateDisposer === null) {
+            this._validateDisposer = _Registry__WEBPACK_IMPORTED_MODULE_2__["registry"].events.on("exitframe", this.validate, this);
         }
     };
     /**
@@ -94974,37 +98481,22 @@ var Validatable = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     Validatable.prototype.validate = function () {
-        if (this._invalid === true) {
-            this._invalid = false;
-            _Registry__WEBPACK_IMPORTED_MODULE_2__["registry"].events.off("exitframe", this.validate, this);
+        if (this._validateDisposer !== null) {
+            this._validateDisposer.dispose();
+            this._validateDisposer = null;
         }
+    };
+    Validatable.prototype.dispose = function () {
+        if (this._validateDisposer !== null) {
+            this._validateDisposer.dispose();
+            this._validateDisposer = null;
+        }
+        _super.prototype.dispose.call(this);
     };
     return Validatable;
 }(_Base__WEBPACK_IMPORTED_MODULE_1__["BaseObjectEvents"]));
 
 //# sourceMappingURL=Validatable.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@amcharts/amcharts4/.internal/themes/ITheme.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@amcharts/amcharts4/.internal/themes/ITheme.js ***!
-  \*********************************************************************/
-/*! exports provided: is */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "is", function() { return is; });
-/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-
-// TODO put this someplace else ?
-// TODO export this in core.ts ?
-function is(object, name) {
-    var x = _core_Registry__WEBPACK_IMPORTED_MODULE_0__["registry"].registeredClasses[name];
-    return x != null && object instanceof x;
-}
-//# sourceMappingURL=ITheme.js.map
 
 /***/ }),
 
@@ -95464,7 +98956,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/core.js ***!
   \**************************************************/
-/*! exports provided: System, system, BaseObject, BaseObjectEvents, Component, Container, DataItem, Sprite, SpriteEventDispatcher, SpriteState, registry, Registry, options, CSVParser, DataLoader, dataLoader, DataParser, DataSource, JSONParser, SVGDefaults, Button, Circle, Ellipse, Image, Label, Line, Popup, Modal, PointedRectangle, PointedShape, Polyarc, Polygon, Polyline, Polyspline, Preloader, Rectangle, ResizeButton, RoundedRectangle, Scrollbar, Slider, Slice, TextLink, Tooltip, Trapezoid, Triangle, WavedCircle, WavedLine, WavedRectangle, ZoomOutButton, PlayButton, Cone, Rectangle3D, Slice3D, Export, ExportMenu, DateFormatter, DurationFormatter, NumberFormatter, TextFormatter, getTextFormatter, Inertia, Interaction, getInteraction, InteractionKeyboardObject, InteractionObject, InteractionObjectEventDispatcher, MouseCursorStyle, AMElement, Group, Paper, Tension, Basis, SVGContainer, ColorModifier, LinearGradient, LinearGradientModifier, RadialGradientModifier, LinePattern, Pattern, RadialGradient, RectPattern, ColorizeFilter, DesaturateFilter, DropShadowFilter, BlurFilter, Filter, FocusFilter, LightenFilter, GlobalAdapter, globalAdapter, Adapter, Animation, animate, nextFrame, readFrame, writeFrame, whenIdle, triggerIdle, Cache, cache, Color, color, isColor, castColor, ColorSet, InterfaceColorSet, DictionaryDisposer, Dictionary, DictionaryTemplate, Disposer, MultiDisposer, MutableValueDisposer, CounterDisposer, StyleRule, StyleClass, getElement, addClass, removeClass, blur, focus, outerHTML, isElement, copyAttributes, fixPixelPerfect, ready, EventDispatcher, TargetedEventDispatcher, ListIterator, min, max, join, Keyboard, keyboard, Language, IndexedIterable, ListGrouper, ListDisposer, List, ListTemplate, Morpher, reverse, or, Percent, percent, isPercent, Plugin, Responsive, ResponsiveBreakpoints, defaultRules, OrderedList, SortedList, OrderedListTemplate, SortedListTemplate, PX, STRING, NUMBER, DATE, DURATION, PLACEHOLDER, PLACEHOLDER2, isNaN, checkString, checkBoolean, checkNumber, checkObject, castString, castNumber, isString, isNumber, isObject, isArray, Validatable, path, colors, ease, math, array, number, object, string, time, utils, iter, type, create, createFromConfig, disposeAllCharts, useTheme, unuseTheme, unuseAllThemes, addLicense */
+/*! exports provided: System, system, BaseObject, BaseObjectEvents, Component, Container, DataItem, Sprite, SpriteEventDispatcher, SpriteState, registry, Registry, is, options, CSVParser, DataLoader, dataLoader, DataParser, DataSource, JSONParser, SVGDefaults, Button, Circle, Ellipse, Image, Label, Line, Popup, Modal, PointedRectangle, PointedShape, Polyarc, Polygon, Polyline, Polyspline, Preloader, Rectangle, ResizeButton, RoundedRectangle, Scrollbar, Slider, Slice, TextLink, Tooltip, Trapezoid, Triangle, WavedCircle, WavedLine, WavedRectangle, ZoomOutButton, PlayButton, Cone, Rectangle3D, Slice3D, Export, ExportMenu, DateFormatter, DurationFormatter, NumberFormatter, TextFormatter, getTextFormatter, Inertia, Interaction, getInteraction, InteractionKeyboardObject, InteractionObject, InteractionObjectEventDispatcher, MouseCursorStyle, AMElement, Group, Paper, Tension, Basis, SVGContainer, ColorModifier, LinearGradient, LinearGradientModifier, RadialGradientModifier, LinePattern, CirclePattern, Pattern, RadialGradient, RectPattern, ColorizeFilter, DesaturateFilter, DropShadowFilter, BlurFilter, Filter, FocusFilter, LightenFilter, GlobalAdapter, globalAdapter, Adapter, Animation, animate, nextFrame, readFrame, writeFrame, whenIdle, triggerIdle, Cache, cache, Color, color, isColor, castColor, ColorSet, PatternSet, InterfaceColorSet, DictionaryDisposer, Dictionary, DictionaryTemplate, Disposer, MultiDisposer, MutableValueDisposer, CounterDisposer, StyleRule, StyleClass, getElement, addClass, removeClass, blur, focus, outerHTML, isElement, copyAttributes, fixPixelPerfect, ready, EventDispatcher, TargetedEventDispatcher, ListIterator, min, max, join, Keyboard, keyboard, Language, IndexedIterable, ListGrouper, ListDisposer, List, ListTemplate, Morpher, reverse, or, Percent, percent, isPercent, Plugin, Responsive, ResponsiveBreakpoints, defaultRules, OrderedList, SortedList, OrderedListTemplate, SortedListTemplate, PX, STRING, NUMBER, DATE, DURATION, PLACEHOLDER, PLACEHOLDER2, isNaN, checkString, checkBoolean, checkNumber, checkObject, castString, castNumber, isString, isNumber, isObject, isArray, Validatable, path, colors, ease, math, array, number, object, string, time, utils, iter, type, create, createFromConfig, disposeAllCharts, useTheme, unuseTheme, unuseAllThemes, addLicense */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95501,6 +98993,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "registry", function() { return _internal_core_Registry__WEBPACK_IMPORTED_MODULE_8__["registry"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Registry", function() { return _internal_core_Registry__WEBPACK_IMPORTED_MODULE_8__["Registry"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "is", function() { return _internal_core_Registry__WEBPACK_IMPORTED_MODULE_8__["is"]; });
 
 /* harmony import */ var _internal_core_Options__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./.internal/core/Options */ "./node_modules/@amcharts/amcharts4/.internal/core/Options.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "options", function() { return _internal_core_Options__WEBPACK_IMPORTED_MODULE_9__["options"]; });
@@ -95696,264 +99190,270 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _internal_core_rendering_fills_LinePattern__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./.internal/core/rendering/fills/LinePattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinePattern.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LinePattern", function() { return _internal_core_rendering_fills_LinePattern__WEBPACK_IMPORTED_MODULE_70__["LinePattern"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_Pattern__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./.internal/core/rendering/fills/Pattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/Pattern.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Pattern", function() { return _internal_core_rendering_fills_Pattern__WEBPACK_IMPORTED_MODULE_71__["Pattern"]; });
+/* harmony import */ var _internal_core_rendering_fills_CirclePattern__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./.internal/core/rendering/fills/CirclePattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/CirclePattern.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CirclePattern", function() { return _internal_core_rendering_fills_CirclePattern__WEBPACK_IMPORTED_MODULE_71__["CirclePattern"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RadialGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradient.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RadialGradient", function() { return _internal_core_rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_72__["RadialGradient"]; });
+/* harmony import */ var _internal_core_rendering_fills_Pattern__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./.internal/core/rendering/fills/Pattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/Pattern.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Pattern", function() { return _internal_core_rendering_fills_Pattern__WEBPACK_IMPORTED_MODULE_72__["Pattern"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RectPattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RectPattern.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RectPattern", function() { return _internal_core_rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_73__["RectPattern"]; });
+/* harmony import */ var _internal_core_rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RadialGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradient.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RadialGradient", function() { return _internal_core_rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_73__["RadialGradient"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_ColorizeFilter__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./.internal/core/rendering/filters/ColorizeFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/ColorizeFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorizeFilter", function() { return _internal_core_rendering_filters_ColorizeFilter__WEBPACK_IMPORTED_MODULE_74__["ColorizeFilter"]; });
+/* harmony import */ var _internal_core_rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RectPattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RectPattern.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RectPattern", function() { return _internal_core_rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_74__["RectPattern"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./.internal/core/rendering/filters/DesaturateFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/DesaturateFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DesaturateFilter", function() { return _internal_core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_75__["DesaturateFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_ColorizeFilter__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./.internal/core/rendering/filters/ColorizeFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/ColorizeFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorizeFilter", function() { return _internal_core_rendering_filters_ColorizeFilter__WEBPACK_IMPORTED_MODULE_75__["ColorizeFilter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_DropShadowFilter__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./.internal/core/rendering/filters/DropShadowFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/DropShadowFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropShadowFilter", function() { return _internal_core_rendering_filters_DropShadowFilter__WEBPACK_IMPORTED_MODULE_76__["DropShadowFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./.internal/core/rendering/filters/DesaturateFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/DesaturateFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DesaturateFilter", function() { return _internal_core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_76__["DesaturateFilter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_BlurFilter__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./.internal/core/rendering/filters/BlurFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/BlurFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BlurFilter", function() { return _internal_core_rendering_filters_BlurFilter__WEBPACK_IMPORTED_MODULE_77__["BlurFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_DropShadowFilter__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./.internal/core/rendering/filters/DropShadowFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/DropShadowFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropShadowFilter", function() { return _internal_core_rendering_filters_DropShadowFilter__WEBPACK_IMPORTED_MODULE_77__["DropShadowFilter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_Filter__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./.internal/core/rendering/filters/Filter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/Filter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Filter", function() { return _internal_core_rendering_filters_Filter__WEBPACK_IMPORTED_MODULE_78__["Filter"]; });
+/* harmony import */ var _internal_core_rendering_filters_BlurFilter__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./.internal/core/rendering/filters/BlurFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/BlurFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BlurFilter", function() { return _internal_core_rendering_filters_BlurFilter__WEBPACK_IMPORTED_MODULE_78__["BlurFilter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./.internal/core/rendering/filters/FocusFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/FocusFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FocusFilter", function() { return _internal_core_rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_79__["FocusFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_Filter__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./.internal/core/rendering/filters/Filter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/Filter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Filter", function() { return _internal_core_rendering_filters_Filter__WEBPACK_IMPORTED_MODULE_79__["Filter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./.internal/core/rendering/filters/LightenFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/LightenFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LightenFilter", function() { return _internal_core_rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_80__["LightenFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./.internal/core/rendering/filters/FocusFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/FocusFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FocusFilter", function() { return _internal_core_rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_80__["FocusFilter"]; });
 
-/* harmony import */ var _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./.internal/core/utils/Adapter */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Adapter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GlobalAdapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_81__["GlobalAdapter"]; });
+/* harmony import */ var _internal_core_rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./.internal/core/rendering/filters/LightenFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/LightenFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LightenFilter", function() { return _internal_core_rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_81__["LightenFilter"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "globalAdapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_81__["globalAdapter"]; });
+/* harmony import */ var _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./.internal/core/utils/Adapter */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Adapter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GlobalAdapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_82__["GlobalAdapter"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Adapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_81__["Adapter"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "globalAdapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_82__["globalAdapter"]; });
 
-/* harmony import */ var _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./.internal/core/utils/Animation */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Animation.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Animation", function() { return _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_82__["Animation"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Adapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_82__["Adapter"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_82__["animate"]; });
+/* harmony import */ var _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./.internal/core/utils/Animation */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Animation.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Animation", function() { return _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_83__["Animation"]; });
 
-/* harmony import */ var _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./.internal/core/utils/AsyncPending */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/AsyncPending.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "nextFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_83__["nextFrame"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_83__["animate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "readFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_83__["readFrame"]; });
+/* harmony import */ var _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./.internal/core/utils/AsyncPending */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/AsyncPending.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "nextFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["nextFrame"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "writeFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_83__["writeFrame"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "readFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["readFrame"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "whenIdle", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_83__["whenIdle"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "writeFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["writeFrame"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "triggerIdle", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_83__["triggerIdle"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "whenIdle", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["whenIdle"]; });
 
-/* harmony import */ var _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./.internal/core/utils/Cache */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Cache.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Cache", function() { return _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_84__["Cache"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "triggerIdle", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["triggerIdle"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "cache", function() { return _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_84__["cache"]; });
+/* harmony import */ var _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./.internal/core/utils/Cache */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Cache.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Cache", function() { return _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_85__["Cache"]; });
 
-/* harmony import */ var _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./.internal/core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Color", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_85__["Color"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "cache", function() { return _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_85__["cache"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "color", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_85__["color"]; });
+/* harmony import */ var _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./.internal/core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Color", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__["Color"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isColor", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_85__["isColor"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "color", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__["color"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castColor", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_85__["castColor"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isColor", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__["isColor"]; });
 
-/* harmony import */ var _internal_core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./.internal/core/utils/ColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/ColorSet.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorSet", function() { return _internal_core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_86__["ColorSet"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castColor", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__["castColor"]; });
 
-/* harmony import */ var _internal_core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./.internal/core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InterfaceColorSet", function() { return _internal_core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_87__["InterfaceColorSet"]; });
+/* harmony import */ var _internal_core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./.internal/core/utils/ColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/ColorSet.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorSet", function() { return _internal_core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_87__["ColorSet"]; });
 
-/* harmony import */ var _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./.internal/core/utils/Dictionary */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Dictionary.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DictionaryDisposer", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_88__["DictionaryDisposer"]; });
+/* harmony import */ var _internal_core_utils_PatternSet__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./.internal/core/utils/PatternSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/PatternSet.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PatternSet", function() { return _internal_core_utils_PatternSet__WEBPACK_IMPORTED_MODULE_88__["PatternSet"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Dictionary", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_88__["Dictionary"]; });
+/* harmony import */ var _internal_core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./.internal/core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InterfaceColorSet", function() { return _internal_core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_89__["InterfaceColorSet"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DictionaryTemplate", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_88__["DictionaryTemplate"]; });
+/* harmony import */ var _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./.internal/core/utils/Dictionary */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Dictionary.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DictionaryDisposer", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_90__["DictionaryDisposer"]; });
 
-/* harmony import */ var _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./.internal/core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Disposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_89__["Disposer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Dictionary", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_90__["Dictionary"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MultiDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_89__["MultiDisposer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DictionaryTemplate", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_90__["DictionaryTemplate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MutableValueDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_89__["MutableValueDisposer"]; });
+/* harmony import */ var _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./.internal/core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Disposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__["Disposer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CounterDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_89__["CounterDisposer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MultiDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__["MultiDisposer"]; });
 
-/* harmony import */ var _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./.internal/core/utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StyleRule", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["StyleRule"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MutableValueDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__["MutableValueDisposer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StyleClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["StyleClass"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CounterDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__["CounterDisposer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["getElement"]; });
+/* harmony import */ var _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./.internal/core/utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StyleRule", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["StyleRule"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["addClass"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StyleClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["StyleClass"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["removeClass"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["getElement"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "blur", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["blur"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["addClass"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "focus", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["focus"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["removeClass"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "outerHTML", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["outerHTML"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "blur", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["blur"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isElement", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["isElement"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "focus", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["focus"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "copyAttributes", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["copyAttributes"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "outerHTML", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["outerHTML"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "fixPixelPerfect", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["fixPixelPerfect"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isElement", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["isElement"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ready", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_90__["ready"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "copyAttributes", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["copyAttributes"]; });
 
-/* harmony import */ var _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./.internal/core/utils/EventDispatcher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/EventDispatcher.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EventDispatcher", function() { return _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_91__["EventDispatcher"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "fixPixelPerfect", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["fixPixelPerfect"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TargetedEventDispatcher", function() { return _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_91__["TargetedEventDispatcher"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ready", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["ready"]; });
 
-/* harmony import */ var _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./.internal/core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListIterator", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_92__["ListIterator"]; });
+/* harmony import */ var _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./.internal/core/utils/EventDispatcher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/EventDispatcher.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EventDispatcher", function() { return _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_93__["EventDispatcher"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "min", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_92__["min"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TargetedEventDispatcher", function() { return _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_93__["TargetedEventDispatcher"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "max", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_92__["max"]; });
+/* harmony import */ var _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./.internal/core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListIterator", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__["ListIterator"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "join", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_92__["join"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "min", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__["min"]; });
 
-/* harmony import */ var _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./.internal/core/utils/Keyboard */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Keyboard.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Keyboard", function() { return _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_93__["Keyboard"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "max", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__["max"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "keyboard", function() { return _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_93__["keyboard"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "join", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__["join"]; });
 
-/* harmony import */ var _internal_core_utils_Language__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./.internal/core/utils/Language */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Language.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Language", function() { return _internal_core_utils_Language__WEBPACK_IMPORTED_MODULE_94__["Language"]; });
+/* harmony import */ var _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./.internal/core/utils/Keyboard */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Keyboard.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Keyboard", function() { return _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_95__["Keyboard"]; });
 
-/* harmony import */ var _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./.internal/core/utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IndexedIterable", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_95__["IndexedIterable"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "keyboard", function() { return _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_95__["keyboard"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListGrouper", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_95__["ListGrouper"]; });
+/* harmony import */ var _internal_core_utils_Language__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./.internal/core/utils/Language */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Language.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Language", function() { return _internal_core_utils_Language__WEBPACK_IMPORTED_MODULE_96__["Language"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListDisposer", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_95__["ListDisposer"]; });
+/* harmony import */ var _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! ./.internal/core/utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IndexedIterable", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["IndexedIterable"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_95__["List"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListGrouper", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["ListGrouper"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListTemplate", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_95__["ListTemplate"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListDisposer", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["ListDisposer"]; });
 
-/* harmony import */ var _internal_core_utils_Morpher__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./.internal/core/utils/Morpher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Morpher.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Morpher", function() { return _internal_core_utils_Morpher__WEBPACK_IMPORTED_MODULE_96__["Morpher"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["List"]; });
 
-/* harmony import */ var _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! ./.internal/core/utils/Order */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Order.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reverse", function() { return _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_97__["reverse"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListTemplate", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["ListTemplate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "or", function() { return _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_97__["or"]; });
+/* harmony import */ var _internal_core_utils_Morpher__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! ./.internal/core/utils/Morpher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Morpher.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Morpher", function() { return _internal_core_utils_Morpher__WEBPACK_IMPORTED_MODULE_98__["Morpher"]; });
 
-/* harmony import */ var _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! ./.internal/core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Percent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_98__["Percent"]; });
+/* harmony import */ var _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! ./.internal/core/utils/Order */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Order.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reverse", function() { return _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_99__["reverse"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "percent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_98__["percent"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "or", function() { return _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_99__["or"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isPercent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_98__["isPercent"]; });
+/* harmony import */ var _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! ./.internal/core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Percent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_100__["Percent"]; });
 
-/* harmony import */ var _internal_core_utils_Plugin__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! ./.internal/core/utils/Plugin */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Plugin.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Plugin", function() { return _internal_core_utils_Plugin__WEBPACK_IMPORTED_MODULE_99__["Plugin"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "percent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_100__["percent"]; });
 
-/* harmony import */ var _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! ./.internal/core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Responsive", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_100__["Responsive"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isPercent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_100__["isPercent"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ResponsiveBreakpoints", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_100__["ResponsiveBreakpoints"]; });
+/* harmony import */ var _internal_core_utils_Plugin__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! ./.internal/core/utils/Plugin */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Plugin.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Plugin", function() { return _internal_core_utils_Plugin__WEBPACK_IMPORTED_MODULE_101__["Plugin"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "defaultRules", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_100__["defaultRules"]; });
+/* harmony import */ var _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! ./.internal/core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Responsive", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_102__["Responsive"]; });
 
-/* harmony import */ var _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! ./.internal/core/utils/SortedList */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/SortedList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedList", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_101__["OrderedList"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ResponsiveBreakpoints", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_102__["ResponsiveBreakpoints"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortedList", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_101__["SortedList"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "defaultRules", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_102__["defaultRules"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedListTemplate", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_101__["OrderedListTemplate"]; });
+/* harmony import */ var _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! ./.internal/core/utils/SortedList */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/SortedList.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedList", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__["OrderedList"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortedListTemplate", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_101__["SortedListTemplate"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortedList", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__["SortedList"]; });
 
-/* harmony import */ var _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! ./.internal/core/utils/Strings */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Strings.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PX", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_102__["PX"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedListTemplate", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__["OrderedListTemplate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "STRING", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_102__["STRING"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortedListTemplate", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__["SortedListTemplate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NUMBER", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_102__["NUMBER"]; });
+/* harmony import */ var _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! ./.internal/core/utils/Strings */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Strings.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PX", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["PX"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DATE", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_102__["DATE"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "STRING", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["STRING"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DURATION", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_102__["DURATION"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NUMBER", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["NUMBER"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PLACEHOLDER", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_102__["PLACEHOLDER"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DATE", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["DATE"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PLACEHOLDER2", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_102__["PLACEHOLDER2"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DURATION", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["DURATION"]; });
 
-/* harmony import */ var _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! ./.internal/core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isNaN", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["isNaN"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PLACEHOLDER", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["PLACEHOLDER"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["checkString"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PLACEHOLDER2", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["PLACEHOLDER2"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkBoolean", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["checkBoolean"]; });
+/* harmony import */ var _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! ./.internal/core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isNaN", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isNaN"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["checkNumber"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["checkString"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkObject", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["checkObject"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkBoolean", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["checkBoolean"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["castString"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["checkNumber"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["castNumber"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkObject", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["checkObject"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["isString"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["castString"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["isNumber"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["castNumber"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["isObject"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isString"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__["isArray"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isNumber"]; });
 
-/* harmony import */ var _internal_core_utils_Validatable__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! ./.internal/core/utils/Validatable */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Validatable.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Validatable", function() { return _internal_core_utils_Validatable__WEBPACK_IMPORTED_MODULE_104__["Validatable"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isObject"]; });
 
-/* harmony import */ var _internal_core_rendering_Path__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! ./.internal/core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "path", function() { return _internal_core_rendering_Path__WEBPACK_IMPORTED_MODULE_105__; });
-/* harmony import */ var _internal_core_utils_Colors__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! ./.internal/core/utils/Colors */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Colors.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return _internal_core_utils_Colors__WEBPACK_IMPORTED_MODULE_106__; });
-/* harmony import */ var _internal_core_utils_Ease__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! ./.internal/core/utils/Ease */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Ease.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "ease", function() { return _internal_core_utils_Ease__WEBPACK_IMPORTED_MODULE_107__; });
-/* harmony import */ var _internal_core_utils_Math__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! ./.internal/core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "math", function() { return _internal_core_utils_Math__WEBPACK_IMPORTED_MODULE_108__; });
-/* harmony import */ var _internal_core_utils_Array__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! ./.internal/core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "array", function() { return _internal_core_utils_Array__WEBPACK_IMPORTED_MODULE_109__; });
-/* harmony import */ var _internal_core_utils_Number__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! ./.internal/core/utils/Number */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Number.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "number", function() { return _internal_core_utils_Number__WEBPACK_IMPORTED_MODULE_110__; });
-/* harmony import */ var _internal_core_utils_Object__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! ./.internal/core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "object", function() { return _internal_core_utils_Object__WEBPACK_IMPORTED_MODULE_111__; });
-/* harmony import */ var _internal_core_utils_String__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! ./.internal/core/utils/String */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/String.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "string", function() { return _internal_core_utils_String__WEBPACK_IMPORTED_MODULE_112__; });
-/* harmony import */ var _internal_core_utils_Time__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! ./.internal/core/utils/Time */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Time.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "time", function() { return _internal_core_utils_Time__WEBPACK_IMPORTED_MODULE_113__; });
-/* harmony import */ var _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! ./.internal/core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "utils", function() { return _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_114__; });
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "iter", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_92__; });
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "type", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_103__; });
-/* harmony import */ var _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! ./.internal/core/utils/Instance */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Instance.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "create", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_115__["create"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isArray"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createFromConfig", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_115__["createFromConfig"]; });
+/* harmony import */ var _internal_core_utils_Validatable__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! ./.internal/core/utils/Validatable */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Validatable.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Validatable", function() { return _internal_core_utils_Validatable__WEBPACK_IMPORTED_MODULE_106__["Validatable"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "disposeAllCharts", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_115__["disposeAllCharts"]; });
+/* harmony import */ var _internal_core_rendering_Path__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! ./.internal/core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "path", function() { return _internal_core_rendering_Path__WEBPACK_IMPORTED_MODULE_107__; });
+/* harmony import */ var _internal_core_utils_Colors__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! ./.internal/core/utils/Colors */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Colors.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return _internal_core_utils_Colors__WEBPACK_IMPORTED_MODULE_108__; });
+/* harmony import */ var _internal_core_utils_Ease__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! ./.internal/core/utils/Ease */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Ease.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "ease", function() { return _internal_core_utils_Ease__WEBPACK_IMPORTED_MODULE_109__; });
+/* harmony import */ var _internal_core_utils_Math__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! ./.internal/core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "math", function() { return _internal_core_utils_Math__WEBPACK_IMPORTED_MODULE_110__; });
+/* harmony import */ var _internal_core_utils_Array__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! ./.internal/core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "array", function() { return _internal_core_utils_Array__WEBPACK_IMPORTED_MODULE_111__; });
+/* harmony import */ var _internal_core_utils_Number__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! ./.internal/core/utils/Number */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Number.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "number", function() { return _internal_core_utils_Number__WEBPACK_IMPORTED_MODULE_112__; });
+/* harmony import */ var _internal_core_utils_Object__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! ./.internal/core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "object", function() { return _internal_core_utils_Object__WEBPACK_IMPORTED_MODULE_113__; });
+/* harmony import */ var _internal_core_utils_String__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! ./.internal/core/utils/String */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/String.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "string", function() { return _internal_core_utils_String__WEBPACK_IMPORTED_MODULE_114__; });
+/* harmony import */ var _internal_core_utils_Time__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! ./.internal/core/utils/Time */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Time.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "time", function() { return _internal_core_utils_Time__WEBPACK_IMPORTED_MODULE_115__; });
+/* harmony import */ var _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! ./.internal/core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "utils", function() { return _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_116__; });
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "iter", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__; });
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "type", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__; });
+/* harmony import */ var _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! ./.internal/core/utils/Instance */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Instance.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "create", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["create"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_115__["useTheme"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createFromConfig", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["createFromConfig"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_115__["unuseTheme"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "disposeAllCharts", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["disposeAllCharts"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseAllThemes", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_115__["unuseAllThemes"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["useTheme"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addLicense", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_115__["addLicense"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["unuseTheme"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseAllThemes", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["unuseAllThemes"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addLicense", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["addLicense"]; });
 
 /**
  * This module houses all core/framework functionality and is required for
@@ -96060,6 +99560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Elements: filters
  */
@@ -96073,6 +99574,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Elements: utils
  */
+
 
 
 
@@ -96517,6 +100019,9 @@ __webpack_require__.r(__webpack_exports__);
     "Error parsing file: %1": "",
     "Unable to load file: %1": "",
     "Invalid date": "",
+    // Common actions
+    "Close": "",
+    "Minimize": ""
 });
 //# sourceMappingURL=en.js.map
 

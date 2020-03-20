@@ -60,67 +60,63 @@
                     <div class="hero-head is-size-6">
                         <div class="navbar-end">
 
-                            <div class="navbar-item dropdown is-hoverable">
-                                <div class="navbar-menu">
-                                    <b-navbar-dropdown hoverable right :label="user.nombre">
+                            <b-navbar-dropdown hoverable right :label="user.nombre">
 
-                                        <b-navbar-item href="/2017/08/03/list-of-tags/">
-                                            <div class="navbar-content">
-                                                <p>
-                                                    <small class="has-text-info">03 Aug 2017</small>
-                                                </p>
-                                                <p>New feature: list of tags</p>
-                                            </div>
-                                        </b-navbar-item>
+                                <b-navbar-item href="/2017/08/03/list-of-tags/">
+                                    <div class="navbar-content">
+                                        <p>
+                                            <small class="has-text-info">03 Aug 2017</small>
+                                        </p>
+                                        <p>New feature: list of tags</p>
+                                    </div>
+                                </b-navbar-item>
 
-                                        <b-navbar-item href="/2017/08/01/bulma-bootstrap-comparison/">
-                                            <div class="navbar-content">
-                                                <p>
-                                                    <small class="has-text-info">01 Aug 2017</small>
-                                                </p>
-                                                <p>Bulma / Bootstrap comparison</p>
-                                            </div>
-                                        </b-navbar-item>
+                                <b-navbar-item href="/2017/08/01/bulma-bootstrap-comparison/">
+                                    <div class="navbar-content">
+                                        <p>
+                                            <small class="has-text-info">01 Aug 2017</small>
+                                        </p>
+                                        <p>Bulma / Bootstrap comparison</p>
+                                    </div>
+                                </b-navbar-item>
 
-                                        <b-navbar-item href="/2017/07/24/access-previous-bulma-versions/">
-                                            <div class="navbar-content">
-                                                <p>
-                                                    <small class="has-text-info">24 Jul 2017</small>
-                                                </p>
-                                                <p>Access previous Bulma versions</p>
-                                            </div>
-                                        </b-navbar-item>
+                                <b-navbar-item href="/2017/07/24/access-previous-bulma-versions/">
+                                    <div class="navbar-content">
+                                        <p>
+                                            <small class="has-text-info">24 Jul 2017</small>
+                                        </p>
+                                        <p>Access previous Bulma versions</p>
+                                    </div>
+                                </b-navbar-item>
 
-                                        <b-navbar-item @click="changeStyle" v-model="darkMode">
-                                            {{ style }}
-                                        </b-navbar-item>
+                                <b-navbar-item @click="changeStyle" v-model="darkMode">
+                                    {{ style }}
+                                </b-navbar-item>
 
-                                        <hr class="navbar-divider">
+                                <hr class="navbar-divider">
 
-                                        <b-navbar-item>
-                                            <div class="navbar-content">
-                                                <div class="level is-mobile">
-                                                    <div class="level-left">
-                                                        <div class="level-item">
-                                                            <strong>Stay up to date!</strong>
-                                                        </div>
-                                                    </div>
-                                                    <div class="level-right">
-                                                        <div class="level-item">
-                                                            <a class="button bd-is-rss is-small" @click.prevent="logout">
-                                                                <span class="icon is-small">
-                                                                    <i class="fa fa-rss"></i>
-                                                                </span>
-                                                                <span>Log Out</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                <b-navbar-item>
+                                    <div class="navbar-content">
+                                        <div class="level is-mobile">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <strong>Stay up to date!</strong>
                                                 </div>
                                             </div>
-                                        </b-navbar-item>
-                                    </b-navbar-dropdown>
-                                </div>
-                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <a class="button bd-is-rss is-small" @click.prevent="logout">
+                                                        <span class="icon is-small">
+                                                            <i class="fa fa-rss"></i>
+                                                        </span>
+                                                        <span>Log Out</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b-navbar-item>
+                            </b-navbar-dropdown>
                         </div>
                         <div class="navbar-end" style="padding-right: 20px;">
                             <clock></clock>

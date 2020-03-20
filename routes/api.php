@@ -131,11 +131,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 		// Clients Connection
 			Route::apiResource('clientConnections','Api\ClientConnectionController');
 
-		// Generator Groups
-			Route::apiResource('generatorGroups','Api\Infraestructura\GeneratorGroupController');
-			Route::get('generatorGroupData', 'Api\Infraestructura\GeneratorGroupController@generatorGroupData');
-			Route::get('generatorGroupDataCrm', 'Api\Infraestructura\GeneratorGroupController@generatorGroupDataCrm');
-			Route::get('generatorGroupDataZona', 'Api\Infraestructura\GeneratorGroupController@generatorGroupDataZona');
+		// Generator Sets
+			Route::apiResource('generatorSets','Api\Infraestructura\GeneratorSetController');
+			Route::get('generatorSetData', 'Api\Infraestructura\GeneratorSetController@generatorSetData');
+			Route::get('generatorSetDataCrm', 'Api\Infraestructura\GeneratorSetController@generatorSetDataCrm');
+			Route::get('generatorSetDataZona', 'Api\Infraestructura\GeneratorSetController@generatorSetDataZona');
 
 		// Power Rectifiers
 			Route::apiResource('powerRectifiers','Api\Infraestructura\PowerRectifierController');
@@ -198,7 +198,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 			]);
 
 		// Exports
-			Route::get('pop/export', 'PopController@export')->name('pops.export');
+			Route::get('pop/export', 'Api\PopController@export')->name('pops.export');
 
 		// Sites Stats Chart
 			Route::get('siteStats', 'Api\SiteController@stats')->name('site.stats');
@@ -243,10 +243,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 	### COMSITE ######################################################################
 		Route::apiResource('comsites','Api\ComsiteController');
-		Route::get('searchComsites', [
-			'as' => 'comsites.search',
-			'uses' => 'Api\ComsiteController@search'
-		]);
 
 		Route::get('comsiteLastData', 'Api\ComsiteController@lastData');
 	##############################################################################################

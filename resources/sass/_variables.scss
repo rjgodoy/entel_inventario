@@ -40,9 +40,9 @@ $yellow-light-invert: findColorInvert($yellow-light);
 // $link-focus-border: $primary;
 
 // Success
-$success: $eco;
-$success-invert: $eco-invert;
-$success-focus-border: $eco;
+// $success: $eco;
+// $success-invert: $eco-invert;
+// $success-focus-border: $eco;
 
 // Danger
 $danger: $entel-secondary;
@@ -64,6 +64,7 @@ $input-placeholder-color: #7a7a7a;
 $colors: (
     "white": ($white, $black),
     "black": ($black, $white),
+    "black-ter": ($black-ter, $white),
     "light": ($light, $light-invert),
     "dark": ($dark, $dark-invert),
     "primary": ($primary, $primary-invert),
@@ -83,8 +84,8 @@ $colors: (
     "positive": ($positive, $positive-light-invert),
     "positive-light": ($positive-light, $positive-light-invert),
     "yellow": ($yellow, $yellow-light-invert),
-    // "mirage": ($mirage, $mirage-invert),
-    // "blackRussian": ($blackRussian, $blackRussian-invert)
+    "mirage": ($mirage, $mirage-invert),
+    "blackRussian": ($blackRussian, $blackRussian-invert)
 );
 
 $shades: (
@@ -108,6 +109,14 @@ $shades: (
 );
 
 
+$dropdown-content-max-height: 400px !default;
+
+.autocomplete {
+    .dropdown-content {
+        overflow: auto;
+        max-height: $dropdown-content-max-height;
+    }
+}
 
 
 // Background image
@@ -123,7 +132,7 @@ $shades: (
 	height: 100%;
 }
 .hero-background.is-transparent {
-	opacity: 0.6;
+	opacity: 0.8;
 }
 
 // Image centered

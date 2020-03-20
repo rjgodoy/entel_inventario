@@ -16,6 +16,7 @@
                             class="input is-rounded" 
                             :class="bodyBackground + ' ' + primaryText" 
                             @keyup="getComsiteData" 
+                            @input="comsiteData.current_page = 1"
                             v-model="searchText" 
                             type="text" 
                             arial-label="Buscar" 
@@ -85,30 +86,30 @@
                         </tr>    
                     </tbody>
                 </table>
-                <nav class="pagination" role="navigation" aria-label="pagination">
-                    <vue-pagination  
-                        :pagination="comsiteData"
-                        @paginate="getComsiteData()"
-                        :offset="4"
-                        :primaryText="primaryText">
-                    </vue-pagination>
-                </nav>
-                <div class="field">
-                    <div class="field has-text-right">
-                        <!-- <b-field> -->
-                            <b-button v-if="comsiteData.can.sync"
-                                :loading="buttonLoading ? true : false"
-                                type="is-link"
-                                size="is-small"
-                                @click="syncComsite">
-                                <font-awesome-icon icon="sync-alt"/>
-                                &nbsp;
-                                Sincronizar
-                            </b-button>
-                        <!-- </b-field> -->
+                <div class="level">
+                    <nav class="level-left pagination" role="navigation" aria-label="pagination">
+                        <vue-pagination  
+                            :pagination="comsiteData"
+                            @paginate="getComsiteData()"
+                            :offset="4"
+                            :primaryText="primaryText">
+                        </vue-pagination>
+                    </nav>
+                               
+                <!-- <b-button v-if="comsiteData.can.create"
+                    :loading="buttonLoading ? true : false"
+                    type="is-link"
+                    size="is-small"
+                    @click="syncComsite">
+                    <font-awesome-icon icon="sync-alt"/>
+                    &nbsp;
+                    Sincronizar
+                </b-button> -->
+                    <div class="level-right has-text-right">
+                        <div class="is-size-7 " :class="secondaryText">Fecha ultima actualización: {{ last_updated }}</div>
                     </div>
-                    <div class="is-size-7 has-text-right" :class="secondaryText">Fecha ultima actualización: {{ last_updated }}</div>
                 </div>
+                    
             </div>
         </div>
     </section>
@@ -133,16 +134,15 @@
                 last_updated: '',
 
                 comsiteData: {
+                    can: Array,
                     total: 0,
                     per_page: 2,
                     from: 1,
                     to: 0,
-                    current_page: 1,
-                    can: false
+                    current_page: 1
                 },
-                counter: 0,
                 searchText: '',
-                buttonLoading: 0,
+                // buttonLoading: 0,
             }
         },
         created() {
@@ -154,35 +154,28 @@
         },
         methods: {
             getComsiteData() {
-                if (this.searchText != '') {
-                    axios.get(`/api/searchComsites?page=${this.comsiteData.current_page}&text=${this.searchText}`)
-                    .then((response) => {
-                        this.comsiteData = response.data;
-                    })
-                } else {
-                    axios.get(`/api/comsites?page=${this.comsiteData.current_page}`)
-                    .then((response) => {
-                        this.comsiteData = response.data;
-                        // console.log(response.data.can.update)
-                    })
-                }
-            },
-            syncComsite() {
-                // e.preventDefault()
-                this.buttonLoading = 1
-                // let currentObj = this
-
-                axios.post(`/api/comsites`)
+                axios.get(`/api/comsites?page=${this.comsiteData.current_page}&text=${this.searchText}`)
                 .then((response) => {
-                    // console.log(this.$route.params)
-                    // console.log(response)
-                    // document.location.href = "/comsite/create"
-                    // currentObj.output = response.data
-                    this.buttonLoading = 0
-                    this.getComsiteData()
-                    this.lastUpdated()
+                    this.comsiteData = response.data
+                    console.log(response.data)
                 })
             },
+            // syncComsite() {
+            //     // e.preventDefault()
+            //     this.buttonLoading = 1
+            //     // let currentObj = this
+
+            //     axios.post(`/api/comsites`)
+            //     .then((response) => {
+            //         // console.log(this.$route.params)
+            //         // console.log(response)
+            //         // document.location.href = "/comsite/create"
+            //         // currentObj.output = response.data
+            //         this.buttonLoading = 0
+            //         this.getComsiteData()
+            //         this.lastUpdated()
+            //     })
+            // },
 
             // Style mode
             styleMode(){

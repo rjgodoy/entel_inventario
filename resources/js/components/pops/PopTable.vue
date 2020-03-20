@@ -1,20 +1,20 @@
 <template>
     <div :class="bodyBackground">
-        <section class="section" style="padding-top: 30px; padding-bottom: 0px;">
-            <div class="">
-                <div class="box">
+        <section class="section hero has-background-dark">
+            <div class="hero-body is-paddingless">
+                <div class="">
                     
                     <div class="columns">
 
                         <!-- Filtros CRM -->
                         <div class="column is-2">
-                            <div class="title is-size-6 has-text-weight-light has-text-centered">CRMs</div>
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">CRMs</div>
                             <div class="columns is-multiline is-gapless">
                                 <div class="column is-6" v-for="crm in crms">
-                                    <a class="is-fullwidth button" :class="selectedCrm == crm ? 'has-background-link' : boxBackground" @click="selectCrm(crm)">
+                                    <a class="is-fullwidth button" :class="selectedCrm == crm ? 'is-link' : 'is-black-ter'" @click="selectCrm(crm)">
                                         <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
                                             <!-- <div class="is-size-7 has-text-weight-normal">CRM</div> -->
-                                            <div class="is-size-7 has-text-weight-light">{{ crm.nombre_crm }}</div>
+                                            <div class="is-size-7 has-text-weight-normal">{{ crm.nombre_crm }}</div>
                                         </div>
                                     </a>
                                 </div>
@@ -25,16 +25,16 @@
 
                         <!-- Filtros ZONAS -->
                         <div class="column is-2">
-                            <div class="title is-size-5 has-text-weight-light has-text-centered">Zonas</div>
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Zonas</div>
                             <div v-if="!selectedCrm">
-                                <div class="has-text-centered has-text-weight-light has-text-grey-light">Selecciona un CRM</div>
+                                <div class="has-text-centered has-text-weight-light has-text-grey-light is-size-5">Selecciona un CRM</div>
                             </div>
                             <div v-if="selectedCrm" class="columns is-multiline is-gapless">
                                 <div class="column" :class="zonas.length == 2 || zonas.length == 3 ? 'is-12' : 'is-6'" v-for="zona in zonas">
-                                    <a class="is-fullwidth button" :class="selectedZona == zona ? 'has-background-link' : boxBackground" @click="selectZona(zona)">
+                                    <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona)">
                                         <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
                                             <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
-                                            <div class="is-size-7 has-text-weight-light">{{ zona.nombre_zona }}</div>
+                                            <div class="is-size-7 has-text-weight-normal">{{ zona.nombre_zona }}</div>
                                         </div>
                                     </a>
                                 </div>
@@ -43,26 +43,26 @@
 
                         <!-- Filtros EXCLUSIVOS -->
                         <div class="column is-1">
-                            <div class="title is-size-5 has-text-weight-light has-text-centered">Importancia</div>
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Importancia</div>
                             <div class="columns is-multiline is-gapless">
                                 <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="core ? 'is-link' : boxBackground" @click="core = +!core" >
+                                    <a class="is-fullwidth button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">CORE</div>
+                                            <div class="is-size-7 has-text-weight-normal">CORE</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="critic ? 'is-link' : boxBackground" @click="critic = +!critic" >
+                                    <a class="is-fullwidth button" :class="critic ? 'is-link' : 'is-black-ter'" @click="critic = +!critic" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">CRITICO</div>
+                                            <div class="is-size-7 has-text-weight-normal">CRITICO</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="vip ? 'is-link' : boxBackground" @click="vip = +!vip" >
+                                    <a class="is-fullwidth button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">VIP</div>
+                                            <div class="is-size-7 has-text-weight-normal">VIP</div>
                                         </div>
                                     </a>
                                 </div>
@@ -73,103 +73,103 @@
 
                         <!-- Filtros CARACTERISTICAS -->
                         <div class="column is-4">
-                            <div class="title is-size-5 has-text-weight-light has-text-centered">Características</div>
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Características</div>
                             <div class="columns is-multiline is-gapless">
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="pe_3g ? 'is-link' : boxBackground" @click="pe_3g = +!pe_3g" >
+                                    <a class="tile is-child button" :class="pe_3g ? 'is-link' : 'is-black-ter'" @click="pe_3g = +!pe_3g" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">PE 3G</div>
+                                            <div class="is-size-7 has-text-weight-normal">PE 3G</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="mpls ? 'is-link' : boxBackground" @click="mpls = +!mpls" >
+                                    <a class="tile is-child button" :class="mpls ? 'is-link' : 'is-black-ter'" @click="mpls = +!mpls" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">MPLS</div>
+                                            <div class="is-size-7 has-text-weight-normal">MPLS</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="olt ? 'is-link' : boxBackground" @click="olt = +!olt" >
+                                    <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">OLT</div>
+                                            <div class="is-size-7 has-text-weight-normal">OLT</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="olt_3play ? 'is-link' : boxBackground" @click="olt_3play = +!olt_3play" >
+                                    <a class="tile is-child button" :class="olt_3play ? 'is-link' : 'is-black-ter'" @click="olt_3play = +!olt_3play" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">OLT 3Play</div>
+                                            <div class="is-size-7 has-text-weight-normal">OLT 3Play</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : boxBackground" @click="red_minima_n1 = +!red_minima_n1" >
+                                    <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : 'is-black-ter'" @click="red_minima_n1 = +!red_minima_n1" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Red Mínima N1</div>
+                                            <div class="is-size-7 has-text-weight-normal">Red Mínima N1</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : boxBackground" @click="red_minima_n2 = +!red_minima_n2" >
+                                    <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : 'is-black-ter'" @click="red_minima_n2 = +!red_minima_n2" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Red Mínima N2</div>
+                                            <div class="is-size-7 has-text-weight-normal">Red Mínima N2</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="lloo ? 'is-link' : boxBackground" @click="lloo = +!lloo" >
+                                    <a class="tile is-child button" :class="lloo ? 'is-link' : 'is-black-ter'" @click="lloo = +!lloo" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Localidad Obligatoria</div>
+                                            <div class="is-size-7 has-text-weight-normal">Localidad Obligatoria</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="ranco ? 'is-link' : boxBackground" @click="ranco = +!ranco" >
+                                    <a class="tile is-child button" :class="ranco ? 'is-link' : 'is-black-ter'" @click="ranco = +!ranco" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">RANCO</div>
+                                            <div class="is-size-7 has-text-weight-normal">RANCO</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="bafi ? 'is-link' : boxBackground" @click="bafi = +!bafi" >
+                                    <a class="tile is-child button" :class="bafi ? 'is-link' : 'is-black-ter'" @click="bafi = +!bafi" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">BAFI</div>
+                                            <div class="is-size-7 has-text-weight-normal">BAFI</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="offgrid ? 'is-link' : boxBackground" @click="offgrid = +!offgrid" >
+                                    <a class="tile is-child button" :class="offgrid ? 'is-link' : 'is-black-ter'" @click="offgrid = +!offgrid" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Offgrid</div>
+                                            <div class="is-size-7 has-text-weight-normal">Offgrid</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="solar ? 'is-link' : boxBackground" @click="solar = +!solar" >
+                                    <a class="tile is-child button" :class="solar ? 'is-link' : 'is-black-ter'" @click="solar = +!solar" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Solar</div>
+                                            <div class="is-size-7 has-text-weight-normal">Solar</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="eolica ? 'is-link' : boxBackground" @click="eolica = +!eolica" >
+                                    <a class="tile is-child button" :class="eolica ? 'is-link' : 'is-black-ter'" @click="eolica = +!eolica" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Eólica</div>
+                                            <div class="is-size-7 has-text-weight-normal">Eólica</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="protected_zone ? 'is-link' : boxBackground" @click="protected_zone = +!protected_zone" >
+                                    <a class="tile is-child button" :class="protected_zone ? 'is-link' : 'is-black-ter'" @click="protected_zone = +!protected_zone" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Zona protegida</div>
+                                            <div class="is-size-7 has-text-weight-normal">Zona protegida</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="alba_project ? 'is-link' : boxBackground" @click="alba_project = +!alba_project" >
+                                    <a class="tile is-child button" :class="alba_project ? 'is-link' : 'is-black-ter'" @click="alba_project = +!alba_project" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Proyecto Alba</div>
+                                            <div class="is-size-7 has-text-weight-normal">Proyecto Alba</div>
                                         </div>
                                     </a>
                                 </div>
@@ -180,47 +180,47 @@
 
                         <!-- Filtros EQUIPAMIENTO -->
                         <div class="column is-3">
-                            <div class="title is-size-5 has-text-weight-light has-text-centered">Equipamiento</div>
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Equipamiento</div>
                             <div class="columns is-multiline is-gapless">
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="olt ? 'is-link' : boxBackground" @click="olt = +!olt" >
+                                    <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Empalme</div>
+                                            <div class="is-size-7 has-text-weight-normal">Empalme</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="core ? 'is-link' : boxBackground" @click="core = +!core">
+                                    <a class="tile is-child button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core">
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Grupo Electrógeno</div>
+                                            <div class="is-size-7 has-text-weight-normal">Grupo Electrógeno</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="vip ? 'is-link' : boxBackground" @click="vip = +!vip" >
+                                    <a class="tile is-child button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Planta Rectificadora</div>
+                                            <div class="is-size-7 has-text-weight-normal">Planta Rectificadora</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="pe_3g ? 'is-link' : boxBackground" @click="pe_3g = +!pe_3g" >
+                                    <a class="tile is-child button" :class="pe_3g ? 'is-link' : 'is-black-ter'" @click="pe_3g = +!pe_3g" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Aire Acondicionado</div>
+                                            <div class="is-size-7 has-text-weight-normal">Aire Acondicionado</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="mpls ? 'is-link' : boxBackground" @click="mpls = +!mpls" >
+                                    <a class="tile is-child button" :class="mpls ? 'is-link' : 'is-black-ter'" @click="mpls = +!mpls" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Estructura Vertical</div>
+                                            <div class="is-size-7 has-text-weight-normal">Estructura Vertical</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="olt ? 'is-link' : boxBackground" @click="olt = +!olt" >
+                                    <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
                                         <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-light">Contenedor</div>
+                                            <div class="is-size-7 has-text-weight-normal">Contenedor</div>
                                         </div>
                                     </a>
                                 </div>
@@ -279,7 +279,7 @@
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Nombre POP</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Sitios</abbr></th>
-                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Dirección</abbr></th>
+                                <!-- <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Dirección</abbr></th> -->
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
                             </tr>
@@ -301,11 +301,14 @@
                                     <a :href="'/pop/' + pop.id" target="_blank" class="is-size-6 has-text-weight-normal" :class="primaryText">
                                         {{ pop ? pop.nombre : '' }}
                                     </a>
+                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                        {{ pop ? pop.direccion : '' }}, {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}
+                                    </div>
                                 </td>
 
                                 <td class="">
                                     <div class="columns is-multiline">
-                                        <div class="column is-6" v-for="site in pop.sites">
+                                        <div class="column is-4" v-for="site in pop.sites">
                                             <div class="is-size-7 has-text-weight-normal">{{ site.nem_site }}</div>
                                         </div>
                                     </div>
@@ -314,7 +317,7 @@
                                     </div>
                                 </td>
 
-                                <td class="">
+                                <!-- <td class="">
                                     <div class="is-size-6 has-text-weight-light" :class="secondaryText">
                                         {{ pop ? pop.direccion : '' }}
                                     </div>
@@ -324,7 +327,7 @@
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                         {{ pop.comuna.zona ? 'Zona: ' + pop.comuna.zona.nombre_zona : '' }} - {{ pop.comuna.zona.crm ? 'CRM: ' + pop.comuna.zona.crm.nombre_crm : '' }}
                                     </div>
-                                </td>
+                                </td> -->
 
                                 <td>
                                     <div class="field is-pulled-right">

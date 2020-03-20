@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transformer extends Model
 {
+    protected $guarded = [];
+    
     public function electric_line()
     {
         return $this->belongsTo(ElectricLine::class);

@@ -36,9 +36,19 @@ class ComsiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $comsites = Comsite::with('pop.comuna.zona.crm')->paginate(20);
+        $text = $request->text;
+        $comsites = Comsite::with('pop.comuna.zona.crm')
+        ->where(function($query) use ($text) {
+            $query->where('cod_pop', 'LIKE', "%$text%")
+                ->orWhere('nombre_pop', 'LIKE', "%$text%")
+                ->orWhere('operador', 'LIKE', "%$text%")
+                ->orWhere('propietario', 'LIKE', "%$text%")
+                ->orWhere('rol_propiedad', 'LIKE', "%$text%");
+        })
+        ->paginate(20);
+
         return new ComsiteResource($comsites);
     }
 
@@ -50,6 +60,8 @@ class ComsiteController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->user()->authorizeRoles(['admin']);
+
         $comsite_data = self::comsiteCall();
 
         foreach ($comsite_data as $data) {
@@ -117,6 +129,16 @@ class ComsiteController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -124,6 +146,17 @@ class ComsiteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Comsite  $comsite
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Comsite $comsite)
     {
         //
     }
@@ -145,34 +178,13 @@ class ComsiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
-    {
-        $text = $request->text;
-
-        $comsites = Comsite::where(function($query) use ($text) {
-            $query->where('cod_pop', 'LIKE', "%$text%")
-                ->orWhere('nombre_pop', 'LIKE', "%$text%")
-                ->orWhere('operador', 'LIKE', "%$text%")
-                ->orWhere('propietario', 'LIKE', "%$text%")
-                ->orWhere('rol_propiedad', 'LIKE', "%$text%");
-        })->paginate(20);
-
-        return $comsites;
-    }
-
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function lastData()
     {
         $last_updated = Comsite::orderBy('updated_at', 'desc')->first()->updated_at;
         return $last_updated;
     }
 
-     /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

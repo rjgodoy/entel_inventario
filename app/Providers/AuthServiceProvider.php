@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\Comsite;
-use App\Models\ComsitePolicy;
+// use App\Models\Comsite;
+// use App\Policies\ComsitePolicy;
+use App\Models\ElectricLine;
+use App\Policies\ElectricLinePolicy;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -17,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // Comsite::class => ComsitePolicy::class,
-        // 'App\Comsite' => 'App\Policies\ComsitePolicy',
+        ElectricLine::class => ElectricLinePolicy::class,
     ];
 
     /**
@@ -29,11 +31,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('sync-comsite', function ($user) {
-            return $user->id == 5;
-        });
+        // Gate::define('sync-comsite', function ($user) {
+        //     return $user->isAdmin;
+        // });
 
-        Gate::define('sync-comsite', 'App\Policies\ComsitePolicy@create');
+        // Gate::define('create-comsite', 'App\Policies\ComsitePolicy@create');
+
+        // Gate::define('create-electric-line', 'App\Policies\ElectricLinePolicy@create');
+        Gate::define('update-electric-line', 'App\Policies\ElectricLinePolicy@update');
+        // Gate::define('delete-electric-line', 'App\Policies\ElectricLinePolicy@delete');
 
     }
 }

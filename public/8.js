@@ -9,66 +9,66 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ITheme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ITheme */ "./node_modules/@amcharts/amcharts4/.internal/themes/ITheme.js");
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
 
 var theme = function (object) {
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SpriteState")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SpriteState")) {
         object.transitionDuration = 400;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Component")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Component")) {
         object.rangeChangeDuration = 500;
         object.interpolationDuration = 500;
         object.sequencedInterpolation = false;
-        if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SankeyDiagram")) {
+        if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SankeyDiagram")) {
             object.sequencedInterpolation = true;
         }
-        if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSeries")) {
+        if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSeries")) {
             object.sequencedInterpolation = true;
         }
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Chart")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Chart")) {
         object.defaultState.transitionDuration = 2000;
         object.hiddenState.transitionDuration = 1000;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Tooltip")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Tooltip")) {
         object.animationDuration = 400;
         object.defaultState.transitionDuration = 400;
         object.hiddenState.transitionDuration = 400;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Scrollbar")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Scrollbar")) {
         object.animationDuration = 500;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Series")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Series")) {
         object.defaultState.transitionDuration = 1000;
         object.hiddenState.transitionDuration = 700;
         object.hiddenState.properties.opacity = 1;
         object.showOnInit = true;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "MapSeries")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "MapSeries")) {
         object.hiddenState.properties.opacity = 0;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "PercentSeries")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "PercentSeries")) {
         object.hiddenState.properties.opacity = 0;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSlice")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSlice")) {
         object.defaultState.transitionDuration = 800;
         object.hiddenState.transitionDuration = 1000;
         object.hiddenState.properties.opacity = 1;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Slice")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Slice")) {
         object.defaultState.transitionDuration = 700;
         object.hiddenState.transitionDuration = 1000;
         object.hiddenState.properties.opacity = 1;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Preloader")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Preloader")) {
         object.hiddenState.transitionDuration = 2000;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column")) {
         object.defaultState.transitionDuration = 700;
         object.hiddenState.transitionDuration = 1000;
         object.hiddenState.properties.opacity = 1;
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column3D")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column3D")) {
         object.hiddenState.properties.opacity = 0;
     }
 };
@@ -86,12 +86,12 @@ var theme = function (object) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ITheme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ITheme */ "./node_modules/@amcharts/amcharts4/.internal/themes/ITheme.js");
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
 /* harmony import */ var _core_utils_Color__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
 
 
 var theme = function (object) {
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "InterfaceColorSet")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "InterfaceColorSet")) {
         object.setFor("stroke", Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#000000"));
         object.setFor("fill", Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#2b2b2b"));
         object.setFor("primaryButton", Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#6794dc").lighten(-0.2));
@@ -113,7 +113,7 @@ var theme = function (object) {
         object.setFor("alternativeText", Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#000000"));
         object.setFor("disabledBackground", Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_1__["color"])("#bbbbbb"));
     }
-    if (Object(_ITheme__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Scrollbar")) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Scrollbar")) {
         object.background.fillOpacity = 0.4;
         object.thumb.background.fillOpacity = 0.5;
     }
@@ -157,10 +157,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/GrowingChart.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/GrowingChart.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -424,10 +424,10 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/GrowingChart.vue?vue&type=template&id=ca55bb6e&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/GrowingChart.vue?vue&type=template&id=ca55bb6e& ***!
-  \************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41& ***!
+  \********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -448,17 +448,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/capacity/GrowingChart.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/capacity/GrowingChart.vue ***!
-  \***********************************************************/
+/***/ "./resources/js/components/pops/GrowingChart.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/pops/GrowingChart.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _GrowingChart_vue_vue_type_template_id_ca55bb6e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GrowingChart.vue?vue&type=template&id=ca55bb6e& */ "./resources/js/components/capacity/GrowingChart.vue?vue&type=template&id=ca55bb6e&");
-/* harmony import */ var _GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrowingChart.vue?vue&type=script&lang=js& */ "./resources/js/components/capacity/GrowingChart.vue?vue&type=script&lang=js&");
+/* harmony import */ var _GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GrowingChart.vue?vue&type=template&id=229b3e41& */ "./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41&");
+/* harmony import */ var _GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrowingChart.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -469,8 +469,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _GrowingChart_vue_vue_type_template_id_ca55bb6e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _GrowingChart_vue_vue_type_template_id_ca55bb6e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -480,38 +480,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/capacity/GrowingChart.vue"
+component.options.__file = "resources/js/components/pops/GrowingChart.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/capacity/GrowingChart.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/capacity/GrowingChart.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./GrowingChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/GrowingChart.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./GrowingChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/capacity/GrowingChart.vue?vue&type=template&id=ca55bb6e&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/capacity/GrowingChart.vue?vue&type=template&id=ca55bb6e& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41& ***!
+  \**************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_ca55bb6e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./GrowingChart.vue?vue&type=template&id=ca55bb6e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/GrowingChart.vue?vue&type=template&id=ca55bb6e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_ca55bb6e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./GrowingChart.vue?vue&type=template&id=229b3e41& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_ca55bb6e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

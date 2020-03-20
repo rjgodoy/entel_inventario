@@ -274,8 +274,8 @@
                                             </b-icon>
                                         </div>
                                         
-                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'pops' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal">POP</p>
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'pops' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'pops' ? 'has-text-white' : secondaryText">POP</p>
                                         </div>
                                     </a>
                                 </div>
@@ -290,8 +290,8 @@
                                                 :class="currentTab === 'sites' ? 'has-text-eco' : 'has-text-eco'">
                                             </b-icon>
                                         </div>
-                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'sites' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal">Sitios</p>
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'sites' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'sites' ? 'has-text-white' : secondaryText">Sitios</p>
                                         </div>
                                     </a>
                                 </div>
@@ -306,8 +306,8 @@
                                                 :class="currentTab === 'technologies' ? 'has-text-positive' : 'has-text-positive'">
                                             </b-icon>
                                         </div>
-                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'technologies' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal">Tecnologías</p>
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'technologies' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'technologies' ? 'has-text-white' : secondaryText">Tecnologías</p>
                                         </div>
                                     </a>
                                 </div>
@@ -324,8 +324,8 @@
                                                 >
                                             </b-icon>
                                         </div>
-                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'critics' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal">POP Críticos</p>
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'critics' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'critics' ? 'has-text-white' : secondaryText">POP Críticos</p>
                                         </div>
                                     </a>
                                 </div>
@@ -340,8 +340,8 @@
                                                 >
                                             </b-icon>
                                         </div>
-                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'alba' ? 'has-text-white' : ''" style="margin-top: 10px;">{{ albaQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal">Proyecto Alba</p>
+                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'alba' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ albaQuantity | numeral('0,0') }}
+                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'alba' ? 'has-text-white' : secondaryText">Proyecto Alba</p>
                                         </div>
                                     </a>
                                 </div>
@@ -366,17 +366,20 @@
                             <div class="tile">
                                 <div class="tile is-parent">
                                     <article
-                                        class="tile is-child box" 
                                         :class="boxBackground" 
                                         style="width: 100%; height: auto;">
-                                        <radial-chart></radial-chart>
+                                        <pret-data-chart
+                                            :bodyBackground="bodyBackground"
+                                            :boxBackground="boxBackground"
+                                            :primaryText="primaryText"
+                                            :secondaryText="secondaryText"
+                                        ></pret-data-chart>
                                     </article>
                                 </div>
                             </div>
                         </div>
 
-
-
+                        <!-- Mapa -->
                         <div class="tile is-parent is-vertical">
                             <div class="tile is-child box" :class="boxBackground">
                                 <map-view
@@ -394,7 +397,7 @@
                         <div class="tile">
                             <div class="tile is-parent is-vertical">
                                 <article class="tile is-child box" :class="boxBackground">
-                                <!-- <keep-alive> -->
+                                <keep-alive>
                                     <component :is="currentTabComponent"
                                         :bodyBackground="bodyBackground"
                                         :boxBackground="boxBackground"
@@ -405,14 +408,14 @@
                                         :core="core"
                                         :last_updated="currentLastUpdateData"
                                     />
-                                <!-- </keep-alive> -->
+                                </keep-alive>
                                 </article>
 
                                 <article v-if="(this.currentTab !== 'critics') && (this.currentTab !== 'alba')"
                                     class="tile is-child box" 
                                     :class="boxBackground" 
                                     style="width: 100%; height: auto;">
-                                    <data-chart></data-chart>
+                                    <!-- <data-chart></data-chart> -->
                                 </article>
                             </div>
                         </div>
@@ -423,7 +426,7 @@
                         <div class="tile is-parent">
                             <div class="tile is-child box">
                                 <div class="is-size-5 has-text-weight-semibold title">Nuevos POP</div>
-                                <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.pop_news }}
+                                <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.pop_news_month }}
                                     <p class="is-size-6 has-text-weight-light">POP nuevos ingresados esta semana</p>
                                 </div>
                                 <div class="field" style="margin-top: 20px;">
@@ -443,7 +446,7 @@
                         <div class="tile is-parent">
                             <div class="tile is-child box">
                                 <div class="is-size-5 has-text-weight-semibold title">Nuevos Sitios</div>
-                                <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.sites_news }}
+                                <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.sites_news_month }}
                                     <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados esta semana</p>
                                 </div>
                                 <div class="field" style="margin-top: 20px;">
@@ -460,7 +463,7 @@
                             </div>
                         </div>
 
-                        <div class="tile is-parent">
+                        <!-- <div class="tile is-parent">
                             <div class="tile is-child box">
                                 <div class="is-size-5 has-text-weight-semibold title">Nuevas Tecnologías</div>
                                 <div class="is-size-2 has-text-centered">{{ last_data_counters.technologies_news }}
@@ -476,15 +479,15 @@
                                     Fecha actualización: {{ last_data_counters.last_updated_technologies }}
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="tile is-parent is-5">
-                            <pret-data-chart
+                        <div class="tile is-parent is-7">
+                            <!-- <pret-data-chart
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
                                 :primaryText="primaryText"
                                 :secondaryText="secondaryText"
-                            ></pret-data-chart>
+                            ></pret-data-chart> -->
                         </div>
                     </div>
 
@@ -494,69 +497,65 @@
         </section>
 
         <!-- Equipamiento -->
-        <section class="section is-marginless" :class="bodyBackground">
+        <section class="section" :class="bodyBackground">
             <!-- <div class="title">Equipamiento</div> -->
-            <div class="tile is-ancestor">
-                <div class="tile is-vertical">
-                    <div class="tile">
-                        <electric-lines-data
-                            :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackground"
-                            :primaryText="primaryText"
-                            :secondaryText="secondaryText"
-                            :selectedCrm="this.selectedCrm"
-                            :selectedZona="this.selectedZona"
-                            :core="core"
-                        />
-                        <generator-groups-data
-                            :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackground"
-                            :primaryText="primaryText"
-                            :secondaryText="secondaryText"
-                            :selectedCrm="this.selectedCrm"
-                            :selectedZona="this.selectedZona"
-                            :core="core"
-                        />
-                        <power-rectifiers-data
-                            :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackground"
-                            :primaryText="primaryText"
-                            :secondaryText="secondaryText"
-                            :selectedCrm="this.selectedCrm"
-                            :selectedZona="this.selectedZona"
-                            :core="core"
-                        />
+            <div class="columns is-multiline">
+                <electric-lines-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
+                <generator-sets-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
+                <power-rectifiers-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
 
-                        <air-conditioners-data
-                            :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackground"
-                            :primaryText="primaryText"
-                            :secondaryText="secondaryText"
-                            :selectedCrm="this.selectedCrm"
-                            :selectedZona="this.selectedZona"
-                            :core="core"
-                        />
+                <air-conditioners-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
 
-                        <vertical-structures-data
-                            :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackground"
-                            :primaryText="primaryText"
-                            :secondaryText="secondaryText"
-                            :selectedCrm="this.selectedCrm"
-                            :selectedZona="this.selectedZona"
-                            :core="core"
-                        />
-                        <infrastructures-data
-                            :bodyBackground="bodyBackground"
-                            :boxBackground="boxBackground"
-                            :primaryText="primaryText"
-                            :secondaryText="secondaryText"
-                            :selectedCrm="this.selectedCrm"
-                            :selectedZona="this.selectedZona"
-                            :core="core"
-                        />
-                    </div>
-                </div>
+                <vertical-structures-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
+                <infrastructures-data
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
             </div>
         </section>
 
@@ -595,19 +594,19 @@
         timeout: 3000
     })
 
-    const MapView = () => ({
-        // The component to load (should be a Promise)
-        component: import('../maps/MapView.vue'),
-        // A component to use while the async component is loading
-        loading: import('../helpers/LoadingComponent'),
-        // A component to use if the load fails
-        error: import('../helpers/ErrorComponent'),
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
+    // const MapView = () => ({
+    //     // The component to load (should be a Promise)
+    //     component: import('../maps/MapView.vue'),
+    //     // A component to use while the async component is loading
+    //     loading: import('../helpers/LoadingComponent'),
+    //     // A component to use if the load fails
+    //     error: import('../helpers/ErrorComponent'),
+    //     // Delay before showing the loading component. Default: 200ms.
+    //     delay: 200,
+    //     // The error component will be displayed if a timeout is
+    //     // provided and exceeded. Default: Infinity.
+    //     timeout: 3000
+    // })
 
     const RadialChart = () => ({
         // The component to load (should be a Promise)
@@ -651,7 +650,8 @@
             
             // ###### Map ###########
             // PopsMap,
-            MapView,
+            MapView: () => import("../maps/MapView.vue"),
+            // MapView,
 
             // ###### Charts ########
             PretDataChart,
@@ -660,7 +660,7 @@
 
             // ###### Equipment #####
             ElectricLinesData: () => import('./ElectricLinesData'),
-            GeneratorGroupsData: () => import('./GeneratorGroupsData'),
+            GeneratorSetsData: () => import('./GeneratorSetsData'),
             PowerRectifiersData: () => import('./PowerRectifiersData'),
             AirConditionersData: () => import('./AirConditionersData'),
             VerticalStructuresData: () => import('./VerticalStructuresData'),
@@ -682,11 +682,13 @@
             //         duration: 5000
             //     })
             // });
+
+            this.$eventCounters.$on('pops', function(total) {
+                console.log('El total es ' + total)
+                // this.popsQuantity = total
+            })
         },
-        beforeDestroy() {
-            this.$eventBus.$off('graphData')
-            // this.$eventBus.$off('password-changed');
-        },
+
         mounted() {
             // console.log(this.last_data_counters)
             // this.getCrms()
@@ -813,7 +815,9 @@
                 else if (this.currentTab == 'alba') {
                     this.viewAlbaPops()
                 }
-                else {
+                else if(
+                    (oldValue == 'critics' || oldValue == 'alba') && 
+                    (newValue == 'pops' || newValue == 'sites' || newValue == 'technologies')) {
                     this.getPops()
                 }
             }
@@ -835,6 +839,14 @@
                     return
                 }
             },
+
+            // popsQuantity: function () {
+            //     this.$eventCounters.$on('pops', function(value) {
+            //         var totalPops = value
+            //         console.log(totalPops)
+            //         return totalPops
+            //     })   
+            // },
 
             textSwitchCore() {
                 return this.core ? 'has-text-link' : ''
@@ -870,6 +882,7 @@
                 axios.get(`/api/criticPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     // console.log(response.data)
                     this.pops = response.data.data
+
                 })
                 this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
             },
@@ -882,7 +895,7 @@
 
                 axios.get(`/api/albaPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     // console.log(response.data)
-                    this.pops = response.data
+                    this.pops = response.data.data
                 })
                 this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0
             },
@@ -1065,10 +1078,27 @@
                     link.download = 'test.xlsx'
                     link.click()
                     this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'La planilla se ha descargado exitosamente.',
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'Ha ocurrido un error. Favor contactar al administrador',
+                        type: 'is-danger',
+                        duration: 5000
+                    })
                 })
             },
         },
 
+        beforeDestroy() {
+            this.$eventBus.$off('graphData')
+            this.$eventCounters.$off('pops');
+        },
     }
 </script>
 

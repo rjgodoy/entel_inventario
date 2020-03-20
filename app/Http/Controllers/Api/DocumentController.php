@@ -125,7 +125,7 @@ class DocumentController extends Controller
     {
         $site = Site::where('id', $id)->first();
 
-        return $site->nem_site;
+        // return $site->nem_site;
 
         $siteFolder = $this->originPath.'/'.$site->nem_site;
 

@@ -1,57 +1,84 @@
 <template>
     <div>
         <!-- POP Name -->
-        <section class="hero is-info is-bold">
+        <section class="hero is-dark">
             <div class="hero-body">
-                <div class="container">
+                <div class="">
                     <div class="columns">
-                        <div class="column is-8">
+                        <div class="column is-1"></div>
+                        <div class="column is-1">
+                            <b-button type="is-primary" size="is-medium" :class="popClassification.id == 1 ? 'is-info' : (popClassification.id == 2 ? 'is-warning' : (popClassification.id == 3 ? 'is-primary' : (popClassification.id == 4 ? 'is-smart' : 'is-eco')))">
+                                <div class="title is-size-4">{{ popClassification.classification }}</div>
+                            </b-button>
+                        </div>
+                        <div class="column is-6">
                             <div class="is-size-4">
                                 <h1 class="title">{{ pop.nombre }}</h1>
+                                <h2 class="subtitle">{{ popNems }}
+                                    <span class="is-size-5" v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
+                                    </span>
+                                </h2>
                             </div>
                         </div>
-                        <div class="column is-4">
-                            <div class="columns is-multiline">
-                                <div class="column is-6" v-for="site in pop.sites">
-                                    <b-button class="is-size-6 has-text-weight-bold is-light is-fullwidth" >{{ site.nem_site }}</b-button>
+                        <div class="column is-2">
+                            <div class="columns is-multiline is-gapless">
+                                <div class="column is-6">
+                                    <b-button 
+                                        :disabled="popClassification.id == 1 ? false : true"
+                                        size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        CORE
+                                    </b-button>
                                 </div>
+                                <div class="column is-6">
+                                    <b-button size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        Critico
+                                    </b-button>
+                                </div>
+                                <div class="column is-6">
+                                    <b-button 
+                                        :disabled="pop.vip == 1 ? false : true"
+                                        size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        VIP
+                                    </b-button>
+                                </div>
+                                <div class="column is-6">
+                                    <b-button 
+                                        :disabled="pop.alba_project == 1 ? false : true"
+                                        size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        ALBA
+                                    </b-button>
+                                </div>
+                                <!-- <div class="column is-6">
+                                    <b-button size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        DWDR
+                                    </b-button>
+                                </div>
+                                <div class="column is-6">
+                                    <b-button size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        ALBA
+                                    </b-button>
+                                </div> -->
                             </div>
                         </div>
-                        <!-- <div class="column is-2">
-                            <div class="columns is-multiline has-text-centered">
-                                <div class="column is-6">
-                                    <b-button type="is-success" disabled class="is-fullwidth">Critico</b-button>
-                                </div>
-                                <div class="column is-6">
-                                    <b-button type="is-success" class="is-fullwidth">CORE</b-button>
-                                </div>
-                                <div class="column is-6">
-                                    <b-button type="is-success" class="is-fullwidth">DWDR</b-button>
-                                </div>
-                                <div class="column is-6">
-                                    <b-button type="is-success" class="is-fullwidth">ALBA</b-button>
-                                </div>
-                            </div>
-                        </div> -->
-
-
-                        <log 
-                            :pop="pop"
-                        />
-                        <b-button
-                            type="is-primary" 
-                            @click="openLog" 
-                            data-target="quickviewDefault" 
-                            data-show="quickview" 
-                            size="is-small"
-                            >Log del POP
-                        </b-button>
-                        <!-- <b-button 
-                            @click="closeLog" 
-                            data-dismiss="quickview"
-                            size="is-small"
-                            >Log dismiss
-                        </b-button> -->
+                        <div class="column is-1">
+                            <log 
+                                :pop="pop"
+                            />
+                            <b-button
+                                type="is-primary" 
+                                @click="openLog" 
+                                data-target="quickviewDefault" 
+                                data-show="quickview" 
+                                size="is-small"
+                                >Log del POP
+                            </b-button>
+                            <!-- <b-button 
+                                @click="closeLog" 
+                                data-dismiss="quickview"
+                                size="is-small"
+                                >Log dismiss
+                            </b-button> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -146,7 +173,7 @@
         ],
         data() {
             return {
-                pop: [],
+                pop: Object,
                 technologiesArray: [],
                 i: 0,
 
@@ -187,6 +214,15 @@
         },
 
         computed: {
+            popNems() {
+                if(this.pop.sites) {
+                    var nem = this.pop.sites.length == 1 ? 
+                        this.pop.sites[0].nem_site : 
+                        this.pop.sites[0].nem_site + ' - ' + this.pop.sites[1].nem_site
+                    return nem
+                }
+                return
+            },
             // sites() {
             //     var array = []
             //     if (this.pop.sites) {
@@ -245,33 +281,36 @@
             //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
             // },
 
-            // popClassification() {
-            //     var id = 6; var classification
+            popClassification() {
+                var id = 6; var classification
+                if (this.pop.sites) {
+                    this.pop.sites.forEach(function(item) {
+                        if (item.classification_type_id && item.classification_type_id < id) { 
+                            id = item.classification_type_id
+                            classification = item.classification_type.classification_type
+                        }
+                    })
+                }
+                return {
+                    'classification': classification, 
+                    'id': id
+                    }
+            },
+
+            // popAttentionPriority() {
+            //     var id = 10; var attentionPriority
             //     if (this.pop.sites) {
             //         this.pop.sites.forEach(function(item) {
-            //             if (item.classification_type_id && item.classification_type_id < id) { 
-            //                 id = item.classification_type_id
-            //                 classification = item.classification_type.classification_type
+            //             if (item.attention_priority_type_id && item.attention_priority_type_id < id) { 
+            //                 id = item.attention_priority_type_id
+            //                 attentionPriority = item.attention_priority_type.attention_priority_type
             //             }
             //         })
             //     }
             //     return {
-            //         'classification': classification, 
+            //         'attentionPriority': attentionPriority, 
             //         'id': id
             //         }
-            // },
-
-            // popAttentionPriority() {
-            //     var i = 10; var cat
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.attention_priority_type_id && item.attention_priority_type_id < i) { 
-            //                 i = item.attention_priority_type_id
-            //                 cat = item.attention_priority_type.attention_priority_type
-            //             }
-            //         })
-            //     }
-            //     return cat
             // },
 
             // popCategory() {

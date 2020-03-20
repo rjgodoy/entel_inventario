@@ -61,22 +61,28 @@ class HomeController extends Controller
         }
 
         // CONTADORES
-        $pop_news = Pop::where('created_at', '>', Carbon::now()->subHours(24))->count();
-        $sites_news = Site::where('created_at', '>', Carbon::now()->subHours(24))->count();
-        $technologies_news = Technology::where('created_at', '>', Carbon::now()->subHours(24))->count();
+        $pop_news_day = Pop::whereDay('created_at', Carbon::now()->format('d'))->count();
+        $pop_news_month = Pop::whereMonth('created_at', Carbon::now()->format('m'))->count();
+        $sites_news_day = Site::whereDay('created_at', Carbon::now()->format('d'))->count();
+        $sites_news_month = Site::whereMonth('created_at', Carbon::now()->format('m'))->count();
+        $technologies_news_day = Technology::whereDay('created_at', Carbon::now()->format('d'))->count();
+        $technologies_news_month = Technology::whereMonth('created_at', Carbon::now()->format('m'))->count();
         $last_site = Site::with('pop.comuna.zona.crm')->latest()->first();
-        $psg_info = PsgTp::where('created_at', '>', Carbon::now()->subHours(24))->count();
+        $equipment = PsgTp::whereMonth('created_at', '>', Carbon::now()->format('m'))->count();
 
         $last_updated_pops = Carbon::parse(Pop::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
         $last_updated_sites = Carbon::parse(Site::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
         $last_updated_technologies = Carbon::parse(Technology::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
         
         $last_data_counters = [
-            'pop_news' => $pop_news,
-            'sites_news' => $sites_news,
-            'technologies_news' => $technologies_news,
+            'pop_news_day' => $pop_news_day,
+            'pop_news_month' => $pop_news_month,
+            'sites_news_day' => $sites_news_day,
+            'sites_news_month' => $sites_news_month,
+            'technologies_news_day' => $technologies_news_day,
+            'technologies_news_month' => $technologies_news_month,
             'last_site' => $last_site,
-            'psg_info' => $psg_info,
+            'equipment' => $equipment,
             'last_updated_pops' => $last_updated_pops,
             'last_updated_sites' => $last_updated_sites,
             'last_updated_technologies' => $last_updated_technologies

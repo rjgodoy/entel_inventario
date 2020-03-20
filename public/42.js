@@ -103,6 +103,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['pop'],
@@ -217,158 +232,189 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", {}, [
-    _c("div", { staticClass: "level has-background-dark has-text-white" }, [
-      _c("div", { staticClass: "level-item" }, [
-        _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-          _vm._v("2G 1900\n                "),
-          _c(
-            "span",
-            {
-              staticClass: "has-text-weight-bold is-size-5",
-              class: _vm.tec2g1900 ? "has-text-eco" : ""
-            },
-            [_vm._v(" " + _vm._s(_vm.tec2g1900 ? _vm.tec2g1900.nem_tech : "-"))]
-          )
+    _c(
+      "div",
+      { staticClass: "level has-background-black-ter has-text-white" },
+      [
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+            _vm._v("2G 1900\n                "),
+            _c(
+              "span",
+              {
+                staticClass: "has-text-weight-bold is-size-5",
+                class: _vm.tec2g1900 ? "has-text-eco" : ""
+              },
+              [
+                _vm._v(
+                  " " + _vm._s(_vm.tec2g1900 ? _vm.tec2g1900.nem_tech : "-")
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "is-divider-vertical",
+          staticStyle: { height: "64px" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+            _vm._v("3G 900\n                "),
+            _c(
+              "span",
+              {
+                staticClass: "has-text-weight-bold is-size-5",
+                class: _vm.tec3g900 ? "has-text-eco" : ""
+              },
+              [_vm._v(" " + _vm._s(_vm.tec3g900 ? _vm.tec3g900.nem_tech : "-"))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+            _vm._v("3G 1900\n                "),
+            _c(
+              "span",
+              {
+                staticClass: "has-text-weight-bold is-size-5",
+                class: _vm.tec3g1900 ? "has-text-eco" : ""
+              },
+              [
+                _vm._v(
+                  " " + _vm._s(_vm.tec3g1900 ? _vm.tec3g1900.nem_tech : "-")
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+            _vm._v("3G 3500\n                "),
+            _c(
+              "span",
+              {
+                staticClass: "has-text-weight-bold is-size-5",
+                class: _vm.tec3g3500 ? "has-text-eco" : ""
+              },
+              [
+                _vm._v(
+                  " " + _vm._s(_vm.tec3g3500 ? _vm.tec3g3500.nem_tech : "-")
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "is-divider-vertical",
+          staticStyle: { height: "64px" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+            _vm._v("LTE 700\n                "),
+            _c(
+              "span",
+              {
+                staticClass: "has-text-weight-bold is-size-5",
+                class: _vm.tec4g700 ? "has-text-eco" : ""
+              },
+              [_vm._v(" " + _vm._s(_vm.tec4g700 ? _vm.tec4g700.nem_tech : "-"))]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+            _vm._v("LTE 1900\n                "),
+            _c(
+              "span",
+              {
+                staticClass: "has-text-weight-bold is-size-5",
+                class: _vm.tec4g1900 ? "has-text-eco" : ""
+              },
+              [
+                _vm._v(
+                  " " + _vm._s(_vm.tec4g1900 ? _vm.tec4g1900.nem_tech : "-")
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+            _vm._v("LTE 2600\n                "),
+            _c(
+              "span",
+              {
+                staticClass: "has-text-weight-bold is-size-5",
+                class: _vm.tec4g2600 ? "has-text-eco" : ""
+              },
+              [
+                _vm._v(
+                  " " + _vm._s(_vm.tec4g2600 ? _vm.tec4g2600.nem_tech : "-")
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+            _vm._v("LTE 3500\n                "),
+            _c(
+              "span",
+              {
+                staticClass: "has-text-weight-bold is-size-5",
+                class: _vm.tec4g3500 ? "has-text-eco" : ""
+              },
+              [
+                _vm._v(
+                  " " + _vm._s(_vm.tec4g3500 ? _vm.tec4g3500.nem_tech : "-")
+                )
+              ]
+            )
+          ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "is-divider-vertical",
-        staticStyle: { height: "64px" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-item" }, [
-        _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-          _vm._v("3G 900\n                "),
-          _c(
-            "span",
-            {
-              staticClass: "has-text-weight-bold is-size-5",
-              class: _vm.tec3g900 ? "has-text-eco" : ""
-            },
-            [_vm._v(" " + _vm._s(_vm.tec3g900 ? _vm.tec3g900.nem_tech : "-"))]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-item" }, [
-        _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-          _vm._v("3G 1900\n                "),
-          _c(
-            "span",
-            {
-              staticClass: "has-text-weight-bold is-size-5",
-              class: _vm.tec3g1900 ? "has-text-eco" : ""
-            },
-            [_vm._v(" " + _vm._s(_vm.tec3g1900 ? _vm.tec3g1900.nem_tech : "-"))]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-item" }, [
-        _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-          _vm._v("3G 3500\n                "),
-          _c(
-            "span",
-            {
-              staticClass: "has-text-weight-bold is-size-5",
-              class: _vm.tec3g3500 ? "has-text-eco" : ""
-            },
-            [_vm._v(" " + _vm._s(_vm.tec3g3500 ? _vm.tec3g3500.nem_tech : "-"))]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "is-divider-vertical",
-        staticStyle: { height: "64px" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-item" }, [
-        _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-          _vm._v("LTE 700\n                "),
-          _c(
-            "span",
-            {
-              staticClass: "has-text-weight-bold is-size-5",
-              class: _vm.tec4g700 ? "has-text-eco" : ""
-            },
-            [_vm._v(" " + _vm._s(_vm.tec4g700 ? _vm.tec4g700.nem_tech : "-"))]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-item" }, [
-        _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-          _vm._v("LTE 1900\n                "),
-          _c(
-            "span",
-            {
-              staticClass: "has-text-weight-bold is-size-5",
-              class: _vm.tec4g1900 ? "has-text-eco" : ""
-            },
-            [_vm._v(" " + _vm._s(_vm.tec4g1900 ? _vm.tec4g1900.nem_tech : "-"))]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-item" }, [
-        _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-          _vm._v("LTE 2600\n                "),
-          _c(
-            "span",
-            {
-              staticClass: "has-text-weight-bold is-size-5",
-              class: _vm.tec4g2600 ? "has-text-eco" : ""
-            },
-            [_vm._v(" " + _vm._s(_vm.tec4g2600 ? _vm.tec4g2600.nem_tech : "-"))]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-item" }, [
-        _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-          _vm._v("LTE 3500\n                "),
-          _c(
-            "span",
-            {
-              staticClass: "has-text-weight-bold is-size-5",
-              class: _vm.tec4g3500 ? "has-text-eco" : ""
-            },
-            [_vm._v(" " + _vm._s(_vm.tec4g3500 ? _vm.tec4g3500.nem_tech : "-"))]
-          )
-        ])
-      ])
-    ]),
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "section" }, [
       _c(
         "div",
-        { staticClass: "columns is-multiline" },
+        { staticClass: "tile is-ancestor columns is-multiline" },
         _vm._l(_vm.sites, function(site) {
-          return _c("div", { staticClass: "column is-4" }, [
+          return _c("div", { staticClass: "tile is-parent column is-4" }, [
             _c("div", { staticClass: "tile is-child box" }, [
               _c("div", { staticClass: "columns" }, [
                 _c("div", { staticClass: "column is-8" }, [
                   _c(
                     "div",
-                    { staticClass: "title is-size-6 has-text-weight-semibold" },
-                    [_vm._v(_vm._s(site.nem_site ? site.nem_site : "-"))]
+                    { staticClass: "title is-size-6 has-text-weight-normal" },
+                    [_vm._v("Sitio")]
                   ),
                   _vm._v(" "),
                   _c(
                     "div",
-                    {
-                      staticClass: "subtitle is-size-5 has-text-weight-normal"
-                    },
-                    [_vm._v(_vm._s(site.nombre ? site.nombre : "-"))]
-                  ),
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(
-                        site.attention_priority_type.attention_priority_type
-                      ) +
-                      "\n                        "
+                    { staticClass: "subtitle is-size-4 has-text-weight-bold" },
+                    [
+                      _vm._v(
+                        _vm._s(site.nem_site) +
+                          "\n                                "
+                      ),
+                      site.nombre
+                        ? _c(
+                            "p",
+                            { staticClass: "is-size-5 has-text-weight-light" },
+                            [_vm._v(_vm._s(site.nombre))]
+                          )
+                        : _vm._e()
+                    ]
                   )
                 ]),
                 _vm._v(" "),
@@ -384,38 +430,12 @@ var render = function() {
                           "b-tag",
                           {
                             staticClass: "has-text-weight-bold",
-                            attrs: {
-                              type:
-                                site.site_type.service_type_id == 1
-                                  ? "is-smart"
-                                  : "is-eco",
-                              size: "is-normal"
-                            }
+                            attrs: { size: "is-medium" }
                           },
                           [
                             _vm._v(
                               "\n                                    " +
                                 _vm._s(site.site_type.site_type.toUpperCase()) +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-tag",
-                          {
-                            staticClass: "has-text-weight-bold",
-                            attrs: { type: "is-positive", size: "is-normal" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(
-                                  site.classification_type
-                                    ? site.classification_type
-                                        .classification_type
-                                    : ""
-                                ) +
                                 "\n                                "
                             )
                           ]
@@ -428,13 +448,55 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              site.technologies.length
-                ? _c("div", {
-                    staticClass: "is-divider",
-                    staticStyle: { margin: "10px auto 10px auto" },
-                    attrs: { "data-content": "TECNOLOGIAS" }
-                  })
-                : _vm._e(),
+              _c("div", { staticClass: "columns has-text-centered" }, [
+                _c("div", { staticClass: "column" }, [
+                  _c(
+                    "div",
+                    { staticClass: "title is-size-4 has-text-weight-bold" },
+                    [
+                      _vm._v(
+                        _vm._s(site.classification_type.classification_type)
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "subtitle is-size-7 has-text-weight-normal"
+                    },
+                    [_vm._v("Categoría")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column" }, [
+                  _c(
+                    "div",
+                    { staticClass: "title is-size-4 has-text-weight-bold" },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          site.attention_priority_type.attention_priority_type
+                        )
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "subtitle is-size-7 has-text-weight-normal"
+                    },
+                    [_vm._v("Prioridad atención")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "is-divider",
+                staticStyle: { margin: "10px auto 10px auto" },
+                attrs: { "data-content": "TECNOLOGIAS" }
+              }),
               _vm._v(" "),
               _c("div", { staticStyle: { "padding-top": "20px" } }, [
                 _c(
@@ -469,7 +531,15 @@ var render = function() {
                   }),
                   0
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              !site.technologies.length
+                ? _c(
+                    "div",
+                    { staticClass: "subtitle is-size-6 has-text-weight-light" },
+                    [_vm._v("No tiene tecnologías móviles")]
+                  )
+                : _vm._e()
             ])
           ])
         }),

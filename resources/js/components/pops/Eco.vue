@@ -1,11 +1,10 @@
 <template>
-    <section class="section" style="min-height: 500px;">
-        <div class="" :class="bodyBackground">
-            <div class="column">
-                <!-- CUADROS DE INFORMACION -->
+    <section class="section container">
+        <div class="columns" >
+            <div class="column is-6">
                 <div class="tile is-ancestor">
                     <div class="tile is-parent">
-                        <div class="tile is-child box has-background-eco-light">
+                        <div class="tile is-child box ">
                             <div class="is-size-5 title has-text-weight-semibold" :class="primaryText">GESTION AMBIENTAL</div>
                             <div class="" style="padding: 10px;">
                                 <div class="field">
@@ -27,7 +26,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

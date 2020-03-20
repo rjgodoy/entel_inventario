@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Cache;
 
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PopsExport;
+use App\Exports\SitesExport;
+use App\Exports\AllInfoPopsExport;
+
+
 use App\Http\Resources\Pop as PopResource;
 use App\Models\Pop;
 use App\Models\Site;
@@ -793,14 +800,12 @@ class PopController extends Controller
      */
     public function export(Request $request)
     {
-        return $request;
-        // $core = $request->core;
-        // $crm_id = $request->crm_id;
-        // $zona_id = $request->zona_id;
+        $core = $request->core;
+        $crm_id = $request->crm_id;
+        $zona_id = $request->zona_id;
 
-        // return Excel::download(new PopsExport($core, $crm_id, $zona_id), 'listado_pops - '.date("Y-m-d h:i:sa").'.xlsx');
-        // return Excel::download(new PopsExport(), 'listado_pops - '.date("Y-m-d h:i:sa").'.xlsx');
-        // return Excel::download(new PopsExport, 'pops.xlsx');
+        return (new AllInfoPopsExport($core, $crm_id, $zona_id))->download('pops.xlsx');
+
     }
 
 

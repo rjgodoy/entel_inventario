@@ -33,18 +33,23 @@ class Comsite extends JsonResource
     // protected function permissions()
     // {
     //     return [
-    //         'create' => Gate::allows('create-comsite', $this->resource),
-    //         // 'delete' => Gate::allows('delete', $this->resource),
-    //         // 'view' => Gate::allows('view', $this->resource)
+    //         'create' => Gate::allows('create-comsite', Comsite::class),
+    //         'update' => Gate::allows('update-comsite', $this->resource),
+    //         'delete' => Gate::allows('delete-comsite', $this->resource)
     //     ];
     // }
 
-    public function with($request)
-    {
-        return [
-            'can' => [
-                'sync' => Gate::inspect('sync-comsite')
-            ],
-        ];
-    }
+    /**
+     * Get any additional data that should be returned with the resource array.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return array
+     */
+    // public function with($request)
+    // {
+    //     return [
+    //         'can' => $this->permissions()
+    //     ];
+    // }
 }

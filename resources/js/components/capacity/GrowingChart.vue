@@ -18,10 +18,7 @@
 
     export default {
         props : [
-            'bodyBackground',
-            'boxBackground',
-            'primaryText',
-            'secondaryText'
+            'currentRoom'
         ],
         data() {
             return {
@@ -36,7 +33,7 @@
         },
 
         watch: {
-            chartData(newValue, oldValue) {
+            currentRoom(newValue) {
                 if (this.chart) {
                     this.chart.dispose()
                 }

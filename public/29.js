@@ -1,242 +1,123 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[29],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @amcharts/amcharts4/core */ "./node_modules/@amcharts/amcharts4/core.js");
+/* harmony import */ var _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @amcharts/amcharts4/charts */ "./node_modules/@amcharts/amcharts4/charts.js");
+//
+//
+//
+//
+//
+//
 
+ // import am4themes_entel from "@amcharts/amcharts4/themes/entel.js";
+// import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
+// import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+// this.darkMode ? 
+// am4core.useTheme(am4themes_dark) 
+// : 
+// am4core.useTheme(am4themes_entel)
+// am4core.useTheme(am4themes_animated);
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
-  props: ['selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
+  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode', 'chartData'],
   data: function data() {
     return {
-      popsData: [],
-      buttonLoading: 0
+      chart: null
     };
   },
-  created: function created() {},
   mounted: function mounted() {
-    this.getData();
+    this.graph(); // this.$eventBus.$on('getSitesData', this.graph)
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (this.chart) {
+      this.chart.destroy();
+      this.chart.dispose();
+    } // this.$eventBus.$off('getSitesData')
+
   },
   watch: {
-    selectedCrm: function selectedCrm(newValue, oldValue) {
-      this.getData();
-    },
-    selectedZona: function selectedZona(newValue, oldValue) {
-      this.getData();
-    },
-    core: function core(newValue, oldValue) {
-      this.getData();
-    }
-  },
-  computed: {
-    totalOpto: function totalOpto() {
-      var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.opto;
-      });
-      return counter;
-    },
-    totalRadio: function totalRadio() {
-      var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.radio;
-      });
-      return counter;
-    },
-    totalRepetidor: function totalRepetidor() {
-      var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.repetidor;
-      });
-      return counter;
-    },
-    totalIndoor: function totalIndoor() {
-      var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.indoor;
-      });
-      return counter;
-    },
-    totalOutdoor: function totalOutdoor() {
-      var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.outdoor;
-      });
-      return counter;
-    },
-    totalPoleSite: function totalPoleSite() {
-      var counter = 0;
-      this.popsData.forEach(function (element) {
-        return counter = counter + element.pole_site;
-      });
-      return counter;
-    },
-    totalPops: function totalPops() {
-      return this.totalOpto + this.totalRadio + this.totalRepetidor + this.totalIndoor + this.totalOutdoor + this.totalPoleSite;
+    chartData: function chartData(newValue, oldValue) {
+      this.graph();
     }
   },
   methods: {
-    getData: function () {
-      var _getData = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
+    graph: function graph() {
+      // data.forEach(element => console.log(element))
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                // Si no hay un CRM seleccionado
-                if (!this.selectedCrm) {
-                  axios.get("/api/popData?core=".concat(this.core)).then(function (response) {
-                    _this.popsData = response.data.data;
+      /* Create chart instance */
+      var chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarChart"]); // let chart = am4core.create("chartdiv", am4charts.RadarChart);
 
-                    _this.$eventBus.$emit('graphData', _this.popsData);
-                  });
-                } //Si hay un CRM seleccionado, pero no hay zona seleccionada
-                else if (!this.selectedZona) {
-                    axios.get("/api/popDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
-                      _this.popsData = response.data.data;
+      chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-                      _this.$eventBus.$emit('graphData', _this.popsData);
-                    });
-                  } // Si hay una zona seleccionada
-                  else {
-                      axios.get("/api/popDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
-                        _this.popsData = response.data.data;
+      chart.data = this.chartData;
+      chart.padding(20, 20, 20, 20);
+      var categoryAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["CategoryAxis"]());
+      categoryAxis.dataFields.category = "nombre";
+      categoryAxis.renderer.labels.template.location = 0.5;
+      categoryAxis.renderer.tooltipLocation = 0.5;
+      var valueAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ValueAxis"]());
+      valueAxis.tooltip.disabled = true;
+      valueAxis.renderer.labels.template.horizontalCenter = "left";
+      valueAxis.min = 0;
+      var series1 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series1.columns.template.tooltipText = "{name}: {valueY.value}";
+      series1.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series1.name = "Fijo";
+      series1.dataFields.categoryX = "nombre";
+      series1.dataFields.valueY = "fijo";
+      series1.stacked = true;
+      var series2 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series2.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series2.columns.template.tooltipText = "{name}: {valueY.value}";
+      series2.name = "Movil";
+      series2.dataFields.categoryX = "nombre";
+      series2.dataFields.valueY = "movil";
+      series2.stacked = true;
+      var series3 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series3.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series3.columns.template.tooltipText = "{name}: {valueY.value}";
+      series3.name = "Switch";
+      series3.dataFields.categoryX = "nombre";
+      series3.dataFields.valueY = "switch";
+      series3.stacked = true;
+      var series4 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
+      series4.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      series4.columns.template.tooltipText = "{name}: {valueY.value}";
+      series4.name = "Phone";
+      series4.dataFields.categoryX = "nombre";
+      series4.dataFields.valueY = "phone";
+      series4.stacked = true;
+      chart.seriesContainer.zIndex = -1; // chart.scrollbarX = new am4core.Scrollbar();
+      // chart.scrollbarX.exportable = false;
+      // chart.scrollbarY = new am4core.Scrollbar();
+      // chart.scrollbarY.exportable = false;
 
-                        _this.$eventBus.$emit('graphData', _this.popsData);
-                      });
-                    }
-
-                this.$emit('graphData', this.popsData);
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getData() {
-        return _getData.apply(this, arguments);
-      }
-
-      return getData;
-    }(),
-    downloadPops: function downloadPops() {
-      var _this2 = this;
-
-      this.buttonLoading = 1;
-      axios.get("/api/pop/export?core=".concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0), {
-        responseType: 'blob'
-      }).then(function (response) {
-        // console.log(response.data)
-        var blob = new Blob([response.data], {
-          type: 'application/xls'
-        }); // const objectUrl = window.URL.createObjectURL(blob)
-
-        var link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = 'test.xlsx';
-        link.click();
-        _this2.buttonLoading = 0;
-      });
+      chart.cursor = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarCursor"]();
+      chart.cursor.xAxis = categoryAxis;
+      chart.cursor.fullWidthXLine = true;
+      chart.cursor.lineX.strokeOpacity = 0;
+      chart.cursor.lineX.fillOpacity = 0.1;
+      chart.cursor.lineX.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"]("#000000");
+      this.chart = chart;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -248,261 +129,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "columns" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-5 has-text-weight-semibold has-text-left",
-          class: _vm.primaryText
-        },
-        [_vm._v("POP")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-4 has-text-weight-semibold has-text-right",
-          class: _vm.primaryText
-        },
-        [_vm._v(_vm._s(_vm._f("numeral")(this.totalPops, "0,0")))]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "table",
-      { staticClass: "table is-fullwidth", class: _vm.boxBackground },
-      [
-        _c("thead", [
-          _c("tr", { staticClass: "is-size-7" }, [
-            _c("th", { class: _vm.secondaryText }, [
-              _vm._v(
-                _vm._s(
-                  _vm.selectedCrm == null
-                    ? "CRM"
-                    : _vm.selectedZona == null
-                    ? "Zona"
-                    : "Comuna"
-                )
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Opto Estación" } }, [
-                  _vm._v("Opto Estación")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Radio Estación" } }, [
-                  _vm._v("Radio Estación")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Repetidor" } }, [
-                  _vm._v("Repetidor")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Indoor" } }, [_vm._v("Indoor")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Outdoor" } }, [_vm._v("Outdoor")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Pole Site" } }, [
-                  _vm._v("Pole Site")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Total" } }, [_vm._v("Total")])]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          [
-            _vm._l(_vm.popsData, function(item) {
-              return _c("tr", { staticClass: "is-size-7" }, [
-                _c("td", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "has-text-weight-bold",
-                      class: _vm.secondaryText,
-                      attrs: { href: "", title: "CRM Norte" }
-                    },
-                    [_vm._v(_vm._s(item.nombre))]
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.opto, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.radio, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.repetidor, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.indoor, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.outdoor, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.pole_site, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "has-text-right has-text-weight-bold",
-                    class: _vm.primaryText
-                  },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm._f("numeral")(
-                          item.opto +
-                            item.radio +
-                            item.repetidor +
-                            item.indoor +
-                            item.outdoor +
-                            item.pole_site,
-                          "0,0"
-                        )
-                      )
-                    )
-                  ]
-                )
-              ])
-            }),
-            _vm._v(" "),
-            _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    class: _vm.secondaryText,
-                    attrs: { href: "", title: "Total" }
-                  },
-                  [_vm._v("Total")]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalOpto, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalRadio, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalRepetidor, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalIndoor, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalOutdoor, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalPoleSite, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalPops, "0,0")))]
-              )
-            ])
-          ],
-          2
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "column is-right" }, [
-        _c(
-          "div",
-          {
-            staticClass: "is-size-7 has-text-right",
-            class: _vm.secondaryText,
-            staticStyle: { "margin-top": "10px" }
-          },
-          [_vm._v("Ultima actualización: " + _vm._s(_vm.last_updated))]
-        )
-      ])
-    ])
-  ])
+  return _c(
+    "article",
+    {
+      staticClass: "tile is-child box is-paddingless",
+      class: _vm.boxBackground,
+      staticStyle: { width: "100%", height: "auto" }
+    },
+    [_c("div", { ref: "chartdiv", staticStyle: { height: "400px" } })]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -511,17 +146,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopsData.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/dashboard/PopsData.vue ***!
-  \********************************************************/
+/***/ "./resources/js/components/dashboard/SitesDataChart.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesDataChart.vue ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopsData.vue?vue&type=template&id=31b5635c& */ "./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c&");
-/* harmony import */ var _PopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopsData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SitesDataChart.vue?vue&type=template&id=12d7306e& */ "./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e&");
+/* harmony import */ var _SitesDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SitesDataChart.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -531,9 +166,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SitesDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -543,38 +178,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/PopsData.vue"
+component.options.__file = "resources/js/components/dashboard/SitesDataChart.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopsData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopsData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SitesDataChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e& ***!
+  \*********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopsData.vue?vue&type=template&id=31b5635c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopsData.vue?vue&type=template&id=31b5635c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SitesDataChart.vue?vue&type=template&id=12d7306e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopsData_vue_vue_type_template_id_31b5635c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Comsite;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -13,6 +14,13 @@ class ComsiteCollection extends ResourceCollection
      * @var string
      */
     // public static $wrap = 'comsite';
+
+    /**
+     * Indicates if the resource's collection keys should be preserved.
+     *
+     * @var bool
+     */
+    public $preserveKeys = true;
 
     /**
      * Transform the resource collection into an array.
@@ -36,7 +44,7 @@ class ComsiteCollection extends ResourceCollection
     // {
     //     return [
     //         'can' => [
-    //             'sync' => Gate::allows('sync-comsite'),
+    //             'create' => Gate::allows('create-comsite', Comsite::class)
     //         ],
     //     ];
     // }

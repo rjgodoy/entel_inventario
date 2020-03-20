@@ -30,6 +30,7 @@ Vue.use(Buefy)
 // });
 
 Vue.prototype.$eventBus = new Vue()
+Vue.prototype.$eventCounters = new Vue()
 
 // ########################## FontAwesome Libraries ##########################
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -52,9 +53,11 @@ import {
     faSeedling,
     faLeaf,
     faWarehouse,
+    faFolder,
     faFolderOpen,
     faCogs,
     faExclamationTriangle,
+    faExclamationCircle,
     faSearch,
     faDownload,
     faBars,
@@ -86,7 +89,11 @@ import {
     faChargingStation,
     faRandom,
     faFileInvoiceDollar,
-    faTrafficLight
+    faTrafficLight,
+    faBan,
+    faBullseye,
+    faCaretDown,
+    faCaretUp
 } from '@fortawesome/free-solid-svg-icons'
 
 import { 
@@ -119,9 +126,11 @@ library.add(
 	faSeedling,
 	faLeaf,
 	faWarehouse,
-	faFolderOpen,
+	faFolder,
+    faFolderOpen,
 	faCogs,
 	faExclamationTriangle,
+    faExclamationCircle,
 	faSearch,
 	faDownload,
 	faBars,
@@ -157,7 +166,11 @@ library.add(
     faRandom,
     farCheckCircle,
     faFileInvoiceDollar,
-    faTrafficLight
+    faTrafficLight,
+    faBan,
+    faBullseye,
+    faCaretDown,
+    faCaretUp
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

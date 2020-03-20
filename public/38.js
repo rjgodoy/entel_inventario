@@ -113,6 +113,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
@@ -231,19 +238,14 @@ var render = function() {
                               key: "label",
                               fn: function(props) {
                                 return [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(site.nem_site) +
-                                      "\n                                "
-                                  ),
                                   _c("b-icon", {
-                                    staticClass: "is-pulled-right",
-                                    attrs: {
-                                      icon: props.expanded
-                                        ? "menu-down"
-                                        : "menu-up"
-                                    }
-                                  })
+                                    staticClass: "fa-2x has-text-smart",
+                                    attrs: { pack: "fas", icon: "folder-open" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {}, [
+                                    _vm._v(_vm._s(site.nem_site))
+                                  ])
                                 ]
                               }
                             }
@@ -283,8 +285,9 @@ var render = function() {
                                           staticClass: "is-pulled-right",
                                           attrs: {
                                             icon: props.expanded
-                                              ? "menu-down"
-                                              : "menu-up"
+                                              ? "folder-open"
+                                              : "folder",
+                                            type: "fas"
                                           }
                                         })
                                       ]

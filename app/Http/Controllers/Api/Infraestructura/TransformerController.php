@@ -52,7 +52,13 @@ class TransformerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $transformer = Transformer::find($id);
+
+        $transformer->update([
+            'electric_line_id' => $request->electric_line_id
+        ]);
+
+        return;
     }
 
     /**

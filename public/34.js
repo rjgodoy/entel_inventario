@@ -32,10 +32,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     CapacityChart: function CapacityChart() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/pops/CapacityChart.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/pops/CapacityChart.vue"));
     },
     GrowingChart: function GrowingChart() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./GrowingChart */ "./resources/js/components/pops/GrowingChart.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./GrowingChart */ "./resources/js/components/pops/GrowingChart.vue"));
     }
   },
   props: ['pop'],

@@ -28,10 +28,14 @@ class SiteController extends Controller
     public function stats(Request $request)
     {
         $data = DB::select(DB::raw("
-                SELECT      YEAR(created_at) as ano, MONTH(created_at) as mes, COUNT(*) as new
-                FROM        entel_pops.sites 
-                GROUP BY    ano, mes
-                ORDER BY    ano desc, mes desc
+                SELECT      
+                @y:=YEAR(created_at) as year, 
+                @m:=MONTH(created_at) as month, 
+                COUNT(*) as q_new,
+                (SELECT COUNT(*) FROM entel_pops.sites WHERE YEAR(deleted_at) = @y AND MONTH(deleted_at) = @m) as q_deleted
+                FROM entel_pops.sites 
+                GROUP BY year, month
+                ORDER BY year desc, month desc
                 limit 6
             "));
 

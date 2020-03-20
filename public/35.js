@@ -187,7 +187,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', 'rcas', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['pop', // 'rcas',
+  'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {// radio_pe_3g: this.pop.pe_3g
     };
@@ -655,81 +656,6 @@ var render = function() {
                   )
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-parent" }, [
-              _c(
-                "div",
-                { staticClass: "tile is-child box has-background-eco-light" },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "is-size-5 title has-text-weight-semibold",
-                      class: _vm.primaryText
-                    },
-                    [_vm._v("GESTION AMBIENTAL")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticStyle: { padding: "10px" } }, [
-                    _c(
-                      "div",
-                      { staticClass: "field" },
-                      [
-                        _c("font-awesome-icon", {
-                          class: _vm.pop.protected_zone
-                            ? "has-text-eco"
-                            : "has-text-grey-light",
-                          attrs: {
-                            icon: ["far", "check-circle"],
-                            disabled: _vm.pop.protected_zone ? false : true
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "is-size-6",
-                            class: _vm.pop.protected_zone
-                              ? "has-text-weight-normal"
-                              : "has-text-grey-light"
-                          },
-                          [_vm._v("Zona protegida")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "field" },
-                      [
-                        _c("font-awesome-icon", {
-                          class: _vm.rcas.length
-                            ? "has-text-info"
-                            : "has-text-grey-light",
-                          attrs: {
-                            icon: ["far", "check-circle"],
-                            disabled: _vm.rcas.length ? false : true
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "is-size-6",
-                            class: _vm.rcas.length
-                              ? "has-text-weight-normal"
-                              : "has-text-grey-light"
-                          },
-                          [_vm._v("R.C.A.")]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]
-              )
             ])
           ])
         ])

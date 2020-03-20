@@ -143,7 +143,7 @@
                         </div>
                     </div>
 
-                    <div class="tile is-parent">
+                    <!-- <div class="tile is-parent">
                         <div class="tile is-child box has-background-eco-light">
                             <div class="is-size-5 title has-text-weight-semibold" :class="primaryText">GESTION AMBIENTAL</div>
                             <div class="" style="padding: 10px;">
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -180,7 +180,7 @@
         },
         props : [
             'pop',
-            'rcas',
+            // 'rcas',
             'bodyBackground',
             'boxBackground',
             'primaryText',

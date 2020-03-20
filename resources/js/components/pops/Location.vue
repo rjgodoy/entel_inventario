@@ -25,7 +25,7 @@
                     </div> -->
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popCategory }}</p>
+                            <p class="is-size-5 has-text-weight-semibold">{{ popCategory ? popCategory : '-' }}</p>
                             <p class="is-size-7 has-text-weight-semibold">CLASIFICACION PLANIFICACION</p>
                         </div>
                     </div>

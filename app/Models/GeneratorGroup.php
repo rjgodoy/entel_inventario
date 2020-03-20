@@ -10,4 +10,9 @@ class GeneratorGroup extends Model
     {
         return $this->belongsTo(GeneratorGroupType::class);
     }
+
+    public function generator_set() 
+    {
+        return $this->belongsTo(GeneratorSet::class);
+    }
 }

@@ -43,11 +43,17 @@
                                 :expanded="isActive"
                                 @click="getDirectories(site.id)">
                                 <template slot="label" slot-scope="props">
-                                    {{ site.nem_site }}
-                                    <b-icon
-                                        class="is-pulled-right"
-                                        :icon="props.expanded ? 'menu-down' : 'menu-up'">
+                                    <b-icon 
+                                        pack="fas" 
+                                        icon="folder-open" 
+                                        class="fa-2x has-text-smart">
                                     </b-icon>
+                                    <span class="">{{ site.nem_site }}</span>
+                                    <!-- <b-icon
+                                        class="is-pulled-right has-text-black"
+                                        :icon="props.expanded ? 'folder-open' : 'folder'"
+                                        type="fas">
+                                    </b-icon> -->
                                 </template>
 
                                 <b-menu-item 
@@ -59,7 +65,8 @@
                                         {{ folder.basename }}
                                         <b-icon
                                             class="is-pulled-right"
-                                            :icon="props.expanded ? 'menu-down' : 'menu-up'">
+                                            :icon="props.expanded ? 'folder-open' : 'folder'"
+                                            type="fas">
                                         </b-icon>
                                     </template>
 

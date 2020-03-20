@@ -1,17 +1,14 @@
 <template>
-    <div class="tile is-parent">
+    <div class="column is-4">
         <article class="tile is-child box" :class="boxBackground">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Aires Acondicionados</div>
-                <!-- <div class="column has-text-centered">
-                    <button data-toggle="button" class="button is-small is-link" type="button">CORE</button>
-                </div> -->
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
             </div>
 
             <div class="columns is-multiline">
                 <div class="column is-6" v-for="item in this.airConditionerData">
-                    <div class="is-size-5 has-text-weight-semibold">{{ item.q_air_conditioners | numeral('0,0') }}</div>
+                    <div class="is-size-4 has-text-weight-normal">{{ item.q_air_conditioners | numeral('0,0') }}</div>
                     <div class="is-size-7">{{ item.nombre }}</div>
                 </div>
             </div>

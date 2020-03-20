@@ -2,7 +2,7 @@
     <section class="">
         <!-- TECNOLOGIAS -->
         <!-- ########### -->
-        <div class="level has-background-dark has-text-white">
+        <div class="level has-background-black-ter has-text-white">
             <div class="level-item">
                 <div class="is-size-7 has-text-weight-bold">2G 1900
                     <span class="has-text-weight-bold is-size-5" :class="tec2g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec2g1900 ? tec2g1900.nem_tech : '-' }}</span>
@@ -50,29 +50,42 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="columns is-multiline">
-                <div class="column is-4" v-for="site in sites">
+
+        <div class="section">
+            <div class="tile is-ancestor columns is-multiline">
+                <div class="tile is-parent column is-4" v-for="site in sites">
                     <div class="tile is-child box">
                         <div class="columns">
                             <div class="column is-8">
-                                <div class="title is-size-6 has-text-weight-semibold">{{ site.nem_site ? site.nem_site : '-' }}</div>
-                                <div class="subtitle is-size-5 has-text-weight-normal">{{ site.nombre ? site.nombre : '-' }}</div>
-                                {{ site.attention_priority_type.attention_priority_type }}
+                                <div class="title is-size-6 has-text-weight-normal">Sitio</div>
+                                <div class="subtitle is-size-4 has-text-weight-bold">{{ site.nem_site }}
+                                    <p class="is-size-5 has-text-weight-light" v-if="site.nombre">{{ site.nombre }}</p>
+                                </div>
                             </div>
                             <div class="column">
                                 <b-taglist attached class="is-right">
-                                    <b-tag :type="site.site_type.service_type_id == 1 ? 'is-smart' : 'is-eco'" size="is-normal" class="has-text-weight-bold">
+                                    <b-tag size="is-medium" class="has-text-weight-bold">
                                         {{ site.site_type.site_type.toUpperCase() }}
                                     </b-tag>
-                                    <b-tag type="is-positive" size="is-normal" class="has-text-weight-bold">
+                                    <!-- <b-tag type="is-positive" size="is-normal" class="has-text-weight-bold">
                                         {{ site.classification_type ? site.classification_type.classification_type : '' }}
-                                    </b-tag>
+                                    </b-tag> -->
                                 </b-taglist>
                             </div>
                         </div>
+
+                        <div class="columns has-text-centered">
+                            <div class="column">
+                                <div class="title is-size-4 has-text-weight-bold">{{ site.classification_type.classification_type }}</div>
+                                <div class="subtitle is-size-7 has-text-weight-normal">Categoría</div>
+                            </div>
+                            <div class="column">
+                                <div class="title is-size-4 has-text-weight-bold">{{ site.attention_priority_type.attention_priority_type }}</div>
+                                <div class="subtitle is-size-7 has-text-weight-normal">Prioridad atención</div>
+                            </div>
+                        </div>
                         
-                        <div v-if="site.technologies.length" class="is-divider" data-content="TECNOLOGIAS" style="margin: 10px auto 10px auto"></div>
+                        <div class="is-divider" data-content="TECNOLOGIAS" style="margin: 10px auto 10px auto"></div>
 
                         <div class="" style="padding-top: 20px;">
                             <div class="columns is-multiline">
@@ -85,6 +98,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div v-if="!site.technologies.length" class="subtitle is-size-6 has-text-weight-light">No tiene tecnologías móviles</div>
                     </div>
                 </div>
             </div>

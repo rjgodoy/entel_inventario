@@ -7,21 +7,18 @@
 <script>
     import * as am4core from "@amcharts/amcharts4/core";
     import * as am4charts from "@amcharts/amcharts4/charts";
+
     // import am4themes_entel from "@amcharts/amcharts4/themes/entel.js";
     import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
-    // import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-    // this.darkMode ? 
-    am4core.useTheme(am4themes_dark) 
-    // : 
+    import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+
     // am4core.useTheme(am4themes_entel)
-    // am4core.useTheme(am4themes_animated);
+    am4core.useTheme(am4themes_dark) 
+    am4core.useTheme(am4themes_animated);
 
     export default {
         props : [
-            'bodyBackground',
-            'boxBackground',
-            'primaryText',
-            'secondaryText'
+            'currentRoom'
         ],
         data() {
             return {
@@ -36,7 +33,7 @@
         },
 
         watch: {
-            chartData(newValue, oldValue) {
+            currentRoom(newValue) {
                 if (this.chart) {
                     this.chart.dispose()
                 }
@@ -61,15 +58,17 @@
                     "category": "Power",
                     "value": 80,
                     "full": 100
-                }, {
-                    "category": "Climate",
+                }, 
+                {
+                    "category": "Space",
                     "value": 35,
                     "full": 100
-                }, {
-                    "category": "Space",
-                    "value": 92,
-                    "full": 100
                 }, 
+                // {
+                //     "category": "Space",
+                //     "value": 92,
+                //     "full": 100 
+                // }, 
                 // {
                 //     "category": "Human Resources",
                 //     "value": 68,

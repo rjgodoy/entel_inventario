@@ -1,5 +1,5 @@
 <template>
-    <div class="hero is-dark is-bold">
+    <div class="hero is-dark">
         <div class="columns hero-body">
 
             <!-- SECCION BOTONES -->
@@ -8,14 +8,14 @@
                 <!-- BOTONES MODULOS -->
                 <!-- ############################### -->
                 <div class="">
-                    <div class="columns is-multiline tile is-ancestor">
+                    <div class="columns is-multiline">
                         <!-- TABS DE INFORMACIÓN -->
                         <!-- ############################### -->
-                        <div class="column is-12 tile is-parent"
+                        <div class="column is-12"
                             v-for="crm in crms"
                             :key="crm.id"
                             @click="currentCrm = currentCrm === crm.id ? 0 : crm.id">
-                            <div class="tile is-child box has-text-centered has-text-white" :class="currentCrm === crm.id ? 'has-background-link' : 'has-background-dark'">
+                            <div class="tile is-child box has-text-centered has-text-white" :class="currentCrm === crm.id ? 'has-background-link' : 'has-background-black-ter'">
                                 <div 
                                     v-text="crm.sigla_crm"
                                     class="is-size-4 has-text-weight-semibold">
@@ -70,78 +70,72 @@
                             </thead>
                             
                             <tbody>
-                                <tr class="is-size-7 has-text-weight-light" v-for="data in roomsData.data">
+                                <tr class="" v-for="pop in roomsData.data">
                                     <td class="">
+                                        <a class="is-size-6 has-text-weight-bold" target="_blank" :href="'/pop/' + pop.id">
+                                            {{ pop ? pop.nombre : '' }}
+                                        </a>
                                         <div class="is-size-7 has-text-weight-normal">
-                                            {{ data ? data.nombre : '' }}
+                                            {{ pop ? pop.comuna.nombre : '' }}
                                         </div>
                                         <div class="is-size-7 has-text-weight-normal">
-                                            {{ data ? data.comuna.nombre : '' }}
-                                        </div>
-                                        <div class="is-size-7 has-text-weight-normal">
-                                            {{ data ? 'Zona: ' + data.comuna.zona.nombre_zona : '' }} - {{ data ? 'CRM: ' + data.comuna.zona.crm.nombre_crm : '' }}
+                                            {{ pop ? 'Zona: ' + pop.comuna.zona.nombre_zona : '' }} - {{ pop ? 'CRM: ' + pop.comuna.zona.crm.nombre_crm : '' }}
                                         </div>
                                     </td>
 
                                     <td class="">
-                                        <div class="is-size-7 has-text-weight-bold" v-for="site in data.sites" v-if="criticity(site)">
+                                        <div class="is-size-6 has-text-weight-bold" v-for="site in pop.sites" v-if="criticity(site)">
                                             {{ site ? site.nem_site : '' }}
                                         
                                     
-                                            <div class="field" v-for="room in site.rooms">
-                                                <a class="has-text-weight-light has-text-link">
-                                                    {{ room.name }} - {{ room.old_name }}
-                                                </a>
+                                            <div class="field columns" v-for="room in site.rooms">
+
+                                                <div class="column is-6">
+                                                    <a class="is-size-6 has-text-weight-normal" :class="currentRoom == room ? 'has-text-smart' : 'has-text-link'" @click="setGraph(room, site, pop)">
+                                                        {{ room.name }} <span v-if="room.old_name">- {{ room.old_name }}</span>
+                                                    </a>
+                                                </div>
+
+                                                <div class="column">
+                                                    <b-icon
+                                                        pack="fas"
+                                                        icon="ban"
+                                                        size="is-medium"
+                                                        type="is-danger">
+                                                    </b-icon>
+                                                </div>
+                                                <div class="column">
+                                                    <div>10 kW</div>
+                                                </div>
+                                                <div class="column">
+                                                    <b-icon
+                                                        pack="fas"
+                                                        icon="exclamation-circle"
+                                                        size="is-medium"
+                                                        type="is-warning">
+                                                    </b-icon>
+                                                </div>
+                                                <div class="column">
+                                                    <b-icon
+                                                        pack="fas"
+                                                        icon="exclamation-circle"
+                                                        size="is-medium"
+                                                        type="is-success">
+                                                    </b-icon>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                     </td>
 
-                                    <td class="has-text-weight-light has-text-centered">
+                                    <!-- <td class="has-text-weight-light has-text-centered">
                                         <button href="/comsites/download" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
                                             <font-awesome-icon icon="bars"/>
                                         </button>
-                                    </td>
+                                    </td> -->
                                 </tr>    
                             </tbody>
-
-                            <!-- <tbody>
-                                <tr class="is-size-7 has-text-weight-light" v-for="data in roomsData.data">
-                                    <td class="">
-                                        <div class="is-size-7 has-text-weight-normal">
-                                            {{ data.site.pop ? data.site.pop.nombre : '' }}
-                                        </div>
-                                        <div class="is-size-7 has-text-weight-normal">
-                                            {{ data.site.pop ? data.site.pop.comuna.nombre : '' }}
-                                        </div>
-                                        <div class="is-size-7 has-text-weight-normal">
-                                            {{ data.site.pop ? 'Zona: ' + data.site.pop.comuna.zona.nombre : '' }} - {{ data.site.pop ? 'CRM: ' + data.site.pop.comuna.zona.crm.nombre : '' }}
-                                        </div>
-                                    </td>
-
-                                    <td class="">
-                                        <div class="is-size-7 has-text-weight-normal">
-                                            {{ data.site ? data.site.nem_site : '' }}
-                                        </div>
-                                    </td>
-
-                                    <td class="">
-                                        <div class="has-text-weight-light">
-                                            Nombre: {{ data.name }}
-                                        </div>
-                                        <div class="has-text-weight-light">
-                                            Antiguo nombre: {{ data.old_name }}
-                                        </div>
-                                    </td>
-
-                                    <td class="has-text-weight-light has-text-centered">
-                                        <button href="/comsites/download" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
-                                            <font-awesome-icon icon="bars"/>
-                                        </button>
-                                    </td>
-                                </tr>    
-                            </tbody> -->
-
                         </table>
                         <nav class="pagination" role="navigation" aria-label="pagination">
                             <vue-pagination  
@@ -155,8 +149,14 @@
                 </div>
             </div>
             <div class="column section">
-                <capacity-chart/>
-                <growing-chart/>
+                <div class="has-text-weight-bold is-size-5">{{ currentPop.nombre }} - {{ currentSite.nem_site }}</div>
+                <div class="has-text-weight-bold is-size-3">{{ currentRoom.name }} - {{ currentRoom.old_name }}</div>
+                <capacity-chart
+                    :currentRoom="currentRoom"
+                />
+                <growing-chart
+                    :currentRoom="currentRoom"
+                />
             </div>
         </div>
     </div>
@@ -184,6 +184,9 @@
                 },
                 searchText: '',
                 currentCrm: 0,
+                currentPop: [],
+                currentSite: [],
+                currentRoom: []
             }
         },
 
@@ -208,15 +211,20 @@
                     'text': this.searchText != '' ?  this.searchText : 0
                 }
 
-                axios.get('/api/rooms', {params: params})
+                axios.get('/api/rooms', { params: params })
                 .then((response) => {
-                    this.roomsData = response.data;
+                    this.roomsData = response.data
+                    this.currentPop = this.roomsData.data[0]
+                    this.currentSite = this.currentPop.sites[0]
+                    this.currentRoom = this.currentSite.rooms[0]
                 })
             },
+
             clearSearch() {
                 this.searchText = ''
                 this.getRoomsData()
             },
+
             criticity(site) {
                 var crit
                 if (site.rooms) {
@@ -228,6 +236,12 @@
                 }
                 return crit
             },
+            
+            setGraph(room, site, pop) {
+                this.currentRoom = room
+                this.currentSite = site
+                this.currentPop = pop
+            }
         }
     }
 </script>

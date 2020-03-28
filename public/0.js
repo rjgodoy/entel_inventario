@@ -8155,7 +8155,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
 /* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
 /* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony import */ var _core_utils_Adapter__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Adapter */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Adapter.js");
 /**
  * Category axis module
  */
@@ -8166,7 +8165,6 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
-
 
 
 
@@ -8203,19 +8201,6 @@ var CategoryAxisDataItem = /** @class */ (function (_super) {
         _this.applyTheme();
         return _this;
     }
-    Object.defineProperty(CategoryAxisDataItem.prototype, "adapter", {
-        /**
-         * Holds Adapter.
-         */
-        get: function () {
-            if (!this._adapterO) {
-                this._adapterO = new _core_utils_Adapter__WEBPACK_IMPORTED_MODULE_10__["Adapter"](this);
-            }
-            return this._adapterO;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(CategoryAxisDataItem.prototype, "category", {
         /**
          * @return Category
@@ -22466,6 +22451,25 @@ var ColumnSeriesDataItem = /** @class */ (function (_super) {
             }));
         }
     };
+    Object.defineProperty(ColumnSeriesDataItem.prototype, "width", {
+        get: function () {
+            var width = this.properties.width;
+            if (this._adapterO) {
+                width = this._adapterO.apply("width", width);
+            }
+            return width;
+        },
+        set: function (value) {
+            if (this.properties.width != value) {
+                this.properties.width = value;
+                if (this.component) {
+                    this.component.validateDataElement(this);
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ColumnSeriesDataItem.prototype, "rangesColumns", {
         /**
          * A dictionary storing axes ranges columns by axis uid
@@ -22758,6 +22762,15 @@ var ColumnSeries = /** @class */ (function (_super) {
         var paddingTop = template.pixelPaddingTop;
         var paddingBottom = template.pixelPaddingBottom;
         var outOfBounds = false;
+        var diw = dataItem.width;
+        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](diw)) {
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_16__["isNumber"](diw)) {
+                pixelWidth = diw;
+            }
+            if (diw instanceof _core_utils_Percent__WEBPACK_IMPORTED_MODULE_11__["Percent"]) {
+                percentWidth = diw.value * 100;
+            }
+        }
         // two category axes
         if ((this.xAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"]) && (this.yAxis instanceof _axes_CategoryAxis__WEBPACK_IMPORTED_MODULE_7__["CategoryAxis"])) {
             if (!dataItem.hasValue(this._xValueFields) || !dataItem.hasValue(this._yValueFields)) {
@@ -22945,6 +22958,8 @@ var ColumnSeries = /** @class */ (function (_super) {
                         column_1.readerTitle = "";
                     }, undefined, false);
                 }
+                column_1.parent = this.columnsContainer;
+                column_1.virtualParent = this;
             }
             else {
                 column_1 = dataItem.column;
@@ -22964,8 +22979,6 @@ var ColumnSeries = /** @class */ (function (_super) {
             column_1.realY = t;
             column_1.realWidth = r - l;
             column_1.realHeight = b - t;
-            column_1.parent = this.columnsContainer;
-            column_1.virtualParent = this;
             this.setColumnStates(column_1);
             if (column_1.invalid) {
                 column_1.validate(); // validate as if it was used previously, it will flicker with previous dimensions
@@ -56443,7 +56456,7 @@ var System = /** @class */ (function () {
      *
      * @see {@link https://docs.npmjs.com/misc/semver}
      */
-    System.VERSION = "4.9.9";
+    System.VERSION = "4.9.10";
     return System;
 }());
 
@@ -58788,6 +58801,7 @@ var Button = /** @class */ (function (_super) {
         _this.contentAlign = "center";
         _this.contentValign = "middle";
         _this.padding(8, 16, 8, 16);
+        _this.setStateOnChildren = true;
         var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_4__["InterfaceColorSet"]();
         // Create background
         var background = _this.background;
@@ -58800,6 +58814,7 @@ var Button = /** @class */ (function (_super) {
         _this.label = new _Label__WEBPACK_IMPORTED_MODULE_2__["Label"]();
         _this.label.fill = interfaceColors.getFor("secondaryButtonText");
         ;
+        _this.label.shouldClone = false;
         // Create default states
         var hoverState = background.states.create("hover");
         hoverState.properties.fillOpacity = 1;
@@ -58821,7 +58836,7 @@ var Button = /** @class */ (function (_super) {
          * @return Icon Sprite
          */
         get: function () {
-            return this.getPropertyValue("icon");
+            return this._icon;
         },
         /**
          * A [[Sprite]] to be used as an icon on button.
@@ -58829,16 +58844,17 @@ var Button = /** @class */ (function (_super) {
          * @param icon Icon Sprite
          */
         set: function (icon) {
-            var currentIcon = this.getPropertyValue("icon");
+            var currentIcon = this._icon;
             if (currentIcon) {
                 //this._icon.dispose();
                 //this.removeDispose(currentIcon);
                 currentIcon.parent = undefined;
             }
             if (icon) {
-                this.setPropertyValue("icon", icon);
+                this._icon = icon;
                 icon.parent = this;
                 icon.interactionsEnabled = false;
+                icon.shouldClone = false;
                 this.iconPosition = this.iconPosition;
                 this._disposers.push(icon);
             }
@@ -58908,6 +58924,20 @@ var Button = /** @class */ (function (_super) {
      */
     Button.prototype.createBackground = function () {
         return new _elements_RoundedRectangle__WEBPACK_IMPORTED_MODULE_3__["RoundedRectangle"]();
+    };
+    /**
+     * Copies properties and other attributes.
+     *
+     * @param source  Source
+     */
+    Button.prototype.copyFrom = function (source) {
+        _super.prototype.copyFrom.call(this, source);
+        if (source.label) {
+            this.label.copyFrom(source.label);
+        }
+        if (source.icon) {
+            this.icon = source.icon.clone();
+        }
     };
     return Button;
 }(_Container__WEBPACK_IMPORTED_MODULE_1__["Container"]));
@@ -59048,6 +59078,127 @@ var Circle = /** @class */ (function (_super) {
  */
 _Registry__WEBPACK_IMPORTED_MODULE_3__["registry"].registeredClasses["Circle"] = Circle;
 //# sourceMappingURL=Circle.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@amcharts/amcharts4/.internal/core/elements/CloseButton.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/.internal/core/elements/CloseButton.js ***!
+  \*********************************************************************************/
+/*! exports provided: CloseButton */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CloseButton", function() { return CloseButton; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Button */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Button.js");
+/* harmony import */ var _Sprite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Sprite */ "./node_modules/@amcharts/amcharts4/.internal/core/Sprite.js");
+/* harmony import */ var _Registry__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/* harmony import */ var _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
+/* harmony import */ var _rendering_Path__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
+/* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../core/interaction/Mouse */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Mouse.js");
+/**
+ * Zoom out button functionality.
+ */
+
+/**
+ * ============================================================================
+ * IMPORTS
+ * ============================================================================
+ * @hidden
+ */
+
+
+
+
+
+
+
+/**
+ * ============================================================================
+ * MAIN CLASS
+ * ============================================================================
+ * @hidden
+ */
+/**
+ * Creates a zoom out button.
+ *
+ * @see {@link ICloseButtonEvents} for a list of available events
+ * @see {@link ICloseButtonAdapters} for a list of available Adapters
+ */
+var CloseButton = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CloseButton, _super);
+    /**
+     * Constructor
+     */
+    function CloseButton() {
+        var _this = 
+        // Init
+        _super.call(this) || this;
+        _this.className = "CloseButton";
+        _this.padding(8, 8, 8, 8);
+        _this.showSystemTooltip = true;
+        _this.width = 30;
+        _this.height = 30;
+        var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_4__["InterfaceColorSet"]();
+        _this.cursorOverStyle = _core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_7__["MouseCursorStyle"].pointer;
+        var background = _this.background;
+        background.cornerRadius(20, 20, 20, 20);
+        var bgc = interfaceColors.getFor("background");
+        background.fill = bgc;
+        background.stroke = interfaceColors.getFor("primaryButton");
+        background.strokeOpacity = 1;
+        background.strokeWidth = 1;
+        var downColor = interfaceColors.getFor("primaryButtonActive");
+        var bhs = background.states.getKey("hover");
+        bhs.properties.strokeWidth = 3;
+        bhs.properties.fill = bgc;
+        var bds = background.states.getKey("down");
+        bds.properties.stroke = downColor;
+        bds.properties.fill = bgc;
+        // Create an icon
+        var icon = new _Sprite__WEBPACK_IMPORTED_MODULE_2__["Sprite"]();
+        icon.element = _this.paper.add("path");
+        icon.stroke = background.stroke;
+        _this.icon = icon;
+        // Apply theme
+        _this.applyTheme();
+        return _this;
+    }
+    CloseButton.prototype.validate = function () {
+        _super.prototype.validate.call(this);
+        var w = this.pixelWidth / 3;
+        var h = this.pixelHeight / 3;
+        var path = _rendering_Path__WEBPACK_IMPORTED_MODULE_5__["moveTo"]({ x: -w / 2, y: -h / 2 });
+        path += _rendering_Path__WEBPACK_IMPORTED_MODULE_5__["lineTo"]({ x: w / 2, y: h / 2 });
+        path += _rendering_Path__WEBPACK_IMPORTED_MODULE_5__["moveTo"]({ x: w / 2, y: -h / 2 });
+        path += _rendering_Path__WEBPACK_IMPORTED_MODULE_5__["lineTo"]({ x: -w / 2, y: h / 2 });
+        this.icon.path = path;
+        this.invalidateLayout();
+    };
+    /**
+     * Sets defaults that instantiate some objects that rely on parent, so they
+     * cannot be set in constructor.
+     */
+    CloseButton.prototype.applyInternalDefaults = function () {
+        _super.prototype.applyInternalDefaults.call(this);
+        if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_6__["hasValue"](this.readerTitle)) {
+            this.readerTitle = this.language.translate("Close");
+        }
+    };
+    return CloseButton;
+}(_Button__WEBPACK_IMPORTED_MODULE_1__["Button"]));
+
+/**
+ * Register class in system, so that it can be instantiated using its name from
+ * anywhere.
+ *
+ * @ignore
+ */
+_Registry__WEBPACK_IMPORTED_MODULE_3__["registry"].registeredClasses["CloseButton"] = CloseButton;
+//# sourceMappingURL=CloseButton.js.map
 
 /***/ }),
 
@@ -65914,6 +66065,234 @@ var Slider = /** @class */ (function (_super) {
  */
 _Registry__WEBPACK_IMPORTED_MODULE_2__["registry"].registeredClasses["Slider"] = Slider;
 //# sourceMappingURL=Slider.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@amcharts/amcharts4/.internal/core/elements/SwitchButton.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/.internal/core/elements/SwitchButton.js ***!
+  \**********************************************************************************/
+/*! exports provided: SwitchButton */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SwitchButton", function() { return SwitchButton; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Container */ "./node_modules/@amcharts/amcharts4/.internal/core/Container.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Label */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Label.js");
+/* harmony import */ var _elements_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../elements/Button */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Button.js");
+/* harmony import */ var _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
+/* harmony import */ var _core_elements_Circle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/elements/Circle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Circle.js");
+/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony import */ var _Registry__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+/**
+ * Functionality for drawing simple SwitchButtons.
+ */
+
+/**
+ * ============================================================================
+ * IMPORTS
+ * ============================================================================
+ * @hidden
+ */
+
+
+
+
+
+
+
+/**
+ * ============================================================================
+ * MAIN CLASS
+ * ============================================================================
+ * @hidden
+ */
+/**
+ * SwitchButton class is capable of drawing a simple rectangular SwitchButton with
+ * optionally rounded corners and an icon in it.
+ *
+ * @see {@link ISwitchButtonEvents} for a list of available events
+ * @see {@link ISwitchButtonAdapters} for a list of available Adapters
+ */
+var SwitchButton = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(SwitchButton, _super);
+    /**
+     * Constructor
+     */
+    function SwitchButton() {
+        var _this = 
+        // Init
+        _super.call(this) || this;
+        _this.className = "SwitchButton";
+        _this.tooltipY = 0;
+        // Set defaults
+        _this.layout = "horizontal";
+        _this.contentAlign = "center";
+        _this.contentValign = "middle";
+        _this.padding(8, 16, 8, 16);
+        var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_4__["InterfaceColorSet"]();
+        // Create the label element
+        var leftLabel = new _Label__WEBPACK_IMPORTED_MODULE_2__["Label"]();
+        leftLabel.fillOpacity = 0.3;
+        var llas = leftLabel.states.create("active");
+        llas.properties.fillOpacity = 1;
+        leftLabel.isActive = true;
+        _this.leftLabel = leftLabel;
+        var button = new _elements_Button__WEBPACK_IMPORTED_MODULE_3__["Button"]();
+        var circle = new _core_elements_Circle__WEBPACK_IMPORTED_MODULE_5__["Circle"]();
+        button.contentValign = "none";
+        button.padding(0, 0, 0, 0);
+        circle.radius = 10;
+        button.icon = circle;
+        button.icon.valign = "middle";
+        button.label = undefined;
+        var p100 = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_6__["percent"])(100);
+        button.background.cornerRadius(p100, p100, p100, p100);
+        button.width = circle.radius * 3.5;
+        button.height = circle.radius * 2.1;
+        button.marginLeft = 8;
+        button.marginRight = 8;
+        button.togglable = true;
+        circle.dx = -circle.radius * 0.7;
+        circle.fill = interfaceColors.getFor("primaryButton");
+        var hs = circle.states.create("hover");
+        hs.properties.fill = interfaceColors.getFor("primaryButtonHover");
+        var as = circle.states.create("active");
+        as.properties.fill = interfaceColors.getFor("primaryButtonActive");
+        as.properties.dx = circle.radius * 0.7;
+        _this.switchButton = button;
+        _this.events.on("toggled", function () {
+            _this.leftLabel.isActive = !_this.isActive;
+            _this.rightLabel.isActive = _this.isActive;
+        });
+        // Create the label element
+        var rightLabel = new _Label__WEBPACK_IMPORTED_MODULE_2__["Label"]();
+        rightLabel.fillOpacity = 0.3;
+        var rlas = rightLabel.states.create("active");
+        rlas.properties.fillOpacity = 1;
+        _this.rightLabel = rightLabel;
+        // Set up accessibility
+        // A Button should be always focusable
+        _this.role = "button";
+        _this.focusable = true;
+        // Apply theme
+        _this.applyTheme();
+        return _this;
+    }
+    Object.defineProperty(SwitchButton.prototype, "leftLabel", {
+        /**
+         * @return Left label element
+         */
+        get: function () {
+            return this._leftLabel;
+        },
+        /**
+         * [[Label]] element to be used for left text.
+         *
+         * @param left label element
+         */
+        set: function (label) {
+            if (this._leftLabel) {
+                this.removeDispose(this._leftLabel);
+            }
+            this._leftLabel = label;
+            if (label) {
+                label.parent = this;
+                label.interactionsEnabled = false;
+                label.shouldClone = false;
+                this._disposers.push(this._leftLabel);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SwitchButton.prototype, "rightLabel", {
+        /**
+         * @return Rigth label element
+         */
+        get: function () {
+            return this._rightLabel;
+        },
+        /**
+         * [[Label]] element to be used for left text.
+         *
+         * @param rigth label element
+         */
+        set: function (label) {
+            if (this._rightLabel) {
+                this.removeDispose(this._rightLabel);
+            }
+            this._rightLabel = label;
+            if (label) {
+                label.parent = this;
+                label.interactionsEnabled = false;
+                label.shouldClone = false;
+                this._disposers.push(this._rightLabel);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SwitchButton.prototype, "switch", {
+        /**
+         * @return Left label element
+         */
+        get: function () {
+            return this._switchButton;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SwitchButton.prototype, "switchButton", {
+        /**
+         * [[Label]] element to be used for left text.
+         *
+         * @param rigth label element
+         */
+        set: function (button) {
+            if (this._switchButton) {
+                this.removeDispose(this._switchButton);
+            }
+            this._switchButton = button;
+            if (button) {
+                button.parent = this;
+                button.shouldClone = false;
+                this._disposers.push(this._switchButton);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Copies properties and other attributes.
+     *
+     * @param source  Source
+     */
+    SwitchButton.prototype.copyFrom = function (source) {
+        _super.prototype.copyFrom.call(this, source);
+        if (source.leftLabel) {
+            this.leftLabel.copyFrom(source.leftLabel);
+        }
+        if (source.rightLabel) {
+            this.rightLabel.copyFrom(source.rightLabel);
+        }
+        if (source.switchButton) {
+            this.switchButton.copyFrom(source.switchButton);
+        }
+    };
+    return SwitchButton;
+}(_Container__WEBPACK_IMPORTED_MODULE_1__["Container"]));
+
+/**
+ * Register class in system, so that it can be instantiated using its name from
+ * anywhere.
+ *
+ * @ignore
+ */
+_Registry__WEBPACK_IMPORTED_MODULE_7__["registry"].registeredClasses["SwitchButton"] = SwitchButton;
+//# sourceMappingURL=SwitchButton.js.map
 
 /***/ }),
 
@@ -98956,7 +99335,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/core.js ***!
   \**************************************************/
-/*! exports provided: System, system, BaseObject, BaseObjectEvents, Component, Container, DataItem, Sprite, SpriteEventDispatcher, SpriteState, registry, Registry, is, options, CSVParser, DataLoader, dataLoader, DataParser, DataSource, JSONParser, SVGDefaults, Button, Circle, Ellipse, Image, Label, Line, Popup, Modal, PointedRectangle, PointedShape, Polyarc, Polygon, Polyline, Polyspline, Preloader, Rectangle, ResizeButton, RoundedRectangle, Scrollbar, Slider, Slice, TextLink, Tooltip, Trapezoid, Triangle, WavedCircle, WavedLine, WavedRectangle, ZoomOutButton, PlayButton, Cone, Rectangle3D, Slice3D, Export, ExportMenu, DateFormatter, DurationFormatter, NumberFormatter, TextFormatter, getTextFormatter, Inertia, Interaction, getInteraction, InteractionKeyboardObject, InteractionObject, InteractionObjectEventDispatcher, MouseCursorStyle, AMElement, Group, Paper, Tension, Basis, SVGContainer, ColorModifier, LinearGradient, LinearGradientModifier, RadialGradientModifier, LinePattern, CirclePattern, Pattern, RadialGradient, RectPattern, ColorizeFilter, DesaturateFilter, DropShadowFilter, BlurFilter, Filter, FocusFilter, LightenFilter, GlobalAdapter, globalAdapter, Adapter, Animation, animate, nextFrame, readFrame, writeFrame, whenIdle, triggerIdle, Cache, cache, Color, color, isColor, castColor, ColorSet, PatternSet, InterfaceColorSet, DictionaryDisposer, Dictionary, DictionaryTemplate, Disposer, MultiDisposer, MutableValueDisposer, CounterDisposer, StyleRule, StyleClass, getElement, addClass, removeClass, blur, focus, outerHTML, isElement, copyAttributes, fixPixelPerfect, ready, EventDispatcher, TargetedEventDispatcher, ListIterator, min, max, join, Keyboard, keyboard, Language, IndexedIterable, ListGrouper, ListDisposer, List, ListTemplate, Morpher, reverse, or, Percent, percent, isPercent, Plugin, Responsive, ResponsiveBreakpoints, defaultRules, OrderedList, SortedList, OrderedListTemplate, SortedListTemplate, PX, STRING, NUMBER, DATE, DURATION, PLACEHOLDER, PLACEHOLDER2, isNaN, checkString, checkBoolean, checkNumber, checkObject, castString, castNumber, isString, isNumber, isObject, isArray, Validatable, path, colors, ease, math, array, number, object, string, time, utils, iter, type, create, createFromConfig, disposeAllCharts, useTheme, unuseTheme, unuseAllThemes, addLicense */
+/*! exports provided: System, system, BaseObject, BaseObjectEvents, Component, Container, DataItem, Sprite, SpriteEventDispatcher, SpriteState, registry, Registry, is, options, CSVParser, DataLoader, dataLoader, DataParser, DataSource, JSONParser, SVGDefaults, Button, Circle, Ellipse, Image, Label, Line, Popup, Modal, PointedRectangle, PointedShape, Polyarc, Polygon, Polyline, Polyspline, Preloader, Rectangle, ResizeButton, CloseButton, SwitchButton, RoundedRectangle, Scrollbar, Slider, Slice, TextLink, Tooltip, Trapezoid, Triangle, WavedCircle, WavedLine, WavedRectangle, ZoomOutButton, PlayButton, Cone, Rectangle3D, Slice3D, Export, ExportMenu, DateFormatter, DurationFormatter, NumberFormatter, TextFormatter, getTextFormatter, Inertia, Interaction, getInteraction, InteractionKeyboardObject, InteractionObject, InteractionObjectEventDispatcher, MouseCursorStyle, AMElement, Group, Paper, Tension, Basis, SVGContainer, ColorModifier, LinearGradient, LinearGradientModifier, RadialGradientModifier, LinePattern, CirclePattern, Pattern, RadialGradient, RectPattern, ColorizeFilter, DesaturateFilter, DropShadowFilter, BlurFilter, Filter, FocusFilter, LightenFilter, GlobalAdapter, globalAdapter, Adapter, Animation, animate, nextFrame, readFrame, writeFrame, whenIdle, triggerIdle, Cache, cache, Color, color, isColor, castColor, ColorSet, PatternSet, InterfaceColorSet, DictionaryDisposer, Dictionary, DictionaryTemplate, Disposer, MultiDisposer, MutableValueDisposer, CounterDisposer, StyleRule, StyleClass, getElement, addClass, removeClass, blur, focus, outerHTML, isElement, copyAttributes, fixPixelPerfect, ready, EventDispatcher, TargetedEventDispatcher, ListIterator, min, max, join, Keyboard, keyboard, Language, IndexedIterable, ListGrouper, ListDisposer, List, ListTemplate, Morpher, reverse, or, Percent, percent, isPercent, Plugin, Responsive, ResponsiveBreakpoints, defaultRules, OrderedList, SortedList, OrderedListTemplate, SortedListTemplate, PX, STRING, NUMBER, DATE, DURATION, PLACEHOLDER, PLACEHOLDER2, isNaN, checkString, checkBoolean, checkNumber, checkObject, castString, castNumber, isString, isNumber, isObject, isArray, Validatable, path, colors, ease, math, array, number, object, string, time, utils, iter, type, create, createFromConfig, disposeAllCharts, useTheme, unuseTheme, unuseAllThemes, addLicense */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99070,390 +99449,396 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _internal_core_elements_ResizeButton__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./.internal/core/elements/ResizeButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/ResizeButton.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ResizeButton", function() { return _internal_core_elements_ResizeButton__WEBPACK_IMPORTED_MODULE_32__["ResizeButton"]; });
 
-/* harmony import */ var _internal_core_elements_RoundedRectangle__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./.internal/core/elements/RoundedRectangle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/RoundedRectangle.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RoundedRectangle", function() { return _internal_core_elements_RoundedRectangle__WEBPACK_IMPORTED_MODULE_33__["RoundedRectangle"]; });
+/* harmony import */ var _internal_core_elements_CloseButton__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./.internal/core/elements/CloseButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/CloseButton.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CloseButton", function() { return _internal_core_elements_CloseButton__WEBPACK_IMPORTED_MODULE_33__["CloseButton"]; });
 
-/* harmony import */ var _internal_core_elements_Scrollbar__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./.internal/core/elements/Scrollbar */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Scrollbar.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Scrollbar", function() { return _internal_core_elements_Scrollbar__WEBPACK_IMPORTED_MODULE_34__["Scrollbar"]; });
+/* harmony import */ var _internal_core_elements_SwitchButton__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./.internal/core/elements/SwitchButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/SwitchButton.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SwitchButton", function() { return _internal_core_elements_SwitchButton__WEBPACK_IMPORTED_MODULE_34__["SwitchButton"]; });
 
-/* harmony import */ var _internal_core_elements_Slider__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./.internal/core/elements/Slider */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Slider.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Slider", function() { return _internal_core_elements_Slider__WEBPACK_IMPORTED_MODULE_35__["Slider"]; });
+/* harmony import */ var _internal_core_elements_RoundedRectangle__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./.internal/core/elements/RoundedRectangle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/RoundedRectangle.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RoundedRectangle", function() { return _internal_core_elements_RoundedRectangle__WEBPACK_IMPORTED_MODULE_35__["RoundedRectangle"]; });
 
-/* harmony import */ var _internal_core_elements_Slice__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./.internal/core/elements/Slice */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Slice.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Slice", function() { return _internal_core_elements_Slice__WEBPACK_IMPORTED_MODULE_36__["Slice"]; });
+/* harmony import */ var _internal_core_elements_Scrollbar__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./.internal/core/elements/Scrollbar */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Scrollbar.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Scrollbar", function() { return _internal_core_elements_Scrollbar__WEBPACK_IMPORTED_MODULE_36__["Scrollbar"]; });
 
-/* harmony import */ var _internal_core_elements_TextLink__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./.internal/core/elements/TextLink */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/TextLink.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextLink", function() { return _internal_core_elements_TextLink__WEBPACK_IMPORTED_MODULE_37__["TextLink"]; });
+/* harmony import */ var _internal_core_elements_Slider__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./.internal/core/elements/Slider */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Slider.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Slider", function() { return _internal_core_elements_Slider__WEBPACK_IMPORTED_MODULE_37__["Slider"]; });
 
-/* harmony import */ var _internal_core_elements_Tooltip__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./.internal/core/elements/Tooltip */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Tooltip.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Tooltip", function() { return _internal_core_elements_Tooltip__WEBPACK_IMPORTED_MODULE_38__["Tooltip"]; });
+/* harmony import */ var _internal_core_elements_Slice__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./.internal/core/elements/Slice */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Slice.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Slice", function() { return _internal_core_elements_Slice__WEBPACK_IMPORTED_MODULE_38__["Slice"]; });
 
-/* harmony import */ var _internal_core_elements_Trapezoid__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./.internal/core/elements/Trapezoid */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Trapezoid.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Trapezoid", function() { return _internal_core_elements_Trapezoid__WEBPACK_IMPORTED_MODULE_39__["Trapezoid"]; });
+/* harmony import */ var _internal_core_elements_TextLink__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./.internal/core/elements/TextLink */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/TextLink.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextLink", function() { return _internal_core_elements_TextLink__WEBPACK_IMPORTED_MODULE_39__["TextLink"]; });
 
-/* harmony import */ var _internal_core_elements_Triangle__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./.internal/core/elements/Triangle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Triangle.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Triangle", function() { return _internal_core_elements_Triangle__WEBPACK_IMPORTED_MODULE_40__["Triangle"]; });
+/* harmony import */ var _internal_core_elements_Tooltip__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./.internal/core/elements/Tooltip */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Tooltip.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Tooltip", function() { return _internal_core_elements_Tooltip__WEBPACK_IMPORTED_MODULE_40__["Tooltip"]; });
 
-/* harmony import */ var _internal_core_elements_WavedCircle__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./.internal/core/elements/WavedCircle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/WavedCircle.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "WavedCircle", function() { return _internal_core_elements_WavedCircle__WEBPACK_IMPORTED_MODULE_41__["WavedCircle"]; });
+/* harmony import */ var _internal_core_elements_Trapezoid__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./.internal/core/elements/Trapezoid */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Trapezoid.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Trapezoid", function() { return _internal_core_elements_Trapezoid__WEBPACK_IMPORTED_MODULE_41__["Trapezoid"]; });
 
-/* harmony import */ var _internal_core_elements_WavedLine__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./.internal/core/elements/WavedLine */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/WavedLine.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "WavedLine", function() { return _internal_core_elements_WavedLine__WEBPACK_IMPORTED_MODULE_42__["WavedLine"]; });
+/* harmony import */ var _internal_core_elements_Triangle__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./.internal/core/elements/Triangle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Triangle.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Triangle", function() { return _internal_core_elements_Triangle__WEBPACK_IMPORTED_MODULE_42__["Triangle"]; });
 
-/* harmony import */ var _internal_core_elements_WavedRectangle__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./.internal/core/elements/WavedRectangle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/WavedRectangle.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "WavedRectangle", function() { return _internal_core_elements_WavedRectangle__WEBPACK_IMPORTED_MODULE_43__["WavedRectangle"]; });
+/* harmony import */ var _internal_core_elements_WavedCircle__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./.internal/core/elements/WavedCircle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/WavedCircle.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "WavedCircle", function() { return _internal_core_elements_WavedCircle__WEBPACK_IMPORTED_MODULE_43__["WavedCircle"]; });
 
-/* harmony import */ var _internal_core_elements_ZoomOutButton__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./.internal/core/elements/ZoomOutButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/ZoomOutButton.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ZoomOutButton", function() { return _internal_core_elements_ZoomOutButton__WEBPACK_IMPORTED_MODULE_44__["ZoomOutButton"]; });
+/* harmony import */ var _internal_core_elements_WavedLine__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./.internal/core/elements/WavedLine */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/WavedLine.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "WavedLine", function() { return _internal_core_elements_WavedLine__WEBPACK_IMPORTED_MODULE_44__["WavedLine"]; });
 
-/* harmony import */ var _internal_core_elements_PlayButton__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./.internal/core/elements/PlayButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/PlayButton.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PlayButton", function() { return _internal_core_elements_PlayButton__WEBPACK_IMPORTED_MODULE_45__["PlayButton"]; });
+/* harmony import */ var _internal_core_elements_WavedRectangle__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./.internal/core/elements/WavedRectangle */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/WavedRectangle.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "WavedRectangle", function() { return _internal_core_elements_WavedRectangle__WEBPACK_IMPORTED_MODULE_45__["WavedRectangle"]; });
 
-/* harmony import */ var _internal_core_elements_3d_Cone__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./.internal/core/elements/3d/Cone */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/3d/Cone.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Cone", function() { return _internal_core_elements_3d_Cone__WEBPACK_IMPORTED_MODULE_46__["Cone"]; });
+/* harmony import */ var _internal_core_elements_ZoomOutButton__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./.internal/core/elements/ZoomOutButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/ZoomOutButton.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ZoomOutButton", function() { return _internal_core_elements_ZoomOutButton__WEBPACK_IMPORTED_MODULE_46__["ZoomOutButton"]; });
 
-/* harmony import */ var _internal_core_elements_3d_Rectangle3D__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./.internal/core/elements/3d/Rectangle3D */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/3d/Rectangle3D.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Rectangle3D", function() { return _internal_core_elements_3d_Rectangle3D__WEBPACK_IMPORTED_MODULE_47__["Rectangle3D"]; });
+/* harmony import */ var _internal_core_elements_PlayButton__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./.internal/core/elements/PlayButton */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/PlayButton.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PlayButton", function() { return _internal_core_elements_PlayButton__WEBPACK_IMPORTED_MODULE_47__["PlayButton"]; });
 
-/* harmony import */ var _internal_core_elements_3d_Slice3D__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./.internal/core/elements/3d/Slice3D */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/3d/Slice3D.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Slice3D", function() { return _internal_core_elements_3d_Slice3D__WEBPACK_IMPORTED_MODULE_48__["Slice3D"]; });
+/* harmony import */ var _internal_core_elements_3d_Cone__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./.internal/core/elements/3d/Cone */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/3d/Cone.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Cone", function() { return _internal_core_elements_3d_Cone__WEBPACK_IMPORTED_MODULE_48__["Cone"]; });
 
-/* harmony import */ var _internal_core_export_Export__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./.internal/core/export/Export */ "./node_modules/@amcharts/amcharts4/.internal/core/export/Export.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Export", function() { return _internal_core_export_Export__WEBPACK_IMPORTED_MODULE_49__["Export"]; });
+/* harmony import */ var _internal_core_elements_3d_Rectangle3D__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./.internal/core/elements/3d/Rectangle3D */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/3d/Rectangle3D.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Rectangle3D", function() { return _internal_core_elements_3d_Rectangle3D__WEBPACK_IMPORTED_MODULE_49__["Rectangle3D"]; });
 
-/* harmony import */ var _internal_core_export_ExportMenu__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./.internal/core/export/ExportMenu */ "./node_modules/@amcharts/amcharts4/.internal/core/export/ExportMenu.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ExportMenu", function() { return _internal_core_export_ExportMenu__WEBPACK_IMPORTED_MODULE_50__["ExportMenu"]; });
+/* harmony import */ var _internal_core_elements_3d_Slice3D__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./.internal/core/elements/3d/Slice3D */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/3d/Slice3D.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Slice3D", function() { return _internal_core_elements_3d_Slice3D__WEBPACK_IMPORTED_MODULE_50__["Slice3D"]; });
 
-/* harmony import */ var _internal_core_formatters_DateFormatter__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./.internal/core/formatters/DateFormatter */ "./node_modules/@amcharts/amcharts4/.internal/core/formatters/DateFormatter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DateFormatter", function() { return _internal_core_formatters_DateFormatter__WEBPACK_IMPORTED_MODULE_51__["DateFormatter"]; });
+/* harmony import */ var _internal_core_export_Export__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./.internal/core/export/Export */ "./node_modules/@amcharts/amcharts4/.internal/core/export/Export.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Export", function() { return _internal_core_export_Export__WEBPACK_IMPORTED_MODULE_51__["Export"]; });
 
-/* harmony import */ var _internal_core_formatters_DurationFormatter__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./.internal/core/formatters/DurationFormatter */ "./node_modules/@amcharts/amcharts4/.internal/core/formatters/DurationFormatter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DurationFormatter", function() { return _internal_core_formatters_DurationFormatter__WEBPACK_IMPORTED_MODULE_52__["DurationFormatter"]; });
+/* harmony import */ var _internal_core_export_ExportMenu__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./.internal/core/export/ExportMenu */ "./node_modules/@amcharts/amcharts4/.internal/core/export/ExportMenu.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ExportMenu", function() { return _internal_core_export_ExportMenu__WEBPACK_IMPORTED_MODULE_52__["ExportMenu"]; });
 
-/* harmony import */ var _internal_core_formatters_NumberFormatter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./.internal/core/formatters/NumberFormatter */ "./node_modules/@amcharts/amcharts4/.internal/core/formatters/NumberFormatter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NumberFormatter", function() { return _internal_core_formatters_NumberFormatter__WEBPACK_IMPORTED_MODULE_53__["NumberFormatter"]; });
+/* harmony import */ var _internal_core_formatters_DateFormatter__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./.internal/core/formatters/DateFormatter */ "./node_modules/@amcharts/amcharts4/.internal/core/formatters/DateFormatter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DateFormatter", function() { return _internal_core_formatters_DateFormatter__WEBPACK_IMPORTED_MODULE_53__["DateFormatter"]; });
 
-/* harmony import */ var _internal_core_formatters_TextFormatter__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./.internal/core/formatters/TextFormatter */ "./node_modules/@amcharts/amcharts4/.internal/core/formatters/TextFormatter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextFormatter", function() { return _internal_core_formatters_TextFormatter__WEBPACK_IMPORTED_MODULE_54__["TextFormatter"]; });
+/* harmony import */ var _internal_core_formatters_DurationFormatter__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./.internal/core/formatters/DurationFormatter */ "./node_modules/@amcharts/amcharts4/.internal/core/formatters/DurationFormatter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DurationFormatter", function() { return _internal_core_formatters_DurationFormatter__WEBPACK_IMPORTED_MODULE_54__["DurationFormatter"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getTextFormatter", function() { return _internal_core_formatters_TextFormatter__WEBPACK_IMPORTED_MODULE_54__["getTextFormatter"]; });
+/* harmony import */ var _internal_core_formatters_NumberFormatter__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./.internal/core/formatters/NumberFormatter */ "./node_modules/@amcharts/amcharts4/.internal/core/formatters/NumberFormatter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NumberFormatter", function() { return _internal_core_formatters_NumberFormatter__WEBPACK_IMPORTED_MODULE_55__["NumberFormatter"]; });
 
-/* harmony import */ var _internal_core_interaction_Inertia__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./.internal/core/interaction/Inertia */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Inertia.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Inertia", function() { return _internal_core_interaction_Inertia__WEBPACK_IMPORTED_MODULE_55__["Inertia"]; });
+/* harmony import */ var _internal_core_formatters_TextFormatter__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./.internal/core/formatters/TextFormatter */ "./node_modules/@amcharts/amcharts4/.internal/core/formatters/TextFormatter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TextFormatter", function() { return _internal_core_formatters_TextFormatter__WEBPACK_IMPORTED_MODULE_56__["TextFormatter"]; });
 
-/* harmony import */ var _internal_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./.internal/core/interaction/Interaction */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Interaction.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Interaction", function() { return _internal_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_56__["Interaction"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getTextFormatter", function() { return _internal_core_formatters_TextFormatter__WEBPACK_IMPORTED_MODULE_56__["getTextFormatter"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getInteraction", function() { return _internal_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_56__["getInteraction"]; });
+/* harmony import */ var _internal_core_interaction_Inertia__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./.internal/core/interaction/Inertia */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Inertia.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Inertia", function() { return _internal_core_interaction_Inertia__WEBPACK_IMPORTED_MODULE_57__["Inertia"]; });
 
-/* harmony import */ var _internal_core_interaction_InteractionKeyboardObject__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./.internal/core/interaction/InteractionKeyboardObject */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/InteractionKeyboardObject.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InteractionKeyboardObject", function() { return _internal_core_interaction_InteractionKeyboardObject__WEBPACK_IMPORTED_MODULE_57__["InteractionKeyboardObject"]; });
+/* harmony import */ var _internal_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./.internal/core/interaction/Interaction */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Interaction.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Interaction", function() { return _internal_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_58__["Interaction"]; });
 
-/* harmony import */ var _internal_core_interaction_InteractionObject__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./.internal/core/interaction/InteractionObject */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/InteractionObject.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InteractionObject", function() { return _internal_core_interaction_InteractionObject__WEBPACK_IMPORTED_MODULE_58__["InteractionObject"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getInteraction", function() { return _internal_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_58__["getInteraction"]; });
 
-/* harmony import */ var _internal_core_interaction_InteractionObjectEvents__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./.internal/core/interaction/InteractionObjectEvents */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/InteractionObjectEvents.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InteractionObjectEventDispatcher", function() { return _internal_core_interaction_InteractionObjectEvents__WEBPACK_IMPORTED_MODULE_59__["InteractionObjectEventDispatcher"]; });
+/* harmony import */ var _internal_core_interaction_InteractionKeyboardObject__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./.internal/core/interaction/InteractionKeyboardObject */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/InteractionKeyboardObject.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InteractionKeyboardObject", function() { return _internal_core_interaction_InteractionKeyboardObject__WEBPACK_IMPORTED_MODULE_59__["InteractionKeyboardObject"]; });
 
-/* harmony import */ var _internal_core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./.internal/core/interaction/Mouse */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Mouse.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MouseCursorStyle", function() { return _internal_core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_60__["MouseCursorStyle"]; });
+/* harmony import */ var _internal_core_interaction_InteractionObject__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./.internal/core/interaction/InteractionObject */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/InteractionObject.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InteractionObject", function() { return _internal_core_interaction_InteractionObject__WEBPACK_IMPORTED_MODULE_60__["InteractionObject"]; });
 
-/* harmony import */ var _internal_core_rendering_AMElement__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./.internal/core/rendering/AMElement */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/AMElement.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AMElement", function() { return _internal_core_rendering_AMElement__WEBPACK_IMPORTED_MODULE_61__["AMElement"]; });
+/* harmony import */ var _internal_core_interaction_InteractionObjectEvents__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./.internal/core/interaction/InteractionObjectEvents */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/InteractionObjectEvents.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InteractionObjectEventDispatcher", function() { return _internal_core_interaction_InteractionObjectEvents__WEBPACK_IMPORTED_MODULE_61__["InteractionObjectEventDispatcher"]; });
 
-/* harmony import */ var _internal_core_rendering_Group__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./.internal/core/rendering/Group */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Group.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Group", function() { return _internal_core_rendering_Group__WEBPACK_IMPORTED_MODULE_62__["Group"]; });
+/* harmony import */ var _internal_core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./.internal/core/interaction/Mouse */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Mouse.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MouseCursorStyle", function() { return _internal_core_interaction_Mouse__WEBPACK_IMPORTED_MODULE_62__["MouseCursorStyle"]; });
 
-/* harmony import */ var _internal_core_rendering_Paper__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./.internal/core/rendering/Paper */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Paper.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Paper", function() { return _internal_core_rendering_Paper__WEBPACK_IMPORTED_MODULE_63__["Paper"]; });
+/* harmony import */ var _internal_core_rendering_AMElement__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./.internal/core/rendering/AMElement */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/AMElement.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AMElement", function() { return _internal_core_rendering_AMElement__WEBPACK_IMPORTED_MODULE_63__["AMElement"]; });
 
-/* harmony import */ var _internal_core_rendering_Smoothing__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./.internal/core/rendering/Smoothing */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Smoothing.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Tension", function() { return _internal_core_rendering_Smoothing__WEBPACK_IMPORTED_MODULE_64__["Tension"]; });
+/* harmony import */ var _internal_core_rendering_Group__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./.internal/core/rendering/Group */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Group.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Group", function() { return _internal_core_rendering_Group__WEBPACK_IMPORTED_MODULE_64__["Group"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Basis", function() { return _internal_core_rendering_Smoothing__WEBPACK_IMPORTED_MODULE_64__["Basis"]; });
+/* harmony import */ var _internal_core_rendering_Paper__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./.internal/core/rendering/Paper */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Paper.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Paper", function() { return _internal_core_rendering_Paper__WEBPACK_IMPORTED_MODULE_65__["Paper"]; });
 
-/* harmony import */ var _internal_core_rendering_SVGContainer__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./.internal/core/rendering/SVGContainer */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/SVGContainer.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SVGContainer", function() { return _internal_core_rendering_SVGContainer__WEBPACK_IMPORTED_MODULE_65__["SVGContainer"]; });
+/* harmony import */ var _internal_core_rendering_Smoothing__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./.internal/core/rendering/Smoothing */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Smoothing.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Tension", function() { return _internal_core_rendering_Smoothing__WEBPACK_IMPORTED_MODULE_66__["Tension"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_ColorModifier__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./.internal/core/rendering/fills/ColorModifier */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/ColorModifier.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorModifier", function() { return _internal_core_rendering_fills_ColorModifier__WEBPACK_IMPORTED_MODULE_66__["ColorModifier"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Basis", function() { return _internal_core_rendering_Smoothing__WEBPACK_IMPORTED_MODULE_66__["Basis"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_LinearGradient__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./.internal/core/rendering/fills/LinearGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinearGradient.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LinearGradient", function() { return _internal_core_rendering_fills_LinearGradient__WEBPACK_IMPORTED_MODULE_67__["LinearGradient"]; });
+/* harmony import */ var _internal_core_rendering_SVGContainer__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./.internal/core/rendering/SVGContainer */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/SVGContainer.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SVGContainer", function() { return _internal_core_rendering_SVGContainer__WEBPACK_IMPORTED_MODULE_67__["SVGContainer"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_LinearGradientModifier__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./.internal/core/rendering/fills/LinearGradientModifier */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinearGradientModifier.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LinearGradientModifier", function() { return _internal_core_rendering_fills_LinearGradientModifier__WEBPACK_IMPORTED_MODULE_68__["LinearGradientModifier"]; });
+/* harmony import */ var _internal_core_rendering_fills_ColorModifier__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./.internal/core/rendering/fills/ColorModifier */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/ColorModifier.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorModifier", function() { return _internal_core_rendering_fills_ColorModifier__WEBPACK_IMPORTED_MODULE_68__["ColorModifier"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_RadialGradientModifier__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RadialGradientModifier */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradientModifier.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RadialGradientModifier", function() { return _internal_core_rendering_fills_RadialGradientModifier__WEBPACK_IMPORTED_MODULE_69__["RadialGradientModifier"]; });
+/* harmony import */ var _internal_core_rendering_fills_LinearGradient__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./.internal/core/rendering/fills/LinearGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinearGradient.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LinearGradient", function() { return _internal_core_rendering_fills_LinearGradient__WEBPACK_IMPORTED_MODULE_69__["LinearGradient"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_LinePattern__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./.internal/core/rendering/fills/LinePattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinePattern.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LinePattern", function() { return _internal_core_rendering_fills_LinePattern__WEBPACK_IMPORTED_MODULE_70__["LinePattern"]; });
+/* harmony import */ var _internal_core_rendering_fills_LinearGradientModifier__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./.internal/core/rendering/fills/LinearGradientModifier */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinearGradientModifier.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LinearGradientModifier", function() { return _internal_core_rendering_fills_LinearGradientModifier__WEBPACK_IMPORTED_MODULE_70__["LinearGradientModifier"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_CirclePattern__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./.internal/core/rendering/fills/CirclePattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/CirclePattern.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CirclePattern", function() { return _internal_core_rendering_fills_CirclePattern__WEBPACK_IMPORTED_MODULE_71__["CirclePattern"]; });
+/* harmony import */ var _internal_core_rendering_fills_RadialGradientModifier__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RadialGradientModifier */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradientModifier.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RadialGradientModifier", function() { return _internal_core_rendering_fills_RadialGradientModifier__WEBPACK_IMPORTED_MODULE_71__["RadialGradientModifier"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_Pattern__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./.internal/core/rendering/fills/Pattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/Pattern.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Pattern", function() { return _internal_core_rendering_fills_Pattern__WEBPACK_IMPORTED_MODULE_72__["Pattern"]; });
+/* harmony import */ var _internal_core_rendering_fills_LinePattern__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./.internal/core/rendering/fills/LinePattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/LinePattern.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LinePattern", function() { return _internal_core_rendering_fills_LinePattern__WEBPACK_IMPORTED_MODULE_72__["LinePattern"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RadialGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradient.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RadialGradient", function() { return _internal_core_rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_73__["RadialGradient"]; });
+/* harmony import */ var _internal_core_rendering_fills_CirclePattern__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./.internal/core/rendering/fills/CirclePattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/CirclePattern.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CirclePattern", function() { return _internal_core_rendering_fills_CirclePattern__WEBPACK_IMPORTED_MODULE_73__["CirclePattern"]; });
 
-/* harmony import */ var _internal_core_rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RectPattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RectPattern.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RectPattern", function() { return _internal_core_rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_74__["RectPattern"]; });
+/* harmony import */ var _internal_core_rendering_fills_Pattern__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./.internal/core/rendering/fills/Pattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/Pattern.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Pattern", function() { return _internal_core_rendering_fills_Pattern__WEBPACK_IMPORTED_MODULE_74__["Pattern"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_ColorizeFilter__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./.internal/core/rendering/filters/ColorizeFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/ColorizeFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorizeFilter", function() { return _internal_core_rendering_filters_ColorizeFilter__WEBPACK_IMPORTED_MODULE_75__["ColorizeFilter"]; });
+/* harmony import */ var _internal_core_rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RadialGradient */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RadialGradient.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RadialGradient", function() { return _internal_core_rendering_fills_RadialGradient__WEBPACK_IMPORTED_MODULE_75__["RadialGradient"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./.internal/core/rendering/filters/DesaturateFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/DesaturateFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DesaturateFilter", function() { return _internal_core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_76__["DesaturateFilter"]; });
+/* harmony import */ var _internal_core_rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./.internal/core/rendering/fills/RectPattern */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/fills/RectPattern.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RectPattern", function() { return _internal_core_rendering_fills_RectPattern__WEBPACK_IMPORTED_MODULE_76__["RectPattern"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_DropShadowFilter__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./.internal/core/rendering/filters/DropShadowFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/DropShadowFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropShadowFilter", function() { return _internal_core_rendering_filters_DropShadowFilter__WEBPACK_IMPORTED_MODULE_77__["DropShadowFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_ColorizeFilter__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./.internal/core/rendering/filters/ColorizeFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/ColorizeFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorizeFilter", function() { return _internal_core_rendering_filters_ColorizeFilter__WEBPACK_IMPORTED_MODULE_77__["ColorizeFilter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_BlurFilter__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./.internal/core/rendering/filters/BlurFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/BlurFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BlurFilter", function() { return _internal_core_rendering_filters_BlurFilter__WEBPACK_IMPORTED_MODULE_78__["BlurFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./.internal/core/rendering/filters/DesaturateFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/DesaturateFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DesaturateFilter", function() { return _internal_core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_78__["DesaturateFilter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_Filter__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./.internal/core/rendering/filters/Filter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/Filter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Filter", function() { return _internal_core_rendering_filters_Filter__WEBPACK_IMPORTED_MODULE_79__["Filter"]; });
+/* harmony import */ var _internal_core_rendering_filters_DropShadowFilter__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./.internal/core/rendering/filters/DropShadowFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/DropShadowFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropShadowFilter", function() { return _internal_core_rendering_filters_DropShadowFilter__WEBPACK_IMPORTED_MODULE_79__["DropShadowFilter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./.internal/core/rendering/filters/FocusFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/FocusFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FocusFilter", function() { return _internal_core_rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_80__["FocusFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_BlurFilter__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./.internal/core/rendering/filters/BlurFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/BlurFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BlurFilter", function() { return _internal_core_rendering_filters_BlurFilter__WEBPACK_IMPORTED_MODULE_80__["BlurFilter"]; });
 
-/* harmony import */ var _internal_core_rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./.internal/core/rendering/filters/LightenFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/LightenFilter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LightenFilter", function() { return _internal_core_rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_81__["LightenFilter"]; });
+/* harmony import */ var _internal_core_rendering_filters_Filter__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./.internal/core/rendering/filters/Filter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/Filter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Filter", function() { return _internal_core_rendering_filters_Filter__WEBPACK_IMPORTED_MODULE_81__["Filter"]; });
 
-/* harmony import */ var _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./.internal/core/utils/Adapter */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Adapter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GlobalAdapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_82__["GlobalAdapter"]; });
+/* harmony import */ var _internal_core_rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./.internal/core/rendering/filters/FocusFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/FocusFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FocusFilter", function() { return _internal_core_rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_82__["FocusFilter"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "globalAdapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_82__["globalAdapter"]; });
+/* harmony import */ var _internal_core_rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./.internal/core/rendering/filters/LightenFilter */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/filters/LightenFilter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LightenFilter", function() { return _internal_core_rendering_filters_LightenFilter__WEBPACK_IMPORTED_MODULE_83__["LightenFilter"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Adapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_82__["Adapter"]; });
+/* harmony import */ var _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./.internal/core/utils/Adapter */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Adapter.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GlobalAdapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_84__["GlobalAdapter"]; });
 
-/* harmony import */ var _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./.internal/core/utils/Animation */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Animation.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Animation", function() { return _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_83__["Animation"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "globalAdapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_84__["globalAdapter"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_83__["animate"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Adapter", function() { return _internal_core_utils_Adapter__WEBPACK_IMPORTED_MODULE_84__["Adapter"]; });
 
-/* harmony import */ var _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./.internal/core/utils/AsyncPending */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/AsyncPending.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "nextFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["nextFrame"]; });
+/* harmony import */ var _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./.internal/core/utils/Animation */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Animation.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Animation", function() { return _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_85__["Animation"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "readFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["readFrame"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return _internal_core_utils_Animation__WEBPACK_IMPORTED_MODULE_85__["animate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "writeFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["writeFrame"]; });
+/* harmony import */ var _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./.internal/core/utils/AsyncPending */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/AsyncPending.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "nextFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_86__["nextFrame"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "whenIdle", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["whenIdle"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "readFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_86__["readFrame"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "triggerIdle", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_84__["triggerIdle"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "writeFrame", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_86__["writeFrame"]; });
 
-/* harmony import */ var _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./.internal/core/utils/Cache */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Cache.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Cache", function() { return _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_85__["Cache"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "whenIdle", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_86__["whenIdle"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "cache", function() { return _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_85__["cache"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "triggerIdle", function() { return _internal_core_utils_AsyncPending__WEBPACK_IMPORTED_MODULE_86__["triggerIdle"]; });
 
-/* harmony import */ var _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./.internal/core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Color", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__["Color"]; });
+/* harmony import */ var _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./.internal/core/utils/Cache */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Cache.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Cache", function() { return _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_87__["Cache"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "color", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__["color"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "cache", function() { return _internal_core_utils_Cache__WEBPACK_IMPORTED_MODULE_87__["cache"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isColor", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__["isColor"]; });
+/* harmony import */ var _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./.internal/core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Color", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_88__["Color"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castColor", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_86__["castColor"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "color", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_88__["color"]; });
 
-/* harmony import */ var _internal_core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./.internal/core/utils/ColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/ColorSet.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorSet", function() { return _internal_core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_87__["ColorSet"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isColor", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_88__["isColor"]; });
 
-/* harmony import */ var _internal_core_utils_PatternSet__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./.internal/core/utils/PatternSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/PatternSet.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PatternSet", function() { return _internal_core_utils_PatternSet__WEBPACK_IMPORTED_MODULE_88__["PatternSet"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castColor", function() { return _internal_core_utils_Color__WEBPACK_IMPORTED_MODULE_88__["castColor"]; });
 
-/* harmony import */ var _internal_core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./.internal/core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InterfaceColorSet", function() { return _internal_core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_89__["InterfaceColorSet"]; });
+/* harmony import */ var _internal_core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./.internal/core/utils/ColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/ColorSet.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorSet", function() { return _internal_core_utils_ColorSet__WEBPACK_IMPORTED_MODULE_89__["ColorSet"]; });
 
-/* harmony import */ var _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./.internal/core/utils/Dictionary */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Dictionary.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DictionaryDisposer", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_90__["DictionaryDisposer"]; });
+/* harmony import */ var _internal_core_utils_PatternSet__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./.internal/core/utils/PatternSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/PatternSet.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PatternSet", function() { return _internal_core_utils_PatternSet__WEBPACK_IMPORTED_MODULE_90__["PatternSet"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Dictionary", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_90__["Dictionary"]; });
+/* harmony import */ var _internal_core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./.internal/core/utils/InterfaceColorSet */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/InterfaceColorSet.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "InterfaceColorSet", function() { return _internal_core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_91__["InterfaceColorSet"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DictionaryTemplate", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_90__["DictionaryTemplate"]; });
+/* harmony import */ var _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./.internal/core/utils/Dictionary */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Dictionary.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DictionaryDisposer", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_92__["DictionaryDisposer"]; });
 
-/* harmony import */ var _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./.internal/core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Disposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__["Disposer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Dictionary", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_92__["Dictionary"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MultiDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__["MultiDisposer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DictionaryTemplate", function() { return _internal_core_utils_Dictionary__WEBPACK_IMPORTED_MODULE_92__["DictionaryTemplate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MutableValueDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__["MutableValueDisposer"]; });
+/* harmony import */ var _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./.internal/core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Disposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_93__["Disposer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CounterDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_91__["CounterDisposer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MultiDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_93__["MultiDisposer"]; });
 
-/* harmony import */ var _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./.internal/core/utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StyleRule", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["StyleRule"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MutableValueDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_93__["MutableValueDisposer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StyleClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["StyleClass"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CounterDisposer", function() { return _internal_core_utils_Disposer__WEBPACK_IMPORTED_MODULE_93__["CounterDisposer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["getElement"]; });
+/* harmony import */ var _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./.internal/core/utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StyleRule", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["StyleRule"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["addClass"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StyleClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["StyleClass"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["removeClass"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["getElement"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "blur", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["blur"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["addClass"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "focus", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["focus"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeClass", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["removeClass"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "outerHTML", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["outerHTML"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "blur", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["blur"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isElement", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["isElement"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "focus", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["focus"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "copyAttributes", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["copyAttributes"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "outerHTML", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["outerHTML"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "fixPixelPerfect", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["fixPixelPerfect"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isElement", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["isElement"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ready", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_92__["ready"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "copyAttributes", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["copyAttributes"]; });
 
-/* harmony import */ var _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./.internal/core/utils/EventDispatcher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/EventDispatcher.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EventDispatcher", function() { return _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_93__["EventDispatcher"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "fixPixelPerfect", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["fixPixelPerfect"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TargetedEventDispatcher", function() { return _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_93__["TargetedEventDispatcher"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ready", function() { return _internal_core_utils_DOM__WEBPACK_IMPORTED_MODULE_94__["ready"]; });
 
-/* harmony import */ var _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./.internal/core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListIterator", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__["ListIterator"]; });
+/* harmony import */ var _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./.internal/core/utils/EventDispatcher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/EventDispatcher.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EventDispatcher", function() { return _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_95__["EventDispatcher"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "min", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__["min"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TargetedEventDispatcher", function() { return _internal_core_utils_EventDispatcher__WEBPACK_IMPORTED_MODULE_95__["TargetedEventDispatcher"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "max", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__["max"]; });
+/* harmony import */ var _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./.internal/core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListIterator", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_96__["ListIterator"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "join", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__["join"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "min", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_96__["min"]; });
 
-/* harmony import */ var _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./.internal/core/utils/Keyboard */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Keyboard.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Keyboard", function() { return _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_95__["Keyboard"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "max", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_96__["max"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "keyboard", function() { return _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_95__["keyboard"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "join", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_96__["join"]; });
 
-/* harmony import */ var _internal_core_utils_Language__WEBPACK_IMPORTED_MODULE_96__ = __webpack_require__(/*! ./.internal/core/utils/Language */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Language.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Language", function() { return _internal_core_utils_Language__WEBPACK_IMPORTED_MODULE_96__["Language"]; });
+/* harmony import */ var _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! ./.internal/core/utils/Keyboard */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Keyboard.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Keyboard", function() { return _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_97__["Keyboard"]; });
 
-/* harmony import */ var _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__ = __webpack_require__(/*! ./.internal/core/utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IndexedIterable", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["IndexedIterable"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "keyboard", function() { return _internal_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_97__["keyboard"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListGrouper", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["ListGrouper"]; });
+/* harmony import */ var _internal_core_utils_Language__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! ./.internal/core/utils/Language */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Language.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Language", function() { return _internal_core_utils_Language__WEBPACK_IMPORTED_MODULE_98__["Language"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListDisposer", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["ListDisposer"]; });
+/* harmony import */ var _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! ./.internal/core/utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IndexedIterable", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_99__["IndexedIterable"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["List"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListGrouper", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_99__["ListGrouper"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListTemplate", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_97__["ListTemplate"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListDisposer", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_99__["ListDisposer"]; });
 
-/* harmony import */ var _internal_core_utils_Morpher__WEBPACK_IMPORTED_MODULE_98__ = __webpack_require__(/*! ./.internal/core/utils/Morpher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Morpher.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Morpher", function() { return _internal_core_utils_Morpher__WEBPACK_IMPORTED_MODULE_98__["Morpher"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "List", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_99__["List"]; });
 
-/* harmony import */ var _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_99__ = __webpack_require__(/*! ./.internal/core/utils/Order */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Order.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reverse", function() { return _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_99__["reverse"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListTemplate", function() { return _internal_core_utils_List__WEBPACK_IMPORTED_MODULE_99__["ListTemplate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "or", function() { return _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_99__["or"]; });
+/* harmony import */ var _internal_core_utils_Morpher__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! ./.internal/core/utils/Morpher */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Morpher.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Morpher", function() { return _internal_core_utils_Morpher__WEBPACK_IMPORTED_MODULE_100__["Morpher"]; });
 
-/* harmony import */ var _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_100__ = __webpack_require__(/*! ./.internal/core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Percent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_100__["Percent"]; });
+/* harmony import */ var _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! ./.internal/core/utils/Order */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Order.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reverse", function() { return _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_101__["reverse"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "percent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_100__["percent"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "or", function() { return _internal_core_utils_Order__WEBPACK_IMPORTED_MODULE_101__["or"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isPercent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_100__["isPercent"]; });
+/* harmony import */ var _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! ./.internal/core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Percent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_102__["Percent"]; });
 
-/* harmony import */ var _internal_core_utils_Plugin__WEBPACK_IMPORTED_MODULE_101__ = __webpack_require__(/*! ./.internal/core/utils/Plugin */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Plugin.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Plugin", function() { return _internal_core_utils_Plugin__WEBPACK_IMPORTED_MODULE_101__["Plugin"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "percent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_102__["percent"]; });
 
-/* harmony import */ var _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_102__ = __webpack_require__(/*! ./.internal/core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Responsive", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_102__["Responsive"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isPercent", function() { return _internal_core_utils_Percent__WEBPACK_IMPORTED_MODULE_102__["isPercent"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ResponsiveBreakpoints", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_102__["ResponsiveBreakpoints"]; });
+/* harmony import */ var _internal_core_utils_Plugin__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! ./.internal/core/utils/Plugin */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Plugin.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Plugin", function() { return _internal_core_utils_Plugin__WEBPACK_IMPORTED_MODULE_103__["Plugin"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "defaultRules", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_102__["defaultRules"]; });
+/* harmony import */ var _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! ./.internal/core/utils/Responsive */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Responsive", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_104__["Responsive"]; });
 
-/* harmony import */ var _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__ = __webpack_require__(/*! ./.internal/core/utils/SortedList */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/SortedList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedList", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__["OrderedList"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ResponsiveBreakpoints", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_104__["ResponsiveBreakpoints"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortedList", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__["SortedList"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "defaultRules", function() { return _internal_core_utils_Responsive__WEBPACK_IMPORTED_MODULE_104__["defaultRules"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedListTemplate", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__["OrderedListTemplate"]; });
+/* harmony import */ var _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! ./.internal/core/utils/SortedList */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/SortedList.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedList", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_105__["OrderedList"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortedListTemplate", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_103__["SortedListTemplate"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortedList", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_105__["SortedList"]; });
 
-/* harmony import */ var _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__ = __webpack_require__(/*! ./.internal/core/utils/Strings */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Strings.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PX", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["PX"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedListTemplate", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_105__["OrderedListTemplate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "STRING", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["STRING"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SortedListTemplate", function() { return _internal_core_utils_SortedList__WEBPACK_IMPORTED_MODULE_105__["SortedListTemplate"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NUMBER", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["NUMBER"]; });
+/* harmony import */ var _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! ./.internal/core/utils/Strings */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Strings.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PX", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_106__["PX"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DATE", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["DATE"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "STRING", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_106__["STRING"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DURATION", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["DURATION"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NUMBER", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_106__["NUMBER"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PLACEHOLDER", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["PLACEHOLDER"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DATE", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_106__["DATE"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PLACEHOLDER2", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_104__["PLACEHOLDER2"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DURATION", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_106__["DURATION"]; });
 
-/* harmony import */ var _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__ = __webpack_require__(/*! ./.internal/core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isNaN", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isNaN"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PLACEHOLDER", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_106__["PLACEHOLDER"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["checkString"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PLACEHOLDER2", function() { return _internal_core_utils_Strings__WEBPACK_IMPORTED_MODULE_106__["PLACEHOLDER2"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkBoolean", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["checkBoolean"]; });
+/* harmony import */ var _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! ./.internal/core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isNaN", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["isNaN"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["checkNumber"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["checkString"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkObject", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["checkObject"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkBoolean", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["checkBoolean"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["castString"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["checkNumber"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["castNumber"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "checkObject", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["checkObject"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isString"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["castString"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isNumber"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "castNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["castNumber"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isObject"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["isString"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__["isArray"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["isNumber"]; });
 
-/* harmony import */ var _internal_core_utils_Validatable__WEBPACK_IMPORTED_MODULE_106__ = __webpack_require__(/*! ./.internal/core/utils/Validatable */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Validatable.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Validatable", function() { return _internal_core_utils_Validatable__WEBPACK_IMPORTED_MODULE_106__["Validatable"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["isObject"]; });
 
-/* harmony import */ var _internal_core_rendering_Path__WEBPACK_IMPORTED_MODULE_107__ = __webpack_require__(/*! ./.internal/core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "path", function() { return _internal_core_rendering_Path__WEBPACK_IMPORTED_MODULE_107__; });
-/* harmony import */ var _internal_core_utils_Colors__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! ./.internal/core/utils/Colors */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Colors.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return _internal_core_utils_Colors__WEBPACK_IMPORTED_MODULE_108__; });
-/* harmony import */ var _internal_core_utils_Ease__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! ./.internal/core/utils/Ease */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Ease.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "ease", function() { return _internal_core_utils_Ease__WEBPACK_IMPORTED_MODULE_109__; });
-/* harmony import */ var _internal_core_utils_Math__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! ./.internal/core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "math", function() { return _internal_core_utils_Math__WEBPACK_IMPORTED_MODULE_110__; });
-/* harmony import */ var _internal_core_utils_Array__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! ./.internal/core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "array", function() { return _internal_core_utils_Array__WEBPACK_IMPORTED_MODULE_111__; });
-/* harmony import */ var _internal_core_utils_Number__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! ./.internal/core/utils/Number */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Number.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "number", function() { return _internal_core_utils_Number__WEBPACK_IMPORTED_MODULE_112__; });
-/* harmony import */ var _internal_core_utils_Object__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! ./.internal/core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "object", function() { return _internal_core_utils_Object__WEBPACK_IMPORTED_MODULE_113__; });
-/* harmony import */ var _internal_core_utils_String__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! ./.internal/core/utils/String */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/String.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "string", function() { return _internal_core_utils_String__WEBPACK_IMPORTED_MODULE_114__; });
-/* harmony import */ var _internal_core_utils_Time__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! ./.internal/core/utils/Time */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Time.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "time", function() { return _internal_core_utils_Time__WEBPACK_IMPORTED_MODULE_115__; });
-/* harmony import */ var _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! ./.internal/core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "utils", function() { return _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_116__; });
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "iter", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_94__; });
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "type", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_105__; });
-/* harmony import */ var _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! ./.internal/core/utils/Instance */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Instance.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "create", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["create"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__["isArray"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createFromConfig", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["createFromConfig"]; });
+/* harmony import */ var _internal_core_utils_Validatable__WEBPACK_IMPORTED_MODULE_108__ = __webpack_require__(/*! ./.internal/core/utils/Validatable */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Validatable.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Validatable", function() { return _internal_core_utils_Validatable__WEBPACK_IMPORTED_MODULE_108__["Validatable"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "disposeAllCharts", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["disposeAllCharts"]; });
+/* harmony import */ var _internal_core_rendering_Path__WEBPACK_IMPORTED_MODULE_109__ = __webpack_require__(/*! ./.internal/core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "path", function() { return _internal_core_rendering_Path__WEBPACK_IMPORTED_MODULE_109__; });
+/* harmony import */ var _internal_core_utils_Colors__WEBPACK_IMPORTED_MODULE_110__ = __webpack_require__(/*! ./.internal/core/utils/Colors */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Colors.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return _internal_core_utils_Colors__WEBPACK_IMPORTED_MODULE_110__; });
+/* harmony import */ var _internal_core_utils_Ease__WEBPACK_IMPORTED_MODULE_111__ = __webpack_require__(/*! ./.internal/core/utils/Ease */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Ease.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "ease", function() { return _internal_core_utils_Ease__WEBPACK_IMPORTED_MODULE_111__; });
+/* harmony import */ var _internal_core_utils_Math__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(/*! ./.internal/core/utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "math", function() { return _internal_core_utils_Math__WEBPACK_IMPORTED_MODULE_112__; });
+/* harmony import */ var _internal_core_utils_Array__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(/*! ./.internal/core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "array", function() { return _internal_core_utils_Array__WEBPACK_IMPORTED_MODULE_113__; });
+/* harmony import */ var _internal_core_utils_Number__WEBPACK_IMPORTED_MODULE_114__ = __webpack_require__(/*! ./.internal/core/utils/Number */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Number.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "number", function() { return _internal_core_utils_Number__WEBPACK_IMPORTED_MODULE_114__; });
+/* harmony import */ var _internal_core_utils_Object__WEBPACK_IMPORTED_MODULE_115__ = __webpack_require__(/*! ./.internal/core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "object", function() { return _internal_core_utils_Object__WEBPACK_IMPORTED_MODULE_115__; });
+/* harmony import */ var _internal_core_utils_String__WEBPACK_IMPORTED_MODULE_116__ = __webpack_require__(/*! ./.internal/core/utils/String */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/String.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "string", function() { return _internal_core_utils_String__WEBPACK_IMPORTED_MODULE_116__; });
+/* harmony import */ var _internal_core_utils_Time__WEBPACK_IMPORTED_MODULE_117__ = __webpack_require__(/*! ./.internal/core/utils/Time */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Time.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "time", function() { return _internal_core_utils_Time__WEBPACK_IMPORTED_MODULE_117__; });
+/* harmony import */ var _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_118__ = __webpack_require__(/*! ./.internal/core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "utils", function() { return _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_118__; });
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "iter", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_96__; });
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "type", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__; });
+/* harmony import */ var _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! ./.internal/core/utils/Instance */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Instance.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "create", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["create"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["useTheme"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createFromConfig", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["createFromConfig"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["unuseTheme"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "disposeAllCharts", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["disposeAllCharts"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseAllThemes", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["unuseAllThemes"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["useTheme"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addLicense", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_117__["addLicense"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["unuseTheme"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseAllThemes", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["unuseAllThemes"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addLicense", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["addLicense"]; });
 
 /**
  * This module houses all core/framework functionality and is required for
@@ -99484,6 +99869,8 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Elements: elements
  */
+
+
 
 
 

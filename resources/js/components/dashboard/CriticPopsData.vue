@@ -8,22 +8,22 @@
             <table class="table is-fullwidth" :class="boxBackground">
                 <thead>
                     <tr class="is-size-7">
-                        <!-- <th class="has-text-right" :class="secondaryText"><abbr title="ID">ID</abbr></th> -->
-                        <th class="has-text-left" :class="secondaryText"><abbr title="Nemónico">Nemónico</abbr></th>
                         <th class="has-text-left" :class="secondaryText"><abbr title="Nombre y dirección del POP">Nombre / Dirección</abbr></th>
+                        <th class="has-text-left" :class="secondaryText"><abbr title="Nemónico">Nemónico</abbr></th>
                         <th class="has-text-left" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="is-size-7" v-for="item in data.data">
                         <td class="has-text-left" :class="primaryText">
-                            <router-link :to="'/pop/' + item.site.pop.id" target="_blank">{{ item.site.nem_site }}</router-link></td>
+                            <div>{{ item.pop.nombre }}</div>
+                            <div>{{ item.pop.direccion }}</div>
+                        </td>
                         <td class="has-text-left" :class="primaryText">
-                            <div>{{ item.site.pop.nombre }}</div>
-                            <div>{{ item.site.pop.direccion }}</div>
+                            <router-link :to="'/pop/' + item.pop.id" target="_blank">{{ item.name }}</router-link>
                         </td>
                         <td class="has-text-centered" :class="primaryText">
-                            <b-tag :type="item.site.classification_type_id == 1 ? 'is-info' : (item.site.classification_type_id == 2 ? 'is-warning' : (item.site.classification_type_id == 3 ? 'is-smart' : (item.site.classification_type_id == 4 ? 'is-success' : 'is-link')))">{{ item.site.classification_type.classification_type }}</b-tag>
+                            <b-tag :type="popClassification(item.pop).id == 1 ? 'is-info' : (popClassification(item.pop).id == 2 ? 'is-warning' : (popClassification(item.pop).id == 3 ? 'is-smart' : (popClassification(item.pop).id == 4 ? 'is-success' : 'is-link')))">{{ popClassification(item.pop).classification }}</b-tag>
                         </td>
                     </tr>
                 </tbody>
@@ -105,20 +105,7 @@
                 this.getData()
             }
         },
-        computed: {
-            popClassification(site) {
-                var i = 6; var cat
-                if (site.pop) {
-                    site.forEach(function(item) {
-                        if (item.classification_type_id && item.classification_type_id < i) { 
-                            i = item.classification_type_id
-                            cat = item.classification_type.classification_type
-                        }
-                    }, this)
-                }
-                return cat
-            }
-        },
+ 
         methods: {
             getData() {                          
                 axios.get(`/api/criticPopList?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
@@ -130,24 +117,23 @@
                     // }
                 })
             },
-            // downloadPops() {
-            //     this.buttonLoading = 1
 
-            //     axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
-            //         responseType: 'blob',
-            //     })
-            //     .then((response) => {
-            //         // console.log(response.data)
-            //         const blob = new Blob([response.data], { type: 'application/xls' })
-            //         // const objectUrl = window.URL.createObjectURL(blob)
+            popClassification(pop) {
+                var id = 6; var classification
+                if(pop.sites) {
+                    pop.sites.forEach(function(item) {
+                        if (item.classification_type_id && item.classification_type_id < id) { 
+                            id = item.classification_type_id
+                            classification = item.classification_type.classification_type
+                        }
+                    }, this)
+                }
 
-            //         let link = document.createElement('a')
-            //         link.href = window.URL.createObjectURL(blob)
-            //         link.download = 'test.xlsx'
-            //         link.click()
-            //         this.buttonLoading = 0
-            //     })
-            // }
+                return {
+                    'id': id,
+                    'classification': classification
+                }
+            }
         }
     }
 </script>

@@ -36,6 +36,11 @@ class Pop extends Model
         return $this->hasMany(Rca::class);
     }
 
+    public function rooms() 
+    {
+        return $this->hasMany(Room::class);
+    }
+
     public function sites() 
     {
         return $this->hasMany(Site::class);

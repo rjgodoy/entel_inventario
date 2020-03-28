@@ -234,3 +234,15 @@ $dropdown-content-max-height: 400px !default;
     width: inherit;
     height: inherit;
 }
+
+
+// Sticky Footer
+.sticky {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+  
+.sticky-content {
+  flex: 1;
+}

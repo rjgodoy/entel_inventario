@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $connection = 'mysql_entel_pops';
+    protected $guarded = [];
 
-    public function site() 
+    public function pop() 
     {
-        return $this->belongsTo(Site::class);
+        return $this->belongsTo(Pop::class);
     }
 }

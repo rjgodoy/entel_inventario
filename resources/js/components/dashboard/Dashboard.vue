@@ -267,7 +267,7 @@
                                     <a class="tile is-child box" :class="currentTab === 'pops' ? 'has-background-link' : boxBackground" @click="currentTab = 'pops'">
                                         <div class="" style="padding-top: 10px; padding-left: 5px;" >
                                             <b-icon 
-                                                pack="fad" 
+                                                pack="fas" 
                                                 icon="map-marker-alt" 
                                                 class="fa-2x"
                                                 :class="currentTab === 'pops' ? 'has-text-smart-light' : 'has-text-smart'">
@@ -284,7 +284,7 @@
                                     <a class="tile is-child box" :class="currentTab === 'sites' ? 'has-background-link' : boxBackground" @click="currentTab = 'sites'">
                                         <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
-                                                pack="fad" 
+                                                pack="fas" 
                                                 icon="server" 
                                                 class="fa-2x"
                                                 :class="currentTab === 'sites' ? 'has-text-eco' : 'has-text-eco'">
@@ -300,7 +300,7 @@
                                     <a class="tile is-child box" :class="currentTab === 'technologies' ? 'has-background-link' : boxBackground" @click="currentTab = 'technologies'">
                                         <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
-                                                pack="fad" 
+                                                pack="fas" 
                                                 icon="signal" 
                                                 class="fa-2x"
                                                 :class="currentTab === 'technologies' ? 'has-text-positive' : 'has-text-positive'">
@@ -318,7 +318,7 @@
                                     <a class="tile is-child box" :class="currentTab === 'critics' ? 'has-background-link' : boxBackground" @click="viewCriticPops">
                                         <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
-                                                pack="fad" 
+                                                pack="fas" 
                                                 icon="exclamation-triangle" 
                                                 class="has-text-yellow fa-2x"
                                                 >
@@ -334,7 +334,7 @@
                                     <a class="tile is-child box" :class="currentTab === 'alba' ? 'has-background-link' : boxBackground" @click="viewAlbaPops">
                                         <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
-                                                pack="fad" 
+                                                pack="fas" 
                                                 icon="file-invoice-dollar" 
                                                 class="has-text-smart fa-2x"
                                                 >
@@ -350,8 +350,8 @@
                                     <a class="tile is-child box has-background-dark has-text-white" style="position: relative;" 
                                         @click="downloadPops">
                                         <b-icon 
-                                            style="padding-top: 10px; padding-left: 5px;"
-                                            pack="fad" 
+                                            style="padding-top: 20px; padding-left: 5px;"
+                                            pack="fas" 
                                             icon="download" 
                                             class="has-text-eco fa-2x">
                                         </b-icon> 
@@ -365,16 +365,43 @@
 
                             <div class="tile">
                                 <div class="tile is-parent">
-                                    <article
-                                        :class="boxBackground" 
-                                        style="width: 100%; height: auto;">
-                                        <pret-data-chart
-                                            :bodyBackground="bodyBackground"
-                                            :boxBackground="boxBackground"
-                                            :primaryText="primaryText"
-                                            :secondaryText="secondaryText"
-                                        ></pret-data-chart>
-                                    </article>
+                                    <div class="tile is-child box">
+                                        <div class="is-size-5 has-text-weight-semibold title">Nuevos POP</div>
+                                        <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.pop_news_month }}
+                                            <p class="is-size-6 has-text-weight-light">POP nuevos ingresados esta semana</p>
+                                        </div>
+                                        <div class="field" style="margin-top: 20px;">
+                                            <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
+                                            <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_site.pop.id" target="_blank">
+                                                {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
+                                            </router-link>
+                                            <div class="is-size-7">
+                                                {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}
+                                            </div>
+                                        </div>
+
+                                        <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 10px;">Fecha actualización: {{ last_data_counters.last_updated_pops }}</div>
+                                    </div>
+                                </div>
+
+                                <div class="tile is-parent">
+                                    <div class="tile is-child box">
+                                        <div class="is-size-5 has-text-weight-semibold title">Nuevos Sitios</div>
+                                        <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.sites_news_month }}
+                                            <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados esta semana</p>
+                                        </div>
+                                        <div class="field" style="margin-top: 20px;">
+                                            <div class="is-size-7 has-text-weight-light">Utimo Sitio ingresado:</div>
+                                            <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_site.pop.id" target="_blank">
+                                                {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
+                                            </router-link>
+                                            <div class="is-size-7">
+                                                {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}
+                                            </div>
+                                        </div>
+
+                                        <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 10px;">Fecha actualización: {{ last_data_counters.last_updated_sites }}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -411,18 +438,22 @@
                                 </keep-alive>
                                 </article>
 
-                                <article v-if="(this.currentTab !== 'critics') && (this.currentTab !== 'alba')"
-                                    class="tile is-child box" 
-                                    :class="boxBackground" 
-                                    style="width: 100%; height: auto;">
-                                    <!-- <data-chart></data-chart> -->
+                                <article v-if="(this.currentTab !== 'critics') && (this.currentTab !== 'alba')">
+                                    <keep-alive>
+                                    <pret-data-chart
+                                        :bodyBackground="bodyBackground"
+                                        :boxBackground="boxBackground"
+                                        :primaryText="primaryText"
+                                        :secondaryText="secondaryText"
+                                    ></pret-data-chart>
+                                    </keep-alive>
                                 </article>
                             </div>
                         </div>
                     </div>
 
                     <!-- cuadros inferiores -->
-                    <div class="tile is-ancestor">
+                    <!-- <div class="tile is-ancestor">
                         <div class="tile is-parent">
                             <div class="tile is-child box">
                                 <div class="is-size-5 has-text-weight-semibold title">Nuevos POP</div>
@@ -463,10 +494,10 @@
                             </div>
                         </div>
 
-                        <!-- <div class="tile is-parent">
+                        <div class="tile is-parent">
                             <div class="tile is-child box">
-                                <div class="is-size-5 has-text-weight-semibold title">Nuevas Tecnologías</div>
-                                <div class="is-size-2 has-text-centered">{{ last_data_counters.technologies_news }}
+                                <div class="is-size-5 has-text-weight-semibold title">Nuevo Equipamiento</div>
+                                <div class="is-size-2 has-text-centered">{{ last_data_counters.equipments_news_month }}
                                     <p class="is-size-6 has-text-weight-light">Equipos ingresados esta semana</p>
                                 </div>
                                 <div class="field" style="margin-top: 20px;">
@@ -479,17 +510,17 @@
                                     Fecha actualización: {{ last_data_counters.last_updated_technologies }}
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
-                        <div class="tile is-parent is-7">
-                            <!-- <pret-data-chart
+                        <div class="tile is-parent is-5">
+                            <pret-data-chart
                                 :bodyBackground="bodyBackground"
                                 :boxBackground="boxBackground"
                                 :primaryText="primaryText"
                                 :secondaryText="secondaryText"
-                            ></pret-data-chart> -->
+                            ></pret-data-chart>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -566,33 +597,20 @@
     // import LoadingComponent from '../helpers/LoadingComponent'
     // import ErrorComponent from '../helpers/ErrorComponent'
 
-    const PretDataChart = () => ({
-        // The component to load (should be a Promise)
-        component: import('./PretDataChart.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
 
-    const PopsMap = () => ({
-        // The component to load (should be a Promise)
-        component: import('../maps/PopsMap.vue'),
-        // A component to use while the async component is loading
-        loading: import('../helpers/LoadingComponent'),
-        // A component to use if the load fails
-        error: import('../helpers/ErrorComponent'),
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
+    // const PopsMap = () => ({
+    //     // The component to load (should be a Promise)
+    //     component: import('../maps/PopsMap.vue'),
+    //     // A component to use while the async component is loading
+    //     loading: import('../helpers/LoadingComponent'),
+    //     // A component to use if the load fails
+    //     error: import('../helpers/ErrorComponent'),
+    //     // Delay before showing the loading component. Default: 200ms.
+    //     delay: 200,
+    //     // The error component will be displayed if a timeout is
+    //     // provided and exceeded. Default: Infinity.
+    //     timeout: 3000
+    // })
 
     // const MapView = () => ({
     //     // The component to load (should be a Promise)
@@ -608,33 +626,33 @@
     //     timeout: 3000
     // })
 
-    const RadialChart = () => ({
-        // The component to load (should be a Promise)
-        component: import('../RadialChart.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
+    // const RadialChart = () => ({
+    //     // The component to load (should be a Promise)
+    //     component: import('../RadialChart.vue'),
+    //     // A component to use while the async component is loading
+    //     // loading: LoadingComponent,
+    //     // A component to use if the load fails
+    //     // error: ErrorComponent,
+    //     // Delay before showing the loading component. Default: 200ms.
+    //     delay: 200,
+    //     // The error component will be displayed if a timeout is
+    //     // provided and exceeded. Default: Infinity.
+    //     timeout: 3000
+    // })
 
-    const RedCoreChart = () => ({
-        // The component to load (should be a Promise)
-        component: import('./RedCoreChart.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
+    // const RedCoreChart = () => ({
+    //     // The component to load (should be a Promise)
+    //     component: import('./RedCoreChart.vue'),
+    //     // A component to use while the async component is loading
+    //     // loading: LoadingComponent,
+    //     // A component to use if the load fails
+    //     // error: ErrorComponent,
+    //     // Delay before showing the loading component. Default: 200ms.
+    //     delay: 200,
+    //     // The error component will be displayed if a timeout is
+    //     // provided and exceeded. Default: Infinity.
+    //     timeout: 3000
+    // })
 
     var moment = require('moment');
     import debounce from 'lodash/debounce'
@@ -654,8 +672,8 @@
             // MapView,
 
             // ###### Charts ########
-            PretDataChart,
-            RadialChart,
+            PretDataChart: () => import('./PretDataChart.vue'),
+            // RadialChart,
             // RedCoreChart,
 
             // ###### Equipment #####
@@ -683,10 +701,10 @@
             //     })
             // });
 
-            this.$eventCounters.$on('pops', function(total) {
-                console.log('El total es ' + total)
+            // this.$eventCounters.$on('pops', function(total) {
+                // console.log('El total es ' + total)
                 // this.popsQuantity = total
-            })
+            // })
         },
 
         mounted() {
@@ -824,10 +842,6 @@
         },
 
         computed: {
-            // zonas: function() {
-            //     return this.selectedCrm ? this.selectedCrm.zona : null
-            // },
-
             currentTabComponent: function () {
                 return this.currentTab + '-data'
             },
@@ -839,14 +853,6 @@
                     return
                 }
             },
-
-            // popsQuantity: function () {
-            //     this.$eventCounters.$on('pops', function(value) {
-            //         var totalPops = value
-            //         console.log(totalPops)
-            //         return totalPops
-            //     })   
-            // },
 
             textSwitchCore() {
                 return this.core ? 'has-text-link' : ''
@@ -966,51 +972,11 @@
                 this.getAsyncData(this.searchText)
             }, 10),
         
-            // Search bar
-            // async search(){
-            //     if (this.searchText.length >= 3) {
-            //         if (this.selectedCrm == null) {
-            //             axios.get(`/api/searchPops?text=${this.searchText}&core=${this.core}`)
-            //             .then((response) => {
-            //                 this.popSearch = response.data
-            //                 this.counter = this.popSearch.length
-            //                 this.active = 1
-            //             })
-            //         } else if (this.selectedZona == null) {
-            //             axios.get(`/api/searchPopsCrm?text=${this.searchText}&crm_id=${this.selectedCrm.id}&core=${this.core}`)
-            //             .then((response) => {
-            //                 this.popSearch = response.data
-            //                 this.counter = this.popSearch.length
-            //                 this.active = 1
-            //             })
-            //         } else {
-            //             axios.get(`/api/searchPopsZona?text=${this.searchText}&zona_id=${this.selectedZona.id}&core=${this.core}`)
-            //             .then((response) => {
-            //                 this.popSearch = response.data
-            //                 this.counter = this.popSearch.length
-            //                 this.active = 1
-            //             })
-            //         }
-            //     } else if (this.searchText == '') {
-            //         this.clearSearch()
-            //     } else {
-            //         this.popSearch = []
-            //     }
-            // },
-
             clearSearch() {
                 this.popSearch = []
                 this.searchText = ''
                 this.selectedPop = null
             },
-
-            // clickOutside() {
-            //     this.active = null
-            // },
-
-            // setActive() {
-            //     this.active = 1
-            // },
 
             // Style mode
             styleMode(){
@@ -1065,17 +1031,21 @@
             downloadPops() {
                 this.isLoading = true
 
-                axios.get(`/api/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
-                    responseType: 'blob',
-                })
+                var params = {
+                    'core': this.core,
+                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                    'zona_id': this.selectedZona ? this.selectedZona.id : 0
+                }
+
+                axios.get('/api/pop/export', { params: params, responseType: 'arraybuffer' })
                 .then((response) => {
                     console.log(response.data)
-                    const blob = new Blob([response.data], { type: 'application/xls' })
+                    const blob = new Blob([response.data], { type: 'application/xlsx' })
                     // const objectUrl = window.URL.createObjectURL(blob)
 
                     let link = document.createElement('a')
                     link.href = window.URL.createObjectURL(blob)
-                    link.download = 'test.xlsx'
+                    link.download = 'listado_pops.xlsx'
                     link.click()
                     this.isLoading = false
                     this.$buefy.toast.open({

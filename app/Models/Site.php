@@ -59,11 +59,6 @@ class Site extends Model
         return $this->belongsTo(Pop::class);
     }
 
-    public function rooms() 
-    {
-        return $this->hasMany(Room::class);
-    }
-
     public function site_type() 
     {
         return $this->belongsTo(SiteType::class);

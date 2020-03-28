@@ -23,21 +23,21 @@ class RoomController extends Controller
 
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
 
-        $rooms = Room::with('site.pop.comuna.zona.crm')
-            ->whereHas('site.pop.comuna.zona', function($r) use($condition_crm) {
-                $r->whereRaw($condition_crm);
-            })
-            ->whereHas('site', function($q) use($text) {
-                $q->where('nem_site', 'LIKE', "%$text%")
-                ->orWhere('nombre', 'LIKE', "%$text%");
-            })
-            // ->orWhereHas('site.pop', function($p) use($text) {
-            //     $p->where('nombre', 'LIKE', "%$text%")
-            //     ->orWhere('direccion', 'LIKE', "%$text%");
-            // })
-            ->paginate(20);
+        // $rooms = Room::with('site.pop.comuna.zona.crm')
+        //     ->whereHas('site.pop.comuna.zona', function($r) use($condition_crm) {
+        //         $r->whereRaw($condition_crm);
+        //     })
+        //     ->whereHas('site', function($q) use($text) {
+        //         $q->where('nem_site', 'LIKE', "%$text%")
+        //         ->orWhere('nombre', 'LIKE', "%$text%");
+        //     })
+        //     // ->orWhereHas('site.pop', function($p) use($text) {
+        //     //     $p->where('nombre', 'LIKE', "%$text%")
+        //     //     ->orWhere('direccion', 'LIKE', "%$text%");
+        //     // })
+        //     ->paginate(20);
 
-        $pops = Pop::with('comuna.zona.crm', 'sites.rooms')
+        $pops = Pop::with('comuna.zona.crm', 'sites', 'rooms')
             ->whereHas('comuna.zona', function($r) use($condition_crm) {
                 $r->whereRaw($condition_crm);
             })
@@ -49,7 +49,7 @@ class RoomController extends Controller
             //     $p->where('nombre', 'LIKE', "%$text%")
             //     ->orWhere('direccion', 'LIKE', "%$text%");
             // })
-            ->whereHas('sites.rooms', function($p) {
+            ->whereHas('rooms', function($p) {
                 $p->where('criticity', 1);
             })
             ->paginate(20);

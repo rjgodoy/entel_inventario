@@ -7,18 +7,13 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class AllInfoPopsExport implements WithMultipleSheets 
 {
-
 	use Exportable;
 
-	protected $core;
-    protected $crm_id;
-    protected $zona_id;
+	protected $request;
     
-    public function __construct(int $core, int $crm_id, int $zona_id)
+    public function __construct(object $request)
     {
-        $this->core = $core;
-        $this->crm_id = $crm_id;
-        $this->zona_id = $zona_id;
+        $this->request = $request;
     }
 
     /**
@@ -28,8 +23,8 @@ class AllInfoPopsExport implements WithMultipleSheets
     {
         $sheets = [];
 
-        $sheets[] = new PopsExport($this->core, $this->crm_id, $this->zona_id);
-        $sheets[] = new SitesExport($this->core, $this->crm_id, $this->zona_id);
+        $sheets[] = new PopsExport($this->request);
+        $sheets[] = new SitesExport($this->request);
 
         return $sheets;
     }

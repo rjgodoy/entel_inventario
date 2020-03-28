@@ -11,7 +11,7 @@ use App\Http\Resources\Pop as PopResource;
 use App\Models\Pop;
 use App\Models\Site;
 use App\Models\Technology;
-use App\Models\CriticSite;
+use App\Models\Room;
 use App\Models\PsgTp;
 use DB;
 use Carbon\Carbon;
@@ -102,21 +102,27 @@ class DashboardApiController extends Controller
             ->where('state_id', 1)
             ->distinct('technologies.id')->count();
 
-        $critics = CriticSite::whereHas('site', function($q) use($condition_core) { 
-                $q->whereIn('site_type_id', [1,3,4])
-                    ->orWhere(function($query) {
-                        $query->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($q) {
-                                $q->where('state_id', 1);
-                            });
+        $critics = Room::whereHas('pop.sites', function($q) use($condition_core) { 
+                $q->where(function($p) {
+                    $p->where(function($w) {
+                        $w->whereIn('site_type_id', [1,3,4])
+                        ->where('state_id', 1);
                     })
-                    ->whereRaw($condition_core);
+                    ->orWhere(function($s) {
+                        $s->whereIn('site_type_id', [2])
+                        ->whereHas('technologies', function($r) {
+                            $r->where('state_id', 1);
+                        });
+                    });
+                })
+                ->whereRaw($condition_core);
             })
-            ->whereHas('site.pop.comuna.zona', function($q) use($crm_id, $zona_id) {
+            ->whereHas('pop.comuna.zona', function($q) use($crm_id, $zona_id) {
                 $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
                 $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
                 $q->whereRaw($condition_crm)->whereRaw($condition_zona);
             })
+            ->where('criticity', 1)
             ->distinct('pop_id')->count('pop_id');
 
         $alba_project = Pop::join('sites', function($query) use($condition_core) { 
@@ -205,22 +211,23 @@ class DashboardApiController extends Controller
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
 
-        $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
-        $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
-        $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
+        $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
+        $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
+        $condition_zona = $zona_id != 0 ? 'id = '.$zona_id : 'id != '.$zona_id;
 
         // if (Cache::has('criticSites'.$core)) {
         //     $criticSites = Cache::get('criticSites'.$core);
         // } else {
         //     $criticSites = Cache::remember('criticSites'.$core, $this->seconds, function () use ($core) {
 
-                $criticSites = CriticSite::with('site.pop.comuna.zona.crm', 'site.classification_type')
-                    ->whereHas('site', function($q) use($condition_core) { 
+                $criticSites = Room::with('pop.comuna.zona.crm', 'pop.sites.classification_type')
+                    ->whereHas('pop.sites', function($q) use($condition_core) { 
                         $q->whereRaw($condition_core);
                     })
-                    ->whereHas('site.pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                    ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
                         $q->whereRaw($condition_crm)->whereRaw($condition_zona);
                     })
+                    ->where('criticity', 1)
                     ->groupBy('pop_id')
                     ->paginate(10);
 

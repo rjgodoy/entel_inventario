@@ -12,7 +12,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PopsExport;
 use App\Exports\SitesExport;
 use App\Exports\AllInfoPopsExport;
-
+use App\Exports\FilteredInfoPopsExport;
+use App\Exports\FilteredPopsExport;
+use App\Exports\FilteredSitesExport;
 
 use App\Http\Resources\Pop as PopResource;
 use App\Models\Pop;
@@ -361,110 +363,6 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function searchPopsCrm(Request $request)
-    // {
-    //     $text = $request->text;
-    //     $core = $request->core;
-    //     $crm_id = $request->crm_id;
-
-    //     $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
-    //         ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-    //         ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-    //         ->join('crms', function($join) use ($crm_id) {
-    //             $join->on('zonas.crm_id', '=', 'crms.id')
-    //             ->where('crms.id', $crm_id);
-    //         })
-    //         ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-    //         ->where(function($query) use ($text) {
-    //             $query->where('sites.nem_site', 'LIKE', "%$text%")
-    //                 ->orWhere('sites.nombre', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
-    //         })
-    //         ->where('sites.state_id', 1)
-    //         ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
-    //         ->select(
-    //             'pops.id',
-    //             'sites.id as site_id',
-    //             'sites.nem_site',
-    //             'sites.nombre as nombre_sitio',
-    //             'sites.classification_type_id',
-    //             'pops.nombre',
-    //             'pops.direccion',
-    //             'pops.latitude',
-    //             'pops.longitude',
-    //             'comunas.nombre_comuna',
-    //             'comunas.zona_id',
-    //             'zonas.crm_id',
-    //             'zonas.nombre_zona',
-    //             'crms.nombre_crm',
-    //             'classification_types.classification_type',
-    //             'pops.alba_project'
-    //         )
-    //         ->orderBy('pops.id')
-    //         ->get();
-
-    //     return $pops;
-    // }
-
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function searchPopsZona(Request $request)
-    // {
-    //     $text = $request->text;
-    //     $core = $request->core;
-    //     $zona_id = $request->zona_id;
-
-    //     $pops = Site::join('pops', 'sites.pop_id', '=', 'pops.id')
-    //         ->join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-    //         ->join('zonas', function($join) use ($zona_id) {
-    //             $join->on('comunas.zona_id', '=', 'zonas.id')
-    //             ->where('zonas.id', $zona_id);
-    //         })
-    //         ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-    //         ->leftJoin('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-    //         ->where(function($query) use ($text) {
-    //             $query->where('sites.nem_site', 'LIKE', "%$text%")
-    //                 ->orWhere('sites.nombre', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
-    //         })
-    //         ->where('sites.state_id', 1)
-    //         ->whereRaw('IF('.$core.' = 0, sites.classification_type_id IN (1,2,3,4,5), sites.classification_type_id IN (1))')
-    //         ->select(
-    //             'pops.id',
-    //             'sites.id as site_id',
-    //             'sites.nem_site',
-    //             'sites.nombre as nombre_sitio',
-    //             'sites.classification_type_id',
-    //             'pops.nombre',
-    //             'pops.direccion',
-    //             'pops.latitude',
-    //             'pops.longitude',
-    //             'comunas.nombre_comuna',
-    //             'comunas.zona_id',
-    //             'zonas.crm_id',
-    //             'zonas.nombre_zona',
-    //             'crms.nombre_crm',
-    //             'classification_types.classification_type',
-    //             'pops.alba_project'
-    //         )
-    //         ->orderBy('pops.id')
-    //         ->get();
-
-    //     return $pops;
-    // }
-
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function filters()
     {
         $filters = PopMenuType::where('active', 1)->get();
@@ -479,9 +377,8 @@ class PopController extends Controller
      */
     public function filterPops(Request $request)
     {
-        $text = $request->text = 0 ? '' : $request->text;
+        $text = $request->text;
 
-        // $core = $request->core;
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
         
@@ -489,8 +386,8 @@ class PopController extends Controller
         $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
 
         // Site
-        $condition_core = $request->core ? 'sites.classification_type_id = 1' : 'sites.classification_type_id != 2';
-        $condition_critic = $request->critic ? 'rooms.criticity = 1' : 'rooms.criticity IS NOT NULL';
+        $condition_core = $request->core ? 'classification_type_id = 1' : 'classification_type_id != 0';
+        $condition_critic = $request->critic ? 'criticity = 1' : 'criticity IS NOT NULL';
         $condition_red_minima = 
             $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' : 
             ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
@@ -513,18 +410,47 @@ class PopController extends Controller
         $condition_alba_project = 'pops.alba_project IN ('.$request->alba_project.',1)';
 
         $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
-            ->whereHas('sites', function($query) use ($text, $condition_core, $condition_red_minima) {
-                $query->where(function($q) use($text) {
-                    $q->where('sites.nem_site', 'LIKE', "%$text%")
-                    ->orWhere('pops.nombre', 'LIKE', "%$text%")
-                    ->orWhere('pops.direccion', 'LIKE', "%$text%");
+            ->whereHas('sites', function($q) use($text, $condition_core) { 
+                $q->where(function($p) use($text) {
+                    $p->where(function($w) use($text) {
+                        if ($text) {
+                            $w->whereIn('site_type_id', [1,3,4])
+                            ->where('state_id', 1)
+                            ->where(function($r) use($text) {
+                                $r->where('sites.nem_site', 'LIKE', "%$text%")
+                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
+                            });
+                        } else {
+                            $w->whereIn('site_type_id', [1,3,4])
+                            ->where('state_id', 1);
+                        }
+                    })
+                    ->orWhere(function($s) use($text) {
+                        if ($text) {
+                            $s->whereIn('site_type_id', [2])
+                            ->whereHas('technologies', function($r) {
+                                $r->where('state_id', 1);
+                            })
+                            ->where(function($q) use($text) {
+                                $q->where('sites.nem_site', 'LIKE', "%$text%")
+                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
+                            });
+                        } else {
+                            $s->whereIn('site_type_id', [2])
+                            ->whereHas('technologies', function($r) {
+                                $r->where('state_id', 1);
+                            });
+                        }
+                    });
                 })
-                ->whereRaw($condition_core)
-                ->whereRaw($condition_red_minima);
+                ->whereRaw($condition_core);
             })
-            ->whereHas('comuna.zona', function($query) use($condition_crm, $condition_zona) {
-                $query->whereRaw($condition_crm)
-                    ->whereRaw($condition_zona);
+            ->whereHas('rooms', function($r) use($condition_critic) {
+                $r->whereRaw($condition_critic);
+            })
+            ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                $q->whereRaw($condition_crm)
+                ->whereRaw($condition_zona);
             })
             ->whereRaw($condition_pe_3g)
             ->whereRaw($condition_mpls)
@@ -540,9 +466,50 @@ class PopController extends Controller
             ->whereRaw($condition_protected_zone)
             ->whereRaw($condition_alba_project)
             ->orderBy('pops.id', 'asc')
-
             ->paginate(15);
-            // ->get();
+
+
+
+
+        // $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
+        //     ->whereHas('sites', function($query) use ($text, $condition_core, $condition_red_minima) {
+        //         if ($text == '') {
+        //             $query
+        //             ->whereRaw($condition_core)
+        //             ->whereRaw($condition_red_minima)
+        //             ;
+        //         } else {
+        //             $query
+        //             ->where(function($q) use($text) {
+        //                 $q->where('sites.nem_site', 'LIKE', "%$text%")
+        //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
+        //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
+        //             })
+        //             ->whereRaw($condition_core)
+        //             ->whereRaw($condition_red_minima);
+        //         }
+        //     })
+        //     ->whereHas('comuna.zona', function($query) use($condition_crm, $condition_zona) {
+        //         $query->whereRaw($condition_crm)
+        //             ->whereRaw($condition_zona);
+        //     })
+        //     ->whereRaw($condition_pe_3g)
+        //     ->whereRaw($condition_mpls)
+        //     ->whereRaw($condition_olt)
+        //     ->whereRaw($condition_olt_3play)
+        //     ->whereRaw($condition_vip)
+        //     ->whereRaw($condition_lloo)
+        //     ->whereRaw($condition_ranco)
+        //     ->whereRaw($condition_bafi)
+        //     ->whereRaw($condition_offgrid)
+        //     ->whereRaw($condition_solar)
+        //     ->whereRaw($condition_eolica)
+        //     ->whereRaw($condition_protected_zone)
+        //     ->whereRaw($condition_alba_project)
+        //     ->orderBy('pops.id', 'asc')
+
+        //     ->paginate(15);
+        //     // ->get();
 
         return $pops;
     }
@@ -555,9 +522,8 @@ class PopController extends Controller
      */
     public function popsMap(Request $request)
     {
-        $text = $request->text = 0 ? '' : $request->text;
+        $text = $request->text;
 
-        // $core = $request->core;
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
         
@@ -565,8 +531,8 @@ class PopController extends Controller
         $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
 
         // Site
-        $condition_core = $request->core ? 'sites.classification_type_id = 1' : 'sites.classification_type_id != 2';
-        $condition_critic = $request->critic ? 'rooms.criticity = 1' : 'rooms.criticity IS NOT NULL';
+        $condition_core = $request->core ? 'classification_type_id = 1' : 'classification_type_id != 0';
+        $condition_critic = $request->critic ? 'criticity = 1' : 'criticity IS NOT NULL';
         $condition_red_minima = 
             $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' : 
             ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
@@ -588,25 +554,48 @@ class PopController extends Controller
         $condition_protected_zone = 'pops.protected_zone IN ('.$request->protected_zone.',1)';
         $condition_alba_project = 'pops.alba_project IN ('.$request->alba_project.',1)';
 
-        $popsMap = Pop::with('sites.classification_type', 'comuna.zona.crm')
-            ->whereHas('comuna.zona', function($query) use($condition_crm, $condition_zona) {
-                $query->whereRaw($condition_crm)
-                    ->whereRaw($condition_zona);
-            })->whereHas('sites', function($q) use($condition_core, $condition_red_minima, $condition_critic) { 
-                $q->where(function($p) use($condition_critic) {
-                    $p->whereIn('site_type_id', [1,3,4])
-                    ->orWhere(function($query) use ($condition_critic) {
-                        $query->whereIn('site_type_id', [2])
-                        ->whereHas('technologies', function($r) {
-                            $r->where('state_id', 1);
-                        })
-                        ->orWhereHas('rooms', function($t) use ($condition_critic) {
-                            $t->whereRaw($condition_critic);
-                        });
+        $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
+            ->whereHas('sites', function($q) use($text, $condition_core) { 
+                $q->where(function($p) use($text) {
+                    $p->where(function($w) use($text) {
+                        if ($text) {
+                            $w->whereIn('site_type_id', [1,3,4])
+                            ->where('state_id', 1)
+                            ->where(function($r) use($text) {
+                                $r->where('sites.nem_site', 'LIKE', "%$text%")
+                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
+                            });
+                        } else {
+                            $w->whereIn('site_type_id', [1,3,4])
+                            ->where('state_id', 1);
+                        }
+                    })
+                    ->orWhere(function($s) use($text) {
+                        if ($text) {
+                            $s->whereIn('site_type_id', [2])
+                            ->whereHas('technologies', function($r) {
+                                $r->where('state_id', 1);
+                            })
+                            ->where(function($q) use($text) {
+                                $q->where('sites.nem_site', 'LIKE', "%$text%")
+                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
+                            });
+                        } else {
+                            $s->whereIn('site_type_id', [2])
+                            ->whereHas('technologies', function($r) {
+                                $r->where('state_id', 1);
+                            });
+                        }
                     });
                 })
-                ->whereRaw($condition_core)
-                ->whereRaw($condition_red_minima);
+                ->whereRaw($condition_core);
+            })
+            ->whereHas('rooms', function($r) use($condition_critic) {
+                $r->whereRaw($condition_critic);
+            })
+            ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                $q->whereRaw($condition_crm)
+                ->whereRaw($condition_zona);
             })
             ->whereRaw($condition_pe_3g)
             ->whereRaw($condition_mpls)
@@ -628,127 +617,11 @@ class PopController extends Controller
                 'pops.latitude',
                 'pops.longitude'
             )
+            ->orderBy('pops.id', 'asc')
             ->get();
 
-        return $popsMap;
+        return $pops;
     }
-
-    // /**
-    //  * Search the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function filterPopsCrm()
-    // {
-    //     $text = $_GET["text"];
-    //     $crm_id = $_GET["crm_id"];
-
-    //     $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-    //         ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-    //         ->join('crms', function($join) use ($crm_id) {
-    //             $join->on('zonas.crm_id', '=', 'crms.id')
-    //             ->where('crms.id', $crm_id);
-    //         })
-            
-    //         // Classificación
-    //         ->leftJoin('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
-
-    //         // Tipo Atención
-    //         ->leftJoin('attentions', function ($join) {
-    //             $join->on('pops.id', '=', 'attentions.pop_id')
-    //             ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-    //         })
-    //         // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
-
-    //         ->where(function($query) use ($text) {
-    //             $query->where('pops.nem_fijo', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
-    //         })
-
-    //         ->select(
-    //             'pops.id as pop_id',
-    //             'pops.nombre',
-    //             'pops.nem_movil',
-    //             'pops.nem_fijo',
-    //             'pops.direccion',
-    //             'pops.latitude',
-    //             'pops.longitude',
-    //             'pops.cod_planificacion',
-    //             'comunas.*',
-    //             'zonas.*',
-    //             'crms.*',
-    //             'pops.classification_type_id',
-    //             'classification_types.classification_type',
-    //             'attentions.attention_type_id',
-    //             // 'attention_types.attention_type as attention_type',
-    //             'pops.alba_project'
-    //         )
-    //         ->orderBy('pops.id')
-    //         ->paginate(10);
-
-    //     return $pops;
-    // }
-
-    // /**
-    //  * Search the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function filterPopsZona()
-    // {
-    //     $text = $_GET["text"];
-    //     $zona_id = $_GET["zona_id"];
-
-    //     $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-    //         ->join('zonas', function($join) use ($zona_id) {
-    //             $join->on('comunas.zona_id', '=', 'zonas.id')
-    //             ->where('zonas.id', $zona_id);
-    //         })
-    //         ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-    //         // Classificación
-    //         ->leftJoin('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
-
-    //         // Tipo Atención
-    //         ->leftJoin('attentions', function ($join) {
-    //             $join->on('pops.id', '=', 'attentions.pop_id')
-    //             ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-    //         })
-    //         // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
-
-    //         ->where(function($query) use ($text) {
-    //             $query->where('pops.nem_fijo', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
-    //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
-    //         })
-
-    //         ->select(
-    //             'pops.id as pop_id',
-    //             'pops.nombre',
-    //             'pops.nem_movil',
-    //             'pops.nem_fijo',
-    //             'pops.direccion',
-    //             'pops.latitude',
-    //             'pops.longitude',
-    //             'pops.cod_planificacion',
-    //             'comunas.*',
-    //             'zonas.*',
-    //             'crms.*',
-    //             'pops.classification_type_id',
-    //             'classification_types.classification_type',
-    //             'attentions.attention_type_id',
-    //             // 'attention_types.attention_type as attention_type',
-    //             'pops.alba_project'
-    //         )
-    //         ->orderBy('pops.id')
-    //         ->paginate(10);
-
-    //     return $pops;
-    // }
 
     /**
      * Search the specified resource from storage.
@@ -793,20 +666,28 @@ class PopController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Download all data from Pops (Dashboard).
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function export(Request $request)
     {
-        $core = $request->core;
-        $crm_id = $request->crm_id;
-        $zona_id = $request->zona_id;
-
-        return (new AllInfoPopsExport($core, $crm_id, $zona_id))->download('pops.xlsx');
-
+        return (new AllInfoPopsExport($request))->download('pops.xlsx');
     }
+
+    // /**
+    //  * Download all data from Pops (Filtered).
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function exportFilter(Request $request)
+    // {
+    //     return new PopResource('hello');
+    //     // return (new AllInfoPopsExport($request))->download('pops.xlsx');
+    //     // return (new FilteredInfoPopsExport($request))->download('pops.xlsx');
+    // }
 
 
 }

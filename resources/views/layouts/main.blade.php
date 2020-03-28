@@ -22,10 +22,14 @@
 <body>
     <div id="app">
 
-        <app
+        <router-view
+            :crms='@json($crms)'
+            :menu_data='@json($menu)'
+            :last_data_counters='@json($last_data_counters)'
+            :message="'{{ session()->get('message') }}'"
             :app_name="'{{ config('app.name') }}'"
             :user='@json(Auth::user())'
-        ></app>
+        ></router-view>
 
     </div>
 </body>

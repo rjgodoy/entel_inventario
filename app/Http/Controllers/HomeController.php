@@ -10,7 +10,11 @@ use App\Models\Pop;
 use App\Models\Crm;
 use App\Models\Site;
 use App\Models\Technology;
+use App\Models\GeneratorSet;
+use App\Models\PowerRectifier;
+use App\Models\AirConditioner;
 use App\Models\PsgTp;
+use App\Models\Room;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Cache;
@@ -61,12 +65,24 @@ class HomeController extends Controller
         }
 
         // CONTADORES
-        $pop_news_day = Pop::whereDay('created_at', Carbon::now()->format('d'))->count();
+        // $pop_news_day = Pop::whereDay('created_at', Carbon::now()->format('d'))->count();
         $pop_news_month = Pop::whereMonth('created_at', Carbon::now()->format('m'))->count();
-        $sites_news_day = Site::whereDay('created_at', Carbon::now()->format('d'))->count();
+        // $sites_news_day = Site::whereDay('created_at', Carbon::now()->format('d'))->count();
         $sites_news_month = Site::whereMonth('created_at', Carbon::now()->format('m'))->count();
-        $technologies_news_day = Technology::whereDay('created_at', Carbon::now()->format('d'))->count();
-        $technologies_news_month = Technology::whereMonth('created_at', Carbon::now()->format('m'))->count();
+        // $technologies_news_day = Technology::whereDay('created_at', Carbon::now()->format('d'))->count();
+        // $technologies_news_month = Technology::whereMonth('created_at', Carbon::now()->format('m'))->count();
+
+        // Equipos
+        // $equipments_news_day = 
+        //     GeneratorSet::whereDay('created_at', Carbon::now()->format('d'))->count() +
+        //     PowerRectifier::whereDay('created_at', Carbon::now()->format('d'))->count() +
+        //     AirConditioner::whereDay('created_at', Carbon::now()->format('d'))->count();
+        $equipments_news_month = 
+            GeneratorSet::whereMonth('created_at', Carbon::now()->format('m'))->count() +
+            PowerRectifier::whereMonth('created_at', Carbon::now()->format('m'))->count() +
+            AirConditioner::whereMonth('created_at', Carbon::now()->format('m'))->count();
+
+
         $last_site = Site::with('pop.comuna.zona.crm')->latest()->first();
         $equipment = PsgTp::whereMonth('created_at', '>', Carbon::now()->format('m'))->count();
 
@@ -75,12 +91,14 @@ class HomeController extends Controller
         $last_updated_technologies = Carbon::parse(Technology::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
         
         $last_data_counters = [
-            'pop_news_day' => $pop_news_day,
+            // 'pop_news_day' => $pop_news_day,
             'pop_news_month' => $pop_news_month,
-            'sites_news_day' => $sites_news_day,
+            // 'sites_news_day' => $sites_news_day,
             'sites_news_month' => $sites_news_month,
-            'technologies_news_day' => $technologies_news_day,
-            'technologies_news_month' => $technologies_news_month,
+            // 'technologies_news_day' => $technologies_news_day,
+            // 'technologies_news_month' => $technologies_news_month,
+            // 'equipments_news_day' => $equipments_news_day,
+            'equipments_news_month' => $equipments_news_month,
             'last_site' => $last_site,
             'equipment' => $equipment,
             'last_updated_pops' => $last_updated_pops,
@@ -89,9 +107,8 @@ class HomeController extends Controller
 
         ]; 
 
-        return view('main', compact(
+        return view('layouts.main', compact(
             'menu',
-            'pops',
             'crms',
             'last_data_counters'
         ));

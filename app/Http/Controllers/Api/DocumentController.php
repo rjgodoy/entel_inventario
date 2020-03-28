@@ -15,8 +15,6 @@ class DocumentController extends Controller
 {
     protected $originPath = 'Files';
     protected $originType = 'ftp';
-
-    // protected $originPath = '/public';
     // protected $originType = 'local';
 
     /**
@@ -54,42 +52,10 @@ class DocumentController extends Controller
      */
     public function show(Request $request, $id)
     {
-        // Dev
-        // $path = '/public/destino';
-        // $origenFolders = Storage::disk('local')->directories($path);
-
-        // Prod
-        $path = '/Files';
-        $origenFolders = Storage::disk('ftp')->directories($this->originPath);
-
-        $sites = Site::whereHas('pop', function($q) use($id) {
-            $q->where('id', $id);
-        })->get();
-
-        $directories = []; $folders = []; $files = [];
-
-        foreach ($sites as $site) {
-            // array_push($directories, ['nem' => $site->nem_site]);
-
-            $dirs = Storage::disk('ftp')->directories($path.'/'.$site->nem_site);
-            if($dirs) {
-                foreach ($dirs as $dir) {
-                    $siteDir = explode('/', $dir)[2];
-                    if ($siteDir == $site->nem_site) {
-                        array_push($directories, pathinfo($dir));
-                    }
-                }
-            } else {
-                return 'No hay archivos en este sitio';
-            }
-        }
-
-        return [
-            'directories' => $directories, 
-            // 'folders' => $folders, 
-            // 'files' => $files
+        $headers = [
+            'Content-Type' => 'application/'.$request->extension,
         ];
-        
+        return Storage::download($request->dirname.'/'.$request->basename, $request->basename, $headers);
     }
 
     /**
@@ -124,15 +90,12 @@ class DocumentController extends Controller
     public function directories($id)
     {
         $site = Site::where('id', $id)->first();
-
-        // return $site->nem_site;
-
         $siteFolder = $this->originPath.'/'.$site->nem_site;
 
         $directories = [];
 
         $dirs = Storage::disk($this->originType)->directories($siteFolder);
-        // return $dirs;
+
         if($dirs) {
             foreach ($dirs as $dir) {
                 $siteDir = explode('/', $dir)[1];

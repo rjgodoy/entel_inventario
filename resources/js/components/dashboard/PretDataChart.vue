@@ -1,6 +1,6 @@
 <template>
-    <article class="tile is-child box" :class="boxBackground" style="width: 100%; height: auto; margin-top: -20px;">
-        <div class="" ref="chartdiv" style="height: 200px;"></div>
+    <article class="tile is-child box" :class="boxBackground" style="padding: 10px;">
+        <div class="" ref="chartdiv" style="height: 200px; width: 100%"></div>
     </article>
 </template>
 
@@ -53,27 +53,17 @@
             },
 
             graph() {
+                // Create chart instance
                 var chart = am4core.create(this.$refs.chartdiv, am4charts.XYChart)
-
-                // Add data
-                // for(var i = 0; i < this.chartData.data.length; i++) {
-                //     var date = new Date(this.chartData.data[i].year, this.chartData.data[i].year, 1)
-                //     console.log(date)
-                //     chart.data.push({
-                //         date: date,
-                //         new: Math.round(Math.random() * 50)
-                //     })
-                // }
 
                 // Add data
                 this.chartData.data.forEach((element) => {
                     chart.data.push({
-                        date: new Date(element.year, element.month - 1, 1),
-                        new: element.q_new,
-                        deleted: element.q_deleted
+                        "date": new Date(element.year, element.month - 1, 1),
+                        "value": element.q_new,
+                        "deleted": element.q_deleted
                     })
                 })
-
 
                 var title = chart.titles.create();
                 title.text = "Ingresos y retiros de sitios";
@@ -83,37 +73,73 @@
                 title.fontWeight = 'bold'
 
                 // Create axes
-                let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-                dateAxis.dataFields.category = "date";
-                dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy");
+                var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
                 dateAxis.renderer.grid.template.location = 0;
-                dateAxis.renderer.minGridDistance = 5;
-                dateAxis.renderer.cellStartLocation = 0.4;
-                dateAxis.renderer.cellEndLocation = 0.6;
+                dateAxis.renderer.labels.template.location = 0;
+                dateAxis.renderer.minGridDistance = 30;
+                dateAxis.renderer.cellStartLocation = 7;
+                dateAxis.renderer.cellEndLocation = 23;
+                dateAxis.dateFormats.setKey("month", "[font-size: 12px]MMM");
+                dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy");
 
-                let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-                valueAxis.min = 0;
-                valueAxis.title.text = "Cantidad (Q)";
-                valueAxis.fontSize = 12;
+                var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
                 // Create series
-                function createSeries(field, name, stacked) {
-                    let series = chart.series.push(new am4charts.ColumnSeries());
-                    series.dataFields.valueY = field;
-                    series.dataFields.dateX = "date";
-                    series.name = name;
-                    series.columns.template.tooltipText = "[font-size: 12px]{name}: [bold font-size: 12px]{valueY}[/]";
-                    series.stacked = stacked;
-                    series.columns.template.width = am4core.percent(65);
+                function createSeries(field, name) {
+                  var series = chart.series.push(new am4charts.ColumnSeries());
+                  series.dataFields.valueY = field; 
+                  series.dataFields.dateX = "date"; 
+                  series.name = name;   
+                  series.tooltipText = "{dateX}[dateFor]: [b]{valueY}[/]";
+                  series.strokeWidth = 2;
                 }
 
-                createSeries("new", "Nuevos", false);
-                createSeries("deleted", "Eliminados", false);
+                createSeries("value", "Nuevos");
+                createSeries("deleted", "Eliminados");
+
+                chart.cursor = new am4charts.XYCursor();
+                // chart.scrollbarX = new am4core.Scrollbar();
+
+
+
+
+
+                
+
+                // // Create axes
+                // let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+                // dateAxis.dateFormats.setKey("month", "[font-size: 12px]MMM");
+                // dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy");
+                // dateAxis.renderer.grid.template.location = 0;
+                // dateAxis.renderer.labels.template.location = 0.5;
+                // dateAxis.renderer.minGridDistance = 30;
+                // dateAxis.renderer.cellStartLocation = 10;
+                // dateAxis.renderer.cellEndLocation = 20;
+
+
+                // let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                // valueAxis.min = 0;
+                // valueAxis.title.text = "Cantidad (Q)";
+                // valueAxis.fontSize = 12;
+
+                // // Create series
+                // function createSeries(field, name) {
+                //     let series = chart.series.push(new am4charts.ColumnSeries());
+                //     series.dataFields.valueY = field;
+                //     series.dataFields.dateX = "date";
+                //     series.name = name;
+                //     series.columns.template.tooltipText = "[font-size: 12px]{name}: [bold font-size: 12px]{valueY}[/]";
+                //     series.strokeWidth = 2;
+                //     // series.columns.template.width = am4core.percent(50);
+                // }
+
+                // createSeries("new", "Nuevos");
+                // createSeries("deleted", "Eliminados");
 
                 // Add legend
                 // chart.legend = new am4charts.Legend();
 
-                this.chart = chart;
+                // this.chart = chart;
             }
         },
 

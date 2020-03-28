@@ -84,56 +84,43 @@
                                     </td>
 
                                     <td class="">
-                                        <div class="is-size-6 has-text-weight-bold" v-for="site in pop.sites" v-if="criticity(site)">
-                                            {{ site ? site.nem_site : '' }}
-                                        
-                                    
-                                            <div class="field columns" v-for="room in site.rooms">
+                                        <div class="field columns" v-for="room in pop.rooms">
 
-                                                <div class="column is-6">
-                                                    <a class="is-size-6 has-text-weight-normal" :class="currentRoom == room ? 'has-text-smart' : 'has-text-link'" @click="setGraph(room, site, pop)">
-                                                        {{ room.name }} <span v-if="room.old_name">- {{ room.old_name }}</span>
-                                                    </a>
-                                                </div>
-
-                                                <div class="column">
-                                                    <b-icon
-                                                        pack="fas"
-                                                        icon="ban"
-                                                        size="is-medium"
-                                                        type="is-danger">
-                                                    </b-icon>
-                                                </div>
-                                                <div class="column">
-                                                    <div>10 kW</div>
-                                                </div>
-                                                <div class="column">
-                                                    <b-icon
-                                                        pack="fas"
-                                                        icon="exclamation-circle"
-                                                        size="is-medium"
-                                                        type="is-warning">
-                                                    </b-icon>
-                                                </div>
-                                                <div class="column">
-                                                    <b-icon
-                                                        pack="fas"
-                                                        icon="exclamation-circle"
-                                                        size="is-medium"
-                                                        type="is-success">
-                                                    </b-icon>
-                                                </div>
-
+                                            <div class="column is-6">
+                                                <a class="is-size-6 has-text-weight-normal" :class="currentRoom == room ? 'has-text-smart' : 'has-text-link'" @click="setGraph(room, pop)">
+                                                    {{ room.name }} <span v-if="room.old_name">- {{ room.old_name }}</span>
+                                                </a>
                                             </div>
 
+                                            <div class="column">
+                                                <b-icon
+                                                    pack="fas"
+                                                    icon="ban"
+                                                    size="is-medium"
+                                                    type="is-danger">
+                                                </b-icon>
+                                            </div>
+                                            <div class="column">
+                                                <div class="is-size-6">10 kW</div>
+                                            </div>
+                                            <div class="column">
+                                                <b-icon
+                                                    pack="fas"
+                                                    icon="exclamation-circle"
+                                                    size="is-medium"
+                                                    type="is-warning">
+                                                </b-icon>
+                                            </div>
+                                            <div class="column">
+                                                <b-icon
+                                                    pack="fas"
+                                                    icon="exclamation-circle"
+                                                    size="is-medium"
+                                                    type="is-success">
+                                                </b-icon>
+                                            </div>
                                         </div>
                                     </td>
-
-                                    <!-- <td class="has-text-weight-light has-text-centered">
-                                        <button href="/comsites/download" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
-                                            <font-awesome-icon icon="bars"/>
-                                        </button>
-                                    </td> -->
                                 </tr>    
                             </tbody>
                         </table>
@@ -149,7 +136,7 @@
                 </div>
             </div>
             <div class="column section">
-                <div class="has-text-weight-bold is-size-5">{{ currentPop.nombre }} - {{ currentSite.nem_site }}</div>
+                <div class="has-text-weight-bold is-size-5">{{ currentPop.nombre }}</div>
                 <div class="has-text-weight-bold is-size-3">{{ currentRoom.name }} - {{ currentRoom.old_name }}</div>
                 <capacity-chart
                     :currentRoom="currentRoom"
@@ -185,7 +172,6 @@
                 searchText: '',
                 currentCrm: 0,
                 currentPop: [],
-                currentSite: [],
                 currentRoom: []
             }
         },
@@ -215,8 +201,7 @@
                 .then((response) => {
                     this.roomsData = response.data
                     this.currentPop = this.roomsData.data[0]
-                    this.currentSite = this.currentPop.sites[0]
-                    this.currentRoom = this.currentSite.rooms[0]
+                    this.currentRoom = this.currentPop.rooms[0]
                 })
             },
 
@@ -224,22 +209,9 @@
                 this.searchText = ''
                 this.getRoomsData()
             },
-
-            criticity(site) {
-                var crit
-                if (site.rooms) {
-                    site.rooms.forEach(function(item) {
-                        if (item.criticity == 1) { 
-                            crit = 1
-                        }
-                    })
-                }
-                return crit
-            },
             
-            setGraph(room, site, pop) {
+            setGraph(room, pop) {
                 this.currentRoom = room
-                this.currentSite = site
                 this.currentPop = pop
             }
         }

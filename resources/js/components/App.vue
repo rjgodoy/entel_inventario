@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <section class="section is-paddingless">
+    <div class="sticky">
+
+        <header class="section is-paddingless Site-header">
             <div class="columns has-background-black-ter is-marginless">
 
                 <!-- ICONO Y NOMBRE -->
@@ -59,64 +60,100 @@
                 <div class="column hero is-small" style="padding-top: 16px; margin-bottom: -5px;">
                     <div class="hero-head is-size-6">
                         <div class="navbar-end">
+                            <b-dropdown   
+                                hoverable                 
+                                position="is-bottom-left"
+                                aria-role="menu">
+                                <a
+                                    class="navbar-item has-text-grey-light"
+                                    slot="trigger"
+                                    role="button">
+                                    <b-icon 
+                                        icon="bell" 
+                                        pack="fas"
+                                        :type="alerts.length ? 'is-info' : 'is-dark'">
+                                    </b-icon>
+                                </a>
 
-                            <b-navbar-dropdown hoverable right :label="user.nombre">
-
-                                <b-navbar-item href="/2017/08/03/list-of-tags/">
-                                    <div class="navbar-content">
+                                <b-dropdown-item has-link v-for="alert in alerts" :key="alert.id">
+                                    <a :href="alert.to">
                                         <p>
-                                            <small class="has-text-info">03 Aug 2017</small>
+                                            <small class="has-text-info">{{ alert.date }}</small>
                                         </p>
-                                        <p>New feature: list of tags</p>
-                                    </div>
-                                </b-navbar-item>
+                                        <p>{{ alert.description }}</p>
+                                    </a>
+                                </b-dropdown-item>
 
-                                <b-navbar-item href="/2017/08/01/bulma-bootstrap-comparison/">
-                                    <div class="navbar-content">
-                                        <p>
-                                            <small class="has-text-info">01 Aug 2017</small>
-                                        </p>
-                                        <p>Bulma / Bootstrap comparison</p>
-                                    </div>
-                                </b-navbar-item>
+                                <b-dropdown-item  v-if="!alerts.length" aria-role="menuitem">
+                                    <b-icon icon="home" pack="fas"></b-icon>
+                                    No hay alertas
+                                </b-dropdown-item>
+                            </b-dropdown>
 
-                                <b-navbar-item href="/2017/07/24/access-previous-bulma-versions/">
-                                    <div class="navbar-content">
-                                        <p>
-                                            <small class="has-text-info">24 Jul 2017</small>
-                                        </p>
-                                        <p>Access previous Bulma versions</p>
-                                    </div>
-                                </b-navbar-item>
+                            <b-dropdown   
+                                hoverable                 
+                                position="is-bottom-left"
+                                aria-role="menu">
+                                <a
+                                    class="navbar-item has-text-grey-light"
+                                    slot="trigger"
+                                    role="button">
+                                    <span> Menu </span>
+                                    <b-icon icon="angle-down" pack="fas"></b-icon>
+                                </a>
 
-                                <b-navbar-item @click="changeStyle" v-model="darkMode">
+                                <b-dropdown-item custom aria-role="menuitem">
+                                    <div class="has-text-left">
+                                        Bienvenido<br/><b>{{ user.name }} {{ user.apellido }}</b>
+                                    </div>
+                                </b-dropdown-item>
+
+                                <hr class="dropdown-divider">
+
+                                <b-dropdown-item has-link aria-role="menuitem">
+                                    <a href="https://google.com" target="_blank">
+                                        <b-icon icon="link" pack="fas"></b-icon>
+                                        Google (link)
+                                    </a>
+                                </b-dropdown-item>
+
+                                <b-dropdown-item value="home" aria-role="menuitem">
+                                    <b-icon icon="home" pack="fas"></b-icon>
+                                    Home
+                                </b-dropdown-item>
+
+                                <b-dropdown-item value="products" aria-role="menuitem">
+                                    <b-icon icon="cart" pack="fas"></b-icon>
+                                    Products
+                                </b-dropdown-item>
+
+                                <b-dropdown-item value="blog" disabled aria-role="menuitem">
+                                    <b-icon icon="book-open" pack="fas"></b-icon>
+                                    Blog
+                                </b-dropdown-item>
+
+                                <hr class="dropdown-divider" aria-role="menuitem">
+
+                                <b-dropdown-item value="settings">
+                                    <b-icon icon="settings" pack="fas"></b-icon>
+                                    Settings
+                                </b-dropdown-item>
+
+                                <b-dropdown-item @click="changeStyle" v-model="darkMode">
+                                    <b-icon icon="settings" pack="fas"></b-icon>
                                     {{ style }}
-                                </b-navbar-item>
+                                </b-dropdown-item>
 
                                 <hr class="navbar-divider">
 
-                                <b-navbar-item>
-                                    <div class="navbar-content">
-                                        <div class="level is-mobile">
-                                            <div class="level-left">
-                                                <div class="level-item">
-                                                    <strong>Stay up to date!</strong>
-                                                </div>
-                                            </div>
-                                            <div class="level-right">
-                                                <div class="level-item">
-                                                    <a class="button bd-is-rss is-small" @click.prevent="logout">
-                                                        <span class="icon is-small">
-                                                            <i class="fa fa-rss"></i>
-                                                        </span>
-                                                        <span>Log Out</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </b-navbar-item>
-                            </b-navbar-dropdown>
+                                <b-dropdown-item value="logout" aria-role="menuitem">
+                                    <a class="bd-is-rss is-small has-text-dark" @click.prevent="logout">
+                                        <b-icon icon="logout" pack="fas"></b-icon>
+                                        <span class="has-text-weight-bold">Log Out</span>
+                                    </a>
+                                </b-dropdown-item>
+                            </b-dropdown>
+
                         </div>
                         <div class="navbar-end" style="padding-right: 20px;">
                             <clock></clock>
@@ -132,18 +169,26 @@
                     </div>
                 </div>
             </div> -->
-        </section>
+        </header>
 
-        <section class="section is-paddingless">
-        <!-- <keep-alive> -->
-            <router-view
-                :popList="pops"
-                :crms="crms"
-                :last_data_counters='last_data_counters'
-                :darkMode="darkMode"
-            ></router-view>
-        <!-- </keep-alive> -->
-        </section>
+        <main class="sticky-content">
+            <div class="section is-paddingless">
+                <keep-alive>
+                    <router-view
+                        :popList="pops"
+                        :crms="crms"
+                        :last_data_counters='last_data_counters'
+                        :darkMode="darkMode"
+                    ></router-view>
+                </keep-alive>
+            </div>
+        </main>
+
+        <footer class="has-background-white" style="padding-top: 0.5rem; padding-bottom: 0rem;">
+            <div class="has-text-centered">
+                <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
+            </div>
+        </footer>
 
     </div>
 </template>
@@ -167,18 +212,38 @@
         data() {
             return {
                 darkMode: 0,
+                alerts: [
+                    // {
+                    //     'id': 1,
+                    //     'date': '03 Aug 2017',
+                    //     'description': 'New feature: list of tags',
+                    //     'to': '/pops'
+                    // },
+                    // {
+                    //     'id': 2,
+                    //     'date': '01 Aug 2017',
+                    //     'description': 'Bulma / Bootstrap comparison',
+                    //     'to': '/comsite'
+                    // },
+                    // {
+                    //     'id': 3,
+                    //     'date': '24 Jul 2017',
+                    //     'description': 'Access previous Bulma versions',
+                    //     'to': '/admin'
+                    // },
+                ]
             }
         },
 
         created() {
             // console.log(this.$route)
-            if (this.$route.query.message) {
-                this.$buefy.toast.open({
-                    message: this.$route.query.message,
-                    type: 'is-success',
-                    duration: 3000
-                })
-            }
+            // if (this.$route.query.message) {
+            //     this.$buefy.toast.open({
+            //         message: this.$route.query.message,
+            //         type: 'is-success',
+            //         duration: 3000
+            //     })
+            // }
         },
 
         computed: {

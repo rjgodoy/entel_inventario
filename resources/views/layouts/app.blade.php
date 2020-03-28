@@ -22,9 +22,9 @@
 <body>
     <div id="app">
 
-        <welcome
+        <router-view
             :app_name="'{{ config('app.name') }}'"
-        ></welcome>
+        ></router-view>
 
     </div>
 </body>

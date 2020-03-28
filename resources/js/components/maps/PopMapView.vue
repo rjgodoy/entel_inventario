@@ -1,6 +1,5 @@
 <template>
     <GmapMap
-        class=""
         style="min-height: 500px; height: 100%"
         ref="map"
         :center="center"

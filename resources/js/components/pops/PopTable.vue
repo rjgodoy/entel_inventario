@@ -104,14 +104,14 @@
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : 'is-black-ter'" @click="red_minima_n1 = +!red_minima_n1" >
+                                    <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : 'is-black-ter'" @click="red_minima_n1 = +!red_minima_n1" disabled>
                                         <div :class="secondaryText"> 
                                             <div class="is-size-7 has-text-weight-normal">Red Mínima N1</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-3">
-                                    <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : 'is-black-ter'" @click="red_minima_n2 = +!red_minima_n2" >
+                                    <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : 'is-black-ter'" @click="red_minima_n2 = +!red_minima_n2" disabled>
                                         <div :class="secondaryText"> 
                                             <div class="is-size-7 has-text-weight-normal">Red Mínima N2</div>
                                         </div>
@@ -183,42 +183,42 @@
                             <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Equipamiento</div>
                             <div class="columns is-multiline is-gapless">
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
+                                    <a class="tile is-child button" :class="client_connection ? 'is-link' : 'is-black-ter'" @click="client_connection = +!client_connection" disabled>
                                         <div :class="secondaryText"> 
                                             <div class="is-size-7 has-text-weight-normal">Empalme</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core">
+                                    <a class="tile is-child button" :class="generator_set ? 'is-link' : 'is-black-ter'" @click="generator_set = +!generator_set" disabled>
                                         <div :class="secondaryText"> 
                                             <div class="is-size-7 has-text-weight-normal">Grupo Electrógeno</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
+                                    <a class="tile is-child button" :class="power_rectifier ? 'is-link' : 'is-black-ter'" @click="power_rectifier = +!power_rectifier" disabled>
                                         <div :class="secondaryText"> 
                                             <div class="is-size-7 has-text-weight-normal">Planta Rectificadora</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="pe_3g ? 'is-link' : 'is-black-ter'" @click="pe_3g = +!pe_3g" >
+                                    <a class="tile is-child button" :class="air_conditioner ? 'is-link' : 'is-black-ter'" @click="air_conditioner = +!air_conditioner" disabled>
                                         <div :class="secondaryText"> 
                                             <div class="is-size-7 has-text-weight-normal">Aire Acondicionado</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="mpls ? 'is-link' : 'is-black-ter'" @click="mpls = +!mpls" >
+                                    <a class="tile is-child button" :class="vertical_structure ? 'is-link' : 'is-black-ter'" @click="vertical_structure = +!vertical_structure" disabled>
                                         <div :class="secondaryText"> 
                                             <div class="is-size-7 has-text-weight-normal">Estructura Vertical</div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column is-4">
-                                    <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
+                                    <a class="tile is-child button" :class="infrastructure ? 'is-link' : 'is-black-ter'" @click="infrastructure = +!infrastructure" disabled>
                                         <div :class="secondaryText"> 
                                             <div class="is-size-7 has-text-weight-normal">Contenedor</div>
                                         </div>
@@ -238,17 +238,12 @@
 
                     <div class="field">
                         <div class="columns">
-                            <div class="column">
-                                <span class="is-size-7" v-if="searchText.length" style="padding-left: 0">
-                                    <strong style="margin-left: 10px;">{{ pops.total | numeral('0,0')}}</strong> pops encontrados
-                                </span>
-                            </div>
-                            <div class="column">
-                                <div class="is-right is-size-5">
-                                    <span class="is-dark">POP</span>
-                                    <span class="has-text-weight-bold">
-                                        {{ counter | numeral('0,0')}}
+                            <div class="column has-text-centered">
+                                <div class="">
+                                    <span class="is-size-4 has-text-weight-normal">
+                                        {{ pops.total | numeral('0,0')}}
                                     </span>
+                                    <span class="is-size-6">POPs</span>
                                 </div>
                             </div>
                         </div>
@@ -278,9 +273,9 @@
                             <tr>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Nombre POP</abbr></th>
-                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Sitios</abbr></th>
+                                <th class="is-size-7 has-text-weight-semibold has-text-centered" :class="secondaryText"><abbr title="Sitios">Sitios</abbr></th>
                                 <!-- <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Dirección</abbr></th> -->
-                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
+                                <th class="is-size-7 has-text-weight-semibold has-text-centered" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
                             </tr>
                         </thead>
@@ -308,12 +303,9 @@
 
                                 <td class="">
                                     <div class="columns is-multiline">
-                                        <div class="column is-4" v-for="site in pop.sites">
-                                            <div class="is-size-7 has-text-weight-normal">{{ site.nem_site }}</div>
+                                        <div class="column is-6 has-text-centered" v-for="site in pop.sites">
+                                            <div class="is-size-7 has-text-weight-normal has-text-centered">{{ site.nem_site }}</div>
                                         </div>
-                                    </div>
-                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? pop.sites.nem_site : '' }}
                                     </div>
                                 </td>
 
@@ -329,14 +321,10 @@
                                     </div>
                                 </td> -->
 
-                                <td>
-                                    <div class="field is-pulled-right">
-                                        <div class="tags has-addons">
-                                            <span 
-                                                class="tag has-text-weight-bold is-size-7" 
-                                                :class="">
-                                                {{ pop ? popClassification(pop).classification : '' }}
-                                            </span>
+                                <td class="">
+                                    <div class="has-text-centered">
+                                        <div class="tag has-text-weight-bold is-size-7">
+                                            {{ pop ? popClassification(pop).classification : '' }}
                                         </div>
                                     </div>
                                 </td>
@@ -367,45 +355,33 @@
                         </tbody>
                     </table>
 
-                    <nav class="pagination" role="navigation" aria-label="pagination">
-                        <vue-pagination  
-                            :pagination="pops"
-                            @paginate="getPops()"
-                            :offset="4"
-                            :primaryText="primaryText">
-                        </vue-pagination>
-                    </nav>
-
-
-                    <form @submit="formSubmit">
-                        <div class="field has-addons has-text-right">
-                            <p class="control">
-                                <button type="submit" class="button is-small is-link" :class="buttonLoading">
-                                    <font-awesome-icon icon="download"/> 
-                                    &nbsp;&nbsp;Listado de POPs
-                                </button>
-                            </p>
-                        </div>
-                    </form>
-                    <form @submit="formSubmit">
-                        <div class="field has-addons has-text-right">
-                            <p class="control">
-                                <button type="submit" class="button is-small is-link" :class="buttonLoading">
-                                    <font-awesome-icon icon="download"/> 
-                                    &nbsp;&nbsp;Listado de POPs filtrados
-                                </button>
-                            </p>
-                        </div>
-
-                    </form>
                     <div class="field">
-                        <div class="field ">
-                            <!-- <a href="{{ route('comsite.create') }}" type="submit" class="button is-link is-small">{{ __('Sincronizar') }}</a> -->
+                        <nav class="pagination" role="navigation" aria-label="pagination">
+                            <vue-pagination  
+                                :pagination="pops"
+                                @paginate="getPops()"
+                                :offset="4"
+                                :primaryText="primaryText">
+                            </vue-pagination>
+                        </nav>
+
+                        <div class="has-text-right">
+                            <b-button 
+                                type="is-link"
+                                style="position: relative;" 
+                                @click="downloadPops"
+                                icon-left="download"
+                                icon-pack="fas"
+                                size="is-medium"
+                                :loading="isLoading">
+                                <div class="is-size-6 has-text-weight-normal">Descargar POPs</div>
+                                <!-- <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading> -->
+                            </b-button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- </div> -->
+
             <div class="tile is-parent is-vertical">
                 <div class="tile box is-child is-12">
                     <div class="snippet">
@@ -426,8 +402,7 @@
                         :map_attributes="map_attributes"
                         :darkMode="darkMode"                    
                     ></map-view>
-                </div>
-                
+                </div> 
             </div>
         </section>
 
@@ -436,24 +411,24 @@
 
 <script>
     import VuePagination from '../VuePagination.vue';
-    // import LoadingComponent from './maps/LoadingComponent.vue';
+    import LoadingComponent from '../helpers/LoadingComponent.vue';
     // import ErrorComponent from './maps/ErrorComponent.vue';
-    const MapView = () => ({
-        // The component to load (should be a Promise)
-        component: import('../maps/MapView.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 300
-    });
+    // const MapView = () => ({
+    //     // The component to load (should be a Promise)
+    //     component: import('../maps/MapView.vue'),
+    //     // A component to use while the async component is loading
+    //     // loading: LoadingComponent,
+    //     // A component to use if the load fails
+    //     // error: ErrorComponent,
+    //     // Delay before showing the loading component. Default: 200ms.
+    //     delay: 200,
+    //     // The error component will be displayed if a timeout is
+    //     // provided and exceeded. Default: Infinity.
+    //     timeout: 300
+    // });
     export default {
         components: {
-            MapView,
+            MapView: () => import('../maps/MapView.vue'),
             VuePagination,
         },
         props : [
@@ -490,7 +465,7 @@
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
                 
-                buttonLoading: '',
+                isLoading: false,
 
                 selectedPop: null,
                 selectedPops: [],
@@ -516,6 +491,13 @@
                 eolica: 0,
                 protected_zone: 0,
                 alba_project: 0,
+
+                client_connection: 0,
+                generator_set: 0,
+                power_rectifier: 0,
+                air_conditioner: 0,
+                vertical_structure: 0,
+                infrastructure: 0,
 
                 // checkboxPosition: 'left',
                 // isPaginated: true,
@@ -559,15 +541,20 @@
             protected_zone(newValue) { this.getPops(); this.getPopsMap() },
             alba_project(newValue) { this.getPops(); this.getPopsMap() },
 
+            client_connection(newValue) { this.getPops(); this.getPopsMap() },
+            generator_set(newValue) { this.getPops(); this.getPopsMap() },
+            power_rectifier(newValue) { this.getPops(); this.getPopsMap() },
+            air_conditioner(newValue) { this.getPops(); this.getPopsMap() },
+            vertical_structure(newValue) { this.getPops(); this.getPopsMap() },
+            infrastructure(newValue) { this.getPops(); this.getPopsMap() },
+
             selectedPops(newValue) { 
                 newValue.length != 0 ? this.popsMap = newValue : this.getPops()
             }
         },
 
         computed: {
-            counter() {
-                return this.pops.length
-            }
+            
         },
         methods: {
             // BUTTONS
@@ -588,7 +575,6 @@
                     this.filters = response.data;
                 })
             },
-
 
             selectPop(pop) {
                 this.popsMap = [pop]
@@ -613,7 +599,7 @@
             popClassification(pop) {
                 var id = 6; var classification
                 if (pop.sites) {
-                    pop.sites.forEach(function(item) {
+                    pop.sites.forEach((item) => {
                         if (item.classification_type_id && item.classification_type_id < id) { 
                             id = item.classification_type_id
                             classification = item.classification_type.classification_type
@@ -628,15 +614,11 @@
 
             // APIs
             getPops() {
-                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-                var zona_id = this.selectedZona ? this.selectedZona.id : 0
-                var text = this.searchText != '' ?  this.searchText : 0
-
                 var params = {
                     'page': this.pops.current_page,
-                    'crm_id': crm_id,
-                    'zona_id': zona_id,
-                    'text': text,
+                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                    'text': this.searchText != '' ?  this.searchText : 0,
 
                     'core': this.core,
                     'critic': this.critic,
@@ -655,26 +637,29 @@
                     'solar': this.solar,
                     'eolica': this.eolica,
                     'alba_project': this.alba_project,
-                    'protected_zone': this.protected_zone
+                    'protected_zone': this.protected_zone,
+
+                    // 'client_connection': this.client_connection,
+                    // 'generator_set': this.generator_set,
+                    // 'power_rectifier': this.power_rectifier,
+                    // 'air_conditioner': this.air_conditioner,
+                    // 'vertical_structure': this.vertical_structure,
+                    // 'infrastructure': this.infrastructure
                 }
 
-                axios.get('/api/filterPops', {params: params})
+                axios.get('/api/filterPops', { params: params })
                 .then((response) => {
-                    // console.log(response.data)
+                    console.log(response)
                     this.pops = response.data
                 })
             },
 
             // APIs
             getPopsMap() {
-                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-                var zona_id = this.selectedZona ? this.selectedZona.id : 0
-                var text = this.searchText != '' ?  this.searchText : 0
-
                 var params = {
-                    'crm_id': crm_id,
-                    'zona_id': zona_id,
-                    'text': text,
+                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                    'text': this.searchText != '' ?  this.searchText : 0,
 
                     'core': this.core,
                     'critic': this.critic,
@@ -693,12 +678,19 @@
                     'solar': this.solar,
                     'eolica': this.eolica,
                     'alba_project': this.alba_project,
-                    'protected_zone': this.protected_zone
+                    'protected_zone': this.protected_zone,
+
+                    'client_connection': this.client_connection,
+                    'generator_set': this.generator_set,
+                    'power_rectifier': this.power_rectifier,
+                    'air_conditioner': this.air_conditioner,
+                    'vertical_structure': this.vertical_structure,
+                    'infrastructure': this.infrastructure
                 }
 
-                axios.get('/api/popsMap', {params: params})
+                axios.get('/api/popsMap', { params: params })
                 .then((response) => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.popsMap = response.data
 
                 })
@@ -768,34 +760,66 @@
                 }
             },
 
-            formSubmit(e) {
-                // Activate loading button
-                this.buttonLoading = 'is-loading'
+            downloadPops() {
+                this.isLoading = true
 
-                e.preventDefault()
-                axios({
-                    url: '/pop/export',
-                    method: 'POST',
-                    responseType: 'blob',
-                    // headers: {
-                    //     'Content-Type': 'text/html; charset=utf-8',
-                    //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    // }
-                })
+                var params = {
+                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                    'text': this.searchText != '' ?  this.searchText : 0,
+
+                    'core': this.core,
+                    'critic': this.critic,
+
+                    'vip': this.vip,
+                    'pe_3g': this.pe_3g,
+                    'mpls': this.mpls,
+                    'olt': this.olt,
+                    'olt_3play': this.olt_3play,
+                    // 'red_minima_n1': this.red_minima_n1,
+                    // 'red_minima_n2': this.red_minima_n2,
+                    'lloo': this.lloo,
+                    'ranco': this.ranco,
+                    'bafi': this.bafi,
+                    'offgrid': this.offgrid,
+                    'solar': this.solar,
+                    'eolica': this.eolica,
+                    'alba_project': this.alba_project,
+                    'protected_zone': this.protected_zone,
+
+                    // 'client_connection': this.client_connection,
+                    // 'generator_set': this.generator_set,
+                    // 'power_rectifier': this.power_rectifier,
+                    // 'air_conditioner': this.air_conditioner,
+                    // 'vertical_structure': this.vertical_structure,
+                    // 'infrastructure': this.infrastructure
+                }
+
+                axios.get('/api/pop/export', { params: params, responseType: 'arraybuffer' })
                 .then((response) => {
-                    const url = window.URL.createObjectURL(new Blob([response.data]))
-                    const link = document.createElement('a')
-                    link.href = url
-                    link.setAttribute('download', 'listado_pops.xlsx')
-                    document.body.appendChild(link)
-                    link.click()
+                    console.log(response.data)
+                    const blob = new Blob([response.data], { type: 'application/xlsx' })
+                    // const objectUrl = window.URL.createObjectURL(blob)
 
-                    // Deativate loading button
-                    this.buttonLoading = ''
+                    let link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = 'listado_pops.xlsx'
+                    link.click()
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'La planilla se ha descargado exitosamente.',
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'Ha ocurrido un error. Favor contactar al administrador',
+                        type: 'is-danger',
+                        duration: 5000
+                    })
                 })
-                .catch((error) => {
-                    console.log('Error: ' + error);
-                });
             },
 
         }

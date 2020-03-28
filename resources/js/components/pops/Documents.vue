@@ -93,9 +93,10 @@
                         <div class="column is-2" v-for="file in files">
                             <a class="box" target="_blank" @click="readFile(file)">
                                 <b-icon 
-                                    pack="fad"
-                                    :icon="faFile(file.extension)"
-                                    size="is-medium">
+                                    pack="fas"
+                                    :icon="faFile(file.extension).icon"
+                                    size="is-medium"
+                                    :type="faFile(file.extension).type">
                                 </b-icon>
                                 <div class="is-size-7">{{ file.basename }}</div>
                             </a>
@@ -169,17 +170,100 @@
             },
 
             faFile(ext) {
-                var fa = ext == 'pdf' ? 'file-pdf' : 
+                var icon = ext == 'pdf' ? 'file-pdf' : 
                         (ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'file-image' : 
                             (ext == 'xls' || ext == 'xlsx' ? 'file-excel' : 'file')
                         )
-                return fa
+
+                var type = ext == 'pdf' ? 'is-info' : 
+                        (ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'is-warning' : 
+                            (ext == 'xls' || ext == 'xlsx' ? 'is-success' : 'is-primary')
+                        )
+                return {
+                    'icon': icon,
+                    'type': type
+                    }
             },
+
+            // readFile(file) {
+            //     var params = {
+            //         'name': '/storage/app/' + file.dirname,
+            //         'basename': file.basename,
+            //     }
+            //     axios.get('/api/documents/' + this.pop.id, { params: params, responseType: 'blob' })
+            //     .then(response => {
+            //         let blob = new Blob([response.data], { type: 'application/pdf' })
+            //         let link = document.createElement('a')
+            //         link.href = window.URL.createObjectURL(blob)
+            //         link.download = 'test.pdf'
+            //         link.click()
+            //     })
+            // }
+
             readFile(file) {
-                let routeData = this.$router.resolve({name: '/storage/app/' + file.dirname, query: {data: file.basename}});
-                console.log(routeData)
-                window.open(routeData.href, '_blank');
-            }
+                var params = {
+                    'dirname': file.dirname,
+                    'basename': file.basename,
+                    'extension': file.extension,
+                }
+                axios.get('/api/documents/' + this.pop.id, { params: params, responseType: 'arraybuffer' })
+                // .then(response => {
+                //     this.downloadFile(response, file.basename, file.extension)
+                // }, response => {
+                //     console.warn('error from download_contract')
+                //     console.log(response)
+                //     // Manage errors
+                // })
+                .then((response) => {
+                    console.log(response.data)
+                    const blob = new Blob([response.data], { type: 'application/' + file.extension })
+                    // const objectUrl = window.URL.createObjectURL(blob)
+
+                    let link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = file.basename
+                    link.click()
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'El archivo se ha descargado exitosamente.',
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'Ha ocurrido un error. Favor contactar al administrador',
+                        type: 'is-danger',
+                        duration: 5000
+                    })
+                })
+            },
+
+            downloadFile(response, filename, type) {
+                // It is necessary to create a new blob object with mime-type explicitly set
+                // otherwise only Chrome works like it should
+                var newBlob = new Blob([response.body], {type: 'application/' + type})
+
+                // IE doesn't allow using a blob object directly as link href
+                // instead it is necessary to use msSaveOrOpenBlob
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(newBlob)
+                    return
+                }
+
+                // For other browsers:
+                // Create a link pointing to the ObjectURL containing the blob.
+                const data = window.URL.createObjectURL(newBlob)
+                var link = document.createElement('a')
+                link.href = data
+                link.download = filename
+                link.click()
+                setTimeout(function () {
+                    // For Firefox it is necessary to delay revoking the ObjectURL
+                    window.URL.revokeObjectURL(data)
+                }, 100)
+            },
         }
     }
 </script>

@@ -439,7 +439,17 @@ fieldset[disabled] .pagination-ellipsis {
   height: inherit;
 }
 
-/*! bulma.io v0.8.0 | MIT License | github.com/jgthms/bulma */
+.sticky {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.sticky-content {
+  flex: 1;
+}
+
+/*! bulma.io v0.8.1 | MIT License | github.com/jgthms/bulma */
 
 @keyframes spinAround {
   from {
@@ -7388,7 +7398,7 @@ a.tag:hover {
   background-color: white;
   border-color: #dbdbdb;
   border-radius: 4px;
-  color: #363636;
+  color: inherit;
 }
 
 .input::-moz-placeholder,
@@ -12857,7 +12867,6 @@ a.navbar-item.is-active,
 }
 
 .navbar-item {
-  display: block;
   flex-grow: 0;
   flex-shrink: 0;
 }
@@ -18250,21 +18259,18 @@ label.panel-block:hover {
 }
 
 .hero.is-small .hero-body {
-  padding-bottom: 1.5rem;
-  padding-top: 1.5rem;
+  padding: 1.5rem;
 }
 
 @media screen and (min-width: 769px), print {
   .hero.is-medium .hero-body {
-    padding-bottom: 9rem;
-    padding-top: 9rem;
+    padding: 9rem 1.5rem;
   }
 }
 
 @media screen and (min-width: 769px), print {
   .hero.is-large .hero-body {
-    padding-bottom: 18rem;
-    padding-top: 18rem;
+    padding: 18rem 1.5rem;
   }
 }
 

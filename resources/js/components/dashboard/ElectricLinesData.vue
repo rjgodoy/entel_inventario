@@ -8,12 +8,14 @@
 
             <div class="columns is-multiline">
                 <div class="column is-6" v-for="item in this.electricLineData">
-                    <div class="is-size-4 has-text-weight-normal">{{ item.q_electric_lines | numeral('0,0') }}</div>
-                    <div class="is-size-7">{{ item.nombre }}</div>
+                    <b-message type="is-positive">
+                        <div class="is-size-4 has-text-weight-normal">{{ item.q_electric_lines | numeral('0,0') }}</div>
+                        <div class="is-size-7">{{ item.nombre }}</div>
+                    </b-message>
                 </div>
             </div>
 
-            <form @submit="formSubmit">
+            <!-- <form @submit="formSubmit">
                 <div class="field has-addons">
                     <p class="control">
                         <button type="submit" class="button is-small is-link is-outlined" :class="buttonLoading">
@@ -21,14 +23,14 @@
                             &nbsp;&nbsp;Listado de POPs
                         </button>
                     </p>
-                    <!-- <p class="control">
+                    <p class="control">
                         <a href="/pop" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
                             <font-awesome-icon icon="bars"/>
                         </a>
-                    </p> -->
+                    </p>
                 </div>
 
-            </form>
+            </form> -->
         </article>
     </div>
 </template>

@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable
 {
@@ -41,22 +41,62 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function zonas() 
     {
         return $this->hasMany(Zona::class);
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function authorizeRoles($roles)
     {
         abort_unless($this->hasAnyRole($roles), 401);
         return true;
     }
     
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function hasAnyRole($roles)
     {
         if (is_array($roles)) {
@@ -73,6 +113,11 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function hasRole($role)
     {
         if ($this->roles()->where('name', $role)->first()) {
@@ -81,6 +126,11 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function isAdmin() {
         return $this->roles()->where('name', 'admin')->exists();
     }

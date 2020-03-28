@@ -11,16 +11,51 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadings, WithMapping
 {
+    protected $text;
 
 	protected $core;
     protected $crm_id;
     protected $zona_id;
+
+    protected $critic;
+    protected $vip;
+    protected $pe_3g;
+    protected $mpls;
+    protected $olt;
+    protected $olt_3play;
+    // protected $red_minima;
+    protected $lloo;
+    protected $ranco;
+    protected $bafi;
+    protected $offgrid;
+    protected $solar;
+    protected $eolica;
+    protected $alba_project;
+    protected $protected_zone;
     
-    public function __construct(int $core, int $crm_id, int $zona_id)
+    public function __construct(object $request)
     {
-        $this->core = $core;
-        $this->crm_id = $crm_id;
-        $this->zona_id = $zona_id;
+        $this->text = $request->text;
+
+        $this->core = $request->core;
+        $this->crm_id = $request->crm_id;
+        $this->zona_id = $request->zona_id;
+
+        $this->critic = $request->critic;
+        $this->vip = $request->vip;
+        $this->pe_3g = $request->pe_3g;
+        $this->mpls = $request->mpls;
+        $this->olt = $request->olt;
+        $this->olt_3play = $request->olt_3play;
+        // $this->red_minima = $request->red_minima_n1;
+        $this->lloo = $request->lloo;
+        $this->ranco = $request->ranco;
+        $this->bafi = $request->bafi;
+        $this->offgrid = $request->offgrid;
+        $this->solar = $request->solar;
+        $this->eolica = $request->eolica;
+        $this->alba_project = $request->alba_project;
+        $this->protected_zone = $request->protected_zone;
     }
 
     /**
@@ -28,30 +63,92 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
     */
     public function collection()
     {
-
+        $text = $this->text;
         $condition_core = $this->core ? 'classification_type_id = '.$this->core : 'classification_type_id != '.$this->core;
         $condition_crm = $this->crm_id != 0 ? 'crm_id = '.$this->crm_id : 'crm_id != '.$this->crm_id;
         $condition_zona = $this->zona_id != 0 ? 'id = '.$this->zona_id : 'id != '.$this->zona_id;
 
-        $pop = Pop::whereHas('sites', function($q) use($condition_core) { 
-            $q->where(function($p) {
-                $p->where(function($w) {
-                    $w->whereIn('site_type_id', [1,3,4])
-                    ->where('state_id', 1);
-                })
-                ->orWhere(function($s) {
-                    $s->whereIn('site_type_id', [2])
-                    ->whereHas('technologies', function($r) {
-                        $r->where('state_id', 1);
+        // $condition_critic = $this->critic ? 'criticity = '.$this->critic : 'criticity IN ('.$this->critic.', 1)';
+
+        $condition_critic = $this->critic ? 'criticity = 1' : 'criticity IS NOT NULL';
+        // $condition_red_minima = 
+        //     $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' : 
+        //     ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
+        //         ($request->red_minima_n2 ? 'sites.red_minima = 2' : 'sites.red_minima IN (0,1,2)')
+        //     );
+
+        // POP
+        $condition_pe_3g = 'pops.pe_3g IN ('.$this->pe_3g.' ,1)';
+        $condition_mpls = 'pops.mpls IN ('.$this->mpls.',1)';
+        $condition_olt = 'pops.olt IN ('.$this->olt.',1)';
+        $condition_olt_3play = 'pops.olt_3play IN ('.$this->olt_3play.',1)';
+        $condition_vip = 'pops.vip IN ('.$this->vip.',1)';
+        $condition_lloo = 'pops.localidad_obligatoria IN ('.$this->lloo.',1)';
+        $condition_ranco = 'pops.ranco IN ('.$this->ranco.',1)';
+        $condition_bafi = 'pops.bafi IN ('.$this->bafi.',1)';
+        $condition_offgrid = 'pops.offgrid IN ('.$this->offgrid.',1)';
+        $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
+        $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
+        $condition_protected_zone = 'pops.protected_zone IN ('.$this->protected_zone.',1)';
+        $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
+
+        $pop = Pop::with('comuna.zona.crm', 'sites.classification_type')
+            ->whereHas('sites', function($q) use($text, $condition_core) { 
+                $q->where(function($p) use($text) {
+                    $p->where(function($w) use($text) {
+                        if ($text) {
+                            $w->whereIn('site_type_id', [1,3,4])
+                            ->where('state_id', 1)
+                            ->where(function($r) use($text) {
+                                $r->where('sites.nem_site', 'LIKE', "%$text%")
+                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
+                            });
+                        } else {
+                            $w->whereIn('site_type_id', [1,3,4])
+                            ->where('state_id', 1);
+                        }
+                    })
+                    ->orWhere(function($s) use($text) {
+                        if ($text) {
+                            $s->whereIn('site_type_id', [2])
+                            ->whereHas('technologies', function($r) {
+                                $r->where('state_id', 1);
+                            })
+                            ->where(function($q) use($text) {
+                                $q->where('sites.nem_site', 'LIKE', "%$text%")
+                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
+                            });
+                        } else {
+                            $s->whereIn('site_type_id', [2])
+                            ->whereHas('technologies', function($r) {
+                                $r->where('state_id', 1);
+                            });
+                        }
                     });
-                });
+                })
+                ->whereRaw($condition_core);
             })
-            ->whereRaw($condition_core);
+            ->whereHas('rooms', function($r) use($condition_critic) {
+                $r->whereRaw($condition_critic);
             })
             ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
                 $q->whereRaw($condition_crm)
                 ->whereRaw($condition_zona);
             })
+            ->whereRaw($condition_pe_3g)
+            ->whereRaw($condition_mpls)
+            ->whereRaw($condition_olt)
+            ->whereRaw($condition_olt_3play)
+            ->whereRaw($condition_vip)
+            ->whereRaw($condition_lloo)
+            ->whereRaw($condition_ranco)
+            ->whereRaw($condition_bafi)
+            ->whereRaw($condition_offgrid)
+            ->whereRaw($condition_solar)
+            ->whereRaw($condition_eolica)
+            ->whereRaw($condition_protected_zone)
+            ->whereRaw($condition_alba_project)
+            ->orderBy('pops.id', 'asc')
             ->get();
 
         return $pop;

@@ -60,7 +60,7 @@
                 this.chartData.data.forEach((element) => {
                     chart.data.push({
                         "date": new Date(element.year, element.month - 1, 1),
-                        "value": element.q_new,
+                        "new": element.q_new,
                         "deleted": element.q_deleted
                     })
                 })
@@ -90,11 +90,11 @@
                   series.dataFields.valueY = field; 
                   series.dataFields.dateX = "date"; 
                   series.name = name;   
-                  series.tooltipText = "{dateX}[dateFor]: [b]{valueY}[/]";
+                  series.tooltipText = "{name}: [b]{valueY}[/]";
                   series.strokeWidth = 2;
                 }
 
-                createSeries("value", "Nuevos");
+                createSeries("new", "Nuevos");
                 createSeries("deleted", "Eliminados");
 
                 chart.cursor = new am4charts.XYCursor();

@@ -47,6 +47,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
@@ -54,58 +56,46 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   data: function data() {
     return {
-      file: [] // buttonLoading: 0,
-      // filename: 'No hay archivo...',
-      // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-
+      file: [],
+      isLoading: false
     };
   },
   methods: {
-    onFileChange: function onFileChange(file) {
-      this.file = file;
-    },
-    submit: function submit(e) {
-      // this.buttonLoading = 1
-      e.preventDefault();
+    submit: function submit() {
+      var _this = this;
+
+      this.isLoading = true;
       var config = {
         headers: {
-          'content-type': 'multipart/form-data'
+          'content-type': 'multipart/form-data',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         }
-      };
+      }; // form data
+
       var formData = new FormData();
-      formData.append('file', this.file[0]); // console.log(this.file)
+      formData.append('file', this.file);
+      axios.post("/api/junction/efizity", formData, config).then(function (response) {
+        console.log(response.data);
 
-      axios.post("/api/client_connection/efizity", formData, config).then(function (response) {
-        console.log(response.data); // this.$buefy.toast.open({
-        //     message: response.data.success,
-        //     type: 'is-success',
-        //     duration: 5000
-        // })
-        // this.buttonLoading = 0
+        _this.$buefy.toast.open({
+          message: response.data.success,
+          type: 'is-success',
+          duration: 5000
+        });
+
+        _this.isLoading = false;
       })["catch"](function (error) {
-        console.log('error: ' + error); // this.$buefy.toast.open({
-        //     message: error,
-        //     type: 'is-danger',
-        //     duration: 5000
-        // })
-        // this.buttonLoading = 0
-      });
-    } // submit() {
-    //     this.buttonLoading = 1
-    //     console.log(this.file)
-    //     axios.post(`/api/client_connection/efizity?file=${this.file}`)
-    //     .then((response) => {
-    //         console.log(response)
-    //         // const blob = new Blob([response.data], { type: 'application/xls' })
-    //         // const objectUrl = window.URL.createObjectURL(blob)
-    //         // let link = document.createElement('a')
-    //         // link.href = window.URL.createObjectURL(blob)
-    //         // link.download = 'test.xlsx'
-    //         // link.click()
-    //         this.buttonLoading = 0
-    //     })
-    // }
+        console.log(error);
 
+        _this.$buefy.toast.open({
+          message: 'error: ' + error,
+          type: 'is-danger',
+          duration: 5000
+        });
+
+        _this.isLoading = false;
+      });
+    }
   }
 });
 
@@ -150,12 +140,12 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "b-field",
-                    { staticClass: "file" },
                     [
                       _c(
                         "b-upload",
                         {
-                          on: { input: _vm.onFileChange },
+                          attrs: { "drag-drop": "" },
+                          on: { input: _vm.submit },
                           model: {
                             value: _vm.file,
                             callback: function($$v) {
@@ -165,39 +155,48 @@ var render = function() {
                           }
                         },
                         [
-                          _c(
-                            "a",
-                            { staticClass: "button is-primary" },
-                            [
-                              _c("b-icon", { attrs: { icon: "upload" } }),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("Click to upload")])
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm.file
-                        ? _c("span", { staticClass: "file-name" }, [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(_vm.file.name) +
-                                "\n                            "
+                          _c("section", { staticClass: "section" }, [
+                            _c(
+                              "div",
+                              { staticClass: "content has-text-centered" },
+                              [
+                                _c(
+                                  "p",
+                                  [
+                                    _c("b-icon", {
+                                      attrs: {
+                                        icon: "upload",
+                                        pack: "fas",
+                                        size: "is-large"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _vm._v(
+                                    "Drop your files here or click to upload"
+                                  )
+                                ])
+                              ]
                             )
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-button",
-                    { attrs: { type: "is-link" }, on: { click: _vm.submit } },
-                    [
-                      _c("font-awesome-icon", { attrs: { icon: "sync-alt" } }),
-                      _vm._v(
-                        " \n                              Sync Efizity\n                        "
+                          ]),
+                          _vm._v(" "),
+                          _c("b-loading", {
+                            attrs: {
+                              "is-full-page": false,
+                              active: _vm.isLoading,
+                              "can-cancel": true
+                            },
+                            on: {
+                              "update:active": function($event) {
+                                _vm.isLoading = $event
+                              }
+                            }
+                          })
+                        ],
+                        1
                       )
                     ],
                     1

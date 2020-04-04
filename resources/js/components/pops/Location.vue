@@ -58,32 +58,23 @@
             <div class="card-content">
                 <div class="columns">
                     <div class="column is-8">
-                        <div class="is-size-6 has-text-weight-semibold">{{ pop.direccion }}</div>
-                        <div class="is-size-7 has-text-weight-normal">Comuna de {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}</div>
-                        <div class="columns" style="margin-top: 5px;">
-                            <div class="column has-text-left">
-                                <div class="is-size-6 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }}
-                                    <p class="is-size-7 has-text-weight-light">ZONA</p>
-                                </div>
-                            </div>
-                            <div class="column has-background-right">
-                                <div class="is-size-6 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}
-                                    <p class="is-size-7 has-text-weight-light">CRM</p>
-                                </div>
-                            </div>
+                        <div class="is-size-5 has-text-weight-semibold">{{ pop.direccion }}</div>
+                        <div class="is-size-6 has-text-weight-normal">Comuna de {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}</div>
+                        <div class="is-size-7 has-text-weight-normal">
+                            Zona {{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }} - CRM {{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}
                         </div>
                     </div>
 
                     <div class="column">
                         <div class="level">
                             <div class="level-item">
-                                <div class="is-size-6 has-text-weight-semibold">{{ pop.latitude }}
-                                    <p class="is-size-7 has-text-weight-light">Latitud</p>
+                                <div class="is-size-5 has-text-weight-semibold">{{ pop.latitude }}
+                                    <p class="is-size-6 has-text-weight-light">Latitud</p>
                                 </div>
                             </div>
                             <div class="level-item">
-                                <div class="is-size-6 has-text-weight-semibold">{{ pop.longitude }}
-                                    <p class="is-size-7 has-text-weight-light">Longitud</p>
+                                <div class="is-size-5 has-text-weight-semibold">{{ pop.longitude }}
+                                    <p class="is-size-6 has-text-weight-light">Longitud</p>
                                 </div>
                             </div>
                         </div>

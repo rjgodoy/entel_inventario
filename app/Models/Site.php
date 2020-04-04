@@ -29,11 +29,6 @@ class Site extends Model
         return $this->belongsTo(ClassificationType::class);
     }
 
-    public function client_connections() 
-    {
-        return $this->hasMany(ClientConnection::class);
-    }
-
     public function coverage_type() 
     {
         return $this->belongsTo(CoverageType::class);

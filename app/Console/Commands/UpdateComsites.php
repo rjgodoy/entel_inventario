@@ -55,10 +55,14 @@ class UpdateComsites extends Command
         foreach ($comsite_data as $data) {
 
             // Verifica si el Pop existe en Inventario. Si no existe, lo deja NULL
-            if ($pop_id = Pop::join('sites', 'pops.id', '=', 'sites.pop_id')->where('nem_site', $data->val02_CodSitio)->count()) {
-                $pop_id = Pop::join('sites', 'pops.id', '=', 'sites.pop_id')->where('nem_site', $data->val02_CodSitio)->first()->pop_id;
-            } else {
+            $pop = Pop::whereHas('sites', function($q) use($data) {
+                    $q->where('nem_site', $data->val02_CodSitio);
+                })->get();
+
+            if ($pop->isEmpty()) {
                 $pop_id = null;
+            } else {
+                $pop_id = $pop->first()->id;
             }
 
             // Transforma las fechas en 
@@ -66,12 +70,12 @@ class UpdateComsites extends Command
             $time_ended = strtotime($data->val06_FechaTermino);
             $started_at = date('Y-m-d',$time_started);
             $ended_at = date('Y-m-d',$time_ended);
-            // dd($ended_at);
 
-            if (Comsite::where('id', $data->val01_IdContrato)->count()) {
-                $comsite_update = Comsite::where('id', $data->val01_IdContrato)->first();
-
-                $comsite_update->update([
+            Comsite::updateOrCreate(
+                [
+                    'id' => $data->val01_IdContrato
+                ],
+                [
                     'pop_id' => $pop_id,
                     'cod_pop' => $data->val02_CodSitio,
                     'nombre_pop' => $data->val03_NombreSitio,
@@ -82,23 +86,8 @@ class UpdateComsites extends Command
                     'celular_propietario' => $data->val08_CelularPropietario,
                     'fono_propietario' => $data->val09_TelefonoParticularPropietario,
                     'rol_propiedad' => $data->val10_RolPropiedad
-                ]);  
-            } else {
-                $comsite = new Comsite();
-                $comsite->addData(
-                    $data->val01_IdContrato,
-                    $pop_id,
-                    $data->val02_CodSitio,
-                    $data->val03_NombreSitio,
-                    $data->val04_Operador,
-                    $started_at,
-                    $ended_at,
-                    $data->val07_Propietario,
-                    $data->val08_CelularPropietario,
-                    $data->val09_TelefonoParticularPropietario,
-                    $data->val10_RolPropiedad
-                );
-            }
+                ]
+            );
         }
     }
 
@@ -121,7 +110,7 @@ class UpdateComsites extends Command
         });
 
         // Without classmap
-        $response = $this->soapWrapper->call('Comsite.getListInfoContratoResponse');
+        $response = $this->soapWrapper->call('Comsite.getListInfoContrato');
         $comsite_data = $response->getListInfoContratoReturn;
 
         return $comsite_data;

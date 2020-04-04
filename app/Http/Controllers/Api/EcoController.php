@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Resources\Eco as EcoResource;
 use App\Models\ProtectedZone;
 use App\Models\Pop;
@@ -34,6 +37,48 @@ class EcoController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function upload(Request $request)
+    {
+        $upload_path = '../storage/app/Files';
+        $file_name = $request->file->getClientOriginalName();
+        // $generated_new_name = time() . '.' . $request->file->getClientOriginalExtension();
+        $request->file->move($upload_path, $file_name);
+
+
+        // $file = $request->file('file');
+        // $filename = $file->getClientOriginalName();
+
+        // if( Storage::disk('local')->putFileAs('Files', $file_name)) {
+
+        //     return response()->json([
+        //         'success' => true
+        //     ], 200);
+        // }
+        // return response()->json([
+        //     'success' => false
+        // ], 500);
+
+
+
+        // return $request;
+        // $file = $request->file('file');
+        // $ext = $file->getClientOriginalExtension();
+        // $type = $this->getType($ext);
+
+        // Storage::putFileAs(
+        //     '/public/' . $this->getUserDir() . '/' . $type . '/', 
+        //     $file, 
+        //     time().$request['name'] . '.' . $ext);
+        
+        return response()->json(false);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -41,39 +86,23 @@ class EcoController extends Controller
      */
     public function show($id)
     {
-        // $directory_path = '../resources/views';
-        $directory_path = 'ftp://developer:Entel@123RepoDev@172.16.100.110/var/www/html/storage';
+        //
+    }
 
-        // $directory_path = 'ftp://developer:Entel@123RepoDev@172.16.100.110/var/www/html/storage';
-
-        // Files
-        $files = [];
-        $filesInFolder = \File::files($directory_path, true);
-        // $filesInFolder = \File::allFiles($directory_path, true);
-
-        foreach($filesInFolder as $path)
-        {
-            $files[] = pathinfo($path);
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function rcas(Request $request)
+    {
+        $files = Storage::disk('local')->files('Files');
+        $rcas = [];
+        foreach ($files as $file) {
+            array_push($rcas, pathinfo($file));
         }
-
-        // Directories
-        $folders = [];
-        $Folders = \File::directories($directory_path, true);
-        // $Folders = \File::allDirectories($directory_path);
-
-        foreach($Folders as $folder_path)
-        {
-            $folders[] = pathinfo($folder_path);
-        }
-
-        // dd($folders, $files);
-
-        // $folders = json_encode($folders[0]);
-        // $files = json_encode($files[0]);
-
-        // dd($folders, $files);
-
-        return $folders;
+        return $rcas;
     }
 
     /**

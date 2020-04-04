@@ -1,17 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[28],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/AirConditionersData.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/AirConditionersData.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/ModalRoom.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/ModalRoom.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -47,109 +44,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['selectedCrm', 'selectedZona', // 'csrf',
-  'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
+  props: ['email', 'password'],
   data: function data() {
-    return {
-      crmSelected: this.selectedCrm,
-      zonaSelected: this.selectedZona,
-      airConditionerData: null,
-      total: 0,
-      buttonLoading: ''
-    };
+    return {};
   },
-  created: function created() {
-    this.getAirConditionerData();
-  },
+  watch: {},
+  created: function created() {},
   mounted: function mounted() {},
-  watch: {
-    selectedCrm: function selectedCrm(newValue, oldValue) {
-      this.crmSelected = newValue;
-      this.zonaSelected = null;
-      this.getAirConditionerData();
-    },
-    selectedZona: function selectedZona(newValue, oldValue) {
-      this.zonaSelected = newValue;
-      this.getAirConditionerData();
-    },
-    core: function core(newValue, oldValue) {
-      this.getAirConditionerData();
-    }
-  },
-  methods: {
-    totalAirConditioners: function totalAirConditioners() {
-      this.total = 0;
-      this.airConditionerData.forEach(this.counter);
-    },
-    counter: function counter(item, index) {
-      this.total = this.total + item.q_air_conditioners;
-    },
-    getAirConditionerData: function getAirConditionerData() {
-      var _this = this;
-
-      if (this.crmSelected == null) {
-        axios.get("/api/airConditionerData/".concat(this.core)).then(function (response) {
-          _this.airConditionerData = response.data.data;
-
-          _this.totalAirConditioners();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
-      } else if (this.zonaSelected == null) {
-        axios.get("/api/airConditionerDataCrm/".concat(this.crmSelected.id, "/").concat(this.core)).then(function (response) {
-          _this.airConditionerData = response.data.data;
-
-          _this.totalAirConditioners();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
-      } else {
-        axios.get("/api/airConditionerDataZona/".concat(this.zonaSelected.id, "/").concat(this.core)).then(function (response) {
-          console.log(response);
-          _this.airConditionerData = response.data.data;
-
-          _this.totalAirConditioners();
-        })["catch"](function () {
-          console.log('handle server error from here');
-        });
-      }
-    },
-    formSubmit: function formSubmit(e) {
-      var _this2 = this;
-
-      // Activate loading button
-      this.buttonLoading = 'is-loading';
-      e.preventDefault();
-      axios({
-        url: '/pop/export',
-        method: 'POST',
-        responseType: 'blob' // headers: {
-        //     'Content-Type': 'text/html; charset=utf-8',
-        //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        // }
-
-      }).then(function (response) {
-        var url = window.URL.createObjectURL(new Blob([response.data]));
-        var link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'listado_pops.xlsx');
-        document.body.appendChild(link);
-        link.click(); // Deativate loading button
-
-        _this2.buttonLoading = '';
-      })["catch"](function (error) {
-        console.log('Error: ' + error);
-      });
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/AirConditionersData.vue?vue&type=template&id=42cd9dc9&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/AirConditionersData.vue?vue&type=template&id=42cd9dc9& ***!
-  \********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/ModalRoom.vue?vue&type=template&id=0376b5fe&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/ModalRoom.vue?vue&type=template&id=0376b5fe& ***!
+  \*********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -161,86 +71,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "column is-4" }, [
-    _c(
-      "article",
-      { staticClass: "tile is-child box", class: _vm.boxBackground },
-      [
-        _c("div", { staticClass: "columns" }, [
+  return _c(
+    "div",
+    { staticClass: "modal-card", staticStyle: { width: "auto" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "modal-card-body" },
+        [
           _c(
-            "div",
-            {
-              staticClass:
-                "column is-size-5 has-text-weight-semibold has-text-left",
-              class: _vm.primaryText
-            },
-            [_vm._v("Aires Acondicionados")]
+            "b-field",
+            { attrs: { label: "Email" } },
+            [
+              _c("b-input", {
+                attrs: {
+                  type: "email",
+                  value: _vm.email,
+                  placeholder: "Your email",
+                  required: ""
+                }
+              })
+            ],
+            1
           ),
           _vm._v(" "),
           _c(
-            "div",
-            {
-              staticClass:
-                "column is-size-4 has-text-weight-semibold has-text-right",
-              class: _vm.primaryText
-            },
-            [_vm._v(_vm._s(_vm._f("numeral")(this.total, "0,0")))]
-          )
-        ]),
-        _vm._v(" "),
+            "b-field",
+            { attrs: { label: "Password" } },
+            [
+              _c("b-input", {
+                attrs: {
+                  type: "password",
+                  value: _vm.password,
+                  "password-reveal": "",
+                  placeholder: "Your password",
+                  required: ""
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("b-checkbox", [_vm._v("Remember me")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("footer", { staticClass: "modal-card-foot" }, [
         _c(
-          "div",
-          { staticClass: "columns is-multiline" },
-          _vm._l(this.airConditionerData, function(item) {
-            return _c(
-              "div",
-              { staticClass: "column is-6" },
-              [
-                _c("b-message", { attrs: { type: "is-smart" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-4 has-text-weight-normal" },
-                    [
-                      _vm._v(
-                        _vm._s(
-                          _vm._f("numeral")(item.q_air_conditioners, "0,0")
-                        )
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "is-size-7" }, [
-                    _vm._v(_vm._s(item.nombre))
-                  ])
-                ])
-              ],
-              1
-            )
-          }),
-          0
-        )
-      ]
-    )
-  ])
+          "button",
+          {
+            staticClass: "button",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.$parent.close()
+              }
+            }
+          },
+          [_vm._v("Close")]
+        ),
+        _vm._v(" "),
+        _c("button", { staticClass: "button is-primary" }, [_vm._v("Login")])
+      ])
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("header", { staticClass: "modal-card-head" }, [
+      _c("p", { staticClass: "modal-card-title" }, [_vm._v("Login")])
+    ])
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/AirConditionersData.vue":
-/*!*******************************************************************!*\
-  !*** ./resources/js/components/dashboard/AirConditionersData.vue ***!
-  \*******************************************************************/
+/***/ "./resources/js/components/capacity/ModalRoom.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/capacity/ModalRoom.vue ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AirConditionersData_vue_vue_type_template_id_42cd9dc9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AirConditionersData.vue?vue&type=template&id=42cd9dc9& */ "./resources/js/components/dashboard/AirConditionersData.vue?vue&type=template&id=42cd9dc9&");
-/* harmony import */ var _AirConditionersData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AirConditionersData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/AirConditionersData.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ModalRoom_vue_vue_type_template_id_0376b5fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalRoom.vue?vue&type=template&id=0376b5fe& */ "./resources/js/components/capacity/ModalRoom.vue?vue&type=template&id=0376b5fe&");
+/* harmony import */ var _ModalRoom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalRoom.vue?vue&type=script&lang=js& */ "./resources/js/components/capacity/ModalRoom.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -250,9 +175,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AirConditionersData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AirConditionersData_vue_vue_type_template_id_42cd9dc9___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AirConditionersData_vue_vue_type_template_id_42cd9dc9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ModalRoom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalRoom_vue_vue_type_template_id_0376b5fe___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalRoom_vue_vue_type_template_id_0376b5fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -262,38 +187,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/AirConditionersData.vue"
+component.options.__file = "resources/js/components/capacity/ModalRoom.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/AirConditionersData.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/AirConditionersData.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************/
+/***/ "./resources/js/components/capacity/ModalRoom.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/capacity/ModalRoom.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AirConditionersData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AirConditionersData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/AirConditionersData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AirConditionersData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalRoom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalRoom.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/ModalRoom.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalRoom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/AirConditionersData.vue?vue&type=template&id=42cd9dc9&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/AirConditionersData.vue?vue&type=template&id=42cd9dc9& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/components/capacity/ModalRoom.vue?vue&type=template&id=0376b5fe&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/capacity/ModalRoom.vue?vue&type=template&id=0376b5fe& ***!
+  \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AirConditionersData_vue_vue_type_template_id_42cd9dc9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AirConditionersData.vue?vue&type=template&id=42cd9dc9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/AirConditionersData.vue?vue&type=template&id=42cd9dc9&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AirConditionersData_vue_vue_type_template_id_42cd9dc9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalRoom_vue_vue_type_template_id_0376b5fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalRoom.vue?vue&type=template&id=0376b5fe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/ModalRoom.vue?vue&type=template&id=0376b5fe&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalRoom_vue_vue_type_template_id_0376b5fe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AirConditionersData_vue_vue_type_template_id_42cd9dc9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalRoom_vue_vue_type_template_id_0376b5fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

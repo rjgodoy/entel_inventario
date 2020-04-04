@@ -18,41 +18,25 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        $text = $request->text == 0 ? '' : $request->text;
+        $text = $request->text;
         $crm_id = $request->crm_id;
 
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
 
-        // $rooms = Room::with('site.pop.comuna.zona.crm')
-        //     ->whereHas('site.pop.comuna.zona', function($r) use($condition_crm) {
-        //         $r->whereRaw($condition_crm);
-        //     })
-        //     ->whereHas('site', function($q) use($text) {
-        //         $q->where('nem_site', 'LIKE', "%$text%")
-        //         ->orWhere('nombre', 'LIKE', "%$text%");
-        //     })
-        //     // ->orWhereHas('site.pop', function($p) use($text) {
-        //     //     $p->where('nombre', 'LIKE', "%$text%")
-        //     //     ->orWhere('direccion', 'LIKE', "%$text%");
-        //     // })
-        //     ->paginate(20);
-
         $pops = Pop::with('comuna.zona.crm', 'sites', 'rooms')
+            ->whereHas('sites', function($q) use($text) {
+                if ($text) {
+                    $q->where('nem_site', 'LIKE', "%$text%")
+                    ->orWhere('nombre', 'LIKE', "%$text%");
+                }
+            })
             ->whereHas('comuna.zona', function($r) use($condition_crm) {
                 $r->whereRaw($condition_crm);
             })
-            ->whereHas('sites', function($q) use($text) {
-                $q->where('nem_site', 'LIKE', "%$text%")
-                ->orWhere('nombre', 'LIKE', "%$text%");
-            })
-            // ->orWhereHas('site.pop', function($p) use($text) {
-            //     $p->where('nombre', 'LIKE', "%$text%")
-            //     ->orWhere('direccion', 'LIKE', "%$text%");
-            // })
             ->whereHas('rooms', function($p) {
                 $p->where('criticity', 1);
             })
-            ->paginate(20);
+            ->paginate(10);
 
         return new RoomResource($pops);
     }

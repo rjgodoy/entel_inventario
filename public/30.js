@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[30],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -53,62 +53,61 @@ __webpack_require__.r(__webpack_exports__);
     return {
       crmSelected: this.selectedCrm,
       zonaSelected: this.selectedZona,
-      generatorSetData: null,
+      electricLineData: null,
       total: 0,
       buttonLoading: ''
     };
   },
   created: function created() {
-    this.getGeneratorSetData();
+    this.getElectricLineData();
   },
   mounted: function mounted() {},
   watch: {
     selectedCrm: function selectedCrm(newValue, oldValue) {
       this.crmSelected = newValue;
       this.zonaSelected = null;
-      this.getGeneratorSetData();
+      this.getElectricLineData();
     },
     selectedZona: function selectedZona(newValue, oldValue) {
       this.zonaSelected = newValue;
-      this.getGeneratorSetData();
+      this.getElectricLineData();
     },
     core: function core(newValue, oldValue) {
-      this.getGeneratorSetData();
+      this.getElectricLineData();
     }
   },
   methods: {
-    totalGeneratorSets: function totalGeneratorSets() {
+    totalElectricLines: function totalElectricLines() {
       this.total = 0;
-      this.generatorSetData.forEach(this.counter);
+      this.electricLineData.forEach(this.counter);
     },
     counter: function counter(item, index) {
-      this.total = this.total + item.q_generator_sets;
+      this.total = this.total + item.q_electric_lines;
     },
-    getGeneratorSetData: function getGeneratorSetData() {
+    getElectricLineData: function getElectricLineData() {
       var _this = this;
 
       if (this.crmSelected == null) {
-        axios.get("/api/generatorSetData?core=".concat(this.core)).then(function (response) {
-          // console.log(response.data)
-          _this.generatorSetData = response.data.data;
+        axios.get("/api/electricLineData/".concat(this.core)).then(function (response) {
+          _this.electricLineData = response.data.electric_line;
 
-          _this.totalGeneratorSets();
+          _this.totalElectricLines();
         })["catch"](function () {
           console.log('handle server error from here');
         });
       } else if (this.zonaSelected == null) {
-        axios.get("api/generatorSetDataCrm?core=".concat(this.core, "&crm_id=").concat(this.crmSelected.id)).then(function (response) {
-          _this.generatorSetData = response.data.data;
+        axios.get("/api/electricLineDataCrm/".concat(this.crmSelected.id, "/").concat(this.core)).then(function (response) {
+          _this.electricLineData = response.data.electric_line;
 
-          _this.totalGeneratorSets();
+          _this.totalElectricLines();
         })["catch"](function () {
           console.log('handle server error from here');
         });
       } else {
-        axios.get("api/generatorSetDataZona?core=".concat(this.core, "&zona_id=").concat(this.zonaSelected.id)).then(function (response) {
-          _this.generatorSetData = response.data.data;
+        axios.get("/api/electricLineDataZona/".concat(this.zonaSelected.id, "/").concat(this.core)).then(function (response) {
+          _this.electricLineData = response.data.electric_line;
 
-          _this.totalGeneratorSets();
+          _this.totalElectricLines();
         })["catch"](function () {
           console.log('handle server error from here');
         });
@@ -146,9 +145,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=template&id=4ace0838&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=template&id=4ace0838& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056& ***!
   \******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -174,7 +173,7 @@ var render = function() {
                 "column is-size-5 has-text-weight-semibold has-text-left",
               class: _vm.primaryText
             },
-            [_vm._v("Grupos Electrógenos")]
+            [_vm._v("Lineas Eléctricas")]
           ),
           _vm._v(" "),
           _c(
@@ -191,7 +190,7 @@ var render = function() {
         _c(
           "div",
           { staticClass: "columns is-multiline" },
-          _vm._l(this.generatorSetData, function(item) {
+          _vm._l(this.electricLineData, function(item) {
             return _c(
               "div",
               { staticClass: "column is-6" },
@@ -202,7 +201,7 @@ var render = function() {
                     { staticClass: "is-size-4 has-text-weight-normal" },
                     [
                       _vm._v(
-                        _vm._s(_vm._f("numeral")(item.q_generator_sets, "0,0"))
+                        _vm._s(_vm._f("numeral")(item.q_electric_lines, "0,0"))
                       )
                     ]
                   ),
@@ -228,17 +227,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/GeneratorSetsData.vue":
+/***/ "./resources/js/components/dashboard/ElectricLinesData.vue":
 /*!*****************************************************************!*\
-  !*** ./resources/js/components/dashboard/GeneratorSetsData.vue ***!
+  !*** ./resources/js/components/dashboard/ElectricLinesData.vue ***!
   \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _GeneratorSetsData_vue_vue_type_template_id_4ace0838___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GeneratorSetsData.vue?vue&type=template&id=4ace0838& */ "./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=template&id=4ace0838&");
-/* harmony import */ var _GeneratorSetsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GeneratorSetsData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ElectricLinesData.vue?vue&type=template&id=19a62056& */ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&");
+/* harmony import */ var _ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ElectricLinesData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -248,9 +247,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _GeneratorSetsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _GeneratorSetsData_vue_vue_type_template_id_4ace0838___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _GeneratorSetsData_vue_vue_type_template_id_4ace0838___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -260,38 +259,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/GeneratorSetsData.vue"
+component.options.__file = "resources/js/components/dashboard/ElectricLinesData.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneratorSetsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./GeneratorSetsData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneratorSetsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ElectricLinesData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=template&id=4ace0838&":
+/***/ "./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&":
 /*!************************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=template&id=4ace0838& ***!
+  !*** ./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056& ***!
   \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneratorSetsData_vue_vue_type_template_id_4ace0838___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./GeneratorSetsData.vue?vue&type=template&id=4ace0838& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/GeneratorSetsData.vue?vue&type=template&id=4ace0838&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneratorSetsData_vue_vue_type_template_id_4ace0838___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ElectricLinesData.vue?vue&type=template&id=19a62056& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/ElectricLinesData.vue?vue&type=template&id=19a62056&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GeneratorSetsData_vue_vue_type_template_id_4ace0838___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ElectricLinesData_vue_vue_type_template_id_19a62056___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

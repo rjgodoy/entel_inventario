@@ -539,6 +539,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import ErrorComponent from './maps/ErrorComponent.vue';
 // const MapView = () => ({
@@ -612,7 +621,7 @@ __webpack_require__.r(__webpack_exports__);
       eolica: 0,
       protected_zone: 0,
       alba_project: 0,
-      client_connection: 0,
+      junction: 0,
       generator_set: 0,
       power_rectifier: 0,
       air_conditioner: 0,
@@ -630,6 +639,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    this.styleMode();
     this.getCrms();
     this.getFilterButtons();
   },
@@ -706,7 +716,7 @@ __webpack_require__.r(__webpack_exports__);
       this.getPops();
       this.getPopsMap();
     },
-    client_connection: function client_connection(newValue) {
+    junction: function junction(newValue) {
       this.getPops();
       this.getPopsMap();
     },
@@ -734,7 +744,15 @@ __webpack_require__.r(__webpack_exports__);
       newValue.length != 0 ? this.popsMap = newValue : this.getPops();
     }
   },
-  computed: {},
+  computed: {
+    selectedIds: function selectedIds() {
+      var popIds = [];
+      this.selectedPops.forEach(function (element) {
+        popIds.push(element.id);
+      });
+      return popIds;
+    }
+  },
   methods: {
     // BUTTONS
     getCrms: function getCrms() {
@@ -814,7 +832,7 @@ __webpack_require__.r(__webpack_exports__);
         'solar': this.solar,
         'eolica': this.eolica,
         'alba_project': this.alba_project,
-        'protected_zone': this.protected_zone // 'client_connection': this.client_connection,
+        'protected_zone': this.protected_zone // 'junction': this.junction,
         // 'generator_set': this.generator_set,
         // 'power_rectifier': this.power_rectifier,
         // 'air_conditioner': this.air_conditioner,
@@ -854,7 +872,7 @@ __webpack_require__.r(__webpack_exports__);
         'eolica': this.eolica,
         'alba_project': this.alba_project,
         'protected_zone': this.protected_zone,
-        'client_connection': this.client_connection,
+        'junction': this.junction,
         'generator_set': this.generator_set,
         'power_rectifier': this.power_rectifier,
         'air_conditioner': this.air_conditioner,
@@ -875,7 +893,7 @@ __webpack_require__.r(__webpack_exports__);
         this.bodyBackground = 'has-background-black-ter';
         this.boxBackground = 'has-background-dark';
         this.primaryText = 'has-text-white';
-        this.secondaryText = 'has-text-grey-light';
+        this.secondaryText = 'has-text-light';
         this.searchBodyBackground = 'has-background-dark';
       } else {
         // light mode
@@ -932,9 +950,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.isLoading = true;
       var params = {
+        'selectedIds': this.selectedIds,
+        'text': this.searchText != '' ? this.searchText : 0,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
         'zona_id': this.selectedZona ? this.selectedZona.id : 0,
-        'text': this.searchText != '' ? this.searchText : 0,
         'core': this.core,
         'critic': this.critic,
         'vip': this.vip,
@@ -951,7 +970,7 @@ __webpack_require__.r(__webpack_exports__);
         'solar': this.solar,
         'eolica': this.eolica,
         'alba_project': this.alba_project,
-        'protected_zone': this.protected_zone // 'client_connection': this.client_connection,
+        'protected_zone': this.protected_zone // 'junction': this.junction,
         // 'generator_set': this.generator_set,
         // 'power_rectifier': this.power_rectifier,
         // 'air_conditioner': this.air_conditioner,
@@ -963,15 +982,27 @@ __webpack_require__.r(__webpack_exports__);
         params: params,
         responseType: 'arraybuffer'
       }).then(function (response) {
-        console.log(response.data);
+        console.log(response);
         var blob = new Blob([response.data], {
           type: 'application/xlsx'
         }); // const objectUrl = window.URL.createObjectURL(blob)
+        // IE doesn't allow using a blob object directly as link href
+        // instead it is necessary to use msSaveOrOpenBlob
 
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(newBlob);
+          return;
+        }
+
+        var data = window.URL.createObjectURL(blob);
         var link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
+        link.href = data;
         link.download = 'listado_pops.xlsx';
-        link.click();
+        link.click(); // setTimeout(function () {
+        //     // For Firefox it is necessary to delay revoking the ObjectURL
+        //     window.URL.revokeObjectURL(data)
+        // }, 100)
+
         _this5.isLoading = false;
 
         _this5.$buefy.toast.open({
@@ -1224,9 +1255,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { class: _vm.bodyBackground }, [
-    _c("section", { staticClass: "section hero has-background-dark" }, [
-      _c("div", { staticClass: "hero-body is-paddingless" }, [
+  return _c("div", {}, [
+    _c(
+      "section",
+      {
+        staticClass: "section has-background-dark",
+        staticStyle: { "padding-top": "5px", "padding-bottom": "32px" }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "has-text-centered has-text-weight-bold is-size-5 has-text-grey-light",
+            staticStyle: { "margin-bottom": "5px" }
+          },
+          [_vm._v("FILTROS")]
+        ),
+        _vm._v(" "),
         _c("div", {}, [
           _c("div", { staticClass: "columns" }, [
             _c("div", { staticClass: "column is-2" }, [
@@ -1234,7 +1280,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "title is-size-6 has-text-weight-bold has-text-centered has-text-white"
+                    "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
                 },
                 [_vm._v("CRMs")]
               ),
@@ -1269,7 +1315,8 @@ var render = function() {
                             _c(
                               "div",
                               {
-                                staticClass: "is-size-7 has-text-weight-normal"
+                                staticClass:
+                                  "is-size-7 has-text-weight-normal has-text-grey-light"
                               },
                               [_vm._v(_vm._s(crm.nombre_crm))]
                             )
@@ -1288,7 +1335,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "title is-size-6 has-text-weight-bold has-text-centered has-text-white"
+                    "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
                 },
                 [_vm._v("Zonas")]
               ),
@@ -1349,7 +1396,7 @@ var render = function() {
                                     "div",
                                     {
                                       staticClass:
-                                        "is-size-7 has-text-weight-normal"
+                                        "is-size-7 has-text-weight-normal has-text-grey-light"
                                     },
                                     [_vm._v(_vm._s(zona.nombre_zona))]
                                   )
@@ -1370,7 +1417,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "title is-size-6 has-text-weight-bold has-text-centered has-text-white"
+                    "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
                 },
                 [_vm._v("Importancia")]
               ),
@@ -1392,7 +1439,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("CORE")]
                         )
                       ])
@@ -1416,7 +1466,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("CRITICO")]
                         )
                       ])
@@ -1440,7 +1493,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("VIP")]
                         )
                       ])
@@ -1455,7 +1511,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "title is-size-6 has-text-weight-bold has-text-centered has-text-white"
+                    "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
                 },
                 [_vm._v("Características")]
               ),
@@ -1477,7 +1533,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("PE 3G")]
                         )
                       ])
@@ -1501,7 +1560,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("MPLS")]
                         )
                       ])
@@ -1525,7 +1587,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("OLT")]
                         )
                       ])
@@ -1549,7 +1614,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("OLT 3Play")]
                         )
                       ])
@@ -1574,7 +1642,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Red Mínima N1")]
                         )
                       ])
@@ -1599,7 +1670,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Red Mínima N2")]
                         )
                       ])
@@ -1623,7 +1697,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Localidad Obligatoria")]
                         )
                       ])
@@ -1647,7 +1724,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("RANCO")]
                         )
                       ])
@@ -1671,7 +1751,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("BAFI")]
                         )
                       ])
@@ -1695,7 +1778,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Offgrid")]
                         )
                       ])
@@ -1719,7 +1805,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Solar")]
                         )
                       ])
@@ -1743,7 +1832,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Eólica")]
                         )
                       ])
@@ -1767,7 +1859,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Zona protegida")]
                         )
                       ])
@@ -1791,7 +1886,10 @@ var render = function() {
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Proyecto Alba")]
                         )
                       ])
@@ -1806,7 +1904,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "title is-size-6 has-text-weight-bold has-text-centered has-text-white"
+                    "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
                 },
                 [_vm._v("Equipamiento")]
               ),
@@ -1817,19 +1915,17 @@ var render = function() {
                     "a",
                     {
                       staticClass: "tile is-child button",
-                      class: _vm.client_connection ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" },
-                      on: {
-                        click: function($event) {
-                          _vm.client_connection = +!_vm.client_connection
-                        }
-                      }
+                      class: _vm.junction ? "is-link" : "is-black-ter",
+                      attrs: { disabled: "" }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Empalme")]
                         )
                       ])
@@ -1843,18 +1939,16 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.generator_set ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" },
-                      on: {
-                        click: function($event) {
-                          _vm.generator_set = +!_vm.generator_set
-                        }
-                      }
+                      attrs: { disabled: "" }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Grupo Electrógeno")]
                         )
                       ])
@@ -1868,18 +1962,16 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.power_rectifier ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" },
-                      on: {
-                        click: function($event) {
-                          _vm.power_rectifier = +!_vm.power_rectifier
-                        }
-                      }
+                      attrs: { disabled: "" }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Planta Rectificadora")]
                         )
                       ])
@@ -1893,18 +1985,16 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.air_conditioner ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" },
-                      on: {
-                        click: function($event) {
-                          _vm.air_conditioner = +!_vm.air_conditioner
-                        }
-                      }
+                      attrs: { disabled: "" }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Aire Acondicionado")]
                         )
                       ])
@@ -1920,18 +2010,16 @@ var render = function() {
                       class: _vm.vertical_structure
                         ? "is-link"
                         : "is-black-ter",
-                      attrs: { disabled: "" },
-                      on: {
-                        click: function($event) {
-                          _vm.vertical_structure = +!_vm.vertical_structure
-                        }
-                      }
+                      attrs: { disabled: "" }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Estructura Vertical")]
                         )
                       ])
@@ -1945,18 +2033,16 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.infrastructure ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" },
-                      on: {
-                        click: function($event) {
-                          _vm.infrastructure = +!_vm.infrastructure
-                        }
-                      }
+                      attrs: { disabled: "" }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
                         _c(
                           "div",
-                          { staticClass: "is-size-7 has-text-weight-normal" },
+                          {
+                            staticClass:
+                              "is-size-7 has-text-weight-normal has-text-grey-light"
+                          },
                           [_vm._v("Contenedor")]
                         )
                       ])
@@ -1967,430 +2053,439 @@ var render = function() {
             ])
           ])
         ])
-      ])
-    ]),
+      ]
+    ),
     _vm._v(" "),
-    _c("section", { staticClass: "section tile is-ancestor" }, [
-      _c("div", { staticClass: "tile is-7 is-parent" }, [
-        _c(
-          "div",
-          {
-            staticClass: "tile is-child box",
-            staticStyle: { "max-height": "100%", "min-height": "800px" }
-          },
-          [
-            _c("div", { staticClass: "field" }, [
-              _c("div", { staticClass: "columns" }, [
-                _c("div", { staticClass: "column has-text-centered" }, [
-                  _c("div", {}, [
-                    _c(
-                      "span",
-                      { staticClass: "is-size-4 has-text-weight-normal" },
-                      [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(_vm._f("numeral")(_vm.pops.total, "0,0")) +
-                            "\n                                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "is-size-6" }, [_vm._v("POPs")])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "p",
-                { staticClass: "control has-icons-left has-icons-right" },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.searchText,
-                        expression: "searchText"
-                      }
-                    ],
-                    staticClass: "input is-rounded",
-                    class: _vm.bodyBackground + " " + _vm.primaryText,
-                    attrs: {
-                      type: "text",
-                      "arial-label": "Buscar",
-                      placeholder: "Buscar...",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.searchText },
-                    on: {
-                      keyup: _vm.getPops,
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.searchText = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    { staticClass: "icon is-small is-left" },
-                    [_c("font-awesome-icon", { attrs: { icon: "search" } })],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "icon is-small is-right" }, [
-                    _c("button", {
-                      staticClass: "delete",
-                      on: { click: _vm.clearSearch }
-                    })
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "table",
-              { staticClass: "table is-fullwidth", class: _vm.boxBackground },
-              [
-                _c("thead", [
-                  _c("tr", [
-                    _c(
-                      "th",
-                      {
-                        staticClass: "is-size-7 has-text-weight-semibold",
-                        class: _vm.secondaryText
-                      },
-                      [_c("abbr", { attrs: { title: "Id" } }, [_vm._v("Id")])]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "th",
-                      {
-                        staticClass: "is-size-7 has-text-weight-semibold",
-                        class: _vm.secondaryText
-                      },
-                      [
-                        _c("abbr", { attrs: { title: "Pop" } }, [
-                          _vm._v("Nombre POP")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "th",
-                      {
-                        staticClass:
-                          "is-size-7 has-text-weight-semibold has-text-centered",
-                        class: _vm.secondaryText
-                      },
-                      [
-                        _c("abbr", { attrs: { title: "Sitios" } }, [
-                          _vm._v("Sitios")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "th",
-                      {
-                        staticClass:
-                          "is-size-7 has-text-weight-semibold has-text-centered",
-                        class: _vm.secondaryText
-                      },
-                      [
-                        _c("abbr", { attrs: { title: "Categoría" } }, [
-                          _vm._v("Categoría")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("th", {
-                      staticClass:
-                        "is-size-7 has-text-weight-semibold has-text-centered"
-                    })
+    _c(
+      "section",
+      { staticClass: "section tile is-ancestor has-background-light" },
+      [
+        _c("div", { staticClass: "tile is-7 is-parent" }, [
+          _c(
+            "div",
+            {
+              staticClass: "tile is-child box",
+              staticStyle: { "max-height": "100%", "min-height": "800px" }
+            },
+            [
+              _c("div", { staticClass: "field" }, [
+                _c("div", { staticClass: "columns" }, [
+                  _c("div", { staticClass: "column" }, [
+                    _c("div", { staticClass: "has-text-centered" }, [
+                      _c(
+                        "span",
+                        { staticClass: "is-size-4 has-text-weight-semibold" },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm._f("numeral")(_vm.pops.total, "0,0")) +
+                              "\n                                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "is-size-6" }, [_vm._v("POPs")])
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
                 _c(
-                  "tbody",
-                  _vm._l(_vm.pops.data, function(pop) {
-                    return _c("tr", {}, [
-                      _c(
-                        "td",
+                  "p",
+                  { staticClass: "control has-icons-left has-icons-right" },
+                  [
+                    _c("input", {
+                      directives: [
                         {
-                          staticClass: "has-text-weight-light",
-                          class: _vm.primaryText
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.searchText,
+                          expression: "searchText"
+                        }
+                      ],
+                      staticClass: "input is-rounded",
+                      class: _vm.bodyBackground + " " + _vm.primaryText,
+                      attrs: {
+                        type: "text",
+                        "arial-label": "Buscar",
+                        placeholder: "Buscar...",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.searchText },
+                      on: {
+                        keyup: _vm.getPops,
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.searchText = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      { staticClass: "icon is-small is-left" },
+                      [_c("font-awesome-icon", { attrs: { icon: "search" } })],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "icon is-small is-right" }, [
+                      _c("button", {
+                        staticClass: "delete",
+                        on: { click: _vm.clearSearch }
+                      })
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "table",
+                { staticClass: "table is-fullwidth", class: _vm.boxBackground },
+                [
+                  _c("thead", [
+                    _c("tr", [
+                      _c(
+                        "th",
+                        {
+                          staticClass: "is-size-7 has-text-weight-semibold",
+                          class: _vm.secondaryText
                         },
-                        [
-                          _c("b-checkbox", {
-                            attrs: { size: "is-medium", "native-value": pop },
-                            model: {
-                              value: _vm.selectedPops,
-                              callback: function($$v) {
-                                _vm.selectedPops = $$v
-                              },
-                              expression: "selectedPops"
-                            }
-                          })
-                        ],
-                        1
+                        [_c("abbr", { attrs: { title: "Id" } }, [_vm._v("Id")])]
                       ),
                       _vm._v(" "),
-                      _c("td", {}, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "is-size-6 has-text-weight-normal",
-                            class: _vm.primaryText,
-                            attrs: { href: "/pop/" + pop.id, target: "_blank" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(pop ? pop.nombre : "") +
-                                "\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "is-size-7 has-text-weight-normal",
-                            class: _vm.secondaryText
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(pop ? pop.direccion : "") +
-                                ", " +
-                                _vm._s(
-                                  pop.comuna ? pop.comuna.nombre_comuna : ""
-                                ) +
-                                "\n                                "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", {}, [
-                        _c(
-                          "div",
-                          { staticClass: "columns is-multiline" },
-                          _vm._l(pop.sites, function(site) {
-                            return _c(
-                              "div",
-                              { staticClass: "column is-6 has-text-centered" },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "is-size-7 has-text-weight-normal has-text-centered"
-                                  },
-                                  [_vm._v(_vm._s(site.nem_site))]
-                                )
-                              ]
-                            )
-                          }),
-                          0
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", {}, [
-                        _c("div", { staticClass: "has-text-centered" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "tag has-text-weight-bold is-size-7"
-                            },
-                            [
-                              _vm._v(
-                                "\n                                        " +
-                                  _vm._s(
-                                    pop
-                                      ? _vm.popClassification(pop)
-                                          .classification
-                                      : ""
-                                  ) +
-                                  "\n                                    "
-                              )
-                            ]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
                       _c(
-                        "td",
+                        "th",
                         {
-                          staticClass:
-                            "has-text-weight-light has-text-centered",
-                          class: _vm.primaryText
+                          staticClass: "is-size-7 has-text-weight-semibold",
+                          class: _vm.secondaryText
                         },
                         [
+                          _c("abbr", { attrs: { title: "Pop" } }, [
+                            _vm._v("Nombre POP")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "th",
+                        {
+                          staticClass:
+                            "is-size-7 has-text-weight-semibold has-text-centered",
+                          class: _vm.secondaryText
+                        },
+                        [
+                          _c("abbr", { attrs: { title: "Sitios" } }, [
+                            _vm._v("Sitios")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "th",
+                        {
+                          staticClass:
+                            "is-size-7 has-text-weight-semibold has-text-centered",
+                          class: _vm.secondaryText
+                        },
+                        [
+                          _c("abbr", { attrs: { title: "Categoría" } }, [
+                            _vm._v("Categoría")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("th", {
+                        staticClass:
+                          "is-size-7 has-text-weight-semibold has-text-centered"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.pops.data, function(pop) {
+                      return _c("tr", {}, [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "has-text-weight-light",
+                            class: _vm.primaryText
+                          },
+                          [
+                            _c("b-checkbox", {
+                              attrs: { size: "is-medium", "native-value": pop },
+                              model: {
+                                value: _vm.selectedPops,
+                                callback: function($$v) {
+                                  _vm.selectedPops = $$v
+                                },
+                                expression: "selectedPops"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("td", {}, [
                           _c(
                             "a",
                             {
-                              staticClass:
-                                "button is-small is-link is-outlined has-tooltip-left",
+                              staticClass: "is-size-6 has-text-weight-normal",
                               attrs: {
                                 href: "/pop/" + pop.id,
-                                type: "button",
-                                target: "_blank",
-                                "data-tooltip": "Ver información completa"
+                                target: "_blank"
                               }
                             },
                             [
-                              _c("font-awesome-icon", {
-                                attrs: { icon: "info" }
-                              })
-                            ],
-                            1
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(pop ? pop.nombre : "") +
+                                  "\n                                "
+                              )
+                            ]
                           ),
                           _vm._v(" "),
                           _c(
-                            "button",
+                            "div",
                             {
-                              staticClass: "button is-small is-default",
-                              attrs: { "data-tooltip": "Ver en mapa" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.selectPop(pop)
-                                }
-                              },
-                              model: {
-                                value: _vm.selectedPop,
-                                callback: function($$v) {
-                                  _vm.selectedPop = $$v
-                                },
-                                expression: "selectedPop"
-                              }
+                              staticClass: "is-size-7 has-text-weight-normal",
+                              class: _vm.secondaryText
                             },
                             [
-                              _c("font-awesome-icon", {
-                                attrs: { icon: "map-marked-alt" }
-                              })
-                            ],
-                            1
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(pop ? pop.direccion : "") +
+                                  ", " +
+                                  _vm._s(
+                                    pop.comuna ? pop.comuna.nombre_comuna : ""
+                                  ) +
+                                  "\n                                "
+                              )
+                            ]
                           )
-                        ]
-                      )
-                    ])
-                  }),
-                  0
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "field" }, [
-              _c(
-                "nav",
-                {
-                  staticClass: "pagination",
-                  attrs: { role: "navigation", "aria-label": "pagination" }
-                },
-                [
-                  _c("vue-pagination", {
-                    attrs: {
-                      pagination: _vm.pops,
-                      offset: 4,
-                      primaryText: _vm.primaryText
-                    },
-                    on: {
-                      paginate: function($event) {
-                        return _vm.getPops()
-                      }
-                    }
-                  })
-                ],
-                1
+                        ]),
+                        _vm._v(" "),
+                        _c("td", {}, [
+                          _c(
+                            "div",
+                            { staticClass: "columns is-multiline" },
+                            _vm._l(pop.sites, function(site) {
+                              return _c(
+                                "div",
+                                {
+                                  staticClass: "column is-6 has-text-centered"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-normal has-text-centered"
+                                    },
+                                    [_vm._v(_vm._s(site.nem_site))]
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", {}, [
+                          _c("div", { staticClass: "has-text-centered" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "tag has-text-weight-bold is-size-7"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(
+                                      pop
+                                        ? _vm.popClassification(pop)
+                                            .classification
+                                        : ""
+                                    ) +
+                                    "\n                                    "
+                                )
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass:
+                              "has-text-weight-light has-text-centered",
+                            class: _vm.primaryText
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "button is-small is-link is-outlined has-tooltip-left",
+                                attrs: {
+                                  href: "/pop/" + pop.id,
+                                  type: "button",
+                                  target: "_blank",
+                                  "data-tooltip": "Ver información completa"
+                                }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  attrs: { icon: "info" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "button is-small is-default",
+                                attrs: { "data-tooltip": "Ver en mapa" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.selectPop(pop)
+                                  }
+                                },
+                                model: {
+                                  value: _vm.selectedPop,
+                                  callback: function($$v) {
+                                    _vm.selectedPop = $$v
+                                  },
+                                  expression: "selectedPop"
+                                }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  attrs: { icon: "map-marked-alt" }
+                                })
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "has-text-right" },
-                [
-                  _c(
-                    "b-button",
-                    {
-                      staticStyle: { position: "relative" },
+              _c("div", { staticClass: "field" }, [
+                _c(
+                  "nav",
+                  {
+                    staticClass: "pagination",
+                    attrs: { role: "navigation", "aria-label": "pagination" }
+                  },
+                  [
+                    _c("vue-pagination", {
                       attrs: {
-                        type: "is-link",
-                        "icon-left": "download",
-                        "icon-pack": "fas",
-                        size: "is-medium",
-                        loading: _vm.isLoading
+                        pagination: _vm.pops,
+                        offset: 4,
+                        primaryText: _vm.primaryText
                       },
-                      on: { click: _vm.downloadPops }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "is-size-6 has-text-weight-normal" },
-                        [_vm._v("Descargar POPs")]
-                      )
-                    ]
-                  )
-                ],
-                1
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "tile is-parent is-vertical" }, [
-        _c("div", { staticClass: "tile box is-child is-12" }, [
-          _c("div", { staticClass: "snippet" }, [
-            _c("span", { staticClass: "has-text-weight-normal is-size-7" }, [
-              _c("strong", [_vm._v(_vm._s(_vm.selectedPops.length))]),
-              _vm._v(" pops selected")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "field is-grouped is-grouped-multiline" },
-              _vm._l(_vm.selectedPops, function(pop) {
-                return _c("div", { staticClass: "control" }, [
-                  _c("div", { staticClass: "tags has-addons" }, [
-                    _c("a", { staticClass: "tag is-link" }, [
-                      _vm._v(_vm._s(pop.nombre))
-                    ]),
-                    _vm._v(" "),
-                    _c("a", {
-                      staticClass: "tag is-delete",
                       on: {
-                        click: function($event) {
-                          return _vm.removeSelectedPop(pop)
+                        paginate: function($event) {
+                          return _vm.getPops()
                         }
                       }
                     })
-                  ])
-                ])
-              }),
-              0
-            )
-          ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "has-text-right" },
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        staticStyle: { position: "relative" },
+                        attrs: {
+                          type: "is-link",
+                          "icon-left": "download",
+                          "icon-pack": "fas",
+                          size: "is-medium",
+                          loading: _vm.isLoading
+                        },
+                        on: { click: _vm.downloadPops }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "is-size-6 has-text-weight-normal" },
+                          [_vm._v("Descargar POPs")]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]
+          )
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tile box is-child" },
-          [
-            _c("map-view", {
-              attrs: {
-                pops: _vm.popsMap,
-                map_attributes: _vm.map_attributes,
-                darkMode: _vm.darkMode
-              }
-            })
-          ],
-          1
-        )
-      ])
-    ])
+        _c("div", { staticClass: "tile is-parent is-vertical" }, [
+          _c("div", { staticClass: "tile box is-child is-12" }, [
+            _c("div", { staticClass: "snippet" }, [
+              _c("span", { staticClass: "has-text-weight-normal is-size-7" }, [
+                _c("strong", [_vm._v(_vm._s(_vm.selectedPops.length))]),
+                _vm._v(" pops selected")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "field is-grouped is-grouped-multiline" },
+                _vm._l(_vm.selectedPops, function(pop) {
+                  return _c("div", { staticClass: "control" }, [
+                    _c("div", { staticClass: "tags has-addons" }, [
+                      _c("a", { staticClass: "tag is-link" }, [
+                        _vm._v(_vm._s(pop.nombre))
+                      ]),
+                      _vm._v(" "),
+                      _c("a", {
+                        staticClass: "tag is-delete",
+                        on: {
+                          click: function($event) {
+                            return _vm.removeSelectedPop(pop)
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tile box is-child" },
+            [
+              _c("map-view", {
+                attrs: {
+                  pops: _vm.popsMap,
+                  map_attributes: _vm.map_attributes,
+                  darkMode: _vm.darkMode
+                }
+              })
+            ],
+            1
+          )
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []

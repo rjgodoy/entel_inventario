@@ -30,30 +30,26 @@
         </section> -->
 
         <section class="section has-background-white">
+            <div class="field">
+                <div class="has-text-weight-semibold has-text-dark is-size-4 has-text-left">Documentos</div>
+            </div>
             <div class="columns">
                 <div class="column is-2">
                     <b-menu>
                         <b-menu-list label="Sitios">
                             <!-- <b-menu-item icon="information-outline" label="Info"></b-menu-item> -->
                             <b-menu-item
-                                v-for="site in sitesFolders"
-                                v-bind:key="site.id"
-                                icon="settings"
+                                v-for="site in pop.sites"
+                                :key="site.id"
                                 :active="isActive"
                                 :expanded="isActive"
                                 @click="getDirectories(site.id)">
                                 <template slot="label" slot-scope="props">
-                                    <b-icon 
-                                        pack="fas" 
-                                        icon="folder-open" 
-                                        class="fa-2x has-text-smart">
-                                    </b-icon>
+                                    <font-awesome-icon 
+                                        :icon="['fas', props.expanded ? 'folder-open' : 'folder']"
+                                        size="2x"
+                                        class="has-text-smart"/>
                                     <span class="">{{ site.nem_site }}</span>
-                                    <!-- <b-icon
-                                        class="is-pulled-right has-text-black"
-                                        :icon="props.expanded ? 'folder-open' : 'folder'"
-                                        type="fas">
-                                    </b-icon> -->
                                 </template>
 
                                 <b-menu-item 
@@ -62,29 +58,34 @@
                                     icon="account" 
                                     @click="getFolders(site.id, folder.basename)">
                                     <template slot="label" slot-scope="props">
-                                        {{ folder.basename }}
-                                        <b-icon
-                                            class="is-pulled-right"
-                                            :icon="props.expanded ? 'folder-open' : 'folder'"
-                                            type="fas">
-                                        </b-icon>
+                                        <font-awesome-icon 
+                                        :icon="['fas', props.expanded ? 'folder-open' : 'folder']"
+                                        size="2x"
+                                        class="has-text-smart"/>
+                                        <span class="">{{ folder.basename }}</span>
                                     </template>
 
                                     <b-menu-item 
                                         v-for="folder2 in folders2"
                                         v-bind:key="folder2.id"
                                         icon="account" 
-                                        :label="folder2.basename"
                                         @click="getFiles(site.id, folder.basename, folder2.basename)">
+                                        <template slot="label" slot-scope="props">
+                                            <font-awesome-icon 
+                                            :icon="['fas', props.expanded ? 'folder-open' : 'folder']"
+                                            size="2x"
+                                            class="has-text-smart"/>
+                                            <span class="">{{ folder2.basename }}</span>
+                                        </template>
                                     </b-menu-item>
                                 </b-menu-item>
 
                             </b-menu-item>
                         </b-menu-list>
 
-                        <b-menu-list label="Actions">
+                        <!-- <b-menu-list label="Actions">
                             <b-menu-item label="Subir archivo"></b-menu-item>
-                        </b-menu-list>
+                        </b-menu-list> -->
                     </b-menu>
 
                 </div>
@@ -92,12 +93,10 @@
                     <div class="columns is-multiline">
                         <div class="column is-2" v-for="file in files">
                             <a class="box" target="_blank" @click="readFile(file)">
-                                <b-icon 
-                                    pack="fas"
-                                    :icon="faFile(file.extension).icon"
-                                    size="is-medium"
-                                    :type="faFile(file.extension).type">
-                                </b-icon>
+                                <font-awesome-icon 
+                                    :icon="['fas', faFile(file.extension).icon]"
+                                    :class="faFile(file.extension).type"
+                                    size="2x"/>
                                 <div class="is-size-7">{{ file.basename }}</div>
                             </a>
                         </div>
@@ -125,7 +124,6 @@
             return {                
                 isActive: false,
 
-                sitesFolders: this.pop.sites,
                 folders: null,
                 folders2: null,
                 files: null,
@@ -148,7 +146,8 @@
         // },
         methods: {
             getDirectories(site_id) {
-                axios.get(`/api/directories/${site_id}`).then((response) => {
+                axios.get(`/api/directories/${site_id}`)
+                .then((response) => {
                     console.log(response)
                     this.folders = response.data.data
                 })
@@ -175,9 +174,9 @@
                             (ext == 'xls' || ext == 'xlsx' ? 'file-excel' : 'file')
                         )
 
-                var type = ext == 'pdf' ? 'is-info' : 
-                        (ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'is-warning' : 
-                            (ext == 'xls' || ext == 'xlsx' ? 'is-success' : 'is-primary')
+                var type = ext == 'pdf' ? 'has-text-info' : 
+                        (ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'has-text-warning' : 
+                            (ext == 'xls' || ext == 'xlsx' ? 'has-text-success' : 'has-text-primary')
                         )
                 return {
                     'icon': icon,
@@ -206,23 +205,32 @@
                     'basename': file.basename,
                     'extension': file.extension,
                 }
-                axios.get('/api/documents/' + this.pop.id, { params: params, responseType: 'arraybuffer' })
-                // .then(response => {
-                //     this.downloadFile(response, file.basename, file.extension)
-                // }, response => {
-                //     console.warn('error from download_contract')
-                //     console.log(response)
-                //     // Manage errors
-                // })
+                axios.get(`/api/documents/${this.pop.id}`, { 
+                    params: params, 
+                    responseType: 'arraybuffer' 
+                })
                 .then((response) => {
                     console.log(response.data)
                     const blob = new Blob([response.data], { type: 'application/' + file.extension })
                     // const objectUrl = window.URL.createObjectURL(blob)
 
+                    // IE doesn't allow using a blob object directly as link href
+                    // instead it is necessary to use msSaveOrOpenBlob
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(newBlob)
+                        return
+                    }
+
+                    const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
-                    link.href = window.URL.createObjectURL(blob)
+                    link.href = data
                     link.download = file.basename
                     link.click()
+                    // setTimeout(function () {
+                    //     // For Firefox it is necessary to delay revoking the ObjectURL
+                    //     window.URL.revokeObjectURL(data)
+                    // }, 100)
+
                     this.isLoading = false
                     this.$buefy.toast.open({
                         message: 'El archivo se ha descargado exitosamente.',
@@ -238,31 +246,6 @@
                         duration: 5000
                     })
                 })
-            },
-
-            downloadFile(response, filename, type) {
-                // It is necessary to create a new blob object with mime-type explicitly set
-                // otherwise only Chrome works like it should
-                var newBlob = new Blob([response.body], {type: 'application/' + type})
-
-                // IE doesn't allow using a blob object directly as link href
-                // instead it is necessary to use msSaveOrOpenBlob
-                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                    window.navigator.msSaveOrOpenBlob(newBlob)
-                    return
-                }
-
-                // For other browsers:
-                // Create a link pointing to the ObjectURL containing the blob.
-                const data = window.URL.createObjectURL(newBlob)
-                var link = document.createElement('a')
-                link.href = data
-                link.download = filename
-                link.click()
-                setTimeout(function () {
-                    // For Firefox it is necessary to delay revoking the ObjectURL
-                    window.URL.revokeObjectURL(data)
-                }, 100)
             },
         }
     }

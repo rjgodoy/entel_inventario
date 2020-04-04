@@ -24,7 +24,7 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
-        $directories = Storage::disk('ftp')->directories('/');
+        $directories = Storage::disk($this->originType)->directories($this->originPath);
 
         $folders = [];
         foreach ($directories as $directory) {
@@ -55,7 +55,7 @@ class DocumentController extends Controller
         $headers = [
             'Content-Type' => 'application/'.$request->extension,
         ];
-        return Storage::download($request->dirname.'/'.$request->basename, $request->basename, $headers);
+        return Storage::disk($this->originType)->download($request->dirname.'/'.$request->basename, $request->basename, $headers);
     }
 
     /**
@@ -89,13 +89,12 @@ class DocumentController extends Controller
      */
     public function directories($id)
     {
-        $site = Site::where('id', $id)->first();
+        $site = Site::find($id);
         $siteFolder = $this->originPath.'/'.$site->nem_site;
 
         $directories = [];
 
         $dirs = Storage::disk($this->originType)->directories($siteFolder);
-
         if($dirs) {
             foreach ($dirs as $dir) {
                 $siteDir = explode('/', $dir)[1];
@@ -119,7 +118,7 @@ class DocumentController extends Controller
      */
     public function folders($id, $path)
     {
-        $site = Site::where('id', $id)->first();
+        $site = Site::find($id);
 
         $folder = $this->originPath.'/'.$site->nem_site.'/'.$path;
         $foldersSite = Storage::disk($this->originType)->directories($folder);
@@ -150,7 +149,7 @@ class DocumentController extends Controller
      */
     public function files($id, $path, $path2)
     {
-        $site = Site::where('id', $id)->first();
+        $site = Site::find($id);
 
         $folder = $this->originPath.'/'.$site->nem_site.'/'.$path.'/'.$path2;
 

@@ -21,6 +21,11 @@ class ElectricLine extends Model
         return $this->belongsTo(PhaseType::class);
     }
 
+    public function junctions()
+    {
+        return $this->hasMany(Junction::class);
+    }
+
     public function transformers()
     {
         return $this->hasMany(Transformer::class);

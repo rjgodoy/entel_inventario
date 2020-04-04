@@ -169,7 +169,10 @@ class PowerRectifierController extends Controller
      */
     public function show($id)
     {
-        $powerRectifier = PowerRectifier::with('power_rectifier_type', 'power_rectifier_modules', 'room.site')->where('pop_id', $id)->get();
+        $powerRectifier = PowerRectifier::with('power_rectifier_type', 'power_rectifier_modules')
+        ->where('pop_id', $id)
+        ->get();
+
         return new PowerRectifierResource($powerRectifier);
     }
 

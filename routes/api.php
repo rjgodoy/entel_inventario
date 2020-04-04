@@ -35,6 +35,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // 	});
 // });
     	Route::apiResource('users','UserController');
+    	Route::get('roles','Api\MainController@roles');
 
 
 		Route::get('menu', 'Api\MainController@menu');
@@ -147,7 +148,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 				Route::apiResource('transformers','Api\Infraestructura\TransformerController');
 
 			// Clients Connection
-				Route::apiResource('clientConnections','Api\ClientConnectionController');
+				Route::apiResource('junctions','Api\JunctionController');
 
 			// Generator Sets
 				Route::apiResource('generatorSets','Api\Infraestructura\GeneratorSetController');
@@ -264,6 +265,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 		### GESTION AMBIENTAL ######################################################################
 			Route::apiResource('eco','Api\EcoController');
+			Route::get('rcas','Api\EcoController@rcas');
+			Route::post('rcas','Api\EcoController@upload');
 		##############################################################################################
 
 
@@ -306,8 +309,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 			Route::apiResource('psgTp','Api\PsgTpController');
 
 
-			Route::apiResource('client_connection','Api\ClientConnectionController');
-			Route::post('client_connection/efizity','Api\ClientConnectionController@syncEfizity');
+			Route::apiResource('junction','Api\JunctionController');
+			Route::post('junction/efizity','Api\JunctionController@syncEfizity');
 		##############################################################################################
 
 // 	});

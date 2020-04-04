@@ -3,9 +3,8 @@
         
         <section class="section is-marginless" :class="bodyBackground">
             
-
             <!-- SWITCH CORE & CRM BUTTONS-->
-            <div class="container" style="margin: -20px auto 20px auto;">
+            <div class="container" style="margin-top: -32px; margin-bottom: 20px">
                 <b-field>
                     <div class="columns">
                         <div class="column">
@@ -38,7 +37,7 @@
                                 </div>
 
                                 <div style="margin-top: 10px;">
-                                    <div class="is-size-7 has-text-weight-light" v-text="crm.id == 3 ? 'Coordinador Metropolitano' : 'Subgerente'"></div> 
+                                    <div class="is-size-7 has-text-weight-light" v-text="'Subgerente'"></div> 
                                     <div class="is-size-7 has-text-weight-semibold">{{ crm.subgerente_crm }}</div>
                                 </div>
                                 <!-- <div class="is-size-5 has-text-weight-semibold">
@@ -62,7 +61,7 @@
             </div>
 
             <!-- ZONA BUTTONS -->
-            <div v-if="selectedCrm != null" class="" :class="innerBackground" style="margin: 0 -24px 0 -24px">
+            <div v-if="selectedCrm != null" class="" :class="innerBackground + ' ' + bodyBackground" style="margin: 0 -24px 0 -24px">
                 <div class="container" style="margin: -20px auto 10px auto;">
                     <div class="tile is-ancestor">
                         <div class="tile is-parent" v-for="zona in zonas">
@@ -86,90 +85,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- BUSCADOR -->
-            <!-- <div class="container" style="width: 50%; margin-top: 30px;">
-                <p class="control has-icons-left has-icons-right">
-                    <input 
-                        class="input is-rounded is-medium" 
-                        :class="searchBodyBackground + ' ' + primaryText" 
-                        v-model="searchText" 
-                        @keyup="search" 
-                        type="text" 
-                        arial-label="Buscar..." 
-                        placeholder="Buscar..." 
-                        autofocus
-                        v-clickOutside="clickOutside"
-                        @click="setActive"
-                        >
-                    <span class="icon is-small is-left">
-                        <font-awesome-icon icon="search"/>
-                    </span>
-                    <span class="icon is-small is-right">
-                        <button class="delete" @click="clearSearch"></button>
-                    </span>
-                </p>
-                
-                <div class="dropdown" :class="popSearch.length && active == 1 ? 'is-active' : ''" style="width: 100%">
-                    <div class="dropdown-menu" style="width: 100%" id="dropdown-menu" role="menu">
-                        <span v-if="searchText.length >= 3" class="container is-size-7 is-right field" :class="secondaryText" >
-                            <strong style="margin-left: 10px;" :class="primaryText">{{ counter | numeral('0,0')}}</strong> pops encontrados
-                        </span>
-                        <div class="dropdown-content" :class="searchBodyBackground + ' ' + primaryText" style="max-height: 400px; overflow: auto;">
-                            <div v-for="pop in popSearch" class="dropdown-item" :class="pop.alba_project ? '' : ''">
-                                <a :href="'/pop/' + pop.id" target="_blank" class="columns">
-                                    <div class="column is-6">
-                                        <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
-                                            {{ pop.nem_site }}
-                                        </div>
-                                        <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
-                                            {{ pop ? pop.nombre_sitio : '' }}
-                                        </div>
-                                        <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                            {{ pop ? pop.nombre_comuna : '' }}
-                                        </div>
-                                        <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                            {{ pop ? 'Zona ' + pop.nombre_zona : '' }} - {{ pop ? 'CRM ' + pop.nombre_crm : '' }}
-                                        </div>
-                                    </div>
-
-                                    <div class="column is-1">
-                                        <div class="has-text-centered">
-                                            <span v-if="pop.alba_project == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
-                                                {{ pop.alba_project == 1 ? 'alba' : '' }}
-                                            </span>
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="column">
-                                        <div class="tags has-addons is-right">
-                                            <span class="tag is-dark">categoría</span>
-                                            <span 
-                                                class="tag has-text-weight-bold" 
-                                                :class="pop.classification_type_id == 1 ? 'is-danger' : 
-                                                    (pop.classification_type_id == 2 ? 'is-warning' : 
-                                                    (pop.classification_type_id == 3 ? 'is-link' : 'is-info'))"
-                                            >
-                                                {{ pop ? pop.classification_type : '' }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="field">
-                                    <button class="button is-small is-default" @click="selectPop(pop)" v-model="selectedPop">
-                                        <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
-                                    </button>
-                                    <a class="button is-small is-link" :href="'/pop/' + pop.id" target="_blank">
-                                        <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
-                                    </a>
-                                </div>
-                                <hr class="dropdown-divider">
-                            </div>
-                        </div>
-                    </div>
-                </div>       
-            </div> -->
 
             <div class="container" style="width: 50%; margin-top: 30px;">
                 <b-autocomplete
@@ -367,8 +282,8 @@
                                 <div class="tile is-parent">
                                     <div class="tile is-child box">
                                         <div class="is-size-5 has-text-weight-semibold title">Nuevos POP</div>
-                                        <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.pop_news_month }}
-                                            <p class="is-size-6 has-text-weight-light">POP nuevos ingresados esta semana</p>
+                                        <div class="is-size-3 has-text-centered">{{ last_data_counters && last_data_counters.pop_news_month }}
+                                            <p class="is-size-6 has-text-weight-light">POP nuevos ingresados este mes</p>
                                         </div>
                                         <div class="field" style="margin-top: 20px;">
                                             <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
@@ -376,7 +291,8 @@
                                                 {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
                                             </router-link>
                                             <div class="is-size-7">
-                                                {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}
+                                                <p>{{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }}</p>
+                                                <p class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}</p>
                                             </div>
                                         </div>
 
@@ -387,8 +303,8 @@
                                 <div class="tile is-parent">
                                     <div class="tile is-child box">
                                         <div class="is-size-5 has-text-weight-semibold title">Nuevos Sitios</div>
-                                        <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.sites_news_month }}
-                                            <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados esta semana</p>
+                                        <div class="is-size-3 has-text-centered">{{ last_data_counters && last_data_counters.sites_news_month }}
+                                            <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados este mes</p>
                                         </div>
                                         <div class="field" style="margin-top: 20px;">
                                             <div class="is-size-7 has-text-weight-light">Utimo Sitio ingresado:</div>
@@ -396,7 +312,8 @@
                                                 {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
                                             </router-link>
                                             <div class="is-size-7">
-                                                {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}
+                                                <p>{{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }}</p>
+                                                <p class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}</p>
                                             </div>
                                         </div>
 
@@ -414,10 +331,6 @@
                                     :map_attributes="map_attributes"
                                     :darkMode="darkMode"
                                 />   
-                                <!-- <PopsMap 
-                                    style="height: 100%; margin: -14px -14px -14px -14px;"
-                                    :pops="pops"
-                                    :darkMode="darkMode"/> -->
                             </div>                               
                         </div>
 
@@ -526,6 +439,8 @@
             </div>
             
         </section>
+
+        <!-- <iframe width="650" height="450" src="https://embed.windy.com/embed2.html?lat=-33.708&lon=-70.815&zoom=10&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-33.708&detailLon=-70.815&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe> -->
 
         <!-- Equipamiento -->
         <section class="section" :class="bodyBackground">
@@ -668,11 +583,11 @@
             
             // ###### Map ###########
             // PopsMap,
-            MapView: () => import("../maps/MapView.vue"),
+            MapView: () => import('../maps/MapView'),
             // MapView,
 
             // ###### Charts ########
-            PretDataChart: () => import('./PretDataChart.vue'),
+            PretDataChart: () => import('./PretDataChart'),
             // RadialChart,
             // RedCoreChart,
 
@@ -1037,16 +952,32 @@
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0
                 }
 
-                axios.get('/api/pop/export', { params: params, responseType: 'arraybuffer' })
+                axios.get('/api/pop/export', { 
+                    params: params, 
+                    responseType: 'arraybuffer' 
+                })
                 .then((response) => {
                     console.log(response.data)
                     const blob = new Blob([response.data], { type: 'application/xlsx' })
                     // const objectUrl = window.URL.createObjectURL(blob)
 
+                    // IE doesn't allow using a blob object directly as link href
+                    // instead it is necessary to use msSaveOrOpenBlob
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(newBlob)
+                        return
+                    }
+
+                    const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
-                    link.href = window.URL.createObjectURL(blob)
+                    link.href = data
                     link.download = 'listado_pops.xlsx'
                     link.click()
+                    // setTimeout(function () {
+                    //     // For Firefox it is necessary to delay revoking the ObjectURL
+                    //     window.URL.revokeObjectURL(data)
+                    // }, 100)
+                    
                     this.isLoading = false
                     this.$buefy.toast.open({
                         message: 'La planilla se ha descargado exitosamente.',

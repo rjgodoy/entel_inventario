@@ -157,10 +157,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -180,12 +180,14 @@ __webpack_require__.r(__webpack_exports__);
  // import am4themes_entel from "@amcharts/amcharts4/themes/entel.js";
 
 
- // am4core.useTheme(am4themes_entel)
+ // this.darkMode ? 
 
-_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amcharts4_themes_dark_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
+_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amcharts4_themes_dark_js__WEBPACK_IMPORTED_MODULE_2__["default"]); // : 
+// am4core.useTheme(am4themes_entel)
+
 _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amcharts4_themes_animated__WEBPACK_IMPORTED_MODULE_3__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['currentRoom'],
+  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
       chart: null,
@@ -197,7 +199,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
     // this.$eventBus.$on('getSitesData', this.graph)
   },
   watch: {
-    currentRoom: function currentRoom(newValue) {
+    chartData: function chartData(newValue, oldValue) {
       if (this.chart) {
         this.chart.dispose();
       }
@@ -216,72 +218,199 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
     },
     graph: function graph() {
       // Create chart instance
-      var chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarChart"]); // Add data
+      var chartMin = -50;
+      var chartMax = 100;
+      var data = {
+        score: 52.7,
+        gradingData: [{
+          title: "Unsustainable",
+          color: "#ee1f25",
+          lowScore: -100,
+          highScore: -20
+        }, {
+          title: "Volatile",
+          color: "#f04922",
+          lowScore: -20,
+          highScore: 0
+        }, {
+          title: "Foundational",
+          color: "#fdae19",
+          lowScore: 0,
+          highScore: 20
+        }, {
+          title: "Developing",
+          color: "#f3eb0c",
+          lowScore: 20,
+          highScore: 40
+        }, {
+          title: "Maturing",
+          color: "#b0d136",
+          lowScore: 40,
+          highScore: 60
+        }, {
+          title: "Sustainable",
+          color: "#54b947",
+          lowScore: 60,
+          highScore: 80
+        }, {
+          title: "High Performing",
+          color: "#0f9747",
+          lowScore: 80,
+          highScore: 100
+        }]
+      }; // create chart
 
-      chart.data = [{
-        "category": "Power",
-        "value": 80,
-        "full": 100
-      }, {
-        "category": "Space",
-        "value": 35,
-        "full": 100
-      } // {
-      //     "category": "Space",
-      //     "value": 92,
-      //     "full": 100 
-      // }, 
-      // {
-      //     "category": "Human Resources",
-      //     "value": 68,
-      //     "full": 100
-      // }
-      ]; // Make chart not full circle
+      var chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["GaugeChart"]);
+      chart.hiddenState.properties.opacity = 0;
+      chart.fontSize = 11;
+      chart.innerRadius = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      chart.resizable = true;
+      /**
+      * Normal axis
+      */
 
-      chart.startAngle = -90;
-      chart.endAngle = 180;
-      chart.innerRadius = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](20); // Set number format
+      var axis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ValueAxis"]());
+      axis.min = chartMin;
+      axis.max = chartMax;
+      axis.strictMinMax = true;
+      axis.renderer.radius = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
+      axis.renderer.inside = true;
+      axis.renderer.line.strokeOpacity = 0.1;
+      axis.renderer.ticks.template.disabled = false;
+      axis.renderer.ticks.template.strokeOpacity = 1;
+      axis.renderer.ticks.template.strokeWidth = 0.5;
+      axis.renderer.ticks.template.length = 5;
+      axis.renderer.grid.template.disabled = true;
+      axis.renderer.labels.template.radius = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](15);
+      axis.renderer.labels.template.fontSize = "0.9em";
+      /**
+      * Axis for ranges
+      */
 
-      chart.numberFormatter.numberFormat = "#.#'%'"; // Create axes
+      var axis2 = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ValueAxis"]());
+      axis2.min = chartMin;
+      axis2.max = chartMax;
+      axis2.renderer.innerRadius = 10;
+      axis2.strictMinMax = true;
+      axis2.renderer.labels.template.disabled = true;
+      axis2.renderer.ticks.template.disabled = true;
+      axis2.renderer.grid.template.disabled = false;
+      axis2.renderer.grid.template.opacity = 0.5;
+      axis2.renderer.labels.template.bent = true;
+      axis2.renderer.labels.template.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"]("#000");
+      axis2.renderer.labels.template.fontWeight = "bold";
+      axis2.renderer.labels.template.fillOpacity = 0.3;
+      /**
+      Ranges
+      */
 
-      var categoryAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["CategoryAxis"]());
-      categoryAxis.dataFields.category = "category";
-      categoryAxis.renderer.grid.template.location = 0;
-      categoryAxis.renderer.grid.template.strokeOpacity = 0;
-      categoryAxis.renderer.labels.template.horizontalCenter = "right";
-      categoryAxis.renderer.labels.template.fontWeight = 500;
-      categoryAxis.renderer.labels.template.adapter.add("fill", function (fill, target) {
-        return target.dataItem.index >= 0 ? chart.colors.getIndex(target.dataItem.index) : fill;
-      });
-      categoryAxis.renderer.minGridDistance = 10;
-      var valueAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ValueAxis"]());
-      valueAxis.renderer.grid.template.strokeOpacity = 0;
-      valueAxis.min = 0;
-      valueAxis.max = 100;
-      valueAxis.strictMinMax = true; // Create series
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-      var series1 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series1.dataFields.valueX = "full";
-      series1.dataFields.categoryY = "category";
-      series1.clustered = false;
-      series1.columns.template.fill = new _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["InterfaceColorSet"]().getFor("alternativeBackground");
-      series1.columns.template.fillOpacity = 0.08;
-      series1.columns.template.cornerRadiusTopLeft = 20;
-      series1.columns.template.strokeWidth = 0;
-      series1.columns.template.radarColumn.cornerRadius = 20;
-      var series2 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series2.dataFields.valueX = "value";
-      series2.dataFields.categoryY = "category";
-      series2.clustered = false;
-      series2.columns.template.strokeWidth = 0;
-      series2.columns.template.tooltipText = "{category}: [bold]{value}[/]";
-      series2.columns.template.radarColumn.cornerRadius = 20;
-      series2.columns.template.adapter.add("fill", function (fill, target) {
-        return chart.colors.getIndex(target.dataItem.index);
-      }); // Add cursor
+      try {
+        for (var _iterator = data.gradingData[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var grading = _step.value;
+          var range = axis2.axisRanges.create();
+          range.axisFill.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"](grading.color);
+          range.axisFill.fillOpacity = 0.8;
+          range.axisFill.zIndex = -1;
+          range.value = grading.lowScore > chartMin ? grading.lowScore : chartMin;
+          range.endValue = grading.highScore < chartMax ? grading.highScore : chartMax;
+          range.grid.strokeOpacity = 0;
+          range.stroke = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"](grading.color).lighten(-0.1);
+          range.label.inside = true;
+          range.label.text = grading.title.toUpperCase();
+          range.label.inside = true;
+          range.label.location = 0.5;
+          range.label.inside = true;
+          range.label.radius = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](5);
+          range.label.paddingBottom = -5; // ~half font size
 
-      chart.cursor = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarCursor"]();
+          range.label.fontSize = "0.9em";
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      var matchingGrade = this.lookUpGrade(data.score, data.gradingData);
+      /**
+      * Label 1
+      */
+
+      var label = chart.radarContainer.createChild(_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["Label"]);
+      label.isMeasured = false;
+      label.fontSize = "6em";
+      label.x = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](50);
+      label.paddingBottom = 15;
+      label.horizontalCenter = "middle";
+      label.verticalCenter = "bottom"; //label.dataItem = data;
+
+      label.text = data.score.toFixed(1); //label.text = "{score}";
+
+      label.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"](matchingGrade.color);
+      /**
+      * Label 2
+      */
+
+      var label2 = chart.radarContainer.createChild(_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["Label"]);
+      label2.isMeasured = false;
+      label2.fontSize = "2em";
+      label2.horizontalCenter = "middle";
+      label2.verticalCenter = "bottom";
+      label2.text = matchingGrade.title.toUpperCase();
+      label2.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"](matchingGrade.color);
+      /**
+      * Hand
+      */
+
+      var hand = chart.hands.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ClockHand"]());
+      hand.axis = axis2;
+      hand.innerRadius = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](55);
+      hand.startWidth = 8;
+      hand.pin.disabled = true;
+      hand.value = data.score;
+      hand.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"]("#444");
+      hand.stroke = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"]("#000"); // hand.events.on("positionchanged", function() {
+      //     label.text = axis2.positionToValue(hand.currentPosition).toFixed(1);
+      //     let value2 = axis.positionToValue(hand.currentPosition);
+      //     let matchingGrade = this.lookUpGrade(axis.positionToValue(hand.currentPosition), data.gradingData);
+      //     label2.text = matchingGrade.title.toUpperCase();
+      //     label2.fill = am4core.color(matchingGrade.color);
+      //     label2.stroke = am4core.color(matchingGrade.color);  
+      //     label.fill = am4core.color(matchingGrade.color);
+      // })
+      // setInterval(function() {
+      //     let value = chartMin + Math.random() * (chartMax - chartMin);
+      //     hand.showValue(value, 1000, am4core.ease.cubicOut);
+      // }, 2000);
+
       this.chart = chart;
+    },
+
+    /**
+    Grading Lookup
+    */
+    lookUpGrade: function lookUpGrade(lookupScore, grades) {
+      // Only change code below this line
+      for (var i = 0; i < grades.length; i++) {
+        if (grades[i].lowScore < lookupScore && grades[i].highScore >= lookupScore) {
+          return grades[i];
+        }
+      }
+
+      return null;
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -295,10 +424,10 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41& ***!
+  \********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -319,17 +448,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/capacity/CapacityChart.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/capacity/CapacityChart.vue ***!
-  \************************************************************/
+/***/ "./resources/js/components/pops/GrowingChart.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/pops/GrowingChart.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CapacityChart.vue?vue&type=template&id=99c241cc& */ "./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&");
-/* harmony import */ var _CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CapacityChart.vue?vue&type=script&lang=js& */ "./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&");
+/* harmony import */ var _GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GrowingChart.vue?vue&type=template&id=229b3e41& */ "./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41&");
+/* harmony import */ var _GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrowingChart.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -339,9 +468,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -351,38 +480,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/capacity/CapacityChart.vue"
+component.options.__file = "resources/js/components/pops/GrowingChart.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CapacityChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./GrowingChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/GrowingChart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41& ***!
+  \**************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CapacityChart.vue?vue&type=template&id=99c241cc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./GrowingChart.vue?vue&type=template&id=229b3e41& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/GrowingChart.vue?vue&type=template&id=229b3e41&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GrowingChart_vue_vue_type_template_id_229b3e41___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

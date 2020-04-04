@@ -1,246 +1,255 @@
 <template>
-    <div :class="bodyBackground">
-        <section class="section hero has-background-dark">
-            <div class="hero-body is-paddingless">
-                <div class="">
-                    
-                    <div class="columns">
+    <div :class="">
+        <section class="section has-background-dark" style="padding-top: 5px; padding-bottom: 32px">
+            <div class="has-text-centered has-text-weight-bold is-size-5 has-text-grey-light" style="margin-bottom: 5px">FILTROS</div>
+            <div class="">
+                <div class="columns">
 
-                        <!-- Filtros CRM -->
-                        <div class="column is-2">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">CRMs</div>
-                            <div class="columns is-multiline is-gapless">
-                                <div class="column is-6" v-for="crm in crms">
-                                    <a class="is-fullwidth button" :class="selectedCrm == crm ? 'is-link' : 'is-black-ter'" @click="selectCrm(crm)">
-                                        <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
-                                            <!-- <div class="is-size-7 has-text-weight-normal">CRM</div> -->
-                                            <div class="is-size-7 has-text-weight-normal">{{ crm.nombre_crm }}</div>
-                                        </div>
-                                    </a>
-                                </div>
+                    <!-- Filtros CRM -->
+                    <div class="column is-2">
+                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">CRMs</div>
+                        <div class="columns is-multiline is-gapless">
+                            <div class="column is-6" v-for="crm in crms">
+                                <a class="is-fullwidth button" :class="selectedCrm == crm ? 'is-link' : 'is-black-ter'" @click="selectCrm(crm)">
+                                    <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
+                                        <!-- <div class="is-size-7 has-text-weight-normal">CRM</div> -->
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">{{ crm.nombre_crm }}</div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
+                    <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
 
-                        <!-- Filtros ZONAS -->
-                        <div class="column is-2">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Zonas</div>
-                            <div v-if="!selectedCrm">
-                                <div class="has-text-centered has-text-weight-light has-text-grey-light is-size-5">Selecciona un CRM</div>
-                            </div>
-                            <div v-if="selectedCrm" class="columns is-multiline is-gapless">
-                                <div class="column" :class="zonas.length == 2 || zonas.length == 3 ? 'is-12' : 'is-6'" v-for="zona in zonas">
-                                    <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona)">
-                                        <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
-                                            <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
-                                            <div class="is-size-7 has-text-weight-normal">{{ zona.nombre_zona }}</div>
-                                        </div>
-                                    </a>
-                                </div>
+                    <!-- Filtros ZONAS -->
+                    <div class="column is-2">
+                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Zonas</div>
+                        <div v-if="!selectedCrm">
+                            <div class="has-text-centered has-text-weight-light has-text-grey-light is-size-5">Selecciona un CRM</div>
+                        </div>
+                        <div v-if="selectedCrm" class="columns is-multiline is-gapless">
+                            <div class="column" :class="zonas.length == 2 || zonas.length == 3 ? 'is-12' : 'is-6'" v-for="zona in zonas">
+                                <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona)">
+                                    <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
+                                        <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">{{ zona.nombre_zona }}</div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Filtros EXCLUSIVOS -->
-                        <div class="column is-1">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Importancia</div>
-                            <div class="columns is-multiline is-gapless">
-                                <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">CORE</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="critic ? 'is-link' : 'is-black-ter'" @click="critic = +!critic" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">CRITICO</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">VIP</div>
-                                        </div>
-                                    </a>
-                                </div>
+                    <!-- Filtros IMPORTANCIA -->
+                    <div class="column is-1">
+                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Importancia</div>
+                        <div class="columns is-multiline is-gapless">
+                            <div class="column is-12">
+                                <a class="is-fullwidth button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">CORE</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-12">
+                                <a class="is-fullwidth button" :class="critic ? 'is-link' : 'is-black-ter'" @click="critic = +!critic" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">CRITICO</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-12">
+                                <a class="is-fullwidth button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">VIP</div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
+                    <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
 
-                        <!-- Filtros CARACTERISTICAS -->
-                        <div class="column is-4">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Características</div>
-                            <div class="columns is-multiline is-gapless">
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="pe_3g ? 'is-link' : 'is-black-ter'" @click="pe_3g = +!pe_3g" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">PE 3G</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="mpls ? 'is-link' : 'is-black-ter'" @click="mpls = +!mpls" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">MPLS</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">OLT</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="olt_3play ? 'is-link' : 'is-black-ter'" @click="olt_3play = +!olt_3play" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">OLT 3Play</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : 'is-black-ter'" @click="red_minima_n1 = +!red_minima_n1" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Red Mínima N1</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : 'is-black-ter'" @click="red_minima_n2 = +!red_minima_n2" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Red Mínima N2</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="lloo ? 'is-link' : 'is-black-ter'" @click="lloo = +!lloo" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Localidad Obligatoria</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="ranco ? 'is-link' : 'is-black-ter'" @click="ranco = +!ranco" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">RANCO</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="bafi ? 'is-link' : 'is-black-ter'" @click="bafi = +!bafi" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">BAFI</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="offgrid ? 'is-link' : 'is-black-ter'" @click="offgrid = +!offgrid" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Offgrid</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="solar ? 'is-link' : 'is-black-ter'" @click="solar = +!solar" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Solar</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="eolica ? 'is-link' : 'is-black-ter'" @click="eolica = +!eolica" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Eólica</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="protected_zone ? 'is-link' : 'is-black-ter'" @click="protected_zone = +!protected_zone" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Zona protegida</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="alba_project ? 'is-link' : 'is-black-ter'" @click="alba_project = +!alba_project" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Proyecto Alba</div>
-                                        </div>
-                                    </a>
-                                </div>
+                    <!-- Filtros CARACTERISTICAS -->
+                    <div class="column is-4">
+                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Características</div>
+                        <div class="columns is-multiline is-gapless">
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="pe_3g ? 'is-link' : 'is-black-ter'" @click="pe_3g = +!pe_3g" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">PE 3G</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="mpls ? 'is-link' : 'is-black-ter'" @click="mpls = +!mpls" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">MPLS</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">OLT</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="olt_3play ? 'is-link' : 'is-black-ter'" @click="olt_3play = +!olt_3play" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">OLT 3Play</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : 'is-black-ter'" @click="red_minima_n1 = +!red_minima_n1" disabled>
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Red Mínima N1</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : 'is-black-ter'" @click="red_minima_n2 = +!red_minima_n2" disabled>
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Red Mínima N2</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="lloo ? 'is-link' : 'is-black-ter'" @click="lloo = +!lloo" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Localidad Obligatoria</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="ranco ? 'is-link' : 'is-black-ter'" @click="ranco = +!ranco" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">RANCO</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="bafi ? 'is-link' : 'is-black-ter'" @click="bafi = +!bafi" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">BAFI</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="offgrid ? 'is-link' : 'is-black-ter'" @click="offgrid = +!offgrid" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Offgrid</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="solar ? 'is-link' : 'is-black-ter'" @click="solar = +!solar" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Solar</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="eolica ? 'is-link' : 'is-black-ter'" @click="eolica = +!eolica" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Eólica</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="protected_zone ? 'is-link' : 'is-black-ter'" @click="protected_zone = +!protected_zone" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Zona protegida</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-3">
+                                <a class="tile is-child button" :class="alba_project ? 'is-link' : 'is-black-ter'" @click="alba_project = +!alba_project" >
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Proyecto Alba</div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
+                    <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
 
-                        <!-- Filtros EQUIPAMIENTO -->
-                        <div class="column is-3">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-white">Equipamiento</div>
-                            <div class="columns is-multiline is-gapless">
-                                <div class="column is-4">
-                                    <a class="tile is-child button" :class="client_connection ? 'is-link' : 'is-black-ter'" @click="client_connection = +!client_connection" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Empalme</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" :class="generator_set ? 'is-link' : 'is-black-ter'" @click="generator_set = +!generator_set" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Grupo Electrógeno</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" :class="power_rectifier ? 'is-link' : 'is-black-ter'" @click="power_rectifier = +!power_rectifier" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Planta Rectificadora</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" :class="air_conditioner ? 'is-link' : 'is-black-ter'" @click="air_conditioner = +!air_conditioner" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Aire Acondicionado</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" :class="vertical_structure ? 'is-link' : 'is-black-ter'" @click="vertical_structure = +!vertical_structure" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Estructura Vertical</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" :class="infrastructure ? 'is-link' : 'is-black-ter'" @click="infrastructure = +!infrastructure" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal">Contenedor</div>
-                                        </div>
-                                    </a>
-                                </div>
+                    <!-- Filtros EQUIPAMIENTO -->
+                    <div class="column is-3">
+                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Equipamiento</div>
+                        <div class="columns is-multiline is-gapless">
+                            <div class="column is-4">
+                                <a class="tile is-child button" 
+                                    :class="junction ? 'is-link' : 'is-black-ter'" 
+                                    disabled>
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Empalme</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-4">
+                                <a class="tile is-child button" 
+                                    :class="generator_set ? 'is-link' : 'is-black-ter'" 
+                                    disabled>
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Grupo Electrógeno</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-4">
+                                <a class="tile is-child button" 
+                                    :class="power_rectifier ? 'is-link' : 'is-black-ter'" 
+                                    disabled>
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Planta Rectificadora</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-4">
+                                <a class="tile is-child button" 
+                                    :class="air_conditioner ? 'is-link' : 'is-black-ter'" 
+                                    disabled>
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Aire Acondicionado</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-4">
+                                <a class="tile is-child button" 
+                                    :class="vertical_structure ? 'is-link' : 'is-black-ter'" 
+                                    disabled>
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Estructura Vertical</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column is-4">
+                                <a class="tile is-child button" 
+                                    :class="infrastructure ? 'is-link' : 'is-black-ter'" 
+                                    disabled>
+                                    <div :class="secondaryText"> 
+                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Contenedor</div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                    
             </div>
         </section>
 
-        <section class="section tile is-ancestor">            
+        <section class="section tile is-ancestor has-background-light">            
             <div class="tile is-7 is-parent">
                 <div class="tile is-child box" style="max-height: 100%; min-height: 800px;">
 
                     <div class="field">
                         <div class="columns">
-                            <div class="column has-text-centered">
-                                <div class="">
-                                    <span class="is-size-4 has-text-weight-normal">
+                            <div class="column">
+                                <div class="has-text-centered">
+                                    <span class="is-size-4 has-text-weight-semibold">
                                         {{ pops.total | numeral('0,0')}}
                                     </span>
                                     <span class="is-size-6">POPs</span>
@@ -293,7 +302,7 @@
                                     <!-- <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                         {{ pop ? pop.sites[0].nem_site : '' }}
                                     </div> -->
-                                    <a :href="'/pop/' + pop.id" target="_blank" class="is-size-6 has-text-weight-normal" :class="primaryText">
+                                    <a :href="'/pop/' + pop.id" target="_blank" class="is-size-6 has-text-weight-normal">
                                         {{ pop ? pop.nombre : '' }}
                                     </a>
                                     <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
@@ -492,7 +501,7 @@
                 protected_zone: 0,
                 alba_project: 0,
 
-                client_connection: 0,
+                junction: 0,
                 generator_set: 0,
                 power_rectifier: 0,
                 air_conditioner: 0,
@@ -512,6 +521,7 @@
         },
 
         created() {
+            this.styleMode()
             this.getCrms()
             this.getFilterButtons()
         },
@@ -541,7 +551,7 @@
             protected_zone(newValue) { this.getPops(); this.getPopsMap() },
             alba_project(newValue) { this.getPops(); this.getPopsMap() },
 
-            client_connection(newValue) { this.getPops(); this.getPopsMap() },
+            junction(newValue) { this.getPops(); this.getPopsMap() },
             generator_set(newValue) { this.getPops(); this.getPopsMap() },
             power_rectifier(newValue) { this.getPops(); this.getPopsMap() },
             air_conditioner(newValue) { this.getPops(); this.getPopsMap() },
@@ -554,7 +564,13 @@
         },
 
         computed: {
-            
+            selectedIds() {
+                var popIds = []
+                this.selectedPops.forEach(element => {
+                    popIds.push(element.id)
+                })
+                return popIds
+            }
         },
         methods: {
             // BUTTONS
@@ -639,7 +655,7 @@
                     'alba_project': this.alba_project,
                     'protected_zone': this.protected_zone,
 
-                    // 'client_connection': this.client_connection,
+                    // 'junction': this.junction,
                     // 'generator_set': this.generator_set,
                     // 'power_rectifier': this.power_rectifier,
                     // 'air_conditioner': this.air_conditioner,
@@ -680,7 +696,7 @@
                     'alba_project': this.alba_project,
                     'protected_zone': this.protected_zone,
 
-                    'client_connection': this.client_connection,
+                    'junction': this.junction,
                     'generator_set': this.generator_set,
                     'power_rectifier': this.power_rectifier,
                     'air_conditioner': this.air_conditioner,
@@ -704,7 +720,7 @@
                     this.bodyBackground = 'has-background-black-ter'
                     this.boxBackground = 'has-background-dark'
                     this.primaryText = 'has-text-white'
-                    this.secondaryText = 'has-text-grey-light'
+                    this.secondaryText = 'has-text-light'
                     this.searchBodyBackground = 'has-background-dark'
                 } else {
                     // light mode
@@ -764,10 +780,12 @@
                 this.isLoading = true
 
                 var params = {
-                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                    'selectedIds': this.selectedIds,
                     'text': this.searchText != '' ?  this.searchText : 0,
 
+                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                    
                     'core': this.core,
                     'critic': this.critic,
 
@@ -787,7 +805,7 @@
                     'alba_project': this.alba_project,
                     'protected_zone': this.protected_zone,
 
-                    // 'client_connection': this.client_connection,
+                    // 'junction': this.junction,
                     // 'generator_set': this.generator_set,
                     // 'power_rectifier': this.power_rectifier,
                     // 'air_conditioner': this.air_conditioner,
@@ -795,16 +813,32 @@
                     // 'infrastructure': this.infrastructure
                 }
 
-                axios.get('/api/pop/export', { params: params, responseType: 'arraybuffer' })
+                axios.get('/api/pop/export', { 
+                    params: params, 
+                    responseType: 'arraybuffer' 
+                })
                 .then((response) => {
-                    console.log(response.data)
+                    console.log(response)
                     const blob = new Blob([response.data], { type: 'application/xlsx' })
                     // const objectUrl = window.URL.createObjectURL(blob)
 
+                    // IE doesn't allow using a blob object directly as link href
+                    // instead it is necessary to use msSaveOrOpenBlob
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(newBlob)
+                        return
+                    }
+
+                    const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
-                    link.href = window.URL.createObjectURL(blob)
+                    link.href = data
                     link.download = 'listado_pops.xlsx'
                     link.click()
+                    // setTimeout(function () {
+                    //     // For Firefox it is necessary to delay revoking the ObjectURL
+                    //     window.URL.revokeObjectURL(data)
+                    // }, 100)
+
                     this.isLoading = false
                     this.$buefy.toast.open({
                         message: 'La planilla se ha descargado exitosamente.',

@@ -181,7 +181,7 @@ class ComsiteController extends Controller
     public function lastData()
     {
         $last_updated = Comsite::orderBy('updated_at', 'desc')->first()->updated_at;
-        return $last_updated;
+        return new ComsiteResource($last_updated);
     }
 
     /**

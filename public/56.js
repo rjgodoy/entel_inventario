@@ -1,123 +1,385 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[56],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/Power.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/power/Power.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @amcharts/amcharts4/core */ "./node_modules/@amcharts/amcharts4/core.js");
-/* harmony import */ var _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @amcharts/amcharts4/charts */ "./node_modules/@amcharts/amcharts4/charts.js");
 //
 //
 //
 //
 //
 //
-
- // import am4themes_entel from "@amcharts/amcharts4/themes/entel.js";
-// import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
-// import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-// this.darkMode ? 
-// am4core.useTheme(am4themes_dark) 
-// : 
-// am4core.useTheme(am4themes_entel)
-// am4core.useTheme(am4themes_animated);
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode', 'chartData'],
+  components: {
+    ElectricLines: function ElectricLines() {
+      return __webpack_require__.e(/*! import() */ 53).then(__webpack_require__.bind(null, /*! ./ElectricLines */ "./resources/js/components/pops/power/ElectricLines.vue"));
+    },
+    Junctions: function Junctions() {
+      return __webpack_require__.e(/*! import() */ 55).then(__webpack_require__.bind(null, /*! ./Junctions */ "./resources/js/components/pops/power/Junctions.vue"));
+    },
+    GeneratorSets: function GeneratorSets() {
+      return __webpack_require__.e(/*! import() */ 54).then(__webpack_require__.bind(null, /*! ./GeneratorSets */ "./resources/js/components/pops/power/GeneratorSets.vue"));
+    },
+    PowerRectifiers: function PowerRectifiers() {
+      return __webpack_require__.e(/*! import() */ 57).then(__webpack_require__.bind(null, /*! ./PowerRectifiers */ "./resources/js/components/pops/power/PowerRectifiers.vue"));
+    }
+  },
+  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
     return {
-      chart: null
+      electricLines: [],
+      transformers: [],
+      junctions: [],
+      generatorSets: [],
+      powerRectifiers: [],
+      electricLineSelected: 0,
+      currentTab: 'electric-lines',
+      tabs: [{
+        'title': 'Lineas Eléctricas',
+        'component': 'electric-lines',
+        'icon': 'bolt',
+        'icon_type': 'fas'
+      }, {
+        'title': 'Empalmes',
+        'component': 'junctions',
+        'icon': 'plug',
+        'icon_type': 'fas'
+      }, {
+        'title': 'Grupos Electrógenos',
+        'component': 'generator-sets',
+        'icon': 'charging-station',
+        'icon_type': 'fas'
+      }, {
+        'title': 'Plantas Rectificadoras',
+        'component': 'power-rectifiers',
+        'icon': 'random',
+        'icon_type': 'fas'
+      }]
     };
   },
   mounted: function mounted() {
-    this.graph(); // this.$eventBus.$on('getSitesData', this.graph)
+    this.getElectricLines();
+    this.getConnectionClients();
+    this.getGeneratorGroups();
+    this.getPowerRectifiers();
   },
-  beforeDestroy: function beforeDestroy() {
-    if (this.chart) {
-      this.chart.destroy();
-      this.chart.dispose();
-    } // this.$eventBus.$off('getSitesData')
-
-  },
-  watch: {
-    chartData: function chartData(newValue, oldValue) {
-      this.graph();
+  computed: {
+    currentTabComponent: function currentTabComponent() {
+      return this.currentTab;
     }
   },
   methods: {
-    graph: function graph() {
-      // data.forEach(element => console.log(element))
+    // APIs
+    getElectricLines: function getElectricLines() {
+      var _this = this;
 
-      /* Create chart instance */
-      var chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarChart"]); // let chart = am4core.create("chartdiv", am4charts.RadarChart);
+      axios.get("/api/electricLines/".concat(this.pop.id)).then(function (response) {
+        _this.electricLines = response.data;
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Líneas Eléctricas: ' + error);
+      });
+    },
+    getConnectionClients: function getConnectionClients() {
+      var _this2 = this;
 
-      chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+      axios.get("/api/junctions/".concat(this.pop.id)).then(function (response) {
+        _this2.junctions = response.data.data; // console.log(this.junctions)
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Empalmes: ' + error);
+      });
+    },
+    getGeneratorGroups: function getGeneratorGroups() {
+      var _this3 = this;
 
-      chart.data = this.chartData;
-      chart.padding(20, 20, 20, 20);
-      var categoryAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["CategoryAxis"]());
-      categoryAxis.dataFields.category = "nombre";
-      categoryAxis.renderer.labels.template.location = 0.5;
-      categoryAxis.renderer.tooltipLocation = 0.5;
-      var valueAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ValueAxis"]());
-      valueAxis.tooltip.disabled = true;
-      valueAxis.renderer.labels.template.horizontalCenter = "left";
-      valueAxis.min = 0;
-      var series1 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series1.columns.template.tooltipText = "{name}: {valueY.value}";
-      series1.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series1.name = "Fijo";
-      series1.dataFields.categoryX = "nombre";
-      series1.dataFields.valueY = "fijo";
-      series1.stacked = true;
-      var series2 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series2.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series2.columns.template.tooltipText = "{name}: {valueY.value}";
-      series2.name = "Movil";
-      series2.dataFields.categoryX = "nombre";
-      series2.dataFields.valueY = "movil";
-      series2.stacked = true;
-      var series3 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series3.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series3.columns.template.tooltipText = "{name}: {valueY.value}";
-      series3.name = "Switch";
-      series3.dataFields.categoryX = "nombre";
-      series3.dataFields.valueY = "switch";
-      series3.stacked = true;
-      var series4 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series4.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series4.columns.template.tooltipText = "{name}: {valueY.value}";
-      series4.name = "Phone";
-      series4.dataFields.categoryX = "nombre";
-      series4.dataFields.valueY = "phone";
-      series4.stacked = true;
-      chart.seriesContainer.zIndex = -1; // chart.scrollbarX = new am4core.Scrollbar();
-      // chart.scrollbarX.exportable = false;
-      // chart.scrollbarY = new am4core.Scrollbar();
-      // chart.scrollbarY.exportable = false;
+      axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
+        _this3.generatorSets = response.data.data; // console.log(this.generatorSets)
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
+      });
+    },
+    getPowerRectifiers: function getPowerRectifiers() {
+      var _this4 = this;
 
-      chart.cursor = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarCursor"]();
-      chart.cursor.xAxis = categoryAxis;
-      chart.cursor.fullWidthXLine = true;
-      chart.cursor.lineX.strokeOpacity = 0;
-      chart.cursor.lineX.fillOpacity = 0.1;
-      chart.cursor.lineX.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"]("#000000");
-      this.chart = chart;
+      axios.get("/api/powerRectifiers/".concat(this.pop.id)).then(function (response) {
+        _this4.powerRectifiers = response.data.data; // console.log(this.powerRectifiers)
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
+      });
+    },
+    setTransformerElectricLine: function setTransformerElectricLine(transformer_id, electricLine_id) {
+      var _this5 = this;
+
+      axios.put("/api/transformers/".concat(transformer_id, "?electric_line_id=").concat(electricLine_id)).then(function (response) {
+        console.log(response);
+
+        _this5.getElectricLines();
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/Power.vue?vue&type=template&id=57341859&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/power/Power.vue?vue&type=template&id=57341859& ***!
+  \*******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -129,15 +391,98 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "article",
-    {
-      staticClass: "tile is-child box is-paddingless",
-      class: _vm.boxBackground,
-      staticStyle: { width: "100%", height: "auto" }
-    },
-    [_c("div", { ref: "chartdiv", staticStyle: { height: "400px" } })]
-  )
+  return _c("div", [
+    _c("section", { staticClass: "section container" }, [
+      _c(
+        "div",
+        { staticClass: "level has-background-white tile is-ancestor" },
+        _vm._l(_vm.tabs, function(tab) {
+          return _c(
+            "div",
+            {
+              key: tab.component,
+              staticClass: "level-item tile is-parent",
+              on: {
+                click: function($event) {
+                  _vm.currentTab = tab.component
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "tile is-child box has-text-centered",
+                  class:
+                    _vm.currentTab === tab.component && "has-background-link"
+                },
+                [
+                  _c("font-awesome-icon", {
+                    class:
+                      _vm.currentTab === tab.component
+                        ? "has-text-white"
+                        : "has-text-grey",
+                    attrs: { icon: [tab.icon_type, tab.icon], size: "2x" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      class:
+                        _vm.currentTab === tab.component
+                          ? "has-text-white"
+                          : "has-text-grey",
+                      staticStyle: { "padding-top": "5px" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "is-size-6 has-text-weight-semibold" },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(tab.title) +
+                              "\n                        "
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "section",
+      { staticClass: "section" },
+      [
+        _c(
+          "keep-alive",
+          [
+            _c(_vm.currentTabComponent, {
+              tag: "detail",
+              attrs: {
+                pop: _vm.pop,
+                bodyBackground: _vm.bodyBackground,
+                boxBackground: _vm.boxBackground,
+                primaryText: _vm.primaryText,
+                secondaryText: _vm.secondaryText,
+                darkMode: _vm.darkMode
+              }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -146,18 +491,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/SitesDataChart.vue":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/dashboard/SitesDataChart.vue ***!
-  \**************************************************************/
+/***/ "./resources/js/components/pops/power/Power.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/pops/power/Power.vue ***!
+  \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SitesDataChart.vue?vue&type=template&id=12d7306e& */ "./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e&");
-/* harmony import */ var _SitesDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SitesDataChart.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Power_vue_vue_type_template_id_57341859___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Power.vue?vue&type=template&id=57341859& */ "./resources/js/components/pops/power/Power.vue?vue&type=template&id=57341859&");
+/* harmony import */ var _Power_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Power.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/power/Power.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -166,9 +511,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _SitesDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Power_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Power_vue_vue_type_template_id_57341859___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Power_vue_vue_type_template_id_57341859___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -178,38 +523,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/SitesDataChart.vue"
+component.options.__file = "resources/js/components/pops/power/Power.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/pops/power/Power.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/pops/power/Power.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SitesDataChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Power_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Power.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/Power.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Power_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e& ***!
-  \*********************************************************************************************/
+/***/ "./resources/js/components/pops/power/Power.vue?vue&type=template&id=57341859&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/pops/power/Power.vue?vue&type=template&id=57341859& ***!
+  \*************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SitesDataChart.vue?vue&type=template&id=12d7306e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/SitesDataChart.vue?vue&type=template&id=12d7306e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Power_vue_vue_type_template_id_57341859___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Power.vue?vue&type=template&id=57341859& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/Power.vue?vue&type=template&id=57341859&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Power_vue_vue_type_template_id_57341859___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SitesDataChart_vue_vue_type_template_id_12d7306e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Power_vue_vue_type_template_id_57341859___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

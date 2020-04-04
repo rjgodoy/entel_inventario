@@ -62,10 +62,12 @@
                 }
                 else {
                     var token = document.head.querySelector('meta[name="csrf-token"]');
-                    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+                    // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
                     axios.post('/login', this.state).then((response) => { 
+                        // console.log('error 0')
                         if (response.status === 200) {
                             this.buttonLoading = 0
+                            // console.log('error 1')
                             if (response.data.includes('not match')) {
                                 this.$buefy.toast.open({
                                     message: 'Las credenciales no concuerdan con nuestros registros.',
@@ -76,6 +78,7 @@
                                 this.$router.go('/dashboard')
                             }
                         } else {
+                            // console.log('error 2')
                             this.buttonLoading = 0
                             this.$buefy.toast.open({
                                 message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',

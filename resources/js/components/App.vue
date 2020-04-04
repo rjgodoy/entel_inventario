@@ -1,14 +1,14 @@
 <template>
     <div class="sticky">
 
-        <header class="section is-paddingless Site-header">
-            <div class="columns has-background-black-ter is-marginless">
+        <header class="section has-background-black-ter" style="padding-top: 0px; padding-bottom: 0px;">
+            <div class="columns" style="padding-top: 24px; padding-bottom: 24px;">
 
                 <!-- ICONO Y NOMBRE -->
                 <!-- ################## -->
-                <div class="column is-3 hero is-small">
-                    <div class="hero-body">
-                        <nav class="navbar">
+                <div class="column is-3 is-small" style="padding-top: 10px; padding-left: 12px;">
+                    <div class="">
+                        <nav class="navbar has-background-black-ter">
                             <div class="navbar-brand">
                                 <a class="navbar-item" href="#" style="background: url('/img/iconografia/entel-logo-negativo.png') no-repeat center center; background-size: contain; width: 60px;">
                                 </a>
@@ -32,8 +32,8 @@
 
                 <!-- LINKS DE MODULOS -->
                 <!-- ################## -->
-                <div class="column is-6 hero is-small" style="padding-top: 32px;">
-                    <div class="hero-body">
+                <div class="column is-6 is-small" style="padding-top: 20px;">
+                    <div class="">
                         <div class="">
                             <ul class="columns">
 
@@ -57,22 +57,20 @@
 
                 <!-- PERFIL Y RELOJ -->
                 <!-- ################## -->
-                <div class="column hero is-small" style="padding-top: 16px; margin-bottom: -5px;">
-                    <div class="hero-head is-size-6">
+                <div class="column is-small" style="padding-top: 0px;">
+                    <div class="is-size-6">
                         <div class="navbar-end">
                             <b-dropdown   
                                 hoverable                 
                                 position="is-bottom-left"
                                 aria-role="menu">
                                 <a
-                                    class="navbar-item has-text-grey-light"
+                                    class="navbar-item"
                                     slot="trigger"
                                     role="button">
-                                    <b-icon 
-                                        icon="bell" 
-                                        pack="fas"
-                                        :type="alerts.length ? 'is-info' : 'is-dark'">
-                                    </b-icon>
+                                    <font-awesome-icon 
+                                        :icon="['fas','bell']" 
+                                        :class="alerts.length ? 'has-text-info' : 'has-text-grey-light'"/>
                                 </a>
 
                                 <b-dropdown-item has-link v-for="alert in alerts" :key="alert.id">
@@ -85,8 +83,8 @@
                                 </b-dropdown-item>
 
                                 <b-dropdown-item  v-if="!alerts.length" aria-role="menuitem">
-                                    <b-icon icon="home" pack="fas"></b-icon>
-                                    No hay alertas
+                                    <font-awesome-icon :icon="['fas','home']" />
+                                    &nbsp;No tienes notificaciones
                                 </b-dropdown-item>
                             </b-dropdown>
 
@@ -104,52 +102,37 @@
 
                                 <b-dropdown-item custom aria-role="menuitem">
                                     <div class="has-text-left">
-                                        Bienvenido<br/><b>{{ user.name }} {{ user.apellido }}</b>
+                                        {{ welcomeText }}<br/><b>{{ user.name }} {{ user.apellido }}</b>
                                     </div>
                                 </b-dropdown-item>
 
                                 <hr class="dropdown-divider">
 
-                                <b-dropdown-item has-link aria-role="menuitem">
+                                <!-- <b-dropdown-item has-link aria-role="menuitem">
                                     <a href="https://google.com" target="_blank">
-                                        <b-icon icon="link" pack="fas"></b-icon>
-                                        Google (link)
+                                        <font-awesome-icon :icon="['fas','link']" />
+                                        &nbsp;Google (link)
                                     </a>
-                                </b-dropdown-item>
-
-                                <b-dropdown-item value="home" aria-role="menuitem">
-                                    <b-icon icon="home" pack="fas"></b-icon>
-                                    Home
-                                </b-dropdown-item>
-
-                                <b-dropdown-item value="products" aria-role="menuitem">
-                                    <b-icon icon="cart" pack="fas"></b-icon>
-                                    Products
-                                </b-dropdown-item>
-
-                                <b-dropdown-item value="blog" disabled aria-role="menuitem">
-                                    <b-icon icon="book-open" pack="fas"></b-icon>
-                                    Blog
-                                </b-dropdown-item>
+                                </b-dropdown-item> -->
 
                                 <hr class="dropdown-divider" aria-role="menuitem">
 
-                                <b-dropdown-item value="settings">
-                                    <b-icon icon="settings" pack="fas"></b-icon>
-                                    Settings
+                                <b-dropdown-item value="settings" disabled>
+                                    <font-awesome-icon :icon="['fas','cog']" />
+                                    &nbsp;Settings
                                 </b-dropdown-item>
 
-                                <b-dropdown-item @click="changeStyle" v-model="darkMode">
-                                    <b-icon icon="settings" pack="fas"></b-icon>
-                                    {{ style }}
+                                <b-dropdown-item @click="changeStyle" v-model="darkMode" disabled>
+                                    <font-awesome-icon :icon="['fas','adjust']" />
+                                    &nbsp;{{ style }}
                                 </b-dropdown-item>
 
                                 <hr class="navbar-divider">
 
                                 <b-dropdown-item value="logout" aria-role="menuitem">
                                     <a class="bd-is-rss is-small has-text-dark" @click.prevent="logout">
-                                        <b-icon icon="logout" pack="fas"></b-icon>
-                                        <span class="has-text-weight-bold">Log Out</span>
+                                        <font-awesome-icon :icon="['fas','sign-out-alt']" />
+                                    &nbsp;Log Out
                                     </a>
                                 </b-dropdown-item>
                             </b-dropdown>
@@ -247,6 +230,9 @@
         },
 
         computed: {
+            welcomeText() {
+                return this.user.sexo == 'Femenino' ? 'Bienvenida' : 'Bienvenido'
+            },
             currentRoute () {
                 return this.$route.path
             },

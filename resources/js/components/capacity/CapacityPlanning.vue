@@ -30,8 +30,10 @@
                     </div>
                 </div>
             </div>
-            <div class="column is-7 section">
-                <div class="container">
+
+            <!-- TABLE -->
+            <div class="column section">
+                <div class="">
 
                     <!-- <section class="field" v-if="message">
                         <div class="notification is-primary alert is-dismissable" role="alert">
@@ -63,9 +65,9 @@
                         <table class="table is-fullwidth has-background-black-ter has-text-white">
                             <thead>
                                 <tr>
-                                    <th class="is-size-7 has-text-weight-semibold has-text-white"><abbr title="id">POP</abbr></th>
-                                    <th class="is-size-7 has-text-weight-semibold has-text-white"><abbr title="id">Sitio / Sala</abbr></th>
-                                    <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
+                                    <th class="is-size-6 has-text-weight-semibold has-text-white"><abbr title="id">POP</abbr></th>
+                                    <th class="is-size-6 has-text-weight-semibold has-text-white"><abbr title="id">Sala</abbr></th>
+                                    <th class="is-size-6 has-text-weight-semibold has-text-centered">Estado</th>
                                 </tr>
                             </thead>
                             
@@ -84,10 +86,22 @@
                                     </td>
 
                                     <td class="">
+                                        <!-- <div class="field columns">
+                                            <div class="column is-6 is-size-7"></div>
+                                            <div class="column is-size-7">Estado</div>
+                                            <div class="column is-size-7">kW Disp.</div>
+                                            <div class="column is-size-7">Energia</div>
+                                            <div class="column is-size-7">kW Disp.</div>
+                                            <div class="column is-size-7">Clima</div>
+                                            <div class="column is-size-7">kW Disp.</div>
+                                            <div class="column is-size-7">Espacio</div>
+                                            <div class="column is-size-7">Disp.</div>
+                                        </div> -->
                                         <div class="field columns" v-for="room in pop.rooms">
 
-                                            <div class="column is-6">
-                                                <a class="is-size-6 has-text-weight-normal" :class="currentRoom == room ? 'has-text-smart' : 'has-text-link'" @click="setGraph(room, pop)">
+                                            <div class="column is-5">
+                                                <a class="is-size-6 has-text-weight-semibold has-text-smart" 
+                                                    @click="isComponentModalActive = true">
                                                     {{ room.name }} <span v-if="room.old_name">- {{ room.old_name }}</span>
                                                 </a>
                                             </div>
@@ -95,7 +109,7 @@
                                             <div class="column">
                                                 <b-icon
                                                     pack="fas"
-                                                    icon="ban"
+                                                    icon="circle"
                                                     size="is-medium"
                                                     type="is-danger">
                                                 </b-icon>
@@ -106,18 +120,35 @@
                                             <div class="column">
                                                 <b-icon
                                                     pack="fas"
-                                                    icon="exclamation-circle"
+                                                    icon="circle"
                                                     size="is-medium"
                                                     type="is-warning">
                                                 </b-icon>
                                             </div>
                                             <div class="column">
+                                                <div class="is-size-6">10 kW</div>
+                                            </div>
+                                            <div class="column">
                                                 <b-icon
                                                     pack="fas"
-                                                    icon="exclamation-circle"
+                                                    icon="circle"
                                                     size="is-medium"
                                                     type="is-success">
                                                 </b-icon>
+                                            </div>
+                                            <div class="column">
+                                                <div class="is-size-6">10 kW</div>
+                                            </div>
+                                            <div class="column">
+                                                <b-icon
+                                                    pack="fas"
+                                                    icon="circle"
+                                                    size="is-medium"
+                                                    type="is-success">
+                                                </b-icon>
+                                            </div>
+                                            <div class="column">
+                                                <div class="is-size-6">6</div>
                                             </div>
                                         </div>
                                     </td>
@@ -135,7 +166,15 @@
                     </div>
                 </div>
             </div>
-            <div class="column section">
+
+
+            <b-modal :active.sync="isComponentModalActive"
+                has-modal-card full-screen :can-cancel="false">
+                <modal-room v-bind="formProps"></modal-room>
+            </b-modal>
+
+            <!-- GRAPH -->
+            <!-- <div class="column section">
                 <div class="has-text-weight-bold is-size-5">{{ currentPop.nombre }}</div>
                 <div class="has-text-weight-bold is-size-3">{{ currentRoom.name }} - {{ currentRoom.old_name }}</div>
                 <capacity-chart
@@ -144,18 +183,20 @@
                 <growing-chart
                     :currentRoom="currentRoom"
                 />
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
+
     import VuePagination from '../VuePagination.vue';
     export default {
         components: {
             VuePagination,
-            CapacityChart: () => import('./CapacityChart'),
-            GrowingChart: () => import('./GrowingChart'),
+            // CapacityChart: () => import('./CapacityChart'),
+            // GrowingChart: () => import('./GrowingChart'),
+            ModalRoom: () => import('./ModalRoom')
         },
         props : [
             'crms'
@@ -171,8 +212,14 @@
                 },
                 searchText: '',
                 currentCrm: 0,
-                currentPop: [],
-                currentRoom: []
+                // currentPop: [],
+                // currentRoom: [],
+
+                isComponentModalActive: false,
+                formProps: {
+                    email: 'evan@you.com',
+                    password: 'testing'
+                }
             }
         },
 
@@ -200,8 +247,8 @@
                 axios.get('/api/rooms', { params: params })
                 .then((response) => {
                     this.roomsData = response.data
-                    this.currentPop = this.roomsData.data[0]
-                    this.currentRoom = this.currentPop.rooms[0]
+                    // this.currentPop = this.roomsData.data[0]
+                    // this.currentRoom = this.currentPop.rooms[0]
                 })
             },
 
@@ -210,10 +257,10 @@
                 this.getRoomsData()
             },
             
-            setGraph(room, pop) {
-                this.currentRoom = room
-                this.currentPop = pop
-            }
+            // setGraph(room, pop) {
+            //     this.currentRoom = room
+            //     this.currentPop = pop
+            // }
         }
     }
 </script>

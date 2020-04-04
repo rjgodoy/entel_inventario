@@ -105,15 +105,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   created: function created() {},
   mounted: function mounted() {
-    this.getPops();
+    this.getUsers();
+    this.getRoles();
   },
   data: function data() {
     return {
+      selectedRole: 0,
+      roles: [],
       users: [],
       isPaginated: true,
       isPaginationSimple: false,
@@ -128,13 +174,34 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getPops: function getPops() {
+    getUsers: function getUsers() {
       var _this = this;
 
-      axios.get('/api/users').then(function (response) {
+      var params = {
+        'role_id': this.selectedRole
+      };
+      axios.get('/api/users', {
+        params: params
+      }).then(function (response) {
         console.log(response.data);
         _this.users = response.data.users;
       });
+    },
+    getRoles: function getRoles() {
+      var _this2 = this;
+
+      axios.get('/api/roles').then(function (response) {
+        _this2.roles = response.data.data;
+      });
+    },
+    updateUserRole: function updateUserRole(user_id, role_id) {
+      console.log(role_id); // var params = {
+      //     'role_id': role_id
+      // }
+      // axios.put(`/api/users/${user_id}`, { params: params })
+      // .then(response => {
+      //     this.roles = response.data.data
+      // })
     }
   }
 });
@@ -167,28 +234,6 @@ var render = function() {
           _c(
             "b-select",
             {
-              model: {
-                value: _vm.defaultSortDirection,
-                callback: function($$v) {
-                  _vm.defaultSortDirection = $$v
-                },
-                expression: "defaultSortDirection"
-              }
-            },
-            [
-              _c("option", { attrs: { value: "asc" } }, [
-                _vm._v("Default sort direction: ASC")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "desc" } }, [
-                _vm._v("Default sort direction: DESC")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-select",
-            {
               attrs: { disabled: !_vm.isPaginated },
               model: {
                 value: _vm.perPage,
@@ -209,144 +254,41 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "control" }, [
-            _c(
-              "button",
-              {
-                staticClass: "button",
-                attrs: { disabled: !_vm.isPaginated },
-                on: {
-                  click: function($event) {
-                    _vm.currentPage = 2
-                  }
+          _c(
+            "b-select",
+            {
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.getUsers()
                 }
               },
-              [_vm._v("Set page to 2")]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "control is-flex" },
-            [
-              _c(
-                "b-switch",
-                {
-                  model: {
-                    value: _vm.isPaginated,
-                    callback: function($$v) {
-                      _vm.isPaginated = $$v
-                    },
-                    expression: "isPaginated"
-                  }
+              model: {
+                value: _vm.selectedRole,
+                callback: function($$v) {
+                  _vm.selectedRole = $$v
                 },
-                [_vm._v("Paginated")]
-              )
+                expression: "selectedRole"
+              }
+            },
+            [
+              _c("option", { domProps: { value: 0 } }, [_vm._v("Todos")]),
+              _vm._v(" "),
+              _vm._l(_vm.roles, function(role) {
+                return _c(
+                  "option",
+                  { key: role.id, domProps: { value: role.id } },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(role.name) +
+                        "\n                "
+                    )
+                  ]
+                )
+              })
             ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "control is-flex" },
-            [
-              _c(
-                "b-switch",
-                {
-                  attrs: { disabled: !_vm.isPaginated },
-                  model: {
-                    value: _vm.isPaginationSimple,
-                    callback: function($$v) {
-                      _vm.isPaginationSimple = $$v
-                    },
-                    expression: "isPaginationSimple"
-                  }
-                },
-                [_vm._v("Simple pagination")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-select",
-            {
-              attrs: { disabled: !_vm.isPaginated },
-              model: {
-                value: _vm.paginationPosition,
-                callback: function($$v) {
-                  _vm.paginationPosition = $$v
-                },
-                expression: "paginationPosition"
-              }
-            },
-            [
-              _c("option", { attrs: { value: "bottom" } }, [
-                _vm._v("bottom pagination")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "top" } }, [
-                _vm._v("top pagination")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "both" } }, [_vm._v("both")])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-select",
-            {
-              model: {
-                value: _vm.sortIcon,
-                callback: function($$v) {
-                  _vm.sortIcon = $$v
-                },
-                expression: "sortIcon"
-              }
-            },
-            [
-              _c("option", { attrs: { value: "arrow-up" } }, [
-                _vm._v("Arrow sort icon")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "menu-up" } }, [
-                _vm._v("Caret sort icon")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "chevron-up" } }, [
-                _vm._v("Chevron sort icon ")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-select",
-            {
-              model: {
-                value: _vm.sortIconSize,
-                callback: function($$v) {
-                  _vm.sortIconSize = $$v
-                },
-                expression: "sortIconSize"
-              }
-            },
-            [
-              _c("option", { attrs: { value: "is-small" } }, [
-                _vm._v("Small sort icon")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "" } }, [
-                _vm._v("Regular sort icon")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "is-medium" } }, [
-                _vm._v("Medium sort icon")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "is-large" } }, [
-                _vm._v("Large sort icon")
-              ])
-            ]
+            2
           )
         ],
         1
@@ -388,18 +330,83 @@ var render = function() {
                   "b-table-column",
                   {
                     attrs: {
+                      field: "id",
+                      label: "ID",
+                      width: "40",
+                      searchable: "",
+                      sortable: "",
+                      numeric: ""
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                { attrs: { label: column.label } },
+                                [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(_vm._s(column.label))
+                                  ])
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v(_vm._s(props.row.id))
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-table-column",
+                  {
+                    attrs: {
                       field: "name",
                       label: "First Name",
                       searchable: "",
                       sortable: ""
-                    }
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                { attrs: { label: column.label } },
+                                [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(_vm._s(column.label))
+                                  ])
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
                   },
                   [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(props.row.name) +
-                        "\n                "
-                    )
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v(_vm._s(props.row.name))
+                    ])
                   ]
                 ),
                 _vm._v(" "),
@@ -411,14 +418,36 @@ var render = function() {
                       label: "Last Name",
                       searchable: "",
                       sortable: ""
-                    }
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                { attrs: { label: column.label } },
+                                [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(_vm._s(column.label))
+                                  ])
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
                   },
                   [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(props.row.apellido) +
-                        "\n                "
-                    )
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v(_vm._s(props.row.apellido))
+                    ])
                   ]
                 ),
                 _vm._v(" "),
@@ -430,68 +459,102 @@ var render = function() {
                       label: "Cargo",
                       searchable: "",
                       sortable: ""
-                    }
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                { attrs: { label: column.label } },
+                                [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(_vm._s(column.label))
+                                  ])
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
                   },
                   [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(props.row.nombre_cargo_especifico) +
-                        "\n                "
-                    )
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v(_vm._s(props.row.nombre_cargo_especifico))
+                    ])
                   ]
                 ),
                 _vm._v(" "),
                 _c(
                   "b-table-column",
                   {
-                    attrs: {
-                      field: "role",
-                      label: "Role",
-                      sortable: "",
-                      centered: ""
-                    }
+                    attrs: { field: "role", label: "Role", centered: "" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                { attrs: { label: column.label } },
+                                [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(_vm._s(column.label))
+                                  ])
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
                   },
                   [
+                    _vm._v(" "),
                     _c(
-                      "span",
+                      "b-select",
                       {
-                        staticClass: "tag",
-                        class: props.row.roles.length ? "is-success" : "is-info"
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              props.row.roles.length
-                                ? props.row.roles[0].name
-                                : "No tiene rol"
-                            ) +
-                            "\n                        "
-                        )
-                      ]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("b-table-column", { attrs: { label: "Gender" } }, [
-                  _c(
-                    "span",
-                    [
-                      _c("b-icon", {
                         attrs: {
-                          pack: "fas",
-                          icon: props.row.gender === "Male" ? "mars" : "venus"
+                          placeholder: props.row.roles.length
+                            ? props.row.roles[0].name
+                            : "Sin rol asignado"
+                        },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.updateUserRole(props.row.id)
+                          }
                         }
+                      },
+                      _vm._l(_vm.roles, function(role) {
+                        return _c(
+                          "option",
+                          { key: role.id, domProps: { value: role.id } },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(role.name) +
+                                "\n                        "
+                            )
+                          ]
+                        )
                       }),
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(props.row.gender) +
-                          "\n                    "
-                      )
-                    ],
-                    1
-                  )
-                ])
+                      0
+                    )
+                  ],
+                  1
+                )
               ]
             }
           }

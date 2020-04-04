@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable
 {
     protected $connection = 'mysql_entel_corp';
-    protected $table = 'users';
+    protected $table = 'entel_corp.users';
 
     use Notifiable;
 
@@ -46,19 +45,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    public function getJWTIdentifier()
+    public function zonas() 
     {
-        return $this->getKey();
-    }
-    
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
+        return $this->hasMany(Zona::class);
     }
 
     /**
@@ -66,9 +55,59 @@ class User extends Authenticatable
      *
      * @var array
      */
-    public function zonas() 
+    public function groups()
     {
-        return $this->hasMany(Zona::class);
+        return $this->belongsToMany(Group::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function request_basics()
+    {
+        return $this->belongsToMany(RequestBasic::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function request_notes()
+    {
+        return $this->hasMany(RequestNote::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function request_files()
+    {
+        return $this->hasMany(RequestFile::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function request_stakeholders()
+    {
+        return $this->belongsToMany(RequestStakeholder::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function processes()
+    {
+        return $this->belongsToMany(Process::class);
     }
 
     /**

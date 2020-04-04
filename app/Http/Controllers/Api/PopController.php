@@ -179,7 +179,7 @@ class PopController extends Controller
      */
     public function show($id)
     {
-        $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.technologies', 'comuna.zona.responsable', 'sites.site_type', 'sites.attention_priority_type', 'sites.dependences', 'sites.category_type', 'sites.attention_type')
+        $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.technologies', 'comuna.zona.responsable', 'sites.site_type', 'sites.attention_priority_type', 'sites.dependences', 'sites.category_type', 'sites.attention_type', 'rooms')
             ->where('id', $id)
             ->whereHas('sites', function($q) {
                 $q->where(function($p) {
@@ -675,19 +675,5 @@ class PopController extends Controller
     {
         return (new AllInfoPopsExport($request))->download('pops.xlsx');
     }
-
-    // /**
-    //  * Download all data from Pops (Filtered).
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function exportFilter(Request $request)
-    // {
-    //     return new PopResource('hello');
-    //     // return (new AllInfoPopsExport($request))->download('pops.xlsx');
-    //     // return (new FilteredInfoPopsExport($request))->download('pops.xlsx');
-    // }
-
 
 }

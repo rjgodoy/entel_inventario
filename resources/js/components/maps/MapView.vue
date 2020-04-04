@@ -201,33 +201,8 @@
             criticPopsSwitch(newValue, oldValue) {
                 this.setPops()
             },
-
-            // selectedPops(newValue, oldValue) {
-            //     if (newValue.length != 0) {
-            //         this.pops = newValue
-            //         //Set bounds of the map                    
-            //         this.$refs.map.$mapPromise.then((map) => {
-            //             var bounds = new google.maps.LatLngBounds()
-            //             // Create bounds from pops
-            //             for (let m of this.pops) {
-            //                 // console.log(m)
-            //                 bounds.extend(({ lat: parseFloat(m.latitude), lng: parseFloat(m.longitude) }))
-            //             }
-            //             // Don't zoom in too far on only one marker
-            //             if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-            //                 var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
-            //                 var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
-            //                 bounds.extend(extendPoint1);
-            //                 bounds.extend(extendPoint2);
-            //             }
-
-            //             map.fitBounds(bounds)
-            //         });
-            //     } else {
-            //         this.setPops()
-            //     }
-            // }
         },
+        
         methods: {
             toggleInfoWindow(pop, idx) {
                 this.infoWindowPos = { lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) };
@@ -360,15 +335,6 @@
                     map.setZoom(17)
                 });
             },
-
-            // getPopData(pop) { 
-            //     console.log(pop)
-            //     axios.get(`/api/pop/${pop.pop_id}`)
-            //     .then((response) => {
-            //         console.log(response.data.data)
-            //         this.selectedPopMap = response.data.data
-            //     })
-            // }
 
             // cluster() {
             //     if (this.clusterActive == 0) {

@@ -106,7 +106,7 @@
                     Sincronizar
                 </b-button> -->
                     <div class="level-right has-text-right">
-                        <div class="is-size-7 " :class="secondaryText">Fecha ultima actualización: {{ last_updated }}</div>
+                        <div class="is-size-7 " :class="secondaryText">Fecha ultima actualización: {{ last_updated.formatted }}</div>
                     </div>
                 </div>
                     
@@ -215,7 +215,7 @@
             },
             lastUpdated() {
                 axios.get(`/api/comsiteLastData`).then((response) => {
-                    this.last_updated = response.data
+                    this.last_updated = response.data.data
                 })
             },
         }

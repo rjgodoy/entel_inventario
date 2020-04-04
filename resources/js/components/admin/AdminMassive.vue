@@ -9,23 +9,25 @@
                                 Efizzity
                             </div>
 
-                            <b-field class="file">
-                                <b-upload v-model="file" @input="onFileChange">
-                                    <a class="button is-primary">
-                                        <b-icon icon="upload"></b-icon>
-                                        <span>Click to upload</span>
-                                    </a>
+                            <b-field>
+                                <b-upload v-model="file"
+                                    @input="submit"
+                                    drag-drop>
+                                    <section class="section">
+                                        <div class="content has-text-centered">
+                                            <p>
+                                                <b-icon
+                                                    icon="upload"
+                                                    pack="fas"
+                                                    size="is-large">
+                                                </b-icon>
+                                            </p>
+                                            <p>Drop your files here or click to upload</p>
+                                        </div>
+                                    </section>
+                                    <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
                                 </b-upload>
-                                <span class="file-name" v-if="file">
-                                    {{ file.name }}
-                                </span>
                             </b-field>
-                            <b-button 
-                                type="is-link"
-                                @click="submit">
-                                <font-awesome-icon icon="sync-alt"/> 
-                                &nbsp;&nbsp;Sync Efizity
-                            </b-button>
 
                         </div>
                     </div>
@@ -56,64 +58,47 @@
         data() {
             return {
                 file: [],
-                // buttonLoading: 0,
-                // filename: 'No hay archivo...',
-                // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                isLoading: false,
             }
         },
+
         methods: {
-            onFileChange(file){
-                this.file = file;
-            },
-            submit(e) {
-                // this.buttonLoading = 1
-                e.preventDefault();
-   
+
+            submit() {
+                this.isLoading = true
+
                 const config = {
-                    headers: { 'content-type': 'multipart/form-data' }
+                    headers: {
+                        'content-type': 'multipart/form-data',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    }
                 }
     
+                // form data
                 let formData = new FormData();
-                formData.append('file', this.file[0]);
-                // console.log(this.file)
+                formData.append('file', this.file);
    
-                axios.post(`/api/client_connection/efizity`, formData, config)
-                .then(function (response) {
+                axios.post(`/api/junction/efizity`, formData, config)
+                .then((response) => {
                     console.log(response.data)
-                    // this.$buefy.toast.open({
-                    //     message: response.data.success,
-                    //     type: 'is-success',
-                    //     duration: 5000
-                    // })
-                    // this.buttonLoading = 0
+                    this.$buefy.toast.open({
+                        message: response.data.success,
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                    this.isLoading = false
                 })
-                .catch(function (error) {
-                    console.log('error: ' + error)
-                    // this.$buefy.toast.open({
-                    //     message: error,
-                    //     type: 'is-danger',
-                    //     duration: 5000
-                    // })
-                    // this.buttonLoading = 0
+                .catch((error) => {
+                    console.log(error)
+                    this.$buefy.toast.open({
+                        message: 'error: ' + error,
+                        type: 'is-danger',
+                        duration: 5000
+                    })
+                    this.isLoading = false
                 });
             }
-            // submit() {
-            //     this.buttonLoading = 1
-            //     console.log(this.file)
 
-            //     axios.post(`/api/client_connection/efizity?file=${this.file}`)
-            //     .then((response) => {
-            //         console.log(response)
-            //         // const blob = new Blob([response.data], { type: 'application/xls' })
-            //         // const objectUrl = window.URL.createObjectURL(blob)
-
-            //         // let link = document.createElement('a')
-            //         // link.href = window.URL.createObjectURL(blob)
-            //         // link.download = 'test.xlsx'
-            //         // link.click()
-            //         this.buttonLoading = 0
-            //     })
-            // }
         }
     }
 </script>

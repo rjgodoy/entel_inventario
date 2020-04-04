@@ -136,36 +136,36 @@
             },
             total3G900() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tec3g900 })
+                this.technologyData.forEach(element => counter = counter + element.tec3g900)
                 return counter
             },
             total3G1900() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tec3g1900 })
+                this.technologyData.forEach(element => counter = counter + element.tec3g1900)
                 return counter
             },
             totalLTE700() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tecLTE700 })
+                this.technologyData.forEach(element => counter = counter + element.tecLTE700)
                 return counter
             },
             totalLTE1900() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tecLTE1900 })
+                this.technologyData.forEach(element => counter = counter + element.tecLTE1900)
                 return counter
             },
             totalLTE2600() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tecLTE2600 })
+                this.technologyData.forEach(element => counter = counter + element.tecLTE2600)
                 return counter
             },
             totalLTE3500() {
                 var counter = 0
-                this.technologyData.forEach(function(item) { counter = counter + item.tecLTE3500 })
+                this.technologyData.forEach(element => counter = counter + element.tecLTE3500)
                 return counter
             },
             totalTechnologies() {
-                return this.total2G1900 + this.total3G900 + this.total3G1900 + this.total3G3500 + this.totalLTE700 + this.totalLTE1900 + this.totalLTE2600 + this.totalLTE3500
+                return this.total2G1900 + this.total3G900 + this.total3G1900 + this.totalLTE700 + this.totalLTE1900 + this.totalLTE2600 + this.totalLTE3500
             }
         },
         methods: {
@@ -174,19 +174,16 @@
                     axios.get(`/api/technologyData?core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.data;
-                        // this.totalTechnologies()
                     })
                 } else if (!this.selectedZona){
                     axios.get(`/api/technologyDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.data;
-                        // this.totalTechnologies()
                     })
                 } else {
                     axios.get(`/api/technologyDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.data;
-                        // this.totalTechnologies()
                     })
                 }
             },

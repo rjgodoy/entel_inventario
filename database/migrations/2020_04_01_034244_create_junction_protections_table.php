@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientConnectionStatesTable extends Migration
+class CreateJunctionProtectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateClientConnectionStatesTable extends Migration
      */
     public function up()
     {
-        // Schema::create('client_connection_states', function (Blueprint $table) {
+        // Schema::create('junction_protections', function (Blueprint $table) {
         //     $table->bigIncrements('id');
-        //     $table->string('description');
+        //     $table->bigInteger('junction_id');
+        //     $table->string('name');
+        //     $table->string('protection_type');
+        //     $table->double('capacity');
+        //     $table->timestamps();
         // });
     }
 
@@ -26,6 +30,6 @@ class CreateClientConnectionStatesTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('client_connection_states');
+        // Schema::dropIfExists('junction_protections');
     }
 }

@@ -1,138 +1,138 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[55],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/Junctions.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/power/Junctions.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @amcharts/amcharts4/core */ "./node_modules/@amcharts/amcharts4/core.js");
-/* harmony import */ var _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @amcharts/amcharts4/charts */ "./node_modules/@amcharts/amcharts4/charts.js");
 //
 //
 //
 //
-
- // import am4themes_entel from "@amcharts/amcharts4/themes/entel.js";
-// import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
-// import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-// this.darkMode ? 
-// am4core.useTheme(am4themes_dark) 
-// : 
-// am4core.useTheme(am4themes_entel)
-// am4core.useTheme(am4themes_animated);
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  components: {},
+  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
     return {
-      chart: null
+      junctions: Array
     };
   },
-  created: function created() {
-    // this.graph()
-    this.$eventBus.$on('graphData', this.graph);
+  mounted: function mounted() {
+    this.getJunctions();
   },
-  beforeDestroy: function beforeDestroy() {
-    if (this.chart) {
-      this.chart.destroy();
-      this.chart.dispose();
+  computed: {
+    currentTabComponent: function currentTabComponent() {
+      return this.currentTab;
     }
-
-    this.$eventBus.$off('graphData');
   },
-  // watch: {
-  //     chartData(newValue, oldValue) {
-  //         this.graph()
-  //     }
-  // },
   methods: {
-    graph: function graph(data) {
-      // console.log(data)
-      // data.forEach(element => console.log(element))
+    // APIs
+    getJunctions: function getJunctions() {
+      var _this = this;
 
-      /* Create chart instance */
-      var chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarChart"]); // let chart = am4core.create("chartdiv", am4charts.RadarChart);
-
-      chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
-
-      chart.data = data;
-      chart.padding(20, 20, 20, 20);
-      var categoryAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["CategoryAxis"]());
-      categoryAxis.dataFields.category = "nombre";
-      categoryAxis.renderer.labels.template.location = 0.5;
-      categoryAxis.renderer.tooltipLocation = 0.5;
-      var valueAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ValueAxis"]());
-      valueAxis.tooltip.disabled = true;
-      valueAxis.renderer.labels.template.horizontalCenter = "left";
-      valueAxis.min = 0;
-      var series1 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series1.columns.template.tooltipText = "{name}: {valueY.value}";
-      series1.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series1.name = "Opto Estación";
-      series1.dataFields.categoryX = "nombre";
-      series1.dataFields.valueY = "opto";
-      series1.stacked = true;
-      var series2 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series2.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series2.columns.template.tooltipText = "{name}: {valueY.value}";
-      series2.name = "Radio Estación";
-      series2.dataFields.categoryX = "nombre";
-      series2.dataFields.valueY = "radio";
-      series2.stacked = true;
-      var series3 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series3.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series3.columns.template.tooltipText = "{name}: {valueY.value}";
-      series3.name = "Repetidor";
-      series3.dataFields.categoryX = "nombre";
-      series3.dataFields.valueY = "repetidor";
-      series3.stacked = true;
-      var series4 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series4.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series4.columns.template.tooltipText = "{name}: {valueY.value}";
-      series4.name = "Indoor";
-      series4.dataFields.categoryX = "nombre";
-      series4.dataFields.valueY = "indoor";
-      series4.stacked = true;
-      var series5 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series5.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series5.columns.template.tooltipText = "{name}: {valueY.value}";
-      series5.name = "Outdoor";
-      series5.dataFields.categoryX = "nombre";
-      series5.dataFields.valueY = "outdoor";
-      series5.stacked = true;
-      var series6 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarColumnSeries"]());
-      series6.columns.template.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](80);
-      series6.columns.template.tooltipText = "{name}: {valueY.value}";
-      series6.name = "Pole Site";
-      series6.dataFields.categoryX = "nombre";
-      series6.dataFields.valueY = "pole_site";
-      series6.stacked = true;
-      chart.seriesContainer.zIndex = -1; // chart.scrollbarX = new am4core.Scrollbar();
-      // chart.scrollbarX.exportable = false;
-      // chart.scrollbarY = new am4core.Scrollbar();
-      // chart.scrollbarY.exportable = false;
-
-      chart.cursor = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["RadarCursor"]();
-      chart.cursor.xAxis = categoryAxis;
-      chart.cursor.fullWidthXLine = true;
-      chart.cursor.lineX.strokeOpacity = 0;
-      chart.cursor.lineX.fillOpacity = 0.1;
-      chart.cursor.lineX.fill = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"]("#000000");
-      this.chart = chart;
+      axios.get("/api/junctions/".concat(this.pop.id)).then(function (response) {
+        _this.junctions = response.data.data;
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Empalmes: ' + error);
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/Junctions.vue?vue&type=template&id=02d577f3&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/power/Junctions.vue?vue&type=template&id=02d577f3& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -144,27 +144,293 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { ref: "chartdiv", staticStyle: { height: "250px" } })
+  return _vm.junctions.length
+    ? _c(
+        "section",
+        {
+          staticClass: "section container",
+          staticStyle: { "padding-top": "0px" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "columns tile is-ancestor is-multiline" },
+            _vm._l(_vm.junctions, function(data) {
+              return _c(
+                "div",
+                {
+                  staticClass: "column tile is-parent",
+                  class: "is-" + 12 / _vm.junctions.length
+                },
+                [
+                  _c("div", { staticClass: "tile is-child box" }, [
+                    _c("div", { staticClass: "columns" }, [
+                      _c("div", { staticClass: "column" }, [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-4" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                data.electric_company
+                                  ? data.electric_company.name
+                                  : "Sin información"
+                              )
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-light is-size-7" },
+                          [_vm._v("Distribuidora")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "has-text-weight-semibold is-size-5",
+                            staticStyle: { "padding-top": "12px" }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                data.client_number
+                                  ? data.client_number
+                                  : "Sin información"
+                              )
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-light is-size-7" },
+                          [_vm._v("Número Cliente")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "column" }, [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-light is-size-7" },
+                          [_vm._v("Tipo Empalme")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                data.junction_type
+                                  ? data.junction_type.type
+                                  : "Sin información"
+                              )
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "has-text-weight-light is-size-7",
+                            staticStyle: { "margin-top": "5px" }
+                          },
+                          [_vm._v("Tipo Conexión")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                data.junction_connection
+                                  ? data.junction_connection.connection
+                                  : "Sin información"
+                              )
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "is-divider",
+                          attrs: { "data-content": "Mediciones" }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "has-text-weight-light is-size-7",
+                            staticStyle: { "margin-top": "5px" }
+                          },
+                          [_vm._v("Protecciones")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                data.junction_protections
+                                  ? data.junction_protections
+                                  : "Sin información"
+                              )
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "is-divider",
+                          attrs: { "data-content": "Mediciones" }
+                        }),
+                        _vm._v(" "),
+                        _c("table", { staticClass: "table is-fullwidth" }, [
+                          _vm._m(0, true),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("td", { staticClass: "has-text-centered" }, [
+                              data.latest_measurement
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "has-text-weight-semibold is-size-5"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            data.latest_measurement.r_measure
+                                          ) +
+                                          " "
+                                      ),
+                                      _c("span", { staticClass: "is-size-6" }, [
+                                        _vm._v("A")
+                                      ])
+                                    ]
+                                  )
+                                : _c("div", [_vm._v("Sin Información")])
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "has-text-centered" }, [
+                              data.latest_measurement
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "has-text-weight-semibold is-size-5"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            data.latest_measurement.s_measure
+                                          ) +
+                                          " "
+                                      ),
+                                      _c("span", { staticClass: "is-size-6" }, [
+                                        _vm._v("A")
+                                      ])
+                                    ]
+                                  )
+                                : _c("div", [_vm._v("Sin Información")])
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "has-text-centered" }, [
+                              data.latest_measurement
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "has-text-weight-semibold is-size-5"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            data.latest_measurement.t_measure
+                                          ) +
+                                          " "
+                                      ),
+                                      _c("span", { staticClass: "is-size-6" }, [
+                                        _vm._v("A")
+                                      ])
+                                    ]
+                                  )
+                                : _c("div", [_vm._v("Sin Información")])
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "column has-text-right" },
+                        [
+                          _c("font-awesome-icon", {
+                            staticClass: "has-text-grey-lighter",
+                            staticStyle: { opacity: "0.5" },
+                            attrs: { icon: ["fas", "plug"], size: "3x" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1, true)
+                  ])
+                ]
+              )
+            }),
+            0
+          )
+        ]
+      )
+    : _vm._e()
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "has-text-centered" }, [_vm._v("Medición R")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "has-text-centered" }, [_vm._v("Medición S")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "has-text-centered" }, [_vm._v("Medición T")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column is-4" })
+    ])
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopDataChart.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/dashboard/PopDataChart.vue ***!
-  \************************************************************/
+/***/ "./resources/js/components/pops/power/Junctions.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/pops/power/Junctions.vue ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopDataChart.vue?vue&type=template&id=2a5dd86e& */ "./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e&");
-/* harmony import */ var _PopDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopDataChart.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Junctions_vue_vue_type_template_id_02d577f3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Junctions.vue?vue&type=template&id=02d577f3& */ "./resources/js/components/pops/power/Junctions.vue?vue&type=template&id=02d577f3&");
+/* harmony import */ var _Junctions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Junctions.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/power/Junctions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -173,9 +439,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PopDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Junctions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Junctions_vue_vue_type_template_id_02d577f3___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Junctions_vue_vue_type_template_id_02d577f3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -185,38 +451,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/PopDataChart.vue"
+component.options.__file = "resources/js/components/pops/power/Junctions.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/components/pops/power/Junctions.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/pops/power/Junctions.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopDataChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopDataChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Junctions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Junctions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/Junctions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Junctions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/pops/power/Junctions.vue?vue&type=template&id=02d577f3&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/pops/power/Junctions.vue?vue&type=template&id=02d577f3& ***!
+  \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopDataChart.vue?vue&type=template&id=2a5dd86e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/PopDataChart.vue?vue&type=template&id=2a5dd86e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Junctions_vue_vue_type_template_id_02d577f3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Junctions.vue?vue&type=template&id=02d577f3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/Junctions.vue?vue&type=template&id=02d577f3&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Junctions_vue_vue_type_template_id_02d577f3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopDataChart_vue_vue_type_template_id_2a5dd86e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Junctions_vue_vue_type_template_id_02d577f3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

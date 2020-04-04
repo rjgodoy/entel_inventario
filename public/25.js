@@ -72,11 +72,12 @@ __webpack_require__.r(__webpack_exports__);
           duration: 3000
         });
       } else {
-        var token = document.head.querySelector('meta[name="csrf-token"]');
-        window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+        var token = document.head.querySelector('meta[name="csrf-token"]'); // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+
         axios.post('/login', this.state).then(function (response) {
+          // console.log('error 0')
           if (response.status === 200) {
-            _this.buttonLoading = 0;
+            _this.buttonLoading = 0; // console.log('error 1')
 
             if (response.data.includes('not match')) {
               _this.$buefy.toast.open({
@@ -88,6 +89,7 @@ __webpack_require__.r(__webpack_exports__);
               _this.$router.go('/dashboard');
             }
           } else {
+            // console.log('error 2')
             _this.buttonLoading = 0;
 
             _this.$buefy.toast.open({

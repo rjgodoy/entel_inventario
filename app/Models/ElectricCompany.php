@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ElectricCompany extends Model
 {
-	public function client_connections() 
+	protected $guarded = [];
+	
+	public function junctions() 
     {
-        return $this->hasMany(ClientConnection::class);
+        return $this->hasMany(Junction::class);
     }
 }

@@ -55,6 +55,7 @@ Vue.prototype.$eventCounters = new Vue()
         faFolder,
         faFolderOpen,
         faCogs,
+        faCog,
         faExclamationTriangle,
         faExclamationCircle,
         faSearch,
@@ -97,7 +98,9 @@ Vue.prototype.$eventCounters = new Vue()
         faFileExcel,
         faFile,
         faFileImage,
-        faBell
+        faBell,
+        faAdjust,
+        faCircle
     } from '@fortawesome/free-solid-svg-icons'
 
     import { 
@@ -133,6 +136,7 @@ Vue.prototype.$eventCounters = new Vue()
     	faFolder,
         faFolderOpen,
     	faCogs,
+        faCog,
     	faExclamationTriangle,
         faExclamationCircle,
     	faSearch,
@@ -179,7 +183,10 @@ Vue.prototype.$eventCounters = new Vue()
         faFileExcel,
         faFile,
         faFileImage,
-        faBell
+        faBell,
+        faAdjust,
+        farCircle,
+        faCircle
     )
 
     Vue.component('font-awesome-icon', FontAwesomeIcon)

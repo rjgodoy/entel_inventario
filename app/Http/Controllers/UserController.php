@@ -12,9 +12,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('roles')->where('estado', 1)->get();
+        $condition_role = $request->role_id == 0 ? 'id != 0' : 'id = '.$request->role_id;;
+        $users = User::with('roles')
+                    // ->whereHas('roles', function($q) use($condition_role) {
+                    //     $q->whereRaw($condition_role);
+                    // })
+                    ->where('estado', 1)->get();
 
         return response()->json(
             [

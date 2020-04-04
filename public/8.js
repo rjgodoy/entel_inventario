@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get("/api/comsiteLastData").then(function (response) {
-        _this2.last_updated = response.data;
+        _this2.last_updated = response.data.data;
       });
     }
   }
@@ -893,7 +893,8 @@ var render = function() {
                 { staticClass: "is-size-7 ", class: _vm.secondaryText },
                 [
                   _vm._v(
-                    "Fecha ultima actualización: " + _vm._s(_vm.last_updated)
+                    "Fecha ultima actualización: " +
+                      _vm._s(_vm.last_updated.formatted)
                   )
                 ]
               )

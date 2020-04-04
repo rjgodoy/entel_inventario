@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\Menu;
 use App\Models\Pop;
@@ -13,8 +14,9 @@ use App\Models\Technology;
 use App\Models\GeneratorSet;
 use App\Models\PowerRectifier;
 use App\Models\AirConditioner;
+use App\Models\TechnologyType;
 use App\Models\PsgTp;
-use App\Models\Room;
+use App\Models\User;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Cache;

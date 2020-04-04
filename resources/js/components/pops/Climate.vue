@@ -1,9 +1,9 @@
 <template>
     <section class="section">
         <div class="columns">
-            <div class="column is-10">
+            <div class="column">
 
-                <section class="section" v-if="airConditioners.length">
+                <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="airConditioners.length">
                     <div class="field">
                         <div class="has-text-weight-semibold has-text-dark is-size-4 has-text-left">Aires Acondicionados</div>
                     </div>
@@ -21,19 +21,11 @@
                                             <div class="has-text-weight-semibold is-size-6 subtitle">{{ data.air_conditioner_brand.air_conditioner_type.air_conditioner_type }}</div>
                                         </div>
                                         <div class="column has-text-right">
-                                            <b-icon
-                                                v-if="data.air_conditioner_brand.air_conditioner_type.icon" 
-                                                :pack="data.air_conditioner_brand.air_conditioner_type.icon_type" 
-                                                :icon="data.air_conditioner_brand.air_conditioner_type.icon" 
-                                                class="fa-3x is-right has-text-grey-lighter"
-                                                style="padding: 30px;">
-                                            </b-icon>
-                                            <!-- <font-awesome-icon 
-                                                v-if="data.air_conditioner_brand.air_conditioner_type.icon"
-                                                :icon="[data.air_conditioner_brand.air_conditioner_type.icon_type, data.air_conditioner_brand.air_conditioner_type.icon]"
+                                            <font-awesome-icon v-if="data.air_conditioner_brand.air_conditioner_type.icon"
+                                                :icon="[data.air_conditioner_brand.air_conditioner_type.icon_type, data.air_conditioner_brand.air_conditioner_type.icon]" 
                                                 size="3x" 
-                                                class="is-right has-text-grey-lighter"
-                                            /> -->
+                                                class="has-text-grey-lighter" 
+                                                style="opacity: 0.5;"/>
                                         </div>
                                     </div>
 
@@ -55,7 +47,7 @@
                     </div>
                 </section>
 
-                <section class="section" v-if="airConditioners.length == 0">
+                <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="airConditioners.length == 0">
                     <div class="container">
                         <div class="box">
                             POP no tiene equipos de clima.
@@ -63,11 +55,11 @@
                     </div>
                 </section>
             </div>
-            <div class="column has-background-dark is-bold">
+            <!-- <div class="column is-2 has-background-dark is-bold">
                 <div>
                     
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 </template>

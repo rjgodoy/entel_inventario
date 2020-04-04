@@ -1072,15 +1072,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 // const PopMap = () => ({
 //     // The component to load (should be a Promise)
 //     component: import('../maps/PopMapView'),
@@ -1415,62 +1406,30 @@ var render = function() {
       _c("div", { staticClass: "card-content" }, [
         _c("div", { staticClass: "columns" }, [
           _c("div", { staticClass: "column is-8" }, [
-            _c("div", { staticClass: "is-size-6 has-text-weight-semibold" }, [
+            _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
               _vm._v(_vm._s(_vm.pop.direccion))
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "is-size-7 has-text-weight-normal" }, [
+            _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
               _vm._v(
                 "Comuna de " +
                   _vm._s(_vm.pop.comuna ? _vm.pop.comuna.nombre_comuna : "")
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "columns", staticStyle: { "margin-top": "5px" } },
-              [
-                _c("div", { staticClass: "column has-text-left" }, [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-6 has-text-weight-semibold" },
-                    [
-                      _vm._v(
-                        _vm._s(
-                          _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
-                        ) + "\n                                "
-                      ),
-                      _c(
-                        "p",
-                        { staticClass: "is-size-7 has-text-weight-light" },
-                        [_vm._v("ZONA")]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "column has-background-right" }, [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-6 has-text-weight-semibold" },
-                    [
-                      _vm._v(
-                        _vm._s(
-                          _vm.pop.comuna
-                            ? _vm.pop.comuna.zona.crm.nombre_crm
-                            : ""
-                        ) + "\n                                "
-                      ),
-                      _c(
-                        "p",
-                        { staticClass: "is-size-7 has-text-weight-light" },
-                        [_vm._v("CRM")]
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
+            _c("div", { staticClass: "is-size-7 has-text-weight-normal" }, [
+              _vm._v(
+                "\n                        Zona " +
+                  _vm._s(
+                    _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
+                  ) +
+                  " - CRM " +
+                  _vm._s(
+                    _vm.pop.comuna ? _vm.pop.comuna.zona.crm.nombre_crm : ""
+                  ) +
+                  "\n                    "
+              )
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "column" }, [
@@ -1478,7 +1437,7 @@ var render = function() {
               _c("div", { staticClass: "level-item" }, [
                 _c(
                   "div",
-                  { staticClass: "is-size-6 has-text-weight-semibold" },
+                  { staticClass: "is-size-5 has-text-weight-semibold" },
                   [
                     _vm._v(
                       _vm._s(_vm.pop.latitude) +
@@ -1486,7 +1445,7 @@ var render = function() {
                     ),
                     _c(
                       "p",
-                      { staticClass: "is-size-7 has-text-weight-light" },
+                      { staticClass: "is-size-6 has-text-weight-light" },
                       [_vm._v("Latitud")]
                     )
                   ]
@@ -1496,7 +1455,7 @@ var render = function() {
               _c("div", { staticClass: "level-item" }, [
                 _c(
                   "div",
-                  { staticClass: "is-size-6 has-text-weight-semibold" },
+                  { staticClass: "is-size-5 has-text-weight-semibold" },
                   [
                     _vm._v(
                       _vm._s(_vm.pop.longitude) +
@@ -1504,7 +1463,7 @@ var render = function() {
                     ),
                     _c(
                       "p",
-                      { staticClass: "is-size-7 has-text-weight-light" },
+                      { staticClass: "is-size-6 has-text-weight-light" },
                       [_vm._v("Longitud")]
                     )
                   ]

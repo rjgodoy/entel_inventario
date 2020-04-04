@@ -5,12 +5,14 @@
             <div class="hero-body">
                 <div class="">
                     <div class="columns">
-                        <div class="column is-1"></div>
-                        <div class="column is-1">
+                        <!-- <div class="column is-1"></div> -->
+
+                        <div class="column is-1 has-text-centered">
                             <b-button type="is-primary" size="is-medium" :class="popClassification.id == 1 ? 'is-info' : (popClassification.id == 2 ? 'is-warning' : (popClassification.id == 3 ? 'is-primary' : (popClassification.id == 4 ? 'is-smart' : 'is-eco')))">
                                 <div class="title is-size-4">{{ popClassification.classification }}</div>
                             </b-button>
                         </div>
+
                         <div class="column is-6">
                             <div class="is-size-4">
                                 <h1 class="title">{{ pop.nombre }}</h1>
@@ -20,31 +22,49 @@
                                 </h2>
                             </div>
                         </div>
+
+                        <div class="column is-2" style="padding: 0px">
+                            <p class="is-size-6 has-text-weight-light">Zona</p>
+                            <p class="is-size-5 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }}</p>
+                            <p class="is-size-6 has-text-weight-light" style="margin-top: 10px;">CRM</p>
+                            <p class="is-size-5 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}</p>
+                        </div>
+
                         <div class="column is-2">
                             <div class="columns is-multiline is-gapless">
                                 <div class="column is-6">
                                     <b-button 
                                         :disabled="popClassification.id == 1 ? false : true"
-                                        size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        size="is-normal" 
+                                        class="has-text-weight-bold is-fullwidth"
+                                        :class="popClassification.id == 1 && 'is-link'">
                                         CORE
                                     </b-button>
                                 </div>
                                 <div class="column is-6">
-                                    <b-button size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                    <b-button 
+                                        :disabled="popCritical == 1 ? false : true"
+                                        size="is-normal" 
+                                        class="has-text-weight-bold is-fullwidth"
+                                        :class="popCritical == 1 && 'is-link'">
                                         Critico
                                     </b-button>
                                 </div>
                                 <div class="column is-6">
                                     <b-button 
                                         :disabled="pop.vip == 1 ? false : true"
-                                        size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        size="is-normal" 
+                                        class="has-text-weight-bold is-fullwidth"
+                                        :class="pop.vip == 1 && 'is-link'">
                                         VIP
                                     </b-button>
                                 </div>
                                 <div class="column is-6">
                                     <b-button 
                                         :disabled="pop.alba_project == 1 ? false : true"
-                                        size="is-normal" class="has-text-weight-bold is-fullwidth">
+                                        size="is-normal" 
+                                        class="has-text-weight-bold is-fullwidth"
+                                        :class="pop.alba_project == 1 && 'is-link'">
                                         ALBA
                                     </b-button>
                                 </div>
@@ -60,7 +80,8 @@
                                 </div> -->
                             </div>
                         </div>
-                        <div class="column is-1">
+
+                        <div class="column is-1 has-text-right">
                             <log 
                                 :pop="pop"
                             />
@@ -112,14 +133,14 @@
                                 v-for="tab in tabs" 
                                 :key="tab.component" 
                                 @click="currentTab = tab.component">
-                                <div class="tile is-child box has-text-centered" :class="currentTab === tab.component && 'has-background-link'">
-                                    <b-icon 
-                                        :pack="tab.icon_type" 
-                                        :icon="tab.icon" 
-                                        :class="currentTab === tab.component && 'has-text-white'"
-                                        >
-                                    </b-icon>
-                                    <div :class="currentTab === tab.component && 'has-text-white'" style="padding-top: 5px;"> 
+                                <div 
+                                    class="tile is-child box has-text-centered" 
+                                    :class="currentTab === tab.component && (currentTab == 'eco' ? 'has-background-eco' : 'has-background-link')">
+                                    <font-awesome-icon 
+                                        :icon="[tab.icon_type, tab.icon]"
+                                        size="2x"
+                                        :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'"/>
+                                    <div :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'" style="padding-top: 12px;"> 
                                         <div class="is-size-7 has-text-weight-normal">
                                             {{ tab.title }}
                                         </div>
@@ -161,9 +182,9 @@
             Sites: () => import('./Sites'),
             Characteristics: () => import('./Characteristics'),
             Capacity: () => import('./Capacity'),
-            Power: () => import('./Power'),
+            Power: () => import('./power/Power'),
             Climate: () => import('./Climate'),
-            Infrastructure: () => import('./Infrastructure'),
+            Infrastructure: () => import('./infrastructure/Infrastructure'),
             Eco: () => import('./Eco'),
             Comsite: () => import('./Comsite'),
             Documents: () => import('./Documents'),
@@ -297,6 +318,18 @@
                     }
             },
 
+            popCritical() {
+                var criticity = 0;
+                if (this.pop.rooms) {
+                    this.pop.rooms.forEach(function(item) {
+                        if (item.criticity && item.criticity > criticity) { 
+                            criticity = item.criticity
+                        }
+                    })
+                }
+                return criticity
+            },
+
             // popAttentionPriority() {
             //     var id = 10; var attentionPriority
             //     if (this.pop.sites) {
@@ -374,14 +407,14 @@
         methods: {
             getTabs() {
                 axios.get(`/api/popMenu`).then((response) => {
+                    // console.log(response.data.data)
                     this.tabs = response.data.data
                 })
             },
             getAllData() {
-                // console.log(this.$route.params.id)
-                axios.get(`/api/pop/${this.$route.params.id}`).then((response) => {
+                axios.get(`/api/pop/${this.$route.params.id}`)
+                .then((response) => {
                     this.pop = response.data.data
-                    // console.log(this.pop)
                 })
 
 

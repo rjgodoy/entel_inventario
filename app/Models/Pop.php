@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pop extends Model
 {
     protected $connection = 'mysql_entel_pops';
+    protected $table = 'entel_pops.pops'; 
+    
     protected $guarded = [];
 
     ##################### RELACIONES CON entel_pops #####################
@@ -14,6 +16,26 @@ class Pop extends Model
     public function comuna() 
     {
         return $this->belongsTo(Comuna::class);
+    }
+
+    public function junctions() 
+    {
+        return $this->hasMany(Junction::class);
+    }
+
+    public function comsites() 
+    {
+        return $this->hasMany(Comsite::class);
+    }
+
+    public function documents() 
+    {
+        return $this->belongsToMany(Document::class);
+    }
+
+    public function electric_lines() 
+    {
+        return $this->hasMany(ElectricLine::class);
     }
 
     public function nets() 
@@ -24,6 +46,11 @@ class Pop extends Model
     public function pop_classes() 
     {
         return $this->hasMany(PopClass::class);
+    }
+
+    public function power_rectifiers() 
+    {
+        return $this->hasMany(PowerRectifier::class);
     }
 
     public function protected_zones()
@@ -46,29 +73,9 @@ class Pop extends Model
         return $this->hasMany(Site::class);
     }
 
-    ##################### RELACIONES CON entel_inventario #####################
-    public function comsites() 
-    {
-        return $this->hasMany(Comsite::class);
-    }
-
-    public function electric_lines() 
-    {
-        return $this->hasMany(ElectricLine::class);
-    }
-
-    public function power_rectifiers() 
-    {
-        return $this->hasMany(PowerRectifier::class);
-    }
-
     public function temporary_storage() 
     {
         return $this->hasMany(TemporaryStorage::class);
     }
 
-    public function documents() 
-    {
-        return $this->belongsToMany(Document::class);
-    }
 }

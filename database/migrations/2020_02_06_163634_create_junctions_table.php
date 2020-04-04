@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientConnectionsTable extends Migration
+class CreateJunctionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateClientConnectionsTable extends Migration
      */
     public function up()
     {
-        // Schema::create('client_connections', function (Blueprint $table) {
+        // Schema::create('junctions', function (Blueprint $table) {
         //     $table->bigIncrements('id');
         //     $table->bigInteger('pop_id');
         //     $table->bigInteger('electric_company_id');
@@ -31,6 +31,6 @@ class CreateClientConnectionsTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('client_connections');
+        // Schema::dropIfExists('junctions');
     }
 }

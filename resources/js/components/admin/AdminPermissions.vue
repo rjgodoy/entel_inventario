@@ -144,6 +144,7 @@
 
         },
         props : [
+            'user',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -177,7 +178,8 @@
         methods: {
             getUsers() {
                 var params = {
-                    'role_id': this.selectedRole
+                    'role_id': this.selectedRole,
+                    'api_token': this.user.api_token
                 }
                 axios.get('/api/users', { params: params })
                 .then(response => {
@@ -187,7 +189,7 @@
             },
 
             getRoles() {
-                axios.get('/api/roles')
+                axios.get(`/api/roles?api_token=${this.user.api_token}`)
                 .then(response => {
                     this.roles = response.data.data
                 })

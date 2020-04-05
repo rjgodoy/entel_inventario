@@ -38,6 +38,7 @@
 <script>
     export default {
         props : [
+            'user',
             'selectedCrm',
             'selectedZona',
             // 'csrf',
@@ -85,7 +86,7 @@
             },
             getElectricLineData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/electricLineData/${this.core}`)
+                    axios.get(`/api/electricLineData/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.electricLineData = response.data.electric_line;
                             this.totalElectricLines()
@@ -94,7 +95,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/electricLineDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`/api/electricLineDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.electricLineData = response.data.electric_line;
                             this.totalElectricLines()
@@ -103,7 +104,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/electricLineDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`/api/electricLineDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.electricLineData = response.data.electric_line;
                             this.totalElectricLines()

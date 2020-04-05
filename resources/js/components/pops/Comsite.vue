@@ -46,6 +46,7 @@
         components: {
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',
@@ -63,7 +64,7 @@
         methods: {
             // APIs
             getComsite() {
-                axios.get(`/api/comsites/${this.pop.id}`)
+                axios.get(`/api/comsites/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.comsites = response.data.data
                 })

@@ -103,7 +103,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {// 'chart': RadialChart
   },
-  props: ['selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
+  props: ['user', 'selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
   data: function data() {
     return {
       technologyData: [] // buttonLoading: 0
@@ -184,15 +184,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (!this.selectedCrm) {
-        axios.get("/api/technologyData?core=".concat(this.core)).then(function (response) {
+        axios.get("/api/technologyData?api_token=".concat(this.user.api_token, "&core=").concat(this.core)).then(function (response) {
           _this.technologyData = response.data.data;
         });
       } else if (!this.selectedZona) {
-        axios.get("/api/technologyDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
+        axios.get("/api/technologyDataCrm?api_token=".concat(this.user.api_token, "&crm_id=").concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
           _this.technologyData = response.data.data;
         });
       } else {
-        axios.get("/api/technologyDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
+        axios.get("/api/technologyDataZona?api_token=".concat(this.user.api_token, "&zona_id=").concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
           _this.technologyData = response.data.data;
         });
       }

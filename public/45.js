@@ -38,7 +38,7 @@ __webpack_require__.r(__webpack_exports__);
       return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./GrowingChart */ "./resources/js/components/pops/GrowingChart.vue"));
     }
   },
-  props: ['pop'],
+  props: ['user', 'pop'],
   data: function data() {
     return {};
   },

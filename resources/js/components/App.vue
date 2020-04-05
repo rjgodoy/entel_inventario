@@ -158,6 +158,7 @@
             <div class="section is-paddingless">
                 <keep-alive>
                     <router-view
+                        :user="user"
                         :popList="pops"
                         :crms="crms"
                         :last_data_counters='last_data_counters'
@@ -184,12 +185,12 @@
             'clock': Clock
         },
         props: [
+            'user',
             'app_name',
             'crms',
             'menu_data',
             'pops',
-            'last_data_counters',
-            'user'
+            'last_data_counters'
         ],
 
         data() {
@@ -249,7 +250,7 @@
                 this.darkMode = this.darkMode == 0 ? 1 : 0
             },
             logout: function(e){
-                axios.post(`/logout`).then((response) => {
+                axios.post(`/logout?api_token=${this.user.api_token}`).then((response) => {
                     if (response.status === 200) {
                         console.log(response)
                     }

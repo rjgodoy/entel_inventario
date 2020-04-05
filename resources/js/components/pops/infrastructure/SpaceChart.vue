@@ -18,6 +18,7 @@
 
     export default {
         props : [
+            'user',
             'bodyBackground',
             'boxBackground',
             'primaryText',

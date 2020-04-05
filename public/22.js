@@ -150,7 +150,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   created: function created() {},
   mounted: function mounted() {
     this.getUsers();
@@ -178,7 +178,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var params = {
-        'role_id': this.selectedRole
+        'role_id': this.selectedRole,
+        'api_token': this.user.api_token
       };
       axios.get('/api/users', {
         params: params
@@ -190,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
     getRoles: function getRoles() {
       var _this2 = this;
 
-      axios.get('/api/roles').then(function (response) {
+      axios.get("/api/roles?api_token=".concat(this.user.api_token)).then(function (response) {
         _this2.roles = response.data.data;
       });
     },

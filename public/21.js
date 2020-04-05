@@ -51,7 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   created: function created() {},
   mounted: function mounted() {},
   data: function data() {
@@ -74,11 +74,11 @@ __webpack_require__.r(__webpack_exports__);
 
       var formData = new FormData();
       formData.append('file', this.file);
-      axios.post("/api/junction/efizity", formData, config).then(function (response) {
+      axios.post("/api/junction/efizity?api_token=".concat(this.user.api_token), formData, config).then(function (response) {
         console.log(response.data);
 
         _this.$buefy.toast.open({
-          message: response.data.success,
+          message: 'Los datos de efizity se han inrgesado exitosamente',
           type: 'is-success',
           duration: 5000
         });

@@ -29,7 +29,7 @@ __webpack_require__.r(__webpack_exports__);
 _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_constants_amChartsEntel_js__WEBPACK_IMPORTED_MODULE_2__["default"]); // am4core.useTheme(am4themes_animated);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
       chart: null,
@@ -51,7 +51,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_constants_amC
     graphData: function graphData() {
       var _this = this;
 
-      axios.get("/api/siteStats").then(function (response) {
+      axios.get("/api/siteStats?api_token=".concat(this.user.api_token)).then(function (response) {
         // console.log(response.data)
         _this.chartData = response.data;
 

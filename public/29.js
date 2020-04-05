@@ -47,7 +47,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['selectedCrm', 'selectedZona', // 'csrf',
+  props: ['user', 'selectedCrm', 'selectedZona', // 'csrf',
   'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
   data: function data() {
     return {
@@ -88,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.crmSelected == null) {
-        axios.get("/api/airConditionerData/".concat(this.core)).then(function (response) {
+        axios.get("/api/airConditionerData/".concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
           _this.airConditionerData = response.data.data;
 
           _this.totalAirConditioners();
@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log('handle server error from here');
         });
       } else if (this.zonaSelected == null) {
-        axios.get("/api/airConditionerDataCrm/".concat(this.crmSelected.id, "/").concat(this.core)).then(function (response) {
+        axios.get("/api/airConditionerDataCrm/".concat(this.crmSelected.id, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
           _this.airConditionerData = response.data.data;
 
           _this.totalAirConditioners();
@@ -104,7 +104,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log('handle server error from here');
         });
       } else {
-        axios.get("/api/airConditionerDataZona/".concat(this.zonaSelected.id, "/").concat(this.core)).then(function (response) {
+        axios.get("/api/airConditionerDataZona/".concat(this.zonaSelected.id, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
           console.log(response);
           _this.airConditionerData = response.data.data;
 

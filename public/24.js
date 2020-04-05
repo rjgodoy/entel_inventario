@@ -127,7 +127,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   created: function created() {},
   mounted: function mounted() {
     // Se conecta a la base de datos de PSG y extrae la información a la tabla de Inventario
@@ -159,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
     syncData: function syncData() {
       var _this = this;
 
-      axios.get("/api/psgTp?page=".concat(this.currentPage)).then(function (response) {
+      axios.get("/api/psgTp?api_token=".concat(this.user.api_token, "&page=").concat(this.currentPage)).then(function (response) {
         console.log(response);
         _this.data = response.data;
       });

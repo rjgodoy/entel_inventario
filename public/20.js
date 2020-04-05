@@ -75,6 +75,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -84,7 +87,7 @@ __webpack_require__.r(__webpack_exports__);
     'pop-data-edit': _AdminPopDataEdit_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     'pop-data-sync': _AdminPopDataSync_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   created: function created() {},
   mounted: function mounted() {},
   data: function data() {
@@ -262,6 +265,7 @@ var render = function() {
       _vm.popActiveView == 1
         ? _c("pop-data-add", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,
@@ -273,6 +277,7 @@ var render = function() {
       _vm.popActiveView == 2
         ? _c("pop-data-edit", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,
@@ -284,6 +289,7 @@ var render = function() {
       _vm.popActiveView == 3
         ? _c("pop-data-sync", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,

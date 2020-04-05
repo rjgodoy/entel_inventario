@@ -83,6 +83,7 @@
 
                         <div class="column is-1 has-text-right">
                             <log 
+                                :user="user"
                                 :pop="pop"
                             />
                             <b-button
@@ -158,6 +159,7 @@
                     <!-- ############### -->
                     <keep-alive>
                         <detail :is="currentTabComponent"
+                            :user="user"
                             :pop="pop"
                             :rcas="[]"
                             :bodyBackground="bodyBackground"
@@ -191,6 +193,7 @@
             Log: () => import('./Log'),
         },
         props : [
+            'user'
         ],
         data() {
             return {
@@ -406,13 +409,13 @@
         },
         methods: {
             getTabs() {
-                axios.get(`/api/popMenu`).then((response) => {
+                axios.get(`/api/popMenu?api_token=${this.user.api_token}`).then((response) => {
                     // console.log(response.data.data)
                     this.tabs = response.data.data
                 })
             },
             getAllData() {
-                axios.get(`/api/pop/${this.$route.params.id}`)
+                axios.get(`/api/pop/${this.$route.params.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.pop = response.data.data
                 })

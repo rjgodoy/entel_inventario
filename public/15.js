@@ -215,7 +215,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
       return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./SpaceChart */ "./resources/js/components/pops/infrastructure/SpaceChart.vue"));
     }
   },
-  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
       verticalStructures: [],
@@ -233,7 +233,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
     getVerticalStructures: function getVerticalStructures() {
       var _this = this;
 
-      axios.get("/api/verticalStructures/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/verticalStructures/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this.verticalStructures = response.data.data;
         console.log(_this.verticalStructures);
       })["catch"](function (error) {
@@ -243,7 +243,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
     getInfrastructures: function getInfrastructures() {
       var _this2 = this;
 
-      axios.get("/api/infrastructures/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/infrastructures/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this2.infrastructures = response.data.data;
         console.log(_this2.infrastructures);
       })["catch"](function (error) {

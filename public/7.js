@@ -300,7 +300,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ./ModalRoom */ "./resources/js/components/capacity/ModalRoom.vue"));
     }
   },
-  props: ['crms'],
+  props: ['user', 'crms'],
   data: function data() {
     return {
       roomsData: {
@@ -335,6 +335,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var params = {
+        'api_token': this.user.api_token,
         'page': this.roomsData.current_page,
         'crm_id': this.currentCrm,
         'text': this.searchText != '' ? this.searchText : 0

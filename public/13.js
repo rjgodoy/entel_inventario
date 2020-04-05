@@ -529,6 +529,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import LoadingComponent from '../helpers/LoadingComponent'
 // import ErrorComponent from '../helpers/ErrorComponent'
 // const PopsMap = () => ({
@@ -639,7 +648,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ./InfrastructuresData */ "./resources/js/components/dashboard/InfrastructuresData.vue"));
     }
   },
-  props: ['message', 'last_data_counters', 'crms', 'darkMode'],
+  props: ['user', 'message', 'last_data_counters', 'crms', 'darkMode'],
   created: function created() {
     this.styleMode(); // this.$eventBus.$on('password-changed', function() {
     //     console.log('Se cambió la contraseña!!')
@@ -791,7 +800,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
       var crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
       var zona_id = this.selectedZona ? this.selectedZona.id : 0;
-      axios.get("/api/dashboardMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+      axios.get("/api/dashboardMap?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
         try {
           _this.pops = response.data;
         } catch (ex) {
@@ -813,7 +822,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 this.currentTab = 'critics';
                 crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/criticPopsMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                axios.get("/api/criticPopsMap?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
                   _this2.pops = response.data.data;
                 });
@@ -847,7 +856,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 this.currentTab = 'alba';
                 crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/albaPopsMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                axios.get("/api/albaPopsMap?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
                   _this3.pops = response.data.data;
                 });
@@ -881,7 +890,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
               case 0:
                 crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/dashboard?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                axios.get("/api/dashboard?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   _this4.popsQuantity = response.data.pops;
                   _this4.sitesQuantity = response.data.sites;
                   _this4.technologiesQuantity = response.data.technologies;
@@ -940,7 +949,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       }
 
       this.isFetching = true;
-      axios.get("/api/searchPops?text=".concat(text, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&core=").concat(this.core, "&page=").concat(this.page)).then(function (response) {
+      axios.get("/api/searchPops?api_token=".concat(this.user.api_token, "&text=").concat(text, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&core=").concat(this.core, "&page=").concat(this.page)).then(function (response) {
         response.data.data.forEach(function (item) {
           return _this5.popSearch.push(item);
         });
@@ -1023,6 +1032,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
       this.isLoading = true;
       var params = {
+        'api_token': this.user.api_token,
         'core': this.core,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
         'zona_id': this.selectedZona ? this.selectedZona.id : 0
@@ -2312,6 +2322,7 @@ var render = function() {
                     [
                       _c("map-view", {
                         attrs: {
+                          user: _vm.user,
                           pops: _vm.pops,
                           map_attributes: _vm.map_attributes,
                           darkMode: _vm.darkMode
@@ -2337,6 +2348,7 @@ var render = function() {
                             _c(_vm.currentTabComponent, {
                               tag: "component",
                               attrs: {
+                                user: _vm.user,
                                 bodyBackground: _vm.bodyBackground,
                                 boxBackground: _vm.boxBackground,
                                 primaryText: _vm.primaryText,
@@ -2363,6 +2375,7 @@ var render = function() {
                               [
                                 _c("pret-data-chart", {
                                   attrs: {
+                                    user: _vm.user,
                                     bodyBackground: _vm.bodyBackground,
                                     boxBackground: _vm.boxBackground,
                                     primaryText: _vm.primaryText,
@@ -2392,6 +2405,7 @@ var render = function() {
         [
           _c("electric-lines-data", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,
@@ -2404,6 +2418,7 @@ var render = function() {
           _vm._v(" "),
           _c("generator-sets-data", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,
@@ -2416,6 +2431,7 @@ var render = function() {
           _vm._v(" "),
           _c("power-rectifiers-data", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,
@@ -2428,6 +2444,7 @@ var render = function() {
           _vm._v(" "),
           _c("air-conditioners-data", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,
@@ -2440,6 +2457,7 @@ var render = function() {
           _vm._v(" "),
           _c("vertical-structures-data", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,
@@ -2452,6 +2470,7 @@ var render = function() {
           _vm._v(" "),
           _c("infrastructures-data", {
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,

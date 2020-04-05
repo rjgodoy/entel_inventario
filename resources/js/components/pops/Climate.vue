@@ -69,6 +69,7 @@
         components: {
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',
@@ -86,7 +87,7 @@
         methods: {
             // APIs
             getAirConditioners() {
-                axios.get(`/api/airConditioners/${this.pop.id}`)
+                axios.get(`/api/airConditioners/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.airConditioners = response.data.data
                     console.log(this.airConditioners)

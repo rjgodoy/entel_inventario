@@ -53,7 +53,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', 'rcas', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'pop', 'rcas', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {};
   },

@@ -57,6 +57,7 @@
         components: {
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',
@@ -76,7 +77,7 @@
         },
         methods: {
             getPowerRectifiers() {
-                axios.get(`/api/powerRectifiers/${this.pop.id}`)
+                axios.get(`/api/powerRectifiers/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.powerRectifiers = response.data.data
                     // console.log(this.powerRectifiers)

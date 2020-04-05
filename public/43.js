@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: [],
+  props: ['user'],
   data: function data() {
     return {
       dropFiles: [],
@@ -156,7 +156,7 @@ __webpack_require__.r(__webpack_exports__);
     getRCAs: function getRCAs() {
       var _this = this;
 
-      axios.get('/api/rcas').then(function (response) {
+      axios.get("/api/rcas?api_token=".concat(this.user.api_token)).then(function (response) {
         // console.log(response.data)
         _this.rcas = response.data;
       });
@@ -174,7 +174,7 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('file', this.dropFiles[0]); // send upload request
 
-      axios.post('/api/rcas', formData, config).then(function (response) {
+      axios.post("/api/rcas?api_token=".concat(this.user.api_token), formData, config).then(function (response) {
         _this2.getRCAs();
       });
     },

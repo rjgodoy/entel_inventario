@@ -470,6 +470,7 @@
             'multiselect': Multiselect
         },
         props : [
+            'user',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -514,7 +515,7 @@
             // Search bar
             search(){
                 if (this.searchText.length >= 4) {
-                    axios.get(`api/searchPopsEdicion/${this.searchText}/${this.core}`)
+                    axios.get(`api/searchPopsEdicion/${this.searchText}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.popSearch = response.data
                             this.counter = this.popSearch.length
@@ -523,7 +524,7 @@
                         .catch(() => {
                         });
 
-                    axios.get(`api/comunas`)
+                    axios.get(`api/comunas?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.comunas = response.data
                         })
@@ -566,7 +567,7 @@
             },
 
             changeData(data) {
-                axios.put(`api/pop/${this.selectedPop.id}?${data}=${Math.abs(this.selectedPop[data] - 1)}`)
+                axios.put(`api/pop/${this.selectedPop.id}?api_token=${this.user.api_token}&${data}=${Math.abs(this.selectedPop[data] - 1)}`)
                 .then((response) => {
                     console.log(response)
                 })

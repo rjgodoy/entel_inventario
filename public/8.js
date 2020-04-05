@@ -222,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'vue-pagination': _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: [],
+  props: ['user'],
   data: function data() {
     return {
       darkMode: 0,
@@ -255,7 +255,7 @@ __webpack_require__.r(__webpack_exports__);
     getComsiteData: function getComsiteData() {
       var _this = this;
 
-      axios.get("/api/comsites?page=".concat(this.comsiteData.current_page, "&text=").concat(this.searchText)).then(function (response) {
+      axios.get("/api/comsites?api_token=".concat(this.user.api_token, "&page=").concat(this.comsiteData.current_page, "&text=").concat(this.searchText)).then(function (response) {
         _this.comsiteData = response.data;
         console.log(response.data);
       });
@@ -314,7 +314,7 @@ __webpack_require__.r(__webpack_exports__);
     lastUpdated: function lastUpdated() {
       var _this2 = this;
 
-      axios.get("/api/comsiteLastData").then(function (response) {
+      axios.get("/api/comsiteLastData?api_token=".concat(this.user.api_token)).then(function (response) {
         _this2.last_updated = response.data.data;
       });
     }

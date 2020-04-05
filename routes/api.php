@@ -12,28 +12,29 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::middleware('auth:api')->group(function () {
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-	return $request->user();
-});
+	Route::get('/user', function (Request $request) {
+		return $request->user();
+	});
 
-// Route::prefix('auth')->group(function () {
+	// Route::prefix('auth')->group(function () {
 
-//     Route::post('register', 'AuthController@register');
-//     Route::post('login', 'AuthController@login');
-//     Route::get('refresh', 'AuthController@refresh');
+	//     Route::post('register', 'AuthController@register');
+	//     Route::post('login', 'AuthController@login');
+	//     Route::get('refresh', 'AuthController@refresh');
 
-//     Route::group(['middleware' => 'auth:api'], function(){
+	//     Route::group(['middleware' => 'auth:api'], function(){
 
-//         Route::get('user', 'AuthController@user');
-//         Route::post('logout', 'AuthController@logout');
+	//         Route::get('user', 'AuthController@user');
+	//         Route::post('logout', 'AuthController@logout');
 
-//         // Users
-	    // Route::get('users', 'UserController@index')->middleware('isAdmin');
-	    // Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
+	//         // Users
+		    // Route::get('users', 'UserController@index')->middleware('isAdmin');
+		    // Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 
-// 	});
-// });
+	// 	});
+	// });
     	Route::apiResource('users','UserController');
     	Route::get('roles','Api\MainController@roles');
 
@@ -313,5 +314,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 			Route::post('junction/efizity','Api\JunctionController@syncEfizity');
 		##############################################################################################
 
-// 	});
-// });
+});

@@ -80,7 +80,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
     return {
       electricLines: Array
@@ -95,7 +95,7 @@ __webpack_require__.r(__webpack_exports__);
     getElectricLines: function getElectricLines() {
       var _this = this;
 
-      axios.get("/api/electricLines/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/electricLines/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this.electricLines = response.data;
         console.log(response.data);
       })["catch"](function (error) {
@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
     setTransformerElectricLine: function setTransformerElectricLine(transformer_id, electricLine_id) {
       var _this2 = this;
 
-      axios.put("/api/transformers/".concat(transformer_id, "?electric_line_id=").concat(electricLine_id)).then(function (response) {
+      axios.put("/api/transformers/".concat(transformer_id, "?api_token=").concat(this.user.api_token, "&electric_line_id=").concat(electricLine_id)).then(function (response) {
         console.log(response);
 
         _this2.getElectricLines();

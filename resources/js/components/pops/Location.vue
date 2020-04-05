@@ -50,6 +50,7 @@
         <div class="card">
             <div class="map-container">
                 <pop-map
+                    :user="user"
                     :classification="popClassification"
                     :popMaster="pop"
                     :darkMode="darkMode"
@@ -108,6 +109,7 @@
             // PopMap: () => import('../maps/PopMapView'),
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',

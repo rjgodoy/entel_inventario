@@ -118,6 +118,7 @@
 <script>
     export default {
         props : [
+            'user',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -154,7 +155,7 @@
         },
         methods: {
             syncData() {
-                axios.get(`/api/psgTp?page=${this.currentPage}`).then((response) => {
+                axios.get(`/api/psgTp?api_token=${this.user.api_token}&page=${this.currentPage}`).then((response) => {
                     console.log(response)
                     this.data = response.data
                 })

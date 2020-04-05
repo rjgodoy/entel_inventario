@@ -96,6 +96,7 @@
             // 'chart': RadialChart
         },
         props : [
+            'user',
             'selectedCrm',
             'selectedZona',
             'core',
@@ -171,17 +172,17 @@
         methods: {
             getTechnologyData() {
                 if (!this.selectedCrm) {
-                    axios.get(`/api/technologyData?core=${this.core}`)
+                    axios.get(`/api/technologyData?api_token=${this.user.api_token}&core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.data;
                     })
                 } else if (!this.selectedZona){
-                    axios.get(`/api/technologyDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
+                    axios.get(`/api/technologyDataCrm?api_token=${this.user.api_token}&crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.data;
                     })
                 } else {
-                    axios.get(`/api/technologyDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
+                    axios.get(`/api/technologyDataZona?api_token=${this.user.api_token}&zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.data;
                     })

@@ -122,6 +122,7 @@
             'vue-pagination': VuePagination
         },
         props : [
+            'user'
         ],
         data() {
             return {
@@ -154,7 +155,7 @@
         },
         methods: {
             getComsiteData() {
-                axios.get(`/api/comsites?page=${this.comsiteData.current_page}&text=${this.searchText}`)
+                axios.get(`/api/comsites?api_token=${this.user.api_token}&page=${this.comsiteData.current_page}&text=${this.searchText}`)
                 .then((response) => {
                     this.comsiteData = response.data
                     console.log(response.data)
@@ -214,7 +215,7 @@
                 this.getComsiteData()
             },
             lastUpdated() {
-                axios.get(`/api/comsiteLastData`).then((response) => {
+                axios.get(`/api/comsiteLastData?api_token=${this.user.api_token}`).then((response) => {
                     this.last_updated = response.data.data
                 })
             },

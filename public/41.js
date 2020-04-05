@@ -34,6 +34,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Rcas: function Rcas() {
@@ -46,7 +49,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ 42).then(__webpack_require__.bind(null, /*! ./ProtectedZones */ "./resources/js/components/eco/ProtectedZones.vue"));
     }
   },
-  props: [],
+  props: ['user'],
   data: function data() {
     return {
       darkMode: 0,
@@ -90,7 +93,7 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "tile is-parent" },
-                [_c("protected-zones")],
+                [_c("protected-zones", { attrs: { user: _vm.user } })],
                 1
               )
             ]),
@@ -99,11 +102,16 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "tile is-parent" },
-                [_c("temporal-storages")],
+                [_c("temporal-storages", { attrs: { user: _vm.user } })],
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "tile is-parent" }, [_c("rcas")], 1)
+              _c(
+                "div",
+                { staticClass: "tile is-parent" },
+                [_c("rcas", { attrs: { user: _vm.user } })],
+                1
+              )
             ])
           ])
         ])

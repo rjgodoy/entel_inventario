@@ -118,6 +118,7 @@
         components: {
         },
         props : [
+            'user',
             'pop'
         ],
         data() {

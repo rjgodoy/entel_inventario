@@ -604,7 +604,7 @@ __webpack_require__.r(__webpack_exports__);
     'vue-pagination': _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     'multiselect': vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   created: function created() {},
   mounted: function mounted() {},
   data: function data() {
@@ -641,12 +641,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.searchText.length >= 4) {
-        axios.get("api/searchPopsEdicion/".concat(this.searchText, "/").concat(this.core)).then(function (response) {
+        axios.get("api/searchPopsEdicion/".concat(this.searchText, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
           _this.popSearch = response.data;
           _this.counter = _this.popSearch.length;
           _this.active = 1;
         })["catch"](function () {});
-        axios.get("api/comunas").then(function (response) {
+        axios.get("api/comunas?api_token=".concat(this.user.api_token)).then(function (response) {
           _this.comunas = response.data;
         })["catch"](function () {});
       } else if (this.searchText == '') {
@@ -692,7 +692,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }),
     changeData: function changeData(data) {
-      axios.put("api/pop/".concat(this.selectedPop.id, "?").concat(data, "=").concat(Math.abs(this.selectedPop[data] - 1))).then(function (response) {
+      axios.put("api/pop/".concat(this.selectedPop.id, "?api_token=").concat(this.user.api_token, "&").concat(data, "=").concat(Math.abs(this.selectedPop[data] - 1))).then(function (response) {
         console.log(response);
       });
     }
@@ -894,7 +894,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'vue-pagination': _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   created: function created() {},
   mounted: function mounted() {
     this.getPopsExisting();
@@ -923,7 +923,7 @@ __webpack_require__.r(__webpack_exports__);
     getPopsExisting: function getPopsExisting() {
       var _this = this;
 
-      axios.get("api/popsExisting?page=".concat(this.popsExisting.current_page)).then(function (response) {
+      axios.get("api/popsExisting?api_token=".concat(this.user.api_token, "&page=").concat(this.popsExisting.current_page)).then(function (response) {
         // console.log(response)
         _this.popsExisting = response.data; // console.log(this.popsExisting.data.length)
         // this.totalPops = this.pops.total
@@ -934,7 +934,7 @@ __webpack_require__.r(__webpack_exports__);
     getPopsToAdd: function getPopsToAdd() {
       var _this2 = this;
 
-      axios.get("api/popsToAdd?page=".concat(this.popsToAdd.current_page)).then(function (response) {
+      axios.get("api/popsToAdd?api_token=".concat(this.user.api_token, "&page=").concat(this.popsToAdd.current_page)).then(function (response) {
         // console.log(response)
         _this2.popsToAdd = response.data; // console.log(this.popsToAdd.data.length)
         // this.totalPops = this.pops.total
@@ -987,7 +987,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }),
     updateSgcRequest: function updateSgcRequest(pop) {
-      axios.put("api/tempSgcPops/".concat(pop.pop_id)).then(function (response) {
+      axios.put("api/tempSgcPops/".concat(pop.pop_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         console.log(response.data); // this.deletePopExisting(pop)
         // Alert Confirmation
 

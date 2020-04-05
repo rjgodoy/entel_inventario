@@ -65,6 +65,7 @@
     import { gmapApi } from 'vue2-google-maps'
     export default {
         props : [ 
+            'user',
             'classification',
             'popMaster',
             'darkMode'
@@ -227,7 +228,7 @@
                     this.dependencesActive = 1
                     this.buttonName = 'POP'
 
-                    axios.get(`/api/dependences/${this.popMaster.id}`)
+                    axios.get(`/api/dependences/${this.popMaster.id}?api_token=${this.user.api_token}`)
                     .then((response) => {
                         this.dependences = response.data.data
                         if (this.dependences.length) {

@@ -47,7 +47,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['selectedCrm', 'selectedZona', // 'csrf',
+  props: ['user', 'selectedCrm', 'selectedZona', // 'csrf',
   'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
   data: function data() {
     return {
@@ -88,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.crmSelected == null) {
-        axios.get("/api/generatorSetData?core=".concat(this.core)).then(function (response) {
+        axios.get("/api/generatorSetData?api_token=".concat(this.user.api_token, "&core=").concat(this.core)).then(function (response) {
           // console.log(response.data)
           _this.generatorSetData = response.data.data;
 
@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log('handle server error from here');
         });
       } else if (this.zonaSelected == null) {
-        axios.get("api/generatorSetDataCrm?core=".concat(this.core, "&crm_id=").concat(this.crmSelected.id)).then(function (response) {
+        axios.get("api/generatorSetDataCrm?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(this.crmSelected.id)).then(function (response) {
           _this.generatorSetData = response.data.data;
 
           _this.totalGeneratorSets();
@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log('handle server error from here');
         });
       } else {
-        axios.get("api/generatorSetDataZona?core=".concat(this.core, "&zona_id=").concat(this.zonaSelected.id)).then(function (response) {
+        axios.get("api/generatorSetDataZona?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&zona_id=").concat(this.zonaSelected.id)).then(function (response) {
           _this.generatorSetData = response.data.data;
 
           _this.totalGeneratorSets();

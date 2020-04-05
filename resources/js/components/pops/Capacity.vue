@@ -25,6 +25,7 @@
             GrowingChart: () => import('./GrowingChart'),
         },
         props : [
+            'user',
             'pop'
         ],
         data() {

@@ -38,6 +38,7 @@
 <script>
     export default {
         props : [
+            'user',
             'selectedCrm',
             'selectedZona',
             // 'csrf',
@@ -85,7 +86,7 @@
             },
             getInfrastructureData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/infrastructureData/${this.core}`)
+                    axios.get(`/api/infrastructureData/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.infrastructureData = response.data.data;
                             this.totalInfrastructures()
@@ -94,7 +95,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/infrastructureDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`/api/infrastructureDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.infrastructureData = response.data.data;
                             this.totalInfrastructures()
@@ -103,7 +104,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/infrastructureDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`/api/infrastructureDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             console.log(response)
                             this.infrastructureData = response.data.data;

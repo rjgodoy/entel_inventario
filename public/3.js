@@ -106,7 +106,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['pops', 'map_attributes', 'darkMode', 'criticPopsSwitch'],
+  props: ['user', 'pops', 'map_attributes', 'darkMode', 'criticPopsSwitch'],
   data: function data() {
     return {
       selectedPopMap: null,
@@ -851,7 +851,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         lat: parseFloat(pop.latitude),
         lng: parseFloat(pop.longitude)
       };
-      axios.get("/api/popInfo?pop_id=".concat(pop.id)).then(function (response) {
+      axios.get("/api/popInfo?api_token=".concat(this.user.api_token, "&pop_id=").concat(pop.id)).then(function (response) {
         console.log(response.data);
         _this.infoContent = _this.getInfoWindowContent(response.data);
       }); // this.infoContent = this.getInfoPop(pop);

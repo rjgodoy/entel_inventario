@@ -125,6 +125,7 @@
         components: {
         },
         props : [
+            'user'
         ],
         data() {
             return {
@@ -148,7 +149,7 @@
         },
         methods: {
             getRCAs() {
-                axios.get('/api/rcas')
+                axios.get(`/api/rcas?api_token=${this.user.api_token}`)
                 .then(response => {
                     // console.log(response.data)
                     this.rcas = response.data
@@ -168,7 +169,7 @@
                 formData.append('file', this.dropFiles[0]);
 
                 // send upload request
-                axios.post('/api/rcas', formData, config)
+                axios.post(`/api/rcas?api_token=${this.user.api_token}`, formData, config)
                     .then(response => {
                         this.getRCAs()
                     })

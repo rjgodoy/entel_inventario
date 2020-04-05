@@ -45,6 +45,7 @@
         components: {
         },
         props : [
+            'user',
             'pop',
             'rcas',
             'bodyBackground',

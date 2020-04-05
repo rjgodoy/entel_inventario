@@ -407,6 +407,7 @@
                 </div>
                 <div class="tile box is-child">
                     <map-view
+                        :user="user"
                         :pops="popsMap"
                         :map_attributes="map_attributes"
                         :darkMode="darkMode"                    
@@ -441,6 +442,7 @@
             VuePagination,
         },
         props : [
+            'user',
             'darkMode'
         ],
         data() {
@@ -575,7 +577,7 @@
         methods: {
             // BUTTONS
             getCrms() {
-                axios.get(`/api/crms`)
+                axios.get(`/api/crms?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.crms = response.data.data;
                 })
@@ -585,7 +587,7 @@
             },
 
             getFilterButtons() {
-                axios.get(`/api/filters`)
+                axios.get(`/api/filters?api_token=${this.user.api_token}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.filters = response.data;
@@ -631,6 +633,8 @@
             // APIs
             getPops() {
                 var params = {
+                    'api_token': this.user.api_token,
+
                     'page': this.pops.current_page,
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0,
@@ -673,6 +677,8 @@
             // APIs
             getPopsMap() {
                 var params = {
+                    'api_token': this.user.api_token,
+
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0,
                     'text': this.searchText != '' ?  this.searchText : 0,
@@ -780,6 +786,8 @@
                 this.isLoading = true
 
                 var params = {
+                    'api_token': this.user.api_token,
+
                     'selectedIds': this.selectedIds,
                     'text': this.searchText != '' ?  this.searchText : 0,
 

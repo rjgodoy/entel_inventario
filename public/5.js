@@ -548,6 +548,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // import ErrorComponent from './maps/ErrorComponent.vue';
 // const MapView = () => ({
@@ -571,7 +572,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     VuePagination: _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['darkMode'],
+  props: ['user', 'darkMode'],
   data: function data() {
     return {
       crms: null,
@@ -758,7 +759,7 @@ __webpack_require__.r(__webpack_exports__);
     getCrms: function getCrms() {
       var _this = this;
 
-      axios.get("/api/crms").then(function (response) {
+      axios.get("/api/crms?api_token=".concat(this.user.api_token)).then(function (response) {
         _this.crms = response.data.data;
       })["catch"](function () {
         console.log('handle server error from here');
@@ -767,7 +768,7 @@ __webpack_require__.r(__webpack_exports__);
     getFilterButtons: function getFilterButtons() {
       var _this2 = this;
 
-      axios.get("/api/filters").then(function (response) {
+      axios.get("/api/filters?api_token=".concat(this.user.api_token)).then(function (response) {
         // console.log(response.data)
         _this2.filters = response.data;
       });
@@ -812,6 +813,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var params = {
+        'api_token': this.user.api_token,
         'page': this.pops.current_page,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
         'zona_id': this.selectedZona ? this.selectedZona.id : 0,
@@ -852,6 +854,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       var params = {
+        'api_token': this.user.api_token,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
         'zona_id': this.selectedZona ? this.selectedZona.id : 0,
         'text': this.searchText != '' ? this.searchText : 0,
@@ -950,6 +953,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.isLoading = true;
       var params = {
+        'api_token': this.user.api_token,
         'selectedIds': this.selectedIds,
         'text': this.searchText != '' ? this.searchText : 0,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
@@ -2475,6 +2479,7 @@ var render = function() {
             [
               _c("map-view", {
                 attrs: {
+                  user: _vm.user,
                   pops: _vm.popsMap,
                   map_attributes: _vm.map_attributes,
                   darkMode: _vm.darkMode

@@ -187,7 +187,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', // 'rcas',
+  props: ['user', 'pop', // 'rcas',
   'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {// radio_pe_3g: this.pop.pe_3g

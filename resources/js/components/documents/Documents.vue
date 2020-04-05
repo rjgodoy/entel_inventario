@@ -32,6 +32,7 @@
         components: {
         },
         props : [
+            'user'
         ],
         data() {
             return {

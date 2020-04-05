@@ -38,6 +38,7 @@
 <script>
     export default {
         props : [
+            'user',
             'selectedCrm',
             'selectedZona',
             // 'csrf',
@@ -85,7 +86,7 @@
             },
             getGeneratorSetData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/generatorSetData?core=${this.core}`)
+                    axios.get(`/api/generatorSetData?api_token=${this.user.api_token}&core=${this.core}`)
                         .then((response) => {
                             // console.log(response.data)
                             this.generatorSetData = response.data.data;
@@ -95,7 +96,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`api/generatorSetDataCrm?core=${this.core}&crm_id=${this.crmSelected.id}`)
+                    axios.get(`api/generatorSetDataCrm?api_token=${this.user.api_token}&core=${this.core}&crm_id=${this.crmSelected.id}`)
                         .then((response) => {
                             this.generatorSetData = response.data.data;
                             this.totalGeneratorSets()
@@ -104,7 +105,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/generatorSetDataZona?core=${this.core}&zona_id=${this.zonaSelected.id}`)
+                    axios.get(`api/generatorSetDataZona?api_token=${this.user.api_token}&core=${this.core}&zona_id=${this.zonaSelected.id}`)
                         .then((response) => {
                             this.generatorSetData = response.data.data;
                             this.totalGeneratorSets()

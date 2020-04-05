@@ -119,7 +119,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: [],
+  props: ['user'],
   data: function data() {
     return {
       protectedZones: [],
@@ -147,7 +147,7 @@ __webpack_require__.r(__webpack_exports__);
     getProtectedZones: function getProtectedZones() {
       var _this = this;
 
-      axios.get("/api/eco").then(function (response) {
+      axios.get("/api/eco?api_token=".concat(this.user.api_token)).then(function (response) {
         // console.log(response.data.data)
         _this.protectedZones = response.data.data;
       });

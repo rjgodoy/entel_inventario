@@ -46,6 +46,14 @@ class HomeController extends Controller
     {
         $request->user()->authorizeRoles(['user', 'admin']);
 
+        // ⚠️ Create api_token
+        // $users = User::where('estado', 1)->get();
+        // foreach ($users as $user) {
+        //     $user->forceFill([
+        //         'api_token' => Hash::make(Str::random(60))
+        //     ])->save();
+        // }
+
         if (Cache::has('crms')) {
             $crms = Cache::get('crms');
         } else {

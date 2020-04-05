@@ -38,6 +38,7 @@
 <script>
     export default {
         props : [
+            'user',
             'selectedCrm',
             'selectedZona',
             // 'csrf',
@@ -85,7 +86,7 @@
             },
             getPowerRectifierData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/powerRectifierData/${this.core}`)
+                    axios.get(`/api/powerRectifierData/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.powerRectifierData = response.data.data;
                             this.totalPowerRectifiers()
@@ -94,7 +95,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`api/powerRectifierDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`api/powerRectifierDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.powerRectifierData = response.data.data;
                             this.totalPowerRectifiers()
@@ -103,7 +104,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/powerRectifierDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`api/powerRectifierDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.powerRectifierData = response.data.data;
                             this.totalPowerRectifiers()

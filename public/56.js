@@ -264,6 +264,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ElectricLines: function ElectricLines() {
@@ -279,7 +280,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ 57).then(__webpack_require__.bind(null, /*! ./PowerRectifiers */ "./resources/js/components/pops/power/PowerRectifiers.vue"));
     }
   },
-  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
     return {
       electricLines: [],
@@ -328,7 +329,7 @@ __webpack_require__.r(__webpack_exports__);
     getElectricLines: function getElectricLines() {
       var _this = this;
 
-      axios.get("/api/electricLines/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/electricLines/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this.electricLines = response.data;
         console.log(response.data);
       })["catch"](function (error) {
@@ -338,7 +339,7 @@ __webpack_require__.r(__webpack_exports__);
     getConnectionClients: function getConnectionClients() {
       var _this2 = this;
 
-      axios.get("/api/junctions/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/junctions/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this2.junctions = response.data.data; // console.log(this.junctions)
       })["catch"](function (error) {
         console.log('Error al traer los datos de Empalmes: ' + error);
@@ -347,7 +348,7 @@ __webpack_require__.r(__webpack_exports__);
     getGeneratorGroups: function getGeneratorGroups() {
       var _this3 = this;
 
-      axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/generatorSets/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this3.generatorSets = response.data.data; // console.log(this.generatorSets)
       })["catch"](function (error) {
         console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
@@ -356,7 +357,7 @@ __webpack_require__.r(__webpack_exports__);
     getPowerRectifiers: function getPowerRectifiers() {
       var _this4 = this;
 
-      axios.get("/api/powerRectifiers/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/powerRectifiers/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this4.powerRectifiers = response.data.data; // console.log(this.powerRectifiers)
       })["catch"](function (error) {
         console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
@@ -365,7 +366,7 @@ __webpack_require__.r(__webpack_exports__);
     setTransformerElectricLine: function setTransformerElectricLine(transformer_id, electricLine_id) {
       var _this5 = this;
 
-      axios.put("/api/transformers/".concat(transformer_id, "?electric_line_id=").concat(electricLine_id)).then(function (response) {
+      axios.put("/api/transformers/".concat(transformer_id, "?api_token=").concat(this.user.api_token, "&electric_line_id=").concat(electricLine_id)).then(function (response) {
         console.log(response);
 
         _this5.getElectricLines();
@@ -468,6 +469,7 @@ var render = function() {
             _c(_vm.currentTabComponent, {
               tag: "detail",
               attrs: {
+                user: _vm.user,
                 pop: _vm.pop,
                 bodyBackground: _vm.bodyBackground,
                 boxBackground: _vm.boxBackground,

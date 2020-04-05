@@ -29,6 +29,7 @@
 
         <keep-alive>
             <admin-content :is="currentTabComponent"
+                :user="user"
                 :bodyBackground="bodyBackground"
                 :boxBackground="boxBackground"
                 :primaryText="primaryText"
@@ -49,6 +50,7 @@
             AdminPermissions: () => import("./AdminPermissions"),
         },
         props : [
+            'user'
         ],
         created() {
             this.getTabs()
@@ -94,7 +96,8 @@
                 this.styleMode()
             },
             getTabs() {
-                axios.get(`/api/adminTabs`).then((response) => {
+                axios.get(`/api/adminTabs?api_token=${this.user.api_token}`)
+                .then((response) => {
                     this.tabs = response.data.data
                 })
             }

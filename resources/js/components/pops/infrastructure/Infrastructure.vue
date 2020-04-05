@@ -109,6 +109,7 @@
             SpaceChart: () => import('./SpaceChart')
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',
@@ -131,7 +132,7 @@
         methods: {
             // APIs
             getVerticalStructures() {
-                axios.get(`/api/verticalStructures/${this.pop.id}`)
+                axios.get(`/api/verticalStructures/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.verticalStructures = response.data.data
                     console.log(this.verticalStructures)
@@ -142,7 +143,7 @@
             },
 
             getInfrastructures() {
-                axios.get(`/api/infrastructures/${this.pop.id}`)
+                axios.get(`/api/infrastructures/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.infrastructures = response.data.data
                     console.log(this.infrastructures)

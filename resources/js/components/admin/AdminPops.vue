@@ -36,6 +36,7 @@
 
         <pop-data-add
             v-if="popActiveView == 1"
+            :user="user"
             :bodyBackground="bodyBackground"
             :boxBackground="boxBackground"
             :primaryText="primaryText"
@@ -44,6 +45,7 @@
 
         <pop-data-edit
             v-if="popActiveView == 2"
+            :user="user"
             :bodyBackground="bodyBackground"
             :boxBackground="boxBackground"
             :primaryText="primaryText"
@@ -52,6 +54,7 @@
 
         <pop-data-sync
             v-if="popActiveView == 3"
+            :user="user"
             :bodyBackground="bodyBackground"
             :boxBackground="boxBackground"
             :primaryText="primaryText"
@@ -72,6 +75,7 @@
             'pop-data-sync': AdminPopDataSync
         },
         props : [
+            'user',
             'bodyBackground',
             'boxBackground',
             'primaryText',

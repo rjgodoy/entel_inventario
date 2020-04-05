@@ -91,6 +91,7 @@
         components: {
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',
@@ -114,7 +115,7 @@
         methods: {
             // APIs
             getJunctions() {
-                axios.get(`/api/junctions/${this.pop.id}`)
+                axios.get(`/api/junctions/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.junctions = response.data.data
                 })

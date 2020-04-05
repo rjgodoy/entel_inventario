@@ -84,7 +84,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['classification', 'popMaster', 'darkMode'],
+  props: ['user', 'classification', 'popMaster', 'darkMode'],
   data: function data() {
     return {
       pops: null,
@@ -889,7 +889,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!this.dependencesActive) {
                   this.dependencesActive = 1;
                   this.buttonName = 'POP';
-                  axios.get("/api/dependences/".concat(this.popMaster.id)).then(function (response) {
+                  axios.get("/api/dependences/".concat(this.popMaster.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
                     _this3.dependences = response.data.data;
 
                     if (_this3.dependences.length) {
@@ -1072,6 +1072,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 // const PopMap = () => ({
 //     // The component to load (should be a Promise)
 //     component: import('../maps/PopMapView'),
@@ -1094,7 +1095,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     PopMap: _maps_PopMapView__WEBPACK_IMPORTED_MODULE_0__["default"] // PopMap: () => import('../maps/PopMapView'),
 
   },
-  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
     return {};
   },
@@ -1394,6 +1395,7 @@ var render = function() {
         [
           _c("pop-map", {
             attrs: {
+              user: _vm.user,
               classification: _vm.popClassification,
               popMaster: _vm.pop,
               darkMode: _vm.darkMode

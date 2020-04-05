@@ -18,6 +18,7 @@
 
     export default {
         props : [
+            'user',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -46,7 +47,7 @@
 
         methods : {
             graphData() {
-                axios.get(`/api/siteStats`).then((response) => {
+                axios.get(`/api/siteStats?api_token=${this.user.api_token}`).then((response) => {
                     // console.log(response.data)
                     this.chartData = response.data
                 })

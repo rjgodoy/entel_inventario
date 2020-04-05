@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
       isActive: false,
@@ -147,7 +147,7 @@ __webpack_require__.r(__webpack_exports__);
     getDirectories: function getDirectories(site_id) {
       var _this = this;
 
-      axios.get("/api/directories/".concat(site_id)).then(function (response) {
+      axios.get("/api/directories/".concat(site_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         console.log(response);
         _this.folders = response.data.data;
       });
@@ -155,7 +155,7 @@ __webpack_require__.r(__webpack_exports__);
     getFolders: function getFolders(site_id, path) {
       var _this2 = this;
 
-      axios.get("/api/folders/".concat(site_id, "/").concat(path)).then(function (response) {
+      axios.get("/api/folders/".concat(site_id, "/").concat(path, "?api_token=").concat(this.user.api_token)).then(function (response) {
         console.log(response.data);
         _this2.folders2 = response.data.data;
         _this2.files = response.data.files;
@@ -164,7 +164,7 @@ __webpack_require__.r(__webpack_exports__);
     getFiles: function getFiles(site_id, path, path2) {
       var _this3 = this;
 
-      axios.get("/api/files/".concat(site_id, "/").concat(path, "/").concat(path2)).then(function (response) {
+      axios.get("/api/files/".concat(site_id, "/").concat(path, "/").concat(path2, "?api_token=").concat(this.user.api_token)).then(function (response) {
         console.log(response.data);
         _this3.files = response.data.data;
       });
@@ -199,7 +199,7 @@ __webpack_require__.r(__webpack_exports__);
         'basename': file.basename,
         'extension': file.extension
       };
-      axios.get("/api/documents/".concat(this.pop.id), {
+      axios.get("/api/documents/".concat(this.pop.id, "?api_token=").concat(this.user.api_token), {
         params: params,
         responseType: 'arraybuffer'
       }).then(function (response) {

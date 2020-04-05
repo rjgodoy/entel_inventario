@@ -50,6 +50,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AdminPops: function AdminPops() {
@@ -68,7 +69,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./AdminPermissions */ "./resources/js/components/admin/AdminPermissions.vue"));
     }
   },
-  props: [],
+  props: ['user'],
   created: function created() {
     this.getTabs();
     this.styleMode();
@@ -114,7 +115,7 @@ __webpack_require__.r(__webpack_exports__);
     getTabs: function getTabs() {
       var _this = this;
 
-      axios.get("/api/adminTabs").then(function (response) {
+      axios.get("/api/adminTabs?api_token=".concat(this.user.api_token)).then(function (response) {
         _this.tabs = response.data.data;
       });
     }
@@ -218,6 +219,7 @@ var render = function() {
           _c(_vm.currentTabComponent, {
             tag: "admin-content",
             attrs: {
+              user: _vm.user,
               bodyBackground: _vm.bodyBackground,
               boxBackground: _vm.boxBackground,
               primaryText: _vm.primaryText,

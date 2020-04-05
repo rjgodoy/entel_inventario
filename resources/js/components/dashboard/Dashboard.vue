@@ -327,6 +327,7 @@
                         <div class="tile is-parent is-vertical">
                             <div class="tile is-child box" :class="boxBackground">
                                 <map-view
+                                    :user="user"
                                     :pops="pops"
                                     :map_attributes="map_attributes"
                                     :darkMode="darkMode"
@@ -339,6 +340,7 @@
                                 <article class="tile is-child box" :class="boxBackground">
                                 <keep-alive>
                                     <component :is="currentTabComponent"
+                                        :user="user"
                                         :bodyBackground="bodyBackground"
                                         :boxBackground="boxBackground"
                                         :primaryText="primaryText"
@@ -353,7 +355,8 @@
 
                                 <article v-if="(this.currentTab !== 'critics') && (this.currentTab !== 'alba')">
                                     <keep-alive>
-                                    <pret-data-chart
+                                    <pret-data-chart    
+                                        :user="user"
                                         :bodyBackground="bodyBackground"
                                         :boxBackground="boxBackground"
                                         :primaryText="primaryText"
@@ -447,6 +450,7 @@
             <!-- <div class="title">Equipamiento</div> -->
             <div class="columns is-multiline">
                 <electric-lines-data
+                    :user="user"
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackground"
                     :primaryText="primaryText"
@@ -456,6 +460,7 @@
                     :core="core"
                 />
                 <generator-sets-data
+                    :user="user"
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackground"
                     :primaryText="primaryText"
@@ -465,6 +470,7 @@
                     :core="core"
                 />
                 <power-rectifiers-data
+                    :user="user"
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackground"
                     :primaryText="primaryText"
@@ -475,6 +481,7 @@
                 />
 
                 <air-conditioners-data
+                    :user="user"
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackground"
                     :primaryText="primaryText"
@@ -485,6 +492,7 @@
                 />
 
                 <vertical-structures-data
+                    :user="user"
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackground"
                     :primaryText="primaryText"
@@ -494,6 +502,7 @@
                     :core="core"
                 />
                 <infrastructures-data
+                    :user="user"
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackground"
                     :primaryText="primaryText"
@@ -600,6 +609,7 @@
             InfrastructuresData: () => import('./InfrastructuresData')
         },
         props : [
+            'user',
             'message',
             'last_data_counters',
             'crms',
@@ -784,7 +794,7 @@
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
+                axios.get(`/api/dashboardMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
                 .then((response) => {
                     try {
                         this.pops = response.data
@@ -800,7 +810,7 @@
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/criticPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                axios.get(`/api/criticPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     // console.log(response.data)
                     this.pops = response.data.data
 
@@ -814,7 +824,7 @@
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/albaPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                axios.get(`/api/albaPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     // console.log(response.data)
                     this.pops = response.data.data
                 })
@@ -826,7 +836,7 @@
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/dashboard?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                axios.get(`/api/dashboard?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     this.popsQuantity = response.data.pops
                     this.sitesQuantity = response.data.sites
                     this.technologiesQuantity = response.data.technologies
@@ -868,7 +878,7 @@
                     return
                 }
                 this.isFetching = true
-                axios.get(`/api/searchPops?text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
+                axios.get(`/api/searchPops?api_token=${this.user.api_token}&text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
                     .then((response) => {
                         response.data.data.forEach((item) => this.popSearch.push(item))
                         this.page++
@@ -947,6 +957,7 @@
                 this.isLoading = true
 
                 var params = {
+                    'api_token': this.user.api_token,
                     'core': this.core,
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0

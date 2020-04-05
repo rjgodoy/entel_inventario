@@ -38,6 +38,7 @@
 <script>
     export default {
         props : [
+            'user',
             'selectedCrm',
             'selectedZona',
             // 'csrf',
@@ -85,7 +86,7 @@
             },
             getAirConditionerData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/airConditionerData/${this.core}`)
+                    axios.get(`/api/airConditionerData/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.airConditionerData = response.data.data;
                             this.totalAirConditioners()
@@ -94,7 +95,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/airConditionerDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`/api/airConditionerDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.airConditionerData = response.data.data;
                             this.totalAirConditioners()
@@ -103,7 +104,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/airConditionerDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`/api/airConditionerDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             console.log(response)
                             this.airConditionerData = response.data.data;

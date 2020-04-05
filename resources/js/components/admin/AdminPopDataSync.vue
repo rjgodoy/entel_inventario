@@ -183,6 +183,7 @@
             'vue-pagination': VuePagination
         },
         props : [
+            'user',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -215,7 +216,7 @@
         },
         methods: {
             getPopsExisting() {
-                axios.get(`api/popsExisting?page=${this.popsExisting.current_page}`)
+                axios.get(`api/popsExisting?api_token=${this.user.api_token}&page=${this.popsExisting.current_page}`)
                     .then((response) => {
                         // console.log(response)
                         this.popsExisting = response.data
@@ -227,7 +228,7 @@
                     });
             },
             getPopsToAdd() {
-                axios.get(`api/popsToAdd?page=${this.popsToAdd.current_page}`)
+                axios.get(`api/popsToAdd?api_token=${this.user.api_token}&page=${this.popsToAdd.current_page}`)
                     .then((response) => {
                         // console.log(response)
                         this.popsToAdd = response.data
@@ -276,7 +277,7 @@
                 
             },
             updateSgcRequest(pop) {
-                axios.put(`api/tempSgcPops/${pop.pop_id}`)
+                axios.put(`api/tempSgcPops/${pop.pop_id}?api_token=${this.user.api_token}`)
                     .then((response) => {
                         console.log(response.data)
 

@@ -168,6 +168,7 @@
             ModalRoom: () => import('./ModalRoom')
         },
         props : [
+            'user',
             'crms'
         ],
         data() {
@@ -218,6 +219,7 @@
         methods: {
             getRoomsData() {
                 var params = {
+                    'api_token': this.user.api_token,
                     'page': this.roomsData.current_page,
                     'crm_id': this.currentCrm,
                     'text': this.searchText != '' ?  this.searchText : 0

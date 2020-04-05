@@ -65,7 +65,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
     return {
       powerRectifiers: Array
@@ -79,7 +79,7 @@ __webpack_require__.r(__webpack_exports__);
     getPowerRectifiers: function getPowerRectifiers() {
       var _this = this;
 
-      axios.get("/api/powerRectifiers/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/powerRectifiers/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this.powerRectifiers = response.data.data; // console.log(this.powerRectifiers)
       })["catch"](function (error) {
         console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);

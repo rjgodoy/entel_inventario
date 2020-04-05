@@ -186,6 +186,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
@@ -222,7 +224,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pops/Log.vue"));
     }
   },
-  props: [],
+  props: ['user'],
   data: function data() {
     return {
       pop: Object,
@@ -427,7 +429,7 @@ __webpack_require__.r(__webpack_exports__);
     getTabs: function getTabs() {
       var _this = this;
 
-      axios.get("/api/popMenu").then(function (response) {
+      axios.get("/api/popMenu?api_token=".concat(this.user.api_token)).then(function (response) {
         // console.log(response.data.data)
         _this.tabs = response.data.data;
       });
@@ -435,7 +437,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllData: function getAllData() {
       var _this2 = this;
 
-      axios.get("/api/pop/".concat(this.$route.params.id)).then(function (response) {
+      axios.get("/api/pop/".concat(this.$route.params.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this2.pop = response.data.data;
       }); // axios.get(`/api/popTechnologies?pop_id=${this.$route.params.id}`).then((response) => {
       //     // console.log(response.data.data)
@@ -701,7 +703,7 @@ var render = function() {
               "div",
               { staticClass: "column is-1 has-text-right" },
               [
-                _c("log", { attrs: { pop: _vm.pop } }),
+                _c("log", { attrs: { user: _vm.user, pop: _vm.pop } }),
                 _vm._v(" "),
                 _c(
                   "b-button",
@@ -820,6 +822,7 @@ var render = function() {
                 _c(_vm.currentTabComponent, {
                   tag: "detail",
                   attrs: {
+                    user: _vm.user,
                     pop: _vm.pop,
                     rcas: [],
                     bodyBackground: _vm.bodyBackground,

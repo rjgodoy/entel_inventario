@@ -45,6 +45,7 @@
         components: {
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',
@@ -64,7 +65,7 @@
         },
         methods: {
             getGeneratorGroups() {
-                axios.get(`/api/generatorSets/${this.pop.id}`)
+                axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.generatorSets = response.data.data
                     // console.log(this.generatorSets)

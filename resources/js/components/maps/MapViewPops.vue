@@ -86,6 +86,7 @@
     import { gmapApi } from 'vue2-google-maps'
     export default {
         props : [ 
+            'user',
             'selectedPop',
             'selectedCrm',
             'selectedZona',
@@ -315,7 +316,7 @@
             getPops() {
                 if (this.selectedCrm == null) {
                     if (this.popList == null) {
-                        axios.get(`/api/dashboardMap`)
+                        axios.get(`/api/dashboardMap?api_token=${this.user.api_token}`)
                         .then((response) => {
                             this.popList = response.data.data
                             this.pops = this.popList

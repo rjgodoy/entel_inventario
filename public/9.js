@@ -167,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'vue-pagination': _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['selectedCrm', 'selectedZona', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
+  props: ['user', 'selectedCrm', 'selectedZona', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
   data: function data() {
     return {
       data: {
@@ -215,7 +215,7 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this = this;
 
-      axios.get("/api/albaPopList?core=".concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&page=").concat(this.data.current_page)).then(function (response) {
+      axios.get("/api/albaPopList?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&page=").concat(this.data.current_page)).then(function (response) {
         // console.log(response.data)
         _this.data = response.data; // if(true) {
         //     this.$emit('clicked', this.data)

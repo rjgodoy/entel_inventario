@@ -32,7 +32,7 @@ var bulmaQuickview = __webpack_require__(/*! ../../../../node_modules/bulma-quic
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop'],
+  props: ['user', 'pop'],
   data: function data() {
     return {
       quickviews: Object

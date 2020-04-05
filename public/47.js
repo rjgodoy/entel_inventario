@@ -77,7 +77,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
       airConditioners: []
@@ -91,7 +91,7 @@ __webpack_require__.r(__webpack_exports__);
     getAirConditioners: function getAirConditioners() {
       var _this = this;
 
-      axios.get("/api/airConditioners/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/airConditioners/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this.airConditioners = response.data.data;
         console.log(_this.airConditioners);
       })["catch"](function (error) {

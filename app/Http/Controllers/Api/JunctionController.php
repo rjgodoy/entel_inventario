@@ -85,7 +85,9 @@ class JunctionController extends Controller
      */
     public function syncEfizity(Request $request)
     {
-        return $request->file('file');
+        // $this->output->title('Starting import');
+        // (new JunctionsImport)->withOutput($this->output)->import($request->file('file'));
+        // $this->output->success('Import successful');
         Excel::import(new JunctionsImport, $request->file('file'));
 
         return 'success!';

@@ -30,6 +30,7 @@
             <!-- ############### -->
             <keep-alive>
                 <detail :is="currentTabComponent"
+                    :user="user"
                     :pop="pop"
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackground"
@@ -262,6 +263,7 @@
             PowerRectifiers: () => import('./PowerRectifiers')
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',
@@ -320,7 +322,7 @@
         methods: {
             // APIs
             getElectricLines() {
-                axios.get(`/api/electricLines/${this.pop.id}`)
+                axios.get(`/api/electricLines/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.electricLines = response.data
                     console.log(response.data)
@@ -330,7 +332,7 @@
                 });
             },
             getConnectionClients() {
-                axios.get(`/api/junctions/${this.pop.id}`)
+                axios.get(`/api/junctions/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.junctions = response.data.data
                     // console.log(this.junctions)
@@ -340,7 +342,7 @@
                 });
             },
             getGeneratorGroups() {
-                axios.get(`/api/generatorSets/${this.pop.id}`)
+                axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.generatorSets = response.data.data
                     // console.log(this.generatorSets)
@@ -350,7 +352,7 @@
                 });
             },
             getPowerRectifiers() {
-                axios.get(`/api/powerRectifiers/${this.pop.id}`)
+                axios.get(`/api/powerRectifiers/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.powerRectifiers = response.data.data
                     // console.log(this.powerRectifiers)
@@ -360,7 +362,7 @@
                 });
             },
             setTransformerElectricLine(transformer_id, electricLine_id) {
-                axios.put(`/api/transformers/${transformer_id}?electric_line_id=${electricLine_id}`)
+                axios.put(`/api/transformers/${transformer_id}?api_token=${this.user.api_token}&electric_line_id=${electricLine_id}`)
                 .then((response) => {
                     console.log(response)
                     this.getElectricLines()

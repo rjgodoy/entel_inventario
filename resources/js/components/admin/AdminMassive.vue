@@ -45,6 +45,7 @@
 
         },
         props : [
+            'user',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -78,11 +79,11 @@
                 let formData = new FormData();
                 formData.append('file', this.file);
    
-                axios.post(`/api/junction/efizity`, formData, config)
+                axios.post(`/api/junction/efizity?api_token=${this.user.api_token}`, formData, config)
                 .then((response) => {
                     console.log(response.data)
                     this.$buefy.toast.open({
-                        message: response.data.success,
+                        message: 'Los datos de efizity se han inrgesado exitosamente',
                         type: 'is-success',
                         duration: 5000
                     })

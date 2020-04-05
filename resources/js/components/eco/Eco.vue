@@ -5,15 +5,18 @@
                 <div class="tile">
                     <div class="tile is-vertical">
                         <div class="tile is-parent">
-                            <protected-zones/>
+                            <protected-zones
+                                :user="user"/>
                         </div>
                     </div>
                     <div class="tile is-vertical">
                         <div class="tile is-parent">
-                            <temporal-storages/>
+                            <temporal-storages
+                                :user="user"/>
                         </div>
                         <div class="tile is-parent">
-                            <rcas/>
+                            <rcas
+                                :user="user"/>
                         </div>
                     </div>
                 </div>
@@ -31,6 +34,7 @@
             ProtectedZones: () => import('./ProtectedZones')
         },
         props : [
+            'user'
         ],
         data() {
             return {

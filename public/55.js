@@ -99,7 +99,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
     return {
       junctions: Array
@@ -118,7 +118,7 @@ __webpack_require__.r(__webpack_exports__);
     getJunctions: function getJunctions() {
       var _this = this;
 
-      axios.get("/api/junctions/".concat(this.pop.id)).then(function (response) {
+      axios.get("/api/junctions/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
         _this.junctions = response.data.data;
       })["catch"](function (error) {
         console.log('Error al traer los datos de Empalmes: ' + error);

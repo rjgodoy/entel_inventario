@@ -114,6 +114,7 @@
         components: {
         },
         props : [
+            'user',
             'pop',
             'bodyBackground',
             'boxBackground',
@@ -146,7 +147,7 @@
         // },
         methods: {
             getDirectories(site_id) {
-                axios.get(`/api/directories/${site_id}`)
+                axios.get(`/api/directories/${site_id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     console.log(response)
                     this.folders = response.data.data
@@ -154,7 +155,7 @@
             },
 
             getFolders(site_id, path) {
-                axios.get(`/api/folders/${site_id}/${path}`).then((response) => {
+                axios.get(`/api/folders/${site_id}/${path}?api_token=${this.user.api_token}`).then((response) => {
                     console.log(response.data)
                     this.folders2 = response.data.data
                     this.files = response.data.files
@@ -162,7 +163,7 @@
             },
 
             getFiles(site_id, path, path2) {
-                axios.get(`/api/files/${site_id}/${path}/${path2}`).then((response) => {
+                axios.get(`/api/files/${site_id}/${path}/${path2}?api_token=${this.user.api_token}`).then((response) => {
                     console.log(response.data)
                     this.files = response.data.data
                 })
@@ -205,7 +206,7 @@
                     'basename': file.basename,
                     'extension': file.extension,
                 }
-                axios.get(`/api/documents/${this.pop.id}`, { 
+                axios.get(`/api/documents/${this.pop.id}?api_token=${this.user.api_token}`, { 
                     params: params, 
                     responseType: 'arraybuffer' 
                 })

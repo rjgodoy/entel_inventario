@@ -106,28 +106,16 @@
             </div>
         </section>
 
-        <section class="has-background-light">
+        <section class="">
             <div class="columns is-marginless">
 
                 <!-- BUTTONS -->
                 <div class="column is-2 has-background-white is-paddingless">
-                    <!-- <section class="section">
-                        <div class="is-size-3 has-text-weight-semibold">{{ pop.nombre }}
-                            <p class="is-size-7 has-text-weight-light">NOMBRE POP</p>
-                        </div>
-                        <b-tooltip label="Categoría: corresponde a la mayor categoría entre todos los sitios del POP" type="is-dark" position="is-right">
-                            <b-tag type="is-info" size="is-large">{{ popClassification.classification }}</b-tag>
-                        </b-tooltip>
-
-                        <div class="is-size-4 has-text-weight-normal">{{ pop.pop_e_id ? pop.pop_e_id : '-' }}
-                            <div class="is-size-7 has-text-weight-light">CODIGO PLANIFICACION</div>
-                        </div>
-                    </section> -->
 
                     <!-- BOTONES MODULOS -->
                     <!-- ############################### -->
                     <section class="section">
-                        <div class="columns has-background-white is-multiline tile is-ancestor">
+                        <div class="columns is-multiline tile is-ancestor">
                             <!-- TABS DE INFORMACIÓN -->
                             <!-- ############################### -->
                             <div class="column is-6 tile is-parent" 
@@ -153,7 +141,7 @@
                 </div>
 
                 <!-- INFO -->
-                <div class="column is-paddingless">
+                <div class="column section is-paddingless has-background-light">
 
                     <!-- DETELLE DEL TAB -->
                     <!-- ############### -->
@@ -183,7 +171,7 @@
             Location: () => import('./Location'),
             Sites: () => import('./Sites'),
             Characteristics: () => import('./Characteristics'),
-            Capacity: () => import('./Capacity'),
+            Capacity: () => import('./capacity/Capacity'),
             Power: () => import('./power/Power'),
             Climate: () => import('./Climate'),
             Infrastructure: () => import('./infrastructure/Infrastructure'),

@@ -1,79 +1,86 @@
 <template>
     <!-- <article class="box" :class="boxBackground" style="width: 100%; height: 200px;"> -->
-        <div class="" ref="chartdiv" style="height: 500px;"></div>
+        <div class="" ref="chartdiv" style="height: 400px;"></div>
     <!-- </article> -->
 </template>
 
 <script>
     import * as am4core from "@amcharts/amcharts4/core";
     import * as am4charts from "@amcharts/amcharts4/charts";
-
-    // import am4themes_entel from "@amcharts/amcharts4/themes/entel.js";
-    import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
-    import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+    // import am4themes_entel from "../../constants/amChartsEntel.js";
+    // import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
+    // import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
     // am4core.useTheme(am4themes_entel)
-    am4core.useTheme(am4themes_dark) 
-    am4core.useTheme(am4themes_animated);
+    // am4core.useTheme(am4themes_dark) 
+    // am4core.useTheme(am4themes_animated);
+    am4core.disposeAllCharts();
 
     export default {
         props : [
-            'currentRoom'
+            // 'room',
+            'chartData'
         ],
         data() {
             return {
-                chart: null,
-                chartData: []
+                // chart: null,
             }
         },
         mounted() {
             this.graph()
-            // this.graphData()
-            // this.$eventBus.$on('getSitesData', this.graph)
         },
 
-        watch: {
-            currentRoom(newValue) {
-                if (this.chart) {
-                    this.chart.dispose()
-                }
-                this.graph()
+        computed: {
+            lastData() {
+                return this.chartData
             }
         },
 
-        methods : {
-            graphData() {
-                axios.get(`/api/siteStats`).then((response) => {
-                    // console.log(response.data)
-                    this.chartData = response.data
-                })
-            },
+        watch: {
+        },
 
-            graph() {
+        methods : {
+
+            async graph() {
                 // Create chart instance
                 let chart = am4core.create(this.$refs.chartdiv, am4charts.RadarChart);
 
                 // Add data
                 chart.data = [{
-                    "category": "Power",
-                    "value": 80,
-                    "full": 100
-                }, 
-                {
-                    "category": "Space",
-                    "value": 35,
-                    "full": 100
-                }, 
-                // {
-                //     "category": "Space",
-                //     "value": 92,
-                //     "full": 100 
-                // }, 
-                // {
-                //     "category": "Human Resources",
-                //     "value": 68,
-                //     "full": 100
-                // }
+                        "category": "Empalme",
+                        "value": 100 - this.lastData.junction * 100,
+                        "full": 100
+                    }, 
+                    {
+                        "category": "GGEE",
+                        "value": 100 - this.lastData.generator * 100,
+                        "full": 100
+                    }, 
+                    {
+                        "category": "Plantas CC",
+                        "value": 100 - this.lastData.rectifier * 100,
+                        "full": 100 
+                    }, 
+                    {
+                        "category": "Baterías",
+                        "value": 100 - this.lastData.battery * 100,
+                        "full": 100
+                    }, 
+                    {
+                        "category": "Distribución",
+                        "value": 100 - this.lastData.distribution * 100,
+                        "full": 100
+                    }, 
+                    {
+                        "category": "Clima",
+                        "value": 100 - this.lastData.climate * 100,
+                        "full": 100
+                    }, 
+                    {
+                        "category": "Espacio",
+                        "value": 100 - this.lastData.space * 100,
+                        "full": 100
+                    }
                 ];
 
                 // Make chart not full circle
@@ -91,6 +98,7 @@
                 categoryAxis.renderer.grid.template.strokeOpacity = 0;
                 categoryAxis.renderer.labels.template.horizontalCenter = "right";
                 categoryAxis.renderer.labels.template.fontWeight = 500;
+                categoryAxis.renderer.labels.template.fontSize = 14;
                 categoryAxis.renderer.labels.template.adapter.add("fill", function(fill, target) {
                     return (target.dataItem.index >= 0) ? chart.colors.getIndex(target.dataItem.index) : fill;
                 });
@@ -101,6 +109,7 @@
                 valueAxis.min = 0;
                 valueAxis.max = 100;
                 valueAxis.strictMinMax = true;
+                valueAxis.renderer.labels.template.fontSize = 12;
 
                 // Create series
                 let series1 = chart.series.push(new am4charts.RadarColumnSeries());
@@ -133,11 +142,9 @@
         },
 
         beforeDestroy(){
-            if (this.chart) {
-                this.chart.destroy()
+            // if (this.chart) {
                 this.chart.dispose()
-            }
-            // this.$eventBus.$off('getSitesData')
+            // }
         },
     }  
 </script>

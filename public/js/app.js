@@ -16400,6 +16400,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Clock.vue")["default"];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52436,7 +52438,17 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _c(
+      "footer",
+      {
+        class:
+          _vm.currentRoute.toLowerCase() == "/capacity"
+            ? "has-background-black-ter"
+            : "has-background-white",
+        staticStyle: { "padding-top": "0.5rem", "padding-bottom": "0rem" }
+      },
+      [_vm._m(1)]
+    )
   ])
 }
 var staticRenderFns = [
@@ -52457,28 +52469,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      {
-        staticClass: "has-background-white",
-        staticStyle: { "padding-top": "0.5rem", "padding-bottom": "0rem" }
-      },
-      [
-        _c("div", { staticClass: "has-text-centered" }, [
-          _c(
-            "a",
-            { attrs: { href: "http://www.anidalatam.com", target: "blank" } },
-            [
-              _c("img", {
-                staticClass: "img-container",
-                staticStyle: { width: "100px" },
-                attrs: { alt: "image", src: "/img/logo_anida.png" }
-              })
-            ]
-          )
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "has-text-centered" }, [
+      _c(
+        "a",
+        { attrs: { href: "http://www.anidalatam.com", target: "blank" } },
+        [
+          _c("img", {
+            staticClass: "img-container",
+            staticStyle: { width: "100px" },
+            attrs: { alt: "image", src: "/img/logo_anida.png" }
+          })
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -70703,31 +70706,31 @@ var PasswordReset = function PasswordReset() {
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(6), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(9), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/pops/PopTable.vue */ "./resources/js/components/pops/PopTable.vue"));
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/pops/PopTable.vue */ "./resources/js/components/pops/PopTable.vue"));
 };
 
 var Pop = function Pop() {
-  return __webpack_require__.e(/*! import() */ 51).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
+  return __webpack_require__.e(/*! import() */ 52).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
 };
 
 var CapacityPlanning = function CapacityPlanning() {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
 };
 
 var Eco = function Eco() {
-  return __webpack_require__.e(/*! import() */ 41).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
+  return __webpack_require__.e(/*! import() */ 43).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
 };
 
 var Comsite = function Comsite() {
-  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/comsite/Comsite.vue */ "./resources/js/components/comsite/Comsite.vue"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/comsite/Comsite.vue */ "./resources/js/components/comsite/Comsite.vue"));
 };
 
 var Documents = function Documents() {
-  return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ../components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
+  return __webpack_require__.e(/*! import() */ 42).then(__webpack_require__.bind(null, /*! ../components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
 };
 
 var Admin = function Admin() {

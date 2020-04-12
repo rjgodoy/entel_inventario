@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Permissions\HasPermissionsTrait;
 
 class User extends Authenticatable
 {
@@ -12,6 +13,7 @@ class User extends Authenticatable
     protected $table = 'entel_corp.users';
 
     use Notifiable;
+    use HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -115,9 +117,29 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class)->withTimestamps();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function areas()
+    {
+        return $this->belongsToMany(Area::class)->withTimestamps();
     }
 
     /**
@@ -173,4 +195,5 @@ class User extends Authenticatable
     public function isAdmin() {
         return $this->roles()->where('name', 'admin')->exists();
     }
+
 }

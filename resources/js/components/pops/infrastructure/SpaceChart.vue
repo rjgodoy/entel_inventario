@@ -1,20 +1,20 @@
 <template>
-    <article class="tile is-child box" :class="boxBackground" style="padding: 10px;">
-        <div class="" ref="chartdiv" style="height: 200px; width: 100%"></div>
-    </article>
+    <!-- <article class="tile is-child box" :class="boxBackground" style="padding: 10px;"> -->
+        <div class="" ref="chartdiv" style="height: 100px; width: 100%"></div>
+    <!-- </article> -->
 </template>
 
 <script>
     import * as am4core from "@amcharts/amcharts4/core";
     import * as am4charts from "@amcharts/amcharts4/charts";
-    import am4themes_entel from "../../../constants/amChartsEntel.js";
+    // import am4themes_entel from "../../../constants/amChartsEntel.js";
     // import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
-    // import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+    import am4themes_animated from "@amcharts/amcharts4/themes/animated";
     // this.darkMode ? 
     // am4core.useTheme(am4themes_dark) 
     // : 
-    am4core.useTheme(am4themes_entel)
-    // am4core.useTheme(am4themes_animated);
+    // am4core.useTheme(am4themes_entel)
+    am4core.useTheme(am4themes_animated);
 
     export default {
         props : [
@@ -99,7 +99,7 @@
                     return series;
                 }
 
-                let series1 = createSeries("Plantas Rectificadoras");
+                let series1 = createSeries("Plantas CC");
                 series1.data = [
                     { x: "1", y: "1" },
                     { x: "1", y: "2" },
@@ -128,7 +128,7 @@
                     { x: "3", y: "3" },
                 ];
 
-                let series2 = createSeries("Republican");
+                let series2 = createSeries("Clima");
                 series2.data = [
                     { x: "3", y: "4" },
                     { x: "3", y: "5" },
@@ -157,46 +157,14 @@
                     { x: "5", y: "6" },
                 ];
 
-                let series3 = createSeries("Libertarian");
-                series3.data = [
-                    { x: "5", y: "7" },
-                    { x: "5", y: "8" },
-                    { x: "5", y: "9" },
-                    { x: "5", y: "10" },
-
-                    { x: "6", y: "1" },
-                    { x: "6", y: "2" },
-                    { x: "6", y: "3" },
-                    { x: "6", y: "4" },
-                    { x: "6", y: "5" },
-                    { x: "6", y: "6" },
-                    { x: "6", y: "7" },
-                    { x: "6", y: "8" },
-                    { x: "6", y: "9" },
-                    { x: "6", y: "10" },
-
-                    { x: "7", y: "1" },
-                    { x: "7", y: "2" },
-                    { x: "7", y: "3" },
-                    { x: "7", y: "4" },
-                    { x: "7", y: "5" },
-                    { x: "7", y: "6" },
-                    { x: "7", y: "7" },
-                    { x: "7", y: "8" },
-                    { x: "7", y: "9" },
-                ];
-
-
                 this.chart = chart;
             }
         },
 
         beforeDestroy(){
             if (this.chart) {
-                // this.chart.destroy()
                 this.chart.dispose()
             }
-            // this.$eventBus.$off('getSitesData')
         },
     }  
 </script>

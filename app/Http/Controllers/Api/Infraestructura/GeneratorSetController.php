@@ -203,7 +203,7 @@ class GeneratorSetController extends Controller
      */
     public function show($id)
     {
-        $generatorSets = GeneratorSet::with('generator_set_type')->where('pop_id', $id)->get();
+        $generatorSets = GeneratorSet::with('current_generator_group', 'current_generator_motor', 'current_generator_tank', 'generator_set_type')->where('pop_id', $id)->get();
         return new GeneratorSetResource($generatorSets);
     }
 

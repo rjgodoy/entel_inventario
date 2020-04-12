@@ -17,6 +17,7 @@ use App\Models\AirConditioner;
 use App\Models\TechnologyType;
 use App\Models\PsgTp;
 use App\Models\User;
+use App\Models\Junction;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Cache;
@@ -45,6 +46,10 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['user', 'admin']);
+
+        // $user = $request->user();
+
+        // dd($user->can('vew-comsites'));
 
         // ⚠️ Create api_token
         // $users = User::where('estado', 1)->get();

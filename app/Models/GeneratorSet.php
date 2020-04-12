@@ -6,6 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeneratorSet extends Model
 {
+
+    public function current_generator_group() 
+    {
+        return $this->hasOne(GeneratorGroup::class)->latest();
+    }
+
+    public function current_generator_tank() 
+    {
+        return $this->hasOne(GeneratorTank::class)->latest();
+    }
+
+    public function current_generator_motor() 
+    {
+        return $this->hasOne(GeneratorMotor::class)->latest();
+    }
+
+
     public function generator_set_type() 
     {
         return $this->belongsTo(GeneratorSetType::class);

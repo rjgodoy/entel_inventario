@@ -35,18 +35,11 @@
             <div class="column section">
                 <div class="">
 
-                    <!-- <section class="field" v-if="message">
-                        <div class="notification is-primary alert is-dismissable" role="alert">
-                            <button aria-hidden="true" data-dismiss="alert" class="delete" type="button"></button>
-                            {{ message }}
-                        </div>
-                    </section> -->
-
                     <div class="box has-background-black-ter">
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
                                 <input 
-                                    class="input is-rounded" 
+                                    class="input is-rounded has-background-black-ter has-text-light" 
                                     @keyup="getRoomsData" 
                                     v-model="searchText" 
                                     type="text" 
@@ -66,8 +59,30 @@
                             <thead>
                                 <tr>
                                     <th class="is-size-6 has-text-weight-semibold has-text-white"><abbr title="id">POP</abbr></th>
-                                    <th class="is-size-6 has-text-weight-semibold has-text-white"><abbr title="id">Sala</abbr></th>
-                                    <th class="is-size-6 has-text-weight-semibold has-text-centered">Estado</th>
+                                    <th class="is-size-6 has-text-weight-semibold has-text-white">
+                                        <div class="columns">
+                                            <div class="column is-6">
+                                                <abbr title="id">Sala</abbr>
+                                            </div>
+                                            <div class="column has-text-centered">
+                                                <div style="padding-bottom: 5px;">Estado / Disponibilidad</div>
+                                                <div class="columns">
+                                                    <div class="column has-text-centered">
+                                                        <abbr title="id">General</abbr>
+                                                    </div>
+                                                    <div class="column has-text-centered">
+                                                        <abbr title="id">Energía</abbr>
+                                                    </div>
+                                                    <div class="column has-text-centered">
+                                                        <abbr title="id">Clima</abbr>
+                                                    </div>
+                                                    <div class="column has-text-centered">
+                                                        <abbr title="id">Espacio</abbr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
                                 </tr>
                             </thead>
                             
@@ -86,70 +101,65 @@
                                     </td>
 
                                     <td class="">
-                                        <!-- <div class="field columns">
-                                            <div class="column is-6 is-size-7"></div>
-                                            <div class="column is-size-7">Estado</div>
-                                            <div class="column is-size-7">kW Disp.</div>
-                                            <div class="column is-size-7">Energia</div>
-                                            <div class="column is-size-7">kW Disp.</div>
-                                            <div class="column is-size-7">Clima</div>
-                                            <div class="column is-size-7">kW Disp.</div>
-                                            <div class="column is-size-7">Espacio</div>
-                                            <div class="column is-size-7">Disp.</div>
-                                        </div> -->
                                         <div class="field columns" v-for="room in pop.rooms">
 
-                                            <div class="column is-5">
+                                            <div class="column is-6">
                                                 <a class="is-size-6 has-text-weight-semibold has-text-smart" 
-                                                    @click="isComponentModalActive = true">
+                                                    @click="isComponentModalActive = true; roomSelected = room">
                                                     {{ room.name }} <span v-if="room.old_name">- {{ room.old_name }}</span>
                                                 </a>
                                             </div>
 
-                                            <div class="column">
-                                                <b-icon
-                                                    pack="fas"
-                                                    icon="circle"
-                                                    size="is-medium"
-                                                    type="is-danger">
-                                                </b-icon>
+                                            <div class="column has-text-centered">
+                                                <div style="padding-top: 5px;">
+                                                    <font-awesome-icon
+                                                        :icon="['fas', 'circle']"
+                                                        size="2x"
+                                                        class="has-text-info"
+                                                        />
+                                                    <div class="is-size-6 has-text-weight-bold">10 kW</div>
+                                                </div>
                                             </div>
-                                            <div class="column">
-                                                <div class="is-size-6">10 kW</div>
+
+                                            <div class="column has-text-centered">
+                                                <div style="padding-top: 5px;">
+                                                    <font-awesome-icon
+                                                        :icon="['fas', 'circle']"
+                                                        size="2x"
+                                                        class="has-text-warning"
+                                                        />
+                                                    <div class="is-size-6 has-text-weight-bold">10 kW</div>
+                                                </div>
                                             </div>
-                                            <div class="column">
-                                                <b-icon
-                                                    pack="fas"
-                                                    icon="circle"
-                                                    size="is-medium"
-                                                    type="is-warning">
-                                                </b-icon>
+                                            <!-- <div class="column">
+                                                
+                                            </div> -->
+                                            <div class="column has-text-centered">
+                                                <!-- <div style="padding-top: 5px;"> -->
+                                                    <font-awesome-icon
+                                                        :icon="['fas', 'circle']"
+                                                        size="2x"
+                                                        class="has-text-success"
+                                                        />
+                                                    <div class="is-size-6 has-text-weight-bold">10 kW</div>
+                                                <!-- </div> -->
                                             </div>
-                                            <div class="column">
-                                                <div class="is-size-6">10 kW</div>
+                                            <!-- <div class="column">
+                                                
+                                            </div> -->
+                                            <div class="column has-text-centered">
+                                                <!-- <div style="padding-top: 5px;"> -->
+                                                    <font-awesome-icon
+                                                        :icon="['fas', 'circle']"
+                                                        size="2x"
+                                                        class="has-text-danger"
+                                                        />
+                                                    <div class="is-size-6 has-text-weight-bold">10 kW</div>
+                                                <!-- </div> -->
                                             </div>
-                                            <div class="column">
-                                                <b-icon
-                                                    pack="fas"
-                                                    icon="circle"
-                                                    size="is-medium"
-                                                    type="is-success">
-                                                </b-icon>
-                                            </div>
-                                            <div class="column">
-                                                <div class="is-size-6">10 kW</div>
-                                            </div>
-                                            <div class="column">
-                                                <b-icon
-                                                    pack="fas"
-                                                    icon="circle"
-                                                    size="is-medium"
-                                                    type="is-success">
-                                                </b-icon>
-                                            </div>
-                                            <div class="column">
-                                                <div class="is-size-6">6</div>
-                                            </div>
+                                            <!-- <div class="column">
+                                                
+                                            </div> -->
                                         </div>
                                     </td>
                                 </tr>    
@@ -167,23 +177,13 @@
                 </div>
             </div>
 
-
             <b-modal :active.sync="isComponentModalActive"
                 has-modal-card full-screen :can-cancel="false">
-                <modal-room v-bind="formProps"></modal-room>
+                <modal-room 
+                    :user="user"
+                    :room="roomSelected"
+                ></modal-room>
             </b-modal>
-
-            <!-- GRAPH -->
-            <!-- <div class="column section">
-                <div class="has-text-weight-bold is-size-5">{{ currentPop.nombre }}</div>
-                <div class="has-text-weight-bold is-size-3">{{ currentRoom.name }} - {{ currentRoom.old_name }}</div>
-                <capacity-chart
-                    :currentRoom="currentRoom"
-                />
-                <growing-chart
-                    :currentRoom="currentRoom"
-                />
-            </div> -->
         </div>
     </div>
 </template>
@@ -217,10 +217,7 @@
                 // currentRoom: [],
 
                 isComponentModalActive: false,
-                formProps: {
-                    email: 'evan@you.com',
-                    password: 'testing'
-                }
+                roomSelected: null
             }
         },
 

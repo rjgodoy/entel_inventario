@@ -90,10 +90,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityPlanning.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/CapacityPlanning.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -164,68 +164,194 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    'vue-pagination': _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    VuePagination: _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    // CapacityChart: () => import('./CapacityChart'),
+    // GrowingChart: () => import('./GrowingChart'),
+    ModalRoom: function ModalRoom() {
+      return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ./ModalRoom */ "./resources/js/components/capacity/ModalRoom.vue"));
+    }
   },
-  props: ['user', 'selectedCrm', 'selectedZona', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
+  props: ['user', 'crms'],
   data: function data() {
     return {
-      data: {
+      roomsData: {
         total: 0,
-        per_page: 12,
+        per_page: 2,
         from: 1,
         to: 0,
         current_page: 1
       },
-      buttonLoading: 0
+      searchText: '',
+      currentCrm: 0,
+      // currentPop: [],
+      // currentRoom: [],
+      isComponentModalActive: false,
+      roomSelected: null
     };
+  },
+  watch: {
+    currentCrm: function currentCrm(newValue) {
+      this.getRoomsData();
+    }
   },
   created: function created() {},
   mounted: function mounted() {
-    this.getData();
-  },
-  watch: {
-    selectedCrm: function selectedCrm(newValue, oldValue) {
-      this.getData();
-    },
-    selectedZona: function selectedZona(newValue, oldValue) {
-      this.getData();
-    },
-    core: function core(newValue, oldValue) {
-      this.getData();
-    }
+    this.getRoomsData();
   },
   methods: {
-    getData: function getData() {
+    getRoomsData: function getRoomsData() {
       var _this = this;
 
-      axios.get("/api/criticPopList?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&page=").concat(this.data.current_page)).then(function (response) {
-        // console.log(response.data)
-        _this.data = response.data; // if(true) {
-        //     this.$emit('clicked', this.data)
-        // }
+      var params = {
+        'api_token': this.user.api_token,
+        'page': this.roomsData.current_page,
+        'crm_id': this.currentCrm,
+        'text': this.searchText != '' ? this.searchText : 0
+      };
+      axios.get('/api/rooms', {
+        params: params
+      }).then(function (response) {
+        _this.roomsData = response.data; // this.currentPop = this.roomsData.data[0]
+        // this.currentRoom = this.currentPop.rooms[0]
       });
     },
-    popClassification: function popClassification(pop) {
-      var id = 6;
-      var classification;
+    clearSearch: function clearSearch() {
+      this.searchText = '';
+      this.getRoomsData();
+    } // setGraph(room, pop) {
+    //     this.currentRoom = room
+    //     this.currentPop = pop
+    // }
 
-      if (pop.sites) {
-        pop.sites.forEach(function (item) {
-          if (item.classification_type_id && item.classification_type_id < id) {
-            id = item.classification_type_id;
-            classification = item.classification_type.classification_type;
-          }
-        }, this);
-      }
-
-      return {
-        'id': id,
-        'classification': classification
-      };
-    }
   }
 });
 
@@ -403,10 +529,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityPlanning.vue?vue&type=template&id=e14f455e&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/CapacityPlanning.vue?vue&type=template&id=e14f455e& ***!
+  \****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -418,155 +544,442 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "columns" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-5 has-text-weight-semibold has-text-left",
-          class: _vm.primaryText
-        },
-        [_vm._v("POP Críticos")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-4 has-text-weight-semibold has-text-right",
-          class: _vm.primaryText
-        },
-        [_vm._v(_vm._s(_vm._f("numeral")(_vm.data.total, "0,0")))]
-      )
-    ]),
-    _vm._v(" "),
+  return _c("div", { staticClass: "hero is-dark" }, [
     _c(
-      "table",
-      { staticClass: "table is-fullwidth", class: _vm.boxBackground },
+      "div",
+      { staticClass: "columns hero-body" },
       [
-        _c("thead", [
-          _c("tr", { staticClass: "is-size-7" }, [
+        _c("div", { staticClass: "column is-1 section" }, [
+          _c("div", {}, [
             _c(
-              "th",
-              { staticClass: "has-text-left", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Nombre y dirección del POP" } }, [
-                  _vm._v("Nombre / Dirección")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-left", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Nemónico" } }, [
-                  _vm._v("Nemónico")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-left", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Categoría" } }, [
-                  _vm._v("Categoría")
-                ])
-              ]
+              "div",
+              { staticClass: "columns is-multiline" },
+              _vm._l(_vm.crms, function(crm) {
+                return _c(
+                  "div",
+                  {
+                    key: crm.id,
+                    staticClass: "column is-12",
+                    on: {
+                      click: function($event) {
+                        _vm.currentCrm = _vm.currentCrm === crm.id ? 0 : crm.id
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "tile is-child box has-text-centered has-text-white",
+                        class:
+                          _vm.currentCrm === crm.id
+                            ? "has-background-link"
+                            : "has-background-black-ter"
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "is-size-4 has-text-weight-semibold",
+                          domProps: { textContent: _vm._s(crm.sigla_crm) }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticStyle: { "padding-top": "5px" } }, [
+                          _c(
+                            "div",
+                            { staticClass: "is-size-7 has-text-weight-normal" },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(crm.nombre_crm) +
+                                  "\n                                "
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              }),
+              0
             )
           ])
         ]),
         _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.data.data, function(item) {
-            return _c("tr", { staticClass: "is-size-7" }, [
+        _c("div", { staticClass: "column section" }, [
+          _c("div", {}, [
+            _c("div", { staticClass: "box has-background-black-ter" }, [
+              _c("div", { staticClass: "field" }, [
+                _c(
+                  "p",
+                  { staticClass: "control has-icons-left has-icons-right" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.searchText,
+                          expression: "searchText"
+                        }
+                      ],
+                      staticClass:
+                        "input is-rounded has-background-black-ter has-text-light",
+                      attrs: {
+                        type: "text",
+                        "arial-label": "Buscar",
+                        placeholder: "Buscar...",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.searchText },
+                      on: {
+                        keyup: _vm.getRoomsData,
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.searchText = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      { staticClass: "icon is-small is-left" },
+                      [_c("font-awesome-icon", { attrs: { icon: "search" } })],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "icon is-small is-right" }, [
+                      _c("button", {
+                        staticClass: "delete",
+                        on: { click: _vm.clearSearch }
+                      })
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
               _c(
-                "td",
-                { staticClass: "has-text-left", class: _vm.primaryText },
+                "table",
+                {
+                  staticClass:
+                    "table is-fullwidth has-background-black-ter has-text-white"
+                },
                 [
-                  _c("div", [_vm._v(_vm._s(item.pop.nombre))]),
+                  _vm._m(0),
                   _vm._v(" "),
-                  _c("div", [_vm._v(_vm._s(item.pop.direccion))])
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.roomsData.data, function(pop) {
+                      return _c("tr", {}, [
+                        _c("td", {}, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "is-size-6 has-text-weight-bold",
+                              attrs: {
+                                target: "_blank",
+                                href: "/pop/" + pop.id
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(pop ? pop.nombre : "") +
+                                  "\n                                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "is-size-7 has-text-weight-normal" },
+                            [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(pop ? pop.comuna.nombre : "") +
+                                  "\n                                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "is-size-7 has-text-weight-normal" },
+                            [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(
+                                    pop
+                                      ? "Zona: " + pop.comuna.zona.nombre_zona
+                                      : ""
+                                  ) +
+                                  " - " +
+                                  _vm._s(
+                                    pop
+                                      ? "CRM: " + pop.comuna.zona.crm.nombre_crm
+                                      : ""
+                                  ) +
+                                  "\n                                    "
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {},
+                          _vm._l(pop.rooms, function(room) {
+                            return _c("div", { staticClass: "field columns" }, [
+                              _c("div", { staticClass: "column is-6" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-semibold has-text-smart",
+                                    on: {
+                                      click: function($event) {
+                                        _vm.isComponentModalActive = true
+                                        _vm.roomSelected = room
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                " +
+                                        _vm._s(room.name) +
+                                        " "
+                                    ),
+                                    room.old_name
+                                      ? _c("span", [
+                                          _vm._v("- " + _vm._s(room.old_name))
+                                        ])
+                                      : _vm._e()
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column has-text-centered" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticStyle: { "padding-top": "5px" } },
+                                    [
+                                      _c("font-awesome-icon", {
+                                        staticClass: "has-text-info",
+                                        attrs: {
+                                          icon: ["fas", "circle"],
+                                          size: "2x"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-6 has-text-weight-bold"
+                                        },
+                                        [_vm._v("10 kW")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column has-text-centered" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticStyle: { "padding-top": "5px" } },
+                                    [
+                                      _c("font-awesome-icon", {
+                                        staticClass: "has-text-warning",
+                                        attrs: {
+                                          icon: ["fas", "circle"],
+                                          size: "2x"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-6 has-text-weight-bold"
+                                        },
+                                        [_vm._v("10 kW")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column has-text-centered" },
+                                [
+                                  _c("font-awesome-icon", {
+                                    staticClass: "has-text-success",
+                                    attrs: {
+                                      icon: ["fas", "circle"],
+                                      size: "2x"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-6 has-text-weight-bold"
+                                    },
+                                    [_vm._v("10 kW")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column has-text-centered" },
+                                [
+                                  _c("font-awesome-icon", {
+                                    staticClass: "has-text-danger",
+                                    attrs: {
+                                      icon: ["fas", "circle"],
+                                      size: "2x"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-6 has-text-weight-bold"
+                                    },
+                                    [_vm._v("10 kW")]
+                                  )
+                                ],
+                                1
+                              )
+                            ])
+                          }),
+                          0
+                        )
+                      ])
+                    }),
+                    0
+                  )
                 ]
               ),
               _vm._v(" "),
               _c(
-                "td",
-                { staticClass: "has-text-left", class: _vm.primaryText },
+                "nav",
+                {
+                  staticClass: "pagination",
+                  attrs: { role: "navigation", "aria-label": "pagination" }
+                },
                 [
-                  _c(
-                    "router-link",
-                    { attrs: { to: "/pop/" + item.pop.id, target: "_blank" } },
-                    [_vm._v(_vm._s(item.name))]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-centered", class: _vm.primaryText },
-                [
-                  _c(
-                    "b-tag",
-                    {
-                      attrs: {
-                        type:
-                          _vm.popClassification(item.pop).id == 1
-                            ? "is-info"
-                            : _vm.popClassification(item.pop).id == 2
-                            ? "is-warning"
-                            : _vm.popClassification(item.pop).id == 3
-                            ? "is-smart"
-                            : _vm.popClassification(item.pop).id == 4
-                            ? "is-success"
-                            : "is-link"
+                  _c("vue-pagination", {
+                    staticClass: "has-text-white",
+                    attrs: { pagination: _vm.roomsData, offset: 4 },
+                    on: {
+                      paginate: function($event) {
+                        return _vm.getRoomsData()
                       }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.popClassification(item.pop).classification)
-                      )
-                    ]
-                  )
+                    }
+                  })
                 ],
                 1
               )
             ])
-          }),
-          0
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "nav",
-      {
-        staticClass: "pagination",
-        attrs: { role: "navigation", "aria-label": "pagination" }
-      },
-      [
-        _c("vue-pagination", {
-          attrs: {
-            pagination: _vm.data,
-            offset: 4,
-            primaryText: _vm.primaryText
-          },
-          on: {
-            paginate: function($event) {
-              return _vm.getData()
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            attrs: {
+              active: _vm.isComponentModalActive,
+              "has-modal-card": "",
+              "full-screen": "",
+              "can-cancel": false
+            },
+            on: {
+              "update:active": function($event) {
+                _vm.isComponentModalActive = $event
+              }
             }
-          }
-        })
+          },
+          [
+            _c("modal-room", {
+              attrs: { user: _vm.user, room: _vm.roomSelected }
+            })
+          ],
+          1
+        )
       ],
       1
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c(
+          "th",
+          { staticClass: "is-size-6 has-text-weight-semibold has-text-white" },
+          [_c("abbr", { attrs: { title: "id" } }, [_vm._v("POP")])]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "is-size-6 has-text-weight-semibold has-text-white" },
+          [
+            _c("div", { staticClass: "columns" }, [
+              _c("div", { staticClass: "column is-6" }, [
+                _c("abbr", { attrs: { title: "id" } }, [_vm._v("Sala")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "column has-text-centered" }, [
+                _c("div", { staticStyle: { "padding-bottom": "5px" } }, [
+                  _vm._v("Estado / Disponibilidad")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "columns" }, [
+                  _c("div", { staticClass: "column has-text-centered" }, [
+                    _c("abbr", { attrs: { title: "id" } }, [_vm._v("General")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "column has-text-centered" }, [
+                    _c("abbr", { attrs: { title: "id" } }, [_vm._v("Energía")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "column has-text-centered" }, [
+                    _c("abbr", { attrs: { title: "id" } }, [_vm._v("Clima")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "column has-text-centered" }, [
+                    _c("abbr", { attrs: { title: "id" } }, [_vm._v("Espacio")])
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -642,17 +1055,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/CriticPopsData.vue":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/dashboard/CriticPopsData.vue ***!
-  \**************************************************************/
+/***/ "./resources/js/components/capacity/CapacityPlanning.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityPlanning.vue ***!
+  \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CriticPopsData.vue?vue&type=template&id=5a0f1266& */ "./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266&");
-/* harmony import */ var _CriticPopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CriticPopsData.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CapacityPlanning_vue_vue_type_template_id_e14f455e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CapacityPlanning.vue?vue&type=template&id=e14f455e& */ "./resources/js/components/capacity/CapacityPlanning.vue?vue&type=template&id=e14f455e&");
+/* harmony import */ var _CapacityPlanning_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CapacityPlanning.vue?vue&type=script&lang=js& */ "./resources/js/components/capacity/CapacityPlanning.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -662,9 +1075,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CriticPopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CapacityPlanning_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CapacityPlanning_vue_vue_type_template_id_e14f455e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CapacityPlanning_vue_vue_type_template_id_e14f455e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -674,38 +1087,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/CriticPopsData.vue"
+component.options.__file = "resources/js/components/capacity/CapacityPlanning.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/capacity/CapacityPlanning.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityPlanning.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CriticPopsData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityPlanning_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CapacityPlanning.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityPlanning.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityPlanning_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266& ***!
-  \*********************************************************************************************/
+/***/ "./resources/js/components/capacity/CapacityPlanning.vue?vue&type=template&id=e14f455e&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityPlanning.vue?vue&type=template&id=e14f455e& ***!
+  \**********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CriticPopsData.vue?vue&type=template&id=5a0f1266& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/CriticPopsData.vue?vue&type=template&id=5a0f1266&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityPlanning_vue_vue_type_template_id_e14f455e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CapacityPlanning.vue?vue&type=template&id=e14f455e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityPlanning.vue?vue&type=template&id=e14f455e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityPlanning_vue_vue_type_template_id_e14f455e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CriticPopsData_vue_vue_type_template_id_5a0f1266___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityPlanning_vue_vue_type_template_id_e14f455e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

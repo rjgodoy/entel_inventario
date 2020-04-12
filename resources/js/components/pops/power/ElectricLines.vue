@@ -1,11 +1,11 @@
 <template>
-    <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="electricLines.electric_line">
+    <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="electricLines.electricLine">
         <div class="field">
             <div class="has-text-weight-semibold has-text-dark is-size-4 has-text-left">Líneas Eléctricas</div>
         </div>
         
         <div class="columns is-multiline">
-            <div class="column is-6" v-for="data in electricLines.electric_line">
+            <div class="column is-6" v-for="data in electricLines.electricLine">
                 <div class="tile is-child box">
 
                     <div class="columns">
@@ -33,6 +33,7 @@
                             <div class="has-text-weight-normal is-size-6">{{ data.distance | numeral('0,0') }} <span class="is-size-7" v-if="data.distance">m</span></div>
                         </div>
                     </div>
+
                     <div class="columns is-multiline">
                         <div class="column is-6" v-for="transformer in data.transformers">
 
@@ -40,7 +41,7 @@
                                 <div class="title is-size-5 has-text-weight-semibold">Transformador Nº {{ transformer.id }}</div>
                                 <b-field v-if="electricLines.can.update">
                                     <b-select placeholder="" icon="bolt" icon-pack="fas" v-model="electricLineSelected" @input="setTransformerElectricLine(transformer.id, electricLineSelected)">
-                                        <option v-for="electricLine in electricLines.electric_line" :value="electricLine.id">{{ electricLine.id }}</option>
+                                        <option v-for="electricLine in electricLines.electricLine" :value="electricLine.id">{{ electricLine.id }}</option>
                                     </b-select>
                                 </b-field>
                                 <div class="columns">
@@ -83,6 +84,7 @@
         data() {
             return {
                 electricLines: Array,
+                electricLineSelected: Number
             }
         },
         mounted() {

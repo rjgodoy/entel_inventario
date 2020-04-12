@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\TempSgcPop;
 
+use App\Http\Resources\Admin as AdminResource;
 use App\Models\AdminTab;
 
 class AdminController extends Controller
@@ -14,23 +15,7 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $request->user()->authorizeRoles(['admin']);
-
-        $tabs = AdminTab::all();
-
-        return view('admin', compact(
-            'tabs'
-        ))->with('message', 'Hello');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index()
     {
         //
     }
@@ -58,17 +43,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -89,5 +63,17 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Get tabs for admin module.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function tabs()
+    {
+        $tabs = AdminTab::all();
+        return new AdminResource($tabs);
     }
 }

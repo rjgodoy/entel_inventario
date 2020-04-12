@@ -73,7 +73,6 @@
         data() {
             return {
                 pops: null,
-                // center: { lat: parseFloat(this.popMaster.latitude), lng: parseFloat(this.popMaster.longitude) },
                 dependences: [],
                 map: null,
                 infoContent: '',
@@ -142,20 +141,26 @@
                 return this.darkMode == 1 ? this.style8 : this.style9
             },
             center() {
-                return { lat: parseFloat(this.popMaster.latitude), lng: parseFloat(this.popMaster.longitude) }
+                return { 
+                    lat: parseFloat(this.popMaster.latitude), 
+                    lng: parseFloat(this.popMaster.longitude) 
+                }
             },
             icon_pop() {
                 return {
                     url: '../img/markers/entelPin_red-white.png',
-                    scaledSize: new google.maps.Size(30, 54),
-                    origin: new google.maps.Point(0,0),
-                    anchor: new google.maps.Point(15,54)
+                    scaledSize: google && new google.maps.Size(30, 54),
+                    origin: google && new google.maps.Point(0,0),
+                    anchor: google && new google.maps.Point(15,54)
                 }
             },
         },
         created() {
+
         },
         mounted() {
+            this.pops = [this.popMaster]
+            // this.initializeMap()
             this.dependencesButton()
         },
         watch: {
@@ -167,9 +172,9 @@
             }
         },
         methods: {
-            async initializeMap() {
+            initializeMap() {
                 this.$refs.map.$mapPromise.then((map) => {
-                    map.panTo({ lat: parseFloat(this.popMaster.latitude), lng: parseFloat(this.popMaster.longitude) })
+                    // map.panTo({ lat: parseFloat(this.popMaster.latitude), lng: parseFloat(this.popMaster.longitude) })
                     this.pops.length == 1 ? map.setZoom(this.zoom) : null
                     this.pops.length == 1 ? null : this.flightPath.setMap(null)
                 })
@@ -223,7 +228,7 @@
                 `);
             },
 
-            async getDependences() {
+            getDependences() {
                 if (!this.dependencesActive) {
                     this.dependencesActive = 1
                     this.buttonName = 'POP'
@@ -232,7 +237,7 @@
                     .then((response) => {
                         this.dependences = response.data.data
                         if (this.dependences.length) {
-                            this.dependences.forEach(element => this.pops.push(element.dependence.pop))
+                            this.dependences.forEach(element => element && this.pops.push(element.dependence.pop))
 
                             //Set bounds of the map
                             this.$refs.map.$mapPromise.then((map) => {
@@ -242,7 +247,7 @@
                                         { lat: parseFloat(m.dependence.pop.latitude), lng: parseFloat(m.dependence.pop.longitude) }
                                     ]
 
-                                    this.flightPath = new google.maps.Polyline({
+                                    this.flightPath = google && new google.maps.Polyline({
                                         path: this.dependencesLines,
                                         geodesic: true,
                                         strokeColor: '#FF8001',
@@ -267,7 +272,7 @@
                 this.$refs.map.$mapPromise.then((map) => {
                     var myButton = document.getElementById('myDependencesButton')
                     myButton.index = 1
-                    map.controls[google.maps.ControlPosition.TOP_LEFT].push(myButton)
+                    map.controls[this.google.maps.ControlPosition.TOP_LEFT].push(myButton)
                 })
             }
         }

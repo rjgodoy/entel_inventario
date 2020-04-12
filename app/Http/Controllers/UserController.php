@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -14,7 +13,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $condition_role = $request->role_id == 0 ? 'id != 0' : 'id = '.$request->role_id;;
+        $condition_role = $request->role_id == 0 ? 'id != 0' : 'id = '.$request->role_id;
+        ;
         $users = User::with('roles')
                     // ->whereHas('roles', function($q) use($condition_role) {
                     //     $q->whereRaw($condition_role);
@@ -25,7 +25,9 @@ class UserController extends Controller
             [
                 'status' => 'success',
                 'users' => $users->toArray()
-            ], 200);
+            ],
+            200
+        );
     }
 
     /**
@@ -63,7 +65,9 @@ class UserController extends Controller
             [
                 'status' => 'success',
                 'user' => $user->toArray()
-            ], 200);
+            ],
+            200
+        );
     }
 
     /**

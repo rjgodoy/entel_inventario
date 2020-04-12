@@ -46,5 +46,10 @@ class Junction extends Model
         return $this->hasOne(JunctionMeasurement::class)->latest();
     }
 
+    public function latest_protection()
+    {
+        return $this->hasOne(JunctionProtection::class)->latest();
+    }
+
 
 }

@@ -44,10 +44,7 @@ class JunctionController extends Controller
      */
     public function show($id)
     {
-        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'junction_protections', 'latest_measurement')
-        ->whereHas('junction_protections', function($q) {
-            $q->where('protection_type', 1)->latest();
-        })
+        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection')
         ->where('pop_id', $id)
         ->get();
 

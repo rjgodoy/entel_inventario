@@ -38,6 +38,7 @@
                             <ul class="columns">
 
                                 <li v-for="menu in menu_data" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
+
                                     <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
                                         <b-icon 
                                             :pack="menu.icon_type" 
@@ -48,6 +49,7 @@
 
                                         <div v-if="currentRoute.toLowerCase().includes(menu.path)" :class="menu.path == '/eco' ? 'has-text-eco' : 'has-text-link'" style="border-bottom: 3px solid; padding-top: 5px;"></div>
                                     </router-link>
+                                    
                                 </li>
 
                             </ul>
@@ -168,7 +170,7 @@
             </div>
         </main>
 
-        <footer class="has-background-white" style="padding-top: 0.5rem; padding-bottom: 0rem;">
+        <footer :class="currentRoute.toLowerCase() == '/capacity' ? 'has-background-black-ter' : 'has-background-white'" style="padding-top: 0.5rem; padding-bottom: 0rem;">
             <div class="has-text-centered">
                 <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
             </div>

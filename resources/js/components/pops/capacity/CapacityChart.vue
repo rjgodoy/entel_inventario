@@ -1,6 +1,6 @@
 <template>
     <!-- <article class="box" :class="boxBackground" style="width: 100%; height: 200px;"> -->
-        <div class="" ref="chartdiv" style="height: 500px;"></div>
+        <div class="" ref="chartdiv" style="width: 100%;"></div>
     <!-- </article> -->
 </template>
 
@@ -93,6 +93,7 @@
                 categoryAxis.renderer.grid.template.strokeOpacity = 0;
                 categoryAxis.renderer.labels.template.horizontalCenter = "right";
                 categoryAxis.renderer.labels.template.fontWeight = 500;
+                categoryAxis.renderer.labels.template.fontSize = 14;
                 categoryAxis.renderer.labels.template.adapter.add("fill", function(fill, target) {
                     return (target.dataItem.index >= 0) ? chart.colors.getIndex(target.dataItem.index) : fill;
                 });
@@ -103,6 +104,7 @@
                 valueAxis.min = 0;
                 valueAxis.max = 100;
                 valueAxis.strictMinMax = true;
+                valueAxis.renderer.labels.template.fontSize = 12;
 
                 // Create series
                 let series1 = chart.series.push(new am4charts.RadarColumnSeries());

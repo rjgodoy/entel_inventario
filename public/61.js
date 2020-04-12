@@ -1,195 +1,172 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[61],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/Eco.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/eco/Eco.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @amcharts/amcharts4/core */ "./node_modules/@amcharts/amcharts4/core.js");
+/* harmony import */ var _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @amcharts/amcharts4/charts */ "./node_modules/@amcharts/amcharts4/charts.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+
+ // import am4themes_entel from "../../constants/amChartsEntel.js";
+// import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
+// import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+// am4core.useTheme(am4themes_entel)
+// am4core.useTheme(am4themes_dark) 
+// am4core.useTheme(am4themes_animated);
+
+_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
-  props: [],
+  props: [// 'room',
+  'chartData'],
   data: function data() {
-    return {
-      protectedZones: [],
-      isPaginated: true,
-      isPaginationSimple: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 20,
-      darkMode: 0,
-      bodyBackground: '',
-      boxBackground: '',
-      primaryText: '',
-      secondaryText: '',
-      searchBodyBackground: ''
+    return {// chart: null,
     };
   },
-  created: function created() {},
   mounted: function mounted() {
-    this.getProtectedZones(); // this.getFiles()
+    this.graph();
   },
+  computed: {
+    lastData: function lastData() {
+      return this.chartData;
+    }
+  },
+  watch: {},
   methods: {
-    getProtectedZones: function getProtectedZones() {
-      var _this = this;
+    graph: function () {
+      var _graph = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var chart, categoryAxis, valueAxis, series1, series2;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                // Create chart instance
+                chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["RadarChart"]); // Add data
 
-      axios.get("/api/eco").then(function (response) {
-        // console.log(response.data.data)
-        _this.protectedZones = response.data.data;
-      });
-    } // async getFiles() {
-    //     axios.get(`/api/eco/1`).then((response) => {
-    //         // console.log(response)
-    //     })
-    // }
+                chart.data = [{
+                  "category": "Empalme",
+                  "value": 100 - this.lastData.junction * 100,
+                  "full": 100
+                }, {
+                  "category": "GGEE",
+                  "value": 100 - this.lastData.generator * 100,
+                  "full": 100
+                }, {
+                  "category": "Plantas CC",
+                  "value": 100 - this.lastData.rectifier * 100,
+                  "full": 100
+                }, {
+                  "category": "Baterías",
+                  "value": 100 - this.lastData.battery * 100,
+                  "full": 100
+                }, {
+                  "category": "Distribución",
+                  "value": 100 - this.lastData.distribution * 100,
+                  "full": 100
+                }, {
+                  "category": "Clima",
+                  "value": 100 - this.lastData.climate * 100,
+                  "full": 100
+                }, {
+                  "category": "Espacio",
+                  "value": 100 - this.lastData.space * 100,
+                  "full": 100
+                }]; // Make chart not full circle
 
+                chart.startAngle = -90;
+                chart.endAngle = 180;
+                chart.innerRadius = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["percent"](20); // Set number format
+
+                chart.numberFormatter.numberFormat = "#.#'%'"; // Create axes
+
+                categoryAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["CategoryAxis"]());
+                categoryAxis.dataFields.category = "category";
+                categoryAxis.renderer.grid.template.location = 0;
+                categoryAxis.renderer.grid.template.strokeOpacity = 0;
+                categoryAxis.renderer.labels.template.horizontalCenter = "right";
+                categoryAxis.renderer.labels.template.fontWeight = 500;
+                categoryAxis.renderer.labels.template.fontSize = 14;
+                categoryAxis.renderer.labels.template.adapter.add("fill", function (fill, target) {
+                  return target.dataItem.index >= 0 ? chart.colors.getIndex(target.dataItem.index) : fill;
+                });
+                categoryAxis.renderer.minGridDistance = 10;
+                valueAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["ValueAxis"]());
+                valueAxis.renderer.grid.template.strokeOpacity = 0;
+                valueAxis.min = 0;
+                valueAxis.max = 100;
+                valueAxis.strictMinMax = true;
+                valueAxis.renderer.labels.template.fontSize = 12; // Create series
+
+                series1 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["RadarColumnSeries"]());
+                series1.dataFields.valueX = "full";
+                series1.dataFields.categoryY = "category";
+                series1.clustered = false;
+                series1.columns.template.fill = new _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["InterfaceColorSet"]().getFor("alternativeBackground");
+                series1.columns.template.fillOpacity = 0.08;
+                series1.columns.template.cornerRadiusTopLeft = 20;
+                series1.columns.template.strokeWidth = 0;
+                series1.columns.template.radarColumn.cornerRadius = 20;
+                series2 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["RadarColumnSeries"]());
+                series2.dataFields.valueX = "value";
+                series2.dataFields.categoryY = "category";
+                series2.clustered = false;
+                series2.columns.template.strokeWidth = 0;
+                series2.columns.template.tooltipText = "{category}: [bold]{value}[/]";
+                series2.columns.template.radarColumn.cornerRadius = 20;
+                series2.columns.template.adapter.add("fill", function (fill, target) {
+                  return chart.colors.getIndex(target.dataItem.index);
+                }); // Add cursor
+
+                chart.cursor = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["RadarCursor"]();
+                this.chart = chart;
+
+              case 40:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function graph() {
+        return _graph.apply(this, arguments);
+      }
+
+      return graph;
+    }()
+  },
+  beforeDestroy: function beforeDestroy() {
+    // if (this.chart) {
+    this.chart.dispose(); // }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810& ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -201,357 +178,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "section is-marginless", class: _vm.bodyBackground },
-    [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "tile is-ancestor" }, [
-          _c("div", { staticClass: "tile" }, [
-            _c("div", { staticClass: "tile is-vertical" }, [
-              _c("div", { staticClass: "tile is-parent" }, [
-                _c(
-                  "div",
-                  { staticClass: "tile is-child box" },
-                  [
-                    _c("div", { staticClass: "title is-size-4" }, [
-                      _vm._v("POP en zonas protegidas")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "b-field",
-                      { attrs: { grouped: "", "group-multiline": "" } },
-                      [
-                        _c(
-                          "b-select",
-                          {
-                            model: {
-                              value: _vm.defaultSortDirection,
-                              callback: function($$v) {
-                                _vm.defaultSortDirection = $$v
-                              },
-                              expression: "defaultSortDirection"
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "asc" } }, [
-                              _vm._v("Default sort direction: ASC")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "desc" } }, [
-                              _vm._v("Default sort direction: DESC")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-select",
-                          {
-                            attrs: { disabled: !_vm.isPaginated },
-                            model: {
-                              value: _vm.perPage,
-                              callback: function($$v) {
-                                _vm.perPage = $$v
-                              },
-                              expression: "perPage"
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "5" } }, [
-                              _vm._v("5 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "10" } }, [
-                              _vm._v("10 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "15" } }, [
-                              _vm._v("15 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "20" } }, [
-                              _vm._v("20 per page")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "control is-flex" },
-                          [
-                            _c(
-                              "b-switch",
-                              {
-                                attrs: { disabled: !_vm.isPaginated },
-                                model: {
-                                  value: _vm.isPaginationSimple,
-                                  callback: function($$v) {
-                                    _vm.isPaginationSimple = $$v
-                                  },
-                                  expression: "isPaginationSimple"
-                                }
-                              },
-                              [_vm._v("Simple pagination")]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("b-table", {
-                      attrs: {
-                        data: _vm.protectedZones,
-                        paginated: _vm.isPaginated,
-                        "per-page": _vm.perPage,
-                        "current-page": _vm.currentPage,
-                        "pagination-simple": _vm.isPaginationSimple,
-                        "pagination-position": _vm.paginationPosition,
-                        "default-sort-direction": _vm.defaultSortDirection,
-                        "sort-icon": _vm.sortIcon,
-                        "sort-icon-size": _vm.sortIconSize,
-                        "pagination-size": "is-small",
-                        "default-sort": "user.first_name",
-                        "aria-next-label": "Next page",
-                        "aria-previous-label": "Previous page",
-                        "aria-page-label": "Page",
-                        "aria-current-label": "Current page"
-                      },
-                      on: {
-                        "update:currentPage": function($event) {
-                          _vm.currentPage = $event
-                        },
-                        "update:current-page": function($event) {
-                          _vm.currentPage = $event
-                        }
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function(props) {
-                            return [
-                              _c(
-                                "b-table-column",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: {
-                                    field: "id",
-                                    label: "Nemónico",
-                                    width: "40",
-                                    sortable: ""
-                                  },
-                                  scopedSlots: _vm._u(
-                                    [
-                                      {
-                                        key: "header",
-                                        fn: function(ref) {
-                                          var column = ref.column
-                                          return [
-                                            _c(
-                                              "b-tooltip",
-                                              {
-                                                staticClass: "is-size-6",
-                                                attrs: { label: column.label }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                " +
-                                                    _vm._s(column.label) +
-                                                    "\n                                            "
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        }
-                                      }
-                                    ],
-                                    null,
-                                    true
-                                  )
-                                },
-                                [
-                                  _vm._v(" "),
-                                  _vm._l(props.row.sites, function(site) {
-                                    return _c(
-                                      "router-link",
-                                      {
-                                        key: props.row.id,
-                                        staticClass: "is-size-7",
-                                        attrs: {
-                                          to: "/pop/" + props.row.id,
-                                          target: "_blank"
-                                        }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                            " +
-                                            _vm._s(site.nem_site) +
-                                            "\n                                        "
-                                        )
-                                      ]
-                                    )
-                                  })
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-table-column",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: {
-                                    field: "user.first_name",
-                                    label: "Nombre POP",
-                                    sortable: ""
-                                  },
-                                  scopedSlots: _vm._u(
-                                    [
-                                      {
-                                        key: "header",
-                                        fn: function(ref) {
-                                          var column = ref.column
-                                          return [
-                                            _c(
-                                              "b-tooltip",
-                                              {
-                                                staticClass: "is-size-6",
-                                                attrs: { label: column.label }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                " +
-                                                    _vm._s(column.label) +
-                                                    "\n                                            "
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        }
-                                      }
-                                    ],
-                                    null,
-                                    true
-                                  )
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(props.row.nombre) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-table-column",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: {
-                                    field: "user.last_name",
-                                    label: "Zona",
-                                    sortable: ""
-                                  },
-                                  scopedSlots: _vm._u(
-                                    [
-                                      {
-                                        key: "header",
-                                        fn: function(ref) {
-                                          var column = ref.column
-                                          return [
-                                            _c(
-                                              "b-tooltip",
-                                              {
-                                                staticClass: "is-size-6",
-                                                attrs: { label: column.label }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                " +
-                                                    _vm._s(column.label) +
-                                                    "\n                                            "
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        }
-                                      }
-                                    ],
-                                    null,
-                                    true
-                                  )
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(
-                                        props.row.protected_zones[0].cod_zone
-                                      ) +
-                                      "\n                                        " +
-                                      _vm._s(
-                                        props.row.comuna.zona.nombre_zona
-                                      ) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ])
-                    })
-                  ],
-                  1
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ])
-      ])
-    ]
-  )
+  return _c("div", { ref: "chartdiv", staticStyle: { height: "400px" } })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tile is-vertical" }, [
-      _c("div", { staticClass: "tile is-parent" }, [
-        _c("div", { staticClass: "tile is-child box" }, [
-          _c("div", { staticClass: "title" }, [
-            _vm._v("Zonas de acopio temporal")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "tile is-parent" }, [
-        _c("div", { staticClass: "tile is-child box" }, [
-          _c("div", { staticClass: "title" }, [_vm._v("RCA")])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/eco/Eco.vue":
-/*!*********************************************!*\
-  !*** ./resources/js/components/eco/Eco.vue ***!
-  \*********************************************/
+/***/ "./resources/js/components/capacity/CapacityChart.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityChart.vue ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Eco.vue?vue&type=template&id=100bd810& */ "./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810&");
-/* harmony import */ var _Eco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Eco.vue?vue&type=script&lang=js& */ "./resources/js/components/eco/Eco.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CapacityChart.vue?vue&type=template&id=99c241cc& */ "./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&");
+/* harmony import */ var _CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CapacityChart.vue?vue&type=script&lang=js& */ "./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -561,9 +207,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Eco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -573,38 +219,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/eco/Eco.vue"
+component.options.__file = "resources/js/components/capacity/CapacityChart.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/eco/Eco.vue?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/eco/Eco.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************/
+/***/ "./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Eco.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/Eco.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CapacityChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810& ***!
-  \****************************************************************************/
+/***/ "./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc& ***!
+  \*******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Eco.vue?vue&type=template&id=100bd810& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CapacityChart.vue?vue&type=template&id=99c241cc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

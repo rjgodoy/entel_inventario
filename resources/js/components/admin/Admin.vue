@@ -96,7 +96,7 @@
                 this.styleMode()
             },
             getTabs() {
-                axios.get(`/api/adminTabs?api_token=${this.user.api_token}`)
+                axios.get(`/api/tabs?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.tabs = response.data.data
                 })

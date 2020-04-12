@@ -254,6 +254,7 @@ Route::middleware('auth:api')->group(function () {
 
 		### CAPACITY PLANNING ######################################################################
 			Route::apiResource('rooms','Api\RoomController');
+			Route::get('roomProjection','Api\RoomController@projection');
 		##############################################################################################
 
 
@@ -287,7 +288,7 @@ Route::middleware('auth:api')->group(function () {
 
 
 		### ADMIN ######################################################################
-			Route::get('adminTabs', 'Api\MainController@adminTabs');
+			Route::get('tabs', 'Api\AdminController@tabs');
 
 			Route::apiResource('tempSgcPops','Api\TempSgcPopController');
 			Route::get('popsExisting', [

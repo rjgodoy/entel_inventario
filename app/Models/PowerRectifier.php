@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class PowerRectifier extends Model
 {
+    protected $connection = 'mysql';
+    protected $table = 'power_rectifiers';
+
+    protected $guarded = [];
+
 	public function pop() 
     {
         return $this->belongsTo(Pop::class);

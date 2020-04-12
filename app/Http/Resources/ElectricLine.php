@@ -12,7 +12,7 @@ class ElectricLine extends JsonResource
      *
      * @var string
      */
-    public static $wrap = 'electric_line';
+    public static $wrap = 'electricLine';
 
     /**
      * Indicates if the resource's collection keys should be preserved.
@@ -37,13 +37,14 @@ class ElectricLine extends JsonResource
      *
      * @return array
      */
-    // protected function permissions()
-    // {
-    //     return [
-    //         'update' => Gate::allows('update-electric-line', $this->resource),
-    //         // 'delete' => Gate::allows('delete-electric-line', $this->resource)
-    //     ];
-    // }
+    protected function permissions()
+    {
+        return [
+            // 'create' => Gate::allows('create-electric-line', ElectricLine::class),
+            'update' => Gate::allows('edit-equipment', $this->resource),
+            // 'delete' => Gate::allows('delete-electric-line', $this->resource)
+        ];
+    }
 
     /**
      * Get any additional data that should be returned with the resource array.
@@ -55,10 +56,7 @@ class ElectricLine extends JsonResource
     public function with($request)
     {        
         return [
-            'can' => [
-                'update' => $request,
-                // 'delete' => Gate::allows('delete-electric-line', $this->resource)
-            ]
+            'can' => $this->permissions()
         ];
     }
 }

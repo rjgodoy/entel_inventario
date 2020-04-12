@@ -92,18 +92,6 @@
 </template>
 
 <script>
-
-    import * as am4core from "@amcharts/amcharts4/core";
-    import * as am4charts from "@amcharts/amcharts4/charts";
-    // import am4themes_entel from "../../constants/amChartsEntel.js";
-    // import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
-    import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-    // this.darkMode ? 
-    // am4core.useTheme(am4themes_dark) 
-    // : 
-    // am4core.useTheme(am4themes_entel)
-    am4core.useTheme(am4themes_animated);
-
     export default {
         components: {
             SpaceChart: () => import('./SpaceChart')
@@ -120,9 +108,6 @@
             return {
                 verticalStructures: [],
                 infrastructures: [],
-
-                chart: null,
-                chartData: []
             }
         },
         mounted() {
@@ -152,14 +137,6 @@
                     console.log('Error al traer los datos de Transformadores: ' + error);
                 });
             }
-        },
-
-        beforeDestroy(){
-            if (this.chart) {
-                // this.chart.destroy()
-                this.chart.dispose()
-            }
-            // this.$eventBus.$off('getSitesData')
         },
     }
 </script>

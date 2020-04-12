@@ -15,6 +15,7 @@
     // : 
     am4core.useTheme(am4themes_entel)
     // am4core.useTheme(am4themes_animated);
+    am4core.disposeAllCharts();
 
     export default {
         props : [
@@ -26,7 +27,7 @@
         ],
         data() {
             return {
-                chart: null,
+                // chart: null,
                 chartData: []
             }
         },
@@ -46,7 +47,8 @@
 
         methods : {
             graphData() {
-                axios.get(`/api/siteStats?api_token=${this.user.api_token}`).then((response) => {
+                axios.get(`/api/siteStats?api_token=${this.user.api_token}`)
+                .then((response) => {
                     // console.log(response.data)
                     this.chartData = response.data
                     this.graph()
@@ -87,12 +89,12 @@
 
                 // Create series
                 function createSeries(field, name) {
-                  var series = chart.series.push(new am4charts.ColumnSeries());
-                  series.dataFields.valueY = field; 
-                  series.dataFields.dateX = "date"; 
-                  series.name = name;   
-                  series.tooltipText = "{name}: [b]{valueY}[/]";
-                  series.strokeWidth = 2;
+                    var series = chart.series.push(new am4charts.ColumnSeries());
+                    series.dataFields.valueY = field; 
+                    series.dataFields.dateX = "date"; 
+                    series.name = name;   
+                    series.tooltipText = "{name}: [b]{valueY}[/]";
+                    series.strokeWidth = 2;
                 }
 
                 createSeries("new", "Nuevos");
@@ -145,11 +147,9 @@
         },
 
         beforeDestroy(){
-            if (this.chart) {
-                // this.chart.destroy()
+            // if (this.chart) {
                 this.chart.dispose()
-            }
-            // this.$eventBus.$off('getSitesData')
+            // }
         },
     }  
 </script>

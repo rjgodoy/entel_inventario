@@ -179,7 +179,18 @@ class PopController extends Controller
      */
     public function show($id)
     {
-        $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.technologies', 'comuna.zona.responsable', 'sites.site_type', 'sites.attention_priority_type', 'sites.dependences', 'sites.category_type', 'sites.attention_type', 'rooms')
+        $pop = Pop::with(
+            'comuna.zona.crm', 
+            'sites.classification_type', 
+            'sites.technologies', 
+            'comuna.zona.responsable', 
+            'sites.site_type', 
+            'sites.attention_priority_type', 
+            'sites.dependences', 
+            'sites.category_type', 
+            'sites.attention_type', 
+            'rooms.power_rectifiers',
+            'rooms.air_conditioners')
             ->where('id', $id)
             ->whereHas('sites', function($q) {
                 $q->where(function($p) {
@@ -467,49 +478,6 @@ class PopController extends Controller
             ->whereRaw($condition_alba_project)
             ->orderBy('pops.id', 'asc')
             ->paginate(15);
-
-
-
-
-        // $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
-        //     ->whereHas('sites', function($query) use ($text, $condition_core, $condition_red_minima) {
-        //         if ($text == '') {
-        //             $query
-        //             ->whereRaw($condition_core)
-        //             ->whereRaw($condition_red_minima)
-        //             ;
-        //         } else {
-        //             $query
-        //             ->where(function($q) use($text) {
-        //                 $q->where('sites.nem_site', 'LIKE', "%$text%")
-        //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
-        //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
-        //             })
-        //             ->whereRaw($condition_core)
-        //             ->whereRaw($condition_red_minima);
-        //         }
-        //     })
-        //     ->whereHas('comuna.zona', function($query) use($condition_crm, $condition_zona) {
-        //         $query->whereRaw($condition_crm)
-        //             ->whereRaw($condition_zona);
-        //     })
-        //     ->whereRaw($condition_pe_3g)
-        //     ->whereRaw($condition_mpls)
-        //     ->whereRaw($condition_olt)
-        //     ->whereRaw($condition_olt_3play)
-        //     ->whereRaw($condition_vip)
-        //     ->whereRaw($condition_lloo)
-        //     ->whereRaw($condition_ranco)
-        //     ->whereRaw($condition_bafi)
-        //     ->whereRaw($condition_offgrid)
-        //     ->whereRaw($condition_solar)
-        //     ->whereRaw($condition_eolica)
-        //     ->whereRaw($condition_protected_zone)
-        //     ->whereRaw($condition_alba_project)
-        //     ->orderBy('pops.id', 'asc')
-
-        //     ->paginate(15);
-        //     // ->get();
 
         return $pops;
     }

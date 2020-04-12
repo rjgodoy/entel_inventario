@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Cache;
-
 use App\Http\Resources\Main as MainResource;
 use App\Models\Menu;
 use App\Models\User;
 use App\Models\Role;
-use App\Models\AdminTab;
 
 class MainController extends Controller
 {
@@ -94,15 +91,4 @@ class MainController extends Controller
         return new MainResource($roles);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function adminTabs() 
-    {
-        $tabs = AdminTab::all();
-        return new MainResource($tabs);
-    }
 }

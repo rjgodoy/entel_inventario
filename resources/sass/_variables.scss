@@ -108,9 +108,8 @@ $shades: (
     "yellow-light": $yellow-light,
 );
 
-
+// Autocomplete
 $dropdown-content-max-height: 400px !default;
-
 .autocomplete {
     .dropdown-content {
         overflow: auto;

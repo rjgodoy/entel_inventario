@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Room as RoomResource;
 use App\Models\Room;
 use App\Models\Pop;
+use App\Models\Projection;
 
 class RoomController extends Controller
 {
@@ -84,5 +85,20 @@ class RoomController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function projection(Request $request)
+    {
+        $data = Projection::where('room_id', $request->room_id)
+                ->orderBy('year', 'desc')
+                ->orderBy('month', 'desc')
+                ->get();
+        return new RoomResource($data);
     }
 }

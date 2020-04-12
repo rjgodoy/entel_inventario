@@ -23,7 +23,6 @@
     <div id="app">
 
         <router-view
-            :user='@json(auth()->user())'
             :crms='@json($crms)'
             :menu_data='@json($menu)'
             :last_data_counters='@json($last_data_counters)'

@@ -45,11 +45,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['user', 'admin']);
-
-        // $user = $request->user();
-
-        // dd($user->can('vew-comsites'));
+        $request->user()->authorizeRoles(['developer', 'admin', 'engineer', 'user']);
 
         // ⚠️ Create api_token
         // $users = User::where('estado', 1)->get();
@@ -68,16 +64,10 @@ class HomeController extends Controller
             });
         }
 
-        if ($request->user()->hasRole('admin')) {
-            $menu = Menu::where('active', 1)
-                ->orderBy('order', 'asc')
-                ->get();
-        } else {
-            $menu = Menu::where('active', 1)
-                ->where('id', '!=', 13)
-                ->orderBy('order', 'asc')
-                ->get();
-        }
+        $menu = Menu::where('active', 1)
+            ->orderBy('order', 'asc')
+            ->get();
+
 
         // CONTADORES
         // $pop_news_day = Pop::whereDay('created_at', Carbon::now()->format('d'))->count();

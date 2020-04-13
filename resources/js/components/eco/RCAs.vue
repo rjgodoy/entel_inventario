@@ -2,7 +2,7 @@
     <div class="tile is-child box">
         <div class="title is-size-4">RCAs</div>
 
-        <b-field grouped group-multiline>
+        <!-- <b-field grouped group-multiline>
             <div class="control">
                 <b-switch v-model="isBordered">Bordered</b-switch>
             </div>
@@ -22,15 +22,12 @@
                 <b-switch v-model="isLoading">Loading state</b-switch>
             </div>
             <div class="control">
-                <b-switch v-model="isEmpty">Empty</b-switch>
-            </div>
-            <div class="control">
                 <b-switch v-model="hasMobileCards">Mobile cards <small>(collapsed rows)</small></b-switch>
             </div>
-        </b-field>
+        </b-field> -->
 
         <b-table
-            :data="isEmpty ? [] : rcas"
+            :data="rcas.environmentalData"
             :bordered="isBordered"
             :striped="isStriped"
             :narrowed="isNarrowed"
@@ -83,9 +80,9 @@
             </template>
         </b-table>
 
-        <!-- <form @submit="submitForm" enctype="multipart/form-data"> -->
-        <b-field>
-            <b-upload v-model="dropFiles"
+        <b-field v-if="rcas.can ? rcas.can.upload : null">
+            <b-upload
+                v-model="dropFiles"
                 @input="submitForm"
                 multiple
                 drag-drop>
@@ -103,10 +100,8 @@
                 </section>
             </b-upload>
         </b-field>
-            <!-- <button type="submit">Upload</button> -->
-        <!-- </form> -->
 
-        <div class="tags">
+        <!-- <div class="tags">
             <span v-for="(file, index) in dropFiles"
                 :key="index"
                 class="tag is-primary" >
@@ -116,7 +111,7 @@
                     @click="deleteDropFile(index)">
                 </button>
             </span>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -131,8 +126,7 @@
             return {
                 dropFiles: [],
 
-                rcas: [],
-                isEmpty: false,
+                rcas: Array,
                 isBordered: false,
                 isStriped: false,
                 isNarrowed: false,
@@ -151,7 +145,7 @@
             getRCAs() {
                 axios.get(`/api/rcas?api_token=${this.user.api_token}`)
                 .then(response => {
-                    // console.log(response.data)
+                    console.log(response.data)
                     this.rcas = response.data
                 })
             },

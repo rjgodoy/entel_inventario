@@ -19,35 +19,5 @@ class Authenticate extends Middleware
             return route('login');
         }
     }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    // public function handle($request, Closure $next, ...$guards)
-    // {
-    //     if ($this->authenticate($request, $guards) === 'authentication_error') {
-    //         return response()->json(['error'=>'Unauthorized']);
-    //     }
-    //     return $next($request);
-    // }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    // protected function authenticate($request, array $guards)
-    // {
-    //     if (empty($guards)) {
-    //         $guards = [null];
-    //     }
-    //     foreach ($guards as $guard) {
-    //         if ($this->auth->guard($guard)->check()) {
-    //             return $this->auth->shouldUse($guard);
-    //         }
-    //     }
-    //     return 'authentication_error';
-    // }
+    
 }

@@ -1,5 +1,5 @@
 <template>
-    <article class="tile is-child box" :class="boxBackground" style="padding: 10px;">
+    <article class="tile is-child box is-bold is-dark" :class="boxBackground" style="padding: 10px;">
         <div class="" ref="chartdiv" style="height: 200px; width: 100%"></div>
     </article>
 </template>
@@ -27,23 +27,22 @@
         ],
         data() {
             return {
-                // chart: null,
-                chartData: []
+                chart: '',
+                chartData: Array
             }
         },
         mounted() {
+            // this.graph()
             this.graphData()
             // this.$eventBus.$on('getSitesData', this.graph)
         },
 
-        // watch: {
-        //     chartData(newValue, oldValue) {
-        //         // if (this.chart) {
-        //         //     this.chart.dispose()
-        //         // }
-        //         this.graph()
-        //     }
-        // },
+        watch: {
+            chartData(newValue) {
+                this.chart && this.chart.dispose()
+                this.graph()
+            }
+        },
 
         methods : {
             graphData() {
@@ -69,16 +68,18 @@
                 })
 
                 var title = chart.titles.create();
-                title.text = "Ingresos y retiros de sitios";
-                title.fontSize = 16;
+                title.text = "Ingresos y retiros de Sitios";
+                title.fontSize = 20;
                 title.marginBottom = 30;
-                title.align = 'left';
+                title.fill = am4core.color("white");
+                title.align = 'center';
                 title.fontWeight = 'bold'
 
                 // Create axes
                 var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
                 dateAxis.renderer.grid.template.location = 0;
                 dateAxis.renderer.labels.template.location = 0;
+                dateAxis.renderer.labels.template.fill = am4core.color("white");
                 dateAxis.renderer.minGridDistance = 30;
                 dateAxis.renderer.cellStartLocation = 7;
                 dateAxis.renderer.cellEndLocation = 23;
@@ -86,6 +87,7 @@
                 dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy");
 
                 var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                valueAxis.renderer.labels.template.fill = am4core.color("white");
 
                 // Create series
                 function createSeries(field, name) {
@@ -103,53 +105,15 @@
                 chart.cursor = new am4charts.XYCursor();
                 // chart.scrollbarX = new am4core.Scrollbar();
 
-
-
-
-
-                
-
-                // // Create axes
-                // let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-                // dateAxis.dateFormats.setKey("month", "[font-size: 12px]MMM");
-                // dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy");
-                // dateAxis.renderer.grid.template.location = 0;
-                // dateAxis.renderer.labels.template.location = 0.5;
-                // dateAxis.renderer.minGridDistance = 30;
-                // dateAxis.renderer.cellStartLocation = 10;
-                // dateAxis.renderer.cellEndLocation = 20;
-
-
-                // let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-                // valueAxis.min = 0;
-                // valueAxis.title.text = "Cantidad (Q)";
-                // valueAxis.fontSize = 12;
-
-                // // Create series
-                // function createSeries(field, name) {
-                //     let series = chart.series.push(new am4charts.ColumnSeries());
-                //     series.dataFields.valueY = field;
-                //     series.dataFields.dateX = "date";
-                //     series.name = name;
-                //     series.columns.template.tooltipText = "[font-size: 12px]{name}: [bold font-size: 12px]{valueY}[/]";
-                //     series.strokeWidth = 2;
-                //     // series.columns.template.width = am4core.percent(50);
-                // }
-
-                // createSeries("new", "Nuevos");
-                // createSeries("deleted", "Eliminados");
-
                 // Add legend
                 // chart.legend = new am4charts.Legend();
 
-                // this.chart = chart;
+                this.chart = chart;
             }
         },
 
         beforeDestroy(){
-            // if (this.chart) {
-                this.chart.dispose()
-            // }
+            this.chart && this.chart.dispose()
         },
     }  
 </script>

@@ -37,7 +37,7 @@
                         <div class="">
                             <ul class="columns">
 
-                                <li v-for="menu in menu_data" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
+                                <li v-if="canView(menu.path)" v-for="menu in menu_data" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
 
                                     <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
                                         <b-icon 
@@ -188,6 +188,7 @@
         },
         props: [
             'user',
+            'user_permissions',
             'app_name',
             'crms',
             'menu_data',
@@ -221,8 +222,8 @@
             }
         },
 
-        created() {
-            // console.log(this.$route)
+        mounted() {
+            console.log(this.user_permissions[0])
             // if (this.$route.query.message) {
             //     this.$buefy.toast.open({
             //         message: this.$route.query.message,
@@ -248,9 +249,29 @@
             goBack() {
                 window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
             },
+
             changeStyle() {
                 this.darkMode = this.darkMode == 0 ? 1 : 0
             },
+
+            canView(path) {
+                if (path !== '/capacity' && path !== '/admin') {
+                    return true
+                } else if (path == '/capacity' && 
+                    (this.user.roles[0].name == 'developer' 
+                        || this.user.roles[0].name == 'admin' 
+                        || this.user.roles[0].name == 'engineer'
+                        || this.user_permissions.find(element => element.slug == 'view-capacity')
+                        )) {
+                    return true
+                } else if (path == '/admin' && (this.user.roles[0].name == 'developer' || this.user.roles[0].name == 'admin')) {
+                    return true
+                } else {
+                    return false
+                }
+
+            },
+
             logout: function(e){
                 axios.post(`/logout?api_token=${this.user.api_token}`).then((response) => {
                     if (response.status === 200) {

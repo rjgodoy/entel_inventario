@@ -15,7 +15,7 @@
                             v-for="crm in crms"
                             :key="crm.id"
                             @click="currentCrm = currentCrm === crm.id ? 0 : crm.id">
-                            <div class="tile is-child box has-text-centered has-text-white" :class="currentCrm === crm.id ? 'has-background-link' : 'has-background-black-ter'">
+                            <div class="tile is-child box has-text-centered has-text-white" :class="currentCrm === crm.id ? 'is-bold is-link' : 'has-background-black-ter'">
                                 <div 
                                     v-text="crm.sigla_crm"
                                     class="is-size-4 has-text-weight-semibold">

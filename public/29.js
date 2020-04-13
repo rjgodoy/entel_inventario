@@ -45,12 +45,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    // Junctions: () => import('../pops/power/Junctions'),
     ProjectionChart: function ProjectionChart() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(30)]).then(__webpack_require__.bind(null, /*! ./ProjectionChart */ "./resources/js/components/capacity/ProjectionChart.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(61), __webpack_require__.e(30)]).then(__webpack_require__.bind(null, /*! ./ProjectionChart */ "./resources/js/components/capacity/ProjectionChart.vue"));
     },
     CapacityChart: function CapacityChart() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(28)]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/capacity/CapacityChart.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(61), __webpack_require__.e(28)]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/capacity/CapacityChart.vue"));
     }
   },
   props: ['room', 'user'],

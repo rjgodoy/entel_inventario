@@ -6,10 +6,13 @@ import { color } from "@amcharts/amcharts4/.internal/core/utils/Color";
 var theme = function (object) {
     if (is(object, "ColorSet")) {
         object.list = [
-            color("#005cff"),
-            color("#FF3E00"),
-            color("#10069f"),
-            color("#cccccc")
+            color("#005CFF"),
+            color("#FF3C00"),
+            color("#1005A0"),
+            color("#CCCCCC"),
+            color("#2FCBF1"),
+            color("#43E8B4"),
+            color("#FD6D9B")
         ];
         object.reuse = false;
         object.stepOptions = {

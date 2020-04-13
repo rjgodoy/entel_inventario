@@ -16408,7 +16408,7 @@ var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Cl
   components: {
     'clock': Clock
   },
-  props: ['user', 'app_name', 'crms', 'menu_data', 'pops', 'last_data_counters'],
+  props: ['user', 'user_permissions', 'app_name', 'crms', 'menu_data', 'pops', 'last_data_counters'],
   data: function data() {
     return {
       darkMode: 0,
@@ -16433,8 +16433,8 @@ var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Cl
       ]
     };
   },
-  created: function created() {// console.log(this.$route)
-    // if (this.$route.query.message) {
+  mounted: function mounted() {
+    console.log(this.user_permissions[0]); // if (this.$route.query.message) {
     //     this.$buefy.toast.open({
     //         message: this.$route.query.message,
     //         type: 'is-success',
@@ -16459,6 +16459,19 @@ var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Cl
     },
     changeStyle: function changeStyle() {
       this.darkMode = this.darkMode == 0 ? 1 : 0;
+    },
+    canView: function canView(path) {
+      if (path !== '/capacity' && path !== '/admin') {
+        return true;
+      } else if (path == '/capacity' && (this.user.roles[0].name == 'developer' || this.user.roles[0].name == 'admin' || this.user.roles[0].name == 'engineer' || this.user_permissions.find(function (element) {
+        return element.slug == 'view-capacity';
+      }))) {
+        return true;
+      } else if (path == '/admin' && (this.user.roles[0].name == 'developer' || this.user.roles[0].name == 'admin')) {
+        return true;
+      } else {
+        return false;
+      }
     },
     logout: function logout(e) {
       var _this = this;
@@ -52102,76 +52115,79 @@ var render = function() {
                       "ul",
                       { staticClass: "columns" },
                       _vm._l(_vm.menu_data, function(menu) {
-                        return _c(
-                          "li",
-                          {
-                            staticClass: "column has-text-centered",
-                            class: _vm.currentRoute
-                              .toLowerCase()
-                              .includes(menu.path)
-                              ? "is-active"
-                              : ""
-                          },
-                          [
-                            _c(
-                              "router-link",
+                        return _vm.canView(menu.path)
+                          ? _c(
+                              "li",
                               {
-                                class:
-                                  _vm.currentRoute.toLowerCase() === menu.path
-                                    ? menu.path == "/eco"
-                                      ? "has-text-eco"
-                                      : "has-text-link"
-                                    : "",
-                                attrs: { to: menu.path }
-                              },
-                              [
-                                _c("b-icon", {
-                                  class: _vm.currentRoute
-                                    .toLowerCase()
-                                    .includes(menu.path)
-                                    ? menu.path == "/eco"
-                                      ? "has-text-eco"
-                                      : "has-text-link"
-                                    : "has-text-grey-light",
-                                  attrs: {
-                                    pack: menu.icon_type,
-                                    icon: menu.icon
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "p",
-                                  {
-                                    staticClass: "is-size-7",
-                                    class: _vm.currentRoute
-                                      .toLowerCase()
-                                      .includes(menu.path)
-                                      ? "has-text-white"
-                                      : "has-text-grey-light"
-                                  },
-                                  [_vm._v(_vm._s(menu.title))]
-                                ),
-                                _vm._v(" "),
-                                _vm.currentRoute
+                                staticClass: "column has-text-centered",
+                                class: _vm.currentRoute
                                   .toLowerCase()
                                   .includes(menu.path)
-                                  ? _c("div", {
-                                      class:
-                                        menu.path == "/eco"
+                                  ? "is-active"
+                                  : ""
+                              },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    class:
+                                      _vm.currentRoute.toLowerCase() ===
+                                      menu.path
+                                        ? menu.path == "/eco"
                                           ? "has-text-eco"
-                                          : "has-text-link",
-                                      staticStyle: {
-                                        "border-bottom": "3px solid",
-                                        "padding-top": "5px"
+                                          : "has-text-link"
+                                        : "",
+                                    attrs: { to: menu.path }
+                                  },
+                                  [
+                                    _c("b-icon", {
+                                      class: _vm.currentRoute
+                                        .toLowerCase()
+                                        .includes(menu.path)
+                                        ? menu.path == "/eco"
+                                          ? "has-text-eco"
+                                          : "has-text-link"
+                                        : "has-text-grey-light",
+                                      attrs: {
+                                        pack: menu.icon_type,
+                                        icon: menu.icon
                                       }
-                                    })
-                                  : _vm._e()
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass: "is-size-7",
+                                        class: _vm.currentRoute
+                                          .toLowerCase()
+                                          .includes(menu.path)
+                                          ? "has-text-white"
+                                          : "has-text-grey-light"
+                                      },
+                                      [_vm._v(_vm._s(menu.title))]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.currentRoute
+                                      .toLowerCase()
+                                      .includes(menu.path)
+                                      ? _c("div", {
+                                          class:
+                                            menu.path == "/eco"
+                                              ? "has-text-eco"
+                                              : "has-text-link",
+                                          staticStyle: {
+                                            "border-bottom": "3px solid",
+                                            "padding-top": "5px"
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ],
+                                  1
+                                )
                               ],
                               1
                             )
-                          ],
-                          1
-                        )
+                          : _vm._e()
                       }),
                       0
                     )
@@ -70706,7 +70722,7 @@ var PasswordReset = function PasswordReset() {
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(9), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(61), __webpack_require__.e(9), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {

@@ -32,13 +32,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // am4core.useTheme(am4themes_entel)
 // am4core.useTheme(am4themes_dark) 
 // am4core.useTheme(am4themes_animated);
+// am4core.disposeAllCharts();
 
-_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [// 'room',
   'chartData'],
   data: function data() {
-    return {// chart: null,
+    return {
+      chart: ''
     };
   },
   mounted: function mounted() {
@@ -49,7 +50,12 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
       return this.chartData;
     }
   },
-  watch: {},
+  watch: {
+    chartData: function chartData(newValue) {
+      this.chart && this.chart.dispose();
+      this.graph();
+    }
+  },
   methods: {
     graph: function () {
       var _graph = _asyncToGenerator(
@@ -156,8 +162,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
     }()
   },
   beforeDestroy: function beforeDestroy() {
-    // if (this.chart) {
-    this.chart.dispose(); // }
+    this.chart && this.chart.dispose();
   }
 });
 

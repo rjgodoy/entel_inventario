@@ -10,7 +10,7 @@ use App\Permissions\HasPermissionsTrait;
 class User extends Authenticatable
 {
     protected $connection = 'mysql_entel_corp';
-    protected $table = 'entel_corp.users';
+    protected $table = 'users';
 
     use Notifiable;
     use HasPermissionsTrait;
@@ -117,83 +117,19 @@ class User extends Authenticatable
      *
      * @var array
      */
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class)->withTimestamps();
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class)->withTimestamps();
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     public function areas()
     {
         return $this->belongsToMany(Area::class)->withTimestamps();
-    }
+    }    
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    public function authorizeRoles($roles)
+    public function logs()
     {
-        abort_unless($this->hasAnyRole($roles), 401);
-        return true;
-    }
-    
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public function hasAnyRole($roles)
-    {
-        if (is_array($roles)) {
-            foreach ($roles as $role) {
-                if ($this->hasRole($role)) {
-                    return true;
-                }
-            }
-        } else {
-            if ($this->hasRole($roles)) {
-                return true; 
-            }   
-        }
-        return false;
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public function hasRole($role)
-    {
-        if ($this->roles()->where('name', $role)->first()) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public function isAdmin() {
-        return $this->roles()->where('name', 'admin')->exists();
+        return $this->hasMany(Log::class);
     }
 
 }

@@ -79,7 +79,7 @@
                             <!-- Salas -->
                             <div class="tile is-parent columns is-multiline">
                                 <div class="column tile is-6" v-for="room in pop.rooms">
-                                    <div class="tile box has-background-white">
+                                    <div class="tile box is-bold is-blue">
                                         <div class="tile is-vertical">
                                             <div class="is-size-6">{{ room.name }} - {{ room.old_name }} </div>
                                             <div>
@@ -109,8 +109,8 @@
                                                 </div>
                                             </div>
                                                 
-                                            <div class="is-divider" data-content="ESPACIO"></div>
-                                            <space-chart/>
+                                            <!-- <div class="is-divider" data-content="ESPACIO"></div> -->
+                                            <!-- <space-chart/> -->
                                             
                                             </div>
                                         </div>

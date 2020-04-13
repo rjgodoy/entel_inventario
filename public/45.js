@@ -126,19 +126,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user'],
   data: function data() {
     return {
       dropFiles: [],
-      rcas: [],
-      isEmpty: false,
+      rcas: Array,
       isBordered: false,
       isStriped: false,
       isNarrowed: false,
@@ -157,7 +151,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/rcas?api_token=".concat(this.user.api_token)).then(function (response) {
-        // console.log(response.data)
+        console.log(response.data);
         _this.rcas = response.data;
       });
     },
@@ -207,184 +201,11 @@ var render = function() {
     [
       _c("div", { staticClass: "title is-size-4" }, [_vm._v("RCAs")]),
       _vm._v(" "),
-      _c("b-field", { attrs: { grouped: "", "group-multiline": "" } }, [
-        _c(
-          "div",
-          { staticClass: "control" },
-          [
-            _c(
-              "b-switch",
-              {
-                model: {
-                  value: _vm.isBordered,
-                  callback: function($$v) {
-                    _vm.isBordered = $$v
-                  },
-                  expression: "isBordered"
-                }
-              },
-              [_vm._v("Bordered")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "control" },
-          [
-            _c(
-              "b-switch",
-              {
-                model: {
-                  value: _vm.isStriped,
-                  callback: function($$v) {
-                    _vm.isStriped = $$v
-                  },
-                  expression: "isStriped"
-                }
-              },
-              [_vm._v("Striped")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "control" },
-          [
-            _c(
-              "b-switch",
-              {
-                model: {
-                  value: _vm.isNarrowed,
-                  callback: function($$v) {
-                    _vm.isNarrowed = $$v
-                  },
-                  expression: "isNarrowed"
-                }
-              },
-              [_vm._v("Narrowed")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "control" },
-          [
-            _c(
-              "b-switch",
-              {
-                model: {
-                  value: _vm.isHoverable,
-                  callback: function($$v) {
-                    _vm.isHoverable = $$v
-                  },
-                  expression: "isHoverable"
-                }
-              },
-              [_vm._v("Hoverable")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "control" },
-          [
-            _c(
-              "b-switch",
-              {
-                model: {
-                  value: _vm.isFocusable,
-                  callback: function($$v) {
-                    _vm.isFocusable = $$v
-                  },
-                  expression: "isFocusable"
-                }
-              },
-              [_vm._v("Focusable")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "control" },
-          [
-            _c(
-              "b-switch",
-              {
-                model: {
-                  value: _vm.isLoading,
-                  callback: function($$v) {
-                    _vm.isLoading = $$v
-                  },
-                  expression: "isLoading"
-                }
-              },
-              [_vm._v("Loading state")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "control" },
-          [
-            _c(
-              "b-switch",
-              {
-                model: {
-                  value: _vm.isEmpty,
-                  callback: function($$v) {
-                    _vm.isEmpty = $$v
-                  },
-                  expression: "isEmpty"
-                }
-              },
-              [_vm._v("Empty")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "control" },
-          [
-            _c(
-              "b-switch",
-              {
-                model: {
-                  value: _vm.hasMobileCards,
-                  callback: function($$v) {
-                    _vm.hasMobileCards = $$v
-                  },
-                  expression: "hasMobileCards"
-                }
-              },
-              [
-                _vm._v("Mobile cards "),
-                _c("small", [_vm._v("(collapsed rows)")])
-              ]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
       _c(
         "b-table",
         {
           attrs: {
-            data: _vm.isEmpty ? [] : _vm.rcas,
+            data: _vm.rcas.environmentalData,
             bordered: _vm.isBordered,
             striped: _vm.isStriped,
             narrowed: _vm.isNarrowed,
@@ -441,63 +262,53 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c(
-        "b-field",
-        [
-          _c(
-            "b-upload",
-            {
-              attrs: { multiple: "", "drag-drop": "" },
-              on: { input: _vm.submitForm },
-              model: {
-                value: _vm.dropFiles,
-                callback: function($$v) {
-                  _vm.dropFiles = $$v
-                },
-                expression: "dropFiles"
-              }
-            },
+      (_vm.rcas.can
+      ? _vm.rcas.can.upload
+      : null)
+        ? _c(
+            "b-field",
             [
-              _c("section", { staticClass: "section" }, [
-                _c("div", { staticClass: "content has-text-centered" }, [
-                  _c(
-                    "p",
-                    [
-                      _c("b-icon", {
-                        attrs: { icon: "upload", pack: "fas", size: "is-large" }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("Drop your files here or click to upload")])
-                ])
-              ])
-            ]
+              _c(
+                "b-upload",
+                {
+                  attrs: { multiple: "", "drag-drop": "" },
+                  on: { input: _vm.submitForm },
+                  model: {
+                    value: _vm.dropFiles,
+                    callback: function($$v) {
+                      _vm.dropFiles = $$v
+                    },
+                    expression: "dropFiles"
+                  }
+                },
+                [
+                  _c("section", { staticClass: "section" }, [
+                    _c("div", { staticClass: "content has-text-centered" }, [
+                      _c(
+                        "p",
+                        [
+                          _c("b-icon", {
+                            attrs: {
+                              icon: "upload",
+                              pack: "fas",
+                              size: "is-large"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v("Drop your files here or click to upload")
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "tags" },
-        _vm._l(_vm.dropFiles, function(file, index) {
-          return _c("span", { key: index, staticClass: "tag is-primary" }, [
-            _vm._v("\n            " + _vm._s(file.name) + "\n            "),
-            _c("button", {
-              staticClass: "delete is-small",
-              attrs: { type: "button" },
-              on: {
-                click: function($event) {
-                  return _vm.deleteDropFile(index)
-                }
-              }
-            })
-          ])
-        }),
-        0
-      )
+        : _vm._e()
     ],
     1
   )

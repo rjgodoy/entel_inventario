@@ -14,7 +14,7 @@
     // am4core.useTheme(am4themes_entel)
     // am4core.useTheme(am4themes_dark) 
     // am4core.useTheme(am4themes_animated);
-    am4core.disposeAllCharts();
+    // am4core.disposeAllCharts();
 
     export default {
         props : [
@@ -23,7 +23,7 @@
         ],
         data() {
             return {
-                // chart: null,
+                chart: '',
             }
         },
         mounted() {
@@ -37,6 +37,10 @@
         },
 
         watch: {
+            chartData(newValue) {
+                this.chart && this.chart.dispose()
+                this.graph()
+            }
         },
 
         methods : {
@@ -142,9 +146,7 @@
         },
 
         beforeDestroy(){
-            // if (this.chart) {
-                this.chart.dispose()
-            // }
+            this.chart && this.chart.dispose()
         },
     }  
 </script>

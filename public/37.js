@@ -163,7 +163,10 @@ var render = function() {
   return _c("div", { staticClass: "column is-4" }, [
     _c(
       "article",
-      { staticClass: "tile is-child box", class: _vm.boxBackground },
+      {
+        staticClass: "tile is-child box is-bold is-positive",
+        class: _vm.boxBackground
+      },
       [
         _c("div", { staticClass: "columns" }, [
           _c(
@@ -193,27 +196,18 @@ var render = function() {
           _vm._l(this.powerRectifierData, function(item) {
             return _c(
               "div",
-              { staticClass: "column is-6" },
+              { staticClass: "column is-6", class: _vm.primaryText },
               [
-                _c("b-message", { attrs: { type: "is-positive" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-4 has-text-weight-normal" },
-                    [
-                      _vm._v(
-                        _vm._s(
-                          _vm._f("numeral")(item.q_power_rectifiers, "0,0")
-                        )
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "is-size-7" }, [
-                    _vm._v(_vm._s(item.nombre))
-                  ])
+                _c("div", { staticClass: "is-size-4 has-text-weight-normal" }, [
+                  _vm._v(
+                    _vm._s(_vm._f("numeral")(item.q_power_rectifiers, "0,0"))
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "is-size-7" }, [
+                  _vm._v(_vm._s(item.nombre))
                 ])
-              ],
-              1
+              ]
             )
           }),
           0

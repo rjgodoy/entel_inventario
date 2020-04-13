@@ -9,7 +9,7 @@
                                 :user="user"/>
                         </div>
                     </div>
-                    <div class="tile is-vertical">
+                    <!-- <div class="tile is-vertical">
                         <div class="tile is-parent">
                             <temporal-storages
                                 :user="user"/>
@@ -18,7 +18,7 @@
                             <rcas
                                 :user="user"/>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

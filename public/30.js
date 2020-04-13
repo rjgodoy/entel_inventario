@@ -34,19 +34,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // : 
 // am4core.useTheme(am4themes_entel)
 // am4core.useTheme(am4themes_animated);
+// am4core.disposeAllCharts();
 
-_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'room', 'chartData'],
   data: function data() {
-    return {// chart: null,
+    return {
+      chart: ''
     };
   },
   mounted: function mounted() {
     this.graph();
   },
-  watch: {},
+  watch: {
+    chartData: function chartData(newValue) {
+      this.chart && this.chart.dispose();
+      this.graph();
+    }
+  },
   methods: {
+    // loadChart() {
+    //     console.log('Values are changed')
+    //     this.chart.invalidateRawData();
+    // },
     graph: function () {
       var _graph = _asyncToGenerator(
       /*#__PURE__*/
@@ -84,21 +94,21 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
                   var series = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["StepLineSeries"]());
                   series.dataFields.dateX = "date";
                   series.dataFields.valueY = field;
-                  series.tooltipText = "{valueY.value}%";
+                  series.tooltipText = "{valueY.value.formatNumber('#,###.00')}%";
                   series.strokeWidth = 3;
-                  series.name = name;
-                  var segment = series.segments.template;
-                  segment.interactionsEnabled = true;
-                  var hoverState = segment.states.create("hover");
-                  hoverState.properties.strokeWidth = 3;
-                  var dimmed = segment.states.create("dimmed");
-                  dimmed.properties.stroke = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["color"]("#dadada");
-                  segment.events.on("over", function (event) {
-                    processOver(event.target.parent.parent.parent);
-                  });
-                  segment.events.on("out", function (event) {
-                    processOut(event.target.parent.parent.parent);
-                  });
+                  series.name = name; // let segment = series.segments.template;
+                  // segment.interactionsEnabled = true;
+                  // let hoverState = segment.states.create("hover");
+                  // hoverState.properties.strokeWidth = 3;
+                  // let dimmed = segment.states.create("dimmed");
+                  // dimmed.properties.stroke = am4core.color("#dadada");
+                  // segment.events.on("over", function(event) {
+                  //     processOver(event.target.parent.parent.parent);
+                  // });
+                  // segment.events.on("out", function(event) {
+                  //     processOut(event.target.parent.parent.parent);
+                  // });
+
                   return series;
                 };
 
@@ -123,11 +133,8 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
 
                 dateAxis.renderer.minGridDistance = 50;
                 dateAxis.dateFormats.setKey("month", "[font-size: 12px]MMM");
-                dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy");
-                dateAxis.baseInterval = {
-                  timeUnit: "date",
-                  count: 1
-                };
+                dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy"); // dateAxis.baseInterval = { timeUnit: "day", count: 1 };
+
                 valueAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["ValueAxis"]());
                 valueAxis.tooltip.disabled = true;
                 createSeries("junction", "Empalme");
@@ -142,17 +149,17 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
                 chart.cursor.fullWidthLineX = true;
                 chart.cursor.lineX.strokeWidth = 0;
                 chart.cursor.lineX.fill = chart.colors.getIndex(2);
-                chart.cursor.lineX.fillOpacity = 0.1;
-                chart.scrollbarX = new _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["Scrollbar"]();
+                chart.cursor.lineX.fillOpacity = 0.1; // chart.scrollbarX = new am4core.Scrollbar();
+
                 chart.legend = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["Legend"]();
                 chart.legend.position = "right";
-                chart.legend.scrollable = true;
-                chart.legend.itemContainers.template.events.on("over", function (event) {
-                  processOver(event.target.dataItem.dataContext);
-                });
-                chart.legend.itemContainers.template.events.on("out", function (event) {
-                  processOut(event.target.dataItem.dataContext);
-                });
+                chart.legend.scrollable = true; // chart.legend.itemContainers.template.events.on("over", function(event) {
+                //     processOver(event.target.dataItem.dataContext);
+                // })
+                // chart.legend.itemContainers.template.events.on("out", function(event) {
+                //     processOut(event.target.dataItem.dataContext);
+                // })
+
                 rangeH = dateAxis.axisRanges.create();
                 rangeH.date = new Date();
                 rangeH.grid.stroke = chart.colors.getIndex(7);
@@ -173,9 +180,9 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
 
                 rangeP.label.horizontalCenter = "left";
                 rangeP.label.verticalCenter = "bottom";
-                this.chart = chart; // chart.dispose();
+                this.chart = chart;
 
-              case 51:
+              case 47:
               case "end":
                 return _context.stop();
             }
@@ -190,9 +197,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["disposeAllCharts"]();
       return graph;
     }()
   },
-  beforeDestroy: function beforeDestroy() {
-    // if (this.chart) {
-    this.chart.dispose(); // }
+  beforeDestroy: function beforeDestroy() {// this.chart && this.chart.dispose()
   }
 });
 

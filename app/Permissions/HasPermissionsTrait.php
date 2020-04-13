@@ -1,8 +1,8 @@
 <?php
 namespace App\Permissions;
 
-use App\Permission;
-use App\Role;
+use App\Models\Permission;
+use App\Models\Role;
 
 trait HasPermissionsTrait {
 
@@ -58,14 +58,16 @@ trait HasPermissionsTrait {
 
     public function roles() {
 
-        return $this->belongsToMany(Role::class,'users_roles');
+        return $this->belongsToMany(Role::class)->withTimestamps();
 
     }
+
     public function permissions() {
 
-        return $this->belongsToMany(Permission::class,'users_permissions');
+        return $this->belongsToMany(Permission::class)->withTimestamps();
 
     }
+    
     protected function hasPermission($permission) {
 
         return (bool) $this->permissions->where('slug', $permission->slug)->count();
@@ -76,5 +78,47 @@ trait HasPermissionsTrait {
         return Permission::whereIn('slug',$permissions)->get();
 
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function authorizeRoles($roles)
+    {
+        abort_unless($this->hasAnyRole($roles), 401);
+        return true;
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function hasAnyRole($roles)
+    {
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                if ($this->hasRole($role)) {
+                    return true;
+                }
+            }
+        } else {
+            if ($this->hasRole($roles)) {
+                return true; 
+            }   
+        }
+        return false;
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function isAdmin() {
+        return $this->roles()->where('name', 'admin')->exists();
+    }
+
 
 }

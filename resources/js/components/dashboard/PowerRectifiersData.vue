@@ -1,17 +1,17 @@
 <template>
     <div class="column is-4">
-        <article class="tile is-child box" :class="boxBackground">
+        <article class="tile is-child box is-bold is-positive" :class="boxBackground">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Plantas Rectificadoras</div>
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
             </div>
 
             <div class="columns is-multiline">
-                <div class="column is-6" v-for="item in this.powerRectifierData">
-                    <b-message type="is-positive">
+                <div class="column is-6" :class="primaryText" v-for="item in this.powerRectifierData">
+                    <!-- <b-message type="is-positive"> -->
                         <div class="is-size-4 has-text-weight-normal">{{ item.q_power_rectifiers | numeral('0,0') }}</div>
                         <div class="is-size-7">{{ item.nombre }}</div>
-                    </b-message>
+                    <!-- </b-message> -->
                 </div>
             </div>
             

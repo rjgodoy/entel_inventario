@@ -38,6 +38,11 @@
                     this.chart.dispose()
                 }
                 this.graph()
+            },
+
+            chartData: {
+                handler: 'loadChart',
+                deep: true
             }
         },
 
@@ -253,11 +258,7 @@
         },
 
         beforeDestroy(){
-            if (this.chart) {
-                this.chart.destroy()
-                this.chart.dispose()
-            }
-            // this.$eventBus.$off('getSitesData')
+            this.chart && this.chart.dispose()
         },
     }  
 </script>

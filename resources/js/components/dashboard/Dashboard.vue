@@ -30,7 +30,7 @@
 
                 <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="crm in crms">
-                        <a class="tile is-child box" :class="selectedCrm == crm ? 'has-background-link' : boxBackground" @click="selectCrm(crm)">
+                        <a class="tile is-child box" :class="selectedCrm == crm ? 'is-bold is-link' : boxBackground" @click="selectCrm(crm)">
                             <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
                                     CRM {{ crm.nombre_crm }}
@@ -65,7 +65,7 @@
                 <div class="container" style="margin: -20px auto 10px auto;">
                     <div class="tile is-ancestor">
                         <div class="tile is-parent" v-for="zona in zonas">
-                            <a class="tile is-child box" :class="selectedZona == zona ? 'has-background-link' : boxBackground" @click="selectZona(zona)">
+                            <a class="tile is-child box" :class="selectedZona == zona ? 'is-bold is-link' : boxBackground" @click="selectZona(zona)">
                                 <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
                                     <div class="is-size-6 has-text-weight-semibold">
                                         Zona {{ zona.nombre_zona }}
@@ -179,13 +179,13 @@
 
                             <div class="tile">
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'pops' ? 'has-background-link' : boxBackground" @click="currentTab = 'pops'">
-                                        <div class="" style="padding-top: 10px; padding-left: 5px;" >
+                                    <a class="tile is-child box" :class="currentTab === 'pops' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'pops'">
+                                        <div class="" style="padding-top: 10px;" >
                                             <b-icon 
                                                 pack="fas" 
                                                 icon="map-marker-alt" 
                                                 class="fa-2x"
-                                                :class="currentTab === 'pops' ? 'has-text-smart-light' : 'has-text-smart'">
+                                                :class="currentTab === 'pops' ? 'has-text-smart' : 'has-text-smart'">
                                             </b-icon>
                                         </div>
                                         
@@ -196,8 +196,8 @@
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'sites' ? 'has-background-link' : boxBackground" @click="currentTab = 'sites'">
-                                        <div class="" style="padding-top: 10px; padding-left: 5px;">
+                                    <a class="tile is-child box" :class="currentTab === 'sites' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'sites'">
+                                        <div class="" style="padding-top: 10px;">
                                             <b-icon 
                                                 pack="fas" 
                                                 icon="server" 
@@ -212,7 +212,7 @@
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'technologies' ? 'has-background-link' : boxBackground" @click="currentTab = 'technologies'">
+                                    <a class="tile is-child box" :class="currentTab === 'technologies' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'technologies'">
                                         <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
                                                 pack="fas" 
@@ -230,8 +230,8 @@
 
                             <div class="tile">
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'critics' ? 'has-background-link' : boxBackground" @click="viewCriticPops">
-                                        <div class="" style="padding-top: 10px; padding-left: 5px;">
+                                    <a class="tile is-child box" :class="currentTab === 'critics' ? 'is-bold is-link' : boxBackground" @click="viewCriticPops">
+                                        <div class="" style="padding-top: 10px;">
                                             <b-icon 
                                                 pack="fas" 
                                                 icon="exclamation-triangle" 
@@ -246,8 +246,8 @@
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'alba' ? 'has-background-link' : boxBackground" @click="viewAlbaPops">
-                                        <div class="" style="padding-top: 10px; padding-left: 5px;">
+                                    <a class="tile is-child box" :class="currentTab === 'alba' ? 'is-bold is-link' : boxBackground" @click="viewAlbaPops">
+                                        <div class="" style="padding-top: 10px;">
                                             <b-icon 
                                                 pack="fas" 
                                                 icon="file-invoice-dollar" 
@@ -262,7 +262,7 @@
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box has-background-dark has-text-white" style="position: relative;" 
+                                    <a class="tile is-child box is-bold is-dark has-text-white" style="position: relative;" 
                                         @click="downloadPops">
                                         <b-icon 
                                             style="padding-top: 20px; padding-left: 5px;"
@@ -271,7 +271,7 @@
                                             class="has-text-eco fa-2x">
                                         </b-icon> 
                                         <div class="is-size-4 has-text-weight-bold" style="margin-top: 10px;">
-                                            <p class="is-size-6 has-text-weight-normal">Descargar listado de POP</p>
+                                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de POP</p>
                                         </div>
                                         <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
                                     </a>

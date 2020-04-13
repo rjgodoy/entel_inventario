@@ -118,13 +118,13 @@
                         <div class="columns is-multiline tile is-ancestor">
                             <!-- TABS DE INFORMACIÓN -->
                             <!-- ############################### -->
-                            <div class="column is-6 tile is-parent" 
+                            <div class="column is-6 tile is-parent" v-if="showTab(tab)"
                                 v-for="tab in tabs" 
                                 :key="tab.component" 
                                 @click="currentTab = tab.component">
                                 <div 
                                     class="tile is-child box has-text-centered" 
-                                    :class="currentTab === tab.component && (currentTab == 'eco' ? 'has-background-eco' : 'has-background-link')">
+                                    :class="currentTab === tab.component && (currentTab == 'eco' ? 'has-background-eco' : 'is-bold is-link')">
                                     <font-awesome-icon 
                                         :icon="[tab.icon_type, tab.icon]"
                                         size="2x"
@@ -171,7 +171,7 @@
             Location: () => import('./Location'),
             Sites: () => import('./Sites'),
             Characteristics: () => import('./Characteristics'),
-            Capacity: () => import('./capacity/Capacity'),
+            Layout: () => import('./layout/Layout'),
             Power: () => import('./power/Power'),
             Climate: () => import('./Climate'),
             Infrastructure: () => import('./infrastructure/Infrastructure'),
@@ -402,6 +402,14 @@
                     this.tabs = response.data.data
                 })
             },
+
+            showTab(tab) {
+                if (tab.component == 'layout' && this.popCritical == 0) {
+                    return false
+                }
+                return true
+            },
+
             getAllData() {
                 axios.get(`/api/pop/${this.$route.params.id}?api_token=${this.user.api_token}`)
                 .then((response) => {

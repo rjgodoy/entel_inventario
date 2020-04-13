@@ -15,17 +15,6 @@ use DB;
 class ElectricLineController extends Controller
 {
     protected $seconds = 2592000;
-
-    /**
-     * SoapController constructor.
-     *
-     * @param SoapWrapper $soapWrapper
-     */
-    public function __construct()
-    {
-        // Auth::shouldUse('api');
-    }
-
     
 
     /**

@@ -10,4 +10,9 @@ class GeneratorTank extends Model
     {
         return $this->belongsTo(GeneratorSet::class);
     }
+
+    public function generator_tank_type() 
+    {
+        return $this->belongsTo(GeneratorTankType::class);
+    }
 }

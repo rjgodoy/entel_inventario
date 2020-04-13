@@ -574,7 +574,7 @@ var render = function() {
                           "tile is-child box has-text-centered has-text-white",
                         class:
                           _vm.currentCrm === crm.id
-                            ? "has-background-link"
+                            ? "is-bold is-link"
                             : "has-background-black-ter"
                       },
                       [

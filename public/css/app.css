@@ -382,6 +382,48 @@ fieldset[disabled] .pagination-ellipsis {
   margin-top: 0px;
 }
 
+.box.is-bold.is-link {
+  color: white;
+  background: #0c3d7c;
+  background: linear-gradient(270deg, #0c3d7c 0%, #005cff 100%);
+}
+
+.box.is-bold.is-smart {
+  color: white;
+  background: #cce3ff;
+  background: linear-gradient(270deg, #cce3ff 0%, #f3f7fd 100%);
+}
+
+.box.is-bold.is-eco {
+  color: white;
+  background: #a8f4dc;
+  background: linear-gradient(270deg, #a8f4dc 0%, #e8fff8 100%);
+}
+
+.box.is-bold.is-positive {
+  color: white;
+  background: #fae1e9;
+  background: linear-gradient(270deg, #fae1e9 0%, #fbf7f8 100%);
+}
+
+.box.is-bold.is-info {
+  color: white;
+  background: #cf1300;
+  background: linear-gradient(270deg, #cf1300 0%, #ff6d13 100%);
+}
+
+.box.is-bold.is-calid {
+  color: white;
+  background: #fff1d5;
+  background: linear-gradient(270deg, #fff1d5 0%, #fcf8f0 100%);
+}
+
+.box.is-bold.is-dark {
+  color: white;
+  background: #4a4a4a;
+  background: linear-gradient(270deg, #4a4a4a 0%, #242424 100%);
+}
+
 .shadow-inset {
   box-shadow: inset 0 0 20px #ccc;
 }

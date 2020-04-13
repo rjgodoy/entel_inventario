@@ -10,4 +10,9 @@ class GeneratorTta extends Model
     {
         return $this->belongsTo(GeneratorSet::class);
     }
+
+    public function generator_tta_type() 
+    {
+        return $this->belongsTo(GeneratorTtaType::class);
+    }
 }

@@ -35,8 +35,6 @@ Route::middleware('auth:api')->group(function () {
 
 	// 	});
 	// });
-    	Route::apiResource('users','UserController');
-    	Route::get('roles','Api\MainController@roles');
 
 
 		Route::get('menu', 'Api\MainController@menu');
@@ -253,8 +251,14 @@ Route::middleware('auth:api')->group(function () {
 
 
 		### CAPACITY PLANNING ######################################################################
-			Route::apiResource('rooms','Api\RoomController');
-			Route::get('roomProjection','Api\RoomController@projection');
+
+			Route::group(['middleware' => 'role:developer,admin,engineer'], function() {
+
+				Route::apiResource('rooms','Api\RoomController');
+				Route::get('roomProjection','Api\RoomController@projection');
+
+			});
+			
 		##############################################################################################
 
 
@@ -273,7 +277,6 @@ Route::middleware('auth:api')->group(function () {
 
 
 		### POP DETAIL ######################################################################
-
 			Route::apiResource('dependences','Api\DependenceController');
 
 			Route::get('popTechnologies', 'Api\PopController@technologies');
@@ -288,6 +291,9 @@ Route::middleware('auth:api')->group(function () {
 
 
 		### ADMIN ######################################################################
+		Route::group(['middleware' => 'role:developer,admin'], function() {
+			Route::apiResource('users','UserController');
+	    	Route::get('roles','Api\MainController@roles');
 			Route::get('tabs', 'Api\AdminController@tabs');
 
 			Route::apiResource('tempSgcPops','Api\TempSgcPopController');
@@ -313,6 +319,7 @@ Route::middleware('auth:api')->group(function () {
 
 			Route::apiResource('junction','Api\JunctionController');
 			Route::post('junction/efizity','Api\JunctionController@syncEfizity');
+		});
 		##############################################################################################
 
 });

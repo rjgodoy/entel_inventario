@@ -143,7 +143,7 @@
             getProtectedZones() {
                 axios.get(`/api/eco?api_token=${this.user.api_token}`).then((response) => {
                     // console.log(response.data.data)
-                    this.protectedZones = response.data.data
+                    this.protectedZones = response.data.environmentalData
                 })
             },
             // async getFiles() {

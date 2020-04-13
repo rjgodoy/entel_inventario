@@ -162,65 +162,52 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "column is-4" }, [
-    _c(
-      "article",
-      { staticClass: "tile is-child box", class: _vm.boxBackground },
-      [
-        _c("div", { staticClass: "columns" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "column is-size-5 has-text-weight-semibold has-text-left",
-              class: _vm.primaryText
-            },
-            [_vm._v("Aires Acondicionados")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "column is-size-4 has-text-weight-semibold has-text-right",
-              class: _vm.primaryText
-            },
-            [_vm._v(_vm._s(_vm._f("numeral")(this.total, "0,0")))]
-          )
-        ]),
+    _c("article", { staticClass: "tile is-child box is-smart is-bold" }, [
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "column is-size-5 has-text-weight-semibold has-text-left",
+            class: _vm.primaryText
+          },
+          [_vm._v("Aires Acondicionados")]
+        ),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "columns is-multiline" },
-          _vm._l(this.airConditionerData, function(item) {
-            return _c(
-              "div",
-              { staticClass: "column is-6" },
-              [
-                _c("b-message", { attrs: { type: "is-smart" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-4 has-text-weight-normal" },
-                    [
-                      _vm._v(
-                        _vm._s(
-                          _vm._f("numeral")(item.q_air_conditioners, "0,0")
-                        )
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "is-size-7" }, [
-                    _vm._v(_vm._s(item.nombre))
-                  ])
-                ])
-              ],
-              1
-            )
-          }),
-          0
+          {
+            staticClass:
+              "column is-size-4 has-text-weight-semibold has-text-right",
+            class: _vm.primaryText
+          },
+          [_vm._v(_vm._s(_vm._f("numeral")(this.total, "0,0")))]
         )
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "columns is-multiline" },
+        _vm._l(this.airConditionerData, function(item) {
+          return _c(
+            "div",
+            { staticClass: "column is-6", class: _vm.primaryText },
+            [
+              _c("div", { staticClass: "is-size-4 has-text-weight-normal" }, [
+                _vm._v(
+                  _vm._s(_vm._f("numeral")(item.q_air_conditioners, "0,0"))
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "is-size-7" }, [
+                _vm._v(_vm._s(item.nombre))
+              ])
+            ]
+          )
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = []

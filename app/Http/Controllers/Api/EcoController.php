@@ -102,7 +102,7 @@ class EcoController extends Controller
         foreach ($files as $file) {
             array_push($rcas, pathinfo($file));
         }
-        return $rcas;
+        return new EcoResource($rcas);
     }
 
     /**

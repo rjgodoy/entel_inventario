@@ -1210,7 +1210,7 @@ var render = function() {
                       staticClass: "tile is-child box",
                       class:
                         _vm.selectedCrm == crm
-                          ? "has-background-link"
+                          ? "is-bold is-link"
                           : _vm.boxBackground,
                       on: {
                         click: function($event) {
@@ -1295,7 +1295,7 @@ var render = function() {
                               staticClass: "tile is-child box",
                               class:
                                 _vm.selectedZona == zona
-                                  ? "has-background-link"
+                                  ? "is-bold is-link"
                                   : _vm.boxBackground,
                               on: {
                                 click: function($event) {
@@ -1691,7 +1691,7 @@ var render = function() {
                           staticClass: "tile is-child box",
                           class:
                             _vm.currentTab === "pops"
-                              ? "has-background-link"
+                              ? "is-bold is-link"
                               : _vm.boxBackground,
                           on: {
                             click: function($event) {
@@ -1702,18 +1702,13 @@ var render = function() {
                         [
                           _c(
                             "div",
-                            {
-                              staticStyle: {
-                                "padding-top": "10px",
-                                "padding-left": "5px"
-                              }
-                            },
+                            { staticStyle: { "padding-top": "10px" } },
                             [
                               _c("b-icon", {
                                 staticClass: "fa-2x",
                                 class:
                                   _vm.currentTab === "pops"
-                                    ? "has-text-smart-light"
+                                    ? "has-text-smart"
                                     : "has-text-smart",
                                 attrs: { pack: "fas", icon: "map-marker-alt" }
                               })
@@ -1762,7 +1757,7 @@ var render = function() {
                           staticClass: "tile is-child box",
                           class:
                             _vm.currentTab === "sites"
-                              ? "has-background-link"
+                              ? "is-bold is-link"
                               : _vm.boxBackground,
                           on: {
                             click: function($event) {
@@ -1773,12 +1768,7 @@ var render = function() {
                         [
                           _c(
                             "div",
-                            {
-                              staticStyle: {
-                                "padding-top": "10px",
-                                "padding-left": "5px"
-                              }
-                            },
+                            { staticStyle: { "padding-top": "10px" } },
                             [
                               _c("b-icon", {
                                 staticClass: "fa-2x",
@@ -1833,7 +1823,7 @@ var render = function() {
                           staticClass: "tile is-child box",
                           class:
                             _vm.currentTab === "technologies"
-                              ? "has-background-link"
+                              ? "is-bold is-link"
                               : _vm.boxBackground,
                           on: {
                             click: function($event) {
@@ -1909,19 +1899,14 @@ var render = function() {
                           staticClass: "tile is-child box",
                           class:
                             _vm.currentTab === "critics"
-                              ? "has-background-link"
+                              ? "is-bold is-link"
                               : _vm.boxBackground,
                           on: { click: _vm.viewCriticPops }
                         },
                         [
                           _c(
                             "div",
-                            {
-                              staticStyle: {
-                                "padding-top": "10px",
-                                "padding-left": "5px"
-                              }
-                            },
+                            { staticStyle: { "padding-top": "10px" } },
                             [
                               _c("b-icon", {
                                 staticClass: "has-text-yellow fa-2x",
@@ -1975,19 +1960,14 @@ var render = function() {
                           staticClass: "tile is-child box",
                           class:
                             _vm.currentTab === "alba"
-                              ? "has-background-link"
+                              ? "is-bold is-link"
                               : _vm.boxBackground,
                           on: { click: _vm.viewAlbaPops }
                         },
                         [
                           _c(
                             "div",
-                            {
-                              staticStyle: {
-                                "padding-top": "10px",
-                                "padding-left": "5px"
-                              }
-                            },
+                            { staticStyle: { "padding-top": "10px" } },
                             [
                               _c("b-icon", {
                                 staticClass: "has-text-smart fa-2x",
@@ -2039,7 +2019,7 @@ var render = function() {
                         "a",
                         {
                           staticClass:
-                            "tile is-child box has-background-dark has-text-white",
+                            "tile is-child box is-bold is-dark has-text-white",
                           staticStyle: { position: "relative" },
                           on: { click: _vm.downloadPops }
                         },
@@ -2498,7 +2478,7 @@ var staticRenderFns = [
         staticStyle: { "margin-top": "10px" }
       },
       [
-        _c("p", { staticClass: "is-size-6 has-text-weight-normal" }, [
+        _c("p", { staticClass: "is-size-6 has-text-weight-semibold" }, [
           _vm._v("Descargar listado de POP")
         ])
       ]

@@ -35,7 +35,6 @@
 <script>    
     export default {
         components: {
-            // Junctions: () => import('../pops/power/Junctions'),
             ProjectionChart: () => import('./ProjectionChart'),
             CapacityChart: () => import('./CapacityChart')
         },

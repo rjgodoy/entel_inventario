@@ -96,22 +96,6 @@ var render = function() {
                 [_c("protected-zones", { attrs: { user: _vm.user } })],
                 1
               )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-vertical" }, [
-              _c(
-                "div",
-                { staticClass: "tile is-parent" },
-                [_c("temporal-storages", { attrs: { user: _vm.user } })],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "tile is-parent" },
-                [_c("rcas", { attrs: { user: _vm.user } })],
-                1
-              )
             ])
           ])
         ])

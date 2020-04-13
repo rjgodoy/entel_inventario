@@ -149,7 +149,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/eco?api_token=".concat(this.user.api_token)).then(function (response) {
         // console.log(response.data.data)
-        _this.protectedZones = response.data.data;
+        _this.protectedZones = response.data.environmentalData;
       });
     } // async getFiles() {
     //     axios.get(`/api/eco/1`).then((response) => {

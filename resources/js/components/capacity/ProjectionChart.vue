@@ -15,7 +15,7 @@
     // : 
     // am4core.useTheme(am4themes_entel)
     // am4core.useTheme(am4themes_animated);
-    am4core.disposeAllCharts();
+    // am4core.disposeAllCharts();
 
     export default {
         props : [
@@ -25,7 +25,7 @@
         ],
         data() {
             return {
-                // chart: null,
+                chart: '',
             }
         },
         mounted() {
@@ -33,9 +33,18 @@
         },
 
         watch: {
+            chartData(newValue) {
+                this.chart && this.chart.dispose()
+                this.graph()
+            }
         },
 
         methods : {
+
+            // loadChart() {
+            //     console.log('Values are changed')
+            //     this.chart.invalidateRawData();
+            // },
 
             async graph() {
                 // Create chart
@@ -63,7 +72,7 @@
                 dateAxis.renderer.minGridDistance = 50;
                 dateAxis.dateFormats.setKey("month", "[font-size: 12px]MMM");
                 dateAxis.periodChangeDateFormats.setKey("month", "[bold]yyyy");
-                dateAxis.baseInterval = { timeUnit: "date", count: 1 };
+                // dateAxis.baseInterval = { timeUnit: "day", count: 1 };
 
                 let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
                 valueAxis.tooltip.disabled = true;
@@ -72,26 +81,26 @@
                     let series = chart.series.push(new am4charts.StepLineSeries());
                     series.dataFields.dateX = "date";
                     series.dataFields.valueY = field;
-                    series.tooltipText = "{valueY.value}%";
+                    series.tooltipText = "{valueY.value.formatNumber('#,###.00')}%";
                     series.strokeWidth = 3;
                     series.name = name;
 
-                    let segment = series.segments.template;
-                    segment.interactionsEnabled = true;
+                    // let segment = series.segments.template;
+                    // segment.interactionsEnabled = true;
 
-                    let hoverState = segment.states.create("hover");
-                    hoverState.properties.strokeWidth = 3;
+                    // let hoverState = segment.states.create("hover");
+                    // hoverState.properties.strokeWidth = 3;
 
-                    let dimmed = segment.states.create("dimmed");
-                    dimmed.properties.stroke = am4core.color("#dadada");
+                    // let dimmed = segment.states.create("dimmed");
+                    // dimmed.properties.stroke = am4core.color("#dadada");
 
-                    segment.events.on("over", function(event) {
-                        processOver(event.target.parent.parent.parent);
-                    });
+                    // segment.events.on("over", function(event) {
+                    //     processOver(event.target.parent.parent.parent);
+                    // });
 
-                    segment.events.on("out", function(event) {
-                        processOut(event.target.parent.parent.parent);
-                    });
+                    // segment.events.on("out", function(event) {
+                    //     processOut(event.target.parent.parent.parent);
+                    // });
 
                     return series;
                 }
@@ -112,18 +121,18 @@
                 chart.cursor.lineX.fill = chart.colors.getIndex(2);
                 chart.cursor.lineX.fillOpacity = 0.1;
 
-                chart.scrollbarX = new am4core.Scrollbar();
+                // chart.scrollbarX = new am4core.Scrollbar();
 
                 chart.legend = new am4charts.Legend();
                 chart.legend.position = "right";
                 chart.legend.scrollable = true;
-                chart.legend.itemContainers.template.events.on("over", function(event) {
-                    processOver(event.target.dataItem.dataContext);
-                })
+                // chart.legend.itemContainers.template.events.on("over", function(event) {
+                //     processOver(event.target.dataItem.dataContext);
+                // })
 
-                chart.legend.itemContainers.template.events.on("out", function(event) {
-                    processOut(event.target.dataItem.dataContext);
-                })
+                // chart.legend.itemContainers.template.events.on("out", function(event) {
+                //     processOut(event.target.dataItem.dataContext);
+                // })
 
                 let rangeH = dateAxis.axisRanges.create();
                 rangeH.date = new Date();
@@ -142,7 +151,6 @@
                 rangeP.endDate = chart.data[0].date;
                 rangeP.axisFill.fill = chart.colors.getIndex(1);
                 rangeP.axisFill.fillOpacity = 0.2;
-
                 rangeP.label.text = "Proyección";
                 rangeP.label.inside = true;
                 // rangeP.label.rotation = 90;
@@ -176,15 +184,12 @@
                 }
 
                 this.chart = chart;
-                // chart.dispose();
             },
 
         },
 
         beforeDestroy(){
-            // if (this.chart) {
-                this.chart.dispose()
-            // }
+            // this.chart && this.chart.dispose()
         },
     }  
 </script>

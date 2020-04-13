@@ -187,8 +187,8 @@ __webpack_require__.r(__webpack_exports__);
     Characteristics: function Characteristics() {
       return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./Characteristics */ "./resources/js/components/pops/Characteristics.vue"));
     },
-    Capacity: function Capacity() {
-      return __webpack_require__.e(/*! import() */ 54).then(__webpack_require__.bind(null, /*! ./capacity/Capacity */ "./resources/js/components/pops/capacity/Capacity.vue"));
+    Layout: function Layout() {
+      return __webpack_require__.e(/*! import() */ 55).then(__webpack_require__.bind(null, /*! ./layout/Layout */ "./resources/js/components/pops/layout/Layout.vue"));
     },
     Power: function Power() {
       return __webpack_require__.e(/*! import() */ 59).then(__webpack_require__.bind(null, /*! ./power/Power */ "./resources/js/components/pops/power/Power.vue"));
@@ -197,7 +197,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ 48).then(__webpack_require__.bind(null, /*! ./Climate */ "./resources/js/components/pops/Climate.vue"));
     },
     Infrastructure: function Infrastructure() {
-      return __webpack_require__.e(/*! import() */ 57).then(__webpack_require__.bind(null, /*! ./infrastructure/Infrastructure */ "./resources/js/components/pops/infrastructure/Infrastructure.vue"));
+      return __webpack_require__.e(/*! import() */ 54).then(__webpack_require__.bind(null, /*! ./infrastructure/Infrastructure */ "./resources/js/components/pops/infrastructure/Infrastructure.vue"));
     },
     Eco: function Eco() {
       return __webpack_require__.e(/*! import() */ 51).then(__webpack_require__.bind(null, /*! ./Eco */ "./resources/js/components/pops/Eco.vue"));
@@ -421,6 +421,13 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(response.data.data)
         _this.tabs = response.data.data;
       });
+    },
+    showTab: function showTab(tab) {
+      if (tab.component == 'layout' && this.popCritical == 0) {
+        return false;
+      }
+
+      return true;
     },
     getAllData: function getAllData() {
       var _this2 = this;
@@ -725,71 +732,74 @@ var render = function() {
                 "div",
                 { staticClass: "columns is-multiline tile is-ancestor" },
                 _vm._l(_vm.tabs, function(tab) {
-                  return _c(
-                    "div",
-                    {
-                      key: tab.component,
-                      staticClass: "column is-6 tile is-parent",
-                      on: {
-                        click: function($event) {
-                          _vm.currentTab = tab.component
-                        }
-                      }
-                    },
-                    [
-                      _c(
+                  return _vm.showTab(tab)
+                    ? _c(
                         "div",
                         {
-                          staticClass: "tile is-child box has-text-centered",
-                          class:
-                            _vm.currentTab === tab.component &&
-                            (_vm.currentTab == "eco"
-                              ? "has-background-eco"
-                              : "has-background-link")
+                          key: tab.component,
+                          staticClass: "column is-6 tile is-parent",
+                          on: {
+                            click: function($event) {
+                              _vm.currentTab = tab.component
+                            }
+                          }
                         },
                         [
-                          _c("font-awesome-icon", {
-                            class:
-                              _vm.currentTab === tab.component
-                                ? "has-text-white"
-                                : "has-text-grey",
-                            attrs: {
-                              icon: [tab.icon_type, tab.icon],
-                              size: "2x"
-                            }
-                          }),
-                          _vm._v(" "),
                           _c(
                             "div",
                             {
+                              staticClass:
+                                "tile is-child box has-text-centered",
                               class:
-                                _vm.currentTab === tab.component
-                                  ? "has-text-white"
-                                  : "has-text-grey",
-                              staticStyle: { "padding-top": "12px" }
+                                _vm.currentTab === tab.component &&
+                                (_vm.currentTab == "eco"
+                                  ? "has-background-eco"
+                                  : "is-bold is-link")
                             },
                             [
+                              _c("font-awesome-icon", {
+                                class:
+                                  _vm.currentTab === tab.component
+                                    ? "has-text-white"
+                                    : "has-text-grey",
+                                attrs: {
+                                  icon: [tab.icon_type, tab.icon],
+                                  size: "2x"
+                                }
+                              }),
+                              _vm._v(" "),
                               _c(
                                 "div",
                                 {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal"
+                                  class:
+                                    _vm.currentTab === tab.component
+                                      ? "has-text-white"
+                                      : "has-text-grey",
+                                  staticStyle: { "padding-top": "12px" }
                                 },
                                 [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(tab.title) +
-                                      "\n                                    "
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-normal"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(tab.title) +
+                                          "\n                                    "
+                                      )
+                                    ]
                                   )
                                 ]
                               )
-                            ]
+                            ],
+                            1
                           )
-                        ],
-                        1
+                        ]
                       )
-                    ]
-                  )
+                    : _vm._e()
                 }),
                 0
               )

@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.crmSelected == null) {
         axios.get("/api/electricLineData/".concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
-          _this.electricLineData = response.data.electric_line;
+          _this.electricLineData = response.data.electricLine;
 
           _this.totalElectricLines();
         })["catch"](function () {
@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else if (this.zonaSelected == null) {
         axios.get("/api/electricLineDataCrm/".concat(this.crmSelected.id, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
-          _this.electricLineData = response.data.electric_line;
+          _this.electricLineData = response.data.electricLine;
 
           _this.totalElectricLines();
         })["catch"](function () {
@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         axios.get("/api/electricLineDataZona/".concat(this.zonaSelected.id, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
-          _this.electricLineData = response.data.electric_line;
+          _this.electricLineData = response.data.electricLine;
 
           _this.totalElectricLines();
         })["catch"](function () {
@@ -163,7 +163,10 @@ var render = function() {
   return _c("div", { staticClass: "column is-4" }, [
     _c(
       "article",
-      { staticClass: "tile is-child box", class: _vm.boxBackground },
+      {
+        staticClass: "tile is-child box is-bold is-positive",
+        class: _vm.boxBackground
+      },
       [
         _c("div", { staticClass: "columns" }, [
           _c(
@@ -193,25 +196,18 @@ var render = function() {
           _vm._l(this.electricLineData, function(item) {
             return _c(
               "div",
-              { staticClass: "column is-6" },
+              { staticClass: "column is-6", class: _vm.primaryText },
               [
-                _c("b-message", { attrs: { type: "is-positive" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-4 has-text-weight-normal" },
-                    [
-                      _vm._v(
-                        _vm._s(_vm._f("numeral")(item.q_electric_lines, "0,0"))
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "is-size-7" }, [
-                    _vm._v(_vm._s(item.nombre))
-                  ])
+                _c("div", { staticClass: "is-size-4 has-text-weight-normal" }, [
+                  _vm._v(
+                    _vm._s(_vm._f("numeral")(item.q_electric_lines, "0,0"))
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "is-size-7" }, [
+                  _vm._v(_vm._s(item.nombre))
                 ])
-              ],
-              1
+              ]
             )
           }),
           0

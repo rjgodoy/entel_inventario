@@ -98,7 +98,7 @@
                 axios.get(`/api/electricLines/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.electricLines = response.data
-                    console.log(response.data)
+                    // console.log(response.data)
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Líneas Eléctricas: ' + error);
@@ -108,7 +108,7 @@
             setTransformerElectricLine(transformer_id, electricLine_id) {
                 axios.put(`/api/transformers/${transformer_id}?api_token=${this.user.api_token}&electric_line_id=${electricLine_id}`)
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     this.getElectricLines()
                 })
             }

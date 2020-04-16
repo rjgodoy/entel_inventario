@@ -26,8 +26,4 @@ class Room extends Model
         return $this->hasMany(AirConditioner::class);
     }
 
-    public function projections()
-    {
-        return $this->hasMany(Projection::class);
-    }
 }

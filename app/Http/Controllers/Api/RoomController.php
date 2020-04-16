@@ -87,18 +87,4 @@ class RoomController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function projection(Request $request)
-    {
-        $data = Projection::where('room_id', $request->room_id)
-                ->orderBy('year', 'desc')
-                ->orderBy('month', 'desc')
-                ->get();
-        return new RoomResource($data);
-    }
 }

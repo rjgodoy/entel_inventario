@@ -9,8 +9,8 @@ class Projection extends Model
 	protected $connection = 'mysql';
 	protected $table = 'projections';
 
-    public function room()
+    public function pop()
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(Pop::class);
     }
 }

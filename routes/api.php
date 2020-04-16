@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 */
 Route::middleware('auth:api')->group(function () {
 
-	Route::get('/user', function (Request $request) {
-		return $request->user();
-	});
+	// Route::get('/user', function (Request $request) {
+	// 	return $request->user();
+	// });
 
 	// Route::prefix('auth')->group(function () {
 
@@ -255,7 +255,7 @@ Route::middleware('auth:api')->group(function () {
 			Route::group(['middleware' => 'role:developer,admin,engineer'], function() {
 
 				Route::apiResource('rooms','Api\RoomController');
-				Route::get('roomProjection','Api\RoomController@projection');
+				Route::get('capacityProjection','Api\PopController@projection');
 
 			});
 			

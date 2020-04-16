@@ -100,7 +100,11 @@ Vue.prototype.$eventCounters = new Vue()
         faFileImage,
         faBell,
         faAdjust,
-        faCircle
+        faCircle,
+        faMicrochip,
+        faFill,
+        faGasPump,
+        faBezierCurve
     } from '@fortawesome/free-solid-svg-icons'
 
     import { 
@@ -186,7 +190,11 @@ Vue.prototype.$eventCounters = new Vue()
         faBell,
         faAdjust,
         farCircle,
-        faCircle
+        faCircle,
+        faMicrochip,
+        faFill,
+        faGasPump,
+        faBezierCurve
     )
 
     Vue.component('font-awesome-icon', FontAwesomeIcon)

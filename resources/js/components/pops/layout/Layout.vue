@@ -10,11 +10,11 @@
                             <!-- Empalme -->
                             <div class="tile">
                                 <div class="tile is-parent"></div>
-                                <div class="tile is-parent">
+                                <div class="tile is-parent" v-for="junction in junctions">
 
                                     <a class="tile is-child is-size-5 has-text-weight-semibold" 
                                         @click="isJunctionModalActive = true">
-                                        <b-message type="is-success">
+                                        <b-message type="is-success" class="">
                                             <div class="columns">
                                                 <div class="column">Empalme</div>
                                                 <div class="column is-2 has-text-centered">
@@ -27,6 +27,18 @@
                                             </div>                                            
                                         </b-message>
                                     </a>
+
+                                    <b-modal :active.sync="isJunctionModalActive"
+                                        has-modal-card
+                                        trap-focus
+                                        aria-role="dialog"
+                                        aria-modal >
+                                        <modal-junction 
+                                            :junction="junction"
+                                            :can="can"
+                                            />
+                                    </b-modal>
+
                                 </div>
                                 <div class="tile is-parent"></div>
                             </div>
@@ -34,7 +46,7 @@
                             <!-- Grupo Electrógeno -->
                             <div class="tile">
                                 <div class="tile is-parent"></div>
-                                <div class="tile is-parent">
+                                <div class="tile is-parent" v-for="generatorSet in generatorSets">
                                     <a class="tile is-child is-size-5 has-text-weight-semibold" 
                                         @click="isGeneratorModalActive = true">
                                         <b-message type="is-warning">
@@ -50,6 +62,14 @@
                                             </div>   
                                         </b-message>
                                     </a>
+
+                                    <b-modal :active.sync="isGeneratorModalActive"
+                                        has-modal-card
+                                        trap-focus
+                                        aria-role="dialog"
+                                        aria-modal >
+                                        <modal-generator :generatorSet="generatorSet"/>
+                                    </b-modal>
                                 </div>
                                 <div class="tile is-parent"></div>
                             </div>
@@ -131,27 +151,6 @@
             </div> -->
         </div>
 
-        <b-modal :active.sync="isJunctionModalActive"
-            has-modal-card
-            trap-focus
-            aria-role="dialog"
-            aria-modal >
-            <modal-junction 
-                :user="user"
-                :pop="pop"
-            ></modal-junction>
-        </b-modal>
-
-        <b-modal :active.sync="isGeneratorModalActive"
-            has-modal-card
-            trap-focus
-            aria-role="dialog"
-            aria-modal >
-            <modal-generator 
-                :user="user"
-                :pop="pop"
-            ></modal-generator>
-        </b-modal>
     </section>
         
 </template>
@@ -159,8 +158,8 @@
 <script>
     export default {
         components: {
-            ModalJunction: () => import('./ModalJunction'),
-            ModalGenerator: () => import('./ModalGenerator'),
+            ModalJunction: () => import('./modals/ModalJunction'),
+            ModalGenerator: () => import('./modals/ModalGenerator'),
             CapacityChart: () => import('./CapacityChart'),
             // GrowingChart: () => import('./GrowingChart'),
             SpaceChart: () => import('../infrastructure/SpaceChart')
@@ -171,13 +170,40 @@
         ],
         data() {
             return {
+                can: null,
+                junctions: [],
+                generatorSets: [],
                 isJunctionModalActive: false,
                 isGeneratorModalActive: false,
             }
         },
         mounted() {
+            this.getJunctions()
+            this.getGeneratorSets()
         },
         methods: {
+            getJunctions() {
+                axios.get(`/api/junctions/${this.pop.id}?api_token=${this.user.api_token}`)
+                .then((response) => {
+                    // console.log(response.data)
+                    this.junctions = response.data.junction
+                    this.can = response.data.can
+                })
+                .catch((error) => {
+                    console.log('Error al traer los datos de Empalmes: ' + error);
+                });
+            },
+
+            getGeneratorSets() {
+                axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
+                .then((response) => {
+                    this.generatorSets = response.data.data
+                    // console.log(this.generatorSets)
+                })
+                .catch((error) => {
+                    console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
+                });
+            }
         }
     }
 </script>

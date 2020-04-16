@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GeneratorOwner extends Model
+class TelecomCompany extends Model
 {
     public function generator_sets() 
     {
-        return $this->hasMany(GeneratorSet::class);
+        return $this->belongsToMany(GeneratorSet::class)->withTimestamps();
     }
 }

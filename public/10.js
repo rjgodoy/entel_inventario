@@ -290,14 +290,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     VuePagination: _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     // CapacityChart: () => import('./CapacityChart'),
     // GrowingChart: () => import('./GrowingChart'),
-    ModalRoom: function ModalRoom() {
-      return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ./ModalRoom */ "./resources/js/components/capacity/ModalRoom.vue"));
+    ModalPop: function ModalPop() {
+      return __webpack_require__.e(/*! import() */ 63).then(__webpack_require__.bind(null, /*! ./ModalPop */ "./resources/js/components/capacity/ModalPop.vue"));
     }
   },
   props: ['user', 'crms'],
@@ -315,6 +316,7 @@ __webpack_require__.r(__webpack_exports__);
       // currentPop: [],
       // currentRoom: [],
       isComponentModalActive: false,
+      popSelected: null,
       roomSelected: null
     };
   },
@@ -549,357 +551,412 @@ var render = function() {
       "div",
       { staticClass: "columns hero-body" },
       [
-        _c("div", { staticClass: "column is-1 section" }, [
-          _c("div", {}, [
-            _c(
-              "div",
-              { staticClass: "columns is-multiline" },
-              _vm._l(_vm.crms, function(crm) {
-                return _c(
-                  "div",
-                  {
-                    key: crm.id,
-                    staticClass: "column is-12",
-                    on: {
-                      click: function($event) {
-                        _vm.currentCrm = _vm.currentCrm === crm.id ? 0 : crm.id
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "tile is-child box has-text-centered has-text-white",
-                        class:
-                          _vm.currentCrm === crm.id
-                            ? "is-bold is-link"
-                            : "has-background-black-ter"
-                      },
-                      [
-                        _c("div", {
-                          staticClass: "is-size-4 has-text-weight-semibold",
-                          domProps: { textContent: _vm._s(crm.sigla_crm) }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticStyle: { "padding-top": "5px" } }, [
-                          _c(
-                            "div",
-                            { staticClass: "is-size-7 has-text-weight-normal" },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(crm.nombre_crm) +
-                                  "\n                                "
-                              )
-                            ]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              }),
-              0
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "column section" }, [
-          _c("div", {}, [
-            _c("div", { staticClass: "box has-background-black-ter" }, [
-              _c("div", { staticClass: "field" }, [
-                _c(
-                  "p",
-                  { staticClass: "control has-icons-left has-icons-right" },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.searchText,
-                          expression: "searchText"
-                        }
-                      ],
-                      staticClass:
-                        "input is-rounded has-background-black-ter has-text-light",
-                      attrs: {
-                        type: "text",
-                        "arial-label": "Buscar",
-                        placeholder: "Buscar...",
-                        autofocus: ""
-                      },
-                      domProps: { value: _vm.searchText },
+        _c(
+          "div",
+          {
+            staticClass: "column is-1 section",
+            staticStyle: {
+              "padding-left": "10px",
+              "padding-right": "0px",
+              "padding-top": "20px"
+            }
+          },
+          [
+            _c("div", {}, [
+              _c(
+                "div",
+                { staticClass: "columns is-multiline" },
+                _vm._l(_vm.crms, function(crm) {
+                  return _c(
+                    "div",
+                    {
+                      key: crm.id,
+                      staticClass: "column is-12",
                       on: {
-                        keyup: _vm.getRoomsData,
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.searchText = $event.target.value
+                        click: function($event) {
+                          _vm.currentCrm =
+                            _vm.currentCrm === crm.id ? 0 : crm.id
                         }
                       }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      { staticClass: "icon is-small is-left" },
-                      [_c("font-awesome-icon", { attrs: { icon: "search" } })],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "icon is-small is-right" }, [
-                      _c("button", {
-                        staticClass: "delete",
-                        on: { click: _vm.clearSearch }
-                      })
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "table",
-                {
-                  staticClass:
-                    "table is-fullwidth has-background-black-ter has-text-white"
-                },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.roomsData.data, function(pop) {
-                      return _c("tr", {}, [
-                        _c("td", {}, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "is-size-6 has-text-weight-bold",
-                              attrs: {
-                                target: "_blank",
-                                href: "/pop/" + pop.id
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                        " +
-                                  _vm._s(pop ? pop.nombre : "") +
-                                  "\n                                    "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "is-size-7 has-text-weight-normal" },
-                            [
-                              _vm._v(
-                                "\n                                        " +
-                                  _vm._s(pop ? pop.comuna.nombre : "") +
-                                  "\n                                    "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "is-size-7 has-text-weight-normal" },
-                            [
-                              _vm._v(
-                                "\n                                        " +
-                                  _vm._s(
-                                    pop
-                                      ? "Zona: " + pop.comuna.zona.nombre_zona
-                                      : ""
-                                  ) +
-                                  " - " +
-                                  _vm._s(
-                                    pop
-                                      ? "CRM: " + pop.comuna.zona.crm.nombre_crm
-                                      : ""
-                                  ) +
-                                  "\n                                    "
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {},
-                          _vm._l(pop.rooms, function(room) {
-                            return _c("div", { staticClass: "field columns" }, [
-                              _c("div", { staticClass: "column is-6" }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass:
-                                      "is-size-6 has-text-weight-semibold has-text-smart",
-                                    on: {
-                                      click: function($event) {
-                                        _vm.isComponentModalActive = true
-                                        _vm.roomSelected = room
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                " +
-                                        _vm._s(room.name) +
-                                        " "
-                                    ),
-                                    room.old_name
-                                      ? _c("span", [
-                                          _vm._v("- " + _vm._s(room.old_name))
-                                        ])
-                                      : _vm._e()
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column has-text-centered" },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticStyle: { "padding-top": "5px" } },
-                                    [
-                                      _c("font-awesome-icon", {
-                                        staticClass: "has-text-info",
-                                        attrs: {
-                                          icon: ["fas", "circle"],
-                                          size: "2x"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "is-size-6 has-text-weight-bold"
-                                        },
-                                        [_vm._v("10 kW")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column has-text-centered" },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticStyle: { "padding-top": "5px" } },
-                                    [
-                                      _c("font-awesome-icon", {
-                                        staticClass: "has-text-warning",
-                                        attrs: {
-                                          icon: ["fas", "circle"],
-                                          size: "2x"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "is-size-6 has-text-weight-bold"
-                                        },
-                                        [_vm._v("10 kW")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column has-text-centered" },
-                                [
-                                  _c("font-awesome-icon", {
-                                    staticClass: "has-text-success",
-                                    attrs: {
-                                      icon: ["fas", "circle"],
-                                      size: "2x"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-6 has-text-weight-bold"
-                                    },
-                                    [_vm._v("10 kW")]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column has-text-centered" },
-                                [
-                                  _c("font-awesome-icon", {
-                                    staticClass: "has-text-danger",
-                                    attrs: {
-                                      icon: ["fas", "circle"],
-                                      size: "2x"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-6 has-text-weight-bold"
-                                    },
-                                    [_vm._v("10 kW")]
-                                  )
-                                ],
-                                1
-                              )
-                            ])
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "tile is-child box has-text-centered has-text-white",
+                          class:
+                            _vm.currentCrm === crm.id
+                              ? "is-bold is-link"
+                              : "has-background-black-ter"
+                        },
+                        [
+                          _c("div", {
+                            staticClass: "is-size-4 has-text-weight-semibold",
+                            domProps: { textContent: _vm._s(crm.sigla_crm) }
                           }),
-                          0
-                        )
-                      ])
-                    }),
-                    0
+                          _vm._v(" "),
+                          _c("div", { staticStyle: { "padding-top": "5px" } }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-7 has-text-weight-normal"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(crm.nombre_crm) +
+                                    "\n                                "
+                                )
+                              ]
+                            )
+                          ])
+                        ]
+                      )
+                    ]
                   )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "nav",
-                {
-                  staticClass: "pagination",
-                  attrs: { role: "navigation", "aria-label": "pagination" }
-                },
-                [
-                  _c("vue-pagination", {
-                    staticClass: "has-text-white",
-                    attrs: { pagination: _vm.roomsData, offset: 4 },
-                    on: {
-                      paginate: function($event) {
-                        return _vm.getRoomsData()
-                      }
-                    }
-                  })
-                ],
-                1
+                }),
+                0
               )
             ])
-          ])
-        ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "column section",
+            staticStyle: { "padding-top": "20px", "padding-right": "10px" }
+          },
+          [
+            _c("div", {}, [
+              _c("div", { staticClass: "box has-background-black-ter" }, [
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "p",
+                    { staticClass: "control has-icons-left has-icons-right" },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.searchText,
+                            expression: "searchText"
+                          }
+                        ],
+                        staticClass:
+                          "input is-rounded has-background-black-ter has-text-light",
+                        attrs: {
+                          type: "text",
+                          "arial-label": "Buscar",
+                          placeholder: "Buscar...",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.searchText },
+                        on: {
+                          keyup: _vm.getRoomsData,
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.searchText = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        { staticClass: "icon is-small is-left" },
+                        [
+                          _c("font-awesome-icon", { attrs: { icon: "search" } })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "icon is-small is-right" }, [
+                        _c("button", {
+                          staticClass: "delete",
+                          on: { click: _vm.clearSearch }
+                        })
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table is-fullwidth has-background-black-ter has-text-white"
+                  },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.roomsData.data, function(pop) {
+                        return _c("tr", {}, [
+                          _c("td", {}, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "is-size-6 has-text-weight-bold",
+                                attrs: {
+                                  target: "_blank",
+                                  href: "/pop/" + pop.id
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(pop ? pop.nombre : "") +
+                                    "\n                                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-7 has-text-weight-normal"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(pop ? pop.comuna.nombre : "") +
+                                    "\n                                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-7 has-text-weight-normal"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(
+                                      pop
+                                        ? "Zona: " + pop.comuna.zona.nombre_zona
+                                        : ""
+                                    ) +
+                                    " - " +
+                                    _vm._s(
+                                      pop
+                                        ? "CRM: " +
+                                            pop.comuna.zona.crm.nombre_crm
+                                        : ""
+                                    ) +
+                                    "\n                                    "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {},
+                            _vm._l(pop.rooms, function(room) {
+                              return _c(
+                                "div",
+                                { staticClass: "field columns" },
+                                [
+                                  _c("div", { staticClass: "column is-6" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "is-size-6 has-text-weight-semibold has-text-smart",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.isComponentModalActive = true
+                                            _vm.roomSelected = room
+                                            _vm.popSelected = pop
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                " +
+                                            _vm._s(room.name) +
+                                            " "
+                                        ),
+                                        room.old_name
+                                          ? _c("span", [
+                                              _vm._v(
+                                                "- " + _vm._s(room.old_name)
+                                              )
+                                            ])
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "column has-text-centered" },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticStyle: { "padding-top": "5px" }
+                                        },
+                                        [
+                                          _c("font-awesome-icon", {
+                                            staticClass: "has-text-info",
+                                            attrs: {
+                                              icon: ["fas", "circle"],
+                                              size: "2x"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-6 has-text-weight-bold"
+                                            },
+                                            [_vm._v("10 kW")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "column has-text-centered" },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticStyle: { "padding-top": "5px" }
+                                        },
+                                        [
+                                          _c("font-awesome-icon", {
+                                            staticClass: "has-text-warning",
+                                            attrs: {
+                                              icon: ["fas", "circle"],
+                                              size: "2x"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-6 has-text-weight-bold"
+                                            },
+                                            [_vm._v("10 kW")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "column has-text-centered" },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticStyle: { "padding-top": "5px" }
+                                        },
+                                        [
+                                          _c("font-awesome-icon", {
+                                            staticClass: "has-text-success",
+                                            attrs: {
+                                              icon: ["fas", "circle"],
+                                              size: "2x"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-6 has-text-weight-bold"
+                                            },
+                                            [_vm._v("10 kW")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "column has-text-centered" },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticStyle: { "padding-top": "5px" }
+                                        },
+                                        [
+                                          _c("font-awesome-icon", {
+                                            staticClass: "has-text-danger",
+                                            attrs: {
+                                              icon: ["fas", "circle"],
+                                              size: "2x"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-6 has-text-weight-bold"
+                                            },
+                                            [_vm._v("10 kW")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "nav",
+                  {
+                    staticClass: "pagination",
+                    attrs: { role: "navigation", "aria-label": "pagination" }
+                  },
+                  [
+                    _c("vue-pagination", {
+                      staticClass: "has-text-white",
+                      attrs: { pagination: _vm.roomsData, offset: 4 },
+                      on: {
+                        paginate: function($event) {
+                          return _vm.getRoomsData()
+                        }
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c(
           "b-modal",
@@ -917,8 +974,12 @@ var render = function() {
             }
           },
           [
-            _c("modal-room", {
-              attrs: { user: _vm.user, room: _vm.roomSelected }
+            _c("modal-pop", {
+              attrs: {
+                user: _vm.user,
+                pop: _vm.popSelected,
+                room: _vm.roomSelected
+              }
             })
           ],
           1

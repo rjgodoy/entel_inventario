@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="container">
-            <div class="level has-background-white">
+            <div class="level has-background-light">
                 <!-- POWER TABS -->
                 <!-- ############################### -->
                 <div class="level-item tile is-parent" 

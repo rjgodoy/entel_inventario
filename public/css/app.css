@@ -384,8 +384,8 @@ fieldset[disabled] .pagination-ellipsis {
 
 .box.is-bold.is-link {
   color: white;
-  background: #0c3d7c;
-  background: linear-gradient(270deg, #0c3d7c 0%, #005cff 100%);
+  background: #005cff;
+  background: linear-gradient(270deg, #074cbb 0%, #005cff 100%);
 }
 
 .box.is-bold.is-smart {

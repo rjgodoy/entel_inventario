@@ -223,7 +223,7 @@
         },
 
         mounted() {
-            console.log(this.user_permissions[0])
+            // console.log(this.user_permissions[0])
             // if (this.$route.query.message) {
             //     this.$buefy.toast.open({
             //         message: this.$route.query.message,

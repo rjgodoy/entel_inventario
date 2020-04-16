@@ -1,5 +1,99 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[30],{
 
+/***/ "./node_modules/@amcharts/amcharts4/.internal/themes/animated.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/.internal/themes/animated.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+
+var theme = function (object) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SpriteState")) {
+        object.transitionDuration = 400;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Component")) {
+        object.rangeChangeDuration = 500;
+        object.interpolationDuration = 500;
+        object.sequencedInterpolation = false;
+        if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SankeyDiagram")) {
+            object.sequencedInterpolation = true;
+        }
+        if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSeries")) {
+            object.sequencedInterpolation = true;
+        }
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Chart")) {
+        object.defaultState.transitionDuration = 2000;
+        object.hiddenState.transitionDuration = 1000;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Tooltip")) {
+        object.animationDuration = 400;
+        object.defaultState.transitionDuration = 400;
+        object.hiddenState.transitionDuration = 400;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Scrollbar")) {
+        object.animationDuration = 500;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Series")) {
+        object.defaultState.transitionDuration = 1000;
+        object.hiddenState.transitionDuration = 700;
+        object.hiddenState.properties.opacity = 1;
+        object.showOnInit = true;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "MapSeries")) {
+        object.hiddenState.properties.opacity = 0;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "PercentSeries")) {
+        object.hiddenState.properties.opacity = 0;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSlice")) {
+        object.defaultState.transitionDuration = 800;
+        object.hiddenState.transitionDuration = 1000;
+        object.hiddenState.properties.opacity = 1;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Slice")) {
+        object.defaultState.transitionDuration = 700;
+        object.hiddenState.transitionDuration = 1000;
+        object.hiddenState.properties.opacity = 1;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Preloader")) {
+        object.hiddenState.transitionDuration = 2000;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column")) {
+        object.defaultState.transitionDuration = 700;
+        object.hiddenState.transitionDuration = 1000;
+        object.hiddenState.properties.opacity = 1;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column3D")) {
+        object.hiddenState.properties.opacity = 0;
+    }
+};
+/* harmony default export */ __webpack_exports__["default"] = (theme);
+//# sourceMappingURL=animated.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@amcharts/amcharts4/themes/animated.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/themes/animated.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _internal_themes_animated__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../.internal/themes/animated */ "./node_modules/@amcharts/amcharts4/.internal/themes/animated.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _internal_themes_animated__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+//# sourceMappingURL=animated.js.map
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/ProjectionChart.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/ProjectionChart.vue?vue&type=script&lang=js& ***!
@@ -13,6 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @amcharts/amcharts4/core */ "./node_modules/@amcharts/amcharts4/core.js");
 /* harmony import */ var _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @amcharts/amcharts4/charts */ "./node_modules/@amcharts/amcharts4/charts.js");
+/* harmony import */ var _amcharts_amcharts4_themes_animated__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @amcharts/amcharts4/themes/animated */ "./node_modules/@amcharts/amcharts4/themes/animated.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -23,21 +118,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
  // import am4themes_entel from "../../constants/amChartsEntel.js";
 // import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
-// import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-// this.darkMode ? 
+
+ // this.darkMode ? 
 // am4core.useTheme(am4themes_dark) 
 // : 
 // am4core.useTheme(am4themes_entel)
-// am4core.useTheme(am4themes_animated);
-// am4core.disposeAllCharts();
+
+_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["useTheme"](_amcharts_amcharts4_themes_animated__WEBPACK_IMPORTED_MODULE_3__["default"]); // am4core.disposeAllCharts();
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user', 'room', 'chartData'],
+  props: ['chartData'],
   data: function data() {
     return {
       chart: ''
@@ -149,8 +242,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 chart.cursor.fullWidthLineX = true;
                 chart.cursor.lineX.strokeWidth = 0;
                 chart.cursor.lineX.fill = chart.colors.getIndex(2);
-                chart.cursor.lineX.fillOpacity = 0.1; // chart.scrollbarX = new am4core.Scrollbar();
-
+                chart.cursor.lineX.fillOpacity = 0.1;
+                chart.scrollbarX = new _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["Scrollbar"]();
                 chart.legend = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["Legend"]();
                 chart.legend.position = "right";
                 chart.legend.scrollable = true; // chart.legend.itemContainers.template.events.on("over", function(event) {
@@ -182,7 +275,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 rangeP.label.verticalCenter = "bottom";
                 this.chart = chart;
 
-              case 47:
+              case 48:
               case "end":
                 return _context.stop();
             }
@@ -197,7 +290,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return graph;
     }()
   },
-  beforeDestroy: function beforeDestroy() {// this.chart && this.chart.dispose()
+  beforeDestroy: function beforeDestroy() {
+    this.chart && this.chart.dispose();
   }
 });
 

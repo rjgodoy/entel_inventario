@@ -180,8 +180,8 @@ $dropdown-content-max-height: 400px !default;
     &.is-bold {
         &.is-link {
             color: white;
-            background: rgb(12,61,124);
-            background: linear-gradient(270deg, rgba(12,61,124,1) 0%, rgba(0,92,255,1) 100%);
+            background: rgba(0,92,255,1);
+            background: linear-gradient(270deg, rgb(7, 76, 187) 0%, rgba(0,92,255,1) 100%);
         }
         &.is-smart {
             color: white;

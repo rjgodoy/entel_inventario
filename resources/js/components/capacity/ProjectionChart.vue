@@ -1,7 +1,5 @@
 <template>
-    <!-- <article class="box" :class="boxBackground" style="width: 100%; height: 200px;"> -->
-        <div class="" ref="chartdiv" style="height: 400px;"></div>
-    <!-- </article> -->
+    <div class="" ref="chartdiv" style="height: 400px;"></div>
 </template>
 
 <script>
@@ -9,18 +7,16 @@
     import * as am4charts from "@amcharts/amcharts4/charts";
     // import am4themes_entel from "../../constants/amChartsEntel.js";
     // import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
-    // import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+    import am4themes_animated from "@amcharts/amcharts4/themes/animated";
     // this.darkMode ? 
     // am4core.useTheme(am4themes_dark) 
     // : 
     // am4core.useTheme(am4themes_entel)
-    // am4core.useTheme(am4themes_animated);
+    am4core.useTheme(am4themes_animated);
     // am4core.disposeAllCharts();
 
     export default {
         props : [
-            'user',
-            'room',
             'chartData'
         ],
         data() {
@@ -121,7 +117,7 @@
                 chart.cursor.lineX.fill = chart.colors.getIndex(2);
                 chart.cursor.lineX.fillOpacity = 0.1;
 
-                // chart.scrollbarX = new am4core.Scrollbar();
+                chart.scrollbarX = new am4core.Scrollbar();
 
                 chart.legend = new am4charts.Legend();
                 chart.legend.position = "right";
@@ -189,7 +185,7 @@
         },
 
         beforeDestroy(){
-            // this.chart && this.chart.dispose()
+            this.chart && this.chart.dispose()
         },
     }  
 </script>

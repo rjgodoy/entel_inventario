@@ -4,9 +4,8 @@
             <p class="modal-card-title has-text-white has-text-weight-bold">Grupo Electrógeno</p>
         </header>
         <section class="modal-card-body" style="background: rgba(0,0,0,0)">
-            <generator-sets
-                :user="user"
-                :pop="pop"
+            <generator-set
+                :generatorSet="generatorSet"
             />
         </section>
         <!-- <footer class="modal-card-foot" style="background: rgba(0,0,0,0)"> -->
@@ -19,11 +18,10 @@
 <script>    
     export default {
         components: {
-            GeneratorSets: () => import('../../pops/power/GeneratorSets')
+            GeneratorSet: () => import('../../../pops/power/GeneratorSet')
         },
         props : [
-            'user',
-            'pop'
+            'generatorSet'
         ],
         data() {
             return {

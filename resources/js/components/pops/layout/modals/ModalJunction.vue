@@ -4,9 +4,9 @@
             <p class="modal-card-title has-text-white has-text-weight-bold">Empalme</p>
         </header>
         <section class="modal-card-body" style="background: rgba(0,0,0,0)">
-            <junctions
-                :user="user"
-                :pop="pop"
+            <junction
+                :junction="junction"
+                :can="can"
             />
         </section>
         <!-- <footer class="modal-card-foot" style="background: rgba(0,0,0,0)"> -->
@@ -19,11 +19,11 @@
 <script>    
     export default {
         components: {
-            Junctions: () => import('../../pops/power/Junctions')
+            Junction: () => import('../../../pops/power/Junction')
         },
         props : [
-            'user',
-            'pop'
+            'can',
+            'junction',
         ],
         data() {
             return {

@@ -3,14 +3,12 @@
         <div class="columns hero-body">
 
             <!-- SECCION BOTONES -->
-            <div class="column is-1 section">
+            <div class="column is-1 section" style="padding-left: 10px; padding-right: 0px; padding-top: 20px;">
 
                 <!-- BOTONES MODULOS -->
                 <!-- ############################### -->
                 <div class="">
                     <div class="columns is-multiline">
-                        <!-- TABS DE INFORMACIÓN -->
-                        <!-- ############################### -->
                         <div class="column is-12"
                             v-for="crm in crms"
                             :key="crm.id"
@@ -32,7 +30,7 @@
             </div>
 
             <!-- TABLE -->
-            <div class="column section">
+            <div class="column section" style="padding-top: 20px; padding-right: 10px;">
                 <div class="">
 
                     <div class="box has-background-black-ter">
@@ -55,6 +53,7 @@
                                 </span>
                             </p>
                         </div>
+
                         <table class="table is-fullwidth has-background-black-ter has-text-white">
                             <thead>
                                 <tr>
@@ -105,7 +104,7 @@
 
                                             <div class="column is-6">
                                                 <a class="is-size-6 has-text-weight-semibold has-text-smart" 
-                                                    @click="isComponentModalActive = true; roomSelected = room">
+                                                    @click="isComponentModalActive = true; roomSelected = room; popSelected = pop">
                                                     {{ room.name }} <span v-if="room.old_name">- {{ room.old_name }}</span>
                                                 </a>
                                             </div>
@@ -135,27 +134,27 @@
                                                 
                                             </div> -->
                                             <div class="column has-text-centered">
-                                                <!-- <div style="padding-top: 5px;"> -->
+                                                <div style="padding-top: 5px;">
                                                     <font-awesome-icon
                                                         :icon="['fas', 'circle']"
                                                         size="2x"
                                                         class="has-text-success"
                                                         />
                                                     <div class="is-size-6 has-text-weight-bold">10 kW</div>
-                                                <!-- </div> -->
+                                                </div>
                                             </div>
                                             <!-- <div class="column">
                                                 
                                             </div> -->
                                             <div class="column has-text-centered">
-                                                <!-- <div style="padding-top: 5px;"> -->
+                                                <div style="padding-top: 5px;">
                                                     <font-awesome-icon
                                                         :icon="['fas', 'circle']"
                                                         size="2x"
                                                         class="has-text-danger"
                                                         />
                                                     <div class="is-size-6 has-text-weight-bold">10 kW</div>
-                                                <!-- </div> -->
+                                                </div>
                                             </div>
                                             <!-- <div class="column">
                                                 
@@ -165,6 +164,7 @@
                                 </tr>    
                             </tbody>
                         </table>
+
                         <nav class="pagination" role="navigation" aria-label="pagination">
                             <vue-pagination  
                                 class="has-text-white"
@@ -179,10 +179,11 @@
 
             <b-modal :active.sync="isComponentModalActive"
                 has-modal-card full-screen :can-cancel="false">
-                <modal-room 
+                <modal-pop
                     :user="user"
+                    :pop="popSelected"
                     :room="roomSelected"
-                ></modal-room>
+                ></modal-pop>
             </b-modal>
         </div>
     </div>
@@ -196,7 +197,7 @@
             VuePagination,
             // CapacityChart: () => import('./CapacityChart'),
             // GrowingChart: () => import('./GrowingChart'),
-            ModalRoom: () => import('./ModalRoom')
+            ModalPop: () => import('./ModalPop')
         },
         props : [
             'user',
@@ -217,6 +218,7 @@
                 // currentRoom: [],
 
                 isComponentModalActive: false,
+                popSelected: null,
                 roomSelected: null
             }
         },

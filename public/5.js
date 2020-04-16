@@ -23,48 +23,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
-  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  components: {
+    GeneratorSet: function GeneratorSet() {
+      return __webpack_require__.e(/*! import() */ 61).then(__webpack_require__.bind(null, /*! ./GeneratorSet */ "./resources/js/components/pops/power/GeneratorSet.vue"));
+    }
+  },
+  props: ['user', 'pop'],
   data: function data() {
     return {
       generatorSets: Array
     };
   },
   mounted: function mounted() {
-    this.getGeneratorGroups();
+    this.getGeneratorSets();
   },
   computed: {},
   methods: {
-    getGeneratorGroups: function getGeneratorGroups() {
+    getGeneratorSets: function getGeneratorSets() {
       var _this = this;
 
       axios.get("/api/generatorSets/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
@@ -96,113 +72,27 @@ var render = function() {
   return _vm.generatorSets.length
     ? _c(
         "section",
-        { staticClass: "section", staticStyle: { "padding-top": "0px" } },
-        [
-          _c(
-            "div",
-            { staticClass: "columns tile is-ancestor is-multiline" },
-            _vm._l(_vm.generatorSets, function(data) {
-              return _c("div", { staticClass: "column is-6 tile is-parent" }, [
-                _c("div", { staticClass: "tile is-child box" }, [
-                  _c("div", { staticClass: "columns" }, [
-                    _c("div", { staticClass: "column" }, [
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-light is-size-7" },
-                        [_vm._v("Marca")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-semibold is-size-5 " },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              data.generator_set_type
-                                ? data.generator_set_type.generator_set_type
-                                : "Sin información"
-                            )
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "has-text-weight-light is-size-7",
-                          staticStyle: { "margin-top": "5px" }
-                        },
-                        [_vm._v("Modelo")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-semibold is-size-6" },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              data.generator_set_type
-                                ? data.generator_set_type.generator_set_model
-                                : "Sin información"
-                            )
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column has-text-right" },
-                      [
-                        _c("font-awesome-icon", {
-                          staticClass: "has-text-grey-lighter",
-                          staticStyle: { opacity: "0.5" },
-                          attrs: {
-                            icon: ["fas", "charging-station"],
-                            size: "3x"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c("div", { staticClass: "column is-4" }, [
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-light is-size-7" },
-                        [_vm._v("Potencia")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-normal is-size-6" },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              data.current_generator_group
-                                ? data.current_generator_group.power
-                                : "Sin información"
-                            ) + " "
-                          ),
-                          data.current_generator_group
-                            ? _c("span", { staticClass: "is-size-7" }, [
-                                _vm._v("kW")
-                              ])
-                            : _vm._e()
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "column" })
-                  ])
-                ])
-              ])
-            }),
-            0
-          )
-        ]
+        {},
+        _vm._l(_vm.generatorSets, function(generatorSet) {
+          return _c("div", {}, [
+            _c(
+              "div",
+              { staticClass: "columns" },
+              [
+                _c("div", { staticClass: "column is-2" }),
+                _vm._v(" "),
+                _c("generator-set", {
+                  staticClass: "column is-8",
+                  attrs: { generatorSet: generatorSet }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-2" })
+              ],
+              1
+            )
+          ])
+        }),
+        0
       )
     : _vm._e()
 }

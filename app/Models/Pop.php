@@ -102,6 +102,16 @@ class Pop extends Model
     {
         return $this->hasMany(PowerRectifier::class);
     }
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function projections()
+    {
+        return $this->hasMany(Projection::class);
+    }
 
     /**
      * The attributes that are mass assignable.

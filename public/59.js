@@ -186,7 +186,7 @@ var render = function() {
     _c("section", { staticClass: "container" }, [
       _c(
         "div",
-        { staticClass: "level has-background-white" },
+        { staticClass: "level has-background-light" },
         _vm._l(_vm.tabs, function(tab) {
           return _c(
             "div",

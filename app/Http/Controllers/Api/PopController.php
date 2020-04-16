@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Cache;
-
-use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\PopsExport;
-use App\Exports\SitesExport;
 use App\Exports\AllInfoPopsExport;
 use App\Exports\FilteredInfoPopsExport;
 use App\Exports\FilteredPopsExport;
 use App\Exports\FilteredSitesExport;
-
+use App\Exports\PopsExport;
+use App\Exports\SitesExport;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\Pop as PopResource;
 use App\Models\Pop;
-use App\Models\Site;
 use App\Models\PopMenu;
 use App\Models\PopMenuType;
+use App\Models\Projection;
+use App\Models\Site;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PopController extends Controller
 {
@@ -631,6 +629,21 @@ class PopController extends Controller
     {
         $pop_menu = PopMenu::where('state', 1)->orderBy('order','asc')->get();
         return new PopResource($pop_menu);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function projection(Request $request)
+    {
+        $data = Projection::where('pop_id', $request->pop_id)
+                ->orderBy('year', 'desc')
+                ->orderBy('month', 'desc')
+                ->get();
+        return new PopResource($data);
     }
 
     /**

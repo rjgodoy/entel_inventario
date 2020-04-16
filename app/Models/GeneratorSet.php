@@ -12,14 +12,24 @@ class GeneratorSet extends Model
         return $this->hasOne(GeneratorGroup::class)->latest();
     }
 
+    public function current_generator_motor() 
+    {
+        return $this->hasOne(GeneratorMotor::class)->latest();
+    }
+
     public function current_generator_tank() 
     {
         return $this->hasOne(GeneratorTank::class)->latest();
     }
 
-    public function current_generator_motor() 
+    public function current_generator_tta() 
     {
-        return $this->hasOne(GeneratorMotor::class)->latest();
+        return $this->hasOne(GeneratorTta::class)->latest();
+    }
+
+    public function current_maintainer() 
+    {
+        return $this->belongsToMany(TelecomCompany::class)->latest();
     }
 
 
@@ -48,8 +58,8 @@ class GeneratorSet extends Model
         return $this->hasMany(GeneratorTta::class);
     }
 
-    public function generator_owner() 
+    public function maintainers() 
     {
-        return $this->belongsTo(GeneratorOwner::class);
+        return $this->belongsToMany(TelecomCompany::class)->withTimestamps();
     }
 }

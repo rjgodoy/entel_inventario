@@ -1,8 +1,8 @@
 <template>
-    <section class="">
+    <div class="">
         <!-- TECNOLOGIAS -->
         <!-- ########### -->
-        <div class="level has-background-grey has-text-white">
+        <section class="level has-background-grey has-text-white">
             <div class="level-item">
                 <div class="is-size-7 has-text-weight-bold">2G 1900
                     <span class="has-text-weight-bold is-size-5" :class="tec2g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec2g1900 ? tec2g1900.nem_tech : '-' }}</span>
@@ -49,9 +49,12 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
+        <section class="section" style="padding-top: 0px;">
+            <div class="columns">
+                <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Sitios</div>
+            </div>
             <div class="tile is-ancestor columns is-multiline">
                 <div class="tile is-parent column is-4" v-for="site in sites">
                     <div class="tile is-child box">
@@ -109,8 +112,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </template>
 
 <script>

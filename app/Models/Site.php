@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Site extends Model
 {
     protected $connection = 'mysql_entel_pops';
+    protected $table = 'entel_pops.sites';
+    
     protected $guarded = [];
 
     public function attention_priority_type() 
@@ -47,6 +49,11 @@ class Site extends Model
     public function derivation_type() 
     {
         return $this->belongsTo(DerivationType::class);
+    }
+
+    public function files() 
+    {
+        return $this->hasMany(File::class);
     }
 
     public function pop() 

@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Http\Resources\Junction as JunctionResource;
-use App\Models\Junction;
-use App\Models\JunctionProtection;
-use App\Models\JunctionMeasurement;
-
 use App\Imports\JunctionsImport;
+use App\Models\Junction;
+use App\Models\JunctionMeasurement;
+use App\Models\JunctionProtection;
+use App\Models\Log;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class JunctionController extends Controller
@@ -60,7 +59,21 @@ class JunctionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        JunctionMeasurement::create([
+            'junction_id' => $id,
+            'r_measure' => $request->phase_r,
+            's_measure' => $request->phase_s,
+            't_measure' => $request->phase_t
+        ]);
+
+        Log::create([
+            'pop_id' => $request->pop_id,
+            'user_id' => $request->user_id,
+            'log_type_id' => 1,
+            'description' => 'Se ha introducido nuevos parámetros en el empalme.'
+        ]);
+
+        return;
     }
 
     /**

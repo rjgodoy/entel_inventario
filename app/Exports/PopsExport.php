@@ -9,12 +9,30 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadings, WithMapping
+// use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\Exportable;
+// use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+// use Maatwebsite\Excel\Concerns\WithCustomStartCell;
+// use Maatwebsite\Excel\Concerns\WithDrawings;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Events\BeforeExport;
+use Maatwebsite\Excel\Events\BeforeWriting;
+use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Events\AfterSheet;
+
+// use PhpOffice\PhpSpreadsheet\Shared\Date;
+// use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+// use PhpOffice\PhpSpreadsheet\Worksheet\Drawing
+
+class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadings, WithMapping, WithEvents
 {
+    use Exportable, RegistersEventListeners;
+
     protected $text;
     protected $selectedIds;
 
-	protected $core;
+    protected $core;
     protected $crm_id;
     protected $zona_id;
 
@@ -80,11 +98,12 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $condition_zona = $this->zona_id != 0 ? 'id = '.$this->zona_id : 'id != '.$this->zona_id;
 
             $condition_critic = $this->critic ? 'criticity = 1' : 'criticity IS NOT NULL';
-            // $condition_red_minima = 
-            //     $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' : 
-            //     ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
+            // $condition_red_minima =
+            //     $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' :
+            //     ($request->red_minima_n1 ? 'sites.red_minima = 1' :
             //         ($request->red_minima_n2 ? 'sites.red_minima = 2' : 'sites.red_minima IN (0,1,2)')
             //     );
+            $bafi = $this->bafi;
 
             // POP
             $condition_pe_3g = 'pops.pe_3g IN ('.$this->pe_3g.' ,1)';
@@ -94,21 +113,21 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $condition_vip = 'pops.vip IN ('.$this->vip.',1)';
             $condition_lloo = 'pops.localidad_obligatoria IN ('.$this->lloo.',1)';
             $condition_ranco = 'pops.ranco IN ('.$this->ranco.',1)';
-            $condition_bafi = 'pops.bafi IN ('.$this->bafi.',1)';
+            $condition_bafi = $this->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
             $condition_offgrid = 'pops.offgrid IN ('.$this->offgrid.',1)';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
             $condition_protected_zone = 'pops.protected_zone IN ('.$this->protected_zone.',1)';
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type')
-                ->whereHas('sites', function($q) use($text, $condition_core) { 
-                    $q->where(function($p) use($text) {
-                        $p->where(function($w) use($text) {
+            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type')
+                ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
+                    $q->where(function ($p) use ($text) {
+                        $p->where(function ($w) use ($text) {
                             if ($text) {
                                 $w->whereIn('site_type_id', [1,3,4])
                                 ->where('state_id', 1)
-                                ->where(function($r) use($text) {
+                                ->where(function ($r) use ($text) {
                                     $r->where('sites.nem_site', 'LIKE', "%$text%")
                                     ->orWhere('sites.nombre', 'LIKE', "%$text%");
                                 });
@@ -117,13 +136,13 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                                 ->where('state_id', 1);
                             }
                         })
-                        ->orWhere(function($s) use($text) {
+                        ->orWhere(function ($s) use ($text) {
                             if ($text) {
                                 $s->whereIn('site_type_id', [2])
                                 ->whereHas('technologies', function($r) {
                                     $r->where('state_id', 1);
                                 })
-                                ->where(function($q) use($text) {
+                                ->where(function ($q) use ($text) {
                                     $q->where('sites.nem_site', 'LIKE', "%$text%")
                                     ->orWhere('sites.nombre', 'LIKE', "%$text%");
                                 });
@@ -135,12 +154,21 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                             }
                         });
                     })
+                    ->where(function($q) use($condition_bafi, $bafi) {
+                        if($bafi) {
+                            $q->whereHas('technologies', function($q) use($condition_bafi) {
+                                $q->whereRaw($condition_bafi);
+                            });
+                        } else {
+                            $q->whereRaw('1 = 1');
+                        }
+                    })
                     ->whereRaw($condition_core);
                 })
-                ->whereHas('rooms', function($r) use($condition_critic) {
+                ->whereHas('rooms', function ($r) use ($condition_critic) {
                     $r->whereRaw($condition_critic);
                 })
-                ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                ->whereHas('comuna.zona', function ($q) use ($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })
@@ -151,7 +179,6 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ->whereRaw($condition_vip)
                 ->whereRaw($condition_lloo)
                 ->whereRaw($condition_ranco)
-                ->whereRaw($condition_bafi)
                 ->whereRaw($condition_offgrid)
                 ->whereRaw($condition_solar)
                 ->whereRaw($condition_eolica)
@@ -169,7 +196,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
      */
     public function title(): string
     {
-        return 'POP';
+        return 'PoP';
     }
 
     /**
@@ -179,22 +206,24 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
     {
         return [
             'ID POP',
-	        'COD PLANIFICACION',
-	        'NOMBRE',
-	        'DIRECCION',
-	        'COMUNA',
-	        'REGION',
-	        'NOMBRE REGION',
-	        'COD ZONA',
-	        'NOMBRE ZONA',
-	        'CRM',
-	        'LATITUD',
-	        'LONGITUD',
+            'COD PLANIFICACION',
+            'NOMBRE',
+            'DIRECCION',
+            'COMUNA',
+            'REGION',
+            'NOMBRE REGION',
+            'COD ZONA',
+            'NOMBRE ZONA',
+            'CRM',
+            'LATITUD',
+            'LONGITUD',
 
-	        'OFFGRID',
-	        'PANEL SOLAR',
-	        'EOLICA',
-	        'GESTION AMBIENTAL',
+            'VIP',
+
+            'OFFGRID',
+            'PANEL SOLAR',
+            'EOLICA',
+            'GESTION AMBIENTAL',
             'PROYECTO ALBA'
         ];
     }
@@ -233,12 +262,198 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             // $pop->coverages->first() ? $pop->coverages->first()->coverage_type->type : '',
             // // $pop->towers->first() ? $pop->history_tower_types->first()->tower_type->tower_type : '',
 
-  	        $pop->offgrid ? 'SI' : 'NO',
-  	        $pop->solar ? 'SI' : 'NO',
-  	        $pop->eolica ? 'SI' : 'NO',
-  	        $pop->gestion_ambiental ? 'SI' : 'NO' ,
-            $pop->alba_project ? 'SI' : 'NO' 
+            $pop->vip ? 'SI' : 'NO',
 
-  		];
-  	}
+            $pop->offgrid ? 'SI' : 'NO',
+            $pop->solar ? 'SI' : 'NO',
+            $pop->eolica ? 'SI' : 'NO',
+            $pop->gestion_ambiental ? 'SI' : 'NO' ,
+            $pop->alba_project ? 'SI' : 'NO'
+
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    // public function columnFormats(): array
+    // {
+    //     return [
+    //         'H' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+    //         'I' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+    //         'J' => NumberFormat::FORMAT_CURRENCY_USD_SIMPLE,
+    //     ];
+    // }
+
+    public static function beforeExport(BeforeExport $event)
+    {
+        //
+    }
+
+    public static function beforeWriting(BeforeWriting $event)
+    {
+        //
+    }
+
+    public static function beforeSheet(BeforeSheet $event)
+    {
+        //
+    }
+
+    public static function afterSheet(AfterSheet $event) 
+    {
+
+        // $event->sheet->styleCells(
+        //     'A1:ZZ1',
+        //     [
+        //         'font' => [
+        //             'size' => 11,
+        //             // 'name' => 'Arial',
+        //             'bold' => true,
+        //             'italic' => false,
+        //             // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+        //             'strikethrough' => false,
+        //             // 'color' => ['argb' => '000000']
+        //         ],
+        //         'alignment' => [
+        //             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        //             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+        //             'wrapText' => true,
+        //         ],
+        //         // 'borders' => [
+        //         //     'outline' => [
+        //         //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+        //         //         'color' => ['argb' => 'FFFF0000'],
+        //         //     ],
+        //         // ],
+
+        //         'fill' => [
+        //             'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+        //             'color' => ['argb' => 'F4D35E']
+        //         ]
+        //     ]
+        // );
+
+        $event->sheet->styleCells(
+            'A1:L1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '5081bd']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'M1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '4bacc6']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'N1:P1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => 'f79647']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'Q1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '9cbb59']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'R1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => 'c04f4d']
+                ]
+            ]
+        );
+
+    }
+
 }

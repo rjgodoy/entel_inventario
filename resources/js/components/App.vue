@@ -161,6 +161,7 @@
                 <keep-alive>
                     <router-view
                         :user="user"
+                        :user_permissions="user_permissions"
                         :popList="pops"
                         :crms="crms"
                         :last_data_counters='last_data_counters'
@@ -261,6 +262,7 @@
                     (this.user.roles[0].name == 'developer' 
                         || this.user.roles[0].name == 'admin' 
                         || this.user.roles[0].name == 'engineer'
+                        || this.user.roles[0].name == 'engineer admin'
                         || this.user_permissions.find(element => element.slug == 'view-capacity')
                         )) {
                     return true

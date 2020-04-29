@@ -6,6 +6,9 @@
         <section class="modal-card-body" style="background: rgba(0,0,0,0)">
             <generator-set
                 :generatorSet="generatorSet"
+                :pop="pop"
+                :user="user"
+                :can="can"
             />
         </section>
         <!-- <footer class="modal-card-foot" style="background: rgba(0,0,0,0)"> -->
@@ -21,6 +24,9 @@
             GeneratorSet: () => import('../../../pops/power/GeneratorSet')
         },
         props : [
+            'pop',
+            'can',
+            'user',
             'generatorSet'
         ],
         data() {

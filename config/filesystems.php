@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app/public'),
         ],
 
         'public' => [
@@ -65,14 +65,14 @@ return [
         ],
         
         'ftp' => [
-            'driver'   => 'ftp',
-            'host'     => '172.16.100.123',
+            'driver'   => 'sftp',
+            'host'     => '172.16.100.116',
             'username' => 'developer',
-            'password' => 'Entel.123',
-
+            'password' => 'Entel@123RepoDev',
+            // 'permPublic' => 0766,
             // Optional FTP Settings...
             // 'port'     => 21,
-            // 'root'     => '',
+            'root'     => '/var/ftp/pub',
             // 'passive'  => true,
             // 'ssl'      => true,
             // 'timeout'  => 30,

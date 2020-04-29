@@ -9,6 +9,7 @@
                         :junction="junction" 
                         :can="can"
                         :user="user"
+                        :pop="pop"
                     />
                 </div>
                 <div class="column is-3"></div>
@@ -56,9 +57,9 @@
                 });
             },
 
-            capacidadTotal(latest_protection) {
-                return latest_protection ? latest_protection.nominal_a * 380 * 1.7320508 : 0
-            },
+            // capacidadTotal(latest_protection) {
+            //     return latest_protection ? latest_protection.nominal_a * 380 * 1.7320508 : 0
+            // },
         }
     }
 </script>

@@ -6,14 +6,6 @@
                 <div class="tile is-child box">
 
                     <div class="columns">
-                        <!-- <div class="column has-text-centered">
-                            <font-awesome-icon
-                                :icon="['fas', 'plug']" 
-                                size="3x" 
-                                class="has-text-grey" 
-                                style="opacity: 0.5;"/>
-                        </div> -->
-
                         <div class="column is-4">
                             <div class="has-text-weight-semibold is-size-4">{{ junction.electric_company ? junction.electric_company.name : 'Sin información' }}</div>
                             <div class="has-text-weight-light is-size-7">Distribuidora</div>
@@ -142,7 +134,8 @@
                                     aria-modal >
                                     <edit-junction-parameters 
                                         :junction="junction"
-                                        :user="user"/>
+                                        :user="user"
+                                        :pop="pop"/>
                                 </b-modal>
 
 
@@ -205,6 +198,7 @@
             EditJunctionParameters: () => import('./modals/EditJunctionParameters'),
         },
         props : [
+            'pop',
             'can',
             'junction',
             'user'
@@ -223,7 +217,7 @@
             },
 
             consumoTablero() {
-                return (this.junction.latest_measurement.r_measure + this.junction.latest_measurement.s_measure + this.junction.latest_measurement.t_measure) * 220
+                return this.junction.latest_measurement ? (this.junction.latest_measurement.r_measure + this.junction.latest_measurement.s_measure + this.junction.latest_measurement.t_measure) * 220 : 0
             },
 
             usagePercent() {

@@ -168,7 +168,15 @@ class AirConditionerController extends Controller
      */
     public function show($id)
     {
-        $airConditioners = AirConditioner::with('air_conditioner_brand.air_conditioner_type')->where('pop_id', $id)->get();
+        $airConditioners = AirConditioner::with(
+                    'air_conditioner_brand.air_conditioner_type', 
+                    'air_conditioner_condensers', 
+                    'air_conditioner_chillers', 
+                    'air_conditioner_consumptions', 
+                    'current_consumption'
+                    )
+                    ->where('pop_id', $id)
+                    ->get();
         return new AirConditionerResource($airConditioners);
     }
 

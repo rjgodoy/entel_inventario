@@ -7,6 +7,8 @@
             <junction
                 :junction="junction"
                 :can="can"
+                :pop="pop"
+                :user="user"
             />
         </section>
         <!-- <footer class="modal-card-foot" style="background: rgba(0,0,0,0)"> -->
@@ -22,8 +24,10 @@
             Junction: () => import('../../../pops/power/Junction')
         },
         props : [
+            'pop',
             'can',
             'junction',
+            'user'
         ],
         data() {
             return {

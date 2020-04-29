@@ -97,6 +97,14 @@ class UpdatePops extends Command
                 $site_name = $newPop->ran_device_name;
             }
 
+            $siteRegistered = Site::where('nem_site', $newPop->alias)->first();
+            if ($siteRegistered) {
+                $state_id = $siteRegistered->state_id == 1 ? 1 : $newPop->state_id;
+            } else {
+                $state_id = $newPop->state_id;
+            }
+
+
             $site = Site::updateOrCreate(
                 [
                     'nem_site' => $newPop->alias
@@ -107,7 +115,7 @@ class UpdatePops extends Command
                     'site_type_id' => Str::startsWith($newPop->alias, 'RP') ? 5 : (Str::startsWith($newPop->alias, 'SW') ? 3 : 2),
                     'solution_type_id' => $newPop->solution_type_id, 
                     'site_class_type_id' => Str::startsWith($newPop->alias, 'RP') ? 4 : (Str::startsWith($newPop->alias, 'SW') ? 7 : ($newPop->ran_device_type == 'RBS' ? 3 : 6)),
-                    'state_id' => $newPop->state_id
+                    'state_id' => $state_id
                 ]
             );
 

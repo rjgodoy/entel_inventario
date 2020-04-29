@@ -16402,6 +16402,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Clock.vue")["default"];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -16463,7 +16464,7 @@ var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Cl
     canView: function canView(path) {
       if (path !== '/capacity' && path !== '/admin') {
         return true;
-      } else if (path == '/capacity' && (this.user.roles[0].name == 'developer' || this.user.roles[0].name == 'admin' || this.user.roles[0].name == 'engineer' || this.user_permissions.find(function (element) {
+      } else if (path == '/capacity' && (this.user.roles[0].name == 'developer' || this.user.roles[0].name == 'admin' || this.user.roles[0].name == 'engineer' || this.user.roles[0].name == 'engineer admin' || this.user_permissions.find(function (element) {
         return element.slug == 'view-capacity';
       }))) {
         return true;
@@ -52440,6 +52441,7 @@ var render = function() {
               _c("router-view", {
                 attrs: {
                   user: _vm.user,
+                  user_permissions: _vm.user_permissions,
                   popList: _vm.pops,
                   crms: _vm.crms,
                   last_data_counters: _vm.last_data_counters,
@@ -70384,6 +70386,10 @@ Vue.prototype.$eventCounters = new Vue(); // ########################## Buefy Li
 
 
 Vue.use(buefy__WEBPACK_IMPORTED_MODULE_0__["default"]); // #########################################################################
+// ########################## LeaderLine Libraries ##########################
+// import LeaderLine from 'leader-line'
+// Vue.use(LeaderLine)
+// #########################################################################
 // ########################## FontAwesome Libraries ##########################
 
 
@@ -70393,7 +70399,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["dom"].watch();
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSolarPanel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faWifi"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolder"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faExclamationCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMapMarkedAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faInfo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMousePointer"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faArrowUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faChevronUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBackspace"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSyncAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faLink"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faUnlink"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCarBattery"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faUserEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faAngleDown"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faTwitter"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faGithub"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faServer"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faClipboardList"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faClipboard"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faClipboard"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFan"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSuitcaseRolling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCompress"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCompressArrowsAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faUpload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faPlug"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faRandom"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileInvoiceDollar"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBan"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBullseye"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCaretDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCaretUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFilePdf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileExcel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileImage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faAdjust"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMicrochip"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFill"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faGasPump"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBezierCurve"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSolarPanel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faWifi"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolder"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faExclamationCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMapMarkedAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faInfo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMousePointer"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faArrowUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faChevronUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBackspace"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSyncAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faLink"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faUnlink"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCarBattery"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faUserEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faAngleDown"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faTwitter"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faGithub"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faServer"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faClipboardList"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faClipboard"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faClipboard"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFan"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSuitcaseRolling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCompress"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCompressArrowsAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faUpload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faPlug"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faRandom"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileInvoiceDollar"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBan"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBullseye"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCaretDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCaretUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFilePdf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileExcel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileImage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faAdjust"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMicrochip"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFill"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faGasPump"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCalculator"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faPlus"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faPlusSquare"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faTrashAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faTrashAlt"]);
 Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"]); // #########################################################################
 // ########################## NumeralJs ##########################
 
@@ -70433,9 +70439,6 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_8__["default"]);
 
 var app = new Vue({
   router: new vue_router__WEBPACK_IMPORTED_MODULE_8__["default"](_constants_routes__WEBPACK_IMPORTED_MODULE_9__["default"]) // store,
-  // components: {
-  //     'font-awesome-icon': FontAwesomeIcon
-  // },
   // events: {
   //     clickOutside(event) {                
   //     }
@@ -70710,47 +70713,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ../components/auth/Login.vue */ "./resources/js/components/auth/Login.vue"));
+  return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ../components/auth/Login.vue */ "./resources/js/components/auth/Login.vue"));
 };
 
 var PasswordEmail = function PasswordEmail() {
-  return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordEmail.vue */ "./resources/js/components/auth/PasswordEmail.vue"));
+  return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordEmail.vue */ "./resources/js/components/auth/PasswordEmail.vue"));
 };
 
 var PasswordReset = function PasswordReset() {
-  return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordReset.vue */ "./resources/js/components/auth/PasswordReset.vue"));
+  return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordReset.vue */ "./resources/js/components/auth/PasswordReset.vue"));
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(9), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(13), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {
-  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/pops/PopTable.vue */ "./resources/js/components/pops/PopTable.vue"));
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/pops/PopTable.vue */ "./resources/js/components/pops/PopTable.vue"));
 };
 
 var Pop = function Pop() {
-  return __webpack_require__.e(/*! import() */ 52).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
+  return __webpack_require__.e(/*! import() */ 60).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
 };
 
 var CapacityPlanning = function CapacityPlanning() {
-  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
 };
 
 var Eco = function Eco() {
-  return __webpack_require__.e(/*! import() */ 43).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
+  return __webpack_require__.e(/*! import() */ 50).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
 };
 
 var Comsite = function Comsite() {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/comsite/Comsite.vue */ "./resources/js/components/comsite/Comsite.vue"));
+  return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/comsite/Comsite.vue */ "./resources/js/components/comsite/Comsite.vue"));
 };
 
 var Documents = function Documents() {
-  return __webpack_require__.e(/*! import() */ 42).then(__webpack_require__.bind(null, /*! ../components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
+  return __webpack_require__.e(/*! import() */ 49).then(__webpack_require__.bind(null, /*! ../components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
 };
 
 var Admin = function Admin() {
-  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ../components/admin/Admin.vue */ "./resources/js/components/admin/Admin.vue"));
+  return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ../components/admin/Admin.vue */ "./resources/js/components/admin/Admin.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({

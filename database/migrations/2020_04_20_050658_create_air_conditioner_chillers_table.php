@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentsPopsTable extends Migration
+class CreateAirConditionerChillersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateDocumentsPopsTable extends Migration
      */
     public function up()
     {
-        // Schema::create('documents_pops', function (Blueprint $table) {
+        // Schema::create('air_conditioner_chillers', function (Blueprint $table) {
         //     $table->bigIncrements('id');
-        //     $table->bigInteger('document_id');
-        //     $table->bigInteger('pop_id');
+        //     $table->bigInteger('air_conditioner_id');
+        //     $table->double('capacity');
+        //     $table->timestamps();
         // });
     }
 
@@ -27,6 +28,6 @@ class CreateDocumentsPopsTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('documents_pops');
+        // Schema::dropIfExists('air_conditioner_chillers');
     }
 }

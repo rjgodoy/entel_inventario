@@ -56,25 +56,25 @@
                 :checkbox-position="checkboxPosition">
 
                 <template slot-scope="props">
-                    <b-table-column field="id" label="ID TP" width="40" numeric>
+                    <b-table-column field="tp_id" label="ID TP" width="40" numeric>
                         {{ props.row.tp_id }}
                     </b-table-column>
 
-                    <b-table-column field="first_name" label="Sitio">
+                    <b-table-column field="site.nem_site" label="Sitio" sortable>
                         {{ props.row.site ? props.row.site.nem_site : '' }} - {{ props.row.site ? props.row.site.nombre : '' }}
                     </b-table-column>
 
-                    <b-table-column field="DESCRIPCION" label="Descripción">
+                    <b-table-column field="description" label="Descripción">
                         <!-- {{ new Date(props.row.created_at).toLocaleDateString() }} -->
                         {{ props.row.description }}
                     </b-table-column>
 
-                    <b-table-column field="DESCRIPCION" label="Fecha Ingreso">
+                    <b-table-column field="created_at" label="Fecha Ingreso" sortable>
                         <!-- {{ new Date(props.row.created_at).toLocaleDateString() }} -->
                         {{ props.row.created_at }}
                     </b-table-column>
 
-                    <b-table-column field="date" label="Usuario Creador" centered>
+                    <b-table-column field="user" label="Usuario Creador" centered sortable>
                         <span class="tag is-success">
                             {{ props.row.user }}
                         </span>
@@ -82,7 +82,7 @@
 
 
 
-                    <b-table-column field="date" label="Estado" centered>
+                    <b-table-column field="psg_tp_state.state" label="Estado" centered sortable>
                         <span class="tag is-success">
                             {{ props.row.psg_tp_state.state }}
                         </span>

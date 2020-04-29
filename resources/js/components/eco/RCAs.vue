@@ -83,7 +83,7 @@
         <b-field v-if="rcas.can ? rcas.can.upload : null">
             <b-upload
                 v-model="dropFiles"
-                @input="submitForm"
+                @input="submit"
                 multiple
                 drag-drop>
                 <section class="section">
@@ -145,12 +145,16 @@
             getRCAs() {
                 axios.get(`/api/rcas?api_token=${this.user.api_token}`)
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.rcas = response.data
                 })
             },
 
-            submitForm() {
+            submit() {
+                this.dropFiles.forEach(element => this.submitForm(element))
+            },
+
+            submitForm(file) {
                 const config = {
                     headers: {
                         'content-type': 'multipart/form-data',
@@ -160,13 +164,18 @@
 
                 // form data
                 let formData = new FormData();
-                formData.append('file', this.dropFiles[0]);
+                formData.append('file', file)
 
                 // send upload request
-                axios.post(`/api/rcas?api_token=${this.user.api_token}`, formData, config)
+                try {
+                    let response = axios.post(`/api/rcas?api_token=${this.user.api_token}`, formData, config)
                     .then(response => {
                         this.getRCAs()
                     })
+                } catch (e) {
+                    console.log(e)
+                }
+                
             },
 
             deleteDropFile(index) {

@@ -117,6 +117,28 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public function permissions() {
+
+        return $this->belongsToMany(Permission::class, 'entel_g_redes_inventario.permission_user')->withTimestamps();
+
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function roles() {
+
+        return $this->belongsToMany(Role::class, 'entel_g_redes_inventario.role_user')->withTimestamps();
+
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function areas()
     {
         return $this->belongsToMany(Area::class)->withTimestamps();

@@ -115,13 +115,13 @@
                                     {{ props.option.nem_site }}
                                 </div>
                                 <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
-                                    {{ props.option ? props.option.nombre_sitio : '' }}
+                                    {{ props.option ? props.option.nombre : '' }}
                                 </div>
                                 <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                    {{ props.option ? props.option.nombre_comuna : '' }}
+                                    {{ props.option ? props.option.pop.comuna.nombre_comuna : '' }}
                                 </div>
                                 <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                    {{ props.option ? 'Zona ' + props.option.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.nombre_crm : '' }}
+                                    {{ props.option ? 'Zona ' + props.option.pop.comuna.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.pop.comuna.zona.crm.nombre_crm : '' }}
                                 </div>
                             </div>
 
@@ -135,12 +135,12 @@
                                             (props.option.classification_type_id == 2 ? 'is-warning' : 
                                             (props.option.classification_type_id == 3 ? 'is-link' : 'is-info'))"
                                         >
-                                        {{ props.option ? props.option.classification_type : '' }}
+                                        {{ props.option ? props.option.classification_type.classification_type : '' }}
                                     </span>
                                 </div>
                                 <div class="">
-                                    <span v-if="props.option.alba_project == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
-                                        {{ props.option.alba_project == 1 ? 'alba' : '' }}
+                                    <span v-if="props.option.pop.alba_project == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
+                                        {{ props.option.pop.alba_project == 1 ? 'alba' : '' }}
                                     </span>
                                 </div>
 
@@ -151,12 +151,12 @@
 
                             <div class="column has-text-right">
                                 <div class="">
-                                    <button class="button is-small is-default is-fullwidth" @click="selectPop(props.option)" v-model="selectedPop">
+                                    <button class="button is-small is-default is-fullwidth" @click="selectPop(props.option.pop)" v-model="selectedSite">
                                         <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
                                     </button>
                                 </div>
                                 <div class="">
-                                    <router-link :to="'/pop/' + props.option.id" class="button is-small is-link is-fullwidth" target="_blank">
+                                    <router-link :to="'/pop/' + props.option.pop.id" class="button is-small is-link is-fullwidth" target="_blank">
                                         <font-awesome-icon icon="info-circle"/>&nbsp;Ver detalles
                                     </router-link>
                                 </div>
@@ -324,6 +324,12 @@
                         </div>
 
                         <!-- Mapa -->
+                        <!-- <b-tabs size="is-small" class="block">
+                            <b-tab-item label="Pictures" icon="google-photos"></b-tab-item>
+                            <b-tab-item label="Music" icon="library-music"></b-tab-item>
+                            <b-tab-item label="Videos" icon="video"></b-tab-item>
+                        </b-tabs> -->
+                        
                         <div class="tile is-parent is-vertical">
                             <div class="tile is-child box" :class="boxBackground">
                                 <map-view
@@ -679,7 +685,8 @@
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
 
-                selectedPop: null,
+                // selectedPop: null,
+                selectedSite: null,
                 selectedCrm: null,
                 selectedZona: null,
 
@@ -702,11 +709,11 @@
         },
 
         watch: {
-            selectedPop(newValue, oldValue) {
+            selectedPop(newValue) {
                 this.pops = [newValue]
             },
 
-            selectedCrm(newValue, oldValue) {
+            selectedCrm(newValue) {
                 this.selectedZona = null
                 if (this.currentTab == 'critics') {
                     this.viewCriticPops()
@@ -722,7 +729,7 @@
                 this.getCounters()
             },
 
-            selectedZona(newValue, oldValue) {
+            selectedZona(newValue) {
                 if (this.currentTab == 'critics'){
                     this.viewCriticPops()
                 }
@@ -767,6 +774,10 @@
         },
 
         computed: {
+            selectedPop() {
+                return this.selectedSite ? this.selectedSite.pop : null
+            },
+
             currentTabComponent: function () {
                 return this.currentTab + '-data'
             },

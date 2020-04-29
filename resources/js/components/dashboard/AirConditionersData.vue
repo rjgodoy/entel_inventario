@@ -1,6 +1,6 @@
 <template>
     <div class="column is-4">
-        <article class="tile is-child box is-smart is-bold">
+        <article class="tile is-child box is-bold">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Aires Acondicionados</div>
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
@@ -88,7 +88,7 @@
                 if (this.crmSelected == null) {
                     axios.get(`/api/airConditionerData/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
-                            this.airConditionerData = response.data.data;
+                            this.airConditionerData = response.data.airConditioner;
                             this.totalAirConditioners()
                         })
                         .catch(() => {
@@ -97,7 +97,7 @@
                 } else if (this.zonaSelected == null){
                     axios.get(`/api/airConditionerDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
-                            this.airConditionerData = response.data.data;
+                            this.airConditionerData = response.data.airConditioner;
                             this.totalAirConditioners()
                         })
                         .catch(() => {
@@ -107,7 +107,7 @@
                     axios.get(`/api/airConditionerDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
                             console.log(response)
-                            this.airConditionerData = response.data.data;
+                            this.airConditionerData = response.data.airConditioner;
                             this.totalAirConditioners()
                         })
                         .catch(() => {

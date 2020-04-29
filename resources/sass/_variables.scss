@@ -175,6 +175,8 @@ $dropdown-content-max-height: 400px !default;
     margin-top: 0px;
 }
 
+$radius-rounded: 290486px !default;
+
 // Box gradient
 .box {
     &.is-bold {
@@ -190,8 +192,8 @@ $dropdown-content-max-height: 400px !default;
         }
         &.is-eco {
             color: white;
-            background: rgb(168,244,220);
-            background: linear-gradient(270deg, rgba(168,244,220,1) 0%, rgba(232,255,248,1) 100%);
+            background: rgb(13,204,131);
+            background: linear-gradient(270deg, rgba(0,163,99,1) 0%, rgba(13,204,131,1) 100%);
         }
         &.is-positive {
             color: white;
@@ -213,6 +215,24 @@ $dropdown-content-max-height: 400px !default;
             background: $grey-dark;
             background: linear-gradient(270deg, $grey-dark 0%, $black-ter 100%);
         }
+        &.is-danger {
+            color: white;
+            background: rgb(184, 1, 20);
+            background: linear-gradient(270deg, rgb(184, 1, 20) 0%, rgb(244, 21, 15) 100%);
+        }
+        &.is-warning {
+            color: white;
+            background: rgb(234, 117, 8);
+            background: linear-gradient(270deg, rgb(234, 117, 8) 0%, rgb(255, 191, 0) 100%);
+        }
+        &.is-success {
+            color: white;
+            background: rgb(26, 152, 113);
+            background: linear-gradient(270deg, rgb(26, 152, 113) 0%, rgb(67, 232, 180) 100%);
+        }
+    }
+    &.is-rounded {
+        border-radius: $radius-rounded;
     }
 }
 

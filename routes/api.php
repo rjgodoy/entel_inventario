@@ -252,10 +252,10 @@ Route::middleware('auth:api')->group(function () {
 
 		### CAPACITY PLANNING ######################################################################
 
-			Route::group(['middleware' => 'role:developer,admin,engineer'], function() {
+			Route::group(['middleware' => 'role:developer,admin,engineer,engineer-admin'], function() {
 
 				Route::apiResource('rooms','Api\RoomController');
-				Route::get('capacityProjection','Api\PopController@projection');
+				Route::get('capacityProjection','Api\RoomController@projection');
 
 			});
 			
@@ -284,9 +284,13 @@ Route::middleware('auth:api')->group(function () {
 			Route::get('popMenu', 'Api\PopController@popMenu');
 
 			Route::apiResource('documents', 'Api\DocumentController');
-			Route::get('directories/{id}', 'Api\DocumentController@directories');
-			Route::get('folders/{id}/{path}', 'Api\DocumentController@folders');
-			Route::get('files/{id}/{path}/{path2}', 'Api\DocumentController@files');
+			// Route::get('directories/{id}', 'Api\DocumentController@directories');
+			// Route::get('folders/{id}/{path}', 'Api\DocumentController@folders');
+			Route::apiResource('files', 'Api\FileController');
+			Route::get('viewFile', 'Api\FileController@view');
+			
+
+			Route::apiResource('logs','Api\LogController');
 		##############################################################################################
 
 

@@ -9,8 +9,19 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadings, WithMapping
+use Maatwebsite\Excel\Concerns\Exportable;
+
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Events\BeforeExport;
+use Maatwebsite\Excel\Events\BeforeWriting;
+use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Events\AfterSheet;
+
+class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadings, WithMapping, WithEvents
 {
+    use Exportable, RegistersEventListeners;
+
     protected $text;
     protected $selectedIds;
 
@@ -85,24 +96,25 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             //     ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
             //         ($request->red_minima_n2 ? 'sites.red_minima = 2' : 'sites.red_minima IN (0,1,2)')
             //     );
-
+            $bafi = $this->bafi;
+            
             // POP
-            $condition_pe_3g = 'pops.pe_3g IN ('.$this->pe_3g.' ,1)';
-            $condition_mpls = 'pops.mpls IN ('.$this->mpls.',1)';
-            $condition_olt = 'pops.olt IN ('.$this->olt.',1)';
-            $condition_olt_3play = 'pops.olt_3play IN ('.$this->olt_3play.',1)';
+            $condition_pe_3g = 'pe_3g IN ('.$this->pe_3g.' ,1)';
+            $condition_mpls = 'mpls IN ('.$this->mpls.',1)';
+            $condition_olt = 'olt IN ('.$this->olt.',1)';
+            $condition_olt_3play = 'olt_3play IN ('.$this->olt_3play.',1)';
             $condition_vip = 'pops.vip IN ('.$this->vip.',1)';
-            $condition_lloo = 'pops.localidad_obligatoria IN ('.$this->lloo.',1)';
-            $condition_ranco = 'pops.ranco IN ('.$this->ranco.',1)';
-            $condition_bafi = 'pops.bafi IN ('.$this->bafi.',1)';
+            $condition_lloo = 'localidad_obligatoria IN ('.$this->lloo.',1)';
+            $condition_ranco = 'ranco IN ('.$this->ranco.',1)';
+            $condition_bafi = $this->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
             $condition_offgrid = 'pops.offgrid IN ('.$this->offgrid.',1)';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
             $condition_protected_zone = 'pops.protected_zone IN ('.$this->protected_zone.',1)';
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $site = Site::with('classification_type', 'attention_priority_type')
-            	->where(function($p) use($text) {
+            $site = Site::with('pop', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type')
+            	->where(function($p) use($text, $condition_bafi) {
                     $p->where(function($w) use($text) {
                         if ($text) {
                             $w->whereIn('site_type_id', [1,3,4])
@@ -134,7 +146,15 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                         }
                     });
                 })
-                ->whereRaw($condition_core)
+                ->where(function($q) use($condition_bafi, $bafi) {
+                    if($bafi) {
+                        $q->whereHas('technologies', function($q) use($condition_bafi) {
+                            $q->whereRaw($condition_bafi);
+                        });
+                    } else {
+                        $q->whereRaw('1 = 1');
+                    }
+                })
     	        ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
     	            $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
@@ -142,21 +162,21 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                 ->whereHas('pop.rooms', function($r) use($condition_critic) {
                     $r->whereRaw($condition_critic);
                 })
-                ->whereHas('pop', function($s) use($condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_vip, $condition_lloo, $condition_ranco, $condition_bafi, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $condition_alba_project) {
-                    $s->whereRaw($condition_pe_3g)
-                    ->whereRaw($condition_mpls)
-                    ->whereRaw($condition_olt)
-                    ->whereRaw($condition_olt_3play)
-                    ->whereRaw($condition_vip)
-                    ->whereRaw($condition_lloo)
-                    ->whereRaw($condition_ranco)
-                    ->whereRaw($condition_bafi)
+                ->whereHas('pop', function($s) use($condition_vip, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $condition_alba_project) {
+                    $s->whereRaw($condition_vip)
                     ->whereRaw($condition_offgrid)
                     ->whereRaw($condition_solar)
                     ->whereRaw($condition_eolica)
                     ->whereRaw($condition_protected_zone)
                     ->whereRaw($condition_alba_project);
                 })
+                ->whereRaw($condition_core)
+                ->whereRaw($condition_pe_3g)
+                ->whereRaw($condition_mpls)
+                ->whereRaw($condition_olt)
+                ->whereRaw($condition_olt_3play)
+                ->whereRaw($condition_lloo)
+                ->whereRaw($condition_ranco)
                 ->orderBy('pop_id', 'asc')
     	        ->get();
         }
@@ -169,7 +189,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
      */
     public function title(): string
     {
-        return 'Sites';
+        return 'Sitios';
     }
 
     /**
@@ -178,20 +198,23 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
     public function headings(): array
     {
         return [
-            'ID SITE',
-            'ID POP',
+            'ID SITIO',
+            'CODIGO PLANIFICACION',
 	        'NEMONICO',
 	        'NOMBRE',
 
-	        'CLASIFICACION SITIO',
-	        'PRIORIDAD DE ATENCION EN TERRENO',
-	        'RED MINIMA',
+            'CLASIFICACION SITIO',
+            'PRIORIDAD ATENCION',
+            'CATEGORIA PLANIFICACION',
+            'TIPO ATENCION TERRENO',
 
 	        'PE 3G',
 	        'MPLS',
 	        'OLT',
 	        'OLT 3PLAY',
 	        'CORE',
+
+            'RED MINIMA',
 	        'LOCALIDAD OBLIGATORIA',
 	        'RANCO',
 	        'BAFI'
@@ -204,26 +227,128 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
      */
     public function map($site): array
     {
+        $bafi = 0;
+        foreach ($site->technologies as $technology) {
+            if($technology->technology_type_id == 3 && $technology->frequency == 3500) {
+                $bafi = 1;
+            }
+        }
+
         return [
             $site->id,
-            $site->pop_id,
+            $site->pop->pop_e_id,
             $site->nem_site,
             $site->nombre,
 
             $site->classification_type->classification_type,
             $site->attention_priority_type->attention_priority_type,
-            $site->red_minima,
+            $site->category_type && $site->category_type->category_type,
+            $site->attention_type->attention_type,
 
             $site->pe_3g ? 'SI' : 'NO',
             $site->mpls ? 'SI' : 'NO',
             $site->olt ? 'SI' : 'NO',
             $site->olt_3play ? 'SI' : 'NO',
-            $site->classification_type_id ? 'SI' : 'NO',
+            $site->classification_type_id == 1 ? 'SI' : 'NO',
+
+            $site->red_minima,
+
             $site->localidad_obligatoria ? 'SI' : 'NO',
             $site->ranco ? 'SI' : 'NO',
-            $site->bafi ? 'SI' : 'NO',
-            
+            $bafi ? 'SI' : 'NO',
 
   		];
   	}
+
+    public static function beforeExport(BeforeExport $event)
+    {
+        //
+    }
+
+    public static function beforeWriting(BeforeWriting $event)
+    {
+        //
+    }
+
+    public static function beforeSheet(BeforeSheet $event)
+    {
+        //
+    }
+
+    public static function afterSheet(AfterSheet $event) 
+    {
+        $event->sheet->styleCells(
+            'A1:D1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '5081bd']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'E1:H1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => 'c04f4d']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'I1:Q1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '4bacc6']
+                ]
+            ]
+        );
+
+    }
+    
 }

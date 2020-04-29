@@ -26,13 +26,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     GeneratorSet: function GeneratorSet() {
-      return __webpack_require__.e(/*! import() */ 61).then(__webpack_require__.bind(null, /*! ../../../pops/power/GeneratorSet */ "./resources/js/components/pops/power/GeneratorSet.vue"));
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../../../pops/power/GeneratorSet */ "./resources/js/components/pops/power/GeneratorSet.vue"));
     }
   },
-  props: ['generatorSet'],
+  props: ['pop', 'can', 'user', 'generatorSet'],
   data: function data() {
     return {};
   },
@@ -71,7 +74,16 @@ var render = function() {
           staticClass: "modal-card-body",
           staticStyle: { background: "rgba(0,0,0,0)" }
         },
-        [_c("generator-set", { attrs: { generatorSet: _vm.generatorSet } })],
+        [
+          _c("generator-set", {
+            attrs: {
+              generatorSet: _vm.generatorSet,
+              pop: _vm.pop,
+              user: _vm.user,
+              can: _vm.can
+            }
+          })
+        ],
         1
       )
     ]

@@ -1,6 +1,6 @@
 <template>
     <div class="column is-4">
-        <article class="tile is-child box is-bold is-positive" :class="boxBackground">
+        <article class="tile is-child box is-bold" :class="boxBackground">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Lineas Eléctricas</div>
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>

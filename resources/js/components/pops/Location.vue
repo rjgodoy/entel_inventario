@@ -54,7 +54,7 @@
                     :classification="popClassification"
                     :popMaster="pop"
                     :darkMode="darkMode"
-                ></pop-map>
+                />
             </div>
             <div class="card-content">
                 <div class="columns">
@@ -87,26 +87,10 @@
 </template>
 
 <script>
-    // const PopMap = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('../maps/PopMapView'),
-    //     // A component to use while the async component is loading
-    //     // loading: LoadingComponent,
-    //     // A component to use if the load fails
-    //     // error: ErrorComponent,
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 500,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })
-
-    import PopMap from '../maps/PopMapView';
     var moment = require('moment')
     export default {
         components: {
-            PopMap,
-            // PopMap: () => import('../maps/PopMapView'),
+            PopMap: () => import('../maps/PopMapView'),
         },
         props : [
             'user',

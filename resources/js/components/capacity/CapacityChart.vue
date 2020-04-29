@@ -17,7 +17,7 @@
     export default {
         props : [
             // 'room',
-            'lastData'
+            'actualData'
         ],
         data() {
             return {
@@ -25,18 +25,18 @@
             }
         },
         mounted() {
-            console.log(this.lastData)
+            // console.log(this.actualData)
             this.graph()
         },
 
         computed: {
-            // lastData() {
-            //     return this.lastData
+            // actualData() {
+            //     return this.actualData
             // }
         },
 
         watch: {
-            lastData(newValue) {
+            actualData(newValue) {
                 this.chart && this.chart.dispose()
                 this.graph()
             }
@@ -51,37 +51,37 @@
                 // Add data
                 chart.data = [{
                         "category": "Empalme",
-                        "value": 100 - this.lastData.junction * 100,
+                        "value": this.actualData ? 100 - this.actualData.junction * 100 : 0,
                         "full": 100
                     }, 
                     {
                         "category": "GGEE",
-                        "value": 100 - this.lastData.generator * 100,
+                        "value": this.actualData ? 100 - this.actualData.generator * 100 : 0,
                         "full": 100
                     }, 
                     {
                         "category": "Plantas CC",
-                        "value": 100 - this.lastData.rectifier * 100,
+                        "value": this.actualData ? 100 - this.actualData.rectifier * 100 : 0,
                         "full": 100 
                     }, 
                     {
                         "category": "Baterías",
-                        "value": 100 - this.lastData.battery * 100,
+                        "value": this.actualData ? 100 - this.actualData.battery * 100 : 0,
                         "full": 100
                     }, 
                     {
                         "category": "Distribución",
-                        "value": 100 - this.lastData.distribution * 100,
+                        "value": this.actualData ? 100 - this.actualData.distribution * 100 : 0,
                         "full": 100
                     }, 
                     {
                         "category": "Clima",
-                        "value": 100 - this.lastData.climate * 100,
+                        "value": this.actualData ? 100 - this.actualData.climate * 100 : 0,
                         "full": 100
                     }, 
                     {
                         "category": "Espacio",
-                        "value": 100 - this.lastData.space * 100,
+                        "value": this.actualData ? 100 - this.actualData.space * 100 : 0,
                         "full": 100
                     }
                 ];

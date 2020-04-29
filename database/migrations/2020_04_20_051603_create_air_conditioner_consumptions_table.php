@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentsTable extends Migration
+class CreateAirConditionerConsumptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        // Schema::create('documents', function (Blueprint $table) {
+        // Schema::create('air_conditioner_consumptions', function (Blueprint $table) {
         //     $table->bigIncrements('id');
-        //     $table->bigInteger('user_id');
-        //     $table->string('name');
-        //     $table->string('content');
-        //     $table->string('mime_type');
+        //     $table->bigInteger('air_conditioner_id');
+        //     $table->bigInteger('r_consumption');
+        //     $table->bigInteger('s_consumption');
+        //     $table->bigInteger('t_consumption');
         //     $table->timestamps();
         // });
     }
@@ -30,6 +30,6 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('documents');
+        // Schema::dropIfExists('air_conditioner_consumptions');
     }
 }

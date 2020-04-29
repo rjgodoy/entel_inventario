@@ -1,6 +1,15 @@
 <template>
     <section class="section is-marginless" :class="bodyBackground">
         <div class="container">
+
+
+            <!-- <div id="start" class="box">start</div>
+            <br/>
+            <br/>
+            <br/>
+            <div id="end" class="box">end</div> -->
+
+
             <div class="tile is-ancestor">
                 <div class="tile">
                     <div class="tile is-vertical">
@@ -9,7 +18,7 @@
                                 :user="user"/>
                         </div>
                     </div>
-                    <!-- <div class="tile is-vertical">
+                    <div class="tile is-vertical">
                         <div class="tile is-parent">
                             <temporal-storages
                                 :user="user"/>
@@ -18,7 +27,7 @@
                             <rcas
                                 :user="user"/>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,6 +58,7 @@
         created() {
         },
         mounted() {
+
         },
         methods: {
         }

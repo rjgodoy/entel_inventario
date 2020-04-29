@@ -1,111 +1,140 @@
 <template>
     <div>
-
-        <!-- ITEMS BUTTONS -->
-        <!-- ############# -->
-        <!-- <section class="section" :class="bodyBackground">
-            <div class="">
-                <div class="tile is-ancestor">
-                    <div class="tile is-parent" v-for="tab in tabs">
-                        <a class="tile is-child box" :key="tab.filename" :class="currentTab === tab.filename ? 'has-background-link' : boxBackground" @click="currentTab = tab.filename">
-                            <div :class="currentTab === tab.filename ? selectedSecondaryBoxText : secondaryText"> 
-                                <div class="is-size-6 has-text-weight-semibold">
-                                    {{ tab.nem_site }}
-                                </div>
-
-                                <div style="margin-top: 10px;">
-                                    <div class="is-size-7 has-text-weight-light">{{ tab.description }}</div> 
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>  
-        </section> -->
-
-       <!--  <section class="section" v-if="files.lenght == 0 && folders.lenght == 0">
-            <div class="container">
-                <div class="box">No documentos de este POP</div>
-            </div>
-        </section> -->
-
         <section class="section has-background-white">
             <div class="field">
                 <div class="has-text-weight-semibold has-text-dark is-size-4 has-text-left">Documentos</div>
             </div>
-            <div class="columns">
-                <div class="column is-2">
-                    <b-menu>
-                        <b-menu-list label="Sitios">
-                            <!-- <b-menu-item icon="information-outline" label="Info"></b-menu-item> -->
-                            <b-menu-item
-                                v-for="site in pop.sites"
-                                :key="site.id"
-                                :active="isActive"
-                                :expanded="isActive"
-                                @click="getDirectories(site.id)">
-                                <template slot="label" slot-scope="props">
-                                    <font-awesome-icon 
-                                        :icon="['fas', props.expanded ? 'folder-open' : 'folder']"
-                                        size="2x"
-                                        class="has-text-smart"/>
-                                    <span class="">{{ site.nem_site }}</span>
-                                </template>
 
-                                <b-menu-item 
-                                    v-for="folder in folders"
-                                    v-bind:key="folder.id"
-                                    icon="account" 
-                                    @click="getFolders(site.id, folder.basename)">
-                                    <template slot="label" slot-scope="props">
-                                        <font-awesome-icon 
-                                        :icon="['fas', props.expanded ? 'folder-open' : 'folder']"
-                                        size="2x"
-                                        class="has-text-smart"/>
-                                        <span class="">{{ folder.basename }}</span>
-                                    </template>
+            <b-tabs v-model="activeTab" :multiline="multiline" position="is-centered" @change="folder=activeTab">
+                <template v-for="(tab, index) in tabs">
+                    <b-tab-item
+                        v-if="tab.displayed"
+                        :key="index"
+                        :label="tab.label">
+                        <!-- {{ tab.content }} -->
+                    </b-tab-item>
+                </template>
+            </b-tabs>
 
-                                    <b-menu-item 
-                                        v-for="folder2 in folders2"
-                                        v-bind:key="folder2.id"
-                                        icon="account" 
-                                        @click="getFiles(site.id, folder.basename, folder2.basename)">
-                                        <template slot="label" slot-scope="props">
-                                            <font-awesome-icon 
-                                            :icon="['fas', props.expanded ? 'folder-open' : 'folder']"
-                                            size="2x"
-                                            class="has-text-smart"/>
-                                            <span class="">{{ folder2.basename }}</span>
-                                        </template>
-                                    </b-menu-item>
-                                </b-menu-item>
-
-                            </b-menu-item>
-                        </b-menu-list>
-
-                        <!-- <b-menu-list label="Actions">
-                            <b-menu-item label="Subir archivo"></b-menu-item>
-                        </b-menu-list> -->
-                    </b-menu>
-
-                </div>
-                <div class="column">
-                    <div class="columns is-multiline">
-                        <div class="column is-2" v-for="file in files">
-                            <a class="box" target="_blank" @click="readFile(file)">
-                                <font-awesome-icon 
-                                    :icon="['fas', faFile(file.extension).icon]"
-                                    :class="faFile(file.extension).type"
-                                    size="2x"/>
-                                <div class="is-size-7">{{ file.basename }}</div>
-                            </a>
-                        </div>
-                    </div>
+            <div class="columns is-multiline">
+                <div class="column is-2 tile is-parent" v-for="file in files">
+                    <a class="box tile is-child" target="_blank" @click="readFile(file); load = file.id" style="position: relative;">
+                        <font-awesome-icon 
+                            :icon="['fas', faFile(file.extension).icon]"
+                            :class="faFile(file.extension).type"
+                            size="2x"
+                            style="padding-bottom: 5px;"/>
+                        <div class="is-size-7">{{ file.basename }}</div>
+                        <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true" v-if="load == file.id"></b-loading>
+                    </a>
                 </div>
             </div>
+            <section v-if="files.length == 0" class="section container">
+                <div class="has-text-weight-normal">No hay archivos en esta sección.</div>
+            </section>
+
+
+            <!-- <b-field grouped group-multiline>
+                <div class="control">
+                    <b-checkbox v-model="showDetailIcon">Detail column</b-checkbox>
+                </div>
+                <div v-for="(column, index) in columnsVisible"
+                     :key="index"
+                     class="control">
+                    <b-checkbox v-model="column.display">
+                        {{ column.title }}
+                    </b-checkbox>
+                </div>
+            </b-field>
+
+            <b-table
+                :data="data"
+                ref="table"
+                detailed
+                hoverable
+                custom-detail-row
+                :opened-detailed="['Board Games']"
+                :default-sort="['name', 'asc']"
+                detail-key="name"
+                @details-open="(row, index) => $buefy.toast.open(`Expanded ${row.name}`)"
+                :show-detail-icon="showDetailIcon">
+
+                <template slot-scope="props">
+                    <b-table-column
+                        field="name"
+                        :visible="columnsVisible['name'].display"
+                        :label="columnsVisible['name'].title"
+                        width="300"
+                        sortable
+                    >
+                        <template v-if="showDetailIcon">
+                            {{ props.row.name }}
+                        </template>
+                        <template v-else>
+                            <a @click="toggle(props.row)">
+                                {{ props.row.name }}
+                            </a>
+                        </template>
+                    </b-table-column>
+
+                    <b-table-column
+                        field="sold"
+                        :visible="columnsVisible['sold'].display"
+                        :label="columnsVisible['sold'].title"
+                        sortable
+                        centered
+                    >
+                        {{ props.row.sold }}
+                    </b-table-column>
+
+                    <b-table-column
+                        field="available"
+                        :visible="columnsVisible['available'].display"
+                        :label="columnsVisible['available'].title"
+                        sortable
+                        centered
+                    >
+                        {{ props.row.available }}
+                    </b-table-column>
+
+                    <b-table-column
+                        :visible="columnsVisible['cleared'].display"
+                        :label="columnsVisible['cleared'].title"
+                        centered
+                    >
+                        <span :class="
+                                [
+                                    'tag',
+                                    {'is-danger': props.row.sold / props.row.available <= 0.45},
+                                    {'is-success': props.row.sold / props.row.available > 0.45}
+                                ]">
+                            {{ Math.round((props.row.sold / props.row.available) * 100) }}%
+                        </span>
+                    </b-table-column>
+                </template>
+
+                <template slot="detail" slot-scope="props">
+                    <tr v-for="item in props.row.items" :key="item.name">
+                        <td v-if="showDetailIcon"></td>
+                        <td v-show="columnsVisible['name'].display" >&nbsp;&nbsp;&nbsp;&nbsp;{{ item.name }}</td>
+                        <td v-show="columnsVisible['sold'].display" class="has-text-centered">{{ item.sold }}</td>
+                        <td v-show="columnsVisible['available'].display" class="has-text-centered">{{ item.available }}</td>
+                        <td v-show="columnsVisible['cleared'].display" class="has-text-centered">
+                            <span :class="
+                                [
+                                    'tag',
+                                    {'is-danger': item.sold / item.available <= 0.45},
+                                    {'is-success': item.sold / item.available > 0.45}
+                                ]">
+                                {{ Math.round((item.sold / item.available) * 100) }}%
+                            </span>
+                        </td>
+                    </tr>
+                </template>
+            </b-table> -->
             
         </section>
-        <!-- <section  v-if="files.lenght == 0 && folders.lenght == 0">No hay archivos en esta sección.</section> -->
+        
     </div>
 </template>
 
@@ -116,55 +145,224 @@
         props : [
             'user',
             'pop',
+            'popCritical',
             'bodyBackground',
             'boxBackground',
             'primaryText',
             'secondaryText',
         ],
         data() {
-            return {                
-                isActive: false,
+            return { 
+                files: Array,
+                activeTab: 0,
+                showCam: true,
+                multiline: true,
+                isLoading: false,
+                load:0
 
-                folders: null,
-                folders2: null,
-                files: null,
 
-                selectedPrimaryBoxText: 'has-text-white',
-                selectedSecondaryBoxText: 'has-text-light',
+                // data: [
+                //     {
+                //         name: 'Board Games',
+                //         sold: 131,
+                //         available: 301,
+                //         items: [
+                //             {
+                //                 name: 'Monopoly',
+                //                 sold: 57,
+                //                 available: 100
+                //             },
+                //             {
+                //                 name: 'Scrabble',
+                //                 sold: 23,
+                //                 available: 84
+                //             },
+                //             {
+                //                 name: 'Chess',
+                //                 sold: 37,
+                //                 available: 61
+                //             },
+                //             {
+                //                 name: 'Battleships',
+                //                 sold: 14,
+                //                 available: 56
+                //             }
+                //         ]
+                //     },
+                //     {
+                //         name: 'Jigsaws & Puzzles',
+                //         sold: 88,
+                //         available: 167,
+                //         items: [
+                //             {
+                //                 name: 'World Map',
+                //                 sold: 31,
+                //                 available: 38
+                //             },
+                //             {
+                //                 name: 'London',
+                //                 sold: 23,
+                //                 available: 29
+                //             },
+                //             {
+                //                 name: 'Sharks',
+                //                 sold: 20,
+                //                 available: 44
+                //             },
+                //             {
+                //                 name: 'Disney',
+                //                 sold: 14,
+                //                 available: 56
+                //             }
+                //         ]
+                //     },
+                //     {
+                //         name: 'Books',
+                //         sold: 434,
+                //         available: 721,
+                //         items: [
+                //             {
+                //                 name: 'Hamlet',
+                //                 sold: 101,
+                //                 available: 187
+                //             },
+                //             {
+                //                 name: 'The Lord Of The Rings',
+                //                 sold: 85,
+                //                 available: 156
+                //             },
+                //             {
+                //                 name: 'To Kill a Mockingbird',
+                //                 sold: 78,
+                //                 available: 131
+                //             },
+                //             {
+                //                 name: 'Catch-22',
+                //                 sold: 73,
+                //                 available: 98
+                //             },
+                //             {
+                //                 name: 'Frankenstein',
+                //                 sold: 51,
+                //                 available: 81
+                //             },
+                //             {
+                //                 name: 'Alice\'s Adventures In Wonderland',
+                //                 sold: 46,
+                //                 available: 68
+                //             }
+                //         ]
+                //     }
+                // ],
+                // columnsVisible: {
+                //     name: { title: 'Name', display: true },
+                //     sold: { title: 'Stock Sold', display: true },
+                //     available: { title: 'Stock Available', display: true },
+                //     cleared: { title: 'Stock Cleared', display: true },
+                // },
+                // showDetailIcon: true
+
             }
         },
         mounted() {
-            // this.getFolders()
-            // this.getDocuments()
+            this.getFiles()
         },
 
-        // watch: {
-        //     currentTab(newValue, oldValue) {
-        //         // folders: []
-        //         // files: []
-        //         // this.getDocuments()
-        //     }
-        // },
+        computed: {
+            folder: {
+                get: function() {
+                    return this.baseTabs[this.activeTab]
+                },
+                set: function(newValue) {
+                    this.getFiles()
+                },
+            },
+            
+            showCriticTab() {
+                return this.popCritical
+            },
+
+            baseTabs() {
+                return [
+                    {
+                        id: 1,
+                        label: 'Informes',
+                        content: 'Informes: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        id: 2,
+                        label: 'Documentos',
+                        content: 'Documentos: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        id: 3,
+                        label: 'Fotos',
+                        content: 'Fotos: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        id: 4,
+                        label: 'Construcción',
+                        content: 'Construcción: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        id: 5,
+                        label: 'Obras Civiles',
+                        content: 'Obras Civiles: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        id: 6,
+                        label: 'CAM',
+                        content: 'CAM: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                    {
+                        id: 7,
+                        label: 'Levantamientos Ingeniería',
+                        content: 'Levantamientos Ingeniería: Lorem ipsum dolor sit amet.',
+                        displayed: this.showCriticTab,
+                    },
+                    {
+                        id: 8,
+                        label: 'Gestión Ambiental',
+                        content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
+                        displayed: true,
+                    },
+                ]
+            },
+
+            tabs() {
+                const tabs = [...this.baseTabs]
+                // if (this.showCriticTab) {
+                //     tabs.splice(tabs.length - 1, 0, this.criticTab);
+                // }
+                return tabs
+            },
+
+            // criticTab() {
+            //     return {
+            //         id: 7,
+            //         label: 'Levantamientos Ingeniería',
+            //         content: 'Levantamientos Ingeniería: Lorem ipsum dolor sit amet.',
+            //         displayed: true,
+            //     }
+            // }
+        },
+
         methods: {
-            getDirectories(site_id) {
-                axios.get(`/api/directories/${site_id}?api_token=${this.user.api_token}`)
+            getFiles() {
+                let params = {
+                    'api_token': this.user.api_token,
+                    'folder_id': this.folder.id,
+                    
+                }
+                axios.get(`/api/files/${this.pop.id}`, { params: params })
                 .then((response) => {
-                    console.log(response)
-                    this.folders = response.data.data
-                })
-            },
-
-            getFolders(site_id, path) {
-                axios.get(`/api/folders/${site_id}/${path}?api_token=${this.user.api_token}`).then((response) => {
-                    console.log(response.data)
-                    this.folders2 = response.data.data
-                    this.files = response.data.files
-                })
-            },
-
-            getFiles(site_id, path, path2) {
-                axios.get(`/api/files/${site_id}/${path}/${path2}?api_token=${this.user.api_token}`).then((response) => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.files = response.data.data
                 })
             },
@@ -185,34 +383,22 @@
                     }
             },
 
-            // readFile(file) {
-            //     var params = {
-            //         'name': '/storage/app/' + file.dirname,
-            //         'basename': file.basename,
-            //     }
-            //     axios.get('/api/documents/' + this.pop.id, { params: params, responseType: 'blob' })
-            //     .then(response => {
-            //         let blob = new Blob([response.data], { type: 'application/pdf' })
-            //         let link = document.createElement('a')
-            //         link.href = window.URL.createObjectURL(blob)
-            //         link.download = 'test.pdf'
-            //         link.click()
-            //     })
-            // }
-
             readFile(file) {
+                this.isLoading = true
                 var params = {
+                    'api_token': this.user.api_token,
                     'dirname': file.dirname,
                     'basename': file.basename,
-                    'extension': file.extension,
+                    'mime': file.mime,
                 }
-                axios.get(`/api/documents/${this.pop.id}?api_token=${this.user.api_token}`, { 
+                // console.log(params)
+                axios.get('/api/viewFile', { 
                     params: params, 
                     responseType: 'arraybuffer' 
                 })
                 .then((response) => {
-                    console.log(response.data)
-                    const blob = new Blob([response.data], { type: 'application/' + file.extension })
+                    console.log(response)
+                    const blob = new Blob([response.data], { type: file.mime })
                     // const objectUrl = window.URL.createObjectURL(blob)
 
                     // IE doesn't allow using a blob object directly as link href
@@ -248,6 +434,10 @@
                     })
                 })
             },
+
+            // toggle(row) {
+            //     this.$refs.table.toggleDetails(row)
+            // }
         }
     }
 </script>

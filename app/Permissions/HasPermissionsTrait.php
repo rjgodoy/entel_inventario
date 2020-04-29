@@ -55,18 +55,6 @@ trait HasPermissionsTrait {
         }
         return false;
     }
-
-    public function roles() {
-
-        return $this->belongsToMany(Role::class)->withTimestamps();
-
-    }
-
-    public function permissions() {
-
-        return $this->belongsToMany(Permission::class)->withTimestamps();
-
-    }
     
     protected function hasPermission($permission) {
 

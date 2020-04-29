@@ -25,4 +25,26 @@ class AirConditioner extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function air_conditioner_condensers() 
+    {
+        return $this->hasMany(AirConditionerCondenser::class);
+    }
+
+    public function air_conditioner_chillers() 
+    {
+        return $this->hasMany(AirConditionerChiller::class);
+    }
+
+    public function air_conditioner_consumptions() 
+    {
+        return $this->hasMany(AirConditionerConsumption::class);
+    }
+
+    public function current_consumption() 
+    {
+        return $this->hasOne(AirConditionerConsumption::class)->latest();
+    }
+
+    
 }

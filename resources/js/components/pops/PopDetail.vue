@@ -1,5 +1,9 @@
 <template>
     <div>
+        <log
+            :user="user"
+            :pop="pop"
+        />
         <!-- POP Name -->
         <section class="hero is-dark">
             <div class="hero-body">
@@ -82,23 +86,14 @@
                         </div>
 
                         <div class="column is-1 has-text-right">
-                            <log 
-                                :user="user"
-                                :pop="pop"
-                            />
-                            <b-button
+                            
+                            <!-- <b-button
                                 type="is-primary" 
                                 @click="openLog" 
                                 data-target="quickviewDefault" 
                                 data-show="quickview" 
                                 size="is-small"
                                 >Log del POP
-                            </b-button>
-                            <!-- <b-button 
-                                @click="closeLog" 
-                                data-dismiss="quickview"
-                                size="is-small"
-                                >Log dismiss
                             </b-button> -->
                         </div>
                     </div>
@@ -124,7 +119,7 @@
                                 @click="currentTab = tab.component">
                                 <div 
                                     class="tile is-child box has-text-centered" 
-                                    :class="currentTab === tab.component && (currentTab == 'eco' ? 'has-background-eco' : 'is-bold is-link')">
+                                    :class="currentTab === tab.component && (currentTab == 'eco' ? 'is-eco is-bold' : 'is-bold is-link')">
                                     <font-awesome-icon 
                                         :icon="[tab.icon_type, tab.icon]"
                                         size="2x"
@@ -149,6 +144,7 @@
                         <detail :is="currentTabComponent"
                             :user="user"
                             :pop="pop"
+                            :popCritical="popCritical"
                             :rcas="[]"
                             :bodyBackground="bodyBackground"
                             :boxBackground="boxBackground"
@@ -173,7 +169,7 @@
             Characteristics: () => import('./Characteristics'),
             Layout: () => import('./layout/Layout'),
             Power: () => import('./power/Power'),
-            Climate: () => import('./Climate'),
+            Climate: () => import('./climate/Climate'),
             Infrastructure: () => import('./infrastructure/Infrastructure'),
             Eco: () => import('./Eco'),
             Comsite: () => import('./Comsite'),
@@ -294,7 +290,7 @@
             // },
 
             popClassification() {
-                var id = 6; var classification
+                var id = 10; var classification
                 if (this.pop.sites) {
                     this.pop.sites.forEach(function(item) {
                         if (item.classification_type_id && item.classification_type_id < id) { 

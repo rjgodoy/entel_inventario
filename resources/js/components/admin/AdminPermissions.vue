@@ -18,7 +18,7 @@
             </div> -->
             <b-select 
                 v-model="selectedRole"
-                @click.prevent="getUsers()">
+                @input="getUsers()">
                 <option :value="0">Todos</option>
                 <option
                     v-for="role in roles"
@@ -178,8 +178,8 @@
         methods: {
             getUsers() {
                 var params = {
-                    'role_id': this.selectedRole,
-                    'api_token': this.user.api_token
+                    'api_token': this.user.api_token,
+                    'role_id': this.selectedRole
                 }
                 axios.get('/api/users', { params: params })
                 .then(response => {

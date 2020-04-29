@@ -23,7 +23,8 @@
         ],
         data() {
             return {
-                generatorSets: Array
+                generatorSets: Array,
+                can: null
             }
         },
         mounted() {
@@ -35,8 +36,8 @@
             getGeneratorSets() {
                 axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
-                    this.generatorSets = response.data.data
-                    // console.log(this.generatorSets)
+                    this.generatorSets = response.data.generatorSets
+                    this.can = response.data.can
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);

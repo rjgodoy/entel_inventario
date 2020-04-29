@@ -31,6 +31,15 @@ Vue.prototype.$eventCounters = new Vue()
     Vue.use(Buefy)
 // #########################################################################
 
+
+
+// ########################## LeaderLine Libraries ##########################
+    // import LeaderLine from 'leader-line'
+    // Vue.use(LeaderLine)
+// #########################################################################
+
+
+
 // ########################## FontAwesome Libraries ##########################
     import { library } from '@fortawesome/fontawesome-svg-core'
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -104,7 +113,12 @@ Vue.prototype.$eventCounters = new Vue()
         faMicrochip,
         faFill,
         faGasPump,
-        faBezierCurve
+        faBezierCurve,
+        faCalculator,
+        faFileInvoice,
+        faChartLine,
+        faPlus,
+        faTrashAlt
     } from '@fortawesome/free-solid-svg-icons'
 
     import { 
@@ -112,7 +126,10 @@ Vue.prototype.$eventCounters = new Vue()
     	faCheckCircle as farCheckCircle,
     	faFile as farFile,
     	faPaperPlane as farPaperPlane,
-        faClipboard as farClipboard
+        faClipboard as farClipboard,
+        faPlusSquare as farPlusSquare,
+        faTrashAlt as farTrashAlt,
+        faFolderOpen as farFolderOpen
     } from '@fortawesome/free-regular-svg-icons'
 
     import { 
@@ -139,6 +156,7 @@ Vue.prototype.$eventCounters = new Vue()
     	faWarehouse,
     	faFolder,
         faFolderOpen,
+        farFolderOpen,
     	faCogs,
         faCog,
     	faExclamationTriangle,
@@ -194,16 +212,27 @@ Vue.prototype.$eventCounters = new Vue()
         faMicrochip,
         faFill,
         faGasPump,
-        faBezierCurve
+        faBezierCurve,
+        faCalculator,
+        faFileInvoice,
+        faChartLine,
+        faPlus,
+        farPlusSquare,
+        faTrashAlt,
+        farTrashAlt
     )
 
     Vue.component('font-awesome-icon', FontAwesomeIcon)
 // #########################################################################
 
+
+
 // ########################## NumeralJs ##########################
     import vueNumeralFilterInstaller from 'vue-numeral-filter'
     Vue.use(vueNumeralFilterInstaller)
 // #########################################################################
+
+
 
 // ########################## Google Maps ##########################
     import * as VueGoogleMaps from 'vue2-google-maps'
@@ -236,8 +265,8 @@ Vue.prototype.$eventCounters = new Vue()
     // Vue.component('GmapCluster', GmapCluster)
 // #########################################################################
 
-Vue.config.productionTip = false
 
+Vue.config.productionTip = false
 
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
@@ -248,17 +277,9 @@ import routes from './constants/routes'
 const app = new Vue({
     router: new VueRouter(routes),
     // store,
-    // components: {
-    //     'font-awesome-icon': FontAwesomeIcon
-    // },
     // events: {
     //     clickOutside(event) {                
     //     }
     // },
 }).$mount('#app')
-
-
-
-
-
 

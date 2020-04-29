@@ -1,6 +1,6 @@
 <template>
     <div class="column is-4">
-        <article class="tile is-child box is-bold is-positive" :class="boxBackground">
+        <article class="tile is-child box is-bold" :class="boxBackground">
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Plantas Rectificadoras</div>
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
@@ -88,7 +88,7 @@
                 if (this.crmSelected == null) {
                     axios.get(`/api/powerRectifierData/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
-                            this.powerRectifierData = response.data.data;
+                            this.powerRectifierData = response.data.powerRectifiers;
                             this.totalPowerRectifiers()
                         })
                         .catch(() => {
@@ -97,7 +97,7 @@
                 } else if (this.zonaSelected == null){
                     axios.get(`api/powerRectifierDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
-                            this.powerRectifierData = response.data.data;
+                            this.powerRectifierData = response.data.powerRectifiers;
                             this.totalPowerRectifiers()
                         })
                         .catch(() => {
@@ -106,7 +106,7 @@
                 } else {
                     axios.get(`api/powerRectifierDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
                         .then((response) => {
-                            this.powerRectifierData = response.data.data;
+                            this.powerRectifierData = response.data.powerRectifiers;
                             this.totalPowerRectifiers()
                         })
                         .catch(() => {

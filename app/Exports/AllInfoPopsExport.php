@@ -4,10 +4,13 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use Maatwebsite\Excel\Events\BeforeExport;
 
-class AllInfoPopsExport implements WithMultipleSheets 
+class AllInfoPopsExport implements WithMultipleSheets, WithEvents
 {
-	use Exportable;
+	use Exportable, RegistersEventListeners;
 
 	protected $request;
     
@@ -23,9 +26,17 @@ class AllInfoPopsExport implements WithMultipleSheets
     {
         $sheets = [];
 
+        $sheets[] = new ResumeExport($this->request);
+        $sheets[] = new PopResumeExport($this->request);
         $sheets[] = new PopsExport($this->request);
         $sheets[] = new SitesExport($this->request);
 
         return $sheets;
+    }
+
+    public static function beforeExport(BeforeExport $event)
+    {
+        $event->writer->getProperties()->setTitle('Inventario PoP y Sitios Entel');
+        $event->writer->getProperties()->setCreator('Subgerencia de Infraestructura Poder y Clima');
     }
 }

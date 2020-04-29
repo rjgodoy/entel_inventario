@@ -1,62 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[66],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -78,37 +30,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
-  props: ['user', 'junction'],
-  data: function data() {
-    return {
-      faseR: this.junction.latest_measurement.r_measure,
-      faseS: this.junction.latest_measurement.s_measure,
-      faseT: this.junction.latest_measurement.t_measure
-    };
+  components: {
+    Junction: function Junction() {
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../../../pops/power/Junction */ "./resources/js/components/pops/power/Junction.vue"));
+    }
   },
-  computed: {},
+  props: ['pop', 'can', 'junction', 'user'],
+  data: function data() {
+    return {};
+  },
   watch: {},
   created: function created() {},
   mounted: function mounted() {},
-  methods: {
-    save: function save() {
-      var params = {
-        'api_token': this.user.api_token
-      };
-      axios.get("/api/junctions/".concat(this.junction.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        console.log(response);
-      });
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=template&id=bc1f2336&":
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=template&id=bc1f2336& ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=template&id=4f30204a&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=template&id=4f30204a& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -120,222 +62,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "modal-card" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("section", { staticClass: "modal-card-body" }, [
-      _vm.junction.latest_measurement
-        ? _c("div", { staticClass: "level" }, [
-            _c("div", { staticClass: "level-item" }, [
-              _c("div", { staticClass: "has-text-centered" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "is-size-6 has-text-weight-semibold has-text-centered"
-                  },
-                  [_vm._v("Fase R")]
-                ),
-                _vm._v(" "),
-                _c("div", {}, [
-                  _c("div", { staticClass: "control has-icons-right" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.faseR,
-                          expression: "faseR"
-                        }
-                      ],
-                      staticClass: "input",
-                      attrs: { type: "number" },
-                      domProps: { value: _vm.faseR },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.faseR = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(1)
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(_vm._f("numeral")(_vm.faseR * 220, 0, 0)) +
-                      " \n                        "
-                  ),
-                  _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "level-item" }, [
-              _c("div", { staticClass: "has-text-centered" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "is-size-6 has-text-weight-semibold has-text-centered"
-                  },
-                  [_vm._v("Fase S")]
-                ),
-                _vm._v(" "),
-                _c("div", {}, [
-                  _c("div", { staticClass: "control has-icons-right" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.faseS,
-                          expression: "faseS"
-                        }
-                      ],
-                      staticClass: "input",
-                      attrs: { type: "number" },
-                      domProps: { value: _vm.faseS },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.faseS = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(2)
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(_vm._f("numeral")(_vm.faseS * 220, 0, 0)) +
-                      " \n                        "
-                  ),
-                  _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "level-item" }, [
-              _c("div", { staticClass: "has-text-centered" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "is-size-6 has-text-weight-semibold has-text-centered"
-                  },
-                  [_vm._v("Fase T")]
-                ),
-                _vm._v(" "),
-                _c("div", {}, [
-                  _c("div", { staticClass: "control has-icons-right" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.faseT,
-                          expression: "faseT"
-                        }
-                      ],
-                      staticClass: "input",
-                      attrs: { type: "number" },
-                      domProps: { value: _vm.faseT },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.faseT = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(3)
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(_vm._f("numeral")(_vm.faseT * 220, 0, 0)) +
-                      " \n                        "
-                  ),
-                  _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-                ])
-              ])
-            ])
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("footer", { staticClass: "modal-card-foot" }, [
-      _c(
-        "button",
-        {
-          staticClass: "button",
-          attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              return _vm.$parent.close()
-            }
-          }
-        },
-        [_vm._v("Close")]
-      ),
+  return _c(
+    "div",
+    { staticClass: "modal-card", staticStyle: { width: "800px" } },
+    [
+      _vm._m(0),
       _vm._v(" "),
       _c(
-        "button",
-        { staticClass: "button is-primary", on: { click: _vm.save } },
-        [_vm._v("Guardar")]
+        "section",
+        {
+          staticClass: "modal-card-body",
+          staticStyle: { background: "rgba(0,0,0,0)" }
+        },
+        [
+          _c("junction", {
+            attrs: {
+              junction: _vm.junction,
+              can: _vm.can,
+              pop: _vm.pop,
+              user: _vm.user
+            }
+          })
+        ],
+        1
       )
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "modal-card-head has-text-centered" }, [
-      _c("p", { staticClass: "modal-card-title has-text-weight-bold" }, [
-        _vm._v("Edición de mediciones")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
+    return _c(
+      "header",
+      {
+        staticClass: "modal-card-head has-text-centered",
+        staticStyle: { background: "rgba(0,0,0,0)" }
+      },
+      [
+        _c(
+          "p",
+          {
+            staticClass: "modal-card-title has-text-white has-text-weight-bold"
+          },
+          [_vm._v("Empalme")]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -344,17 +118,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/power/modals/EditJunctionParameters.vue":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/pops/power/modals/EditJunctionParameters.vue ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/pops/layout/modals/ModalJunction.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/pops/layout/modals/ModalJunction.vue ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _EditJunctionParameters_vue_vue_type_template_id_bc1f2336___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditJunctionParameters.vue?vue&type=template&id=bc1f2336& */ "./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=template&id=bc1f2336&");
-/* harmony import */ var _EditJunctionParameters_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditJunctionParameters.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ModalJunction_vue_vue_type_template_id_4f30204a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalJunction.vue?vue&type=template&id=4f30204a& */ "./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=template&id=4f30204a&");
+/* harmony import */ var _ModalJunction_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalJunction.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -364,9 +138,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _EditJunctionParameters_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _EditJunctionParameters_vue_vue_type_template_id_bc1f2336___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _EditJunctionParameters_vue_vue_type_template_id_bc1f2336___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ModalJunction_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalJunction_vue_vue_type_template_id_4f30204a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalJunction_vue_vue_type_template_id_4f30204a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -376,38 +150,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pops/power/modals/EditJunctionParameters.vue"
+component.options.__file = "resources/js/components/pops/layout/modals/ModalJunction.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************!*\
-  !*** ./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************/
+/***/ "./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJunctionParameters_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditJunctionParameters.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJunctionParameters_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalJunction_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalJunction.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalJunction_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=template&id=bc1f2336&":
-/*!*************************************************************************************************************!*\
-  !*** ./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=template&id=bc1f2336& ***!
-  \*************************************************************************************************************/
+/***/ "./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=template&id=4f30204a&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=template&id=4f30204a& ***!
+  \*****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJunctionParameters_vue_vue_type_template_id_bc1f2336___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditJunctionParameters.vue?vue&type=template&id=bc1f2336& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/power/modals/EditJunctionParameters.vue?vue&type=template&id=bc1f2336&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJunctionParameters_vue_vue_type_template_id_bc1f2336___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalJunction_vue_vue_type_template_id_4f30204a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalJunction.vue?vue&type=template&id=4f30204a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/layout/modals/ModalJunction.vue?vue&type=template&id=4f30204a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalJunction_vue_vue_type_template_id_4f30204a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJunctionParameters_vue_vue_type_template_id_bc1f2336___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalJunction_vue_vue_type_template_id_4f30204a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

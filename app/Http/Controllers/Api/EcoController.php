@@ -127,4 +127,17 @@ class EcoController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function storages(Request $request)
+    {
+        $storageZones = Pop::with('temporary_storage', 'comuna.zona', 'sites')->whereHas('temporary_storage')->get();
+        return new EcoResource($storageZones);
+    }
+
 }

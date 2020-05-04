@@ -45,7 +45,7 @@
                 :draggable="false"
                 @click="toggleInfoWindow(pop, index)"
                 :position="google && new google.maps.LatLng({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
-                :icon="icon"
+                :icon="icon(pop)"
             />
             <gmap-info-window 
                 :options="infoOptions"
@@ -90,8 +90,6 @@
             'user',
             'pops',
             'map_attributes',
-            'darkMode',
-            'criticPopsSwitch'
         ],
         data() {
             return {
@@ -158,24 +156,7 @@
         computed: {
             google: gmapApi,
             mapStyle() {
-                return this.darkMode == 1 ? this.style8 : this.style9
-            },
-            icon() {
-                // if (this.darkMode) {
-                //     return {
-                //         url: '../img/markers/pin_entel_sm.png',
-                //         scaledSize: new google.maps.Size(30, 54),
-                //         origin: new google.maps.Point(0,0),
-                //         anchor: new google.maps.Point(15,54)
-                //     }
-                // } else {
-                    return {
-                        url: '../img/markers/entelPin_red-white.png',
-                        scaledSize: new google.maps.Size(30, 54),
-                        origin: new google.maps.Point(0,0),
-                        anchor: new google.maps.Point(15,54)
-                    }
-                // }
+                return this.darkMode ? this.style1 : this.style1
             },
 
         },
@@ -197,10 +178,6 @@
         watch: {
             pops(newValue, oldValue) {
                 newValue.length == 1 ? this.setPop() : this.setPops()
-            },
-
-            criticPopsSwitch(newValue, oldValue) {
-                this.setPops()
             },
         },
         
@@ -270,47 +247,24 @@
                         </div>
                     </div>
                 `);
-                // var class_id = 6; var class_type
-                // if (pop.sites) {
-                //     pop.sites.forEach(function(item) {
-                //         if (item.classification_type_id && item.classification_type_id < class_id) { 
-                //             class_id = item.classification_type_id
-                //             class_type = item.classification_type.classification_type
-                //         }
-                //     })
-                // }
-                // return (`
-                //     <div class="card">
-                //         <!--div class="card-image">
-                //             <figure class="image is-4by3">
-                //                 <img src="https://bulma.io/images/placeholders/640x480.png" alt="Placeholder image">
-                //             </figure>
-                //         </div-->
-                //         <div class="card-content">
-                //             <div class="media">
-                //                 <div class="media-left">
-                //                     <span class="tag ${class_id == 1 ? 'is-danger' : 
-                //                                     (class_id == 2 ? 'is-warning' : 
-                //                                     (class_id == 3 ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
-                //                         ${class_type}
-                //                     </span>
-                //                 </div>
-                //                 <div class="media-content">
-                //                     <p class="has-text-weight-bold is-size-4">${pop.nombre}</p>
-                //                     <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.comuna.nombre_comuna}</p>
-                //                     <p class="has-text-weight-light is-size-6">Zona ${pop.comuna.zona.nombre_zona}, CRM ${pop.comuna.zona.crm.nombre_crm}</p>
-                //                 </div>
-                //             </div>
+            },
 
-                //             <div class="content">
-                //                 <a href="/pop/${pop.id}" target="_blank" class="button is-outlined is-primary is-small">
-                //                     <font-awesome-icon icon="info-circle"/>
-                //                     &nbsp;Ver detalles
-                //                 </a>
-                //             </div>
-                //         </div>
-                //     </div>
-                // `);  
+            icon(pop) {
+                if(pop.protected_zones) {
+                    return {
+                        url: this.map_attributes.protectedZoneIcon,
+                        scaledSize: new google.maps.Size(30, 54),
+                        origin: new google.maps.Point(0,0),
+                        anchor: new google.maps.Point(15,54)
+                    }
+                } else if (pop.temporary_storage) {
+                    return {
+                        url: this.map_attributes.storageIcon,
+                        scaledSize: new google.maps.Size(26.6, 25),
+                        origin: new google.maps.Point(0,0),
+                        anchor: new google.maps.Point(13.3,25)
+                    }
+                }
             },
 
             async setPops() {

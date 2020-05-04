@@ -206,7 +206,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditJunctionParameters: function EditJunctionParameters() {
-      return __webpack_require__.e(/*! import() */ 73).then(__webpack_require__.bind(null, /*! ./modals/EditJunctionParameters */ "./resources/js/components/pops/power/modals/EditJunctionParameters.vue"));
+      return __webpack_require__.e(/*! import() */ 74).then(__webpack_require__.bind(null, /*! ./modals/EditJunctionParameters */ "./resources/js/components/pops/power/modals/EditJunctionParameters.vue"));
     }
   },
   props: ['pop', 'can', 'junction', 'user'],

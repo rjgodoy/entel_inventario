@@ -46,8 +46,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    EcoMapView: function EcoMapView() {
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(54)]).then(__webpack_require__.bind(null, /*! ../maps/EcoMapView */ "./resources/js/components/maps/EcoMapView.vue"));
+    },
     Rcas: function Rcas() {
       return __webpack_require__.e(/*! import() */ 52).then(__webpack_require__.bind(null, /*! ./RCAs */ "./resources/js/components/eco/RCAs.vue"));
     },
@@ -61,17 +66,50 @@ __webpack_require__.r(__webpack_exports__);
   props: ['user'],
   data: function data() {
     return {
-      darkMode: 0,
-      bodyBackground: '',
-      boxBackground: '',
-      primaryText: '',
-      secondaryText: '',
-      searchBodyBackground: ''
+      protectedZones: [],
+      storageZones: [],
+      map_attributes: {
+        latitude: -33.44444275,
+        longitude: -70.6561017,
+        zoom: 5,
+        storageIcon: '../img/markers/storagePin.png',
+        protectedZoneIcon: '../img/markers/entelEcoPin.png'
+      }
     };
   },
-  created: function created() {},
-  mounted: function mounted() {},
-  methods: {}
+  computed: {
+    pops: function pops() {
+      var array = [];
+      this.protectedZones && this.protectedZones.forEach(function (element) {
+        return array.push(element);
+      });
+      this.storageZones && this.storageZones.forEach(function (element) {
+        return array.push(element);
+      });
+      return array;
+    }
+  },
+  mounted: function mounted() {
+    this.getProtectedZones();
+    this.getStorageZones();
+  },
+  methods: {
+    getProtectedZones: function getProtectedZones() {
+      var _this = this;
+
+      axios.get("/api/eco?api_token=".concat(this.user.api_token)).then(function (response) {
+        _this.protectedZones = response.data.environmentalData; // console.log(this.protectedZones)
+      });
+    },
+    getStorageZones: function getStorageZones() {
+      var _this2 = this;
+
+      axios.get("/api/storages?api_token=".concat(this.user.api_token)).then(function (response) {
+        _this2.storageZones = response.data.environmentalData;
+        console.log(_this2.storageZones);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -91,42 +129,50 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "section is-marginless", class: _vm.bodyBackground },
-    [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "tile is-ancestor" }, [
-          _c("div", { staticClass: "tile" }, [
-            _c("div", { staticClass: "tile is-vertical" }, [
-              _c(
-                "div",
-                { staticClass: "tile is-parent" },
-                [_c("protected-zones", { attrs: { user: _vm.user } })],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-vertical" }, [
-              _c(
-                "div",
-                { staticClass: "tile is-parent" },
-                [_c("temporal-storages", { attrs: { user: _vm.user } })],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "tile is-parent" },
-                [_c("rcas", { attrs: { user: _vm.user } })],
-                1
-              )
-            ])
-          ])
-        ])
+  return _c("section", { staticClass: "section has-background-light" }, [
+    _c("div", { staticClass: "tile is-ancestor" }, [
+      _c("div", { staticClass: "tile" }, [
+        _c(
+          "div",
+          { staticClass: "tile is-parent is-3" },
+          [
+            _c("protected-zones", {
+              attrs: { protectedZones: _vm.protectedZones, user: _vm.user }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "tile is-parent" }, [
+          _c(
+            "div",
+            { staticClass: "tile is-child box" },
+            [
+              _c("eco-map-view", {
+                attrs: {
+                  user: _vm.user,
+                  pops: _vm.pops,
+                  map_attributes: _vm.map_attributes
+                }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tile is-parent is-3" },
+          [
+            _c("temporal-storages", {
+              attrs: { storageZones: _vm.storageZones, user: _vm.user }
+            })
+          ],
+          1
+        )
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

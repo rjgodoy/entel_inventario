@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[76],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/Projection.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************!*\
@@ -155,12 +155,88 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ProjectionChart: _ProjectionChart__WEBPACK_IMPORTED_MODULE_1__["default"]
+    LineChart: _ProjectionChart__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: ['data'],
   data: function data() {
     return {
       loaded: false,
+      // chartData: [],
+      // options: {
+      //     responsive: true,
+      //     // title: {
+      //     //     display: false,
+      //     //     text: 'Disponibilidad de Potencia',
+      //     // },
+      //     tooltips: {
+      //         position: 'average',
+      //         mode: 'index',
+      //         intersect: false,
+      //     },
+      //     scales: {
+      //         xAxes: [{
+      //             gridLines: {
+      //                 display: true
+      //             },
+      //             type: 'time',
+      //             time: {
+      //                 unit: 'month'
+      //             },
+      //             displayFormats: {
+      //                 month: 'MMM'
+      //             },
+      //         }],
+      //         yAxes: [{
+      //             gridLines: {
+      //                 display: true
+      //             },
+      //             ticks: {
+      //                 min: 0,
+      //                 max: 100,
+      //                 stepSize: 20
+      //             }
+      //         }]
+      //     },
+      //     annotation: {
+      //         annotations: [{
+      //             type: 'line',
+      //             // drawTime: 'afterDatasetsDraw',
+      //             mode: 'vertical',
+      //             scaleID: 'x-axis-0',
+      //             value: new Date(),
+      //             // endValue: new Date(this.data[0].year, this.data[0].month, 1),
+      //             // borderColor: 'rgb(75, 192, 192)',
+      //             borderWidth: 3,
+      //             label: {
+      //                 enabled: true,
+      //                 content: 'Proyección',
+      //                 position: "top",
+      //                 xPadding: 10,
+      //                 yPadding: 10,
+      //                 xAdjust: -64,
+      //                 yAdjust: 32,
+      //             }
+      //         },{
+      //             type: 'line',
+      //             // drawTime: 'afterDatasetsDraw',
+      //             mode: 'vertical',
+      //             scaleID: 'x-axis-0',
+      //             value: new Date(),
+      //             // endValue: new Date(this.data[0].year, this.data[0].month, 1),
+      //             // borderColor: 'rgb(75, 192, 192)',
+      //             borderWidth: 2,
+      //             label: {
+      //                 enabled: true,
+      //                 content: 'Histórico',
+      //                 position: "top",
+      //                 xPadding: 10,
+      //                 yPadding: 10,
+      //                 xAdjust: 64,
+      //                 yAdjust: 32,
+      //             }
+      //         }]
+      //     } 
+      // },
       // data,
       isPaginated: true,
       isPaginationSimple: false,
@@ -198,7 +274,128 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
 
     return mounted;
   }(),
-  methods: {}
+  methods: {// fillData () {
+    //     this.loaded = false
+    //     var labels = []; var junction = []; var generator = []; var rectifier = [];
+    //     var battery = []; var distribution = []; var climate = []; var space = [];
+    //     this.data.forEach(element => {
+    //         var i = 0;
+    //         labels.push(new Date(element.year, element.month, 1))
+    //         i++
+    //     })
+    //     this.data.forEach(element => junction.push( numeral(element.junction * 100).format('0.0') ))
+    //     this.data.forEach(element => generator.push( numeral(element.generator * 100).format('0.0') ))
+    //     this.data.forEach(element => rectifier.push( numeral(element.rectifier * 100).format('0.0') ))
+    //     this.data.forEach(element => battery.push( numeral(element.battery * 100).format('0.0') ))
+    //     this.data.forEach(element => distribution.push( numeral(element.distribution * 100).format('0.0') ))
+    //     this.data.forEach(element => climate.push( numeral(element.climate * 100).format('0.0') ))
+    //     this.data.forEach(element => space.push( numeral(element.space * 100).format('0.0') ))
+    //     this.chartData = {
+    //         labels: labels,
+    //         datasets: [
+    //             {
+    //                 label: 'Empalme',
+    //                 steppedLine: 'before',
+    //                 borderColor: 'rgba(102, 183, 220, 0.8)',
+    //                 fill: false,
+    //                 fillColor: "rgba(102, 183, 220, 0.2)",
+    //                 strokeColor: "rgba(102, 183, 220, 1)",
+    //                 pointColor: "rgba(102, 183, 220, 1)",
+    //                 pointStrokeColor: "#fff",
+    //                 pointHighlightFill: "#fff",
+    //                 pointHighlightStroke: "rgba(102, 183, 220, 1)",
+    //                 backgroundColor: "rgba(102, 183, 220, 1)",
+    //                 data: junction
+    //             },
+    //             {
+    //                 label: 'Generador',
+    //                 steppedLine: 'before',
+    //                 borderColor: 'rgba(104, 148, 220, 0.8)',
+    //                 fill: false,
+    //                 fillColor: "rgba(104, 148, 220, 0.2)",
+    //                 strokeColor: "rgba(104, 148, 220, 1)",
+    //                 pointColor: "rgba(104, 148, 220, 1)",
+    //                 pointStrokeColor: "#fff",
+    //                 pointHighlightFill: "#fff",
+    //                 pointHighlightStroke: "rgba(104, 148, 220, 1)",
+    //                 backgroundColor: "rgba(104, 148, 220, 1)",
+    //                 data: generator
+    //             },
+    //             {
+    //                 label: 'Planta',
+    //                 steppedLine: 'before',
+    //                 borderColor: 'rgba(104, 113, 220, 0.8)',
+    //                 fill: false,
+    //                 fillColor: "rgba(104, 113, 220, 0.2)",
+    //                 strokeColor: "rgba(104, 113, 220, 1)",
+    //                 pointColor: "rgba(104, 113, 220, 1)",
+    //                 pointStrokeColor: "#fff",
+    //                 pointHighlightFill: "#fff",
+    //                 pointHighlightStroke: "rgba(104, 113, 220, 1)",
+    //                 backgroundColor: "rgba(104, 113, 220, 1)",
+    //                 data: rectifier
+    //             },
+    //             {
+    //                 label: 'Baterías',
+    //                 steppedLine: 'before',
+    //                 borderColor: 'rgba(118, 103, 220, 0.8)',
+    //                 fill: false,
+    //                 fillColor: "rgba(118, 103, 220, 0.2)",
+    //                 strokeColor: "rgba(118, 103, 220, 1)",
+    //                 pointColor: "rgba(118, 103, 220, 1)",
+    //                 pointStrokeColor: "#fff",
+    //                 pointHighlightFill: "#fff",
+    //                 pointHighlightStroke: "rgba(118, 103, 220, 1)",
+    //                 backgroundColor: "rgba(118, 103, 220, 1)",
+    //                 data: battery
+    //             },
+    //             {
+    //                 label: 'Distribución',
+    //                 steppedLine: 'before',
+    //                 borderColor: 'rgba(163, 103, 220, 0.8)',
+    //                 fill: false,
+    //                 fillColor: "rgba(163, 103, 220, 0.2)",
+    //                 strokeColor: "rgba(163, 103, 220, 1)",
+    //                 pointColor: "rgba(163, 103, 220, 1)",
+    //                 pointStrokeColor: "#fff",
+    //                 pointHighlightFill: "#fff",
+    //                 pointHighlightStroke: "rgba(163, 103, 220, 1)",
+    //                 backgroundColor: "rgba(163, 103, 220, 1)",
+    //                 data: distribution
+    //             },
+    //             {
+    //                 label: 'Clima',
+    //                 steppedLine: 'before',
+    //                 borderColor: 'rgba(199, 103, 220, 0.8)',
+    //                 fill: false,
+    //                 fillColor: "rgba(199, 103, 220, 0.2)",
+    //                 strokeColor: "rgba(199, 103, 220, 1)",
+    //                 pointColor: "rgba(199, 103, 220, 1)",
+    //                 pointStrokeColor: "#fff",
+    //                 pointHighlightFill: "#fff",
+    //                 pointHighlightStroke: "rgba(199, 103, 220, 1)",
+    //                 backgroundColor: "rgba(199, 103, 220, 1)",
+    //                 data: climate
+    //             },
+    //             {
+    //                 label: 'Espacio',
+    //                 steppedLine: 'before',
+    //                 borderColor: 'rgba(220, 103, 206, 0.8)',
+    //                 fill: false,
+    //                 fillColor: "rgba(220, 103, 206, 0.2)",
+    //                 strokeColor: "rgba(220, 103, 206, 1)",
+    //                 pointColor: "rgba(220, 103, 206, 1)",
+    //                 pointStrokeColor: "#fff",
+    //                 pointHighlightFill: "#fff",
+    //                 pointHighlightStroke: "rgba(220, 103, 206, 1)",
+    //                 backgroundColor: "rgba(220, 103, 206, 1)",
+    //                 data: space
+    //             }
+    //         ]
+    //     }
+    //     this.loaded = true
+    // }
+  }
 });
 
 /***/ }),
@@ -212,219 +409,56 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var c3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! c3 */ "./node_modules/c3/c3.js");
-/* harmony import */ var c3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(c3__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+/* harmony import */ var vue_d3_charts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-d3-charts */ "./node_modules/vue-d3-charts/dist/vue-d3-charts.esm.js");
 //
 //
 //
 //
-//
-//
-var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['chartData'],
+  components: {
+    D3LineChart: vue_d3_charts__WEBPACK_IMPORTED_MODULE_0__["D3LineChart"]
+  },
+  props: ['chart_data'],
   data: function data() {
     return {
-      chart: '',
-      data: {
-        x: 'x',
-        columns: [],
-        types: {
-          'Empalme': 'step',
-          'Generador': 'step',
-          'Planta Rectificadora': 'step',
-          'Batería': 'step',
-          'Distribución': 'step',
-          'Clima': 'step',
-          'Espacio': 'step'
-        } // groups: [
-        //     ['Empalme', 'Generador', 'Planta Rectificadora', 'Batería', 'Distribución', 'Clima', 'Espacio']
-        // ],
-        // colors: {
-        //     'Empalme': 'rgba(102, 183, 220, 1)',
-        //     'Generador': 'rgba(104, 148, 220, 1)',
-        //     'Planta Rectificadora': 'rgba(104, 113, 220, 1)',
-        //     'Batería': 'rgba(118, 103, 220, 1)',
-        //     'Distribución': 'rgba(163, 103, 220, 1)',
-        //     'Clima': 'rgba(199, 103, 220, 1)',
-        //     'Espacio': 'rgba(220, 103, 206, 1)'
-        // }
-
-      },
-      axis: {
-        x: {
-          label: {// text: 'X Label',
-            // position: 'outer-center'
-            // inner-right : default
-            // inner-center
-            // inner-left
-            // outer-right
-            // outer-center
-            // outer-left
-          },
-          type: 'timeseries',
-          tick: {
-            format: '%Y-%m-%d'
-          }
+      chart_config: {
+        values: ['junction', 'generator', 'rectifier', 'battery', 'distribution', 'climate', 'space'],
+        date: {
+          key: 'projected_at',
+          inputFormat: '%Y-%m-%d',
+          outputFormat: '%Y-%m'
         },
-        y: {
-          tick: {
-            format: d3__WEBPACK_IMPORTED_MODULE_1__["format"](".0%")
-          }
-        }
-      },
-      grid: {
-        x: {
-          show: true,
-          lines: [{
-            value: moment().format('YYYY-MM') + '-01',
-            text: 'Proyección' // class: 'projection',
-            // position: 'start'
-
-          }]
+        tooltip: {
+          labels: ['Empalme', 'Grupo Electrógeno', 'Planta Rectificadora', 'Batería', 'Distribución', 'Espacio']
         },
-        y: {// show: true,
-          // lines: [
-          // { value: 50, text: 'Mitad' },
-          // ]
+        axis: {
+          yFormat: '.1s',
+          yTicks: 6,
+          yTitle: 'Lorem ipsum',
+          xTicks: 5
+        },
+        color: {
+          scheme: ['#41B882', '#222f3e'],
+          current: "#1f77b4"
+        },
+        curve: 'curveStep',
+        transition: {
+          ease: 'easeBounceOut',
+          duration: 1000
         }
-      },
-      tooltip: {
-        format: {
-          title: function title(d) {
-            return 'Disponibilidad ' + moment(d).format('MMMM YYYY');
-          },
-          value: d3__WEBPACK_IMPORTED_MODULE_1__["format"]('.1%')
-        }
-      },
-      regions: [{
-        start: moment().format('YYYY-MM') + '-01',
-        end: this.chartData[0].projected_at // class: 'projection' 
-
-      }],
-      zoom: {
-        enabled: true
-      },
-      subchart: {
-        show: true
-      },
-      color: {
-        pattern: ['#ff7f0e', '#ffbb78', '#2ca02c', '#98df8a', '#d62728', '#ff9896', '#9467bd', '#c5b0d5', '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5']
       }
     };
   },
-  mounted: function mounted() {
-    this.graph();
+  watch: {// chart_data(val) {
+    //     console.log(val)
+    // }
   },
-  methods: {
-    graph: function graph() {
-      var dates = ['x'];
-      var junctionData = ['Empalme'];
-      var generatorData = ['Generador'];
-      var rectifierData = ['Planta Rectificadora'];
-      var batteryData = ['Batería'];
-      var distributionData = ['Distribución'];
-      var climateData = ['Clima'];
-      var spaceData = ['Espacio'];
-      this.chartData.forEach(function (element) {
-        dates.push(element.projected_at);
-      });
-      this.chartData.forEach(function (element) {
-        junctionData.push(element.junction);
-      });
-      this.chartData.forEach(function (element) {
-        generatorData.push(element.generator);
-      });
-      this.chartData.forEach(function (element) {
-        rectifierData.push(element.rectifier);
-      });
-      this.chartData.forEach(function (element) {
-        batteryData.push(element.battery);
-      });
-      this.chartData.forEach(function (element) {
-        distributionData.push(element.distribution);
-      });
-      this.chartData.forEach(function (element) {
-        climateData.push(element.climate);
-      });
-      this.chartData.forEach(function (element) {
-        spaceData.push(element.space);
-      });
-      this.data.columns.push(dates);
-      this.data.columns.push(junctionData);
-      this.data.columns.push(generatorData);
-      this.data.columns.push(rectifierData);
-      this.data.columns.push(batteryData);
-      this.data.columns.push(distributionData);
-      this.data.columns.push(climateData);
-      this.data.columns.push(spaceData);
-      var chart = c3__WEBPACK_IMPORTED_MODULE_0___default.a.generate({
-        data: this.data,
-        axis: this.axis,
-        grid: this.grid,
-        tooltip: this.tooltip,
-        regions: this.regions,
-        zoom: this.zoom,
-        subchart: this.subchart,
-        color: this.color
-      });
-      this.chart = chart;
-    }
-  }
+  mounted: function mounted() {
+    console.log(this.chart_data);
+  },
+  beforeDestroy: function beforeDestroy() {}
 });
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-exports.i(__webpack_require__(/*! -!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./../../../../../node_modules/c3/c3.min.css */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/c3/c3.min.css"), "");
-
-// module
-exports.push([module.i, "\n/* .c3-region.projection {\n    fill: green;\n} */\n\n/* .c3-xgrid-line.projection line {\n    stroke: blue;\n} */\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 
@@ -459,7 +493,7 @@ var render = function() {
           [_vm._v("Disponibilidad de Potencia")]
         ),
         _vm._v(" "),
-        _c("ProjectionChart", { attrs: { chartData: _vm.data } })
+        _c("LineChart", { attrs: { chart_data: _vm.data } })
       ],
       1
     ),
@@ -937,10 +971,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&scoped=true&":
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&scoped=true& ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -952,18 +986,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("D3LineChart", {
+    attrs: { config: _vm.chart_config, datum: _vm.chart_data }
+  })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "chart" }, [
-      _c("div", { attrs: { id: "chart" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1048,11 +1075,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ProjectionChart_vue_vue_type_template_id_9410a800_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProjectionChart.vue?vue&type=template&id=9410a800&scoped=true& */ "./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&scoped=true&");
+/* harmony import */ var _ProjectionChart_vue_vue_type_template_id_9410a800___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProjectionChart.vue?vue&type=template&id=9410a800& */ "./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&");
 /* harmony import */ var _ProjectionChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProjectionChart.vue?vue&type=script&lang=js& */ "./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ProjectionChart_vue_vue_type_style_index_0_id_9410a800_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css& */ "./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1060,13 +1085,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _ProjectionChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ProjectionChart_vue_vue_type_template_id_9410a800_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ProjectionChart_vue_vue_type_template_id_9410a800_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ProjectionChart_vue_vue_type_template_id_9410a800___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ProjectionChart_vue_vue_type_template_id_9410a800___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "9410a800",
+  null,
   null
   
 )
@@ -1092,35 +1117,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css&":
-/*!******************************************************************************************************************************!*\
-  !*** ./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_style_index_0_id_9410a800_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=style&index=0&id=9410a800&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_style_index_0_id_9410a800_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_style_index_0_id_9410a800_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_style_index_0_id_9410a800_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_style_index_0_id_9410a800_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_style_index_0_id_9410a800_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&scoped=true&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&scoped=true& ***!
-  \****************************************************************************************************************/
+/***/ "./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800& ***!
+  \****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_template_id_9410a800_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProjectionChart.vue?vue&type=template&id=9410a800&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_template_id_9410a800_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_template_id_9410a800___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ProjectionChart.vue?vue&type=template&id=9410a800& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/ProjectionChart.vue?vue&type=template&id=9410a800&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_template_id_9410a800___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_template_id_9410a800_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectionChart_vue_vue_type_template_id_9410a800___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

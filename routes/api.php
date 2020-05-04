@@ -30,8 +30,7 @@ Route::middleware('auth:api')->group(function () {
 	//         Route::post('logout', 'AuthController@logout');
 
 	//         // Users
-		    // Route::get('users', 'UserController@index')->middleware('isAdmin');
-		    // Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
+		    // Route::apiResource('users', 'Api\UserController');
 
 	// 	});
 	// });
@@ -273,6 +272,7 @@ Route::middleware('auth:api')->group(function () {
 			Route::apiResource('eco','Api\EcoController');
 			Route::get('rcas','Api\EcoController@rcas');
 			Route::post('rcas','Api\EcoController@upload');
+			Route::get('storages','Api\EcoController@storages');
 		##############################################################################################
 
 
@@ -296,7 +296,7 @@ Route::middleware('auth:api')->group(function () {
 
 		### ADMIN ######################################################################
 		Route::group(['middleware' => 'role:developer,admin'], function() {
-			Route::apiResource('users','UserController');
+			Route::apiResource('users','Api\UserController');
 	    	Route::get('roles','Api\MainController@roles');
 			Route::get('tabs', 'Api\AdminController@tabs');
 

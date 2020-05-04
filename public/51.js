@@ -108,21 +108,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['user'],
+  props: ['protectedZones', 'user'],
   data: function data() {
     return {
-      protectedZones: [],
       isPaginated: true,
       isPaginationSimple: false,
       paginationPosition: 'bottom',
@@ -130,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
       sortIcon: 'arrow-up',
       sortIconSize: 'is-small',
       currentPage: 1,
-      perPage: 20,
+      perPage: 10,
       darkMode: 0,
       bodyBackground: '',
       boxBackground: '',
@@ -140,23 +130,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {},
-  mounted: function mounted() {
-    this.getProtectedZones(); // this.getFiles()
+  mounted: function mounted() {// this.getProtectedZones()
+    // this.getFiles()
   },
-  methods: {
-    getProtectedZones: function getProtectedZones() {
-      var _this = this;
-
-      axios.get("/api/eco?api_token=".concat(this.user.api_token)).then(function (response) {
-        // console.log(response.data.data)
-        _this.protectedZones = response.data.environmentalData;
-      });
-    } // async getFiles() {
+  methods: {// async getFiles() {
     //     axios.get(`/api/eco/1`).then((response) => {
     //         // console.log(response)
     //     })
     // }
-
   }
 });
 
@@ -221,66 +202,9 @@ var render = function() {
                   {
                     staticClass: "is-size-6",
                     attrs: {
-                      field: "sites.nem_site",
-                      label: "Nemónico",
-                      width: "40"
-                    },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
-                    )
-                  },
-                  [
-                    _vm._v(" "),
-                    _vm._l(props.row.sites, function(site) {
-                      return _c(
-                        "router-link",
-                        {
-                          key: site.id,
-                          staticClass: "is-size-7",
-                          attrs: {
-                            to: "/pop/" + props.row.id,
-                            target: "_blank"
-                          }
-                        },
-                        [_c("p", [_vm._v(_vm._s(site.nem_site))])]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
+                      width: "70%",
                       field: "nombre",
-                      label: "Nombre POP",
+                      label: "PoP",
                       sortable: "",
                       searchable: ""
                     },
@@ -315,14 +239,24 @@ var render = function() {
                   },
                   [
                     _vm._v(" "),
-                    _c("div", { staticClass: "is-size-6" }, [
-                      _vm._v(_vm._s(props.row.nombre))
-                    ]),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "is-size-7",
+                        attrs: { to: "/pop/" + props.row.id, target: "_blank" }
+                      },
+                      [
+                        _c("div", { staticClass: "is-size-6" }, [
+                          _vm._v(_vm._s(props.row.nombre))
+                        ])
+                      ]
+                    ),
                     _vm._v(" "),
                     _c("p", { staticClass: "is-size-7" }, [
                       _vm._v(_vm._s(props.row.comuna.nombre_comuna))
                     ])
-                  ]
+                  ],
+                  1
                 ),
                 _vm._v(" "),
                 _c(

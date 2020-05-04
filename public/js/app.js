@@ -70713,19 +70713,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ../components/auth/Login.vue */ "./resources/js/components/auth/Login.vue"));
+  return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ../components/auth/Login.vue */ "./resources/js/components/auth/Login.vue"));
 };
 
 var PasswordEmail = function PasswordEmail() {
-  return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordEmail.vue */ "./resources/js/components/auth/PasswordEmail.vue"));
+  return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordEmail.vue */ "./resources/js/components/auth/PasswordEmail.vue"));
 };
 
 var PasswordReset = function PasswordReset() {
-  return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordReset.vue */ "./resources/js/components/auth/PasswordReset.vue"));
+  return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordReset.vue */ "./resources/js/components/auth/PasswordReset.vue"));
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(13), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(15), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {
@@ -70733,11 +70733,11 @@ var PopTable = function PopTable() {
 };
 
 var Pop = function Pop() {
-  return __webpack_require__.e(/*! import() */ 60).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
+  return __webpack_require__.e(/*! import() */ 61).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
 };
 
 var CapacityPlanning = function CapacityPlanning() {
-  return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
 };
 
 var Eco = function Eco() {
@@ -70745,7 +70745,7 @@ var Eco = function Eco() {
 };
 
 var Comsite = function Comsite() {
-  return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/comsite/Comsite.vue */ "./resources/js/components/comsite/Comsite.vue"));
+  return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/comsite/Comsite.vue */ "./resources/js/components/comsite/Comsite.vue"));
 };
 
 var Documents = function Documents() {
@@ -70753,7 +70753,7 @@ var Documents = function Documents() {
 };
 
 var Admin = function Admin() {
-  return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ../components/admin/Admin.vue */ "./resources/js/components/admin/Admin.vue"));
+  return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ../components/admin/Admin.vue */ "./resources/js/components/admin/Admin.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({

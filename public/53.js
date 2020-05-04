@@ -15,15 +15,118 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: [],
+  props: ['storageZones', 'user'],
   data: function data() {
-    return {};
+    return {
+      isPaginated: true,
+      isPaginationSimple: false,
+      paginationPosition: 'bottom',
+      defaultSortDirection: 'asc',
+      sortIcon: 'arrow-up',
+      sortIconSize: 'is-small',
+      currentPage: 1,
+      perPage: 10,
+      darkMode: 0,
+      bodyBackground: '',
+      boxBackground: '',
+      primaryText: '',
+      secondaryText: '',
+      searchBodyBackground: ''
+    };
   },
   created: function created() {},
-  mounted: function mounted() {},
-  methods: {}
+  mounted: function mounted() {// this.getProtectedZones()
+    // this.getFiles()
+  },
+  methods: {// async getFiles() {
+    //     axios.get(`/api/eco/1`).then((response) => {
+    //         // console.log(response)
+    //     })
+    // }
+  }
 });
 
 /***/ }),
@@ -43,20 +146,158 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tile is-child box" }, [
+  return _c(
+    "div",
+    { staticClass: "tile is-child box" },
+    [
       _c("div", { staticClass: "title is-size-4" }, [
-        _vm._v("Zonas de acopio temporal")
-      ])
-    ])
-  }
-]
+        _vm._v("Zonas Acopio Temporal")
+      ]),
+      _vm._v(" "),
+      _c("b-table", {
+        attrs: {
+          data: _vm.storageZones,
+          paginated: _vm.isPaginated,
+          "per-page": _vm.perPage,
+          "current-page": _vm.currentPage,
+          "pagination-simple": _vm.isPaginationSimple,
+          "pagination-position": _vm.paginationPosition,
+          "default-sort-direction": _vm.defaultSortDirection,
+          "sort-icon": _vm.sortIcon,
+          "sort-icon-size": _vm.sortIconSize,
+          "pagination-size": "is-small",
+          "default-sort": "user.first_name",
+          "aria-next-label": "Next page",
+          "aria-previous-label": "Previous page",
+          "aria-page-label": "Page",
+          "aria-current-label": "Current page"
+        },
+        on: {
+          "update:currentPage": function($event) {
+            _vm.currentPage = $event
+          },
+          "update:current-page": function($event) {
+            _vm.currentPage = $event
+          }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(props) {
+              return [
+                _c(
+                  "b-table-column",
+                  {
+                    staticClass: "is-size-6",
+                    attrs: {
+                      width: "70%",
+                      field: "nombre",
+                      label: "Nombre POP",
+                      sortable: "",
+                      searchable: ""
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                {
+                                  staticClass: "is-size-6",
+                                  attrs: { label: column.label }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(column.label) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v(_vm._s(props.row.nombre))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "is-size-7" }, [
+                      _vm._v(_vm._s(props.row.comuna.nombre_comuna))
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-table-column",
+                  {
+                    staticClass: "is-size-6",
+                    attrs: { field: "comuna.zona.nombre_zona", label: "Zona" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                {
+                                  staticClass: "is-size-6",
+                                  attrs: { label: column.label }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(column.label) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "is-size-7",
+                        attrs: { to: "/pop/" + props.row.id, target: "_blank" }
+                      },
+                      [
+                        _c("p", [
+                          _vm._v(_vm._s(props.row.comuna.zona.nombre_zona))
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -5,9 +5,9 @@
         </div>
         <div class="box">
             <div class="has-text-centered has-text-dark is-size-5" style="padding-bottom: 20px;">Disponibilidad de Potencia</div>
-            <LineChart
-                :chart_data="data"
-            ></LineChart>
+            <ProjectionChart
+                :chartData="data"
+            ></ProjectionChart>
         </div>
         <div class="box">
             <b-field grouped group-multiline>
@@ -132,11 +132,11 @@
 
 <script>
     var numeral = require('numeral');
-    import LineChart from './ProjectionChart'
+    import ProjectionChart from './ProjectionChart'
 
     export default {
         components: {
-            LineChart
+            ProjectionChart
         },
 
         props: [ 'data' ],
@@ -144,82 +144,6 @@
         data() {
             return {
                 loaded: false,
-                // chartData: [],
-                // options: {
-                //     responsive: true,
-                //     // title: {
-                //     //     display: false,
-                //     //     text: 'Disponibilidad de Potencia',
-                //     // },
-                //     tooltips: {
-                //         position: 'average',
-                //         mode: 'index',
-                //         intersect: false,
-                //     },
-                //     scales: {
-                //         xAxes: [{
-                //             gridLines: {
-                //                 display: true
-                //             },
-                //             type: 'time',
-                //             time: {
-                //                 unit: 'month'
-                //             },
-                //             displayFormats: {
-                //                 month: 'MMM'
-                //             },
-                //         }],
-                //         yAxes: [{
-                //             gridLines: {
-                //                 display: true
-                //             },
-                //             ticks: {
-                //                 min: 0,
-                //                 max: 100,
-                //                 stepSize: 20
-                //             }
-                //         }]
-                //     },
-                //     annotation: {
-                //         annotations: [{
-                //             type: 'line',
-                //             // drawTime: 'afterDatasetsDraw',
-                //             mode: 'vertical',
-                //             scaleID: 'x-axis-0',
-                //             value: new Date(),
-                //             // endValue: new Date(this.data[0].year, this.data[0].month, 1),
-                //             // borderColor: 'rgb(75, 192, 192)',
-                //             borderWidth: 3,
-                //             label: {
-                //                 enabled: true,
-                //                 content: 'Proyección',
-                //                 position: "top",
-                //                 xPadding: 10,
-                //                 yPadding: 10,
-                //                 xAdjust: -64,
-                //                 yAdjust: 32,
-                //             }
-                //         },{
-                //             type: 'line',
-                //             // drawTime: 'afterDatasetsDraw',
-                //             mode: 'vertical',
-                //             scaleID: 'x-axis-0',
-                //             value: new Date(),
-                //             // endValue: new Date(this.data[0].year, this.data[0].month, 1),
-                //             // borderColor: 'rgb(75, 192, 192)',
-                //             borderWidth: 2,
-                //             label: {
-                //                 enabled: true,
-                //                 content: 'Histórico',
-                //                 position: "top",
-                //                 xPadding: 10,
-                //                 yPadding: 10,
-                //                 xAdjust: 64,
-                //                 yAdjust: 32,
-                //             }
-                //         }]
-                //     } 
-                // },
 
                 // data,
                 isPaginated: true,
@@ -241,135 +165,10 @@
         },
 
         async mounted() {
-            // console.log(this.data)
-            // this.fillData()
+
         },
 
         methods: {
-            // fillData () {
-            //     this.loaded = false
-
-            //     var labels = []; var junction = []; var generator = []; var rectifier = [];
-            //     var battery = []; var distribution = []; var climate = []; var space = [];
-            //     this.data.forEach(element => {
-            //         var i = 0;
-            //         labels.push(new Date(element.year, element.month, 1))
-            //         i++
-            //     })
-            //     this.data.forEach(element => junction.push( numeral(element.junction * 100).format('0.0') ))
-            //     this.data.forEach(element => generator.push( numeral(element.generator * 100).format('0.0') ))
-            //     this.data.forEach(element => rectifier.push( numeral(element.rectifier * 100).format('0.0') ))
-            //     this.data.forEach(element => battery.push( numeral(element.battery * 100).format('0.0') ))
-            //     this.data.forEach(element => distribution.push( numeral(element.distribution * 100).format('0.0') ))
-            //     this.data.forEach(element => climate.push( numeral(element.climate * 100).format('0.0') ))
-            //     this.data.forEach(element => space.push( numeral(element.space * 100).format('0.0') ))
-
-            //     this.chartData = {
-            //         labels: labels,
-            //         datasets: [
-            //             {
-            //                 label: 'Empalme',
-            //                 steppedLine: 'before',
-            //                 borderColor: 'rgba(102, 183, 220, 0.8)',
-            //                 fill: false,
-            //                 fillColor: "rgba(102, 183, 220, 0.2)",
-            //                 strokeColor: "rgba(102, 183, 220, 1)",
-            //                 pointColor: "rgba(102, 183, 220, 1)",
-            //                 pointStrokeColor: "#fff",
-            //                 pointHighlightFill: "#fff",
-            //                 pointHighlightStroke: "rgba(102, 183, 220, 1)",
-            //                 backgroundColor: "rgba(102, 183, 220, 1)",
-            //                 data: junction
-            //             },
-            //             {
-            //                 label: 'Generador',
-            //                 steppedLine: 'before',
-            //                 borderColor: 'rgba(104, 148, 220, 0.8)',
-            //                 fill: false,
-            //                 fillColor: "rgba(104, 148, 220, 0.2)",
-            //                 strokeColor: "rgba(104, 148, 220, 1)",
-            //                 pointColor: "rgba(104, 148, 220, 1)",
-            //                 pointStrokeColor: "#fff",
-            //                 pointHighlightFill: "#fff",
-            //                 pointHighlightStroke: "rgba(104, 148, 220, 1)",
-            //                 backgroundColor: "rgba(104, 148, 220, 1)",
-            //                 data: generator
-            //             },
-            //             {
-            //                 label: 'Planta',
-            //                 steppedLine: 'before',
-            //                 borderColor: 'rgba(104, 113, 220, 0.8)',
-            //                 fill: false,
-            //                 fillColor: "rgba(104, 113, 220, 0.2)",
-            //                 strokeColor: "rgba(104, 113, 220, 1)",
-            //                 pointColor: "rgba(104, 113, 220, 1)",
-            //                 pointStrokeColor: "#fff",
-            //                 pointHighlightFill: "#fff",
-            //                 pointHighlightStroke: "rgba(104, 113, 220, 1)",
-            //                 backgroundColor: "rgba(104, 113, 220, 1)",
-            //                 data: rectifier
-            //             },
-            //             {
-            //                 label: 'Baterías',
-            //                 steppedLine: 'before',
-            //                 borderColor: 'rgba(118, 103, 220, 0.8)',
-            //                 fill: false,
-            //                 fillColor: "rgba(118, 103, 220, 0.2)",
-            //                 strokeColor: "rgba(118, 103, 220, 1)",
-            //                 pointColor: "rgba(118, 103, 220, 1)",
-            //                 pointStrokeColor: "#fff",
-            //                 pointHighlightFill: "#fff",
-            //                 pointHighlightStroke: "rgba(118, 103, 220, 1)",
-            //                 backgroundColor: "rgba(118, 103, 220, 1)",
-            //                 data: battery
-            //             },
-            //             {
-            //                 label: 'Distribución',
-            //                 steppedLine: 'before',
-            //                 borderColor: 'rgba(163, 103, 220, 0.8)',
-            //                 fill: false,
-            //                 fillColor: "rgba(163, 103, 220, 0.2)",
-            //                 strokeColor: "rgba(163, 103, 220, 1)",
-            //                 pointColor: "rgba(163, 103, 220, 1)",
-            //                 pointStrokeColor: "#fff",
-            //                 pointHighlightFill: "#fff",
-            //                 pointHighlightStroke: "rgba(163, 103, 220, 1)",
-            //                 backgroundColor: "rgba(163, 103, 220, 1)",
-            //                 data: distribution
-            //             },
-            //             {
-            //                 label: 'Clima',
-            //                 steppedLine: 'before',
-            //                 borderColor: 'rgba(199, 103, 220, 0.8)',
-            //                 fill: false,
-            //                 fillColor: "rgba(199, 103, 220, 0.2)",
-            //                 strokeColor: "rgba(199, 103, 220, 1)",
-            //                 pointColor: "rgba(199, 103, 220, 1)",
-            //                 pointStrokeColor: "#fff",
-            //                 pointHighlightFill: "#fff",
-            //                 pointHighlightStroke: "rgba(199, 103, 220, 1)",
-            //                 backgroundColor: "rgba(199, 103, 220, 1)",
-            //                 data: climate
-            //             },
-            //             {
-            //                 label: 'Espacio',
-            //                 steppedLine: 'before',
-            //                 borderColor: 'rgba(220, 103, 206, 0.8)',
-            //                 fill: false,
-            //                 fillColor: "rgba(220, 103, 206, 0.2)",
-            //                 strokeColor: "rgba(220, 103, 206, 1)",
-            //                 pointColor: "rgba(220, 103, 206, 1)",
-            //                 pointStrokeColor: "#fff",
-            //                 pointHighlightFill: "#fff",
-            //                 pointHighlightStroke: "rgba(220, 103, 206, 1)",
-            //                 backgroundColor: "rgba(220, 103, 206, 1)",
-            //                 data: space
-            //             }
-            //         ]
-            //     }
-
-            //     this.loaded = true
-            // }
         }
     }
 </script>

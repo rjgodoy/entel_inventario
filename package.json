@@ -40,6 +40,7 @@
         "bulma-switch": "^2.0.0",
         "bulma-timeline": "^3.0.4",
         "bulma-tooltip": "^3.0.2",
+        "c3": "^0.7.15",
         "canvas": "^2.6.1",
         "chart.js": "^2.9.3",
         "chartjs-plugin-annotation": "^0.5.7",

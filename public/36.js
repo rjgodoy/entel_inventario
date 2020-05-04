@@ -67,22 +67,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(23), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/modals/Capacity.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(23), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/modals/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(11), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/modals/Projection.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(11), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/modals/Projection.vue"));
     },
     Requests: function Requests() {
       return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./Requests */ "./resources/js/components/capacity/modals/Requests.vue"));
     },
     Calculator: function Calculator() {
-      return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./Calculator */ "./resources/js/components/capacity/modals/Calculator.vue"));
+      return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./Calculator */ "./resources/js/components/capacity/modals/Calculator.vue"));
     },
     Layout: function Layout() {
       return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../../pops/layout/Layout */ "./resources/js/components/pops/layout/Layout.vue"));
     },
     Documents: function Documents() {
-      return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./Documents */ "./resources/js/components/capacity/modals/Documents.vue"));
+      return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./Documents */ "./resources/js/components/capacity/modals/Documents.vue"));
     }
   },
   props: ['pop', 'room', 'user'],

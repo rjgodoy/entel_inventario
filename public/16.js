@@ -1,105 +1,193 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VuePagination.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VuePagination.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @amcharts/amcharts4/core */ "./node_modules/@amcharts/amcharts4/core.js");
+/* harmony import */ var _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @amcharts/amcharts4/charts */ "./node_modules/@amcharts/amcharts4/charts.js");
+/* harmony import */ var _amcharts_amcharts4_themes_animated__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @amcharts/amcharts4/themes/animated */ "./node_modules/@amcharts/amcharts4/themes/animated.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+ // import am4themes_entel from "../../constants/amChartsEntel.js";
+// import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
+
+ // am4core.useTheme(am4themes_entel)
+// am4core.useTheme(am4themes_dark) 
+
+_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["useTheme"](_amcharts_amcharts4_themes_animated__WEBPACK_IMPORTED_MODULE_3__["default"]); // am4core.disposeAllCharts();
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    pagination: {
-      type: Object,
-      required: true
-    },
-    offset: {
-      type: Number,
-      "default": 4
-    },
-    primaryText: String
+  props: [// 'room',
+  'actualData'],
+  data: function data() {
+    return {
+      chart: ''
+    };
   },
-  computed: {
-    pagesNumber: function pagesNumber() {
-      if (!this.pagination.to) {
-        return [];
-      }
-
-      var from = this.pagination.current_page - this.offset;
-
-      if (from < 1) {
-        from = 1;
-      }
-
-      var to = from + this.offset * 2;
-
-      if (to >= this.pagination.last_page) {
-        to = this.pagination.last_page;
-      }
-
-      var pagesArray = [];
-
-      for (var page = from; page <= to; page++) {
-        pagesArray.push(page);
-      }
-
-      return pagesArray;
+  mounted: function mounted() {
+    // console.log(this.actualData)
+    this.graph();
+  },
+  computed: {// actualData() {
+    //     return this.actualData
+    // }
+  },
+  watch: {
+    actualData: function actualData(newValue) {
+      this.chart && this.chart.dispose();
+      this.graph();
     }
   },
   methods: {
-    changePage: function changePage(page) {
-      this.pagination.current_page = page;
-      this.$emit('paginate');
-    }
+    graph: function () {
+      var _graph = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var chart, categoryAxis, valueAxis, series1, series2;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                // Create chart instance
+                chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["RadarChart"]); // Add data
+
+                chart.data = [{
+                  "category": "Empalme",
+                  "value": this.actualData ? 100 - this.actualData.junction * 100 : 0,
+                  "full": 100
+                }, {
+                  "category": "GGEE",
+                  "value": this.actualData ? 100 - this.actualData.generator * 100 : 0,
+                  "full": 100
+                }, {
+                  "category": "Plantas CC",
+                  "value": this.actualData ? 100 - this.actualData.rectifier * 100 : 0,
+                  "full": 100
+                }, {
+                  "category": "Baterías",
+                  "value": this.actualData ? 100 - this.actualData.battery * 100 : 0,
+                  "full": 100
+                }, {
+                  "category": "Distribución",
+                  "value": this.actualData ? 100 - this.actualData.distribution * 100 : 0,
+                  "full": 100
+                }, {
+                  "category": "Clima",
+                  "value": this.actualData ? 100 - this.actualData.climate * 100 : 0,
+                  "full": 100
+                }, {
+                  "category": "Espacio",
+                  "value": this.actualData ? 100 - this.actualData.space * 100 : 0,
+                  "full": 100
+                }]; // Make chart not full circle
+
+                chart.startAngle = -90;
+                chart.endAngle = 180;
+                chart.innerRadius = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["percent"](20); // Set number format
+
+                chart.numberFormatter.numberFormat = "#.#'%'"; // Create axes
+
+                categoryAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["CategoryAxis"]());
+                categoryAxis.dataFields.category = "category";
+                categoryAxis.renderer.grid.template.location = 0;
+                categoryAxis.renderer.grid.template.strokeOpacity = 0;
+                categoryAxis.renderer.labels.template.horizontalCenter = "right";
+                categoryAxis.renderer.labels.template.fontWeight = 500;
+                categoryAxis.renderer.labels.template.fontSize = 14;
+                categoryAxis.renderer.labels.template.adapter.add("fill", function (fill, target) {
+                  return target.dataItem.index >= 0 ? chart.colors.getIndex(target.dataItem.index) : fill;
+                });
+                categoryAxis.renderer.minGridDistance = 10;
+                valueAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["ValueAxis"]());
+                valueAxis.renderer.grid.template.strokeOpacity = 0;
+                valueAxis.min = 0;
+                valueAxis.max = 100;
+                valueAxis.strictMinMax = true;
+                valueAxis.renderer.labels.template.fontSize = 12; // Create series
+
+                series1 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["RadarColumnSeries"]());
+                series1.dataFields.valueX = "full";
+                series1.dataFields.categoryY = "category";
+                series1.clustered = false;
+                series1.columns.template.fill = new _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_1__["InterfaceColorSet"]().getFor("alternativeBackground");
+                series1.columns.template.fillOpacity = 0.08;
+                series1.columns.template.cornerRadiusTopLeft = 20;
+                series1.columns.template.strokeWidth = 0;
+                series1.columns.template.radarColumn.cornerRadius = 20;
+                series2 = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["RadarColumnSeries"]());
+                series2.dataFields.valueX = "value";
+                series2.dataFields.categoryY = "category";
+                series2.clustered = false;
+                series2.columns.template.strokeWidth = 0;
+                series2.columns.template.tooltipText = "{category}: [bold]{value}[/]";
+                series2.columns.template.radarColumn.cornerRadius = 20;
+                series2.columns.template.adapter.add("fill", function (fill, target) {
+                  return chart.colors.getIndex(target.dataItem.index);
+                }); // Add cursor
+
+                chart.cursor = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_2__["RadarCursor"]();
+                this.chart = chart;
+
+              case 40:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function graph() {
+        return _graph.apply(this, arguments);
+      }
+
+      return graph;
+    }()
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.chart && this.chart.dispose();
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/comsite/Comsite.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/comsite/Comsite.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/Capacity.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/modals/Capacity.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VuePagination.vue */ "./resources/js/components/VuePagination.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants_chartJs_PolarAreaChart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../constants/chartJs/PolarAreaChart.js */ "./resources/js/constants/chartJs/PolarAreaChart.js");
+/* harmony import */ var _CapacityChart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../CapacityChart */ "./resources/js/components/capacity/CapacityChart.vue");
+
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -217,116 +305,110 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral.js");
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    'vue-pagination': _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    PolarAreaChart: _constants_chartJs_PolarAreaChart_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+    CapacityChart: _CapacityChart__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  props: ['user'],
+  props: ['actualData', 'user'],
   data: function data() {
     return {
-      darkMode: 0,
-      bodyBackground: '',
-      boxBackground: '',
-      primaryText: '',
-      secondaryText: '',
-      searchBodyBackground: '',
-      last_updated: '',
-      comsiteData: {
-        can: Array,
-        total: 0,
-        per_page: 2,
-        from: 1,
-        to: 0,
-        current_page: 1
-      },
-      searchText: '' // buttonLoading: 0,
-
+      energy: 15,
+      climate: 5,
+      space: 6,
+      loaded: false,
+      chartData: [],
+      options: {
+        responsive: true,
+        legend: {
+          position: 'right'
+        },
+        // title: {
+        //     display: true,
+        //     text: 'Chart.js Polar Area Chart'
+        // },
+        scale: {
+          ticks: {
+            beginAtZero: true
+          },
+          reverse: false
+        },
+        animation: {
+          animateRotate: false,
+          animateScale: true
+        }
+      }
     };
   },
-  created: function created() {
-    this.styleMode();
+  watch: {
+    data: function data() {
+      this.fillData();
+    }
   },
-  mounted: function mounted() {
-    this.lastUpdated();
-    this.getComsiteData();
+  computed: {
+    canViewClimate: function canViewClimate() {
+      return this.user.roles[0].slug == 'engineer-admin' || this.user.roles[0].slug == 'admin' || this.user.roles[0].slug == 'developer' || this.user_permissions.find(function (element) {
+        return element.slug == 'edit-air-conditioner';
+      }) ? true : false;
+    }
   },
+  mounted: function () {
+    var _mounted = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              this.fillData();
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function mounted() {
+      return _mounted.apply(this, arguments);
+    }
+
+    return mounted;
+  }(),
   methods: {
-    getComsiteData: function getComsiteData() {
-      var _this = this;
+    fillData: function fillData() {
+      this.loaded = false;
+      this.chartData = _defineProperty({
+        labels: ['Empalme', 'Generador', 'Rectificador', 'Baterías', 'Distribucion', 'Clima', 'Espacio'],
+        datasets: [{
+          data: [this.actualData.junction ? numeral((1 - this.actualData.junction) * 100).format('0,0') : null, this.actualData.generator ? numeral((1 - this.actualData.generator) * 100).format('0,0') : null, this.actualData.rectifier ? numeral((1 - this.actualData.rectifier) * 100).format('0,0') : null, this.actualData.battery ? numeral((1 - this.actualData.battery) * 100).format('0,0') : null, this.actualData.distribution ? numeral((1 - this.actualData.distribution) * 100).format('0,0') : null, this.actualData.climate ? numeral((1 - this.actualData.climate) * 100).format('0,0') : null, this.actualData.space ? numeral((1 - this.actualData.space) * 100).format('0,0') : null],
+          backgroundColor: ['rgba(102, 183, 220, 0.5)', 'rgba(104, 148, 220, 0.5)', 'rgba(104, 113, 220, 0.5)', 'rgba(118, 103, 220, 0.5)', 'rgba(163, 103, 220, 0.5)', 'rgba(199, 103, 220, 0.5)', 'rgba(220, 103, 206, 0.5)'] // label: 'My dataset' // for legend
 
-      axios.get("/api/comsites?api_token=".concat(this.user.api_token, "&page=").concat(this.comsiteData.current_page, "&text=").concat(this.searchText)).then(function (response) {
-        _this.comsiteData = response.data;
-        console.log(response.data);
-      });
-    },
-    // syncComsite() {
-    //     // e.preventDefault()
-    //     this.buttonLoading = 1
-    //     // let currentObj = this
-    //     axios.post(`/api/comsites`)
-    //     .then((response) => {
-    //         // console.log(this.$route.params)
-    //         // console.log(response)
-    //         // document.location.href = "/comsite/create"
-    //         // currentObj.output = response.data
-    //         this.buttonLoading = 0
-    //         this.getComsiteData()
-    //         this.lastUpdated()
-    //     })
-    // },
-    // Style mode
-    styleMode: function styleMode() {
-      if (this.darkMode == 1) {
-        // dark mode
-        this.bodyBackground = 'has-background-black-ter';
-        this.boxBackground = 'has-background-dark';
-        this.primaryText = 'has-text-white';
-        this.secondaryText = 'has-text-grey-light';
-        this.searchBodyBackground = 'has-background-dark';
-      } else {
-        // light mode
-        this.bodyBackground = 'has-background-light';
-        this.boxBackground = 'has-background-white';
-        this.primaryText = 'has-text-dark';
-        this.secondaryText = 'has-text-grey';
-        this.searchBodyBackground = 'has-background-white';
-      }
-    },
-    changeStyle: function changeStyle() {
-      if (this.darkMode == 0) {
-        this.darkMode = 1;
-        this.styleMode();
-      } else {
-        this.darkMode = 0;
-        this.styleMode();
-      }
-    },
-    clearSearch: function clearSearch() {
-      this.searchText = ''; // this.popSearch = []
-      // this.selectedPop = null
-      // this.selectedPops = []
-      // this.selectedCrm = null
-      // this.selectedZona = null
-
-      this.getComsiteData();
-    },
-    lastUpdated: function lastUpdated() {
-      var _this2 = this;
-
-      axios.get("/api/comsiteLastData?api_token=".concat(this.user.api_token)).then(function (response) {
-        _this2.last_updated = response.data.data;
-      });
+        }]
+      }, "labels", ['Empalme', 'Generador', 'Rectificador', 'Baterías', 'Distribucion', 'Clima', 'Espacio']);
+      this.loaded = true;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VuePagination.vue?vue&type=template&id=77006965&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VuePagination.vue?vue&type=template&id=77006965& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -338,155 +420,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    {
-      staticClass: "pagination is-centered is-small",
-      attrs: { role: "navigation", "aria-label": "pagination" }
-    },
-    [
-      _c(
-        "ul",
-        { staticClass: "pagination-list" },
-        [
-          _vm.pagination.current_page == 1
-            ? _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "pagination-previous",
-                    attrs: {
-                      href: "javascript:void(0)",
-                      "aria-label": "Previous",
-                      disabled: ""
-                    }
-                  },
-                  [
-                    _c(
-                      "span",
-                      {
-                        class: _vm.primaryText,
-                        attrs: { "aria-hidden": "true" }
-                      },
-                      [_vm._v("Previous")]
-                    )
-                  ]
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.pagination.current_page > 1
-            ? _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "pagination-previous",
-                    attrs: {
-                      href: "javascript:void(0)",
-                      "aria-label": "Previous"
-                    },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.changePage(_vm.pagination.current_page - 1)
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "span",
-                      {
-                        class: _vm.primaryText,
-                        attrs: { "aria-hidden": "true" }
-                      },
-                      [_vm._v("Previous")]
-                    )
-                  ]
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.pagesNumber, function(page) {
-            return _c("li", [
-              _c(
-                "a",
-                {
-                  staticClass: "pagination-link",
-                  class:
-                    page == _vm.pagination.current_page
-                      ? "is-current"
-                      : _vm.primaryText,
-                  attrs: { href: "javascript:void(0)" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.changePage(page)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(page))]
-              )
-            ])
-          }),
-          _vm._v(" "),
-          _vm.pagination.current_page < _vm.pagination.last_page
-            ? _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "pagination-next",
-                    attrs: { href: "javascript:void(0)", "aria-label": "Next" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.changePage(_vm.pagination.current_page + 1)
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "span",
-                      {
-                        class: _vm.primaryText,
-                        attrs: { "aria-hidden": "true" }
-                      },
-                      [_vm._v("Next Page")]
-                    )
-                  ]
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.pagination.current_page == _vm.pagination.last_page
-            ? _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "pagination-next",
-                    attrs: {
-                      href: "javascript:void(0)",
-                      "aria-label": "Next",
-                      disabled: ""
-                    }
-                  },
-                  [
-                    _c(
-                      "span",
-                      {
-                        class: _vm.primaryText,
-                        attrs: { "aria-hidden": "true" }
-                      },
-                      [_vm._v("Next Page")]
-                    )
-                  ]
-                )
-              ])
-            : _vm._e()
-        ],
-        2
-      )
-    ]
-  )
+  return _c("div", { ref: "chartdiv", staticStyle: { height: "400px" } })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -495,10 +429,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/comsite/Comsite.vue?vue&type=template&id=8cbdad34&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/comsite/Comsite.vue?vue&type=template&id=8cbdad34& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/Capacity.vue?vue&type=template&id=5ff25259&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/capacity/modals/Capacity.vue?vue&type=template&id=5ff25259& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -510,488 +444,294 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "section is-marginless", class: _vm.bodyBackground },
-    [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "box", class: _vm.boxBackground }, [
-          _c("div", { staticClass: "field" }, [
-            _c("p", { staticClass: "control has-icons-left has-icons-right" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.searchText,
-                    expression: "searchText"
-                  }
-                ],
-                staticClass: "input is-rounded",
-                class: _vm.bodyBackground + " " + _vm.primaryText,
-                attrs: {
-                  type: "text",
-                  "arial-label": "Buscar",
-                  placeholder: "Buscar...",
-                  autofocus: ""
-                },
-                domProps: { value: _vm.searchText },
-                on: {
-                  keyup: _vm.getComsiteData,
-                  input: [
-                    function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.searchText = $event.target.value
-                    },
-                    function($event) {
-                      _vm.comsiteData.current_page = 1
-                    }
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "icon is-small is-left" },
-                [_c("font-awesome-icon", { attrs: { icon: "search" } })],
-                1
-              ),
-              _vm._v(" "),
-              _c("span", { staticClass: "icon is-small is-right" }, [
-                _c("button", {
-                  staticClass: "delete",
-                  on: { click: _vm.clearSearch }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "table",
-            { staticClass: "table is-fullwidth", class: _vm.boxBackground },
-            [
-              _c("thead", [
-                _c("tr", [
-                  _c(
-                    "th",
-                    {
-                      staticClass: "is-size-7 has-text-weight-semibold",
-                      class: _vm.secondaryText
-                    },
-                    [
-                      _c("abbr", { attrs: { title: "id" } }, [
-                        _vm._v("# Contrato")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    {
-                      staticClass: "is-size-7 has-text-weight-semibold",
-                      class: _vm.secondaryText
-                    },
-                    [_c("abbr", { attrs: { title: "id" } }, [_vm._v("POP")])]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    {
-                      staticClass: "is-size-7 has-text-weight-semibold",
-                      class: _vm.secondaryText
-                    },
-                    [
-                      _c("abbr", { attrs: { title: "id" } }, [
-                        _vm._v("Operador")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    {
-                      staticClass: "is-size-7 has-text-weight-semibold",
-                      class: _vm.secondaryText
-                    },
-                    [
-                      _c("abbr", { attrs: { title: "id" } }, [
-                        _vm._v("Fechas Contratos")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    {
-                      staticClass: "is-size-7 has-text-weight-semibold",
-                      class: _vm.secondaryText
-                    },
-                    [
-                      _c("abbr", { attrs: { title: "id" } }, [
-                        _vm._v("Propietario")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    {
-                      staticClass: "is-size-7 has-text-weight-semibold",
-                      class: _vm.secondaryText
-                    },
-                    [
-                      _c("abbr", { attrs: { title: "id" } }, [
-                        _vm._v("Rol Propiedad")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("th", {
-                    staticClass:
-                      "is-size-7 has-text-weight-semibold has-text-centered"
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.comsiteData.data, function(data) {
-                  return _c(
-                    "tr",
-                    { staticClass: "is-size-7 has-text-weight-light" },
-                    [
-                      _c(
-                        "td",
-                        {
-                          staticClass: "has-text-weight-light",
-                          class: _vm.primaryText
-                        },
-                        [_vm._v(_vm._s(data.id))]
-                      ),
-                      _vm._v(" "),
-                      _c("td", {}, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "is-size-7 has-text-weight-normal",
-                            class: _vm.primaryText
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(data.pop ? data.pop.nombre : "") +
-                                "\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "is-size-7 has-text-weight-normal",
-                            class: _vm.secondaryText
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(data.pop ? data.pop.comuna.nombre : "") +
-                                "\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "is-size-7 has-text-weight-normal",
-                            class: _vm.secondaryText
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  data.pop
-                                    ? "Zona: " + data.pop.comuna.zona.nombre
-                                    : ""
-                                ) +
-                                " - " +
-                                _vm._s(
-                                  data.pop
-                                    ? "CRM: " + data.pop.comuna.zona.crm.nombre
-                                    : ""
-                                ) +
-                                "\n                            "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass:
-                            "has-text-weight-light has-text-centered",
-                          class: _vm.primaryText
-                        },
-                        [_vm._v(_vm._s(data.operador))]
-                      ),
-                      _vm._v(" "),
-                      _c("td", {}, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "has-text-weight-light",
-                            class: _vm.primaryText
-                          },
-                          [
-                            _vm._v(
-                              "\n                                Inicio: " +
-                                _vm._s(data.started_at) +
-                                "\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "has-text-weight-light",
-                            class: _vm.primaryText
-                          },
-                          [
-                            _vm._v(
-                              "\n                                Término: " +
-                                _vm._s(data.ended_at) +
-                                "\n                            "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", {}, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "has-text-weight-light",
-                            class: _vm.primaryText
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(data.propietario) +
-                                "\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "has-text-weight-light",
-                            class: _vm.secondaryText
-                          },
-                          [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  data.fono_propietario ||
-                                    data.celular_propietario
-                                    ? "Contacto: "
-                                    : ""
-                                ) +
-                                "\n                                " +
-                                _vm._s(
-                                  data.fono_propietario &&
-                                    data.celular_propietario
-                                    ? data.fono_propietario +
-                                        " - " +
-                                        data.celular_propietario
-                                    : data.fono_propietario
-                                    ? data.fono_propietario
-                                    : data.celular_propietario
-                                ) +
-                                "\n                            "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass:
-                            "has-text-weight-light has-text-centered",
-                          class: _vm.primaryText
-                        },
-                        [_vm._v(_vm._s(data.rol_propiedad))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass:
-                            "has-text-weight-light has-text-centered",
-                          class: _vm.primaryText
-                        },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "button is-small is-link tooltip",
-                              attrs: {
-                                href: "/comsites/download",
-                                type: "button",
-                                "data-tooltip": "Tooltip Text"
-                              }
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                attrs: { icon: "bars" }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "level" }, [
+  return _c("div", {}, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column is-4" }, [
+        _c(
+          "div",
+          { staticClass: "box" },
+          [
             _c(
-              "nav",
+              "div",
               {
-                staticClass: "level-left pagination",
-                attrs: { role: "navigation", "aria-label": "pagination" }
+                staticClass: "has-text-centered has-text-dark is-size-5",
+                staticStyle: { "padding-bottom": "20px" }
               },
+              [_vm._v("Estado actual (%)")]
+            ),
+            _vm._v(" "),
+            _c("capacity-chart", { attrs: { actualData: _vm.actualData } })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "column is-2 has-text-centered" }, [
+        _c("div", { staticClass: "has-text-centered is-size-7" }, [
+          _vm._v("GENERAL")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticStyle: {
+              padding: "12px",
+              border: "1px solid #888",
+              "border-radius": "15px"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticStyle: { "padding-top": "10px" } },
               [
-                _c("vue-pagination", {
-                  attrs: {
-                    pagination: _vm.comsiteData,
-                    offset: 4,
-                    primaryText: _vm.primaryText
-                  },
-                  on: {
-                    paginate: function($event) {
-                      return _vm.getComsiteData()
-                    }
-                  }
+                _c("font-awesome-icon", {
+                  class:
+                    _vm.energy <= 5 || _vm.climate <= 5 || _vm.space <= 5
+                      ? "has-text-info"
+                      : (_vm.energy > 5 && _vm.energy <= 10) ||
+                        (_vm.climate > 5 && _vm.climate <= 10) ||
+                        (_vm.space > 5 && _vm.space <= 10)
+                      ? "has-text-warning"
+                      : "has-text-success",
+                  attrs: { icon: "circle", size: "2x" }
                 })
               ],
               1
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "level-right has-text-right" }, [
+            _c("div", { staticClass: "has-text-centered" }, [
               _c(
                 "div",
-                { staticClass: "is-size-7 ", class: _vm.secondaryText },
+                {
+                  staticClass: " is-size-4 has-text-weight-bold",
+                  staticStyle: { "padding-top": "12px" }
+                },
                 [
                   _vm._v(
-                    "Fecha ultima actualización: " +
-                      _vm._s(_vm.last_updated.formatted)
+                    _vm._s(Math.min(_vm.energy, _vm.climate)) +
+                      "\n                        "
+                  ),
+                  _c(
+                    "span",
+                    { staticClass: "is-size-6 has-text-weight-light" },
+                    [_vm._v("kW")]
                   )
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "has-text-weight-light is-size-7" }, [
+                _vm._v("Disponibles")
+              ])
             ])
-          ])
-        ])
-      ])
-    ]
-  )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "column has-text-centered",
+          staticStyle: { "padding-top": "0" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "columns", staticStyle: { padding: "8px" } },
+            [
+              _c("div", { staticClass: "column has-text-centered is-size-7" }, [
+                _vm._v("ENERGIA")
+              ]),
+              _vm._v(" "),
+              _vm.canViewClimate
+                ? _c(
+                    "div",
+                    { staticClass: "column has-text-centered is-size-7" },
+                    [_vm._v("CLIMA")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "column has-text-centered is-size-7" }, [
+                _vm._v("ESPACIO")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticStyle: {
+                "margin-top": "-32px",
+                padding: "12px",
+                border: "1px solid #888",
+                "border-radius": "15px"
+              }
+            },
+            [
+              _c("div", { staticClass: "columns" }, [
+                _c(
+                  "div",
+                  { staticClass: "column" },
+                  [
+                    _c("font-awesome-icon", {
+                      class:
+                        _vm.energy <= 5
+                          ? "has-text-info"
+                          : _vm.energy > 5 && _vm.energy <= 10
+                          ? "has-text-warning"
+                          : "has-text-success",
+                      attrs: { icon: "circle", size: "2x" }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "has-text-centered" }, [
+                      _c(
+                        "div",
+                        { staticClass: " is-size-5 has-text-weight-bold" },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.canViewClimate
+                                ? _vm.energy
+                                : Math.min(_vm.energy, _vm.climate)
+                            ) + "\n                                "
+                          ),
+                          _c(
+                            "span",
+                            { staticClass: "is-size-6 has-text-weight-light" },
+                            [_vm._v("kW")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        { staticClass: "has-text-weight-light is-size-7" },
+                        [_vm._v("Disponibles")]
+                      )
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm.canViewClimate
+                  ? _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c("font-awesome-icon", {
+                          class:
+                            _vm.climate <= 5
+                              ? "has-text-info"
+                              : _vm.climate > 5 && _vm.climate <= 10
+                              ? "has-text-warning"
+                              : "has-text-success",
+                          attrs: { icon: "circle", size: "2x" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "has-text-centered" }, [
+                          _c(
+                            "div",
+                            { staticClass: " is-size-5 has-text-weight-bold" },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.climate) +
+                                  "\n                                "
+                              ),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "is-size-6 has-text-weight-light"
+                                },
+                                [_vm._v("kW")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            { staticClass: "has-text-weight-light is-size-7" },
+                            [_vm._v("Disponibles")]
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "column" },
+                  [
+                    _c("font-awesome-icon", {
+                      class:
+                        _vm.space <= 5
+                          ? "has-text-info"
+                          : _vm.space > 5 && _vm.space <= 10
+                          ? "has-text-warning"
+                          : "has-text-success",
+                      attrs: { icon: "circle", size: "2x" }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "has-text-centered" }, [
+                      _c(
+                        "div",
+                        { staticClass: " is-size-5 has-text-weight-bold" },
+                        [_vm._v(_vm._s(_vm.space))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        { staticClass: "has-text-weight-light is-size-7" },
+                        [_vm._v("Disponibles")]
+                      )
+                    ])
+                  ],
+                  1
+                )
+              ])
+            ]
+          )
+        ]
+      )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "has-text-weight-semibold has-text-dark is-size-3 has-text-left"
+        },
+        [_vm._v("Dashobard")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/VuePagination.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/components/VuePagination.vue ***!
-  \***************************************************/
+/***/ "./resources/js/components/capacity/CapacityChart.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityChart.vue ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _VuePagination_vue_vue_type_template_id_77006965___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VuePagination.vue?vue&type=template&id=77006965& */ "./resources/js/components/VuePagination.vue?vue&type=template&id=77006965&");
-/* harmony import */ var _VuePagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VuePagination.vue?vue&type=script&lang=js& */ "./resources/js/components/VuePagination.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _VuePagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _VuePagination_vue_vue_type_template_id_77006965___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _VuePagination_vue_vue_type_template_id_77006965___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/VuePagination.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/VuePagination.vue?vue&type=script&lang=js&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/VuePagination.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VuePagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./VuePagination.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VuePagination.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VuePagination_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/VuePagination.vue?vue&type=template&id=77006965&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/VuePagination.vue?vue&type=template&id=77006965& ***!
-  \**********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VuePagination_vue_vue_type_template_id_77006965___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./VuePagination.vue?vue&type=template&id=77006965& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VuePagination.vue?vue&type=template&id=77006965&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VuePagination_vue_vue_type_template_id_77006965___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VuePagination_vue_vue_type_template_id_77006965___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/comsite/Comsite.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/comsite/Comsite.vue ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Comsite_vue_vue_type_template_id_8cbdad34___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comsite.vue?vue&type=template&id=8cbdad34& */ "./resources/js/components/comsite/Comsite.vue?vue&type=template&id=8cbdad34&");
-/* harmony import */ var _Comsite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Comsite.vue?vue&type=script&lang=js& */ "./resources/js/components/comsite/Comsite.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CapacityChart.vue?vue&type=template&id=99c241cc& */ "./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&");
+/* harmony import */ var _CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CapacityChart.vue?vue&type=script&lang=js& */ "./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1001,9 +741,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Comsite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Comsite_vue_vue_type_template_id_8cbdad34___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Comsite_vue_vue_type_template_id_8cbdad34___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1013,40 +753,134 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/comsite/Comsite.vue"
+component.options.__file = "resources/js/components/capacity/CapacityChart.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/comsite/Comsite.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/comsite/Comsite.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Comsite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Comsite.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/comsite/Comsite.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Comsite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CapacityChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/comsite/Comsite.vue?vue&type=template&id=8cbdad34&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/comsite/Comsite.vue?vue&type=template&id=8cbdad34& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc& ***!
+  \*******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comsite_vue_vue_type_template_id_8cbdad34___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Comsite.vue?vue&type=template&id=8cbdad34& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/comsite/Comsite.vue?vue&type=template&id=8cbdad34&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comsite_vue_vue_type_template_id_8cbdad34___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CapacityChart.vue?vue&type=template&id=99c241cc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/CapacityChart.vue?vue&type=template&id=99c241cc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comsite_vue_vue_type_template_id_8cbdad34___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapacityChart_vue_vue_type_template_id_99c241cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/capacity/modals/Capacity.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/capacity/modals/Capacity.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Capacity_vue_vue_type_template_id_5ff25259___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Capacity.vue?vue&type=template&id=5ff25259& */ "./resources/js/components/capacity/modals/Capacity.vue?vue&type=template&id=5ff25259&");
+/* harmony import */ var _Capacity_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Capacity.vue?vue&type=script&lang=js& */ "./resources/js/components/capacity/modals/Capacity.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Capacity_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Capacity_vue_vue_type_template_id_5ff25259___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Capacity_vue_vue_type_template_id_5ff25259___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/capacity/modals/Capacity.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/capacity/modals/Capacity.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/capacity/modals/Capacity.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Capacity_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Capacity.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/Capacity.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Capacity_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/capacity/modals/Capacity.vue?vue&type=template&id=5ff25259&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/capacity/modals/Capacity.vue?vue&type=template&id=5ff25259& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Capacity_vue_vue_type_template_id_5ff25259___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Capacity.vue?vue&type=template&id=5ff25259& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/capacity/modals/Capacity.vue?vue&type=template&id=5ff25259&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Capacity_vue_vue_type_template_id_5ff25259___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Capacity_vue_vue_type_template_id_5ff25259___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/constants/chartJs/PolarAreaChart.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/constants/chartJs/PolarAreaChart.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactiveProp;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["PolarArea"],
+  mixins: [reactiveProp],
+  props: ['options'],
+  mounted: function mounted() {
+    // this.chartData is created in the mixin.
+    // If you want to pass options please create a local options object
+    this.renderChart(this.chartData, this.options);
+  }
+});
 
 /***/ })
 

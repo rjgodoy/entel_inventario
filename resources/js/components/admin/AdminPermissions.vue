@@ -103,8 +103,9 @@
                         </b-tooltip>
                     </template>
                     <b-select 
-                        @click.prevent="updateUserRole(props.row.id)"
-                        :placeholder="props.row.roles.length ? props.row.roles[0].name : 'Sin rol asignado'">
+                        @input="updateUserRole(props.row.id, roleId)"
+                        :placeholder="props.row.roles.length ? props.row.roles[0].name : 'Sin rol asignado'"
+                        v-model="roleId">
                         <option
                             v-for="role in roles"
                             :value="role.id"
@@ -170,6 +171,7 @@
                 currentPage: 1,
                 perPage: 20,
 
+                roleId: null,
 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
@@ -196,14 +198,15 @@
             },
 
             updateUserRole(user_id, role_id) {
-                console.log(role_id)
-                // var params = {
-                //     'role_id': role_id
-                // }
-                // axios.put(`/api/users/${user_id}`, { params: params })
-                // .then(response => {
-                //     this.roles = response.data.data
-                // })
+                var params = {
+                    'api_token': this.user.api_token,
+                    'role_id': role_id,
+                }
+                axios.put(`/api/users/${user_id}?api_token=${this.user.api_token}&role_id=${role_id}`)
+                .then(response => {
+                    console.log(response)
+                    // this.roles = response.data.data
+                })
             }
         }
     }

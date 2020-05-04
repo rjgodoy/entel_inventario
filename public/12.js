@@ -543,12 +543,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
  // import ErrorComponent from './maps/ErrorComponent.vue';
 // const MapView = () => ({
@@ -834,13 +828,13 @@ __webpack_require__.r(__webpack_exports__);
         'solar': this.solar,
         'eolica': this.eolica,
         'alba_project': this.alba_project,
-        'protected_zone': this.protected_zone // 'junction': this.junction,
-        // 'generator_set': this.generator_set,
-        // 'power_rectifier': this.power_rectifier,
-        // 'air_conditioner': this.air_conditioner,
-        // 'vertical_structure': this.vertical_structure,
-        // 'infrastructure': this.infrastructure
-
+        'protected_zone': this.protected_zone,
+        'junction': this.junction,
+        'generator_set': this.generator_set,
+        'power_rectifier': this.power_rectifier,
+        'air_conditioner': this.air_conditioner,
+        'vertical_structure': this.vertical_structure,
+        'infrastructure': this.infrastructure
       };
       axios.get('/api/filterPops', {
         params: params
@@ -1920,7 +1914,11 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.junction ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" }
+                      on: {
+                        click: function($event) {
+                          _vm.junction = +!_vm.junction
+                        }
+                      }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
@@ -1943,7 +1941,11 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.generator_set ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" }
+                      on: {
+                        click: function($event) {
+                          _vm.generator_set = +!_vm.generator_set
+                        }
+                      }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
@@ -1966,7 +1968,11 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.power_rectifier ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" }
+                      on: {
+                        click: function($event) {
+                          _vm.power_rectifier = +!_vm.power_rectifier
+                        }
+                      }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
@@ -1989,7 +1995,11 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.air_conditioner ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" }
+                      on: {
+                        click: function($event) {
+                          _vm.air_conditioner = +!_vm.air_conditioner
+                        }
+                      }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
@@ -2014,7 +2024,11 @@ var render = function() {
                       class: _vm.vertical_structure
                         ? "is-link"
                         : "is-black-ter",
-                      attrs: { disabled: "" }
+                      on: {
+                        click: function($event) {
+                          _vm.vertical_structure = +!_vm.vertical_structure
+                        }
+                      }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [
@@ -2037,7 +2051,11 @@ var render = function() {
                     {
                       staticClass: "tile is-child button",
                       class: _vm.infrastructure ? "is-link" : "is-black-ter",
-                      attrs: { disabled: "" }
+                      on: {
+                        click: function($event) {
+                          _vm.infrastructure = +!_vm.infrastructure
+                        }
+                      }
                     },
                     [
                       _c("div", { class: _vm.secondaryText }, [

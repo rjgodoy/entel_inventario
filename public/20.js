@@ -617,10 +617,10 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./TechnologiesData */ "./resources/js/components/dashboard/TechnologiesData.vue"));
     },
     CriticsData: function CriticsData() {
-      return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./CriticPopsData */ "./resources/js/components/dashboard/CriticPopsData.vue"));
+      return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./CriticPopsData */ "./resources/js/components/dashboard/CriticPopsData.vue"));
     },
     AlbaData: function AlbaData() {
-      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./AlbaPopsData */ "./resources/js/components/dashboard/AlbaPopsData.vue"));
+      return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./AlbaPopsData */ "./resources/js/components/dashboard/AlbaPopsData.vue"));
     },
     // ###### Map ###########
     // PopsMap,
@@ -630,7 +630,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     // MapView,
     // ###### Charts ########
     PretDataChart: function PretDataChart() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./PretDataChart */ "./resources/js/components/dashboard/PretDataChart.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ./PretDataChart */ "./resources/js/components/dashboard/PretDataChart.vue"));
     },
     // RadialChart,
     // RedCoreChart,

@@ -806,21 +806,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.darkMode == 1 ? this.style8 : this.style9;
     },
     icon: function icon() {
-      if (this.darkMode) {
-        return {
-          url: '../img/markers/pin_entel_sm.png',
-          scaledSize: new google.maps.Size(30, 54),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(15, 54)
-        };
-      } else {
-        return {
-          url: '../img/markers/entelPin_red-white.png',
-          scaledSize: new google.maps.Size(30, 54),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(15, 54)
-        };
-      }
+      // if (this.darkMode) {
+      //     return {
+      //         url: '../img/markers/pin_entel_sm.png',
+      //         scaledSize: new google.maps.Size(30, 54),
+      //         origin: new google.maps.Point(0,0),
+      //         anchor: new google.maps.Point(15,54)
+      //     }
+      // } else {
+      return {
+        url: '../img/markers/entelPin_red-white.png',
+        scaledSize: new google.maps.Size(30, 54),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(15, 54)
+      }; // }
     }
   },
   created: function created() {},

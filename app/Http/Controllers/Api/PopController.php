@@ -10,6 +10,7 @@ use App\Exports\PopsExport;
 use App\Exports\SitesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Pop as PopResource;
+use App\Models\GeneratorSet;
 use App\Models\Pop;
 use App\Models\PopMenu;
 use App\Models\PopMenuType;
@@ -417,7 +418,7 @@ class PopController extends Controller
 
         // Site
         $condition_core = $request->core ? 'classification_type_id = 1' : 'classification_type_id != 0';
-        $condition_critic = $request->critic ? 'criticity = 1' : 'criticity IS NOT NULL';
+        $condition_critic = $request->critic ? 'criticity = 1' : 'criticity IN (0,1)';
         $condition_red_minima = 
             $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' : 
             ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
@@ -436,8 +437,23 @@ class PopController extends Controller
         $condition_offgrid = 'pops.offgrid IN ('.$request->offgrid.',1)';
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
-        $condition_protected_zone = 'pops.protected_zone IN ('.$request->protected_zone.',1)';
         $condition_alba_project = 'pops.alba_project IN ('.$request->alba_project.',1)';
+
+        $protected_zone = $request->protected_zone;
+        $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
+
+        $junctions = $request->junction;
+        $condition_junctions = 'pops.id IN (SELECT junctions.pop_id from entel_g_redes_inventario.junctions)';
+        $generators = $request->generator_set;
+        $condition_generators = 'pops.id IN (SELECT generator_sets.pop_id from entel_g_redes_inventario.generator_sets)';
+        $rectifiers = $request->power_rectifier;
+        $condition_rectifiers = 'pops.id IN (SELECT power_rectifiers.pop_id from entel_g_redes_inventario.power_rectifiers)';
+        $air_conditioners = $request->air_conditioner;
+        $condition_air_conditioners = 'pops.id IN (SELECT air_conditioners.pop_id from entel_g_redes_inventario.air_conditioners)';
+        $vertical_structures = $request->vertical_structure;
+        $condition_vertical_structures = 'pops.id IN (SELECT vertical_structures.pop_id from entel_g_redes_inventario.vertical_structures)';
+        $infrastructures = $request->infrastructure;
+        $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
         $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
             ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi) { 
@@ -491,6 +507,7 @@ class PopController extends Controller
                 $q->whereRaw($condition_crm)
                 ->whereRaw($condition_zona);
             })
+            
             ->whereRaw($condition_pe_3g)
             ->whereRaw($condition_mpls)
             ->whereRaw($condition_olt)
@@ -501,8 +518,31 @@ class PopController extends Controller
             ->whereRaw($condition_offgrid)
             ->whereRaw($condition_solar)
             ->whereRaw($condition_eolica)
-            ->whereRaw($condition_protected_zone)
             ->whereRaw($condition_alba_project)
+
+            ->where(function($q) use($condition_protected_zone, $protected_zone) {
+                $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
+            })
+
+            ->where(function($q) use($condition_junctions, $junctions) {
+                $junctions ? $q->whereRaw($condition_junctions) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_generators, $generators) {
+                $generators ? $q->whereRaw($condition_generators) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_rectifiers, $rectifiers) {
+                $rectifiers ? $q->whereRaw($condition_rectifiers) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_air_conditioners, $air_conditioners) {
+                $air_conditioners ? $q->whereRaw($condition_air_conditioners) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_vertical_structures, $vertical_structures) {
+                $vertical_structures ? $q->whereRaw($condition_vertical_structures) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_infrastructures, $infrastructures) {
+                $infrastructures ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
+            })
+
             ->orderBy('pops.id', 'asc')
             ->paginate(15);
 
@@ -547,8 +587,24 @@ class PopController extends Controller
         $condition_offgrid = 'pops.offgrid IN ('.$request->offgrid.',1)';
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
-        $condition_protected_zone = 'pops.protected_zone IN ('.$request->protected_zone.',1)';
+        
         $condition_alba_project = 'pops.alba_project IN ('.$request->alba_project.',1)';
+
+        $protected_zone = $request->protected_zone;
+        $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
+
+        $junctions = $request->junction;
+        $condition_junctions = 'pops.id IN (SELECT junctions.pop_id from entel_g_redes_inventario.junctions)';
+        $generators = $request->generator_set;
+        $condition_generators = 'pops.id IN (SELECT generator_sets.pop_id from entel_g_redes_inventario.generator_sets)';
+        $rectifiers = $request->power_rectifier;
+        $condition_rectifiers = 'pops.id IN (SELECT power_rectifiers.pop_id from entel_g_redes_inventario.power_rectifiers)';
+        $air_conditioners = $request->air_conditioner;
+        $condition_air_conditioners = 'pops.id IN (SELECT air_conditioners.pop_id from entel_g_redes_inventario.air_conditioners)';
+        $vertical_structures = $request->vertical_structure;
+        $condition_vertical_structures = 'pops.id IN (SELECT vertical_structures.pop_id from entel_g_redes_inventario.vertical_structures)';
+        $infrastructures = $request->infrastructure;
+        $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
         $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
             ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi) { 
@@ -612,8 +668,31 @@ class PopController extends Controller
             ->whereRaw($condition_offgrid)
             ->whereRaw($condition_solar)
             ->whereRaw($condition_eolica)
-            ->whereRaw($condition_protected_zone)
             ->whereRaw($condition_alba_project)
+
+            ->where(function($q) use($condition_protected_zone, $protected_zone) {
+                $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
+            })
+
+            ->where(function($q) use($condition_junctions, $junctions) {
+                $junctions ? $q->whereRaw($condition_junctions) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_generators, $generators) {
+                $generators ? $q->whereRaw($condition_generators) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_rectifiers, $rectifiers) {
+                $rectifiers ? $q->whereRaw($condition_rectifiers) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_air_conditioners, $air_conditioners) {
+                $air_conditioners ? $q->whereRaw($condition_air_conditioners) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_vertical_structures, $vertical_structures) {
+                $vertical_structures ? $q->whereRaw($condition_vertical_structures) : $q->whereRaw('1 = 1');
+            })
+            ->where(function($q) use($condition_infrastructures, $infrastructures) {
+                $infrastructures ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
+            })
+
             ->select(
                 'id',
                 'nombre',

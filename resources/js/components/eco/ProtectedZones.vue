@@ -58,7 +58,7 @@
             aria-current-label="Current page">
 
             <template slot-scope="props">
-                <b-table-column class="is-size-6" field="sites.nem_site" label="Nemónico" width="40">
+                <!-- <b-table-column class="is-size-6" field="sites.nem_site" label="Nemónico" width="40">
                     <template slot="header" slot-scope="{ column }">
                         <b-tooltip :label="column.label" class="is-size-6">
                             {{ column.label }}
@@ -67,15 +67,17 @@
                     <router-link v-for="site in props.row.sites" :key="site.id" class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
                         <p>{{ site.nem_site }}</p>
                     </router-link>
-                </b-table-column>
+                </b-table-column> -->
 
-                <b-table-column class="is-size-6" field="nombre" label="Nombre POP" sortable searchable>
+                <b-table-column class="is-size-6" width="70%" field="nombre" label="PoP" sortable searchable>
                     <template slot="header" slot-scope="{ column }">
                         <b-tooltip :label="column.label" class="is-size-6">
                             {{ column.label }}
                         </b-tooltip>
                     </template>
-                    <div class="is-size-6">{{ props.row.nombre }}</div>
+                    <router-link class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
+                        <div class="is-size-6">{{ props.row.nombre }}</div>
+                    </router-link>
                     <p class="is-size-7">{{ props.row.comuna.nombre_comuna }}</p>
                 </b-table-column>
 
@@ -89,17 +91,6 @@
                     <div class="is-size-7">{{ props.row.comuna.zona.nombre_zona }}</div>
                 </b-table-column>
 
-                <!-- <b-table-column class="is-size-6" field="date" label="Date" sortable centered>
-                    <template slot="header" slot-scope="{ column }">
-                        <b-tooltip :label="column.label" class="is-size-6">
-                            {{ column.label }}
-                        </b-tooltip>
-                    </template>
-                    <span class="tag is-success">
-                        {{ props.row.created_at }}
-                    </span>
-                </b-table-column> -->
-
             </template>
         </b-table>
 
@@ -111,11 +102,11 @@
         components: {
         },
         props : [
+            'protectedZones',
             'user'
         ],
         data() {
             return {
-                protectedZones: [],
                 isPaginated: true,
                 isPaginationSimple: false,
                 paginationPosition: 'bottom',
@@ -123,7 +114,7 @@
                 sortIcon: 'arrow-up',
                 sortIconSize: 'is-small',
                 currentPage: 1,
-                perPage: 20,
+                perPage: 10,
 
                 darkMode: 0,
                 bodyBackground: '',
@@ -136,16 +127,11 @@
         created() {
         },
         mounted() {
-            this.getProtectedZones()
+            // this.getProtectedZones()
             // this.getFiles()
         },
         methods: {
-            getProtectedZones() {
-                axios.get(`/api/eco?api_token=${this.user.api_token}`).then((response) => {
-                    // console.log(response.data.data)
-                    this.protectedZones = response.data.environmentalData
-                })
-            },
+            
             // async getFiles() {
             //     axios.get(`/api/eco/1`).then((response) => {
             //         // console.log(response)

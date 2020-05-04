@@ -3,16 +3,15 @@
 namespace App\Console\Commands;
 
 use App\Mail\PopsUpdated;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-
 use App\Models\Pop;
+use App\Models\Room;
 use App\Models\Site;
 use App\Models\Technology;
 use App\Models\TechnologyType;
-// use App\Models\SolutionType;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UpdatePops extends Command
 {
@@ -87,6 +86,17 @@ class UpdatePops extends Command
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]
+            ]);
+
+            $lastPop = Pop::latest()->first();
+
+            Room::insertOrIgnore([
+                'pop_id' => $lastPop->id,
+                'name' => 'Sala 1.1',
+                'criticity' => 0,
+                'order' => 0,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]);
 
             // Insert Sites

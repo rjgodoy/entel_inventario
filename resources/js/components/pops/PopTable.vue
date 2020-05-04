@@ -183,8 +183,7 @@
                         <div class="columns is-multiline is-gapless">
                             <div class="column is-4">
                                 <a class="tile is-child button" 
-                                    :class="junction ? 'is-link' : 'is-black-ter'" 
-                                    disabled>
+                                    :class="junction ? 'is-link' : 'is-black-ter'" @click="junction = +!junction">
                                     <div :class="secondaryText"> 
                                         <div class="is-size-7 has-text-weight-normal has-text-grey-light">Empalme</div>
                                     </div>
@@ -192,8 +191,7 @@
                             </div>
                             <div class="column is-4">
                                 <a class="tile is-child button" 
-                                    :class="generator_set ? 'is-link' : 'is-black-ter'" 
-                                    disabled>
+                                    :class="generator_set ? 'is-link' : 'is-black-ter'" @click="generator_set = +!generator_set">
                                     <div :class="secondaryText"> 
                                         <div class="is-size-7 has-text-weight-normal has-text-grey-light">Grupo Electrógeno</div>
                                     </div>
@@ -201,8 +199,7 @@
                             </div>
                             <div class="column is-4">
                                 <a class="tile is-child button" 
-                                    :class="power_rectifier ? 'is-link' : 'is-black-ter'" 
-                                    disabled>
+                                    :class="power_rectifier ? 'is-link' : 'is-black-ter'" @click="power_rectifier = +!power_rectifier">
                                     <div :class="secondaryText"> 
                                         <div class="is-size-7 has-text-weight-normal has-text-grey-light">Planta Rectificadora</div>
                                     </div>
@@ -210,8 +207,7 @@
                             </div>
                             <div class="column is-4">
                                 <a class="tile is-child button" 
-                                    :class="air_conditioner ? 'is-link' : 'is-black-ter'" 
-                                    disabled>
+                                    :class="air_conditioner ? 'is-link' : 'is-black-ter'" @click="air_conditioner = +!air_conditioner">
                                     <div :class="secondaryText"> 
                                         <div class="is-size-7 has-text-weight-normal has-text-grey-light">Aire Acondicionado</div>
                                     </div>
@@ -219,8 +215,7 @@
                             </div>
                             <div class="column is-4">
                                 <a class="tile is-child button" 
-                                    :class="vertical_structure ? 'is-link' : 'is-black-ter'" 
-                                    disabled>
+                                    :class="vertical_structure ? 'is-link' : 'is-black-ter'" @click="vertical_structure = +!vertical_structure">
                                     <div :class="secondaryText"> 
                                         <div class="is-size-7 has-text-weight-normal has-text-grey-light">Estructura Vertical</div>
                                     </div>
@@ -228,8 +223,7 @@
                             </div>
                             <div class="column is-4">
                                 <a class="tile is-child button" 
-                                    :class="infrastructure ? 'is-link' : 'is-black-ter'" 
-                                    disabled>
+                                    :class="infrastructure ? 'is-link' : 'is-black-ter'" @click="infrastructure = +!infrastructure">
                                     <div :class="secondaryText"> 
                                         <div class="is-size-7 has-text-weight-normal has-text-grey-light">Contenedor</div>
                                     </div>
@@ -659,12 +653,12 @@
                     'alba_project': this.alba_project,
                     'protected_zone': this.protected_zone,
 
-                    // 'junction': this.junction,
-                    // 'generator_set': this.generator_set,
-                    // 'power_rectifier': this.power_rectifier,
-                    // 'air_conditioner': this.air_conditioner,
-                    // 'vertical_structure': this.vertical_structure,
-                    // 'infrastructure': this.infrastructure
+                    'junction': this.junction,
+                    'generator_set': this.generator_set,
+                    'power_rectifier': this.power_rectifier,
+                    'air_conditioner': this.air_conditioner,
+                    'vertical_structure': this.vertical_structure,
+                    'infrastructure': this.infrastructure
                 }
 
                 axios.get('/api/filterPops', { params: params })

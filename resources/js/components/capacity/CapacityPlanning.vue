@@ -316,3 +316,9 @@
         }
     }
 </script>
+
+<style scoped>
+    body {
+        background-color: hsl(0, 0%, 21%);
+    }
+</style>

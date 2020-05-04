@@ -175,8 +175,8 @@
 
                     <!-- cuadros superiores -->
                     <div class="tile is-ancestor">
-                        <div class="tile is-vertical">
 
+                        <div class="tile is-vertical">
                             <div class="tile">
                                 <div class="tile is-parent">
                                     <a class="tile is-child box" :class="currentTab === 'pops' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'pops'">

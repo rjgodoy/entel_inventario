@@ -5,7 +5,7 @@
         </div>
         <div class="box">
             <div class="columns is-multiline">
-                <div class="column is-2 tile is-parent" v-for="file in files">
+                <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
                     <a class="box tile is-child" target="_blank" @click="readFile(file); load = file.id" style="position: relative;">
                         <font-awesome-icon 
                             :icon="['fas', faFile(file.extension).icon]"
@@ -78,55 +78,61 @@
             },
 
             readFile(file) {
-                this.isLoading = true
-                var params = {
-                    'api_token': this.user.api_token,
-                    'dirname': file.dirname,
-                    'basename': file.basename,
-                    'mime': file.mime,
-                }
-                // console.log(params)
-                axios.get('/api/viewFile', { 
-                    params: params, 
-                    responseType: 'arraybuffer' 
-                })
-                .then((response) => {
-                    console.log(response)
-                    const blob = new Blob([response.data], { type: file.mime })
-                    // const objectUrl = window.URL.createObjectURL(blob)
+                console.log(file)
+                if (file.extension == 'pdf') {
+                    window.open('./' + file.dirname + '/' + file.basename, '_blank')
+                } else {
 
-                    // IE doesn't allow using a blob object directly as link href
-                    // instead it is necessary to use msSaveOrOpenBlob
-                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                        window.navigator.msSaveOrOpenBlob(newBlob)
-                        return
+                    this.isLoading = true
+                    var params = {
+                        'api_token': this.user.api_token,
+                        'dirname': file.dirname,
+                        'basename': file.basename,
+                        'mime': file.mime,
                     }
-
-                    const data = window.URL.createObjectURL(blob)
-                    let link = document.createElement('a')
-                    link.href = data
-                    link.download = file.basename
-                    link.click()
-                    // setTimeout(function () {
-                    //     // For Firefox it is necessary to delay revoking the ObjectURL
-                    //     window.URL.revokeObjectURL(data)
-                    // }, 100)
-
-                    this.isLoading = false
-                    this.$buefy.toast.open({
-                        message: 'El archivo se ha descargado exitosamente.',
-                        type: 'is-success',
-                        duration: 5000
+                    // console.log(params)
+                    axios.get('/api/viewFile', { 
+                        params: params, 
+                        responseType: 'arraybuffer' 
                     })
-                }).catch((error) => {
-                    console.log(error)
-                    this.isLoading = false
-                    this.$buefy.toast.open({
-                        message: 'Ha ocurrido un error. Favor contactar al administrador',
-                        type: 'is-danger',
-                        duration: 5000
+                    .then((response) => {
+                        console.log(response)
+                        const blob = new Blob([response.data], { type: file.mime })
+                        // const objectUrl = window.URL.createObjectURL(blob)
+
+                        // IE doesn't allow using a blob object directly as link href
+                        // instead it is necessary to use msSaveOrOpenBlob
+                        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                            window.navigator.msSaveOrOpenBlob(newBlob)
+                            return
+                        }
+
+                        const data = window.URL.createObjectURL(blob)
+                        let link = document.createElement('a')
+                        link.href = data
+                        link.download = file.basename
+                        link.click()
+                        // setTimeout(function () {
+                        //     // For Firefox it is necessary to delay revoking the ObjectURL
+                        //     window.URL.revokeObjectURL(data)
+                        // }, 100)
+
+                        this.isLoading = false
+                        this.$buefy.toast.open({
+                            message: 'El archivo se ha descargado exitosamente.',
+                            type: 'is-success',
+                            duration: 5000
+                        })
+                    }).catch((error) => {
+                        console.log(error)
+                        this.isLoading = false
+                        this.$buefy.toast.open({
+                            message: 'Ha ocurrido un error. Favor contactar al administrador',
+                            type: 'is-danger',
+                            duration: 5000
+                        })
                     })
-                })
+                }
             },
         }
     }

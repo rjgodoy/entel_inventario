@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('registerRequest', 'Api\AdminController@registerRequest');
+
 Route::middleware('auth:api')->group(function () {
 
 	// Route::get('/user', function (Request $request) {
@@ -36,7 +39,9 @@ Route::middleware('auth:api')->group(function () {
 	// });
 
 
-		Route::get('menu', 'Api\MainController@menu');
+        Route::get('menu', 'Api\MainController@menu');
+        
+        Route::get('userRequestAlerts','Api\MainController@userRequestAlerts');
 
 
 		### DASHBOARD ######################################################################
@@ -251,7 +256,7 @@ Route::middleware('auth:api')->group(function () {
 
 		### CAPACITY PLANNING ######################################################################
 
-			Route::group(['middleware' => 'role:developer,admin,engineer,engineer-admin'], function() {
+			Route::group(['middleware' => 'role:developer,admin,engineer,engineer-admin,super-viewer'], function() {
 
 				Route::apiResource('rooms','Api\RoomController');
 				Route::get('capacityProjection','Api\RoomController@projection');
@@ -270,7 +275,10 @@ Route::middleware('auth:api')->group(function () {
 
 		### GESTION AMBIENTAL ######################################################################
 			Route::apiResource('eco','Api\EcoController');
+			Route::get('ecoZones','Api\EcoController@zones');
+			Route::get('ecoStorage/{pop_id}','Api\EcoController@storage');
 			Route::get('rcas','Api\EcoController@rcas');
+			Route::get('rcas/{pop_id}','Api\EcoController@rcasPop');
 			Route::post('rcas','Api\EcoController@upload');
 			Route::get('storages','Api\EcoController@storages');
 		##############################################################################################
@@ -283,11 +291,11 @@ Route::middleware('auth:api')->group(function () {
 
 			Route::get('popMenu', 'Api\PopController@popMenu');
 
-			Route::apiResource('documents', 'Api\DocumentController');
-			// Route::get('directories/{id}', 'Api\DocumentController@directories');
-			// Route::get('folders/{id}/{path}', 'Api\DocumentController@folders');
+            Route::apiResource('folders', 'Api\FolderController');
 			Route::apiResource('files', 'Api\FileController');
-			Route::get('viewFile', 'Api\FileController@view');
+            Route::get('viewFile', 'Api\FileController@view');
+            Route::get('getFolders', 'Api\FolderController@getFolders');
+            Route::get('getFiles', 'Api\FileController@getFiles');
 			
 
 			Route::apiResource('logs','Api\LogController');
@@ -296,8 +304,13 @@ Route::middleware('auth:api')->group(function () {
 
 		### ADMIN ######################################################################
 		Route::group(['middleware' => 'role:developer,admin'], function() {
-			Route::apiResource('users','Api\UserController');
-	    	Route::get('roles','Api\MainController@roles');
+            Route::apiResource('users','Api\UserController');
+            Route::get('userRequests','Api\UserController@userRequests');
+            Route::post('newUserAccepted','Api\UserController@newUserAccepted');
+            Route::post('newUserRejected','Api\UserController@newUserRejected');
+
+
+            Route::get('roles','Api\MainController@roles');
 			Route::get('tabs', 'Api\AdminController@tabs');
 
 			Route::apiResource('tempSgcPops','Api\TempSgcPopController');

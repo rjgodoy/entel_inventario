@@ -29,7 +29,7 @@
                 </b-field>
 
                 <div class="tile is-ancestor">
-                    <div class="tile is-parent" v-for="crm in crms">
+                    <div class="tile is-parent" v-for="crm in crms" :key="crm.id">
                         <a class="tile is-child box" :class="selectedCrm == crm ? 'is-bold is-link' : boxBackground" @click="selectCrm(crm)">
                             <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
@@ -40,21 +40,7 @@
                                     <div class="is-size-7 has-text-weight-light" v-text="'Subgerente'"></div> 
                                     <div class="is-size-7 has-text-weight-semibold">{{ crm.subgerente_crm }}</div>
                                 </div>
-                                <!-- <div class="is-size-5 has-text-weight-semibold">
-                                    <div>{{ crm.zonas.length }}</div>
-                                    <div class="is-size-7 has-text-weight-normal">Zonas</div> 
-                                </div> -->
                             </div>
-
-                            
-                            <!-- <div 
-                                class="is-size-2 has-text-centered has-text-weight-semibold" 
-                                :class="selectedCrm == crm ? selectedPrimaryBoxText : primaryText"
-                                >
-                                25.2
-                                <span class="is-size-5">&nbsp;Cº</span>
-                            </div> -->
-
                         </a>
                     </div>
                 </div>
@@ -64,7 +50,7 @@
             <div v-if="selectedCrm != null" class="" :class="innerBackground + ' ' + bodyBackground" style="margin: 0 -24px 0 -24px">
                 <div class="container" style="margin: -20px auto 10px auto;">
                     <div class="tile is-ancestor">
-                        <div class="tile is-parent" v-for="zona in zonas">
+                        <div class="tile is-parent" v-for="zona in zonas" :key="zona.id">
                             <a class="tile is-child box" :class="selectedZona == zona ? 'is-bold is-link' : boxBackground" @click="selectZona(zona)">
                                 <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
                                     <div class="is-size-6 has-text-weight-semibold">
@@ -75,10 +61,6 @@
                                         <div class="is-size-7 has-text-weight-light">Coordinador</div> 
                                         <div class="is-size-7 has-text-weight-semibold">{{ zona.responsable.nombre }} {{ zona.responsable.apellido }}</div>
                                     </div>
-                                    <!-- <div class="is-size-5 has-text-weight-semibold">
-                                        <div>{{ crm.zonas.length }}</div>
-                                        <div class="is-size-7 has-text-weight-normal">Zonas</div> 
-                                    </div> -->
                                 </div>
                             </a>
                         </div>
@@ -151,7 +133,7 @@
 
                             <div class="column has-text-right">
                                 <div class="">
-                                    <button class="button is-small is-default is-fullwidth" @click="selectPop(props.option.pop)" v-model="selectedSite">
+                                    <button class="button is-small is-default is-fullwidth" @click="selectPop(props.option.pop); selectedSite = props.option">
                                         <font-awesome-icon icon="map-marked-alt"/>&nbsp;Ver en mapa
                                     </button>
                                 </div>
@@ -374,76 +356,7 @@
                         </div>
                     </div>
 
-                    <!-- cuadros inferiores -->
-                    <!-- <div class="tile is-ancestor">
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-                                <div class="is-size-5 has-text-weight-semibold title">Nuevos POP</div>
-                                <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.pop_news_month }}
-                                    <p class="is-size-6 has-text-weight-light">POP nuevos ingresados esta semana</p>
-                                </div>
-                                <div class="field" style="margin-top: 20px;">
-                                    <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
-                                    <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_site.pop.id" target="_blank">
-                                        {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
-                                    </router-link>
-                                    <div class="is-size-7">
-                                        {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}
-                                    </div>
-                                </div>
-
-                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha actualización: {{ last_data_counters.last_updated_pops }}</div>
-                            </div>
-                        </div>
-
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-                                <div class="is-size-5 has-text-weight-semibold title">Nuevos Sitios</div>
-                                <div class="is-size-2 has-text-centered">{{ last_data_counters && last_data_counters.sites_news_month }}
-                                    <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados esta semana</p>
-                                </div>
-                                <div class="field" style="margin-top: 20px;">
-                                    <div class="is-size-7 has-text-weight-light">Utimo Sitio ingresado:</div>
-                                    <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_site.pop.id" target="_blank">
-                                        {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
-                                    </router-link>
-                                    <div class="is-size-7">
-                                        {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}
-                                    </div>
-                                </div>
-
-                                <div class="has-text-right is-size-7 has-text-weight-light">Fecha actualización: {{ last_data_counters.last_updated_sites }}</div>
-                            </div>
-                        </div>
-
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-                                <div class="is-size-5 has-text-weight-semibold title">Nuevo Equipamiento</div>
-                                <div class="is-size-2 has-text-centered">{{ last_data_counters.equipments_news_month }}
-                                    <p class="is-size-6 has-text-weight-light">Equipos ingresados esta semana</p>
-                                </div>
-                                <div class="field" style="margin-top: 20px;">
-                                    <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
-                                    <a class="is-size-6" :href="'/pop/2'" target="_blank">ESTAN0098 - Nombre POP</a>
-                                    <div class="is-size-7">Zona Valparaiso - CRM Centro Norte</div>
-                                </div>
-
-                                <div class="has-text-right is-size-7 has-text-weight-light">
-                                    Fecha actualización: {{ last_data_counters.last_updated_technologies }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tile is-parent is-5">
-                            <pret-data-chart
-                                :bodyBackground="bodyBackground"
-                                :boxBackground="boxBackground"
-                                :primaryText="primaryText"
-                                :secondaryText="secondaryText"
-                            ></pret-data-chart>
-                        </div>
-                    </div> -->
-
+                    
                 </div>
             </div>
             
@@ -524,505 +437,437 @@
 </template>
 
 <script>
-    // import LoadingComponent from '../helpers/LoadingComponent'
-    // import ErrorComponent from '../helpers/ErrorComponent'
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
+library.add(faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch);
 
-    // const PopsMap = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('../maps/PopsMap.vue'),
-    //     // A component to use while the async component is loading
-    //     loading: import('../helpers/LoadingComponent'),
-    //     // A component to use if the load fails
-    //     error: import('../helpers/ErrorComponent'),
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })
-
-    // const MapView = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('../maps/MapView.vue'),
-    //     // A component to use while the async component is loading
-    //     loading: import('../helpers/LoadingComponent'),
-    //     // A component to use if the load fails
-    //     error: import('../helpers/ErrorComponent'),
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })
-
-    // const RadialChart = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('../RadialChart.vue'),
-    //     // A component to use while the async component is loading
-    //     // loading: LoadingComponent,
-    //     // A component to use if the load fails
-    //     // error: ErrorComponent,
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })
-
-    // const RedCoreChart = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('./RedCoreChart.vue'),
-    //     // A component to use while the async component is loading
-    //     // loading: LoadingComponent,
-    //     // A component to use if the load fails
-    //     // error: ErrorComponent,
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 3000
-    // })
-
-    var moment = require('moment');
-    import debounce from 'lodash/debounce'
-    export default {
-        components: {
-            // ###### Info ##########
-            PopsData: () => import('./PopsData'),
-            DataChart: () => import("./PopDataChart"),
-            SitesData: () => import("./SitesData"),
-            TechnologiesData: () => import("./TechnologiesData"),
-            CriticsData: () => import("./CriticPopsData"),
-            AlbaData: () => import("./AlbaPopsData"),
-            
-            // ###### Map ###########
-            // PopsMap,
-            MapView: () => import('../maps/MapView'),
-            // MapView,
-
-            // ###### Charts ########
-            PretDataChart: () => import('./PretDataChart'),
-            // RadialChart,
-            // RedCoreChart,
-
-            // ###### Equipment #####
-            ElectricLinesData: () => import('./ElectricLinesData'),
-            GeneratorSetsData: () => import('./GeneratorSetsData'),
-            PowerRectifiersData: () => import('./PowerRectifiersData'),
-            AirConditionersData: () => import('./AirConditionersData'),
-            VerticalStructuresData: () => import('./VerticalStructuresData'),
-            InfrastructuresData: () => import('./InfrastructuresData')
-        },
-        props : [
-            'user',
-            'message',
-            'last_data_counters',
-            'crms',
-            'darkMode'
-        ],
-        created() {
-            this.styleMode()
-            // this.$eventBus.$on('password-changed', function() {
-            //     console.log('Se cambió la contraseña!!')
-            //     this.$buefy.toast.open({
-            //         message: 'Tu password se ha actualizado exitosamente.',
-            //         type: 'is-success',
-            //         duration: 5000
-            //     })
-            // });
-
-            // this.$eventCounters.$on('pops', function(total) {
-                // console.log('El total es ' + total)
-                // this.popsQuantity = total
-            // })
-        },
-
-        mounted() {
-            // console.log(this.last_data_counters)
-            // this.getCrms()
-            this.getCounters()
-            // this.lastUpdate()
-            // this.syncCounter()
-            this.loadMessage()
-            this.getPops()
-        },
-        data: () => {
-            return {
-                core: 0,
-                pops: [],
-                zonas: [],
-
-                isFetching: false,
-                selected: null,
-                page: 1,
-                totalPages: 1,
-                searchText: '',
-                popSearch: [],
-                active: 0,
-                counter: 0,
-
-                map_attributes: {
-                    latitude: -33.44444275,
-                    longitude: -70.6561017,
-                    zoom: 5
-                },
-
-                bodyBackground: '',
-                boxBackground: '',
-                primaryText: '',
-                secondaryText: '',
-                searchBodyBackground: '',
-                innerBackground: '',
-
-                bodyBackgroundEnergy: '',
-                bodyBackgroundClimate: '',
-                bodyBackgroundInfrastructure: '',
-                boxBackgroundEnergy: '',
-                boxBackgroundClimate: '',
-                boxBackgroundInfrastructure: '',
-                
-                selectedPrimaryBoxText: 'has-text-white',
-                selectedSecondaryBoxText: 'has-text-light',
-
-                // selectedPop: null,
-                selectedSite: null,
-                selectedCrm: null,
-                selectedZona: null,
-
-                criticPopsSwitch: 0,
-                albaPopsSwitch: 0,
-
-                popsQuantity: 0,
-                sitesQuantity: 0,
-                technologiesQuantity: 0,
-                criticsQuantity: 0,
-                albaQuantity: 0,
-
-                isLoading: false,
-
-                // lastUpdateData: [],
-                // lastDataCounter: [],
-
-                currentTab: 'pops',
-            }
-        },
-
-        watch: {
-            selectedPop(newValue) {
-                this.pops = [newValue]
-            },
-
-            selectedCrm(newValue) {
-                this.selectedZona = null
-                if (this.currentTab == 'critics') {
-                    this.viewCriticPops()
-                }
-                else if (this.currentTab == 'alba') {
-                    this.viewAlbaPops()
-                } else if (newValue) {
-                    this.getPops()
-                    this.zonas = newValue.zonas
-                } else {
-                    this.getPops()
-                }
-                this.getCounters()
-            },
-
-            selectedZona(newValue) {
-                if (this.currentTab == 'critics'){
-                    this.viewCriticPops()
-                }
-                else if (this.currentTab == 'alba') {
-                    this.viewAlbaPops()
-                } else {
-                    this.getPops()
-                }
-                this.getCounters()
-            },
-
-            core(newValue, oldValue) {
-                if (this.currentTab == 'critics') {
-                    this.viewCriticPops()
-                } 
-                else if (this.currentTab == 'alba') {
-                    this.viewAlbaPops()
-                }
-                else {
-                    this.getPops()
-                }
-                this.getCounters()
-            },
-
-            darkMode(newValue, oldValue) {
-                this.styleMode()
-            },
-
-            currentTab(newValue, oldValue) {
-                if (newValue == 'critics') {
-                    this.viewCriticPops()
-                } 
-                else if (this.currentTab == 'alba') {
-                    this.viewAlbaPops()
-                }
-                else if(
-                    (oldValue == 'critics' || oldValue == 'alba') && 
-                    (newValue == 'pops' || newValue == 'sites' || newValue == 'technologies')) {
-                    this.getPops()
-                }
-            }
-        },
-
-        computed: {
-            selectedPop() {
-                return this.selectedSite ? this.selectedSite.pop : null
-            },
-
-            currentTabComponent: function () {
-                return this.currentTab + '-data'
-            },
-
-            currentLastUpdateData: function () {
-                if (this.currentTab != 'critics' || this.currentTab != 'alba') {
-                    return this.last_data_counters['last_updated_' + this.currentTab]
-                } else {
-                    return
-                }
-            },
-
-            textSwitchCore() {
-                return this.core ? 'has-text-link' : ''
-            }
-        },
-
-        methods: {
-            searchFormat(pop) {
-                this.selectedPop = this.selected
-                return this.searchText
-            },
-
-            getPops: debounce(function () {
-                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-                var zona_id = this.selectedZona ? this.selectedZona.id : 0
-
-                axios.get(`/api/dashboardMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
-                .then((response) => {
-                    try {
-                        this.pops = response.data
-                    } catch (ex) {
-                        console.log(ex);
-                    }
-                })
-            }, 200),
-
-            async viewCriticPops() {
-                this.currentTab = 'critics'
-
-                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-                var zona_id = this.selectedZona ? this.selectedZona.id : 0
-
-                axios.get(`/api/criticPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
-                    // console.log(response.data)
-                    this.pops = response.data.data
-
-                })
-                this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
-            },
-
-            async viewAlbaPops() {
-                this.currentTab = 'alba'
-
-                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-                var zona_id = this.selectedZona ? this.selectedZona.id : 0
-
-                axios.get(`/api/albaPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
-                    // console.log(response.data)
-                    this.pops = response.data.data
-                })
-                this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0
-            },
-
-            // CONTERS
-            async getCounters() {
-                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-                var zona_id = this.selectedZona ? this.selectedZona.id : 0
-
-                axios.get(`/api/dashboard?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
-                    this.popsQuantity = response.data.pops
-                    this.sitesQuantity = response.data.sites
-                    this.technologiesQuantity = response.data.technologies
-                    this.criticsQuantity = response.data.critics
-                    this.albaQuantity = response.data.alba_project
-                })
-            },
-
-            // Triggers
-            selectPop(pop) {
-                this.pops = [pop]
-            },
-            selectCrm(crm) {
-                // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
-                // si había una zona seleccionada, la variable selectedZona será null.
-                this.selectedCrm = this.selectedCrm != crm ? crm : null
-            },
-            selectZona(zona) {
-                this.selectedZona = this.selectedZona != zona ? zona : null
-            },
-
-            getAsyncData: debounce(function (text) {
-                // String update
-                if (this.searchText !== text) {
-                    this.searchText = text
-                    this.popSearch = []
-                    this.page = 1
-                    this.totalPages = 1
-                }
-                // String cleared
-                if (!text.length) {
-                    this.popSearch = []
-                    this.page = 1
-                    this.totalPages = 1
-                    return
-                }
-                // Reached last page
-                if (this.page > this.totalPages) {
-                    return
-                }
-                this.isFetching = true
-                axios.get(`/api/searchPops?api_token=${this.user.api_token}&text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
-                    .then((response) => {
-                        response.data.data.forEach((item) => this.popSearch.push(item))
-                        this.page++
-                        this.totalPages = response.data.last_page
-                        this.counter = response.data.total
-                    })
-                    .catch((error) => {
-                        throw error
-                    })
-                    .finally(() => {
-                        this.isFetching = false
-                    })
-            }, 50),
-
-            getMoreAsyncData: debounce(function () {
-                this.getAsyncData(this.searchText)
-            }, 10),
+var moment = require('moment');
+import debounce from 'lodash/debounce'
+export default {
+    components: {
+        // ###### Info ##########
+        PopsData: () => import('./PopsData'),
+        SitesData: () => import("./SitesData"),
+        TechnologiesData: () => import("./TechnologiesData"),
+        CriticsData: () => import("./CriticPopsData"),
+        AlbaData: () => import("./AlbaPopsData"),
         
-            clearSearch() {
+        // ###### Map ###########
+        // PopsMap,
+        MapView: () => import('../maps/MapView'),
+        // MapView,
+
+        // ###### Charts ########
+        PretDataChart: () => import('./PretDataChart'),
+        // RedCoreChart,
+
+        // ###### Equipment #####
+        ElectricLinesData: () => import('./ElectricLinesData'),
+        GeneratorSetsData: () => import('./GeneratorSetsData'),
+        PowerRectifiersData: () => import('./PowerRectifiersData'),
+        AirConditionersData: () => import('./AirConditionersData'),
+        VerticalStructuresData: () => import('./VerticalStructuresData'),
+        InfrastructuresData: () => import('./InfrastructuresData')
+    },
+    props : [
+        'user',
+        'message',
+        'last_data_counters',
+        'crms',
+        'darkMode'
+    ],
+    created() {
+        this.styleMode()
+    },
+
+    mounted() {
+        // console.log(this.last_data_counters)
+        // this.getCrms()
+        this.getCounters()
+        // this.lastUpdate()
+        // this.syncCounter()
+        this.loadMessage()
+        this.getPops()
+    },
+    data: () => {
+        return {
+            core: 0,
+            pops: [],
+            zonas: [],
+
+            isFetching: false,
+            selected: null,
+            page: 1,
+            totalPages: 1,
+            searchText: '',
+            popSearch: [],
+            active: 0,
+            counter: 0,
+
+            map_attributes: {
+                latitude: -33.44444275,
+                longitude: -70.6561017,
+                zoom: 5
+            },
+
+            bodyBackground: '',
+            boxBackground: '',
+            primaryText: '',
+            secondaryText: '',
+            searchBodyBackground: '',
+            innerBackground: '',
+
+            bodyBackgroundEnergy: '',
+            bodyBackgroundClimate: '',
+            bodyBackgroundInfrastructure: '',
+            boxBackgroundEnergy: '',
+            boxBackgroundClimate: '',
+            boxBackgroundInfrastructure: '',
+            
+            selectedPrimaryBoxText: 'has-text-white',
+            selectedSecondaryBoxText: 'has-text-light',
+
+            // selectedPop: null,
+            selectedSite: null,
+            selectedCrm: null,
+            selectedZona: null,
+
+            criticPopsSwitch: 0,
+            albaPopsSwitch: 0,
+
+            popsQuantity: 0,
+            sitesQuantity: 0,
+            technologiesQuantity: 0,
+            criticsQuantity: 0,
+            albaQuantity: 0,
+
+            isLoading: false,
+
+            // lastUpdateData: [],
+            // lastDataCounter: [],
+
+            currentTab: 'pops',
+        }
+    },
+
+    watch: {
+        selectedPop(newValue) {
+            this.pops = [newValue]
+        },
+
+        selectedCrm(newValue) {
+            this.selectedZona = null
+            if (this.currentTab == 'critics') {
+                this.viewCriticPops()
+            }
+            else if (this.currentTab == 'alba') {
+                this.viewAlbaPops()
+            } else if (newValue) {
+                this.getPops()
+                this.zonas = newValue.zonas
+            } else {
+                this.getPops()
+            }
+            this.getCounters()
+        },
+
+        selectedZona(newValue) {
+            if (this.currentTab == 'critics'){
+                this.viewCriticPops()
+            }
+            else if (this.currentTab == 'alba') {
+                this.viewAlbaPops()
+            } else {
+                this.getPops()
+            }
+            this.getCounters()
+        },
+
+        core(newValue, oldValue) {
+            if (this.currentTab == 'critics') {
+                this.viewCriticPops()
+            } 
+            else if (this.currentTab == 'alba') {
+                this.viewAlbaPops()
+            }
+            else {
+                this.getPops()
+            }
+            this.getCounters()
+        },
+
+        darkMode(newValue, oldValue) {
+            this.styleMode()
+        },
+
+        currentTab(newValue, oldValue) {
+            if (newValue == 'critics') {
+                this.viewCriticPops()
+            } 
+            else if (this.currentTab == 'alba') {
+                this.viewAlbaPops()
+            }
+            else if(
+                (oldValue == 'critics' || oldValue == 'alba') && 
+                (newValue == 'pops' || newValue == 'sites' || newValue == 'technologies')) {
+                this.getPops()
+            }
+        }
+    },
+
+    computed: {
+        selectedPop() {
+            return this.selectedSite ? this.selectedSite.pop : null
+        },
+
+        currentTabComponent: function () {
+            return this.currentTab + '-data'
+        },
+
+        currentLastUpdateData: function () {
+            if (this.currentTab != 'critics' || this.currentTab != 'alba') {
+                return this.last_data_counters['last_updated_' + this.currentTab]
+            } else {
+                return
+            }
+        },
+
+        textSwitchCore() {
+            return this.core ? 'has-text-link' : ''
+        }
+    },
+
+    methods: {
+        searchFormat(pop) {
+            this.selectedPop = this.selected
+            return this.searchText
+        },
+
+        getPops: debounce(function () {
+            var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+            var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+            axios.get(`/api/dashboardMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
+            .then((response) => {
+                try {
+                    this.pops = response.data
+                } catch (ex) {
+                    console.log(ex);
+                }
+            })
+        }, 200),
+
+        async viewCriticPops() {
+            this.currentTab = 'critics'
+
+            var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+            var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+            axios.get(`/api/criticPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                // console.log(response.data)
+                this.pops = response.data.data
+
+            })
+            this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
+        },
+
+        async viewAlbaPops() {
+            this.currentTab = 'alba'
+
+            var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+            var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+            axios.get(`/api/albaPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                // console.log(response.data)
+                this.pops = response.data.data
+            })
+            this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0
+        },
+
+        // CONTERS
+        async getCounters() {
+            var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+            var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+            axios.get(`/api/dashboard?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                this.popsQuantity = response.data.pops
+                this.sitesQuantity = response.data.sites
+                this.technologiesQuantity = response.data.technologies
+                this.criticsQuantity = response.data.critics
+                this.albaQuantity = response.data.alba_project
+            })
+        },
+
+        // Triggers
+        selectPop(pop) {
+            this.pops = [pop]
+        },
+        selectCrm(crm) {
+            // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
+            // si había una zona seleccionada, la variable selectedZona será null.
+            this.selectedCrm = this.selectedCrm != crm ? crm : null
+        },
+        selectZona(zona) {
+            this.selectedZona = this.selectedZona != zona ? zona : null
+        },
+
+        getAsyncData: debounce(function (text) {
+            // String update
+            if (this.searchText !== text) {
+                this.searchText = text
                 this.popSearch = []
-                this.searchText = ''
-                this.selectedPop = null
-            },
-
-            // Style mode
-            styleMode(){
-                if (this.darkMode == 1) {
-                    // dark mode
-                    this.bodyBackground = 'has-background-black-ter'
-                    this.boxBackground = 'has-background-dark'
-                    this.primaryText = 'has-text-white'
-                    this.secondaryText = 'has-text-grey-light'
-                    this.searchBodyBackground = 'has-background-dark'
-                    this.innerBackground = 'has-background-dark-ter shadow-inset-dark',
-                    this.bodyBackgroundEnergy = 'has-background-black-ter',
-                    this.bodyBackgroundClimate = 'has-background-black-ter',
-                    this.bodyBackgroundInfrastructure = 'has-background-black-ter',
-                    this.boxBackgroundEnergy = 'has-background-light',
-                    this.boxBackgroundClimate = 'has-background-light',
-                    this.boxBackgroundInfrastructure = 'has-background-light'
-                } else {
-                    // light mode
-                    this.bodyBackground = 'has-background-light'
-                    this.boxBackground = 'has-background-white'
-                    this.primaryText = 'has-text-dark'
-                    this.secondaryText = 'has-text-grey'
-                    this.searchBodyBackground = 'has-background-white'
-                    this.innerBackground = 'has-background-white shadow-inset',
-                    this.bodyBackgroundEnergy = 'has-background-white',
-                    this.bodyBackgroundClimate = 'has-background-white',
-                    this.bodyBackgroundInfrastructure = 'has-background-white',
-                    this.boxBackgroundEnergy = 'has-background-light',
-                    this.boxBackgroundClimate = 'has-background-light',
-                    this.boxBackgroundInfrastructure = 'has-background-light'
-                }
-            },
-
-            // SWITCHES
-            async switchCore() {
-                this.core = this.core == 0 ? 1 : 0
-            },
-            changeStyle() {
-                this.darkMode = this.darkMode == 0 ? 1 : 0
-            },
-            loadMessage() {
-                if(this.message) {
-                    this.$buefy.toast.open({
-                        message: this.message,
-                        type: 'is-success',
-                        duration: 5000
-                    })
-                }
-            },
-
-            downloadPops() {
-                this.isLoading = true
-
-                var params = {
-                    'api_token': this.user.api_token,
-                    'core': this.core,
-                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                    'zona_id': this.selectedZona ? this.selectedZona.id : 0
-                }
-
-                axios.get('/api/pop/export', { 
-                    params: params, 
-                    responseType: 'arraybuffer' 
-                })
+                this.page = 1
+                this.totalPages = 1
+            }
+            // String cleared
+            if (!text.length) {
+                this.popSearch = []
+                this.page = 1
+                this.totalPages = 1
+                return
+            }
+            // Reached last page
+            if (this.page > this.totalPages) {
+                return
+            }
+            this.isFetching = true
+            axios.get(`/api/searchPops?api_token=${this.user.api_token}&text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
                 .then((response) => {
-                    console.log(response.data)
-                    const blob = new Blob([response.data], { type: 'application/xlsx' })
-                    // const objectUrl = window.URL.createObjectURL(blob)
-
-                    // IE doesn't allow using a blob object directly as link href
-                    // instead it is necessary to use msSaveOrOpenBlob
-                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                        window.navigator.msSaveOrOpenBlob(newBlob)
-                        return
-                    }
-
-                    const data = window.URL.createObjectURL(blob)
-                    let link = document.createElement('a')
-                    link.href = data
-                    link.download = 'listado_pops.xlsx'
-                    link.click()
-                    // setTimeout(function () {
-                    //     // For Firefox it is necessary to delay revoking the ObjectURL
-                    //     window.URL.revokeObjectURL(data)
-                    // }, 100)
-                    
-                    this.isLoading = false
-                    this.$buefy.toast.open({
-                        message: 'La planilla se ha descargado exitosamente.',
-                        type: 'is-success',
-                        duration: 5000
-                    })
-                }).catch((error) => {
-                    console.log(error)
-                    this.isLoading = false
-                    this.$buefy.toast.open({
-                        message: 'Ha ocurrido un error. Favor contactar al administrador',
-                        type: 'is-danger',
-                        duration: 5000
-                    })
+                    response.data.data.forEach((item) => this.popSearch.push(item))
+                    this.page++
+                    this.totalPages = response.data.last_page
+                    this.counter = response.data.total
                 })
-            },
+                .catch((error) => {
+                    throw error
+                })
+                .finally(() => {
+                    this.isFetching = false
+                })
+        }, 50),
+
+        getMoreAsyncData: debounce(function () {
+            this.getAsyncData(this.searchText)
+        }, 10),
+    
+        clearSearch() {
+            this.popSearch = []
+            this.searchText = ''
+            this.selectedPop = null
         },
 
-        beforeDestroy() {
-            this.$eventBus.$off('graphData')
-            this.$eventCounters.$off('pops');
+        // Style mode
+        styleMode(){
+            if (this.darkMode == 1) {
+                // dark mode
+                this.bodyBackground = 'has-background-black-ter'
+                this.boxBackground = 'has-background-dark'
+                this.primaryText = 'has-text-white'
+                this.secondaryText = 'has-text-grey-light'
+                this.searchBodyBackground = 'has-background-dark'
+                this.innerBackground = 'has-background-dark-ter shadow-inset-dark',
+                this.bodyBackgroundEnergy = 'has-background-black-ter',
+                this.bodyBackgroundClimate = 'has-background-black-ter',
+                this.bodyBackgroundInfrastructure = 'has-background-black-ter',
+                this.boxBackgroundEnergy = 'has-background-light',
+                this.boxBackgroundClimate = 'has-background-light',
+                this.boxBackgroundInfrastructure = 'has-background-light'
+            } else {
+                // light mode
+                this.bodyBackground = 'has-background-light'
+                this.boxBackground = 'has-background-white'
+                this.primaryText = 'has-text-dark'
+                this.secondaryText = 'has-text-grey'
+                this.searchBodyBackground = 'has-background-white'
+                this.innerBackground = 'has-background-white shadow-inset',
+                this.bodyBackgroundEnergy = 'has-background-white',
+                this.bodyBackgroundClimate = 'has-background-white',
+                this.bodyBackgroundInfrastructure = 'has-background-white',
+                this.boxBackgroundEnergy = 'has-background-light',
+                this.boxBackgroundClimate = 'has-background-light',
+                this.boxBackgroundInfrastructure = 'has-background-light'
+            }
         },
-    }
+
+        // SWITCHES
+        async switchCore() {
+            this.core = this.core == 0 ? 1 : 0
+        },
+        changeStyle() {
+            this.darkMode = this.darkMode == 0 ? 1 : 0
+        },
+        loadMessage() {
+            if(this.message) {
+                this.$buefy.toast.open({
+                    message: this.message,
+                    type: 'is-success',
+                    duration: 5000
+                })
+            }
+        },
+
+        downloadPops() {
+            this.isLoading = true
+
+            var params = {
+                'api_token': this.user.api_token,
+                'core': this.core,
+                'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                'zona_id': this.selectedZona ? this.selectedZona.id : 0
+            }
+
+            axios.get('/api/pop/export', { 
+                params: params, 
+                responseType: 'arraybuffer' 
+            })
+            .then((response) => {
+                console.log(response.data)
+                const blob = new Blob([response.data], { type: 'application/xlsx' })
+                // const objectUrl = window.URL.createObjectURL(blob)
+
+                // IE doesn't allow using a blob object directly as link href
+                // instead it is necessary to use msSaveOrOpenBlob
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(newBlob)
+                    return
+                }
+
+                const data = window.URL.createObjectURL(blob)
+                let link = document.createElement('a')
+                link.href = data
+                link.download = 'listado_pops.xlsx'
+                link.click()
+                // setTimeout(function () {
+                //     // For Firefox it is necessary to delay revoking the ObjectURL
+                //     window.URL.revokeObjectURL(data)
+                // }, 100)
+                
+                this.isLoading = false
+                this.$buefy.toast.open({
+                    message: 'La planilla se ha descargado exitosamente.',
+                    type: 'is-success',
+                    duration: 5000
+                })
+            }).catch((error) => {
+                console.log(error)
+                this.isLoading = false
+                this.$buefy.toast.open({
+                    message: 'Ha ocurrido un error. Favor contactar al administrador',
+                    type: 'is-danger',
+                    duration: 5000
+                })
+            })
+        },
+    },
+
+    beforeDestroy() {
+        this.$eventBus.$off('graphData')
+        this.$eventCounters.$off('pops');
+    },
+}
 </script>
 
 <style lang="scss" scoped>

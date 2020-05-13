@@ -37,7 +37,7 @@
                         <div class="">
                             <ul class="columns">
 
-                                <li v-if="canView(menu.path)" v-for="menu in menu_data" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
+                                <li v-if="canView(menu.path)" v-for="menu in menu_data" :key="menu.id" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
 
                                     <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
                                         <b-icon 
@@ -72,19 +72,19 @@
                                     role="button">
                                     <font-awesome-icon 
                                         :icon="['fas','bell']" 
-                                        :class="alerts.length ? 'has-text-info' : 'has-text-grey-light'"/>
+                                        :class="userRequestAlerts.length ? 'has-text-info' : 'has-text-grey-light'"/>
                                 </a>
 
-                                <b-dropdown-item has-link v-for="alert in alerts" :key="alert.id">
-                                    <a :href="alert.to">
+                                <b-dropdown-item has-link v-for="alert in userRequestAlerts" :key="alert.id">
+                                    <router-link to="/admin">
                                         <p>
-                                            <small class="has-text-info">{{ alert.date }}</small>
+                                            <small class="has-text-info">{{ alert.created_at }}</small>
                                         </p>
-                                        <p>{{ alert.description }}</p>
-                                    </a>
+                                        <p>El usuario {{ alert.name }} {{ alert.apellido }} ha solicitado</p><p>acceder a Inventario.</p>
+                                    </router-link>
                                 </b-dropdown-item>
 
-                                <b-dropdown-item  v-if="!alerts.length" aria-role="menuitem">
+                                <b-dropdown-item  v-if="!userRequestAlerts.length" aria-role="menuitem">
                                     <font-awesome-icon :icon="['fas','home']" />
                                     &nbsp;No tienes notificaciones
                                 </b-dropdown-item>
@@ -157,7 +157,7 @@
         </header>
 
         <main class="sticky-content">
-            <div class="section is-paddingless">
+            <div class="section is-paddingless has-background-light">
                 <keep-alive>
                     <router-view
                         :user="user"
@@ -181,111 +181,118 @@
 </template>
 
 <script>
-    var Clock = require('./Clock.vue').default;
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-    export default {
-        components: {
-            'clock': Clock
-        },
-        props: [
-            'user',
-            'user_permissions',
-            'app_name',
-            'crms',
-            'menu_data',
-            'pops',
-            'last_data_counters'
-        ],
+library.add(faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust);
+var Clock = require('./Clock.vue').default;
 
-        data() {
-            return {
-                darkMode: 0,
-                alerts: [
-                    // {
-                    //     'id': 1,
-                    //     'date': '03 Aug 2017',
-                    //     'description': 'New feature: list of tags',
-                    //     'to': '/pops'
-                    // },
-                    // {
-                    //     'id': 2,
-                    //     'date': '01 Aug 2017',
-                    //     'description': 'Bulma / Bootstrap comparison',
-                    //     'to': '/comsite'
-                    // },
-                    // {
-                    //     'id': 3,
-                    //     'date': '24 Jul 2017',
-                    //     'description': 'Access previous Bulma versions',
-                    //     'to': '/admin'
-                    // },
-                ]
-            }
-        },
+export default {
+    components: {
+        'clock': Clock
+    },
+    props: [
+        'user',
+        'user_permissions',
+        'app_name',
+        'crms',
+        'menu_data',
+        'pops',
+        'last_data_counters'
+    ],
 
-        mounted() {
-            // console.log(this.user_permissions[0])
-            // if (this.$route.query.message) {
-            //     this.$buefy.toast.open({
-            //         message: this.$route.query.message,
-            //         type: 'is-success',
-            //         duration: 3000
-            //     })
-            // }
-        },
-
-        computed: {
-            welcomeText() {
-                return this.user.sexo == 'Femenino' ? 'Bienvenida' : 'Bienvenido'
-            },
-            currentRoute () {
-                return this.$route.path
-            },
-            style() {
-                return this.darkMode == 1 ? 'Light mode' : 'Dark mode'
-            }
-        },
-
-        methods: {
-            goBack() {
-                window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-            },
-
-            changeStyle() {
-                this.darkMode = this.darkMode == 0 ? 1 : 0
-            },
-
-            canView(path) {
-                if (path !== '/capacity' && path !== '/admin') {
-                    return true
-                } else if (path == '/capacity' && 
-                    (this.user.roles[0].name == 'developer' 
-                        || this.user.roles[0].name == 'admin' 
-                        || this.user.roles[0].name == 'engineer'
-                        || this.user.roles[0].name == 'engineer admin'
-                        || this.user_permissions.find(element => element.slug == 'view-capacity')
-                        )) {
-                    return true
-                } else if (path == '/admin' && (this.user.roles[0].name == 'developer' || this.user.roles[0].name == 'admin')) {
-                    return true
-                } else {
-                    return false
-                }
-
-            },
-
-            logout: function(e){
-                axios.post(`/logout?api_token=${this.user.api_token}`).then((response) => {
-                    if (response.status === 200) {
-                        console.log(response)
-                    }
-                }).catch((error) => {
-                    console.log(error);
-                }).finally(() => {
-                    this.$router.go('/welcome');
-                })
-                e.preventDefault();
-            },
+    data() {
+        return {
+            darkMode: 0,
+            userRequestAlerts: [],
         }
+    },
+
+    mounted() {
+        this.getUserRequestAlerts()
+        
+        // console.log(this.user_permissions[0])
+        // if (this.$route.query.message) {
+        //     this.$buefy.toast.open({
+        //         message: this.$route.query.message,
+        //         type: 'is-success',
+        //         duration: 3000
+        //     })
+        // }
+    },
+
+    computed: {
+        welcomeText() {
+            return this.user.sexo == 'Femenino' ? 'Bienvenida' : 'Bienvenido'
+        },
+        currentRoute () {
+            return this.$route.path
+        },
+        style() {
+            return this.darkMode == 1 ? 'Light mode' : 'Dark mode'
+        }
+    },
+
+    methods: {
+        goBack() {
+            window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+        },
+
+        changeStyle() {
+            this.darkMode = this.darkMode == 0 ? 1 : 0
+        },
+
+        canView(path) {
+            if (path !== '/capacity' && path !== '/admin') {
+                return true
+            } else if (path == '/capacity' && 
+                (this.user.roles[0].name == 'developer' 
+                    || this.user.roles[0].name == 'admin' 
+                    || this.user.roles[0].name == 'engineer'
+                    || this.user.roles[0].name == 'engineer admin'
+                    || this.user.roles[0].name == 'super viewer'
+                    || this.user_permissions.find(element => element.slug == 'view-capacity')
+                    )) {
+                return true
+            } else if (path == '/admin' && 
+                (this.user.roles[0].name == 'developer' 
+                    || this.user.roles[0].name == 'admin' 
+                    || this.user_permissions.find(element => element.slug == 'view-admin'
+                    ))) {
+                return true
+            } else {
+                return false
+            }
+
+        },
+
+        getUserRequestAlerts() {
+            axios.get(`/api/userRequestAlerts?api_token=${this.user.api_token}`)
+            .then(response => {
+                if (this.user.roles[0].name == 'admin'
+                || this.user.roles[0].name == 'developer') {
+                    this.userRequestAlerts = response.data.data
+                } else {
+
+                }
+                
+            })
+        },
+
+        logout: function(e){
+            axios.post(`/logout?api_token=${this.user.api_token}`).then((response) => {
+                if (response.status === 200) {
+                    console.log(response)
+                }
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                this.$router.go('/welcome');
+            })
+            e.preventDefault();
+        },
     }
+}
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <section class="section">
+        <section class="">
             <div class="columns">
                 <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Layout</div>
             </div>
@@ -14,7 +14,7 @@
                                 <!-- Empalme -->
                                 <div class="tile">
                                     <div class="tile is-parent"></div>
-                                    <div class="tile is-parent" v-for="junction in junctions">
+                                    <div class="tile is-parent" v-for="junction in junctions" :key="junction.id">
 
                                         <a class="tile is-child is-size-5 has-text-weight-normal"
                                             ref="alpha" 
@@ -41,19 +41,19 @@
                                 <!-- Grupo Electrógeno -->
                                 <div class="tile">
                                     <div class="tile is-parent"></div>
-                                    <div class="tile is-parent" v-for="generatorSet in generatorSets">
+                                    <div class="tile is-parent" v-for="generatorSet in generatorSets" :key="generatorSet.id">
                                         <a class="tile is-child is-size-5 has-text-weight-normal" 
                                             ref="beta"
                                             id="beta"
                                             @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
-                                            <b-message type="is-warning" class="box is-paddingless">
+                                            <b-message type="is-success" class="box is-paddingless">
                                                 <div class="columns">
                                                     <div class="column">Grupo Electrógeno</div>
                                                     <div class="column is-2 has-text-centered">
                                                         <font-awesome-icon 
-                                                            :icon="['fas', 'exclamation-triangle']"
+                                                            :icon="['far', 'check-circle']"
                                                             size="2x"
-                                                            class="has-text-warning"
+                                                            class="has-text-success"
                                                         />
                                                     </div>
                                                 </div>   
@@ -87,7 +87,7 @@
 
                                 <!-- Salas -->
                                 <div class="tile is-parent columns is-multiline">
-                                    <div class="column tile is-6" v-for="room in pop.rooms">
+                                    <div class="column tile is-6" v-for="room in pop.rooms" :key="room.id">
                                         <div class="tile box" :class="room_id && room.id != room_id ? 'is-shadowless has-background-white-bis' : ''">
                                             <div class="tile is-vertical">
                                                 <div class="is-size-5 has-text-weight-normal" 
@@ -98,7 +98,7 @@
                                                 <div class="section columns">
                                                     <div class="column is-6">
                                                         <div class="columns is-multiline">
-                                                            <div class="column is-12" v-for="powerRectifier in powerRectifiers" v-if="powerRectifier.room_id == room.id">
+                                                            <div class="column is-12" v-for="powerRectifier in powerRectifiers" v-if="powerRectifier.room_id == room.id" :key="powerRectifier.id">
                                                                 <a class="tile is-child is-size-5 has-text-weight-normal"
                                                                     @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier">
                                                                     <b-message type="is-success" class="box is-paddingless">
@@ -119,7 +119,7 @@
                                                     </div>
                                                     <div class="column">
                                                         <div class="columns is-multiline">
-                                                            <div class="column is-12" v-for="airConditioner in airConditioners" v-if="airConditioner.room_id == room.id">
+                                                            <div class="column is-12" v-for="airConditioner in airConditioners" v-if="airConditioner.room_id == room.id" :key="airConditioner.id">
                                                                 <a class="tile is-child is-size-5 has-text-weight-semibold"
                                                                     @click="isAirConditionerModalActive = true; airConditionerSelected = airConditioner">
                                                                     <b-message type="is-success" class="box is-paddingless">
@@ -218,6 +218,11 @@
 </template>
 
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(farCheckCircle, faExclamationTriangle);
     // import LeaderLine from 'leader-line'
     export default {
         components: {

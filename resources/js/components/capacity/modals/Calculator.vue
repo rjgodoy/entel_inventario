@@ -1,10 +1,14 @@
 <template>
     <div>
-        <div class="field">
-            <div class="has-text-weight-semibold has-text-dark is-size-3 has-text-left">Calculadora</div>
+        <div class="columns">
+            <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Calculadora</div>
         </div>
-        <div class="box">
-            
+        <div class="columns">
+            <div class="column">
+                <div class="box">
+                    
+                </div>
+            </div>
         </div>
     </div>
 

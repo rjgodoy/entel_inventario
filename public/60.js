@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[60],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Location.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/Location.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/PopProtectedZones.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/eco/PopProtectedZones.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -97,106 +97,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    PopMap: function PopMap() {
-      return __webpack_require__.e(/*! import() */ 55).then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
-    }
-  },
-  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  components: {},
+  props: ['popProtectedZones', 'user'],
   data: function data() {
-    return {};
+    return {
+      isPaginated: true,
+      isPaginationSimple: false,
+      paginationPosition: 'bottom',
+      defaultSortDirection: 'asc',
+      sortIcon: 'arrow-up',
+      sortIconSize: 'is-small',
+      currentPage: 1,
+      perPage: 10,
+      darkMode: 0,
+      bodyBackground: '',
+      boxBackground: '',
+      primaryText: '',
+      secondaryText: '',
+      searchBodyBackground: ''
+    };
   },
-  mounted: function mounted() {},
-  computed: {
-    popClassification: function popClassification() {
-      var id = 6;
-      var classification;
-
-      if (this.pop.sites) {
-        this.pop.sites.forEach(function (item) {
-          if (item.classification_type_id && item.classification_type_id < id) {
-            id = item.classification_type_id;
-            classification = item.classification_type.classification_type;
-          }
-        });
-      }
-
-      return {
-        'classification': classification,
-        'id': id
-      };
-    },
-    popAttentionPriority: function popAttentionPriority() {
-      var i = 10;
-      var cat;
-
-      if (this.pop.sites) {
-        this.pop.sites.forEach(function (item) {
-          if (item.attention_priority_type_id && item.attention_priority_type_id < i) {
-            i = item.attention_priority_type_id;
-            cat = item.attention_priority_type.attention_priority_type;
-          }
-        });
-      }
-
-      return cat;
-    },
-    popCategory: function popCategory() {
-      var i = 10;
-      var cat;
-
-      if (this.pop.sites) {
-        this.pop.sites.forEach(function (item) {
-          if (item.category_type_id && item.category_type_id < i) {
-            i = item.category_type_id;
-            cat = item.category_type.category_type;
-          }
-        });
-      }
-
-      return cat;
-    },
-    popDependences: function popDependences() {
-      var dependences = 0;
-
-      if (this.pop.sites) {
-        this.pop.sites.forEach(function (item) {
-          dependences = dependences + item.dependences.length;
-        });
-      }
-
-      return dependences;
-    },
-    popAttentionType: function popAttentionType() {
-      var i = 10;
-      var cat;
-
-      if (this.pop.sites) {
-        this.pop.sites.forEach(function (item) {
-          if (item.attention_type_id && item.attention_type_id < i) {
-            i = item.attention_type_id;
-            cat = item.attention_type.attention_type;
-          }
-        });
-      }
-
-      return cat;
-    },
-    heroBackground: function heroBackground() {
-      return this.popClassification.id == 1 ? 'is-info' : this.popClassification.id == 2 ? 'is-warning' : this.popClassification.id == 3 ? 'is-primary' : this.popClassification.id == 4 ? 'is-smart' : this.popClassification.id == 5 ? 'is-eco' : 'is-white';
-    }
+  created: function created() {},
+  mounted: function mounted() {// this.getpopProtectedZones()
+    // this.getFiles()
+  },
+  methods: {// async getFiles() {
+    //     axios.get(`/api/eco/1`).then((response) => {
+    //         // console.log(response)
+    //     })
+    // }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Location.vue?vue&type=template&id=9512fc72&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/Location.vue?vue&type=template&id=9512fc72& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/PopProtectedZones.vue?vue&type=template&id=6fe0b191&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/eco/PopProtectedZones.vue?vue&type=template&id=6fe0b191& ***!
+  \************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -208,173 +158,167 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", {}, [
-    _c("div", { staticClass: "hero is-bold", class: _vm.heroBackground }, [
-      _c(
-        "div",
-        { staticClass: "hero-body", staticStyle: { "padding-top": "" } },
-        [
-          _c("nav", { staticClass: "level" }, [
-            _c("div", { staticClass: "level-item has-text-centered" }, [
-              _c("div", [
-                _c("p", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-                  _vm._v(_vm._s(_vm.popAttentionPriority))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "is-size-7 has-text-weight-semibold" }, [
-                  _vm._v("PRIORIDAD ATENCION")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "level-item has-text-centered" }, [
-              _c("div", [
-                _c("p", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-                  _vm._v(_vm._s(_vm.popDependences))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "is-size-7 has-text-weight-semibold" }, [
-                  _vm._v("DEPENDENCIAS DIRECTAS")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "level-item has-text-centered" }, [
-              _c("div", [
-                _c("p", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-                  _vm._v(_vm._s(_vm.popCategory ? _vm.popCategory : "-"))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "is-size-7 has-text-weight-semibold" }, [
-                  _vm._v("CLASIFICACION PLANIFICACION")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "level-item has-text-centered" }, [
-              _c("div", [
-                _c("p", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-                  _vm._v(_vm._s(_vm.popAttentionType))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "is-size-7 has-text-weight-semibold" }, [
-                  _vm._v("TIPO ATENCION")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "level-item has-text-centered" }, [
-              _c("div", [
-                _c("p", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-                  _vm._v(
-                    _vm._s(
-                      _vm.pop.theoretical_autonomy
-                        ? _vm.pop.theoretical_autonomy
-                        : "-"
-                    ) + " "
-                  ),
-                  _c("span", { staticClass: "is-size-6" }, [_vm._v("hrs.")])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "is-size-7 has-text-weight-semibold" }, [
-                  _vm._v("AUTONOMIA TEORICA")
-                ])
-              ])
-            ])
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c(
-        "div",
-        { staticClass: "map-container" },
-        [
-          _c("pop-map", {
-            attrs: {
-              user: _vm.user,
-              classification: _vm.popClassification,
-              popMaster: _vm.pop,
-              darkMode: _vm.darkMode
-            }
-          })
-        ],
-        1
-      ),
+  return _c(
+    "div",
+    { staticClass: "tile is-child box" },
+    [
+      _c("div", { staticClass: "title is-size-4" }, [
+        _vm._v("POP en zonas protegidas")
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-content" }, [
-        _c("div", { staticClass: "columns" }, [
-          _c("div", { staticClass: "column is-8" }, [
-            _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-              _vm._v(_vm._s(_vm.pop.direccion))
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
-              _vm._v(
-                "Comuna de " +
-                  _vm._s(_vm.pop.comuna ? _vm.pop.comuna.nombre_comuna : "")
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "is-size-7 has-text-weight-normal" }, [
-              _vm._v(
-                "\n                        Zona " +
-                  _vm._s(
-                    _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
-                  ) +
-                  " - CRM " +
-                  _vm._s(
-                    _vm.pop.comuna ? _vm.pop.comuna.zona.crm.nombre_crm : ""
-                  ) +
-                  "\n                    "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "level" }, [
-              _c("div", { staticClass: "level-item" }, [
+      _c("b-table", {
+        attrs: {
+          data: _vm.popProtectedZones,
+          paginated: _vm.isPaginated,
+          "per-page": _vm.perPage,
+          "current-page": _vm.currentPage,
+          "pagination-simple": _vm.isPaginationSimple,
+          "pagination-position": _vm.paginationPosition,
+          "default-sort-direction": _vm.defaultSortDirection,
+          "sort-icon": _vm.sortIcon,
+          "sort-icon-size": _vm.sortIconSize,
+          "pagination-size": "is-small",
+          "default-sort": "user.first_name",
+          "aria-next-label": "Next page",
+          "aria-previous-label": "Previous page",
+          "aria-page-label": "Page",
+          "aria-current-label": "Current page"
+        },
+        on: {
+          "update:currentPage": function($event) {
+            _vm.currentPage = $event
+          },
+          "update:current-page": function($event) {
+            _vm.currentPage = $event
+          }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(props) {
+              return [
                 _c(
-                  "div",
-                  { staticClass: "is-size-5 has-text-weight-semibold" },
-                  [
-                    _vm._v(
-                      _vm._s(_vm.pop.latitude) +
-                        "\n                                "
-                    ),
-                    _c(
-                      "p",
-                      { staticClass: "is-size-6 has-text-weight-light" },
-                      [_vm._v("Latitud")]
+                  "b-table-column",
+                  {
+                    staticClass: "is-size-6",
+                    attrs: {
+                      width: "70%",
+                      field: "nombre",
+                      label: "PoP",
+                      sortable: "",
+                      searchable: ""
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                {
+                                  staticClass: "is-size-6",
+                                  attrs: { label: column.label }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(column.label) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
                     )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "is-size-7",
+                        attrs: { to: "/pop/" + props.row.id, target: "_blank" }
+                      },
+                      [
+                        _c("div", { staticClass: "is-size-6" }, [
+                          _vm._v(_vm._s(props.row.nombre))
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "is-size-7" }, [
+                      _vm._v(_vm._s(props.row.comuna.nombre_comuna))
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-table-column",
+                  {
+                    staticClass: "is-size-6",
+                    attrs: {
+                      field: "comuna.zona.nombre_zona",
+                      label: "Zona",
+                      sortable: "",
+                      searchable: ""
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                {
+                                  staticClass: "is-size-6",
+                                  attrs: { label: column.label }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(column.label) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "is-size-6 has-text-weight-semibold" },
+                      [_vm._v(_vm._s(props.row.protected_zones[0].cod_zone))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-7" }, [
+                      _vm._v(_vm._s(props.row.comuna.zona.nombre_zona))
+                    ])
                   ]
                 )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "level-item" }, [
-                _c(
-                  "div",
-                  { staticClass: "is-size-5 has-text-weight-semibold" },
-                  [
-                    _vm._v(
-                      _vm._s(_vm.pop.longitude) +
-                        "\n                                "
-                    ),
-                    _c(
-                      "p",
-                      { staticClass: "is-size-6 has-text-weight-light" },
-                      [_vm._v("Longitud")]
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
+              ]
+            }
+          }
         ])
-      ])
-    ])
-  ])
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -383,17 +327,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Location.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/components/pops/Location.vue ***!
-  \***************************************************/
+/***/ "./resources/js/components/eco/PopProtectedZones.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/eco/PopProtectedZones.vue ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Location_vue_vue_type_template_id_9512fc72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Location.vue?vue&type=template&id=9512fc72& */ "./resources/js/components/pops/Location.vue?vue&type=template&id=9512fc72&");
-/* harmony import */ var _Location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Location.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/Location.vue?vue&type=script&lang=js&");
+/* harmony import */ var _PopProtectedZones_vue_vue_type_template_id_6fe0b191___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopProtectedZones.vue?vue&type=template&id=6fe0b191& */ "./resources/js/components/eco/PopProtectedZones.vue?vue&type=template&id=6fe0b191&");
+/* harmony import */ var _PopProtectedZones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopProtectedZones.vue?vue&type=script&lang=js& */ "./resources/js/components/eco/PopProtectedZones.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -403,9 +347,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Location_vue_vue_type_template_id_9512fc72___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Location_vue_vue_type_template_id_9512fc72___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _PopProtectedZones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PopProtectedZones_vue_vue_type_template_id_6fe0b191___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PopProtectedZones_vue_vue_type_template_id_6fe0b191___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -415,38 +359,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pops/Location.vue"
+component.options.__file = "resources/js/components/eco/PopProtectedZones.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Location.vue?vue&type=script&lang=js&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/pops/Location.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************/
+/***/ "./resources/js/components/eco/PopProtectedZones.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/eco/PopProtectedZones.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Location.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Location.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopProtectedZones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopProtectedZones.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/PopProtectedZones.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopProtectedZones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Location.vue?vue&type=template&id=9512fc72&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/pops/Location.vue?vue&type=template&id=9512fc72& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/eco/PopProtectedZones.vue?vue&type=template&id=6fe0b191&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/eco/PopProtectedZones.vue?vue&type=template&id=6fe0b191& ***!
+  \******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Location_vue_vue_type_template_id_9512fc72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Location.vue?vue&type=template&id=9512fc72& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Location.vue?vue&type=template&id=9512fc72&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Location_vue_vue_type_template_id_9512fc72___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopProtectedZones_vue_vue_type_template_id_6fe0b191___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PopProtectedZones.vue?vue&type=template&id=6fe0b191& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/PopProtectedZones.vue?vue&type=template&id=6fe0b191&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopProtectedZones_vue_vue_type_template_id_6fe0b191___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Location_vue_vue_type_template_id_9512fc72___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopProtectedZones_vue_vue_type_template_id_6fe0b191___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

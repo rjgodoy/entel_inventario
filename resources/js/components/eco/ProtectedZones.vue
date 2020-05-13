@@ -1,6 +1,6 @@
 <template>
     <div class="tile is-child box">
-        <div class="title is-size-4">POP en zonas protegidas</div>
+        <div class="title is-size-4">Zonas protegidas</div>
 
         <!-- <b-field grouped group-multiline> -->
             <!-- <b-select v-model="defaultSortDirection">
@@ -69,26 +69,25 @@
                     </router-link>
                 </b-table-column> -->
 
-                <b-table-column class="is-size-6" width="70%" field="nombre" label="PoP" sortable searchable>
+                <b-table-column class="is-size-6" width="30%" field="cod_zone" label="Cod Zona" sortable searchable>
                     <template slot="header" slot-scope="{ column }">
                         <b-tooltip :label="column.label" class="is-size-6">
                             {{ column.label }}
                         </b-tooltip>
                     </template>
-                    <router-link class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
+                    <!-- <router-link class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
                         <div class="is-size-6">{{ props.row.nombre }}</div>
-                    </router-link>
-                    <p class="is-size-7">{{ props.row.comuna.nombre_comuna }}</p>
+                    </router-link> -->
+                    <p class="is-size-7">{{ props.row.cod_zone }}</p>
                 </b-table-column>
 
-                <b-table-column class="is-size-6" field="comuna.zona.nombre_zona" label="Zona" sortable searchable>
+                <b-table-column class="is-size-6" field="name" label="Zona" sortable searchable>
                     <template slot="header" slot-scope="{ column }">
                         <b-tooltip :label="column.label" class="is-size-6">
                             {{ column.label }}
                         </b-tooltip>
                     </template>
-                    <div class="is-size-6 has-text-weight-semibold">{{ props.row.protected_zones[0].cod_zone }}</div>
-                    <div class="is-size-7">{{ props.row.comuna.zona.nombre_zona }}</div>
+                    <div class="is-size-6 has-text-weight-semibold">{{ props.row.name }}</div>
                 </b-table-column>
 
             </template>

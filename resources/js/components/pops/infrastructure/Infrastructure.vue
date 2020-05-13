@@ -11,7 +11,7 @@
                     
                     <div :class="infrastructures.length > 4 ? '' : 'container'">
                         <div class="tile is-ancestor">
-                            <div class="tile is-parent" v-for="data in infrastructures">
+                            <div class="tile is-parent" v-for="data in infrastructures" :key=data.id>
                                 <!-- <div class="tile is-child box">
                                     <div class="columns">
                                         <div class="column">
@@ -54,7 +54,7 @@
                     
                     <div :class="verticalStructures.length > 4 ? '' : 'container'">
                         <div class="columns is-multiline tile is-ancestor">
-                            <div class="column is-12 tile is-parent" v-for="data in verticalStructures">
+                            <div class="column is-12 tile is-parent" v-for="data in verticalStructures" :key="data.id">
                                 <div class="tile is-child box" style="max-width: 550px; position: center;">
                                     <div class="columns">
                                         <div class="column">

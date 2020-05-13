@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserRequest;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\UserRequestAccepted;
+use App\Mail\UserRequestRejected;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -26,6 +32,24 @@ class UserController extends Controller
             [
                 'status' => 'success',
                 'users' => $users->toArray()
+            ],
+            200
+        );
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userRequests(Request $request)
+    {
+        $requests = UserRequest::where('status', 0)->get();
+
+        return response()->json(
+            [
+                'status' => 'success',
+                'requests' => $requests->toArray()
             ],
             200
         );
@@ -86,5 +110,61 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Get tabs for admin module.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function newUserAccepted(Request $request)
+    {   
+        $user = User::create([
+            'name' => $request->user['name'],
+            'apellido' => $request->user['apellido'],
+            'email' => $request->user['email'],
+            'username' => $request->user['username'],
+            'password' => $request->user['password'],
+            'api_token' => Hash::make(Str::random(10)),
+            'estado' => 1
+        ]);
+
+        if ($user) {
+            $userRequest = UserRequest::find($request->user['id']);
+            $userRequest->update([
+                'status' => 1,
+                'done_by' => $request->admin_id
+            ]);
+        }
+
+        Mail::to($request->user['email'])->send(new UserRequestAccepted());
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Se ha otorgado el acceso al nuevo usuario.'
+        ]);
+    }
+
+    /**
+     * Get tabs for admin module.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function newUserRejected(Request $request)
+    {   
+        $userRequest = UserRequest::find($request->user['id']);
+        $userRequest->update([
+            'status' => 2,
+            'done_by' => $request->admin_id
+        ]);
+
+        Mail::to($request->user['email'])->send(new UserRequestRejected());
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Se ha rechazado el acceso al nuevo usuario.'
+        ]);
     }
 }

@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[50],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/Eco.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/eco/Eco.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/documents/Cam.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/documents/Cam.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15,109 +15,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    EcoMapView: function EcoMapView() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(54)]).then(__webpack_require__.bind(null, /*! ../maps/EcoMapView */ "./resources/js/components/maps/EcoMapView.vue"));
-    },
-    Rcas: function Rcas() {
-      return __webpack_require__.e(/*! import() */ 52).then(__webpack_require__.bind(null, /*! ./RCAs */ "./resources/js/components/eco/RCAs.vue"));
-    },
-    TemporalStorages: function TemporalStorages() {
-      return __webpack_require__.e(/*! import() */ 53).then(__webpack_require__.bind(null, /*! ./TemporalStorages */ "./resources/js/components/eco/TemporalStorages.vue"));
-    },
-    ProtectedZones: function ProtectedZones() {
-      return __webpack_require__.e(/*! import() */ 51).then(__webpack_require__.bind(null, /*! ./ProtectedZones */ "./resources/js/components/eco/ProtectedZones.vue"));
+    Files: function Files() {
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./Files */ "./resources/js/components/documents/Files.vue"));
     }
   },
   props: ['user'],
   data: function data() {
-    return {
-      protectedZones: [],
-      storageZones: [],
-      map_attributes: {
-        latitude: -33.44444275,
-        longitude: -70.6561017,
-        zoom: 5,
-        storageIcon: '../img/markers/storagePin.png',
-        protectedZoneIcon: '../img/markers/entelEcoPin.png'
-      }
-    };
+    return {};
   },
-  computed: {
-    pops: function pops() {
-      var array = [];
-      this.protectedZones && this.protectedZones.forEach(function (element) {
-        return array.push(element);
-      });
-      this.storageZones && this.storageZones.forEach(function (element) {
-        return array.push(element);
-      });
-      return array;
-    }
-  },
-  mounted: function mounted() {
-    this.getProtectedZones();
-    this.getStorageZones();
-  },
-  methods: {
-    getProtectedZones: function getProtectedZones() {
-      var _this = this;
-
-      axios.get("/api/eco?api_token=".concat(this.user.api_token)).then(function (response) {
-        _this.protectedZones = response.data.environmentalData; // console.log(this.protectedZones)
-      });
-    },
-    getStorageZones: function getStorageZones() {
-      var _this2 = this;
-
-      axios.get("/api/storages?api_token=".concat(this.user.api_token)).then(function (response) {
-        _this2.storageZones = response.data.environmentalData;
-        console.log(_this2.storageZones);
-      });
-    }
-  }
+  computed: {},
+  created: function created() {},
+  mounted: function mounted() {},
+  methods: {}
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810& ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/documents/Cam.vue?vue&type=template&id=77b068c6&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/documents/Cam.vue?vue&type=template&id=77b068c6& ***!
+  \****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -129,50 +48,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "section has-background-light" }, [
-    _c("div", { staticClass: "tile is-ancestor" }, [
-      _c("div", { staticClass: "tile" }, [
-        _c(
-          "div",
-          { staticClass: "tile is-parent is-3" },
-          [
-            _c("protected-zones", {
-              attrs: { protectedZones: _vm.protectedZones, user: _vm.user }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "tile is-parent" }, [
-          _c(
-            "div",
-            { staticClass: "tile is-child box" },
-            [
-              _c("eco-map-view", {
-                attrs: {
-                  user: _vm.user,
-                  pops: _vm.pops,
-                  map_attributes: _vm.map_attributes
-                }
-              })
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tile is-parent is-3" },
-          [
-            _c("temporal-storages", {
-              attrs: { storageZones: _vm.storageZones, user: _vm.user }
-            })
-          ],
-          1
-        )
-      ])
-    ])
-  ])
+  return _c("div", [_c("Files")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -181,17 +57,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/eco/Eco.vue":
-/*!*********************************************!*\
-  !*** ./resources/js/components/eco/Eco.vue ***!
-  \*********************************************/
+/***/ "./resources/js/components/documents/Cam.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/documents/Cam.vue ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Eco.vue?vue&type=template&id=100bd810& */ "./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810&");
-/* harmony import */ var _Eco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Eco.vue?vue&type=script&lang=js& */ "./resources/js/components/eco/Eco.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Cam_vue_vue_type_template_id_77b068c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Cam.vue?vue&type=template&id=77b068c6& */ "./resources/js/components/documents/Cam.vue?vue&type=template&id=77b068c6&");
+/* harmony import */ var _Cam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cam.vue?vue&type=script&lang=js& */ "./resources/js/components/documents/Cam.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -201,9 +77,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Eco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Cam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Cam_vue_vue_type_template_id_77b068c6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Cam_vue_vue_type_template_id_77b068c6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -213,38 +89,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/eco/Eco.vue"
+component.options.__file = "resources/js/components/documents/Cam.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/eco/Eco.vue?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/eco/Eco.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************/
+/***/ "./resources/js/components/documents/Cam.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/documents/Cam.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Eco.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/Eco.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Cam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Cam.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/documents/Cam.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Cam_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810& ***!
-  \****************************************************************************/
+/***/ "./resources/js/components/documents/Cam.vue?vue&type=template&id=77b068c6&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/documents/Cam.vue?vue&type=template&id=77b068c6& ***!
+  \**********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Eco.vue?vue&type=template&id=100bd810& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/Eco.vue?vue&type=template&id=100bd810&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Cam_vue_vue_type_template_id_77b068c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Cam.vue?vue&type=template&id=77b068c6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/documents/Cam.vue?vue&type=template&id=77b068c6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Cam_vue_vue_type_template_id_77b068c6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Eco_vue_vue_type_template_id_100bd810___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Cam_vue_vue_type_template_id_77b068c6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comuna extends Model
 {
     protected $connection = 'mysql_entel_pops';
+    protected $table = 'entel_pops.comunas'; 
 
     public function pops() 
     {

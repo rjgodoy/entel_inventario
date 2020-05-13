@@ -2,14 +2,13 @@
     <div class="">
         
         <section class="section" :class="bodyBackground">
-            <!-- <button class="button is-link" @click="changeStyle" v-model="darkMode">Style</button> -->
 
             <!-- ITEMS BUTTONS -->
             <div class="container">
 
                 <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
 
-                    <div class="tile is-parent" v-for="tab in tabs">
+                    <div class="tile is-parent" v-for="tab in tabs" :key="tab.id">
                         <a class="tile is-child box" :key="tab.component" :class="currentTab === tab.component ? 'has-background-link' : boxBackground" @click="currentTab = tab.component">
                             <div :class="currentTab === tab.component ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
@@ -47,7 +46,7 @@
             AdminTps: () => import("./AdminTps"),
             AdminApprove: () => import("./AdminApprove"),
             AdminMassive: () => import("./AdminMassive"),
-            AdminPermissions: () => import("./AdminPermissions"),
+            AdminUsers: () => import("./AdminUsers"),
         },
         props : [
             'user'
@@ -91,10 +90,7 @@
                     this.searchBodyBackground = 'has-background-white'
                 }
             },
-            changeStyle() {
-                this.darkMode = this.darkMode == 0 ? 1 : 0
-                this.styleMode()
-            },
+
             getTabs() {
                 axios.get(`/api/tabs?api_token=${this.user.api_token}`)
                 .then((response) => {

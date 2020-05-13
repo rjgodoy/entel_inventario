@@ -56,6 +56,11 @@ class Site extends Model
         return $this->hasMany(File::class);
     }
 
+    public function folders() 
+    {
+        return $this->hasMany(Folder::class);
+    }
+
     public function pop() 
     {
         return $this->belongsTo(Pop::class);

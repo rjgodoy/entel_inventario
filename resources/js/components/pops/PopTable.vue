@@ -9,7 +9,7 @@
                     <div class="column is-2">
                         <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">CRMs</div>
                         <div class="columns is-multiline is-gapless">
-                            <div class="column is-6" v-for="crm in crms">
+                            <div class="column is-6" v-for="crm in crms" :key=crm.id>
                                 <a class="is-fullwidth button" :class="selectedCrm == crm ? 'is-link' : 'is-black-ter'" @click="selectCrm(crm)">
                                     <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
                                         <!-- <div class="is-size-7 has-text-weight-normal">CRM</div> -->
@@ -29,7 +29,7 @@
                             <div class="has-text-centered has-text-weight-light has-text-grey-light is-size-5">Selecciona un CRM</div>
                         </div>
                         <div v-if="selectedCrm" class="columns is-multiline is-gapless">
-                            <div class="column" :class="zonas.length == 2 || zonas.length == 3 ? 'is-12' : 'is-6'" v-for="zona in zonas">
+                            <div class="column" :class="zonas.length == 2 || zonas.length == 3 ? 'is-12' : 'is-6'" v-for="zona in zonas" :key="zona.id">
                                 <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona)">
                                     <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
                                         <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
@@ -284,7 +284,7 @@
                         </thead>
                         
                         <tbody>
-                            <tr class="" v-for="pop in pops.data">
+                            <tr class="" v-for="pop in pops.data" :key="pop.id">
                                 <td class="has-text-weight-light" :class="primaryText">
                                     <b-checkbox v-model="selectedPops"
                                         size="is-medium"
@@ -306,7 +306,7 @@
 
                                 <td class="">
                                     <div class="columns is-multiline">
-                                        <div class="column is-6 has-text-centered" v-for="site in pop.sites">
+                                        <div class="column is-6 has-text-centered" v-for="site in pop.sites" :key="site.id">
                                             <div class="is-size-7 has-text-weight-normal has-text-centered">{{ site.nem_site }}</div>
                                         </div>
                                     </div>
@@ -346,7 +346,6 @@
                                     <button 
                                         class="button is-small is-default" 
                                         @click="selectPop(pop)" 
-                                        v-model="selectedPop" 
                                         data-tooltip="Ver en mapa"
                                         >
                                         <font-awesome-icon icon="map-marked-alt"/>
@@ -390,7 +389,7 @@
                     <div class="snippet">
                         <span class="has-text-weight-normal is-size-7"><strong>{{ selectedPops.length }}</strong> pops selected</span>
                         <div class="field is-grouped is-grouped-multiline">
-                            <div class="control" v-for="pop in selectedPops">
+                            <div class="control" v-for="pop in selectedPops" :key="pop.id">
                                 <div class="tags has-addons">
                                     <a class="tag is-link">{{ pop.nombre }}</a>
                                     <a class="tag is-delete" @click="removeSelectedPop(pop)"></a>
@@ -414,450 +413,456 @@
 </template>
 
 <script>
-    import VuePagination from '../VuePagination.vue';
-    import LoadingComponent from '../helpers/LoadingComponent.vue';
-    // import ErrorComponent from './maps/ErrorComponent.vue';
-    // const MapView = () => ({
-    //     // The component to load (should be a Promise)
-    //     component: import('../maps/MapView.vue'),
-    //     // A component to use while the async component is loading
-    //     // loading: LoadingComponent,
-    //     // A component to use if the load fails
-    //     // error: ErrorComponent,
-    //     // Delay before showing the loading component. Default: 200ms.
-    //     delay: 200,
-    //     // The error component will be displayed if a timeout is
-    //     // provided and exceeded. Default: Infinity.
-    //     timeout: 300
-    // });
-    export default {
-        components: {
-            MapView: () => import('../maps/MapView.vue'),
-            VuePagination,
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch, faInfo, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faSearch, faInfo, faMapMarkedAlt);
+
+import VuePagination from '../VuePagination.vue';
+import LoadingComponent from '../helpers/LoadingComponent.vue';
+// import ErrorComponent from './maps/ErrorComponent.vue';
+// const MapView = () => ({
+//     // The component to load (should be a Promise)
+//     component: import('../maps/MapView.vue'),
+//     // A component to use while the async component is loading
+//     // loading: LoadingComponent,
+//     // A component to use if the load fails
+//     // error: ErrorComponent,
+//     // Delay before showing the loading component. Default: 200ms.
+//     delay: 200,
+//     // The error component will be displayed if a timeout is
+//     // provided and exceeded. Default: Infinity.
+//     timeout: 300
+// });
+export default {
+    components: {
+        MapView: () => import('../maps/MapView.vue'),
+        VuePagination,
+    },
+    props : [
+        'user',
+        'darkMode'
+    ],
+    data() {
+        return {
+            crms: null,
+            zonas: null,
+            filters: [],
+            // pops: [],
+            popsMap: [],
+
+            pops: {
+                total: 0,
+                per_page: 10,
+                from: 1,
+                to: 0,
+                current_page: 1
+            },
+
+            map_attributes: {
+                latitude: -33.44444275,
+                longitude: -70.6561017,
+                zoom: 5
+            },
+
+            bodyBackground: '',
+            boxBackground: '',
+            primaryText: '',
+            secondaryText: '',
+            searchBodyBackground: '',
+
+            selectedPrimaryBoxText: 'has-text-white',
+            selectedSecondaryBoxText: 'has-text-light',
+            
+            isLoading: false,
+
+            // selectedPop: null,
+            selectedPops: [],
+            selectedCrm: null,
+            selectedZona: null,
+            searchText: '',
+
+            core: 0,
+            critic: 0,
+
+            vip: 0,
+            pe_3g: 0,
+            mpls: 0,
+            olt: 0,
+            olt_3play: 0,
+            red_minima_n1: 0,
+            red_minima_n2: 0,
+            lloo: 0,
+            ranco: 0,
+            bafi: 0,
+            offgrid: 0,
+            solar: 0,
+            eolica: 0,
+            protected_zone: 0,
+            alba_project: 0,
+
+            junction: 0,
+            generator_set: 0,
+            power_rectifier: 0,
+            air_conditioner: 0,
+            vertical_structure: 0,
+            infrastructure: 0,
+
+            // checkboxPosition: 'left',
+            // isPaginated: true,
+            // isPaginationSimple: false,
+            // paginationPosition: 'bottom',
+            // defaultSortDirection: 'asc',
+            // sortIcon: 'arrow-up',
+            // sortIconSize: 'is-small',
+            // currentPage: 1,
+            // perPage: 20
+        }
+    },
+
+    created() {
+        this.styleMode()
+        this.getCrms()
+        this.getFilterButtons()
+    },
+
+    mounted() {
+        this.getPops()
+        this.getPopsMap()
+    },
+
+    watch: {
+        core(newValue) { this.getPops(); this.getPopsMap() },
+        critic(newValue) { this.getPops(); this.getPopsMap() },
+
+        vip(newValue) { this.getPops(); this.getPopsMap() },
+        pe_3g(newValue) { this.getPops(); this.getPopsMap() },
+        mpls(newValue) { this.getPops(); this.getPopsMap() },
+        olt(newValue) { this.getPops(); this.getPopsMap() },
+        olt_3play(newValue) { this.getPops(); this.getPopsMap() },
+        red_minima_n1(newValue) { this.getPops(); this.getPopsMap() },
+        red_minima_n2(newValue) { this.getPops(); this.getPopsMap() },
+        lloo(newValue) { this.getPops(); this.getPopsMap() },
+        ranco(newValue) { this.getPops(); this.getPopsMap() },
+        bafi(newValue) { this.getPops(); this.getPopsMap() },
+        offgrid(newValue) { this.getPops(); this.getPopsMap() },
+        solar(newValue) { this.getPops(); this.getPopsMap() },
+        eolica(newValue) { this.getPops(); this.getPopsMap() },
+        protected_zone(newValue) { this.getPops(); this.getPopsMap() },
+        alba_project(newValue) { this.getPops(); this.getPopsMap() },
+
+        junction(newValue) { this.getPops(); this.getPopsMap() },
+        generator_set(newValue) { this.getPops(); this.getPopsMap() },
+        power_rectifier(newValue) { this.getPops(); this.getPopsMap() },
+        air_conditioner(newValue) { this.getPops(); this.getPopsMap() },
+        vertical_structure(newValue) { this.getPops(); this.getPopsMap() },
+        infrastructure(newValue) { this.getPops(); this.getPopsMap() },
+
+        selectedPops(newValue) { 
+            newValue.length != 0 ? this.popsMap = newValue : this.getPops()
+        }
+    },
+
+    computed: {
+        selectedIds() {
+            var popIds = []
+            this.selectedPops.forEach(element => {
+                popIds.push(element.id)
+            })
+            return popIds
+        }
+    },
+    methods: {
+        // BUTTONS
+        getCrms() {
+            axios.get(`/api/crms?api_token=${this.user.api_token}`)
+            .then((response) => {
+                this.crms = response.data.data;
+            })
+            .catch(() => {
+                console.log('handle server error from here');
+            });
         },
-        props : [
-            'user',
-            'darkMode'
-        ],
-        data() {
-            return {
-                crms: null,
-                zonas: null,
-                filters: [],
-                // pops: [],
-                popsMap: [],
 
-                pops: {
-                    total: 0,
-                    per_page: 10,
-                    from: 1,
-                    to: 0,
-                    current_page: 1
-                },
-
-                map_attributes: {
-                    latitude: -33.44444275,
-                    longitude: -70.6561017,
-                    zoom: 5
-                },
-
-                bodyBackground: '',
-                boxBackground: '',
-                primaryText: '',
-                secondaryText: '',
-                searchBodyBackground: '',
-
-                selectedPrimaryBoxText: 'has-text-white',
-                selectedSecondaryBoxText: 'has-text-light',
-                
-                isLoading: false,
-
-                selectedPop: null,
-                selectedPops: [],
-                selectedCrm: null,
-                selectedZona: null,
-                searchText: '',
-
-                core: 0,
-                critic: 0,
-
-                vip: 0,
-                pe_3g: 0,
-                mpls: 0,
-                olt: 0,
-                olt_3play: 0,
-                red_minima_n1: 0,
-                red_minima_n2: 0,
-                lloo: 0,
-                ranco: 0,
-                bafi: 0,
-                offgrid: 0,
-                solar: 0,
-                eolica: 0,
-                protected_zone: 0,
-                alba_project: 0,
-
-                junction: 0,
-                generator_set: 0,
-                power_rectifier: 0,
-                air_conditioner: 0,
-                vertical_structure: 0,
-                infrastructure: 0,
-
-                // checkboxPosition: 'left',
-                // isPaginated: true,
-                // isPaginationSimple: false,
-                // paginationPosition: 'bottom',
-                // defaultSortDirection: 'asc',
-                // sortIcon: 'arrow-up',
-                // sortIconSize: 'is-small',
-                // currentPage: 1,
-                // perPage: 20
-            }
+        getFilterButtons() {
+            axios.get(`/api/filters?api_token=${this.user.api_token}`)
+            .then((response) => {
+                // console.log(response.data)
+                this.filters = response.data;
+            })
         },
 
-        created() {
-            this.styleMode()
-            this.getCrms()
-            this.getFilterButtons()
+        selectPop(pop) {
+            this.popsMap = [pop]
         },
 
-        mounted() {
+        selectCrm(crm) {
+            // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
+            // si había una zona seleccionada, la variable selectedZona será null.
+            this.selectedCrm = this.selectedCrm != crm ? crm : null
+            this.selectedZona = null
+            this.zonas = crm.zonas
             this.getPops()
             this.getPopsMap()
         },
 
-        watch: {
-            core(newValue) { this.getPops(); this.getPopsMap() },
-            critic(newValue) { this.getPops(); this.getPopsMap() },
+        selectZona(zona) {
+            this.selectedZona = this.selectedZona != zona ? zona : null
+            this.getPops()
+            this.getPopsMap()
+        },
 
-            vip(newValue) { this.getPops(); this.getPopsMap() },
-            pe_3g(newValue) { this.getPops(); this.getPopsMap() },
-            mpls(newValue) { this.getPops(); this.getPopsMap() },
-            olt(newValue) { this.getPops(); this.getPopsMap() },
-            olt_3play(newValue) { this.getPops(); this.getPopsMap() },
-            red_minima_n1(newValue) { this.getPops(); this.getPopsMap() },
-            red_minima_n2(newValue) { this.getPops(); this.getPopsMap() },
-            lloo(newValue) { this.getPops(); this.getPopsMap() },
-            ranco(newValue) { this.getPops(); this.getPopsMap() },
-            bafi(newValue) { this.getPops(); this.getPopsMap() },
-            offgrid(newValue) { this.getPops(); this.getPopsMap() },
-            solar(newValue) { this.getPops(); this.getPopsMap() },
-            eolica(newValue) { this.getPops(); this.getPopsMap() },
-            protected_zone(newValue) { this.getPops(); this.getPopsMap() },
-            alba_project(newValue) { this.getPops(); this.getPopsMap() },
+        popClassification(pop) {
+            var id = 6; var classification
+            if (pop.sites) {
+                pop.sites.forEach((item) => {
+                    if (item.classification_type_id && item.classification_type_id < id) { 
+                        id = item.classification_type_id
+                        classification = item.classification_type.classification_type
+                    }
+                })
+            }
+            return {
+                'classification': classification, 
+                'id': id
+                }
+        },
 
-            junction(newValue) { this.getPops(); this.getPopsMap() },
-            generator_set(newValue) { this.getPops(); this.getPopsMap() },
-            power_rectifier(newValue) { this.getPops(); this.getPopsMap() },
-            air_conditioner(newValue) { this.getPops(); this.getPopsMap() },
-            vertical_structure(newValue) { this.getPops(); this.getPopsMap() },
-            infrastructure(newValue) { this.getPops(); this.getPopsMap() },
+        // APIs
+        getPops() {
+            var params = {
+                'api_token': this.user.api_token,
 
-            selectedPops(newValue) { 
-                newValue.length != 0 ? this.popsMap = newValue : this.getPops()
+                'page': this.pops.current_page,
+                'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                'text': this.searchText != '' ?  this.searchText : 0,
+
+                'core': this.core,
+                'critic': this.critic,
+
+                'vip': this.vip,
+                'pe_3g': this.pe_3g,
+                'mpls': this.mpls,
+                'olt': this.olt,
+                'olt_3play': this.olt_3play,
+                'red_minima_n1': this.red_minima_n1,
+                'red_minima_n2': this.red_minima_n2,
+                'lloo': this.lloo,
+                'ranco': this.ranco,
+                'bafi': this.bafi,
+                'offgrid': this.offgrid,
+                'solar': this.solar,
+                'eolica': this.eolica,
+                'alba_project': this.alba_project,
+                'protected_zone': this.protected_zone,
+
+                'junction': this.junction,
+                'generator_set': this.generator_set,
+                'power_rectifier': this.power_rectifier,
+                'air_conditioner': this.air_conditioner,
+                'vertical_structure': this.vertical_structure,
+                'infrastructure': this.infrastructure
+            }
+
+            axios.get('/api/filterPops', { params: params })
+            .then((response) => {
+                console.log(response)
+                this.pops = response.data
+            })
+        },
+
+        // APIs
+        getPopsMap() {
+            var params = {
+                'api_token': this.user.api_token,
+
+                'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                'text': this.searchText != '' ?  this.searchText : 0,
+
+                'core': this.core,
+                'critic': this.critic,
+
+                'vip': this.vip,
+                'pe_3g': this.pe_3g,
+                'mpls': this.mpls,
+                'olt': this.olt,
+                'olt_3play': this.olt_3play,
+                'red_minima_n1': this.red_minima_n1,
+                'red_minima_n2': this.red_minima_n2,
+                'lloo': this.lloo,
+                'ranco': this.ranco,
+                'bafi': this.bafi,
+                'offgrid': this.offgrid,
+                'solar': this.solar,
+                'eolica': this.eolica,
+                'alba_project': this.alba_project,
+                'protected_zone': this.protected_zone,
+
+                'junction': this.junction,
+                'generator_set': this.generator_set,
+                'power_rectifier': this.power_rectifier,
+                'air_conditioner': this.air_conditioner,
+                'vertical_structure': this.vertical_structure,
+                'infrastructure': this.infrastructure
+            }
+
+            axios.get('/api/popsMap', { params: params })
+            .then((response) => {
+                // console.log(response.data)
+                this.popsMap = response.data
+
+            })
+        },
+
+
+        // Style mode
+        styleMode(){
+            if (this.darkMode == 1) {
+                // dark mode
+                this.bodyBackground = 'has-background-black-ter'
+                this.boxBackground = 'has-background-dark'
+                this.primaryText = 'has-text-white'
+                this.secondaryText = 'has-text-light'
+                this.searchBodyBackground = 'has-background-dark'
+            } else {
+                // light mode
+                this.bodyBackground = 'has-background-light'
+                this.boxBackground = 'has-background-white'
+                this.primaryText = 'has-text-dark'
+                this.secondaryText = 'has-text-grey'
+                this.searchBodyBackground = 'has-background-white'
             }
         },
 
-        computed: {
-            selectedIds() {
-                var popIds = []
-                this.selectedPops.forEach(element => {
-                    popIds.push(element.id)
-                })
-                return popIds
+        changeStyle() {
+            if (this.darkMode == 0) {
+                this.darkMode = 1
+                this.styleMode()
+            } else {
+                this.darkMode = 0
+                this.styleMode()
             }
         },
-        methods: {
-            // BUTTONS
-            getCrms() {
-                axios.get(`/api/crms?api_token=${this.user.api_token}`)
-                .then((response) => {
-                    this.crms = response.data.data;
+
+        clearSearch() {
+            this.searchText = ''
+            this.popSearch = []
+            // this.selectedPop = null
+            this.selectedPops = []
+            this.selectedCrm = null
+            this.selectedZona = null
+            this.getPops()
+        },
+
+        // addPop(pop) {
+        //     if (this.selectedPops.includes(pop)) {
+        //         console.log('fail')
+        //     //     var index = this.selectedPops.indexOf(pop);
+        //     //     if (index > -1) {
+        //     //       this.selectedPops.splice(index, 1);
+        //     //     }
+        //     } else {
+        //         pop.selected = true
+        //         this.selectedPops.push(pop)
+        //         console.log(this.selectedPops)
+        //         this.pops = this.selectedPops
+        //     }
+        // },
+
+        removeSelectedPop(item){
+            item.selected = false
+            for( var i = 0; i < this.selectedPops.length; i++){ 
+                if ( this.selectedPops[i] === item) {
+                    this.selectedPops.splice(i, 1); 
+                }
+            }
+        },
+
+        downloadPops() {
+            this.isLoading = true
+
+            var params = {
+                'api_token': this.user.api_token,
+
+                'selectedIds': this.selectedIds,
+                'text': this.searchText != '' ?  this.searchText : 0,
+
+                'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                
+                'core': this.core,
+                'critic': this.critic,
+
+                'vip': this.vip,
+                'pe_3g': this.pe_3g,
+                'mpls': this.mpls,
+                'olt': this.olt,
+                'olt_3play': this.olt_3play,
+                // 'red_minima_n1': this.red_minima_n1,
+                // 'red_minima_n2': this.red_minima_n2,
+                'lloo': this.lloo,
+                'ranco': this.ranco,
+                'bafi': this.bafi,
+                'offgrid': this.offgrid,
+                'solar': this.solar,
+                'eolica': this.eolica,
+                'alba_project': this.alba_project,
+                'protected_zone': this.protected_zone,
+
+                'junction': this.junction,
+                'generator_set': this.generator_set,
+                'power_rectifier': this.power_rectifier,
+                'air_conditioner': this.air_conditioner,
+                'vertical_structure': this.vertical_structure,
+                'infrastructure': this.infrastructure
+            }
+
+            axios.get('/api/pop/export', { 
+                params: params, 
+                responseType: 'arraybuffer' 
+            })
+            .then((response) => {
+                console.log(response)
+                const blob = new Blob([response.data], { type: 'application/xlsx' })
+                // const objectUrl = window.URL.createObjectURL(blob)
+
+                // IE doesn't allow using a blob object directly as link href
+                // instead it is necessary to use msSaveOrOpenBlob
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(newBlob)
+                    return
+                }
+
+                const data = window.URL.createObjectURL(blob)
+                let link = document.createElement('a')
+                link.href = data
+                link.download = 'listado_pops.xlsx'
+                link.click()
+                // setTimeout(function () {
+                //     // For Firefox it is necessary to delay revoking the ObjectURL
+                //     window.URL.revokeObjectURL(data)
+                // }, 100)
+
+                this.isLoading = false
+                this.$buefy.toast.open({
+                    message: 'La planilla se ha descargado exitosamente.',
+                    type: 'is-success',
+                    duration: 5000
                 })
-                .catch(() => {
-                    console.log('handle server error from here');
-                });
-            },
-
-            getFilterButtons() {
-                axios.get(`/api/filters?api_token=${this.user.api_token}`)
-                .then((response) => {
-                    // console.log(response.data)
-                    this.filters = response.data;
+            }).catch((error) => {
+                console.log(error)
+                this.isLoading = false
+                this.$buefy.toast.open({
+                    message: 'Ha ocurrido un error. Favor contactar al administrador',
+                    type: 'is-danger',
+                    duration: 5000
                 })
-            },
+            })
+        },
 
-            selectPop(pop) {
-                this.popsMap = [pop]
-            },
-
-            selectCrm(crm) {
-                // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
-                // si había una zona seleccionada, la variable selectedZona será null.
-                this.selectedCrm = this.selectedCrm != crm ? crm : null
-                this.selectedZona = null
-                this.zonas = crm.zonas
-                this.getPops()
-                this.getPopsMap()
-            },
-
-            selectZona(zona) {
-                this.selectedZona = this.selectedZona != zona ? zona : null
-                this.getPops()
-                this.getPopsMap()
-            },
-
-            popClassification(pop) {
-                var id = 6; var classification
-                if (pop.sites) {
-                    pop.sites.forEach((item) => {
-                        if (item.classification_type_id && item.classification_type_id < id) { 
-                            id = item.classification_type_id
-                            classification = item.classification_type.classification_type
-                        }
-                    })
-                }
-                return {
-                    'classification': classification, 
-                    'id': id
-                    }
-            },
-
-            // APIs
-            getPops() {
-                var params = {
-                    'api_token': this.user.api_token,
-
-                    'page': this.pops.current_page,
-                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
-                    'text': this.searchText != '' ?  this.searchText : 0,
-
-                    'core': this.core,
-                    'critic': this.critic,
-
-                    'vip': this.vip,
-                    'pe_3g': this.pe_3g,
-                    'mpls': this.mpls,
-                    'olt': this.olt,
-                    'olt_3play': this.olt_3play,
-                    'red_minima_n1': this.red_minima_n1,
-                    'red_minima_n2': this.red_minima_n2,
-                    'lloo': this.lloo,
-                    'ranco': this.ranco,
-                    'bafi': this.bafi,
-                    'offgrid': this.offgrid,
-                    'solar': this.solar,
-                    'eolica': this.eolica,
-                    'alba_project': this.alba_project,
-                    'protected_zone': this.protected_zone,
-
-                    'junction': this.junction,
-                    'generator_set': this.generator_set,
-                    'power_rectifier': this.power_rectifier,
-                    'air_conditioner': this.air_conditioner,
-                    'vertical_structure': this.vertical_structure,
-                    'infrastructure': this.infrastructure
-                }
-
-                axios.get('/api/filterPops', { params: params })
-                .then((response) => {
-                    console.log(response)
-                    this.pops = response.data
-                })
-            },
-
-            // APIs
-            getPopsMap() {
-                var params = {
-                    'api_token': this.user.api_token,
-
-                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
-                    'text': this.searchText != '' ?  this.searchText : 0,
-
-                    'core': this.core,
-                    'critic': this.critic,
-
-                    'vip': this.vip,
-                    'pe_3g': this.pe_3g,
-                    'mpls': this.mpls,
-                    'olt': this.olt,
-                    'olt_3play': this.olt_3play,
-                    'red_minima_n1': this.red_minima_n1,
-                    'red_minima_n2': this.red_minima_n2,
-                    'lloo': this.lloo,
-                    'ranco': this.ranco,
-                    'bafi': this.bafi,
-                    'offgrid': this.offgrid,
-                    'solar': this.solar,
-                    'eolica': this.eolica,
-                    'alba_project': this.alba_project,
-                    'protected_zone': this.protected_zone,
-
-                    'junction': this.junction,
-                    'generator_set': this.generator_set,
-                    'power_rectifier': this.power_rectifier,
-                    'air_conditioner': this.air_conditioner,
-                    'vertical_structure': this.vertical_structure,
-                    'infrastructure': this.infrastructure
-                }
-
-                axios.get('/api/popsMap', { params: params })
-                .then((response) => {
-                    // console.log(response.data)
-                    this.popsMap = response.data
-
-                })
-            },
-
-
-            // Style mode
-            styleMode(){
-                if (this.darkMode == 1) {
-                    // dark mode
-                    this.bodyBackground = 'has-background-black-ter'
-                    this.boxBackground = 'has-background-dark'
-                    this.primaryText = 'has-text-white'
-                    this.secondaryText = 'has-text-light'
-                    this.searchBodyBackground = 'has-background-dark'
-                } else {
-                    // light mode
-                    this.bodyBackground = 'has-background-light'
-                    this.boxBackground = 'has-background-white'
-                    this.primaryText = 'has-text-dark'
-                    this.secondaryText = 'has-text-grey'
-                    this.searchBodyBackground = 'has-background-white'
-                }
-            },
-
-            changeStyle() {
-                if (this.darkMode == 0) {
-                    this.darkMode = 1
-                    this.styleMode()
-                } else {
-                    this.darkMode = 0
-                    this.styleMode()
-                }
-            },
-
-            clearSearch() {
-                this.searchText = ''
-                this.popSearch = []
-                this.selectedPop = null
-                this.selectedPops = []
-                this.selectedCrm = null
-                this.selectedZona = null
-                this.getPops()
-            },
-
-            // addPop(pop) {
-            //     if (this.selectedPops.includes(pop)) {
-            //         console.log('fail')
-            //     //     var index = this.selectedPops.indexOf(pop);
-            //     //     if (index > -1) {
-            //     //       this.selectedPops.splice(index, 1);
-            //     //     }
-            //     } else {
-            //         pop.selected = true
-            //         this.selectedPops.push(pop)
-            //         console.log(this.selectedPops)
-            //         this.pops = this.selectedPops
-            //     }
-            // },
-
-            removeSelectedPop(item){
-                item.selected = false
-                for( var i = 0; i < this.selectedPops.length; i++){ 
-                   if ( this.selectedPops[i] === item) {
-                     this.selectedPops.splice(i, 1); 
-                   }
-                }
-            },
-
-            downloadPops() {
-                this.isLoading = true
-
-                var params = {
-                    'api_token': this.user.api_token,
-
-                    'selectedIds': this.selectedIds,
-                    'text': this.searchText != '' ?  this.searchText : 0,
-
-                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
-                    
-                    'core': this.core,
-                    'critic': this.critic,
-
-                    'vip': this.vip,
-                    'pe_3g': this.pe_3g,
-                    'mpls': this.mpls,
-                    'olt': this.olt,
-                    'olt_3play': this.olt_3play,
-                    // 'red_minima_n1': this.red_minima_n1,
-                    // 'red_minima_n2': this.red_minima_n2,
-                    'lloo': this.lloo,
-                    'ranco': this.ranco,
-                    'bafi': this.bafi,
-                    'offgrid': this.offgrid,
-                    'solar': this.solar,
-                    'eolica': this.eolica,
-                    'alba_project': this.alba_project,
-                    'protected_zone': this.protected_zone,
-
-                    // 'junction': this.junction,
-                    // 'generator_set': this.generator_set,
-                    // 'power_rectifier': this.power_rectifier,
-                    // 'air_conditioner': this.air_conditioner,
-                    // 'vertical_structure': this.vertical_structure,
-                    // 'infrastructure': this.infrastructure
-                }
-
-                axios.get('/api/pop/export', { 
-                    params: params, 
-                    responseType: 'arraybuffer' 
-                })
-                .then((response) => {
-                    console.log(response)
-                    const blob = new Blob([response.data], { type: 'application/xlsx' })
-                    // const objectUrl = window.URL.createObjectURL(blob)
-
-                    // IE doesn't allow using a blob object directly as link href
-                    // instead it is necessary to use msSaveOrOpenBlob
-                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                        window.navigator.msSaveOrOpenBlob(newBlob)
-                        return
-                    }
-
-                    const data = window.URL.createObjectURL(blob)
-                    let link = document.createElement('a')
-                    link.href = data
-                    link.download = 'listado_pops.xlsx'
-                    link.click()
-                    // setTimeout(function () {
-                    //     // For Firefox it is necessary to delay revoking the ObjectURL
-                    //     window.URL.revokeObjectURL(data)
-                    // }, 100)
-
-                    this.isLoading = false
-                    this.$buefy.toast.open({
-                        message: 'La planilla se ha descargado exitosamente.',
-                        type: 'is-success',
-                        duration: 5000
-                    })
-                }).catch((error) => {
-                    console.log(error)
-                    this.isLoading = false
-                    this.$buefy.toast.open({
-                        message: 'Ha ocurrido un error. Favor contactar al administrador',
-                        type: 'is-danger',
-                        duration: 5000
-                    })
-                })
-            },
-
-        }
     }
+}
 </script>

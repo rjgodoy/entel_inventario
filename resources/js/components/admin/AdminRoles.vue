@@ -7,7 +7,7 @@
                 <option value="15">15 per page</option>
                 <option value="20">20 per page</option>
             </b-select>
-<!--             <div class="control">
+            <!-- <div class="control">
                 <button class="button" @click="currentPage = 2" :disabled="!isPaginated">Set page to 2</button>
             </div>
             <div class="control is-flex">

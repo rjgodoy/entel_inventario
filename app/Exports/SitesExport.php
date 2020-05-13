@@ -44,6 +44,13 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
     protected $eolica;
     protected $alba_project;
     protected $protected_zone;
+
+    protected $junction;
+    protected $generator_set;
+    protected $power_rectifier;
+    protected $air_conditioner;
+    protected $vertical_structure;
+    protected $infrastructure;
     
     public function __construct(object $request)
     {
@@ -69,6 +76,13 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         $this->eolica = $request->eolica ? $request->eolica : 0;
         $this->alba_project = $request->alba_project ? $request->alba_project : 0;
         $this->protected_zone = $request->protected_zone ? $request->protected_zone : 0;
+
+        $this->junction = $request->junction ? $request->junction : 0;
+        $this->generator_set = $request->generator_set ? $request->generator_set : 0;
+        $this->power_rectifier = $request->power_rectifier ? $request->power_rectifier : 0;
+        $this->air_conditioner = $request->air_conditioner ? $request->air_conditioner : 0;
+        $this->vertical_structure = $request->vertical_structure ? $request->vertical_structure : 0;
+        $this->infrastructure = $request->infrastructure ? $request->infrastructure : 0;
     }
 
     /**
@@ -110,7 +124,23 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $condition_offgrid = 'pops.offgrid IN ('.$this->offgrid.',1)';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
-            $condition_protected_zone = 'pops.protected_zone IN ('.$this->protected_zone.',1)';
+            
+            $protected_zone = $this->protected_zone;
+            $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
+
+            $junction = $this->junction;
+            $condition_junctions = 'pops.id IN (SELECT junctions.pop_id from entel_g_redes_inventario.junctions)';
+            $generator_set = $this->generator_set;
+            $condition_generators = 'pops.id IN (SELECT generator_sets.pop_id from entel_g_redes_inventario.generator_sets)';
+            $power_rectifier = $this->power_rectifier;
+            $condition_rectifiers = 'pops.id IN (SELECT power_rectifiers.pop_id from entel_g_redes_inventario.power_rectifiers)';
+            $air_conditioner = $this->air_conditioner;
+            $condition_air_conditioners = 'pops.id IN (SELECT air_conditioners.pop_id from entel_g_redes_inventario.air_conditioners)';
+            $vertical_structure = $this->vertical_structure;
+            $condition_vertical_structures = 'pops.id IN (SELECT vertical_structures.pop_id from entel_g_redes_inventario.vertical_structures)';
+            $infrastructure = $this->infrastructure;
+            $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
+
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
             $site = Site::with('pop', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type')
@@ -162,12 +192,36 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                 ->whereHas('pop.rooms', function($r) use($condition_critic) {
                     $r->whereRaw($condition_critic);
                 })
-                ->whereHas('pop', function($s) use($condition_vip, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $condition_alba_project) {
+                ->whereHas('pop', function($s) use($condition_vip, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone, 
+                    $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_alba_project) {
                     $s->whereRaw($condition_vip)
                     ->whereRaw($condition_offgrid)
                     ->whereRaw($condition_solar)
                     ->whereRaw($condition_eolica)
-                    ->whereRaw($condition_protected_zone)
+                    
+                    ->where(function($q) use($condition_protected_zone, $protected_zone) {
+                        $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
+                    })
+
+                    ->where(function($q) use($condition_junctions, $junction) {
+                    $junction ? $q->whereRaw($condition_junctions) : $q->whereRaw('1 = 1');
+                    })
+                    ->where(function($q) use($condition_generators, $generator_set) {
+                        $generator_set ? $q->whereRaw($condition_generators) : $q->whereRaw('1 = 1');
+                    })
+                    ->where(function($q) use($condition_rectifiers, $power_rectifier) {
+                        $power_rectifier ? $q->whereRaw($condition_rectifiers) : $q->whereRaw('1 = 1');
+                    })
+                    ->where(function($q) use($condition_air_conditioners, $air_conditioner) {
+                        $air_conditioner ? $q->whereRaw($condition_air_conditioners) : $q->whereRaw('1 = 1');
+                    })
+                    ->where(function($q) use($condition_vertical_structures, $vertical_structure) {
+                        $vertical_structure ? $q->whereRaw($condition_vertical_structures) : $q->whereRaw('1 = 1');
+                    })
+                    ->where(function($q) use($condition_infrastructures, $infrastructure) {
+                        $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
+                    })
+
                     ->whereRaw($condition_alba_project);
                 })
                 ->whereRaw($condition_core)

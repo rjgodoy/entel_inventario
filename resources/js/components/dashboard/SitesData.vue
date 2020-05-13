@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="is-size-7" v-for="item in sitesData">
+                <tr class="is-size-7" v-for="item in sitesData" :key="item.id">
                     <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
                     <td class="has-text-right" :class="primaryText">{{ item.fijo | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ item.movil | numeral('0,0') }}</td>
@@ -58,34 +58,14 @@
                 <div class="is-size-7 has-text-right" style="margin-top: 10px" :class="secondaryText">Ultima actualización: {{ last_updated }}</div>
             </div>
 
-
-
-    <!--         <chart
-                :chartData="sitesData"
-            ></chart> -->
-
         </div>
     </div>
 </template>
 
 <script>
-    const SitesDataChart = () => ({
-        // The component to load (should be a Promise)
-        component: import('./SitesDataChart.vue'),
-        // A component to use while the async component is loading
-        // loading: LoadingComponent,
-        // A component to use if the load fails
-        // error: ErrorComponent,
-        // Delay before showing the loading component. Default: 200ms.
-        delay: 200,
-        // The error component will be displayed if a timeout is
-        // provided and exceeded. Default: Infinity.
-        timeout: 3000
-    })
 
     export default {
         components: {
-            'chart': SitesDataChart
         },
         props : [
             'user',

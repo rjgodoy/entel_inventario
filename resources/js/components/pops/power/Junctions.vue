@@ -1,6 +1,6 @@
 <template>
     <section class="" v-if="junctions.length">
-        <div class="" v-for="junction in junctions">
+        <div class="" v-for="junction in junctions" :key="junction.id">
 
             <div class="columns">
                 <div class="column is-3"></div>
@@ -15,7 +15,6 @@
                 <div class="column is-3"></div>
             </div>
             
-
         </div>
     </section>
 </template>

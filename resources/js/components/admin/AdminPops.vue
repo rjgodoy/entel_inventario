@@ -21,15 +21,6 @@
                             </div>
                         </a>
                     </div>
-                    <div class="tile is-parent">
-                        <a class="tile is-child box" :class="popActiveView == 3 ? 'has-background-link' : boxBackground" @click="changeView(3)">
-                            <div :class="popActiveView == 3 ? selectedSecondaryBoxText : secondaryText"> 
-                                <div class="is-size-6 has-text-weight-semibold">
-                                    Sincronización con SGC
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -52,27 +43,16 @@
             :secondaryText="secondaryText"
         ></pop-data-edit>
 
-        <pop-data-sync
-            v-if="popActiveView == 3"
-            :user="user"
-            :bodyBackground="bodyBackground"
-            :boxBackground="boxBackground"
-            :primaryText="primaryText"
-            :secondaryText="secondaryText"
-        ></pop-data-sync>
-
     </div>
 </template>
 
 <script>
     import AdminPopDataAdd from './AdminPopDataAdd.vue';
     import AdminPopDataEdit from './AdminPopDataEdit.vue';
-    import AdminPopDataSync from './AdminPopDataSync.vue';
     export default {
         components: {
             'pop-data-add': AdminPopDataAdd,
             'pop-data-edit': AdminPopDataEdit,
-            'pop-data-sync': AdminPopDataSync
         },
         props : [
             'user',
@@ -90,7 +70,7 @@
             return {
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
-                popActiveView: 1
+                popActiveView: 0
             }
         },
         methods: {

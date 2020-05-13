@@ -1,339 +1,391 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/layout/Layout.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/layout/Layout.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/@amcharts/amcharts4/.internal/themes/animated.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/.internal/themes/animated.js ***!
+  \***********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// import LeaderLine from 'leader-line'
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    ModalJunction: function ModalJunction() {
-      return __webpack_require__.e(/*! import() */ 67).then(__webpack_require__.bind(null, /*! ./modals/ModalJunction */ "./resources/js/components/pops/layout/modals/ModalJunction.vue"));
-    },
-    ModalGenerator: function ModalGenerator() {
-      return __webpack_require__.e(/*! import() */ 66).then(__webpack_require__.bind(null, /*! ./modals/ModalGenerator */ "./resources/js/components/pops/layout/modals/ModalGenerator.vue"));
-    },
-    ModalPowerRectifier: function ModalPowerRectifier() {
-      return __webpack_require__.e(/*! import() */ 68).then(__webpack_require__.bind(null, /*! ./modals/ModalPowerRectifier */ "./resources/js/components/pops/layout/modals/ModalPowerRectifier.vue"));
-    },
-    ModalAirConditioner: function ModalAirConditioner() {
-      return __webpack_require__.e(/*! import() */ 65).then(__webpack_require__.bind(null, /*! ./modals/ModalAirConditioner */ "./resources/js/components/pops/layout/modals/ModalAirConditioner.vue"));
-    },
-    CapacityChart: function CapacityChart() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/pops/layout/CapacityChart.vue"));
-    },
-    // GrowingChart: () => import('./GrowingChart'),
-    SpaceChart: function SpaceChart() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../infrastructure/SpaceChart */ "./resources/js/components/pops/infrastructure/SpaceChart.vue"));
+/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
+
+var theme = function (object) {
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SpriteState")) {
+        object.transitionDuration = 400;
     }
-  },
-  props: ['user', 'pop', 'room_id'],
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Component")) {
+        object.rangeChangeDuration = 500;
+        object.interpolationDuration = 500;
+        object.sequencedInterpolation = false;
+        if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SankeyDiagram")) {
+            object.sequencedInterpolation = true;
+        }
+        if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSeries")) {
+            object.sequencedInterpolation = true;
+        }
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Chart")) {
+        object.defaultState.transitionDuration = 2000;
+        object.hiddenState.transitionDuration = 1000;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Tooltip")) {
+        object.animationDuration = 400;
+        object.defaultState.transitionDuration = 400;
+        object.hiddenState.transitionDuration = 400;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Scrollbar")) {
+        object.animationDuration = 500;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Series")) {
+        object.defaultState.transitionDuration = 1000;
+        object.hiddenState.transitionDuration = 700;
+        object.hiddenState.properties.opacity = 1;
+        object.showOnInit = true;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "MapSeries")) {
+        object.hiddenState.properties.opacity = 0;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "PercentSeries")) {
+        object.hiddenState.properties.opacity = 0;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSlice")) {
+        object.defaultState.transitionDuration = 800;
+        object.hiddenState.transitionDuration = 1000;
+        object.hiddenState.properties.opacity = 1;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Slice")) {
+        object.defaultState.transitionDuration = 700;
+        object.hiddenState.transitionDuration = 1000;
+        object.hiddenState.properties.opacity = 1;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Preloader")) {
+        object.hiddenState.transitionDuration = 2000;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column")) {
+        object.defaultState.transitionDuration = 700;
+        object.hiddenState.transitionDuration = 1000;
+        object.hiddenState.properties.opacity = 1;
+    }
+    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column3D")) {
+        object.hiddenState.properties.opacity = 0;
+    }
+};
+/* harmony default export */ __webpack_exports__["default"] = (theme);
+//# sourceMappingURL=animated.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@amcharts/amcharts4/themes/animated.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/themes/animated.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _internal_themes_animated__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../.internal/themes/animated */ "./node_modules/@amcharts/amcharts4/.internal/themes/animated.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _internal_themes_animated__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+//# sourceMappingURL=animated.js.map
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @amcharts/amcharts4/core */ "./node_modules/@amcharts/amcharts4/core.js");
+/* harmony import */ var _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @amcharts/amcharts4/charts */ "./node_modules/@amcharts/amcharts4/charts.js");
+/* harmony import */ var _amcharts_amcharts4_themes_animated__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @amcharts/amcharts4/themes/animated */ "./node_modules/@amcharts/amcharts4/themes/animated.js");
+//
+//
+//
+//
+//
+//
+
+ // import am4themes_entel from "../../../constants/amChartsEntel.js";
+// import am4themes_dark from "@amcharts/amcharts4/themes/dark.js";
+
+ // this.darkMode ? 
+// am4core.useTheme(am4themes_dark) 
+// : 
+// am4core.useTheme(am4themes_entel)
+
+_amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amcharts4_themes_animated__WEBPACK_IMPORTED_MODULE_2__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
-      junctionSelected: null,
-      generatorSetSelected: null,
-      powerRectifierSelected: null,
-      airConditionerSelected: null,
-      canEditJunctions: null,
-      canEditGeneratorGroups: null,
-      canEditPowerRectifiers: null,
-      canEditAirConditioners: null,
-      junctions: Array,
-      generatorSets: Array,
-      powerRectifiers: Array,
-      airConditioners: Array,
-      isJunctionModalActive: false,
-      isGeneratorModalActive: false,
-      isPowerRectifierModalActive: false,
-      isAirConditionerModalActive: false
+      chart: null,
+      chartData: []
     };
   },
   mounted: function mounted() {
-    this.getJunctions();
-    this.getGeneratorSets();
-    this.getPowerRectifiers();
-    this.getAirConditioners(); // let leader = new LeaderLine(
-    //     document.getElementById('alpha'),
-    //     document.getElementById('beta')
-    // );
+    this.graphData(); // this.$eventBus.$on('getSitesData', this.graph)
   },
+  // watch: {
+  //     chartData(newValue, oldValue) {
+  //         // if (this.chart) {
+  //         //     this.chart.dispose()
+  //         // }
+  //         this.graph()
+  //     }
+  // },
   methods: {
-    getJunctions: function getJunctions() {
-      var _this = this;
-
-      axios.get("/api/junctions/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        // console.log(response.data)
-        _this.junctions = response.data.junction;
-        _this.canEditJunctions = response.data.can;
-      })["catch"](function (error) {
-        console.log('Error al traer los datos de Empalmes: ' + error);
-      });
+    graphData: function graphData() {
+      // axios.get(`/api/siteStats`).then((response) => {
+      // console.log(response.data)
+      // this.chartData = response.data
+      this.graph(); // })
     },
-    getGeneratorSets: function getGeneratorSets() {
-      var _this2 = this;
+    graph: function graph() {
+      // Chart
+      var chart = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["create"](this.$refs.chartdiv, _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["XYChart"]);
+      chart.hiddenState.properties.opacity = 0;
+      chart.colors.step = 2; // X axis
 
-      axios.get("/api/generatorSets/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        _this2.generatorSets = response.data.generatorSets;
-        _this2.canEditGeneratorGroups = response.data.can;
-      })["catch"](function (error) {
-        console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
-      });
-    },
-    getPowerRectifiers: function getPowerRectifiers() {
-      var _this3 = this;
+      var xAxis = chart.xAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["CategoryAxis"]());
+      xAxis.dataFields.category = "x";
+      xAxis.renderer.grid.template.location = 0;
+      xAxis.renderer.minGridDistance = 10;
+      xAxis.renderer.labels.template.disabled = true;
+      xAxis.data = [{
+        x: "1"
+      }, {
+        x: "2"
+      }, {
+        x: "3"
+      }, {
+        x: "4"
+      }, {
+        x: "5"
+      }, {
+        x: "6"
+      }, {
+        x: "7"
+      }, {
+        x: "8"
+      }, {
+        x: "9"
+      }, {
+        x: "10"
+      }]; // Y axis
 
-      axios.get("/api/powerRectifiers/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        // console.log(response.data)
-        _this3.powerRectifiers = response.data.powerRectifiers;
-        _this3.canEditPowerRectifiers = response.data.can;
-      })["catch"](function (error) {
-        console.log('Error al traer los datos de Empalmes: ' + error);
-      });
-    },
-    getAirConditioners: function getAirConditioners() {
-      var _this4 = this;
+      var yAxis = chart.yAxes.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["CategoryAxis"]());
+      yAxis.renderer.labels.template.disabled = true;
+      yAxis.renderer.grid.template.location = 0;
+      yAxis.renderer.minGridDistance = 10;
+      yAxis.dataFields.category = "y";
+      yAxis.data = [{
+        y: "1"
+      }, {
+        y: "2"
+      }, {
+        y: "3"
+      }, {
+        y: "4"
+      }, {
+        y: "5"
+      }, {
+        y: "6"
+      }, {
+        y: "7"
+      }, {
+        y: "8"
+      }, {
+        y: "9"
+      }, {
+        y: "10"
+      }]; // Legend
 
-      axios.get("/api/airConditioners/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        // console.log(response.data)
-        _this4.airConditioners = response.data.airConditioner;
-        _this4.canEditAirConditioners = response.data.can;
-      })["catch"](function (error) {
-        console.log('Error al traer los datos de Empalmes: ' + error);
-      });
+      chart.legend = new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["Legend"](); // Create series
+
+      function createSeries(name) {
+        var series = chart.series.push(new _amcharts_amcharts4_charts__WEBPACK_IMPORTED_MODULE_1__["ColumnSeries"]());
+        series.dataFields.categoryX = "x";
+        series.dataFields.categoryY = "y";
+        series.sequencedInterpolation = true;
+        series.defaultState.transitionDuration = 3000;
+        series.name = name; // Set up column appearance
+
+        var column = series.columns.template;
+        column.strokeWidth = 1;
+        column.strokeOpacity = 1;
+        column.stroke = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["color"]("#ffffff");
+        column.width = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](100);
+        column.height = _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["percent"](100); //column.column.cornerRadius(6, 6, 6, 6);
+
+        return series;
+      }
+
+      var series1 = createSeries("Plantas CC");
+      series1.data = [{
+        x: "1",
+        y: "1"
+      }, {
+        x: "1",
+        y: "2"
+      }, {
+        x: "1",
+        y: "3"
+      }, {
+        x: "1",
+        y: "4"
+      }, {
+        x: "1",
+        y: "5"
+      }, {
+        x: "1",
+        y: "6"
+      }, {
+        x: "1",
+        y: "7"
+      }, {
+        x: "1",
+        y: "8"
+      }, {
+        x: "1",
+        y: "9"
+      }, {
+        x: "1",
+        y: "10"
+      }, {
+        x: "2",
+        y: "1"
+      }, {
+        x: "2",
+        y: "2"
+      }, {
+        x: "2",
+        y: "3"
+      }, {
+        x: "2",
+        y: "4"
+      }, {
+        x: "2",
+        y: "5"
+      }, {
+        x: "2",
+        y: "6"
+      }, {
+        x: "2",
+        y: "7"
+      }, {
+        x: "2",
+        y: "8"
+      }, {
+        x: "2",
+        y: "9"
+      }, {
+        x: "2",
+        y: "10"
+      }, {
+        x: "3",
+        y: "1"
+      }, {
+        x: "3",
+        y: "2"
+      }, {
+        x: "3",
+        y: "3"
+      }];
+      var series2 = createSeries("Clima");
+      series2.data = [{
+        x: "3",
+        y: "4"
+      }, {
+        x: "3",
+        y: "5"
+      }, {
+        x: "3",
+        y: "6"
+      }, {
+        x: "3",
+        y: "7"
+      }, {
+        x: "3",
+        y: "8"
+      }, {
+        x: "3",
+        y: "9"
+      }, {
+        x: "3",
+        y: "10"
+      }, {
+        x: "4",
+        y: "1"
+      }, {
+        x: "4",
+        y: "2"
+      }, {
+        x: "4",
+        y: "3"
+      }, {
+        x: "4",
+        y: "4"
+      }, {
+        x: "4",
+        y: "5"
+      }, {
+        x: "4",
+        y: "6"
+      }, {
+        x: "4",
+        y: "7"
+      }, {
+        x: "4",
+        y: "8"
+      }, {
+        x: "4",
+        y: "9"
+      }, {
+        x: "4",
+        y: "10"
+      }, {
+        x: "5",
+        y: "1"
+      }, {
+        x: "5",
+        y: "2"
+      }, {
+        x: "5",
+        y: "3"
+      }, {
+        x: "5",
+        y: "4"
+      }, {
+        x: "5",
+        y: "5"
+      }, {
+        x: "5",
+        y: "6"
+      }];
+      this.chart = chart;
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (this.chart) {
+      this.chart.dispose();
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/layout/Layout.vue?vue&type=template&id=6dba5166&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/layout/Layout.vue?vue&type=template&id=6dba5166& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=template&id=0fb6c082&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=template&id=0fb6c082& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -345,549 +397,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {},
-    [
-      _c("section", { staticClass: "section" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "columns" }, [
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "section" }, [
-              _c("div", { staticClass: "tile is-ancestor" }, [
-                _c("div", { staticClass: "tile is-vertical" }, [
-                  _c(
-                    "div",
-                    { staticClass: "tile" },
-                    [
-                      _c("div", { staticClass: "tile is-parent" }),
-                      _vm._v(" "),
-                      _vm._l(_vm.junctions, function(junction) {
-                        return _c("div", { staticClass: "tile is-parent" }, [
-                          _c(
-                            "a",
-                            {
-                              ref: "alpha",
-                              refInFor: true,
-                              staticClass:
-                                "tile is-child is-size-5 has-text-weight-normal",
-                              attrs: { id: "alpha" },
-                              on: {
-                                click: function($event) {
-                                  _vm.isJunctionModalActive = true
-                                  _vm.junctionSelected = junction
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "b-message",
-                                {
-                                  staticClass: "box is-paddingless",
-                                  attrs: { type: "is-success" }
-                                },
-                                [
-                                  _c("div", { staticClass: "columns" }, [
-                                    _c("div", { staticClass: "column" }, [
-                                      _vm._v("Empalme")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "column is-2 has-text-centered"
-                                      },
-                                      [
-                                        _c("font-awesome-icon", {
-                                          staticClass: "has-text-success",
-                                          attrs: {
-                                            icon: ["far", "check-circle"],
-                                            size: "2x"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ])
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "tile is-parent" })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "tile" },
-                    [
-                      _c("div", { staticClass: "tile is-parent" }),
-                      _vm._v(" "),
-                      _vm._l(_vm.generatorSets, function(generatorSet) {
-                        return _c("div", { staticClass: "tile is-parent" }, [
-                          _c(
-                            "a",
-                            {
-                              ref: "beta",
-                              refInFor: true,
-                              staticClass:
-                                "tile is-child is-size-5 has-text-weight-normal",
-                              attrs: { id: "beta" },
-                              on: {
-                                click: function($event) {
-                                  _vm.isGeneratorModalActive = true
-                                  _vm.generatorSetSelected = generatorSet
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "b-message",
-                                {
-                                  staticClass: "box is-paddingless",
-                                  attrs: { type: "is-warning" }
-                                },
-                                [
-                                  _c("div", { staticClass: "columns" }, [
-                                    _c("div", { staticClass: "column" }, [
-                                      _vm._v("Grupo Electrógeno")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "column is-2 has-text-centered"
-                                      },
-                                      [
-                                        _c("font-awesome-icon", {
-                                          staticClass: "has-text-warning",
-                                          attrs: {
-                                            icon: [
-                                              "fas",
-                                              "exclamation-triangle"
-                                            ],
-                                            size: "2x"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ])
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "tile is-parent" })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "tile is-parent columns is-multiline" },
-                    _vm._l(_vm.pop.rooms, function(room) {
-                      return _c("div", { staticClass: "column tile is-6" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "tile box",
-                            class:
-                              _vm.room_id && room.id != _vm.room_id
-                                ? "is-shadowless has-background-white-bis"
-                                : ""
-                          },
-                          [
-                            _c("div", { staticClass: "tile is-vertical" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-5 has-text-weight-normal",
-                                  class:
-                                    _vm.room_id && room.id != _vm.room_id
-                                      ? "has-text-grey-light"
-                                      : ""
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                                " +
-                                      _vm._s(room.name) +
-                                      " - " +
-                                      _vm._s(room.old_name) +
-                                      "\n                                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "section columns" }, [
-                                _c("div", { staticClass: "column is-6" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "columns is-multiline" },
-                                    _vm._l(_vm.powerRectifiers, function(
-                                      powerRectifier
-                                    ) {
-                                      return powerRectifier.room_id == room.id
-                                        ? _c(
-                                            "div",
-                                            { staticClass: "column is-12" },
-                                            [
-                                              _c(
-                                                "a",
-                                                {
-                                                  staticClass:
-                                                    "tile is-child is-size-5 has-text-weight-normal",
-                                                  on: {
-                                                    click: function($event) {
-                                                      _vm.isPowerRectifierModalActive = true
-                                                      _vm.powerRectifierSelected = powerRectifier
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _c(
-                                                    "b-message",
-                                                    {
-                                                      staticClass:
-                                                        "box is-paddingless",
-                                                      attrs: {
-                                                        type: "is-success"
-                                                      }
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass: "columns"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "column"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "Planta Nº " +
-                                                                  _vm._s(
-                                                                    powerRectifier.id
-                                                                  )
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "column is-2 has-text-centered"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "font-awesome-icon",
-                                                                {
-                                                                  staticClass:
-                                                                    "has-text-success",
-                                                                  attrs: {
-                                                                    icon: [
-                                                                      "far",
-                                                                      "check-circle"
-                                                                    ],
-                                                                    size: "2x"
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    }),
-                                    0
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "column" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "columns is-multiline" },
-                                    _vm._l(_vm.airConditioners, function(
-                                      airConditioner
-                                    ) {
-                                      return airConditioner.room_id == room.id
-                                        ? _c(
-                                            "div",
-                                            { staticClass: "column is-12" },
-                                            [
-                                              _c(
-                                                "a",
-                                                {
-                                                  staticClass:
-                                                    "tile is-child is-size-5 has-text-weight-semibold",
-                                                  on: {
-                                                    click: function($event) {
-                                                      _vm.isAirConditionerModalActive = true
-                                                      _vm.airConditionerSelected = airConditioner
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _c(
-                                                    "b-message",
-                                                    {
-                                                      staticClass:
-                                                        "box is-paddingless",
-                                                      attrs: {
-                                                        type: "is-success"
-                                                      }
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass: "columns"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "column has-text-weight-normal has-text-dark is-size-6"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "Aire Acondicionado"
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "column is-2 has-text-centered"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "font-awesome-icon",
-                                                                {
-                                                                  staticClass:
-                                                                    "has-text-success",
-                                                                  attrs: {
-                                                                    icon: [
-                                                                      "far",
-                                                                      "check-circle"
-                                                                    ],
-                                                                    size: "2x"
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    }),
-                                    0
-                                  )
-                                ])
-                              ])
-                            ])
-                          ]
-                        )
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            active: _vm.isJunctionModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
-          },
-          on: {
-            "update:active": function($event) {
-              _vm.isJunctionModalActive = $event
-            }
-          }
-        },
-        [
-          _c("modal-junction", {
-            attrs: {
-              junction: _vm.junctionSelected,
-              can: _vm.canEditJunctions,
-              pop: _vm.pop,
-              user: _vm.user
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            active: _vm.isGeneratorModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
-          },
-          on: {
-            "update:active": function($event) {
-              _vm.isGeneratorModalActive = $event
-            }
-          }
-        },
-        [
-          _c("modal-generator", {
-            attrs: {
-              generatorSet: _vm.generatorSetSelected,
-              can: _vm.canEditGeneratorGroups,
-              pop: _vm.pop,
-              user: _vm.user
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            active: _vm.isPowerRectifierModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
-          },
-          on: {
-            "update:active": function($event) {
-              _vm.isPowerRectifierModalActive = $event
-            }
-          }
-        },
-        [
-          _c("modal-power-rectifier", {
-            attrs: {
-              powerRectifier: _vm.powerRectifierSelected,
-              can: _vm.canEditPowerRectifiers,
-              pop: _vm.pop,
-              user: _vm.user
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            active: _vm.isAirConditionerModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
-          },
-          on: {
-            "update:active": function($event) {
-              _vm.isAirConditionerModalActive = $event
-            }
-          }
-        },
-        [
-          _c("modal-air-conditioner", {
-            attrs: {
-              airConditioner: _vm.airConditionerSelected,
-              can: _vm.canEditAirConditioners,
-              pop: _vm.pop,
-              user: _vm.user
-            }
-          })
-        ],
-        1
-      )
-    ],
-    1
-  )
+  return _c("div", {
+    ref: "chartdiv",
+    staticStyle: { height: "100px", width: "100%" }
+  })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "columns" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "column has-text-weight-semibold has-text-dark is-size-3 has-text-left"
-        },
-        [_vm._v("Layout")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/layout/Layout.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/pops/layout/Layout.vue ***!
-  \********************************************************/
+/***/ "./resources/js/components/pops/infrastructure/SpaceChart.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/pops/infrastructure/SpaceChart.vue ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Layout_vue_vue_type_template_id_6dba5166___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Layout.vue?vue&type=template&id=6dba5166& */ "./resources/js/components/pops/layout/Layout.vue?vue&type=template&id=6dba5166&");
-/* harmony import */ var _Layout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Layout.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/layout/Layout.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SpaceChart_vue_vue_type_template_id_0fb6c082___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SpaceChart.vue?vue&type=template&id=0fb6c082& */ "./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=template&id=0fb6c082&");
+/* harmony import */ var _SpaceChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SpaceChart.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -897,9 +429,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Layout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Layout_vue_vue_type_template_id_6dba5166___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Layout_vue_vue_type_template_id_6dba5166___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SpaceChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SpaceChart_vue_vue_type_template_id_0fb6c082___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SpaceChart_vue_vue_type_template_id_0fb6c082___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -909,38 +441,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pops/layout/Layout.vue"
+component.options.__file = "resources/js/components/pops/infrastructure/SpaceChart.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/layout/Layout.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/pops/layout/Layout.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Layout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Layout.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/layout/Layout.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Layout_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpaceChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./SpaceChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpaceChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/layout/Layout.vue?vue&type=template&id=6dba5166&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/pops/layout/Layout.vue?vue&type=template&id=6dba5166& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=template&id=0fb6c082&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=template&id=0fb6c082& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Layout_vue_vue_type_template_id_6dba5166___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Layout.vue?vue&type=template&id=6dba5166& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/layout/Layout.vue?vue&type=template&id=6dba5166&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Layout_vue_vue_type_template_id_6dba5166___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpaceChart_vue_vue_type_template_id_0fb6c082___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./SpaceChart.vue?vue&type=template&id=0fb6c082& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/infrastructure/SpaceChart.vue?vue&type=template&id=0fb6c082&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpaceChart_vue_vue_type_template_id_0fb6c082___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Layout_vue_vue_type_template_id_6dba5166___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpaceChart_vue_vue_type_template_id_0fb6c082___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -70,7 +70,7 @@
                         </thead>
                         
                         <tbody>
-                            <tr class="" v-for="pop in roomsData.data">
+                            <tr class="" v-for="pop in roomsData.data" :key="pop.id">
                                 <td class="">
                                     <div class="field">
                                         <a class="is-size-6 has-text-weight-bold" target="_blank" :href="'/pop/' + pop.id">
@@ -86,7 +86,7 @@
                                 </td>
 
                                 <td class="">
-                                    <div class="field" v-for="room in pop.rooms">
+                                    <div class="field" v-for="room in pop.rooms" :key="room.id">
                                         <div v-for="id in {'id': parseInt(Math.random() * 50 + 1)}" :key="id" :set="energy = id" class="">
                                             <div v-for="id in {'id': parseInt(Math.random() * 50 + 1)}" :key="id" :set="climate = id" class="">
                                                 <div v-for="id in {'id': parseInt(Math.random() * 50 + 1)}" :key="id" :set="space = id" class="columns is-vcentered">
@@ -234,87 +234,97 @@
 </template>
 
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faCircle, faSearch);
 
-    import VuePagination from '../VuePagination.vue';
-    export default {
-        components: {
-            VuePagination,
-            // CapacityChart: () => import('./CapacityChart'),
-            // GrowingChart: () => import('./GrowingChart'),
-            ModalRoom: () => import('./modals/ModalRoom')
-        },
-        props : [
-            'user',
-            'user_permissions',
-            'crms'
-        ],
-        data() {
-            return {
-                roomsData: {
-                    total: 0,
-                    per_page: 2,
-                    from: 1,
-                    to: 0,
-                    current_page: 1,
-                },
-                searchText: '',
-                currentCrm: 0,
-                // currentPop: [],
-                // currentRoom: [],
+import VuePagination from '../VuePagination.vue';
+export default {
+    components: {
+        VuePagination,
+        // CapacityChart: () => import('./CapacityChart'),
+        // GrowingChart: () => import('./GrowingChart'),
+        ModalRoom: () => import('./modals/ModalRoom')
+    },
+    props : [
+        'user',
+        'user_permissions',
+        'crms'
+    ],
+    data() {
+        return {
+            roomsData: {
+                total: 0,
+                per_page: 2,
+                from: 1,
+                to: 0,
+                current_page: 1,
+            },
+            searchText: '',
+            currentCrm: 0,
+            // currentPop: [],
+            // currentRoom: [],
 
-                isComponentModalActive: false,
-                popSelected: null,
-                roomSelected: null
+            isComponentModalActive: false,
+            popSelected: null,
+            roomSelected: null
+        }
+    },
+
+    watch: {
+        currentCrm(newValue) {
+            this.getRoomsData()
+        }
+    },
+
+    computed: {
+        canViewClimate() {
+            return this.user.roles[0].slug == 'engineer-admin' 
+                || this.user.roles[0].slug == 'admin' 
+                || this.user.roles[0].slug == 'developer'
+                || this.user.roles[0].slug == 'super-viewer' 
+                || this.user_permissions.find(element => element.slug == 'edit-air-conditioner'
+                ) ? true : false
+        }
+    },
+
+    created() {
+    },
+
+    mounted() {
+        this.getRoomsData()
+    },
+
+    methods: {
+        getRoomsData() {
+            var params = {
+                'api_token': this.user.api_token,
+                'page': this.roomsData.current_page,
+                'crm_id': this.currentCrm,
+                'text': this.searchText != '' ?  this.searchText : 0
             }
+
+            axios.get('/api/rooms', { params: params })
+            .then((response) => {
+                this.roomsData = response.data
+                // this.currentPop = this.roomsData.data[0]
+                // this.currentRoom = this.currentPop.rooms[0]
+            })
         },
 
-        watch: {
-            currentCrm(newValue) {
-                this.getRoomsData()
-            }
-        },
-
-        computed: {
-            canViewClimate() {
-               return this.user.roles[0].slug == 'engineer-admin' || this.user.roles[0].slug == 'admin' || this.user.roles[0].slug == 'developer' || this.user_permissions.find(element => element.slug == 'edit-air-conditioner') ? true : false
-            }
-        },
-
-        created() {
-        },
-
-        mounted() {
+        clearSearch() {
+            this.searchText = ''
             this.getRoomsData()
         },
-
-        methods: {
-            getRoomsData() {
-                var params = {
-                    'api_token': this.user.api_token,
-                    'page': this.roomsData.current_page,
-                    'crm_id': this.currentCrm,
-                    'text': this.searchText != '' ?  this.searchText : 0
-                }
-
-                axios.get('/api/rooms', { params: params })
-                .then((response) => {
-                    this.roomsData = response.data
-                    // this.currentPop = this.roomsData.data[0]
-                    // this.currentRoom = this.currentPop.rooms[0]
-                })
-            },
-
-            clearSearch() {
-                this.searchText = ''
-                this.getRoomsData()
-            },
-            
-            // setGraph(room, pop) {
-            //     this.currentRoom = room
-            //     this.currentPop = pop
-            // }
-        }
+        
+        // setGraph(room, pop) {
+        //     this.currentRoom = room
+        //     this.currentPop = pop
+        // }
     }
+}
 </script>
 
 <style scoped>

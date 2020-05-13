@@ -27,42 +27,58 @@
         </b-field> -->
 
         <b-table
-            :data="rcas.environmentalData"
-            :bordered="isBordered"
-            :striped="isStriped"
-            :narrowed="isNarrowed"
-            :hoverable="isHoverable"
-            :loading="isLoading"
-            :focusable="isFocusable"
-            :mobile-cards="hasMobileCards">
+            :data="rcas.files"
+            :paginated="isPaginated"
+            :per-page="perPage"
+            :current-page.sync="currentPage"
+            :pagination-simple="isPaginationSimple"
+            :pagination-position="paginationPosition"
+            :default-sort-direction="defaultSortDirection"
+            :sort-icon="sortIcon"
+            :sort-icon-size="sortIconSize"
+            pagination-size="is-small"
+            default-sort="user.first_name"
+            aria-next-label="Next page"
+            aria-previous-label="Previous page"
+            aria-page-label="Page"
+            aria-current-label="Current page">
 
             <template slot-scope="props">
                 <!-- <b-table-column field="id" label="ID" width="40" numeric>
                     {{ props.row.id }}
                 </b-table-column> -->
 
-                <b-table-column field="basename" label="First Name">
-                    {{ props.row.basename }}
+                <b-table-column class="is-size-6" width="60%" field="basename" label="Archivo" sortable searchable>
+                    <template slot="header" slot-scope="{ column }">
+                        <b-tooltip :label="column.label" class="is-size-6">
+                            {{ column.label }}
+                        </b-tooltip>
+                    </template>
+                    <div class="is-size-6">{{ props.row.basename }}</div>
                 </b-table-column>
 
-                <!-- <b-table-column field="last_name" label="Last Name">
-                    {{ props.row.last_name }}
+                <b-table-column class="is-size-6" width="" field="site.nem_site" label="PoP" sortable searchable>
+                    <b-input
+                        slot="searchable"
+                        slot-scope="props"
+                        v-model="props.filters[props.column.field]"/>
+                    <template slot="header" slot-scope="{ column }">
+                        <b-tooltip :label="column.label" class="is-size-6">
+                            {{ column.label }}
+                        </b-tooltip>
+                    </template>
+                    <div class="is-size-7">{{ props.row.site.nem_site }}</div>
+                    <router-link class="is-size-7" :to="'/pop/' + props.row.site.pop.id" target="_blank">
+                        <div class="is-size-6">{{ props.row.site.pop.nombre }}</div>
+                    </router-link>
                 </b-table-column>
 
-                <b-table-column field="date" label="Date" centered>
-                    <span class="tag is-success">
-                        {{ new Date(props.row.date).toLocaleDateString() }}
-                    </span>
+                <b-table-column field="id" label="" width="10" numeric v-if="rcas.can.delete">
+                    <button class="button" @click="confirm(props.row)">
+                        <font-awesome-icon :icon="['far', 'trash-alt']"/>
+                    </button>
                 </b-table-column>
 
-                <b-table-column label="Gender">
-                    <span>
-                        <b-icon pack="fas"
-                            :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                        </b-icon>
-                        {{ props.row.gender }}
-                    </span>
-                </b-table-column> -->
             </template>
 
             <template slot="empty">
@@ -81,6 +97,7 @@
         </b-table>
 
         <b-field v-if="rcas.can ? rcas.can.upload : null">
+
             <b-upload
                 v-model="dropFiles"
                 @input="submit"
@@ -101,87 +118,100 @@
             </b-upload>
         </b-field>
 
-        <!-- <div class="tags">
-            <span v-for="(file, index) in dropFiles"
-                :key="index"
-                class="tag is-primary" >
-                {{file.name}}
-                <button class="delete is-small"
-                    type="button"
-                    @click="deleteDropFile(index)">
-                </button>
-            </span>
-        </div> -->
     </div>
 </template>
 
 <script>
-    export default {
-        components: {
-        },
-        props : [
-            'user'
-        ],
-        data() {
-            return {
-                dropFiles: [],
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
+library.add(faUpload, farTrashAlt);
+export default {
+    components: {
+    },
 
-                rcas: Array,
-                isBordered: false,
-                isStriped: false,
-                isNarrowed: false,
-                isHoverable: false,
-                isFocusable: false,
-                isLoading: false,
-                hasMobileCards: true
-            }
-        },
-        created() {
-        },
-        mounted() {
-            this.getRCAs()
-        },
-        methods: {
-            getRCAs() {
-                axios.get(`/api/rcas?api_token=${this.user.api_token}`)
-                .then(response => {
-                    // console.log(response.data)
-                    this.rcas = response.data
-                })
-            },
+    props : [
+        'user'
+    ],
 
-            submit() {
-                this.dropFiles.forEach(element => this.submitForm(element))
-            },
+    data() {
+        return {
+            dropFiles: [],
 
-            submitForm(file) {
-                const config = {
-                    headers: {
-                        'content-type': 'multipart/form-data',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    }
-                }
-
-                // form data
-                let formData = new FormData();
-                formData.append('file', file)
-
-                // send upload request
-                try {
-                    let response = axios.post(`/api/rcas?api_token=${this.user.api_token}`, formData, config)
-                    .then(response => {
-                        this.getRCAs()
-                    })
-                } catch (e) {
-                    console.log(e)
-                }
-                
-            },
-
-            deleteDropFile(index) {
-                this.dropFiles.splice(index, 1)
-            }
-
+            rcas: Array,
+            isPaginated: true,
+            isPaginationSimple: false,
+            paginationPosition: 'bottom',
+            defaultSortDirection: 'asc',
+            sortIcon: 'arrow-up',
+            sortIconSize: 'is-small',
+            currentPage: 1,
+            perPage: 10,
         }
+    },
+
+    created() {
+    },
+
+    mounted() {
+        this.getRCAs()
+    },
+
+    methods: {
+        getRCAs() {
+            axios.get(`/api/rcas?api_token=${this.user.api_token}`)
+            .then(response => {
+                this.rcas = response.data
+            })
+        },
+
+        submit() {
+            this.dropFiles.forEach(element => this.submitForm(element))
+        },
+
+        submitForm(file) {
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                }
+            }
+
+            // form data
+            let formData = new FormData();
+            formData.append('file', file)
+
+            // send upload request
+            try {
+                let response = axios.post(`/api/rcas?api_token=${this.user.api_token}`, formData, config)
+                .then(response => {
+                    this.getRCAs()
+                })
+            } catch (e) {
+                console.log(e)
+            }
+            
+        },
+
+        confirm(file) {
+            this.$buefy.dialog.confirm({
+                message: 'Desea eliminar este archivo?',
+                type: 'is-danger',
+                onConfirm: () => {
+                    this.deleteFile(file.id)
+                }
+            })
+        },
+
+        deleteFile(file_id) {
+            axios.delete(`/api/files/${file_id}?api_token=${this.user.api_token}`)
+            .then(response => {
+                console.log(response)
+                this.getRCAs()
+            })
+        }
+
     }
+}
 </script>

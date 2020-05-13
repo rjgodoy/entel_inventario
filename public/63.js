@@ -1,15 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[63],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/climate/Climate.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/TemporalStorages.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/climate/Climate.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/eco/TemporalStorages.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AirConditioner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AirConditioner */ "./resources/js/components/pops/climate/AirConditioner.vue");
 //
 //
 //
@@ -36,41 +35,105 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    AirConditioner: _AirConditioner__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  components: {},
+  props: ['storageZones', 'user'],
   data: function data() {
     return {
-      airConditioners: Array,
-      can: null
+      isPaginated: true,
+      isPaginationSimple: false,
+      paginationPosition: 'bottom',
+      defaultSortDirection: 'asc',
+      sortIcon: 'arrow-up',
+      sortIconSize: 'is-small',
+      currentPage: 1,
+      perPage: 10,
+      darkMode: 0,
+      bodyBackground: '',
+      boxBackground: '',
+      primaryText: '',
+      secondaryText: '',
+      searchBodyBackground: ''
     };
   },
-  mounted: function mounted() {
-    this.getAirConditioners();
+  created: function created() {},
+  mounted: function mounted() {// this.getProtectedZones()
+    // this.getFiles()
   },
-  methods: {
-    // APIs
-    getAirConditioners: function getAirConditioners() {
-      var _this = this;
-
-      axios.get("/api/airConditioners/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        _this.airConditioners = response.data.airConditioner;
-        _this.can = response.data.can;
-      })["catch"](function (error) {
-        console.log('Error al traer los datos de Líneas Eléctricas: ' + error);
-      });
-    }
+  methods: {// async getFiles() {
+    //     axios.get(`/api/eco/1`).then((response) => {
+    //         // console.log(response)
+    //     })
+    // }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/climate/Climate.vue?vue&type=template&id=525e53ce&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/TemporalStorages.vue?vue&type=template&id=2313da43&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/climate/Climate.vue?vue&type=template&id=525e53ce& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/eco/TemporalStorages.vue?vue&type=template&id=2313da43& ***!
   \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -83,94 +146,176 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.airConditioners.length
-      ? _c("section", { staticClass: "section" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            { class: _vm.airConditioners.length > 4 ? "" : "container" },
-            [
-              _c(
-                "div",
-                { staticClass: "columns is-multiline tile is-ancestor" },
-                _vm._l(_vm.airConditioners, function(airConditioner) {
-                  return _c(
-                    "div",
-                    { staticClass: "column is-4 tile is-parent" },
-                    [
-                      _c("air-conditioner", {
-                        attrs: { airConditioner: airConditioner }
-                      })
-                    ],
-                    1
-                  )
-                }),
-                0
-              )
-            ]
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.airConditioners.length == 0
-      ? _c(
-          "section",
-          {
-            staticClass: "section",
-            staticStyle: { "padding-top": "0px", "padding-bottom": "48px" }
-          },
-          [_vm._m(1)]
-        )
-      : _vm._e()
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "columns" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "column has-text-weight-semibold has-text-dark is-size-3 has-text-left"
+  return _c(
+    "div",
+    { staticClass: "tile is-child box" },
+    [
+      _c("div", { staticClass: "title is-size-4" }, [
+        _vm._v("Zonas Acopio Temporal")
+      ]),
+      _vm._v(" "),
+      _c("b-table", {
+        attrs: {
+          data: _vm.storageZones,
+          paginated: _vm.isPaginated,
+          "per-page": _vm.perPage,
+          "current-page": _vm.currentPage,
+          "pagination-simple": _vm.isPaginationSimple,
+          "pagination-position": _vm.paginationPosition,
+          "default-sort-direction": _vm.defaultSortDirection,
+          "sort-icon": _vm.sortIcon,
+          "sort-icon-size": _vm.sortIconSize,
+          "pagination-size": "is-small",
+          "default-sort": "user.first_name",
+          "aria-next-label": "Next page",
+          "aria-previous-label": "Previous page",
+          "aria-page-label": "Page",
+          "aria-current-label": "Current page"
         },
-        [_vm._v("Clima")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "box" }, [
-        _vm._v("\n                POP no tiene equipos de clima.\n            ")
-      ])
-    ])
-  }
-]
+        on: {
+          "update:currentPage": function($event) {
+            _vm.currentPage = $event
+          },
+          "update:current-page": function($event) {
+            _vm.currentPage = $event
+          }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(props) {
+              return [
+                _c(
+                  "b-table-column",
+                  {
+                    staticClass: "is-size-6",
+                    attrs: {
+                      width: "70%",
+                      field: "nombre",
+                      label: "Nombre POP",
+                      sortable: "",
+                      searchable: ""
+                    },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                {
+                                  staticClass: "is-size-6",
+                                  attrs: { label: column.label }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(column.label) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v(_vm._s(props.row.nombre))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "is-size-7" }, [
+                      _vm._v(_vm._s(props.row.comuna.nombre_comuna))
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-table-column",
+                  {
+                    staticClass: "is-size-6",
+                    attrs: { field: "comuna.zona.nombre_zona", label: "Zona" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "header",
+                          fn: function(ref) {
+                            var column = ref.column
+                            return [
+                              _c(
+                                "b-tooltip",
+                                {
+                                  staticClass: "is-size-6",
+                                  attrs: { label: column.label }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(column.label) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "is-size-7",
+                        attrs: { to: "/pop/" + props.row.id, target: "_blank" }
+                      },
+                      [
+                        _c("p", [
+                          _vm._v(_vm._s(props.row.comuna.zona.nombre_zona))
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/climate/Climate.vue":
+/***/ "./resources/js/components/eco/TemporalStorages.vue":
 /*!**********************************************************!*\
-  !*** ./resources/js/components/pops/climate/Climate.vue ***!
+  !*** ./resources/js/components/eco/TemporalStorages.vue ***!
   \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Climate_vue_vue_type_template_id_525e53ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Climate.vue?vue&type=template&id=525e53ce& */ "./resources/js/components/pops/climate/Climate.vue?vue&type=template&id=525e53ce&");
-/* harmony import */ var _Climate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Climate.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/climate/Climate.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _TemporalStorages_vue_vue_type_template_id_2313da43___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TemporalStorages.vue?vue&type=template&id=2313da43& */ "./resources/js/components/eco/TemporalStorages.vue?vue&type=template&id=2313da43&");
+/* harmony import */ var _TemporalStorages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TemporalStorages.vue?vue&type=script&lang=js& */ "./resources/js/components/eco/TemporalStorages.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -179,9 +324,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Climate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Climate_vue_vue_type_template_id_525e53ce___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Climate_vue_vue_type_template_id_525e53ce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TemporalStorages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TemporalStorages_vue_vue_type_template_id_2313da43___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TemporalStorages_vue_vue_type_template_id_2313da43___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -191,38 +336,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pops/climate/Climate.vue"
+component.options.__file = "resources/js/components/eco/TemporalStorages.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/climate/Climate.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/eco/TemporalStorages.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************!*\
-  !*** ./resources/js/components/pops/climate/Climate.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/eco/TemporalStorages.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Climate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Climate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/climate/Climate.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Climate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TemporalStorages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TemporalStorages.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/TemporalStorages.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TemporalStorages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/climate/Climate.vue?vue&type=template&id=525e53ce&":
+/***/ "./resources/js/components/eco/TemporalStorages.vue?vue&type=template&id=2313da43&":
 /*!*****************************************************************************************!*\
-  !*** ./resources/js/components/pops/climate/Climate.vue?vue&type=template&id=525e53ce& ***!
+  !*** ./resources/js/components/eco/TemporalStorages.vue?vue&type=template&id=2313da43& ***!
   \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Climate_vue_vue_type_template_id_525e53ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Climate.vue?vue&type=template&id=525e53ce& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/climate/Climate.vue?vue&type=template&id=525e53ce&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Climate_vue_vue_type_template_id_525e53ce___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TemporalStorages_vue_vue_type_template_id_2313da43___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TemporalStorages.vue?vue&type=template&id=2313da43& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/eco/TemporalStorages.vue?vue&type=template&id=2313da43&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TemporalStorages_vue_vue_type_template_id_2313da43___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Climate_vue_vue_type_template_id_525e53ce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TemporalStorages_vue_vue_type_template_id_2313da43___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

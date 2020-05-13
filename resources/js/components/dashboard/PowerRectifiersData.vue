@@ -7,7 +7,7 @@
             </div>
 
             <div class="columns is-multiline">
-                <div class="column is-6" :class="primaryText" v-for="item in this.powerRectifierData">
+                <div class="column is-6" :class="primaryText" v-for="item in this.powerRectifierData" :key="item.id">
                     <!-- <b-message type="is-positive"> -->
                         <div class="is-size-4 has-text-weight-normal">{{ item.q_power_rectifiers | numeral('0,0') }}</div>
                         <div class="is-size-7">{{ item.nombre }}</div>

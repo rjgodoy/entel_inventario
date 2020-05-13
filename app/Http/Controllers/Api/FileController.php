@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Storage;
-
-use App\Http\Resources\File as FileResource;
+use Carbon\Carbon;
 use App\Models\File;
+
 use App\Models\Site;
+
+use App\Models\Folder;
+use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\For_;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\FileCollection;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\File as FileResource;
 
 class FileController extends Controller
 {
     protected $originPath = 'Files';
-    protected $originType = 'ftp';
-    // protected $originType = 'local';
+    // protected $originType = 'ftp';
+    protected $originType = 'local';
 
     /**
      * Display a listing of the resource.
@@ -24,7 +29,7 @@ class FileController extends Controller
      */
     public function index(Request $request)
     {
-        $directories = Storage::disk($this->originType)->directories($this->originPath);
+        $directories = Folder::where('parent_id', null)->get();
 
         $folders = [];
         foreach ($directories as $directory) {
@@ -41,50 +46,36 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        // $files = Storage::disk('ftp')->directories('Files');
-        // dd($files);
-        // // $arrayFiles = [];
-        // foreach ($files as $file) {
-        //     $site = explode('/', $file)[1];
-        //     if (substr($site, 0, 1) !== '.') {
+        return $request;
 
-        //         if($site_id = Site::where('nem_site', $site)->first()) {
-        //             $site_id = $site_id->id;
-        //         } else {
-        //             $site_id = null;
-        //         }
-                
-        //         $fileData = collect([
-        //             'dirname' => isset(pathinfo($file)['dirname']) ? pathinfo($file)['dirname'] : '',
-        //             'basename' => isset(pathinfo($file)['basename']) ? pathinfo($file)['basename'] : '',
-        //             'extension' => isset(pathinfo($file)['extension']) ? pathinfo($file)['extension'] : '',
-        //             'filename' => isset(pathinfo($file)['filename']) ? pathinfo($file)['filename'] : '',
-        //             'size' => Storage::size($file) ? Storage::size($file) : 0,
-        //             'mime' => Storage::mimeType($file) ? Storage::mimeType($file) : ''
-        //         ]);
+        // Store in disk
+        if ($request->pop_id) {
+            $sites = Site::where('pop_id', $request->pop_id)->get();
 
-        //         if (substr($fileData['basename'], 0, 1) !== '.') {
-        //             // array_push($arrayFiles, $fileData);
+            $folders = [];
+            foreach ($sites as $site) {
+                $folder = Folder::where('site_id', $site->id)->where('parent_id', null)->where('name', 'Informes')->first();
+                $folder && array_push($folders, $folder);
+            }
+            return $folders;
 
-        //             File::updateOrCreate(
-        //                 [
-        //                     'site_id' => $site_id,
-        //                     'dirname' => $fileData['dirname'],
-        //                     'filename' => $fileData['filename'],
-        //                 ],
-        //                 [
-        //                     'user_id' => 1,
-        //                     'basename' => $fileData['basename'],
-        //                     'extension' => $fileData['extension'],
-        //                     'size' => $fileData['size'],
-        //                     'mime' => $fileData['mime'],
-        //                 ]
-        //             );
-        //         }
-        //     }
-        // }
-        // // dd($arrayFiles);
-        // dd('Done!');
+        } else {
+            $upload_path = '../storage/app/public/General';
+            $file_name = $request->file->getClientOriginalName();
+            $request->file->move($upload_path, $file_name);
+        }
+
+        // Store in db
+        $file = Storage::disk('local');
+        // $files = File::create([
+        //     'user_id' => ,
+        //     'site_id' => ,
+        //     'folder_id' => ,
+        // ]);
+
+        // Store in Log
+
+
     }
 
     /**
@@ -95,10 +86,7 @@ class FileController extends Controller
      */
     public function show(Request $request, $id)
     {
-        // $headers = [
-        //     'Content-Type' => 'application/'.$request->extension,
-        // ];
-        // return Storage::disk($this->originType)->download($request->dirname.'/'.$request->basename, $request->basename, $headers);
+        // return $request;
 
         $files = File::whereHas('site', function($q) use($id) {
             $q->where('pop_id', $id);
@@ -106,7 +94,20 @@ class FileController extends Controller
         ->where('folder_id', $request->folder_id)
         ->get();
 
-        return new FileResource($files);
+        return new FileCollection($files);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getFiles(Request $request)
+    {
+        $files = File::where('folder_id', $request->folder_id)->get();
+
+        return new FileCollection($files);
     }
 
     /**
@@ -120,7 +121,7 @@ class FileController extends Controller
         $headers = [
             'Content-Type' => $request->mime,
         ];
-        return Storage::disk('ftp')->get($request->dirname.'/'.$request->basename);
+        return Storage::disk('local')->get($request->dirname.'/'.$request->basename);
     }
 
     /**
@@ -143,7 +144,8 @@ class FileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        File::find($id)->delete();
+        return 'done';
     }
 
 }

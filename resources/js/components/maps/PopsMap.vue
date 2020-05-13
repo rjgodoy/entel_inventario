@@ -35,12 +35,17 @@
 </template>
 
 <script>
-    import GoogleMapLoader from "./GoogleMapLoader";
-    import GoogleMapMarker from "./GoogleMapMarker";
-    // import GoogleMapInfoWindow from "./GoogleMapInfoWindow";
-    // import GoogleMapLine from "./GoogleMapLine";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faInfoCircle);
 
-    import { mapSettings } from "../../constants/mapSettings";
+import GoogleMapLoader from "./GoogleMapLoader";
+import GoogleMapMarker from "./GoogleMapMarker";
+// import GoogleMapInfoWindow from "./GoogleMapInfoWindow";
+// import GoogleMapLine from "./GoogleMapLine";
+import { mapSettings } from "../../constants/mapSettings";
 
 export default {
     components: {

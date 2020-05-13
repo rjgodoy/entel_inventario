@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="is-size-7" v-for="item in popsData">
+                <tr class="is-size-7" v-for="item in popsData" :key="item.id">
                     <td><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ item.nombre }}</a></td>
                     <td class="has-text-right" :class="primaryText">{{ item.opto | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ item.radio | numeral('0,0') }}</td>

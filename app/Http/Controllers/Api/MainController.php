@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Http\Resources\Main as MainResource;
 use App\Models\Menu;
-use App\Models\User;
 use App\Models\Role;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\MainCollection;
+use App\Http\Resources\Main as MainResource;
+use App\Models\UserRequest;
 
 class MainController extends Controller
 {
@@ -20,6 +22,19 @@ class MainController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userRequestAlerts(Request $request)
+    {
+        $alerts = UserRequest::where('status', 0)->get(); 
+        
+        return new MainCollection($alerts);
+
     }
 
     /**

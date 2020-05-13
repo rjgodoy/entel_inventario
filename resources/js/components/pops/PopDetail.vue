@@ -136,7 +136,10 @@
                 </div>
 
                 <!-- INFO -->
-                <div class="column section is-paddingless has-background-light">
+                <div 
+                    class="column section has-background-light" 
+                    :class="currentTabComponent == 'location' || currentTabComponent == 'sites' ? 'is-paddingless' : ''" 
+                    style="padding-top: 32px;">
 
                     <!-- DETELLE DEL TAB -->
                     <!-- ############### -->
@@ -145,7 +148,6 @@
                             :user="user"
                             :pop="pop"
                             :popCritical="popCritical"
-                            :rcas="[]"
                             :bodyBackground="bodyBackground"
                             :boxBackground="boxBackground"
                             :primaryText="primaryText"
@@ -162,297 +164,298 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            Location: () => import('./Location'),
-            Sites: () => import('./Sites'),
-            Characteristics: () => import('./Characteristics'),
-            Layout: () => import('./layout/Layout'),
-            Power: () => import('./power/Power'),
-            Climate: () => import('./climate/Climate'),
-            Infrastructure: () => import('./infrastructure/Infrastructure'),
-            Eco: () => import('./Eco'),
-            Comsite: () => import('./Comsite'),
-            Documents: () => import('./Documents'),
-            Log: () => import('./Log'),
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt)
+export default {
+    components: {
+        Location: () => import('./Location'),
+        Sites: () => import('./Sites'),
+        Characteristics: () => import('./Characteristics'),
+        Layout: () => import('./layout/Layout'),
+        Power: () => import('./power/Power'),
+        Climate: () => import('./climate/Climate'),
+        Infrastructure: () => import('./infrastructure/Infrastructure'),
+        Eco: () => import('./Eco'),
+        Comsite: () => import('./Comsite'),
+        Documents: () => import('./Documents'),
+        Log: () => import('./Log'),
+    },
+    props : [
+        'user'
+    ],
+    data() {
+        return {
+            pop: [],
+            technologiesArray: [],
+            i: 0,
+
+            darkMode: 0,
+            bodyBackground: '',
+            boxBackground: '',
+            primaryText: '',
+            secondaryText: '',
+
+            selectedPrimaryBoxText: 'has-text-white',
+            selectedSecondaryBoxText: 'has-text-light',
+
+            tabButtonView: 1,
+            logOpened: 0,
+
+            tabs: null,
+            currentTab: this.$route.hash == '#eco' ? 'eco' : 'location',
+
+            isEmpty: false,
+            isBordered: false,
+            isStriped: true,
+            isNarrowed: false,
+            isHoverable: true,
+            isFocusable: false,
+            isLoading: false,
+            hasMobileCards: true
+        }
+    },
+
+    created() {
+        this.styleMode()
+    },
+
+    mounted() {
+        console.log(this.$route)
+        this.getAllData()
+        this.getTabs()
+        
+    },
+
+    computed: {
+        popNems() {
+            if(this.pop.sites) {
+                var nem = this.pop.sites.length == 1 ? 
+                    this.pop.sites[0].nem_site : 
+                    this.pop.sites[0].nem_site + ' - ' + this.pop.sites[1].nem_site
+                return nem
+            }
+            return
         },
-        props : [
-            'user'
-        ],
-        data() {
+        // sites() {
+        //     var array = []
+        //     if (this.pop.sites) {
+        //         this.pop.sites.forEach(function(item) { 
+        //             array.push(item) 
+        //         })
+        //     } 
+        //     return array
+        // },
+        // sitesFijo() {
+        //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 1) : null
+        // },
+        // sitesMovil() {
+        //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 2) : null
+        // },
+        // sitesSwitch() {
+        //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 3) : null
+        // },
+        // sitesPhone() {
+        //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 4) : null
+        // },
+
+        // technologies() {
+        //     var array = []
+        //     if (this.pop.sites) {
+        //         this.pop.sites.forEach(function(item) {
+        //             if (item.technologies.length > 0) { 
+        //                 array.push(item.technologies) 
+        //             }
+        //         })
+        //     }
+        //     return array[0]
+        // },
+        // tec2g1900() {
+        //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 1) : null
+        // },
+        // tec3g900() {
+        //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 2) : null
+        // },
+        // tec3g1900() {
+        //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 3) : null
+        // },
+        // tec3g3500() {
+        //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 4) : null
+        // },
+        // tec4g700() {
+        //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 5) : null
+        // },
+        // tec4g1900() {
+        //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 6) : null
+        // },
+        // tec4g2600() {
+        //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 7) : null
+        // },
+        // tec4g3500() {
+        //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
+        // },
+
+        popClassification() {
+            var id = 10; var classification
+            if (this.pop.sites) {
+                this.pop.sites.forEach(function(item) {
+                    if (item.classification_type_id && item.classification_type_id < id) { 
+                        id = item.classification_type_id
+                        classification = item.classification_type.classification_type
+                    }
+                })
+            }
             return {
-                pop: Object,
-                technologiesArray: [],
-                i: 0,
+                'classification': classification, 
+                'id': id
+                }
+        },
 
-                darkMode: 0,
-                bodyBackground: '',
-                boxBackground: '',
-                primaryText: '',
-                secondaryText: '',
+        popCritical() {
+            var criticity = 0;
+            if (this.pop.rooms) {
+                this.pop.rooms.forEach(function(item) {
+                    if (item.criticity && item.criticity > criticity) { 
+                        criticity = item.criticity
+                    }
+                })
+            }
+            return criticity
+        },
 
-                selectedPrimaryBoxText: 'has-text-white',
-                selectedSecondaryBoxText: 'has-text-light',
+        // popAttentionPriority() {
+        //     var id = 10; var attentionPriority
+        //     if (this.pop.sites) {
+        //         this.pop.sites.forEach(function(item) {
+        //             if (item.attention_priority_type_id && item.attention_priority_type_id < id) { 
+        //                 id = item.attention_priority_type_id
+        //                 attentionPriority = item.attention_priority_type.attention_priority_type
+        //             }
+        //         })
+        //     }
+        //     return {
+        //         'attentionPriority': attentionPriority, 
+        //         'id': id
+        //         }
+        // },
 
-                tabButtonView: 1,
-                logOpened: 0,
+        // popCategory() {
+        //     var i = 10; var cat
+        //     if (this.pop.sites) {
+        //         this.pop.sites.forEach(function(item) {
+        //             if (item.category_type_id && item.category_type_id < i) { 
+        //                 i = item.category_type_id
+        //                 cat = item.category_type.category_type
+        //             }
+        //         })
+        //     }
+        //     return cat
+        // },
 
-                tabs: null,
-                currentTab: 'location',
+        // popDependences() {
+        //     var dependences = 0
+        //     if (this.pop.sites) {
+        //         this.pop.sites.forEach(function(item) {
+        //             dependences = dependences + item.dependences.length
+        //         })
+        //     }
+        //     return dependences
+        // },
 
-                isEmpty: false,
-                isBordered: false,
-                isStriped: true,
-                isNarrowed: false,
-                isHoverable: true,
-                isFocusable: false,
-                isLoading: false,
-                hasMobileCards: true
+        // popAttentionType() {
+        //     var i = 10; var cat
+        //     if (this.pop.sites) {
+        //         this.pop.sites.forEach(function(item) {
+        //             if (item.attention_type_id && item.attention_type_id < i) { 
+        //                 i = item.attention_type_id
+        //                 cat = item.attention_type.attention_type
+        //             }
+        //         })
+        //     }
+        //     return cat
+        // },
+
+        responsableZona() {
+            var array = []
+            if (this.pop.comuna) {
+                array = {
+                    'nombre': this.pop.comuna.zona.responsable.nombre,
+                    'apellido': this.pop.comuna.zona.responsable.apellido,
+                    'email': this.pop.comuna.zona.responsable.email,
+                    'telefono_movil': this.pop.comuna.zona.responsable.telefono_movil,
+                    'anexo_fono': this.pop.comuna.zona.responsable.anexo_fono,
+                    'nombre_cargo_especifico': this.pop.comuna.zona.responsable.nombre_cargo_especifico
+                }
+            }
+            return array
+        },
+        currentTabComponent() {
+            return this.currentTab
+        },
+
+        // heroBackground() {
+        //     return this.popClassification.id == 1 ? 'is-info' : (this.popClassification.id == 2 ? 'is-warning' : (this.popClassification.id == 3 ? 'is-primary' : (this.popClassification.id == 4 ? 'is-smart' : (this.popClassification.id == 5 ? 'is-eco' : 'is-white'))))
+        // }
+    },
+    methods: {
+        getTabs() {
+            axios.get(`/api/popMenu?api_token=${this.user.api_token}`).then((response) => {
+                // console.log(response.data.data)
+                this.tabs = response.data.data
+            })
+        },
+
+        showTab(tab) {
+            if (tab.component == 'layout' && this.popCritical == 0) {
+                return false
+            }
+            return true
+        },
+
+        getAllData() {
+            axios.get(`/api/pop/${this.$route.params.id}?api_token=${this.user.api_token}`)
+            .then((response) => {
+                this.pop = response.data.data
+            })
+        },
+
+        // Style mode
+        styleMode(){
+            if (this.darkMode == 1) {
+                // dark mode
+                this.bodyBackground = 'has-background-black-ter'
+                this.boxBackground = 'has-background-dark'
+                this.primaryText = 'has-text-white'
+                this.secondaryText = 'has-text-grey-light'
+                this.searchBodyBackground = 'has-background-dark'
+            } else {
+                // light mode
+                this.bodyBackground = 'has-background-light'
+                this.boxBackground = 'has-background-white'
+                this.primaryText = 'has-text-dark'
+                this.secondaryText = 'has-text-grey'
+                this.searchBodyBackground = 'has-background-white'
             }
         },
-
-        created() {
+        changeStyle() {
+            this.darkMode = this.darkMode == 0 ? 1 : 0
             this.styleMode()
         },
-
-        mounted() {
-            this.getAllData()
-            this.getTabs()
-            
-        },
-
-        computed: {
-            popNems() {
-                if(this.pop.sites) {
-                    var nem = this.pop.sites.length == 1 ? 
-                        this.pop.sites[0].nem_site : 
-                        this.pop.sites[0].nem_site + ' - ' + this.pop.sites[1].nem_site
-                    return nem
-                }
-                return
-            },
-            // sites() {
-            //     var array = []
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) { 
-            //             array.push(item) 
-            //         })
-            //     } 
-            //     return array
-            // },
-            // sitesFijo() {
-            //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 1) : null
-            // },
-            // sitesMovil() {
-            //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 2) : null
-            // },
-            // sitesSwitch() {
-            //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 3) : null
-            // },
-            // sitesPhone() {
-            //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 4) : null
-            // },
-
-            // technologies() {
-            //     var array = []
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.technologies.length > 0) { 
-            //                 array.push(item.technologies) 
-            //             }
-            //         })
-            //     }
-            //     return array[0]
-            // },
-            // tec2g1900() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 1) : null
-            // },
-            // tec3g900() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 2) : null
-            // },
-            // tec3g1900() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 3) : null
-            // },
-            // tec3g3500() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 4) : null
-            // },
-            // tec4g700() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 5) : null
-            // },
-            // tec4g1900() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 6) : null
-            // },
-            // tec4g2600() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 7) : null
-            // },
-            // tec4g3500() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
-            // },
-
-            popClassification() {
-                var id = 10; var classification
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        if (item.classification_type_id && item.classification_type_id < id) { 
-                            id = item.classification_type_id
-                            classification = item.classification_type.classification_type
-                        }
-                    })
-                }
-                return {
-                    'classification': classification, 
-                    'id': id
-                    }
-            },
-
-            popCritical() {
-                var criticity = 0;
-                if (this.pop.rooms) {
-                    this.pop.rooms.forEach(function(item) {
-                        if (item.criticity && item.criticity > criticity) { 
-                            criticity = item.criticity
-                        }
-                    })
-                }
-                return criticity
-            },
-
-            // popAttentionPriority() {
-            //     var id = 10; var attentionPriority
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.attention_priority_type_id && item.attention_priority_type_id < id) { 
-            //                 id = item.attention_priority_type_id
-            //                 attentionPriority = item.attention_priority_type.attention_priority_type
-            //             }
-            //         })
-            //     }
-            //     return {
-            //         'attentionPriority': attentionPriority, 
-            //         'id': id
-            //         }
-            // },
-
-            // popCategory() {
-            //     var i = 10; var cat
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.category_type_id && item.category_type_id < i) { 
-            //                 i = item.category_type_id
-            //                 cat = item.category_type.category_type
-            //             }
-            //         })
-            //     }
-            //     return cat
-            // },
-
-            // popDependences() {
-            //     var dependences = 0
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             dependences = dependences + item.dependences.length
-            //         })
-            //     }
-            //     return dependences
-            // },
-
-            // popAttentionType() {
-            //     var i = 10; var cat
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.attention_type_id && item.attention_type_id < i) { 
-            //                 i = item.attention_type_id
-            //                 cat = item.attention_type.attention_type
-            //             }
-            //         })
-            //     }
-            //     return cat
-            // },
-
-            responsableZona() {
-                var array = []
-                if (this.pop.comuna) {
-                    array = {
-                        'nombre': this.pop.comuna.zona.responsable.nombre,
-                        'apellido': this.pop.comuna.zona.responsable.apellido,
-                        'email': this.pop.comuna.zona.responsable.email,
-                        'telefono_movil': this.pop.comuna.zona.responsable.telefono_movil,
-                        'anexo_fono': this.pop.comuna.zona.responsable.anexo_fono,
-                        'nombre_cargo_especifico': this.pop.comuna.zona.responsable.nombre_cargo_especifico
-                    }
-                }
-                return array
-            },
-            currentTabComponent() {
-                return this.currentTab
-            },
-
-            // heroBackground() {
-            //     return this.popClassification.id == 1 ? 'is-info' : (this.popClassification.id == 2 ? 'is-warning' : (this.popClassification.id == 3 ? 'is-primary' : (this.popClassification.id == 4 ? 'is-smart' : (this.popClassification.id == 5 ? 'is-eco' : 'is-white'))))
-            // }
-        },
-        methods: {
-            getTabs() {
-                axios.get(`/api/popMenu?api_token=${this.user.api_token}`).then((response) => {
-                    // console.log(response.data.data)
-                    this.tabs = response.data.data
-                })
-            },
-
-            showTab(tab) {
-                if (tab.component == 'layout' && this.popCritical == 0) {
-                    return false
-                }
-                return true
-            },
-
-            getAllData() {
-                axios.get(`/api/pop/${this.$route.params.id}?api_token=${this.user.api_token}`)
-                .then((response) => {
-                    this.pop = response.data.data
-                })
-
-
-                // axios.get(`/api/popTechnologies?pop_id=${this.$route.params.id}`).then((response) => {
-                //     // console.log(response.data.data)
-                //     this.technologies = response.data.data
-                // })
-            },
-            // Style mode
-            styleMode(){
-                if (this.darkMode == 1) {
-                    // dark mode
-                    this.bodyBackground = 'has-background-black-ter'
-                    this.boxBackground = 'has-background-dark'
-                    this.primaryText = 'has-text-white'
-                    this.secondaryText = 'has-text-grey-light'
-                    this.searchBodyBackground = 'has-background-dark'
-                } else {
-                    // light mode
-                    this.bodyBackground = 'has-background-light'
-                    this.boxBackground = 'has-background-white'
-                    this.primaryText = 'has-text-dark'
-                    this.secondaryText = 'has-text-grey'
-                    this.searchBodyBackground = 'has-background-white'
-                }
-            },
-            changeStyle() {
-                this.darkMode = this.darkMode == 0 ? 1 : 0
-                this.styleMode()
-            },
-            changeView(view) {
-                if (this.tabButtonView != view) {
-                    this.tabButtonView = view
-                }
-            },
-            openLog() {
-                this.logOpened = 1
-                // console.log(this.logOpened)
-            },
-            closeLog() {
-                this.logOpened = 0
-                // console.log(this.logOpened)
+        changeView(view) {
+            if (this.tabButtonView != view) {
+                this.tabButtonView = view
             }
+        },
+        openLog() {
+            this.logOpened = 1
+            // console.log(this.logOpened)
+        },
+        closeLog() {
+            this.logOpened = 0
+            // console.log(this.logOpened)
         }
     }
+}
 </script>

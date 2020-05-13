@@ -21,6 +21,7 @@
             <hr>
             <p class="control">
                 <button type="submit" class="button is-link">Login</button>
+                <router-link to="/register" type="button" class="button is-default">Solicita una cuenta</router-link>
             </p>
         </form>
 
@@ -41,11 +42,12 @@
                 state: {
                     username: '',
                     password: ''
-                }
+                },
             }
         },
         methods: {
             checkForm(e) {
+                
                 if (!this.state.username) {
                     this.$buefy.toast.open({
                         message: 'Se requiere username.',
@@ -53,7 +55,7 @@
                         duration: 3000
                     })
                 }
-                if (!this.state.password) {
+                else if (!this.state.password) {
                     this.$buefy.toast.open({
                         message: 'Password required.',
                         type: 'is-danger',
@@ -61,6 +63,7 @@
                     })
                 }
                 else {
+                    this.buttonLoading = 1
                     var token = document.head.querySelector('meta[name="csrf-token"]');
                     // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
                     axios.post('/login', this.state).then((response) => { 

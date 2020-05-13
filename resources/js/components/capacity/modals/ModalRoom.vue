@@ -30,7 +30,7 @@
                     </div>
                 </div>
 
-                <div class="column container">
+                <div class="column container is-paddingless">
                     <!-- <div class="box"> -->
                         <keep-alive>
                             <component :is="currentTabComponent"
@@ -53,97 +53,103 @@
     </div>
 </template>
 
-<script>    
-    export default {
-        components: {
-            Capacity: () => import('./Capacity'),
-            Projection: () => import('./Projection'),
-            Requests: () => import('./Requests'),
-            Calculator: () => import('./Calculator'),
-            Layout: () => import('../../pops/layout/Layout'),
-            Documents: () => import('./Documents'),
-        },
-        props : [
-            'pop',
-            'room',
-            'user'
-        ],
-        data() {
-            return {
-                popData: Object,
-                chartData: [],
-                actualData: [],
-                currentTab: 'capacity',
-                tabs: [
-                    {
-                        "title": "Capacity",
-                        "component": "capacity",
-                        "icon": "traffic-light",
-                        "icon_type": "fas"
-                    },
-                    {
-                        "title": "Proyección",
-                        "component": "projection",
-                        "icon": "chart-line",
-                        "icon_type": "fas"
-                    },
-                    {
-                        "title": "Reserva",
-                        "component": "requests",
-                        "icon": "file-invoice",
-                        "icon_type": "fas"
-                    },
-                    {
-                        "title": "Layout",
-                        "component": "layout",
-                        "icon": "bezier-curve",
-                        "icon_type": "fas"
-                    },
-                    {
-                        "title": "Calculador",
-                        "component": "calculator",
-                        "icon": "calculator",
-                        "icon_type": "fas"
-                    },
-                    {
-                        "title": "Documentos",
-                        "component": "documents",
-                        "icon": "folder-open",
-                        "icon_type": "far"
-                    },
-                ]
-            }
-        },
-        computed: {
-            currentTabComponent() {
-                return this.currentTab
-            },
-        },
+<script>   
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+import { faFolderOpen as farFolderOpen } from '@fortawesome/free-regular-svg-icons'
+library.add(faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen); 
 
-        mounted() {
-            this.getPopData()
-            this.graphData()
-        },
-
-        methods: {
-            getPopData() {
-                axios.get(`/api/pop/${this.pop.id}?api_token=${this.user.api_token}`)
-                .then((response) => {
-                    // console.log(response.data.data)
-                    this.popData = response.data.data
-                })
-            },
-
-            graphData() {
-                axios.get(`/api/capacityProjection?room_id=${this.room.id}&api_token=${this.user.api_token}`)
-                .then((response) => {
-                    // console.log(response)
-                    if(response.data.data) {
-                        this.chartData = response.data.data
-                        this.actualData = response.data.data[0]
-                    }
-                })
-            },
+export default {
+    components: {
+        Capacity: () => import('./Capacity'),
+        Projection: () => import('./Projection'),
+        Requests: () => import('./Requests'),
+        Calculator: () => import('./Calculator'),
+        Layout: () => import('../../pops/layout/Layout'),
+        Documents: () => import('../../pops/Documents'),
+    },
+    props : [
+        'pop',
+        'room',
+        'user'
+    ],
+    data() {
+        return {
+            popData: Object,
+            chartData: [],
+            actualData: [],
+            currentTab: 'capacity',
+            tabs: [
+                {
+                    "title": "Capacity",
+                    "component": "capacity",
+                    "icon": "traffic-light",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Proyección",
+                    "component": "projection",
+                    "icon": "chart-line",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Reserva",
+                    "component": "requests",
+                    "icon": "file-invoice",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Layout",
+                    "component": "layout",
+                    "icon": "bezier-curve",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Calculador",
+                    "component": "calculator",
+                    "icon": "calculator",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Documentos",
+                    "component": "documents",
+                    "icon": "folder-open",
+                    "icon_type": "far"
+                },
+            ]
         }
+    },
+    computed: {
+        currentTabComponent() {
+            return this.currentTab
+        },
+    },
+
+    mounted() {
+        this.getPopData()
+        this.graphData()
+    },
+
+    methods: {
+        getPopData() {
+            axios.get(`/api/pop/${this.pop.id}?api_token=${this.user.api_token}`)
+            .then((response) => {
+                // console.log(response.data.data)
+                this.popData = response.data.data
+            })
+        },
+
+        graphData() {
+            axios.get(`/api/capacityProjection?room_id=${this.room.id}&api_token=${this.user.api_token}`)
+            .then((response) => {
+                // console.log(response)
+                if(response.data.data) {
+                    this.chartData = response.data.data
+                    this.actualData = response.data.data[0]
+                }
+            })
+        },
     }
+}
 </script>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Zona extends Model
 {
     protected $connection = 'mysql_entel_pops';
+    protected $table = 'entel_pops.zonas'; 
 
     public function crm() 
     {
@@ -21,6 +22,11 @@ class Zona extends Model
     public function responsable() 
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function temporary_storages() 
+    {
+        return $this->hasMany(User::class);
     }
 
 }

@@ -192,7 +192,8 @@ class PopController extends Controller
             'rooms.air_conditioners.air_conditioner_consumptions',
             'rooms.air_conditioners.air_conditioner_brand.air_conditioner_type',
             'rooms.air_conditioners.air_conditioner_chillers',
-            'rooms.air_conditioners.air_conditioner_condensers'
+            'rooms.air_conditioners.air_conditioner_condensers',
+            'protected_zones'
             )
             ->where('id', $id)
             ->whereHas('sites', function($q) {

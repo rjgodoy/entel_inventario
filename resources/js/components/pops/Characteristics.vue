@@ -1,9 +1,10 @@
 <template>
 
-    <section class="section" style="min-height: 500px;">
+    <section class="" style="min-height: 500px;">
         <div class="columns">
             <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Características</div>
         </div>
+        
         <div class="columns tile is-ancestor" :class="bodyBackground">
             <!-- <div class=" "> -->
                 <!-- CUADROS DE INFORMACION -->
@@ -15,7 +16,7 @@
                             <div class="" style="padding: 10px;">
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.pe_3g ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.pe_3g ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.pe_3g ? false : true"
                                     />
@@ -23,7 +24,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.mpls ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.mpls ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.mpls ? false : true"
                                     />
@@ -31,7 +32,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.olt ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.olt ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.olt ? false : true"
                                     />
@@ -39,7 +40,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.olt_3play ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.olt_3play ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.olt_3play ? false : true"
                                     />
@@ -47,7 +48,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.core ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.core ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.core ? false : true"
                                     />
@@ -55,7 +56,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.bafi ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.bafi ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.bafi ? false : true"
                                     />
@@ -71,7 +72,7 @@
                             <div class="" style="padding: 10px;">
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.red_minima_n1 ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.red_minima_n1 ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.red_minima_n1 ? false : true"
                                     />
@@ -79,7 +80,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.red_minima_n2 ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.red_minima_n2 ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.red_minima_n2 ? false : true"
                                     />
@@ -87,7 +88,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.vip ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.vip ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.vip ? false : true"
                                     />
@@ -95,7 +96,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.localidad_obligatoria ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.localidad_obligatoria ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.localidad_obligatoria ? false : true"
                                     />
@@ -103,7 +104,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.ranco ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.ranco ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.ranco ? false : true"
                                     />
@@ -120,7 +121,7 @@
                             <div class="" style="padding: 10px;">
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.offgrid ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.offgrid ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.offgrid ? false : true"
                                     />
@@ -128,7 +129,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.solar ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.solar ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.solar ? false : true"
                                     />
@@ -136,7 +137,7 @@
                                 </div>
                                 <div class="field">
                                     <font-awesome-icon 
-                                        :icon="['far', 'check-circle']"
+                                        :icon="pop.eolica ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.eolica ? 'has-text-eco' : 'has-text-grey-lighter'"
                                         :disabled="pop.eolica ? false : true"
                                     />
@@ -154,27 +155,32 @@
 </template>
 
 <script>
-    export default {
-        components: {
-        },
-        props : [
-            'user',
-            'pop',
-            // 'rcas',
-            'bodyBackground',
-            'boxBackground',
-            'primaryText',
-            'secondaryText',
-        ],
-        data() {
-            return {
-                // radio_pe_3g: this.pop.pe_3g
-            }
-        },
-        mounted() {
-
-        },
-        methods: {
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+import { faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faCheckCircle, farTimesCircle);
+export default {
+    components: {
+    },
+    props : [
+        'user',
+        'pop',
+        // 'rcas',
+        'bodyBackground',
+        'boxBackground',
+        'primaryText',
+        'secondaryText',
+    ],
+    data() {
+        return {
+            // radio_pe_3g: this.pop.pe_3g
         }
+    },
+    mounted() {
+
+    },
+    methods: {
     }
+}
 </script>

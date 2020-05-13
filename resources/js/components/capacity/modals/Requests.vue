@@ -1,11 +1,15 @@
 <template>
     <div>
-        <div class="field">
-            <div class="has-text-weight-semibold has-text-dark is-size-3 has-text-left">Solicitudes de reservas</div>
+        <div class="columns">
+            <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Solicitudes de reserva</div>
         </div>
-        <div class="box">
-            <div class="has-text-centered has-text-dark is-size-5">Solicitud de reserva</div>
-            
+        <div class="columns">
+            <div class="column">
+                <div class="box">
+                    <div class="has-text-centered has-text-dark is-size-5">No hay solicitud de reserva</div>
+                    
+                </div>
+            </div>
         </div>
     </div>
 </template>

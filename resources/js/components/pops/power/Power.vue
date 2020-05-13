@@ -45,6 +45,11 @@
 </template>
 
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclamationTriangle);
     export default {
         components: {
             ElectricLines: () => import('./ElectricLines'),

@@ -1,36 +1,45 @@
 <template>
-    <section class="section container" style="min-height: 500px;">
-        <div class="box has-backgroung-success has-text-weight-light" v-if="comsites" v-for="data in comsites">
-            <div class="has-text-weight-semibold is-size-4 has-text-centered">Contrato #{{ data.id }}</div>
-            <div class="columns">
-                <div class="column is-one-fifth">
-                    <div class="has-text-weight-normal">Operador</div>
-                    <div class="has-text-weight-normal">Propietario</div>
-                    <div class="has-text-weight-normal">Celular/Telefono propietario</div>
-                    <div class="has-text-weight-normal">ROL propiedad</div>
-                </div>
-                <div class="column">
-                    <div>{{ data.operador }}</div>
-                    <div>{{ data.propietario }}</div>
-                    <div>{{ data.celular_propietario }} / {{ data.telefono_propietario }}</div>
-                    <div>{{ data.rol_propiedad ? data.rol_propiedad : 'Sin daots de ROL' }}</div>
+    <section class="" style="min-height: 500px;">
+        <div class="columns">
+            <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Comsite</div>
+        </div>
+
+        <div class="columns is-multiline tile is-ancestor">
+            <div class="column is-6 tile is-parent" v-for="data in comsites" :key="data.id">
+                <div class="tile is-child box has-backgroung-success has-text-weight-light">
+                    <div class="has-text-weight-semibold is-size-4 has-text-centered">Contrato #{{ data.id }}</div>
+                    <br/>
+                    <div class="columns">
+                        <div class="column is-one-fifth">
+                            <div class="has-text-weight-normal is-size-6">Operador</div>
+                            <div class="has-text-weight-normal is-size-6">Propietario</div>
+                            <div class="has-text-weight-normal is-size-6">Celular/Telefono propietario</div>
+                            <div class="has-text-weight-normal is-size-6">ROL propiedad</div>
+                        </div>
+                        <div class="column">
+                            <div class="is-size-6">{{ data.operador }}</div>
+                            <div class="is-size-6">{{ data.propietario }}</div>
+                            <div class="is-size-6">{{ data.celular_propietario }} / {{ data.telefono_propietario }}</div>
+                            <div class="is-size-6">{{ data.rol_propiedad ? data.rol_propiedad : 'Sin daots de ROL' }}</div>
+                        </div>
+                    </div>
+                    <div class="columns" v-if="data.started_at != '1969-12-31'">
+                        <div class="column has-text-right is-one-fifth">
+                            <div>{{ dateMoment(data.started_at) }}</div>
+                            <div class="has-text-weight-normal is-size-7">Fecha inicio</div>
+                        </div>
+                        <div class="column is-three-fifths">
+                            <b-progress type="is-link" :value="percentDate(data.started_at, data.ended_at)" show-value format="percent" size="is-medium"></b-progress>
+                        </div>
+                        <div class="column has-text-left">
+                            <div>{{ dateMoment(data.ended_at) }}</div>
+                            <div class="has-text-weight-normal is-size-7">Fecha término</div>
+                        </div>
+                    </div>
+                    <div class="has-text-centered has-text-weight-normal is-size-6" style="margin-top: -20px;" v-if="data.started_at != '1969-12-31'">{{ dateFromNow(data.started_at) }}</div>
+                    
                 </div>
             </div>
-            <div class="columns" v-if="data.started_at != '1969-12-31'">
-                <div class="column has-text-right is-one-fifth">
-                    <div>{{ dateMoment(data.started_at) }}</div>
-                    <div class="has-text-weight-normal is-size-7">Fecha inicio</div>
-                </div>
-                <div class="column is-three-fifths">
-                    <b-progress type="is-link" :value="percentDate(data.started_at, data.ended_at)" show-value format="percent" size="is-medium"></b-progress>
-                </div>
-                <div class="column has-text-left">
-                    <div>{{ dateMoment(data.ended_at) }}</div>
-                    <div class="has-text-weight-normal is-size-7">Fecha término</div>
-                </div>
-            </div>
-            <div class="has-text-centered has-text-weight-normal is-size-6" style="margin-top: -20px;" v-if="data.started_at != '1969-12-31'">{{ dateFromNow(data.started_at) }}</div>
-            
         </div>
         <div class="box" v-if="comsites.length == 0">
             <div class="">

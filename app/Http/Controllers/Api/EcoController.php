@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Http\File;
-use Illuminate\Support\Facades\Storage;
-
 use App\Http\Resources\Eco as EcoResource;
-use App\Models\ProtectedZone;
+use App\Http\Resources\FileCollection;
+use App\Models\File;
+use App\Models\Folder;
 use App\Models\Pop;
+use App\Models\ProtectedZone;
+use App\Models\Site;
+use App\Models\TemporaryStorage;
+use Illuminate\Http\File as FileResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EcoController extends Controller
 {
@@ -23,6 +26,17 @@ class EcoController extends Controller
     {
         $protectedZonesPops = Pop::with('protected_zones', 'comuna.zona', 'sites')->has('protected_zones')->get();
         return new EcoResource($protectedZonesPops);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function zones()
+    {
+        $protectedZones = ProtectedZone::with('pops')->get();
+        return new EcoResource($protectedZones);
     }
 
     /**
@@ -44,36 +58,26 @@ class EcoController extends Controller
      */
     public function upload(Request $request)
     {
-        $upload_path = '../storage/app/Files';
-        $file_name = $request->file->getClientOriginalName();
-        // $generated_new_name = time() . '.' . $request->file->getClientOriginalExtension();
-        $request->file->move($upload_path, $file_name);
+        
+        if ($request->pop_id) {
+            $sites = Site::where('pop_id', $request->pop_id)->get();
+
+            $folders = [];
+            foreach ($sites as $site) {
+                $folder = Folder::where('site_id', $site->id)->where('parent_id', null)->where('name', 'Informes')->first();
+                $folder && array_push($folders, $folder);
+            }
+            return $folders;
+
+        } else {
+            $upload_path = '../storage/app/public/General/Gestión Ambiental';
+            $file_name = $request->file->getClientOriginalName();
+            $request->file->move($upload_path, $file_name);
+        }
 
 
-        // $file = $request->file('file');
-        // $filename = $file->getClientOriginalName();
-
-        // if( Storage::disk('local')->putFileAs('Files', $file_name)) {
-
-        //     return response()->json([
-        //         'success' => true
-        //     ], 200);
-        // }
-        // return response()->json([
-        //     'success' => false
-        // ], 500);
-
-
-
-        // return $request;
-        // $file = $request->file('file');
-        // $ext = $file->getClientOriginalExtension();
-        // $type = $this->getType($ext);
-
-        // Storage::putFileAs(
-        //     '/public/' . $this->getUserDir() . '/' . $type . '/', 
-        //     $file, 
-        //     time().$request['name'] . '.' . $ext);
+        // 1- FIND POP ID
+        // 2- SEARCH FOLDER NAME "Gestion Ambiental"
         
         return response()->json(false);
     }
@@ -95,9 +99,41 @@ class EcoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function storage(Request $request, $pop_id)
+    {
+        $zona_id = Pop::with('comuna.zona')->where('id', $pop_id)->first()->comuna->zona->id;
+        
+        $storages = TemporaryStorage::with('pop')->where('zona_id', $zona_id)->get();
+        
+        return new EcoResource($storages);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function rcas(Request $request)
     {
-        $files = Storage::disk('local')->files('Files');
+        // $rcas = Folder::with('subfolders.files', 'site', 'files')->where('name', 'Gestión Ambiental')->get();
+
+        $rcas = File::with('site.pop')->whereHas('folder', function($q) {
+            $q->where('name', 'Gestión Ambiental');
+        })->get();
+
+        return new FileCollection($rcas);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function rcasPop(Request $request)
+    {
+        $files = Storage::disk('local')->files('Gestion Ambiental');
         $rcas = [];
         foreach ($files as $file) {
             array_push($rcas, pathinfo($file));

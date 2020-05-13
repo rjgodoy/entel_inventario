@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="is-size-7" v-for="crm in this.technologyData">
+                <tr class="is-size-7" v-for="crm in this.technologyData" :key="crm.id">
                     <td class=""><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ crm.nombre }}</a></td>
                     <td class="has-text-right" :class="primaryText">{{ crm.tec2g1900 | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ crm.tec3g900 | numeral('0,0') }}</td>

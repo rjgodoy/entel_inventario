@@ -116,109 +116,115 @@
 </template>
 
 <script>
-    import VuePagination from '../VuePagination.vue';
-    export default {
-        components: {
-            'vue-pagination': VuePagination
-        },
-        props : [
-            'user'
-        ],
-        data() {
-            return {
-                darkMode: 0,
-                bodyBackground: '',
-                boxBackground: '',
-                primaryText: '',
-                secondaryText: '',
-                searchBodyBackground: '',
-                last_updated: '',
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faSearch, faBars);
 
-                comsiteData: {
-                    can: Array,
-                    total: 0,
-                    per_page: 2,
-                    from: 1,
-                    to: 0,
-                    current_page: 1
-                },
-                searchText: '',
-                // buttonLoading: 0,
+import VuePagination from '../VuePagination.vue';
+export default {
+    components: {
+        'vue-pagination': VuePagination
+    },
+    props : [
+        'user'
+    ],
+    data() {
+        return {
+            darkMode: 0,
+            bodyBackground: '',
+            boxBackground: '',
+            primaryText: '',
+            secondaryText: '',
+            searchBodyBackground: '',
+            last_updated: '',
+
+            comsiteData: {
+                can: Array,
+                total: 0,
+                per_page: 2,
+                from: 1,
+                to: 0,
+                current_page: 1
+            },
+            searchText: '',
+            // buttonLoading: 0,
+        }
+    },
+    created() {
+        this.styleMode()
+    },
+    mounted() {
+        this.lastUpdated()
+        this.getComsiteData()
+    },
+    methods: {
+        getComsiteData() {
+            axios.get(`/api/comsites?api_token=${this.user.api_token}&page=${this.comsiteData.current_page}&text=${this.searchText}`)
+            .then((response) => {
+                this.comsiteData = response.data
+                console.log(response.data)
+            })
+        },
+        // syncComsite() {
+        //     // e.preventDefault()
+        //     this.buttonLoading = 1
+        //     // let currentObj = this
+
+        //     axios.post(`/api/comsites`)
+        //     .then((response) => {
+        //         // console.log(this.$route.params)
+        //         // console.log(response)
+        //         // document.location.href = "/comsite/create"
+        //         // currentObj.output = response.data
+        //         this.buttonLoading = 0
+        //         this.getComsiteData()
+        //         this.lastUpdated()
+        //     })
+        // },
+
+        // Style mode
+        styleMode(){
+            if (this.darkMode == 1) {
+                // dark mode
+                this.bodyBackground = 'has-background-black-ter'
+                this.boxBackground = 'has-background-dark'
+                this.primaryText = 'has-text-white'
+                this.secondaryText = 'has-text-grey-light'
+                this.searchBodyBackground = 'has-background-dark'
+            } else {
+                // light mode
+                this.bodyBackground = 'has-background-light'
+                this.boxBackground = 'has-background-white'
+                this.primaryText = 'has-text-dark'
+                this.secondaryText = 'has-text-grey'
+                this.searchBodyBackground = 'has-background-white'
             }
         },
-        created() {
-            this.styleMode()
+        changeStyle() {
+            if (this.darkMode == 0) {
+                this.darkMode = 1
+                this.styleMode()
+            } else {
+                this.darkMode = 0
+                this.styleMode()
+            }
         },
-        mounted() {
-            this.lastUpdated()
+        clearSearch() {
+            this.searchText = ''
+            // this.popSearch = []
+            // this.selectedPop = null
+            // this.selectedPops = []
+            // this.selectedCrm = null
+            // this.selectedZona = null
             this.getComsiteData()
         },
-        methods: {
-            getComsiteData() {
-                axios.get(`/api/comsites?api_token=${this.user.api_token}&page=${this.comsiteData.current_page}&text=${this.searchText}`)
-                .then((response) => {
-                    this.comsiteData = response.data
-                    console.log(response.data)
-                })
-            },
-            // syncComsite() {
-            //     // e.preventDefault()
-            //     this.buttonLoading = 1
-            //     // let currentObj = this
-
-            //     axios.post(`/api/comsites`)
-            //     .then((response) => {
-            //         // console.log(this.$route.params)
-            //         // console.log(response)
-            //         // document.location.href = "/comsite/create"
-            //         // currentObj.output = response.data
-            //         this.buttonLoading = 0
-            //         this.getComsiteData()
-            //         this.lastUpdated()
-            //     })
-            // },
-
-            // Style mode
-            styleMode(){
-                if (this.darkMode == 1) {
-                    // dark mode
-                    this.bodyBackground = 'has-background-black-ter'
-                    this.boxBackground = 'has-background-dark'
-                    this.primaryText = 'has-text-white'
-                    this.secondaryText = 'has-text-grey-light'
-                    this.searchBodyBackground = 'has-background-dark'
-                } else {
-                    // light mode
-                    this.bodyBackground = 'has-background-light'
-                    this.boxBackground = 'has-background-white'
-                    this.primaryText = 'has-text-dark'
-                    this.secondaryText = 'has-text-grey'
-                    this.searchBodyBackground = 'has-background-white'
-                }
-            },
-            changeStyle() {
-                if (this.darkMode == 0) {
-                    this.darkMode = 1
-                    this.styleMode()
-                } else {
-                    this.darkMode = 0
-                    this.styleMode()
-                }
-            },
-            clearSearch() {
-                this.searchText = ''
-                // this.popSearch = []
-                // this.selectedPop = null
-                // this.selectedPops = []
-                // this.selectedCrm = null
-                // this.selectedZona = null
-                this.getComsiteData()
-            },
-            lastUpdated() {
-                axios.get(`/api/comsiteLastData?api_token=${this.user.api_token}`).then((response) => {
-                    this.last_updated = response.data.data
-                })
-            },
-        }
+        lastUpdated() {
+            axios.get(`/api/comsiteLastData?api_token=${this.user.api_token}`).then((response) => {
+                this.last_updated = response.data.data
+            })
+        },
     }
+}
 </script>

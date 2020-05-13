@@ -80,38 +80,43 @@
 </template>
 
 <script>
-    export default {
-        components: {
-            // Editair_conditionerParameters: () => import('./modals/Editair_conditionerParameters'),
-        },
-        props : [
-            'pop',
-            'can',
-            'airConditioner',
-            'user'
-        ],
-        data() {
-            return {
-                // isEditair_conditionerModalActive: false,
-            }
-        },
-        mounted() {
-            // console.log(this.airConditioner)
-        },
-        computed: {
-            // capacidadTotal() {
-            //     return this.airConditioner.latest_protection ? this.airConditioner.latest_protection.nominal_a * 380 * 1.7320508 : 0
-            // },
-
-            // consumoTablero() {
-            //     return (this.airConditioner.latest_measurement.r_measure + this.airConditioner.latest_measurement.s_measure + this.airConditioner.latest_measurement.t_measure) * 220
-            // },
-
-            // usagePercent() {
-            //     return this.capacidadTotal != 0 ? this.consumoTablero / this.capacidadTotal : 0
-            // }
-        },
-        methods: {            
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faFan, faCompressArrowsAlt, faBullseye, faSuitcaseRolling } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(faFan, faCompressArrowsAlt, faBullseye, faSuitcaseRolling);
+export default {
+    components: {
+        // Editair_conditionerParameters: () => import('./modals/Editair_conditionerParameters'),
+    },
+    props : [
+        'pop',
+        'can',
+        'airConditioner',
+        'user'
+    ],
+    data() {
+        return {
+            // isEditair_conditionerModalActive: false,
         }
+    },
+    mounted() {
+        // console.log(this.airConditioner)
+    },
+    computed: {
+        // capacidadTotal() {
+        //     return this.airConditioner.latest_protection ? this.airConditioner.latest_protection.nominal_a * 380 * 1.7320508 : 0
+        // },
+
+        // consumoTablero() {
+        //     return (this.airConditioner.latest_measurement.r_measure + this.airConditioner.latest_measurement.s_measure + this.airConditioner.latest_measurement.t_measure) * 220
+        // },
+
+        // usagePercent() {
+        //     return this.capacidadTotal != 0 ? this.consumoTablero / this.capacidadTotal : 0
+        // }
+    },
+    methods: {            
     }
+}
 </script>

@@ -1,13 +1,13 @@
 <template>
     <div>
-        <section class="section" v-if="airConditioners.length">
+        <section class="" v-if="airConditioners.length">
             <div class="columns">
                 <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Clima</div>
             </div>
             
             <div :class="airConditioners.length > 4 ? '' : 'container'">
                 <div class="columns is-multiline tile is-ancestor">
-                    <div class="column is-4 tile is-parent" v-for="airConditioner in airConditioners">
+                    <div class="column is-4 tile is-parent" v-for="airConditioner in airConditioners" :key="airConditioner.id">
                         <air-conditioner :airConditioner="airConditioner"></air-conditioner>
                     </div>
                 </div>

@@ -4,45 +4,61 @@
         <div class="tile is-ancestor">
 
             <div class="tile">
-                    <div class="tile is-parent is-3">
-                        <protected-zones 
-                            :protectedZones=protectedZones
-                            :user="user"/>
-                    </div>
+                <div class="tile is-parent is-4">
+                    <pop-protected-zones 
+                        :popProtectedZones=popProtectedZones
+                        :user="user"/>
+                </div>
 
-                    <div class="tile is-parent">
+                <div class="tile is-parent">
 
-                        <div class="tile is-child box">
-                            <eco-map-view
-                                :user="user"
-                                :pops="pops"
-                                :map_attributes="map_attributes"
-                            />   
-                        </div>    
-                    </div>
+                    <div class="tile is-child box">
+                        <eco-map-view
+                            :user="user"
+                            :pops="pops"
+                            :map_attributes="map_attributes"
+                        />   
+                    </div>    
+                </div>
 
-                    <div class="tile is-parent is-3">
-                        <temporal-storages 
-                            :storageZones=storageZones
-                            :user="user"/>
-                    </div>
+                <div class="tile is-parent is-3">
+                    <protected-zones 
+                        :protectedZones=protectedZones
+                        :user="user"/>
+                    
                 </div>
             </div>
         </div>
 
-        <!-- <div class="tile is-parent">
-            <rcas :user="user"/>
-        </div> -->
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <rcas :user="user"/>
+            </div>
+
+            <div class="tile is-parent">
+                <temporal-storages 
+                    :storageZones=storageZones
+                    :user="user"/>
+            </div>
+        </div>
+
+        
 
     </section>
 </template>
 
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+// import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+library.add(farCheckCircle);
     export default {
         components: {
             EcoMapView: () => import('../maps/EcoMapView'),
             Rcas: () => import('./RCAs'),
             TemporalStorages: () => import('./TemporalStorages'),
+            PopProtectedZones: () => import('./PopProtectedZones'),
             ProtectedZones: () => import('./ProtectedZones')
         },
 
@@ -52,6 +68,7 @@
 
         data() {
             return {
+                popProtectedZones: [],
                 protectedZones: [],
                 storageZones: [],
                 map_attributes: {
@@ -67,28 +84,37 @@
         computed: {
             pops() {
                 var array = [];
-                this.protectedZones && this.protectedZones.forEach(element => array.push(element))
+                this.popProtectedZones && this.popProtectedZones.forEach(element => array.push(element))
                 this.storageZones && this.storageZones.forEach(element => array.push(element))
                 return array
             }
         },
 
         mounted() {
+            this.getPopProtectedZones()
             this.getProtectedZones()
             this.getStorageZones()
         },
 
         methods: {
-            getProtectedZones() {
+            getPopProtectedZones() {
                 axios.get(`/api/eco?api_token=${this.user.api_token}`).then((response) => {
-                    this.protectedZones = response.data.environmentalData
-                    // console.log(this.protectedZones)
+                    this.popProtectedZones = response.data.environmentalData
+                    // console.log(this.popProtectedZones)
                 })
             },
+
+            getProtectedZones() {
+                axios.get(`/api/ecoZones?api_token=${this.user.api_token}`).then((response) => {
+                    this.protectedZones = response.data.environmentalData
+                    console.log(this.protectedZones)
+                })
+            },
+
             getStorageZones() {
                 axios.get(`/api/storages?api_token=${this.user.api_token}`).then((response) => {
                     this.storageZones = response.data.environmentalData
-                    console.log(this.storageZones)
+                    // console.log(this.storageZones)
                 })
             },
         }

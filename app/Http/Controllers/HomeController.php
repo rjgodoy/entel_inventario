@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AirConditioner;
-use App\Models\Crm;
-use App\Models\File;
-use App\Models\GeneratorSet;
-use App\Models\Junction;
-use App\Models\Menu;
-use App\Models\Pop;
-use App\Models\PowerRectifier;
-use App\Models\PsgTp;
-use App\Models\Site;
-use App\Models\Technology;
-use App\Models\TechnologyType;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Crm;
+use App\Models\Pop;
+use App\Models\File;
+use App\Models\Menu;
+use App\Models\Site;
+use App\Models\User;
+use App\Models\PsgTp;
+use App\Models\Folder;
+use App\Models\Junction;
+use App\Models\Technology;
+use Illuminate\Support\Str;
+use App\Models\GeneratorSet;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use App\Models\AirConditioner;
+use App\Models\PowerRectifier;
+use App\Models\TechnologyType;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -44,8 +45,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['developer', 'admin', 'engineer', 'engineer-admin', 'user']);
-
+        $request->user()->authorizeRoles(['developer', 'admin', 'engineer', 'engineer-admin', 'user', 'super-viewer']);
+        
         // ⚠️ Create api_token
         // $users = User::where('estado', 1)->get();
         // foreach ($users as $user) {

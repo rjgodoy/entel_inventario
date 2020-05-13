@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="is-size-7" v-for="item in data.data">
+                <tr class="is-size-7" v-for="item in data.data" :key="item.id">
                     <td class="has-text-left" :class="primaryText">
                         <router-link :to="'/pop/' + item.id" target="_blank">{{ item.sites[0].nem_site }}</router-link>
                     </td>

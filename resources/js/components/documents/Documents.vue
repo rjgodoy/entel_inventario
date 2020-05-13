@@ -1,50 +1,117 @@
 <template>
-    <section class="section is-marginless" :class="bodyBackground">
-        <div class="container">
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <div class="tile is-vertical">
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-                                <div class="title">Informes</div>
+    <div>
+        <section class="section">
+            <div class="">
+
+                <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
+
+                    <div class="tile is-parent" v-for="tab in tabs" :key="tab.id">
+                        <a class="tile is-child box" :key="tab.component" :class="currentTab === tab.component ? 'is-link is-bold' : ''" @click="currentTab = tab.component">
+                            <div class="is-size-6 has-text-weight-semibold has-text-centered">
+                                {{ tab.title }}
                             </div>
-                        </div>
-                        <div class="tile is-parent">
-                            <div class="tile is-child box">
-                                <div class="title">Levantamientos</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tile is-parent">
-                        <div class="tile is-child box">
-                            <div class="title">Otros</div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-        
-    </section>
+            
+        </section>
+
+        <keep-alive>
+            <admin-content 
+                :is="currentTabComponent"
+                :user="user"
+            />
+        </keep-alive>
+    </div>
 </template>
 
 <script>
-    export default {
-        components: {
-        },
-        props : [
-            'user'
-        ],
-        data() {
-            return {
+export default {
+    components: {
+        Mantenciones: () => import('./Mantenciones'),
+        Procedimientos: () => import('./Procedimientos'),
+        Manuales: () => import('./Manuales'),
+        Fotos: () => import('./Fotos'),
+        Construccion: () => import('./Construccion'),
+        ObrasCiviles: () => import('./ObrasCiviles'),
+        Cam: () => import('./Cam'),
+        GestionAmbiental: () => import('./GestionAmbiental'),
+    },
+
+    props : [
+        'user'
+    ],
+
+    data() {
+        return {
+            tabs: [
+                {
+                    "title": "Mantenciones",
+                    "component": "mantenciones",
+                    "icon": "file",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Procedimientos",
+                    "component": "procedimientos",
+                    "icon": "file-invoice",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Manuales",
+                    "component": "manuales",
+                    "icon": "file-invoice",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Fotos",
+                    "component": "fotos",
+                    "icon": "file-invoice",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Construcción",
+                    "component": "construccion",
+                    "icon": "file-invoice",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Obras Civiles",
+                    "component": "obras-civiles",
+                    "icon": "file-invoice",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "CAM",
+                    "component": "cam",
+                    "icon": "file-invoice",
+                    "icon_type": "fas"
+                },
+                {
+                    "title": "Gestión Ambiental",
+                    "component": "gestion-ambiental",
+                    "icon": "file-invoice",
+                    "icon_type": "fas"
+                },
                 
-            }
-        },
-        created() {
-        },
-        mounted() {
-        },
-        methods: {
-            
+            ],
+            currentTab: 'fotos'
         }
+    },
+
+    computed: {
+        currentTabComponent: function () {
+            return this.currentTab
+        }
+    },
+
+    created() {
+    },
+    mounted() {
+    },
+    methods: {
+        
     }
+}
 </script>

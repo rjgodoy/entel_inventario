@@ -5,6 +5,7 @@ import App from '../components/App.vue'
 let Login = () => import('../components/auth/Login.vue')
 let PasswordEmail = () => import('../components/auth/PasswordEmail.vue')
 let PasswordReset = () => import('../components/auth/PasswordReset.vue')
+let Register = () => import('../components/auth/Register.vue')
 
 let Dashboard = () => import('../components/dashboard/Dashboard.vue')
 let PopTable = () => import('../components/pops/PopTable.vue')
@@ -27,6 +28,7 @@ export default {
             component: Welcome, 
             children: [
                 { path: '/login', name: 'Login', component: Login },
+                { path: '/register', name: 'Register', component: Register },
                 { path: '/password/email', name: 'Password Email', component: PasswordEmail },
                 { path: '/password/reset/:token', name: 'Password Reset', component: PasswordReset },
             ]

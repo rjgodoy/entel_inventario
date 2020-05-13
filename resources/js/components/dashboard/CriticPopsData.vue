@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="is-size-7" v-for="item in data.data">
+                    <tr class="is-size-7" v-for="item in data.data" :key="item.id">
                         <td class="has-text-left" :class="primaryText">
                             <div>{{ item.pop.nombre }}</div>
                             <div>{{ item.pop.direccion }}</div>

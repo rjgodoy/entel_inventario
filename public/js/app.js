@@ -12299,6 +12299,8 @@ var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Cl
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment_locale_es__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment/locale/es */ "./node_modules/moment/locale/es.js");
+/* harmony import */ var moment_locale_es__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment_locale_es__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -12310,11 +12312,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
 
-    this.currentDay = moment().format('MMMM Do YYYY');
+    this.currentDay = moment().format('MMMM DD, YYYY').toUpperCase();
     this.currentTime = moment().format('h:mm:ss a');
     setInterval(function () {
       return _this.updateCurrentDay();
@@ -12323,7 +12326,9 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       return _this.updateCurrentTime();
     }, 1 * 1000);
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    moment.locale('es');
+  },
   data: function data() {
     return {
       currentDay: null,
@@ -12332,7 +12337,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
   },
   methods: {
     updateCurrentDay: function updateCurrentDay() {
-      this.currentDay = moment().format('MMMM Do YYYY');
+      this.currentDay = moment().format('MMMM DD, YYYY').toUpperCase();
     },
     updateCurrentTime: function updateCurrentTime() {
       this.currentTime = moment().format('h:mm:ss a');
@@ -66186,8 +66191,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 //     },
 // });
 
-Vue.prototype.$eventBus = new Vue();
-Vue.prototype.$eventCounters = new Vue(); // ########################## Buefy Libraries ##########################
+Vue.prototype.$eventBus = new Vue(); // ########################## Buefy Libraries ##########################
 
 
 Vue.use(buefy__WEBPACK_IMPORTED_MODULE_0__["default"]); // #########################################################################
@@ -66529,23 +66533,23 @@ var Register = function Register() {
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(20), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(6), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {
-  return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/pops/PopTable.vue */ "./resources/js/components/pops/PopTable.vue"));
+  return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/pops/PopTable.vue */ "./resources/js/components/pops/PopTable.vue"));
 };
 
 var Pop = function Pop() {
-  return __webpack_require__.e(/*! import() */ 70).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
+  return __webpack_require__.e(/*! import() */ 72).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
 };
 
 var CapacityPlanning = function CapacityPlanning() {
-  return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
 };
 
 var Eco = function Eco() {
-  return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(59)]).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(88), __webpack_require__.e(60)]).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
 };
 
 var Comsite = function Comsite() {

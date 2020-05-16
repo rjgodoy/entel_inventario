@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Crm;
-use App\Models\Pop;
-use App\Models\File;
-use App\Models\Menu;
-use App\Models\Site;
-use App\Models\User;
-use App\Models\PsgTp;
-use App\Models\Folder;
-use App\Models\Junction;
-use App\Models\Technology;
-use Illuminate\Support\Str;
-use App\Models\GeneratorSet;
-use Illuminate\Http\Request;
 use App\Models\AirConditioner;
+use App\Models\Crm;
+use App\Models\GeneratorSet;
+use App\Models\Junction;
+use App\Models\Menu;
+use App\Models\Pop;
 use App\Models\PowerRectifier;
-use App\Models\TechnologyType;
+use App\Models\PsgTp;
+use App\Models\Site;
+use App\Models\Technology;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -82,10 +79,10 @@ class HomeController extends Controller
         //     GeneratorSet::whereDay('created_at', Carbon::now()->format('d'))->count() +
         //     PowerRectifier::whereDay('created_at', Carbon::now()->format('d'))->count() +
         //     AirConditioner::whereDay('created_at', Carbon::now()->format('d'))->count();
-        $equipments_news_month = 
-            GeneratorSet::whereMonth('created_at', Carbon::now()->format('m'))->count() +
-            PowerRectifier::whereMonth('created_at', Carbon::now()->format('m'))->count() +
-            AirConditioner::whereMonth('created_at', Carbon::now()->format('m'))->count();
+        // $equipments_news_month = 
+        //     GeneratorSet::whereMonth('created_at', Carbon::now()->format('m'))->count() +
+        //     PowerRectifier::whereMonth('created_at', Carbon::now()->format('m'))->count() +
+        //     AirConditioner::whereMonth('created_at', Carbon::now()->format('m'))->count();
 
 
         $last_site = Site::with('pop.comuna.zona.crm')->latest()->first();
@@ -103,7 +100,7 @@ class HomeController extends Controller
             // 'technologies_news_day' => $technologies_news_day,
             // 'technologies_news_month' => $technologies_news_month,
             // 'equipments_news_day' => $equipments_news_day,
-            'equipments_news_month' => $equipments_news_month,
+            // 'equipments_news_month' => $equipments_news_month,
             'last_site' => $last_site,
             'equipment' => $equipment,
             'last_updated_pops' => $last_updated_pops,

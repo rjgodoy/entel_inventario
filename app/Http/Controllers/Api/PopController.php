@@ -10,6 +10,7 @@ use App\Exports\PopsExport;
 use App\Exports\SitesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Pop as PopResource;
+use App\Http\Resources\PopCollection;
 use App\Models\GeneratorSet;
 use App\Models\Pop;
 use App\Models\PopMenu;
@@ -41,6 +42,27 @@ class PopController extends Controller
         //     });
         // }
         return new PopResource($pops);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allPops(Request $request)
+    {
+        $text = $request->text;
+        $pops = Pop::with('comuna.zona.crm')
+            ->where(function($q) use($text) {
+                $q->whereHas('sites', function($p) use ($text) {
+                    $p->where('nem_site', 'LIKE', "%$text%")
+                    ->orWhere('nombre', 'LIKE', "%$text%");
+                })
+                ->orWhere('nombre', 'LIKE', "%$text%")
+                ->orWhere('direccion', 'LIKE', "%$text%");
+            })->paginate(20);
+
+        return new PopCollection($pops);
     }
 
     /**

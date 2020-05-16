@@ -109,9 +109,6 @@
             core(newValue, oldValue) {
                 this.getData()
             },
-            totalPops(newValue) {
-                this.$eventCounters.$emit('pops', newValue)
-            }
         },
         computed: {
             totalOpto() {

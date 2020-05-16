@@ -249,6 +249,8 @@ Route::middleware('auth:api')->group(function () {
 			Route::get('popsMap', 'Api\PopController@popsMap');
 			Route::get('filters', 'Api\PopController@filters');
 
+			Route::get('allPops', 'Api\PopController@allPops');
+
 			// Exports
 			// Route::get('pop/exportFilter', 'Api\PopController@exportFilter');
 		##############################################################################################
@@ -281,6 +283,7 @@ Route::middleware('auth:api')->group(function () {
 			Route::get('rcas/{pop_id}','Api\EcoController@rcasPop');
 			Route::post('rcas','Api\EcoController@upload');
 			Route::get('storages','Api\EcoController@storages');
+			Route::post('newStorage','Api\EcoController@newStorage');
 		##############################################################################################
 
 
@@ -295,7 +298,9 @@ Route::middleware('auth:api')->group(function () {
 			Route::apiResource('files', 'Api\FileController');
             Route::get('viewFile', 'Api\FileController@view');
             Route::get('getFolders', 'Api\FolderController@getFolders');
+            Route::get('currentFolder', 'Api\FolderController@currentFolder');
             Route::get('getFiles', 'Api\FileController@getFiles');
+            Route::post('createFolder/{id}', 'Api\FolderController@createFolder');
 			
 
 			Route::apiResource('logs','Api\LogController');

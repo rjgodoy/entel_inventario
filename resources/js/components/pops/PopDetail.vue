@@ -87,14 +87,14 @@
 
                         <div class="column is-1 has-text-right">
                             
-                            <!-- <b-button
+                            <b-button
                                 type="is-primary" 
                                 @click="openLog" 
                                 data-target="quickviewDefault" 
                                 data-show="quickview" 
                                 size="is-small"
                                 >Log del POP
-                            </b-button> -->
+                            </b-button>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@ export default {
         Infrastructure: () => import('./infrastructure/Infrastructure'),
         Eco: () => import('./Eco'),
         Comsite: () => import('./Comsite'),
-        Documents: () => import('./Documents'),
+        Documents: () => import('./documents/Documents'),
         Log: () => import('./Log'),
     },
     props : [
@@ -223,7 +223,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.$route)
+        // console.log(this.$route)
         this.getAllData()
         this.getTabs()
         

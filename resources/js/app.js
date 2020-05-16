@@ -24,7 +24,6 @@ window.Vue = require('vue');
 // });
 
 Vue.prototype.$eventBus = new Vue()
-Vue.prototype.$eventCounters = new Vue()
 
 // ########################## Buefy Libraries ##########################
     import Buefy from 'buefy'

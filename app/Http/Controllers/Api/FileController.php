@@ -88,9 +88,7 @@ class FileController extends Controller
     {
         // return $request;
 
-        $files = File::whereHas('site', function($q) use($id) {
-            $q->where('pop_id', $id);
-        })
+        $files = File::where('pop_id', $id)
         ->where('folder_id', $request->folder_id)
         ->get();
 

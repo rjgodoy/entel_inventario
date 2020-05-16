@@ -74,7 +74,7 @@
                 </b-table-column>
 
                 <b-table-column field="id" label="" width="10" numeric v-if="rcas.can.delete">
-                    <button class="button" @click="confirm(props.row)">
+                    <button class="button" @click="confirmDelete(props.row)">
                         <font-awesome-icon :icon="['far', 'trash-alt']"/>
                     </button>
                 </b-table-column>
@@ -96,7 +96,7 @@
             </template>
         </b-table>
 
-        <b-field v-if="rcas.can ? rcas.can.upload : null">
+        <!-- <b-field v-if="rcas.can ? rcas.can.upload : null">
 
             <b-upload
                 v-model="dropFiles"
@@ -116,7 +116,7 @@
                     </div>
                 </section>
             </b-upload>
-        </b-field>
+        </b-field> -->
 
     </div>
 </template>
@@ -194,23 +194,19 @@ export default {
             
         },
 
-        confirm(file) {
+        confirmDelete(file) {
             this.$buefy.dialog.confirm({
                 message: 'Desea eliminar este archivo?',
                 type: 'is-danger',
                 onConfirm: () => {
-                    this.deleteFile(file.id)
+                    axios.delete(`/api/files/${file.id}?api_token=${this.user.api_token}`)
+                    .then(response => {
+                        console.log(response)
+                        this.getRCAs()
+                    })
                 }
             })
         },
-
-        deleteFile(file_id) {
-            axios.delete(`/api/files/${file_id}?api_token=${this.user.api_token}`)
-            .then(response => {
-                console.log(response)
-                this.getRCAs()
-            })
-        }
 
     }
 }

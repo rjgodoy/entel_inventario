@@ -863,10 +863,6 @@ export default {
         },
     },
 
-    beforeDestroy() {
-        this.$eventBus.$off('graphData')
-        this.$eventCounters.$off('pops');
-    },
 }
 </script>
 

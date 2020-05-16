@@ -40,9 +40,9 @@ class Eco extends JsonResource
     protected function permissions()
     {
         return [
-            // 'create' => Gate::allows('create-electric-line', ElectricLine::class),
-            'upload' => Gate::allows('edit-eco', $this->resource),
-            // 'delete' => Gate::allows('delete-electric-line', $this->resource)
+            'create' => Gate::allows('create-eco', $this->resource),
+            'edit' => Gate::allows('edit-eco', $this->resource),
+            'delete' => Gate::allows('delete-eco', $this->resource)
         ];
     }
 

@@ -53,19 +53,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AdminPops: function AdminPops() {
-      return Promise.all(/*! import() */[__webpack_require__.e(14), __webpack_require__.e(5), __webpack_require__.e(32)]).then(__webpack_require__.bind(null, /*! ./AdminPops */ "./resources/js/components/admin/AdminPops.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(15), __webpack_require__.e(5), __webpack_require__.e(32)]).then(__webpack_require__.bind(null, /*! ./AdminPops */ "./resources/js/components/admin/AdminPops.vue"));
     },
     AdminTps: function AdminTps() {
       return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./AdminTps */ "./resources/js/components/admin/AdminTps.vue"));
     },
     AdminApprove: function AdminApprove() {
-      return Promise.all(/*! import() */[__webpack_require__.e(14), __webpack_require__.e(5), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./AdminApprove */ "./resources/js/components/admin/AdminApprove.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(15), __webpack_require__.e(5), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./AdminApprove */ "./resources/js/components/admin/AdminApprove.vue"));
     },
     AdminMassive: function AdminMassive() {
       return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ./AdminMassive */ "./resources/js/components/admin/AdminMassive.vue"));
     },
     AdminUsers: function AdminUsers() {
-      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./AdminUsers */ "./resources/js/components/admin/AdminUsers.vue"));
+      return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./AdminUsers */ "./resources/js/components/admin/AdminUsers.vue"));
     }
   },
   props: ['user'],

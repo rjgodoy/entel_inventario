@@ -140,7 +140,7 @@
                             'user': user,
                             'admin_id': this.user.id
                         }
-                        axios.post('api/newUserAccepted', params )
+                        axios.post('/api/newUserAccepted', params )
                         .then(response => {
                             console.log(response.data)
 

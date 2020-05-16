@@ -489,7 +489,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     // ###### Map ###########
     // PopsMap,
     MapView: function MapView() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../maps/MapView */ "./resources/js/components/maps/MapView.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../maps/MapView */ "./resources/js/components/maps/MapView.vue"));
     },
     // MapView,
     // ###### Charts ########
@@ -942,10 +942,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         });
       });
     }
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.$eventBus.$off('graphData');
-    this.$eventCounters.$off('pops');
   }
 });
 

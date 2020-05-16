@@ -7,6 +7,8 @@ use App\Http\Resources\Eco as EcoResource;
 use App\Http\Resources\FileCollection;
 use App\Models\File;
 use App\Models\Folder;
+use App\Models\Log;
+use App\Models\LogType;
 use App\Models\Pop;
 use App\Models\ProtectedZone;
 use App\Models\Site;
@@ -48,6 +50,29 @@ class EcoController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function newStorage(Request $request)
+    {
+        $new = TemporaryStorage::create([
+            'pop_id' => $request->pop_id,
+            'zona_id' => $request->zona_id
+        ]);
+
+        Log::create([
+            'pop_id' => $request->pop_id,
+            'user_id' => $request->user_id,
+            'log_type_id' => LogType::where('type', 'eco')->first()->id,
+            'description' => 'Se ha agregado este PoP como Zona de Acopio Temporal'
+        ]);
+
+        return $new;
     }
 
     /**

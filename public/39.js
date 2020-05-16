@@ -75,10 +75,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(4), __webpack_require__.e(29), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/modals/Capacity.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(3), __webpack_require__.e(4), __webpack_require__.e(29), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/modals/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/modals/Projection.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(4), __webpack_require__.e(27)]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/modals/Projection.vue"));
     },
     Requests: function Requests() {
       return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./Requests */ "./resources/js/components/capacity/modals/Requests.vue"));
@@ -87,10 +87,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() */ 38).then(__webpack_require__.bind(null, /*! ./Calculator */ "./resources/js/components/capacity/modals/Calculator.vue"));
     },
     Layout: function Layout() {
-      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../../pops/layout/Layout */ "./resources/js/components/pops/layout/Layout.vue"));
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../../pops/layout/Layout */ "./resources/js/components/pops/layout/Layout.vue"));
     },
     Documents: function Documents() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../../pops/Documents */ "./resources/js/components/pops/Documents.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../../pops/documents/Documents */ "./resources/js/components/pops/documents/Documents.vue"));
     }
   },
   props: ['pop', 'room', 'user'],

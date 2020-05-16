@@ -112,9 +112,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     core: function core(newValue, oldValue) {
       this.getData();
-    },
-    totalPops: function totalPops(newValue) {
-      this.$eventCounters.$emit('pops', newValue);
     }
   },
   computed: {

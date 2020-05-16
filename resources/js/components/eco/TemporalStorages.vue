@@ -1,5 +1,6 @@
 <template>
     <div class="tile is-child box">
+        <button v-if="canEdit" class="button is-pulled-right" @click="isNewStorageModalActive = true">+</button>
         <div class="title is-size-4">Zonas Acopio Temporal</div>
 
         <!-- <b-field grouped group-multiline> -->
@@ -41,7 +42,7 @@
         <!-- </b-field> -->
 
         <b-table
-            :data="storageZones"
+            :data="storageZones.environmentalData"
             :paginated="isPaginated"
             :per-page="perPage"
             :current-page.sync="currentPage"
@@ -64,7 +65,9 @@
                             {{ column.label }}
                         </b-tooltip>
                     </template>
-                    <div class="is-size-6">{{ props.row.nombre }}</div>
+                    <router-link class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
+                        <div class="is-size-6">{{ props.row.nombre }}</div>
+                    </router-link>
                     <p class="is-size-7">{{ props.row.comuna.nombre_comuna }}</p>
                 </b-table-column>
 
@@ -74,13 +77,23 @@
                             {{ column.label }}
                         </b-tooltip>
                     </template>
-                    <router-link class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
+                    <div class="is-size-7">
                         <p>{{ props.row.comuna.zona.nombre_zona }}</p>
-                    </router-link>
+                    </div>
                 </b-table-column>
 
             </template>
         </b-table>
+
+        <b-modal :active.sync="isNewStorageModalActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-new-storage 
+                :user="user"
+                />
+        </b-modal>
 
     </div>       
 </template>
@@ -88,6 +101,7 @@
 <script>
     export default {
         components: {
+            ModalNewStorage: () => import('./modals/ModalNewStorage'),
         },
         props : [
             'storageZones',
@@ -104,27 +118,24 @@
                 currentPage: 1,
                 perPage: 10,
 
-                darkMode: 0,
-                bodyBackground: '',
-                boxBackground: '',
-                primaryText: '',
-                secondaryText: '',
-                searchBodyBackground: '',
+                isNewStorageModalActive: false,
+                newTempStorage: null,
+
             }
         },
+
+        computed: {
+            canEdit() {
+                return this.storageZones.can && this.storageZones.can
+            }
+        },
+
         created() {
         },
-        mounted() {
-            // this.getProtectedZones()
-            // this.getFiles()
-        },
+
+
         methods: {
             
-            // async getFiles() {
-            //     axios.get(`/api/eco/1`).then((response) => {
-            //         // console.log(response)
-            //     })
-            // }
         }
     }
 </script>

@@ -11,13 +11,13 @@
                     <div class="box tile is-child">
                         <div class="field">
                             <div class="title is-size-4 has-text-weight-semibold has-text-centered">Zona protegida</div>
-                            <div v-if="pop.protected_zones">
+                            <div v-if="pop.protected_zones.length">
                                 <div class="is-size-6 has-text-weight-light has-text-centered">Este PoP <span class="has-text-weight-semibold has-text-eco">SI</span> se encuentra dentro de una zona protegida</div>
                                 <div v-for="pz in pop.protected_zones" class="title is-size-5 has-text-weight-semibold has-text-centered" style="padding-top: 12px">Zona {{ pz.cod_zone }}
                                     <div class="is-size-5 has-text-weight-light">{{ pz.name }}</div>
                                 </div>
                             </div>
-                            <div v-if="!pop.protected_zones" class="is-size-6 has-text-weight-light has-text-centered">Este PoP <span class="has-text-weight-semibold has-text-positive">NO</span> se encuentra dentro de una zona protegida.</div>
+                            <div v-if="!pop.protected_zones.length" class="is-size-6 has-text-weight-light has-text-centered">Este PoP <span class="has-text-weight-semibold has-text-positive">NO</span> se encuentra dentro de una zona protegida.</div>
                         </div>
                     </div>
                 </div>

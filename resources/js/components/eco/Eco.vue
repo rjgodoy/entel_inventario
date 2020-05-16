@@ -36,6 +36,10 @@
             </div>
 
             <div class="tile is-parent">
+                <documents :user="user"/>
+            </div>
+
+            <div class="tile is-parent">
                 <temporal-storages 
                     :storageZones=storageZones
                     :user="user"/>
@@ -57,6 +61,7 @@ library.add(farCheckCircle);
         components: {
             EcoMapView: () => import('../maps/EcoMapView'),
             Rcas: () => import('./RCAs'),
+            Documents: () => import('./Documents'),
             TemporalStorages: () => import('./TemporalStorages'),
             PopProtectedZones: () => import('./PopProtectedZones'),
             ProtectedZones: () => import('./ProtectedZones')
@@ -85,9 +90,13 @@ library.add(farCheckCircle);
             pops() {
                 var array = [];
                 this.popProtectedZones && this.popProtectedZones.forEach(element => array.push(element))
-                this.storageZones && this.storageZones.forEach(element => array.push(element))
+                this.storageZones.environmentalData && this.storageZones.environmentalData.forEach(element => array.push(element))
                 return array
             }
+        },
+
+        created() {
+            this.$eventBus.$on('storage-created', this.getStorageZones)
         },
 
         mounted() {
@@ -113,10 +122,14 @@ library.add(farCheckCircle);
 
             getStorageZones() {
                 axios.get(`/api/storages?api_token=${this.user.api_token}`).then((response) => {
-                    this.storageZones = response.data.environmentalData
+                    this.storageZones = response.data
                     // console.log(this.storageZones)
                 })
             },
+        },
+
+        beforeDestroy() {
+            this.$eventBus.$off('storage-created')
         }
     }
 </script>

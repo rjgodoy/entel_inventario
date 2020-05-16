@@ -161,7 +161,7 @@ export default {
     computed: {
         google: gmapApi,
         mapStyle() {
-            return this.darkMode ? this.style1 : this.style1
+            return this.darkMode ? this.style8 : this.style9
         },
 
     },

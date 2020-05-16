@@ -67,7 +67,7 @@ export default {
         Requests: () => import('./Requests'),
         Calculator: () => import('./Calculator'),
         Layout: () => import('../../pops/layout/Layout'),
-        Documents: () => import('../../pops/Documents'),
+        Documents: () => import('../../pops/documents/Documents'),
     },
     props : [
         'pop',

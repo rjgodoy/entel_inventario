@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\File;
-use App\Models\Site;
-use App\Models\Folder;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\FolderCollection;
 use App\Http\Resources\Folder as FolderResource;
+use App\Http\Resources\FolderCollection;
+use App\Models\File;
+use App\Models\Folder;
+use App\Models\Log;
+use App\Models\LogType;
+use App\Models\Site;
+use Illuminate\Http\Request;
 
 class FolderController extends Controller
 {
@@ -21,7 +23,7 @@ class FolderController extends Controller
     {
         
         $text = $request->text;
-        $folders = Folder::with('site')
+        $folders = Folder::with('site', 'pop')
         ->whereHas('site', function($q) use($text) {
             $q->where('nem_site', 'LIKE', "%$text%")
             ->orWhere('nombre', 'LIKE', "%$text%");
@@ -42,6 +44,49 @@ class FolderController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createFolder(Request $request, $id)
+    {
+        if($id == 'null') {
+            $parentFolder = Folder::updateOrCreate([
+                'parent_id' => null,
+                'pop_id' => $request->pop_id,
+                'name' => $request->folderTab
+            ],[
+                'creator_id' => $request->creator_id
+            ]);
+            
+            $folder = Folder::create([
+                'parent_id' => $parentFolder->id,
+                'pop_id' => $request->pop_id,
+                'name' => $request->name,
+                'creator_id' => $request->creator_id
+            ]);
+        } else {
+            $folder = Folder::create([
+                'parent_id' => $id,
+                'pop_id' => $request->pop_id,
+                'name' => $request->name,
+                'creator_id' => $request->creator_id
+            ]);
+        }
+
+        Log::create([
+            'pop_id' => $request->pop_id,
+            'user_id' => $request->creator_id,
+            'log_type_id' => LogType::where('type', 'folder')->first()->id,
+            'description' => 'Se ha agregado la carpeta "'. $request->name.'" a "'.$request->folderTab.'"'
+        ]);
+
+        return $folder;
+        
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -50,26 +95,32 @@ class FolderController extends Controller
     public function show(Request $request, $id)
     {
         if ($request->folder_id) {
-            $folders = Folder::whereHas('site', function($q) use($id) {
-                $q->where('pop_id', $id);
-            })
+            $folders = Folder::with('subfolders')->where('pop_id', $id)
             ->where('parent_id', $request->folder_id)
-            ->first();
+            ->get();
         } else {
-            $folders = Folder::whereHas('site', function ($q) use ($id) {
-                $q->where('pop_id', $id);
-            })
+            $folders = Folder::with('subfolders')->where('pop_id', $id)
             ->where('name', $request->folder_name)
-            ->first();
-        }
-
-        if ($folders) {
-            $folders = $folders->subfolders()->get();
-        } else {
-            $folders = [];
+            ->get();
         }
 
         return new FolderCollection($folders);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function currentFolder(Request $request)
+    {
+        
+        $folder = Folder::with('subfolders')
+        ->where('id', $request->folder_id)
+        ->first();
+
+        return new FolderResource($folder);
     }
 
     /**
@@ -110,9 +161,25 @@ class FolderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $folder = Folder::find($id);
+        $files = File::where('folder_id', $folder->id)->get();
+        if($files){
+            foreach ($files as $file) {
+                $file->delete();
+            }
+        }
+        $folder->delete();
+
+        Log::create([
+            'pop_id' => $request->pop_id,
+            'user_id' => $request->user_id,
+            'log_type_id' => LogType::where('type', 'delete-folder')->first()->id,
+            'description' => 'Se ha eliminado la carpeta "'. $folder->name.'" y su contenido'
+        ]);
+
+        return 'done';
     }
 
     /**

@@ -66533,7 +66533,7 @@ var Register = function Register() {
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(6), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(6), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {

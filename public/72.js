@@ -214,7 +214,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return Promise.all(/*! import() */[__webpack_require__.e(88), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./documents/Documents */ "./resources/js/components/pops/documents/Documents.vue"));
     },
     Log: function Log() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pops/Log.vue"));
+      return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pops/Log.vue"));
     }
   },
   props: ['user'],

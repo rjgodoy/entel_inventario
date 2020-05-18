@@ -51,7 +51,7 @@ class FolderController extends Controller
      */
     public function createFolder(Request $request, $id)
     {
-        if($id == 'null') {
+        if($id == 'null' || $id == 'undefined') {
             $parentFolder = Folder::updateOrCreate([
                 'parent_id' => null,
                 'pop_id' => $request->pop_id,

@@ -303,19 +303,63 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get("/api/folders/".concat(this.pop.id), {
         params: params
       }).then(function (response) {
-        _this.folders = _this.currentFolderView.id ? response.data.folders : response.data.folders[0].subfolders;
+        _this.folders = !_this.currentFolderView.id && response.data.folders[0] ? response.data.folders[0].subfolders : response.data.folders;
         _this.canCreateFolder = response.data.can.create;
         _this.canDeleteFolder = response.data.can["delete"];
       });
       axios.get('/api/currentFolder', {
         params: params
       }).then(function (response) {
-        // console.log(response.data.folder)
         _this.currentFolderView = response.data.folder;
       });
     },
-    getFiles: function getFiles() {
+    confirmDeleteFolder: function confirmDeleteFolder(folder) {
       var _this2 = this;
+
+      this.$buefy.dialog.confirm({
+        message: 'Desea eliminar esta carpeta?',
+        type: 'is-danger',
+        onConfirm: function onConfirm() {
+          var params = {
+            'api_token': _this2.user.api_token,
+            'user_id': _this2.user.id,
+            'pop_id': _this2.pop.id
+          };
+          axios["delete"]("/api/folders/".concat(folder.id), {
+            params: params
+          }).then(function (response) {
+            console.log(response);
+
+            _this2.getFolders();
+
+            _this2.$eventBus.$emit('folder-deleted');
+          });
+        }
+      });
+    },
+    setBreadcrum: function setBreadcrum(name) {
+      if (this.bread == '') {
+        this.bread = name;
+      } else {
+        this.bread = this.bread + ' / ' + name;
+      }
+    },
+    backOne: function backOne() {
+      var split = this.bread.split('/');
+      var deep = split.pop();
+      this.bread = '';
+
+      for (var i = 0; i < split.length; i++) {
+        this.bread = this.bread == '' ? split[i] : this.bread + '/' + split[i];
+      }
+
+      this.currentFolderView.id = this.currentFolderView.parent_id;
+      this.getFolders();
+      this.getFiles();
+    },
+    // File Management
+    getFiles: function getFiles() {
+      var _this3 = this;
 
       var params = {
         'api_token': this.user.api_token,
@@ -326,9 +370,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         params: params
       }).then(function (response) {
         // console.log(response.data)
-        _this2.files = response.data.files;
-        _this2.canUploadFile = response.data.can.upload;
-        _this2.canDeleteFile = response.data.can["delete"];
+        _this3.files = response.data.files;
+        _this3.canUploadFile = response.data.can.upload;
+        _this3.canDeleteFile = response.data.can["delete"];
       });
     },
     faFile: function faFile(ext) {
@@ -340,7 +384,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       };
     },
     readFile: function readFile(file) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.isLoading = true;
       var params = {
@@ -375,66 +419,22 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         //     window.URL.revokeObjectURL(data)
         // }, 100)
 
-        _this3.isLoading = false;
+        _this4.isLoading = false;
 
-        _this3.$buefy.toast.open({
+        _this4.$buefy.toast.open({
           message: 'El archivo se ha descargado exitosamente.',
           type: 'is-success',
           duration: 5000
         });
       })["catch"](function (error) {
         console.log(error);
-        _this3.isLoading = false;
+        _this4.isLoading = false;
 
-        _this3.$buefy.toast.open({
+        _this4.$buefy.toast.open({
           message: 'Ha ocurrido un error. Favor contactar al administrador',
           type: 'is-danger',
           duration: 5000
         });
-      });
-    },
-    setBreadcrum: function setBreadcrum(name) {
-      if (this.bread == '') {
-        this.bread = name;
-      } else {
-        this.bread = this.bread + ' / ' + name;
-      }
-    },
-    backOne: function backOne() {
-      var split = this.bread.split('/');
-      var deep = split.pop();
-      this.bread = '';
-
-      for (var i = 0; i < split.length; i++) {
-        this.bread = this.bread == '' ? split[i] : this.bread + '/' + split[i];
-      }
-
-      this.currentFolderView.id = this.currentFolderView.parent_id;
-      this.getFolders();
-      this.getFiles();
-    },
-    confirmDeleteFolder: function confirmDeleteFolder(folder) {
-      var _this4 = this;
-
-      this.$buefy.dialog.confirm({
-        message: 'Desea eliminar esta carpeta?',
-        type: 'is-danger',
-        onConfirm: function onConfirm() {
-          var params = {
-            'api_token': _this4.user.api_token,
-            'user_id': _this4.user.id,
-            'pop_id': _this4.pop.id
-          };
-          axios["delete"]("/api/folders/".concat(folder.id), {
-            params: params
-          }).then(function (response) {
-            console.log(response);
-
-            _this4.getFolders();
-
-            _this4.$eventBus.$emit('folder-deleted');
-          });
-        }
       });
     },
     confirmDeleteFile: function confirmDeleteFile(file) {

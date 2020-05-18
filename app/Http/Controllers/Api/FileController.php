@@ -48,6 +48,12 @@ class FileController extends Controller
     {
         return $request;
 
+
+        if ($request->folder_id) {
+            $folder = Folder::find($request->folder_id);
+            $file
+        }
+
         // Store in disk
         if ($request->pop_id) {
             $sites = Site::where('pop_id', $request->pop_id)->get();

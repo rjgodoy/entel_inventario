@@ -304,19 +304,62 @@ export default {
             }
             axios.get(`/api/folders/${this.pop.id}`, { params })
             .then((response) => {
-                
-                this.folders = this.currentFolderView.id ? response.data.folders : response.data.folders[0].subfolders               
+                this.folders = !this.currentFolderView.id && response.data.folders[0] ? response.data.folders[0].subfolders : response.data.folders               
                 this.canCreateFolder = response.data.can.create
                 this.canDeleteFolder = response.data.can.delete
                 
             })
             axios.get('/api/currentFolder', { params })
             .then(response => {
-                // console.log(response.data.folder)
                 this.currentFolderView = response.data.folder
             })
         },
 
+        confirmDeleteFolder(folder) {
+            this.$buefy.dialog.confirm({
+                message: 'Desea eliminar esta carpeta?',
+                type: 'is-danger',
+                onConfirm: () => {
+                    var params = {
+                        'api_token': this.user.api_token,
+                        'user_id': this.user.id,
+                        'pop_id': this.pop.id
+                    }
+                    axios.delete(`/api/folders/${folder.id}`, { params })
+                    .then(response => {
+                        console.log(response)
+                        this.getFolders()
+                        this.$eventBus.$emit('folder-deleted');
+                    })
+                }
+            })
+        },
+
+        setBreadcrum(name) {
+            if (this.bread == '') {
+                this.bread = name
+            } else {
+                this.bread = this.bread + ' / ' + name
+            }
+        },
+
+        backOne() {
+            var split = this.bread.split('/')
+            var deep = split.pop()
+            this.bread = ''
+            for (let i = 0; i < split.length; i++) {
+                this.bread = this.bread == '' ? split[i] : this.bread + '/' + split[i]
+            }
+
+            this.currentFolderView.id = this.currentFolderView.parent_id
+            this.getFolders()
+            this.getFiles()
+        },
+
+        
+
+
+        // File Management
         getFiles() {
             let params = {
                 'api_token': this.user.api_token,
@@ -331,7 +374,7 @@ export default {
                 this.canDeleteFile = response.data.can.delete
             })
         },
-
+        
         faFile(ext) {
             var icon = ext == 'pdf' ? 'file-pdf' : 
                     (ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'file-image' : 
@@ -397,48 +440,6 @@ export default {
                     type: 'is-danger',
                     duration: 5000
                 })
-            })
-        },
-
-        setBreadcrum(name) {
-            if (this.bread == '') {
-                this.bread = name
-            } else {
-                this.bread = this.bread + ' / ' + name
-            }
-        },
-
-        backOne() {
-            var split = this.bread.split('/')
-            var deep = split.pop()
-            this.bread = ''
-            for (let i = 0; i < split.length; i++) {
-                this.bread = this.bread == '' ? split[i] : this.bread + '/' + split[i]
-            }
-
-            this.currentFolderView.id = this.currentFolderView.parent_id
-            this.getFolders()
-            this.getFiles()
-            
-        },
-
-        confirmDeleteFolder(folder) {
-            this.$buefy.dialog.confirm({
-                message: 'Desea eliminar esta carpeta?',
-                type: 'is-danger',
-                onConfirm: () => {
-                    var params = {
-                        'api_token': this.user.api_token,
-                        'user_id': this.user.id,
-                        'pop_id': this.pop.id
-                    }
-                    axios.delete(`/api/folders/${folder.id}`, { params })
-                    .then(response => {
-                        console.log(response)
-                        this.getFolders()
-                        this.$eventBus.$emit('folder-deleted');
-                    })
-                }
             })
         },
 

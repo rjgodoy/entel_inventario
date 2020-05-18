@@ -32,7 +32,7 @@
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="$parent.close()">Close</button>
-            <button class="button is-primary">Subir</button>
+            <!-- <button class="button is-primary">Subir</button> -->
         </footer>
     </div>
 </template>
@@ -71,7 +71,7 @@
         methods: {
             submit() {
                 console.log(this.folderTab)
-                // this.dropFiles.forEach(element => this.submitForm(element))
+                this.dropFiles.forEach(element => this.submitForm(element))
             },
 
             submitForm(file) {
@@ -91,9 +91,9 @@
 
                 // send upload request
                 try {
-                    let response = axios.post(`/api/rcas?api_token=${this.user.api_token}`, formData, config)
+                    let response = axios.post(`/api/files?api_token=${this.user.api_token}`, formData, config)
                     .then(response => {
-                        this.getRCAs()
+                        this.getFiles()
                     })
                 } catch (e) {
                     console.log(e)

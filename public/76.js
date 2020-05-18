@@ -68,10 +68,15 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   mounted: function mounted() {},
   methods: {
     submit: function submit() {
-      console.log(this.folderTab); // this.dropFiles.forEach(element => this.submitForm(element))
+      var _this = this;
+
+      console.log(this.folderTab);
+      this.dropFiles.forEach(function (element) {
+        return _this.submitForm(element);
+      });
     },
     submitForm: function submitForm(file) {
-      var _this = this;
+      var _this2 = this;
 
       var config = {
         headers: {
@@ -85,8 +90,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       formData.append('file', file); // send upload request
 
       try {
-        var response = axios.post("/api/rcas?api_token=".concat(this.user.api_token), formData, config).then(function (response) {
-          _this.getRCAs();
+        var response = axios.post("/api/files?api_token=".concat(this.user.api_token), formData, config).then(function (response) {
+          _this2.getFiles();
         });
       } catch (e) {
         console.log(e);
@@ -193,9 +198,7 @@ var render = function() {
             }
           },
           [_vm._v("Close")]
-        ),
-        _vm._v(" "),
-        _c("button", { staticClass: "button is-primary" }, [_vm._v("Subir")])
+        )
       ])
     ]
   )

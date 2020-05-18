@@ -289,7 +289,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       this.setBreadcrum(folder.name);
       this.parentViewId = this.currentFolderView.id;
       this.currentFolderView = folder;
-      console.log(this.currentFolderView);
       this.getFolders();
       this.getFiles();
     },
@@ -304,10 +303,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get("/api/folders/".concat(this.pop.id), {
         params: params
       }).then(function (response) {
-        // console.log(response.data.folders)
-        _this.folders = _this.currentFolderView.id ? response.data.folders : response.data.folders[0].subfolders;
+        console.log(_this.currentFolderView.id);
+        _this.folders = !_this.currentFolderView.id && response.data.folders ? response.data.folders : response.data.folders[0] ? response.data.folders[0].subfolders : null;
         _this.canCreateFolder = response.data.can.create;
         _this.canDeleteFolder = response.data.can["delete"];
+      });
+      axios.get('/api/currentFolder', {
+        params: params
+      }).then(function (response) {
+        // console.log(response.data.folder)
+        _this.currentFolderView = response.data.folder;
       });
     },
     getFiles: function getFiles() {
@@ -325,7 +330,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         _this2.files = response.data.files;
         _this2.canUploadFile = response.data.can.upload;
         _this2.canDeleteFile = response.data.can["delete"];
-        _this2.parentViewId = _this2.folders[0].parent_id;
       });
     },
     faFile: function faFile(ext) {
@@ -402,11 +406,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var deep = split.pop();
       this.bread = '';
 
-      for (var index = 0; index < split.length; index++) {
-        this.bread = this.bread + ' / ' + split[index];
+      for (var i = 0; i < split.length; i++) {
+        this.bread = this.bread == '' ? split[i] : this.bread + '/' + split[i];
       }
 
-      this.currentFolderView.id = this.parentViewId;
+      this.currentFolderView.id = this.currentFolderView.parent_id;
       this.getFolders();
       this.getFiles();
     },

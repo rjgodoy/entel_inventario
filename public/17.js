@@ -568,7 +568,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     MapView: function MapView() {
-      return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../maps/MapView.vue */ "./resources/js/components/maps/MapView.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../maps/MapView.vue */ "./resources/js/components/maps/MapView.vue"));
     },
     VuePagination: _VuePagination_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },

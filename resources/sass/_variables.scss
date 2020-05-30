@@ -178,6 +178,8 @@ $dropdown-content-max-height: 400px !default;
 $radius-rounded: 290486px !default;
 
 // Box gradient
+.section,
+.level,
 .box {
     &.is-bold {
         &.is-link {
@@ -229,6 +231,11 @@ $radius-rounded: 290486px !default;
             color: white;
             background: rgb(26, 152, 113);
             background: linear-gradient(270deg, rgb(26, 152, 113) 0%, rgb(67, 232, 180) 100%);
+        }
+        &.is-tech {
+            color: white;
+            background: rgba(0,92,255,1);
+            background: linear-gradient(270deg, rgb(7, 76, 187) 0%, rgba(0,92,255,1) 100%);
         }
     }
     &.is-rounded {
@@ -301,4 +308,12 @@ $radius-rounded: 290486px !default;
   
 .sticky-content {
   flex: 1;
+}
+
+// Carousel
+.is-active .al img {
+    filter: grayscale(0%);
+}
+.al img {
+    filter: grayscale(100%);
 }

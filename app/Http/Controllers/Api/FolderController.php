@@ -21,14 +21,34 @@ class FolderController extends Controller
      */
     public function index(Request $request)
     {
-        
+        // $text = $request->text;
+        if ($request->folder_id) {
+            $folders = Folder::with('subfolders', 'pop', 'site')
+            ->where('parent_id', $request->folder_id)
+            ->get();
+        } else {
+            $folders = Folder::with('subfolders', 'pop', 'site')
+            ->where('name', $request->folder_name)
+            ->get();
+        }
+        return new FolderCollection($folders);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sideFolders(Request $request)
+    {
         $text = $request->text;
-        $folders = Folder::with('site', 'pop')
-        ->whereHas('site', function($q) use($text) {
+        $folders = Folder::with('subfolders', 'pop', 'site')
+        ->whereHas('pop.sites', function($q) use($text) {
             $q->where('nem_site', 'LIKE', "%$text%")
             ->orWhere('nombre', 'LIKE', "%$text%");
         })
-        ->where('name', $request->name)->get();
+        ->where('name', $request->folder_name)
+        ->paginate(10);
         return new FolderCollection($folders);
     }
 
@@ -51,6 +71,7 @@ class FolderController extends Controller
      */
     public function createFolder(Request $request, $id)
     {
+        $parentFolderId = $id;
         if($id == 'null' || $id == 'undefined') {
             $parentFolder = Folder::updateOrCreate([
                 'parent_id' => null,
@@ -59,16 +80,16 @@ class FolderController extends Controller
             ],[
                 'creator_id' => $request->creator_id
             ]);
-            
-            $folder = Folder::create([
-                'parent_id' => $parentFolder->id,
-                'pop_id' => $request->pop_id,
-                'name' => $request->name,
-                'creator_id' => $request->creator_id
-            ]);
+
+            $parentFolderId = $parentFolder->id;
+
+        }
+
+        if ($folder = Folder::withTrashed()->where('parent_id', $parentFolderId)->where('name', $request->name)->first()) {
+            $folder->restore();
         } else {
             $folder = Folder::create([
-                'parent_id' => $id,
+                'parent_id' => $parentFolderId,
                 'pop_id' => $request->pop_id,
                 'name' => $request->name,
                 'creator_id' => $request->creator_id
@@ -87,6 +108,31 @@ class FolderController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createRootFolder(Request $request)
+    {
+        return $request;
+        Folder::create([
+            'name' => $request->name,
+            'creator_id' => $request->creator_id
+        ]);        
+
+        Log::create([
+            'pop_id' => null,
+            'user_id' => $request->creator_id,
+            'log_type_id' => LogType::where('type', 'folder')->first()->id,
+            'description' => 'Se ha creado la carpeta "'. $request->name.'" en "'.$request->folderTab.'"'
+        ]);
+
+        return $folder;
+        
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -95,11 +141,11 @@ class FolderController extends Controller
     public function show(Request $request, $id)
     {
         if ($request->folder_id) {
-            $folders = Folder::with('subfolders')->where('pop_id', $id)
+            $folders = Folder::with('subfolders', 'pop', 'site')->where('pop_id', $id)
             ->where('parent_id', $request->folder_id)
             ->get();
         } else {
-            $folders = Folder::with('subfolders')->where('pop_id', $id)
+            $folders = Folder::with('subfolders', 'pop', 'site')->where('pop_id', $id)
             ->where('name', $request->folder_name)
             ->get();
         }
@@ -115,10 +161,15 @@ class FolderController extends Controller
      */
     public function currentFolder(Request $request)
     {
-        
-        $folder = Folder::with('subfolders')
-        ->where('id', $request->folder_id)
-        ->first();
+        if ($request->folder_id) {
+            $folder = Folder::where('pop_id', $request->pop_id)
+            ->where('id', $request->folder_id)
+            ->first();
+        } else {
+            $folder = Folder::where('pop_id', $request->pop_id)
+            ->where('name', $request->folder_name)
+            ->first();
+        }
 
         return new FolderResource($folder);
     }
@@ -169,11 +220,11 @@ class FolderController extends Controller
             foreach ($files as $file) {
                 $file->delete();
             }
-        }
+        } 
         $folder->delete();
 
         Log::create([
-            'pop_id' => $request->pop_id,
+            'pop_id' => $request->pop_id ? $request->pop_id : ($folder->pop_id ? $folder->pop_id : null),
             'user_id' => $request->user_id,
             'log_type_id' => LogType::where('type', 'delete-folder')->first()->id,
             'description' => 'Se ha eliminado la carpeta "'. $folder->name.'" y su contenido'

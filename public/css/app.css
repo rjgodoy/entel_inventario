@@ -382,66 +382,96 @@ fieldset[disabled] .pagination-ellipsis {
   margin-top: 0px;
 }
 
+.section.is-bold.is-link,
+.level.is-bold.is-link,
 .box.is-bold.is-link {
   color: white;
   background: #005cff;
   background: linear-gradient(270deg, #074cbb 0%, #005cff 100%);
 }
 
+.section.is-bold.is-smart,
+.level.is-bold.is-smart,
 .box.is-bold.is-smart {
   color: white;
   background: #cce3ff;
   background: linear-gradient(270deg, #cce3ff 0%, #f3f7fd 100%);
 }
 
+.section.is-bold.is-eco,
+.level.is-bold.is-eco,
 .box.is-bold.is-eco {
   color: white;
   background: #0dcc83;
   background: linear-gradient(270deg, #00a363 0%, #0dcc83 100%);
 }
 
+.section.is-bold.is-positive,
+.level.is-bold.is-positive,
 .box.is-bold.is-positive {
   color: white;
   background: #fae1e9;
   background: linear-gradient(270deg, #fae1e9 0%, #fbf7f8 100%);
 }
 
+.section.is-bold.is-info,
+.level.is-bold.is-info,
 .box.is-bold.is-info {
   color: white;
   background: #cf1300;
   background: linear-gradient(270deg, #cf1300 0%, #ff6d13 100%);
 }
 
+.section.is-bold.is-calid,
+.level.is-bold.is-calid,
 .box.is-bold.is-calid {
   color: white;
   background: #fff1d5;
   background: linear-gradient(270deg, #fff1d5 0%, #fcf8f0 100%);
 }
 
+.section.is-bold.is-dark,
+.level.is-bold.is-dark,
 .box.is-bold.is-dark {
   color: white;
   background: #4a4a4a;
   background: linear-gradient(270deg, #4a4a4a 0%, #242424 100%);
 }
 
+.section.is-bold.is-danger,
+.level.is-bold.is-danger,
 .box.is-bold.is-danger {
   color: white;
   background: #b80114;
   background: linear-gradient(270deg, #b80114 0%, #f4150f 100%);
 }
 
+.section.is-bold.is-warning,
+.level.is-bold.is-warning,
 .box.is-bold.is-warning {
   color: white;
   background: #ea7508;
   background: linear-gradient(270deg, #ea7508 0%, #ffbf00 100%);
 }
 
+.section.is-bold.is-success,
+.level.is-bold.is-success,
 .box.is-bold.is-success {
   color: white;
   background: #1a9871;
   background: linear-gradient(270deg, #1a9871 0%, #43e8b4 100%);
 }
 
+.section.is-bold.is-tech,
+.level.is-bold.is-tech,
+.box.is-bold.is-tech {
+  color: white;
+  background: #005cff;
+  background: linear-gradient(270deg, #074cbb 0%, #005cff 100%);
+}
+
+.section.is-rounded,
+.level.is-rounded,
 .box.is-rounded {
   border-radius: 290486px;
 }
@@ -511,6 +541,16 @@ fieldset[disabled] .pagination-ellipsis {
 
 .sticky-content {
   flex: 1;
+}
+
+.is-active .al img {
+  -webkit-filter: grayscale(0%);
+          filter: grayscale(0%);
+}
+
+.al img {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
 }
 
 /*! bulma.io v0.8.1 | MIT License | github.com/jgthms/bulma */

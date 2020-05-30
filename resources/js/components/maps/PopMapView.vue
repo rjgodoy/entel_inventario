@@ -77,7 +77,7 @@ export default {
     ],
     data() {
         return {
-            pops: Array,
+            pops: [],
             dependences: [],
             map: null,
             infoContent: '',

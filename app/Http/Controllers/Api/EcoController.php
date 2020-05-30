@@ -145,9 +145,30 @@ class EcoController extends Controller
 
         $rcas = File::with('site.pop')->whereHas('folder', function($q) {
             $q->where('name', 'Gestión Ambiental');
-        })->get();
+        })
+        ->where('filename', 'LIKE', '%RCA%')
+        ->get();
 
         return new FileCollection($rcas);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function ecoDocs(Request $request)
+    {
+        // $rcas = Folder::with('subfolders.files', 'site', 'files')->where('name', 'Gestión Ambiental')->get();
+
+        $docs = File::with('site.pop')->whereHas('folder', function($q) {
+            $q->where('name', 'Gestión Ambiental');
+        })
+        ->where('filename', 'NOT LIKE', '%RCA%')
+        ->get();
+
+        return new FileCollection($docs);
     }
 
     /**

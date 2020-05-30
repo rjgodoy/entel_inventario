@@ -2,19 +2,19 @@
 import Welcome from '../components/Welcome.vue'
 import App from '../components/App.vue'
 
-let Login = () => import('../components/auth/Login.vue')
-let PasswordEmail = () => import('../components/auth/PasswordEmail.vue')
-let PasswordReset = () => import('../components/auth/PasswordReset.vue')
-let Register = () => import('../components/auth/Register.vue')
+let Login = () => import(/* webpackChunkName: "chunks/login"*/'../components/auth/Login.vue')
+let PasswordEmail = () => import(/* webpackChunkName: "chunks/passwordEmail"*/'../components/auth/PasswordEmail.vue')
+let PasswordReset = () => import(/* webpackChunkName: "chunks/passwordReset"*/'../components/auth/PasswordReset.vue')
+let Register = () => import(/* webpackChunkName: "chunks/register"*/'../components/auth/Register.vue')
 
-let Dashboard = () => import('../components/dashboard/Dashboard.vue')
-let PopTable = () => import('../components/pops/PopTable.vue')
-let Pop = () => import('../components/pops/PopDetail.vue')
-let CapacityPlanning = () => import('../components/capacity/CapacityPlanning.vue')
-let Eco = () => import('../components/eco/Eco.vue')
-let Comsite = () => import('../components/comsite/Comsite.vue')
-let Documents = () => import('../components/documents/Documents.vue')
-let Admin = () => import('../components/admin/Admin.vue')
+let Dashboard = () => import(/* webpackChunkName: "chunks/dashboard"*/'../components/dashboard/Dashboard.vue')
+let PopTable = () => import(/* webpackChunkName: "chunks/pops"*/'../components/pops/PopTable.vue')
+let Pop = () => import(/* webpackChunkName: "chunks/pop"*/'../components/pops/PopDetail.vue')
+let CapacityPlanning = () => import(/* webpackChunkName: "chunks/capacityPlanning"*/'../components/capacity/CapacityPlanning.vue')
+let Eco = () => import(/* webpackChunkName: "chunks/eco"*/'../components/eco/Eco.vue')
+let Comsite = () => import(/* webpackChunkName: "chunks/comsite"*/'../components/comsite/Comsite.vue')
+let Documents = () => import(/* webpackChunkName: "chunks/documents"*/'../components/documents/Documents.vue')
+let Admin = () => import(/* webpackChunkName: "chunks/admin"*/'../components/admin/Admin.vue')
 
 
 export default {
@@ -39,13 +39,13 @@ export default {
             component: App, 
             children: [
                 { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-                { path: '/pop', name: 'Pop', component: PopTable },
+                { path: '/pop', name: 'POPs', component: PopTable },
                 { path: '/pop/:id', name: 'Detalle Pop', component: Pop },
                 { path: '/capacity', name: 'Capacity Planning', component: CapacityPlanning },
                 { path: '/comsite', name: 'Comsite', component: Comsite },
                 { path: '/eco', name: 'Gestion Ambiental', component: Eco },
-                { path: '/docs', name: 'Documents', component: Documents },
-                { path: '/admin', name: 'Administracion', component: Admin },
+                { path: '/docs', name: 'Documentos', component: Documents },
+                { path: '/admin', name: 'Administración', component: Admin },
             ]
         }
     ]

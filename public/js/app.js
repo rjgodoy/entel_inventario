@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"vendors~canvg":"vendors~canvg","vendors~pdfmake":"vendors~pdfmake","vendors~xlsx":"vendors~xlsx","xlsx":"xlsx"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/capacityPlanning":"chunks/capacityPlanning","chunks/comsite":"chunks/comsite","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","vendors~chunks/capacity/modalRoom~chunks/documents~chunks/eco~chunks/pop":"vendors~chunks/capacity/modalRoom~chunks/documents~chunks/eco~chunks/pop","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chunks/ma~1bf2ce6c":"vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chunks/ma~1bf2ce6c","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage","chunks/dashboard":"chunks/dashboard","chunks/admin/approve":"chunks/admin/approve","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/pops":"chunks/admin/pops","chunks/capacity/modalRoom":"chunks/capacity/modalRoom","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/capacity/modals/calculator":"chunks/capacity/modals/calculator","chunks/capacity/modals/requests":"chunks/capacity/modals/requests","chunks/capacity/modals/projection":"chunks/capacity/modals/projection","vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart":"vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart","vendors~chunks/capacity/modals/capacity":"vendors~chunks/capacity/modals/capacity","chunks/capacity/modals/capacity":"chunks/capacity/modals/capacity","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/pop/infrastructure/SpaceChart":"chunks/pop/infrastructure/SpaceChart","chunks/pop/layout/modals/airConditioner":"chunks/pop/layout/modals/airConditioner","chunks/pop/layout/modals/generator":"chunks/pop/layout/modals/generator","chunks/pop/layout/modals/junction":"chunks/pop/layout/modals/junction","chunks/pop/layout/modals/powerRectifier":"chunks/pop/layout/modals/powerRectifier","chunks/pop/layout/capacityChart":"chunks/pop/layout/capacityChart","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","vendors~canvg":"vendors~canvg","vendors~pdfmake":"vendors~pdfmake","vendors~xlsx":"vendors~xlsx","xlsx":"xlsx","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -48239,6 +48239,32 @@ var render = function() {
               ]
             )
           ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "level is-link is-bold",
+            staticStyle: {
+              "margin-right": "-24px",
+              "margin-left": "-24px",
+              "margin-top": "-24px"
+            }
+          },
+          [
+            _c("div", { staticClass: "level-item" }, [
+              _c("div", { staticClass: "container has-text-centered" }, [
+                _c(
+                  "h1",
+                  {
+                    staticClass: "is-size-5 has-text-white",
+                    staticStyle: { padding: "10px 0 10px 0" }
+                  },
+                  [_vm._v(_vm._s(this.$route.name.toUpperCase()))]
+                )
+              ])
+            ])
+          ]
         )
       ]
     ),
@@ -66517,51 +66543,51 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Login = function Login() {
-  return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ../components/auth/Login.vue */ "./resources/js/components/auth/Login.vue"));
+  return __webpack_require__.e(/*! import() | chunks/login */ "chunks/login").then(__webpack_require__.bind(null, /*! ../components/auth/Login.vue */ "./resources/js/components/auth/Login.vue"));
 };
 
 var PasswordEmail = function PasswordEmail() {
-  return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordEmail.vue */ "./resources/js/components/auth/PasswordEmail.vue"));
+  return __webpack_require__.e(/*! import() | chunks/passwordEmail */ "chunks/passwordEmail").then(__webpack_require__.bind(null, /*! ../components/auth/PasswordEmail.vue */ "./resources/js/components/auth/PasswordEmail.vue"));
 };
 
 var PasswordReset = function PasswordReset() {
-  return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ../components/auth/PasswordReset.vue */ "./resources/js/components/auth/PasswordReset.vue"));
+  return __webpack_require__.e(/*! import() | chunks/passwordReset */ "chunks/passwordReset").then(__webpack_require__.bind(null, /*! ../components/auth/PasswordReset.vue */ "./resources/js/components/auth/PasswordReset.vue"));
 };
 
 var Register = function Register() {
-  return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ../components/auth/Register.vue */ "./resources/js/components/auth/Register.vue"));
+  return __webpack_require__.e(/*! import() | chunks/register */ "chunks/register").then(__webpack_require__.bind(null, /*! ../components/auth/Register.vue */ "./resources/js/components/auth/Register.vue"));
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(6), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chunks/ma~1bf2ce6c"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {
-  return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/pops/PopTable.vue */ "./resources/js/components/pops/PopTable.vue"));
+  return __webpack_require__.e(/*! import() | chunks/pops */ "chunks/pops").then(__webpack_require__.bind(null, /*! ../components/pops/PopTable.vue */ "./resources/js/components/pops/PopTable.vue"));
 };
 
 var Pop = function Pop() {
-  return __webpack_require__.e(/*! import() */ 72).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
+  return Promise.all(/*! import() | chunks/pop */[__webpack_require__.e("vendors~chunks/capacity/modalRoom~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/pop")]).then(__webpack_require__.bind(null, /*! ../components/pops/PopDetail.vue */ "./resources/js/components/pops/PopDetail.vue"));
 };
 
 var CapacityPlanning = function CapacityPlanning() {
-  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+  return __webpack_require__.e(/*! import() | chunks/capacityPlanning */ "chunks/capacityPlanning").then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
 };
 
 var Eco = function Eco() {
-  return Promise.all(/*! import() */[__webpack_require__.e(88), __webpack_require__.e(60)]).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
+  return Promise.all(/*! import() | chunks/eco */[__webpack_require__.e("vendors~chunks/capacity/modalRoom~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/eco")]).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
 };
 
 var Comsite = function Comsite() {
-  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ../components/comsite/Comsite.vue */ "./resources/js/components/comsite/Comsite.vue"));
+  return __webpack_require__.e(/*! import() | chunks/comsite */ "chunks/comsite").then(__webpack_require__.bind(null, /*! ../components/comsite/Comsite.vue */ "./resources/js/components/comsite/Comsite.vue"));
 };
 
 var Documents = function Documents() {
-  return __webpack_require__.e(/*! import() */ 52).then(__webpack_require__.bind(null, /*! ../components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
+  return Promise.all(/*! import() | chunks/documents */[__webpack_require__.e("vendors~chunks/capacity/modalRoom~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/documents")]).then(__webpack_require__.bind(null, /*! ../components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
 };
 
 var Admin = function Admin() {
-  return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ../components/admin/Admin.vue */ "./resources/js/components/admin/Admin.vue"));
+  return __webpack_require__.e(/*! import() | chunks/admin */ "chunks/admin").then(__webpack_require__.bind(null, /*! ../components/admin/Admin.vue */ "./resources/js/components/admin/Admin.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66601,7 +66627,7 @@ var Admin = function Admin() {
       component: Dashboard
     }, {
       path: '/pop',
-      name: 'Pop',
+      name: 'POPs',
       component: PopTable
     }, {
       path: '/pop/:id',
@@ -66621,11 +66647,11 @@ var Admin = function Admin() {
       component: Eco
     }, {
       path: '/docs',
-      name: 'Documents',
+      name: 'Documentos',
       component: Documents
     }, {
       path: '/admin',
-      name: 'Administracion',
+      name: 'Administración',
       component: Admin
     }]
   }]

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api\Infraestructura;
 
+use App\Exports\PowerRectifiersExport;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Cache;
-
 use App\Http\Resources\PowerRectifier as PowerRectifierResource;
 use App\Models\PowerRectifier;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PowerRectifierController extends Controller
 {
@@ -197,5 +196,16 @@ class PowerRectifierController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        return (new PowerRectifiersExport($request))->download('power_rectifiers.xlsx');
     }
 }

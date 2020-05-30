@@ -1,6 +1,6 @@
 <template>
     <div class="tile is-child box">
-        <div class="title is-size-4">Documentos</div>
+        <div class="title is-size-4">Otros Documentos</div>
 
         <!-- <b-field grouped group-multiline>
             <div class="control">
@@ -27,7 +27,7 @@
         </b-field> -->
 
         <b-table
-            :data="rcas.files"
+            :data="ecoDocs.files"
             :paginated="isPaginated"
             :per-page="perPage"
             :current-page.sync="currentPage"
@@ -73,7 +73,7 @@
                     </router-link>
                 </b-table-column>
 
-                <b-table-column field="id" label="" width="10" numeric v-if="rcas.can.delete">
+                <b-table-column field="id" label="" width="10" numeric v-if="ecoDocs.can.delete">
                     <button class="button" @click="confirm(props.row)">
                         <font-awesome-icon :icon="['far', 'trash-alt']"/>
                     </button>
@@ -96,7 +96,7 @@
             </template>
         </b-table>
 
-        <!-- <b-field v-if="rcas.can ? rcas.can.upload : null">
+        <!-- <b-field v-if="ecoDocs.can ? ecoDocs.can.upload : null">
 
             <b-upload
                 v-model="dropFiles"
@@ -139,7 +139,7 @@ export default {
         return {
             dropFiles: [],
 
-            rcas: Array,
+            ecoDocs: Array,
             isPaginated: true,
             isPaginationSimple: false,
             paginationPosition: 'bottom',
@@ -155,14 +155,14 @@ export default {
     },
 
     mounted() {
-        this.getRCAs()
+        this.getEcoDocs()
     },
 
     methods: {
-        getRCAs() {
-            axios.get(`/api/rcas?api_token=${this.user.api_token}`)
+        getEcoDocs() {
+            axios.get(`/api/ecoDocs?api_token=${this.user.api_token}`)
             .then(response => {
-                this.rcas = response.data
+                this.ecoDocs = response.data
             })
         },
 
@@ -184,9 +184,9 @@ export default {
 
             // send upload request
             try {
-                let response = axios.post(`/api/rcas?api_token=${this.user.api_token}`, formData, config)
+                let response = axios.post(`/api/ecoDocs?api_token=${this.user.api_token}`, formData, config)
                 .then(response => {
-                    this.getRCAs()
+                    this.getEcoDocs()
                 })
             } catch (e) {
                 console.log(e)
@@ -208,7 +208,7 @@ export default {
             axios.delete(`/api/files/${file_id}?api_token=${this.user.api_token}`)
             .then(response => {
                 console.log(response)
-                this.getRCAs()
+                this.getEcoDocs()
             })
         }
 

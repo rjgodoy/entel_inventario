@@ -62,12 +62,12 @@ library.add(faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalcula
 
 export default {
     components: {
-        Capacity: () => import('./Capacity'),
-        Projection: () => import('./Projection'),
-        Requests: () => import('./Requests'),
-        Calculator: () => import('./Calculator'),
-        Layout: () => import('../../pops/layout/Layout'),
-        Documents: () => import('../../pops/documents/Documents'),
+        Capacity: () => import(/* webpackChunkName: "chunks/capacity/modals/capacity"*/'./Capacity'),
+        Projection: () => import(/* webpackChunkName: "chunks/capacity/modals/projection"*/'./Projection'),
+        Requests: () => import(/* webpackChunkName: "chunks/capacity/modals/requests"*/'./Requests'),
+        Calculator: () => import(/* webpackChunkName: "chunks/capacity/modals/calculator"*/'./Calculator'),
+        Layout: () => import(/* webpackChunkName: "chunks/pop/layout/layout"*/'../../pops/layout/Layout'),
+        Documents: () => import(/* webpackChunkName: "chunks/capacity/modals/documents"*/'../../pops/documents/Documents'),
     },
     props : [
         'pop',

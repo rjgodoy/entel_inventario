@@ -16,13 +16,17 @@
                         </span>
                     </header>
 
-                    <!-- <div class="timeline-item is-smart">
-                        <div class="timeline-marker is-smart"></div>
+                    <div v-if="!logs.length" class="timeline-item is-positive">
+                        <div class="timeline-marker is-positive"></div>
                         <div class="timeline-content">
-                            <p class="heading">January 2016</p>
-                            <p>Timeline content - Can include any HTML element</p>
+                            <p class="heading">Actualmente,</p>
+                            <p>No existen registros en este PoP</p>
                         </div>
-                    </div> -->
+                    </div>
+
+                    <!-- <header class="timeline-header">
+                        <span class="tag is-primary">2017</span>
+                    </header> -->
 
                     <div v-for="log in logs" :key="log.id" class="timeline-item" :class="log.log_type.background">
                         <!-- <div class="timeline-marker is-image is-32x32" :class="log.log_type.background">
@@ -37,26 +41,10 @@
                                 <p class="is-size-6" style="padding-top: 5px;">{{ log.description }}</p>
                                 <p class="is-size-7">{{ log.user.name }} {{ log.user.apellido }}</p>
                             </div>
-                            <!-- <p class="heading">February 2016</p>
-                            <p>Timeline content - Can include any HTML element</p> -->
-                        </div>
-                    </div>
-
-                    <header class="timeline-header">
-                        <span class="tag is-primary">2017</span>
-                    </header>
-
-                    <div class="timeline-item is-danger">
-                        <div class="timeline-marker is-danger is-icon">
-                            <i class="fa fa-map-alt"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <p class="heading">March 2017</p>
-                            <p>Timeline content - Can include any HTML element</p>
                         </div>
                     </div>
                     
-                    <header class="timeline-header">
+                    <header v-if="logs.length" class="timeline-header">
                         <span class="tag is-medium is-smart has-text-weight-bold">No hay mas registros en este PoP</span>
                     </header>
                 </div>

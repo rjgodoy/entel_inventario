@@ -29,7 +29,7 @@
 
                             <div v-if="isTempStorage" class="is-size-6 has-text-weight-light has-text-centered">Este PoP es <span class="has-text-weight-semibold has-text-smart">Zona de Acopio Temporal</span>.</div>
 
-                            <div v-if="!isTempStorage">
+                            <div v-if="!isTempStorage & temporaryStorages.environmentalData.length">
                                 <div class="is-size-6 has-text-weight-light has-text-centered">Este PoP tiene asociada las siguientes zonas de acopio temporal:</div>
                                 <div v-for="ts in temporaryStorages.environmentalData" class="title is-size-5 has-text-weight-semibold has-text-centered" style="padding-top: 12px">
                                     <a :href="'/pop/' + ts.pop.id + '#eco'" target="_blank">{{ ts.pop.nombre }}</a>
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="!temporaryStorages.environmentalData" class="is-size-6 has-text-weight-light has-text-centered">Este PoP <span class="has-text-weight-semibold has-text-positive">NO</span> tiene asociada ninguna zona de acopio temporal.</div>
+                            <div v-if="!temporaryStorages.environmentalData.length" class="is-size-6 has-text-weight-light has-text-centered">Este PoP <span class="has-text-weight-semibold has-text-positive">NO</span> tiene asociada ninguna zona de acopio temporal.</div>
                         </div>
                     </div>
                 </div>

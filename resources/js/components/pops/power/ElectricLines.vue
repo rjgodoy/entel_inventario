@@ -1,8 +1,8 @@
 <template>
     <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="electricLines.electricLine">
-        <div class="field">
+        <!-- <div class="field">
             <div class="has-text-weight-semibold has-text-dark is-size-4 has-text-left">Líneas Eléctricas</div>
-        </div>
+        </div> -->
         
         <div class="columns is-multiline">
             <div class="column is-6" v-for="data in electricLines.electricLine">

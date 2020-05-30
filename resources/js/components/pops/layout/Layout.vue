@@ -226,13 +226,13 @@ library.add(farCheckCircle, faExclamationTriangle);
     // import LeaderLine from 'leader-line'
     export default {
         components: {
-            ModalJunction: () => import('./modals/ModalJunction'),
-            ModalGenerator: () => import('./modals/ModalGenerator'),
-            ModalPowerRectifier: () => import('./modals/ModalPowerRectifier'),
-            ModalAirConditioner: () => import('./modals/ModalAirConditioner'),
-            CapacityChart: () => import('./CapacityChart'),
-            // GrowingChart: () => import('./GrowingChart'),
-            SpaceChart: () => import('../infrastructure/SpaceChart')
+            ModalJunction: () => import(/* webpackChunkName: "chunks/pop/layout/modals/junction"*/'./modals/ModalJunction'),
+            ModalGenerator: () => import(/* webpackChunkName: "chunks/pop/layout/modals/generator"*/'./modals/ModalGenerator'),
+            ModalPowerRectifier: () => import(/* webpackChunkName: "chunks/pop/layout/modals/powerRectifier"*/'./modals/ModalPowerRectifier'),
+            ModalAirConditioner: () => import(/* webpackChunkName: "chunks/pop/layout/modals/airConditioner"*/'./modals/ModalAirConditioner'),
+            CapacityChart: () => import(/* webpackChunkName: "chunks/pop/layout/capacityChart"*/'./CapacityChart'),
+            // GrowingChart: () => import(/* webpackChunkName: "chunks/pop/layout/growingChart"*/'./GrowingChart'),
+            SpaceChart: () => import(/* webpackChunkName: "chunks/pop/infrastructure/SpaceChart"*/'../infrastructure/SpaceChart')
         },
         props : [
             'user',

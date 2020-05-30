@@ -59,12 +59,12 @@ import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-i
 library.add(farCheckCircle);
     export default {
         components: {
-            EcoMapView: () => import('../maps/EcoMapView'),
-            Rcas: () => import('./RCAs'),
-            Documents: () => import('./Documents'),
-            TemporalStorages: () => import('./TemporalStorages'),
-            PopProtectedZones: () => import('./PopProtectedZones'),
-            ProtectedZones: () => import('./ProtectedZones')
+            EcoMapView: () => import(/* webpackChunkName: "chunks/maps/ecoMap"*/'../maps/EcoMapView'),
+            Rcas: () => import(/* webpackChunkName: "chunks/eco/rcas"*/'./RCAs'),
+            Documents: () => import(/* webpackChunkName: "chunks/eco/documents"*/'./Documents'),
+            TemporalStorages: () => import(/* webpackChunkName: "chunks/eco/temporaryStorages"*/'./TemporalStorages'),
+            PopProtectedZones: () => import(/* webpackChunkName: "chunks/eco/popProtectedZones"*/'./PopProtectedZones'),
+            ProtectedZones: () => import(/* webpackChunkName: "chunks/eco/protectedZones"*/'./ProtectedZones')
         },
 
         props : [

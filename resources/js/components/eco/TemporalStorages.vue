@@ -1,6 +1,6 @@
 <template>
     <div class="tile is-child box">
-        <button v-if="canEdit" class="button is-pulled-right" @click="isNewStorageModalActive = true">+</button>
+        <button v-if="canCreate" class="button is-pulled-right" @click="isNewStorageModalActive = true">+</button>
         <div class="title is-size-4">Zonas Acopio Temporal</div>
 
         <!-- <b-field grouped group-multiline> -->
@@ -101,7 +101,7 @@
 <script>
     export default {
         components: {
-            ModalNewStorage: () => import('./modals/ModalNewStorage'),
+            ModalNewStorage: () => import(/* webpackChunkName: "chunks/eco/modals/newStorage"*/'./modals/ModalNewStorage'),
         },
         props : [
             'storageZones',
@@ -125,8 +125,12 @@
         },
 
         computed: {
-            canEdit() {
-                return this.storageZones.can && this.storageZones.can
+            canCreate() {
+                return this.storageZones.can && this.storageZones.can.create
+            },
+
+            canDelete() {
+                return this.storageZones.can && this.storageZones.can.delete
             }
         },
 

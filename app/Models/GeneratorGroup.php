@@ -15,4 +15,9 @@ class GeneratorGroup extends Model
     {
         return $this->belongsTo(GeneratorSet::class);
     }
+
+    public function phase_type() 
+    {
+        return $this->belongsTo(PhaseType::class);
+    }
 }

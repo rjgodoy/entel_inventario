@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeneratorSet extends Model
 {
+    public function pop() 
+    {
+        return $this->belongsTo(Pop::class);
+    }
 
     public function current_generator_group() 
     {

@@ -52,10 +52,10 @@ import { faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclamati
 library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclamationTriangle);
     export default {
         components: {
-            ElectricLines: () => import('./ElectricLines'),
-            Junctions: () => import('./Junctions'),
-            GeneratorSets: () => import('./GeneratorSets'),
-            PowerRectifiers: () => import('./PowerRectifiers')
+            ElectricLines: () => import(/* webpackChunkName: "chunks/pop/power/electricLines"*/'./ElectricLines'),
+            Junctions: () => import(/* webpackChunkName: "chunks/pop/power/junctions"*/'./Junctions'),
+            GeneratorSets: () => import(/* webpackChunkName: "chunks/pop/power/generatorSets"*/'./GeneratorSets'),
+            PowerRectifiers: () => import(/* webpackChunkName: "chunks/pop/power/powerRectifiers"*/'./PowerRectifiers')
         },
         props : [
             'user',

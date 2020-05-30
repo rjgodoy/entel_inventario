@@ -134,6 +134,7 @@ Route::middleware('auth:api')->group(function () {
 
 			// Electric Lines
 				Route::apiResource('electricLines','Api\Infraestructura\ElectricLineController');
+				Route::get('electricLinesExport', 'Api\Infraestructura\ElectricLineController@export');
 				Route::get('electricLineData/{core}', [
 					'as' => 'electricLine.data',
 					'uses' => 'Api\Infraestructura\ElectricLineController@electricLineData'
@@ -155,12 +156,14 @@ Route::middleware('auth:api')->group(function () {
 
 			// Generator Sets
 				Route::apiResource('generatorSets','Api\Infraestructura\GeneratorSetController');
+				Route::get('generatorSetsExport', 'Api\Infraestructura\GeneratorSetController@export');
 				Route::get('generatorSetData', 'Api\Infraestructura\GeneratorSetController@generatorSetData');
 				Route::get('generatorSetDataCrm', 'Api\Infraestructura\GeneratorSetController@generatorSetDataCrm');
 				Route::get('generatorSetDataZona', 'Api\Infraestructura\GeneratorSetController@generatorSetDataZona');
 
 			// Power Rectifiers
 				Route::apiResource('powerRectifiers','Api\Infraestructura\PowerRectifierController');
+				Route::get('powerRectifiersExport', 'Api\Infraestructura\PowerRectifierController@export');
 				Route::get('powerRectifierData/{core}', [
 					'as' => 'powerRectifier.data',
 					'uses' => 'Api\Infraestructura\PowerRectifierController@powerRectifierData'
@@ -176,6 +179,7 @@ Route::middleware('auth:api')->group(function () {
 
 			// Air Conditioners
 				Route::apiResource('airConditioners','Api\Infraestructura\AirConditionerController');
+				Route::get('airConditionersExport', 'Api\Infraestructura\AirConditionerController@export');
 				Route::get('airConditionerData/{core}', [
 					'as' => 'airConditioner.data',
 					'uses' => 'Api\Infraestructura\AirConditionerController@airConditionerData'
@@ -191,6 +195,7 @@ Route::middleware('auth:api')->group(function () {
 
 			// Estructuras Verticales
 				Route::apiResource('verticalStructures','Api\Infraestructura\VerticalStructureController');
+				Route::get('verticalStructuresExport', 'Api\Infraestructura\VerticalStructureController@export');
 				Route::get('verticalStructureData/{core}', [
 					'as' => 'verticalStructure.data',
 					'uses' => 'Api\Infraestructura\VerticalStructureController@verticalStructureData'
@@ -206,6 +211,7 @@ Route::middleware('auth:api')->group(function () {
 
 			// Infraestructuras
 				Route::apiResource('infrastructures','Api\Infraestructura\InfrastructureController');
+				Route::get('infrastructuresExport', 'Api\Infraestructura\InfrastructureController@export');
 				Route::get('infrastructureData/{core}', [
 					'as' => 'infrastructure.data',
 					'uses' => 'Api\Infraestructura\InfrastructureController@infrastructureData'
@@ -280,6 +286,7 @@ Route::middleware('auth:api')->group(function () {
 			Route::get('ecoZones','Api\EcoController@zones');
 			Route::get('ecoStorage/{pop_id}','Api\EcoController@storage');
 			Route::get('rcas','Api\EcoController@rcas');
+			Route::get('ecoDocs','Api\EcoController@ecoDocs');
 			Route::get('rcas/{pop_id}','Api\EcoController@rcasPop');
 			Route::post('rcas','Api\EcoController@upload');
 			Route::get('storages','Api\EcoController@storages');
@@ -297,10 +304,12 @@ Route::middleware('auth:api')->group(function () {
             Route::apiResource('folders', 'Api\FolderController');
 			Route::apiResource('files', 'Api\FileController');
             Route::get('viewFile', 'Api\FileController@view');
+            Route::get('sideFolders', 'Api\FolderController@sideFolders');
             Route::get('getFolders', 'Api\FolderController@getFolders');
             Route::get('currentFolder', 'Api\FolderController@currentFolder');
             Route::get('getFiles', 'Api\FileController@getFiles');
             Route::post('createFolder/{id}', 'Api\FolderController@createFolder');
+            Route::post('createRootFolder', 'Api\FolderController@createRootFolder');
 			
 
 			Route::apiResource('logs','Api\LogController');
@@ -334,6 +343,11 @@ Route::middleware('auth:api')->group(function () {
 			]);
 
 			Route::apiResource('comunas','Api\ComunaController');
+			Route::apiResource('popTypes','Api\PopTypeController');
+			Route::apiResource('netTypes','Api\NetTypeController');
+
+			Route::get('classificationTypes','Api\SiteController@classificationTypes');
+			Route::get('attentionPriorityTypes','Api\SiteController@attentionPriorityTypes');
 
 			// PSG
 			Route::apiResource('psgTp','Api\PsgTpController');

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Http\Resources\Site as SiteResource;
+use App\Models\AttentionPriorityType;
+use App\Models\ClassificationType;
 use DB;
+use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
@@ -85,5 +86,25 @@ class SiteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function classificationTypes()
+    {
+        return ClassificationType::all();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function attentionPriorityTypes()
+    {
+        return AttentionPriorityType::all();
     }
 }

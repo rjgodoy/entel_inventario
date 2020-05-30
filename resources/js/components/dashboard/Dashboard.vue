@@ -82,6 +82,7 @@
                     :custom-formatter="searchFormat"
                     :loading="isFetching"
                     :check-infinite-scroll="true"
+                    clearable
                     @typing="getAsyncData"
                     @select="option => selected = option"
                     @infinite-scroll="getMoreAsyncData">
@@ -438,39 +439,39 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch);
+library.add(faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch);
 
 var moment = require('moment');
 import debounce from 'lodash/debounce'
 export default {
     components: {
         // ###### Info ##########
-        PopsData: () => import('./PopsData'),
-        SitesData: () => import("./SitesData"),
-        TechnologiesData: () => import("./TechnologiesData"),
-        CriticsData: () => import("./CriticPopsData"),
-        AlbaData: () => import("./AlbaPopsData"),
+        PopsData: () => import(/* webpackChunkName: "chunks/dashboard/popsData"*/'./PopsData'),
+        SitesData: () => import(/* webpackChunkName: "chunks/dashboard/sitesData"*/"./SitesData"),
+        TechnologiesData: () => import(/* webpackChunkName: "chunks/dashboard/technologyData"*/"./TechnologiesData"),
+        CriticsData: () => import(/* webpackChunkName: "chunks/dashboard/criticPopsData"*/"./CriticPopsData"),
+        AlbaData: () => import(/* webpackChunkName: "chunks/dashboard/albaPopsData"*/"./AlbaPopsData"),
         
         // ###### Map ###########
         // PopsMap,
-        MapView: () => import('../maps/MapView'),
+        MapView: () => import(/* webpackChunkName: "chunks/maps/mapView/"*/'../maps/MapView'),
         // MapView,
 
         // ###### Charts ########
-        PretDataChart: () => import('./PretDataChart'),
+        PretDataChart: () => import(/* webpackChunkName: "chunks/dashboard/pretDataChart"*/'./PretDataChart'),
         // RedCoreChart,
 
         // ###### Equipment #####
-        ElectricLinesData: () => import('./ElectricLinesData'),
-        GeneratorSetsData: () => import('./GeneratorSetsData'),
-        PowerRectifiersData: () => import('./PowerRectifiersData'),
-        AirConditionersData: () => import('./AirConditionersData'),
-        VerticalStructuresData: () => import('./VerticalStructuresData'),
-        InfrastructuresData: () => import('./InfrastructuresData')
+        ElectricLinesData: () => import(/* webpackChunkName: "chunks/dashboard/electricLines"*/'./ElectricLinesData'),
+        GeneratorSetsData: () => import(/* webpackChunkName: "chunks/dashboard/generatorSets"*/'./GeneratorSetsData'),
+        PowerRectifiersData: () => import(/* webpackChunkName: "chunks/dashboard/powerRectifiers"*/'./PowerRectifiersData'),
+        AirConditionersData: () => import(/* webpackChunkName: "chunks/dashboard/airConditioners"*/'./AirConditionersData'),
+        VerticalStructuresData: () => import(/* webpackChunkName: "chunks/dashboard/verticalStructures"*/'./VerticalStructuresData'),
+        InfrastructuresData: () => import(/* webpackChunkName: "chunks/dashboard/infrastructures"*/'./InfrastructuresData')
     },
     props : [
         'user',
@@ -642,7 +643,7 @@ export default {
 
     methods: {
         searchFormat(pop) {
-            this.selectedPop = this.selected
+            this.selectedSite = this.selected
             return this.searchText
         },
 
@@ -658,7 +659,7 @@ export default {
                     console.log(ex);
                 }
             })
-        }, 200),
+        }, 10),
 
         async viewCriticPops() {
             this.currentTab = 'critics'
@@ -747,11 +748,11 @@ export default {
                 .finally(() => {
                     this.isFetching = false
                 })
-        }, 50),
+        }, 150),
 
         getMoreAsyncData: debounce(function () {
             this.getAsyncData(this.searchText)
-        }, 10),
+        }, 50),
     
         clearSearch() {
             this.popSearch = []

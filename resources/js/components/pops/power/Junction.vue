@@ -195,7 +195,7 @@
 <script>
     export default {
         components: {
-            EditJunctionParameters: () => import('./modals/EditJunctionParameters'),
+            EditJunctionParameters: () => import(/* webpackChunkName: "chunks/pop/power/modals/editJunction"*/'./modals/EditJunctionParameters'),
         },
         props : [
             'pop',

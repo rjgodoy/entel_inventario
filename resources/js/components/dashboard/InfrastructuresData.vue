@@ -15,22 +15,20 @@
                 </div>
             </div>
 
-            <!-- <form @submit="formSubmit">
-                <div class="field has-addons">
-                    <p class="control">
-                        <button type="submit" class="button is-small is-link is-outlined" :class="buttonLoading">
-                            <font-awesome-icon icon="download"/> 
-                            &nbsp;&nbsp;Listado de POPs
-                        </button>
-                    </p>
-                    <p class="control">
-                        <a href="/pop" type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
-                            <font-awesome-icon icon="bars"/>
-                        </a>
-                    </p>
+            <a class="tile is-child box is-bold is-dark has-text-white" style="position: relative;" 
+                @click="downloadInfrastructures">
+                <b-icon 
+                    style="padding-top: 20px; padding-left: 5px;"
+                    pack="fas" 
+                    icon="download" 
+                    class="has-text-eco fa-2x">
+                </b-icon> 
+                <div class="is-size-4 has-text-weight-bold" style="margin-top: 10px;">
+                    <p class="is-size-6 has-text-weight-semibold">Descargar listado de Infraestructuras</p>
                 </div>
+                <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
+            </a>
 
-            </form> -->
         </article>
     </div>
 </template>
@@ -55,6 +53,7 @@
                 infrastructureData: null,
                 total: 0,
                 buttonLoading: '',
+                isLoading: false
             }
         },
         created(){
@@ -115,35 +114,59 @@
                         });
                 }
             },
-            formSubmit(e) {
-                // Activate loading button
-                this.buttonLoading = 'is-loading'
+            
+            downloadInfrastructures() {
+                this.isLoading = true
 
-                e.preventDefault()
-                axios({
-                    url: '/pop/export',
-                    method: 'POST',
-                    responseType: 'blob',
-                    // headers: {
-                    //     'Content-Type': 'text/html; charset=utf-8',
-                    //     'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    // }
+                var params = {
+                    'api_token': this.user.api_token,
+                    'core': this.core,
+                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                    'zona_id': this.selectedZona ? this.selectedZona.id : 0
+                }
+
+                axios.get('/api/infrastructuresExport', { 
+                    params: params, 
+                    responseType: 'arraybuffer' 
                 })
                 .then((response) => {
-                    const url = window.URL.createObjectURL(new Blob([response.data]))
-                    const link = document.createElement('a')
-                    link.href = url
-                    link.setAttribute('download', 'listado_pops.xlsx')
-                    document.body.appendChild(link)
-                    link.click()
+                    console.log(response.data)
+                    const blob = new Blob([response.data], { type: 'application/xlsx' })
+                    // const objectUrl = window.URL.createObjectURL(blob)
 
-                    // Deativate loading button
-                    this.buttonLoading = ''
+                    // IE doesn't allow using a blob object directly as link href
+                    // instead it is necessary to use msSaveOrOpenBlob
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(newBlob)
+                        return
+                    }
+
+                    const data = window.URL.createObjectURL(blob)
+                    let link = document.createElement('a')
+                    link.href = data
+                    link.download = 'listado_infraestructuras.xlsx'
+                    link.click()
+                    // setTimeout(function () {
+                    //     // For Firefox it is necessary to delay revoking the ObjectURL
+                    //     window.URL.revokeObjectURL(data)
+                    // }, 100)
+                    
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'La planilla se ha descargado exitosamente.',
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'Ha ocurrido un error. Favor contactar al administrador',
+                        type: 'is-danger',
+                        duration: 5000
+                    })
                 })
-                .catch((error) => {
-                    console.log('Error: ' + error);
-                });
-            }
+            },
         }
     }
 </script>

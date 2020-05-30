@@ -21,7 +21,7 @@
 <script>    
     export default {
         components: {
-            Junction: () => import('../../../pops/power/Junction')
+            Junction: () => import(/* webpackChunkName: "chunks/pop/power/junction"*/'../../../pops/power/Junction')
         },
         props : [
             'pop',

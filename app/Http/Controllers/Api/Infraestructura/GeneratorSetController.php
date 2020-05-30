@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api\Infraestructura;
 
+use App\Exports\GeneratorSetsExport;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Cache;
-
 use App\Http\Resources\GeneratorSet as GeneratorSetResource;
 use App\Models\GeneratorSet;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class GeneratorSetController extends Controller
 {
@@ -239,5 +238,16 @@ class GeneratorSetController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        return (new GeneratorSetsExport($request))->download('grupos_electrógenos.xlsx');
     }
 }

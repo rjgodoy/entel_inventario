@@ -437,7 +437,7 @@ import LoadingComponent from '../helpers/LoadingComponent.vue';
 // });
 export default {
     components: {
-        MapView: () => import('../maps/MapView.vue'),
+        MapView: () => import(/* webpackChunkName: "chunks/maps/mapView"*/'../maps/MapView.vue'),
         VuePagination,
     },
     props : [

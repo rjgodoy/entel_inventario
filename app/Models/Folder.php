@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Folder extends Model
 {
+    use SoftDeletes;
+    
     protected $guarded = [];
     
     public function files() 
@@ -26,5 +29,10 @@ class Folder extends Model
     public function site() 
     {
         return $this->belongsTo(Site::class);
+    }
+
+    public function pop() 
+    {
+        return $this->belongsTo(Pop::class);
     }
 }

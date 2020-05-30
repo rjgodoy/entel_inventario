@@ -42,11 +42,11 @@
 <script>
     export default {
         components: {
-            AdminPops: () => import("./AdminPops"),
-            AdminTps: () => import("./AdminTps"),
-            AdminApprove: () => import("./AdminApprove"),
-            AdminMassive: () => import("./AdminMassive"),
-            AdminUsers: () => import("./AdminUsers"),
+            AdminPops: () => import(/* webpackChunkName: "chunks/admin/pops"*/"./AdminPops"),
+            AdminTps: () => import(/* webpackChunkName: "chunks/admin/tps"*/"./AdminTps"),
+            AdminApprove: () => import(/* webpackChunkName: "chunks/admin/approve"*/"./AdminApprove"),
+            AdminMassive: () => import(/* webpackChunkName: "chunks/admin/massive"*/"./AdminMassive"),
+            AdminUsers: () => import(/* webpackChunkName: "chunks/admin/usersPermissions"*/"./AdminUsers"),
         },
         props : [
             'user'

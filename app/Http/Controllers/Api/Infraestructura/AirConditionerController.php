@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api\Infraestructura;
 
+use App\Exports\AirConditionersExport;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Cache;
-
 use App\Http\Resources\AirConditioner as AirConditionerResource;
 use App\Models\AirConditioner;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AirConditionerController extends Controller
 {
@@ -201,5 +201,16 @@ class AirConditionerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        return (new AirConditionersExport($request))->download('aires_acondicionados.xlsx');
     }
 }

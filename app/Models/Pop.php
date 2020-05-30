@@ -78,9 +78,9 @@ class Pop extends Model
      *
      * @var array
      */
-    public function nets() 
+    public function net_type() 
     {
-        return $this->hasMany(Net::class);
+        return $this->belongsTo(NetType::class);
     }
 
     /**
@@ -88,9 +88,9 @@ class Pop extends Model
      *
      * @var array
      */
-    public function pop_classes() 
+    public function pop_type() 
     {
-        return $this->hasMany(PopClass::class);
+        return $this->belongsTo(PopType::class);
     }
 
     /**

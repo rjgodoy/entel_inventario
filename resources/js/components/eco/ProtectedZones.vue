@@ -113,7 +113,7 @@
                 sortIcon: 'arrow-up',
                 sortIconSize: 'is-small',
                 currentPage: 1,
-                perPage: 10,
+                perPage: 15,
 
                 darkMode: 0,
                 bodyBackground: '',

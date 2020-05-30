@@ -19,7 +19,7 @@
 <script>
     export default {
         components: {
-            PowerRectifier: () => import('./PowerRectifier'),
+            PowerRectifier: () => import(/* webpackChunkName: "chunks/pop/power/powerRectifier"*/'./PowerRectifier'),
         },
         props : [
             'user',

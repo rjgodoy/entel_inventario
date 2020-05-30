@@ -15,7 +15,7 @@
 <script>
     export default {
         components: {
-            GeneratorSet: () => import('./GeneratorSet'),
+            GeneratorSet: () => import(/* webpackChunkName: "chunks/pop/power/generatorSet"*/'./GeneratorSet'),
         },
         props : [
             'user',

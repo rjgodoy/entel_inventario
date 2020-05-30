@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-card" style="width: auto">
+    <div class="modal-card" style="width: 400px;">
         <header class="modal-card-head has-text-centered">
             <p class="modal-card-title has-text-weight-bold">Crear Carpeta</p>
         </header>
@@ -7,13 +7,9 @@
             <b-field label="Name">
                 <b-input v-model="name" autofocus></b-input>
             </b-field>
-            {{ name }}
-            {{ 'pop: ' + pop.id }}
-            {{ 'folderTab: ' + folderTab.label }}
-            {{ 'folder_id: ' + folder_id }}
         </section>
         <footer class="modal-card-foot">
-            <button class="button" type="button" @click="$parent.close()">Close</button>
+            <button class="button" type="button" @click="$parent.close()">Cerrar</button>
             <button class="button is-primary" @click="createFolder">Crear</button>
         </footer>
     </div>

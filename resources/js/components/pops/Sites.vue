@@ -2,56 +2,68 @@
     <div class="">
         <!-- TECNOLOGIAS -->
         <!-- ########### -->
-        <section class="level has-background-grey has-text-white">
-            <div class="level-item">
-                <div class="is-size-7 has-text-weight-bold">2G 1900
-                    <span class="has-text-weight-bold is-size-5" :class="tec2g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec2g1900 ? tec2g1900.nem_tech : '-' }}</span>
-                </div>
+        <section class="section is-tech is-bold has-text-white" style="padding-top: 20px; padding-bottom: 20px;">
+            <div class="columns">
+                <div class="column has-text-weight-semibold has-text-white is-size-3 has-text-left">Tecnologías</div>
             </div>
-
-            <div class="is-divider-vertical" style="height: 64px;"></div>
-
-            <div class="level-item">
-                <div class="is-size-7 has-text-weight-bold">3G 900
-                    <span class="has-text-weight-bold is-size-5" :class="tec3g900 ? 'has-text-eco' : ''">&nbsp;{{ tec3g900 ? tec3g900.nem_tech : '-' }}</span>
+            <div class="level">
+                <div class="level-item">
+                    <div>
+                        <div class="is-size-7 has-text-weight-bold has-text-light">2G 1900</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec2g1900 ? 'has-text-eco' : ''">{{ tec2g1900 ? tec2g1900.nem_tech : '-' }}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="level-item">
-                <div class="is-size-7 has-text-weight-bold">3G 1900
-                    <span class="has-text-weight-bold is-size-5" :class="tec3g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec3g1900 ? tec3g1900.nem_tech : '-' }}</span>
-                </div>
-            </div>
 
-            <div class="is-divider-vertical" style="height: 64px;"></div>
+                <div class="is-divider-vertical" style="height: 64px;"></div>
 
-            <div class="level-item">
-                <div class="is-size-7 has-text-weight-bold">LTE 700
-                    <span class="has-text-weight-bold is-size-5" :class="tec4g700 ? 'has-text-eco' : ''">&nbsp;{{ tec4g700 ? tec4g700.nem_tech : '-' }}</span>
+                <div class="level-item">
+                    <div>
+                        <div class="is-size-7 has-text-weight-bold">3G 900</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec3g900 ? 'has-text-eco' : ''">{{ tec3g900 ? tec3g900.nem_tech : '-' }}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="level-item">
-                <div class="is-size-7 has-text-weight-bold">LTE 1900
-                    <span class="has-text-weight-bold is-size-5" :class="tec4g1900 ? 'has-text-eco' : ''">&nbsp;{{ tec4g1900 ? tec4g1900.nem_tech : '-' }}</span>
+                <div class="level-item">
+                    <div>
+                        <div class="is-size-7 has-text-weight-bold">3G 1900</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec3g1900 ? 'has-text-eco' : ''">{{ tec3g1900 ? tec3g1900.nem_tech : '-' }}</div>
+                    </div>
                 </div>
-            </div>
-            <div class="level-item">
-                <div class="is-size-7 has-text-weight-bold">LTE 2600
-                    <span class="has-text-weight-bold is-size-5" :class="tec4g2600 ? 'has-text-eco' : ''">&nbsp;{{ tec4g2600 ? tec4g2600.nem_tech : '-' }}</span>
-                </div>
-            </div>
 
-            <div class="is-divider-vertical" style="height: 64px;"></div>
+                <div class="is-divider-vertical" style="height: 64px;"></div>
 
-            <div class="level-item">
-                <div class="is-size-7 has-text-weight-bold">BAFI
-                    <span class="has-text-weight-bold is-size-6" :class="bafi ? 'has-text-eco' : ''">
-                        &nbsp;{{ bafi ? bafi.tecA + ' - ' + bafi.tecB + ' - ' + bafi.tecC : '-' }}
-                    </span>
+                <div class="level-item">
+                    <div>
+                        <div class="is-size-7 has-text-weight-bold">LTE 700</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec4g700 ? 'has-text-eco' : ''">{{ tec4g700 ? tec4g700.nem_tech : '-' }}</div>
+                    </div>
+                </div>
+                <div class="level-item">
+                    <div>
+                        <div class="is-size-7 has-text-weight-bold">LTE 1900</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec4g1900 ? 'has-text-eco' : ''">{{ tec4g1900 ? tec4g1900.nem_tech : '-' }}</div>
+                    </div>
+                </div>
+                <div class="level-item">
+                    <div>
+                        <div class="is-size-7 has-text-weight-bold">LTE 2600</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec4g2600 ? 'has-text-eco' : ''">{{ tec4g2600 ? tec4g2600.nem_tech : '-' }}</div>
+                    </div>
+                </div>
+
+                <div class="is-divider-vertical" style="height: 64px;"></div>
+
+                <div class="level-item">
+                    <div>
+                        <div class="is-size-7 has-text-weight-bold">BAFI</div>
+                        <div class="has-text-weight-bold is-size-5" :class="bafi ? 'has-text-eco' : ''">
+                            {{ bafi ? bafi.tecA + ' - ' + bafi.tecB + ' - ' + bafi.tecC : '-' }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section" style="padding-top: 0px;">
+        <section class="section" style="padding-top: 20px;">
             <div class="columns">
                 <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Sitios</div>
             </div>

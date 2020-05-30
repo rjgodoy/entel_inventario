@@ -21,7 +21,7 @@
 <script>    
     export default {
         components: {
-            AirConditioner: () => import('../../../pops/climate/AirConditioner')
+            AirConditioner: () => import(/* webpackChunkName: "chunks/pop/climate/airConditioner"*/'../../../pops/climate/AirConditioner')
         },
         props : [
             'pop',

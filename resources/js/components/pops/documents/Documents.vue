@@ -35,15 +35,15 @@
 
                         <div class="column has-text-right">
                             <span class="" v-if="canUploadFile">
-                                <button class="button" @click="isUploadModalActive = true">Upload</button>
+                                <button class="button" @click="isUploadModalActive = true">Subir archivos</button>
                             </span>
 
                             <span class="" v-if="canUploadFile">
-                                <button class="button" @click="isNewFolderModalActive = true">+ Folder</button>
+                                <button class="button" @click="isNewFolderModalActive = true">Nueva Carpeta</button>
                             </span>
 
                             <span class="" v-if="canUploadFile">
-                                <button class="button" :class="edit && 'is-link'" @click="edit = !edit">Edit</button>
+                                <button class="button" :class="edit && 'is-danger'" @click="edit = !edit">Editar</button>
                             </span>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                                     class="has-text-smart"
                                     size="3x"
                                     style="padding-bottom: 5px;"/>
-                                <div class="is-size-6 has-text-weight-bold">{{ folder.name }}</div>
+                                <div class="is-size-6 has-text-weight-bold">{{ bread != '' ? folder.name : (folder.site && folder.site.nem_site) }}</div>
                             </a>
                         </div>
 
@@ -72,6 +72,35 @@
                                 <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true" v-if="load == file.id"></b-loading>
                             </a>
                         </div>
+                    </div>
+
+                    <div class="container">
+                        <b-carousel
+                            :autoplay="false"
+                            with-carousel-list
+                            :indicator="false"
+                            :overlay="gallery">
+                            <b-carousel-item v-for="(item, i) in photos" :key="i">
+                                <figure @click="switchGallery(true)" class="image">
+                                    <img :src="item.image">
+                                </figure>
+                            </b-carousel-item>
+                            <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
+                            <template slot="list" slot-scope="props">
+                                <b-carousel-list
+                                    v-model="props.active"
+                                    :data="photos"
+                                    :config="al"
+                                    :refresh="gallery"
+                                    @switch="props.switch($event, false)"
+                                    as-indicator />
+                            </template>
+                            <!-- <template slot="overlay">
+                                <div class="has-text-centered has-text-white">
+                                    {{ item.basename }}
+                                </div>
+                            </template> -->
+                        </b-carousel>
                     </div>
 
 
@@ -89,17 +118,17 @@
                                     class="has-text-smart"
                                     size="3x"
                                     style="padding-bottom: 5px;"/>
-                                <div class="is-size-6 has-text-weight-bold">{{ folder.name }}</div>
+                                <div class="is-size-6 has-text-weight-bold">{{ bread != '' ? folder.name : (folder.site && folder.site.nem_site) }}</div>
                             </div>
                         </div>
 
                         <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
-                            <div class="box tile is-child columns" style="position: relative;">
-                                <a class=" has-text-danger">
+                            <div class="box tile is-child" style="position: relative;">
+                                <a class="is-pulled-right has-text-danger" @click="confirmDeleteFile(file)">
                                     <font-awesome-icon 
                                         :icon="['far', 'trash-alt']"
                                         size="2x"
-                                        style="padding-bottom: 1px;"/>
+                                        style="padding-bottom: 5px;"/>
                                 </a>
                                 <font-awesome-icon 
                                     :icon="['fas', faFile(file.extension).icon]"
@@ -158,8 +187,8 @@ import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
 library.add(faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, farTrashAlt);
 export default {
     components: {
-        ModalUpload: () => import('./modals/ModalUpload'),
-        ModalNewFolder: () => import('./modals/ModalNewFolder'),
+        ModalUpload: () => import(/* webpackChunkName: "chunks/pop/documents/modals/upload"*/'./modals/ModalUpload'),
+        ModalNewFolder: () => import(/* webpackChunkName: "chunks/pop/documents/modals/newFolder"*/'./modals/ModalNewFolder'),
     },
     props : [
         'user',
@@ -174,6 +203,7 @@ export default {
         return { 
             folders: [],
             files: [],
+            photos: [],
             activeTab: 0,
             showCam: true,
             multiline: true,
@@ -195,10 +225,30 @@ export default {
             },
             parentViewId: null,
 
-            bread: ''
+            bread: '',
+            gallery: false,
+            al: {
+                hasGrayscale: true,
+                itemsToShow: 2,
+                breakpoints: {
+                    768: {
+                        hasGrayscale: false,
+                        itemsToShow: 4
+                    },
+                    960: {
+                        hasGrayscale: true,
+                        itemsToShow: 6
+                    }
+                }
+            },
 
         }
     },
+
+    created() {
+        this.$eventBus.$on('reload-files', this.getFiles);
+    },
+
     mounted() {
         this.getFolders()
         this.getFiles()
@@ -276,9 +326,8 @@ export default {
         },
 
         noFiles() {
-            return !this.folders.length && !this.files.length
+            return !this.folders.length && !this.files.length && !this.photos.length
         },
-
     },
 
     watch: {
@@ -288,6 +337,7 @@ export default {
     },
     
     methods: {
+
         selected(folder) {
             this.setBreadcrum(folder.name)
             this.parentViewId = this.currentFolderView.id
@@ -300,64 +350,22 @@ export default {
             let params = {
                 'api_token': this.user.api_token,
                 'folder_name': this.folderTab.label,
-                'folder_id': this.currentFolderView.id
+                'folder_id': this.currentFolderView.id,
+                'pop_id': this.pop.id
             }
             axios.get(`/api/folders/${this.pop.id}`, { params })
             .then((response) => {
-                this.folders = !this.currentFolderView.id && response.data.folders[0] ? response.data.folders[0].subfolders : response.data.folders               
+                this.folders = response.data.folders
                 this.canCreateFolder = response.data.can.create
                 this.canDeleteFolder = response.data.can.delete
                 
             })
             axios.get('/api/currentFolder', { params })
             .then(response => {
+                console.log(response.data)
                 this.currentFolderView = response.data.folder
             })
         },
-
-        confirmDeleteFolder(folder) {
-            this.$buefy.dialog.confirm({
-                message: 'Desea eliminar esta carpeta?',
-                type: 'is-danger',
-                onConfirm: () => {
-                    var params = {
-                        'api_token': this.user.api_token,
-                        'user_id': this.user.id,
-                        'pop_id': this.pop.id
-                    }
-                    axios.delete(`/api/folders/${folder.id}`, { params })
-                    .then(response => {
-                        console.log(response)
-                        this.getFolders()
-                        this.$eventBus.$emit('folder-deleted');
-                    })
-                }
-            })
-        },
-
-        setBreadcrum(name) {
-            if (this.bread == '') {
-                this.bread = name
-            } else {
-                this.bread = this.bread + ' / ' + name
-            }
-        },
-
-        backOne() {
-            var split = this.bread.split('/')
-            var deep = split.pop()
-            this.bread = ''
-            for (let i = 0; i < split.length; i++) {
-                this.bread = this.bread == '' ? split[i] : this.bread + '/' + split[i]
-            }
-
-            this.currentFolderView.id = this.currentFolderView.parent_id
-            this.getFolders()
-            this.getFiles()
-        },
-
-        
-
 
         // File Management
         getFiles() {
@@ -366,15 +374,28 @@ export default {
                 'folder_name': this.folderTab.label,
                 'folder_id': this.currentFolderView.id
             }
-            axios.get(`/api/files/${this.pop.id}`, { params: params })
-            .then((response) => {
+            this.files = [] 
+            this.photos = []
+            axios.get(`/api/files/${this.pop.id}`, { params })
+            .then(response => {
+                response.data.files.forEach(element => {
+                    if (element.extension != 'jpg' 
+                        && element.extension != 'png' 
+                        && element.extension != 'jpeg' 
+                        && element.extension != 'tiff') {
+                        this.files.push(element)
+                    } else {
+                        element.image = '/storage/'+element.route
+                        this.photos.push(element)
+                    }
+                })
                 // console.log(response.data)
-                this.files = response.data.files
+                // this.files = response.data.files
                 this.canUploadFile = response.data.can.upload
                 this.canDeleteFile = response.data.can.delete
             })
         },
-        
+
         faFile(ext) {
             var icon = ext == 'pdf' ? 'file-pdf' : 
                     (ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'file-image' : 
@@ -395,8 +416,7 @@ export default {
             this.isLoading = true
             var params = {
                 'api_token': this.user.api_token,
-                'dirname': file.dirname,
-                'basename': file.basename,
+                'route': file.route,
                 'mime': file.mime,
             }
             // console.log(params)
@@ -443,6 +463,47 @@ export default {
             })
         },
 
+        confirmDeleteFolder(folder) {
+            this.$buefy.dialog.confirm({
+                message: 'Desea eliminar esta carpeta?',
+                type: 'is-danger',
+                onConfirm: () => {
+                    var params = {
+                        'api_token': this.user.api_token,
+                        'user_id': this.user.id,
+                        'pop_id': this.pop.id
+                    }
+                    axios.delete(`/api/folders/${folder.id}`, { params })
+                    .then(response => {
+                        // console.log(response)
+                        this.getFolders()
+                        this.$eventBus.$emit('folder-deleted');
+                    })
+                }
+            })
+        },
+
+        setBreadcrum(name) {
+            if (this.bread == '') {
+                this.bread = name
+            } else {
+                this.bread = this.bread + ' / ' + name
+            }
+        },
+
+        backOne() {
+            var split = this.bread.split('/')
+            var deep = split.pop()
+            this.bread = ''
+            for (let i = 0; i < split.length; i++) {
+                this.bread = this.bread == '' ? split[i] : this.bread + '/' + split[i]
+            }
+
+            this.currentFolderView.id = this.currentFolderView.parent_id
+            this.getFolders()
+            this.getFiles()
+        },
+
         confirmDeleteFile(file) {
             this.$buefy.dialog.confirm({
                 message: 'Desea eliminar este archivo?',
@@ -458,10 +519,18 @@ export default {
             })
         },
         
+        switchGallery(value) {
+            this.gallery = value
+            if (value) {
+                return document.documentElement.classList.add('is-clipped')
+            } else {
+                return document.documentElement.classList.remove('is-clipped')
+            }
+        }
+    },
 
-        // toggle(row) {
-        //     this.$refs.table.toggleDetails(row)
-        // }
+    beforeDestroy() {
+        this.$eventBus.$off('reload-files');
     }
 }
 </script>

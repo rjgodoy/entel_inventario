@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api\Infraestructura;
 
+use App\Exports\InfrastructuresExport;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Cache;
-
 use App\Http\Resources\Infrastructure as InfrastructureResource;
 use App\Models\Infrastructure;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class InfrastructureController extends Controller
 {
@@ -193,5 +192,16 @@ class InfrastructureController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        return (new InfrastructuresExport($request))->download('infraestructuras.xlsx');
     }
 }

@@ -22,7 +22,7 @@
 <script>
     export default {
         components: {
-            Junction: () => import('./Junction'),
+            Junction: () => import(/* webpackChunkName: "chunks/pop/power/junction"*/'./Junction'),
         },
         props : [
             'user',

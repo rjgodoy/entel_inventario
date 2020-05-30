@@ -3,11 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Exports\AllInfoPopsExport;
-use App\Exports\FilteredInfoPopsExport;
-use App\Exports\FilteredPopsExport;
-use App\Exports\FilteredSitesExport;
-use App\Exports\PopsExport;
-use App\Exports\SitesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Pop as PopResource;
 use App\Http\Resources\PopCollection;
@@ -188,8 +183,50 @@ class PopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+
+        $pop = Pop::updateOrCreate([
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude
+        ],[
+            'pop_e_id' => $request->pop_e_id,
+            'nombre' => $request->nombre,
+            'direccion' => $request->direccion,
+            'comuna_id' => $request->comuna_id,
+            'pop_type_id' => $request->pop_type_id,
+            'net_type_id' => $request->net_type_id,
+            'vip' => $request->vip,
+            'offgrid' => $request->offgrid,
+            'solar' => $request->solar,
+            'eolica' => $request->eolica,
+        ]);
+
+        $site = Site::create([
+            'pop_id' => $pop->id,
+            'site_type_id' => $request->site_type_id,
+            'nem_site' => $request->nem_site,
+            'nombre' => $request->site_name,
+            'classification_type_id' => $request->classification_type_id,
+            'attention_priority_type_id' => $request->attention_priority_type_id,
+            'category_type_id'=> null,
+            'attention_type_id'=> 2,
+            'solution_type_id'=> null,
+            'site_class_type_id' => null,
+            'coverage_type_id'=> null,
+            'transport_type_id'=> null,
+
+            'pe_3g' => $request->pe_3g,
+            'mpls' => $request->mpls,
+            'olt' => $request->olt,
+            'olt_3play' => $request->olt_3play,
+            'red_minima' => $request->red_minima_n1 ? $request->red_minima_n1 : ($request->red_minima_n2 ? $request->red_minima_n2 : null),
+            'core' => $request->core,
+            'localidad_obligatoria' => $request->localidad_obligatoria,
+            'ranco' => $request->ranco,
+            'bafi' => $request->bafi,
+        ]);
+
+        return $pop;
     }
 
     /**

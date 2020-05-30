@@ -15,4 +15,9 @@ class VerticalStructure extends Model
     {
         return $this->belongsTo(VerticalStructureType::class);
     }
+
+    public function beacons() 
+    {
+        return $this->hasMany(Beacon::class);
+    }
 }

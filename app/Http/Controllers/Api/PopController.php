@@ -287,6 +287,25 @@ class PopController extends Controller
         return new PopResource($technologies);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function popParameters(Request $request)
+    {
+        $strClassName = '';
+        $array = explode('_', $request->parameter);
+        for ($i=0; $i < count($array) - 1; $i++) { 
+            $word = ucwords($array[$i]);
+            $strClassName = ucwords($strClassName.=$word);
+        }
+        $className = "\\App\\Models\\".$strClassName;
+        $parameters = app($className)->get();
+        return new PopResource($parameters);
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -295,71 +314,20 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $pop_id)
+    public function update(Request $request, $id)
     {
-        return $request;
-        $pop = Pop::find($pop_id);
-        // $pop->update([
-        //     $request-> => $
-        // ])
-        // if ($request->pe_3g != null) {
-            $pop->{$request} = $request;
-            $pop->save();
-        
-        // if ($request->mpls != null) {
-        //     $pop->mpls = $request->mpls;
-        //     $pop->save();
-        // }
-        // if ($request->olt != null) {
-        //     $pop->olt = $request->olt;
-        //     $pop->save();
-        // }
-        // if ($request->olt_3play != null) {
-        //     $pop->olt_3play = $request->olt_3play;
-        //     $pop->save();
-        // }
-        // if ($request->red_minima_n1 != null) {
-        //     $pop->red_minima_n1 = $request->red_minima_n1;
-        //     $pop->save();
-        // }
-        // if ($request->red_minima_n2 != null) {
-        //     $pop->red_minima_n2 = $request->red_minima_n2;
-        //     $pop->save();
-        // }
-        // if ($request->core != null) {
-        //     $pop->core = $request->core;
-        //     $pop->save();
-        // }
-        // if ($request->vip != null) {
-        //     $pop->vip = $request->vip;
-        //     $pop->save();
-        // }
-        // if ($request->localidad_obligatoria != null) {
-        //     $pop->localidad_obligatoria = $request->localidad_obligatoria;
-        //     $pop->save();
-        // }
-        // if ($request->ranco != null) {
-        //     $pop->ranco = $request->ranco;
-        //     $pop->save();
-        // }
-        // if ($request->bafi != null) {
-        //     $pop->bafi = $request->bafi;
-        //     $pop->save();
-        // }
-        // if ($request->offgrid != null) {
-        //     $pop->offgrid = $request->offgrid;
-        //     $pop->save();
-        // }
-        // if ($request->solar != null) {
-        //     $pop->solar = $request->solar;
-        //     $pop->save();
-        // }
-        // if ($request->eolica != null) {
-        //     $pop->eolica = $request->eolica;
-        //     $pop->save();
-        // }
+        $pop = Pop::find($id);
+        $pop->update([
+            $request->parameter => $request->value
+        ]);
 
         // ESCRIBIR UN LOG DEL CAMBIO
+        // Log::create([
+        //     'pop_id' => $pop->id,
+        //     'user_id' => $request->user_id,
+        //     'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
+        //     'description' => 'Se ha actualizado el parámetro "'.$request->parameter.'" a "'.$request->value ? 'Si"' : 'No"'
+        // ]);
 
         return $request;
     }

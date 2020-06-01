@@ -1,13 +1,13 @@
 <template>
     <div class="modal-card" style="width: 800px;">
         <header class="modal-card-head has-text-centered" style="background: rgba(0,0,0,0)">
-            <p class="modal-card-title has-text-white has-text-weight-bold">Aire Acondicionado</p>
+            <p class="modal-card-title has-text-white has-text-weight-bold">Empalme</p>
         </header>
         <section class="modal-card-body" style="background: rgba(0,0,0,0)">
-            <air-conditioner
-                :airConditioner="airConditioner"
-                :pop="pop"
+            <junction
+                :junction="junction"
                 :can="can"
+                :pop="pop"
                 :user="user"
             />
         </section>
@@ -21,12 +21,12 @@
 <script>    
     export default {
         components: {
-            AirConditioner: () => import(/* webpackChunkName: "chunks/pop/climate/airConditioner"*/'../../../pops/climate/AirConditioner')
+            Junction: () => import(/* webpackChunkName: "chunks/pop/power/junction"*/'../../../pop/power/Junction')
         },
         props : [
             'pop',
             'can',
-            'airConditioner',
+            'junction',
             'user'
         ],
         data() {

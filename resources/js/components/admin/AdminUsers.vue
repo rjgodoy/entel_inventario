@@ -4,7 +4,8 @@
             <div class="container">
                 <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
                     <div class="tile is-parent">
-                        <a class="tile is-child box" :class="currentTab === 'AdminRoles' ? 'has-background-link' : boxBackground" @click="currentTab = 'AdminRoles'">
+                        <a class="tile is-child box" 
+                            :class="currentTab === 'AdminRoles' ? 'has-background-link' : boxBackground" @click="currentTab = 'AdminRoles'">
                             <div :class="currentTab === 'AdminRoles' ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
                                     Roles de Usuario

@@ -459,7 +459,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -2172,8 +2171,9 @@ var render = function() {
                   _c(
                     "div",
                     {
-                      staticClass: "tile is-child box",
-                      class: _vm.boxBackground
+                      staticClass: "tile is-child card",
+                      class: _vm.boxBackground,
+                      staticStyle: { border: "solid 4px white" }
                     },
                     [
                       _c("map-view", {

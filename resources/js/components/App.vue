@@ -150,7 +150,7 @@
             <div class="level is-link is-bold" style="margin-right: -24px; margin-left: -24px; margin-top: -24px">
                 <div class="level-item">
                     <div class="container has-text-centered">
-                        <h1 class="is-size-5 has-text-white" style="padding: 10px 0 10px 0;">{{ this.$route.name.toUpperCase() }}</h1>
+                        <h1 class="is-size-5 has-text-white has-text-weight-bold" style="padding: 10px 0 10px 0;">{{ this.$route.name.toUpperCase() }}</h1>
                     </div>
                 </div>
             </div>

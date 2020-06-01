@@ -1,13 +1,13 @@
 <template>
     <div class="modal-card" style="width: 800px;">
         <header class="modal-card-head has-text-centered" style="background: rgba(0,0,0,0)">
-            <p class="modal-card-title has-text-white has-text-weight-bold">Empalme</p>
+            <p class="modal-card-title has-text-white has-text-weight-bold">Planta Rectificadora</p>
         </header>
         <section class="modal-card-body" style="background: rgba(0,0,0,0)">
-            <junction
-                :junction="junction"
-                :can="can"
+            <power-rectifier
+                :powerRectifier="powerRectifier"
                 :pop="pop"
+                :can="can"
                 :user="user"
             />
         </section>
@@ -21,12 +21,12 @@
 <script>    
     export default {
         components: {
-            Junction: () => import(/* webpackChunkName: "chunks/pop/power/junction"*/'../../../pops/power/Junction')
+            PowerRectifier: () => import(/* webpackChunkName: "chunks/pop/power/powerRectifier"*/'../../../pop/power/PowerRectifier')
         },
         props : [
             'pop',
             'can',
-            'junction',
+            'powerRectifier',
             'user'
         ],
         data() {

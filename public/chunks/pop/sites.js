@@ -1,14 +1,55 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["chunks/pop/sites"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Sites.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/Sites.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pop/Sites.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pop/Sites.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -140,17 +181,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
-  props: ['user', 'pop'],
+  components: {
+    EditParameter: function EditParameter() {
+      return __webpack_require__.e(/*! import() | chunks/pop/modals/editParameter */ "chunks/pop/modals/editParameter").then(__webpack_require__.bind(null, /*! ./modals/EditParameter */ "./resources/js/components/pop/modals/EditParameter.vue"));
+    }
+  },
+  props: ['user', 'pop', 'isEditMode', 'bafi'],
   data: function data() {
-    return {};
+    return {
+      popData: this.pop,
+      selectedSite: null,
+      parameter: '',
+      isEditParameterModalActive: false
+    };
+  },
+  watch: {
+    pop: function pop(val) {
+      this.popData = val;
+    }
   },
   computed: {
     sites: function sites() {
       var array = [];
 
-      if (this.pop.sites) {
-        this.pop.sites.forEach(function (item) {
+      if (this.popData.sites) {
+        this.popData.sites.forEach(function (item) {
           array.push(item);
         });
       }
@@ -180,8 +235,8 @@ __webpack_require__.r(__webpack_exports__);
     technologies: function technologies() {
       var array = [];
 
-      if (this.pop.sites) {
-        this.pop.sites.forEach(function (item) {
+      if (this.popData.sites) {
+        this.popData.sites.forEach(function (item) {
           if (item.technologies.length > 0) {
             array.push(item.technologies);
           }
@@ -261,50 +316,19 @@ __webpack_require__.r(__webpack_exports__);
         });
         return tec;
       }
-    },
-    bafi: function bafi() {
-      var tecA;
-      var tecB;
-      var tecC;
-      var array;
-
-      if (this.technologies) {
-        this.technologies.forEach(function (element) {
-          if (element.technology_type_id == 3 && element.frequency == 3500) {
-            if (element.nem_tech.startsWith('A')) {
-              tecA = element.nem_tech;
-            }
-
-            if (element.nem_tech.startsWith('B')) {
-              tecB = element.nem_tech;
-            }
-
-            if (element.nem_tech.startsWith('C')) {
-              tecC = element.nem_tech;
-            }
-
-            array = {
-              'tecA': tecA,
-              'tecB': tecB,
-              'tecC': tecC
-            };
-          }
-        });
-      }
-
-      return array;
     }
   },
-  mounted: function mounted() {},
-  methods: {}
+  beforeDestroy: function beforeDestroy() {
+    this.$eventBus.$off('parameter-updated');
+  }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Sites.vue?vue&type=template&id=75d796ea&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/Sites.vue?vue&type=template&id=75d796ea& ***!
-  \*************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pop/Sites.vue?vue&type=template&id=03b343f3&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pop/Sites.vue?vue&type=template&id=03b343f3& ***!
+  \************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -316,362 +340,580 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
-    _c(
-      "section",
-      {
-        staticClass: "section is-tech is-bold has-text-white",
-        staticStyle: { "padding-top": "20px", "padding-bottom": "20px" }
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "level" }, [
-          _c("div", { staticClass: "level-item" }, [
-            _c("div", [
-              _c(
-                "div",
-                {
-                  staticClass: "is-size-7 has-text-weight-bold has-text-light"
-                },
-                [_vm._v("2G 1900")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "is-size-5 has-text-weight-bold",
-                  class: _vm.tec2g1900 ? "has-text-eco" : ""
-                },
-                [_vm._v(_vm._s(_vm.tec2g1900 ? _vm.tec2g1900.nem_tech : "-"))]
-              )
-            ])
-          ]),
+  return _c(
+    "div",
+    {},
+    [
+      _c(
+        "section",
+        {
+          staticClass: "section is-tech is-bold has-text-white",
+          staticStyle: { "padding-top": "20px", "padding-bottom": "20px" }
+        },
+        [
+          _vm._m(0),
           _vm._v(" "),
-          _c("div", {
-            staticClass: "is-divider-vertical",
-            staticStyle: { height: "64px" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "level-item" }, [
-            _c("div", [
-              _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-                _vm._v("3G 900")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "is-size-5 has-text-weight-bold",
-                  class: _vm.tec3g900 ? "has-text-eco" : ""
-                },
-                [_vm._v(_vm._s(_vm.tec3g900 ? _vm.tec3g900.nem_tech : "-"))]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "level-item" }, [
-            _c("div", [
-              _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-                _vm._v("3G 1900")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "is-size-5 has-text-weight-bold",
-                  class: _vm.tec3g1900 ? "has-text-eco" : ""
-                },
-                [_vm._v(_vm._s(_vm.tec3g1900 ? _vm.tec3g1900.nem_tech : "-"))]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", {
-            staticClass: "is-divider-vertical",
-            staticStyle: { height: "64px" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "level-item" }, [
-            _c("div", [
-              _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-                _vm._v("LTE 700")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "is-size-5 has-text-weight-bold",
-                  class: _vm.tec4g700 ? "has-text-eco" : ""
-                },
-                [_vm._v(_vm._s(_vm.tec4g700 ? _vm.tec4g700.nem_tech : "-"))]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "level-item" }, [
-            _c("div", [
-              _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-                _vm._v("LTE 1900")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "is-size-5 has-text-weight-bold",
-                  class: _vm.tec4g1900 ? "has-text-eco" : ""
-                },
-                [_vm._v(_vm._s(_vm.tec4g1900 ? _vm.tec4g1900.nem_tech : "-"))]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "level-item" }, [
-            _c("div", [
-              _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-                _vm._v("LTE 2600")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "is-size-5 has-text-weight-bold",
-                  class: _vm.tec4g2600 ? "has-text-eco" : ""
-                },
-                [_vm._v(_vm._s(_vm.tec4g2600 ? _vm.tec4g2600.nem_tech : "-"))]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", {
-            staticClass: "is-divider-vertical",
-            staticStyle: { height: "64px" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "level-item" }, [
-            _c("div", [
-              _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
-                _vm._v("BAFI")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "has-text-weight-bold is-size-5",
-                  class: _vm.bafi ? "has-text-eco" : ""
-                },
-                [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(
-                        _vm.bafi
-                          ? _vm.bafi.tecA +
-                              " - " +
-                              _vm.bafi.tecB +
-                              " - " +
-                              _vm.bafi.tecC
-                          : "-"
-                      ) +
-                      "\n                    "
-                  )
-                ]
-              )
+          _c("div", { staticClass: "level" }, [
+            _c("div", { staticClass: "level-item" }, [
+              _c("div", [
+                _c(
+                  "div",
+                  {
+                    staticClass: "is-size-7 has-text-weight-bold has-text-light"
+                  },
+                  [_vm._v("2G 1900")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "is-size-5 has-text-weight-bold",
+                    class: _vm.tec2g1900 ? "has-text-eco" : ""
+                  },
+                  [_vm._v(_vm._s(_vm.tec2g1900 ? _vm.tec2g1900.nem_tech : "-"))]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "is-divider-vertical",
+              staticStyle: { height: "64px" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c("div", [
+                _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                  _vm._v("3G 900")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "is-size-5 has-text-weight-bold",
+                    class: _vm.tec3g900 ? "has-text-eco" : ""
+                  },
+                  [_vm._v(_vm._s(_vm.tec3g900 ? _vm.tec3g900.nem_tech : "-"))]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c("div", [
+                _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                  _vm._v("3G 1900")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "is-size-5 has-text-weight-bold",
+                    class: _vm.tec3g1900 ? "has-text-eco" : ""
+                  },
+                  [_vm._v(_vm._s(_vm.tec3g1900 ? _vm.tec3g1900.nem_tech : "-"))]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "is-divider-vertical",
+              staticStyle: { height: "64px" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c("div", [
+                _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                  _vm._v("LTE 700")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "is-size-5 has-text-weight-bold",
+                    class: _vm.tec4g700 ? "has-text-eco" : ""
+                  },
+                  [_vm._v(_vm._s(_vm.tec4g700 ? _vm.tec4g700.nem_tech : "-"))]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c("div", [
+                _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                  _vm._v("LTE 1900")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "is-size-5 has-text-weight-bold",
+                    class: _vm.tec4g1900 ? "has-text-eco" : ""
+                  },
+                  [_vm._v(_vm._s(_vm.tec4g1900 ? _vm.tec4g1900.nem_tech : "-"))]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c("div", [
+                _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                  _vm._v("LTE 2600")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "is-size-5 has-text-weight-bold",
+                    class: _vm.tec4g2600 ? "has-text-eco" : ""
+                  },
+                  [_vm._v(_vm._s(_vm.tec4g2600 ? _vm.tec4g2600.nem_tech : "-"))]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "is-divider-vertical",
+              staticStyle: { height: "64px" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c("div", [
+                _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                  _vm._v("BAFI")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "has-text-weight-bold is-size-5",
+                    class: _vm.bafi ? "has-text-eco" : ""
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(
+                          _vm.bafi
+                            ? _vm.bafi.tecA +
+                                " - " +
+                                _vm.bafi.tecB +
+                                " - " +
+                                _vm.bafi.tecC
+                            : "-"
+                        ) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              ])
             ])
           ])
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "section",
-      { staticClass: "section", staticStyle: { "padding-top": "20px" } },
-      [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tile is-ancestor columns is-multiline" },
-          _vm._l(_vm.sites, function(site) {
-            return _c("div", { staticClass: "tile is-parent column is-4" }, [
-              _c("div", { staticClass: "tile is-child box" }, [
-                _c("div", { staticClass: "columns" }, [
-                  _c("div", { staticClass: "column is-8" }, [
-                    _c(
-                      "div",
-                      { staticClass: "title is-size-6 has-text-weight-normal" },
-                      [_vm._v("Sitio")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "subtitle is-size-4 has-text-weight-bold"
-                      },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(site.nem_site) +
-                            "\n                                "
-                        ),
-                        site.nombre
-                          ? _c(
-                              "p",
-                              {
-                                staticClass: "is-size-5 has-text-weight-normal"
-                              },
-                              [_vm._v(_vm._s(site.nombre))]
-                            )
-                          : _vm._e()
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "column" },
-                    [
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "section", staticStyle: { "padding-top": "20px" } },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tile is-ancestor columns is-multiline" },
+            _vm._l(_vm.sites, function(site) {
+              return _c("div", { staticClass: "tile is-parent column is-4" }, [
+                _c("div", { staticClass: "tile is-child box" }, [
+                  _c("div", { staticClass: "columns" }, [
+                    _c("div", { staticClass: "column is-8" }, [
                       _c(
-                        "b-taglist",
-                        { staticClass: "is-right", attrs: { attached: "" } },
-                        [
-                          _c(
-                            "b-tag",
-                            {
-                              staticClass: "has-text-weight-bold",
-                              class:
-                                site.site_type_id == 1
-                                  ? "is-smart"
-                                  : site.site_type_id == 2
-                                  ? "is-info"
-                                  : site.site_type_id == 3
-                                  ? "is-success"
-                                  : "is-positive",
-                              attrs: { size: "is-medium" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(
-                                    site.site_type.site_type.toUpperCase()
-                                  ) +
-                                  "\n                                "
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "columns has-text-centered" }, [
-                  _c("div", { staticClass: "column" }, [
-                    _c(
-                      "div",
-                      { staticClass: "title is-size-4 has-text-weight-bold" },
-                      [
-                        _vm._v(
-                          _vm._s(site.classification_type.classification_type)
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "subtitle is-size-7 has-text-weight-normal"
-                      },
-                      [_vm._v("Categoría")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column" }, [
-                    _c(
-                      "div",
-                      { staticClass: "title is-size-4 has-text-weight-bold" },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            site.attention_priority_type.attention_priority_type
-                          )
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "subtitle is-size-7 has-text-weight-normal"
-                      },
-                      [_vm._v("Prioridad atención")]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", {
-                  staticClass: "is-divider",
-                  staticStyle: { margin: "10px auto 10px auto" },
-                  attrs: { "data-content": "TECNOLOGIAS" }
-                }),
-                _vm._v(" "),
-                _c("div", { staticStyle: { "padding-top": "20px" } }, [
-                  _c(
-                    "div",
-                    { staticClass: "columns is-multiline" },
-                    _vm._l(site.technologies, function(tech) {
-                      return tech
+                        "div",
+                        { staticClass: "is-size-7 has-text-weight-normal" },
+                        [_vm._v("Nemonico")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "is-size-4 has-text-weight-bold" },
+                        [_vm._v(_vm._s(site.nem_site))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "is-size-7 has-text-weight-normal",
+                          staticStyle: { "padding-top": "4px" }
+                        },
+                        [_vm._v("Nombre")]
+                      ),
+                      _vm._v(" "),
+                      site.nombre
                         ? _c(
                             "div",
-                            { staticClass: "column is-4 has-text-centered" },
-                            [
-                              _c(
+                            { staticClass: "is-size-5 has-text-weight-light" },
+                            [_vm._v(_vm._s(site.nombre))]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-taglist",
+                          { staticClass: "is-right", attrs: { attached: "" } },
+                          [
+                            _c(
+                              "b-tag",
+                              {
+                                staticClass: "has-text-weight-normal",
+                                attrs: { type: "is-dark" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    Tipo Sitio\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-tag",
+                              {
+                                staticClass:
+                                  "has-text-weight-bold has-text-white",
+                                class:
+                                  site.site_type_id == 1
+                                    ? "is-smart"
+                                    : site.site_type_id == 2
+                                    ? "is-positive"
+                                    : site.site_type_id == 3
+                                    ? "is-eco"
+                                    : "is-warning"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(
+                                      site.site_type.site_type.toUpperCase()
+                                    ) +
+                                    "\n                                "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "columns has-text-centered tile is-ancestor"
+                    },
+                    [
+                      _c("div", { staticClass: "column tile is-parent" }, [
+                        !_vm.isEditMode
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "tile is-child box is-shadowless",
+                                staticStyle: { border: "solid 0.5px grey" }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "title is-size-4 has-text-weight-bold"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        site.classification_type
+                                          .classification_type
+                                      )
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "subtitle is-size-7 has-text-weight-normal"
+                                  },
+                                  [_vm._v("Categoría")]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.isEditMode
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "tile is-child box",
+                                staticStyle: { border: "solid 0.5px grey" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.isEditParameterModalActive = true
+                                    _vm.parameter = "classification_type_id"
+                                    _vm.selectedSite = site
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "title is-size-4 has-text-weight-bold"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        site.classification_type
+                                          .classification_type
+                                      )
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "subtitle is-size-7 has-text-weight-normal"
+                                  },
+                                  [_vm._v("Categoría")]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "column tile is-parent" }, [
+                        !_vm.isEditMode
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "tile is-child box is-shadowless",
+                                staticStyle: { border: "solid 0.5px grey" }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "title is-size-4 has-text-weight-bold"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        site.attention_priority_type
+                                          .attention_priority_type
+                                      )
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "subtitle is-size-7 has-text-weight-normal"
+                                  },
+                                  [_vm._v("Prioridad atención")]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.isEditMode
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "tile is-child box",
+                                staticStyle: { border: "solid 0.5px grey" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.isEditParameterModalActive = true
+                                    _vm.parameter = "attention_priority_type_id"
+                                    _vm.selectedSite = site
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "title is-size-4 has-text-weight-bold"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        site.attention_priority_type
+                                          .attention_priority_type
+                                      )
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "subtitle is-size-7 has-text-weight-normal"
+                                  },
+                                  [_vm._v("Prioridad atención")]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      site.site_type_id == 2
+                        ? _c("div", { staticClass: "column tile is-parent" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tile is-child box is-shadowless",
+                                staticStyle: { border: "solid 0.5px grey" }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "title is-size-4 has-text-weight-bold"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        site.category_type &&
+                                          site.category_type.category_type
+                                      )
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "subtitle is-size-7 has-text-weight-normal"
+                                  },
+                                  [_vm._v("Cat. Planificación")]
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "is-divider",
+                    staticStyle: { margin: "10px auto 10px auto" },
+                    attrs: { "data-content": "TECNOLOGIAS" }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticStyle: { "padding-top": "20px" } }, [
+                    _c(
+                      "div",
+                      { staticClass: "columns is-multiline" },
+                      [
+                        _vm._l(site.technologies, function(tech) {
+                          return tech
+                            ? _c(
                                 "div",
                                 {
-                                  staticClass:
-                                    "title is-size-5 has-text-weight-normal"
+                                  staticClass: "column is-4 has-text-centered"
                                 },
                                 [
-                                  _vm._v(
-                                    _vm._s(tech.nem_tech) +
-                                      "\n                                        "
-                                  ),
                                   _c(
                                     "div",
                                     {
                                       staticClass:
-                                        "subtitle is-size-6 has-text-weight-light"
+                                        "is-size-6 has-text-weight-normal"
                                     },
-                                    [_vm._v("Tecnología")]
+                                    [
+                                      _vm._v(
+                                        _vm._s(tech.nem_tech) +
+                                          "\n                                    "
+                                      ),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "subtitle is-size-6 has-text-weight-light"
+                                        },
+                                        [_vm._v("Tecnología")]
+                                      )
+                                    ]
                                   )
                                 ]
                               )
-                            ]
-                          )
-                        : _vm._e()
-                    }),
-                    0
-                  )
-                ]),
-                _vm._v(" "),
-                !site.technologies.length
-                  ? _c(
-                      "div",
-                      {
-                        staticClass: "subtitle is-size-5 has-text-weight-light"
-                      },
-                      [_vm._v("Sitio no tiene tecnologías móviles")]
+                            : _vm._e()
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "column" }, [
+                          !site.technologies.length
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "subtitle is-size-5 has-text-weight-light has-text-centered"
+                                },
+                                [_vm._v("Sitio no tiene tecnologías móviles")]
+                              )
+                            : _vm._e()
+                        ])
+                      ],
+                      2
                     )
-                  : _vm._e()
+                  ])
+                ])
               ])
-            ])
-          }),
-          0
-        )
-      ]
-    )
-  ])
+            }),
+            0
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isEditParameterModalActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isEditParameterModalActive = $event
+            }
+          }
+        },
+        [
+          _c("edit-parameter", {
+            attrs: {
+              pop: _vm.pop,
+              site: _vm.selectedSite,
+              user: _vm.user,
+              parameter: _vm.parameter
+            }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -711,17 +953,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Sites.vue":
-/*!************************************************!*\
-  !*** ./resources/js/components/pops/Sites.vue ***!
-  \************************************************/
+/***/ "./resources/js/components/pop/Sites.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/pop/Sites.vue ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Sites_vue_vue_type_template_id_75d796ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sites.vue?vue&type=template&id=75d796ea& */ "./resources/js/components/pops/Sites.vue?vue&type=template&id=75d796ea&");
-/* harmony import */ var _Sites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sites.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/Sites.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Sites_vue_vue_type_template_id_03b343f3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sites.vue?vue&type=template&id=03b343f3& */ "./resources/js/components/pop/Sites.vue?vue&type=template&id=03b343f3&");
+/* harmony import */ var _Sites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sites.vue?vue&type=script&lang=js& */ "./resources/js/components/pop/Sites.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -732,8 +974,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Sites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Sites_vue_vue_type_template_id_75d796ea___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Sites_vue_vue_type_template_id_75d796ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Sites_vue_vue_type_template_id_03b343f3___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Sites_vue_vue_type_template_id_03b343f3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -743,38 +985,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pops/Sites.vue"
+component.options.__file = "resources/js/components/pop/Sites.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Sites.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/pops/Sites.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/pop/Sites.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/pop/Sites.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Sites.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Sites.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Sites.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pop/Sites.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Sites.vue?vue&type=template&id=75d796ea&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/pops/Sites.vue?vue&type=template&id=75d796ea& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/pop/Sites.vue?vue&type=template&id=03b343f3&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/pop/Sites.vue?vue&type=template&id=03b343f3& ***!
+  \******************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_template_id_75d796ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Sites.vue?vue&type=template&id=75d796ea& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Sites.vue?vue&type=template&id=75d796ea&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_template_id_75d796ea___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_template_id_03b343f3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Sites.vue?vue&type=template&id=03b343f3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pop/Sites.vue?vue&type=template&id=03b343f3&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_template_id_03b343f3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_template_id_75d796ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sites_vue_vue_type_template_id_03b343f3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -295,7 +295,11 @@ Route::middleware('auth:api')->group(function () {
 
 
 		### POP DETAIL ######################################################################
+			Route::apiResource('site','Api\SiteController');
 			Route::apiResource('dependences','Api\DependenceController');
+
+			Route::get('popParameters', 'Api\PopController@popParameters');
+			Route::get('siteParameters', 'Api\SiteController@siteParameters');
 
 			Route::get('popTechnologies', 'Api\PopController@technologies');
 
@@ -305,7 +309,7 @@ Route::middleware('auth:api')->group(function () {
 			Route::apiResource('files', 'Api\FileController');
             Route::get('viewFile', 'Api\FileController@view');
             Route::get('sideFolders', 'Api\FolderController@sideFolders');
-            Route::get('getFolders', 'Api\FolderController@getFolders');
+            // Route::get('getFolders', 'Api\FolderController@getFolders');
             Route::get('currentFolder', 'Api\FolderController@currentFolder');
             Route::get('getFiles', 'Api\FileController@getFiles');
             Route::post('createFolder/{id}', 'Api\FolderController@createFolder');

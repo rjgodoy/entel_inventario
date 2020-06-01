@@ -191,7 +191,10 @@ var render = function() {
         _c("div", { staticClass: "tile is-parent" }, [
           _c(
             "div",
-            { staticClass: "tile is-child box" },
+            {
+              staticClass: "tile is-child card",
+              staticStyle: { border: "solid 4px white" }
+            },
             [
               _c("eco-map-view", {
                 attrs: {

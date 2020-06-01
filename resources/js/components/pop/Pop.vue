@@ -9,7 +9,6 @@
             <div class="hero-body">
                 <div class="">
                     <div class="columns">
-                        <!-- <div class="column is-1"></div> -->
 
                         <div class="column is-1 has-text-centered">
                             <b-button type="is-primary" size="is-medium" :class="popClassification.id == 1 ? 'is-info' : (popClassification.id == 2 ? 'is-warning' : (popClassification.id == 3 ? 'is-primary' : (popClassification.id == 4 ? 'is-smart' : 'is-eco')))">
@@ -146,6 +145,25 @@
                             <p class="is-size-7 has-text-weight-semibold">AUTONOMIA TEORICA</p>
                         </div>
                     </div>
+                    <b-tooltip 
+                        :label="isEditMode ? 'Salir del modo edición' : 'Entrar en modo edición'" 
+                        position="is-left"
+                        type="is-link"
+                        animated>
+                        <button
+                            class="button"
+                            :class="isEditMode ? 'is-info' : 'is-link'"
+                            @click="isEditMode=!isEditMode" 
+                            type="button"
+                            style="height: 48px; margin-right: -24px">
+                            <div class="columns">
+                                <div class="column" style="padding-left: 8px; padding-right: 5px;">
+                                    <font-awesome-icon :icon="isEditMode ? ['fas', 'edit'] : ['fas', 'edit']"/>
+                                    <div>{{ isEditMode ? 'MODO EDICION' : '' }}</div>
+                                </div>
+                            </div>
+                        </button>
+                    </b-tooltip>
                 </nav>
             </div>
         </div>
@@ -196,12 +214,15 @@
                         <detail :is="currentTabComponent"
                             :user="user"
                             :pop="pop"
+                            :popClassification="popClassification"
                             :popCritical="popCritical"
                             :bodyBackground="bodyBackground"
                             :boxBackground="boxBackground"
                             :primaryText="primaryText"
                             :secondaryText="secondaryText"
                             :darkMode="darkMode"
+                            :isEditMode="isEditMode"
+                            :bafi="bafi"
                         />
                     </keep-alive>
 
@@ -214,10 +235,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+    import { faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, farCheckCircle)
+    library.add(faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, farCheckCircle)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
@@ -241,6 +262,7 @@
                 technologiesArray: [],
                 i: 0,
 
+                isEditMode: false,
                 darkMode: 0,
                 bodyBackground: '',
                 boxBackground: '',
@@ -269,6 +291,7 @@
 
         created() {
             this.styleMode()
+            this.$eventBus.$on('parameter-updated', this.getAllData)
         },
 
         mounted() {
@@ -378,17 +401,45 @@
             //     return this.sites ? this.sites.find(elemnent => element.site_type_id == 4) : null
             // },
 
-            // technologies() {
-            //     var array = []
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.technologies.length > 0) { 
-            //                 array.push(item.technologies) 
-            //             }
-            //         })
-            //     }
-            //     return array[0]
-            // },
+            technologies() {
+                var array = []
+                if (this.pop.sites) {
+                    this.pop.sites.forEach(function(item) {
+                        if (item.technologies.length > 0) { 
+                            array.push(item.technologies) 
+                        }
+                    })
+                }
+                return array[0]
+            },
+
+            bafi() {
+                var tecA; var tecB; var tecC; 
+                var array;
+                if (this.technologies) {
+                    this.technologies.forEach(element => {
+                        if (element.technology_type_id == 3 && element.frequency == 3500) {
+                            if (element.nem_tech.startsWith('A')) {
+                                tecA = element.nem_tech
+                            }
+                            if (element.nem_tech.startsWith('B')) {
+                                tecB = element.nem_tech
+                            }
+                            if (element.nem_tech.startsWith('C')) {
+                                tecC = element.nem_tech
+                            }
+
+                            array = {
+                                'tecA': tecA, 
+                                'tecB': tecB, 
+                                'tecC': tecC
+                            }
+                        }
+                    })
+                }
+
+                return array
+            },
             // tec2g1900() {
             //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 1) : null
             // },
@@ -410,25 +461,11 @@
             // tec4g2600() {
             //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 7) : null
             // },
-            // tec4g3500() {
-            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
-            // },
-
-            popClassification() {
-                var id = 10; var classification
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        if (item.classification_type_id && item.classification_type_id < id) { 
-                            id = item.classification_type_id
-                            classification = item.classification_type.classification_type
-                        }
-                    })
-                }
-                return {
-                    'classification': classification, 
-                    'id': id
-                    }
+            tec4g3500() {
+                return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
             },
+
+            
 
             popCritical() {
                 var criticity = 0;
@@ -441,58 +478,6 @@
                 }
                 return criticity
             },
-
-            // popAttentionPriority() {
-            //     var id = 10; var attentionPriority
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.attention_priority_type_id && item.attention_priority_type_id < id) { 
-            //                 id = item.attention_priority_type_id
-            //                 attentionPriority = item.attention_priority_type.attention_priority_type
-            //             }
-            //         })
-            //     }
-            //     return {
-            //         'attentionPriority': attentionPriority, 
-            //         'id': id
-            //         }
-            // },
-
-            // popCategory() {
-            //     var i = 10; var cat
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.category_type_id && item.category_type_id < i) { 
-            //                 i = item.category_type_id
-            //                 cat = item.category_type.category_type
-            //             }
-            //         })
-            //     }
-            //     return cat
-            // },
-
-            // popDependences() {
-            //     var dependences = 0
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             dependences = dependences + item.dependences.length
-            //         })
-            //     }
-            //     return dependences
-            // },
-
-            // popAttentionType() {
-            //     var i = 10; var cat
-            //     if (this.pop.sites) {
-            //         this.pop.sites.forEach(function(item) {
-            //             if (item.attention_type_id && item.attention_type_id < i) { 
-            //                 i = item.attention_type_id
-            //                 cat = item.attention_type.attention_type
-            //             }
-            //         })
-            //     }
-            //     return cat
-            // },
 
             responsableZona() {
                 var array = []
@@ -516,6 +501,7 @@
             //     return this.popClassification.id == 1 ? 'is-info' : (this.popClassification.id == 2 ? 'is-warning' : (this.popClassification.id == 3 ? 'is-primary' : (this.popClassification.id == 4 ? 'is-smart' : (this.popClassification.id == 5 ? 'is-eco' : 'is-white'))))
             // }
         },
+
         methods: {
             getTabs() {
                 axios.get(`/api/popMenu?api_token=${this.user.api_token}`).then((response) => {
@@ -573,6 +559,10 @@
                 this.logOpened = 0
                 // console.log(this.logOpened)
             }
+        },
+
+        beforeDestroy() {
+             this.$eventBus.$off('parameter-updated')
         }
     }
 </script>

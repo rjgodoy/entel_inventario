@@ -1,256 +1,295 @@
 <template>
     <div :class="">
-        <section class="section has-background-dark" style="padding-top: 5px; padding-bottom: 32px">
-            <div class="has-text-centered has-text-weight-bold is-size-5 has-text-grey-light" style="margin-bottom: 5px">FILTROS</div>
-            <div class="">
-                <div class="columns">
+        <b-collapse class="card has-background-dark" animation="slide" aria-id="contentIdForA11y3" :open="true">
+            <div
+                slot="trigger" 
+                slot-scope="props"
+                class="card-header"
+                role="button"
+                aria-controls="contentIdForA11y3">
+                <div class="card-header-title has-text-grey-light">
+                    FILTROS
+                </div>
+                <a class="card-header-icon">
+                    <font-awesome-icon :icon="props.open ? 'sort-down' : 'sort-up'" />
+                </a>
+            </div>
+            <div class="card-content">
+                <!-- <div class="has-text-centered has-text-weight-bold is-size-5 has-text-grey-light" style="margin-bottom: 5px">FILTROS</div> -->
+                <div class="">
+                    <div class="columns">
 
-                    <!-- Filtros CRM -->
-                    <div class="column is-2">
-                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">CRMs</div>
-                        <div class="columns is-multiline is-gapless">
-                            <div class="column is-6" v-for="crm in crms" :key=crm.id>
-                                <a class="is-fullwidth button" :class="selectedCrm == crm ? 'is-link' : 'is-black-ter'" @click="selectCrm(crm)">
-                                    <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
-                                        <!-- <div class="is-size-7 has-text-weight-normal">CRM</div> -->
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">{{ crm.nombre_crm }}</div>
-                                    </div>
-                                </a>
+                        <!-- Filtros CRM -->
+                        <div class="column is-2">
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">CRMs</div>
+                            <div class="columns is-multiline is-gapless">
+                                <div class="column is-6" v-for="crm in crms" :key=crm.id>
+                                    <a class="is-fullwidth button" :class="selectedCrm == crm ? 'is-link' : 'is-black-ter'" @click="selectCrm(crm)">
+                                        <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
+                                            <!-- <div class="is-size-7 has-text-weight-normal">CRM</div> -->
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">{{ crm.nombre_crm }}</div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
+                        <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
 
-                    <!-- Filtros ZONAS -->
-                    <div class="column is-2">
-                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Zonas</div>
-                        <div v-if="!selectedCrm">
-                            <div class="has-text-centered has-text-weight-light has-text-grey-light is-size-5">Selecciona un CRM</div>
-                        </div>
-                        <div v-if="selectedCrm" class="columns is-multiline is-gapless">
-                            <div class="column" :class="zonas.length == 2 || zonas.length == 3 ? 'is-12' : 'is-6'" v-for="zona in zonas" :key="zona.id">
-                                <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona)">
-                                    <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
-                                        <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">{{ zona.nombre_zona }}</div>
-                                    </div>
-                                </a>
+                        <!-- Filtros ZONAS -->
+                        <div class="column is-2">
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Zonas</div>
+                            <div v-if="!selectedCrm">
+                                <div class="has-text-centered has-text-weight-light has-text-grey-light is-size-5">Selecciona un CRM</div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Filtros IMPORTANCIA -->
-                    <div class="column is-1">
-                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Importancia</div>
-                        <div class="columns is-multiline is-gapless">
-                            <div class="column is-12">
-                                <a class="is-fullwidth button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">CORE</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-12">
-                                <a class="is-fullwidth button" :class="critic ? 'is-link' : 'is-black-ter'" @click="critic = +!critic" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">CRITICO</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-12">
-                                <a class="is-fullwidth button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">VIP</div>
-                                    </div>
-                                </a>
+                            <div v-if="selectedCrm" class="columns is-multiline is-gapless">
+                                <div class="column" :class="zonas.length == 2 || zonas.length == 3 ? 'is-12' : 'is-6'" v-for="zona in zonas" :key="zona.id">
+                                    <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona)">
+                                        <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
+                                            <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">{{ zona.nombre_zona }}</div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
-
-                    <!-- Filtros CARACTERISTICAS -->
-                    <div class="column is-4">
-                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Características</div>
-                        <div class="columns is-multiline is-gapless">
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="pe_3g ? 'is-link' : 'is-black-ter'" @click="pe_3g = +!pe_3g" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">PE 3G</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="mpls ? 'is-link' : 'is-black-ter'" @click="mpls = +!mpls" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">MPLS</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">OLT</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="olt_3play ? 'is-link' : 'is-black-ter'" @click="olt_3play = +!olt_3play" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">OLT 3Play</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : 'is-black-ter'" @click="red_minima_n1 = +!red_minima_n1" disabled>
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Red Mínima N1</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : 'is-black-ter'" @click="red_minima_n2 = +!red_minima_n2" disabled>
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Red Mínima N2</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="lloo ? 'is-link' : 'is-black-ter'" @click="lloo = +!lloo" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Localidad Obligatoria</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="ranco ? 'is-link' : 'is-black-ter'" @click="ranco = +!ranco" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">RANCO</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="bafi ? 'is-link' : 'is-black-ter'" @click="bafi = +!bafi" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">BAFI</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="offgrid ? 'is-link' : 'is-black-ter'" @click="offgrid = +!offgrid" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Offgrid</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="solar ? 'is-link' : 'is-black-ter'" @click="solar = +!solar" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Solar</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="eolica ? 'is-link' : 'is-black-ter'" @click="eolica = +!eolica" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Eólica</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="protected_zone ? 'is-link' : 'is-black-ter'" @click="protected_zone = +!protected_zone" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Zona protegida</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-3">
-                                <a class="tile is-child button" :class="alba_project ? 'is-link' : 'is-black-ter'" @click="alba_project = +!alba_project" >
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Proyecto Alba</div>
-                                    </div>
-                                </a>
+                        <!-- Filtros IMPORTANCIA -->
+                        <div class="column is-1">
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Importancia</div>
+                            <div class="columns is-multiline is-gapless">
+                                <div class="column is-12">
+                                    <a class="is-fullwidth button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">CORE</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-12">
+                                    <a class="is-fullwidth button" :class="critic ? 'is-link' : 'is-black-ter'" @click="critic = +!critic" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">CRITICO</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-12">
+                                    <a class="is-fullwidth button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">VIP</div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
+                        <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
 
-                    <!-- Filtros EQUIPAMIENTO -->
-                    <div class="column is-3">
-                        <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Equipamiento</div>
-                        <div class="columns is-multiline is-gapless">
-                            <div class="column is-4">
-                                <a class="tile is-child button" 
-                                    :class="junction ? 'is-link' : 'is-black-ter'" @click="junction = +!junction">
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Empalme</div>
-                                    </div>
-                                </a>
+                        <!-- Filtros CARACTERISTICAS -->
+                        <div class="column is-4">
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Características</div>
+                            <div class="columns is-multiline is-gapless">
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="pe_3g ? 'is-link' : 'is-black-ter'" @click="pe_3g = +!pe_3g" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">PE 3G</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="mpls ? 'is-link' : 'is-black-ter'" @click="mpls = +!mpls" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">MPLS</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">OLT</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="olt_3play ? 'is-link' : 'is-black-ter'" @click="olt_3play = +!olt_3play" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">OLT 3Play</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : 'is-black-ter'" @click="red_minima_n1 = +!red_minima_n1" disabled>
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Red Mínima N1</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : 'is-black-ter'" @click="red_minima_n2 = +!red_minima_n2" disabled>
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Red Mínima N2</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="lloo ? 'is-link' : 'is-black-ter'" @click="lloo = +!lloo" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Localidad Obligatoria</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="ranco ? 'is-link' : 'is-black-ter'" @click="ranco = +!ranco" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">RANCO</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="bafi ? 'is-link' : 'is-black-ter'" @click="bafi = +!bafi" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">BAFI</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="offgrid ? 'is-link' : 'is-black-ter'" @click="offgrid = +!offgrid" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Offgrid</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="solar ? 'is-link' : 'is-black-ter'" @click="solar = +!solar" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Solar</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="eolica ? 'is-link' : 'is-black-ter'" @click="eolica = +!eolica" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Eólica</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="protected_zone ? 'is-link' : 'is-black-ter'" @click="protected_zone = +!protected_zone" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Zona protegida</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-3">
+                                    <a class="tile is-child button" :class="alba_project ? 'is-link' : 'is-black-ter'" @click="alba_project = +!alba_project" >
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Proyecto Alba</div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="column is-4">
-                                <a class="tile is-child button" 
-                                    :class="generator_set ? 'is-link' : 'is-black-ter'" @click="generator_set = +!generator_set">
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Grupo Electrógeno</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-4">
-                                <a class="tile is-child button" 
-                                    :class="power_rectifier ? 'is-link' : 'is-black-ter'" @click="power_rectifier = +!power_rectifier">
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Planta Rectificadora</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-4">
-                                <a class="tile is-child button" 
-                                    :class="air_conditioner ? 'is-link' : 'is-black-ter'" @click="air_conditioner = +!air_conditioner">
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Aire Acondicionado</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-4">
-                                <a class="tile is-child button" 
-                                    :class="vertical_structure ? 'is-link' : 'is-black-ter'" @click="vertical_structure = +!vertical_structure">
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Estructura Vertical</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="column is-4">
-                                <a class="tile is-child button" 
-                                    :class="infrastructure ? 'is-link' : 'is-black-ter'" @click="infrastructure = +!infrastructure">
-                                    <div :class="secondaryText"> 
-                                        <div class="is-size-7 has-text-weight-normal has-text-grey-light">Contenedor</div>
-                                    </div>
-                                </a>
+                        </div>
+
+                        <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
+
+                        <!-- Filtros EQUIPAMIENTO -->
+                        <div class="column is-3">
+                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Equipamiento</div>
+                            <div class="columns is-multiline is-gapless">
+                                <div class="column is-4">
+                                    <a class="tile is-child button" 
+                                        :class="junction ? 'is-link' : 'is-black-ter'" @click="junction = +!junction">
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Empalme</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-4">
+                                    <a class="tile is-child button" 
+                                        :class="generator_set ? 'is-link' : 'is-black-ter'" @click="generator_set = +!generator_set">
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Grupo Electrógeno</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-4">
+                                    <a class="tile is-child button" 
+                                        :class="power_rectifier ? 'is-link' : 'is-black-ter'" @click="power_rectifier = +!power_rectifier">
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Planta Rectificadora</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-4">
+                                    <a class="tile is-child button" 
+                                        :class="air_conditioner ? 'is-link' : 'is-black-ter'" @click="air_conditioner = +!air_conditioner">
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Aire Acondicionado</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-4">
+                                    <a class="tile is-child button" 
+                                        :class="vertical_structure ? 'is-link' : 'is-black-ter'" @click="vertical_structure = +!vertical_structure">
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Estructura Vertical</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="column is-4">
+                                    <a class="tile is-child button" 
+                                        :class="infrastructure ? 'is-link' : 'is-black-ter'" @click="infrastructure = +!infrastructure">
+                                        <div :class="secondaryText"> 
+                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Contenedor</div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </b-collapse>
+        <div class="card-footer">
+            <a class="card-footer-item item is-link is-bold"
+                style="position: relative;" 
+                @click="downloadPops"
+                icon-pack="fas"
+                size="is-medium"
+                :loading="isLoading">
+                <div class="is-size-6 has-text-weight-normal">Descargar listado filtrado de POPs</div>
+                <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
+                <!-- </b-button> -->
+            </a>
+            <div class="card-footer-item has-background-white">
+                <div class="has-text-centered">
+                    <span class="is-size-3 has-text-weight-semibold">
+                        {{ pops.total | numeral('0,0')}}
+                    </span>
+                    <span class="is-size-6">POPs</span>
+                </div>
+            </div>
+            <div class="card-footer-item has-background-white">
+                <div class="snippet">
+                    <span class="has-text-weight-normal">
+                        <span class="is-size-6" v-if="!selectedPops.length">Selecciona los POP que desees del costado izquierdo de la tabla.</span>
+                        <span class="is-size-7" v-if="selectedPops.length"><strong>{{ selectedPops.length }}</strong> pops seleccionados</span>
+                    </span>
+                    <div class="field is-grouped is-grouped-multiline">
+                        <div class="control" v-for="pop in selectedPops" :key="pop.id">
+                            <div class="tags has-addons">
+                                <a class="tag is-link">{{ pop.nombre }}</a>
+                                <a class="tag is-delete" @click="removeSelectedPop(pop)"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <section class="section tile is-ancestor has-background-light">            
             <div class="tile is-7 is-parent">
                 <div class="tile is-child box" style="max-height: 100%; min-height: 800px;">
-
                     <div class="field">
-                        <div class="columns">
-                            <div class="column">
-                                <div class="has-text-centered">
-                                    <span class="is-size-4 has-text-weight-semibold">
-                                        {{ pops.total | numeral('0,0')}}
-                                    </span>
-                                    <span class="is-size-6">POPs</span>
-                                </div>
-                            </div>
-                        </div>
-                        
                         <p class="control has-icons-left has-icons-right">
                             <input 
                                 class="input is-rounded" 
@@ -277,7 +316,6 @@
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Nombre POP</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold has-text-centered" :class="secondaryText"><abbr title="Sitios">Sitios</abbr></th>
-                                <!-- <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Dirección</abbr></th> -->
                                 <th class="is-size-7 has-text-weight-semibold has-text-centered" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
                                 <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
                             </tr>
@@ -357,7 +395,7 @@
                         </tbody>
                     </table>
 
-                    <div class="field">
+                    <div class="block">
                         <nav class="pagination" role="navigation" aria-label="pagination">
                             <vue-pagination  
                                 :pagination="pops"
@@ -366,39 +404,12 @@
                                 :primaryText="primaryText">
                             </vue-pagination>
                         </nav>
-
-                        <div class="has-text-right">
-                            <b-button 
-                                type="is-link"
-                                style="position: relative;" 
-                                @click="downloadPops"
-                                icon-left="download"
-                                icon-pack="fas"
-                                size="is-medium"
-                                :loading="isLoading">
-                                <div class="is-size-6 has-text-weight-normal">Descargar POPs</div>
-                                <!-- <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading> -->
-                            </b-button>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="tile is-parent is-vertical">
-                <div class="tile box is-child is-12">
-                    <div class="snippet">
-                        <span class="has-text-weight-normal is-size-7"><strong>{{ selectedPops.length }}</strong> pops selected</span>
-                        <div class="field is-grouped is-grouped-multiline">
-                            <div class="control" v-for="pop in selectedPops" :key="pop.id">
-                                <div class="tags has-addons">
-                                    <a class="tag is-link">{{ pop.nombre }}</a>
-                                    <a class="tag is-delete" @click="removeSelectedPop(pop)"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tile box is-child">
+                <div class="tile is-child card" style="border: solid 4px white">
                     <map-view
                         :user="user"
                         :pops="popsMap"
@@ -414,27 +425,11 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faInfo, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
-// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-library.add(faSearch, faInfo, faMapMarkedAlt);
+import { faDownload, faSortDown, faSortUp, faSearch, faInfo, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
+library.add(faDownload, faSortDown, faSortUp, faSearch, faInfo, faMapMarkedAlt);
 
 import VuePagination from '../VuePagination.vue';
-import LoadingComponent from '../helpers/LoadingComponent.vue';
-// import ErrorComponent from './maps/ErrorComponent.vue';
-// const MapView = () => ({
-//     // The component to load (should be a Promise)
-//     component: import('../maps/MapView.vue'),
-//     // A component to use while the async component is loading
-//     // loading: LoadingComponent,
-//     // A component to use if the load fails
-//     // error: ErrorComponent,
-//     // Delay before showing the loading component. Default: 200ms.
-//     delay: 200,
-//     // The error component will be displayed if a timeout is
-//     // provided and exceeded. Default: Infinity.
-//     timeout: 300
-// });
+
 export default {
     components: {
         MapView: () => import(/* webpackChunkName: "chunks/maps/mapView"*/'../maps/MapView.vue'),

@@ -426,7 +426,7 @@ var render = function() {
     "GmapMap",
     {
       ref: "map",
-      staticStyle: { "min-height": "500px", height: "100%" },
+      staticStyle: { "min-height": "576px", height: "100%" },
       attrs: {
         center: _vm.center,
         zoom: _vm.zoom,
@@ -449,7 +449,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "button is-default",
+            staticClass: "button is-link",
             staticStyle: {
               border: "2px solid #fff",
               borderRadius: "3px",

@@ -999,11 +999,7 @@ var render = function() {
     "GmapMap",
     {
       ref: "map",
-      staticStyle: {
-        height: "100%",
-        margin: "-14px -14px -14px -14px",
-        "padding-bottom": "-14px"
-      },
+      staticStyle: { height: "100%", "padding-bottom": "-14px" },
       attrs: {
         center: _vm.center,
         zoom: _vm.zoom,

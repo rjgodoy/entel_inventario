@@ -66,8 +66,8 @@ export default {
         Projection: () => import(/* webpackChunkName: "chunks/capacity/modals/projection"*/'./Projection'),
         Requests: () => import(/* webpackChunkName: "chunks/capacity/modals/requests"*/'./Requests'),
         Calculator: () => import(/* webpackChunkName: "chunks/capacity/modals/calculator"*/'./Calculator'),
-        Layout: () => import(/* webpackChunkName: "chunks/pop/layout/layout"*/'../../pops/layout/Layout'),
-        Documents: () => import(/* webpackChunkName: "chunks/capacity/modals/documents"*/'../../pops/documents/Documents'),
+        Layout: () => import(/* webpackChunkName: "chunks/pop/layout/layout"*/'../../pop/layout/Layout'),
+        Documents: () => import(/* webpackChunkName: "chunks/pop/documents/documents"*/'../../pop/documents/Documents'),
     },
     props : [
         'pop',

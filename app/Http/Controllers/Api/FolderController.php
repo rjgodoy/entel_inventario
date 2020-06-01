@@ -43,11 +43,14 @@ class FolderController extends Controller
     {
         $text = $request->text;
         $folders = Folder::with('subfolders', 'pop', 'site')
-        ->whereHas('pop.sites', function($q) use($text) {
-            $q->where('nem_site', 'LIKE', "%$text%")
-            ->orWhere('nombre', 'LIKE', "%$text%");
+        ->where(function($p) use($text) {
+            $p->whereHas('pop.sites', function($q) use($text) {
+                $q->where('nem_site', 'LIKE', "%$text%")
+                ->orWhere('nombre', 'LIKE', "%$text%");
+            })->orWhere('pop_id', null);
         })
         ->where('name', $request->folder_name)
+        ->orderBy('pop_id')
         ->paginate(10);
         return new FolderCollection($folders);
     }
@@ -75,7 +78,7 @@ class FolderController extends Controller
         if($id == 'null' || $id == 'undefined') {
             $parentFolder = Folder::updateOrCreate([
                 'parent_id' => null,
-                'pop_id' => $request->pop_id,
+                'pop_id' => $request->pop_id ? $request->pop_id : null,
                 'name' => $request->folderTab
             ],[
                 'creator_id' => $request->creator_id
@@ -90,14 +93,14 @@ class FolderController extends Controller
         } else {
             $folder = Folder::create([
                 'parent_id' => $parentFolderId,
-                'pop_id' => $request->pop_id,
+                'pop_id' => $request->pop_id ? $request->pop_id : null,
                 'name' => $request->name,
                 'creator_id' => $request->creator_id
             ]);
         }
 
         Log::create([
-            'pop_id' => $request->pop_id,
+            'pop_id' => $request->pop_id ? $request->pop_id : null,
             'user_id' => $request->creator_id,
             'log_type_id' => LogType::where('type', 'folder')->first()->id,
             'description' => 'Se ha agregado la carpeta "'. $request->name.'" a "'.$request->folderTab.'"'
@@ -107,30 +110,30 @@ class FolderController extends Controller
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function createRootFolder(Request $request)
-    {
-        return $request;
-        Folder::create([
-            'name' => $request->name,
-            'creator_id' => $request->creator_id
-        ]);        
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function createRootFolder(Request $request)
+    // {
+    //     // return $request;
+    //     Folder::create([
+    //         'name' => $request->name,
+    //         'creator_id' => $request->creator_id
+    //     ]);        
 
-        Log::create([
-            'pop_id' => null,
-            'user_id' => $request->creator_id,
-            'log_type_id' => LogType::where('type', 'folder')->first()->id,
-            'description' => 'Se ha creado la carpeta "'. $request->name.'" en "'.$request->folderTab.'"'
-        ]);
+    //     Log::create([
+    //         'pop_id' => null,
+    //         'user_id' => $request->creator_id,
+    //         'log_type_id' => LogType::where('type', 'folder')->first()->id,
+    //         'description' => 'Se ha creado la carpeta "'. $request->name.'" en "'.$request->folderTab.'"'
+    //     ]);
 
-        return $folder;
+    //     return $folder;
         
-    }
+    // }
 
     /**
      * Display the specified resource.

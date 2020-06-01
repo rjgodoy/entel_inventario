@@ -55,7 +55,7 @@
 
         </section>
         <footer class="modal-card-foot">
-            <button class="button" type="button" @click="$parent.close()">Close</button>
+            <button class="button" type="button" @click="$parent.close()">Cerrar</button>
             <button class="button is-primary" @click="addZone">Agragar</button>
         </footer>
     </div>

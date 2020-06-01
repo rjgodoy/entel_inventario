@@ -349,7 +349,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     // CapacityChart: () => import('./CapacityChart'),
     // GrowingChart: () => import('./GrowingChart'),
     ModalRoom: function ModalRoom() {
-      return Promise.all(/*! import() | chunks/capacity/modalRoom */[__webpack_require__.e("vendors~chunks/capacity/modalRoom~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/capacity/modalRoom")]).then(__webpack_require__.bind(null, /*! ./modals/ModalRoom */ "./resources/js/components/capacity/modals/ModalRoom.vue"));
+      return Promise.all(/*! import() | chunks/capacity/modals/modalRoom */[__webpack_require__.e("vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/capacity/modals/modalRoom")]).then(__webpack_require__.bind(null, /*! ./modals/ModalRoom */ "./resources/js/components/capacity/modals/ModalRoom.vue"));
     }
   },
   props: ['user', 'user_permissions', 'crms'],

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Site as SiteResource;
 use App\Models\AttentionPriorityType;
 use App\Models\ClassificationType;
+use App\Models\Log;
+use App\Models\LogType;
+use App\Models\Site;
 use DB;
 use Illuminate\Http\Request;
 
@@ -66,6 +69,25 @@ class SiteController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function siteParameters(Request $request)
+    {
+        $strClassName = '';
+        $array = explode('_', $request->parameter);
+        for ($i=0; $i < count($array) - 1; $i++) { 
+            $word = ucwords($array[$i]);
+            $strClassName = ucwords($strClassName.=$word);
+        }
+        $className = "\\App\\Models\\".$strClassName;
+        $parameters = app($className)->get();
+        return new SiteResource($parameters);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -74,7 +96,31 @@ class SiteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $site = Site::find($id);
+        $site->update([
+            $request->parameter => $request->value
+        ]);
+
+        // Busca el dato que se actualizó par incorporarlo en el Log
+        $strClassName = '';
+        $parameterType = '';
+        $array = explode('_', $request->parameter);
+        for ($i=0; $i < count($array) - 1; $i++) { 
+            $parameterType = $parameterType == '' ? $array[$i] : $parameterType.'_'.$array[$i];
+            $word = ucwords($array[$i]);
+            $strClassName = ucwords($strClassName.=$word);
+        }
+        $className = "\\App\\Models\\".$strClassName;
+        $parameterTypeName = app($className)->find($request->value)->first()->$parameterType;
+
+        Log::create([
+            'pop_id' => $site->pop_id,
+            'user_id' => $request->user_id,
+            'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
+            'description' => 'Se ha actualizado el parámetro "'. $strClassName.'" a "'.$parameterTypeName.'"'
+        ]);
+
+        return $site;
     }
 
     /**

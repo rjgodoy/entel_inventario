@@ -86,6 +86,7 @@
         created() {
             this.$eventBus.$on('folder-created', this.getLogs);
             this.$eventBus.$on('folder-deleted', this.getLogs);
+            this.$eventBus.$on('parameter-updated', this.getLogs);
         },
 
         mounted() {
@@ -121,6 +122,7 @@
         beforeDestroy() {
             this.$eventBus.$off('folder-created');
             this.$eventBus.$off('folder-deleted');
+            this.$eventBus.$off('parameter-updated');
         }
     }
 </script>

@@ -48,14 +48,20 @@
         <!-- MAPA -->
         <!-- ############### -->
         <div class="card">
-            <div class="map-container">
-                <pop-map
-                    :user="user"
-                    :classification="popClassification"
-                    :popMaster="pop"
-                    :darkMode="darkMode"
-                />
+            <div class="card-header">
             </div>
+            
+            <div class="card-content is-paddingless">
+                <div class="map-container">
+                    <pop-map
+                        :user="user"
+                        :classification="popClassification"
+                        :popMaster="pop"
+                        :darkMode="darkMode"
+                    />
+                </div>
+            </div>
+            
             <div class="card-content">
                 <div class="columns">
                     <div class="column is-8">

@@ -396,7 +396,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       lat: '',
       lon: '',
       // Datos sitio
-      site_type_id: 1,
+      site_type: 0,
       nem: '',
       siteName: '',
       pe_3g: false,
@@ -437,16 +437,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       totalPages: 1,
       siteTypes: [{
         id: 1,
-        label: 'Fijo',
-        selected: true
+        label: 'Fijo'
       }, {
         id: 3,
-        label: 'Switch',
-        selected: false
+        label: 'Switch'
       }, {
         id: 4,
-        label: 'Phone',
-        selected: false
+        label: 'Phone'
       }]
     };
   },
@@ -478,6 +475,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     }
   },
   computed: {
+    site_type_id: function site_type_id() {
+      return this.site_type == 0 ? 1 : this.site_type == 1 ? 3 : 4;
+    },
     filteredComunasArray: function filteredComunasArray() {
       var _this = this;
 
@@ -553,11 +553,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     }
   },
   methods: {
-    siteType: function siteType(id) {
-      this.site_type_id = id;
-      this.siteTypes.forEach(function (element) {
-        return element.selected = element.id == id ? true : false;
-      });
+    siteType: function siteType(val) {
+      console.log(val);
     },
     isNewPop: function isNewPop(bool) {
       this.newPop = bool;
@@ -1235,163 +1232,164 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "tile is-parent column" }, [
-            _c(
-              "div",
-              { staticClass: "tile is-child box" },
-              [
-                _c(
-                  "div",
-                  { staticClass: "field is-size-5 has-text-weight-semibold" },
-                  [_vm._v("Datos del Sitio")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "block has-text-centered",
-                    staticStyle: { "padding-top": "12px" }
-                  },
-                  _vm._l(_vm.siteTypes, function(site_type) {
-                    return _c(
-                      "button",
-                      {
+            _c("div", { staticClass: "tile is-child box" }, [
+              _c(
+                "div",
+                { staticClass: "field is-size-5 has-text-weight-semibold" },
+                [_vm._v("Datos del Sitio")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "block has-text-centered",
+                  staticStyle: { "padding-top": "12px" }
+                },
+                [
+                  _c(
+                    "b-tabs",
+                    {
+                      attrs: { type: "is-toggle", expanded: "" },
+                      model: {
+                        value: _vm.site_type,
+                        callback: function($$v) {
+                          _vm.site_type = $$v
+                        },
+                        expression: "site_type"
+                      }
+                    },
+                    _vm._l(_vm.siteTypes, function(site_type) {
+                      return _c("b-tab-item", {
                         key: site_type.id,
-                        staticClass: "button",
-                        class: site_type.selected && "is-link",
-                        on: {
-                          click: function($event) {
-                            return _vm.siteType(site_type.id)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(site_type.label) +
-                            "\n                        "
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-field",
-                  [
-                    _c("b-input", {
-                      attrs: {
-                        placeholder: "Nemónico",
-                        type: "text",
-                        required: ""
-                      },
-                      model: {
-                        value: _vm.nem,
-                        callback: function($$v) {
-                          _vm.nem = $$v
-                        },
-                        expression: "nem"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-field",
-                  [
-                    _c("b-input", {
-                      attrs: {
-                        placeholder: "Nombre Sitio",
-                        type: "text",
-                        required: ""
-                      },
-                      model: {
-                        value: _vm.siteName,
-                        callback: function($$v) {
-                          _vm.siteName = $$v
-                        },
-                        expression: "siteName"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-field",
-                  [
-                    _c(
-                      "b-autocomplete",
-                      {
+                        attrs: { label: site_type.label }
+                      })
+                    }),
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-field",
+                    [
+                      _c("b-input", {
                         attrs: {
-                          placeholder: "Categoría",
-                          "keep-first": "",
-                          "open-on-focus": "",
-                          data: _vm.filteredClassificationsArray,
-                          "use-html5-validation": false,
-                          field: "classification_type",
+                          placeholder: "Nemónico",
+                          type: "text",
                           required: ""
                         },
-                        on: {
-                          select: function(option) {
-                            return (_vm.selectedClassificationType = option)
-                          }
-                        },
                         model: {
-                          value: _vm.classificationType,
+                          value: _vm.nem,
                           callback: function($$v) {
-                            _vm.classificationType = $$v
+                            _vm.nem = $$v
                           },
-                          expression: "classificationType"
+                          expression: "nem"
                         }
-                      },
-                      [
-                        _c("template", { slot: "empty" }, [
-                          _vm._v("No results found")
-                        ])
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-autocomplete",
-                      {
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    [
+                      _c("b-input", {
                         attrs: {
-                          placeholder: "Prioridad atención",
-                          "keep-first": "",
-                          "open-on-focus": "",
-                          data: _vm.filteredAttentionPrioritiesArray,
-                          "use-html5-validation": false,
-                          field: "attention_priority_type",
+                          placeholder: "Nombre Sitio",
+                          type: "text",
                           required: ""
                         },
-                        on: {
-                          select: function(option) {
-                            return (_vm.selectedAttentionPriorityType = option)
+                        model: {
+                          value: _vm.siteName,
+                          callback: function($$v) {
+                            _vm.siteName = $$v
+                          },
+                          expression: "siteName"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    [
+                      _c(
+                        "b-autocomplete",
+                        {
+                          attrs: {
+                            placeholder: "Categoría",
+                            "keep-first": "",
+                            "open-on-focus": "",
+                            data: _vm.filteredClassificationsArray,
+                            "use-html5-validation": false,
+                            field: "classification_type",
+                            required: ""
+                          },
+                          on: {
+                            select: function(option) {
+                              return (_vm.selectedClassificationType = option)
+                            }
+                          },
+                          model: {
+                            value: _vm.classificationType,
+                            callback: function($$v) {
+                              _vm.classificationType = $$v
+                            },
+                            expression: "classificationType"
                           }
                         },
-                        model: {
-                          value: _vm.attentionPriorityType,
-                          callback: function($$v) {
-                            _vm.attentionPriorityType = $$v
+                        [
+                          _c("template", { slot: "empty" }, [
+                            _vm._v("No results found")
+                          ])
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-autocomplete",
+                        {
+                          attrs: {
+                            placeholder: "Prioridad atención",
+                            "keep-first": "",
+                            "open-on-focus": "",
+                            data: _vm.filteredAttentionPrioritiesArray,
+                            "use-html5-validation": false,
+                            field: "attention_priority_type",
+                            required: ""
                           },
-                          expression: "attentionPriorityType"
-                        }
-                      },
-                      [
-                        _c("template", { slot: "empty" }, [
-                          _vm._v("No results found")
-                        ])
-                      ],
-                      2
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
+                          on: {
+                            select: function(option) {
+                              return (_vm.selectedAttentionPriorityType = option)
+                            }
+                          },
+                          model: {
+                            value: _vm.attentionPriorityType,
+                            callback: function($$v) {
+                              _vm.attentionPriorityType = $$v
+                            },
+                            expression: "attentionPriorityType"
+                          }
+                        },
+                        [
+                          _c("template", { slot: "empty" }, [
+                            _vm._v("No results found")
+                          ])
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "tile is-parent column" }, [

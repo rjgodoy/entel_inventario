@@ -382,6 +382,7 @@ fieldset[disabled] .pagination-ellipsis {
   margin-top: 0px;
 }
 
+.item.is-bold.is-link,
 .section.is-bold.is-link,
 .level.is-bold.is-link,
 .box.is-bold.is-link {
@@ -390,6 +391,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #074cbb 0%, #005cff 100%);
 }
 
+.item.is-bold.is-smart,
 .section.is-bold.is-smart,
 .level.is-bold.is-smart,
 .box.is-bold.is-smart {
@@ -398,6 +400,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #cce3ff 0%, #f3f7fd 100%);
 }
 
+.item.is-bold.is-eco,
 .section.is-bold.is-eco,
 .level.is-bold.is-eco,
 .box.is-bold.is-eco {
@@ -406,6 +409,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #00a363 0%, #0dcc83 100%);
 }
 
+.item.is-bold.is-positive,
 .section.is-bold.is-positive,
 .level.is-bold.is-positive,
 .box.is-bold.is-positive {
@@ -414,6 +418,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #fae1e9 0%, #fbf7f8 100%);
 }
 
+.item.is-bold.is-info,
 .section.is-bold.is-info,
 .level.is-bold.is-info,
 .box.is-bold.is-info {
@@ -422,6 +427,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #cf1300 0%, #ff6d13 100%);
 }
 
+.item.is-bold.is-calid,
 .section.is-bold.is-calid,
 .level.is-bold.is-calid,
 .box.is-bold.is-calid {
@@ -430,6 +436,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #fff1d5 0%, #fcf8f0 100%);
 }
 
+.item.is-bold.is-dark,
 .section.is-bold.is-dark,
 .level.is-bold.is-dark,
 .box.is-bold.is-dark {
@@ -438,6 +445,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #4a4a4a 0%, #242424 100%);
 }
 
+.item.is-bold.is-danger,
 .section.is-bold.is-danger,
 .level.is-bold.is-danger,
 .box.is-bold.is-danger {
@@ -446,6 +454,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #b80114 0%, #f4150f 100%);
 }
 
+.item.is-bold.is-warning,
 .section.is-bold.is-warning,
 .level.is-bold.is-warning,
 .box.is-bold.is-warning {
@@ -454,6 +463,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #ea7508 0%, #ffbf00 100%);
 }
 
+.item.is-bold.is-success,
 .section.is-bold.is-success,
 .level.is-bold.is-success,
 .box.is-bold.is-success {
@@ -462,6 +472,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #1a9871 0%, #43e8b4 100%);
 }
 
+.item.is-bold.is-tech,
 .section.is-bold.is-tech,
 .level.is-bold.is-tech,
 .box.is-bold.is-tech {
@@ -470,6 +481,7 @@ fieldset[disabled] .pagination-ellipsis {
   background: linear-gradient(270deg, #074cbb 0%, #005cff 100%);
 }
 
+.item.is-rounded,
 .section.is-rounded,
 .level.is-rounded,
 .box.is-rounded {

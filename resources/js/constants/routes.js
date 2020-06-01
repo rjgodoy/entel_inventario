@@ -8,8 +8,8 @@ let PasswordReset = () => import(/* webpackChunkName: "chunks/passwordReset"*/'.
 let Register = () => import(/* webpackChunkName: "chunks/register"*/'../components/auth/Register.vue')
 
 let Dashboard = () => import(/* webpackChunkName: "chunks/dashboard"*/'../components/dashboard/Dashboard.vue')
-let PopTable = () => import(/* webpackChunkName: "chunks/pops"*/'../components/pops/PopTable.vue')
-let Pop = () => import(/* webpackChunkName: "chunks/pop"*/'../components/pops/PopDetail.vue')
+let PopTable = () => import(/* webpackChunkName: "chunks/pops"*/'../components/pops/PopsTable.vue')
+let Pop = () => import(/* webpackChunkName: "chunks/pop"*/'../components/pop/Pop.vue')
 let CapacityPlanning = () => import(/* webpackChunkName: "chunks/capacityPlanning"*/'../components/capacity/CapacityPlanning.vue')
 let Eco = () => import(/* webpackChunkName: "chunks/eco"*/'../components/eco/Eco.vue')
 let Comsite = () => import(/* webpackChunkName: "chunks/comsite"*/'../components/comsite/Comsite.vue')
@@ -40,7 +40,7 @@ export default {
             children: [
                 { path: '/dashboard', name: 'Dashboard', component: Dashboard },
                 { path: '/pop', name: 'POPs', component: PopTable },
-                { path: '/pop/:id', name: 'Detalle Pop', component: Pop },
+                { path: '/pop/:id', name: 'Pop', component: Pop },
                 { path: '/capacity', name: 'Capacity Planning', component: CapacityPlanning },
                 { path: '/comsite', name: 'Comsite', component: Comsite },
                 { path: '/eco', name: 'Gestion Ambiental', component: Eco },

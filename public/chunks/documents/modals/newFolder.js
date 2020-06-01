@@ -88,7 +88,7 @@ var render = function() {
             { attrs: { label: "Name" } },
             [
               _c("b-input", {
-                attrs: { autofocus: "" },
+                attrs: { autofocus: "", required: "" },
                 model: {
                   value: _vm.name,
                   callback: function($$v) {

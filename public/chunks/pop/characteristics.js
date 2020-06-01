@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["chunks/pop/characteristics"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Characteristics.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/Characteristics.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pop/Characteristics.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pop/Characteristics.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -168,6 +168,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -175,22 +220,57 @@ __webpack_require__.r(__webpack_exports__);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCheckCircle"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['user', 'pop', // 'rcas',
-  'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'pop', 'popClassification', 'bafi', 'isEditMode', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  mounted: function mounted() {
+    console.log(this.bafi);
+  },
   data: function data() {
-    return {// radio_pe_3g: this.pop.pe_3g
+    return {
+      pe_3g: this.pop.pe_3g ? true : false,
+      mpls: this.pop.mpls ? true : false,
+      olt: this.pop.olt ? true : false,
+      olt_3play: this.pop.olt_3play ? true : false,
+      vip: this.pop.vip ? true : false,
+      localidad_obligatoria: this.pop.localidad_obligatoria ? true : false,
+      ranco: this.pop.ranco ? true : false,
+      offgrid: this.pop.offgrid ? true : false,
+      solar: this.pop.solar ? true : false,
+      eolica: this.pop.eolica ? true : false
     };
   },
-  mounted: function mounted() {},
-  methods: {}
+  watch: {
+    pop: function pop(val) {}
+  },
+  methods: {
+    updateParameter: function updateParameter(param, val) {
+      var _this = this;
+
+      var params = {
+        'api_token': this.user.api_token,
+        'parameter': param,
+        'value': val,
+        'user_id': this.user.id
+      };
+      axios.put("/api/pop/".concat(this.pop.id), params).then(function (response) {
+        console.log(response.data);
+
+        _this.$buefy.toast.open({
+          message: 'Parámetro actualizado exitosamente.',
+          type: 'is-success',
+          duration: 2000
+        });
+      });
+      this.$eventBus.$emit('parameter-updated');
+    }
+  }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Characteristics.vue?vue&type=template&id=311d2996&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pops/Characteristics.vue?vue&type=template&id=311d2996& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pop/Characteristics.vue?vue&type=template&id=320edf5f&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pop/Characteristics.vue?vue&type=template&id=320edf5f& ***!
+  \**********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -221,49 +301,280 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticStyle: { padding: "10px" } }, [
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.pe_3g
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.pe_3g
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.pe_3g ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.pe_3g
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("PE 3G")]
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.pe_3g
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.pe_3g
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.pe_3g ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.pe_3g
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("PE 3G")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              ),
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter("pe_3g", _vm.pe_3g)
+                            }
+                          },
+                          model: {
+                            value: _vm.pe_3g,
+                            callback: function($$v) {
+                              _vm.pe_3g = $$v
+                            },
+                            expression: "pe_3g"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("PE 3G")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.mpls
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.mpls
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.mpls ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.mpls
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("MPLS")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter("mpls", _vm.mpls)
+                            }
+                          },
+                          model: {
+                            value: _vm.mpls,
+                            callback: function($$v) {
+                              _vm.mpls = $$v
+                            },
+                            expression: "mpls"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("MPLS")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.olt
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.olt
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.olt ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.olt
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("OLT")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter("olt", _vm.olt)
+                            }
+                          },
+                          model: {
+                            value: _vm.olt,
+                            callback: function($$v) {
+                              _vm.olt = $$v
+                            },
+                            expression: "olt"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("OLT")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.olt_3play
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.olt_3play
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.olt_3play ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.olt_3play
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("OLT 3Play")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter(
+                                "olt_3play",
+                                _vm.olt_3play
+                              )
+                            }
+                          },
+                          model: {
+                            value: _vm.olt_3play,
+                            callback: function($$v) {
+                              _vm.olt_3play = $$v
+                            },
+                            expression: "olt_3play"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("OLT 3Play")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "div",
                 { staticClass: "field" },
                 [
                   _c("font-awesome-icon", {
-                    class: _vm.pop.mpls
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
+                    class:
+                      _vm.popClassification.id == 1
+                        ? "has-text-eco"
+                        : "has-text-grey-lighter",
                     attrs: {
-                      icon: _vm.pop.mpls
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.mpls ? false : true
+                      icon:
+                        _vm.popClassification.id == 1
+                          ? ["fas", "check-circle"]
+                          : ["far", "times-circle"],
+                      disabled: _vm.popClassification.id == 1 ? false : true
                     }
                   }),
                   _vm._v(" "),
@@ -271,99 +582,10 @@ var render = function() {
                     "label",
                     {
                       staticClass: "is-size-6",
-                      class: _vm.pop.mpls
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("MPLS")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.olt
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.olt
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.olt ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.olt
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("OLT")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.olt_3play
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.olt_3play
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.olt_3play ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.olt_3play
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("OLT 3Play")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.core
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.core
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.core ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.core
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
+                      class:
+                        _vm.popClassification.id == 1
+                          ? "has-text-weight-normal"
+                          : "has-text-grey-lighter"
                     },
                     [_vm._v("CORE")]
                   )
@@ -376,14 +598,12 @@ var render = function() {
                 { staticClass: "field" },
                 [
                   _c("font-awesome-icon", {
-                    class: _vm.pop.bafi
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
+                    class: _vm.bafi ? "has-text-eco" : "has-text-grey-lighter",
                     attrs: {
-                      icon: _vm.pop.bafi
+                      icon: _vm.bafi
                         ? ["fas", "check-circle"]
                         : ["far", "times-circle"],
-                      disabled: _vm.pop.bafi ? false : true
+                      disabled: _vm.bafi ? false : true
                     }
                   }),
                   _vm._v(" "),
@@ -391,7 +611,7 @@ var render = function() {
                     "label",
                     {
                       staticClass: "is-size-6",
-                      class: _vm.pop.bafi
+                      class: _vm.bafi
                         ? "has-text-weight-normal"
                         : "has-text-grey-lighter"
                     },
@@ -476,95 +696,200 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.vip
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.vip
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.vip ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.vip
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("VIP")]
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.vip
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.vip
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.vip ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.vip
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("VIP")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              ),
+                : _vm._e(),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.localidad_obligatoria
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.localidad_obligatoria
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.localidad_obligatoria ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.localidad_obligatoria
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("Localidad Obligatoria")]
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter("vip", _vm.vip)
+                            }
+                          },
+                          model: {
+                            value: _vm.vip,
+                            callback: function($$v) {
+                              _vm.vip = $$v
+                            },
+                            expression: "vip"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("VIP")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              ),
+                : _vm._e(),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.ranco
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.ranco
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.ranco ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.ranco
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("RAN Consolidado (RANCO)")]
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.localidad_obligatoria
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.localidad_obligatoria
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.localidad_obligatoria ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.localidad_obligatoria
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("Localidad Obligatoria")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter(
+                                "localidad_obligatoria",
+                                _vm.localidad_obligatoria
+                              )
+                            }
+                          },
+                          model: {
+                            value: _vm.localidad_obligatoria,
+                            callback: function($$v) {
+                              _vm.localidad_obligatoria = $$v
+                            },
+                            expression: "localidad_obligatoria"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("Localidad Obligatoria")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.ranco
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.ranco
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.ranco ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.ranco
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("RAN Consolidado (RANCO)")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter("ranco", _vm.ranco)
+                            }
+                          },
+                          model: {
+                            value: _vm.ranco,
+                            callback: function($$v) {
+                              _vm.ranco = $$v
+                            },
+                            expression: "ranco"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("RAN Consolidado (RANCO)")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
             ])
           ])
         ]),
@@ -581,95 +906,197 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticStyle: { padding: "10px" } }, [
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.offgrid
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.offgrid
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.offgrid ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.offgrid
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("Offgrid")]
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.offgrid
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.offgrid
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.offgrid ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.offgrid
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("Offgrid")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              ),
+                : _vm._e(),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.solar
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.solar
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.solar ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.solar
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("Paneles Solares")]
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter("offgrid", _vm.offgrid)
+                            }
+                          },
+                          model: {
+                            value: _vm.offgrid,
+                            callback: function($$v) {
+                              _vm.offgrid = $$v
+                            },
+                            expression: "offgrid"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("Offgrid")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              ),
+                : _vm._e(),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "field" },
-                [
-                  _c("font-awesome-icon", {
-                    class: _vm.pop.eolica
-                      ? "has-text-eco"
-                      : "has-text-grey-lighter",
-                    attrs: {
-                      icon: _vm.pop.eolica
-                        ? ["fas", "check-circle"]
-                        : ["far", "times-circle"],
-                      disabled: _vm.pop.eolica ? false : true
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "is-size-6",
-                      class: _vm.pop.eolica
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
-                    },
-                    [_vm._v("Eólico")]
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.solar
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.solar
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.solar ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.solar
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("Paneles Solares")]
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter("solar", _vm.solar)
+                            }
+                          },
+                          model: {
+                            value: _vm.solar,
+                            callback: function($$v) {
+                              _vm.solar = $$v
+                            },
+                            expression: "solar"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("Paneles Solares")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.eolica
+                          ? "has-text-eco"
+                          : "has-text-grey-lighter",
+                        attrs: {
+                          icon: _vm.eolica
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: _vm.eolica ? false : true
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.eolica
+                            ? "has-text-weight-normal"
+                            : "has-text-grey-lighter"
+                        },
+                        [_vm._v("Eólico")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          on: {
+                            input: function($event) {
+                              return _vm.updateParameter("eolica", _vm.eolica)
+                            }
+                          },
+                          model: {
+                            value: _vm.eolica,
+                            callback: function($$v) {
+                              _vm.eolica = $$v
+                            },
+                            expression: "eolica"
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("Eólico")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
             ])
           ])
         ])
@@ -700,17 +1127,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Characteristics.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/pops/Characteristics.vue ***!
-  \**********************************************************/
+/***/ "./resources/js/components/pop/Characteristics.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/pop/Characteristics.vue ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Characteristics_vue_vue_type_template_id_311d2996___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Characteristics.vue?vue&type=template&id=311d2996& */ "./resources/js/components/pops/Characteristics.vue?vue&type=template&id=311d2996&");
-/* harmony import */ var _Characteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Characteristics.vue?vue&type=script&lang=js& */ "./resources/js/components/pops/Characteristics.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Characteristics_vue_vue_type_template_id_320edf5f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Characteristics.vue?vue&type=template&id=320edf5f& */ "./resources/js/components/pop/Characteristics.vue?vue&type=template&id=320edf5f&");
+/* harmony import */ var _Characteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Characteristics.vue?vue&type=script&lang=js& */ "./resources/js/components/pop/Characteristics.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -721,8 +1148,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Characteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Characteristics_vue_vue_type_template_id_311d2996___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Characteristics_vue_vue_type_template_id_311d2996___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Characteristics_vue_vue_type_template_id_320edf5f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Characteristics_vue_vue_type_template_id_320edf5f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -732,38 +1159,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pops/Characteristics.vue"
+component.options.__file = "resources/js/components/pop/Characteristics.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Characteristics.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/pops/Characteristics.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/components/pop/Characteristics.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/pop/Characteristics.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Characteristics.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Characteristics.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Characteristics.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pop/Characteristics.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pops/Characteristics.vue?vue&type=template&id=311d2996&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/pops/Characteristics.vue?vue&type=template&id=311d2996& ***!
-  \*****************************************************************************************/
+/***/ "./resources/js/components/pop/Characteristics.vue?vue&type=template&id=320edf5f&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/pop/Characteristics.vue?vue&type=template&id=320edf5f& ***!
+  \****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_template_id_311d2996___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Characteristics.vue?vue&type=template&id=311d2996& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pops/Characteristics.vue?vue&type=template&id=311d2996&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_template_id_311d2996___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_template_id_320edf5f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Characteristics.vue?vue&type=template&id=320edf5f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pop/Characteristics.vue?vue&type=template&id=320edf5f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_template_id_320edf5f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_template_id_311d2996___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristics_vue_vue_type_template_id_320edf5f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -246,7 +246,7 @@ export default {
         VuePagination,
         // CapacityChart: () => import('./CapacityChart'),
         // GrowingChart: () => import('./GrowingChart'),
-        ModalRoom: () => import(/* webpackChunkName: "chunks/capacity/modalRoom"*/'./modals/ModalRoom')
+        ModalRoom: () => import(/* webpackChunkName: "chunks/capacity/modals/modalRoom"*/'./modals/ModalRoom')
     },
     props : [
         'user',

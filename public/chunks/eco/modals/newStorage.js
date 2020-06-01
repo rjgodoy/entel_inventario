@@ -422,7 +422,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Close")]
+          [_vm._v("Cerrar")]
         ),
         _vm._v(" "),
         _c(

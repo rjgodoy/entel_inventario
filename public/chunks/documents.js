@@ -370,15 +370,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -421,6 +412,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       canDeleteFolder: false,
       canUploadFile: false,
       canDeleteFile: false,
+      canViewProcedimientosTab: false,
+      canViewManualesTab: false,
+      canCreateManuales: false,
+      canCreateProcedimientos: false,
       searchText: '',
       edit: false,
       isUploadModalActive: false,
@@ -465,6 +460,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         return this.baseTabs[this.activeTab];
       },
       set: function set(val) {
+        console.log(val);
         this.bread = '';
         this.currentFolderView = {
           id: null,
@@ -475,7 +471,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           parent_id: null
         };
         this.meta.current_page = 1;
-        this.getSideFolders();
+        val == 8 || val == 9 ? this.getFolders() : this.getSideFolders();
         this.folders = [];
         this.files = [];
         this.photos = [];
@@ -486,52 +482,62 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         id: 1,
         label: 'Informes',
         content: 'Informes: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: true,
+        asideView: true
       }, {
         id: 2,
         label: 'Documentos',
         content: 'Documentos: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: true,
+        asideView: true
       }, {
         id: 3,
         label: 'Fotos',
         content: 'Fotos: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: true,
+        asideView: true
       }, {
         id: 4,
         label: 'Construcción',
         content: 'Construcción: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: true,
+        asideView: true
       }, {
         id: 5,
         label: 'Obras Civiles',
         content: 'Obras Civiles: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: true,
+        asideView: true
       }, {
         id: 6,
         label: 'CAM',
         content: 'CAM: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: true,
+        asideView: true
       }, {
         id: 7,
         label: 'Levantamientos Ingeniería',
         content: 'Levantamientos Ingeniería: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: true,
+        asideView: true
       }, {
         id: 8,
         label: 'Gestión Ambiental',
         content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: true,
+        asideView: true
       }, {
         id: 9,
         label: 'Procedimientos',
         content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: this.canViewProcedimientosTab,
+        asideView: false
       }, {
         id: 10,
         label: 'Manuales',
         content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
-        displayed: true
+        displayed: this.canViewManualesTab,
+        asideView: false
       }];
     },
     tabs: function tabs() {
@@ -585,6 +591,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         _this.sideFolders = response.data.folders;
         _this.canCreateFolder = response.data.can.create;
         _this.canDeleteFolder = response.data.can["delete"];
+        _this.canViewProcedimientosTab = response.data.can.viewProcedimientos;
+        _this.canViewManualesTab = response.data.can.viewManuales;
+        _this.canCreateProcedimientos = response.data.can.createProcedimientos;
+        _this.canCreateManuales = response.data.can.createManuales;
       });
     },
     getFolders: function getFolders() {
@@ -600,9 +610,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get("/api/folders", {
         params: params
       }).then(function (response) {
-        _this2.folders = response.data.folders;
+        _this2.folders = (_this2.activeTab == 8 || _this2.activeTab == 9) && !_this2.currentFolderView.id ? response.data.folders[0].subfolders : response.data.folders;
         _this2.canCreateFolder = response.data.can.create;
         _this2.canDeleteFolder = response.data.can["delete"];
+        _this2.canViewProcedimientosTab = response.data.can.viewProcedimientos;
+        _this2.canViewManualesTab = response.data.can.viewManuales;
         console.log(_this2.currentFolderView);
       });
     },
@@ -629,9 +641,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
             _this3.photos.push(element);
           }
-        }); // console.log(this.photos)
-        // this.files = response.data.files
-
+        });
         _this3.canUploadFile = response.data.can.upload;
         _this3.canDeleteFile = response.data.can["delete"];
       });
@@ -966,25 +976,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "section" },
-    [
-      _c(
-        "div",
-        {
-          staticClass: "block",
-          staticStyle: { "margin-top": "-24px", "margin-bottom": "-24px" }
-        },
-        [
+  return _c("div", [
+    _c(
+      "section",
+      { staticClass: "section box", staticStyle: { padding: "auto 0 auto 0" } },
+      [
+        _c("div", { staticClass: "level" }, [
           _c(
             "div",
-            {},
+            {
+              staticClass: "level-item",
+              staticStyle: { "margin-top": "-24px", "margin-bottom": "-48px" }
+            },
             [
               _c(
                 "b-tabs",
                 {
-                  staticStyle: { "margin-bottom": "0px" },
                   attrs: { type: "is-toggle", expanded: "" },
                   on: {
                     change: function($event) {
@@ -1012,742 +1019,782 @@ var render = function() {
             ],
             1
           )
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "columns" }, [
-        _c("aside", { staticClass: "column is-2" }, [
-          _c("div", { staticClass: "box" }, [
-            _c("div", { staticClass: "field" }, [
-              _c(
-                "p",
-                { staticClass: "control has-icons-left has-icons-right" },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.searchText,
-                        expression: "searchText"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: {
-                      type: "text",
-                      "arial-label": "Buscar",
-                      placeholder: "Buscar...",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.searchText },
-                    on: {
-                      keyup: _vm.getSideFolders,
-                      input: [
-                        function($event) {
-                          if ($event.target.composing) {
-                            return
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "section",
+      { staticClass: "section", staticStyle: { "padding-top": "0px" } },
+      [
+        _c("div", { staticClass: "columns tile is-ancestor" }, [
+          _vm.baseTabs[_vm.activeTab].asideView
+            ? _c("aside", { staticClass: "column is-2 tile is-parent" }, [
+                _c("div", { staticClass: "box tile is-child" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c(
+                      "p",
+                      { staticClass: "control has-icons-left has-icons-right" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.searchText,
+                              expression: "searchText"
+                            }
+                          ],
+                          staticClass: "input",
+                          attrs: {
+                            type: "text",
+                            "arial-label": "Buscar",
+                            placeholder: "Buscar...",
+                            autofocus: ""
+                          },
+                          domProps: { value: _vm.searchText },
+                          on: {
+                            keyup: _vm.getSideFolders,
+                            input: [
+                              function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.searchText = $event.target.value
+                              },
+                              function($event) {
+                                _vm.meta.current_page = 1
+                              }
+                            ]
                           }
-                          _vm.searchText = $event.target.value
-                        },
-                        function($event) {
-                          _vm.meta.current_page = 1
-                        }
-                      ]
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    { staticClass: "icon is-small is-left" },
-                    [_c("font-awesome-icon", { attrs: { icon: "search" } })],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "icon is-small is-right" }, [
-                    _c("button", {
-                      staticClass: "delete",
-                      on: { click: _vm.clearSearch }
-                    })
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "field" }, [
-              _c("table", { staticClass: "table" }, [
-                _c(
-                  "tbody",
-                  _vm._l(_vm.sideFolders, function(folder) {
-                    return _c("tr", { key: folder.id }, [
-                      _c("td", [
+                        }),
+                        _vm._v(" "),
                         _c(
-                          "a",
-                          {
+                          "span",
+                          { staticClass: "icon is-small is-left" },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: "search" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "icon is-small is-right" }, [
+                          _c("button", {
+                            staticClass: "delete",
+                            on: { click: _vm.clearSearch }
+                          })
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field" }, [
+                    _c("table", { staticClass: "table" }, [
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.sideFolders, function(folder) {
+                          return _c("tr", { key: folder.id }, [
+                            _c(
+                              "td",
+                              {
+                                class:
+                                  folder.id == _vm.currentFolderView.id &&
+                                  "has-background-link has-text-white"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.selectedSide(folder)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "columns",
+                                        class:
+                                          folder.id == _vm.currentFolderView.id
+                                            ? "has-text-white"
+                                            : "has-text-grey-dark"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "column is-2" },
+                                          [
+                                            _c("font-awesome-icon", {
+                                              staticClass: "has-text-smart",
+                                              attrs: {
+                                                icon: ["fas", "folder-open"],
+                                                size: "2x"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        folder.site
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "column" },
+                                              [
+                                                _c(
+                                                  "p",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold is-size-7"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        folder.site &&
+                                                          folder.site.nem_site
+                                                      )
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-normal is-size-6"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        folder.site &&
+                                                          folder.site.nombre
+                                                      )
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        !folder.site
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "column" },
+                                              [
+                                                _c(
+                                                  "p",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold is-size-7"
+                                                  },
+                                                  [_vm._v(_vm._s(folder.name))]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "p",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-normal is-size-6"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(folder.created_at)
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "level" }, [
+                      _c(
+                        "nav",
+                        {
+                          staticClass: "level-left pagination",
+                          attrs: {
+                            role: "navigation",
+                            "aria-label": "pagination"
+                          }
+                        },
+                        [
+                          _c("vue-pagination", {
+                            attrs: { pagination: _vm.meta, offset: 1 },
                             on: {
-                              click: function($event) {
-                                return _vm.selectedSide(folder)
+                              paginate: function($event) {
+                                return _vm.getSideFolders()
                               }
                             }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "column tile is-parent" }, [
+            _c("div", { staticClass: "box tile is-child" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "columns",
+                  staticStyle: {
+                    "padding-bottom": "20px",
+                    "padding-left": "24px"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "column has-text-left" }, [
+                    _c("span", [
+                      _vm.bread
+                        ? _c(
+                            "a",
+                            { on: { click: _vm.backOne } },
+                            [
+                              _c("font-awesome-icon", {
+                                staticClass: "is-link",
+                                staticStyle: { "margin-bottom": "-4px" },
+                                attrs: {
+                                  icon: ["fas", "angle-left"],
+                                  size: "2x"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "is-size-6",
+                          staticStyle: { "margin-bottom": "25px" }
+                        },
+                        [_vm._v(" " + _vm._s(_vm.bread))]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.folders.length ||
+                  _vm.files.length ||
+                  !_vm.baseTabs[_vm.activeTab].asideView ||
+                  _vm.currentFolderView.id
+                    ? _c("div", { staticClass: "column has-text-right" }, [
+                        _vm.canUploadFile
+                          ? _c("span", {}, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "button",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.isUploadModalActive = true
+                                    }
+                                  }
+                                },
+                                [_vm._v("Subir archivos")]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.canCreateFolder
+                          ? _c("span", {}, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "button",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.isNewFolderModalActive = true
+                                    }
+                                  }
+                                },
+                                [_vm._v("Nueva Carpeta")]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.canCreateFolder
+                          ? _c("span", {}, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "button",
+                                  class: _vm.edit && "is-danger",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.edit = !_vm.edit
+                                    }
+                                  }
+                                },
+                                [_vm._v("Editar")]
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              !_vm.edit
+                ? _c(
+                    "div",
+                    { staticClass: "columns is-multiline" },
+                    [
+                      _vm._l(_vm.folders, function(folder) {
+                        return _c(
+                          "div",
+                          {
+                            key: folder.id,
+                            staticClass: "column is-2 tile is-parent"
                           },
                           [
-                            _c("div", { staticClass: "columns" }, [
-                              _c(
-                                "div",
-                                { staticClass: "column is-2" },
-                                [
-                                  _c("font-awesome-icon", {
-                                    staticClass: "has-text-smart",
-                                    attrs: {
-                                      icon: ["fas", "folder-open"],
-                                      size: "2x"
+                            _c(
+                              "a",
+                              {
+                                staticClass: "box tile is-child",
+                                staticStyle: { position: "relative" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.selected(folder)
+                                  }
+                                }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  staticClass: "has-text-smart",
+                                  staticStyle: { "padding-bottom": "5px" },
+                                  attrs: {
+                                    icon: ["fas", "folder-open"],
+                                    size: "3x"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-bold"
+                                  },
+                                  [_vm._v(_vm._s(folder.name))]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.files, function(file) {
+                        return _c(
+                          "div",
+                          {
+                            key: file.id,
+                            staticClass: "column is-2 tile is-parent"
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "box tile is-child",
+                                staticStyle: { position: "relative" },
+                                attrs: { target: "_blank" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.readFile(file)
+                                    _vm.load = file.id
+                                  }
+                                }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  class: _vm.faFile(file.extension).type,
+                                  staticStyle: { "padding-bottom": "5px" },
+                                  attrs: {
+                                    icon: [
+                                      "fas",
+                                      _vm.faFile(file.extension).icon
+                                    ],
+                                    size: "3x"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "is-size-7" }, [
+                                  _vm._v(_vm._s(file.basename))
+                                ]),
+                                _vm._v(" "),
+                                _vm.load == file.id
+                                  ? _c("b-loading", {
+                                      attrs: {
+                                        "is-full-page": false,
+                                        active: _vm.isLoading,
+                                        "can-cancel": true
+                                      },
+                                      on: {
+                                        "update:active": function($event) {
+                                          _vm.isLoading = $event
+                                        }
+                                      }
+                                    })
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.edit
+                ? _c(
+                    "div",
+                    { staticClass: "columns is-multiline" },
+                    [
+                      _vm._l(_vm.folders, function(folder) {
+                        return _c(
+                          "div",
+                          {
+                            key: folder.id,
+                            staticClass: "column is-2 tile is-parent"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "box tile is-child",
+                                staticStyle: { position: "relative" }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "is-pulled-right has-text-danger",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.confirmDeleteFolder(folder)
+                                      }
                                     }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              folder.site
-                                ? _c(
-                                    "div",
-                                    {
-                                      staticClass: "column has-text-grey-dark"
-                                    },
-                                    [
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-7"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              folder.site &&
-                                                folder.site.nem_site
-                                            )
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-normal is-size-6"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              folder.site && folder.site.nombre
-                                            )
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              !folder.site
-                                ? _c(
-                                    "div",
-                                    {
-                                      staticClass: "column has-text-grey-dark"
-                                    },
-                                    [
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-7"
-                                        },
-                                        [_vm._v(_vm._s(folder.name))]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-normal is-size-6"
-                                        },
-                                        [_vm._v(_vm._s(folder.created_at))]
-                                      )
-                                    ]
-                                  )
-                                : _vm._e()
-                            ])
+                                  },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      staticStyle: { "padding-bottom": "5px" },
+                                      attrs: {
+                                        icon: ["far", "trash-alt"],
+                                        size: "2x"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("font-awesome-icon", {
+                                  staticClass: "has-text-smart",
+                                  staticStyle: { "padding-bottom": "5px" },
+                                  attrs: {
+                                    icon: ["fas", "folder-open"],
+                                    size: "3x"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-bold"
+                                  },
+                                  [_vm._v(_vm._s(folder.name))]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.files, function(file) {
+                        return _c(
+                          "div",
+                          {
+                            key: file.id,
+                            staticClass: "column is-2 tile is-parent"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "box tile is-child",
+                                staticStyle: { position: "relative" }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "is-pulled-right has-text-danger",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.confirmDeleteFile(file)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      staticStyle: { "padding-bottom": "5px" },
+                                      attrs: {
+                                        icon: ["far", "trash-alt"],
+                                        size: "2x"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("font-awesome-icon", {
+                                  class: _vm.faFile(file.extension).type,
+                                  staticStyle: { "padding-bottom": "5px" },
+                                  attrs: {
+                                    icon: [
+                                      "fas",
+                                      _vm.faFile(file.extension).icon
+                                    ],
+                                    size: "3x"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "is-size-7" }, [
+                                  _vm._v(_vm._s(file.basename))
+                                ]),
+                                _vm._v(" "),
+                                _vm.load == file.id
+                                  ? _c("b-loading", {
+                                      attrs: {
+                                        "is-full-page": false,
+                                        active: _vm.isLoading,
+                                        "can-cancel": true
+                                      },
+                                      on: {
+                                        "update:active": function($event) {
+                                          _vm.isLoading = $event
+                                        }
+                                      }
+                                    })
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "container" },
+                [
+                  _c(
+                    "b-carousel",
+                    {
+                      attrs: {
+                        autoplay: false,
+                        "with-carousel-list": "",
+                        indicator: false,
+                        overlay: _vm.gallery
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "list",
+                          fn: function(props) {
+                            return [
+                              _c("b-carousel-list", {
+                                attrs: {
+                                  data: _vm.photos,
+                                  config: _vm.al,
+                                  refresh: _vm.gallery,
+                                  "as-indicator": ""
+                                },
+                                on: {
+                                  switch: function($event) {
+                                    return props.switch($event, false)
+                                  }
+                                },
+                                model: {
+                                  value: props.active,
+                                  callback: function($$v) {
+                                    _vm.$set(props, "active", $$v)
+                                  },
+                                  expression: "props.active"
+                                }
+                              })
+                            ]
+                          }
+                        }
+                      ])
+                    },
+                    [
+                      _vm._l(_vm.photos, function(item, i) {
+                        return _c("b-carousel-item", { key: i }, [
+                          _c(
+                            "figure",
+                            {
+                              staticClass: "image",
+                              on: {
+                                click: function($event) {
+                                  return _vm.switchGallery(true)
+                                }
+                              }
+                            },
+                            [_c("img", { attrs: { src: item.image } })]
+                          )
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.gallery
+                        ? _c("span", {
+                            staticClass: "modal-close is-large",
+                            on: {
+                              click: function($event) {
+                                return _vm.switchGallery(false)
+                              }
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._v(" "),
+                      _c("template", { slot: "overlay" }, [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-centered has-text-white" },
+                          [
+                            _vm._v(
+                              "\n                                    Hello i'am overlay!\n                                "
+                            )
                           ]
                         )
                       ])
-                    ])
-                  }),
-                  0
-                )
-              ]),
+                    ],
+                    2
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "level" }, [
-                _c(
-                  "nav",
-                  {
-                    staticClass: "level-left pagination",
-                    attrs: { role: "navigation", "aria-label": "pagination" }
-                  },
-                  [
-                    _c("vue-pagination", {
-                      attrs: { pagination: _vm.meta, offset: 1 },
-                      on: {
-                        paginate: function($event) {
-                          return _vm.getSideFolders()
-                        }
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
+              _vm.noFiles
+                ? _c("section", { staticClass: "section container" }, [
+                    _c("div", { staticClass: "has-text-weight-normal" }, [
+                      _vm._v("No hay archivos en esta sección.")
+                    ])
+                  ])
+                : _vm._e()
             ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "column" }, [
-          _c("div", { staticClass: "box" }, [
-            _c(
-              "div",
-              {
-                staticClass: "columns",
-                staticStyle: {
-                  "padding-bottom": "20px",
-                  "padding-left": "24px"
-                }
-              },
-              [
-                _c("div", { staticClass: "column has-text-left" }, [
-                  _c("span", [
-                    _vm.bread
-                      ? _c(
-                          "a",
-                          { on: { click: _vm.backOne } },
-                          [
-                            _c("font-awesome-icon", {
-                              staticClass: "is-link",
-                              staticStyle: { "margin-bottom": "-4px" },
-                              attrs: { icon: ["fas", "angle-left"], size: "2x" }
-                            })
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "is-size-6",
-                        staticStyle: { "margin-bottom": "25px" }
-                      },
-                      [_vm._v(" " + _vm._s(_vm.bread))]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm.folders.length ||
-                _vm.files.length ||
-                _vm.currentFolderView.id
-                  ? _c("div", { staticClass: "column has-text-right" }, [
-                      _vm.canUploadFile
-                        ? _c("span", {}, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "button",
-                                on: {
-                                  click: function($event) {
-                                    _vm.isUploadModalActive = true
-                                  }
-                                }
-                              },
-                              [_vm._v("Subir archivos")]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.canCreateFolder
-                        ? _c("span", {}, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "button",
-                                on: {
-                                  click: function($event) {
-                                    _vm.isNewFolderModalActive = true
-                                  }
-                                }
-                              },
-                              [_vm._v("Nueva Carpeta")]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.canDeleteFile && _vm.canDeleteFolder
-                        ? _c("span", {}, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "button",
-                                class: _vm.edit && "is-danger",
-                                on: {
-                                  click: function($event) {
-                                    _vm.edit = !_vm.edit
-                                  }
-                                }
-                              },
-                              [_vm._v("Editar")]
-                            )
-                          ])
-                        : _vm._e()
-                    ])
-                  : _vm._e()
-              ]
-            ),
-            _vm._v(" "),
-            !_vm.edit
-              ? _c(
-                  "div",
-                  { staticClass: "columns is-multiline" },
-                  [
-                    _vm._l(_vm.folders, function(folder) {
-                      return _c(
-                        "div",
-                        {
-                          key: folder.id,
-                          staticClass: "column is-2 tile is-parent"
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "box tile is-child",
-                              staticStyle: { position: "relative" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.selected(folder)
-                                }
-                              }
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                staticClass: "has-text-smart",
-                                staticStyle: { "padding-bottom": "5px" },
-                                attrs: {
-                                  icon: ["fas", "folder-open"],
-                                  size: "3x"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "is-size-6 has-text-weight-bold"
-                                },
-                                [_vm._v(_vm._s(folder.name))]
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _vm._l(_vm.files, function(file) {
-                      return _c(
-                        "div",
-                        {
-                          key: file.id,
-                          staticClass: "column is-2 tile is-parent"
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "box tile is-child",
-                              staticStyle: { position: "relative" },
-                              attrs: { target: "_blank" },
-                              on: {
-                                click: function($event) {
-                                  _vm.readFile(file)
-                                  _vm.load = file.id
-                                }
-                              }
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                class: _vm.faFile(file.extension).type,
-                                staticStyle: { "padding-bottom": "5px" },
-                                attrs: {
-                                  icon: [
-                                    "fas",
-                                    _vm.faFile(file.extension).icon
-                                  ],
-                                  size: "3x"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v(_vm._s(file.basename))
-                              ]),
-                              _vm._v(" "),
-                              _vm.load == file.id
-                                ? _c("b-loading", {
-                                    attrs: {
-                                      "is-full-page": false,
-                                      active: _vm.isLoading,
-                                      "can-cancel": true
-                                    },
-                                    on: {
-                                      "update:active": function($event) {
-                                        _vm.isLoading = $event
-                                      }
-                                    }
-                                  })
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "container" },
-              [
-                _c(
-                  "b-carousel",
-                  {
-                    attrs: {
-                      autoplay: false,
-                      "with-carousel-list": "",
-                      indicator: false,
-                      overlay: _vm.gallery
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "list",
-                        fn: function(props) {
-                          return [
-                            _c("b-carousel-list", {
-                              attrs: {
-                                data: _vm.photos,
-                                config: _vm.al,
-                                refresh: _vm.gallery,
-                                "as-indicator": ""
-                              },
-                              on: {
-                                switch: function($event) {
-                                  return props.switch($event, false)
-                                }
-                              },
-                              model: {
-                                value: props.active,
-                                callback: function($$v) {
-                                  _vm.$set(props, "active", $$v)
-                                },
-                                expression: "props.active"
-                              }
-                            })
-                          ]
-                        }
-                      }
-                    ])
-                  },
-                  [
-                    _vm._l(_vm.photos, function(item, i) {
-                      return _c("b-carousel-item", { key: i }, [
-                        _c(
-                          "figure",
-                          {
-                            staticClass: "image",
-                            on: {
-                              click: function($event) {
-                                return _vm.switchGallery(true)
-                              }
-                            }
-                          },
-                          [_c("img", { attrs: { src: item.image } })]
-                        )
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _vm.gallery
-                      ? _c("span", {
-                          staticClass: "modal-close is-large",
-                          on: {
-                            click: function($event) {
-                              return _vm.switchGallery(false)
-                            }
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm._v(" "),
-                    _c("template", { slot: "overlay" }, [
-                      _c(
-                        "div",
-                        { staticClass: "has-text-centered has-text-white" },
-                        [
-                          _vm._v(
-                            "\n                                Hello i'am overlay!\n                            "
-                          )
-                        ]
-                      )
-                    ])
-                  ],
-                  2
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm.edit
-              ? _c(
-                  "div",
-                  { staticClass: "columns is-multiline" },
-                  [
-                    _vm._l(_vm.folders, function(folder) {
-                      return _c(
-                        "div",
-                        {
-                          key: folder.id,
-                          staticClass: "column is-2 tile is-parent"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "box tile is-child",
-                              staticStyle: { position: "relative" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "is-pulled-right has-text-danger",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.confirmDeleteFolder(folder)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("font-awesome-icon", {
-                                    staticStyle: { "padding-bottom": "5px" },
-                                    attrs: {
-                                      icon: ["far", "trash-alt"],
-                                      size: "2x"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("font-awesome-icon", {
-                                staticClass: "has-text-smart",
-                                staticStyle: { "padding-bottom": "5px" },
-                                attrs: {
-                                  icon: ["fas", "folder-open"],
-                                  size: "3x"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "is-size-6 has-text-weight-bold"
-                                },
-                                [_vm._v(_vm._s(folder.name))]
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _vm._l(_vm.files, function(file) {
-                      return _c(
-                        "div",
-                        {
-                          key: file.id,
-                          staticClass: "column is-2 tile is-parent"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "box tile is-child",
-                              staticStyle: { position: "relative" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "is-pulled-right has-text-danger",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.confirmDeleteFile(file)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("font-awesome-icon", {
-                                    staticStyle: { "padding-bottom": "5px" },
-                                    attrs: {
-                                      icon: ["far", "trash-alt"],
-                                      size: "2x"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("font-awesome-icon", {
-                                class: _vm.faFile(file.extension).type,
-                                staticStyle: { "padding-bottom": "5px" },
-                                attrs: {
-                                  icon: [
-                                    "fas",
-                                    _vm.faFile(file.extension).icon
-                                  ],
-                                  size: "3x"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v(_vm._s(file.basename))
-                              ]),
-                              _vm._v(" "),
-                              _vm.load == file.id
-                                ? _c("b-loading", {
-                                    attrs: {
-                                      "is-full-page": false,
-                                      active: _vm.isLoading,
-                                      "can-cancel": true
-                                    },
-                                    on: {
-                                      "update:active": function($event) {
-                                        _vm.isLoading = $event
-                                      }
-                                    }
-                                  })
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.noFiles
-              ? _c("section", { staticClass: "section container" }, [
-                  _c("div", { staticClass: "has-text-weight-normal" }, [
-                    _vm._v("No hay archivos en esta sección.")
-                  ])
-                ])
-              : _vm._e()
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            active: _vm.isUploadModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
-          },
-          on: {
-            "update:active": function($event) {
-              _vm.isUploadModalActive = $event
-            }
-          }
-        },
-        [
-          _c("modal-upload", {
+        _c(
+          "b-modal",
+          {
             attrs: {
-              folder: _vm.currentFolderView,
-              folderTab: _vm.folderTab,
-              user: _vm.user
+              active: _vm.isUploadModalActive,
+              "has-modal-card": "",
+              "trap-focus": "",
+              "aria-role": "dialog",
+              "aria-modal": ""
+            },
+            on: {
+              "update:active": function($event) {
+                _vm.isUploadModalActive = $event
+              }
             }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            active: _vm.isNewFolderModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
           },
-          on: {
-            "update:active": function($event) {
-              _vm.isNewFolderModalActive = $event
-            }
-          }
-        },
-        [
-          _c("modal-new-folder", {
+          [
+            _c("modal-upload", {
+              attrs: {
+                folder: _vm.currentFolderView,
+                folderTab: _vm.folderTab,
+                user: _vm.user
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
             attrs: {
-              folder: _vm.currentFolderView,
-              folderTab: _vm.folderTab,
-              user: _vm.user
+              active: _vm.isNewFolderModalActive,
+              "has-modal-card": "",
+              "trap-focus": "",
+              "aria-role": "dialog",
+              "aria-modal": ""
+            },
+            on: {
+              "update:active": function($event) {
+                _vm.isNewFolderModalActive = $event
+              }
             }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            active: _vm.isNewRootFolderModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
           },
-          on: {
-            "update:active": function($event) {
-              _vm.isNewRootFolderModalActive = $event
+          [
+            _c("modal-new-folder", {
+              attrs: {
+                folder: _vm.currentFolderView,
+                folderTab: _vm.folderTab,
+                user: _vm.user
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            attrs: {
+              active: _vm.isNewRootFolderModalActive,
+              "has-modal-card": "",
+              "trap-focus": "",
+              "aria-role": "dialog",
+              "aria-modal": ""
+            },
+            on: {
+              "update:active": function($event) {
+                _vm.isNewRootFolderModalActive = $event
+              }
             }
-          }
-        },
-        [
-          _c("modal-new-root-folder", {
-            attrs: { folderTab: _vm.folderTab, user: _vm.user }
-          })
-        ],
-        1
-      )
-    ],
-    1
-  )
+          },
+          [
+            _c("modal-new-root-folder", {
+              attrs: { folderTab: _vm.folderTab, user: _vm.user }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

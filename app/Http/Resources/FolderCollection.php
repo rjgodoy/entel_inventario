@@ -44,7 +44,11 @@ class FolderCollection extends ResourceCollection
         return [
             'can' => [
                 'create' => Gate::allows('create-folder', Folder::class),
-                'delete' => Gate::allows('delete-folder', Folder::class)
+                'delete' => Gate::allows('delete-folder', Folder::class),
+                'viewManuales' => Gate::allows('view-manuales', Folder::class),
+                'createManuales' => Gate::allows('create-manuales', Folder::class),
+                'viewProcedimientos' => Gate::allows('view-procedimientos', Folder::class),
+                'createProcedimientos' => Gate::allows('create-procedimientos', Folder::class)
             ],
         ];
     }

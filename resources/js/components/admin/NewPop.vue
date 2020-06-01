@@ -7,7 +7,6 @@
                     <div class="tile is-child box">
                         <div class="field is-size-5 has-text-weight-semibold">Datos del PoP</div>
 
-
                         <div class="block has-text-centered" style="padding-top: 12px;">
                             <button class="button" @click="isNewPop(true)" :class="newPop && 'is-link'">Nuevo PoP</button>
                             <button class="button" @click="isNewPop(false)" :class="!newPop && 'is-link' ">PoP Existente</button>
@@ -142,51 +141,52 @@
                         <div class="field is-size-5 has-text-weight-semibold">Datos del Sitio</div>
 
                         <div class="block has-text-centered" style="padding-top: 12px;">
-                            <button 
-                                class="button"
-                                v-for="site_type in siteTypes" 
-                                :key="site_type.id" 
-                                @click="siteType(site_type.id)" 
-                                :class="site_type.selected && 'is-link'">
-                                {{ site_type.label }}
-                            </button>
+                            <b-tabs type="is-toggle" expanded v-model="site_type">
+                                <b-tab-item 
+                                    v-for="site_type in siteTypes" 
+                                    :key="site_type.id" 
+                                    :label="site_type.label">
+                                </b-tab-item>
+                            </b-tabs>
                         </div>
 
-                        <b-field>
-                            <b-input placeholder="Nemónico" type="text" v-model="nem" required></b-input>
-                        </b-field>
+                        <div>
+                            <b-field>
+                                <b-input placeholder="Nemónico" type="text" v-model="nem" required></b-input>
+                            </b-field>
 
-                        <b-field>
-                            <b-input placeholder="Nombre Sitio" type="text" v-model="siteName" required></b-input>
-                        </b-field>
+                            <b-field>
+                                <b-input placeholder="Nombre Sitio" type="text" v-model="siteName" required></b-input>
+                            </b-field>
 
-                        <b-field>
-                            <b-autocomplete
-                                v-model="classificationType"
-                                placeholder="Categoría"
-                                keep-first
-                                open-on-focus
-                                :data="filteredClassificationsArray"
-                                :use-html5-validation="false"
-                                field="classification_type"
-                                required
-                                @select="option => selectedClassificationType = option">
-                                <template slot="empty">No results found</template>
-                            </b-autocomplete>
+                            <b-field>
+                                <b-autocomplete
+                                    v-model="classificationType"
+                                    placeholder="Categoría"
+                                    keep-first
+                                    open-on-focus
+                                    :data="filteredClassificationsArray"
+                                    :use-html5-validation="false"
+                                    field="classification_type"
+                                    required
+                                    @select="option => selectedClassificationType = option">
+                                    <template slot="empty">No results found</template>
+                                </b-autocomplete>
 
-                            <b-autocomplete
-                                v-model="attentionPriorityType"
-                                placeholder="Prioridad atención"
-                                keep-first
-                                open-on-focus
-                                :data="filteredAttentionPrioritiesArray"
-                                :use-html5-validation="false"
-                                field="attention_priority_type"
-                                required
-                                @select="option => selectedAttentionPriorityType = option">
-                                <template slot="empty">No results found</template>
-                            </b-autocomplete>
-                        </b-field>
+                                <b-autocomplete
+                                    v-model="attentionPriorityType"
+                                    placeholder="Prioridad atención"
+                                    keep-first
+                                    open-on-focus
+                                    :data="filteredAttentionPrioritiesArray"
+                                    :use-html5-validation="false"
+                                    field="attention_priority_type"
+                                    required
+                                    @select="option => selectedAttentionPriorityType = option">
+                                    <template slot="empty">No results found</template>
+                                </b-autocomplete>
+                            </b-field>
+                        </div>
                     </div>
                 </div>
 
@@ -351,7 +351,7 @@
                 lon: '',
 
                 // Datos sitio
-                site_type_id: 1,
+                site_type: 0,
                 nem: '',
                 siteName: '',
                 
@@ -400,17 +400,14 @@
                     {
                         id: 1,
                         label: 'Fijo',
-                        selected: true
                     },
                     {
                         id: 3,
                         label: 'Switch',
-                        selected: false
                     },
                     {
                         id: 4,
                         label: 'Phone',
-                        selected: false
                     }
                 ]
                 
@@ -442,6 +439,10 @@
         },
 
         computed: {
+            site_type_id() {
+                return this.site_type == 0 ? 1 : (this.site_type == 1 ? 3 : 4)
+            },
+
             filteredComunasArray() {
                 return this.comunas.filter((option) => {
                     return option.nombre_comuna
@@ -534,9 +535,8 @@
         },
 
         methods: {
-            siteType(id) {
-                this.site_type_id = id
-                this.siteTypes.forEach(element => element.selected = element.id == id ? true : false)
+            siteType(val) {
+                console.log(val)
             },
 
             isNewPop(bool) {

@@ -1,269 +1,260 @@
 <template>
-
-    <section class="section">
-
-        <div class="block" style="margin-top: -24px; margin-bottom: -24px">
-            <div class="">
-                <b-tabs v-model="activeTab" @change="folderTab=activeTab" style="margin-bottom: 0px;" type="is-toggle" expanded>
-                    <b-tab-item v-for="(tab, index) in tabs" :key="index" v-if="tab.displayed" :label="tab.label"></b-tab-item>
-                </b-tabs>
-            </div>
-            
-        </div>
-
-        <div class="columns">
-            <aside class="column is-2">
-                <div class="box">
-                    <!-- <div class="column has-text-right" v-if="canCreateFolder ">
-                        <span class="">
-                            <button class="button" @click="isNewRootFolderModalActive = true">Nueva Carpeta</button>
-                        </span>
-
-                        <span class="">
-                            <button class="button" :class="edit && 'is-danger'" @click="edit = !edit">Editar</button>
-                        </span>
-                    </div> -->
-
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                        <input 
-                            class="input"  
-                            @keyup="getSideFolders" 
-                            @input="meta.current_page = 1"
-                            v-model="searchText" 
-                            type="text" 
-                            arial-label="Buscar" 
-                            placeholder="Buscar..." 
-                            autofocus
-                        >
-                        <span class="icon is-small is-left">
-                            <font-awesome-icon icon="search"/>
-                        </span>
-                        <span class="icon is-small is-right">
-                            <button class="delete" @click="clearSearch"></button>
-                        </span>
-                    </p>
-                    </div>
-
-                    <div class="field">
-                        <table class="table">
-                            <tbody>
-                                <tr v-for="folder in sideFolders" :key="folder.id">
-                                    <td>
-                                        <a class="" @click="selectedSide(folder)">
-                                            <div class="columns">
-                                                <div class="column is-2">
-                                                    <font-awesome-icon
-                                                        :icon="['fas', 'folder-open']"
-                                                        class="has-text-smart"
-                                                        size="2x"
-                                                        />
-                                                </div>
-                                                <div class="column has-text-grey-dark" v-if="folder.site">
-                                                    <p class="has-text-weight-semibold is-size-7">{{ folder.site && folder.site.nem_site }}</p>
-                                                    <p class="has-text-weight-normal is-size-6">{{ folder.site && folder.site.nombre }}</p>
-                                                </div>
-                                                <div class="column has-text-grey-dark" v-if="!folder.site">
-                                                    <p class="has-text-weight-semibold is-size-7">{{ folder.name }}</p>
-                                                    <p class="has-text-weight-normal is-size-6">{{ folder.created_at }}</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="level">
-                            <nav class="level-left pagination" role="navigation" aria-label="pagination">
-                                <vue-pagination  
-                                    :pagination="meta"
-                                    @paginate="getSideFolders()"
-                                    :offset="1">
-                                </vue-pagination>
-                            </nav>
-                        </div>
-                    </div>
+    <div>
+        <section class="section box" style="padding: auto 0 auto 0;">
+            <div class="level">
+                <div class="level-item" style="margin-top: -24px; margin-bottom: -48px">
+                    <b-tabs v-model="activeTab" @change="folderTab=activeTab" type="is-toggle" expanded>
+                        <b-tab-item v-for="(tab, index) in tabs" :key="index" v-if="tab.displayed" :label="tab.label"></b-tab-item>
+                    </b-tabs>
                 </div>
-            </aside>
+                
+            </div>
+        </section>
 
-            <div class="column">
-                <div class="box">
-
-                    <div class="columns" style="padding-bottom: 20px; padding-left: 24px;">
-                        <div class="column has-text-left">
-                            <span>
-                                <a v-if="bread" @click="backOne">
-                                    <font-awesome-icon
-                                        :icon="['fas', 'angle-left']"
-                                        class="is-link"
-                                        size="2x"
-                                        style="margin-bottom: -4px;"/>
-                                </a>
-                                <span class="is-size-6" style="margin-bottom: 25px;">&nbsp;{{ bread }}</span>
-                            </span>
-                            
-                        </div>
-
-                        <div class="column has-text-right" v-if="folders.length || files.length || currentFolderView.id">
-                            <span class="" v-if="canUploadFile">
-                                <button class="button" @click="isUploadModalActive = true">Subir archivos</button>
+        <section class="section" style="padding-top: 0px">
+            <div class="columns tile is-ancestor">
+                <aside class="column is-2 tile is-parent" v-if="baseTabs[activeTab].asideView">
+                    <div class="box tile is-child">
+                        <!-- <div class="column has-text-right" v-if="canCreateFolder ">
+                            <span class="">
+                                <button class="button" @click="isNewRootFolderModalActive = true">Nueva Carpeta</button>
                             </span>
 
-                            <span class="" v-if="canCreateFolder">
-                                <button class="button" @click="isNewFolderModalActive = true">Nueva Carpeta</button>
-                            </span>
-
-                            <span class="" v-if="canDeleteFile && canDeleteFolder">
+                            <span class="">
                                 <button class="button" :class="edit && 'is-danger'" @click="edit = !edit">Editar</button>
                             </span>
+                        </div> -->
+
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                            <input 
+                                class="input"  
+                                @keyup="getSideFolders" 
+                                @input="meta.current_page = 1"
+                                v-model="searchText" 
+                                type="text" 
+                                arial-label="Buscar" 
+                                placeholder="Buscar..." 
+                                autofocus
+                            >
+                            <span class="icon is-small is-left">
+                                <font-awesome-icon icon="search"/>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <button class="delete" @click="clearSearch"></button>
+                            </span>
+                        </p>
+                        </div>
+
+                        <div class="field">
+                            <table class="table">
+                                <tbody>
+                                    <tr v-for="folder in sideFolders" :key="folder.id">
+                                        <td :class="folder.id == currentFolderView.id && 'has-background-link has-text-white'">
+                                            <a class="" @click="selectedSide(folder)">
+                                                <div class="columns" :class="folder.id == currentFolderView.id ? 'has-text-white' : 'has-text-grey-dark'">
+                                                    <div class="column is-2">
+                                                        <font-awesome-icon
+                                                            :icon="['fas', 'folder-open']"
+                                                            class="has-text-smart"
+                                                            size="2x"
+                                                            />
+                                                    </div>
+                                                    <div class="column" v-if="folder.site">
+                                                        <p class="has-text-weight-semibold is-size-7">{{ folder.site && folder.site.nem_site }}</p>
+                                                        <p class="has-text-weight-normal is-size-6">{{ folder.site && folder.site.nombre }}</p>
+                                                    </div>
+                                                    <div class="column" v-if="!folder.site">
+                                                        <p class="has-text-weight-semibold is-size-7">{{ folder.name }}</p>
+                                                        <p class="has-text-weight-normal is-size-6">{{ folder.created_at }}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="level">
+                                <nav class="level-left pagination" role="navigation" aria-label="pagination">
+                                    <vue-pagination  
+                                        :pagination="meta"
+                                        @paginate="getSideFolders()"
+                                        :offset="1">
+                                    </vue-pagination>
+                                </nav>
+                            </div>
                         </div>
                     </div>
-                    
+                </aside>
 
-                    <div class="columns is-multiline" v-if="!edit">
-                        <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
-                            <a class="box tile is-child" @click="selected(folder)" style="position: relative;" >
-                                <font-awesome-icon
-                                    :icon="['fas', 'folder-open']"
-                                    class="has-text-smart"
-                                    size="3x"
-                                    style="padding-bottom: 5px;"/>
-                                <div class="is-size-6 has-text-weight-bold">{{ folder.name }}</div>
-                            </a>
+                <div class="column tile is-parent">
+                    <div class="box tile is-child">
+
+                        <div class="columns" style="padding-bottom: 20px; padding-left: 24px;">
+                            <div class="column has-text-left">
+                                <span>
+                                    <a v-if="bread" @click="backOne">
+                                        <font-awesome-icon
+                                            :icon="['fas', 'angle-left']"
+                                            class="is-link"
+                                            size="2x"
+                                            style="margin-bottom: -4px;"/>
+                                    </a>
+                                    <span class="is-size-6" style="margin-bottom: 25px;">&nbsp;{{ bread }}</span>
+                                </span>
+                                
+                            </div>
+
+                            <div class="column has-text-right" v-if="folders.length || files.length || !baseTabs[activeTab].asideView || currentFolderView.id">
+                                <span class="" v-if="canUploadFile">
+                                    <button class="button" @click="isUploadModalActive = true">Subir archivos</button>
+                                </span>
+
+                                <span class="" v-if="canCreateFolder">
+                                    <button class="button" @click="isNewFolderModalActive = true">Nueva Carpeta</button>
+                                </span>
+
+                                <span class="" v-if="canCreateFolder">
+                                    <button class="button" :class="edit && 'is-danger'" @click="edit = !edit">Editar</button>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="columns is-multiline" v-if="!edit">
+                            <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
+                                <a class="box tile is-child" @click="selected(folder)" style="position: relative;" >
+                                    <font-awesome-icon
+                                        :icon="['fas', 'folder-open']"
+                                        class="has-text-smart"
+                                        size="3x"
+                                        style="padding-bottom: 5px;"/>
+                                    <div class="is-size-6 has-text-weight-bold">{{ folder.name }}</div>
+                                </a>
+                            </div>
+
+                            <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
+                                <a class="box tile is-child" target="_blank" @click="readFile(file); load = file.id" style="position: relative;">
+                                    <font-awesome-icon 
+                                        :icon="['fas', faFile(file.extension).icon]"
+                                        :class="faFile(file.extension).type"
+                                        size="3x"
+                                        style="padding-bottom: 5px;"/>
+                                    <div class="is-size-7">{{ file.basename }}</div>
+                                    <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true" v-if="load == file.id"></b-loading>
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
-                            <a class="box tile is-child" target="_blank" @click="readFile(file); load = file.id" style="position: relative;">
-                                <font-awesome-icon 
-                                    :icon="['fas', faFile(file.extension).icon]"
-                                    :class="faFile(file.extension).type"
-                                    size="3x"
-                                    style="padding-bottom: 5px;"/>
-                                <div class="is-size-7">{{ file.basename }}</div>
-                                <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true" v-if="load == file.id"></b-loading>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- <b-carousel :autoplay="false" indicator-custom :indicator-inside="false" :overlay="gallery" v-if="photos.length" class="container">
-                        <b-carousel-item v-for="photo in photos" :key="photo.id">
-                            <a @click="switchGallery(true)" class="image ">
-                                <img :src="'/storage/'+photo.route">
-                            </a>
-                        </b-carousel-item>
-                    </b-carousel> -->
-                    <div class="container">
-                        <b-carousel
-                            :autoplay="false"
-                            with-carousel-list
-                            :indicator="false"
-                            :overlay="gallery">
-                            <b-carousel-item v-for="(item, i) in photos" :key="i">
-                                <figure @click="switchGallery(true)" class="image">
-                                    <img :src="item.image">
-                                </figure>
-                            </b-carousel-item>
-                            <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
-                            <template slot="list" slot-scope="props">
-                                <b-carousel-list
-                                    v-model="props.active"
-                                    :data="photos"
-                                    :config="al"
-                                    :refresh="gallery"
-                                    @switch="props.switch($event, false)"
-                                    as-indicator />
-                            </template>
-                            <template slot="overlay">
-                                <div class="has-text-centered has-text-white">
-                                    Hello i'am overlay!
+                        <div class="columns is-multiline" v-if="edit">
+                            <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
+                                <div class="box tile is-child" style="position: relative;">
+                                    <a class="is-pulled-right has-text-danger" @click="confirmDeleteFolder(folder)">
+                                        <font-awesome-icon 
+                                            :icon="['far', 'trash-alt']"
+                                            size="2x"
+                                            style="padding-bottom: 5px;"/>
+                                    </a>
+                                    <font-awesome-icon
+                                        :icon="['fas', 'folder-open']"
+                                        class="has-text-smart"
+                                        size="3x"
+                                        style="padding-bottom: 5px;"/>
+                                    <div class="is-size-6 has-text-weight-bold">{{ folder.name }}</div>
                                 </div>
-                            </template>
-                        </b-carousel>
-                    </div>
+                            </div>
 
-
-                    <div class="columns is-multiline" v-if="edit">
-                        <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
-                            <div class="box tile is-child" style="position: relative;">
-                                <a class="is-pulled-right has-text-danger" @click="confirmDeleteFolder(folder)">
+                            <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
+                                <div class="box tile is-child" style="position: relative;">
+                                    <a class="is-pulled-right has-text-danger" @click="confirmDeleteFile(file)">
+                                        <font-awesome-icon 
+                                            :icon="['far', 'trash-alt']"
+                                            size="2x"
+                                            style="padding-bottom: 5px;"/>
+                                    </a>
                                     <font-awesome-icon 
-                                        :icon="['far', 'trash-alt']"
-                                        size="2x"
+                                        :icon="['fas', faFile(file.extension).icon]"
+                                        :class="faFile(file.extension).type"
+                                        size="3x"
                                         style="padding-bottom: 5px;"/>
-                                </a>
-                                <font-awesome-icon
-                                    :icon="['fas', 'folder-open']"
-                                    class="has-text-smart"
-                                    size="3x"
-                                    style="padding-bottom: 5px;"/>
-                                <div class="is-size-6 has-text-weight-bold">{{ folder.name }}</div>
+                                    <div class="is-size-7">{{ file.basename }}</div>
+                                    <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true" v-if="load == file.id"></b-loading>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
-                            <div class="box tile is-child" style="position: relative;">
-                                <a class="is-pulled-right has-text-danger" @click="confirmDeleteFile(file)">
-                                    <font-awesome-icon 
-                                        :icon="['far', 'trash-alt']"
-                                        size="2x"
-                                        style="padding-bottom: 5px;"/>
-                                </a>
-                                <font-awesome-icon 
-                                    :icon="['fas', faFile(file.extension).icon]"
-                                    :class="faFile(file.extension).type"
-                                    size="3x"
-                                    style="padding-bottom: 5px;"/>
-                                <div class="is-size-7">{{ file.basename }}</div>
-                                <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true" v-if="load == file.id"></b-loading>
-                            </div>
+                        <div class="container">
+                            <b-carousel
+                                :autoplay="false"
+                                with-carousel-list
+                                :indicator="false"
+                                :overlay="gallery">
+                                <b-carousel-item v-for="(item, i) in photos" :key="i">
+                                    <figure @click="switchGallery(true)" class="image">
+                                        <img :src="item.image">
+                                    </figure>
+                                </b-carousel-item>
+                                <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
+                                <template slot="list" slot-scope="props">
+                                    <b-carousel-list
+                                        v-model="props.active"
+                                        :data="photos"
+                                        :config="al"
+                                        :refresh="gallery"
+                                        @switch="props.switch($event, false)"
+                                        as-indicator />
+                                </template>
+                                <template slot="overlay">
+                                    <div class="has-text-centered has-text-white">
+                                        Hello i'am overlay!
+                                    </div>
+                                </template>
+                            </b-carousel>
                         </div>
+
+                        <section v-if="noFiles" class="section container">
+                            <div class="has-text-weight-normal">No hay archivos en esta sección.</div>
+                        </section>
                     </div>
-
-
-                    <section v-if="noFiles" class="section container">
-                        <div class="has-text-weight-normal">No hay archivos en esta sección.</div>
-                    </section>
                 </div>
             </div>
-        </div>
 
 
-        <b-modal :active.sync="isUploadModalActive"
-            has-modal-card
-            trap-focus
-            aria-role="dialog"
-            aria-modal>
-            <modal-upload 
-                :folder="currentFolderView"
-                :folderTab="folderTab"
-                :user="user"
-                />
-        </b-modal>
+            <b-modal :active.sync="isUploadModalActive"
+                has-modal-card
+                trap-focus
+                aria-role="dialog"
+                aria-modal>
+                <modal-upload 
+                    :folder="currentFolderView"
+                    :folderTab="folderTab"
+                    :user="user"
+                    />
+            </b-modal>
 
-        <b-modal :active.sync="isNewFolderModalActive"
-            has-modal-card
-            trap-focus
-            aria-role="dialog"
-            aria-modal>
-            <modal-new-folder 
-                :folder="currentFolderView"
-                :folderTab="folderTab"
-                :user="user"
-                />
-        </b-modal>
+            <b-modal :active.sync="isNewFolderModalActive"
+                has-modal-card
+                trap-focus
+                aria-role="dialog"
+                aria-modal>
+                <modal-new-folder 
+                    :folder="currentFolderView"
+                    :folderTab="folderTab"
+                    :user="user"
+                    />
+            </b-modal>
 
-        <b-modal :active.sync="isNewRootFolderModalActive"
-            has-modal-card
-            trap-focus
-            aria-role="dialog"
-            aria-modal>
-            <modal-new-root-folder 
-                :folderTab="folderTab"
-                :user="user"
-                />
-        </b-modal>
-        
-    </section>
+            <b-modal :active.sync="isNewRootFolderModalActive"
+                has-modal-card
+                trap-focus
+                aria-role="dialog"
+                aria-modal>
+                <modal-new-root-folder 
+                    :folderTab="folderTab"
+                    :user="user"
+                    />
+            </b-modal>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -305,6 +296,10 @@ export default {
             canDeleteFolder: false,
             canUploadFile: false,
             canDeleteFile: false,
+            canViewProcedimientosTab: false,
+            canViewManualesTab: false,
+            canCreateManuales: false,
+            canCreateProcedimientos: false,
             searchText: '',
 
             edit: false,
@@ -357,6 +352,7 @@ export default {
                 return this.baseTabs[this.activeTab]
             },
             set: function(val) {
+                console.log(val)
                 this.bread = ''
                 this.currentFolderView= {
                     id: null,
@@ -367,7 +363,7 @@ export default {
                     parent_id: null
                 }
                 this.meta.current_page = 1
-                this.getSideFolders()
+                val == 8 || val == 9 ? this.getFolders() : this.getSideFolders()
                 this.folders = []
                 this.files = []
                 this.photos = []
@@ -381,60 +377,70 @@ export default {
                     label: 'Informes',
                     content: 'Informes: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                    asideView: true
                 },
                 {
                     id: 2,
                     label: 'Documentos',
                     content: 'Documentos: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                    asideView: true
                 },
                 {
                     id: 3,
                     label: 'Fotos',
                     content: 'Fotos: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                    asideView: true
                 },
                 {
                     id: 4,
                     label: 'Construcción',
                     content: 'Construcción: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                    asideView: true
                 },
                 {
                     id: 5,
                     label: 'Obras Civiles',
                     content: 'Obras Civiles: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                    asideView: true
                 },
                 {
                     id: 6,
                     label: 'CAM',
                     content: 'CAM: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                    asideView: true
                 },
                 {
                     id: 7,
                     label: 'Levantamientos Ingeniería',
                     content: 'Levantamientos Ingeniería: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                    asideView: true
                 },
                 {
                     id: 8,
                     label: 'Gestión Ambiental',
                     content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                    asideView: true
                 },
                 {
                     id: 9,
                     label: 'Procedimientos',
                     content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
-                    displayed: true,
+                    displayed: this.canViewProcedimientosTab,
+                    asideView: false
                 },
                 {
                     id: 10,
                     label: 'Manuales',
                     content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
-                    displayed: true,
+                    displayed: this.canViewManualesTab,
+                    asideView: false
                 },
             ]
         },
@@ -493,6 +499,10 @@ export default {
                 this.sideFolders = response.data.folders
                 this.canCreateFolder = response.data.can.create
                 this.canDeleteFolder = response.data.can.delete
+                this.canViewProcedimientosTab = response.data.can.viewProcedimientos
+                this.canViewManualesTab = response.data.can.viewManuales
+                this.canCreateProcedimientos = response.data.can.createProcedimientos
+                this.canCreateManuales = response.data.can.createManuales
                 
             })
         },
@@ -507,9 +517,11 @@ export default {
             }
             axios.get(`/api/folders`, { params })
             .then((response) => {
-                this.folders = response.data.folders
+                this.folders = (this.activeTab == 8 || this.activeTab == 9) && !this.currentFolderView.id ? response.data.folders[0].subfolders : response.data.folders
                 this.canCreateFolder = response.data.can.create
                 this.canDeleteFolder = response.data.can.delete
+                this.canViewProcedimientosTab = response.data.can.viewProcedimientos
+                this.canViewManualesTab = response.data.can.viewManuales
                 console.log(this.currentFolderView)
             })
         },
@@ -538,8 +550,6 @@ export default {
                         
                     }
                 })
-                // console.log(this.photos)
-                // this.files = response.data.files
                 this.canUploadFile = response.data.can.upload
                 this.canDeleteFile = response.data.can.delete
             })

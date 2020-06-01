@@ -69,40 +69,67 @@
             </div>
             <div class="tile is-ancestor columns is-multiline">
                 <div class="tile is-parent column is-4" v-for="site in sites">
+                    
                     <div class="tile is-child box">
                         <div class="columns">
                             <div class="column is-8">
-                                <div class="title is-size-6 has-text-weight-normal">Sitio</div>
-                                <div class="subtitle is-size-4 has-text-weight-bold">
-                                    {{ site.nem_site }}
-                                    <p class="is-size-5 has-text-weight-normal" v-if="site.nombre">{{ site.nombre }}</p>
-                                </div>
+                                <div class="is-size-7 has-text-weight-normal">Nemonico</div>
+                                <div class="is-size-4 has-text-weight-bold">{{ site.nem_site }}</div>
+                                <div class="is-size-7 has-text-weight-normal" style="padding-top: 4px;">Nombre</div>
+                                <div class="is-size-5 has-text-weight-light" v-if="site.nombre">{{ site.nombre }}</div>
                             </div>
                             <div class="column">
                                 <b-taglist attached class="is-right">
+                                    <b-tag type="is-dark" class="has-text-weight-normal">
+                                        Tipo Sitio
+                                    </b-tag>
                                     <b-tag 
-                                        size="is-medium" 
-                                        class="has-text-weight-bold"
+                                        class="has-text-weight-bold has-text-white"
                                         :class="site.site_type_id == 1 ? 'is-smart' : 
-                                            (site.site_type_id == 2 ? 'is-info' : 
-                                                (site.site_type_id == 3 ? 'is-success' : 'is-positive'))">
+                                            (site.site_type_id == 2 ? 'is-positive' : 
+                                                (site.site_type_id == 3 ? 'is-eco' : 'is-warning'))">
                                         {{ site.site_type.site_type.toUpperCase() }}
                                     </b-tag>
-                                    <!-- <b-tag type="is-positive" size="is-normal" class="has-text-weight-bold">
-                                        {{ site.classification_type ? site.classification_type.classification_type : '' }}
-                                    </b-tag> -->
                                 </b-taglist>
                             </div>
                         </div>
 
-                        <div class="columns has-text-centered">
-                            <div class="column">
-                                <div class="title is-size-4 has-text-weight-bold">{{ site.classification_type.classification_type }}</div>
-                                <div class="subtitle is-size-7 has-text-weight-normal">Categoría</div>
+                        <div class="columns has-text-centered tile is-ancestor">
+                            <div class="column tile is-parent">
+                                <div v-if="!isEditMode" class="tile is-child box is-shadowless" style="border: solid 0.5px grey;">
+                                    <div class="title is-size-4 has-text-weight-bold">{{ site.classification_type.classification_type }}</div>
+                                    <div class="subtitle is-size-7 has-text-weight-normal">Categoría</div>
+                                </div>
+
+                                <a v-if="isEditMode" 
+                                    class="tile is-child box" 
+                                    @click="isEditParameterModalActive = true; parameter = 'classification_type_id'; selectedSite = site" 
+                                    style="border: solid 0.5px grey;">
+                                    <div  class="title is-size-4 has-text-weight-bold">{{ site.classification_type.classification_type }}</div>
+                                    <div class="subtitle is-size-7 has-text-weight-normal">Categoría</div>
+                                </a>
                             </div>
-                            <div class="column">
-                                <div class="title is-size-4 has-text-weight-bold">{{ site.attention_priority_type.attention_priority_type }}</div>
-                                <div class="subtitle is-size-7 has-text-weight-normal">Prioridad atención</div>
+
+                            <div class="column tile is-parent">
+                                <div v-if="!isEditMode" class="tile is-child box is-shadowless" style="border: solid 0.5px grey;">
+                                    <div class="title is-size-4 has-text-weight-bold">{{ site.attention_priority_type.attention_priority_type }}</div>
+                                    <div class="subtitle is-size-7 has-text-weight-normal">Prioridad atención</div>
+                                </div>
+
+                                <a v-if="isEditMode" 
+                                    class="tile is-child box" 
+                                    @click="isEditParameterModalActive = true; parameter = 'attention_priority_type_id'; selectedSite = site" 
+                                    style="border: solid 0.5px grey;">
+                                    <div class="title is-size-4 has-text-weight-bold">{{ site.attention_priority_type.attention_priority_type }}</div>
+                                    <div class="subtitle is-size-7 has-text-weight-normal">Prioridad atención</div>
+                                </a>
+                            </div>
+
+                            <div class="column tile is-parent" v-if="site.site_type_id == 2">
+                                <div class="tile is-child box is-shadowless" style="border: solid 0.5px grey;">
+                                    <div class="title is-size-4 has-text-weight-bold">{{ site.category_type && site.category_type.category_type }}</div>
+                                    <div class="subtitle is-size-7 has-text-weight-normal">Cat. Planificación</div>
+                                </div>
                             </div>
                         </div>
                         
@@ -111,40 +138,70 @@
                         <div class="" style="padding-top: 20px;">
                             <div class="columns is-multiline">
                                 <div v-for="tech in site.technologies" class="column is-4 has-text-centered" v-if="tech">
-                                    <!-- <div class="tile is-child box"> -->
-                                        <div class="title is-size-5 has-text-weight-normal">{{ tech.nem_tech }}
-                                            <div class="subtitle is-size-6 has-text-weight-light">Tecnología</div>
-                                        </div>
-                                    <!-- </div> -->
+                                    <div class="is-size-6 has-text-weight-normal">{{ tech.nem_tech }}
+                                        <div class="subtitle is-size-6 has-text-weight-light">Tecnología</div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div v-if="!site.technologies.length" class="subtitle is-size-5 has-text-weight-light has-text-centered">Sitio no tiene tecnologías móviles</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div v-if="!site.technologies.length" class="subtitle is-size-5 has-text-weight-light">Sitio no tiene tecnologías móviles</div>
+                        
                     </div>
+
                 </div>
             </div>
         </section>
+        <b-modal :active.sync="isEditParameterModalActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <edit-parameter 
+                :pop="pop"
+                :site="selectedSite"
+                :user="user"
+                :parameter="parameter"
+                />
+        </b-modal>
     </div>
 </template>
 
 <script>
     export default {
         components: {
+            EditParameter: () => import(/* webpackChunkName: "chunks/pop/modals/editParameter"*/'./modals/EditParameter'),
         },
+
         props : [
             'user',
-            'pop'
+            'pop',
+            'isEditMode',
+            'bafi'
         ],
+
         data() {
             return {
+                popData: this.pop,
+                selectedSite: null,
+                parameter: '',
+                isEditParameterModalActive: false
             }
         },
+
+        watch: {
+            pop(val) {
+                this.popData = val
+            }
+        },
+
         computed: {
             sites() {
                 var array = []
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) { 
+                if (this.popData.sites) {
+                    this.popData.sites.forEach(function(item) { 
                         array.push(item) 
                     })
                 } 
@@ -165,8 +222,8 @@
 
             technologies() {
                 var array = []
-                if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
+                if (this.popData.sites) {
+                    this.popData.sites.forEach(function(item) {
                         if (item.technologies.length > 0) { 
                             array.push(item.technologies) 
                         }
@@ -240,37 +297,11 @@
                     return tec
                 }
             },
-            bafi() {
-                var tecA; var tecB; var tecC; 
-                var array;
-                if (this.technologies) {
-                    this.technologies.forEach(element => {
-                        if (element.technology_type_id == 3 && element.frequency == 3500) {
-                            if (element.nem_tech.startsWith('A')) {
-                                tecA = element.nem_tech
-                            }
-                            if (element.nem_tech.startsWith('B')) {
-                                tecB = element.nem_tech
-                            }
-                            if (element.nem_tech.startsWith('C')) {
-                                tecC = element.nem_tech
-                            }
-
-                            array = {
-                                'tecA': tecA, 
-                                'tecB': tecB, 
-                                'tecC': tecC
-                            }
-                        }
-                    })
-                }
-
-                return array
-            },
+            
         },
-        mounted() {
-        },
-        methods: {
+
+        beforeDestroy() {
+            this.$eventBus.$off('parameter-updated')
         }
 
     }

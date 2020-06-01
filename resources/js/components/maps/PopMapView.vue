@@ -1,6 +1,6 @@
 <template>
     <GmapMap
-        style="min-height: 500px; height: 100%"
+        style="min-height: 576px; height: 100%"
         ref="map"
         :center="center"
         :zoom="zoom"
@@ -21,7 +21,7 @@
         <!-- Dependencias -->
         <div class="" ref="myDependencesButton">
             <button 
-                class="button is-default" 
+                class="button is-link" 
                 @click="panDependences(google)" 
                 style="
                     border: 2px solid #fff;

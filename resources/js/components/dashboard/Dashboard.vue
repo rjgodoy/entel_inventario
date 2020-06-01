@@ -156,7 +156,6 @@
             <div class="" :class="bodyBackground" style="margin: 20px 0 -30px 0;">
                 <div class="">
 
-                    <!-- cuadros superiores -->
                     <div class="tile is-ancestor">
 
                         <div class="tile is-vertical">
@@ -314,7 +313,7 @@
                         </b-tabs> -->
                         
                         <div class="tile is-parent is-vertical">
-                            <div class="tile is-child box" :class="boxBackground">
+                            <div class="tile is-child card" style="border: solid 4px white" :class="boxBackground">
                                 <map-view
                                     :user="user"
                                     :pops="pops"

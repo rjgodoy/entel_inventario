@@ -87,10 +87,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/modals/calculator */ "chunks/capacity/modals/calculator").then(__webpack_require__.bind(null, /*! ./Calculator */ "./resources/js/components/capacity/modals/Calculator.vue"));
     },
     Layout: function Layout() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/layout */ "chunks/pop/layout/layout").then(__webpack_require__.bind(null, /*! ../../pops/layout/Layout */ "./resources/js/components/pops/layout/Layout.vue"));
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/layout */ "chunks/pop/layout/layout").then(__webpack_require__.bind(null, /*! ../../pop/layout/Layout */ "./resources/js/components/pop/layout/Layout.vue"));
     },
     Documents: function Documents() {
-      return __webpack_require__.e(/*! import() | chunks/capacity/modals/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ../../pops/documents/Documents */ "./resources/js/components/pops/documents/Documents.vue"));
+      return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ../../pop/documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
     }
   },
   props: ['pop', 'room', 'user'],

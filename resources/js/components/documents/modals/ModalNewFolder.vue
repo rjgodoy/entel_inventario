@@ -5,7 +5,7 @@
         </header>
         <section class="modal-card-body">
             <b-field label="Name">
-                <b-input v-model="name" autofocus></b-input>
+                <b-input v-model="name" autofocus required></b-input>
             </b-field>
         </section>
         <footer class="modal-card-foot">

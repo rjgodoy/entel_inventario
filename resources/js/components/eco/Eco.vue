@@ -12,7 +12,7 @@
 
                 <div class="tile is-parent">
 
-                    <div class="tile is-child box">
+                    <div class="tile is-child card" style="border: solid 4px white">
                         <eco-map-view
                             :user="user"
                             :pops="pops"

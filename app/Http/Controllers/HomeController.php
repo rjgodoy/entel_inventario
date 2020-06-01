@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\AirConditioner;
 use App\Models\Crm;
+use App\Models\Folder;
 use App\Models\GeneratorSet;
 use App\Models\Junction;
 use App\Models\Menu;
 use App\Models\Pop;
 use App\Models\PowerRectifier;
 use App\Models\PsgTp;
+use App\Models\Role;
 use App\Models\Site;
 use App\Models\Technology;
 use App\Models\User;
@@ -42,7 +44,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['developer', 'admin', 'engineer', 'engineer-admin', 'user', 'super-viewer']);
+        $roles = Role::pluck('slug')->toArray();
+        $request->user()->authorizeRoles($roles);
         
         // ⚠️ Create api_token
         // $users = User::where('estado', 1)->get();

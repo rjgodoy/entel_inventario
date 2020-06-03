@@ -150,7 +150,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type')
+            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'vertical_structures.beacons.beacon_type')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->where(function ($p) use ($text) {
                         $p->where(function ($w) use ($text) {
@@ -309,9 +309,10 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 	        'OFFGRID',
 	        'PANEL SOLAR',
 	        'EOLICA',
+            'BALIZA',
 	        'GESTION AMBIENTAL',
 	        // ->'AU1','BALIZAS',
-	        'PROYECTO ALBA',
+	        'PROYECTO ALBA'
 
         ];
     }
@@ -443,6 +444,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $pop->offgrid ? 'SI' : 'NO',
             $pop->solar ? 'SI' : 'NO',
             $pop->eolica ? 'SI' : 'NO',
+            $pop->vertical_structures->first() ? ($pop->vertical_structures->first()->beacons->first() ? $pop->vertical_structures->first()->beacons->first()->beacon_type->type : null) : null,
             $pop->gestion_ambiental ? 'SI' : 'NO' ,
             $pop->alba_project ? 'SI' : 'NO'
 
@@ -564,7 +566,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AG1:AI1',
+            'AG1:AJ1',
             [
                 'font' => [
                     'size' => 11,
@@ -588,7 +590,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AJ1',
+            'AK1',
             [
                 'font' => [
                     'size' => 11,
@@ -612,7 +614,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AK1',
+            'AL1',
             [
                 'font' => [
                     'size' => 11,

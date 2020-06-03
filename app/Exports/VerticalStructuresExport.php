@@ -143,7 +143,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $verticalStructure = VerticalStructure::with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type')
+            $verticalStructure = VerticalStructure::with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
             	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
             		$a->where(function($p) use($text, $condition_bafi) {
 	                    $p->where(function($w) use($text) {
@@ -265,6 +265,8 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             'ALTURA',
             'FACTOR DE USO',
             'NUMERO SERIE',
+
+            'TIPO BALIZA'
         ];
     }
 
@@ -286,6 +288,8 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             $verticalStructure->height,
             $verticalStructure->use_factor,
             $verticalStructure->serial_number,
+
+            $verticalStructure->beacons->first() ? $verticalStructure->beacons->first()->beacon_type->type : null
   		];
   	}
 
@@ -350,6 +354,30 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
                 'fill' => [
                     'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => ['argb' => 'c04f4d']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'K1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '8064a1']
                 ]
             ]
         );

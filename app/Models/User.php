@@ -87,6 +87,16 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public function user_connections()
+    {
+        return $this->hasMany(UserConnection::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function request_files()
     {
         return $this->hasMany(RequestFile::class);

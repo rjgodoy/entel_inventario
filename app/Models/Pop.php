@@ -153,4 +153,14 @@ class Pop extends Model
         return $this->hasMany(TemporaryStorage::class);
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function vertical_structures() 
+    {
+        return $this->hasMany(VerticalStructure::class);
+    }
+
 }

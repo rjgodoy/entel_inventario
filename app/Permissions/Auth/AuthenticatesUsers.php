@@ -2,6 +2,7 @@
 
 namespace App\Permissions\Auth;
 
+use App\Models\UserConnection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -41,7 +42,7 @@ trait AuthenticatesUsers
 
             return $this->sendLockoutResponse($request);
         }
-
+        
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }
@@ -110,6 +111,7 @@ trait AuthenticatesUsers
                 ?: redirect()->intended($this->redirectPath());
     }
 
+
     /**
      * The user has been authenticated.
      *
@@ -119,7 +121,9 @@ trait AuthenticatesUsers
      */
     protected function authenticated(Request $request, $user)
     {
-        //
+        UserConnection::create([
+            'user_id' => $user->id
+        ]);
     }
 
     /**

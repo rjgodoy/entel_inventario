@@ -421,112 +421,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"]);
@@ -558,6 +452,94 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         longitude: -70.6561017,
         zoom: 5
       },
+      equipments: {
+        electric_line: {
+          label: 'Línea Eléctrica',
+          selected: 0
+        },
+        junction: {
+          label: 'Empalme',
+          selected: 0
+        },
+        generator_set: {
+          label: 'Grupo Electrógeno',
+          selected: 0
+        },
+        power_rectifier: {
+          label: 'Planta Rectificadora',
+          selected: 0
+        },
+        air_conditioner: {
+          label: 'Aire Acondicionado',
+          selected: 0
+        },
+        vertical_structure: {
+          label: 'Estructura Vertical',
+          selected: 0
+        },
+        infrastructure: {
+          label: 'Infraestructura',
+          selected: 0
+        }
+      },
+      characteristics: {
+        pe_3g: {
+          label: 'PE 3G',
+          selected: 0
+        },
+        mpls: {
+          label: 'MPLS',
+          selected: 0
+        },
+        olt: {
+          label: 'OLT',
+          selected: 0
+        },
+        olt_3play: {
+          label: 'OLT 3Play',
+          selected: 0
+        },
+        red_minima_n1: {
+          label: 'Red Mínima N1',
+          selected: 0
+        },
+        red_minima_n2: {
+          label: 'Red Mínima N2',
+          selected: 0
+        },
+        lloo: {
+          label: 'Localidad Obligatoria',
+          selected: 0
+        },
+        ranco: {
+          label: 'RANCO',
+          selected: 0
+        },
+        bafi: {
+          label: 'BAFI',
+          selected: 0
+        },
+        offgrid: {
+          label: 'Offgrid',
+          selected: 0
+        },
+        solar: {
+          label: 'Solar',
+          selected: 0
+        },
+        eolica: {
+          label: 'Eólica',
+          selected: 0
+        },
+        protected_zone: {
+          label: 'Zona protegida',
+          selected: 0
+        },
+        alba_project: {
+          label: 'Proyecto Alba',
+          selected: 0
+        }
+      },
       bodyBackground: '',
       boxBackground: '',
       primaryText: '',
@@ -573,27 +555,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       searchText: '',
       core: 0,
       critic: 0,
-      vip: 0,
-      pe_3g: 0,
-      mpls: 0,
-      olt: 0,
-      olt_3play: 0,
-      red_minima_n1: 0,
-      red_minima_n2: 0,
-      lloo: 0,
-      ranco: 0,
-      bafi: 0,
-      offgrid: 0,
-      solar: 0,
-      eolica: 0,
-      protected_zone: 0,
-      alba_project: 0,
-      junction: 0,
-      generator_set: 0,
-      power_rectifier: 0,
-      air_conditioner: 0,
-      vertical_structure: 0,
-      infrastructure: 0 // checkboxPosition: 'left',
+      vip: 0 // checkboxPosition: 'left',
       // isPaginated: true,
       // isPaginationSimple: false,
       // paginationPosition: 'bottom',
@@ -615,100 +577,20 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.getPopsMap();
   },
   watch: {
-    core: function core(newValue) {
+    core: function core(val) {
       this.getPops();
       this.getPopsMap();
     },
-    critic: function critic(newValue) {
+    critic: function critic(val) {
       this.getPops();
       this.getPopsMap();
     },
-    vip: function vip(newValue) {
+    vip: function vip(val) {
       this.getPops();
       this.getPopsMap();
     },
-    pe_3g: function pe_3g(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    mpls: function mpls(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    olt: function olt(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    olt_3play: function olt_3play(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    red_minima_n1: function red_minima_n1(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    red_minima_n2: function red_minima_n2(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    lloo: function lloo(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    ranco: function ranco(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    bafi: function bafi(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    offgrid: function offgrid(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    solar: function solar(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    eolica: function eolica(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    protected_zone: function protected_zone(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    alba_project: function alba_project(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    junction: function junction(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    generator_set: function generator_set(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    power_rectifier: function power_rectifier(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    air_conditioner: function air_conditioner(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    vertical_structure: function vertical_structure(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    infrastructure: function infrastructure(newValue) {
-      this.getPops();
-      this.getPopsMap();
-    },
-    selectedPops: function selectedPops(newValue) {
-      newValue.length != 0 ? this.popsMap = newValue : this.getPops();
+    selectedPops: function selectedPops(val) {
+      val.length != 0 ? this.popsMap = val : this.getPops();
     }
   },
   computed: {
@@ -738,6 +620,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         // console.log(response.data)
         _this2.filters = response.data;
       });
+    },
+    changeEquipment: function changeEquipment(equipment) {
+      equipment.selected = +!equipment.selected;
+      this.getPops();
+      this.getPopsMap();
+    },
+    changeCharacteristic: function changeCharacteristic(characteristic) {
+      characteristic.selected = +!characteristic.selected;
+      this.getPops();
+      this.getPopsMap();
     },
     selectPop: function selectPop(pop) {
       this.popsMap = [pop];
@@ -787,31 +679,32 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'core': this.core,
         'critic': this.critic,
         'vip': this.vip,
-        'pe_3g': this.pe_3g,
-        'mpls': this.mpls,
-        'olt': this.olt,
-        'olt_3play': this.olt_3play,
-        'red_minima_n1': this.red_minima_n1,
-        'red_minima_n2': this.red_minima_n2,
-        'lloo': this.lloo,
-        'ranco': this.ranco,
-        'bafi': this.bafi,
-        'offgrid': this.offgrid,
-        'solar': this.solar,
-        'eolica': this.eolica,
-        'alba_project': this.alba_project,
-        'protected_zone': this.protected_zone,
-        'junction': this.junction,
-        'generator_set': this.generator_set,
-        'power_rectifier': this.power_rectifier,
-        'air_conditioner': this.air_conditioner,
-        'vertical_structure': this.vertical_structure,
-        'infrastructure': this.infrastructure
+        'pe_3g': this.characteristics.pe_3g.selected,
+        'mpls': this.characteristics.mpls.selected,
+        'olt': this.characteristics.olt.selected,
+        'olt_3play': this.characteristics.olt_3play.selected,
+        'red_minima_n1': this.characteristics.red_minima_n1.selected,
+        'red_minima_n2': this.characteristics.red_minima_n2.selected,
+        'lloo': this.characteristics.lloo.selected,
+        'ranco': this.characteristics.ranco.selected,
+        'bafi': this.characteristics.bafi.selected,
+        'offgrid': this.characteristics.offgrid.selected,
+        'solar': this.characteristics.solar.selected,
+        'eolica': this.characteristics.eolica.selected,
+        'alba_project': this.characteristics.alba_project.selected,
+        'protected_zone': this.characteristics.protected_zone.selected,
+        'electric_line': this.equipments.electric_line.selected,
+        'junction': this.equipments.junction.selected,
+        'generator_set': this.equipments.generator_set.selected,
+        'power_rectifier': this.equipments.power_rectifier.selected,
+        'air_conditioner': this.equipments.air_conditioner.selected,
+        'vertical_structure': this.equipments.vertical_structure.selected,
+        'infrastructure': this.equipments.infrastructure.selected
       };
       axios.get('/api/filterPops', {
         params: params
       }).then(function (response) {
-        console.log(response);
+        // console.log(response)
         _this3.pops = response.data;
       });
     },
@@ -827,26 +720,27 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'core': this.core,
         'critic': this.critic,
         'vip': this.vip,
-        'pe_3g': this.pe_3g,
-        'mpls': this.mpls,
-        'olt': this.olt,
-        'olt_3play': this.olt_3play,
-        'red_minima_n1': this.red_minima_n1,
-        'red_minima_n2': this.red_minima_n2,
-        'lloo': this.lloo,
-        'ranco': this.ranco,
-        'bafi': this.bafi,
-        'offgrid': this.offgrid,
-        'solar': this.solar,
-        'eolica': this.eolica,
-        'alba_project': this.alba_project,
-        'protected_zone': this.protected_zone,
-        'junction': this.junction,
-        'generator_set': this.generator_set,
-        'power_rectifier': this.power_rectifier,
-        'air_conditioner': this.air_conditioner,
-        'vertical_structure': this.vertical_structure,
-        'infrastructure': this.infrastructure
+        'pe_3g': this.characteristics.pe_3g.selected,
+        'mpls': this.characteristics.mpls.selected,
+        'olt': this.characteristics.olt.selected,
+        'olt_3play': this.characteristics.olt_3play.selected,
+        'red_minima_n1': this.characteristics.red_minima_n1.selected,
+        'red_minima_n2': this.characteristics.red_minima_n2.selected,
+        'lloo': this.characteristics.lloo.selected,
+        'ranco': this.characteristics.ranco.selected,
+        'bafi': this.characteristics.bafi.selected,
+        'offgrid': this.characteristics.offgrid.selected,
+        'solar': this.characteristics.solar.selected,
+        'eolica': this.characteristics.eolica.selected,
+        'alba_project': this.characteristics.alba_project.selected,
+        'protected_zone': this.characteristics.protected_zone.selected,
+        'electric_line': this.equipments.electric_line.selected,
+        'junction': this.equipments.junction.selected,
+        'generator_set': this.equipments.generator_set.selected,
+        'power_rectifier': this.equipments.power_rectifier.selected,
+        'air_conditioner': this.equipments.air_conditioner.selected,
+        'vertical_structure': this.equipments.vertical_structure.selected,
+        'infrastructure': this.equipments.infrastructure.selected
       };
       axios.get('/api/popsMap', {
         params: params
@@ -927,26 +821,27 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'core': this.core,
         'critic': this.critic,
         'vip': this.vip,
-        'pe_3g': this.pe_3g,
-        'mpls': this.mpls,
-        'olt': this.olt,
-        'olt_3play': this.olt_3play,
-        // 'red_minima_n1': this.red_minima_n1,
-        // 'red_minima_n2': this.red_minima_n2,
-        'lloo': this.lloo,
-        'ranco': this.ranco,
-        'bafi': this.bafi,
-        'offgrid': this.offgrid,
-        'solar': this.solar,
-        'eolica': this.eolica,
-        'alba_project': this.alba_project,
-        'protected_zone': this.protected_zone,
-        'junction': this.junction,
-        'generator_set': this.generator_set,
-        'power_rectifier': this.power_rectifier,
-        'air_conditioner': this.air_conditioner,
-        'vertical_structure': this.vertical_structure,
-        'infrastructure': this.infrastructure
+        'pe_3g': this.characteristics.pe_3g.selected,
+        'mpls': this.characteristics.mpls.selected,
+        'olt': this.characteristics.olt.selected,
+        'olt_3play': this.characteristics.olt_3play.selected,
+        // 'red_minima_n1': this.characteristics.red_minima_n1.selected,
+        // 'red_minima_n2': this.characteristics.red_minima_n2.selected,
+        'lloo': this.characteristics.lloo.selected,
+        'ranco': this.characteristics.ranco.selected,
+        'bafi': this.characteristics.bafi.selected,
+        'offgrid': this.characteristics.offgrid.selected,
+        'solar': this.characteristics.solar.selected,
+        'eolica': this.characteristics.eolica.selected,
+        'alba_project': this.characteristics.alba_project.selected,
+        'protected_zone': this.characteristics.protected_zone.selected,
+        'electric_line': this.equipments.electric_line.selected,
+        'junction': this.equipments.junction.selected,
+        'generator_set': this.equipments.generator_set.selected,
+        'power_rectifier': this.equipments.power_rectifier.selected,
+        'air_conditioner': this.equipments.air_conditioner.selected,
+        'vertical_structure': this.equipments.vertical_structure.selected,
+        'infrastructure': this.equipments.infrastructure.selected
       };
       axios.get('/api/pop/export', {
         params: params,
@@ -1242,9 +1137,10 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
+                        "is-size-6 has-text-weight-normal has-text-centered has-text-grey-light",
+                      staticStyle: { "padding-bottom": "8px" }
                     },
-                    [_vm._v("CRMs")]
+                    [_vm._v("CRM")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -1256,36 +1152,45 @@ var render = function() {
                         { key: crm.id, staticClass: "column is-6" },
                         [
                           _c(
-                            "a",
+                            "div",
                             {
-                              staticClass: "is-fullwidth button",
-                              class:
-                                _vm.selectedCrm == crm
-                                  ? "is-link"
-                                  : "is-black-ter",
-                              on: {
-                                click: function($event) {
-                                  return _vm.selectCrm(crm)
-                                }
-                              }
+                              staticClass: "field",
+                              staticStyle: { margin: "1px" }
                             },
                             [
                               _c(
-                                "div",
+                                "a",
                                 {
+                                  staticClass: "is-fullwidth button",
                                   class:
                                     _vm.selectedCrm == crm
-                                      ? _vm.selectedSecondaryBoxText
-                                      : _vm.secondaryText
+                                      ? "is-link"
+                                      : "is-black-ter",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.selectCrm(crm)
+                                    }
+                                  }
                                 },
                                 [
                                   _c(
                                     "div",
                                     {
-                                      staticClass:
-                                        "is-size-7 has-text-weight-normal has-text-grey-light"
+                                      class:
+                                        _vm.selectedCrm == crm
+                                          ? _vm.selectedSecondaryBoxText
+                                          : _vm.secondaryText
                                     },
-                                    [_vm._v(_vm._s(crm.nombre_crm))]
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-7 has-text-weight-normal has-text-light"
+                                        },
+                                        [_vm._v(_vm._s(crm.nombre_crm))]
+                                      )
+                                    ]
                                   )
                                 ]
                               )
@@ -1303,9 +1208,10 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
+                        "is-size-6 has-text-weight-normal has-text-centered has-text-grey-light",
+                      staticStyle: { "padding-bottom": "8px" }
                     },
-                    [_vm._v("Zonas")]
+                    [_vm._v("ZONAS")]
                   ),
                   _vm._v(" "),
                   !_vm.selectedCrm
@@ -1314,7 +1220,7 @@ var render = function() {
                           "div",
                           {
                             staticClass:
-                              "has-text-centered has-text-weight-light has-text-grey-light is-size-5"
+                              "has-text-centered has-text-weight-light has-text-grey-light is-size-6"
                           },
                           [_vm._v("Selecciona un CRM")]
                         )
@@ -1338,36 +1244,45 @@ var render = function() {
                             },
                             [
                               _c(
-                                "a",
+                                "div",
                                 {
-                                  staticClass: "is-fullwidth button",
-                                  class:
-                                    _vm.selectedZona == zona
-                                      ? "is-link"
-                                      : "is-black-ter",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.selectZona(zona)
-                                    }
-                                  }
+                                  staticClass: "field",
+                                  staticStyle: { margin: "1px" }
                                 },
                                 [
                                   _c(
-                                    "div",
+                                    "a",
                                     {
+                                      staticClass: "is-fullwidth button",
                                       class:
                                         _vm.selectedZona == zona
-                                          ? _vm.selectedSecondaryBoxText
-                                          : _vm.secondaryText
+                                          ? "is-link"
+                                          : "is-black-ter",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.selectZona(zona)
+                                        }
+                                      }
                                     },
                                     [
                                       _c(
                                         "div",
                                         {
-                                          staticClass:
-                                            "is-size-7 has-text-weight-normal has-text-grey-light"
+                                          class:
+                                            _vm.selectedZona == zona
+                                              ? _vm.selectedSecondaryBoxText
+                                              : _vm.secondaryText
                                         },
-                                        [_vm._v(_vm._s(zona.nombre_zona))]
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-7 has-text-weight-normal has-text-light"
+                                            },
+                                            [_vm._v(_vm._s(zona.nombre_zona))]
+                                          )
+                                        ]
                                       )
                                     ]
                                   )
@@ -1386,9 +1301,10 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
+                        "is-size-6 has-text-weight-normal has-text-centered has-text-grey-light",
+                      staticStyle: { "padding-bottom": "8px" }
                     },
-                    [_vm._v("Importancia")]
+                    [_vm._v("IMPORTANCIA")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -1397,81 +1313,108 @@ var render = function() {
                     [
                       _c("div", { staticClass: "column is-12" }, [
                         _c(
-                          "a",
+                          "div",
                           {
-                            staticClass: "is-fullwidth button",
-                            class: _vm.core ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.core = +!_vm.core
-                              }
-                            }
+                            staticClass: "field",
+                            staticStyle: { margin: "1px" }
                           },
                           [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("CORE")]
-                              )
-                            ])
+                            _c(
+                              "a",
+                              {
+                                staticClass: "is-fullwidth button",
+                                class: _vm.core ? "is-link" : "is-black-ter",
+                                on: {
+                                  click: function($event) {
+                                    _vm.core = +!_vm.core
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { class: _vm.secondaryText }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-normal has-text-light"
+                                    },
+                                    [_vm._v("CORE")]
+                                  )
+                                ])
+                              ]
+                            )
                           ]
                         )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "column is-12" }, [
                         _c(
-                          "a",
+                          "div",
                           {
-                            staticClass: "is-fullwidth button",
-                            class: _vm.critic ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.critic = +!_vm.critic
-                              }
-                            }
+                            staticClass: "field",
+                            staticStyle: { margin: "1px" }
                           },
                           [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("CRITICO")]
-                              )
-                            ])
+                            _c(
+                              "a",
+                              {
+                                staticClass: "is-fullwidth button",
+                                class: _vm.critic ? "is-link" : "is-black-ter",
+                                on: {
+                                  click: function($event) {
+                                    _vm.critic = +!_vm.critic
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { class: _vm.secondaryText }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-normal has-text-light"
+                                    },
+                                    [_vm._v("CRITICO")]
+                                  )
+                                ])
+                              ]
+                            )
                           ]
                         )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "column is-12" }, [
                         _c(
-                          "a",
+                          "div",
                           {
-                            staticClass: "is-fullwidth button",
-                            class: _vm.vip ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.vip = +!_vm.vip
-                              }
-                            }
+                            staticClass: "field",
+                            staticStyle: { margin: "1px" }
                           },
                           [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("VIP")]
-                              )
-                            ])
+                            _c(
+                              "a",
+                              {
+                                staticClass: "is-fullwidth button",
+                                class: _vm.vip ? "is-link" : "is-black-ter",
+                                on: {
+                                  click: function($event) {
+                                    _vm.vip = +!_vm.vip
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { class: _vm.secondaryText }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-normal has-text-light"
+                                    },
+                                    [_vm._v("VIP")]
+                                  )
+                                ])
+                              ]
+                            )
                           ]
                         )
                       ])
@@ -1484,403 +1427,57 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
+                        "is-size-6 has-text-weight-normal has-text-centered has-text-grey-light",
+                      staticStyle: { "padding-bottom": "8px" }
                     },
-                    [_vm._v("Características")]
+                    [_vm._v("CARACTERISTICAS")]
                   ),
                   _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "columns is-multiline is-gapless" },
-                    [
-                      _c("div", { staticClass: "column is-3" }, [
+                    _vm._l(_vm.characteristics, function(characteristic) {
+                      return _c("div", { staticClass: "column is-3" }, [
                         _c(
-                          "a",
+                          "div",
                           {
-                            staticClass: "tile is-child button",
-                            class: _vm.pe_3g ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.pe_3g = +!_vm.pe_3g
-                              }
-                            }
+                            staticClass: "field",
+                            staticStyle: { margin: "1px" }
                           },
                           [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("PE 3G")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.mpls ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.mpls = +!_vm.mpls
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("MPLS")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.olt ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.olt = +!_vm.olt
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("OLT")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.olt_3play ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.olt_3play = +!_vm.olt_3play
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("OLT 3Play")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.red_minima_n1
-                              ? "is-link"
-                              : "is-black-ter",
-                            attrs: { disabled: "" },
-                            on: {
-                              click: function($event) {
-                                _vm.red_minima_n1 = +!_vm.red_minima_n1
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Red Mínima N1")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.red_minima_n2
-                              ? "is-link"
-                              : "is-black-ter",
-                            attrs: { disabled: "" },
-                            on: {
-                              click: function($event) {
-                                _vm.red_minima_n2 = +!_vm.red_minima_n2
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Red Mínima N2")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.lloo ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.lloo = +!_vm.lloo
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Localidad Obligatoria")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.ranco ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.ranco = +!_vm.ranco
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("RANCO")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.bafi ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.bafi = +!_vm.bafi
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("BAFI")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.offgrid ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.offgrid = +!_vm.offgrid
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Offgrid")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.solar ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.solar = +!_vm.solar
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Solar")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.eolica ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.eolica = +!_vm.eolica
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Eólica")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.protected_zone
-                              ? "is-link"
-                              : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.protected_zone = +!_vm.protected_zone
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Zona protegida")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.alba_project
-                              ? "is-link"
-                              : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.alba_project = +!_vm.alba_project
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Proyecto Alba")]
-                              )
-                            ])
+                            _c(
+                              "a",
+                              {
+                                staticClass: "tile is-child button",
+                                class: characteristic.selected
+                                  ? "is-link"
+                                  : "is-black-ter",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.changeCharacteristic(
+                                      characteristic
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { class: _vm.secondaryText }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-normal has-text-light"
+                                    },
+                                    [_vm._v(_vm._s(characteristic.label))]
+                                  )
+                                ])
+                              ]
+                            )
                           ]
                         )
                       ])
-                    ]
+                    }),
+                    0
                   )
                 ]),
                 _vm._v(" "),
@@ -1889,187 +1486,55 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light"
+                        "is-size-6 has-text-weight-normal has-text-centered has-text-grey-light",
+                      staticStyle: { "padding-bottom": "8px" }
                     },
-                    [_vm._v("Equipamiento")]
+                    [_vm._v("EQUIPAMIENTO")]
                   ),
                   _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "columns is-multiline is-gapless" },
-                    [
-                      _c("div", { staticClass: "column is-4" }, [
+                    _vm._l(_vm.equipments, function(equipment) {
+                      return _c("div", { staticClass: "column is-4" }, [
                         _c(
-                          "a",
+                          "div",
                           {
-                            staticClass: "tile is-child button",
-                            class: _vm.junction ? "is-link" : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.junction = +!_vm.junction
-                              }
-                            }
+                            staticClass: "field",
+                            staticStyle: { margin: "1px" }
                           },
                           [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Empalme")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-4" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.generator_set
-                              ? "is-link"
-                              : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.generator_set = +!_vm.generator_set
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Grupo Electrógeno")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-4" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.power_rectifier
-                              ? "is-link"
-                              : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.power_rectifier = +!_vm.power_rectifier
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Planta Rectificadora")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-4" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.air_conditioner
-                              ? "is-link"
-                              : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.air_conditioner = +!_vm.air_conditioner
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Aire Acondicionado")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-4" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.vertical_structure
-                              ? "is-link"
-                              : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.vertical_structure = +!_vm.vertical_structure
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Estructura Vertical")]
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column is-4" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "tile is-child button",
-                            class: _vm.infrastructure
-                              ? "is-link"
-                              : "is-black-ter",
-                            on: {
-                              click: function($event) {
-                                _vm.infrastructure = +!_vm.infrastructure
-                              }
-                            }
-                          },
-                          [
-                            _c("div", { class: _vm.secondaryText }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal has-text-grey-light"
-                                },
-                                [_vm._v("Contenedor")]
-                              )
-                            ])
+                            _c(
+                              "a",
+                              {
+                                staticClass: "tile is-child button",
+                                class: equipment.selected
+                                  ? "is-link"
+                                  : "is-black-ter",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.changeEquipment(equipment)
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { class: _vm.secondaryText }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-normal has-text-light"
+                                    },
+                                    [_vm._v(_vm._s(equipment.label))]
+                                  )
+                                ])
+                              ]
+                            )
                           ]
                         )
                       ])
-                    ]
+                    }),
+                    0
                   )
                 ])
               ])
@@ -2092,6 +1557,11 @@ var render = function() {
             on: { click: _vm.downloadPops }
           },
           [
+            _c("b-icon", {
+              staticClass: "has-text-eco fa-2x",
+              attrs: { pack: "fas", icon: "download" }
+            }),
+            _vm._v(" \n              \n            "),
             _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
               _vm._v("Descargar listado filtrado de POPs")
             ]),

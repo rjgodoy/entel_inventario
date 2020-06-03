@@ -5,7 +5,6 @@
         </header>
         <section class="modal-card-body">
             <div class="container" style="width: 50%; margin-top: 30px;">
-                <p class="content"><b>Selected:</b> {{ value }}</p>
                 <b-select placeholder="Select a name" v-model="value">
                     <option
                         v-for="option in parameters"

@@ -21,15 +21,17 @@
 
                         <!-- Filtros CRM -->
                         <div class="column is-2">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">CRMs</div>
+                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">CRM</div>
                             <div class="columns is-multiline is-gapless">
-                                <div class="column is-6" v-for="crm in crms" :key=crm.id>
-                                    <a class="is-fullwidth button" :class="selectedCrm == crm ? 'is-link' : 'is-black-ter'" @click="selectCrm(crm)">
-                                        <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
-                                            <!-- <div class="is-size-7 has-text-weight-normal">CRM</div> -->
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">{{ crm.nombre_crm }}</div>
-                                        </div>
-                                    </a>
+                                <div class="column is-6" v-for="crm in crms" :key="crm.id">
+                                    <div class="field" style="margin: 1px;">
+                                        <a class="is-fullwidth button" :class="selectedCrm == crm ? 'is-link' : 'is-black-ter'" @click="selectCrm(crm)">
+                                            <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
+                                                <!-- <div class="is-size-7 has-text-weight-normal">CRM</div> -->
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">{{ crm.nombre_crm }}</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -38,46 +40,54 @@
 
                         <!-- Filtros ZONAS -->
                         <div class="column is-2">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Zonas</div>
+                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">ZONAS</div>
                             <div v-if="!selectedCrm">
-                                <div class="has-text-centered has-text-weight-light has-text-grey-light is-size-5">Selecciona un CRM</div>
+                                <div class="has-text-centered has-text-weight-light has-text-grey-light is-size-6">Selecciona un CRM</div>
                             </div>
                             <div v-if="selectedCrm" class="columns is-multiline is-gapless">
                                 <div class="column" :class="zonas.length == 2 || zonas.length == 3 ? 'is-12' : 'is-6'" v-for="zona in zonas" :key="zona.id">
-                                    <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona)">
-                                        <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
-                                            <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">{{ zona.nombre_zona }}</div>
-                                        </div>
-                                    </a>
+                                    <div class="field" style="margin: 1px;">
+                                        <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona)">
+                                            <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
+                                                <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">{{ zona.nombre_zona }}</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Filtros IMPORTANCIA -->
                         <div class="column is-1">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Importancia</div>
+                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">IMPORTANCIA</div>
                             <div class="columns is-multiline is-gapless">
                                 <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">CORE</div>
-                                        </div>
-                                    </a>
+                                    <div class="field" style="margin: 1px;">
+                                        <a class="is-fullwidth button" :class="core ? 'is-link' : 'is-black-ter'" @click="core = +!core" >
+                                            <div :class="secondaryText"> 
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">CORE</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="critic ? 'is-link' : 'is-black-ter'" @click="critic = +!critic" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">CRITICO</div>
-                                        </div>
-                                    </a>
+                                    <div class="field" style="margin: 1px;">
+                                        <a class="is-fullwidth button" :class="critic ? 'is-link' : 'is-black-ter'" @click="critic = +!critic" >
+                                            <div :class="secondaryText"> 
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">CRITICO</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="column is-12">
-                                    <a class="is-fullwidth button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">VIP</div>
-                                        </div>
-                                    </a>
+                                    <div class="field" style="margin: 1px;">
+                                        <a class="is-fullwidth button" :class="vip ? 'is-link' : 'is-black-ter'" @click="vip = +!vip" >
+                                            <div :class="secondaryText"> 
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">VIP</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -86,106 +96,19 @@
 
                         <!-- Filtros CARACTERISTICAS -->
                         <div class="column is-4">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Características</div>
+                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">CARACTERISTICAS</div>
                             <div class="columns is-multiline is-gapless">
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="pe_3g ? 'is-link' : 'is-black-ter'" @click="pe_3g = +!pe_3g" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">PE 3G</div>
-                                        </div>
-                                    </a>
+
+                                <div class="column is-3" v-for="characteristic in characteristics">
+                                    <div class="field" style="margin: 1px;">
+                                        <a class="tile is-child button" :class="characteristic.selected ? 'is-link' : 'is-black-ter'" @click="changeCharacteristic(characteristic)" >
+                                            <div :class="secondaryText"> 
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">{{ characteristic.label }}</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="mpls ? 'is-link' : 'is-black-ter'" @click="mpls = +!mpls" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">MPLS</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="olt ? 'is-link' : 'is-black-ter'" @click="olt = +!olt" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">OLT</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="olt_3play ? 'is-link' : 'is-black-ter'" @click="olt_3play = +!olt_3play" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">OLT 3Play</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="red_minima_n1 ? 'is-link' : 'is-black-ter'" @click="red_minima_n1 = +!red_minima_n1" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Red Mínima N1</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="red_minima_n2 ? 'is-link' : 'is-black-ter'" @click="red_minima_n2 = +!red_minima_n2" disabled>
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Red Mínima N2</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="lloo ? 'is-link' : 'is-black-ter'" @click="lloo = +!lloo" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Localidad Obligatoria</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="ranco ? 'is-link' : 'is-black-ter'" @click="ranco = +!ranco" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">RANCO</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="bafi ? 'is-link' : 'is-black-ter'" @click="bafi = +!bafi" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">BAFI</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="offgrid ? 'is-link' : 'is-black-ter'" @click="offgrid = +!offgrid" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Offgrid</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="solar ? 'is-link' : 'is-black-ter'" @click="solar = +!solar" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Solar</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="eolica ? 'is-link' : 'is-black-ter'" @click="eolica = +!eolica" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Eólica</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="protected_zone ? 'is-link' : 'is-black-ter'" @click="protected_zone = +!protected_zone" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Zona protegida</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-3">
-                                    <a class="tile is-child button" :class="alba_project ? 'is-link' : 'is-black-ter'" @click="alba_project = +!alba_project" >
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Proyecto Alba</div>
-                                        </div>
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
 
@@ -193,56 +116,20 @@
 
                         <!-- Filtros EQUIPAMIENTO -->
                         <div class="column is-3">
-                            <div class="title is-size-6 has-text-weight-bold has-text-centered has-text-grey-light">Equipamiento</div>
+                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">EQUIPAMIENTO</div>
                             <div class="columns is-multiline is-gapless">
-                                <div class="column is-4">
-                                    <a class="tile is-child button" 
-                                        :class="junction ? 'is-link' : 'is-black-ter'" @click="junction = +!junction">
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Empalme</div>
-                                        </div>
-                                    </a>
+
+                                <div class="column is-4" v-for="equipment in equipments">
+                                    <div class="field" style="margin: 1px;">
+                                        <a class="tile is-child button" 
+                                            :class="equipment.selected ? 'is-link' : 'is-black-ter'" @click="changeEquipment(equipment)">
+                                            <div :class="secondaryText"> 
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">{{ equipment.label }}</div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" 
-                                        :class="generator_set ? 'is-link' : 'is-black-ter'" @click="generator_set = +!generator_set">
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Grupo Electrógeno</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" 
-                                        :class="power_rectifier ? 'is-link' : 'is-black-ter'" @click="power_rectifier = +!power_rectifier">
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Planta Rectificadora</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" 
-                                        :class="air_conditioner ? 'is-link' : 'is-black-ter'" @click="air_conditioner = +!air_conditioner">
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Aire Acondicionado</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" 
-                                        :class="vertical_structure ? 'is-link' : 'is-black-ter'" @click="vertical_structure = +!vertical_structure">
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Estructura Vertical</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="column is-4">
-                                    <a class="tile is-child button" 
-                                        :class="infrastructure ? 'is-link' : 'is-black-ter'" @click="infrastructure = +!infrastructure">
-                                        <div :class="secondaryText"> 
-                                            <div class="is-size-7 has-text-weight-normal has-text-grey-light">Contenedor</div>
-                                        </div>
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -256,6 +143,13 @@
                 icon-pack="fas"
                 size="is-medium"
                 :loading="isLoading">
+                <b-icon 
+                    style=""
+                    pack="fas" 
+                    icon="download" 
+                    class="has-text-eco fa-2x">
+                </b-icon> 
+                &nbsp;&nbsp;
                 <div class="is-size-6 has-text-weight-normal">Descargar listado filtrado de POPs</div>
                 <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
                 <!-- </b-button> -->
@@ -286,7 +180,7 @@
             </div>
         </div>
 
-        <section class="section tile is-ancestor has-background-light">            
+        <section class="section tile is-ancestor has-background-light">
             <div class="tile is-7 is-parent">
                 <div class="tile is-child box" style="max-height: 100%; min-height: 800px;">
                     <div class="field">
@@ -461,6 +355,96 @@ export default {
                 zoom: 5
             },
 
+            equipments: {
+                electric_line: {
+                    label: 'Línea Eléctrica',
+                    selected: 0
+                },
+                junction: {
+                    label: 'Empalme',
+                    selected: 0
+                },
+                generator_set: {
+                    label: 'Grupo Electrógeno',
+                    selected: 0
+                },
+                power_rectifier: {
+                    label: 'Planta Rectificadora',
+                    selected: 0
+                },
+                air_conditioner: {
+                    label: 'Aire Acondicionado',
+                    selected: 0
+                },
+                vertical_structure: {
+                    label: 'Estructura Vertical',
+                    selected: 0
+                },
+                infrastructure: {
+                    label: 'Infraestructura',
+                    selected: 0
+                }
+            },
+
+            characteristics: {
+                pe_3g: {
+                    label: 'PE 3G',
+                    selected: 0
+                },
+                mpls: {
+                    label: 'MPLS',
+                    selected: 0
+                },
+                olt: {
+                    label: 'OLT',
+                    selected: 0
+                },
+                olt_3play: {
+                    label: 'OLT 3Play',
+                    selected: 0
+                },
+                red_minima_n1: {
+                    label: 'Red Mínima N1',
+                    selected: 0
+                },
+                red_minima_n2: {
+                    label: 'Red Mínima N2',
+                    selected: 0
+                },
+                lloo: {
+                    label: 'Localidad Obligatoria',
+                    selected: 0
+                },
+                ranco: {
+                    label: 'RANCO',
+                    selected: 0
+                },
+                bafi: {
+                    label: 'BAFI',
+                    selected: 0
+                },
+                offgrid: {
+                    label: 'Offgrid',
+                    selected: 0
+                },
+                solar: {
+                    label: 'Solar',
+                    selected: 0
+                },
+                eolica: {
+                    label: 'Eólica',
+                    selected: 0
+                },
+                protected_zone: {
+                    label: 'Zona protegida',
+                    selected: 0
+                },
+                alba_project: {
+                    label: 'Proyecto Alba',
+                    selected: 0
+                },
+            },
+
             bodyBackground: '',
             boxBackground: '',
             primaryText: '',
@@ -480,29 +464,7 @@ export default {
 
             core: 0,
             critic: 0,
-
             vip: 0,
-            pe_3g: 0,
-            mpls: 0,
-            olt: 0,
-            olt_3play: 0,
-            red_minima_n1: 0,
-            red_minima_n2: 0,
-            lloo: 0,
-            ranco: 0,
-            bafi: 0,
-            offgrid: 0,
-            solar: 0,
-            eolica: 0,
-            protected_zone: 0,
-            alba_project: 0,
-
-            junction: 0,
-            generator_set: 0,
-            power_rectifier: 0,
-            air_conditioner: 0,
-            vertical_structure: 0,
-            infrastructure: 0,
 
             // checkboxPosition: 'left',
             // isPaginated: true,
@@ -528,34 +490,12 @@ export default {
     },
 
     watch: {
-        core(newValue) { this.getPops(); this.getPopsMap() },
-        critic(newValue) { this.getPops(); this.getPopsMap() },
+        core(val) { this.getPops(); this.getPopsMap() },
+        critic(val) { this.getPops(); this.getPopsMap() },
+        vip(val) { this.getPops(); this.getPopsMap() },
 
-        vip(newValue) { this.getPops(); this.getPopsMap() },
-        pe_3g(newValue) { this.getPops(); this.getPopsMap() },
-        mpls(newValue) { this.getPops(); this.getPopsMap() },
-        olt(newValue) { this.getPops(); this.getPopsMap() },
-        olt_3play(newValue) { this.getPops(); this.getPopsMap() },
-        red_minima_n1(newValue) { this.getPops(); this.getPopsMap() },
-        red_minima_n2(newValue) { this.getPops(); this.getPopsMap() },
-        lloo(newValue) { this.getPops(); this.getPopsMap() },
-        ranco(newValue) { this.getPops(); this.getPopsMap() },
-        bafi(newValue) { this.getPops(); this.getPopsMap() },
-        offgrid(newValue) { this.getPops(); this.getPopsMap() },
-        solar(newValue) { this.getPops(); this.getPopsMap() },
-        eolica(newValue) { this.getPops(); this.getPopsMap() },
-        protected_zone(newValue) { this.getPops(); this.getPopsMap() },
-        alba_project(newValue) { this.getPops(); this.getPopsMap() },
-
-        junction(newValue) { this.getPops(); this.getPopsMap() },
-        generator_set(newValue) { this.getPops(); this.getPopsMap() },
-        power_rectifier(newValue) { this.getPops(); this.getPopsMap() },
-        air_conditioner(newValue) { this.getPops(); this.getPopsMap() },
-        vertical_structure(newValue) { this.getPops(); this.getPopsMap() },
-        infrastructure(newValue) { this.getPops(); this.getPopsMap() },
-
-        selectedPops(newValue) { 
-            newValue.length != 0 ? this.popsMap = newValue : this.getPops()
+        selectedPops(val) { 
+            val.length != 0 ? this.popsMap = val : this.getPops()
         }
     },
 
@@ -568,6 +508,7 @@ export default {
             return popIds
         }
     },
+
     methods: {
         // BUTTONS
         getCrms() {
@@ -586,6 +527,18 @@ export default {
                 // console.log(response.data)
                 this.filters = response.data;
             })
+        },
+
+        changeEquipment(equipment) {
+            equipment.selected = +!equipment.selected
+            this.getPops()
+            this.getPopsMap()
+        },
+
+        changeCharacteristic(characteristic) {
+            characteristic.selected = +!characteristic.selected
+            this.getPops()
+            this.getPopsMap()
         },
 
         selectPop(pop) {
@@ -636,34 +589,35 @@ export default {
 
                 'core': this.core,
                 'critic': this.critic,
-
                 'vip': this.vip,
-                'pe_3g': this.pe_3g,
-                'mpls': this.mpls,
-                'olt': this.olt,
-                'olt_3play': this.olt_3play,
-                'red_minima_n1': this.red_minima_n1,
-                'red_minima_n2': this.red_minima_n2,
-                'lloo': this.lloo,
-                'ranco': this.ranco,
-                'bafi': this.bafi,
-                'offgrid': this.offgrid,
-                'solar': this.solar,
-                'eolica': this.eolica,
-                'alba_project': this.alba_project,
-                'protected_zone': this.protected_zone,
 
-                'junction': this.junction,
-                'generator_set': this.generator_set,
-                'power_rectifier': this.power_rectifier,
-                'air_conditioner': this.air_conditioner,
-                'vertical_structure': this.vertical_structure,
-                'infrastructure': this.infrastructure
+                'pe_3g': this.characteristics.pe_3g.selected,
+                'mpls': this.characteristics.mpls.selected,
+                'olt': this.characteristics.olt.selected,
+                'olt_3play': this.characteristics.olt_3play.selected,
+                'red_minima_n1': this.characteristics.red_minima_n1.selected,
+                'red_minima_n2': this.characteristics.red_minima_n2.selected,
+                'lloo': this.characteristics.lloo.selected,
+                'ranco': this.characteristics.ranco.selected,
+                'bafi': this.characteristics.bafi.selected,
+                'offgrid': this.characteristics.offgrid.selected,
+                'solar': this.characteristics.solar.selected,
+                'eolica': this.characteristics.eolica.selected,
+                'alba_project': this.characteristics.alba_project.selected,
+                'protected_zone': this.characteristics.protected_zone.selected,
+
+                'electric_line': this.equipments.electric_line.selected,
+                'junction': this.equipments.junction.selected,
+                'generator_set': this.equipments.generator_set.selected,
+                'power_rectifier': this.equipments.power_rectifier.selected,
+                'air_conditioner': this.equipments.air_conditioner.selected,
+                'vertical_structure': this.equipments.vertical_structure.selected,
+                'infrastructure': this.equipments.infrastructure.selected
             }
 
             axios.get('/api/filterPops', { params: params })
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 this.pops = response.data
             })
         },
@@ -679,29 +633,30 @@ export default {
 
                 'core': this.core,
                 'critic': this.critic,
-
                 'vip': this.vip,
-                'pe_3g': this.pe_3g,
-                'mpls': this.mpls,
-                'olt': this.olt,
-                'olt_3play': this.olt_3play,
-                'red_minima_n1': this.red_minima_n1,
-                'red_minima_n2': this.red_minima_n2,
-                'lloo': this.lloo,
-                'ranco': this.ranco,
-                'bafi': this.bafi,
-                'offgrid': this.offgrid,
-                'solar': this.solar,
-                'eolica': this.eolica,
-                'alba_project': this.alba_project,
-                'protected_zone': this.protected_zone,
 
-                'junction': this.junction,
-                'generator_set': this.generator_set,
-                'power_rectifier': this.power_rectifier,
-                'air_conditioner': this.air_conditioner,
-                'vertical_structure': this.vertical_structure,
-                'infrastructure': this.infrastructure
+                'pe_3g': this.characteristics.pe_3g.selected,
+                'mpls': this.characteristics.mpls.selected,
+                'olt': this.characteristics.olt.selected,
+                'olt_3play': this.characteristics.olt_3play.selected,
+                'red_minima_n1': this.characteristics.red_minima_n1.selected,
+                'red_minima_n2': this.characteristics.red_minima_n2.selected,
+                'lloo': this.characteristics.lloo.selected,
+                'ranco': this.characteristics.ranco.selected,
+                'bafi': this.characteristics.bafi.selected,
+                'offgrid': this.characteristics.offgrid.selected,
+                'solar': this.characteristics.solar.selected,
+                'eolica': this.characteristics.eolica.selected,
+                'alba_project': this.characteristics.alba_project.selected,
+                'protected_zone': this.characteristics.protected_zone.selected,
+
+                'electric_line': this.equipments.electric_line.selected,
+                'junction': this.equipments.junction.selected,
+                'generator_set': this.equipments.generator_set.selected,
+                'power_rectifier': this.equipments.power_rectifier.selected,
+                'air_conditioner': this.equipments.air_conditioner.selected,
+                'vertical_structure': this.equipments.vertical_structure.selected,
+                'infrastructure': this.equipments.infrastructure.selected
             }
 
             axios.get('/api/popsMap', { params: params })
@@ -711,7 +666,6 @@ export default {
 
             })
         },
-
 
         // Style mode
         styleMode(){
@@ -790,29 +744,30 @@ export default {
                 
                 'core': this.core,
                 'critic': this.critic,
-
                 'vip': this.vip,
-                'pe_3g': this.pe_3g,
-                'mpls': this.mpls,
-                'olt': this.olt,
-                'olt_3play': this.olt_3play,
-                // 'red_minima_n1': this.red_minima_n1,
-                // 'red_minima_n2': this.red_minima_n2,
-                'lloo': this.lloo,
-                'ranco': this.ranco,
-                'bafi': this.bafi,
-                'offgrid': this.offgrid,
-                'solar': this.solar,
-                'eolica': this.eolica,
-                'alba_project': this.alba_project,
-                'protected_zone': this.protected_zone,
 
-                'junction': this.junction,
-                'generator_set': this.generator_set,
-                'power_rectifier': this.power_rectifier,
-                'air_conditioner': this.air_conditioner,
-                'vertical_structure': this.vertical_structure,
-                'infrastructure': this.infrastructure
+                'pe_3g': this.characteristics.pe_3g.selected,
+                'mpls': this.characteristics.mpls.selected,
+                'olt': this.characteristics.olt.selected,
+                'olt_3play': this.characteristics.olt_3play.selected,
+                // 'red_minima_n1': this.characteristics.red_minima_n1.selected,
+                // 'red_minima_n2': this.characteristics.red_minima_n2.selected,
+                'lloo': this.characteristics.lloo.selected,
+                'ranco': this.characteristics.ranco.selected,
+                'bafi': this.characteristics.bafi.selected,
+                'offgrid': this.characteristics.offgrid.selected,
+                'solar': this.characteristics.solar.selected,
+                'eolica': this.characteristics.eolica.selected,
+                'alba_project': this.characteristics.alba_project.selected,
+                'protected_zone': this.characteristics.protected_zone.selected,
+
+                'electric_line': this.equipments.electric_line.selected,
+                'junction': this.equipments.junction.selected,
+                'generator_set': this.equipments.generator_set.selected,
+                'power_rectifier': this.equipments.power_rectifier.selected,
+                'air_conditioner': this.equipments.air_conditioner.selected,
+                'vertical_structure': this.equipments.vertical_structure.selected,
+                'infrastructure': this.equipments.infrastructure.selected
             }
 
             axios.get('/api/pop/export', { 

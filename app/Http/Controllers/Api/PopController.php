@@ -470,6 +470,8 @@ class PopController extends Controller
         $protected_zone = $request->protected_zone;
         $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
 
+        $electric_lines = $request->electric_line;
+        $condition_electric_lines = 'pops.id IN (SELECT electric_lines.pop_id from entel_g_redes_inventario.electric_lines)';
         $junctions = $request->junction;
         $condition_junctions = 'pops.id IN (SELECT junctions.pop_id from entel_g_redes_inventario.junctions)';
         $generators = $request->generator_set;
@@ -552,6 +554,9 @@ class PopController extends Controller
                 $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
             })
 
+            ->where(function($q) use($condition_electric_lines, $electric_lines) {
+                $electric_lines ? $q->whereRaw($condition_electric_lines) : $q->whereRaw('1 = 1');
+            })
             ->where(function($q) use($condition_junctions, $junctions) {
                 $junctions ? $q->whereRaw($condition_junctions) : $q->whereRaw('1 = 1');
             })
@@ -621,6 +626,8 @@ class PopController extends Controller
         $protected_zone = $request->protected_zone;
         $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
 
+        $electric_lines = $request->electric_line;
+        $condition_electric_lines = 'pops.id IN (SELECT electric_lines.pop_id from entel_g_redes_inventario.electric_lines)';
         $junctions = $request->junction;
         $condition_junctions = 'pops.id IN (SELECT junctions.pop_id from entel_g_redes_inventario.junctions)';
         $generators = $request->generator_set;
@@ -702,6 +709,9 @@ class PopController extends Controller
                 $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
             })
 
+            ->where(function($q) use($condition_electric_lines, $electric_lines) {
+                $electric_lines ? $q->whereRaw($condition_electric_lines) : $q->whereRaw('1 = 1');
+            })
             ->where(function($q) use($condition_junctions, $junctions) {
                 $junctions ? $q->whereRaw($condition_junctions) : $q->whereRaw('1 = 1');
             })

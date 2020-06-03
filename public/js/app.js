@@ -12200,11 +12200,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAdjust"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAdjust"]);
 
 var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Clock.vue")["default"];
 
@@ -47846,61 +47899,52 @@ var render = function() {
               },
               [
                 _c("div", {}, [
-                  _c(
-                    "nav",
-                    { staticClass: "navbar has-background-black-ter" },
-                    [
-                      _c("div", { staticClass: "navbar-brand" }, [
-                        _c("a", {
-                          staticClass: "navbar-item",
-                          staticStyle: {
-                            background:
-                              "url('/img/iconografia/entel-logo-negativo.png') no-repeat center center",
-                            "background-size": "contain",
-                            width: "60px"
-                          },
-                          attrs: { href: "#" }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "navbar-item" }, [
-                          _c(
-                            "div",
-                            { staticClass: "title is-5 has-text-grey-light" },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "is-5 has-text-white" },
-                                [_vm._v(_vm._s(_vm.app_name))]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "title is-6 has-text-grey-light"
-                                },
-                                [
-                                  _vm._v(
-                                    "Subgerencia Infraestructura, Poder y Clima"
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "subtitle is-7 has-text-grey-light"
-                                },
-                                [_vm._v("Gerencia O&M Redes de Acceso")]
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(0)
-                      ])
-                    ]
-                  )
+                  _c("nav", { staticClass: "navbar is-transparent" }, [
+                    _c("div", { staticClass: "navbar-brand" }, [
+                      _c("a", {
+                        staticClass: "navbar-item",
+                        staticStyle: {
+                          background:
+                            "url('/img/iconografia/entel-logo-negativo.png') no-repeat center center",
+                          "background-size": "contain",
+                          width: "60px"
+                        },
+                        attrs: { href: "#" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "navbar-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "title is-5 has-text-grey-light" },
+                          [
+                            _c("div", { staticClass: "is-5 has-text-white" }, [
+                              _vm._v(_vm._s(_vm.app_name))
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "title is-6 has-text-grey-light" },
+                              [
+                                _vm._v(
+                                  "Subgerencia Infraestructura, Poder y Clima"
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "subtitle is-7 has-text-grey-light"
+                              },
+                              [_vm._v("Gerencia O&M Redes de Acceso")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ])
+                  ])
                 ])
               ]
             ),
@@ -48296,17 +48340,60 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c(
-      "footer",
-      {
-        class:
-          _vm.currentRoute.toLowerCase() == "/capacity"
-            ? "has-background-black-ter"
-            : "has-background-white",
-        staticStyle: { "padding-top": "0.5rem", "padding-bottom": "0rem" }
-      },
-      [_vm._m(1)]
-    )
+    _c("div", { staticClass: "hero is-black-ter" }, [
+      _c("div", { staticClass: "hero-body" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "columns" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "column" }, [
+              _c("div", { staticClass: "block" }, [
+                _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
+                  _vm._v("Contacto")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "field",
+                    staticStyle: { "padding-top": "8px" }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "has-text-weight-normal is-size-6",
+                        attrs: {
+                          href: "mailto:proyectosinfraestructura@entel.cl"
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "envelope"] }
+                        }),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(" proyectosinfraestructura@entel.cl")
+                        ])
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr", { staticClass: "has-background-dark is-marginless" }),
+    _vm._v(" "),
+    _vm._m(4)
   ])
 }
 var staticRenderFns = [
@@ -48327,19 +48414,117 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "has-text-centered" }, [
-      _c(
-        "a",
-        { attrs: { href: "http://www.anidalatam.com", target: "blank" } },
-        [
-          _c("img", {
-            staticClass: "img-container",
-            staticStyle: { width: "100px" },
-            attrs: { alt: "image", src: "/img/logo_anida.png" }
-          })
-        ]
-      )
+    return _c("div", { staticClass: "column is-3" }, [
+      _c("div", { staticClass: "block" }, [
+        _c("img", {
+          staticClass: "img-container",
+          staticStyle: { width: "100px" },
+          attrs: {
+            alt: "image",
+            src: "/img/iconografia/entel-logo-negativo.png"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "block" }, [
+        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
+          _vm._v("Inventario Infraestructura")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "has-text-weight-normal is-size-6",
+            staticStyle: { "padding-top": "8px" }
+          },
+          [_vm._v("Escribir detalle aquí...")]
+        )
+      ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-3" }, [
+      _c("div", { staticClass: "block" }, [
+        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
+          _vm._v("Fuentes de Información")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "has-text-weight-normal is-size-6",
+            staticStyle: { "padding-top": "8px" }
+          },
+          [_vm._v("Escribir detalle aquí...")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "block" }, [
+        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
+          _vm._v("Otros")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "has-text-weight-normal is-size-6",
+            staticStyle: { "padding-top": "8px" }
+          },
+          [_vm._v("Escribir detalle aquí...")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-3" }, [
+      _c("div", { staticClass: "block" }, [
+        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
+          _vm._v("Ultimas Actualizaciones")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "has-text-weight-normal is-size-6",
+            staticStyle: { "padding-top": "8px" }
+          },
+          [_vm._v("Escribir detalle aquí...")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "footer",
+      {
+        staticClass: "has-background-black-bis",
+        staticStyle: { "padding-top": "0.5rem", "padding-bottom": "0rem" }
+      },
+      [
+        _c("div", { staticClass: "has-text-centered" }, [
+          _c(
+            "a",
+            { attrs: { href: "http://www.anidalatam.com", target: "blank" } },
+            [
+              _c("img", {
+                staticClass: "img-container",
+                staticStyle: { width: "100px" },
+                attrs: { alt: "image", src: "/img/logo_anida.png" }
+              })
+            ]
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true

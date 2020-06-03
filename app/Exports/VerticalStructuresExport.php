@@ -43,6 +43,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
     protected $alba_project;
     protected $protected_zone;
 
+    protected $electric_line;
     protected $junction;
     protected $generator_set;
     protected $power_rectifier;
@@ -75,6 +76,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
         $this->alba_project = $request->alba_project ? $request->alba_project : 0;
         $this->protected_zone = $request->protected_zone ? $request->protected_zone : 0;
 
+        $this->electric_line = $request->electric_line ? $request->electric_line : 0;
         $this->junction = $request->junction ? $request->junction : 0;
         $this->generator_set = $request->generator_set ? $request->generator_set : 0;
         $this->power_rectifier = $request->power_rectifier ? $request->power_rectifier : 0;
@@ -128,6 +130,8 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             $protected_zone = $this->protected_zone;
             $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
 
+            $electric_line = $this->electric_line;
+            $condition_electric_lines = 'pops.id IN (SELECT electric_lines.pop_id from entel_g_redes_inventario.electric_lines)';
             $junction = $this->junction;
             $condition_junctions = 'pops.id IN (SELECT junctions.pop_id from entel_g_redes_inventario.junctions)';
             $generator_set = $this->generator_set;
@@ -202,7 +206,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
                 //     $r->whereRaw($condition_critic);
                 // })
                 ->whereHas('pop', function($s) use($condition_vip, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone, 
-                    $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_alba_project) {
+                    $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_alba_project) {
                     $s->whereRaw($condition_vip)
                     ->whereRaw($condition_offgrid)
                     ->whereRaw($condition_solar)
@@ -212,6 +216,9 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
                         $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
                     })
 
+                    ->where(function($q) use($condition_electric_lines, $electric_line) {
+                        $electric_line ? $q->whereRaw($condition_electric_lines) : $q->whereRaw('1 = 1');
+                    })
                     ->where(function($q) use($condition_junctions, $junction) {
                     $junction ? $q->whereRaw($condition_junctions) : $q->whereRaw('1 = 1');
                     })

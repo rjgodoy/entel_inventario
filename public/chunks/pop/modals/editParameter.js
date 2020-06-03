@@ -33,7 +33,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['pop', 'site', 'user', 'parameter'],
   data: function data() {
@@ -138,11 +137,6 @@ var render = function() {
             staticStyle: { width: "50%", "margin-top": "30px" }
           },
           [
-            _c("p", { staticClass: "content" }, [
-              _c("b", [_vm._v("Selected:")]),
-              _vm._v(" " + _vm._s(_vm.value))
-            ]),
-            _vm._v(" "),
             _c(
               "b-select",
               {

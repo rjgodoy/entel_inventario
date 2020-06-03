@@ -8,7 +8,7 @@
                 <!-- ################## -->
                 <div class="column is-3 is-small" style="padding-top: 10px; padding-left: 12px;">
                     <div class="">
-                        <nav class="navbar has-background-black-ter">
+                        <nav class="navbar is-transparent">
                             <div class="navbar-brand">
                                 <a class="navbar-item" href="#" style="background: url('/img/iconografia/entel-logo-negativo.png') no-repeat center center; background-size: contain; width: 60px;">
                                 </a>
@@ -146,7 +146,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="level is-link is-bold" style="margin-right: -24px; margin-left: -24px; margin-top: -24px">
                 <div class="level-item">
                     <div class="container has-text-centered">
@@ -171,128 +171,181 @@
             </div>
         </main>
 
-        <footer :class="currentRoute.toLowerCase() == '/capacity' ? 'has-background-black-ter' : 'has-background-white'" style="padding-top: 0.5rem; padding-bottom: 0rem;">
+        <div class="hero is-black-ter">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-3">
+                            <div class="block">
+                                <img alt="image" class="img-container" src="/img/iconografia/entel-logo-negativo.png" style="width: 100px;"/>
+                            </div>
+                            <div class="block">
+                                <div class="has-text-weight-bold is-size-5">Inventario Infraestructura</div>
+                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Escribir detalle aquí...</div>
+                            </div>
+                        </div>
+                        <div class="column is-3">
+                            <div class="block">
+                                <div class="has-text-weight-bold is-size-5">Fuentes de Información</div>
+                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Escribir detalle aquí...</div>
+                            </div>
+                            <div class="block">
+                                <div class="has-text-weight-bold is-size-5">Otros</div>
+                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Escribir detalle aquí...</div>
+                            </div>
+                        </div>
+                        <div class="column is-3">
+                            <div class="block">
+                                <div class="has-text-weight-bold is-size-5">Ultimas Actualizaciones</div>
+                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Escribir detalle aquí...</div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="block">
+                                <div class="has-text-weight-bold is-size-5">Contacto</div>
+                                <div class="field" style="padding-top: 8px;">
+                                    <a class="has-text-weight-normal is-size-6" href="mailto:proyectosinfraestructura@entel.cl">
+                                        <font-awesome-icon :icon="['fas', 'envelope']"/>
+                                        <span>&nbsp;proyectosinfraestructura@entel.cl</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="has-background-dark is-marginless"></hr>
+
+        <footer class="has-background-black-bis" style="padding-top: 0.5rem; padding-bottom: 0rem;">
             <div class="has-text-centered">
                 <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
             </div>
         </footer>
 
+        <!-- <footer :class="currentRoute.toLowerCase() == '/capacity' ? 'has-background-black-ter' : 'has-background-white'" style="padding-top: 0.5rem; padding-bottom: 0rem;">
+            <div class="has-text-centered">
+                <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
+            </div>
+        </footer> -->
+
     </div>
 </template>
 
 <script>
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust } from "@fortawesome/free-solid-svg-icons";
-// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+    import { library } from "@fortawesome/fontawesome-svg-core";
+    import { faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust } from "@fortawesome/free-solid-svg-icons";
+    // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+    // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust);
-var Clock = require('./Clock.vue').default;
+    library.add(faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust);
+    var Clock = require('./Clock.vue').default;
 
-export default {
-    components: {
-        'clock': Clock
-    },
-    props: [
-        'user',
-        'user_permissions',
-        'app_name',
-        'crms',
-        'menu_data',
-        'pops',
-        'last_data_counters'
-    ],
-
-    data() {
-        return {
-            darkMode: 0,
-            userRequestAlerts: [],
-        }
-    },
-
-    mounted() {
-        this.getUserRequestAlerts()
-        
-        // console.log(this.user_permissions[0])
-        // if (this.$route.query.message) {
-        //     this.$buefy.toast.open({
-        //         message: this.$route.query.message,
-        //         type: 'is-success',
-        //         duration: 3000
-        //     })
-        // }
-    },
-
-    computed: {
-        welcomeText() {
-            return this.user.sexo == 'Femenino' ? 'Bienvenida' : 'Bienvenido'
+    export default {
+        components: {
+            'clock': Clock
         },
-        currentRoute () {
-            return this.$route.path
-        },
-        style() {
-            return this.darkMode == 1 ? 'Light mode' : 'Dark mode'
-        }
-    },
+        props: [
+            'user',
+            'user_permissions',
+            'app_name',
+            'crms',
+            'menu_data',
+            'pops',
+            'last_data_counters'
+        ],
 
-    methods: {
-        goBack() {
-            window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-        },
-
-        changeStyle() {
-            this.darkMode = this.darkMode == 0 ? 1 : 0
-        },
-
-        canView(path) {
-            if (path !== '/capacity' && path !== '/admin') {
-                return true
-            } else if (path == '/capacity' && 
-                (this.user.roles[0].name == 'developer' 
-                    || this.user.roles[0].name == 'admin' 
-                    || this.user.roles[0].name == 'engineer'
-                    || this.user.roles[0].name == 'engineer admin'
-                    || this.user.roles[0].name == 'super viewer'
-                    || this.user_permissions.find(element => element.slug == 'view-capacity')
-                    )) {
-                return true
-            } else if (path == '/admin' && 
-                (this.user.roles[0].name == 'developer' 
-                    || this.user.roles[0].name == 'admin' 
-                    || this.user_permissions.find(element => element.slug == 'view-admin'
-                    ))) {
-                return true
-            } else {
-                return false
+        data() {
+            return {
+                darkMode: 0,
+                userRequestAlerts: [],
             }
-
         },
 
-        getUserRequestAlerts() {
-            axios.get(`/api/userRequestAlerts?api_token=${this.user.api_token}`)
-            .then(response => {
-                if (this.user.roles[0].name == 'admin'
-                || this.user.roles[0].name == 'developer') {
-                    this.userRequestAlerts = response.data.data
+        mounted() {
+            this.getUserRequestAlerts()
+            
+            // console.log(this.user_permissions[0])
+            // if (this.$route.query.message) {
+            //     this.$buefy.toast.open({
+            //         message: this.$route.query.message,
+            //         type: 'is-success',
+            //         duration: 3000
+            //     })
+            // }
+        },
+
+        computed: {
+            welcomeText() {
+                return this.user.sexo == 'Femenino' ? 'Bienvenida' : 'Bienvenido'
+            },
+            currentRoute () {
+                return this.$route.path
+            },
+            style() {
+                return this.darkMode == 1 ? 'Light mode' : 'Dark mode'
+            }
+        },
+
+        methods: {
+            goBack() {
+                window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+            },
+
+            changeStyle() {
+                this.darkMode = this.darkMode == 0 ? 1 : 0
+            },
+
+            canView(path) {
+                if (path !== '/capacity' && path !== '/admin') {
+                    return true
+                } else if (path == '/capacity' && 
+                    (this.user.roles[0].name == 'developer' 
+                        || this.user.roles[0].name == 'admin' 
+                        || this.user.roles[0].name == 'engineer'
+                        || this.user.roles[0].name == 'engineer admin'
+                        || this.user.roles[0].name == 'super viewer'
+                        || this.user_permissions.find(element => element.slug == 'view-capacity')
+                        )) {
+                    return true
+                } else if (path == '/admin' && 
+                    (this.user.roles[0].name == 'developer' 
+                        || this.user.roles[0].name == 'admin' 
+                        || this.user_permissions.find(element => element.slug == 'view-admin'
+                        ))) {
+                    return true
                 } else {
-
+                    return false
                 }
-                
-            })
-        },
 
-        logout: function(e){
-            axios.post(`/logout?api_token=${this.user.api_token}`).then((response) => {
-                if (response.status === 200) {
-                    console.log(response)
-                }
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
-                this.$router.go('/welcome');
-            })
-            e.preventDefault();
-        },
+            },
+
+            getUserRequestAlerts() {
+                axios.get(`/api/userRequestAlerts?api_token=${this.user.api_token}`)
+                .then(response => {
+                    if (this.user.roles[0].name == 'admin'
+                    || this.user.roles[0].name == 'developer') {
+                        this.userRequestAlerts = response.data.data
+                    } else {
+
+                    }
+                    
+                })
+            },
+
+            logout: function(e){
+                axios.post(`/logout?api_token=${this.user.api_token}`).then((response) => {
+                    if (response.status === 200) {
+                        console.log(response)
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                }).finally(() => {
+                    this.$router.go('/welcome');
+                })
+                e.preventDefault();
+            },
+        }
     }
-}
 </script>

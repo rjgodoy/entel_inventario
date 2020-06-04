@@ -41,8 +41,11 @@ class DependenceController extends Controller
     {
         $dependences = Dependence::with('dependence.pop.comuna.zona.crm')->whereHas('site.pop', function($q) use($id) {
                             $q->where('id', $id);
+                        })->whereHas('dependence', function($q) {
+                            $q->where('state_id', '!=', 2);
                         })
                         ->whereRaw('dependence_id IS NOT NULL')
+                        ->orderBy('site_id', 'asc')->orderBy('dependence_id', 'asc')
                         ->get();
 
         return new DependenceResource($dependences);

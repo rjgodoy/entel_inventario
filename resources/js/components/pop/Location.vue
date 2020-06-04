@@ -1,55 +1,7 @@
 <template>
     <section class="">
-        <!-- CARACTERISTICAS -->
-        <!-- ############### -->
-        <!-- <div class="hero is-bold" :class="heroBackground">
-            <div class="hero-body" style="padding-top: ">
-                <nav class="level">
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popAttentionPriority }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">PRIORIDAD ATENCION</p>
-                        </div>
-                    </div>
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popDependences }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">DEPENDENCIAS DIRECTAS</p>
-                        </div>
-                    </div>
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ dependences ? dependences.length : 0 }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">DEPENDENCIAS TOTALES</p>
-                        </div>
-                    </div>
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popCategory ? popCategory : '-' }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">CLASIFICACION PLANIFICACION</p>
-                        </div>
-                    </div>
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popAttentionType }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">TIPO ATENCION</p>
-                        </div>
-                    </div>
-                    <div class="level-item has-text-centered">
-                        <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ pop.theoretical_autonomy ? pop.theoretical_autonomy : '-' }} <span class="is-size-6">hrs.</span></p>
-                            <p class="is-size-7 has-text-weight-semibold">AUTONOMIA TEORICA</p>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div> -->
 
-        <!-- MAPA -->
-        <!-- ############### -->
         <div class="card">
-            <div class="card-header">
-            </div>
             
             <div class="card-content is-paddingless">
                 <div class="map-container">

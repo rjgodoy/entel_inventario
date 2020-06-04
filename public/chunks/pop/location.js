@@ -55,54 +55,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -205,8 +157,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("section", {}, [
     _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header" }),
-      _vm._v(" "),
       _c("div", { staticClass: "card-content is-paddingless" }, [
         _c(
           "div",

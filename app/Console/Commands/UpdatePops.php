@@ -81,8 +81,6 @@ class UpdatePops extends Command
                     'comuna_id' => $newPop->comuna_id, 
                     'latitude' => $newPop->lat_wgs84, 
                     'longitude' => $newPop->lon_wgs84, 
-                    'latitude_b' => $newPop->lat_wgs84, 
-                    'longitude_b' => $newPop->lon_wgs84,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]

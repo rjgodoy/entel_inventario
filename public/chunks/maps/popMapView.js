@@ -321,13 +321,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         _this3.dependences = response.data.data;
 
         if (_this3.dependences.length) {
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
-
-          try {
-            for (var _iterator = _this3.dependences[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-              var m = _step.value;
+          _this3.dependences.forEach(function (m) {
+            if (m.dependence) {
+              console.log(m.dependence.nem_site);
               var dependenceLine = [{
                 lat: parseFloat(_this3.popMaster.latitude),
                 lng: parseFloat(_this3.popMaster.longitude)
@@ -338,20 +334,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
               _this3.depLines.push(dependenceLine);
             }
-          } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                _iterator["return"]();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
-          }
+          });
 
           _this3.setDependencesButton();
         }

@@ -2,10 +2,9 @@
     <div class="">
         <!-- TECNOLOGIAS -->
         <!-- ########### -->
-        <section class="section has-background-white-bis is-bold" style="padding-top: 20px; padding-bottom: 20px;">
+        <!-- <section class="section has-background-white-bis is-bold" style="padding-top: 20px; padding-bottom: 20px;">
             <div class="columns">
                 <div class="column has-text-weight-semibold is-size-3 has-text-left">Tecnologías</div>
-                <!-- <div class="column has-text-weight-semibold is-size-6 has-text-right">Status</div> -->
             </div>
             <div class="level">
                 <div class="level-item">
@@ -83,7 +82,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <hr class="has-background-grey-lighter is-marginless"></hr>
 

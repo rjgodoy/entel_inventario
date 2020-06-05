@@ -2,15 +2,19 @@
     <div class="">
         <!-- TECNOLOGIAS -->
         <!-- ########### -->
-        <section class="section is-tech is-bold has-text-white" style="padding-top: 20px; padding-bottom: 20px;">
+        <section class="section has-background-white-bis is-bold" style="padding-top: 20px; padding-bottom: 20px;">
             <div class="columns">
-                <div class="column has-text-weight-semibold has-text-white is-size-3 has-text-left">Tecnologías</div>
+                <div class="column has-text-weight-semibold is-size-3 has-text-left">Tecnologías</div>
+                <!-- <div class="column has-text-weight-semibold is-size-6 has-text-right">Status</div> -->
             </div>
             <div class="level">
                 <div class="level-item">
                     <div>
-                        <div class="is-size-7 has-text-weight-bold has-text-light">2G 1900</div>
-                        <div class="is-size-5 has-text-weight-bold" :class="tec2g1900 ? 'has-text-eco' : ''">{{ tec2g1900 ? tec2g1900.nem_tech : '-' }}</div>
+                        <div class="is-size-7 has-text-weight-bold">2G 1900</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec2g1900 ? 'has-text-info' : ''">{{ tec2g1900 ? tec2g1900.nem_tech : '-' }}</div>
+                        <b-tooltip :label="tec2g1900 ? tec2g1900.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec2g1900 ? 'is-dark' : 'is-white'">
+                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec2g1900 ? tec2g1900.state.style : 'has-text-white'"/>
+                        </b-tooltip>
                     </div>
                 </div>
 
@@ -19,13 +23,19 @@
                 <div class="level-item">
                     <div>
                         <div class="is-size-7 has-text-weight-bold">3G 900</div>
-                        <div class="is-size-5 has-text-weight-bold" :class="tec3g900 ? 'has-text-eco' : ''">{{ tec3g900 ? tec3g900.nem_tech : '-' }}</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec3g900 ? 'has-text-info' : ''">{{ tec3g900 ? tec3g900.nem_tech : '-' }}</div>
+                        <b-tooltip :label="tec3g900 ? tec3g900.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec3g900 ? 'is-dark' : 'is-white'">
+                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec3g900 ? tec3g900.state.style : 'has-text-white'"/>
+                        </b-tooltip>
                     </div>
                 </div>
                 <div class="level-item">
                     <div>
                         <div class="is-size-7 has-text-weight-bold">3G 1900</div>
-                        <div class="is-size-5 has-text-weight-bold" :class="tec3g1900 ? 'has-text-eco' : ''">{{ tec3g1900 ? tec3g1900.nem_tech : '-' }}</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec3g1900 ? 'has-text-info' : ''">{{ tec3g1900 ? tec3g1900.nem_tech : '-' }}</div>
+                        <b-tooltip :label="tec3g1900 ? tec3g1900.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec3g1900 ? 'is-dark' : 'is-white'">
+                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec3g1900 ? tec3g1900.state.style : 'has-text-white'"/>
+                        </b-tooltip>
                     </div>
                 </div>
 
@@ -34,19 +44,28 @@
                 <div class="level-item">
                     <div>
                         <div class="is-size-7 has-text-weight-bold">LTE 700</div>
-                        <div class="is-size-5 has-text-weight-bold" :class="tec4g700 ? 'has-text-eco' : ''">{{ tec4g700 ? tec4g700.nem_tech : '-' }}</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec4g700 ? 'has-text-info' : ''">{{ tec4g700 ? tec4g700.nem_tech : '-' }}</div>
+                        <b-tooltip :label="tec4g700 ? tec4g700.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec4g700 ? 'is-dark' : 'is-white'">
+                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec4g700 ? tec4g700.state.style : 'has-text-white'"/>
+                        </b-tooltip>
                     </div>
                 </div>
                 <div class="level-item">
                     <div>
                         <div class="is-size-7 has-text-weight-bold">LTE 1900</div>
-                        <div class="is-size-5 has-text-weight-bold" :class="tec4g1900 ? 'has-text-eco' : ''">{{ tec4g1900 ? tec4g1900.nem_tech : '-' }}</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec4g1900 ? 'has-text-info' : ''">{{ tec4g1900 ? tec4g1900.nem_tech : '-' }}</div>
+                        <b-tooltip :label="tec4g1900 ? tec4g1900.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec4g1900 ? 'is-dark' : 'is-white'">
+                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec4g1900 ? tec4g1900.state.style : 'has-text-white'"/>
+                        </b-tooltip>
                     </div>
                 </div>
                 <div class="level-item">
                     <div>
                         <div class="is-size-7 has-text-weight-bold">LTE 2600</div>
-                        <div class="is-size-5 has-text-weight-bold" :class="tec4g2600 ? 'has-text-eco' : ''">{{ tec4g2600 ? tec4g2600.nem_tech : '-' }}</div>
+                        <div class="is-size-5 has-text-weight-bold" :class="tec4g2600 ? 'has-text-info' : ''">{{ tec4g2600 ? tec4g2600.nem_tech : '-' }}</div>
+                        <b-tooltip :label="tec4g2600 ? tec4g2600.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec4g2600 ? 'is-dark' : 'is-white'">
+                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec4g2600 ? tec4g2600.state.style : 'has-text-white'"/>
+                        </b-tooltip>
                     </div>
                 </div>
 
@@ -55,13 +74,18 @@
                 <div class="level-item">
                     <div>
                         <div class="is-size-7 has-text-weight-bold">BAFI</div>
-                        <div class="has-text-weight-bold is-size-5" :class="bafi ? 'has-text-eco' : ''">
+                        <div class="has-text-weight-bold is-size-5" :class="bafi ? 'has-text-info' : ''">
                             {{ bafi ? bafi.tecA + ' - ' + bafi.tecB + ' - ' + bafi.tecC : '-' }}
                         </div>
+                        <b-tooltip :label="tec4g3500 ? tec4g3500.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec4g3500 ? 'is-dark' : 'is-white'">
+                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec4g3500.state.style"/>
+                        </b-tooltip>
                     </div>
                 </div>
             </div>
         </section>
+
+        <hr class="has-background-grey-lighter is-marginless"></hr>
 
         <section class="section" style="padding-top: 20px;">
             <div class="columns">
@@ -170,6 +194,11 @@
 </template>
 
 <script>
+    import { library } from "@fortawesome/fontawesome-svg-core";
+    import { faCircle } from "@fortawesome/free-solid-svg-icons";
+    // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+    // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+    library.add(faCircle);
     export default {
         components: {
             EditParameter: () => import(/* webpackChunkName: "chunks/pop/modals/editParameter"*/'./modals/EditParameter'),
@@ -291,6 +320,18 @@
                 if (this.technologies) {
                     this.technologies.forEach(element => {
                         if (element.technology_type_id == 3 && element.frequency == 2600) {
+                            tec = element
+                        }
+                    })
+                    return tec
+                }
+            },
+
+            tec4g3500() {
+                var tec = null
+                if (this.technologies) {
+                    this.technologies.forEach(element => {
+                        if (element.technology_type_id == 3 && element.frequency == 3500) {
                             tec = element
                         }
                     })

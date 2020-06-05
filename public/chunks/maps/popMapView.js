@@ -76,6 +76,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -409,7 +412,11 @@ var render = function() {
     "GmapMap",
     {
       ref: "map",
-      staticStyle: { "min-height": "576px", height: "100%" },
+      staticStyle: {
+        "min-height": "788px",
+        "/*min-height": "576px",
+        "*/\n        height": "100%"
+      },
       attrs: {
         center: _vm.center,
         zoom: _vm.zoom,

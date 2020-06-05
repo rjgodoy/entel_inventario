@@ -240,7 +240,7 @@ class PopController extends Controller
         $pop = Pop::with(
             'comuna.zona.crm', 
             'sites.classification_type', 
-            'sites.technologies', 
+            'sites.technologies.state', 
             'comuna.zona.responsable', 
             'sites.site_type', 
             'sites.attention_priority_type', 

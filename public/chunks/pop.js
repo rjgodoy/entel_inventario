@@ -771,12 +771,13 @@ var render = function() {
                             _c(
                               "b-tag",
                               {
+                                staticClass: "has-text-white",
                                 attrs: {
                                   size: "is-medium",
                                   type:
                                     _vm.popClassification.id == 1
-                                      ? "is-success"
-                                      : "is-danger"
+                                      ? "is-eco"
+                                      : "is-positive"
                                 }
                               },
                               [
@@ -819,12 +820,13 @@ var render = function() {
                             _c(
                               "b-tag",
                               {
+                                staticClass: "has-text-white",
                                 attrs: {
                                   size: "is-medium",
                                   type:
                                     _vm.popCritical == 1
-                                      ? "is-success"
-                                      : "is-danger"
+                                      ? "is-eco"
+                                      : "is-positive"
                                 }
                               },
                               [
@@ -867,12 +869,11 @@ var render = function() {
                             _c(
                               "b-tag",
                               {
+                                staticClass: "has-text-white",
                                 attrs: {
                                   size: "is-medium",
                                   type:
-                                    _vm.pop.vip == 1
-                                      ? "is-success"
-                                      : "is-danger"
+                                    _vm.pop.vip == 1 ? "is-eco" : "is-positive"
                                 }
                               },
                               [
@@ -915,12 +916,13 @@ var render = function() {
                             _c(
                               "b-tag",
                               {
+                                staticClass: "has-text-white",
                                 attrs: {
                                   size: "is-medium",
                                   type:
                                     _vm.pop.alba_project == 1
-                                      ? "is-success"
-                                      : "is-danger"
+                                      ? "is-eco"
+                                      : "is-positive"
                                 }
                               },
                               [
@@ -1307,7 +1309,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "column is-2 has-background-white is-paddingless" },
+            {
+              staticClass:
+                "column is-2 has-background-link has-text-white is-paddingless"
+            },
             [
               _c("section", { staticClass: "section" }, [
                 _c(

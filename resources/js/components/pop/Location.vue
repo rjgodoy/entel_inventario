@@ -1,7 +1,7 @@
 <template>
     <section class="">
 
-        <div class="card is-shadowless">
+        <div class="card is-shadowless" style="border-left: solid 1px rgba(0,0,0,0.05)">
             
             <div class="card-content is-paddingless">
                 <div class="map-container">

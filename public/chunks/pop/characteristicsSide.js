@@ -215,12 +215,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -291,8 +285,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", {}, [
-    _c("div", { staticClass: "columns" }),
-    _vm._v(" "),
     _c("div", { staticClass: "columns tile is-ancestor" }, [
       _c(
         "div",
@@ -304,8 +296,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass:
-                "has-text-weight-bold has-text-dark is-size-5 has-text-left tile",
+              staticClass: "has-text-weight-bold is-size-5 has-text-left tile",
               staticStyle: { "padding-bottom": "24px" }
             },
             [_vm._v("CARACTERISTICAS NEGOCIO")]
@@ -316,8 +307,8 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "is-size-5 title has-text-weight-semibold",
-                  class: _vm.primaryText
+                  staticClass:
+                    "is-size-5 title has-text-weight-semibold has-text-white"
                 },
                 [_vm._v("Negocio Fijo")]
               ),
@@ -330,7 +321,7 @@ var render = function() {
                       _c("font-awesome-icon", {
                         class: _vm.pe_3g
                           ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                          : "has-text-grey-light",
                         attrs: {
                           icon: _vm.pe_3g
                             ? ["fas", "check-circle"]
@@ -344,8 +335,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.pe_3g
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("PE 3G")]
                       )
@@ -394,7 +385,7 @@ var render = function() {
                       _c("font-awesome-icon", {
                         class: _vm.mpls
                           ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                          : "has-text-grey-light",
                         attrs: {
                           icon: _vm.mpls
                             ? ["fas", "check-circle"]
@@ -408,8 +399,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.mpls
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("MPLS")]
                       )
@@ -456,9 +447,7 @@ var render = function() {
                     { staticClass: "field" },
                     [
                       _c("font-awesome-icon", {
-                        class: _vm.olt
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                        class: _vm.olt ? "has-text-eco" : "has-text-grey-light",
                         attrs: {
                           icon: _vm.olt
                             ? ["fas", "check-circle"]
@@ -472,8 +461,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.olt
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("OLT")]
                       )
@@ -522,7 +511,7 @@ var render = function() {
                       _c("font-awesome-icon", {
                         class: _vm.olt_3play
                           ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                          : "has-text-grey-light",
                         attrs: {
                           icon: _vm.olt_3play
                             ? ["fas", "check-circle"]
@@ -536,8 +525,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.olt_3play
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("OLT 3Play")]
                       )
@@ -589,7 +578,7 @@ var render = function() {
                     class:
                       _vm.popClassification.id == 1
                         ? "has-text-eco"
-                        : "has-text-grey-lighter",
+                        : "has-text-grey-light",
                     attrs: {
                       icon:
                         _vm.popClassification.id == 1
@@ -605,8 +594,8 @@ var render = function() {
                       staticClass: "is-size-6",
                       class:
                         _vm.popClassification.id == 1
-                          ? "has-text-weight-normal"
-                          : "has-text-grey-lighter"
+                          ? "has-text-weight-bold"
+                          : "has-text-grey-light has-text-weight-light"
                     },
                     [_vm._v("CORE")]
                   )
@@ -619,7 +608,7 @@ var render = function() {
                 { staticClass: "field" },
                 [
                   _c("font-awesome-icon", {
-                    class: _vm.bafi ? "has-text-eco" : "has-text-grey-lighter",
+                    class: _vm.bafi ? "has-text-eco" : "has-text-grey-light",
                     attrs: {
                       icon: _vm.bafi
                         ? ["fas", "check-circle"]
@@ -633,8 +622,8 @@ var render = function() {
                     {
                       staticClass: "is-size-6",
                       class: _vm.bafi
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
+                        ? "has-text-weight-bold"
+                        : "has-text-grey-light has-text-weight-light"
                     },
                     [_vm._v("Banda Ancha Fija Inalámbrica (BAFI)")]
                   )
@@ -649,8 +638,8 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "is-size-5 title has-text-weight-semibold",
-                  class: _vm.primaryText
+                  staticClass:
+                    "is-size-5 title has-text-weight-semibold has-text-white"
                 },
                 [_vm._v("Negocio Movil")]
               ),
@@ -662,7 +651,7 @@ var render = function() {
                   _c("font-awesome-icon", {
                     class: _vm.pop.red_minima_n1
                       ? "has-text-eco"
-                      : "has-text-grey-lighter",
+                      : "has-text-grey-light",
                     attrs: {
                       icon: _vm.pop.red_minima_n1
                         ? ["fas", "check-circle"]
@@ -676,8 +665,8 @@ var render = function() {
                     {
                       staticClass: "is-size-6",
                       class: _vm.pop.red_minima_n1
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
+                        ? "has-text-weight-bold"
+                        : "has-text-grey-light has-text-weight-light"
                     },
                     [_vm._v("Red Mínima N1")]
                   )
@@ -692,7 +681,7 @@ var render = function() {
                   _c("font-awesome-icon", {
                     class: _vm.pop.red_minima_n2
                       ? "has-text-eco"
-                      : "has-text-grey-lighter",
+                      : "has-text-grey-light",
                     attrs: {
                       icon: _vm.pop.red_minima_n2
                         ? ["fas", "check-circle"]
@@ -706,8 +695,8 @@ var render = function() {
                     {
                       staticClass: "is-size-6",
                       class: _vm.pop.red_minima_n2
-                        ? "has-text-weight-normal"
-                        : "has-text-grey-lighter"
+                        ? "has-text-weight-bold"
+                        : "has-text-grey-light has-text-weight-light"
                     },
                     [_vm._v("Red Mínima N2")]
                   )
@@ -721,9 +710,7 @@ var render = function() {
                     { staticClass: "field" },
                     [
                       _c("font-awesome-icon", {
-                        class: _vm.vip
-                          ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                        class: _vm.vip ? "has-text-eco" : "has-text-grey-light",
                         attrs: {
                           icon: _vm.vip
                             ? ["fas", "check-circle"]
@@ -737,8 +724,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.vip
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("VIP")]
                       )
@@ -787,7 +774,7 @@ var render = function() {
                       _c("font-awesome-icon", {
                         class: _vm.localidad_obligatoria
                           ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                          : "has-text-grey-light",
                         attrs: {
                           icon: _vm.localidad_obligatoria
                             ? ["fas", "check-circle"]
@@ -801,8 +788,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.localidad_obligatoria
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("Localidad Obligatoria")]
                       )
@@ -854,7 +841,7 @@ var render = function() {
                       _c("font-awesome-icon", {
                         class: _vm.ranco
                           ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                          : "has-text-grey-light",
                         attrs: {
                           icon: _vm.ranco
                             ? ["fas", "check-circle"]
@@ -868,8 +855,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.ranco
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("RAN Consolidado (RANCO)")]
                       )
@@ -918,8 +905,8 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "is-size-5 title has-text-weight-semibold",
-                class: _vm.primaryText
+                staticClass:
+                  "is-size-5 title has-text-weight-semibold has-text-white"
               },
               [_vm._v("CARACTERISTICAS INFRAESTRUCTURA")]
             ),
@@ -933,7 +920,7 @@ var render = function() {
                       _c("font-awesome-icon", {
                         class: _vm.offgrid
                           ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                          : "has-text-grey-light",
                         attrs: {
                           icon: _vm.offgrid
                             ? ["fas", "check-circle"]
@@ -947,8 +934,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.offgrid
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("Offgrid")]
                       )
@@ -997,7 +984,7 @@ var render = function() {
                       _c("font-awesome-icon", {
                         class: _vm.solar
                           ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                          : "has-text-grey-light",
                         attrs: {
                           icon: _vm.solar
                             ? ["fas", "check-circle"]
@@ -1011,8 +998,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.solar
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("Paneles Solares")]
                       )
@@ -1061,7 +1048,7 @@ var render = function() {
                       _c("font-awesome-icon", {
                         class: _vm.eolica
                           ? "has-text-eco"
-                          : "has-text-grey-lighter",
+                          : "has-text-grey-light",
                         attrs: {
                           icon: _vm.eolica
                             ? ["fas", "check-circle"]
@@ -1075,8 +1062,8 @@ var render = function() {
                         {
                           staticClass: "is-size-6",
                           class: _vm.eolica
-                            ? "has-text-weight-normal"
-                            : "has-text-grey-lighter"
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [_vm._v("Eólico")]
                       )

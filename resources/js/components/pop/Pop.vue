@@ -38,7 +38,7 @@
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="popClassification.id == 1 ? 'is-success' : 'is-danger'">
+                                            <b-tag size="is-medium" :type="popClassification.id == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
                                                 <font-awesome-icon :icon="popCritical == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
                                             <b-tag size="is-medium" type="is-black">CORE</b-tag>
@@ -48,7 +48,7 @@
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="popCritical == 1 ? 'is-success' : 'is-danger'">
+                                            <b-tag size="is-medium" :type="popCritical == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
                                                 <font-awesome-icon :icon="popCritical == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
                                             <b-tag size="is-medium" type="is-black">Crítico</b-tag>
@@ -58,7 +58,7 @@
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="pop.vip == 1 ? 'is-success' : 'is-danger'">
+                                            <b-tag size="is-medium" :type="pop.vip == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
                                                 <font-awesome-icon :icon="pop.vip == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
                                             <b-tag size="is-medium" type="is-black">VIP</b-tag>
@@ -68,7 +68,7 @@
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="pop.alba_project == 1 ? 'is-success' : 'is-danger'">
+                                            <b-tag size="is-medium" :type="pop.alba_project == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
                                                 <font-awesome-icon :icon="pop.alba_project == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
                                             <b-tag size="is-medium" type="is-black">Alba</b-tag>
@@ -218,7 +218,7 @@
                     </keep-alive>
                 </div>
 
-                <div class="column is-2 has-background-white is-paddingless">
+                <div class="column is-2 has-background-link has-text-white is-paddingless">
                     <section class="section">
                         <div class="columns is-multiline tile is-ancestor">
                             <characteristics-side

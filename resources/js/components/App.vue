@@ -119,12 +119,13 @@
 
                                 <hr class="dropdown-divider" aria-role="menuitem">
 
-                                <router-link to="/admin">
-                                    <b-dropdown-item v-if="canView('/admin')">
+                                
+                                <b-dropdown-item v-if="canView('/admin')" aria-role="menuitem">
+                                    <router-link class="bd-is-rss is-small has-text-dark" to="/admin">
                                         <font-awesome-icon :icon="['fas','cogs']" />
                                         &nbsp;Administración
-                                    </b-dropdown-item>
-                                </router-link>
+                                    </router-link>
+                                </b-dropdown-item>
 
                                 <hr class="dropdown-divider">
 
@@ -135,10 +136,10 @@
 
                                 <hr class="navbar-divider">
 
-                                <b-dropdown-item value="logout" aria-role="menuitem">
+                                <b-dropdown-item aria-role="menuitem">
                                     <a class="bd-is-rss is-small has-text-dark" @click.prevent="logout">
                                         <font-awesome-icon :icon="['fas','sign-out-alt']" />
-                                    &nbsp;Log Out
+                                        &nbsp;Log Out
                                     </a>
                                 </b-dropdown-item>
                             </b-dropdown>
@@ -226,7 +227,7 @@
                 <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
             </div>
         </footer> -->
-
+        <hr class="has-background-light is-marginless"></hr>
         <footer :class="currentRoute.toLowerCase() == '/capacity' ? 'has-background-black-ter' : 'has-background-white'" style="padding-top: 0.5rem; padding-bottom: 0rem;">
             <div class="has-text-centered">
                 <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>

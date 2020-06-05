@@ -12256,6 +12256,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -48183,13 +48184,18 @@ var render = function() {
                             attrs: { "aria-role": "menuitem" }
                           }),
                           _vm._v(" "),
-                          _c(
-                            "router-link",
-                            { attrs: { to: "/admin" } },
-                            [
-                              _vm.canView("/admin")
-                                ? _c(
-                                    "b-dropdown-item",
+                          _vm.canView("/admin")
+                            ? _c(
+                                "b-dropdown-item",
+                                { attrs: { "aria-role": "menuitem" } },
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass:
+                                        "bd-is-rss is-small has-text-dark",
+                                      attrs: { to: "/admin" }
+                                    },
                                     [
                                       _c("font-awesome-icon", {
                                         attrs: { icon: ["fas", "cogs"] }
@@ -48200,10 +48206,10 @@ var render = function() {
                                     ],
                                     1
                                   )
-                                : _vm._e()
-                            ],
-                            1
-                          ),
+                                ],
+                                1
+                              )
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("hr", { staticClass: "dropdown-divider" }),
                           _vm._v(" "),
@@ -48237,12 +48243,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "b-dropdown-item",
-                            {
-                              attrs: {
-                                value: "logout",
-                                "aria-role": "menuitem"
-                              }
-                            },
+                            { attrs: { "aria-role": "menuitem" } },
                             [
                               _c(
                                 "a",
@@ -48261,7 +48262,7 @@ var render = function() {
                                     attrs: { icon: ["fas", "sign-out-alt"] }
                                   }),
                                   _vm._v(
-                                    "\n                                 Log Out\n                                "
+                                    "\n                                     Log Out\n                                "
                                   )
                                 ],
                                 1
@@ -48344,6 +48345,8 @@ var render = function() {
         1
       )
     ]),
+    _vm._v(" "),
+    _c("hr", { staticClass: "has-background-light is-marginless" }),
     _vm._v(" "),
     _c(
       "footer",

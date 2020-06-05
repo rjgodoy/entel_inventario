@@ -247,11 +247,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
@@ -262,6 +272,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     },
     Characteristics: function Characteristics() {
       return __webpack_require__.e(/*! import() | chunks/pop/characteristics */ "chunks/pop/characteristics").then(__webpack_require__.bind(null, /*! ./Characteristics */ "./resources/js/components/pop/Characteristics.vue"));
+    },
+    CharacteristicsSide: function CharacteristicsSide() {
+      return __webpack_require__.e(/*! import() | chunks/pop/characteristicsSide */ "chunks/pop/characteristicsSide").then(__webpack_require__.bind(null, /*! ./CharacteristicsSide */ "./resources/js/components/pop/CharacteristicsSide.vue"));
     },
     Layout: function Layout() {
       return __webpack_require__.e(/*! import() | chunks/pop/layout/layout */ "chunks/pop/layout/layout").then(__webpack_require__.bind(null, /*! ./layout/Layout */ "./resources/js/components/pop/layout/Layout.vue"));
@@ -305,7 +318,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       tabButtonView: 1,
       logOpened: 0,
       tabs: null,
-      currentTab: this.$route.hash == '#eco' ? 'eco' : 'location',
+      currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'location',
       isEmpty: false,
       isBordered: false,
       isStriped: true,
@@ -321,7 +334,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('parameter-updated', this.getAllData);
   },
   mounted: function mounted() {
-    // console.log(this.$route)
+    console.log(this.$route);
     this.getAllData();
     this.getTabs();
   },
@@ -594,6 +607,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     },
     closeLog: function closeLog() {
       this.logOpened = 0; // console.log(this.logOpened)
+    },
+    isMobile: function isMobile() {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -656,7 +676,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-6" }, [
+              _c("div", { staticClass: "column is-5" }, [
                 _c("div", { staticClass: "is-size-4" }, [
                   _c("h1", { staticClass: "title" }, [
                     _vm._v(_vm._s(_vm.pop.nombre))
@@ -737,7 +757,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-2" }, [
+              _c("div", { staticClass: "column is-3" }, [
                 _c("div", { staticClass: "columns is-multiline" }, [
                   _c("div", { staticClass: "column is-6" }, [
                     _c(
@@ -1169,19 +1189,17 @@ var render = function() {
                   _vm._l(_vm.tabs, function(tab) {
                     return _vm.showTab(tab)
                       ? _c(
-                          "div",
+                          "b-tooltip",
                           {
                             key: tab.component,
-                            staticClass: "column is-6 tile is-parent",
-                            on: {
-                              click: function($event) {
-                                _vm.currentTab = tab.component
-                              }
-                            }
+                            staticClass:
+                              "column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent",
+                            class: !_vm.isMobile() && "is-6",
+                            attrs: { label: tab.title, type: "is-dark" }
                           },
                           [
                             _c(
-                              "div",
+                              "a",
                               {
                                 staticClass:
                                   "tile is-child box has-text-centered",
@@ -1189,7 +1207,12 @@ var render = function() {
                                   _vm.currentTab === tab.component &&
                                   (_vm.currentTab == "eco"
                                     ? "is-eco is-bold"
-                                    : "is-bold is-link")
+                                    : "is-bold is-link"),
+                                on: {
+                                  click: function($event) {
+                                    _vm.currentTab = tab.component
+                                  }
+                                }
                               },
                               [
                                 _c("font-awesome-icon", {
@@ -1206,6 +1229,8 @@ var render = function() {
                                 _c(
                                   "div",
                                   {
+                                    staticClass:
+                                      "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only",
                                     class:
                                       _vm.currentTab === tab.component
                                         ? "has-text-white"
@@ -1236,7 +1261,7 @@ var render = function() {
                         )
                       : _vm._e()
                   }),
-                  0
+                  1
                 )
               ])
             ]
@@ -1278,6 +1303,37 @@ var render = function() {
               )
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "column is-2 has-background-white is-paddingless" },
+            [
+              _c("section", { staticClass: "section" }, [
+                _c(
+                  "div",
+                  { staticClass: "columns is-multiline tile is-ancestor" },
+                  [
+                    _c("characteristics-side", {
+                      attrs: {
+                        user: _vm.user,
+                        pop: _vm.pop,
+                        popClassification: _vm.popClassification,
+                        popCritical: _vm.popCritical,
+                        bodyBackground: _vm.bodyBackground,
+                        boxBackground: _vm.boxBackground,
+                        primaryText: _vm.primaryText,
+                        secondaryText: _vm.secondaryText,
+                        darkMode: _vm.darkMode,
+                        isEditMode: _vm.isEditMode,
+                        bafi: _vm.bafi
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ]
           )
         ])
       ])

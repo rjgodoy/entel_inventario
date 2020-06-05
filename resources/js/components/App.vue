@@ -15,16 +15,16 @@
                                 <div class="navbar-item">
                                     <div class="title is-5 has-text-grey-light">
                                         <div class="is-5 has-text-white">{{ app_name }}</div>
-                                        <div class="title is-6 has-text-grey-light">Subgerencia Infraestructura, Poder y Clima</div>
+                                        <div class="title is-6 has-text-grey-light">Subgerencia Infraestructura, <br class="is-hidden-fullhd" /> Poder y Clima</div>
                                         <div class="subtitle is-7 has-text-grey-light">Gerencia O&M Redes de Acceso</div>
                                     </div>
                                 </div>
 
-                                <span class="navbar-burger burger" data-target="navbarMenuHeroB">
+                                <!-- <span class="navbar-burger burger" data-target="navbarMenuHeroB">
                                     <span></span>
                                     <span></span>
                                     <span></span>
-                                </span>
+                                </span> -->
                             </div>
                         </nav>
                     </div>
@@ -33,8 +33,9 @@
                 <!-- LINKS DE MODULOS -->
                 <!-- ################## -->
                 <div class="column is-6 is-small" style="padding-top: 20px;">
-                    <div class="">
-                        <div class="">
+                    <div class="columns">
+                        <div class="column is-1"></div>
+                        <div class="column">
                             <ul class="columns">
 
                                 <li v-if="canView(menu.path)" v-for="menu in menu_data" :key="menu.id" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
@@ -54,12 +55,13 @@
 
                             </ul>
                         </div>
+                        <div class="column is-1"></div>
                     </div>
                 </div>
 
                 <!-- PERFIL Y RELOJ -->
                 <!-- ################## -->
-                <div class="column is-small" style="padding-top: 0px;">
+                <div class="column is-3 is-small" style="padding-top: 0px;">
                     <div class="is-size-6">
                         <div class="navbar-end">
                             <b-dropdown   
@@ -108,8 +110,6 @@
                                     </div>
                                 </b-dropdown-item>
 
-                                <hr class="dropdown-divider">
-
                                 <!-- <b-dropdown-item has-link aria-role="menuitem">
                                     <a href="https://google.com" target="_blank">
                                         <font-awesome-icon :icon="['fas','link']" />
@@ -119,10 +119,14 @@
 
                                 <hr class="dropdown-divider" aria-role="menuitem">
 
-                                <b-dropdown-item value="settings" disabled>
-                                    <font-awesome-icon :icon="['fas','cog']" />
-                                    &nbsp;Settings
-                                </b-dropdown-item>
+                                <router-link to="/admin">
+                                    <b-dropdown-item v-if="canView('/admin')">
+                                        <font-awesome-icon :icon="['fas','cogs']" />
+                                        &nbsp;Administración
+                                    </b-dropdown-item>
+                                </router-link>
+
+                                <hr class="dropdown-divider">
 
                                 <b-dropdown-item @click="changeStyle" v-model="darkMode" disabled>
                                     <font-awesome-icon :icon="['fas','adjust']" />
@@ -138,7 +142,6 @@
                                     </a>
                                 </b-dropdown-item>
                             </b-dropdown>
-
                         </div>
                         <div class="navbar-end" style="padding-right: 20px;">
                             <clock></clock>
@@ -171,7 +174,7 @@
             </div>
         </main>
 
-        <div class="hero is-black-ter">
+        <!-- <div class="hero is-black-ter">
             <div class="hero-body">
                 <div class="container">
                     <div class="columns">
@@ -214,32 +217,32 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <hr class="has-background-dark is-marginless"></hr>
+        <!-- <hr class="has-background-dark is-marginless"></hr>
 
         <footer class="has-background-black-bis" style="padding-top: 0.5rem; padding-bottom: 0rem;">
             <div class="has-text-centered">
                 <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
             </div>
-        </footer>
+        </footer> -->
 
-        <!-- <footer :class="currentRoute.toLowerCase() == '/capacity' ? 'has-background-black-ter' : 'has-background-white'" style="padding-top: 0.5rem; padding-bottom: 0rem;">
+        <footer :class="currentRoute.toLowerCase() == '/capacity' ? 'has-background-black-ter' : 'has-background-white'" style="padding-top: 0.5rem; padding-bottom: 0rem;">
             <div class="has-text-centered">
                 <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
             </div>
-        </footer> -->
+        </footer>
 
     </div>
 </template>
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust } from "@fortawesome/free-solid-svg-icons";
+    import { faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-    library.add(faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust);
+    library.add(faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust);
     var Clock = require('./Clock.vue').default;
 
     export default {

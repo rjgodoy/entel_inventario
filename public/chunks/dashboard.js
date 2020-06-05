@@ -451,14 +451,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -941,6 +933,13 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
           duration: 5000
         });
       });
+    },
+    isMobile: function isMobile() {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 });
@@ -1106,7 +1105,11 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "div",
-                              { staticStyle: { "margin-top": "10px" } },
+                              {
+                                staticClass:
+                                  "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only",
+                                staticStyle: { "margin-top": "10px" }
+                              },
                               [
                                 _c("div", {
                                   staticClass:
@@ -1203,7 +1206,11 @@ var render = function() {
                                     _vm._v(" "),
                                     _c(
                                       "div",
-                                      { staticStyle: { "margin-top": "10px" } },
+                                      {
+                                        staticClass:
+                                          "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only",
+                                        staticStyle: { "margin-top": "10px" }
+                                      },
                                       [
                                         _c(
                                           "div",
@@ -2167,27 +2174,34 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "tile is-parent is-vertical" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "tile is-child card",
-                      class: _vm.boxBackground,
-                      staticStyle: { border: "solid 4px white" }
-                    },
-                    [
-                      _c("map-view", {
-                        attrs: {
-                          user: _vm.user,
-                          pops: _vm.pops,
-                          map_attributes: _vm.map_attributes,
-                          darkMode: _vm.darkMode
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ]),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "tile is-parent is-vertical is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only"
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tile is-child card",
+                        class: _vm.boxBackground,
+                        staticStyle: { border: "solid 4px white" }
+                      },
+                      [
+                        _c("map-view", {
+                          attrs: {
+                            user: _vm.user,
+                            pops: _vm.pops,
+                            map_attributes: _vm.map_attributes,
+                            darkMode: _vm.darkMode
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "tile" }, [
                   _c("div", { staticClass: "tile is-parent is-vertical" }, [

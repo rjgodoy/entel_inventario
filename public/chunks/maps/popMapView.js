@@ -311,7 +311,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       });
     },
     getInfoWindowContent: function getInfoWindowContent(pop) {
-      console.log(pop);
+      // console.log(pop)
       return "\n                <div class=\"card\">\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(this.classification == 'A' ? 'is-danger' : this.classification == 'B' ? 'is-warning' : this.classification_type_id == 'C' ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(this.classification, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(pop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.comuna.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.comuna.zona.nombre_zona, ", CRM ").concat(pop.comuna.zona.crm.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/pop/").concat(pop.id, "\" class=\"button is-outlined is-primary is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
     },
     getDependences: function getDependences() {
@@ -323,7 +323,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         if (_this3.dependences.length) {
           _this3.dependences.forEach(function (m) {
             if (m.dependence) {
-              console.log(m.dependence.nem_site);
+              // console.log(m.dependence.nem_site)
               var dependenceLine = [{
                 lat: parseFloat(_this3.popMaster.latitude),
                 lng: parseFloat(_this3.popMaster.longitude)

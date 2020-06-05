@@ -24,8 +24,7 @@
                         <div class="column">
                             <!-- <b-button class="button is-link is-small is-pulled-right" @click="changeStyle" v-model="darkMode">Style</b-button> -->
                         </div>
-                    </div>
-                    
+                    </div> 
                 </b-field>
 
                 <div class="tile is-ancestor">
@@ -36,7 +35,7 @@
                                     CRM {{ crm.nombre_crm }}
                                 </div>
 
-                                <div style="margin-top: 10px;">
+                                <div style="margin-top: 10px;" class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only">
                                     <div class="is-size-7 has-text-weight-light" v-text="'Subgerente'"></div> 
                                     <div class="is-size-7 has-text-weight-semibold">{{ crm.subgerente_crm }}</div>
                                 </div>
@@ -57,7 +56,7 @@
                                         Zona {{ zona.nombre_zona }}
                                     </div>
 
-                                    <div style="margin-top: 10px;">
+                                    <div style="margin-top: 10px;" class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only">
                                         <div class="is-size-7 has-text-weight-light">Coordinador</div> 
                                         <div class="is-size-7 has-text-weight-semibold">{{ zona.responsable.nombre }} {{ zona.responsable.apellido }}</div>
                                     </div>
@@ -304,15 +303,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Mapa -->
-                        <!-- <b-tabs size="is-small" class="block">
-                            <b-tab-item label="Pictures" icon="google-photos"></b-tab-item>
-                            <b-tab-item label="Music" icon="library-music"></b-tab-item>
-                            <b-tab-item label="Videos" icon="video"></b-tab-item>
-                        </b-tabs> -->
                         
-                        <div class="tile is-parent is-vertical">
+                        <div class="tile is-parent is-vertical is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only">
                             <div class="tile is-child card" style="border: solid 4px white" :class="boxBackground">
                                 <map-view
                                     :user="user"
@@ -437,433 +429,442 @@
 </template>
 
 <script>
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch } from "@fortawesome/free-solid-svg-icons";
-// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+    import { library } from "@fortawesome/fontawesome-svg-core";
+    import { faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch } from "@fortawesome/free-solid-svg-icons";
+    // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+    // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch);
+    library.add(faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch);
 
-var moment = require('moment');
-import debounce from 'lodash/debounce'
-export default {
-    components: {
-        // ###### Info ##########
-        PopsData: () => import(/* webpackChunkName: "chunks/dashboard/popsData"*/'./PopsData'),
-        SitesData: () => import(/* webpackChunkName: "chunks/dashboard/sitesData"*/"./SitesData"),
-        TechnologiesData: () => import(/* webpackChunkName: "chunks/dashboard/technologyData"*/"./TechnologiesData"),
-        CriticsData: () => import(/* webpackChunkName: "chunks/dashboard/criticPopsData"*/"./CriticPopsData"),
-        AlbaData: () => import(/* webpackChunkName: "chunks/dashboard/albaPopsData"*/"./AlbaPopsData"),
-        
-        // ###### Map ###########
-        // PopsMap,
-        MapView: () => import(/* webpackChunkName: "chunks/maps/mapView/"*/'../maps/MapView'),
-        // MapView,
-
-        // ###### Charts ########
-        PretDataChart: () => import(/* webpackChunkName: "chunks/dashboard/pretDataChart"*/'./PretDataChart'),
-        // RedCoreChart,
-
-        // ###### Equipment #####
-        ElectricLinesData: () => import(/* webpackChunkName: "chunks/dashboard/electricLines"*/'./ElectricLinesData'),
-        GeneratorSetsData: () => import(/* webpackChunkName: "chunks/dashboard/generatorSets"*/'./GeneratorSetsData'),
-        PowerRectifiersData: () => import(/* webpackChunkName: "chunks/dashboard/powerRectifiers"*/'./PowerRectifiersData'),
-        AirConditionersData: () => import(/* webpackChunkName: "chunks/dashboard/airConditioners"*/'./AirConditionersData'),
-        VerticalStructuresData: () => import(/* webpackChunkName: "chunks/dashboard/verticalStructures"*/'./VerticalStructuresData'),
-        InfrastructuresData: () => import(/* webpackChunkName: "chunks/dashboard/infrastructures"*/'./InfrastructuresData')
-    },
-    props : [
-        'user',
-        'message',
-        'last_data_counters',
-        'crms',
-        'darkMode'
-    ],
-    created() {
-        this.styleMode()
-    },
-
-    mounted() {
-        // console.log(this.last_data_counters)
-        // this.getCrms()
-        this.getCounters()
-        // this.lastUpdate()
-        // this.syncCounter()
-        this.loadMessage()
-        this.getPops()
-    },
-    data: () => {
-        return {
-            core: 0,
-            pops: [],
-            zonas: [],
-
-            isFetching: false,
-            selected: null,
-            page: 1,
-            totalPages: 1,
-            searchText: '',
-            popSearch: [],
-            active: 0,
-            counter: 0,
-
-            map_attributes: {
-                latitude: -33.44444275,
-                longitude: -70.6561017,
-                zoom: 5
-            },
-
-            bodyBackground: '',
-            boxBackground: '',
-            primaryText: '',
-            secondaryText: '',
-            searchBodyBackground: '',
-            innerBackground: '',
-
-            bodyBackgroundEnergy: '',
-            bodyBackgroundClimate: '',
-            bodyBackgroundInfrastructure: '',
-            boxBackgroundEnergy: '',
-            boxBackgroundClimate: '',
-            boxBackgroundInfrastructure: '',
+    var moment = require('moment');
+    import debounce from 'lodash/debounce'
+    export default {
+        components: {
+            // ###### Info ##########
+            PopsData: () => import(/* webpackChunkName: "chunks/dashboard/popsData"*/'./PopsData'),
+            SitesData: () => import(/* webpackChunkName: "chunks/dashboard/sitesData"*/"./SitesData"),
+            TechnologiesData: () => import(/* webpackChunkName: "chunks/dashboard/technologyData"*/"./TechnologiesData"),
+            CriticsData: () => import(/* webpackChunkName: "chunks/dashboard/criticPopsData"*/"./CriticPopsData"),
+            AlbaData: () => import(/* webpackChunkName: "chunks/dashboard/albaPopsData"*/"./AlbaPopsData"),
             
-            selectedPrimaryBoxText: 'has-text-white',
-            selectedSecondaryBoxText: 'has-text-light',
+            // ###### Map ###########
+            // PopsMap,
+            MapView: () => import(/* webpackChunkName: "chunks/maps/mapView/"*/'../maps/MapView'),
+            // MapView,
 
-            // selectedPop: null,
-            selectedSite: null,
-            selectedCrm: null,
-            selectedZona: null,
+            // ###### Charts ########
+            PretDataChart: () => import(/* webpackChunkName: "chunks/dashboard/pretDataChart"*/'./PretDataChart'),
+            // RedCoreChart,
 
-            criticPopsSwitch: 0,
-            albaPopsSwitch: 0,
-
-            popsQuantity: 0,
-            sitesQuantity: 0,
-            technologiesQuantity: 0,
-            criticsQuantity: 0,
-            albaQuantity: 0,
-
-            isLoading: false,
-
-            // lastUpdateData: [],
-            // lastDataCounter: [],
-
-            currentTab: 'pops',
-        }
-    },
-
-    watch: {
-        selectedPop(newValue) {
-            this.pops = [newValue]
+            // ###### Equipment #####
+            ElectricLinesData: () => import(/* webpackChunkName: "chunks/dashboard/electricLines"*/'./ElectricLinesData'),
+            GeneratorSetsData: () => import(/* webpackChunkName: "chunks/dashboard/generatorSets"*/'./GeneratorSetsData'),
+            PowerRectifiersData: () => import(/* webpackChunkName: "chunks/dashboard/powerRectifiers"*/'./PowerRectifiersData'),
+            AirConditionersData: () => import(/* webpackChunkName: "chunks/dashboard/airConditioners"*/'./AirConditionersData'),
+            VerticalStructuresData: () => import(/* webpackChunkName: "chunks/dashboard/verticalStructures"*/'./VerticalStructuresData'),
+            InfrastructuresData: () => import(/* webpackChunkName: "chunks/dashboard/infrastructures"*/'./InfrastructuresData')
         },
-
-        selectedCrm(newValue) {
-            this.selectedZona = null
-            if (this.currentTab == 'critics') {
-                this.viewCriticPops()
-            }
-            else if (this.currentTab == 'alba') {
-                this.viewAlbaPops()
-            } else if (newValue) {
-                this.getPops()
-                this.zonas = newValue.zonas
-            } else {
-                this.getPops()
-            }
-            this.getCounters()
-        },
-
-        selectedZona(newValue) {
-            if (this.currentTab == 'critics'){
-                this.viewCriticPops()
-            }
-            else if (this.currentTab == 'alba') {
-                this.viewAlbaPops()
-            } else {
-                this.getPops()
-            }
-            this.getCounters()
-        },
-
-        core(newValue, oldValue) {
-            if (this.currentTab == 'critics') {
-                this.viewCriticPops()
-            } 
-            else if (this.currentTab == 'alba') {
-                this.viewAlbaPops()
-            }
-            else {
-                this.getPops()
-            }
-            this.getCounters()
-        },
-
-        darkMode(newValue, oldValue) {
+        props : [
+            'user',
+            'message',
+            'last_data_counters',
+            'crms',
+            'darkMode'
+        ],
+        created() {
             this.styleMode()
         },
 
-        currentTab(newValue, oldValue) {
-            if (newValue == 'critics') {
-                this.viewCriticPops()
-            } 
-            else if (this.currentTab == 'alba') {
-                this.viewAlbaPops()
+        mounted() {
+            // console.log(this.last_data_counters)
+            // this.getCrms()
+            this.getCounters()
+            // this.lastUpdate()
+            // this.syncCounter()
+            this.loadMessage()
+            this.getPops()
+        },
+        data: () => {
+            return {
+                core: 0,
+                pops: [],
+                zonas: [],
+
+                isFetching: false,
+                selected: null,
+                page: 1,
+                totalPages: 1,
+                searchText: '',
+                popSearch: [],
+                active: 0,
+                counter: 0,
+
+                map_attributes: {
+                    latitude: -33.44444275,
+                    longitude: -70.6561017,
+                    zoom: 5
+                },
+
+                bodyBackground: '',
+                boxBackground: '',
+                primaryText: '',
+                secondaryText: '',
+                searchBodyBackground: '',
+                innerBackground: '',
+
+                bodyBackgroundEnergy: '',
+                bodyBackgroundClimate: '',
+                bodyBackgroundInfrastructure: '',
+                boxBackgroundEnergy: '',
+                boxBackgroundClimate: '',
+                boxBackgroundInfrastructure: '',
+                
+                selectedPrimaryBoxText: 'has-text-white',
+                selectedSecondaryBoxText: 'has-text-light',
+
+                // selectedPop: null,
+                selectedSite: null,
+                selectedCrm: null,
+                selectedZona: null,
+
+                criticPopsSwitch: 0,
+                albaPopsSwitch: 0,
+
+                popsQuantity: 0,
+                sitesQuantity: 0,
+                technologiesQuantity: 0,
+                criticsQuantity: 0,
+                albaQuantity: 0,
+
+                isLoading: false,
+
+                // lastUpdateData: [],
+                // lastDataCounter: [],
+
+                currentTab: 'pops',
             }
-            else if(
-                (oldValue == 'critics' || oldValue == 'alba') && 
-                (newValue == 'pops' || newValue == 'sites' || newValue == 'technologies')) {
-                this.getPops()
-            }
-        }
-    },
-
-    computed: {
-        selectedPop() {
-            return this.selectedSite ? this.selectedSite.pop : null
         },
 
-        currentTabComponent: function () {
-            return this.currentTab + '-data'
-        },
+        watch: {
+            selectedPop(newValue) {
+                this.pops = [newValue]
+            },
 
-        currentLastUpdateData: function () {
-            if (this.currentTab != 'critics' || this.currentTab != 'alba') {
-                return this.last_data_counters['last_updated_' + this.currentTab]
-            } else {
-                return
-            }
-        },
-
-        textSwitchCore() {
-            return this.core ? 'has-text-link' : ''
-        }
-    },
-
-    methods: {
-        searchFormat(pop) {
-            this.selectedSite = this.selected
-            return this.searchText
-        },
-
-        getPops: debounce(function () {
-            var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-            var zona_id = this.selectedZona ? this.selectedZona.id : 0
-
-            axios.get(`/api/dashboardMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
-            .then((response) => {
-                try {
-                    this.pops = response.data
-                } catch (ex) {
-                    console.log(ex);
+            selectedCrm(newValue) {
+                this.selectedZona = null
+                if (this.currentTab == 'critics') {
+                    this.viewCriticPops()
                 }
-            })
-        }, 10),
+                else if (this.currentTab == 'alba') {
+                    this.viewAlbaPops()
+                } else if (newValue) {
+                    this.getPops()
+                    this.zonas = newValue.zonas
+                } else {
+                    this.getPops()
+                }
+                this.getCounters()
+            },
 
-        async viewCriticPops() {
-            this.currentTab = 'critics'
+            selectedZona(newValue) {
+                if (this.currentTab == 'critics'){
+                    this.viewCriticPops()
+                }
+                else if (this.currentTab == 'alba') {
+                    this.viewAlbaPops()
+                } else {
+                    this.getPops()
+                }
+                this.getCounters()
+            },
 
-            var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-            var zona_id = this.selectedZona ? this.selectedZona.id : 0
+            core(newValue, oldValue) {
+                if (this.currentTab == 'critics') {
+                    this.viewCriticPops()
+                } 
+                else if (this.currentTab == 'alba') {
+                    this.viewAlbaPops()
+                }
+                else {
+                    this.getPops()
+                }
+                this.getCounters()
+            },
 
-            axios.get(`/api/criticPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
-                // console.log(response.data)
-                this.pops = response.data.data
+            darkMode(newValue, oldValue) {
+                this.styleMode()
+            },
 
-            })
-            this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
-        },
-
-        async viewAlbaPops() {
-            this.currentTab = 'alba'
-
-            var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-            var zona_id = this.selectedZona ? this.selectedZona.id : 0
-
-            axios.get(`/api/albaPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
-                // console.log(response.data)
-                this.pops = response.data.data
-            })
-            this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0
-        },
-
-        // CONTERS
-        async getCounters() {
-            var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
-            var zona_id = this.selectedZona ? this.selectedZona.id : 0
-
-            axios.get(`/api/dashboard?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
-                this.popsQuantity = response.data.pops
-                this.sitesQuantity = response.data.sites
-                this.technologiesQuantity = response.data.technologies
-                this.criticsQuantity = response.data.critics
-                this.albaQuantity = response.data.alba_project
-            })
-        },
-
-        // Triggers
-        selectPop(pop) {
-            this.pops = [pop]
-        },
-        selectCrm(crm) {
-            // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
-            // si había una zona seleccionada, la variable selectedZona será null.
-            this.selectedCrm = this.selectedCrm != crm ? crm : null
-        },
-        selectZona(zona) {
-            this.selectedZona = this.selectedZona != zona ? zona : null
-        },
-
-        getAsyncData: debounce(function (text) {
-            // String update
-            if (this.searchText !== text) {
-                this.searchText = text
-                this.popSearch = []
-                this.page = 1
-                this.totalPages = 1
-            }
-            // String cleared
-            if (!text.length) {
-                this.popSearch = []
-                this.page = 1
-                this.totalPages = 1
-                return
-            }
-            // Reached last page
-            if (this.page > this.totalPages) {
-                return
-            }
-            this.isFetching = true
-            axios.get(`/api/searchPops?api_token=${this.user.api_token}&text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
-                .then((response) => {
-                    response.data.data.forEach((item) => this.popSearch.push(item))
-                    this.page++
-                    this.totalPages = response.data.last_page
-                    this.counter = response.data.total
-                })
-                .catch((error) => {
-                    throw error
-                })
-                .finally(() => {
-                    this.isFetching = false
-                })
-        }, 150),
-
-        getMoreAsyncData: debounce(function () {
-            this.getAsyncData(this.searchText)
-        }, 50),
-    
-        clearSearch() {
-            this.popSearch = []
-            this.searchText = ''
-            this.selectedPop = null
-        },
-
-        // Style mode
-        styleMode(){
-            if (this.darkMode == 1) {
-                // dark mode
-                this.bodyBackground = 'has-background-black-ter'
-                this.boxBackground = 'has-background-dark'
-                this.primaryText = 'has-text-white'
-                this.secondaryText = 'has-text-grey-light'
-                this.searchBodyBackground = 'has-background-dark'
-                this.innerBackground = 'has-background-dark-ter shadow-inset-dark',
-                this.bodyBackgroundEnergy = 'has-background-black-ter',
-                this.bodyBackgroundClimate = 'has-background-black-ter',
-                this.bodyBackgroundInfrastructure = 'has-background-black-ter',
-                this.boxBackgroundEnergy = 'has-background-light',
-                this.boxBackgroundClimate = 'has-background-light',
-                this.boxBackgroundInfrastructure = 'has-background-light'
-            } else {
-                // light mode
-                this.bodyBackground = 'has-background-light'
-                this.boxBackground = 'has-background-white'
-                this.primaryText = 'has-text-dark'
-                this.secondaryText = 'has-text-grey'
-                this.searchBodyBackground = 'has-background-white'
-                this.innerBackground = 'has-background-white shadow-inset',
-                this.bodyBackgroundEnergy = 'has-background-white',
-                this.bodyBackgroundClimate = 'has-background-white',
-                this.bodyBackgroundInfrastructure = 'has-background-white',
-                this.boxBackgroundEnergy = 'has-background-light',
-                this.boxBackgroundClimate = 'has-background-light',
-                this.boxBackgroundInfrastructure = 'has-background-light'
+            currentTab(newValue, oldValue) {
+                if (newValue == 'critics') {
+                    this.viewCriticPops()
+                } 
+                else if (this.currentTab == 'alba') {
+                    this.viewAlbaPops()
+                }
+                else if(
+                    (oldValue == 'critics' || oldValue == 'alba') && 
+                    (newValue == 'pops' || newValue == 'sites' || newValue == 'technologies')) {
+                    this.getPops()
+                }
             }
         },
 
-        // SWITCHES
-        async switchCore() {
-            this.core = this.core == 0 ? 1 : 0
-        },
-        changeStyle() {
-            this.darkMode = this.darkMode == 0 ? 1 : 0
-        },
-        loadMessage() {
-            if(this.message) {
-                this.$buefy.toast.open({
-                    message: this.message,
-                    type: 'is-success',
-                    duration: 5000
-                })
-            }
-        },
+        computed: {
+            selectedPop() {
+                return this.selectedSite ? this.selectedSite.pop : null
+            },
 
-        downloadPops() {
-            this.isLoading = true
+            currentTabComponent: function () {
+                return this.currentTab + '-data'
+            },
 
-            var params = {
-                'api_token': this.user.api_token,
-                'core': this.core,
-                'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                'zona_id': this.selectedZona ? this.selectedZona.id : 0
-            }
-
-            axios.get('/api/pop/export', { 
-                params: params, 
-                responseType: 'arraybuffer' 
-            })
-            .then((response) => {
-                console.log(response.data)
-                const blob = new Blob([response.data], { type: 'application/xlsx' })
-                // const objectUrl = window.URL.createObjectURL(blob)
-
-                // IE doesn't allow using a blob object directly as link href
-                // instead it is necessary to use msSaveOrOpenBlob
-                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                    window.navigator.msSaveOrOpenBlob(newBlob)
+            currentLastUpdateData: function () {
+                if (this.currentTab != 'critics' || this.currentTab != 'alba') {
+                    return this.last_data_counters['last_updated_' + this.currentTab]
+                } else {
                     return
                 }
+            },
 
-                const data = window.URL.createObjectURL(blob)
-                let link = document.createElement('a')
-                link.href = data
-                link.download = 'listado_pops.xlsx'
-                link.click()
-                // setTimeout(function () {
-                //     // For Firefox it is necessary to delay revoking the ObjectURL
-                //     window.URL.revokeObjectURL(data)
-                // }, 100)
-                
-                this.isLoading = false
-                this.$buefy.toast.open({
-                    message: 'La planilla se ha descargado exitosamente.',
-                    type: 'is-success',
-                    duration: 5000
-                })
-            }).catch((error) => {
-                console.log(error)
-                this.isLoading = false
-                this.$buefy.toast.open({
-                    message: 'Ha ocurrido un error. Favor contactar al administrador',
-                    type: 'is-danger',
-                    duration: 5000
-                })
-            })
+            textSwitchCore() {
+                return this.core ? 'has-text-link' : ''
+            }
         },
-    },
 
-}
+        methods: {
+            searchFormat(pop) {
+                this.selectedSite = this.selected
+                return this.searchText
+            },
+
+            getPops: debounce(function () {
+                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+                var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+                axios.get(`/api/dashboardMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
+                .then((response) => {
+                    try {
+                        this.pops = response.data
+                    } catch (ex) {
+                        console.log(ex);
+                    }
+                })
+            }, 10),
+
+            async viewCriticPops() {
+                this.currentTab = 'critics'
+
+                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+                var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+                axios.get(`/api/criticPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                    // console.log(response.data)
+                    this.pops = response.data.data
+
+                })
+                this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
+            },
+
+            async viewAlbaPops() {
+                this.currentTab = 'alba'
+
+                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+                var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+                axios.get(`/api/albaPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                    // console.log(response.data)
+                    this.pops = response.data.data
+                })
+                this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0
+            },
+
+            // CONTERS
+            async getCounters() {
+                var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
+                var zona_id = this.selectedZona ? this.selectedZona.id : 0
+
+                axios.get(`/api/dashboard?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                    this.popsQuantity = response.data.pops
+                    this.sitesQuantity = response.data.sites
+                    this.technologiesQuantity = response.data.technologies
+                    this.criticsQuantity = response.data.critics
+                    this.albaQuantity = response.data.alba_project
+                })
+            },
+
+            // Triggers
+            selectPop(pop) {
+                this.pops = [pop]
+            },
+            selectCrm(crm) {
+                // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
+                // si había una zona seleccionada, la variable selectedZona será null.
+                this.selectedCrm = this.selectedCrm != crm ? crm : null
+            },
+            selectZona(zona) {
+                this.selectedZona = this.selectedZona != zona ? zona : null
+            },
+
+            getAsyncData: debounce(function (text) {
+                // String update
+                if (this.searchText !== text) {
+                    this.searchText = text
+                    this.popSearch = []
+                    this.page = 1
+                    this.totalPages = 1
+                }
+                // String cleared
+                if (!text.length) {
+                    this.popSearch = []
+                    this.page = 1
+                    this.totalPages = 1
+                    return
+                }
+                // Reached last page
+                if (this.page > this.totalPages) {
+                    return
+                }
+                this.isFetching = true
+                axios.get(`/api/searchPops?api_token=${this.user.api_token}&text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
+                    .then((response) => {
+                        response.data.data.forEach((item) => this.popSearch.push(item))
+                        this.page++
+                        this.totalPages = response.data.last_page
+                        this.counter = response.data.total
+                    })
+                    .catch((error) => {
+                        throw error
+                    })
+                    .finally(() => {
+                        this.isFetching = false
+                    })
+            }, 150),
+
+            getMoreAsyncData: debounce(function () {
+                this.getAsyncData(this.searchText)
+            }, 50),
+        
+            clearSearch() {
+                this.popSearch = []
+                this.searchText = ''
+                this.selectedPop = null
+            },
+
+            // Style mode
+            styleMode(){
+                if (this.darkMode == 1) {
+                    // dark mode
+                    this.bodyBackground = 'has-background-black-ter'
+                    this.boxBackground = 'has-background-dark'
+                    this.primaryText = 'has-text-white'
+                    this.secondaryText = 'has-text-grey-light'
+                    this.searchBodyBackground = 'has-background-dark'
+                    this.innerBackground = 'has-background-dark-ter shadow-inset-dark',
+                    this.bodyBackgroundEnergy = 'has-background-black-ter',
+                    this.bodyBackgroundClimate = 'has-background-black-ter',
+                    this.bodyBackgroundInfrastructure = 'has-background-black-ter',
+                    this.boxBackgroundEnergy = 'has-background-light',
+                    this.boxBackgroundClimate = 'has-background-light',
+                    this.boxBackgroundInfrastructure = 'has-background-light'
+                } else {
+                    // light mode
+                    this.bodyBackground = 'has-background-light'
+                    this.boxBackground = 'has-background-white'
+                    this.primaryText = 'has-text-dark'
+                    this.secondaryText = 'has-text-grey'
+                    this.searchBodyBackground = 'has-background-white'
+                    this.innerBackground = 'has-background-white shadow-inset',
+                    this.bodyBackgroundEnergy = 'has-background-white',
+                    this.bodyBackgroundClimate = 'has-background-white',
+                    this.bodyBackgroundInfrastructure = 'has-background-white',
+                    this.boxBackgroundEnergy = 'has-background-light',
+                    this.boxBackgroundClimate = 'has-background-light',
+                    this.boxBackgroundInfrastructure = 'has-background-light'
+                }
+            },
+
+            // SWITCHES
+            async switchCore() {
+                this.core = this.core == 0 ? 1 : 0
+            },
+            changeStyle() {
+                this.darkMode = this.darkMode == 0 ? 1 : 0
+            },
+            loadMessage() {
+                if(this.message) {
+                    this.$buefy.toast.open({
+                        message: this.message,
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                }
+            },
+
+            downloadPops() {
+                this.isLoading = true
+
+                var params = {
+                    'api_token': this.user.api_token,
+                    'core': this.core,
+                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+                    'zona_id': this.selectedZona ? this.selectedZona.id : 0
+                }
+
+                axios.get('/api/pop/export', { 
+                    params: params, 
+                    responseType: 'arraybuffer' 
+                })
+                .then((response) => {
+                    console.log(response.data)
+                    const blob = new Blob([response.data], { type: 'application/xlsx' })
+                    // const objectUrl = window.URL.createObjectURL(blob)
+
+                    // IE doesn't allow using a blob object directly as link href
+                    // instead it is necessary to use msSaveOrOpenBlob
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(newBlob)
+                        return
+                    }
+
+                    const data = window.URL.createObjectURL(blob)
+                    let link = document.createElement('a')
+                    link.href = data
+                    link.download = 'listado_pops.xlsx'
+                    link.click()
+                    // setTimeout(function () {
+                    //     // For Firefox it is necessary to delay revoking the ObjectURL
+                    //     window.URL.revokeObjectURL(data)
+                    // }, 100)
+                    
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'La planilla se ha descargado exitosamente.',
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                    this.isLoading = false
+                    this.$buefy.toast.open({
+                        message: 'Ha ocurrido un error. Favor contactar al administrador',
+                        type: 'is-danger',
+                        duration: 5000
+                    })
+                })
+            },
+
+            isMobile() {
+                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+
+        },
+
+    }
 </script>
 
 <style lang="scss" scoped>

@@ -519,7 +519,7 @@ var render = function() {
             "div",
             { staticClass: "tile is-ancestor columns is-multiline" },
             _vm._l(_vm.sites, function(site) {
-              return _c("div", { staticClass: "tile is-parent column is-4" }, [
+              return _c("div", { staticClass: "tile is-parent column is-6" }, [
                 _c("div", { staticClass: "tile is-child box" }, [
                   _c("div", { staticClass: "columns" }, [
                     _c("div", { staticClass: "column is-8" }, [

@@ -16,7 +16,7 @@
                             </b-button>
                         </div>
 
-                        <div class="column is-6">
+                        <div class="column is-5">
                             <div class="is-size-4">
                                 <h1 class="title">{{ pop.nombre }}</h1>
                                 <h2 class="subtitle">{{ popNems }}
@@ -33,7 +33,7 @@
                             <p class="is-size-5 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}</p>
                         </div>
 
-                        <div class="column is-2">
+                        <div class="column is-3">
                             <div class="columns is-multiline">
                                 <div class="column is-6">
                                     <div class="control">
@@ -171,45 +171,36 @@
         <section class="">
             <div class="columns is-marginless">
 
-                <!-- BUTTONS -->
                 <div class="column is-2 has-background-white is-paddingless">
-
-                    <!-- BOTONES MODULOS -->
-                    <!-- ############################### -->
                     <section class="section">
                         <div class="columns is-multiline tile is-ancestor">
-                            <!-- TABS DE INFORMACIÓN -->
-                            <!-- ############################### -->
-                            <div class="column is-6 tile is-parent" v-if="showTab(tab)"
+                            <b-tooltip class="column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent" :class="!isMobile() && 'is-6'" v-if="showTab(tab)" :label="tab.title" type="is-dark"
                                 v-for="tab in tabs" 
-                                :key="tab.component" 
-                                @click="currentTab = tab.component">
-                                <div 
-                                    class="tile is-child box has-text-centered" 
+                                :key="tab.component">
+                                <a class="tile is-child box has-text-centered"
+                                    @click="currentTab = tab.component" 
                                     :class="currentTab === tab.component && (currentTab == 'eco' ? 'is-eco is-bold' : 'is-bold is-link')">
                                     <font-awesome-icon 
                                         :icon="[tab.icon_type, tab.icon]"
                                         size="2x"
                                         :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'"/>
-                                    <div :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'" style="padding-top: 12px;"> 
+
+                                    <div class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only"
+                                        :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'" 
+                                        style="padding-top: 12px;"> 
                                         <div class="is-size-7 has-text-weight-normal">
                                             {{ tab.title }}
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </a>
+                            </b-tooltip>
                         </div>
                     </section>
                 </div>
 
-                <!-- INFO -->
-                <div 
-                    class="column section has-background-light" 
+                <div class="column section has-background-light" 
                     :class="currentTabComponent == 'location' || currentTabComponent == 'sites' ? 'is-paddingless' : ''" 
                     style="padding-top: 32px;">
-
-                    <!-- DETELLE DEL TAB -->
-                    <!-- ############### -->
                     <keep-alive>
                         <detail :is="currentTabComponent"
                             :user="user"
@@ -225,7 +216,26 @@
                             :bafi="bafi"
                         />
                     </keep-alive>
+                </div>
 
+                <div class="column is-2 has-background-white is-paddingless">
+                    <section class="section">
+                        <div class="columns is-multiline tile is-ancestor">
+                            <characteristics-side
+                                :user="user"
+                                :pop="pop"
+                                :popClassification="popClassification"
+                                :popCritical="popCritical"
+                                :bodyBackground="bodyBackground"
+                                :boxBackground="boxBackground"
+                                :primaryText="primaryText"
+                                :secondaryText="secondaryText"
+                                :darkMode="darkMode"
+                                :isEditMode="isEditMode"
+                                :bafi="bafi"
+                            />
+                        </div>
+                    </section>
                 </div>
             </div>
         </section>
@@ -235,15 +245,16 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+    import { faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, farCheckCircle)
+    library.add(faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
             Sites: () => import(/* webpackChunkName: "chunks/pop/sites"*/'./Sites'),
             Characteristics: () => import(/* webpackChunkName: "chunks/pop/characteristics"*/'./Characteristics'),
+            CharacteristicsSide: () => import(/* webpackChunkName: "chunks/pop/characteristicsSide"*/'./CharacteristicsSide'),
             Layout: () => import(/* webpackChunkName: "chunks/pop/layout/layout"*/'./layout/Layout'),
             Power: () => import(/* webpackChunkName: "chunks/pop/power/power"*/'./power/Power'),
             Climate: () => import(/* webpackChunkName: "chunks/pop/climate/climate"*/'./climate/Climate'),
@@ -276,7 +287,7 @@
                 logOpened: 0,
 
                 tabs: null,
-                currentTab: this.$route.hash == '#eco' ? 'eco' : 'location',
+                currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'location',
 
                 isEmpty: false,
                 isBordered: false,
@@ -295,7 +306,7 @@
         },
 
         mounted() {
-            // console.log(this.$route)
+            console.log(this.$route)
             this.getAllData()
             this.getTabs()
             
@@ -558,6 +569,14 @@
             closeLog() {
                 this.logOpened = 0
                 // console.log(this.logOpened)
+            },
+
+            isMobile() {
+                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true
+                } else {
+                    return false
+                }
             }
         },
 

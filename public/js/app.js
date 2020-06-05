@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/capacityPlanning":"chunks/capacityPlanning","chunks/comsite":"chunks/comsite","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chunks/ma~1bf2ce6c":"vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chunks/ma~1bf2ce6c","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage","chunks/dashboard":"chunks/dashboard","vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop":"vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","chunks/admin/approve":"chunks/admin/approve","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/pops":"chunks/admin/pops","chunks/capacity/modals/modalRoom":"chunks/capacity/modals/modalRoom","chunks/maps/mapView":"chunks/maps/mapView","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/capacity/modals/calculator":"chunks/capacity/modals/calculator","chunks/capacity/modals/requests":"chunks/capacity/modals/requests","chunks/capacity/modals/projection":"chunks/capacity/modals/projection","vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart":"vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart","vendors~chunks/capacity/modals/capacity":"vendors~chunks/capacity/modals/capacity","chunks/capacity/modals/capacity":"chunks/capacity/modals/capacity","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/pop/infrastructure/SpaceChart":"chunks/pop/infrastructure/SpaceChart","chunks/pop/layout/modals/airConditioner":"chunks/pop/layout/modals/airConditioner","chunks/pop/layout/modals/generator":"chunks/pop/layout/modals/generator","chunks/pop/layout/modals/junction":"chunks/pop/layout/modals/junction","chunks/pop/layout/modals/powerRectifier":"chunks/pop/layout/modals/powerRectifier","chunks/pop/layout/capacityChart":"chunks/pop/layout/capacityChart","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","vendors~canvg":"vendors~canvg","vendors~pdfmake":"vendors~pdfmake","vendors~xlsx":"vendors~xlsx","xlsx":"xlsx","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/capacityPlanning":"chunks/capacityPlanning","chunks/comsite":"chunks/comsite","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chunks/ma~1bf2ce6c":"vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chunks/ma~1bf2ce6c","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage","chunks/dashboard":"chunks/dashboard","vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop":"vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","chunks/admin/approve":"chunks/admin/approve","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/pops":"chunks/admin/pops","chunks/capacity/modals/modalRoom":"chunks/capacity/modals/modalRoom","chunks/maps/mapView":"chunks/maps/mapView","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/characteristicsSide":"chunks/pop/characteristicsSide","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/capacity/modals/calculator":"chunks/capacity/modals/calculator","chunks/capacity/modals/requests":"chunks/capacity/modals/requests","chunks/capacity/modals/projection":"chunks/capacity/modals/projection","vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart":"vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart","vendors~chunks/capacity/modals/capacity":"vendors~chunks/capacity/modals/capacity","chunks/capacity/modals/capacity":"chunks/capacity/modals/capacity","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/pop/infrastructure/SpaceChart":"chunks/pop/infrastructure/SpaceChart","chunks/pop/layout/modals/airConditioner":"chunks/pop/layout/modals/airConditioner","chunks/pop/layout/modals/generator":"chunks/pop/layout/modals/generator","chunks/pop/layout/modals/junction":"chunks/pop/layout/modals/junction","chunks/pop/layout/modals/powerRectifier":"chunks/pop/layout/modals/powerRectifier","chunks/pop/layout/capacityChart":"chunks/pop/layout/capacityChart","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","vendors~canvg":"vendors~canvg","vendors~pdfmake":"vendors~pdfmake","vendors~xlsx":"vendors~xlsx","xlsx":"xlsx","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -12253,11 +12253,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAdjust"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faClipboardList"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAdjust"]);
 
 var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Clock.vue")["default"];
 
@@ -47921,15 +47924,7 @@ var render = function() {
                               _vm._v(_vm._s(_vm.app_name))
                             ]),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "title is-6 has-text-grey-light" },
-                              [
-                                _vm._v(
-                                  "Subgerencia Infraestructura, Poder y Clima"
-                                )
-                              ]
-                            ),
+                            _vm._m(0),
                             _vm._v(" "),
                             _c(
                               "div",
@@ -47940,9 +47935,7 @@ var render = function() {
                             )
                           ]
                         )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(0)
+                      ])
                     ])
                   ])
                 ])
@@ -47956,8 +47949,10 @@ var render = function() {
                 staticStyle: { "padding-top": "20px" }
               },
               [
-                _c("div", {}, [
-                  _c("div", {}, [
+                _c("div", { staticClass: "columns" }, [
+                  _c("div", { staticClass: "column is-1" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "column" }, [
                     _c(
                       "ul",
                       { staticClass: "columns" },
@@ -48039,7 +48034,9 @@ var render = function() {
                       }),
                       0
                     )
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "column is-1" })
                 ])
               ]
             ),
@@ -48047,7 +48044,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "column is-small",
+                staticClass: "column is-3 is-small",
                 staticStyle: { "padding-top": "0px" }
               },
               [
@@ -48181,26 +48178,34 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _c("hr", { staticClass: "dropdown-divider" }),
-                          _vm._v(" "),
                           _c("hr", {
                             staticClass: "dropdown-divider",
                             attrs: { "aria-role": "menuitem" }
                           }),
                           _vm._v(" "),
                           _c(
-                            "b-dropdown-item",
-                            { attrs: { value: "settings", disabled: "" } },
+                            "router-link",
+                            { attrs: { to: "/admin" } },
                             [
-                              _c("font-awesome-icon", {
-                                attrs: { icon: ["fas", "cog"] }
-                              }),
-                              _vm._v(
-                                "\n                                 Settings\n                            "
-                              )
+                              _vm.canView("/admin")
+                                ? _c(
+                                    "b-dropdown-item",
+                                    [
+                                      _c("font-awesome-icon", {
+                                        attrs: { icon: ["fas", "cogs"] }
+                                      }),
+                                      _vm._v(
+                                        "\n                                     Administración\n                                "
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
                             ],
                             1
                           ),
+                          _vm._v(" "),
+                          _c("hr", { staticClass: "dropdown-divider" }),
                           _vm._v(" "),
                           _c(
                             "b-dropdown-item",
@@ -48340,60 +48345,17 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "hero is-black-ter" }, [
-      _c("div", { staticClass: "hero-body" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "columns" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
-            _c("div", { staticClass: "column" }, [
-              _c("div", { staticClass: "block" }, [
-                _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
-                  _vm._v("Contacto")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "field",
-                    staticStyle: { "padding-top": "8px" }
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "has-text-weight-normal is-size-6",
-                        attrs: {
-                          href: "mailto:proyectosinfraestructura@entel.cl"
-                        }
-                      },
-                      [
-                        _c("font-awesome-icon", {
-                          attrs: { icon: ["fas", "envelope"] }
-                        }),
-                        _vm._v(" "),
-                        _c("span", [
-                          _vm._v(" proyectosinfraestructura@entel.cl")
-                        ])
-                      ],
-                      1
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("hr", { staticClass: "has-background-dark is-marginless" }),
-    _vm._v(" "),
-    _vm._m(4)
+    _c(
+      "footer",
+      {
+        class:
+          _vm.currentRoute.toLowerCase() == "/capacity"
+            ? "has-background-black-ter"
+            : "has-background-white",
+        staticStyle: { "padding-top": "0.5rem", "padding-bottom": "0rem" }
+      },
+      [_vm._m(1)]
+    )
   ])
 }
 var staticRenderFns = [
@@ -48401,130 +48363,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      {
-        staticClass: "navbar-burger burger",
-        attrs: { "data-target": "navbarMenuHeroB" }
-      },
-      [_c("span"), _vm._v(" "), _c("span"), _vm._v(" "), _c("span")]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-3" }, [
-      _c("div", { staticClass: "block" }, [
-        _c("img", {
-          staticClass: "img-container",
-          staticStyle: { width: "100px" },
-          attrs: {
-            alt: "image",
-            src: "/img/iconografia/entel-logo-negativo.png"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "block" }, [
-        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
-          _vm._v("Inventario Infraestructura")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-normal is-size-6",
-            staticStyle: { "padding-top": "8px" }
-          },
-          [_vm._v("Escribir detalle aquí...")]
-        )
-      ])
+    return _c("div", { staticClass: "title is-6 has-text-grey-light" }, [
+      _vm._v("Subgerencia Infraestructura, "),
+      _c("br", { staticClass: "is-hidden-fullhd" }),
+      _vm._v(" Poder y Clima")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-3" }, [
-      _c("div", { staticClass: "block" }, [
-        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
-          _vm._v("Fuentes de Información")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-normal is-size-6",
-            staticStyle: { "padding-top": "8px" }
-          },
-          [_vm._v("Escribir detalle aquí...")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "block" }, [
-        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
-          _vm._v("Otros")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-normal is-size-6",
-            staticStyle: { "padding-top": "8px" }
-          },
-          [_vm._v("Escribir detalle aquí...")]
-        )
-      ])
+    return _c("div", { staticClass: "has-text-centered" }, [
+      _c(
+        "a",
+        { attrs: { href: "http://www.anidalatam.com", target: "blank" } },
+        [
+          _c("img", {
+            staticClass: "img-container",
+            staticStyle: { width: "100px" },
+            attrs: { alt: "image", src: "/img/logo_anida.png" }
+          })
+        ]
+      )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-3" }, [
-      _c("div", { staticClass: "block" }, [
-        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
-          _vm._v("Ultimas Actualizaciones")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-normal is-size-6",
-            staticStyle: { "padding-top": "8px" }
-          },
-          [_vm._v("Escribir detalle aquí...")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      {
-        staticClass: "has-background-black-bis",
-        staticStyle: { "padding-top": "0.5rem", "padding-bottom": "0rem" }
-      },
-      [
-        _c("div", { staticClass: "has-text-centered" }, [
-          _c(
-            "a",
-            { attrs: { href: "http://www.anidalatam.com", target: "blank" } },
-            [
-              _c("img", {
-                staticClass: "img-container",
-                staticStyle: { width: "100px" },
-                attrs: { alt: "image", src: "/img/logo_anida.png" }
-              })
-            ]
-          )
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true

@@ -1,7 +1,7 @@
 <template>
     <section class="">
 
-        <div class="card">
+        <div class="card is-shadowless">
             
             <div class="card-content is-paddingless">
                 <div class="map-container">

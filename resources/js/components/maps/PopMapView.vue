@@ -177,7 +177,7 @@
             },
 
             getInfoWindowContent(pop) {
-                console.log(pop)
+                // console.log(pop)
                 return (`
                     <div class="card">
                         <div class="card-content">
@@ -214,7 +214,7 @@
 
                         this.dependences.forEach(m => {
                             if(m.dependence) {
-                                console.log(m.dependence.nem_site)
+                                // console.log(m.dependence.nem_site)
                                 let dependenceLine = [
                                     { lat: parseFloat(this.popMaster.latitude), lng: parseFloat(this.popMaster.longitude) }, 
                                     { lat: parseFloat(m.dependence.pop.latitude), lng: parseFloat(m.dependence.pop.longitude) }

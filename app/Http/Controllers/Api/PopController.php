@@ -408,7 +408,7 @@ class PopController extends Controller
             //     'classification_types.classification_type',
             //     'pops.alba_project'
             // )
-            ->orderBy('id')
+            ->orderBy('classification_type_id')
             ->paginate(10);
     
         return $sites;

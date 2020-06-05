@@ -68,7 +68,7 @@
                 <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Sitios</div>
             </div>
             <div class="tile is-ancestor columns is-multiline">
-                <div class="tile is-parent column is-4" v-for="site in sites">
+                <div class="tile is-parent column is-6" v-for="site in sites">
                     
                     <div class="tile is-child box">
                         <div class="columns">

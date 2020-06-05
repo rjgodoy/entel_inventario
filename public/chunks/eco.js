@@ -72,7 +72,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EcoMapView: function EcoMapView() {
-      return Promise.all(/*! import() | chunks/maps/ecoMap */[__webpack_require__.e("vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chunks/ma~1bf2ce6c"), __webpack_require__.e("chunks/maps/ecoMap")]).then(__webpack_require__.bind(null, /*! ../maps/EcoMapView */ "./resources/js/components/maps/EcoMapView.vue"));
+      return Promise.all(/*! import() | chunks/maps/ecoMap */[__webpack_require__.e("vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chu~fd58a5cd"), __webpack_require__.e("chunks/maps/ecoMap")]).then(__webpack_require__.bind(null, /*! ../maps/EcoMapView */ "./resources/js/components/maps/EcoMapView.vue"));
     },
     Rcas: function Rcas() {
       return __webpack_require__.e(/*! import() | chunks/eco/rcas */ "chunks/eco/rcas").then(__webpack_require__.bind(null, /*! ./RCAs */ "./resources/js/components/eco/RCAs.vue"));

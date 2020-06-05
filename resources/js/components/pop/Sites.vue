@@ -77,7 +77,7 @@
                             {{ bafi ? bafi.tecA + ' - ' + bafi.tecB + ' - ' + bafi.tecC : '-' }}
                         </div>
                         <b-tooltip :label="tec4g3500 ? tec4g3500.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec4g3500 ? 'is-dark' : 'is-white'">
-                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec4g3500 ? tec4g3500.state.style"/>
+                            <font-awesome-icon :icon="['fas', 'circle']" :class="tec4g3500 ? tec4g3500.state.style : 'has-text-white'"/>
                         </b-tooltip>
                     </div>
                 </div>

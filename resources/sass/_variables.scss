@@ -250,6 +250,12 @@ $radius-rounded: 290486px !default;
    box-shadow:         inset 0 0 20px #ccc;
 }
 
+.shadow-inset-dark-light {
+   -moz-box-shadow:    inset 0 0 20px rgba(0,0,0,0.5);
+   -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+   box-shadow:         inset 0 0 20px rgba(0,0,0,0.5);
+}
+
 .shadow-inset-dark {
    -moz-box-shadow:    inset 0 0 20px #111;
    -webkit-box-shadow: inset 0 0 20px #111;

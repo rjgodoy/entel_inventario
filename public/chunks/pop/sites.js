@@ -422,9 +422,7 @@ var render = function() {
                     {
                       attrs: {
                         label: _vm.tec2g1900
-                          ? _vm.tec2g1900.state
-                            ? _vm.tec2g1900.state.state
-                            : "Sin Tecnología"
+                          ? _vm.tec2g1900.state.state
                           : "Sin Tecnología",
                         position: "is-bottom",
                         type: _vm.tec2g1900 ? "is-dark" : "is-white"
@@ -472,9 +470,7 @@ var render = function() {
                     {
                       attrs: {
                         label: _vm.tec3g900
-                          ? _vm.tec3g900.state
-                            ? _vm.tec3g900.state.state
-                            : "Sin Tecnología"
+                          ? _vm.tec3g900.state.state
                           : "Sin Tecnología",
                         position: "is-bottom",
                         type: _vm.tec3g900 ? "is-dark" : "is-white"
@@ -521,9 +517,7 @@ var render = function() {
                     {
                       attrs: {
                         label: _vm.tec3g1900
-                          ? _vm.tec3g1900.state
-                            ? _vm.tec3g1900.state.state
-                            : "Sin Tecnología"
+                          ? _vm.tec3g1900.state.state
                           : "Sin Tecnología",
                         position: "is-bottom",
                         type: _vm.tec3g1900 ? "is-dark" : "is-white"
@@ -571,9 +565,7 @@ var render = function() {
                     {
                       attrs: {
                         label: _vm.tec4g700
-                          ? _vm.tec4g700.state
-                            ? _vm.tec4g700.state.state
-                            : "Sin Tecnología"
+                          ? _vm.tec4g700.state.state
                           : "Sin Tecnología",
                         position: "is-bottom",
                         type: _vm.tec4g700 ? "is-dark" : "is-white"
@@ -620,9 +612,7 @@ var render = function() {
                     {
                       attrs: {
                         label: _vm.tec4g1900
-                          ? _vm.tec4g1900.state
-                            ? _vm.tec4g1900.state.state
-                            : "Sin Tecnología"
+                          ? _vm.tec4g1900.state.state
                           : "Sin Tecnología",
                         position: "is-bottom",
                         type: _vm.tec4g1900 ? "is-dark" : "is-white"
@@ -669,9 +659,7 @@ var render = function() {
                     {
                       attrs: {
                         label: _vm.tec4g2600
-                          ? _vm.tec4g2600.state
-                            ? _vm.tec4g2600.state.state
-                            : "Sin Tecnología"
+                          ? _vm.tec4g2600.state.state
                           : "Sin Tecnología",
                         position: "is-bottom",
                         type: _vm.tec4g2600 ? "is-dark" : "is-white"
@@ -733,9 +721,7 @@ var render = function() {
                     {
                       attrs: {
                         label: _vm.tec4g3500
-                          ? _vm.tec4g3500.state
-                            ? _vm.tec4g3500.state.state
-                            : "Sin Tecnología"
+                          ? _vm.tec4g3500.state.state
                           : "Sin Tecnología",
                         position: "is-bottom",
                         type: _vm.tec4g3500 ? "is-dark" : "is-white"
@@ -743,7 +729,9 @@ var render = function() {
                     },
                     [
                       _c("font-awesome-icon", {
-                        class: _vm.tec4g3500.state.style,
+                        class: _vm.tec4g3500
+                          ? _vm.tec4g3500.state.style
+                          : "has-text-white",
                         attrs: { icon: ["fas", "circle"] }
                       })
                     ],

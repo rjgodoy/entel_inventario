@@ -1311,7 +1311,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "column is-2 has-background-link has-text-white is-paddingless"
+                "column is-2 has-background-link has-text-white is-paddingless shadow-inset-dark-light"
             },
             [
               _c("section", { staticClass: "section" }, [

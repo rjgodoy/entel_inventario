@@ -818,8 +818,18 @@ var Legend = /** @class */ (function (_super) {
         _this._disposers.push(_this.itemContainers.template);
         // Set up global keyboard events for toggling elements
         _this._disposers.push(Object(_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_9__["getInteraction"])().body.events.on("keyup", function (ev) {
-            if (_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_7__["keyboard"].isKey(ev.event, "enter") && _this.focusedItem && _this.focusedItem.itemContainer.clickable) {
-                _this.toggleDataItem(_this.focusedItem);
+            if (_core_utils_Keyboard__WEBPACK_IMPORTED_MODULE_7__["keyboard"].isKey(ev.event, "enter") && _this.focusedItem) {
+                var focusedItem = _this.focusedItem;
+                var target = focusedItem.itemContainer;
+                if (target.togglable) {
+                    _this.toggleDataItem(focusedItem);
+                }
+                else if (target.clickable && target.events.isEnabled("hit")) {
+                    target.dispatchImmediately("hit", { event: ev });
+                    // We need this here because "hit" event resets `this.focusedItem`
+                    // And we need it here
+                    _this.focusedItem = focusedItem;
+                }
             }
         }, _this));
         var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_11__["InterfaceColorSet"]();
@@ -926,7 +936,11 @@ var Legend = /** @class */ (function (_super) {
         container.readerChecked = dataItem.dataContext.visible;
         // Tell series its legend data item
         dataItem.dataContext.legendDataItem = dataItem;
+        var tempMaxWidth = dataItem.label.maxWidth;
         dataItem.label.width = undefined;
+        if (tempMaxWidth > 0) {
+            dataItem.label.maxWidth = tempMaxWidth;
+        }
         if (valueLabel.align == "right") {
             valueLabel.width = undefined;
         }
@@ -1020,7 +1034,7 @@ var Legend = /** @class */ (function (_super) {
         }
         this.labels.each(function (label) {
             if (_this.valueLabels.template.align == "right" || label.measuredWidth > maxAdjustedLabelWidth) {
-                label.width = maxAdjustedLabelWidth - label.pixelMarginLeft - label.pixelMarginRight;
+                label.width = Math.min(label.maxWidth, maxAdjustedLabelWidth - label.pixelMarginLeft - label.pixelMarginRight);
             }
         });
         if (this.valueLabels.template.align == "right") {
@@ -2481,7 +2495,7 @@ var Axis = /** @class */ (function (_super) {
             var startPosition = this.getCellStartPosition(position);
             var endPosition = this.getCellEndPosition(position);
             if (this.tooltipPosition == "fixed") {
-                position = _core_utils_Math__WEBPACK_IMPORTED_MODULE_13__["ceil"](startPosition + (endPosition - startPosition) * tooltipLocation, 4);
+                position = startPosition + (endPosition - startPosition) * tooltipLocation;
             }
             position = _core_utils_Math__WEBPACK_IMPORTED_MODULE_13__["fitToRange"](position, this.start, this.end);
             if (this._tooltipPosition != position) {
@@ -2500,7 +2514,7 @@ var Axis = /** @class */ (function (_super) {
                 var globalPoint = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_14__["spritePointToSvg"](point, this.renderer.line);
                 tooltip.text = this.getTooltipText(position);
                 if (tooltip.text) {
-                    tooltip.pointTo(globalPoint);
+                    tooltip.delayedPointTo(globalPoint);
                     tooltip.show();
                 }
             }
@@ -3081,6 +3095,9 @@ var Axis = /** @class */ (function (_super) {
         range.tick.disabled = true;
         range.label = this.renderer.labels.template.clone();
         range.label.disabled = true;
+        range.addDisposer(new _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_9__["Disposer"](function () {
+            series.axisRanges.removeValue(range);
+        }));
         series.axisRanges.push(range);
         return range;
     };
@@ -4348,6 +4365,7 @@ var AxisLabelCircular = /** @class */ (function (_super) {
         _this.className = "AxisLabelCircular";
         _this.padding(0, 0, 0, 0);
         _this.location = 0.5;
+        _this.locationOnPath = 0.5;
         _this.radius = 0;
         _this.isMeasured = false;
         _this.applyTheme();
@@ -4421,7 +4439,21 @@ var AxisLabelCircular = /** @class */ (function (_super) {
             this.setPropertyValue("horizontalCenter", "none");
             this.setPropertyValue("verticalCenter", "none");
             if (value) {
+                this.setPropertyValue("dx", 0);
+                this.setPropertyValue("dy", 0);
+                this.setPropertyValue("x", 0);
+                this.setPropertyValue("y", 0);
+                this.setPropertyValue("rotation", 0);
+                //this.setPropertyValue("relativeRotation", undefined);
+                this.fdx = 0;
+                this.fdy = 0;
                 this.textAlign = "middle";
+            }
+            else {
+                if (this.textPathElement) {
+                    this.textPathElement.dispose();
+                    this.textPathElement = undefined;
+                }
             }
         },
         enumerable: true,
@@ -4494,9 +4526,11 @@ var AxisLabelCircular = /** @class */ (function (_super) {
         var relativeRotation = this.relativeRotation;
         var labelRadius = this.pixelRadius(axisRadius);
         if (this.bent) {
-            var point_1 = { x: axisRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_3__["cos"](angle + 180), y: axisRadiusY * _core_utils_Math__WEBPACK_IMPORTED_MODULE_3__["sin"](angle + 180) };
+            var point_1 = { x: (axisRadius + labelRadius) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_3__["cos"](angle + 180), y: (axisRadiusY + labelRadius * axisRadiusY / axisRadius) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_3__["sin"](angle + 180) };
             this.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["moveTo"](point_1) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_5__["arcTo"](angle + 180, 360, axisRadius + labelRadius, axisRadiusY + labelRadius * axisRadiusY / axisRadius);
-            this.locationOnPath = 0.5;
+            if (this.textPathElement) {
+                this.textPathElement.attr({ "startOffset": (this.locationOnPath * 100) + "%" });
+            }
             return;
         }
         // WHEN ROTATED
@@ -4796,9 +4830,17 @@ var AxisRenderer = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(AxisRenderer.prototype, "axis", {
+        /**
+         * Axis of a renderer
+         * @return axis Axis
+         */
         get: function () {
             return this._axis;
         },
+        /**
+         * Axis of a renderer
+         * @param axis Axis
+         */
         set: function (axis) {
             this.setAxis(axis);
         },
@@ -5076,7 +5118,7 @@ var AxisRenderer = /** @class */ (function (_super) {
         set: function (value) {
             if (this.setPropertyValue("minGridDistance", value)) {
                 if (this.axis) {
-                    this.axis.invalidateLayout();
+                    this.axis.invalidateDataItems();
                 }
             }
         },
@@ -5797,7 +5839,25 @@ var AxisRendererCircular = /** @class */ (function (_super) {
          * @return Inner radius
          */
         get: function () {
-            return this.getPropertyValue("innerRadius");
+            var chart = this.chart;
+            var innerRadius = this.getPropertyValue("innerRadius");
+            if (chart) {
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_10__["hasValue"](innerRadius)) {
+                    innerRadius = chart.innerRadius;
+                    if (innerRadius instanceof _core_utils_Percent__WEBPACK_IMPORTED_MODULE_6__["Percent"] && chart) {
+                        innerRadius = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_6__["percent"])(innerRadius.value * chart.innerRadiusModifyer * 100);
+                    }
+                }
+                else {
+                    if (innerRadius instanceof _core_utils_Percent__WEBPACK_IMPORTED_MODULE_6__["Percent"] && chart) {
+                        var mr = chart.mr;
+                        var value = innerRadius.value;
+                        value = Math.max(mr * value, mr - Math.min(chart.plotContainer.innerHeight, chart.plotContainer.innerWidth)) / mr;
+                        innerRadius = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_6__["percent"])(value * 100);
+                    }
+                }
+                return innerRadius;
+            }
         },
         /**
          * Inner radius of the axis.
@@ -5865,7 +5925,8 @@ var AxisRendererCircular = /** @class */ (function (_super) {
         var innerRadius = this.pixelInnerRadius;
         if (this.axisRendererY) {
             var realRadius = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["fitToRange"](this.axisRendererY.positionToCoordinate(position2), 0, Infinity);
-            return { x: realRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle), y: realRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) };
+            var point = { x: realRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle), y: realRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) };
+            return point;
         }
         return { x: _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle) * innerRadius + (radius - innerRadius) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle) * position2, y: _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) * innerRadius + (radius - innerRadius) * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) * position2 };
     };
@@ -5933,7 +5994,7 @@ var AxisRendererCircular = /** @class */ (function (_super) {
             var radius = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_9__["relativeRadiusToValue"](_core_utils_Type__WEBPACK_IMPORTED_MODULE_10__["hasValue"](grid.radius) ? grid.radius : Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_6__["percent"])(100), this.pixelRadius);
             var gridInnerRadius = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_9__["relativeRadiusToValue"](grid.innerRadius, this.pixelRadius);
             grid.zIndex = 0;
-            var innerRadius = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_9__["relativeRadiusToValue"](_core_utils_Type__WEBPACK_IMPORTED_MODULE_10__["isNumber"](gridInnerRadius) ? gridInnerRadius : this.innerRadius, this.pixelRadius, true);
+            var innerRadius = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_9__["relativeRadiusToValue"](_core_utils_Type__WEBPACK_IMPORTED_MODULE_10__["isNumber"](gridInnerRadius) ? gridInnerRadius : this.innerRadius, this.pixelRadiusReal, true);
             grid.path = _core_rendering_Path__WEBPACK_IMPORTED_MODULE_8__["moveTo"]({ x: innerRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle), y: innerRadius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) }) + _core_rendering_Path__WEBPACK_IMPORTED_MODULE_8__["lineTo"]({ x: radius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["cos"](angle), y: radius * _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["sin"](angle) });
         }
         this.toggleVisibility(grid, position, 0, 1);
@@ -6283,7 +6344,25 @@ var AxisRendererRadial = /** @class */ (function (_super) {
          * @return Inner radius
          */
         get: function () {
-            return this.getPropertyValue("innerRadius");
+            var chart = this.chart;
+            var innerRadius = this.getPropertyValue("innerRadius");
+            if (chart) {
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_10__["hasValue"](innerRadius)) {
+                    innerRadius = chart.innerRadius;
+                    if (innerRadius instanceof _core_utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"] && chart) {
+                        innerRadius = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_5__["percent"])(innerRadius.value * chart.innerRadiusModifyer * 100);
+                    }
+                }
+                else {
+                    if (innerRadius instanceof _core_utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"] && chart) {
+                        var mr = chart.mr;
+                        var value = innerRadius.value;
+                        value = Math.max(mr * value, mr - Math.min(chart.plotContainer.innerHeight, chart.plotContainer.innerWidth)) / mr;
+                        innerRadius = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_5__["percent"])(value * 100);
+                    }
+                }
+            }
+            return innerRadius;
         },
         /**
          * Inner radius of the axis.
@@ -6306,26 +6385,6 @@ var AxisRendererRadial = /** @class */ (function (_super) {
          */
         get: function () {
             return _core_utils_Utils__WEBPACK_IMPORTED_MODULE_9__["relativeRadiusToValue"](this.innerRadius, this.pixelRadiusReal) || 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AxisRendererRadial.prototype, "chart", {
-        /**
-         * @ignore Exclude from docs
-         * @return Chart
-         */
-        get: function () {
-            return this._chart.get();
-        },
-        /**
-         * Chart, associated with the Axis.
-         *
-         * @ignore Exclude from docs
-         * @param value Chart
-         */
-        set: function (chart) {
-            this._chart.set(chart, null);
         },
         enumerable: true,
         configurable: true
@@ -6715,6 +6774,26 @@ var AxisRendererRadial = /** @class */ (function (_super) {
         var coordinate = (_core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["getDistance"](point) - this.pixelInnerRadius);
         return this.coordinateToPosition(coordinate);
     };
+    Object.defineProperty(AxisRendererRadial.prototype, "chart", {
+        /**
+         * @ignore Exclude from docs
+         * @return Chart
+         */
+        get: function () {
+            return this._chart.get();
+        },
+        /**
+         * A chart, associated with the Axis.
+         *
+         * @ignore Exclude from docs
+         * @param value  Chart
+         */
+        set: function (value) {
+            this._chart.set(value, null);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return AxisRendererRadial;
 }(_AxisRendererY__WEBPACK_IMPORTED_MODULE_1__["AxisRendererY"]));
 
@@ -8219,7 +8298,13 @@ var CategoryAxisDataItem = /** @class */ (function (_super) {
          * @param value  Category
          */
         set: function (value) {
+            var oldCategory = this.properties.category;
             this.setProperty("category", value);
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["hasValue"](oldCategory) && oldCategory != value) {
+                if (this.component) {
+                    this.component.validateDataElement(this);
+                }
+            }
         },
         enumerable: true,
         configurable: true
@@ -8499,14 +8584,21 @@ var CategoryAxis = /** @class */ (function (_super) {
                 var adjustedStartValue = axisBreak.adjustedStartValue;
                 var adjustedEndValue = axisBreak.adjustedEndValue;
                 if (_core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["intersect"]({ start: adjustedStartValue, end: adjustedEndValue }, { start: _this._startIndex, end: _this._endIndex })) {
+                    for (var b = adjustedStartValue; b <= adjustedEndValue; b++) {
+                        var dataItem = _this.dataItems.getIndex(b);
+                        dataItem.__disabled = true;
+                    }
                     var frequency_1 = _core_utils_Math__WEBPACK_IMPORTED_MODULE_7__["fitToRange"](Math.ceil(_this._frequency / axisBreak.breakSize), 1, adjustedEndValue - adjustedStartValue);
                     var itemIndex_1 = 0;
-                    // TODO use iterator instead
-                    for (var b = adjustedStartValue; b <= adjustedEndValue; b = b + frequency_1) {
-                        var dataItem = _this.dataItems.getIndex(b);
-                        _this.appendDataItem(dataItem);
-                        _this.validateDataElement(dataItem, itemIndex_1);
-                        itemIndex_1++;
+                    if (axisBreak.breakSize > 0) {
+                        // TODO use iterator instead
+                        for (var b = adjustedStartValue; b <= adjustedEndValue; b = b + frequency_1) {
+                            var dataItem = _this.dataItems.getIndex(b);
+                            dataItem.__disabled = false;
+                            _this.appendDataItem(dataItem);
+                            _this.validateDataElement(dataItem, itemIndex_1);
+                            itemIndex_1++;
+                        }
                     }
                 }
             });
@@ -9319,6 +9411,8 @@ var CategoryAxisBreak = /** @class */ (function (_super) {
     function CategoryAxisBreak() {
         var _this = _super.call(this) || this;
         _this.className = "CategoryAxisBreak";
+        _this.properties.startLocation = 0.5;
+        _this.properties.endLocation = 0.5;
         _this.applyTheme();
         return _this;
     }
@@ -9331,7 +9425,7 @@ var CategoryAxisBreak = /** @class */ (function (_super) {
          */
         get: function () {
             if (this.axis) {
-                return this.axis.indexToPosition(this.adjustedStartValue);
+                return this.axis.indexToPosition(this.adjustedStartValue, this.startLocation);
             }
         },
         enumerable: true,
@@ -9346,7 +9440,7 @@ var CategoryAxisBreak = /** @class */ (function (_super) {
          */
         get: function () {
             if (this.axis) {
-                return this.axis.indexToPosition(this.adjustedEndValue);
+                return this.axis.indexToPosition(this.adjustedEndValue, this.endLocation);
             }
         },
         enumerable: true,
@@ -9447,6 +9541,66 @@ var CategoryAxisBreak = /** @class */ (function (_super) {
          */
         set: function (value) {
             if (this.setPropertyValue("endValue", value)) {
+                if (this.axis) {
+                    this.axis.invalidateDataItems();
+                    this.axis.invalidateSeries();
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CategoryAxisBreak.prototype, "startLocation", {
+        /**
+         * @return Break start location
+         */
+        get: function () {
+            return this.getPropertyValue("startLocation");
+        },
+        /**
+         * Indicates where within starting category break should begin.
+         *
+         * Values range from `0` (start) to `1` (end), with default being `0.5` (middle).
+         *
+         * E.g. if you want to a break to fully encompass start and end categories,
+         * you should set `startLocation = 0` and `endLocation = 1`.
+         *
+         * @since 4.9.17
+         * @default 0.5
+         * @param  value  Break start location
+         */
+        set: function (value) {
+            if (this.setPropertyValue("startLocation", value)) {
+                if (this.axis) {
+                    this.axis.invalidateDataItems();
+                    this.axis.invalidateSeries();
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CategoryAxisBreak.prototype, "endLocation", {
+        /**
+         * @return Break end location
+         */
+        get: function () {
+            return this.getPropertyValue("endLocation");
+        },
+        /**
+         * Indicates where within ending category break should end.
+         *
+         * Values range from `0` (start) to `1` (end), with default being `0.5` (middle).
+         *
+         * E.g. if you want to a break to fully encompass start and end categories,
+         * you should set `startLocation = 0` and `endLocation = 1`.
+         *
+         * @since 4.9.17
+         * @default 0.5
+         * @param  value  Break end location
+         */
+        set: function (value) {
+            if (this.setPropertyValue("endLocation", value)) {
                 if (this.axis) {
                     this.axis.invalidateDataItems();
                     this.axis.invalidateSeries();
@@ -9931,7 +10085,7 @@ var DateAxis = /** @class */ (function (_super) {
             this.periodChangeDateFormats.setKey("minute", this.language.translate("_date_minute"));
         }
         if (!this.periodChangeDateFormats.hasKey("hour")) {
-            this.periodChangeDateFormats.setKey("hour", this.language.translate("_date_hour"));
+            this.periodChangeDateFormats.setKey("hour", this.language.translate("_date_day"));
         }
         if (!this.periodChangeDateFormats.hasKey("day")) {
             this.periodChangeDateFormats.setKey("day", this.language.translate("_date_day"));
@@ -10003,12 +10157,23 @@ var DateAxis = /** @class */ (function (_super) {
         // if data has to be grouped, choose interval and set dataset
         if (this.groupData && _core_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](difference)) {
             var mainBaseInterval = this.mainBaseInterval;
-            var groupInterval = this.chooseInterval(0, difference, this.groupCount, this.groupIntervals);
-            if (_core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](groupInterval.timeUnit, groupInterval.count) < _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](mainBaseInterval.timeUnit, mainBaseInterval.count)) {
-                groupInterval = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, mainBaseInterval);
+            var modifiedDifference = difference + this.startLocation + (1 - this.endLocation) * this.baseDuration;
+            var groupInterval = void 0;
+            if (this.groupInterval) {
+                groupInterval = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, this.groupInterval);
+            }
+            else {
+                groupInterval = this.chooseInterval(0, modifiedDifference, this.groupCount, this.groupIntervals);
+                if (_core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](groupInterval.timeUnit, groupInterval.count) < _core_utils_Time__WEBPACK_IMPORTED_MODULE_6__["getDuration"](mainBaseInterval.timeUnit, mainBaseInterval.count)) {
+                    groupInterval = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, mainBaseInterval);
+                }
             }
             this._groupInterval = groupInterval;
-            this._currentDataSetId = groupInterval.timeUnit + groupInterval.count;
+            var newId = groupInterval.timeUnit + groupInterval.count;
+            if (this._currentDataSetId != newId) {
+                this._currentDataSetId = newId;
+                this.dispatch("groupperiodchanged");
+            }
             this.series.each(function (series) {
                 if (series.baseAxis == _this) {
                     if (series.setDataSet(_this._currentDataSetId)) {
@@ -10215,6 +10380,10 @@ var DateAxis = /** @class */ (function (_super) {
                         if (previousTime < currentTime) {
                             newDataItem = dataSet.create();
                             newDataItem.dataContext = {};
+                            newDataItem.setWorkingLocation("dateX", series.dataItems.template.locations.dateX, 0);
+                            newDataItem.setWorkingLocation("openDateX", series.dataItems.template.locations.openDateX, 0);
+                            newDataItem.setWorkingLocation("dateY", series.dataItems.template.locations.dateY, 0);
+                            newDataItem.setWorkingLocation("openDateY", series.dataItems.template.locations.openDateY, 0);
                             newDataItem.component = series;
                             // other Dates?
                             newDataItem.setDate(key, roundedDate);
@@ -11077,6 +11246,7 @@ var DateAxis = /** @class */ (function (_super) {
          * * Using this feature affects performance. Use only if you need it.
          * * Setting this to `true` will reset appearance of breaks. If you want to modify appearance, do it *after* you set `skipEmptyPeriods`.
          * * Some axis label overlapping might happen.
+         * * This setting is not compatible with `groupData = true`.
          *
          * @default false
          * @param value  Remove empty stretches of time?
@@ -11659,6 +11829,29 @@ var DateAxis = /** @class */ (function (_super) {
                 });
                 this._currentDataSetId = "";
                 this._groupInterval = undefined;
+                this.invalidate();
+                this.invalidateSeries();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DateAxis.prototype, "groupInterval", {
+        /**
+         * @return Interval
+         */
+        get: function () {
+            return this.getPropertyValue("groupInterval");
+        },
+        /**
+         * Disables automatic selection of data grouping intervals and always uses
+         * `groupInterval` if set. Works only if `groupData = true`.
+         *
+         * @since 4.9.24
+         * @param  value  Interval
+         */
+        set: function (value) {
+            if (this.setPropertyValue("groupInterval", value)) {
                 this.invalidate();
                 this.invalidateSeries();
             }
@@ -12593,6 +12786,8 @@ var ValueAxis = /** @class */ (function (_super) {
          * @todo Description
          */
         _this._stepDecimalPlaces = 0;
+        _this._prevStepDecimalPlaces = 0;
+        _this._adjustLabelPrecision = true;
         /**
          * Base value for the axis.
          */
@@ -12632,6 +12827,7 @@ var ValueAxis = /** @class */ (function (_super) {
         _this.setPropertyValue("extraMax", 0);
         _this.setPropertyValue("strictMinMax", false);
         _this.setPropertyValue("maxPrecision", Number.MAX_VALUE);
+        _this.setPropertyValue("adjustLabelPrecision", true);
         _this.setPropertyValue("extraTooltipPrecision", 0);
         _this.keepSelection = false;
         _this.includeRangesInMinMax = false;
@@ -12865,6 +13061,8 @@ var ValueAxis = /** @class */ (function (_super) {
             this.resetIterators();
             var dataItemsIterator_1 = this._dataItemsIterator;
             var i = 0;
+            var precisionChanged = this._prevStepDecimalPlaces != this._stepDecimalPlaces;
+            this._prevStepDecimalPlaces = this._stepDecimalPlaces;
             while (value_1 <= maxZoomed) {
                 var axisBreak = this.isInBreak(value_1);
                 if (!axisBreak) {
@@ -12875,7 +13073,7 @@ var ValueAxis = /** @class */ (function (_super) {
                     //this.processDataItem(dataItem);
                     this.appendDataItem(dataItem);
                     dataItem.axisBreak = undefined;
-                    if (dataItem.value != value_1) {
+                    if (dataItem.value != value_1 || precisionChanged) {
                         dataItem.value = value_1;
                         dataItem.text = this.formatLabel(value_1);
                         if (dataItem.label && dataItem.label.invalid) {
@@ -13007,7 +13205,12 @@ var ValueAxis = /** @class */ (function (_super) {
      * @return Formatted value
      */
     ValueAxis.prototype.formatLabel = function (value) {
-        return this.numberFormatter.format(value);
+        if (this.adjustLabelPrecision && value != 0) {
+            return this.numberFormatter.format(value, undefined, this._stepDecimalPlaces);
+        }
+        else {
+            return this.numberFormatter.format(value);
+        }
     };
     Object.defineProperty(ValueAxis.prototype, "basePoint", {
         /**
@@ -13764,6 +13967,35 @@ var ValueAxis = /** @class */ (function (_super) {
         set: function (value) {
             if (this._maxDefined != value) {
                 this._maxDefined = value;
+                this.invalidate();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ValueAxis.prototype, "adjustLabelPrecision", {
+        /**
+         * @return Adjust precision
+         */
+        get: function () {
+            return this.getPropertyValue("adjustLabelPrecision");
+        },
+        /**
+         * By default the axis will adjust precision of all numbers to match number
+         * of decimals in all its labels, e.g.: `1.0`, `1.5`, `2.0`.
+         *
+         * To disable set `adjustLabelPrecision` to `false`, to use whatever other
+         * precision or number format settings are set.
+         *
+         * IMPORTANT: This setting will be ignored if your number format uses
+         * modifiers, e.g. `"#a"`.
+         *
+         * @default true
+         * @since 4.9.14
+         * @param  value  Adjust precision
+         */
+        set: function (value) {
+            if (this.setPropertyValue("adjustLabelPrecision", value)) {
                 this.invalidate();
             }
         },
@@ -14947,7 +15179,7 @@ var Cursor = /** @class */ (function (_super) {
         if (!this.interactionsEnabled) {
             return;
         }
-        if (((this._generalBehavior != "zoom" && this._generalBehavior != "pan") || !this.downPoint) && !Object(_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_2__["getInteraction"])().isLocalElement(event.pointer, this.paper.svg, this.uid)) {
+        if (!this.downPoint && !Object(_core_interaction_Interaction__WEBPACK_IMPORTED_MODULE_2__["getInteraction"])().isLocalElement(event.pointer, this.paper.svg, this.uid)) {
             return;
         }
         var local = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_7__["documentPointToSprite"](event.pointer.point, this);
@@ -15869,19 +16101,22 @@ var XYCursor = /** @class */ (function (_super) {
         /**
          * Cursor's behavior when it's moved with pointer down:
          *
-         * * "zoomX" - zooms horizontally;
-         * * "zoomY" - zooms vertically;
-         * * "zoomXY" - zooms both horizontally and vertically;
-         * * "selectX" - selects a range horizontally;
-         * * "selectY" - selects a range vertically;
-         * * "selectXY" - selects a range both horizontally and vertically;
-         * * "panX" - moves (pans) current selection horizontally;
-         * * "panY" - moves (pans) current selection vertically;
-         * * "panXY" - moves (pans) current selection both horizontally and vertically;
-         * * "none" - does nothing with pointer down.
+         * * `"zoomX"` - zooms horizontally.
+         * * `"zoomY"` - zooms vertically.
+         * * `"zoomXY"` - zooms both horizontally and vertically.
+         * * `"selectX"` - selects a range horizontally.
+         * * `"selectY"` - selects a range vertically.
+         * * `"selectXY"` - selects a range both horizontally and vertically.
+         * * `"panX"` - moves (pans) current selection horizontally.
+         * * `"panY"` - moves (pans) current selection vertically.
+         * * `"panXY"` - moves (pans) current selection both horizontally and vertically.
+         * * `"none"` - does nothing with pointer down.
          *
          * E.g. "zoomXY" will mean that pressing a mouse (or touching) over plot area
          * and dragging it will start zooming the chart.
+         *
+         * NOTE: `"zoomXY"` acts differently when used on a `DateAxis`.
+         * See [this note](https://www.amcharts.com/docs/v4/concepts/chart-cursor/#zoomXY_behavior_and_DateAxis).
          *
          * @param value Bheavior
          */
@@ -16244,6 +16479,7 @@ var XYCursor = /** @class */ (function (_super) {
      * @param config  Config
      */
     XYCursor.prototype.processConfig = function (config) {
+        var _this = this;
         if (config) {
             // Set up axes
             if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["hasValue"](config.xAxis) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["isString"](config.xAxis)) {
@@ -16264,13 +16500,25 @@ var XYCursor = /** @class */ (function (_super) {
                     delete config.yAxis;
                 }
             }
-            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["hasValue"](config.snapToSeries) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["isString"](config.snapToSeries)) {
-                if (this.map.hasKey(config.snapToSeries)) {
-                    config.snapToSeries = this.map.getKey(config.snapToSeries);
+            if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["hasValue"](config.snapToSeries)) {
+                var snapTo_1 = _core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["isArray"](config.snapToSeries) ? config.snapToSeries : [config.snapToSeries];
+                var snapError_1 = false;
+                _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__["each"](snapTo_1, function (snap, index) {
+                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_14__["isString"](snap)) {
+                        if (_this.map.hasKey(snap)) {
+                            snapTo_1[index] = _this.map.getKey(snap);
+                        }
+                        else {
+                            _this.processingErrors.push("[XYCursor] No series with id \"" + snap + "\" found for `series`");
+                            snapError_1 = true;
+                        }
+                    }
+                });
+                if (snapError_1) {
+                    delete config.snapToSeries;
                 }
                 else {
-                    this.processingErrors.push("[XYCursor] No series with id \"" + config.snapToSeries + "\" found for `series`");
-                    delete config.snapToSeries;
+                    config.snapToSeries = snapTo_1;
                 }
             }
         }
@@ -19699,7 +19947,7 @@ var HeatLegend = /** @class */ (function (_super) {
          * @param {Color}
          */
         set: function (value) {
-            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_11__["isObject"](value)) {
+            if (!(value instanceof _core_utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"])) {
                 value = Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_4__["toColor"])(value);
             }
             this.setColorProperty("maxColor", value, true);
@@ -21332,7 +21580,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
 /* harmony import */ var _core_utils_Type__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
 /* harmony import */ var _core_rendering_Path__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
-/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony import */ var _core_utils_Utils__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../core/utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
+/* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
+/* harmony import */ var _core_utils_Color__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/utils/Color */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Color.js");
 /**
  * A module with functionality for buildin a scrollbar with an XY graph in it.
  */
@@ -21343,6 +21593,8 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
+
 
 
 
@@ -21394,7 +21646,11 @@ var XYChartScrollbar = /** @class */ (function (_super) {
         scrollbarChart.padding(0, 0, 0, 0);
         scrollbarChart.interactionsEnabled = false;
         _this._scrollbarChart = scrollbarChart;
-        scrollbarChart.plotContainer.filters.push(new _core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_10__["DesaturateFilter"]());
+        if (!_core_utils_Utils__WEBPACK_IMPORTED_MODULE_14__["isIE"]()) {
+            var filter = new _core_rendering_filters_DesaturateFilter__WEBPACK_IMPORTED_MODULE_10__["DesaturateFilter"]();
+            filter.filterUnits = "userSpaceOnUse";
+            scrollbarChart.plotContainer.filters.push(filter);
+        }
         _this._disposers.push(_this._scrollbarChart);
         _this.minHeight = 60;
         _this.minWidth = 60;
@@ -21478,6 +21734,12 @@ var XYChartScrollbar = /** @class */ (function (_super) {
         });
         var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_9__["InterfaceColorSet"]();
         var series = sourceSeries.clone();
+        if (_core_utils_Utils__WEBPACK_IMPORTED_MODULE_14__["isIE"]()) {
+            series.stroke = Object(_core_utils_Color__WEBPACK_IMPORTED_MODULE_16__["color"])("#aaaaaa");
+            series.fill = series.stroke;
+            series.propertyFields.fill = undefined;
+            series.propertyFields.stroke = undefined;
+        }
         sourceSeries.scrollbarSeries = series;
         if (addXAxis) {
             var xAxis = sourceSeries.xAxis.clone();
@@ -21501,7 +21763,7 @@ var XYChartScrollbar = /** @class */ (function (_super) {
             renderer.padding(0, 0, 0, 0);
             renderer.chart = scrollbarChart;
             renderer.margin(0, 0, 0, 0);
-            xAxis.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_14__["percent"])(100);
+            xAxis.width = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_15__["percent"])(100);
             var labelsTemplate = renderer.labels.template;
             labelsTemplate.fillOpacity = 0.5;
             xAxis.maxZoomCount = undefined;
@@ -21571,7 +21833,7 @@ var XYChartScrollbar = /** @class */ (function (_super) {
             renderer.chart = scrollbarChart;
             renderer.padding(0, 0, 0, 0);
             renderer.margin(0, 0, 0, 0);
-            yAxis.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_14__["percent"])(100);
+            yAxis.height = Object(_core_utils_Percent__WEBPACK_IMPORTED_MODULE_15__["percent"])(100);
             var labelsTemplate = renderer.labels.template;
             labelsTemplate.fillOpacity = 0.5;
             series.yAxis = yAxis;
@@ -22568,10 +22830,11 @@ var ColumnSeries = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     ColumnSeries.prototype.validate = function () {
-        var _this = this;
         //@todo Check if we can do better than use `instanceof`
         // find start/end locations based on clustered/stacked settings
         // go through chart series instead of base axis series, because axis series doesn't maintain order
+        var _this = this;
+        this.group.node.removeAttribute("fill");
         if (this.chart && this.xAxis && this.yAxis) {
             var baseAxisSeries = this.chart.series;
             var clusterCount_1 = 0;
@@ -23891,6 +24154,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
 /* harmony import */ var _core_utils_Percent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../core/utils/Percent */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Percent.js");
 /* harmony import */ var _core_utils_Disposer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../core/utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
+/* harmony import */ var _core_Options__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../core/Options */ "./node_modules/@amcharts/amcharts4/.internal/core/Options.js");
 /**
  * Defines Funnel Chart Series.
  */
@@ -23901,6 +24165,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -24502,6 +24767,9 @@ var FunnelSeries = /** @class */ (function (_super) {
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isNumber"](duration)) {
             interpolationDuration = duration;
         }
+        if (!_core_Options__WEBPACK_IMPORTED_MODULE_12__["options"].animationsEnabled) {
+            interpolationDuration = 0;
+        }
         var delay = 0;
         _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_7__["each"](_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_7__["indexed"](this.dataItems.iterator()), function (a) {
             var i = a[0];
@@ -24530,6 +24798,9 @@ var FunnelSeries = /** @class */ (function (_super) {
         var interpolationDuration = this.hiddenState.transitionDuration;
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isNumber"](duration)) {
             interpolationDuration = duration;
+        }
+        if (!_core_Options__WEBPACK_IMPORTED_MODULE_12__["options"].animationsEnabled) {
+            interpolationDuration = 0;
         }
         _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_7__["each"](_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_7__["indexed"](this.dataItems.iterator()), function (a) {
             var i = a[0];
@@ -25002,6 +25273,14 @@ var LineSeries = /** @class */ (function (_super) {
             params = this.openSegment(params.index, params.axisRange);
         } while (params);
     };
+    LineSeries.prototype.getSegment = function () {
+        var segment = this._segmentsIterator.getFirst();
+        if (segment.isDisposed()) {
+            this.segments.removeValue(segment);
+            return this.getSegment();
+        }
+        return segment;
+    };
     /**
      * [openSegment description]
      *
@@ -25017,7 +25296,7 @@ var LineSeries = /** @class */ (function (_super) {
         this._workingEndIndex = Math.min(this._workingEndIndex, this.dataItems.length);
         var closeIndex;
         var propertiesChanged = false;
-        var segment = this._segmentsIterator.getFirst();
+        var segment = this.getSegment();
         segment.__disabled = false;
         if (axisRange) {
             segment.parent = axisRange.contents;
@@ -25028,6 +25307,7 @@ var LineSeries = /** @class */ (function (_super) {
             segment.filters.clear();
             segment.parent = this.segmentsContainer;
         }
+        this.group.node.removeAttribute("fill");
         var connect = this.connect;
         var valuesFound = false; // some flag to avoid multiple closes if no values found
         for (var i = openIndex; i < endIndex; i++) {
@@ -25320,6 +25600,7 @@ var LineSeries = /** @class */ (function (_super) {
         _core_utils_Object__WEBPACK_IMPORTED_MODULE_15__["copyProperties"](this, line, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
         line.x2 = w;
         line.y = h / 2;
+        line.y2 = 0.00001;
         line.visible = true;
         if (this.fillOpacity > 0) {
             var fill = marker.createChild(_core_elements_Rectangle__WEBPACK_IMPORTED_MODULE_13__["Rectangle"]);
@@ -28472,7 +28753,8 @@ var RadarColumnSeries = /** @class */ (function (_super) {
         if (!radarColumn) {
             radarColumn = this.columns.create();
             dataItem.column = radarColumn;
-            _core_utils_Object__WEBPACK_IMPORTED_MODULE_8__["forceCopyProperties"](this.columns.template, radarColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]);
+            _core_utils_Object__WEBPACK_IMPORTED_MODULE_8__["copyProperties"](this, radarColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]); // need this 
+            _core_utils_Object__WEBPACK_IMPORTED_MODULE_8__["copyProperties"](this.columns.template, radarColumn, _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["visualProperties"]); // second time, no force, so that columns.template would override series properties			
             dataItem.addSprite(radarColumn);
             radarColumn.paper = this.paper; // sometimes pattern is not drawn if is set with adapter without this.
             this.setColumnStates(radarColumn);
@@ -29105,6 +29387,21 @@ var Series = /** @class */ (function (_super) {
          */
         _this.calculatePercent = false;
         /**
+         * When `calculatePercent` is enabled and data item's percent value is
+         * calculated, last item's real value is used instead of its working value.
+         *
+         * This is done for the animations when last item in series (e.g. slice in
+         * a `PieSeries`) is hidden or shown. (if we would use real value, the
+         * calculated percent would always be 100%).
+         *
+         * Sometimes there is a need (e.g. for drill-down Sunburst) to disable this
+         * hack by setting `usePercentHack` to `false`.
+         *
+         * @since 4.9.13
+         * @default true
+         */
+        _this.usePercentHack = true;
+        /**
          * Specifies if series should be automatically disposed when removing from
          * chart's `series` list.
          *
@@ -29449,11 +29746,13 @@ var Series = /** @class */ (function (_super) {
                         var value = dataItem_3.getActualWorkingValue(key);
                         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](value)) {
                             if (ksum > 0) {
-                                // this hack is made in order to make it possible to animate single slice to 0
-                                // if there is only one slice left, percent value is always 100%, so it won't animate
-                                // so we use real value of a slice instead of current value
-                                if (value == ksum) {
-                                    ksum = dataItem_3.values[key].value;
+                                if (_this.usePercentHack) {
+                                    // this hack is made in order to make it possible to animate single slice to 0
+                                    // if there is only one slice left, percent value is always 100%, so it won't animate
+                                    // so we use real value of a slice instead of current value
+                                    if (value == ksum) {
+                                        ksum = dataItem_3.values[key].value;
+                                    }
                                 }
                                 var percent = value / ksum * 100;
                                 dataItem_3.setCalculatedValue(key, percent, "percent");
@@ -29501,6 +29800,9 @@ var Series = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     Series.prototype.validate = function () {
+        if (_core_utils_Utils__WEBPACK_IMPORTED_MODULE_16__["isIE"]()) {
+            this.filters.clear();
+        }
         _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_13__["each"](this.axisRanges.iterator(), function (axisRange) {
             //axisRange.contents.disposeChildren(); // not good for columns, as they are reused
             //			axisRange.appendChildren();
@@ -29960,6 +30262,7 @@ var Series = /** @class */ (function (_super) {
         this.bullets.copyFrom(source.bullets);
         this.bulletsContainer.copyFrom(source.bulletsContainer);
         this.calculatePercent = source.calculatePercent;
+        this.usePercentHack = source.usePercentHack;
         this.simplifiedProcessing = source.simplifiedProcessing;
         _super.prototype.copyFrom.call(this, source);
     };
@@ -29973,7 +30276,9 @@ var Series = /** @class */ (function (_super) {
         if (this._chart && this._chart.modal) {
             this._chart.modal.content = this._chart.adapter.apply("criticalError", e).message;
             this._chart.modal.closable = false;
-            this._chart.modal.open();
+            if (!_core_Options__WEBPACK_IMPORTED_MODULE_10__["options"].suppressErrors) {
+                this._chart.modal.open();
+            }
             this._chart.disabled = true;
         }
         if (_core_Options__WEBPACK_IMPORTED_MODULE_10__["options"].verbose) {
@@ -30053,8 +30358,6 @@ var Series = /** @class */ (function (_super) {
                         if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](dataField_1)) {
                             dataField_1 = "value";
                         }
-                        var min_1 = heatRule.min;
-                        var max_1 = heatRule.max;
                         var seriesDataItem_1 = _this.dataItem;
                         var property_1 = heatRule.property;
                         var minValue = _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["toNumber"](heatRule.minValue);
@@ -30123,6 +30426,8 @@ var Series = /** @class */ (function (_super) {
                         target.adapter.add(property_1, function (value, ruleTarget, property) {
                             var minValue = _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["toNumber"](heatRule.minValue);
                             var maxValue = _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["toNumber"](heatRule.maxValue);
+                            var min = heatRule.min;
+                            var max = heatRule.max;
                             if (ruleTarget instanceof _core_Sprite__WEBPACK_IMPORTED_MODULE_2__["Sprite"]) {
                                 var anySprite = ruleTarget;
                                 var propertyField = anySprite.propertyFields[property];
@@ -30144,17 +30449,23 @@ var Series = /** @class */ (function (_super) {
                                 var fieldValues = dataItem.values[dataField_1];
                                 if (fieldValues) {
                                     var workingValue = dataItem.getActualWorkingValue(dataField_1);
-                                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](min_1) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](max_1) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](minValue) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](maxValue) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](workingValue)) {
-                                        var percent = (workingValue - minValue) / (maxValue - minValue);
+                                    if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](min) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["hasValue"](max) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](minValue) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](maxValue) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](workingValue)) {
+                                        var percent = void 0;
+                                        if (heatRule.logarithmic) {
+                                            percent = (Math.log(workingValue) * Math.LOG10E - Math.log(minValue) * Math.LOG10E) / ((Math.log(maxValue) * Math.LOG10E - Math.log(minValue) * Math.LOG10E));
+                                        }
+                                        else {
+                                            percent = (workingValue - minValue) / (maxValue - minValue);
+                                        }
                                         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](workingValue) && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](percent)) {
                                             percent = 0.5;
                                         }
                                         // fixes problems if all values are the same
-                                        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](min_1)) {
-                                            return min_1 + (max_1 - min_1) * percent;
+                                        if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](min)) {
+                                            return min + (max - min) * percent;
                                         }
-                                        else if (min_1 instanceof _core_utils_Color__WEBPACK_IMPORTED_MODULE_11__["Color"]) {
-                                            return new _core_utils_Color__WEBPACK_IMPORTED_MODULE_11__["Color"](_core_utils_Colors__WEBPACK_IMPORTED_MODULE_20__["interpolate"](min_1.rgb, max_1.rgb, percent));
+                                        else if (min instanceof _core_utils_Color__WEBPACK_IMPORTED_MODULE_11__["Color"]) {
+                                            return new _core_utils_Color__WEBPACK_IMPORTED_MODULE_11__["Color"](_core_utils_Colors__WEBPACK_IMPORTED_MODULE_20__["interpolate"](min.rgb, max.rgb, percent));
                                         }
                                     }
                                 }
@@ -31042,6 +31353,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_utils_Array__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../core/utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
 /* harmony import */ var _core_utils_Object__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../core/utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
 /* harmony import */ var _core_rendering_Path__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../core/rendering/Path */ "./node_modules/@amcharts/amcharts4/.internal/core/rendering/Path.js");
+/* harmony import */ var _core_Options__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../core/Options */ "./node_modules/@amcharts/amcharts4/.internal/core/Options.js");
 /**
  * XY series module.
  */
@@ -31052,6 +31364,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -31436,7 +31749,7 @@ var XYSeries = /** @class */ (function (_super) {
          * `lowValueX`, `lowValueY`, `highValueX`, and `highValueY`.
          *
          * Available options:
-         * `"open"`, `"close"`, `"low"`, `"high"`, "average", `"sum"`.
+         * `"open"`, `"close"`, `"low"`, `"high"`, `"average"`, `"sum"`.
          *
          * Defaults are as follows:
          * * `valueX`: `"close"`
@@ -32113,10 +32426,11 @@ var XYSeries = /** @class */ (function (_super) {
      *
      * @param rawDataItem One or many raw data item objects
      */
-    XYSeries.prototype.addData = function (rawDataItem, removeCount) {
-        _super.prototype.addData.call(this, rawDataItem, removeCount);
-        if (this.scrollbarSeries) {
-            this.scrollbarSeries.addData(rawDataItem, removeCount);
+    XYSeries.prototype.addData = function (rawDataItem, removeCount, skipRaw) {
+        _super.prototype.addData.call(this, rawDataItem, removeCount, skipRaw);
+        var scrollbarSeries = this.scrollbarSeries;
+        if (scrollbarSeries) {
+            this.scrollbarSeries.addData(rawDataItem, removeCount, true);
         }
     };
     XYSeries.prototype.setData = function (value) {
@@ -32298,24 +32612,24 @@ var XYSeries = /** @class */ (function (_super) {
                 var changed = false;
                 if (yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !(yAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"])) {
                     var tmin = this._tmin.getKey(yAxisId);
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmin) || ((this.usesShowFields || this._dataSetChanged) && minY < tmin) || this.stackedSeries) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmin) || ((this.usesShowFields || this._dataSetChanged) && minY < tmin) || (this.stackedSeries && !this.isHidden)) {
                         this._tmin.setKey(yAxisId, minY);
                         changed = true;
                     }
                     var tmax = this._tmax.getKey(yAxisId);
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmax) || ((this.usesShowFields || this._dataSetChanged) && maxY > tmax) || this.stackedSeries) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmax) || ((this.usesShowFields || this._dataSetChanged) && maxY > tmax) || (this.stackedSeries && !this.isHidden)) {
                         this._tmax.setKey(yAxisId, maxY);
                         changed = true;
                     }
                 }
                 if (xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_3__["ValueAxis"] && !(xAxis instanceof _axes_DateAxis__WEBPACK_IMPORTED_MODULE_8__["DateAxis"])) {
                     var tmin = this._tmin.getKey(xAxisId);
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmin) || ((this.usesShowFields || this._dataSetChanged) && minX < tmin) || this.stackedSeries) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmin) || ((this.usesShowFields || this._dataSetChanged) && minX < tmin) || (this.stackedSeries && !this.isHidden)) {
                         this._tmin.setKey(xAxisId, minX);
                         changed = true;
                     }
                     var tmax = this._tmax.getKey(xAxisId);
-                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmax) || ((this.usesShowFields || this._dataSetChanged) && maxX > tmax) || this.stackedSeries) {
+                    if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](tmax) || ((this.usesShowFields || this._dataSetChanged) && maxX > tmax) || (this.stackedSeries && !this.isHidden)) {
                         this._tmax.setKey(xAxisId, maxX);
                         changed = true;
                     }
@@ -32818,14 +33132,22 @@ var XYSeries = /** @class */ (function (_super) {
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](duration)) {
             interpolationDuration = duration;
         }
+        if (!_core_Options__WEBPACK_IMPORTED_MODULE_18__["options"].animationsEnabled) {
+            interpolationDuration = 0;
+        }
         var anim;
         _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["indexed"](this.dataItems.iterator()), function (a) {
             var i = a[0];
             var dataItem = a[1];
-            if (_this.sequencedInterpolation && interpolationDuration > 0) {
+            var realDuration = interpolationDuration;
+            if (i < _this.startIndex - 10 || i > _this.endIndex + 10) {
+                realDuration = 0;
+                delay = 0;
+            }
+            if (_this.sequencedInterpolation && realDuration > 0) {
                 delay = _this.sequencedInterpolationDelay * i + interpolationDuration * (i - startIndex) / (endIndex - startIndex);
             }
-            anim = dataItem.show(interpolationDuration, delay, fields);
+            anim = dataItem.show(realDuration, delay, fields);
         });
         // other data sets
         this.dataSets.each(function (key, dataSet) {
@@ -32893,19 +33215,26 @@ var XYSeries = /** @class */ (function (_super) {
         if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_13__["isNumber"](duration)) {
             interpolationDuration = duration;
         }
+        if (!_core_Options__WEBPACK_IMPORTED_MODULE_18__["options"].animationsEnabled) {
+            interpolationDuration = 0;
+        }
         var delay = 0;
         var anim;
         _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["indexed"](this.dataItems.iterator()), function (a) {
             var i = a[0];
             var dataItem = a[1];
-            if (interpolationDuration == 0) {
+            var realDuration = interpolationDuration;
+            if (i < _this.startIndex - 10 || i > _this.endIndex + 10) {
+                realDuration = 0;
+            }
+            if (realDuration == 0) {
                 dataItem.hide(0, 0, value, fields);
             }
             else {
-                if (_this.sequencedInterpolation && interpolationDuration > 0) {
+                if (_this.sequencedInterpolation && realDuration > 0) {
                     delay = _this.sequencedInterpolationDelay * i + interpolationDuration * (i - startIndex) / (endIndex - startIndex);
                 }
-                anim = dataItem.hide(interpolationDuration, delay, value, fields);
+                anim = dataItem.hide(realDuration, delay, value, fields);
             }
         });
         var animation = _super.prototype.hide.call(this, interpolationDuration);
@@ -35432,6 +35761,10 @@ var RadarChart = /** @class */ (function (_super) {
          * @ignore Exclude from docs
          */
         _this.innerRadiusModifyer = 1;
+        /**
+         * @ignore
+         */
+        _this.mr = 1;
         _this.className = "RadarChart";
         _this.startAngle = -90;
         _this.endAngle = 270;
@@ -35545,6 +35878,7 @@ var RadarChart = /** @class */ (function (_super) {
         if (innerRadius instanceof _core_utils_Percent__WEBPACK_IMPORTED_MODULE_2__["Percent"]) {
             var value = innerRadius.value;
             var mr = Math.min(wr, hr);
+            this.mr = mr;
             value = Math.max(mr * value, mr - Math.min(plotContainer.innerHeight, plotContainer.innerWidth)) / mr;
             innerRect = _core_utils_Math__WEBPACK_IMPORTED_MODULE_12__["getArcRect"](this.startAngle, this.endAngle, value);
             this.innerRadiusModifyer = value / innerRadius.value;
@@ -35569,7 +35903,7 @@ var RadarChart = /** @class */ (function (_super) {
             //axis.renderer.width = diameter;
             //axis.renderer.height = diameter;
             axis.renderer.pixelRadiusReal = radius;
-            axis.renderer.innerRadius = innerRadius;
+            //axis.renderer.innerRadius = innerRadius;
         });
         _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_10__["each"](this.yAxes.iterator(), function (axis) {
             axis.renderer.startAngle = startAngle;
@@ -35579,7 +35913,7 @@ var RadarChart = /** @class */ (function (_super) {
             //axis.renderer.width = diameter;
             //axis.renderer.height = diameter;
             axis.renderer.pixelRadiusReal = radius;
-            axis.renderer.innerRadius = innerRadius;
+            //axis.renderer.innerRadius = innerRadius;
         });
         var cursor = this.cursor;
         if (cursor) {
@@ -35952,6 +36286,9 @@ var SankeyDiagram = /** @class */ (function (_super) {
             var realValue = value;
             var levelNodeCount = _this._levelNodesCount[key];
             var valueHeight = (availableHeight - (levelNodeCount - 1) * _this.nodePadding) / realValue;
+            if (valueHeight == Infinity) {
+                valueHeight = 0;
+            }
             if (minHeight > valueHeight || !_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](minHeight)) {
                 minHeight = valueHeight;
                 _this.maxSum = realValue;
@@ -35961,6 +36298,9 @@ var SankeyDiagram = /** @class */ (function (_super) {
         this._maxSumLevel = maxSumLevel;
         var maxSumLevelNodeCount = this._levelNodesCount[this._maxSumLevel];
         var valueHeight = (availableHeight - (maxSumLevelNodeCount - 1) * this.nodePadding) / this.maxSum;
+        if (valueHeight == Infinity) {
+            valueHeight = 0;
+        }
         if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isNumber"](this.valueHeight)) {
             this.valueHeight = valueHeight;
         }
@@ -36421,13 +36761,19 @@ var SerialChart = /** @class */ (function (_super) {
             series.bulletsContainer.parent = undefined;
         }
         //this.feedLegend();
-        if (this.legend) {
+        var legend = this.legend;
+        if (legend) {
             var dataItems = this.legend.dataItems;
             for (var i = dataItems.length - 1; i >= 0; i--) {
                 var dataItem = dataItems.getIndex(i);
                 if (dataItem && dataItem.dataContext == series) {
-                    _core_utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.legend.data, dataItem.dataContext);
-                    this.legend.dataItems.remove(dataItem);
+                    legend.dataItems.remove(dataItem);
+                }
+            }
+            for (var i = legend.data.length - 1; i >= 0; i--) {
+                var di = legend.data[i];
+                if (di && di == series) {
+                    _core_utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](legend.data, di);
                 }
             }
         }
@@ -36472,8 +36818,10 @@ var SerialChart = /** @class */ (function (_super) {
                         series.setPropertyValue("showOnInit", false);
                         series.showOnInit = true;
                     }
-                    series.events.on("datavalidated", function () {
-                        series._data = [];
+                    series.events.once("datavalidated", function () {
+                        if (series.data == _this.data) {
+                            series._data = [];
+                        }
                     });
                 }
             }));
@@ -38691,18 +39039,22 @@ var XYChart = /** @class */ (function (_super) {
     XYChart.prototype.getCommonAxisRange = function (axes) {
         var start;
         var end;
-        _core_utils_Iterator__WEBPACK_IMPORTED_MODULE_17__["each"](axes.iterator(), function (axis) {
-            var axisStart = axis.start;
-            var axisEnd = axis.end;
-            if (axis.renderer.inversed) {
-                axisStart = 1 - axis.end;
-                axisEnd = 1 - axis.start;
+        axes.each(function (axis) {
+            if (axis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_5__["ValueAxis"] && axis.syncWithAxis) {
             }
-            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](start) || (axisStart < start)) {
-                start = axisStart;
-            }
-            if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](end) || (axisEnd > end)) {
-                end = axisEnd;
+            else {
+                var axisStart = axis.start;
+                var axisEnd = axis.end;
+                if (axis.renderer.inversed) {
+                    axisStart = 1 - axis.end;
+                    axisEnd = 1 - axis.start;
+                }
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](start) || (axisStart < start)) {
+                    start = axisStart;
+                }
+                if (!_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](end) || (axisEnd > end)) {
+                    end = axisEnd;
+                }
             }
         });
         return { start: start, end: end };
@@ -38984,11 +39336,11 @@ var XYChart = /** @class */ (function (_super) {
                     else {
                         if (snpSeries.baseAxis == snpSeries.xAxis) {
                             _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["move"](exceptAxes_1, snpSeries.yAxis);
-                            dataItems_1.push(xAxis.getSeriesDataItem(snpSeries, xAxis.toAxisPosition(xPosition_1)));
+                            dataItems_1.push(xAxis.getSeriesDataItem(snpSeries, xAxis.toAxisPosition(xPosition_1), true));
                         }
                         if (snpSeries.baseAxis == snpSeries.yAxis) {
                             _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["move"](exceptAxes_1, snpSeries.xAxis);
-                            dataItems_1.push(yAxis.getSeriesDataItem(snpSeries, yAxis.toAxisPosition(yPosition_1)));
+                            dataItems_1.push(yAxis.getSeriesDataItem(snpSeries, yAxis.toAxisPosition(yPosition_1), true));
                         }
                     }
                 });
@@ -39029,7 +39381,7 @@ var XYChart = /** @class */ (function (_super) {
     XYChart.prototype.getClosest = function (dataItems, xPosition, yPosition) {
         var minDistance = Infinity;
         var closestDataItem;
-        _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](dataItems, function (dataItem) {
+        _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["eachContinue"](dataItems, function (dataItem) {
             if (dataItem) {
                 var xAxis = dataItem.component.xAxis;
                 var yAxis = dataItem.component.yAxis;
@@ -39037,15 +39389,20 @@ var XYChart = /** @class */ (function (_super) {
                 var yPos = yAxis.positionToCoordinate(yAxis.toGlobalPosition(yAxis.toAxisPosition(yPosition)));
                 var xField = dataItem.component.xField;
                 var yField = dataItem.component.yField;
-                if (_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](dataItem.getValue(xField)) && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](dataItem.getValue(yField))) {
-                    var dxPosition = xAxis.positionToCoordinate(xAxis.toGlobalPosition(xAxis.getPositionX(dataItem, xField, dataItem.locations[xField], "valueX")));
-                    var dyPosition = yAxis.positionToCoordinate(yAxis.toGlobalPosition(yAxis.getPositionY(dataItem, yField, dataItem.locations[yField], "valueY")));
-                    var distance = Math.sqrt(Math.pow(xPos - dxPosition, 2) + Math.pow(yPos - dyPosition, 2));
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        closestDataItem = dataItem;
-                    }
+                if (xAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_5__["ValueAxis"] && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](dataItem.getValue(xField))) {
+                    return true;
                 }
+                if (yAxis instanceof _axes_ValueAxis__WEBPACK_IMPORTED_MODULE_5__["ValueAxis"] && !_core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](dataItem.getValue(yField))) {
+                    return true;
+                }
+                var dxPosition = xAxis.positionToCoordinate(xAxis.toGlobalPosition(xAxis.getPositionX(dataItem, xField, dataItem.locations[xField], "valueX")));
+                var dyPosition = yAxis.positionToCoordinate(yAxis.toGlobalPosition(yAxis.getPositionY(dataItem, yField, dataItem.locations[yField], "valueY")));
+                var distance = Math.sqrt(Math.pow(xPos - dxPosition, 2) + Math.pow(yPos - dyPosition, 2));
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestDataItem = dataItem;
+                }
+                return true;
             }
         });
         return closestDataItem;
@@ -39125,110 +39482,119 @@ var XYChart = /** @class */ (function (_super) {
      * @ignore
      */
     XYChart.prototype.sortSeriesTooltips = function (seriesPoints) {
-        var cursor = this.cursor;
-        if (cursor && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](cursor.maxTooltipDistance)) {
-            var cursorPoint_1 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: cursor.point.x, y: cursor.point.y }, cursor);
-            var nearestSeries_1;
-            var nearestPoint_1;
-            var smallestDistance_1 = Infinity;
-            _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](seriesPoints, function (seriesPoint) {
-                var series = seriesPoint.series;
-                var fixedPoint = seriesPoint.point;
-                if (fixedPoint) {
-                    var point = { x: fixedPoint.x, y: fixedPoint.y };
-                    var distance = Math.abs(_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["getDistance"](point, cursorPoint_1));
-                    if (distance < smallestDistance_1) {
-                        nearestPoint_1 = point;
-                        smallestDistance_1 = distance;
-                        nearestSeries_1 = series;
-                    }
-                }
-            });
-            var newSeriesPoints_1 = [];
-            if (nearestSeries_1) {
+        if (seriesPoints.length > 0) {
+            var cursor_1 = this.cursor;
+            if (cursor_1 && _core_utils_Type__WEBPACK_IMPORTED_MODULE_18__["isNumber"](cursor_1.maxTooltipDistance)) {
+                var cursorPoint_1 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: cursor_1.point.x, y: cursor_1.point.y }, cursor_1);
+                var nearestSeries_1;
+                var nearestPoint_1;
+                var smallestDistance_1 = Infinity;
                 _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](seriesPoints, function (seriesPoint) {
-                    if (Math.abs(_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["getDistance"](seriesPoint.point, nearestPoint_1)) <= Math.abs(cursor.maxTooltipDistance)) {
-                        newSeriesPoints_1.push({ series: seriesPoint.series, point: seriesPoint.point });
-                    }
-                    else {
-                        var tooltipDataItem = seriesPoint.series.tooltipDataItem;
-                        if (tooltipDataItem) {
-                            _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](tooltipDataItem.sprites, function (sprite) {
-                                sprite.isHover = false;
-                                sprite.handleOutReal(); // to avoid flicker
-                            });
+                    var series = seriesPoint.series;
+                    var fixedPoint = seriesPoint.point;
+                    if (fixedPoint) {
+                        var point = { x: fixedPoint.x, y: fixedPoint.y };
+                        var distance = Math.abs(_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["getDistance"](point, cursorPoint_1));
+                        if (distance < smallestDistance_1) {
+                            nearestPoint_1 = point;
+                            smallestDistance_1 = distance;
+                            nearestSeries_1 = series;
                         }
-                        seriesPoint.series.tooltip.hide(0);
                     }
                 });
-                if (cursor.maxTooltipDistance < 0) {
-                    newSeriesPoints_1 = [{ series: nearestSeries_1, point: nearestPoint_1 }];
-                }
-            }
-            seriesPoints = newSeriesPoints_1;
-        }
-        var topLeft = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: -0.5, y: -0.5 }, this.plotContainer);
-        var bottomRight = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: this.plotContainer.pixelWidth + 0.5, y: this.plotContainer.pixelHeight + 0.5 }, this.plotContainer);
-        var sum = 0;
-        var filteredSeriesPoints = [];
-        _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](seriesPoints, function (seriesPoint) {
-            var point = seriesPoint.point;
-            if (point && _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["isInRectangle"](point, { x: topLeft.x, y: topLeft.y, width: bottomRight.x - topLeft.x, height: bottomRight.y - topLeft.y })) {
-                filteredSeriesPoints.push({ point: point, series: seriesPoint.series });
-                sum += point.y;
-            }
-        });
-        seriesPoints = filteredSeriesPoints;
-        var firstSeries = this.series.getIndex(0);
-        var inversed = false;
-        if (firstSeries && firstSeries.yAxis && firstSeries.yAxis.renderer.inversed) {
-            inversed = true;
-        }
-        if (inversed) {
-            seriesPoints.sort(function (a, b) { return _core_utils_Number__WEBPACK_IMPORTED_MODULE_21__["order"](a.point.y, b.point.y); });
-        }
-        else {
-            seriesPoints.sort(function (a, b) { return _core_utils_Number__WEBPACK_IMPORTED_MODULE_21__["order"](b.point.y, a.point.y); });
-            seriesPoints.reverse();
-        }
-        var averageY = sum / seriesPoints.length;
-        var maxY = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["svgPointToDocument"]({ x: 0, y: 0 }, this.svgContainer.SVGContainer).y;
-        if (seriesPoints.length > 0) {
-            var top_1 = topLeft.y;
-            var bottom = bottomRight.y;
-            // TODO is this needed ?
-            _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToDocument"]({ x: 0, y: top_1 }, this);
-            var dropped = false;
-            if (averageY > top_1 + (bottom - top_1) / 2) {
-                var nextHeight = bottom;
-                for (var i = seriesPoints.length - 1; i >= 0; i--) {
-                    var series = seriesPoints[i].series;
-                    var tooltip = series.tooltip;
-                    var pointY = seriesPoints[i].point.y;
-                    tooltip.setBounds({ x: 0, y: -maxY, width: this.pixelWidth, height: nextHeight + maxY });
-                    if (tooltip.invalid) {
-                        tooltip.validate();
-                    }
-                    tooltip.toBack();
-                    nextHeight = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: 0, y: tooltip.label.pixelY - tooltip.pixelY + pointY - tooltip.pixelMarginTop }, tooltip).y;
-                    if (nextHeight < -maxY) {
-                        dropped = true;
-                        break;
+                var newSeriesPoints_1 = [];
+                if (nearestSeries_1) {
+                    _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](seriesPoints, function (seriesPoint) {
+                        if (Math.abs(_core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["getDistance"](seriesPoint.point, nearestPoint_1)) <= Math.abs(cursor_1.maxTooltipDistance)) {
+                            newSeriesPoints_1.push({ series: seriesPoint.series, point: seriesPoint.point });
+                        }
+                        else {
+                            var tooltipDataItem = seriesPoint.series.tooltipDataItem;
+                            if (tooltipDataItem) {
+                                _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](tooltipDataItem.sprites, function (sprite) {
+                                    sprite.isHover = false;
+                                    sprite.handleOutReal(); // to avoid flicker
+                                });
+                            }
+                            seriesPoint.series.tooltip.hide(0);
+                        }
+                    });
+                    if (cursor_1.maxTooltipDistance < 0) {
+                        if (newSeriesPoints_1.length > 0) {
+                            _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](newSeriesPoints_1, function (np) {
+                                if (nearestSeries_1 != np.series) {
+                                    np.series.tooltip.hide(0);
+                                }
+                            });
+                        }
+                        newSeriesPoints_1 = [{ series: nearestSeries_1, point: nearestPoint_1 }];
                     }
                 }
+                seriesPoints = newSeriesPoints_1;
             }
-            if (averageY <= top_1 + (bottom - top_1) / 2 || dropped) {
-                var nextY = top_1;
-                for (var i = 0, len = seriesPoints.length; i < len; i++) {
-                    var series = seriesPoints[i].series;
-                    var pointY = seriesPoints[i].point.y;
-                    var tooltip = series.tooltip;
-                    tooltip.setBounds({ x: 0, y: nextY, width: this.pixelWidth, height: bottom });
-                    if (tooltip.invalid) {
-                        tooltip.validate();
+            var topLeft_1 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: -0.5, y: -0.5 }, this.plotContainer);
+            var bottomRight_1 = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: this.plotContainer.pixelWidth + 0.5, y: this.plotContainer.pixelHeight + 0.5 }, this.plotContainer);
+            var sum_1 = 0;
+            var filteredSeriesPoints_1 = [];
+            _core_utils_Array__WEBPACK_IMPORTED_MODULE_20__["each"](seriesPoints, function (seriesPoint) {
+                var point = seriesPoint.point;
+                if (point && _core_utils_Math__WEBPACK_IMPORTED_MODULE_16__["isInRectangle"](point, { x: topLeft_1.x, y: topLeft_1.y, width: bottomRight_1.x - topLeft_1.x, height: bottomRight_1.y - topLeft_1.y })) {
+                    filteredSeriesPoints_1.push({ point: point, series: seriesPoint.series });
+                    sum_1 += point.y;
+                }
+            });
+            seriesPoints = filteredSeriesPoints_1;
+            var firstSeries = this.series.getIndex(0);
+            var inversed = false;
+            if (firstSeries && firstSeries.yAxis && firstSeries.yAxis.renderer.inversed) {
+                inversed = true;
+            }
+            if (inversed) {
+                seriesPoints.sort(function (a, b) { return _core_utils_Number__WEBPACK_IMPORTED_MODULE_21__["order"](a.point.y, b.point.y); });
+            }
+            else {
+                seriesPoints.sort(function (a, b) { return _core_utils_Number__WEBPACK_IMPORTED_MODULE_21__["order"](b.point.y, a.point.y); });
+                seriesPoints.reverse();
+            }
+            var averageY = sum_1 / seriesPoints.length;
+            var maxY = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["svgPointToDocument"]({ x: 0, y: 0 }, this.svgContainer.SVGContainer).y;
+            if (seriesPoints.length > 0) {
+                var top_1 = topLeft_1.y;
+                var bottom = bottomRight_1.y;
+                // TODO is this needed ?
+                _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToDocument"]({ x: 0, y: top_1 }, this);
+                var dropped = false;
+                if (averageY > top_1 + (bottom - top_1) / 2) {
+                    var nextHeight = bottom;
+                    for (var i = seriesPoints.length - 1; i >= 0; i--) {
+                        var series = seriesPoints[i].series;
+                        var tooltip = series.tooltip;
+                        var pointY = seriesPoints[i].point.y;
+                        tooltip.setBounds({ x: 0, y: -maxY, width: this.pixelWidth, height: nextHeight + maxY });
+                        if (tooltip.invalid) {
+                            tooltip.validate();
+                        }
+                        tooltip.toBack();
+                        nextHeight = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: 0, y: tooltip.label.pixelY - tooltip.pixelY + pointY - tooltip.pixelMarginTop }, tooltip).y;
+                        if (nextHeight < -maxY) {
+                            dropped = true;
+                            break;
+                        }
                     }
-                    tooltip.toBack();
-                    nextY = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: 0, y: tooltip.label.pixelY + tooltip.label.measuredHeight - tooltip.pixelY + pointY + tooltip.pixelMarginBottom }, tooltip).y;
+                }
+                if (averageY <= top_1 + (bottom - top_1) / 2 || dropped) {
+                    var nextY = top_1;
+                    for (var i = 0, len = seriesPoints.length; i < len; i++) {
+                        var series = seriesPoints[i].series;
+                        var pointY = seriesPoints[i].point.y;
+                        var tooltip = series.tooltip;
+                        tooltip.setBounds({ x: 0, y: nextY, width: this.pixelWidth, height: bottom });
+                        if (tooltip.invalid) {
+                            tooltip.validate();
+                        }
+                        tooltip.toBack();
+                        nextY = _core_utils_Utils__WEBPACK_IMPORTED_MODULE_19__["spritePointToSvg"]({ x: 0, y: tooltip.label.pixelY + tooltip.label.measuredHeight - tooltip.pixelY + pointY + tooltip.pixelMarginBottom }, tooltip).y;
+                    }
                 }
             }
         }
@@ -41019,8 +41385,8 @@ var BaseObject = /** @class */ (function () {
                 else if (configKey == "locale" && _utils_Type__WEBPACK_IMPORTED_MODULE_13__["isString"](configValue)) {
                     // ... a locale specified as string, e.g. "fr_FR"
                     // ------------------------------------------------------------------
-                    if (document["am4lang_" + configValue]) {
-                        target[configKey] = document["am4lang_" + configValue];
+                    if (window["am4lang_" + configValue]) {
+                        target[configKey] = window["am4lang_" + configValue];
                     }
                 }
                 else if (configKey == "parent" && _utils_Type__WEBPACK_IMPORTED_MODULE_13__["isString"](configValue)) {
@@ -42045,9 +42411,9 @@ var Component = /** @class */ (function (_super) {
                         }).value;
                     }
                 }
-                if (dataItem.hasChildren[fieldName]) {
-                    if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](value)) {
-                        hasSomeValues_1 = true;
+                if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](value)) {
+                    hasSomeValues_1 = true;
+                    if (dataItem.hasChildren[fieldName]) {
                         var template = _this.createDataItem();
                         template.copyFrom(_this.mainDataSet.template);
                         var children = new _utils_SortedList__WEBPACK_IMPORTED_MODULE_3__["OrderedListTemplate"](template);
@@ -42064,11 +42430,8 @@ var Component = /** @class */ (function (_super) {
                         var anyDataItem = dataItem;
                         anyDataItem[fieldName] = children;
                     }
-                }
-                else {
-                    // data is converted to numbers/dates in each dataItem
-                    if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](value)) {
-                        hasSomeValues_1 = true;
+                    else {
+                        // data is converted to numbers/dates in each dataItem
                         dataItem[fieldName] = value;
                     }
                 }
@@ -42109,18 +42472,16 @@ var Component = /** @class */ (function (_super) {
                         dataItem: dataItem
                     }).value;
                 }
-                if (dataItem.hasChildren[fieldName]) {
-                    if (value) {
+                if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](value)) {
+                    if (dataItem.hasChildren[fieldName]) {
                         var anyDataItem = dataItem;
                         var children = (anyDataItem[fieldName]);
-                        _utils_Iterator__WEBPACK_IMPORTED_MODULE_15__["each"](children.iterator(), function (child) {
+                        children.each(function (child) {
                             _this.updateDataItem(child);
                         });
                     }
-                }
-                else {
-                    // data is converted to numbers/dates in each dataItem
-                    if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["hasValue"](value)) {
+                    else {
+                        // data is converted to numbers/dates in each dataItem					
                         dataItem[fieldName] = value;
                     }
                 }
@@ -42172,23 +42533,25 @@ var Component = /** @class */ (function (_super) {
      *
      * @param rawDataItem One or many raw data item objects
      */
-    Component.prototype.addData = function (rawDataItem, removeCount) {
+    Component.prototype.addData = function (rawDataItem, removeCount, skipRaw) {
         var _this = this;
         // need to check if data is invalid, as addData might be called multiple times
         if (!this.dataInvalid && this.inited) {
             this._parseDataFrom = this.data.length; // save length of parsed data
         }
-        if (rawDataItem instanceof Array) {
-            // can't use concat because new array is returned
-            _utils_Array__WEBPACK_IMPORTED_MODULE_12__["each"](rawDataItem, function (dataItem) {
-                _this.data.push(dataItem);
-            });
-        }
-        else {
-            this.data.push(rawDataItem); // add to raw data array
+        if (!skipRaw) {
+            if (rawDataItem instanceof Array) {
+                // can't use concat because new array is returned
+                _utils_Array__WEBPACK_IMPORTED_MODULE_12__["each"](rawDataItem, function (dataItem) {
+                    _this.data.push(dataItem);
+                });
+            }
+            else {
+                this.data.push(rawDataItem); // add to raw data array
+            }
         }
         if (this.inited) {
-            this.removeData(removeCount);
+            this.removeData(removeCount, skipRaw);
         }
         else {
             if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](removeCount)) {
@@ -42205,7 +42568,7 @@ var Component = /** @class */ (function (_super) {
      *
      * @param count number of elements to remove
      */
-    Component.prototype.removeData = function (count) {
+    Component.prototype.removeData = function (count, skipRaw) {
         if (_utils_Type__WEBPACK_IMPORTED_MODULE_17__["isNumber"](count) && count > 0) {
             while (count > 0) {
                 var dataItem = this.mainDataSet.getIndex(0);
@@ -42220,7 +42583,9 @@ var Component = /** @class */ (function (_super) {
                         }
                     }
                 });
-                this.data.shift();
+                if (!skipRaw) {
+                    this.data.shift();
+                }
                 if (this._parseDataFrom > 0) {
                     this._parseDataFrom--;
                 }
@@ -42556,6 +42921,9 @@ var Component = /** @class */ (function (_super) {
         /**
          * Sets source (raw) data for the element. The "data" is always an `Array`
          * of objects.
+         *
+         * IMPORTANT: The order of data items in `data` array is important as it
+         * might affect chart look and behavior. [More details](https://www.amcharts.com/docs/v4/concepts/data/#Order_of_data_items).
          *
          * @param value Data
          */
@@ -43576,8 +43944,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
 /* harmony import */ var _utils_Math__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
 /* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _System__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./System */ "./node_modules/@amcharts/amcharts4/.internal/core/System.js");
-/* harmony import */ var _Options__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Options */ "./node_modules/@amcharts/amcharts4/.internal/core/Options.js");
+/* harmony import */ var _utils_DOM__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
+/* harmony import */ var _System__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./System */ "./node_modules/@amcharts/amcharts4/.internal/core/System.js");
+/* harmony import */ var _Options__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Options */ "./node_modules/@amcharts/amcharts4/.internal/core/Options.js");
 /**
  * Container module
  * @todo Needs description
@@ -43589,6 +43958,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -43774,7 +44144,7 @@ var Container = /** @class */ (function (_super) {
         }
         this.layoutInvalid = true;
         _Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].addToInvalidLayouts(this);
-        _System__WEBPACK_IMPORTED_MODULE_15__["system"].requestFrame();
+        _System__WEBPACK_IMPORTED_MODULE_16__["system"].requestFrame();
     };
     /**
      * Invalidates element.
@@ -45087,6 +45457,8 @@ var Container = /** @class */ (function (_super) {
             // can't import Label because of Circular dependencies
             if (child["hardInvalidate"]) {
                 child["hardInvalidate"]();
+                // this fixes firefox and viewport issue
+                child.events.once("validated", child.handleValidate, child, false);
             }
             else if (child instanceof Container) {
                 child.invalidateLabels();
@@ -45223,7 +45595,7 @@ var Container = /** @class */ (function (_super) {
             else {
                 _Registry__WEBPACK_IMPORTED_MODULE_9__["registry"].events.once("exitframe", function () {
                     _this.dispatchReady();
-                    _System__WEBPACK_IMPORTED_MODULE_15__["system"].requestFrame();
+                    _System__WEBPACK_IMPORTED_MODULE_16__["system"].requestFrame();
                 }, undefined, false);
             }
         }
@@ -45346,15 +45718,38 @@ var Container = /** @class */ (function (_super) {
         }
     };
     /**
+     * Moves the whole chart to other HTML container.
+     *
+     * `htmlElement` can either be a reference to a DOM element, or an id of
+     * such element.
+     *
+     * @since 4.9.24
+     * @param  htmlElement  Target element
+     */
+    Container.prototype.moveHtmlContainer = function (htmlElement) {
+        var newContainer = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["getElement"](htmlElement);
+        if (newContainer) {
+            var svgDiv = this.svgContainer;
+            svgDiv.htmlElement = newContainer;
+            svgDiv.htmlElement.appendChild(svgDiv.SVGContainer);
+            svgDiv.initSensor();
+            svgDiv.measure();
+        }
+        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_14__["isString"](htmlElement) && htmlElement != "") {
+            _System__WEBPACK_IMPORTED_MODULE_16__["system"].log("html container '" + htmlElement + "' not found");
+            //throw new Error("html container not found");
+        }
+    };
+    /**
      * @ignore
      * @return Has license?
      */
     Container.prototype.hasLicense = function () {
-        if (_Options__WEBPACK_IMPORTED_MODULE_16__["options"].commercialLicense) {
+        if (_Options__WEBPACK_IMPORTED_MODULE_17__["options"].commercialLicense) {
             return true;
         }
-        for (var i = 0; i < _Options__WEBPACK_IMPORTED_MODULE_16__["options"].licenses.length; i++) {
-            if (_Options__WEBPACK_IMPORTED_MODULE_16__["options"].licenses[i].match(/^CH.{5,}/i)) {
+        for (var i = 0; i < _Options__WEBPACK_IMPORTED_MODULE_17__["options"].licenses.length; i++) {
+            if (_Options__WEBPACK_IMPORTED_MODULE_17__["options"].licenses[i].match(/^CH.{5,}/i)) {
                 return true;
             }
         }
@@ -46412,7 +46807,10 @@ var options = {
     minPolylineStep: 0.5,
     onlyShowOnViewport: false,
     queue: false,
-    licenses: []
+    licenses: [],
+    suppressErrors: false,
+    animationsEnabled: true,
+    nonce: ""
 };
 //# sourceMappingURL=Options.js.map
 
@@ -46456,6 +46854,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 var Registry = /** @class */ (function () {
     function Registry() {
+        var _this = this;
         /**
          * Event dispacther.
          */
@@ -46551,6 +46950,19 @@ var Registry = /** @class */ (function () {
         this.invalidDatas.noBase = [];
         this.invalidLayouts.noBase = [];
         this.invalidPositions.noBase = [];
+        // This is needed to prevent charts from being cut off when printing
+        addEventListener("beforeprint", function () {
+            _utils_Array__WEBPACK_IMPORTED_MODULE_5__["each"](_this.baseSprites, function (sprite) {
+                var svg = sprite.paper.svg;
+                svg.setAttribute("viewBox", "0 0 " + svg.clientWidth + " " + svg.clientHeight);
+            });
+        });
+        addEventListener("afterprint", function () {
+            _utils_Array__WEBPACK_IMPORTED_MODULE_5__["each"](_this.baseSprites, function (sprite) {
+                var svg = sprite.paper.svg;
+                svg.removeAttribute("viewBox");
+            });
+        });
     }
     /**
      * Generates a unique chart system-wide ID.
@@ -47280,7 +47692,7 @@ var Sprite = /** @class */ (function (_super) {
             return themes;
         }
         else {
-            var parent_1 = this.parent;
+            var parent_1 = this._parent;
             if (parent_1) {
                 return parent_1.getCurrentThemes();
             }
@@ -47756,7 +48168,7 @@ var Sprite = /** @class */ (function (_super) {
                     });
                 }
                 if (value) {
-                    this.parent = this.parent;
+                    this.parent = this._parent;
                     this.removeFromInvalids();
                 }
                 else {
@@ -47776,8 +48188,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.showSystemTooltip;
                 }
-                else if (this.parent) {
-                    return this.parent.showSystemTooltip;
+                else if (this._parent) {
+                    return this._parent.showSystemTooltip;
                 }
                 else {
                     return false;
@@ -47822,8 +48234,8 @@ var Sprite = /** @class */ (function (_super) {
                 return this._topParent;
             }
             else {
-                if (this.parent) {
-                    return this.parent.topParent;
+                if (this._parent) {
+                    return this._parent.topParent;
                 }
             }
         },
@@ -48094,8 +48506,9 @@ var Sprite = /** @class */ (function (_super) {
                 return this._paper;
             }
             else {
-                if (this.parent) {
-                    return this.parent.paper;
+                var parent_2 = this._parent;
+                if (parent_2) {
+                    return parent_2.paper;
                 }
             }
             return Object(_rendering_Paper__WEBPACK_IMPORTED_MODULE_9__["getGhostPaper"])();
@@ -48145,8 +48558,9 @@ var Sprite = /** @class */ (function (_super) {
                 return this._htmlContainer;
             }
             else {
-                if (this.parent) {
-                    return this.parent.htmlContainer;
+                var parent_3 = this._parent;
+                if (parent_3) {
+                    return parent_3.htmlContainer;
                 }
             }
         },
@@ -48273,6 +48687,9 @@ var Sprite = /** @class */ (function (_super) {
         if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this.id)) {
             this.group.addClass(classNamePrefix + this.id);
         }
+        if (this.userClassName) {
+            this.group.addClass(this.userClassName);
+        }
     };
     /**
      * Adds an `id` attribute the the element and returns the id.
@@ -48361,6 +48778,7 @@ var Sprite = /** @class */ (function (_super) {
             _utils_Iterator__WEBPACK_IMPORTED_MODULE_31__["each"](this.filters.iterator(), function (filter) {
                 filter.sprite = _this;
                 filter.paper = _this.paper;
+                _this.filterElement.attr({ filterUnits: filter.filterUnits });
                 filter.appendPrimitives(_this.filterElement);
                 if (filter.width > width_1) {
                     width_1 = filter.width;
@@ -48463,8 +48881,8 @@ var Sprite = /** @class */ (function (_super) {
             if (this._svgContainer) {
                 return this._svgContainer;
             }
-            else if (this.parent) {
-                return this.parent.svgContainer;
+            else if (this._parent) {
+                return this._parent.svgContainer;
             }
         },
         /**
@@ -48663,7 +49081,7 @@ var Sprite = /** @class */ (function (_super) {
      * @return This element
      */
     Sprite.prototype.insertBefore = function (sprite) {
-        var parent = this.parent;
+        var parent = this._parent;
         if (parent) {
             var index = parent.children.indexOf(sprite);
             if (index !== -1) {
@@ -48680,7 +49098,7 @@ var Sprite = /** @class */ (function (_super) {
      * @return This element
      */
     Sprite.prototype.insertAfter = function (sprite) {
-        var parent = this.parent;
+        var parent = this._parent;
         if (parent) {
             var index = parent.children.indexOf(sprite);
             if (index !== -1) {
@@ -48718,8 +49136,8 @@ var Sprite = /** @class */ (function (_super) {
         if (value instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_33__["Percent"]) {
             return value.value;
         }
-        else if (this.parent) {
-            return value / this.parent.innerWidth;
+        else if (this._parent) {
+            return value / this._parent.innerWidth;
         }
         return 0;
     };
@@ -48736,8 +49154,8 @@ var Sprite = /** @class */ (function (_super) {
         if (value instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_33__["Percent"]) {
             return value.value;
         }
-        else if (this.parent) {
-            return value / this.parent.innerHeight;
+        else if (this._parent) {
+            return value / this._parent.innerHeight;
         }
         return 0;
     };
@@ -48761,8 +49179,8 @@ var Sprite = /** @class */ (function (_super) {
         }
         else if (value instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_33__["Percent"]) {
             var relative = value.value;
-            if (this.parent) {
-                pixel = _utils_Math__WEBPACK_IMPORTED_MODULE_26__["round"](this.parent.innerWidth * relative, this._positionPrecision, true);
+            if (this._parent) {
+                pixel = _utils_Math__WEBPACK_IMPORTED_MODULE_26__["round"](this._parent.innerWidth * relative, this._positionPrecision, true);
             }
         }
         return pixel;
@@ -48787,8 +49205,8 @@ var Sprite = /** @class */ (function (_super) {
         }
         else if (value instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_33__["Percent"]) {
             var relative = value.value;
-            if (this.parent) {
-                pixel = _utils_Math__WEBPACK_IMPORTED_MODULE_26__["round"](this.parent.innerHeight * relative, this._positionPrecision, true);
+            if (this._parent) {
+                pixel = _utils_Math__WEBPACK_IMPORTED_MODULE_26__["round"](this._parent.innerHeight * relative, this._positionPrecision, true);
             }
         }
         return pixel;
@@ -49504,8 +49922,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.disabled;
                 }
-                if (this.parent) {
-                    return this.parent.disabled;
+                if (this._parent) {
+                    return this._parent.disabled;
                 }
             }
             return false;
@@ -49533,14 +49951,14 @@ var Sprite = /** @class */ (function (_super) {
         if (current != value) {
             this.setPropertyValue("disabled", value, true);
             if (value) {
-                this.parent = this.parent;
+                this.parent = this._parent;
                 this.removeFromInvalids();
                 this.group.attr({ "display": "none" });
                 this.dispatch("disabled");
             }
             else {
-                if (this.parent) {
-                    var group = this.parent.element;
+                if (this._parent) {
+                    var group = this._parent.element;
                     if (!group.hasChild(this.group)) {
                         group.add(this.group);
                     }
@@ -49602,8 +50020,8 @@ var Sprite = /** @class */ (function (_super) {
             else if (this.virtualParent) {
                 return this.virtualParent.numberFormatter;
             }
-            else if (this.parent) {
-                return this.parent.numberFormatter;
+            else if (this._parent) {
+                return this._parent.numberFormatter;
             }
             this._numberFormatter = new _formatters_NumberFormatter__WEBPACK_IMPORTED_MODULE_19__["NumberFormatter"]();
             this._numberFormatter.language = this.language;
@@ -49662,8 +50080,8 @@ var Sprite = /** @class */ (function (_super) {
             else if (this.virtualParent) {
                 return this.virtualParent.dateFormatter;
             }
-            else if (this.parent) {
-                return this.parent.dateFormatter;
+            else if (this._parent) {
+                return this._parent.dateFormatter;
             }
             this._dateFormatter = new _formatters_DateFormatter__WEBPACK_IMPORTED_MODULE_20__["DateFormatter"]();
             this._dateFormatter.language = this.language;
@@ -49715,8 +50133,8 @@ var Sprite = /** @class */ (function (_super) {
             else if (this.virtualParent) {
                 return this.virtualParent.durationFormatter;
             }
-            else if (this.parent) {
-                return this.parent.durationFormatter;
+            else if (this._parent) {
+                return this._parent.durationFormatter;
             }
             this._durationFormatter = new _formatters_DurationFormatter__WEBPACK_IMPORTED_MODULE_21__["DurationFormatter"]();
             this._durationFormatter.language = this.language;
@@ -49754,8 +50172,8 @@ var Sprite = /** @class */ (function (_super) {
             else if (this.virtualParent) {
                 return this.virtualParent.language;
             }
-            else if (this.parent) {
-                return this.parent.language;
+            else if (this._parent) {
+                return this._parent.language;
             }
             language = new _utils_Language__WEBPACK_IMPORTED_MODULE_23__["Language"]();
             this.language = language;
@@ -49949,8 +50367,8 @@ var Sprite = /** @class */ (function (_super) {
             value = this.getTagValueFromObject(parts, this.populateStringFrom || this);
         }
         // Finally, check the parent
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](value) && this.parent) {
-            value = this.parent.getTagValue(tagName, format);
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](value) && this._parent) {
+            value = this._parent.getTagValue(tagName, format);
         }
         return value;
     };
@@ -50074,8 +50492,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.dataItem;
                 }
-                if (this.parent) {
-                    return this.parent.dataItem;
+                if (this._parent) {
+                    return this._parent.dataItem;
                 }
             }
             return this._dataItem;
@@ -50177,7 +50595,9 @@ var Sprite = /** @class */ (function (_super) {
     Sprite.prototype.setPercentProperty = function (property, value, invalidate, transform, precision, floor) {
         value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toNumberOrPercent"](value);
         if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](value)) {
-            value = _utils_Math__WEBPACK_IMPORTED_MODULE_26__["round"](value, precision, floor);
+            if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](precision)) {
+                value = _utils_Math__WEBPACK_IMPORTED_MODULE_26__["round"](value, precision, floor);
+            }
             return this.setPropertyValue(property, value, invalidate, transform);
         }
         else {
@@ -50728,8 +51148,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.keyboardOptions;
                 }
-                if (this.parent) {
-                    return this.parent.keyboardOptions;
+                if (this._parent) {
+                    return this._parent.keyboardOptions;
                 }
             }
             return this.interactions.keyboardOptions;
@@ -50771,8 +51191,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.mouseOptions;
                 }
-                if (this.parent) {
-                    return this.parent.mouseOptions;
+                if (this._parent) {
+                    return this._parent.mouseOptions;
                 }
             }
             return this.interactions.mouseOptions;
@@ -50978,8 +51398,8 @@ var Sprite = /** @class */ (function (_super) {
             if (this.virtualParent) {
                 return this.virtualParent.focusFilter;
             }
-            else if (this.parent) {
-                return this.parent.focusFilter;
+            else if (this._parent) {
+                return this._parent.focusFilter;
             }
             //this._focusFilter = new FocusFilter();
             //this._disposers.push(this._focusFilter);
@@ -51035,8 +51455,8 @@ var Sprite = /** @class */ (function (_super) {
             else if (this.virtualParent) {
                 return this.virtualParent.tabindex;
             }
-            else if (this.parent) {
-                return this.parent.tabindex;
+            else if (this._parent) {
+                return this._parent.tabindex;
             }
         },
         /**
@@ -51093,8 +51513,8 @@ var Sprite = /** @class */ (function (_super) {
          */
         get: function () {
             if (!this.interactions.inertiaOptions) {
-                if (this.parent) {
-                    return this.parent.inertiaOptions;
+                if (this._parent) {
+                    return this._parent.inertiaOptions;
                 }
             }
             return this.interactions.inertiaOptions;
@@ -51194,10 +51614,10 @@ var Sprite = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      * @param pointer Pointer to use as a reference
      */
-    Sprite.prototype.dragStop = function (pointer) {
+    Sprite.prototype.dragStop = function (pointer, cancelled) {
         //this.draggable = false;
         this._isDragged = false;
-        Object(_interaction_Interaction__WEBPACK_IMPORTED_MODULE_15__["getInteraction"])().dragStop(this.interactions, pointer);
+        Object(_interaction_Interaction__WEBPACK_IMPORTED_MODULE_15__["getInteraction"])().dragStop(this.interactions, pointer, cancelled);
         //this.handleDragStop();
     };
     /**
@@ -51211,7 +51631,7 @@ var Sprite = /** @class */ (function (_super) {
         if (!this.interactions.isTouchProtected || !ev.touch) {
             var point = this.interactions.originalPosition;
             if (point && this._isDragged) {
-                var globalScale = this.parent.globalScale * this.svgContainer.cssScale;
+                var globalScale = this._parent.globalScale * this.svgContainer.cssScale;
                 this.moveTo({ x: point.x + ev.shift.x / globalScale, y: point.y + ev.shift.y / globalScale }, undefined, undefined, true);
             }
             this.dispatchImmediately("dragged", ev);
@@ -51266,8 +51686,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.hoverOptions;
                 }
-                if (this.parent) {
-                    return this.parent.hoverOptions;
+                if (this._parent) {
+                    return this._parent.hoverOptions;
                 }
             }
             return this.interactions.hoverOptions;
@@ -51406,8 +51826,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.hitOptions;
                 }
-                if (this.parent) {
-                    return this.parent.hitOptions;
+                if (this._parent) {
+                    return this._parent.hitOptions;
                 }
             }
             return this.interactions.hitOptions;
@@ -51452,7 +51872,10 @@ var Sprite = /** @class */ (function (_super) {
             this.applyCurrentState();
         }
         if (this.showTooltipOn == "hit") {
-            this.showTooltip();
+            this.updateTooltipPosition(ev.pointer.point);
+            this._disposers.push(_Registry__WEBPACK_IMPORTED_MODULE_18__["registry"].events.once("exitframe", function () {
+                _this.showTooltip();
+            }));
             this._disposers.push(Object(_interaction_Interaction__WEBPACK_IMPORTED_MODULE_15__["getInteraction"])().body.events.once("down", function (ev) {
                 _this.hideTooltip();
             }));
@@ -51622,8 +52045,8 @@ var Sprite = /** @class */ (function (_super) {
          * @return [description]
          */
         get: function () {
-            if (!this._baseId && this.parent) {
-                this.baseId = this.parent.baseId;
+            if (!this._baseId && this._parent) {
+                this.baseId = this._parent.baseId;
             }
             return this._baseId;
         },
@@ -51687,8 +52110,8 @@ var Sprite = /** @class */ (function (_super) {
             if (this.isBaseSprite) {
                 return this;
             }
-            else if (this.parent) {
-                return this.parent.baseSprite;
+            else if (this._parent) {
+                return this._parent.baseSprite;
             }
         },
         enumerable: true,
@@ -51756,8 +52179,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.swipeOptions;
                 }
-                if (this.parent) {
-                    return this.parent.swipeOptions;
+                if (this._parent) {
+                    return this._parent.swipeOptions;
                 }
             }
             return this.interactions.swipeOptions;
@@ -51952,15 +52375,15 @@ var Sprite = /** @class */ (function (_super) {
                 var svgPoint1 = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["documentPointToSvg"](ev.point1, this.htmlContainer, this.svgContainer.cssScale);
                 var svgPoint2 = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["documentPointToSvg"](ev.point2, this.htmlContainer, this.svgContainer.cssScale);
                 var svgMidPoint = _utils_Math__WEBPACK_IMPORTED_MODULE_26__["getMidPoint"](svgPoint1, svgPoint2);
-                var parentPoint1 = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["documentPointToSprite"](ev.startPoint1, this.parent);
-                var parentPoint2 = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["documentPointToSprite"](ev.startPoint2, this.parent);
+                var parentPoint1 = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["documentPointToSprite"](ev.startPoint1, this._parent);
+                var parentPoint2 = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["documentPointToSprite"](ev.startPoint2, this._parent);
                 var originalPosition = this.interactions.originalPosition;
                 var originalScale = this.interactions.originalScale;
                 if (originalPosition) {
                     var spritePoint1 = { x: (parentPoint1.x - originalPosition.x) / originalScale, y: (parentPoint1.y - originalPosition.y) / originalScale };
                     var spritePoint2 = { x: (parentPoint2.x - originalPosition.x) / originalScale, y: (parentPoint2.y - originalPosition.y) / originalScale };
                     var spriteMidPoint = _utils_Math__WEBPACK_IMPORTED_MODULE_26__["getMidPoint"](spritePoint1, spritePoint2);
-                    var parentPoint = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["svgPointToSprite"](svgMidPoint, this.parent);
+                    var parentPoint = _utils_Utils__WEBPACK_IMPORTED_MODULE_25__["svgPointToSprite"](svgMidPoint, this._parent);
                     this.moveTo({ x: parentPoint.x - spriteMidPoint.x * this.scale, y: parentPoint.y - spriteMidPoint.y * this.scale }, undefined, undefined, true);
                 }
             }
@@ -51990,8 +52413,8 @@ var Sprite = /** @class */ (function (_super) {
                 if (this.virtualParent) {
                     return this.virtualParent.cursorOptions;
                 }
-                if (this.parent) {
-                    return this.parent.cursorOptions;
+                if (this._parent) {
+                    return this._parent.cursorOptions;
                 }
             }
             return this.interactions.cursorOptions;
@@ -52100,8 +52523,8 @@ var Sprite = /** @class */ (function (_super) {
             if (this.virtualParent) {
                 return this.virtualParent.interactionsEnabled;
             }
-            if (this.parent) {
-                return this.parent.interactionsEnabled;
+            if (this._parent) {
+                return this._parent.interactionsEnabled;
             }
             return true;
         },
@@ -52172,7 +52595,7 @@ var Sprite = /** @class */ (function (_super) {
             return _export;
         }
         else {
-            if (this.isStandaloneInstance || !this.parent) {
+            if (this.isStandaloneInstance || !this._parent) {
                 _export = new _export_Export__WEBPACK_IMPORTED_MODULE_24__["Export"](this.svgContainer.SVGContainer);
                 _export.sprite = this;
                 _export.language = this.language;
@@ -52182,7 +52605,7 @@ var Sprite = /** @class */ (function (_super) {
                 this._exporting.set(_export, _export);
             }
             else {
-                return this.parent.exporting;
+                return this._parent.exporting;
             }
         }
         return _export;
@@ -52641,8 +53064,8 @@ var Sprite = /** @class */ (function (_super) {
         set: function (value) {
             value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toText"](value);
             if (this.setPropertyValue("align", value)) {
-                if (this.parent) {
-                    this.parent.invalidateLayout();
+                if (this._parent) {
+                    this._parent.invalidateLayout();
                 }
             }
         },
@@ -52666,8 +53089,8 @@ var Sprite = /** @class */ (function (_super) {
         set: function (value) {
             value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toText"](value);
             if (this.setPropertyValue("valign", value)) {
-                if (this.parent) {
-                    this.parent.invalidateLayout();
+                if (this._parent) {
+                    this._parent.invalidateLayout();
                 }
             }
         },
@@ -52729,9 +53152,9 @@ var Sprite = /** @class */ (function (_super) {
         get: function () {
             var maxWidth = this.getPropertyValue("maxWidth");
             if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](maxWidth)) {
-                if (this.parent) {
-                    var parentWidth = this.parent.maxWidth;
-                    if (this.parent.layout != "absolute" && this.align != "none" && this.align != undefined) {
+                if (this._parent) {
+                    var parentWidth = this._parent.maxWidth;
+                    if (this._parent.layout != "absolute" && this.align != "none" && this.align != undefined) {
                         parentWidth = parentWidth - this.pixelMarginLeft - this.pixelMarginRight;
                     }
                     return parentWidth;
@@ -52779,9 +53202,9 @@ var Sprite = /** @class */ (function (_super) {
         get: function () {
             var maxHeight = this.getPropertyValue("maxHeight");
             if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isNumber"](maxHeight)) {
-                if (this.parent) {
-                    var parentHeight = this.parent.maxHeight;
-                    if (this.parent.layout != "absolute" && this.valign != "none" && this.valign != undefined) {
+                if (this._parent) {
+                    var parentHeight = this._parent.maxHeight;
+                    if (this._parent.layout != "absolute" && this.valign != "none" && this.valign != undefined) {
                         parentHeight = parentHeight - this.pixelMarginTop - this.pixelMarginBottom;
                     }
                     return parentHeight;
@@ -53216,8 +53639,8 @@ var Sprite = /** @class */ (function (_super) {
          */
         get: function () {
             var scale = this.scale;
-            if (this.parent) {
-                scale = scale * this.parent.globalScale;
+            if (this._parent) {
+                scale = scale * this._parent.globalScale;
             }
             if (!this._adapterO) {
                 return scale;
@@ -53842,7 +54265,7 @@ var Sprite = /** @class */ (function (_super) {
      * @param value  Fill
      */
     Sprite.prototype.setFill = function (value) {
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isObject"](value)) {
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isObject"](value) || "r" in value) {
             value = Object(_utils_Color__WEBPACK_IMPORTED_MODULE_14__["toColor"])(value);
         }
         if (this.setColorProperty("fill", value) || this.fillModifier) {
@@ -53926,7 +54349,7 @@ var Sprite = /** @class */ (function (_super) {
      * @param value Stroke setting
      */
     Sprite.prototype.setStroke = function (value) {
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isObject"](value)) {
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_30__["isObject"](value) || "r" in value) {
             value = Object(_utils_Color__WEBPACK_IMPORTED_MODULE_14__["toColor"])(value);
         }
         if (this.setColorProperty("stroke", value) || this.strokeModifier) {
@@ -54205,11 +54628,8 @@ var Sprite = /** @class */ (function (_super) {
             if (_utils_Type__WEBPACK_IMPORTED_MODULE_30__["hasValue"](this._rtl)) {
                 return this._rtl;
             }
-            else if (this.virtualParent) {
-                return this.virtualParent.rtl;
-            }
-            else if (this.parent) {
-                return this.parent.rtl;
+            else if (this._topParent) {
+                return this._topParent.rtl;
             }
             //this.rtl = false;
             return false;
@@ -54219,10 +54639,17 @@ var Sprite = /** @class */ (function (_super) {
          *
          * RTL may affect alignment, text, and other visual properties.
          *
+         * If you set this on a top-level chart object, it will be used for all
+         * child elements, e.g. labels, unless they have their own `rtl` setting
+         * set directly on them.
+         *
          * @param value  `true` for to use RTL
          */
         set: function (value) {
             value = _utils_Type__WEBPACK_IMPORTED_MODULE_30__["toBoolean"](value);
+            if (this.isBaseSprite) {
+                this.topParent.rtl = value;
+            }
             this._rtl = value;
         },
         enumerable: true,
@@ -54487,7 +54914,7 @@ var Sprite = /** @class */ (function (_super) {
      * in front of other elements.
      */
     Sprite.prototype.toFront = function () {
-        var parent = this.parent;
+        var parent = this._parent;
         if (parent && parent.children.indexOf(this) != parent.children.length - 1) {
             parent.children.moveValue(this, parent.children.length - 1);
             this.dispatch("zIndexChanged");
@@ -54498,12 +54925,38 @@ var Sprite = /** @class */ (function (_super) {
      * appears behind other elements.
      */
     Sprite.prototype.toBack = function () {
-        var parent = this.parent;
+        var parent = this._parent;
         if (parent && parent.children.indexOf(this) != 0) {
             parent.children.moveValue(this, 0);
             this.dispatch("zIndexChanged");
         }
     };
+    Object.defineProperty(Sprite.prototype, "userClassName", {
+        /**
+         * @return Class name
+         */
+        get: function () {
+            return this.getPropertyValue("userClassName");
+        },
+        /**
+         * A custom class name to set on the element.
+         *
+         * If set, the value will be added to element's `class` attribute.
+         *
+         * @since 4.9.11
+         * @param  value  Class name
+         */
+        set: function (value) {
+            if (this.setPropertyValue("userClassName", value)) {
+                if (!value && this.userClassName) {
+                    this.group.removeClass(this.userClassName);
+                }
+                this.setClassName();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Sprite.prototype, "tooltip", {
         /**
          * @return Tooltip
@@ -54515,8 +54968,8 @@ var Sprite = /** @class */ (function (_super) {
             else if (this.virtualParent) {
                 return this.virtualParent.tooltip;
             }
-            else if (this.parent) {
-                return this.parent.tooltip;
+            else if (this._parent) {
+                return this._parent.tooltip;
             }
         },
         /**
@@ -54879,8 +55332,8 @@ var Sprite = /** @class */ (function (_super) {
             if (this._tooltipContainer) {
                 return this._tooltipContainer;
             }
-            else if (this.parent) {
-                return this.parent.tooltipContainer;
+            else if (this._parent) {
+                return this._parent.tooltipContainer;
             }
         },
         /**
@@ -55134,7 +55587,9 @@ var Sprite = /** @class */ (function (_super) {
             else {
                 this.modal.closable = true;
             }
-            this.modal.open();
+            if (!_Options__WEBPACK_IMPORTED_MODULE_17__["options"].suppressErrors) {
+                this.modal.open();
+            }
         }
         if (_Options__WEBPACK_IMPORTED_MODULE_17__["options"].verbose) {
             console.log(e);
@@ -55510,10 +55965,11 @@ var SpriteEventDispatcher = /** @class */ (function (_super) {
      */
     SpriteEventDispatcher.prototype._addInteractionObjectEvent = function (type, callback, context, shouldClone) {
         var _this = this;
-        var counter = this._interactionEvents.insertKeyIfEmpty(type, function () {
+        var key = shouldClone + "-" + type;
+        var counter = this._interactionEvents.insertKeyIfEmpty(key, function () {
             var disposer = _this.target.interactions.events.on(type, callback, context, shouldClone);
             return new _utils_Disposer__WEBPACK_IMPORTED_MODULE_3__["CounterDisposer"](function () {
-                _this._interactionEvents.removeKey(type);
+                _this._interactionEvents.removeKey(key);
                 disposer.dispose();
             });
         });
@@ -56456,7 +56912,7 @@ var System = /** @class */ (function () {
      *
      * @see {@link https://docs.npmjs.com/misc/semver}
      */
-    System.VERSION = "4.9.10";
+    System.VERSION = "4.9.24";
     return System;
 }());
 
@@ -58213,7 +58669,7 @@ var Rectangle3D = /** @class */ (function (_super) {
      */
     Rectangle3D.prototype.setFill = function (value) {
         _super.prototype.setFill.call(this, value);
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isString"](value)) {
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_9__["isObject"](value) || "r" in value) {
             value = Object(_utils_Color__WEBPACK_IMPORTED_MODULE_5__["toColor"])(value);
         }
         var colorStr;
@@ -60486,13 +60942,13 @@ var Label = /** @class */ (function (_super) {
                 var y = _utils_Type__WEBPACK_IMPORTED_MODULE_8__["toNumber"](node.getAttribute("y"));
                 switch (this.textValign) {
                     case "middle":
-                        node.setAttribute("y", (y + (height - this.bbox.height) / 2).toString());
+                        node.setAttribute("y", ((y || 0) + (height - this.bbox.height) / 2).toString());
                         break;
                     case "bottom":
-                        node.setAttribute("y", (y + height - this.bbox.height).toString());
+                        node.setAttribute("y", ((y || 0) + height - this.bbox.height).toString());
                         break;
                     default:
-                        node.setAttribute("y", y.toString());
+                        node.setAttribute("y", (y || 0).toString());
                         break;
                 }
             }
@@ -62732,8 +63188,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _interaction_Interaction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../interaction/Interaction */ "./node_modules/@amcharts/amcharts4/.internal/core/interaction/Interaction.js");
 /* harmony import */ var _utils_Keyboard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/Keyboard */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Keyboard.js");
 /* harmony import */ var _utils_Disposer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _utils_Object__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
+/* harmony import */ var _utils_DOM__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
+/* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _utils_Object__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
 /**
  * Popup class is used to display information over chart area.
  */
@@ -62744,6 +63201,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -62807,6 +63265,10 @@ var Popup = /** @class */ (function (_super) {
          */
         _this._align = "center";
         /**
+         * Resize popup as images are being loaded.
+         */
+        _this._dynamicResize = true;
+        /**
          * Vertical position of the content window.
          */
         _this._verticalAlign = "middle";
@@ -62855,7 +63317,7 @@ var Popup = /** @class */ (function (_super) {
         _this.isTemplate = false;
         /**
          * Indicates if the element was already sized and should not be measured for
-         * sized again, saving some precious resources.
+         * size again, saving some precious resources.
          */
         _this._sized = false;
         _this.className = "Popup";
@@ -62921,13 +63383,28 @@ var Popup = /** @class */ (function (_super) {
                 _this._elements.wrapper.style.left = "0";
                 _this._elements.wrapper.style.top = "0";
                 _this._elements.wrapper.style.margin = "0 0 0 0";
-                // Size the element, but only for the first time
-                if (!_this._elements.wrapper.style.width) {
-                    var bbox = _this._elements.wrapper.getBoundingClientRect();
-                    _this._elements.wrapper.style.width = bbox.width + "px";
-                    _this._elements.wrapper.style.height = bbox.height + "px";
-                }
+                _this._elements.wrapper.style.width = "";
+                _this._elements.wrapper.style.height = "";
+                var bbox = _this._elements.wrapper.getBoundingClientRect();
+                _this._elements.wrapper.style.width = bbox.width + "px";
+                _this._elements.wrapper.style.height = bbox.height + "px";
                 _this._sized = true;
+            }
+            // Check for any images that are not yet loaded
+            if (_this.dynamicResize) {
+                var images = _this._elements.wrapper.getElementsByTagName("img");
+                for (var i = 0; i < images.length; i++) {
+                    var image = images[i];
+                    if (!image.complete) {
+                        // Resize popup once again when image is loaded
+                        image.addEventListener("load", function () {
+                            _this.positionElement(true);
+                        });
+                        // Do this for one image only as it will be checked again next time
+                        // anyway
+                        break;
+                    }
+                }
             }
             setTimeout(function () {
                 if (!_this._elements.wrapper) {
@@ -63023,10 +63500,10 @@ var Popup = /** @class */ (function (_super) {
         }
     };
     Popup.prototype.toStyle = function (value) {
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](value)) {
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_8__["hasValue"](value)) {
             return null;
         }
-        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_7__["isNumber"](value)) {
+        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isNumber"](value)) {
             return "" + value + "px";
         }
         else {
@@ -63369,6 +63846,29 @@ var Popup = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Popup.prototype, "dynamicResize", {
+        /**
+         * @return Resize dynamically?
+         */
+        get: function () {
+            return this.adapter.apply("dynamicResize", this._dynamicResize);
+        },
+        /**
+         * Resize popup as images are being loaded.
+         *
+         * @default true
+         * @since 4.9.17
+         * @param Resize dynamically?
+         */
+        set: function (value) {
+            if (this._dynamicResize != value) {
+                this._dynamicResize = value;
+                this.positionElement(true);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Popup.prototype, "align", {
         /**
          * @return Horizontal position
@@ -63552,8 +64052,8 @@ var Popup = /** @class */ (function (_super) {
      */
     Popup.prototype.loadDefaultCSS = function () {
         if (!this._cssLoaded) {
-            this._disposers.push(Object(_PopupCSS__WEBPACK_IMPORTED_MODULE_1__["default"])(this.classPrefix));
-            _utils_Object__WEBPACK_IMPORTED_MODULE_8__["each"](this._elements, function (key, el) {
+            this._disposers.push(Object(_PopupCSS__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(_utils_DOM__WEBPACK_IMPORTED_MODULE_7__["getShadowRoot"])(this.container), this.classPrefix));
+            _utils_Object__WEBPACK_IMPORTED_MODULE_9__["each"](this._elements, function (key, el) {
                 el.style.display = "";
             });
             this._cssLoaded = true;
@@ -63578,7 +64078,7 @@ var Popup = /** @class */ (function (_super) {
                     })
                 ];
                 disposers.push(this._IOs.curtain.events.on("hit", function (ev) {
-                    if (_this.showCurtain) {
+                    if (_this.showCurtain && _this.closable) {
                         _this.close();
                     }
                 }));
@@ -63602,7 +64102,7 @@ var Popup = /** @class */ (function (_super) {
      * Releases temporarily disabled pointers on parent chart.
      */
     Popup.prototype.releasePointers = function () {
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](this._spriteInteractionsEnabled)) {
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_8__["hasValue"](this._spriteInteractionsEnabled)) {
             this.sprite.interactionsEnabled = this._spriteInteractionsEnabled;
             this._spriteInteractionsEnabled = undefined;
         }
@@ -63668,7 +64168,7 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__["Dictionary"]();
  * @param prefix  Prefix for CSS classes
  * @return Disposer for the CSS definition
  */
-/* harmony default export */ __webpack_exports__["default"] = (function (prefix) {
+/* harmony default export */ __webpack_exports__["default"] = (function (element, prefix) {
     if (!prefix) {
         prefix = "ampopup";
     }
@@ -63680,7 +64180,7 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__["Dictionary"]();
     abg.alpha = 0.05;
     var counter = rules.insertKeyIfEmpty(prefix, function () {
         var disposer = new _utils_Disposer__WEBPACK_IMPORTED_MODULE_2__["MultiDisposer"]([
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix, {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + prefix, {
                 //"width": "100%",
                 //"height": "100%",
                 "overflow": "visible",
@@ -63689,7 +64189,7 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__["Dictionary"]();
                 "left": "0",
                 "z-index": "2000"
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-curtain", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + prefix + "-curtain", {
                 "width": "100%",
                 "height": "100%",
                 "position": "absolute",
@@ -63699,18 +64199,18 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__["Dictionary"]();
                 "background-color": bg.hex,
                 "opacity": "0.5"
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-header", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + prefix + "-header", {
                 "display": "block",
                 "width": "100%",
                 "min-height": "1.8em",
                 "background": abg.rgba
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-title", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + prefix + "-title", {
                 "font-weight": "bold",
                 "font-size": "110%",
                 "padding": "0.5em 1.2em 0.5em 1em"
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-content", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + prefix + "-content", {
                 /*"width": "100%",
                 "height": "100%",*/
                 // "padding": "2em 1em 1em 1em",
@@ -63726,10 +64226,10 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_1__["Dictionary"]();
                 "overflow": "auto",
                 "z-index": "2002"
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-inside", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + prefix + "-inside", {
                 "padding": "1em"
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + prefix + "-close", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + prefix + "-close", {
                 "display": "block",
                 "position": "absolute",
                 "top": "0.3em",
@@ -63845,6 +64345,7 @@ var Preloader = /** @class */ (function (_super) {
         label.fill = interfaceColors.getFor("text");
         label.align = "center";
         label.valign = "middle";
+        label.textAlign = "middle";
         label.fillOpacity = 0.4;
         _this.label = label;
         // Set defaults
@@ -66132,6 +66633,8 @@ var SwitchButton = /** @class */ (function (_super) {
         _this.contentAlign = "center";
         _this.contentValign = "middle";
         _this.padding(8, 16, 8, 16);
+        _this.setStateOnChildren = true;
+        _this.states.create("active");
         var interfaceColors = new _core_utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_4__["InterfaceColorSet"]();
         // Create the label element
         var leftLabel = new _Label__WEBPACK_IMPORTED_MODULE_2__["Label"]();
@@ -66177,6 +66680,9 @@ var SwitchButton = /** @class */ (function (_super) {
         // A Button should be always focusable
         _this.role = "button";
         _this.focusable = true;
+        rightLabel.valign = "middle";
+        leftLabel.valign = "middle";
+        button.valign = "middle";
         // Apply theme
         _this.applyTheme();
         return _this;
@@ -66889,41 +67395,47 @@ var Tooltip = /** @class */ (function (_super) {
         background.validate();
     };
     /**
+     *
+     */
+    Tooltip.prototype.delayedPointTo = function (point, instantly) {
+        var _this = this;
+        if (this._pointToDisposer) {
+            this._pointToDisposer.dispose();
+        }
+        this._pointToDisposer = _core_Registry__WEBPACK_IMPORTED_MODULE_2__["registry"].events.once("exitframe", function () {
+            _this.pointTo(point, instantly);
+        });
+        this.addDisposer(this._pointToDisposer);
+    };
+    /**
      * Set nes tooltip's anchor point and moves whole tooltip.
      *
      * @param x  X coordinate
      * @param y  Y coordinate
      */
     Tooltip.prototype.pointTo = function (point, instantly) {
-        var _this = this;
         if (this._pointTo.x != point.x || this._pointTo.y != point.y) {
             this._pointTo = point;
             this.invalidate();
-            if (this._pointToDisposer) {
-                this._pointToDisposer.dispose();
+            // this helps to avoid strange animation from nowhere on initial show or when balloon was hidden already
+            if (!this.visible || instantly) {
+                this.moveTo(this._pointTo);
+                if (this._animation) {
+                    this._animation.kill();
+                }
             }
-            this._pointToDisposer = _core_Registry__WEBPACK_IMPORTED_MODULE_2__["registry"].events.once("exitframe", function () {
-                // this helps to avoid strange animation from nowhere on initial show or when balloon was hidden already
-                if (!_this.visible || instantly) {
-                    _this.moveTo(_this._pointTo);
-                    if (_this._animation) {
-                        _this._animation.kill();
-                    }
+            else {
+                // helps to avoid flicker on top/left corner
+                if (this.pixelX == 0 && this.pixelY == 0) {
+                    this.moveTo(this._pointTo);
                 }
                 else {
-                    // helps to avoid flicker on top/left corner
-                    if (_this.pixelX == 0 && _this.pixelY == 0) {
-                        _this.moveTo(_this._pointTo);
+                    if (this._animation) {
+                        this._animation.kill();
                     }
-                    else {
-                        if (_this._animation) {
-                            _this._animation.kill();
-                        }
-                        _this._animation = new _utils_Animation__WEBPACK_IMPORTED_MODULE_5__["Animation"](_this, [{ property: "x", to: point.x, from: _this.pixelX }, { property: "y", to: point.y, from: _this.pixelY }], _this.animationDuration, _this.animationEasing).start();
-                    }
+                    this._animation = new _utils_Animation__WEBPACK_IMPORTED_MODULE_5__["Animation"](this, [{ property: "x", to: point.x, from: this.pixelX }, { property: "y", to: point.y, from: this.pixelY }], this.animationDuration, this.animationEasing).start();
                 }
-            });
-            this.addDisposer(this._pointToDisposer);
+            }
         }
     };
     /**
@@ -68138,6 +68650,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_Utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
 /* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
 /* harmony import */ var _utils_Math__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
+/* harmony import */ var _utils_Strings__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../utils/Strings */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Strings.js");
 /**
  * Export module.
  *
@@ -68165,6 +68678,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -68562,6 +69076,7 @@ var Export = /** @class */ (function (_super) {
         _this._formatOptions.setKey("pdf", {
             fontSize: 14,
             imageFormat: "png",
+            align: "left",
             addURL: true,
             addColumnNames: true
         });
@@ -68688,7 +69203,11 @@ var Export = /** @class */ (function (_super) {
      */
     Export.prototype.typeSupported = function (type) {
         var supported = true;
-        if (type === "pdf") {
+        var options = this.getFormatOptions(type);
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_19__["hasValue"](options) && options.disabled) {
+            supported = false;
+        }
+        else if (type === "pdf") {
             //supported = this.downloadSupport();
         }
         else if (type === "xlsx") {
@@ -69225,7 +69744,7 @@ var Export = /** @class */ (function (_super) {
      */
     Export.prototype.getCanvas = function (options) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
-            var background, DOMURL, url, blobs, canvas, width, height, font, fontSize, pixelRatio, ctx, promises, a, data, svg, img;
+            var background, DOMURL, url, blobs, canvas, width, height, font, fontSize, scale, pixelRatio, ctx, promises, a, data, svg, img;
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -69240,14 +69759,21 @@ var Export = /** @class */ (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, , 4, 5]);
-                        width = this.sprite.pixelWidth, height = this.sprite.pixelHeight, font = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFont"](this.sprite.dom), fontSize = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFontSize"](this.sprite.dom);
+                        width = this.sprite.pixelWidth;
+                        height = this.sprite.pixelHeight;
+                        font = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFont"](this.sprite.dom);
+                        fontSize = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFontSize"](this.sprite.dom);
+                        scale = options.scale || 1;
+                        pixelRatio = this.getPixelRatio(options);
+                        // Check if scale needs to be updated as per min/max dimensions
+                        scale = this.getAdjustedScale(width * pixelRatio, height * pixelRatio, scale, options);
                         // Create canvas and its 2D context
                         canvas = this.getDisposableCanvas();
-                        pixelRatio = this.getPixelRatio(options);
-                        canvas.style.width = width + 'px';
-                        canvas.style.height = height + 'px';
-                        canvas.width = width * pixelRatio;
-                        canvas.height = height * pixelRatio;
+                        // Set canvas width/height
+                        canvas.style.width = width * scale + 'px';
+                        canvas.style.height = height * scale + 'px';
+                        canvas.width = width * pixelRatio * scale;
+                        canvas.height = height * pixelRatio * scale;
                         ctx = canvas.getContext("2d");
                         if (pixelRatio != 1) {
                             ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
@@ -69270,10 +69796,10 @@ var Export = /** @class */ (function (_super) {
                         return [4 /*yield*/, Promise.all(promises)];
                     case 2:
                         a = _a.sent();
-                        data = this.normalizeSVG("<style>" + a[0] + "</style>" + this.serializeElement(this.sprite.paper.defs) + this.serializeElement(this.sprite.dom), options, width, height, font, fontSize);
+                        data = this.normalizeSVG("<style>" + a[0] + "</style>" + this.serializeElement(this.sprite.paper.defs) + this.serializeElement(this.sprite.dom), options, width, height, scale, font, fontSize);
                         svg = new Blob([data], { type: "image/svg+xml" });
                         url = DOMURL.createObjectURL(svg);
-                        return [4 /*yield*/, this.loadNewImage(url, width, height, "anonymous")];
+                        return [4 /*yield*/, this.loadNewImage(url, width * scale, height * scale, "anonymous")];
                     case 3:
                         img = _a.sent();
                         // Draw image on canvas
@@ -69304,7 +69830,7 @@ var Export = /** @class */ (function (_super) {
      */
     Export.prototype.getCanvasAdvanced = function (options) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
-            var background, canvg, width, height, font, fontSize, data, canvas, pixelRatio, config;
+            var background, canvg, width, height, font, fontSize, scale, pixelRatio, data, canvas, config;
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -69321,24 +69847,33 @@ var Export = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.canvg];
                     case 2:
                         canvg = _a.sent();
-                        width = this.sprite.pixelWidth, height = this.sprite.pixelHeight, font = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFont"](this.sprite.dom), fontSize = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFontSize"](this.sprite.dom);
-                        data = this.normalizeSVG(this.serializeElement(this.sprite.paper.defs) + this.serializeElement(this.sprite.dom), options, width, height, font, fontSize, background);
-                        canvas = this.getDisposableCanvas();
+                        width = this.sprite.pixelWidth;
+                        height = this.sprite.pixelHeight;
+                        font = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFont"](this.sprite.dom);
+                        fontSize = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFontSize"](this.sprite.dom);
+                        scale = options.scale || 1;
                         pixelRatio = this.getPixelRatio(options);
-                        canvas.style.width = (width * pixelRatio) + 'px';
-                        canvas.style.height = (height * pixelRatio) + 'px';
-                        canvas.width = width * pixelRatio;
-                        canvas.height = height * pixelRatio;
+                        // Check if scale needs to be updated as per min/max dimensions
+                        scale = this.getAdjustedScale(width * pixelRatio, height * pixelRatio, scale, options);
+                        data = this.normalizeSVG(this.serializeElement(this.sprite.paper.defs) + this.serializeElement(this.sprite.dom), options, width, height, scale, font, fontSize, background);
+                        canvas = this.getDisposableCanvas();
+                        // Set canvas width/height
+                        canvas.style.width = (width * pixelRatio * scale) + 'px';
+                        canvas.style.height = (height * pixelRatio * scale) + 'px';
+                        canvas.width = width * pixelRatio * scale;
+                        canvas.height = height * pixelRatio * scale;
                         config = {
                             //ignoreDimensions: true,
                             useCORS: true
                         };
                         if (pixelRatio != 1) {
                             config.ignoreDimensions = true;
-                            config.scaleWidth = width * pixelRatio;
-                            config.scaleHeight = height * pixelRatio;
+                            config.scaleWidth = width * pixelRatio * scale;
+                            config.scaleHeight = height * pixelRatio * scale;
                         }
-                        canvg(canvas, data, config);
+                        return [4 /*yield*/, canvg.fromString(canvas.getContext("2d"), data, config).render()];
+                    case 3:
+                        _a.sent();
                         return [2 /*return*/, canvas];
                 }
             });
@@ -69414,8 +69949,49 @@ var Export = /** @class */ (function (_super) {
      * @return Pixel ratio
      */
     Export.prototype.getPixelRatio = function (options) {
-        var scale = options && options.scale ? options.scale : 1;
-        return (this.useRetina ? _utils_Utils__WEBPACK_IMPORTED_MODULE_20__["getPixelRatio"]() : 1) * scale;
+        // const scale = options && options.scale ? options.scale : 1;
+        // return (this.useRetina ? $utils.getPixelRatio() : 1) * scale;
+        return this.useRetina ? _utils_Utils__WEBPACK_IMPORTED_MODULE_20__["getPixelRatio"]() : 1;
+    };
+    /**
+     * Calculates adjusted scale if image does not fit or is larger than min/max
+     * settings.
+     *
+     * @param   width    Width of the source image
+     * @param   height   Height of the source image
+     * @param   scale    Current scale
+     * @param   options  Options
+     * @return           Adjusted scale
+     */
+    Export.prototype.getAdjustedScale = function (width, height, scale, options) {
+        if (!options) {
+            return scale;
+        }
+        var adjWidth = width * scale;
+        var adjHeight = width * scale;
+        // Check max restrictions
+        var widthScale;
+        var heightScale;
+        if (options.maxWidth && (adjWidth > options.maxWidth)) {
+            widthScale = options.maxWidth / width;
+        }
+        if (options.maxHeight && (adjHeight > options.maxHeight)) {
+            heightScale = options.maxHeight / height;
+        }
+        if (widthScale || heightScale) {
+            return _utils_Math__WEBPACK_IMPORTED_MODULE_22__["min"](widthScale, heightScale);
+        }
+        // Check min restrictions
+        if (options.minWidth && (adjWidth < options.minWidth)) {
+            widthScale = options.minWidth / width;
+        }
+        if (options.minHeight && (adjHeight < options.minHeight)) {
+            heightScale = options.minHeight / height;
+        }
+        if (widthScale || heightScale) {
+            return _utils_Math__WEBPACK_IMPORTED_MODULE_22__["max"](widthScale, heightScale);
+        }
+        return scale;
     };
     /**
      * Converts all `<image>` tags in SVG to use data uris instead of external
@@ -69828,7 +70404,7 @@ var Export = /** @class */ (function (_super) {
                         // Wait for required elements to be ready before proceeding
                         _a.sent();
                         width = this.sprite.pixelWidth, height = this.sprite.pixelHeight, font = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFont"](this.sprite.dom), fontSize = _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["findFontSize"](this.sprite.dom);
-                        svg = this.normalizeSVG(this.serializeElement(this.sprite.paper.defs) + this.serializeElement(this.sprite.dom), options, width, height, font, fontSize);
+                        svg = this.normalizeSVG(this.serializeElement(this.sprite.paper.defs) + this.serializeElement(this.sprite.dom), options, width, height, 1, font, fontSize);
                         charset = this.adapter.apply("charset", {
                             charset: "charset=utf-8",
                             type: "svg",
@@ -69860,14 +70436,14 @@ var Export = /** @class */ (function (_super) {
      * @return Output SVG
      * @todo Add style params to existing <svg>
      */
-    Export.prototype.normalizeSVG = function (svg, options, width, height, font, fontSize, background) {
+    Export.prototype.normalizeSVG = function (svg, options, width, height, scale, font, fontSize, background) {
         // Construct width/height params
         var dimParams = "";
         if (width) {
-            dimParams += "width=\"" + width + "px\" ";
+            dimParams += "width=\"" + width * scale + "px\" ";
         }
         if (height) {
-            dimParams += "height=\"" + height + "px\" ";
+            dimParams += "height=\"" + height * scale + "px\" ";
         }
         // Apply font settings
         var styleParams = "";
@@ -69876,6 +70452,19 @@ var Export = /** @class */ (function (_super) {
         }
         if (fontSize) {
             styleParams += "font-size: " + fontSize + ";";
+        }
+        // Scale
+        if (scale) {
+            dimParams += "viewBox=\"0 0 " + (width) + " " + (height) + "\" ";
+        }
+        // Remove foreign objects temporarily
+        var fos = [];
+        var ms = svg.match(/<foreignObject[\s\S]*<\/foreignObject>/gi);
+        if (ms) {
+            for (var i = 0; i < ms.length; i++) {
+                svg = svg.replace(ms[i], _utils_Strings__WEBPACK_IMPORTED_MODULE_23__["PLACEHOLDER"]);
+                fos.push(ms[i]);
+            }
         }
         // Add missing <svg> enclosure
         if (!svg.match(/<svg/)) {
@@ -69909,6 +70498,14 @@ var Export = /** @class */ (function (_super) {
         // Remove base uri-related stuff
         var reg = new RegExp("url\\(" + _utils_Utils__WEBPACK_IMPORTED_MODULE_20__["escapeForRgex"](_utils_Utils__WEBPACK_IMPORTED_MODULE_20__["getBaseURI"]()), "g");
         svg = svg.replace(reg, "url(#");
+        // Remove escaped quotes in url() parameters
+        svg = svg.replace(/url\(&quot;([^)]*)&quot;\)/gm, "url($1)");
+        // Put foreignObjects back in
+        if (fos.length) {
+            for (var i = 0; i < fos.length; i++) {
+                svg = svg.replace(_utils_Strings__WEBPACK_IMPORTED_MODULE_23__["PLACEHOLDER"], fos[i]);
+            }
+        }
         svg = this.adapter.apply("normalizeSVG", {
             data: svg,
             options: options
@@ -69939,7 +70536,34 @@ var Export = /** @class */ (function (_super) {
      */
     Export.prototype.getPDF = function (type, options) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
-            var image, pdfmake, defaultMargins, doc, title, _a, _b, _c;
+            function addFont(font) {
+                var paths = {};
+                paths.normal = font.normal.path;
+                vfs[font.normal.path] = font.normal.bytes;
+                if (font.bold) {
+                    paths.bold = font.bold.path;
+                    vfs[font.bold.path] = font.bold.bytes;
+                }
+                else {
+                    paths.bold = font.normal.path;
+                }
+                if (font.italics) {
+                    paths.italics = font.italics.path;
+                    vfs[font.italics.path] = font.italics.bytes;
+                }
+                else {
+                    paths.italics = font.normal.path;
+                }
+                if (font.bolditalics) {
+                    paths.bolditalics = font.bolditalics.path;
+                    vfs[font.bolditalics.path] = font.bolditalics.bytes;
+                }
+                else {
+                    paths.bolditalics = font.normal.path;
+                }
+                fonts[font.name] = paths;
+            }
+            var image, pdfmake, defaultMargins, doc, title, extraMargin, _a, _b, _c, fonts, vfs;
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_d) {
                 switch (_d.label) {
                     case 0: return [4 /*yield*/, this.getImage(options.imageFormat || "png", options)];
@@ -69953,6 +70577,9 @@ var Export = /** @class */ (function (_super) {
                             pageSize: options.pageSize || "A4",
                             pageOrientation: options.pageOrientation || "portrait",
                             pageMargins: options.pageMargins || defaultMargins,
+                            defaultStyle: {
+                                font: options.font ? options.font.name : undefined,
+                            },
                             //header: <any>[],
                             content: []
                         };
@@ -69960,6 +70587,7 @@ var Export = /** @class */ (function (_super) {
                             title: this.title,
                             options: options
                         }).title;
+                        extraMargin = 0;
                         if (title) {
                             doc.content.push({
                                 text: title,
@@ -69967,6 +70595,8 @@ var Export = /** @class */ (function (_super) {
                                 bold: true,
                                 margin: [0, 0, 0, 15]
                             });
+                            // Add some leftover margin for title
+                            extraMargin += 50;
                         }
                         // Add page URL?
                         if (options.addURL) {
@@ -69975,12 +70605,15 @@ var Export = /** @class */ (function (_super) {
                                 fontSize: options.fontSize,
                                 margin: [0, 0, 0, 15]
                             });
+                            // Add some leftover margin for URL
+                            extraMargin += 50;
                         }
                         // Add image
                         if (type != "pdfdata") {
                             doc.content.push({
                                 image: image,
-                                fit: this.getPageSizeFit(doc.pageSize, doc.pageMargins)
+                                alignment: options.align || "left",
+                                fit: this.getPageSizeFit(doc.pageSize, doc.pageMargins, extraMargin)
                             });
                         }
                         if (!(type == "pdfdata" || options.addData)) return [3 /*break*/, 4];
@@ -69997,8 +70630,18 @@ var Export = /** @class */ (function (_super) {
                             doc: doc,
                             options: options
                         }).doc;
+                        fonts = null;
+                        vfs = null;
+                        if (options.font) {
+                            fonts = {};
+                            vfs = {};
+                            addFont(options.font);
+                            if (options.extraFonts) {
+                                _utils_Array__WEBPACK_IMPORTED_MODULE_21__["each"](options.extraFonts, addFont);
+                            }
+                        }
                         return [4 /*yield*/, new Promise(function (success, error) {
-                                pdfmake.createPdf(doc).getDataUrl(function (uri) {
+                                pdfmake.createPdf(doc, null, fonts, vfs).getDataUrl(function (uri) {
                                     success(uri);
                                 });
                             })];
@@ -70135,7 +70778,8 @@ var Export = /** @class */ (function (_super) {
      * @param pageSize Page size
      * @return `[width, height]` in pixels
      */
-    Export.prototype.getPageSizeFit = function (pageSize, margins) {
+    Export.prototype.getPageSizeFit = function (pageSize, margins, extraMargin) {
+        if (extraMargin === void 0) { extraMargin = 0; }
         // Check margins
         var newMargins = [0, 0, 0, 0];
         if (typeof margins == "number") {
@@ -70203,7 +70847,7 @@ var Export = /** @class */ (function (_super) {
         // Calculate size
         var fitSize = sizes[pageSize];
         fitSize[0] -= newMargins[0] + newMargins[2];
-        fitSize[1] -= newMargins[1] + newMargins[3];
+        fitSize[1] -= newMargins[1] + newMargins[3] + extraMargin;
         return fitSize;
     };
     /**
@@ -70988,7 +71632,7 @@ var Export = /** @class */ (function (_super) {
             var scroll, rule, originalTitle, img, isIOS;
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 scroll = document.documentElement.scrollTop || document.body.scrollTop;
-                rule = new _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["StyleRule"]("body > *", {
+                rule = new _utils_DOM__WEBPACK_IMPORTED_MODULE_15__["StyleRule"](_utils_DOM__WEBPACK_IMPORTED_MODULE_15__["getShadowRoot"](this.container), "body > *", {
                     "display": "none",
                     "position": "fixed",
                     "visibility": "hidden",
@@ -71840,7 +72484,7 @@ var Export = /** @class */ (function (_super) {
             var canvg;
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, __webpack_require__.e(/*! import() | canvg */ "vendors~canvg").then(__webpack_require__.t.bind(null, /*! canvg */ "./node_modules/canvg/dist/browser/canvg.min.js", 7))];
+                    case 0: return [4 /*yield*/, Promise.all(/*! import() | canvg */[__webpack_require__.e("vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chu~fd58a5cd"), __webpack_require__.e("vendors~canvg")]).then(__webpack_require__.bind(null, /*! ../../canvg/index.js */ "./node_modules/@amcharts/amcharts4/.internal/canvg/index.js"))];
                     case 1:
                         canvg = (_a.sent());
                         if (canvg.default != null) {
@@ -71928,6 +72572,41 @@ var Export = /** @class */ (function (_super) {
     Export.prototype.getFormatOptions = function (type) {
         return this._formatOptions.getKey(type);
     };
+    Object.defineProperty(Export.prototype, "formatOptions", {
+        /**
+         * A [[Dictionary]] object containing format-specific options.
+         *
+         * May be used to change specific option for the format:
+         *
+         * ```TypeScript
+         * chart.exporting.formatOptions.getKey("csv").disabled = true;
+         * ```
+         * ```JavaScript
+         * chart.exporting.formatOptions.getKey("csv").disabled = true;
+         * ```
+         * ```JSON
+         * {
+         *   // ...
+         *   "exporting": {
+         *     // ...
+         *     "formatOptions": {
+         *       "csv": {
+         *         "disabled": true
+         *       }
+         *     }
+         *   }
+         * }
+         * ```
+         *
+         * @since 4.9.12
+         * @return  Options
+         */
+        get: function () {
+            return this._formatOptions;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Disables interactivity on parent chart.
      */
@@ -72067,7 +72746,7 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_2__["Dictionary"]();
  * @param prefix  Prefix to addtach to class names
  * @return A MultiDisposer with style rules
  */
-/* harmony default export */ __webpack_exports__["default"] = (function (prefix) {
+/* harmony default export */ __webpack_exports__["default"] = (function (element, prefix) {
     var newPrefix = (prefix ? prefix : "amexport");
     var colorSet = new _utils_InterfaceColorSet__WEBPACK_IMPORTED_MODULE_1__["InterfaceColorSet"]();
     var counter = rules.insertKeyIfEmpty(newPrefix, function () {
@@ -72080,48 +72759,48 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_2__["Dictionary"]();
             new StyleRule(`div:hover .${newPrefix}-menu, .${newPrefix}-menu.active`, {
                 "opacity": "0.9",
             }),*/
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu *", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-menu *", {
                 "box-sizing": "border-box"
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu-level-0", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-menu-level-0", {
                 "position": "absolute",
                 "top": "5px",
                 "right": "5px",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu-level-0." + newPrefix + "-left", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-menu-level-0." + newPrefix + "-left", {
                 "right": "auto",
                 "left": "5px",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu-level-0." + newPrefix + "-right", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-menu-level-0." + newPrefix + "-right", {
                 "right": "5px",
                 "left": "auto",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu-level-0." + newPrefix + "-top", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-menu-level-0." + newPrefix + "-top", {
                 "top": "5px",
                 "bottom": "auto",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu-level-0." + newPrefix + "-bottom", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-menu-level-0." + newPrefix + "-bottom", {
                 "top": "auto",
                 "bottom": "5px",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item." + newPrefix + "-item-level-0", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item." + newPrefix + "-item-level-0", {
                 "opacity": "0.3",
                 "width": "30px",
                 "min-height": "30px",
                 "transition": "all 100ms ease-in-out",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("div:hover ." + newPrefix + "-item." + newPrefix + "-item-level-0, ." + newPrefix + "-item." + newPrefix + "-item-level-0.active", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "div:hover ." + newPrefix + "-item." + newPrefix + "-item-level-0, ." + newPrefix + "-item." + newPrefix + "-item-level-0.active", {
                 "opacity": "0.9",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item." + newPrefix + "-item-level-0 > a", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item." + newPrefix + "-item-level-0 > a", {
                 "padding": "0",
                 "text-align": "center",
                 "overflow": "hidden"
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item." + newPrefix + "-item-level-0:before", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item." + newPrefix + "-item-level-0:before", {
                 "display": "block"
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item", {
                 "position": "relative",
                 "display": "block",
                 "opacity": "0",
@@ -72133,60 +72812,60 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_2__["Dictionary"]();
                 "color": colorSet.getFor("secondaryButton").alternative.hex,
                 "transition": "all 100ms ease-in-out, opacity 0.5s ease 0.5s",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-left ." + newPrefix + "-item", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-left ." + newPrefix + "-item", {
                 "margin": "1px 0 0 1px",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item:hover, ." + newPrefix + "-item.active", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item:hover, ." + newPrefix + "-item.active", {
                 "background": colorSet.getFor("secondaryButtonHover").hex,
                 "color": colorSet.getFor("secondaryButtonText").hex,
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item > ." + newPrefix + "-menu", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item > ." + newPrefix + "-menu", {
                 "position": "absolute",
                 "top": "-1px",
                 "right": "0",
                 "margin-right": "100%",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-left ." + newPrefix + "-item > ." + newPrefix + "-menu", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-left ." + newPrefix + "-item > ." + newPrefix + "-menu", {
                 "left": "0",
                 "right": "auto",
                 "margin-left": "100%",
                 "margin-right": "auto",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-right ." + newPrefix + "-item > ." + newPrefix + "-menu", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-right ." + newPrefix + "-item > ." + newPrefix + "-menu", {
                 "left": "auto",
                 "right": "0",
                 "margin-left": "auto",
                 "margin-right": "100%",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-top ." + newPrefix + "-item > ." + newPrefix + "-menu", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-top ." + newPrefix + "-item > ." + newPrefix + "-menu", {
                 "top": "-1px",
                 "bottom": "auto",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-bottom ." + newPrefix + "-item > ." + newPrefix + "-menu", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-bottom ." + newPrefix + "-item > ." + newPrefix + "-menu", {
                 "top": "auto",
                 "bottom": "0",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item > ." + newPrefix + "-menu", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item > ." + newPrefix + "-menu", {
                 "display": "none",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item:hover > ." + newPrefix + "-menu, ." + newPrefix + "-item.active > ." + newPrefix + "-menu", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item:hover > ." + newPrefix + "-menu, ." + newPrefix + "-item.active > ." + newPrefix + "-menu", {
                 "display": "block",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item:hover > ." + newPrefix + "-menu > ." + newPrefix + "-item, ." + newPrefix + "-item.active > ." + newPrefix + "-menu > ." + newPrefix + "-item", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item:hover > ." + newPrefix + "-menu > ." + newPrefix + "-item, ." + newPrefix + "-item.active > ." + newPrefix + "-menu > ." + newPrefix + "-item", {
                 "opacity": "1",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-menu", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-menu", {
                 "display": "block",
                 "list-style": "none",
                 "margin": "0",
                 "padding": "0",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-label", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-label", {
                 "display": "block",
                 "cursor": "default",
                 "padding": "0.5em 1em",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-icon", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-icon", {
                 "display": "block",
                 "cursor": "default",
                 "padding": "0.2em 0.4em",
@@ -72197,10 +72876,10 @@ var rules = new _utils_Dictionary__WEBPACK_IMPORTED_MODULE_2__["Dictionary"]();
                 "margin": "auto auto",
                 "border-radius": "3px",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-item-level-0 > ." + newPrefix + "-icon", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-item-level-0 > ." + newPrefix + "-icon", {
                 "padding": "0.1em 0.2em",
             }),
-            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"]("." + newPrefix + "-clickable", {
+            new _utils_DOM__WEBPACK_IMPORTED_MODULE_0__["StyleRule"](element, "." + newPrefix + "-clickable", {
                 "cursor": "pointer",
             }),
         ]);
@@ -72704,6 +73383,7 @@ var ExportMenu = /** @class */ (function (_super) {
             level: level,
             type: type
         }).className;
+        element.setAttribute("role", "menuitem");
         return element;
     };
     /**
@@ -73081,7 +73761,7 @@ var ExportMenu = /** @class */ (function (_super) {
      * @ignore Exclude from docs
      */
     ExportMenu.prototype.loadDefaultCSS = function () {
-        this._disposers.push(Object(_ExportCSS__WEBPACK_IMPORTED_MODULE_1__["default"])(this.classPrefix));
+        this._disposers.push(Object(_ExportCSS__WEBPACK_IMPORTED_MODULE_1__["default"])(_utils_DOM__WEBPACK_IMPORTED_MODULE_11__["getShadowRoot"](this.container), this.classPrefix));
         if (this._element) {
             this._element.style.display = "";
         }
@@ -73512,21 +74192,19 @@ var DateFormatter = /** @class */ (function (_super) {
         /**
          * A list of month names.
          */
-        _this._months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        _this.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         /**
          * A list of short month names.
-         *
-         * @param {Array<ShortMonthNames>}
          */
-        _this._monthsShort = ["Jan", "Feb", "Mar", "Apr", "May(short)", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        _this.monthsShort = ["Jan", "Feb", "Mar", "Apr", "May(short)", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         /**
          * A list of weekday names.
          */
-        _this._weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        _this.weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         /**
          * A list of short weekday names.
          */
-        _this._weekdaysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        _this.weekdaysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         /**
          * Output format to produce. If the format calls for applying color to the
          * formatted value, this setting will determine what markup to use: SVG or
@@ -73602,11 +74280,16 @@ var DateFormatter = /** @class */ (function (_super) {
         }
         // Is it a built-in format or Intl.DateTimeFormat
         if (format instanceof Object) {
-            if (this.intlLocales) {
-                return new Intl.DateTimeFormat(this.intlLocales, format).format(date);
+            try {
+                if (this.intlLocales) {
+                    return new Intl.DateTimeFormat(this.intlLocales, format).format(date);
+                }
+                else {
+                    return new Intl.DateTimeFormat(undefined, format).format(date);
+                }
             }
-            else {
-                return new Intl.DateTimeFormat(undefined, format).format(date);
+            catch (e) {
+                return "Invalid";
             }
         }
         else {
@@ -73756,13 +74439,13 @@ var DateFormatter = /** @class */ (function (_super) {
                     // @todo
                     break;
                 case "MMMMM":
-                    value = language.translate(this._months[month]).substr(0, 1);
+                    value = language.translate(this.months[month]).substr(0, 1);
                     break;
                 case "MMMM":
-                    value = language.translate(this._months[month]);
+                    value = language.translate(this.months[month]);
                     break;
                 case "MMM":
-                    value = language.translate(this._monthsShort[month]);
+                    value = language.translate(this.monthsShort[month]);
                     break;
                 case "MM":
                     value = _utils_Utils__WEBPACK_IMPORTED_MODULE_6__["padString"](month + 1, 2, "0");
@@ -73809,15 +74492,15 @@ var DateFormatter = /** @class */ (function (_super) {
                     break;
                 case "EEE":
                 case "eee":
-                    value = language.translate(this._weekdaysShort[weekday]);
+                    value = language.translate(this.weekdaysShort[weekday]);
                     break;
                 case "EEEE":
                 case "eeee":
-                    value = language.translate(this._weekdays[weekday]);
+                    value = language.translate(this.weekdays[weekday]);
                     break;
                 case "EEEEE":
                 case "eeeee":
-                    value = language.translate(this._weekdays[weekday]).substr(0, 1);
+                    value = language.translate(this.weekdays[weekday]).substr(0, 1);
                     break;
                 case "e":
                 case "ee":
@@ -74053,11 +74736,11 @@ var DateFormatter = /** @class */ (function (_super) {
                     parsedIndexes.year1 = index;
                     break;
                 case "MMMM":
-                    reg += "(" + this.getStringList(this._months).join("|") + ")";
+                    reg += "(" + this.getStringList(this.months).join("|") + ")";
                     parsedIndexes.monthLong = index;
                     break;
                 case "MMM":
-                    reg += "(" + this.getStringList(this._monthsShort).join("|") + ")";
+                    reg += "(" + this.getStringList(this.monthsShort).join("|") + ")";
                     parsedIndexes.monthShort = index;
                     break;
                 case "MM":
@@ -74082,11 +74765,11 @@ var DateFormatter = /** @class */ (function (_super) {
                     parsedIndexes.yearDay = index;
                     break;
                 case "dddd":
-                    reg += "(" + this.getStringList(this._weekdays).join("|") + ")";
+                    reg += "(" + this.getStringList(this.weekdays).join("|") + ")";
                     parsedIndexes.weekdayLong = index;
                     break;
                 case "ddd":
-                    reg += "(" + this.getStringList(this._weekdaysShort).join("|") + ")";
+                    reg += "(" + this.getStringList(this.weekdaysShort).join("|") + ")";
                     parsedIndexes.weekdayShort = index;
                     break;
                 case "aaa":
@@ -74152,7 +74835,7 @@ var DateFormatter = /** @class */ (function (_super) {
                     parsedIndexes.zone = index;
                     break;
                 case "i":
-                    reg += "([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})\.([0-9]{3})([Zz]?)";
+                    reg += "([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})\.([0-9]{3})[0-9]*([Zz]?)";
                     parsedIndexes.iso = index;
                     indexAdjust += 7;
                     break;
@@ -74355,13 +75038,13 @@ var DateFormatter = /** @class */ (function (_super) {
      */
     DateFormatter.prototype.resolveMonth = function (value) {
         // Let's try English first
-        var month = this._months.indexOf(value);
+        var month = this.months.indexOf(value);
         if (month > -1) {
             return month;
         }
         // Try the translation
         if (this.language && !this.language.isDefault()) {
-            month = this.language.translateAll(this._months).indexOf(value);
+            month = this.language.translateAll(this.months).indexOf(value);
             if (month > -1) {
                 return month;
             }
@@ -74376,13 +75059,18 @@ var DateFormatter = /** @class */ (function (_super) {
      */
     DateFormatter.prototype.resolveShortMonth = function (value) {
         // Let's try English first
-        var month = this._monthsShort.indexOf(value);
+        var month = this.monthsShort.indexOf(value);
+        if (month > -1) {
+            return month;
+        }
+        // Maybe long month (workaround for May)
+        month = this.months.indexOf(value);
         if (month > -1) {
             return month;
         }
         // Try the translation
         if (this.language && !this.language.isDefault()) {
-            month = this.language.translateAll(this._monthsShort).indexOf(value);
+            month = this.language.translateAll(this.monthsShort).indexOf(value);
             if (month > -1) {
                 return month;
             }
@@ -74417,10 +75105,12 @@ var DateFormatter = /** @class */ (function (_super) {
     DateFormatter.prototype.getStringList = function (list) {
         var res = [];
         for (var i = 0; i < list.length; i++) {
-            res.push(_utils_Utils__WEBPACK_IMPORTED_MODULE_6__["escapeForRgex"](list[i]));
             // translate?
-            if (this.language && !this.language.isDefault()) {
+            if (this.language) {
                 res.push(_utils_Utils__WEBPACK_IMPORTED_MODULE_6__["escapeForRgex"](this.language.translate(list[i])));
+            }
+            else {
+                res.push(_utils_Utils__WEBPACK_IMPORTED_MODULE_6__["escapeForRgex"](list[i]));
             }
         }
         return res;
@@ -75326,7 +76016,7 @@ var NumberFormatter = /** @class */ (function (_super) {
      * @param format  Format to apply
      * @return Formatted number
      */
-    NumberFormatter.prototype.format = function (value, format) {
+    NumberFormatter.prototype.format = function (value, format, precision) {
         // no format passed in or "Number"
         if (typeof format === "undefined" || (_utils_Type__WEBPACK_IMPORTED_MODULE_8__["isString"](format) && format.toLowerCase() === "number")) {
             format = this._numberFormat;
@@ -75338,11 +76028,16 @@ var NumberFormatter = /** @class */ (function (_super) {
         var source = Number(value);
         // Is it a built-in format or Intl.NumberFormatOptions
         if (format instanceof Object) {
-            if (this.intlLocales) {
-                return new Intl.NumberFormat(this.intlLocales, format).format(source);
+            try {
+                if (this.intlLocales) {
+                    return new Intl.NumberFormat(this.intlLocales, format).format(source);
+                }
+                else {
+                    return new Intl.NumberFormat(undefined, format).format(source);
+                }
             }
-            else {
-                return new Intl.NumberFormat(undefined, format).format(source);
+            catch (e) {
+                return "Invalid";
             }
         }
         else {
@@ -75360,6 +76055,11 @@ var NumberFormatter = /** @class */ (function (_super) {
             }
             else {
                 details = info.zero;
+            }
+            // Adjust precision
+            if (_utils_Type__WEBPACK_IMPORTED_MODULE_8__["hasValue"](precision) && !details.mod) {
+                details = _utils_Object__WEBPACK_IMPORTED_MODULE_6__["clone"](details);
+                details.decimals.active = source == 0 ? 0 : precision;
             }
             // Format
             formatted = details.template.split(_utils_Strings__WEBPACK_IMPORTED_MODULE_5__["PLACEHOLDER"]).join(this.applyFormat(source, details));
@@ -76275,6 +76975,13 @@ var TextFormatter = /** @class */ (function (_super) {
         if (cached) {
             return cached;
         }
+        // Pre-process quoted text
+        var q = style.match(/('[^']*')|("[^"]*")/gi);
+        if (q) {
+            for (var i = 0; i < q.length; i++) {
+                style = style.replace(q[i], q[i].replace(/['"]*/g, "").replace(/[ ]+/g, "+"));
+            }
+        }
         // Get style parts
         var b = style.match(/([\w\-]*:[\s]?[^;\s\]]*)|(\#[\w]{1,6})|([\w]+)|(\/)/gi);
         // Empty?
@@ -76295,6 +77002,9 @@ var TextFormatter = /** @class */ (function (_super) {
             else if (!b[i].match(/:/)) {
                 // Color
                 b[i] = "fill:" + b[i];
+            }
+            else {
+                b[i] = b[i].replace(/\+/g, " ");
             }
         }
         var res = b.join(';');
@@ -76624,9 +77334,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _System__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./../System */ "./node_modules/@amcharts/amcharts4/.internal/core/System.js");
 /* harmony import */ var _utils_Ease__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils/Ease */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Ease.js");
 /* harmony import */ var _utils_Math__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../utils/Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
-/* harmony import */ var _utils_Iterator__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
-/* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var _utils_Time__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../utils/Time */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Time.js");
+/* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _utils_Iterator__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
+/* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _utils_Time__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../utils/Time */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Time.js");
 /**
  * Interaction manages all aspects of user interaction - mouse move,
  * click, hover, drag events, touch gestures.
@@ -76644,6 +77355,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -76865,7 +77577,7 @@ var Interaction = /** @class */ (function (_super) {
             // Modern browsers
             _this._pointerEvents.wheel = "wheel";
         }
-        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](document.onmousewheel)) {
+        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](document.onmousewheel)) {
             // Webkit and IE support at least "mousewheel"
             _this._pointerEvents.wheel = "mousewheel";
         }
@@ -76922,7 +77634,7 @@ var Interaction = /** @class */ (function (_super) {
                 this._disposers.push(Object(_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["addEventListener"])(document, this._pointerEvents.pointerup, function (ev) { _this.handleGlobalPointerUp(ev); }));
                 this._disposers.push(Object(_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["addEventListener"])(document, this._pointerEvents.pointercancel, function (ev) { _this.handleGlobalPointerUp(ev, true); }));
                 this._disposers.push(Object(_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["addEventListener"])(document, "mouseenter", function (ev) {
-                    if (!_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev.relatedTarget) && (ev.buttons == 0 || ev.which == 0)) {
+                    if (!_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](ev.relatedTarget) && (ev.buttons == 0 || ev.which == 0)) {
                         _this.handleDocumentLeave(ev);
                     }
                 }));
@@ -77633,7 +78345,7 @@ var Interaction = /** @class */ (function (_super) {
      */
     Interaction.prototype.handleHit = function (io, pointer, ev) {
         // Check if this is a double-hit
-        var now = _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"]();
+        var now = _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"]();
         if (io.lastHit && (io.lastHit >= (now - this.getHitOption(io, "doubleHitTime")))) {
             // Yup - it's a double-hit
             // Cancel the hit
@@ -77775,7 +78487,7 @@ var Interaction = /** @class */ (function (_super) {
                         io: io,
                         pointer: pointer,
                         event: ev,
-                        keepUntil: _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"]() + 500
+                        keepUntil: _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"]() + 500
                     });
                     io.hasDelayedOut = true;
                     return;
@@ -77786,7 +78498,7 @@ var Interaction = /** @class */ (function (_super) {
                         io: io,
                         pointer: pointer,
                         event: ev,
-                        keepUntil: _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"]() + 500,
+                        keepUntil: _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"]() + 500,
                         timeout: this.setTimeout(function () {
                             _this.handleOut(io, pointer, ev, true);
                         }, this.getHoverOption(io, "touchOutDelay"))
@@ -77895,8 +78607,26 @@ var Interaction = /** @class */ (function (_super) {
     Interaction.prototype.handleGlobalUp = function (pointer, ev, cancelled) {
         var _this = this;
         if (cancelled === void 0) { cancelled = false; }
+        var sorted = this.downObjects.values.slice();
+        sorted.sort(function (x, y) {
+            if (x && y) {
+                var pos = x.element.compareDocumentPosition(y.element);
+                if (pos & Node.DOCUMENT_POSITION_CONTAINED_BY) {
+                    return 1;
+                }
+                else if (pos & Node.DOCUMENT_POSITION_CONTAINS) {
+                    return -1;
+                }
+                else {
+                    return 0;
+                }
+            }
+            else {
+                return 0;
+            }
+        });
         // Process all down objects
-        _utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](this.downObjects.backwards().iterator(), function (io) {
+        _utils_Array__WEBPACK_IMPORTED_MODULE_14__["each"](sorted, function (io) {
             // Check if this particular pointer is pressing down
             // on object
             if (io && io.downPointers.contains(pointer)) {
@@ -77913,7 +78643,7 @@ var Interaction = /** @class */ (function (_super) {
     Interaction.prototype.handleDocumentLeave = function (ev) {
         var _this = this;
         // Process all down objects
-        _utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](this.downObjects.backwards().iterator(), function (io) {
+        _utils_Iterator__WEBPACK_IMPORTED_MODULE_15__["each"](this.downObjects.backwards().iterator(), function (io) {
             io.downPointers.each(function (pointer) {
                 _this.handleUp(io, pointer, ev);
             });
@@ -77994,7 +78724,7 @@ var Interaction = /** @class */ (function (_super) {
      * @param ev  Event
      */
     Interaction.prototype.maybePreventDefault = function (io, ev, pointer) {
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev)
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](ev)
             && (io.draggable || io.swipeable || io.trackable || io.resizable)
             && !this.isGlobalElement(io)
             && ev.cancelable !== false
@@ -78016,7 +78746,7 @@ var Interaction = /** @class */ (function (_super) {
         // event. (it happens in some cases)
         if (!pointer.touch) {
             var target_1 = _utils_DOM__WEBPACK_IMPORTED_MODULE_9__["eventTarget"](pointer.lastEvent);
-            _utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](this.overObjects.backwards().iterator(), function (io) {
+            _utils_Iterator__WEBPACK_IMPORTED_MODULE_15__["each"](this.overObjects.backwards().iterator(), function (io) {
                 // Is this pointer relevant to element?
                 if (io && io.overPointers.contains(pointer) && io.hoverable) {
                     // Check if the element is still hovered
@@ -78036,7 +78766,7 @@ var Interaction = /** @class */ (function (_super) {
             });
         }
         // Process down elements
-        _utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](this.transformedObjects.backwards().iterator(), function (io) {
+        _utils_Iterator__WEBPACK_IMPORTED_MODULE_15__["each"](this.transformedObjects.backwards().iterator(), function (io) {
             // Is this pointer relevant to element?
             if (io.downPointers.contains(pointer) &&
                 // Swipe still happening?
@@ -78046,7 +78776,7 @@ var Interaction = /** @class */ (function (_super) {
             }
         });
         // Process tracked elements
-        _utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](this.trackedObjects.backwards().iterator(), function (io) {
+        _utils_Iterator__WEBPACK_IMPORTED_MODULE_15__["each"](this.trackedObjects.backwards().iterator(), function (io) {
             // Is this pointer relevant to element?
             if (!io.overPointers.contains(pointer)) {
                 _this.handleTrack(io, pointer, ev);
@@ -78235,7 +78965,7 @@ var Interaction = /** @class */ (function (_super) {
         // Init inertia object
         var inertia = new _Inertia__WEBPACK_IMPORTED_MODULE_8__["Inertia"](interaction, type, point, startPoint);
         // Get inertia data
-        var ref = this.getTrailPoint(pointer, _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"]() - this.getInertiaOption(io, "move", "time"));
+        var ref = this.getTrailPoint(pointer, _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"]() - this.getInertiaOption(io, "move", "time"));
         if (typeof ref === "undefined") {
             this.processDragStop(io, pointer, pointer.lastUpEvent);
             return;
@@ -78532,12 +79262,12 @@ var Interaction = /** @class */ (function (_super) {
      * @param io       Element
      * @param pointer  Pointer
      */
-    Interaction.prototype.dragStop = function (io, pointer) {
+    Interaction.prototype.dragStop = function (io, pointer, cancelled) {
         if (!pointer) {
             pointer = this.getDragPointer(io);
         }
-        if (pointer) {
-            this.handleGlobalUp(pointer, pointer.lastUpEvent);
+        if (pointer && !cancelled) {
+            this.handleGlobalUp(pointer, pointer.lastUpEvent, cancelled);
         }
     };
     /**
@@ -78576,10 +79306,10 @@ var Interaction = /** @class */ (function (_super) {
      */
     Interaction.prototype.getPointerId = function (ev) {
         var id = "";
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev.identifier)) {
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](ev.identifier)) {
             id = "" + ev.identifier;
         }
-        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev.pointerId)) {
+        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](ev.pointerId)) {
             id = "" + ev.pointerId;
         }
         else {
@@ -78630,7 +79360,7 @@ var Interaction = /** @class */ (function (_super) {
                 //"touch": !(ev instanceof MouseEvent) || ((<any>ev).pointerType && (<any>ev).pointerType != "mouse"),
                 "touch": this.isPointerTouch(ev),
                 "startPoint": point,
-                "startTime": _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"](),
+                "startTime": _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"](),
                 "point": point,
                 "track": [],
                 "swipeCanceled": false,
@@ -78656,7 +79386,7 @@ var Interaction = /** @class */ (function (_super) {
         if (typeof Touch !== "undefined" && ev instanceof Touch) {
             return true;
         }
-        else if (typeof PointerEvent !== "undefined" && ev instanceof PointerEvent && _utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev.pointerType)) {
+        else if (typeof PointerEvent !== "undefined" && ev instanceof PointerEvent && _utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](ev.pointerType)) {
             switch (ev.pointerType) {
                 case "touch":
                 case "pen":
@@ -78669,7 +79399,7 @@ var Interaction = /** @class */ (function (_super) {
                     return !(ev instanceof MouseEvent);
             }
         }
-        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev.type)) {
+        else if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](ev.type)) {
             if (ev.type.match(/^mouse/)) {
                 return false;
             }
@@ -78686,7 +79416,7 @@ var Interaction = /** @class */ (function (_super) {
         // Get current coordinates
         var point = this.getPointerPoint(ev);
         ;
-        pointer.startTime = _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"]();
+        pointer.startTime = _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"]();
         pointer.startPoint = { x: point.x, y: point.y };
         pointer.point = { x: point.x, y: point.y };
         pointer.track = [];
@@ -78702,7 +79432,7 @@ var Interaction = /** @class */ (function (_super) {
      */
     Interaction.prototype.addBreadCrumb = function (pointer, point) {
         pointer.track.push({
-            "timestamp": _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"](),
+            "timestamp": _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"](),
             "point": point
         });
     };
@@ -78767,13 +79497,17 @@ var Interaction = /** @class */ (function (_super) {
      */
     Interaction.prototype.isLocalElement = function (pointer, svg, id) {
         var cached = this.getCache("local_pointer_" + pointer.id);
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](cached)) {
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](cached)) {
             return cached;
         }
-        var target = (_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["getRoot"](svg) || document).elementFromPoint(pointer.point.x, pointer.point.y);
-        var local = target && _utils_DOM__WEBPACK_IMPORTED_MODULE_9__["contains"](svg, target);
-        this.setCache("local_pointer_" + pointer.id + "_" + id, local, 100);
-        return local;
+        var doc = (_utils_DOM__WEBPACK_IMPORTED_MODULE_9__["getRoot"](svg) || document);
+        if (doc.elementFromPoint) {
+            var target = doc.elementFromPoint(pointer.point.x, pointer.point.y);
+            var local = target && _utils_DOM__WEBPACK_IMPORTED_MODULE_9__["contains"](svg, target);
+            this.setCache("local_pointer_" + pointer.id + "_" + id, local, 100);
+            return local;
+        }
+        return false;
     };
     /**
      * A function that cancels mouse wheel scroll.
@@ -78930,7 +79664,7 @@ var Interaction = /** @class */ (function (_super) {
     Interaction.prototype.getInertiaOption = function (io, type, option) {
         var options = io.inertiaOptions.getKey(type);
         var res;
-        if (options && _utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](options[option])) {
+        if (options && _utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](options[option])) {
             res = options[option];
         }
         else {
@@ -78968,7 +79702,7 @@ var Interaction = /** @class */ (function (_super) {
      * @return `true` if swiping
      */
     Interaction.prototype.swiping = function (io, pointer) {
-        var now = _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"]();
+        var now = _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"]();
         if (pointer.swipeCanceled || !io.swipeable) {
             return false;
         }
@@ -78988,7 +79722,7 @@ var Interaction = /** @class */ (function (_super) {
      * @return Swiped?
      */
     Interaction.prototype.swiped = function (io, pointer) {
-        var now = _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"]();
+        var now = _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"]();
         if (pointer.swipeCanceled) {
             return false;
         }
@@ -79011,7 +79745,7 @@ var Interaction = /** @class */ (function (_super) {
     Interaction.prototype.applyCursorOverStyle = function (io) {
         // Get sprite's cursor ooptions
         var options = io.cursorOptions;
-        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](options.overStyle)) {
+        if (!_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](options.overStyle)) {
             return;
         }
         // Apply cursor down styles
@@ -79034,7 +79768,7 @@ var Interaction = /** @class */ (function (_super) {
         }
         var downStyle = io.cursorOptions.downStyle;
         // Is down?
-        if (io.downPointers.contains(pointer) && _utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](downStyle)) {
+        if (io.downPointers.contains(pointer) && _utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](downStyle)) {
             // Apply cursor down styles
             for (var i = 0; i < downStyle.length; i++) {
                 this.setTemporaryStyle(this.body, downStyle[i].property, downStyle[i].value);
@@ -79056,7 +79790,7 @@ var Interaction = /** @class */ (function (_super) {
         }
         var downStyle = io.cursorOptions.downStyle;
         // Is down?
-        if (io.downPointers.contains(pointer) && _utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](downStyle)) {
+        if (io.downPointers.contains(pointer) && _utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](downStyle)) {
             // Apply cursor down styles
             for (var i = 0; i < downStyle.length; i++) {
                 this.restoreStyle(this.body, downStyle[i].property);
@@ -79072,7 +79806,7 @@ var Interaction = /** @class */ (function (_super) {
      */
     Interaction.prototype.setGlobalStyle = function (style) {
         var body = getInteraction().body;
-        var styles = (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["isArray"](style) ? style : [style]);
+        var styles = (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["isArray"](style) ? style : [style]);
         for (var i = 0; i < styles.length; i++) {
             this.setTemporaryStyle(body, styles[i].property, styles[i].value);
         }
@@ -79085,7 +79819,7 @@ var Interaction = /** @class */ (function (_super) {
      */
     Interaction.prototype.restoreGlobalStyle = function (style) {
         var body = getInteraction().body;
-        var styles = (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["isArray"](style) ? style : [style]);
+        var styles = (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["isArray"](style) ? style : [style]);
         for (var i = 0; i < styles.length; i++) {
             this.restoreStyle(body, styles[i].property);
         }
@@ -79129,7 +79863,7 @@ var Interaction = /** @class */ (function (_super) {
      */
     Interaction.prototype.old = function (pointer, minTime) {
         if (minTime === void 0) { minTime = 300; }
-        return _utils_Time__WEBPACK_IMPORTED_MODULE_16__["getTime"]() - pointer.startTime > minTime;
+        return _utils_Time__WEBPACK_IMPORTED_MODULE_17__["getTime"]() - pointer.startTime > minTime;
     };
     /**
      * Returns total a shift in pointers coordinates between its original
@@ -79204,7 +79938,7 @@ var Interaction = /** @class */ (function (_super) {
         //let el = io.element.tagName == "g" ? <SVGSVGElement>io.element.parentNode : io.element;
         var el = io.element;
         // Save original property if it is set and hasn't been saved before already
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](el.style[property]) && !io.replacedStyles.hasKey(property)) {
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](el.style[property]) && !io.replacedStyles.hasKey(property)) {
             io.replacedStyles.setKey(property, el.style[property]);
         }
         // Replace with the new one
@@ -79232,7 +79966,7 @@ var Interaction = /** @class */ (function (_super) {
      * @param io Element
      */
     Interaction.prototype.restoreAllStyles = function (io) {
-        _utils_Iterator__WEBPACK_IMPORTED_MODULE_14__["each"](io.replacedStyles.iterator(), function (a) {
+        _utils_Iterator__WEBPACK_IMPORTED_MODULE_15__["each"](io.replacedStyles.iterator(), function (a) {
             var key = a[0];
             var value = a[1];
             io.element.style[key] = value;
@@ -79286,10 +80020,10 @@ var Interaction = /** @class */ (function (_super) {
             }
             // Get ID
             var id = "";
-            if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev.identifier)) {
+            if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](ev.identifier)) {
                 id = ev.identifier;
             }
-            else if (_utils_Type__WEBPACK_IMPORTED_MODULE_15__["hasValue"](ev.pointerId)) {
+            else if (_utils_Type__WEBPACK_IMPORTED_MODULE_16__["hasValue"](ev.pointerId)) {
                 id = ev.pointerId;
             }
             else {
@@ -79316,7 +80050,7 @@ var Interaction = /** @class */ (function (_super) {
     Interaction.prototype.areTransformed = function (except) {
         var count = this.transformedObjects.length;
         if (except) {
-            var ex = _utils_Type__WEBPACK_IMPORTED_MODULE_15__["isArray"](except) ? except : [except];
+            var ex = _utils_Type__WEBPACK_IMPORTED_MODULE_16__["isArray"](except) ? except : [except];
             for (var i = 0; i < ex.length; i++) {
                 if (this.transformedObjects.contains(ex[i])) {
                     count--;
@@ -80617,6 +81351,14 @@ var MouseCursorStyle = /** @class */ (function () {
             "property": "cursor",
             "value": "not-allowed"
         }];
+    /**
+     * Styles for "text" cursor.
+     * @since 4.9.12
+     */
+    MouseCursorStyle.text = [{
+            "property": "cursor",
+            "value": "text"
+        }];
     return MouseCursorStyle;
 }());
 
@@ -81026,6 +81768,7 @@ var AMElement = /** @class */ (function () {
      */
     AMElement.prototype.removeStyle = function (attribute) {
         // @todo Review because it's a bit messy and maybe not needed (pratically not used)
+        this.node.style[attribute] = null;
         delete this.node.style[attribute];
     };
     /**
@@ -81325,9 +82068,9 @@ var Paper = /** @class */ (function () {
         svg.setAttribute("role", "group");
         this.container.appendChild(svg);
         // Add description
-        var desc = document.createElementNS(_utils_DOM__WEBPACK_IMPORTED_MODULE_3__["SVGNS"], "desc");
-        desc.appendChild(document.createTextNode("JavaScript chart by amCharts"));
-        svg.appendChild(desc);
+        //let desc: SVGElement = <SVGElement>document.createElementNS($dom.SVGNS, "desc");
+        //desc.appendChild(document.createTextNode("JavaScript chart by amCharts"));
+        //svg.appendChild(desc);
         // Add defs
         this.defs = document.createElementNS(_utils_DOM__WEBPACK_IMPORTED_MODULE_3__["SVGNS"], "defs");
         svg.appendChild(this.defs);
@@ -81859,20 +82602,17 @@ function pointsToPath(points) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "svgContainers", function() { return svgContainers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SVGContainer", function() { return SVGContainer; });
-/* harmony import */ var _utils_Disposer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
-/* harmony import */ var _elements_Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../elements/Popup */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Popup.js");
-/* harmony import */ var _elements_Modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../elements/Modal */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Modal.js");
-/* harmony import */ var _utils_List__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
-/* harmony import */ var _utils_Utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
-/* harmony import */ var _utils_DOM__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
-/* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
-/* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
-/* harmony import */ var css_element_queries_src_ResizeSensor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! css-element-queries/src/ResizeSensor */ "./node_modules/css-element-queries/src/ResizeSensor.js");
-/* harmony import */ var css_element_queries_src_ResizeSensor__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(css_element_queries_src_ResizeSensor__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _elements_Popup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../elements/Popup */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Popup.js");
+/* harmony import */ var _elements_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../elements/Modal */ "./node_modules/@amcharts/amcharts4/.internal/core/elements/Modal.js");
+/* harmony import */ var _utils_List__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/List */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/List.js");
+/* harmony import */ var _utils_Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/Utils */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Utils.js");
+/* harmony import */ var _utils_DOM__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/DOM */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js");
+/* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _utils_ResizeSensor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/ResizeSensor */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/ResizeSensor.js");
 /**
  * This functionality is related to the HTML wrapper that houses `<svg>` tag.
  */
-
 
 
 
@@ -81928,17 +82668,18 @@ var SVGContainer = /** @class */ (function () {
          */
         this._disposers = [];
         this.cssScale = 1;
+        // This is needed so that it won't resize while printing, so that way printing works correctly.
+        this._printing = false;
         // Log parent HTML element
         this.htmlElement = htmlElement;
         if (!ghost) {
-            var callback_1 = function () {
-                if (_this.autoResize) {
-                    _this.measure();
-                }
-            };
-            this.resizeSensor = new css_element_queries_src_ResizeSensor__WEBPACK_IMPORTED_MODULE_8___default.a(htmlElement, callback_1);
-            this._disposers.push(new _utils_Disposer__WEBPACK_IMPORTED_MODULE_0__["Disposer"](function () {
-                _this.resizeSensor.detach(callback_1);
+            this._printing = false;
+            this.initSensor();
+            this._disposers.push(_utils_DOM__WEBPACK_IMPORTED_MODULE_4__["addEventListener"](window, "beforeprint", function () {
+                _this._printing = true;
+            }));
+            this._disposers.push(_utils_DOM__WEBPACK_IMPORTED_MODULE_4__["addEventListener"](window, "afterprint", function () {
+                _this._printing = false;
             }));
         }
         // Adds to containers array
@@ -81957,13 +82698,29 @@ var SVGContainer = /** @class */ (function () {
         this.SVGContainer = svgContainer;
     }
     /**
+     * (Re)Initializes a resize sensor.
+     */
+    SVGContainer.prototype.initSensor = function () {
+        var _this = this;
+        if (this.resizeSensor) {
+            this.resizeSensor.dispose();
+        }
+        var callback = function () {
+            if (_this.autoResize && !_this._printing) {
+                _this.measure();
+            }
+        };
+        this.resizeSensor = new _utils_ResizeSensor__WEBPACK_IMPORTED_MODULE_7__["ResizeSensor"](this.htmlElement, callback);
+        this._disposers.push(this.resizeSensor);
+    };
+    /**
      * Measures size of parent HTML element.
      *
      * @ignore Exclude from docs
      */
     SVGContainer.prototype.measure = function () {
-        var width = _utils_Utils__WEBPACK_IMPORTED_MODULE_4__["width"](this.htmlElement);
-        var height = _utils_Utils__WEBPACK_IMPORTED_MODULE_4__["height"](this.htmlElement);
+        var width = _utils_Utils__WEBPACK_IMPORTED_MODULE_3__["width"](this.htmlElement);
+        var height = _utils_Utils__WEBPACK_IMPORTED_MODULE_3__["height"](this.htmlElement);
         var container = this.container;
         if (container) {
             if (this.width != width || this.height != height) {
@@ -81975,7 +82732,7 @@ var SVGContainer = /** @class */ (function () {
                 if (height > 0) {
                     container.maxHeight = height;
                 }
-                _utils_DOM__WEBPACK_IMPORTED_MODULE_5__["fixPixelPerfect"](this.SVGContainer);
+                _utils_DOM__WEBPACK_IMPORTED_MODULE_4__["fixPixelPerfect"](this.SVGContainer);
             }
             if (!container.maxWidth) {
                 container.maxWidth = 0;
@@ -82020,9 +82777,9 @@ var SVGContainer = /** @class */ (function () {
      */
     SVGContainer.prototype.dispose = function () {
         if (!this._disposed) {
-            _utils_Array__WEBPACK_IMPORTED_MODULE_6__["remove"](svgContainers, this);
+            _utils_Array__WEBPACK_IMPORTED_MODULE_5__["remove"](svgContainers, this);
         }
-        _utils_Array__WEBPACK_IMPORTED_MODULE_6__["each"](this._disposers, function (item) {
+        _utils_Array__WEBPACK_IMPORTED_MODULE_5__["each"](this._disposers, function (item) {
             item.dispose();
         });
     };
@@ -82075,9 +82832,9 @@ var SVGContainer = /** @class */ (function () {
          * @return Modal instance
          */
         get: function () {
-            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](this._modal)) {
+            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_6__["hasValue"](this._modal)) {
                 // Create new modal
-                this._modal = new _elements_Modal__WEBPACK_IMPORTED_MODULE_2__["Modal"]();
+                this._modal = new _elements_Modal__WEBPACK_IMPORTED_MODULE_1__["Modal"]();
                 this._modal.container = this.SVGContainer;
                 // Add to disposers
                 this._disposers.push(this._modal);
@@ -82103,7 +82860,8 @@ var SVGContainer = /** @class */ (function () {
         // Create modal
         var modal = this.modal;
         modal.content = text;
-        modal.readerTitle = title;
+        modal.readerTitle = title || "";
+        modal.title = title || "";
         modal.open();
         return modal;
     };
@@ -82122,14 +82880,14 @@ var SVGContainer = /** @class */ (function () {
          * @return Popups
          */
         get: function () {
-            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](this._popups)) {
+            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_6__["hasValue"](this._popups)) {
                 // Create popup template
-                var popupTemplate = new _elements_Popup__WEBPACK_IMPORTED_MODULE_1__["Popup"]();
+                var popupTemplate = new _elements_Popup__WEBPACK_IMPORTED_MODULE_0__["Popup"]();
                 popupTemplate.container = this.SVGContainer;
                 // Create the list
-                this._popups = new _utils_List__WEBPACK_IMPORTED_MODULE_3__["ListTemplate"](popupTemplate);
+                this._popups = new _utils_List__WEBPACK_IMPORTED_MODULE_2__["ListTemplate"](popupTemplate);
                 // Add to disposers
-                this._disposers.push(new _utils_List__WEBPACK_IMPORTED_MODULE_3__["ListDisposer"](this._popups));
+                this._disposers.push(new _utils_List__WEBPACK_IMPORTED_MODULE_2__["ListDisposer"](this._popups));
                 this._disposers.push(this._popups.template);
             }
             return this._popups;
@@ -82151,7 +82909,7 @@ var SVGContainer = /** @class */ (function () {
     SVGContainer.prototype.openPopup = function (text, title) {
         var popup = this.popups.create();
         popup.content = text;
-        if (_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](title)) {
+        if (_utils_Type__WEBPACK_IMPORTED_MODULE_6__["hasValue"](title)) {
             popup.title = title;
         }
         popup.open();
@@ -82179,7 +82937,7 @@ var SVGContainer = /** @class */ (function () {
          * @return Element
          */
         get: function () {
-            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](this._readerAlertElement)) {
+            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_6__["hasValue"](this._readerAlertElement)) {
                 // Create element
                 var div = document.createElement("div");
                 div.setAttribute("role", "alert");
@@ -82293,6 +83051,13 @@ var Tension = /** @class */ (function () {
      * @return [description]
      */
     Tension.prototype.smooth = function (points) {
+        for (var i = points.length - 1; i > 0; i--) {
+            var p0 = points[i];
+            var p1 = points[i - 1];
+            if (Math.abs(p0.x - p1.x) < 0.1 && Math.abs(p0.y - p1.y) < 0.1) {
+                points.splice(i, 1);
+            }
+        }
         var tensionX = this._tensionX;
         var tensionY = this._tensionY;
         if (points.length < 3 || (tensionX >= 1 && tensionY >= 1)) {
@@ -83224,6 +83989,22 @@ var LinearGradient = /** @class */ (function (_super) {
         this.stops.copyFrom(source.stops);
         this._rotation = source.rotation;
     };
+    Object.defineProperty(LinearGradient.prototype, "gradientUnits", {
+        /**
+         * Which units are used when drawing gradient filter.
+         *
+         * Use `"userSpaceOnUse"` when applying gradient on a perfectly straight line.
+         *
+         * @since 4.9.17
+         * @default objectBoundingBox
+         * @param value Filter units
+         */
+        set: function (value) {
+            this.element.attr({ gradientUnits: value });
+        },
+        enumerable: true,
+        configurable: true
+    });
     return LinearGradient;
 }(_Base__WEBPACK_IMPORTED_MODULE_1__["BaseObject"]));
 
@@ -83444,7 +84225,7 @@ var Pattern = /** @class */ (function (_super) {
         if (patternElement) {
             patternElement.removeChildNodes();
             var background = this.paper.add("rect");
-            background.attr({ "width": this.width, "height": this.height, "shape-rendering": "crispEdges", "fill": this.backgroundFill.hex, "fill-opacity": this.backgroundOpacity, "stroke": this.backgroundFill.hex, "stroke-opacity": this.backgroundOpacity });
+            background.attr({ "width": this.width, "height": this.height, "shape-rendering": "crispEdges", "fill": this.backgroundFill.hex, "fill-opacity": this.backgroundOpacity, "stroke": this.backgroundFill.hex, "stroke-opacity": 0 });
             patternElement.add(background);
             patternElement.attr({ "x": this.x, "y": this.y, "width": this.width, "height": this.height, "stroke": this.stroke.hex, "fill": this.fill.hex, "fill-opacity": this.fillOpacity, "stroke-opacity": this.strokeOpacity, "stroke-width": this.strokeWidth, "shape-rendering": this.shapeRendering, "patternUnits": this.patternUnits, "stroke-dasharray": this.strokeDasharray });
             _utils_Iterator__WEBPACK_IMPORTED_MODULE_7__["each"](this._elements.iterator(), function (element) {
@@ -84972,6 +85753,7 @@ var Filter = /** @class */ (function (_super) {
         _this.className = "Filter";
         // Create a list to hold primitives (effect elements)
         _this.filterPrimitives = new _utils_List__WEBPACK_IMPORTED_MODULE_4__["List"]();
+        _this.properties.filterUnits = "objectBoundingBox";
         // Automatically add added primitives to `_disposers` so they are discarded
         // when Filter object is destroyed (disposed)
         _this.filterPrimitives.events.on("inserted", function (ev) {
@@ -85135,6 +85917,28 @@ var Filter = /** @class */ (function (_super) {
     Filter.prototype.updateScale = function () {
         // Dummy method for extending classes to override.
     };
+    Object.defineProperty(Filter.prototype, "filterUnits", {
+        /**
+         * @return Filter units
+         */
+        get: function () {
+            return this.properties.filterUnits;
+        },
+        /**
+         * Which units are used when drawing filter.
+         *
+         * Use `"userSpaceOnUse"` when applying filters on a perfectly straight line.
+         *
+         * @since 4.9.17
+         * @default objectBoundingBox
+         * @param value Filter units
+         */
+        set: function (value) {
+            this.properties.filterUnits = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Filter.prototype, "nonScaling", {
         /**
          * @return Non scaling?
@@ -85930,6 +86734,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
 /* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
 /* harmony import */ var _System__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../System */ "./node_modules/@amcharts/amcharts4/.internal/core/System.js");
+/* harmony import */ var _Options__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../Options */ "./node_modules/@amcharts/amcharts4/.internal/core/Options.js");
 /**
  * Animation module.
  */
@@ -85940,6 +86745,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -86101,6 +86907,10 @@ var Animation = /** @class */ (function (_super) {
         _this._time = 0;
         _this._isFinished = false;
         _this.className = "Animation";
+        // Override duration if animations disabled system-wide
+        if (_Options__WEBPACK_IMPORTED_MODULE_13__["options"].animationsEnabled === false) {
+            duration = 0;
+        }
         // Set parameters
         _this.object = object;
         _this.animationOptions = _utils_Array__WEBPACK_IMPORTED_MODULE_10__["toArray"](animationOptions);
@@ -86182,84 +86992,84 @@ var Animation = /** @class */ (function (_super) {
         this.staticOptions = [];
         // Process initial property values
         for (var i = this.animationOptions.length - 1; i >= 0; i--) {
-            var options = this.animationOptions[i];
-            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](options.from)) {
-                if (options.childObject) {
-                    options.from = options.childObject[options.property];
+            var options_1 = this.animationOptions[i];
+            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](options_1.from)) {
+                if (options_1.childObject) {
+                    options_1.from = options_1.childObject[options_1.property];
                 }
                 else {
-                    options.from = this.object[options.property];
-                    if (!_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](options.from)) {
-                        options.from = _defs_SVGDefaults__WEBPACK_IMPORTED_MODULE_2__["SVGDefaults"][options.property];
+                    options_1.from = this.object[options_1.property];
+                    if (!_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](options_1.from)) {
+                        options_1.from = _defs_SVGDefaults__WEBPACK_IMPORTED_MODULE_2__["SVGDefaults"][options_1.property];
                     }
                 }
                 /*if (!$type.hasValue(options.from)) {
                     throw Error("Could not get initial transition value.");
                 }*/
             }
-            if (options.from == options.to) { // || options.to == (<any>this.object)[options.property]){ this is not good, as dataItem.value is set to final at once, and we animate workingValue
-                _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options);
+            if (options_1.from == options_1.to) { // || options.to == (<any>this.object)[options.property]){ this is not good, as dataItem.value is set to final at once, and we animate workingValue
+                _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options_1);
             }
-            else if (!_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](options.from) || (!(options.from instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) && (options.to instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"])) || ((options.from instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) && !(options.to instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]))) {
+            else if (!_utils_Type__WEBPACK_IMPORTED_MODULE_11__["hasValue"](options_1.from) || (!(options_1.from instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) && (options_1.to instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"])) || ((options_1.from instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) && !(options_1.to instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]))) {
                 // Initial value is undefined, treat it as static
-                this.staticOptions.push(options);
-                _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options);
+                this.staticOptions.push(options_1);
+                _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options_1);
             }
             else {
                 // Use different update methods for different value types
-                if (_utils_Type__WEBPACK_IMPORTED_MODULE_11__["isNumber"](options.to)) {
+                if (_utils_Type__WEBPACK_IMPORTED_MODULE_11__["isNumber"](options_1.to)) {
                     // Numeric value
-                    options.updateMethod = getProgressNumber;
+                    options_1.updateMethod = getProgressNumber;
                     // Check if initial value is not Percent
-                    if (options.from instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) {
+                    if (options_1.from instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) {
                         // It is. Let's convert it to pixel value
                         // @todo Check if we can do this in a less hacky way
-                        var convertedFrom = this.object[getHybridProperty(options.property, "pixel")];
+                        var convertedFrom = this.object[getHybridProperty(options_1.property, "pixel")];
                         if (!isNaN(convertedFrom)) {
-                            options.from = convertedFrom;
+                            options_1.from = convertedFrom;
                         }
                         else {
-                            this.staticOptions.push(options);
-                            _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options);
+                            this.staticOptions.push(options_1);
+                            _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options_1);
                         }
                     }
-                    else if (isNaN(options.from)) {
+                    else if (isNaN(options_1.from)) {
                         // Static value
-                        this.staticOptions.push(options);
-                        _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options);
+                        this.staticOptions.push(options_1);
+                        _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options_1);
                     }
                 }
                 else {
                     // Check if maybe we have a color or percent value
-                    if (options.to instanceof _utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"]) {
+                    if (options_1.to instanceof _utils_Color__WEBPACK_IMPORTED_MODULE_4__["Color"]) {
                         // Yup - set resolved named color
                         //options.from = $colors.stringToColor(<string>options.from);
-                        if (options.from) {
-                            options.updateMethod = getProgressColor;
+                        if (options_1.from) {
+                            options_1.updateMethod = getProgressColor;
                         }
                         else {
                             // Static value
-                            this.staticOptions.push(options);
-                            _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options);
+                            this.staticOptions.push(options_1);
+                            _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options_1);
                         }
                     }
-                    else if (options.to instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) {
+                    else if (options_1.to instanceof _utils_Percent__WEBPACK_IMPORTED_MODULE_5__["Percent"]) {
                         // Percent
-                        options.updateMethod = getProgressPercent;
+                        options_1.updateMethod = getProgressPercent;
                         // Check if the initial value is maybe in pixels
-                        if (!isNaN(options.from)) {
+                        if (!isNaN(options_1.from)) {
                             // It is. Let's convert it
                             // @todo Check if we can do this in a less hacky way
-                            var convertedFrom = this.object[getHybridProperty(options.property, "relative")];
+                            var convertedFrom = this.object[getHybridProperty(options_1.property, "relative")];
                             if (!isNaN(convertedFrom)) {
-                                options.from = Object(_utils_Percent__WEBPACK_IMPORTED_MODULE_5__["percent"])(convertedFrom * 100);
+                                options_1.from = Object(_utils_Percent__WEBPACK_IMPORTED_MODULE_5__["percent"])(convertedFrom * 100);
                             }
                         }
                     }
                     else {
                         // Static value
-                        this.staticOptions.push(options);
-                        _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options);
+                        this.staticOptions.push(options_1);
+                        _utils_Array__WEBPACK_IMPORTED_MODULE_10__["remove"](this.animationOptions, options_1);
                     }
                 }
             }
@@ -86523,7 +87333,7 @@ var Animation = /** @class */ (function (_super) {
 /*!************************************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js ***!
   \************************************************************************/
-/*! exports provided: indexOf, any, map, each, eachReverse, eachContinue, shiftLeft, last, first, insert, setIndex, pushAll, remove, move, add, replace, toArray, has, copy, slice, insertIndex, removeIndex, getSortedIndex, findIndex, find, shuffle */
+/*! exports provided: indexOf, any, map, each, eachReverse, eachContinue, shiftLeft, last, first, insert, setIndex, pushAll, remove, move, add, replace, toArray, has, copy, slice, insertIndex, removeIndex, getSortedIndex, findIndex, find, shuffle, keepIf */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86554,6 +87364,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findIndex", function() { return findIndex; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "find", function() { return find; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shuffle", function() { return shuffle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keepIf", function() { return keepIf; });
 /* harmony import */ var _Math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Math */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Math.js");
 /* harmony import */ var _Type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
 
@@ -87012,6 +87823,19 @@ function shuffle(array) {
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
+    }
+}
+function keepIf(array, keep) {
+    var length = array.length;
+    var i = 0;
+    while (i < length) {
+        if (keep(array[i])) {
+            ++i;
+        }
+        else {
+            array.splice(i, 1);
+            --length;
+        }
     }
 }
 //# sourceMappingURL=Array.js.map
@@ -88796,7 +89620,7 @@ function isLight(color) {
 /*!**********************************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/.internal/core/utils/DOM.js ***!
   \**********************************************************************/
-/*! exports provided: SVGNS, XMLNS, XLINK, addEventListener, getElement, addClass, removeClass, setStyle, getComputedStyle, blur, focus, outerHTML, isElement, contains, getRoot, eventTarget, copyAttributes, fixPixelPerfect, StyleRule, StyleClass, ready, findFont, findFontSize, isHidden, isElementInViewport */
+/*! exports provided: SVGNS, XMLNS, XLINK, addEventListener, getElement, addClass, removeClass, setStyle, getComputedStyle, blur, focus, outerHTML, isElement, contains, getShadowRoot, getRoot, eventTarget, copyAttributes, fixPixelPerfect, StyleRule, StyleClass, ready, findFont, findFontSize, isHidden, isElementInViewport */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -88815,6 +89639,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "outerHTML", function() { return outerHTML; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isElement", function() { return isElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contains", function() { return contains; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getShadowRoot", function() { return getShadowRoot; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRoot", function() { return getRoot; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eventTarget", function() { return eventTarget; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyAttributes", function() { return copyAttributes; });
@@ -88829,9 +89654,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _Disposer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Disposer */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Disposer.js");
 /* harmony import */ var _AsyncPending__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AsyncPending */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/AsyncPending.js");
-/* harmony import */ var _Object__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
-/* harmony import */ var _Array__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
-/* harmony import */ var _Type__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _Options__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Options */ "./node_modules/@amcharts/amcharts4/.internal/core/Options.js");
+/* harmony import */ var _Object__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
+/* harmony import */ var _Array__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+/* harmony import */ var _Type__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
 /**
  * A collection of DOM-related functions.
  */
@@ -88842,6 +89668,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -88894,7 +89721,7 @@ function addEventListener(dom, type, listener, options) {
  * @todo Review this function as it seems pretty fuzzy and hacky
  */
 function getElement(el) {
-    if (_Type__WEBPACK_IMPORTED_MODULE_5__["isString"](el)) {
+    if (_Type__WEBPACK_IMPORTED_MODULE_6__["isString"](el)) {
         var e = document.getElementById(el);
         if (e == null) {
             e = document.getElementsByClassName(el)[0];
@@ -89081,6 +89908,29 @@ function contains(a, b) {
     }
 }
 /**
+ * Returns the shadow root of the element or null
+ *
+ * @param a  Node
+ * @return Root
+ */
+function getShadowRoot(a) {
+    var cursor = a;
+    while (true) {
+        if (cursor.parentNode == null) {
+            // TODO better ShadowRoot detection
+            if (cursor.host != null) {
+                return cursor;
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            cursor = cursor.parentNode;
+        }
+    }
+}
+/**
  * Returns the root of the element (either the Document or the ShadowRoot)
  *
  * @param a  Node
@@ -89130,7 +89980,7 @@ function eventTarget(event) {
  * @param target  Element to copy attributes to
  */
 function copyAttributes(source, target) {
-    _Array__WEBPACK_IMPORTED_MODULE_4__["each"](source.attributes, function (attr) {
+    _Array__WEBPACK_IMPORTED_MODULE_5__["each"](source.attributes, function (attr) {
         // TODO what if it's null ?
         if (attr.value != null) {
             target.setAttribute(attr.name, attr.value);
@@ -89180,15 +90030,30 @@ var rootStylesheet;
  * @todo Description
  * @return [description]
  */
-function getStylesheet() {
-    if (!_Type__WEBPACK_IMPORTED_MODULE_5__["hasValue"](rootStylesheet)) {
+function getStylesheet(element) {
+    if (element == null) {
+        if (!_Type__WEBPACK_IMPORTED_MODULE_6__["hasValue"](rootStylesheet)) {
+            // TODO use createElementNS ?
+            var e = document.createElement("style");
+            e.type = "text/css";
+            if (_Options__WEBPACK_IMPORTED_MODULE_3__["options"].nonce != "") {
+                e.setAttribute("nonce", _Options__WEBPACK_IMPORTED_MODULE_3__["options"].nonce);
+            }
+            document.head.appendChild(e);
+            rootStylesheet = e.sheet;
+        }
+        return rootStylesheet;
+    }
+    else {
         // TODO use createElementNS ?
         var e = document.createElement("style");
         e.type = "text/css";
-        document.head.appendChild(e);
-        rootStylesheet = e.sheet;
+        if (_Options__WEBPACK_IMPORTED_MODULE_3__["options"].nonce != "") {
+            e.setAttribute("nonce", _Options__WEBPACK_IMPORTED_MODULE_3__["options"].nonce);
+        }
+        element.appendChild(e);
+        return e.sheet;
     }
-    return rootStylesheet;
 }
 /**
  * [makeStylesheet description]
@@ -89198,8 +90063,7 @@ function getStylesheet() {
  * @param selector  [description]
  * @return [description]
  */
-function makeStylesheet(selector) {
-    var root = getStylesheet();
+function appendStylesheet(root, selector) {
     var index = root.cssRules.length;
     root.insertRule(selector + "{}", index);
     return root.cssRules[index];
@@ -89217,22 +90081,23 @@ var StyleRule = /** @class */ (function (_super) {
      * @param selector  CSS selector
      * @param styles    An object of style attribute - value pairs
      */
-    function StyleRule(selector, styles) {
-        var _this = 
+    function StyleRule(element, selector, styles) {
+        var _this = this;
+        var root = getStylesheet(element);
         // TODO test this
-        _super.call(this, function () {
-            var root = getStylesheet();
+        _this = _super.call(this, function () {
             // TODO a bit hacky
-            var index = _Array__WEBPACK_IMPORTED_MODULE_4__["indexOf"](root.cssRules, _this._rule);
+            var index = _Array__WEBPACK_IMPORTED_MODULE_5__["indexOf"](root.cssRules, _this._rule);
             if (index === -1) {
                 throw new Error("Could not dispose StyleRule");
             }
             else {
+                // TODO if it's empty remove it from the DOM ?
                 root.deleteRule(index);
             }
         }) || this;
-        _this._rule = makeStylesheet(selector);
-        _Object__WEBPACK_IMPORTED_MODULE_3__["each"](styles, function (key, value) {
+        _this._rule = appendStylesheet(root, selector);
+        _Object__WEBPACK_IMPORTED_MODULE_4__["each"](styles, function (key, value) {
             _this.setStyle(key, value);
         });
         return _this;
@@ -89306,13 +90171,13 @@ var StyleClass = /** @class */ (function (_super) {
      * @param styles  An object of style attribute - value pairs
      * @param name    Class name
      */
-    function StyleClass(styles, name) {
+    function StyleClass(element, styles, name) {
         var _this = this;
-        var className = (!_Type__WEBPACK_IMPORTED_MODULE_5__["hasValue"](name)
+        var className = (!_Type__WEBPACK_IMPORTED_MODULE_6__["hasValue"](name)
             // TODO generate the classname randomly
             ? "__style_" + (++styleId) + "__"
             : name);
-        _this = _super.call(this, "." + className, styles) || this;
+        _this = _super.call(this, element, "." + className, styles) || this;
         _this._className = className;
         return _this;
     }
@@ -89429,18 +90294,26 @@ function isHidden(element) {
 function isElementInViewport(el, viewportTarget) {
     // Get position data of the element
     var rect = el.getBoundingClientRect();
+    // Convert to array
+    var targets = _Type__WEBPACK_IMPORTED_MODULE_6__["isArray"](viewportTarget) ? viewportTarget : viewportTarget ? [viewportTarget] : [];
     // Should we measure against specific viewport element?
-    if (viewportTarget) {
-        // Check if viewport itself is visible
-        if (!isElementInViewport(viewportTarget)) {
-            return false;
+    if (targets.length) {
+        for (var i = 0; i < targets.length; i++) {
+            var target = targets[i];
+            // Check if viewport itself is visible
+            if (!isElementInViewport(target)) {
+                return false;
+            }
+            // Check if element is visible within the viewport
+            var viewportRect = target.getBoundingClientRect();
+            if (rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.top <= (viewportRect.top + viewportRect.height) &&
+                rect.left <= (viewportRect.left + viewportRect.width)) {
+                return true;
+            }
         }
-        // Check if element is visible within the viewport
-        var viewportRect = viewportTarget.getBoundingClientRect();
-        return (rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.top <= (viewportRect.top + viewportRect.height) &&
-            rect.left <= (viewportRect.left + viewportRect.width));
+        return false;
     }
     return (rect.top >= 0 &&
         rect.left >= 0 &&
@@ -91007,6 +91880,17 @@ __webpack_require__.r(__webpack_exports__);
  */
 function createChild(htmlElement, classType) {
     var htmlContainer = _DOM__WEBPACK_IMPORTED_MODULE_15__["getElement"](htmlElement);
+    // If there's no container available yet, we create a fake one
+    var tmpContainer = false;
+    if (!htmlContainer) {
+        htmlContainer = document.createElement("div");
+        htmlContainer.style.width = "200px";
+        htmlContainer.style.height = "200px";
+        htmlContainer.style.visibility = "hidden";
+        htmlContainer.style.position = "absolute";
+        document.body.appendChild(htmlContainer);
+        tmpContainer = true;
+    }
     if (htmlContainer) {
         htmlContainer.innerHTML = "";
         //htmlContainer.style.overflow = "hidden";
@@ -91023,6 +91907,12 @@ function createChild(htmlElement, classType) {
         container_1.background.fillOpacity = 0;
         container_1.paper = paper;
         paper.append(container_1.group);
+        // Set up moving to proper element container if it's not yet ready at call time
+        if (tmpContainer) {
+            _DOM__WEBPACK_IMPORTED_MODULE_15__["ready"](function () {
+                container_1.moveHtmlContainer(htmlElement);
+            });
+        }
         // this is set from parent container, but this one doesn't have, so do it manually.
         container_1.relativeWidth = 1;
         container_1.relativeHeight = 1;
@@ -91040,14 +91930,14 @@ function createChild(htmlElement, classType) {
         sprite_1.focusFilter = new _rendering_filters_FocusFilter__WEBPACK_IMPORTED_MODULE_6__["FocusFilter"]();
         _Registry__WEBPACK_IMPORTED_MODULE_1__["registry"].baseSprites.push(sprite_1);
         _Registry__WEBPACK_IMPORTED_MODULE_1__["registry"].baseSpritesByUid[uid] = sprite_1;
-        sprite_1.maskRectangle = { x: 0, y: 0, width: Math.max(svgDiv_1.width, 0), height: Math.max(svgDiv_1.height, 0) };
+        sprite_1.maskRectangle = { x: 0, y: 0, width: Math.max(svgDiv_1.width || 0, 0), height: Math.max(svgDiv_1.height || 0, 0) };
         // this solves issues with display:none, as all children are measured as 0x0
         container_1.events.on("maxsizechanged", function (event) {
             if (event.previousWidth == 0 || event.previousHeight == 0) {
                 container_1.deepInvalidate();
             }
             if (sprite_1.maskRectangle) {
-                sprite_1.maskRectangle = { x: 0, y: 0, width: Math.max(svgDiv_1.width, 0), height: Math.max(svgDiv_1.height, 0) };
+                sprite_1.maskRectangle = { x: 0, y: 0, width: Math.max(svgDiv_1.width || 0, 0), height: Math.max(svgDiv_1.height || 0, 0) };
             }
         });
         var loopTimer_1 = null;
@@ -91125,8 +92015,12 @@ function createChild(htmlElement, classType) {
                     _DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](window, "scroll", function () { viewPortHandler(sprite_1); })
                 ];
                 if (_Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget) {
-                    disposers.push(_DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](_Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget, "resize", function () { viewPortHandler(sprite_1); }));
-                    disposers.push(_DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](_Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget, "scroll", function () { viewPortHandler(sprite_1); }));
+                    var targets = _Type__WEBPACK_IMPORTED_MODULE_14__["isArray"](_Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget) ? _Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget : _Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget ? [_Options__WEBPACK_IMPORTED_MODULE_12__["options"].viewportTarget] : [];
+                    for (var i = 0; i < targets.length; i++) {
+                        var target = targets[i];
+                        disposers.push(_DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](target, "resize", function () { viewPortHandler(sprite_1); }));
+                        disposers.push(_DOM__WEBPACK_IMPORTED_MODULE_15__["addEventListener"](target, "scroll", function () { viewPortHandler(sprite_1); }));
+                    }
                 }
                 var disposer = new _utils_Disposer__WEBPACK_IMPORTED_MODULE_10__["MultiDisposer"](disposers);
                 sprite_1.addDisposer(disposer);
@@ -91160,7 +92054,10 @@ function addToQueue(sprite) {
         sprite.tooltipContainer.__disabled = true;
         sprite.events.disableType("appeared");
         if (_Registry__WEBPACK_IMPORTED_MODULE_1__["registry"].queue.length == 0) {
-            queueHandler(sprite);
+            _Registry__WEBPACK_IMPORTED_MODULE_1__["registry"].events.once("exitframe", function () {
+                queueHandler(sprite);
+            });
+            _System__WEBPACK_IMPORTED_MODULE_0__["system"].requestFrame();
         }
         sprite.addDisposer(new _utils_Disposer__WEBPACK_IMPORTED_MODULE_10__["Disposer"](function () {
             removeFromQueue(sprite);
@@ -91190,6 +92087,7 @@ function queueHandler(sprite) {
     sprite.__disabled = false;
     sprite.tooltipContainer.__disabled = false;
     sprite.events.enableType("appeared");
+    sprite.dispatch("removedfromqueue");
     if (sprite.showOnInit) {
         sprite.events.on("appeared", function () {
             removeFromQueue(sprite);
@@ -91197,6 +92095,12 @@ function queueHandler(sprite) {
     }
     if (sprite.vpDisposer) {
         sprite.vpDisposer.dispose();
+    }
+    if (sprite instanceof _Container__WEBPACK_IMPORTED_MODULE_2__["Container"]) {
+        sprite.invalidateLabels();
+    }
+    if (sprite.tooltipContainer) {
+        sprite.tooltipContainer.invalidateLayout();
     }
     if (sprite instanceof _Component__WEBPACK_IMPORTED_MODULE_3__["Component"]) {
         sprite.invalidateData();
@@ -91211,11 +92115,12 @@ function queueHandler(sprite) {
         });
     }
     else {
+        sprite.reinit();
+        sprite.events.once("inited", function () {
+            removeFromQueue(sprite);
+        });
         if (sprite.showOnInit) {
             sprite.appear();
-        }
-        else {
-            removeFromQueue(sprite);
         }
     }
 }
@@ -94772,7 +95677,7 @@ function order(a, b) {
 /*!*************************************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js ***!
   \*************************************************************************/
-/*! exports provided: entries, keys, keysOrdered, hasKey, getKey, eachContinue, each, eachOrdered, copy, merge, copyProperties, softCopyProperties, forceCopyProperties, copyAllProperties */
+/*! exports provided: entries, keys, keysOrdered, hasKey, getKey, eachContinue, each, eachOrdered, copy, merge, clone, copyProperties, softCopyProperties, forceCopyProperties, copyAllProperties */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -94787,6 +95692,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eachOrdered", function() { return eachOrdered; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copy", function() { return copy; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "merge", function() { return merge; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clone", function() { return clone; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyProperties", function() { return copyProperties; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "softCopyProperties", function() { return softCopyProperties; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "forceCopyProperties", function() { return forceCopyProperties; });
@@ -94935,6 +95841,15 @@ function copy(object) {
  */
 function merge(object1, object2) {
     return Object.assign({}, object1, object2);
+}
+/**
+ * Returns object clone.
+ *
+ * @param object  Source object
+ * @returns       Clone
+ */
+function clone(object) {
+    return JSON.parse(JSON.stringify(object));
 }
 /**
  * Copies a list of properties from one object to another.
@@ -95579,6 +96494,132 @@ var Plugin = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./node_modules/@amcharts/amcharts4/.internal/core/utils/ResizeSensor.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@amcharts/amcharts4/.internal/core/utils/ResizeSensor.js ***!
+  \*******************************************************************************/
+/*! exports provided: ResizeSensor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResizeSensor", function() { return ResizeSensor; });
+/* harmony import */ var _Array__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
+
+var Native = /** @class */ (function () {
+    function Native() {
+        var _this = this;
+        this._targets = [];
+        this._observer = new ResizeObserver(function (entries) {
+            _Array__WEBPACK_IMPORTED_MODULE_0__["each"](entries, function (entry) {
+                _Array__WEBPACK_IMPORTED_MODULE_0__["each"](_this._targets, function (x) {
+                    if (x.target === entry.target) {
+                        x.callback();
+                    }
+                });
+            });
+        });
+    }
+    Native.prototype.addTarget = function (target, callback) {
+        this._observer.observe(target, { box: "content-box" });
+        this._targets.push({ target: target, callback: callback });
+    };
+    Native.prototype.removeTarget = function (target) {
+        this._observer.unobserve(target);
+        _Array__WEBPACK_IMPORTED_MODULE_0__["keepIf"](this._targets, function (x) {
+            return x.target !== target;
+        });
+    };
+    return Native;
+}());
+var Raf = /** @class */ (function () {
+    function Raf() {
+        this._targets = [];
+    }
+    Raf.prototype.addTarget = function (target, callback) {
+        var _this = this;
+        if (this._targets.length === 0) {
+            var lastTime_1 = null;
+            var loop_1 = function () {
+                var currentTime = Date.now();
+                if (lastTime_1 === null || currentTime > (lastTime_1 + Raf.delay)) {
+                    lastTime_1 = currentTime;
+                    _Array__WEBPACK_IMPORTED_MODULE_0__["each"](_this._targets, function (x) {
+                        var newSize = x.target.getBoundingClientRect();
+                        if (newSize.width !== x.size.width || newSize.height !== x.size.height) {
+                            x.size = newSize;
+                            x.callback();
+                        }
+                    });
+                }
+                _this._timer = requestAnimationFrame(loop_1);
+            };
+            this._timer = requestAnimationFrame(loop_1);
+        }
+        var size = target.getBoundingClientRect();
+        this._targets.push({ target: target, callback: callback, size: size });
+    };
+    Raf.prototype.removeTarget = function (target) {
+        _Array__WEBPACK_IMPORTED_MODULE_0__["keepIf"](this._targets, function (x) {
+            return x.target !== target;
+        });
+        if (this._targets.length === 0) {
+            cancelAnimationFrame(this._timer);
+        }
+    };
+    Raf.delay = 200;
+    return Raf;
+}());
+var observer = null;
+function makeSensor() {
+    if (observer === null) {
+        if (typeof ResizeObserver !== "undefined") {
+            observer = new Native();
+        }
+        else {
+            observer = new Raf();
+        }
+    }
+    return observer;
+}
+var ResizeSensor = /** @class */ (function () {
+    function ResizeSensor(element, callback) {
+        this._disposed = false;
+        this._sensor = makeSensor();
+        this._element = element;
+        this._sensor.addTarget(element, callback);
+    }
+    ResizeSensor.prototype.isDisposed = function () {
+        return this._disposed;
+    };
+    ResizeSensor.prototype.dispose = function () {
+        if (!this._disposed) {
+            this._disposed = true;
+            this._sensor.removeTarget(this._element);
+        }
+    };
+    Object.defineProperty(ResizeSensor.prototype, "sensor", {
+        get: function () {
+            return this._sensor;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Deprecated: do not use.
+     *
+     * @ignore Exclude from docs
+     */
+    ResizeSensor.prototype.reset = function () {
+        console.warn("resizeSensor.reset() is no longer needed and can be removed");
+    };
+    return ResizeSensor;
+}());
+
+//# sourceMappingURL=ResizeSensor.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js":
 /*!*****************************************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/.internal/core/utils/Responsive.js ***!
@@ -95599,6 +96640,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_Iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/Iterator */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Iterator.js");
 /* harmony import */ var _utils_Array__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/Array */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Array.js");
 /* harmony import */ var _utils_Type__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/Type */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Type.js");
+/* harmony import */ var _utils_Object__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/Object */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Object.js");
 /**
  * Responsive functionality module.
  */
@@ -95609,6 +96651,7 @@ __webpack_require__.r(__webpack_exports__);
  * ============================================================================
  * @hidden
  */
+
 
 
 
@@ -95945,7 +96988,7 @@ var Responsive = /** @class */ (function (_super) {
                         if (_utils_Array__WEBPACK_IMPORTED_MODULE_6__["indexOf"](_this._appliedTargets, newTarget.uid) !== -1) {
                             // But only if this element has any rules applied, otherwise no
                             // point in setting current state
-                            newTarget.applyCurrentState(0);
+                            newTarget.setState(_this.getDefaultState(newTarget), 0);
                         }
                         defaultStateApplied = true;
                     }
@@ -95953,7 +96996,7 @@ var Responsive = /** @class */ (function (_super) {
                     if (_this.isApplied(_utils_Type__WEBPACK_IMPORTED_MODULE_7__["getValue"](rule.id))) {
                         // Yes. Apply the responsive state
                         state.transitionDuration = 0;
-                        newTarget.setState(state);
+                        _this.setTargetState(newTarget, state);
                         _this.dispatchImmediately("ruleapplied", {
                             rule: rule
                         });
@@ -95999,6 +97042,37 @@ var Responsive = /** @class */ (function (_super) {
         else {
             return target.states.getKey(stateId);
         }
+    };
+    /**
+     * Creates and returns default responsive rule for the target.
+     *
+     * This rule will be used to "reset" to non-responsive values.
+     * @param   target  Target Sprite
+     * @return          State
+     */
+    Responsive.prototype.getDefaultState = function (target) {
+        if (target.states.hasKey("responsive-default")) {
+            return target.states.getKey("responsive-default");
+        }
+        return target.states.create("responsive-default");
+    };
+    /**
+     * Sets state on the target element and updates default state with the
+     * overwritten values if needed.
+     *
+     * @param  target  Target
+     * @param  state   State
+     */
+    Responsive.prototype.setTargetState = function (target, state) {
+        var _this = this;
+        // Update default state
+        var defaultState = this.getDefaultState(target);
+        _utils_Object__WEBPACK_IMPORTED_MODULE_8__["each"](state.properties, function (key, val) {
+            if (!_utils_Type__WEBPACK_IMPORTED_MODULE_7__["hasValue"](defaultState.properties[key])) {
+                defaultState.properties[key] = _this.getValue(target, key);
+            }
+        });
+        target.setState(state);
     };
     /**
      * Gets a value from an element.
@@ -98300,8 +99374,10 @@ function anyToNumber(value) {
  */
 function getYearDay(date, utc) {
     if (utc === void 0) { utc = false; }
-    var first = new Date(date.getFullYear(), 0, 1, 0, 0, 0, 0);
-    return Math.floor((date.getTime() - first.getTime()) / 86400000) + 1;
+    var start = new Date(date.getFullYear(), 0, 0);
+    var diff = (date.getTime() - start.getTime()) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
+    var oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
 }
 /**
  * Returns week number for a given date.
@@ -99335,7 +100411,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/core.js ***!
   \**************************************************/
-/*! exports provided: System, system, BaseObject, BaseObjectEvents, Component, Container, DataItem, Sprite, SpriteEventDispatcher, SpriteState, registry, Registry, is, options, CSVParser, DataLoader, dataLoader, DataParser, DataSource, JSONParser, SVGDefaults, Button, Circle, Ellipse, Image, Label, Line, Popup, Modal, PointedRectangle, PointedShape, Polyarc, Polygon, Polyline, Polyspline, Preloader, Rectangle, ResizeButton, CloseButton, SwitchButton, RoundedRectangle, Scrollbar, Slider, Slice, TextLink, Tooltip, Trapezoid, Triangle, WavedCircle, WavedLine, WavedRectangle, ZoomOutButton, PlayButton, Cone, Rectangle3D, Slice3D, Export, ExportMenu, DateFormatter, DurationFormatter, NumberFormatter, TextFormatter, getTextFormatter, Inertia, Interaction, getInteraction, InteractionKeyboardObject, InteractionObject, InteractionObjectEventDispatcher, MouseCursorStyle, AMElement, Group, Paper, Tension, Basis, SVGContainer, ColorModifier, LinearGradient, LinearGradientModifier, RadialGradientModifier, LinePattern, CirclePattern, Pattern, RadialGradient, RectPattern, ColorizeFilter, DesaturateFilter, DropShadowFilter, BlurFilter, Filter, FocusFilter, LightenFilter, GlobalAdapter, globalAdapter, Adapter, Animation, animate, nextFrame, readFrame, writeFrame, whenIdle, triggerIdle, Cache, cache, Color, color, isColor, castColor, ColorSet, PatternSet, InterfaceColorSet, DictionaryDisposer, Dictionary, DictionaryTemplate, Disposer, MultiDisposer, MutableValueDisposer, CounterDisposer, StyleRule, StyleClass, getElement, addClass, removeClass, blur, focus, outerHTML, isElement, copyAttributes, fixPixelPerfect, ready, EventDispatcher, TargetedEventDispatcher, ListIterator, min, max, join, Keyboard, keyboard, Language, IndexedIterable, ListGrouper, ListDisposer, List, ListTemplate, Morpher, reverse, or, Percent, percent, isPercent, Plugin, Responsive, ResponsiveBreakpoints, defaultRules, OrderedList, SortedList, OrderedListTemplate, SortedListTemplate, PX, STRING, NUMBER, DATE, DURATION, PLACEHOLDER, PLACEHOLDER2, isNaN, checkString, checkBoolean, checkNumber, checkObject, castString, castNumber, isString, isNumber, isObject, isArray, Validatable, path, colors, ease, math, array, number, object, string, time, utils, iter, type, create, createFromConfig, disposeAllCharts, useTheme, unuseTheme, unuseAllThemes, addLicense */
+/*! exports provided: System, system, BaseObject, BaseObjectEvents, Component, Container, DataItem, Sprite, SpriteEventDispatcher, SpriteState, registry, Registry, is, options, CSVParser, DataLoader, dataLoader, DataParser, DataSource, JSONParser, SVGDefaults, Button, Circle, Ellipse, Image, Label, Line, Popup, Modal, PointedRectangle, PointedShape, Polyarc, Polygon, Polyline, Polyspline, Preloader, Rectangle, ResizeButton, CloseButton, SwitchButton, RoundedRectangle, Scrollbar, Slider, Slice, TextLink, Tooltip, Trapezoid, Triangle, WavedCircle, WavedLine, WavedRectangle, ZoomOutButton, PlayButton, Cone, Rectangle3D, Slice3D, Export, ExportMenu, DateFormatter, DurationFormatter, NumberFormatter, TextFormatter, getTextFormatter, Inertia, Interaction, getInteraction, InteractionKeyboardObject, InteractionObject, InteractionObjectEventDispatcher, MouseCursorStyle, AMElement, Group, Paper, Tension, Basis, SVGContainer, ColorModifier, LinearGradient, LinearGradientModifier, RadialGradientModifier, LinePattern, CirclePattern, Pattern, RadialGradient, RectPattern, ColorizeFilter, DesaturateFilter, DropShadowFilter, BlurFilter, Filter, FocusFilter, LightenFilter, GlobalAdapter, globalAdapter, Adapter, Animation, animate, nextFrame, readFrame, writeFrame, whenIdle, triggerIdle, Cache, cache, Color, color, isColor, castColor, ColorSet, PatternSet, InterfaceColorSet, DictionaryDisposer, Dictionary, DictionaryTemplate, Disposer, MultiDisposer, MutableValueDisposer, CounterDisposer, StyleRule, StyleClass, getElement, addClass, removeClass, blur, focus, outerHTML, isElement, copyAttributes, fixPixelPerfect, ready, EventDispatcher, TargetedEventDispatcher, ListIterator, min, max, join, Keyboard, keyboard, Language, IndexedIterable, ListGrouper, ListDisposer, List, ListTemplate, Morpher, reverse, or, Percent, percent, isPercent, Plugin, Responsive, ResponsiveBreakpoints, defaultRules, OrderedList, SortedList, OrderedListTemplate, SortedListTemplate, PX, STRING, NUMBER, DATE, DURATION, PLACEHOLDER, PLACEHOLDER2, isNaN, checkString, checkBoolean, checkNumber, checkObject, castString, castNumber, isString, isNumber, isObject, isArray, Validatable, path, colors, ease, math, array, number, object, string, time, utils, iter, type, net, create, createFromConfig, disposeAllCharts, useTheme, unuseTheme, unuseAllThemes, addLicense */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99825,20 +100901,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "utils", function() { return _internal_core_utils_Utils__WEBPACK_IMPORTED_MODULE_118__; });
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "iter", function() { return _internal_core_utils_Iterator__WEBPACK_IMPORTED_MODULE_96__; });
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "type", function() { return _internal_core_utils_Type__WEBPACK_IMPORTED_MODULE_107__; });
-/* harmony import */ var _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! ./.internal/core/utils/Instance */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Instance.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "create", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["create"]; });
+/* harmony import */ var _internal_core_utils_Net__WEBPACK_IMPORTED_MODULE_119__ = __webpack_require__(/*! ./.internal/core/utils/Net */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Net.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "net", function() { return _internal_core_utils_Net__WEBPACK_IMPORTED_MODULE_119__; });
+/* harmony import */ var _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_120__ = __webpack_require__(/*! ./.internal/core/utils/Instance */ "./node_modules/@amcharts/amcharts4/.internal/core/utils/Instance.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "create", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_120__["create"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createFromConfig", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["createFromConfig"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createFromConfig", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_120__["createFromConfig"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "disposeAllCharts", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["disposeAllCharts"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "disposeAllCharts", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_120__["disposeAllCharts"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["useTheme"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_120__["useTheme"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["unuseTheme"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseTheme", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_120__["unuseTheme"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseAllThemes", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["unuseAllThemes"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unuseAllThemes", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_120__["unuseAllThemes"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addLicense", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_119__["addLicense"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addLicense", function() { return _internal_core_utils_Instance__WEBPACK_IMPORTED_MODULE_120__["addLicense"]; });
 
 /**
  * This module houses all core/framework functionality and is required for
@@ -99994,6 +101072,8 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Functions: utils
  */
+
+
 
 
 
@@ -100411,365 +101491,6 @@ __webpack_require__.r(__webpack_exports__);
     "Minimize": ""
 });
 //# sourceMappingURL=en.js.map
-
-/***/ }),
-
-/***/ "./node_modules/css-element-queries/src/ResizeSensor.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/css-element-queries/src/ResizeSensor.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-/**
- * Copyright Marc J. Schmidt. See the LICENSE file at the top-level
- * directory of this distribution and at
- * https://github.com/marcj/css-element-queries/blob/master/LICENSE.
- */
-(function (root, factory) {
-    if (true) {
-        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    } else {}
-}(typeof window !== 'undefined' ? window : this, function () {
-
-    // Make sure it does not throw in a SSR (Server Side Rendering) situation
-    if (typeof window === "undefined") {
-        return null;
-    }
-    // https://github.com/Semantic-Org/Semantic-UI/issues/3855
-    // https://github.com/marcj/css-element-queries/issues/257
-    var globalWindow = typeof window != 'undefined' && window.Math == Math
-        ? window
-        : typeof self != 'undefined' && self.Math == Math
-            ? self
-            : Function('return this')();
-    // Only used for the dirty checking, so the event callback count is limited to max 1 call per fps per sensor.
-    // In combination with the event based resize sensor this saves cpu time, because the sensor is too fast and
-    // would generate too many unnecessary events.
-    var requestAnimationFrame = globalWindow.requestAnimationFrame ||
-        globalWindow.mozRequestAnimationFrame ||
-        globalWindow.webkitRequestAnimationFrame ||
-        function (fn) {
-            return globalWindow.setTimeout(fn, 20);
-        };
-
-    /**
-     * Iterate over each of the provided element(s).
-     *
-     * @param {HTMLElement|HTMLElement[]} elements
-     * @param {Function}                  callback
-     */
-    function forEachElement(elements, callback){
-        var elementsType = Object.prototype.toString.call(elements);
-        var isCollectionTyped = ('[object Array]' === elementsType
-            || ('[object NodeList]' === elementsType)
-            || ('[object HTMLCollection]' === elementsType)
-            || ('[object Object]' === elementsType)
-            || ('undefined' !== typeof jQuery && elements instanceof jQuery) //jquery
-            || ('undefined' !== typeof Elements && elements instanceof Elements) //mootools
-        );
-        var i = 0, j = elements.length;
-        if (isCollectionTyped) {
-            for (; i < j; i++) {
-                callback(elements[i]);
-            }
-        } else {
-            callback(elements);
-        }
-    }
-
-    /**
-    * Get element size
-    * @param {HTMLElement} element
-    * @returns {Object} {width, height}
-    */
-    function getElementSize(element) {
-        if (!element.getBoundingClientRect) {
-            return {
-                width: element.offsetWidth,
-                height: element.offsetHeight
-            }
-        }
-
-        var rect = element.getBoundingClientRect();
-        return {
-            width: Math.round(rect.width),
-            height: Math.round(rect.height)
-        }
-    }
-
-    /**
-     * Apply CSS styles to element.
-     *
-     * @param {HTMLElement} element
-     * @param {Object} style
-     */
-    function setStyle(element, style) {
-        Object.keys(style).forEach(function(key) {
-            element.style[key] = style[key];
-        });
-    }
-
-    /**
-     * Class for dimension change detection.
-     *
-     * @param {Element|Element[]|Elements|jQuery} element
-     * @param {Function} callback
-     *
-     * @constructor
-     */
-    var ResizeSensor = function(element, callback) {
-        /**
-         *
-         * @constructor
-         */
-        function EventQueue() {
-            var q = [];
-            this.add = function(ev) {
-                q.push(ev);
-            };
-
-            var i, j;
-            this.call = function(sizeInfo) {
-                for (i = 0, j = q.length; i < j; i++) {
-                    q[i].call(this, sizeInfo);
-                }
-            };
-
-            this.remove = function(ev) {
-                var newQueue = [];
-                for(i = 0, j = q.length; i < j; i++) {
-                    if(q[i] !== ev) newQueue.push(q[i]);
-                }
-                q = newQueue;
-            };
-
-            this.length = function() {
-                return q.length;
-            }
-        }
-
-        /**
-         *
-         * @param {HTMLElement} element
-         * @param {Function}    resized
-         */
-        function attachResizeEvent(element, resized) {
-            if (!element) return;
-            if (element.resizedAttached) {
-                element.resizedAttached.add(resized);
-                return;
-            }
-
-            element.resizedAttached = new EventQueue();
-            element.resizedAttached.add(resized);
-
-            element.resizeSensor = document.createElement('div');
-            element.resizeSensor.dir = 'ltr';
-            element.resizeSensor.className = 'resize-sensor';
-
-            var style = {
-                pointerEvents: 'none',
-                position: 'absolute',
-                left: '0px',
-                top: '0px',
-                right: '0px',
-                bottom: '0px',
-                overflow: 'hidden',
-                zIndex: '-1',
-                visibility: 'hidden',
-                maxWidth: '100%'
-            };
-            var styleChild = {
-                position: 'absolute',
-                left: '0px',
-                top: '0px',
-                transition: '0s',
-            };
-
-            setStyle(element.resizeSensor, style);
-
-            var expand = document.createElement('div');
-            expand.className = 'resize-sensor-expand';
-            setStyle(expand, style);
-
-            var expandChild = document.createElement('div');
-            setStyle(expandChild, styleChild);
-            expand.appendChild(expandChild);
-
-            var shrink = document.createElement('div');
-            shrink.className = 'resize-sensor-shrink';
-            setStyle(shrink, style);
-
-            var shrinkChild = document.createElement('div');
-            setStyle(shrinkChild, styleChild);
-            setStyle(shrinkChild, { width: '200%', height: '200%' });
-            shrink.appendChild(shrinkChild);
-
-            element.resizeSensor.appendChild(expand);
-            element.resizeSensor.appendChild(shrink);
-            element.appendChild(element.resizeSensor);
-
-            var computedStyle = window.getComputedStyle(element);
-            var position = computedStyle ? computedStyle.getPropertyValue('position') : null;
-            if ('absolute' !== position && 'relative' !== position && 'fixed' !== position) {
-                element.style.position = 'relative';
-            }
-
-            var dirty, rafId;
-            var size = getElementSize(element);
-            var lastWidth = 0;
-            var lastHeight = 0;
-            var initialHiddenCheck = true;
-            var lastAnimationFrame = 0;
-
-            var resetExpandShrink = function () {
-                var width = element.offsetWidth;
-                var height = element.offsetHeight;
-
-                expandChild.style.width = (width + 10) + 'px';
-                expandChild.style.height = (height + 10) + 'px';
-
-                expand.scrollLeft = width + 10;
-                expand.scrollTop = height + 10;
-
-                shrink.scrollLeft = width + 10;
-                shrink.scrollTop = height + 10;
-            };
-
-            var reset = function() {
-                // Check if element is hidden
-                if (initialHiddenCheck) {
-                    var invisible = element.offsetWidth === 0 && element.offsetHeight === 0;
-                    if (invisible) {
-                        // Check in next frame
-                        if (!lastAnimationFrame){
-                            lastAnimationFrame = requestAnimationFrame(function(){
-                                lastAnimationFrame = 0;
-
-                                reset();
-                            });
-                        }
-
-                        return;
-                    } else {
-                        // Stop checking
-                        initialHiddenCheck = false;
-                    }
-                }
-
-                resetExpandShrink();
-            };
-            element.resizeSensor.resetSensor = reset;
-
-            var onResized = function() {
-                rafId = 0;
-
-                if (!dirty) return;
-
-                lastWidth = size.width;
-                lastHeight = size.height;
-
-                if (element.resizedAttached) {
-                    element.resizedAttached.call(size);
-                }
-            };
-
-            var onScroll = function() {
-                size = getElementSize(element);
-                dirty = size.width !== lastWidth || size.height !== lastHeight;
-
-                if (dirty && !rafId) {
-                    rafId = requestAnimationFrame(onResized);
-                }
-
-                reset();
-            };
-
-            var addEvent = function(el, name, cb) {
-                if (el.attachEvent) {
-                    el.attachEvent('on' + name, cb);
-                } else {
-                    el.addEventListener(name, cb);
-                }
-            };
-
-            addEvent(expand, 'scroll', onScroll);
-            addEvent(shrink, 'scroll', onScroll);
-
-            // Fix for custom Elements
-            requestAnimationFrame(reset);
-        }
-
-        forEachElement(element, function(elem){
-            attachResizeEvent(elem, callback);
-        });
-
-        this.detach = function(ev) {
-            ResizeSensor.detach(element, ev);
-        };
-
-        this.reset = function() {
-            element.resizeSensor.resetSensor();
-        };
-    };
-
-    ResizeSensor.reset = function(element) {
-        forEachElement(element, function(elem){
-            elem.resizeSensor.resetSensor();
-        });
-    };
-
-    ResizeSensor.detach = function(element, ev) {
-        forEachElement(element, function(elem){
-            if (!elem) return;
-            if(elem.resizedAttached && typeof ev === "function"){
-                elem.resizedAttached.remove(ev);
-                if(elem.resizedAttached.length()) return;
-            }
-            if (elem.resizeSensor) {
-                if (elem.contains(elem.resizeSensor)) {
-                    elem.removeChild(elem.resizeSensor);
-                }
-                delete elem.resizeSensor;
-                delete elem.resizedAttached;
-            }
-        });
-    };
-
-    if (typeof MutationObserver !== "undefined") {
-        var observer = new MutationObserver(function (mutations) {
-            for (var i in mutations) {
-                if (mutations.hasOwnProperty(i)) {
-                    var items = mutations[i].addedNodes;
-                    for (var j = 0; j < items.length; j++) {
-                        if (items[j].resizeSensor) {
-                            ResizeSensor.reset(items[j]);
-                        }
-                    }
-                }
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function (event) {
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true,
-            });
-        });
-    }
-
-    return ResizeSensor;
-
-}));
-
 
 /***/ }),
 

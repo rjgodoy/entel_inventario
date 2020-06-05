@@ -218,7 +218,7 @@
                     </keep-alive>
                 </div>
 
-                <div class="column is-2 has-background-link has-text-white is-paddingless">
+                <div class="column is-2 has-background-link has-text-white is-paddingless shadow-inset-dark-light">
                     <section class="section">
                         <div class="columns is-multiline tile is-ancestor">
                             <characteristics-side

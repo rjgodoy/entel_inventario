@@ -3,7 +3,6 @@
         <div class="columns tile is-ancestor">
 
             <!-- <div class=" "> -->
-                <!-- CUADROS DE INFORMACION -->
                 <!-- <div class=""> -->
                     <div class="column tile is-parent is-vertical" style="padding: 0px 24px 24px 24px;">
                         <div class="has-text-weight-bold is-size-5 has-text-left tile" style="padding-bottom: 24px;">CARACTERISTICAS NEGOCIO</div>

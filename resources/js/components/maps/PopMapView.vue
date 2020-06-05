@@ -61,9 +61,6 @@
     </GmapMap>
 </template>
 
-<!-- <style lang="scss" scoped>
-</style> -->
-
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
     import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";

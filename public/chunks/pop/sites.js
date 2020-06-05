@@ -386,13 +386,384 @@ var render = function() {
     "div",
     {},
     [
+      _c(
+        "section",
+        {
+          staticClass: "section has-background-white-bis is-bold",
+          staticStyle: { "padding-top": "20px", "padding-bottom": "20px" }
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "level" }, [
+            _c("div", { staticClass: "level-item" }, [
+              _c(
+                "div",
+                [
+                  _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _vm._v("2G 1900")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "is-size-5 has-text-weight-bold",
+                      class: _vm.tec2g1900 ? "has-text-info" : ""
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(_vm.tec2g1900 ? _vm.tec2g1900.nem_tech : "-")
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-tooltip",
+                    {
+                      attrs: {
+                        label: _vm.tec2g1900
+                          ? _vm.tec2g1900.state
+                            ? _vm.tec2g1900.state.state
+                            : "Sin Tecnología"
+                          : "Sin Tecnología",
+                        position: "is-bottom",
+                        type: _vm.tec2g1900 ? "is-dark" : "is-white"
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.tec2g1900
+                          ? _vm.tec2g1900.state.style
+                          : "has-text-white",
+                        attrs: { icon: ["fas", "circle"] }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "is-divider-vertical",
+              staticStyle: { height: "64px" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c(
+                "div",
+                [
+                  _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _vm._v("3G 900")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "is-size-5 has-text-weight-bold",
+                      class: _vm.tec3g900 ? "has-text-info" : ""
+                    },
+                    [_vm._v(_vm._s(_vm.tec3g900 ? _vm.tec3g900.nem_tech : "-"))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-tooltip",
+                    {
+                      attrs: {
+                        label: _vm.tec3g900
+                          ? _vm.tec3g900.state
+                            ? _vm.tec3g900.state.state
+                            : "Sin Tecnología"
+                          : "Sin Tecnología",
+                        position: "is-bottom",
+                        type: _vm.tec3g900 ? "is-dark" : "is-white"
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.tec3g900
+                          ? _vm.tec3g900.state.style
+                          : "has-text-white",
+                        attrs: { icon: ["fas", "circle"] }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c(
+                "div",
+                [
+                  _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _vm._v("3G 1900")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "is-size-5 has-text-weight-bold",
+                      class: _vm.tec3g1900 ? "has-text-info" : ""
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(_vm.tec3g1900 ? _vm.tec3g1900.nem_tech : "-")
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-tooltip",
+                    {
+                      attrs: {
+                        label: _vm.tec3g1900
+                          ? _vm.tec3g1900.state
+                            ? _vm.tec3g1900.state.state
+                            : "Sin Tecnología"
+                          : "Sin Tecnología",
+                        position: "is-bottom",
+                        type: _vm.tec3g1900 ? "is-dark" : "is-white"
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.tec3g1900
+                          ? _vm.tec3g1900.state.style
+                          : "has-text-white",
+                        attrs: { icon: ["fas", "circle"] }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "is-divider-vertical",
+              staticStyle: { height: "64px" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c(
+                "div",
+                [
+                  _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _vm._v("LTE 700")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "is-size-5 has-text-weight-bold",
+                      class: _vm.tec4g700 ? "has-text-info" : ""
+                    },
+                    [_vm._v(_vm._s(_vm.tec4g700 ? _vm.tec4g700.nem_tech : "-"))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-tooltip",
+                    {
+                      attrs: {
+                        label: _vm.tec4g700
+                          ? _vm.tec4g700.state
+                            ? _vm.tec4g700.state.state
+                            : "Sin Tecnología"
+                          : "Sin Tecnología",
+                        position: "is-bottom",
+                        type: _vm.tec4g700 ? "is-dark" : "is-white"
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.tec4g700
+                          ? _vm.tec4g700.state.style
+                          : "has-text-white",
+                        attrs: { icon: ["fas", "circle"] }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c(
+                "div",
+                [
+                  _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _vm._v("LTE 1900")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "is-size-5 has-text-weight-bold",
+                      class: _vm.tec4g1900 ? "has-text-info" : ""
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(_vm.tec4g1900 ? _vm.tec4g1900.nem_tech : "-")
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-tooltip",
+                    {
+                      attrs: {
+                        label: _vm.tec4g1900
+                          ? _vm.tec4g1900.state
+                            ? _vm.tec4g1900.state.state
+                            : "Sin Tecnología"
+                          : "Sin Tecnología",
+                        position: "is-bottom",
+                        type: _vm.tec4g1900 ? "is-dark" : "is-white"
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.tec4g1900
+                          ? _vm.tec4g1900.state.style
+                          : "has-text-white",
+                        attrs: { icon: ["fas", "circle"] }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c(
+                "div",
+                [
+                  _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _vm._v("LTE 2600")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "is-size-5 has-text-weight-bold",
+                      class: _vm.tec4g2600 ? "has-text-info" : ""
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(_vm.tec4g2600 ? _vm.tec4g2600.nem_tech : "-")
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-tooltip",
+                    {
+                      attrs: {
+                        label: _vm.tec4g2600
+                          ? _vm.tec4g2600.state
+                            ? _vm.tec4g2600.state.state
+                            : "Sin Tecnología"
+                          : "Sin Tecnología",
+                        position: "is-bottom",
+                        type: _vm.tec4g2600 ? "is-dark" : "is-white"
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.tec4g2600
+                          ? _vm.tec4g2600.state.style
+                          : "has-text-white",
+                        attrs: { icon: ["fas", "circle"] }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "is-divider-vertical",
+              staticStyle: { height: "64px" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item" }, [
+              _c(
+                "div",
+                [
+                  _c("div", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                    _vm._v("BAFI")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "has-text-weight-bold is-size-5",
+                      class: _vm.bafi ? "has-text-info" : ""
+                    },
+                    [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(
+                            _vm.bafi
+                              ? _vm.bafi.tecA +
+                                  " - " +
+                                  _vm.bafi.tecB +
+                                  " - " +
+                                  _vm.bafi.tecC
+                              : "-"
+                          ) +
+                          "\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-tooltip",
+                    {
+                      attrs: {
+                        label: _vm.tec4g3500
+                          ? _vm.tec4g3500.state
+                            ? _vm.tec4g3500.state.state
+                            : "Sin Tecnología"
+                          : "Sin Tecnología",
+                        position: "is-bottom",
+                        type: _vm.tec4g3500 ? "is-dark" : "is-white"
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.tec4g3500.state.style,
+                        attrs: { icon: ["fas", "circle"] }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
       _c("hr", { staticClass: "has-background-grey-lighter is-marginless" }),
       _vm._v(" "),
       _c(
         "section",
         { staticClass: "section", staticStyle: { "padding-top": "20px" } },
         [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "div",
@@ -795,6 +1166,20 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "columns" }, [
+      _c(
+        "div",
+        {
+          staticClass: "column has-text-weight-semibold is-size-3 has-text-left"
+        },
+        [_vm._v("Tecnologías")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

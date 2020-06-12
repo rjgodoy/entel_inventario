@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class GeneratorSet extends Model
 {
+    protected $connection = 'mysql';
+    protected $table = 'entel_g_redes_inventario.generator_sets';
+
+    protected $guarded = [];
+
     public function pop() 
     {
         return $this->belongsTo(Pop::class);

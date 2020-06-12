@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Http\Resources\Room as RoomResource;
-use App\Models\Room;
+use App\Http\Resources\RoomCollection;
 use App\Models\Pop;
 use App\Models\Projection;
+use App\Models\Room;
+use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
@@ -39,7 +39,7 @@ class RoomController extends Controller
             })
             ->paginate(10);
 
-        return new RoomResource($pops);
+        return new RoomCollection($pops);
     }
 
     /**
@@ -61,7 +61,18 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        //
+        $room = Room::with(
+            'pop.rooms',
+            'pop.junctions',
+            'pop.generator_sets',
+            'pop.power_rectifiers',
+            'air_conditioners.air_conditioner_consumptions',
+            'air_conditioners.air_conditioner_brand.air_conditioner_type',
+            'air_conditioners.air_conditioner_chillers',
+            'air_conditioners.air_conditioner_condensers'
+        )->where('id', $id)->first();
+
+        return new RoomResource($room);
     }
 
     /**

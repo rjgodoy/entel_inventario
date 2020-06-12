@@ -93,11 +93,17 @@
 
                                                     <!-- ##### SALA ##### -->
                                                     <!-- ################### -->
-                                                    <div class="column is-6">
+                                                    <!-- <div class="column is-6">
                                                         <a class="is-size-6 has-text-weight-bold has-text-white" 
                                                             @click="isComponentModalActive = true; roomSelected = room; popSelected = pop">
                                                             {{ room.name }} <p v-if="room.old_name" class="has-text-weight-light">{{ room.old_name }}</p>
                                                         </a>
+                                                    </div> -->
+
+                                                    <div class="column is-6">
+                                                        <router-link class="is-size-6 has-text-weight-bold has-text-white" :to="'/capacity/' + room.id" target="_blank">
+                                                            {{ room.name }} <p v-if="room.old_name" class="has-text-weight-light">{{ room.old_name }}</p>
+                                                        </router-link>
                                                     </div>
 
                                                     <!-- ##### GENERAL ##### -->

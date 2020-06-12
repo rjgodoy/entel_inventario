@@ -153,6 +153,8 @@ Route::middleware('auth:api')->group(function () {
 
 			// Clients Connection
 				Route::apiResource('junctions','Api\JunctionController');
+				Route::get('popJunctions/{pop_id}','Api\JunctionController@popJunctions');
+				Route::post('junction/efizity','Api\JunctionController@syncEfizity');
 
 			// Generator Sets
 				Route::apiResource('generatorSets','Api\Infraestructura\GeneratorSetController');
@@ -357,8 +359,8 @@ Route::middleware('auth:api')->group(function () {
 			Route::apiResource('psgTp','Api\PsgTpController');
 
 
-			Route::apiResource('junction','Api\JunctionController');
-			Route::post('junction/efizity','Api\JunctionController@syncEfizity');
+			// Route::apiResource('junction','Api\JunctionController');
+			
 		});
 		##############################################################################################
 

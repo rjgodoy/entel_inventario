@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Pop as PopResource;
 use App\Http\Resources\PopCollection;
 use App\Models\GeneratorSet;
+use App\Models\Log;
+use App\Models\LogType;
 use App\Models\Pop;
 use App\Models\PopMenu;
 use App\Models\PopMenuType;
@@ -321,13 +323,15 @@ class PopController extends Controller
             $request->parameter => $request->value
         ]);
 
-        // ESCRIBIR UN LOG DEL CAMBIO
-        // Log::create([
-        //     'pop_id' => $pop->id,
-        //     'user_id' => $request->user_id,
-        //     'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
-        //     'description' => 'Se ha actualizado el parámetro "'.$request->parameter.'" a "'.$request->value ? 'Si"' : 'No"'
-        // ]);
+        $boolean = $request->value ? 'SI' : 'NO';
+
+        // Busca el dato que se actualizó par incorporarlo en el Log
+        Log::create([
+            'pop_id' => $id,
+            'user_id' => $request->user_id,
+            'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
+            'description' => 'Se ha actualizado el parámetro "'. $request->parameter.'" a "'.$boolean.'"'
+        ]);
 
         return $request;
     }

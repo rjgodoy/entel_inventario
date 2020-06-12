@@ -145,7 +145,13 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "has-text-weight-semibold is-size-4" }, [
-          _vm._v(_vm._s(_vm.airConditioner.air_conditioner_brand.brand))
+          _vm._v(
+            _vm._s(
+              _vm.airConditioner.air_conditioner_brand
+                ? _vm.airConditioner.air_conditioner_brand.brand
+                : "Sin Información"
+            )
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
@@ -153,7 +159,13 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
-          _vm._v(_vm._s(_vm.airConditioner.air_conditioner_brand.model))
+          _vm._v(
+            _vm._s(
+              _vm.airConditioner.air_conditioner_brand
+                ? _vm.airConditioner.air_conditioner_brand.model
+                : "Sin Información"
+            )
+          )
         ])
       ]),
       _vm._v(" "),
@@ -161,6 +173,7 @@ var render = function() {
         "div",
         { staticClass: "column has-text-right" },
         [
+          _vm.airConditioner.air_conditioner_brand &&
           _vm.airConditioner.air_conditioner_brand.air_conditioner_type.icon
             ? _c("font-awesome-icon", {
                 staticClass: "has-text-grey-lighter",
@@ -190,7 +203,9 @@ var render = function() {
         _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
           _vm._v(
             _vm._s(
-              _vm.airConditioner.air_conditioner_brand.air_conditioner_type.type
+              _vm.airConditioner.air_conditioner_brand &&
+                _vm.airConditioner.air_conditioner_brand.air_conditioner_type
+                  .type
             )
           )
         ]),

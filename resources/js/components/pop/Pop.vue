@@ -171,7 +171,7 @@
         <section class="">
             <div class="columns is-marginless">
 
-                <div class="column is-2 has-background-white is-paddingless">
+                <div class="column is-2 has-background-white is-paddingless" style="border-right: solid 0.5px rgba(0,0,0,0.1)">
                     <section class="section">
                         <div class="columns is-multiline tile is-ancestor">
                             <b-tooltip class="column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent" :class="!isMobile() && 'is-6'" v-if="showTab(tab)" :label="tab.title" type="is-dark"
@@ -218,7 +218,7 @@
                     </keep-alive>
                 </div>
 
-                <div class="column is-2 has-background-link has-text-white is-paddingless shadow-inset-dark-light">
+                <div class="column is-2 has-background-white is-paddingless" style="border-left: solid 0.5px rgba(0,0,0,0.1)">
                     <section class="section">
                         <div class="columns is-multiline tile is-ancestor">
                             <characteristics-side
@@ -253,7 +253,7 @@
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
             Sites: () => import(/* webpackChunkName: "chunks/pop/sites"*/'./Sites'),
-            Characteristics: () => import(/* webpackChunkName: "chunks/pop/characteristics"*/'./Characteristics'),
+            // Characteristics: () => import(/* webpackChunkName: "chunks/pop/characteristics"*/'./Characteristics'),
             CharacteristicsSide: () => import(/* webpackChunkName: "chunks/pop/characteristicsSide"*/'./CharacteristicsSide'),
             Layout: () => import(/* webpackChunkName: "chunks/pop/layout/layout"*/'./layout/Layout'),
             Power: () => import(/* webpackChunkName: "chunks/pop/power/power"*/'./power/Power'),
@@ -306,7 +306,7 @@
         },
 
         mounted() {
-            console.log(this.$route)
+            // console.log(this.$route)
             this.getAllData()
             this.getTabs()
             

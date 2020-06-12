@@ -448,9 +448,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -486,7 +483,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     // MapView,
     // ###### Charts ########
     PretDataChart: function PretDataChart() {
-      return Promise.all(/*! import() | chunks/dashboard/pretDataChart */[__webpack_require__.e("vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/dashboard/pretDataChart")]).then(__webpack_require__.bind(null, /*! ./PretDataChart */ "./resources/js/components/dashboard/PretDataChart.vue"));
+      return Promise.all(/*! import() | chunks/dashboard/pretDataChart */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("chunks/dashboard/pretDataChart")]).then(__webpack_require__.bind(null, /*! ./PretDataChart */ "./resources/js/components/dashboard/PretDataChart.vue"));
     },
     // RedCoreChart,
     // ###### Equipment #####

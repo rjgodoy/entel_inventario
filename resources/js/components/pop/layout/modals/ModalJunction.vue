@@ -7,7 +7,6 @@
             <junction
                 :junction="junction"
                 :can="can"
-                :pop="pop"
                 :user="user"
             />
         </section>
@@ -23,12 +22,13 @@
         components: {
             Junction: () => import(/* webpackChunkName: "chunks/pop/power/junction"*/'../../../pop/power/Junction')
         },
+
         props : [
-            'pop',
             'can',
             'junction',
             'user'
         ],
+
         data() {
             return {
                 
@@ -36,17 +36,9 @@
         },
 
         watch: {
+            junction(val) {
 
+            }
         },
-
-        created() {
-        },
-
-        mounted() {
-        },
-
-        methods: {
-            
-        }
     }
 </script>

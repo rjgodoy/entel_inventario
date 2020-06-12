@@ -134,8 +134,7 @@
                                     aria-modal >
                                     <edit-junction-parameters 
                                         :junction="junction"
-                                        :user="user"
-                                        :pop="pop"/>
+                                        :user="user"/>
                                 </b-modal>
 
 
@@ -197,20 +196,29 @@
         components: {
             EditJunctionParameters: () => import(/* webpackChunkName: "chunks/pop/power/modals/editJunction"*/'./modals/EditJunctionParameters'),
         },
+
         props : [
-            'pop',
             'can',
             'junction',
             'user'
         ],
+
         data() {
             return {
                 isEditJunctionModalActive: false,
             }
         },
+
+        watch: {
+            junction(val) {
+
+            }
+        },
+
         mounted() {
             // console.log(this.junction)
         },
+
         computed: {
             capacidadTotal() {
                 return this.junction.latest_protection ? this.junction.latest_protection.nominal_a * 380 * 1.7320508 : 0
@@ -224,6 +232,7 @@
                 return this.capacidadTotal != 0 ? this.consumoTablero / this.capacidadTotal : 0
             }
         },
+
         methods: {            
         }
     }

@@ -9,10 +9,19 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
 //
 //
 //
@@ -80,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfoCircle"]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'classification', 'popMaster', 'darkMode'],
@@ -242,7 +251,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     };
   },
   computed: {
-    google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_2__["gmapApi"],
+    google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__["gmapApi"],
     mapStyle: function mapStyle() {
       return this.darkMode == 1 ? this.style8 : this.style9;
     },
@@ -272,6 +281,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   mounted: function mounted() {
     this.setMap();
     this.getDependences();
+  },
+  watch: {
+    popMaster: function popMaster(val) {
+      this.setMap();
+      this.getDependences();
+    }
   },
   methods: {
     setMap: function setMap() {
@@ -314,32 +329,54 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       // console.log(pop)
       return "\n                <div class=\"card\">\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(this.classification == 'A' ? 'is-danger' : this.classification == 'B' ? 'is-warning' : this.classification_type_id == 'C' ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(this.classification, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(pop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.comuna.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.comuna.zona.nombre_zona, ", CRM ").concat(pop.comuna.zona.crm.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/pop/").concat(pop.id, "\" class=\"button is-outlined is-primary is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
     },
-    getDependences: function getDependences() {
-      var _this3 = this;
+    getDependences: function () {
+      var _getDependences = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this3 = this;
 
-      axios.get("/api/dependences/".concat(this.popMaster.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        _this3.dependences = response.data.data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get("/api/dependences/".concat(this.popMaster.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+                  _this3.dependences = response.data.data;
 
-        if (_this3.dependences.length) {
-          _this3.dependences.forEach(function (m) {
-            if (m.dependence) {
-              // console.log(m.dependence.nem_site)
-              var dependenceLine = [{
-                lat: parseFloat(_this3.popMaster.latitude),
-                lng: parseFloat(_this3.popMaster.longitude)
-              }, {
-                lat: parseFloat(m.dependence.pop.latitude),
-                lng: parseFloat(m.dependence.pop.longitude)
-              }];
+                  if (_this3.dependences.length) {
+                    _this3.dependences.forEach(function (m) {
+                      if (m.dependence) {
+                        // console.log(m.dependence.nem_site)
+                        var dependenceLine = [{
+                          lat: parseFloat(_this3.popMaster.latitude),
+                          lng: parseFloat(_this3.popMaster.longitude)
+                        }, {
+                          lat: parseFloat(m.dependence.pop.latitude),
+                          lng: parseFloat(m.dependence.pop.longitude)
+                        }];
 
-              _this3.depLines.push(dependenceLine);
+                        _this3.depLines.push(dependenceLine);
+                      }
+                    });
+
+                    _this3.setDependencesButton();
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
             }
-          });
+          }
+        }, _callee, this);
+      }));
 
-          _this3.setDependencesButton();
-        }
-      });
-    },
+      function getDependences() {
+        return _getDependences.apply(this, arguments);
+      }
+
+      return getDependences;
+    }(),
     panDependences: function panDependences(google) {
       var _this4 = this;
 
@@ -409,6 +446,7 @@ var render = function() {
     "GmapMap",
     {
       ref: "map",
+      staticClass: "map",
       staticStyle: {
         "min-height": "788px",
         "/*min-height": "576px",

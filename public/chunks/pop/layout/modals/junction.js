@@ -28,21 +28,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Junction: function Junction() {
       return __webpack_require__.e(/*! import() | chunks/pop/power/junction */ "chunks/pop/power/junction").then(__webpack_require__.bind(null, /*! ../../../pop/power/Junction */ "./resources/js/components/pop/power/Junction.vue"));
     }
   },
-  props: ['pop', 'can', 'junction', 'user'],
+  props: ['can', 'junction', 'user'],
   data: function data() {
     return {};
   },
-  watch: {},
-  created: function created() {},
-  mounted: function mounted() {},
-  methods: {}
+  watch: {
+    junction: function junction(val) {}
+  }
 });
 
 /***/ }),
@@ -76,12 +74,7 @@ var render = function() {
         },
         [
           _c("junction", {
-            attrs: {
-              junction: _vm.junction,
-              can: _vm.can,
-              pop: _vm.pop,
-              user: _vm.user
-            }
+            attrs: { junction: _vm.junction, can: _vm.can, user: _vm.user }
           })
         ],
         1

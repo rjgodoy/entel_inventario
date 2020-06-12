@@ -47,6 +47,7 @@
             AdminApprove: () => import(/* webpackChunkName: "chunks/admin/approve"*/"./AdminApprove"),
             AdminMassive: () => import(/* webpackChunkName: "chunks/admin/massive"*/"./AdminMassive"),
             AdminUsers: () => import(/* webpackChunkName: "chunks/admin/usersPermissions"*/"./AdminUsers"),
+            AdminFiles: () => import(/* webpackChunkName: "chunks/admin/files"*/"./AdminFiles"),
         },
         props : [
             'user'
@@ -68,7 +69,7 @@
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
                 tabs: null,
-                currentTab: 'pops'
+                currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'pops'
             }
         },
         methods: {

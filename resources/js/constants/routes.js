@@ -11,6 +11,7 @@ let Dashboard = () => import(/* webpackChunkName: "chunks/dashboard"*/'../compon
 let PopTable = () => import(/* webpackChunkName: "chunks/pops"*/'../components/pops/PopsTable.vue')
 let Pop = () => import(/* webpackChunkName: "chunks/pop"*/'../components/pop/Pop.vue')
 let CapacityPlanning = () => import(/* webpackChunkName: "chunks/capacityPlanning"*/'../components/capacity/CapacityPlanning.vue')
+let RoomDetail = () => import(/* webpackChunkName: "chunks/capacityPlanning"*/'../components/capacity/RoomDetail.vue')
 let Eco = () => import(/* webpackChunkName: "chunks/eco"*/'../components/eco/Eco.vue')
 let Comsite = () => import(/* webpackChunkName: "chunks/comsite"*/'../components/comsite/Comsite.vue')
 let Documents = () => import(/* webpackChunkName: "chunks/documents"*/'../components/documents/Documents.vue')
@@ -42,6 +43,7 @@ export default {
                 { path: '/pop', name: 'POPs', component: PopTable },
                 { path: '/pop/:id', name: 'Pop', component: Pop },
                 { path: '/capacity', name: 'Capacity Planning', component: CapacityPlanning },
+                { path: '/capacity/:id', name: 'Detalle de Sala', component: RoomDetail },
                 { path: '/comsite', name: 'Comsite', component: Comsite },
                 { path: '/eco', name: 'Gestion Ambiental', component: Eco },
                 { path: '/docs', name: 'Documentos', component: Documents },

@@ -112,11 +112,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    SpaceChart: function SpaceChart() {
-      return Promise.all(/*! import() | chunks/pop/infrastructure/spaceChart */[__webpack_require__.e("vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart"), __webpack_require__.e("chunks/pop/infrastructure/SpaceChart")]).then(__webpack_require__.bind(null, /*! ./SpaceChart */ "./resources/js/components/pop/infrastructure/SpaceChart.vue"));
-    }
-  },
+  components: {},
   props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
@@ -172,148 +168,129 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "section" }, [
     _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }, [
-        _vm.verticalStructures.length
-          ? _c(
-              "section",
-              {
-                staticClass: "section",
-                staticStyle: { "padding-top": "0px", "padding-bottom": "48px" }
-              },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "div",
+      _vm.verticalStructures.length
+        ? _c("div", { staticClass: "column" }, [
+            _vm.verticalStructures.length
+              ? _c(
+                  "section",
                   {
-                    class: _vm.verticalStructures.length > 4 ? "" : "container"
+                    staticClass: "section",
+                    staticStyle: {
+                      "padding-top": "0px",
+                      "padding-bottom": "48px"
+                    }
                   },
                   [
+                    _vm._m(0),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "columns is-multiline tile is-ancestor" },
-                      _vm._l(_vm.verticalStructures, function(data) {
-                        return _c(
+                      {
+                        class:
+                          _vm.verticalStructures.length > 4 ? "" : "container"
+                      },
+                      [
+                        _c(
                           "div",
                           {
-                            key: data.id,
-                            staticClass: "column is-12 tile is-parent"
+                            staticClass: "columns is-multiline tile is-ancestor"
                           },
-                          [
-                            _c(
+                          _vm._l(_vm.verticalStructures, function(data) {
+                            return _c(
                               "div",
                               {
-                                staticClass: "tile is-child box",
-                                staticStyle: {
-                                  "max-width": "550px",
-                                  position: "center"
-                                }
+                                key: data.id,
+                                staticClass: "column is-12 tile is-parent"
                               },
                               [
-                                _c("div", { staticClass: "columns" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "column" },
-                                    [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "tile is-child box",
+                                    staticStyle: {
+                                      "max-width": "550px",
+                                      position: "center"
+                                    }
+                                  },
+                                  [
+                                    _c("div", { staticClass: "columns" }, [
                                       _c(
                                         "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-light is-size-7 title"
-                                        },
-                                        [_vm._v("Tipo")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-5 subtitle"
-                                        },
+                                        { staticClass: "column" },
                                         [
-                                          _vm._v(
-                                            _vm._s(
-                                              data.vertical_structure_type
-                                                ? data.vertical_structure_type
-                                                    .type
-                                                : "Sin información"
-                                            )
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-light is-size-7 title"
-                                        },
-                                        [_vm._v("Altura")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-6 subtitle"
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                            " +
-                                              _vm._s(
-                                                data.height
-                                                  ? data.height
-                                                  : "Sin información"
-                                              ) +
-                                              "\n                                            "
-                                          ),
                                           _c(
-                                            "span",
-                                            { staticClass: "is-size-7" },
-                                            [_vm._v("m")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-light is-size-7",
-                                          staticStyle: { "margin-top": "5px" }
-                                        },
-                                        [_vm._v("Factor de uso")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-6"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              data.use_factor
-                                                ? data.use_factor
-                                                : "Sin información"
-                                            )
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-light is-size-7",
-                                          staticStyle: { "margin-top": "5px" }
-                                        },
-                                        [_vm._v("Balizas")]
-                                      ),
-                                      _vm._v(" "),
-                                      _vm._l(data.beacons, function(beacon) {
-                                        return _c("div", [
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-light is-size-7 title"
+                                            },
+                                            [_vm._v("Tipo")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-semibold is-size-5 subtitle"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  data.vertical_structure_type
+                                                    ? data
+                                                        .vertical_structure_type
+                                                        .type
+                                                    : "Sin información"
+                                                )
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-light is-size-7 title"
+                                            },
+                                            [_vm._v("Altura")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-semibold is-size-6 subtitle"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(
+                                                    data.height
+                                                      ? data.height
+                                                      : "Sin información"
+                                                  ) +
+                                                  "\n                                            "
+                                              ),
+                                              _c(
+                                                "span",
+                                                { staticClass: "is-size-7" },
+                                                [_vm._v("m")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-light is-size-7",
+                                              staticStyle: {
+                                                "margin-top": "5px"
+                                              }
+                                            },
+                                            [_vm._v("Factor de uso")]
+                                          ),
+                                          _vm._v(" "),
                                           _c(
                                             "div",
                                             {
@@ -322,149 +299,204 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "🚨 " +
-                                                  _vm._s(
-                                                    beacon.beacon_type.type
-                                                  )
+                                                _vm._s(
+                                                  data.use_factor
+                                                    ? data.use_factor
+                                                    : "Sin información"
+                                                )
                                               )
                                             ]
-                                          )
-                                        ])
-                                      }),
-                                      _vm._v(" "),
-                                      !data.beacons.length
-                                        ? _c(
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
                                             "div",
                                             {
                                               staticClass:
-                                                "has-text-weight-normal is-size-6"
+                                                "has-text-weight-light is-size-7",
+                                              staticStyle: {
+                                                "margin-top": "5px"
+                                              }
                                             },
-                                            [_vm._v("No tiene Balizas")]
-                                          )
-                                        : _vm._e()
-                                    ],
-                                    2
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "column has-text-centered" },
-                                    [
-                                      _c("img", {
-                                        staticStyle: { "max-height": "500px" },
-                                        attrs: {
-                                          src:
-                                            "/img/vertical_structures/" +
-                                            data.vertical_structure_type.image
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ])
+                                            [_vm._v("Balizas")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._l(data.beacons, function(
+                                            beacon
+                                          ) {
+                                            return _c("div", [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "has-text-weight-semibold is-size-6"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "🚨 " +
+                                                      _vm._s(
+                                                        beacon.beacon_type.type
+                                                      )
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          }),
+                                          _vm._v(" "),
+                                          !data.beacons.length
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "has-text-weight-normal is-size-6"
+                                                },
+                                                [_vm._v("No tiene Balizas")]
+                                              )
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "column has-text-centered"
+                                        },
+                                        [
+                                          _c("img", {
+                                            staticStyle: {
+                                              "max-height": "500px"
+                                            },
+                                            attrs: {
+                                              src:
+                                                "/img/vertical_structures/" +
+                                                data.vertical_structure_type
+                                                  .image
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                )
                               ]
                             )
-                          ]
+                          }),
+                          0
                         )
-                      }),
-                      0
+                      ]
                     )
                   ]
                 )
-              ]
-            )
-          : _vm._e()
-      ]),
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _vm.verticalStructures.length == 0
+      !_vm.verticalStructures.length
         ? _c("div", { staticClass: "column" }, [_vm._m(1)])
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "column is-6" }, [
-        _vm.infrastructures.length
-          ? _c(
-              "section",
-              {
-                staticClass: "section",
-                staticStyle: { "padding-top": "0px", "padding-bottom": "48px" }
-              },
-              [
-                _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { class: _vm.infrastructures.length > 4 ? "" : "container" },
+      _vm.infrastructures.length
+        ? _c("div", { staticClass: "column is-6" }, [
+            _vm.infrastructures.length
+              ? _c(
+                  "section",
+                  {
+                    staticClass: "section",
+                    staticStyle: {
+                      "padding-top": "0px",
+                      "padding-bottom": "48px"
+                    }
+                  },
                   [
+                    _vm._m(2),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "tile is-ancestor" },
-                      _vm._l(_vm.infrastructures, function(data) {
-                        return _c(
+                      {
+                        class: _vm.infrastructures.length > 4 ? "" : "container"
+                      },
+                      [
+                        _c(
                           "div",
-                          { key: data.id, staticClass: "tile is-parent" },
-                          [
-                            _c("div", { staticClass: "tile is-child box" }, [
-                              _c("div", { staticClass: "columns" }, [
-                                _c("div", { staticClass: "column" }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "has-text-weight-light is-size-7 title"
-                                    },
-                                    [_vm._v("Tipo")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "has-text-weight-semibold is-size-5 subtitle"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            " +
-                                          _vm._s(
-                                            data.infrastructure_type
-                                              ? data.infrastructure_type.type
-                                              : "Sin información"
-                                          ) +
-                                          "\n                                        "
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
+                          { staticClass: "tile is-ancestor" },
+                          _vm._l(_vm.infrastructures, function(data) {
+                            return _c(
+                              "div",
+                              { key: data.id, staticClass: "tile is-parent" },
+                              [
                                 _c(
                                   "div",
-                                  { staticClass: "column has-text-right" },
+                                  { staticClass: "tile is-child box" },
                                   [
-                                    _c("font-awesome-icon", {
-                                      staticClass: "has-text-grey-lighter",
-                                      staticStyle: { opacity: "0.5" },
-                                      attrs: {
-                                        icon: ["fas", "home"],
-                                        size: "3x"
-                                      }
-                                    })
-                                  ],
-                                  1
+                                    _c("div", { staticClass: "columns" }, [
+                                      _c("div", { staticClass: "column" }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-light is-size-7 title"
+                                          },
+                                          [_vm._v("Tipo")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-semibold is-size-5 subtitle"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(
+                                                  data.infrastructure_type
+                                                    ? data.infrastructure_type
+                                                        .type
+                                                    : "Sin información"
+                                                ) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "column has-text-right"
+                                        },
+                                        [
+                                          _c("font-awesome-icon", {
+                                            staticClass:
+                                              "has-text-grey-lighter",
+                                            staticStyle: { opacity: "0.5" },
+                                            attrs: {
+                                              icon: ["fas", "home"],
+                                              size: "3x"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ]
                                 )
-                              ])
-                            ])
-                          ]
+                              ]
+                            )
+                          }),
+                          0
                         )
-                      }),
-                      0
+                      ]
                     )
                   ]
                 )
-              ]
-            )
-          : _vm._e()
-      ]),
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _vm.infrastructures.length == 0
-        ? _c("div", { staticClass: "column" }, [_vm._m(3)])
+      !_vm.infrastructures.length
+        ? _c("div", { staticClass: "column is-6" }, [_vm._m(3)])
         : _vm._e()
     ])
   ])

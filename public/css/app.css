@@ -511,7 +511,7 @@ fieldset[disabled] .pagination-ellipsis {
 .map:after {
   position: absolute;
   display: block;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   content: '';
   z-index: 5;
 }

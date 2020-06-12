@@ -4,7 +4,7 @@
             <p class="modal-card-title has-text-weight-bold">Edición de mediciones</p>
         </header>
         <section class="modal-card-body">
-            <div class="level" v-if="junction.latest_measurement">
+            <div class="level">
                 <div class="level-item">
                     <div class="has-text-centered">
                         <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R</div>
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <div class="has-text-weight-normal is-size-6">
-                            {{ phaseR * 220 | numeral(0,0) }} 
+                            {{ phaseR ? phaseR * 220 : 0 | numeral(0,0) }} 
                             <span class="is-size-7">W</span>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="has-text-weight-normal is-size-6">
-                            {{ phaseS * 220 | numeral(0,0) }} 
+                            {{ phaseS ? phaseS * 220 : 0 | numeral(0,0) }} 
                             <span class="is-size-7">W</span>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="has-text-weight-normal is-size-6">
-                            {{ phaseT * 220 | numeral(0,0) }} 
+                            {{ phaseT ? phaseT * 220 : 0 | numeral(0,0) }} 
                             <span class="is-size-7">W</span>
                         </div>
                     </div>
@@ -68,52 +68,40 @@
 
 <script>    
     export default {
-        components: {
-        },
         props : [
-            'pop',
             'user',
             'junction',
         ],
+
         data() {
             return {
-                phaseR: this.junction.latest_measurement.r_measure,
-                phaseS: this.junction.latest_measurement.s_measure,
-                phaseT: this.junction.latest_measurement.t_measure
+                phaseR: this.junction.latest_measurement ? this.junction.latest_measurement.r_measure : 0,
+                phaseS: this.junction.latest_measurement ? this.junction.latest_measurement.s_measure : 0,
+                phaseT: this.junction.latest_measurement ? this.junction.latest_measurement.t_measure : 0
             }
-        },
-        computed: {            
-        },
-
-        watch: {
-
-        },
-
-        created() {
-        },
-
-        mounted() {
         },
 
         methods: {
             save() {
                 const config = {
-                    headers: {
-                        'content-type': 'application/json',
-                    }
+                    headers: { 'content-type': 'application/json' }
                 }
 
                 let params = {
-                    'pop_id': this.pop.id,
+                    'api_token': this.user.api_token,
+                    'pop_id': this.junction.pop_id,
                     'user_id': this.user.id,
                     'phase_r': this.phaseR,
                     'phase_s': this.phaseS,
                     'phase_t': this.phaseT,
                 }
-                axios.put(`/api/junctions/${this.junction.id}?api_token=${this.user.api_token}`, params, config)
+                axios.put(`/api/junctions/${this.junction.id}`, params, config)
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                 })
+                this.$parent.close()
+                this.$eventBus.$emit('junction-measurements-updated');
+                
             },
         }
     }

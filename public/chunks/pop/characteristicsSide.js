@@ -222,25 +222,47 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'pop', 'popClassification', 'bafi', 'isEditMode', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
-  mounted: function mounted() {
-    console.log(this.bafi);
-  },
   data: function data() {
-    return {
-      pe_3g: this.pop.pe_3g ? true : false,
-      mpls: this.pop.mpls ? true : false,
-      olt: this.pop.olt ? true : false,
-      olt_3play: this.pop.olt_3play ? true : false,
-      vip: this.pop.vip ? true : false,
-      localidad_obligatoria: this.pop.localidad_obligatoria ? true : false,
-      ranco: this.pop.ranco ? true : false,
-      offgrid: this.pop.offgrid ? true : false,
-      solar: this.pop.solar ? true : false,
-      eolica: this.pop.eolica ? true : false
-    };
+    return {};
+  },
+  computed: {
+    pe_3g: function pe_3g() {
+      // console.log(!!+this.pop.pe_3g)
+      return !!+this.pop.pe_3g;
+    },
+    mpls: function mpls() {
+      return !!+this.pop.mpls;
+    },
+    olt: function olt() {
+      return !!+this.pop.olt;
+    },
+    olt_3play: function olt_3play() {
+      return !!+this.pop.olt_3play;
+    },
+    vip: function vip() {
+      return !!+this.pop.vip;
+    },
+    localidad_obligatoria: function localidad_obligatoria() {
+      return !!+this.pop.localidad_obligatoria;
+    },
+    ranco: function ranco() {
+      return !!+this.pop.ranco;
+    },
+    offgrid: function offgrid() {
+      return !!+this.pop.offgrid;
+    },
+    solar: function solar() {
+      return !!+this.pop.solar;
+    },
+    eolica: function eolica() {
+      return !!+this.pop.eolica;
+    }
   },
   watch: {
-    pop: function pop(val) {}
+    pop: function pop(val) {
+      console.log(val);
+      console.log(this.pe_3g);
+    }
   },
   methods: {
     updateParameter: function updateParameter(param, val) {
@@ -249,7 +271,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var params = {
         'api_token': this.user.api_token,
         'parameter': param,
-        'value': val,
+        'value': !val,
         'user_id': this.user.id
       };
       axios.put("/api/pop/".concat(this.pop.id), params).then(function (response) {
@@ -260,8 +282,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           type: 'is-success',
           duration: 2000
         });
+
+        _this.$eventBus.$emit('parameter-updated');
       });
-      this.$eventBus.$emit('parameter-updated');
     }
   }
 });
@@ -307,7 +330,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "is-size-5 title has-text-weight-semibold has-text-white"
+                    "is-size-5 title has-text-weight-semibold has-text-grey-dark"
                 },
                 [_vm._v("Negocio Fijo")]
               ),
@@ -325,7 +348,7 @@ var render = function() {
                           icon: _vm.pe_3g
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.pe_3g ? false : true
+                          disabled: !_vm.pe_3g
                         }
                       }),
                       _vm._v(" "),
@@ -352,17 +375,11 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.pe_3g },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter("pe_3g", _vm.pe_3g)
                             }
-                          },
-                          model: {
-                            value: _vm.pe_3g,
-                            callback: function($$v) {
-                              _vm.pe_3g = $$v
-                            },
-                            expression: "pe_3g"
                           }
                         },
                         [
@@ -389,7 +406,7 @@ var render = function() {
                           icon: _vm.mpls
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.mpls ? false : true
+                          disabled: !_vm.mpls
                         }
                       }),
                       _vm._v(" "),
@@ -416,17 +433,11 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.mpls },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter("mpls", _vm.mpls)
                             }
-                          },
-                          model: {
-                            value: _vm.mpls,
-                            callback: function($$v) {
-                              _vm.mpls = $$v
-                            },
-                            expression: "mpls"
                           }
                         },
                         [
@@ -451,7 +462,7 @@ var render = function() {
                           icon: _vm.olt
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.olt ? false : true
+                          disabled: !_vm.olt
                         }
                       }),
                       _vm._v(" "),
@@ -478,17 +489,11 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.olt },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter("olt", _vm.olt)
                             }
-                          },
-                          model: {
-                            value: _vm.olt,
-                            callback: function($$v) {
-                              _vm.olt = $$v
-                            },
-                            expression: "olt"
                           }
                         },
                         [
@@ -515,7 +520,7 @@ var render = function() {
                           icon: _vm.olt_3play
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.olt_3play ? false : true
+                          disabled: !_vm.olt_3play
                         }
                       }),
                       _vm._v(" "),
@@ -542,6 +547,7 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.olt_3play },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter(
@@ -549,13 +555,6 @@ var render = function() {
                                 _vm.olt_3play
                               )
                             }
-                          },
-                          model: {
-                            value: _vm.olt_3play,
-                            callback: function($$v) {
-                              _vm.olt_3play = $$v
-                            },
-                            expression: "olt_3play"
                           }
                         },
                         [
@@ -638,7 +637,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "is-size-5 title has-text-weight-semibold has-text-white"
+                    "is-size-5 title has-text-weight-semibold has-text-grey-dark"
                 },
                 [_vm._v("Negocio Movil")]
               ),
@@ -655,7 +654,7 @@ var render = function() {
                       icon: _vm.pop.red_minima_n1
                         ? ["fas", "check-circle"]
                         : ["far", "times-circle"],
-                      disabled: _vm.pop.red_minima_n1 ? false : true
+                      disabled: !_vm.pop.red_minima_n1
                     }
                   }),
                   _vm._v(" "),
@@ -685,7 +684,7 @@ var render = function() {
                       icon: _vm.pop.red_minima_n2
                         ? ["fas", "check-circle"]
                         : ["far", "times-circle"],
-                      disabled: _vm.pop.red_minima_n2 ? false : true
+                      disabled: !_vm.pop.red_minima_n2
                     }
                   }),
                   _vm._v(" "),
@@ -714,7 +713,7 @@ var render = function() {
                           icon: _vm.vip
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.vip ? false : true
+                          disabled: !_vm.vip
                         }
                       }),
                       _vm._v(" "),
@@ -741,17 +740,11 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.vip },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter("vip", _vm.vip)
                             }
-                          },
-                          model: {
-                            value: _vm.vip,
-                            callback: function($$v) {
-                              _vm.vip = $$v
-                            },
-                            expression: "vip"
                           }
                         },
                         [
@@ -778,7 +771,7 @@ var render = function() {
                           icon: _vm.localidad_obligatoria
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.localidad_obligatoria ? false : true
+                          disabled: !_vm.localidad_obligatoria
                         }
                       }),
                       _vm._v(" "),
@@ -805,6 +798,7 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.localidad_obligatoria },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter(
@@ -812,13 +806,6 @@ var render = function() {
                                 _vm.localidad_obligatoria
                               )
                             }
-                          },
-                          model: {
-                            value: _vm.localidad_obligatoria,
-                            callback: function($$v) {
-                              _vm.localidad_obligatoria = $$v
-                            },
-                            expression: "localidad_obligatoria"
                           }
                         },
                         [
@@ -845,7 +832,7 @@ var render = function() {
                           icon: _vm.ranco
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.ranco ? false : true
+                          disabled: !_vm.ranco
                         }
                       }),
                       _vm._v(" "),
@@ -872,17 +859,11 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.ranco },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter("ranco", _vm.ranco)
                             }
-                          },
-                          model: {
-                            value: _vm.ranco,
-                            callback: function($$v) {
-                              _vm.ranco = $$v
-                            },
-                            expression: "ranco"
                           }
                         },
                         [
@@ -905,7 +886,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "is-size-5 title has-text-weight-semibold has-text-white"
+                  "is-size-5 title has-text-weight-semibold has-text-grey-dark"
               },
               [_vm._v("CARACTERISTICAS INFRAESTRUCTURA")]
             ),
@@ -924,7 +905,7 @@ var render = function() {
                           icon: _vm.offgrid
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.offgrid ? false : true
+                          disabled: !_vm.offgrid
                         }
                       }),
                       _vm._v(" "),
@@ -951,17 +932,11 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.offgrid },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter("offgrid", _vm.offgrid)
                             }
-                          },
-                          model: {
-                            value: _vm.offgrid,
-                            callback: function($$v) {
-                              _vm.offgrid = $$v
-                            },
-                            expression: "offgrid"
                           }
                         },
                         [
@@ -988,7 +963,7 @@ var render = function() {
                           icon: _vm.solar
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.solar ? false : true
+                          disabled: !_vm.solar
                         }
                       }),
                       _vm._v(" "),
@@ -1015,17 +990,11 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.solar },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter("solar", _vm.solar)
                             }
-                          },
-                          model: {
-                            value: _vm.solar,
-                            callback: function($$v) {
-                              _vm.solar = $$v
-                            },
-                            expression: "solar"
                           }
                         },
                         [
@@ -1052,7 +1021,7 @@ var render = function() {
                           icon: _vm.eolica
                             ? ["fas", "check-circle"]
                             : ["far", "times-circle"],
-                          disabled: _vm.eolica ? false : true
+                          disabled: !_vm.eolica
                         }
                       }),
                       _vm._v(" "),
@@ -1079,17 +1048,11 @@ var render = function() {
                       _c(
                         "b-checkbox",
                         {
+                          attrs: { value: _vm.eolica },
                           on: {
                             input: function($event) {
                               return _vm.updateParameter("eolica", _vm.eolica)
                             }
-                          },
-                          model: {
-                            value: _vm.eolica,
-                            callback: function($$v) {
-                              _vm.eolica = $$v
-                            },
-                            expression: "eolica"
                           }
                         },
                         [

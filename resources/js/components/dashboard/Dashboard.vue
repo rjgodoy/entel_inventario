@@ -347,11 +347,8 @@
                             </div>
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
-            
         </section>
 
         <!-- <iframe width="650" height="450" src="https://embed.windy.com/embed2.html?lat=-33.708&lon=-70.815&zoom=10&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-33.708&detailLon=-70.815&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe> -->

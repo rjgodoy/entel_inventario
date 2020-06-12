@@ -41,11 +41,10 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
 
         if ($request->folder_id != 'null' || $request->folder_id != 'undefined') {
             $folder = Folder::find($request->folder_id);
-            $upload_path = 'Files/'.$request->pop_id;
+            $upload_path = 'Files'.$request->pop_id;
             $array = [$folder];
             while ($folder->parent_id != null) {
                 $parentFolder = Folder::find($folder->parent_id);
@@ -83,7 +82,8 @@ class FileController extends Controller
                 'size' => $file_size,
                 'mime' => $file_mime,
                 'extension' => $file_extension,
-                'route' => $file_route
+                'route' => $file_route,
+                'filename' => $request->filename ? $request->filename : null
             ]);
         }
 
@@ -125,10 +125,12 @@ class FileController extends Controller
      */
     public function view(Request $request)
     {
-        $headers = [
-            'Content-Type' => $request->mime,
-        ];
-        return Storage::disk('local')->get($request->route);
+        // $headers = [
+        //     'Content-Type' => $request->mime,
+        // ];
+        // return Storage::response($request->route);
+
+        return Storage::response($request->route, 'inline');
     }
 
     /**

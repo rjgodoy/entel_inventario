@@ -71,6 +71,16 @@ class Pop extends Model
      *
      * @var array
      */
+    public function generator_sets() 
+    {
+        return $this->hasMany(GeneratorSet::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function logs()
     {
         return $this->hasMany(Log::class);

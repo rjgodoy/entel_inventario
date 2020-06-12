@@ -66,6 +66,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     AdminUsers: function AdminUsers() {
       return __webpack_require__.e(/*! import() | chunks/admin/usersPermissions */ "chunks/admin/usersPermissions").then(__webpack_require__.bind(null, /*! ./AdminUsers */ "./resources/js/components/admin/AdminUsers.vue"));
+    },
+    AdminFiles: function AdminFiles() {
+      return Promise.all(/*! import() | chunks/admin/files */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/admin/files")]).then(__webpack_require__.bind(null, /*! ./AdminFiles */ "./resources/js/components/admin/AdminFiles.vue"));
     }
   },
   props: ['user'],
@@ -85,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
       selectedPrimaryBoxText: 'has-text-white',
       selectedSecondaryBoxText: 'has-text-light',
       tabs: null,
-      currentTab: 'pops'
+      currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'pops'
     };
   },
   methods: {

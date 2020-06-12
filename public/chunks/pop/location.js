@@ -60,7 +60,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     PopMap: function PopMap() {
-      return __webpack_require__.e(/*! import() | chunks/maps/popMapView */ "chunks/maps/popMapView").then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
+      return Promise.all(/*! import() | chunks/maps/popMapView */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("chunks/maps/popMapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
     }
   },
   props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
@@ -156,103 +156,96 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", {}, [
-    _c(
-      "div",
-      {
-        staticClass: "card is-shadowless",
-        staticStyle: { "border-left": "solid 1px rgba(0,0,0,0.05)" }
-      },
-      [
-        _c("div", { staticClass: "card-content is-paddingless" }, [
-          _c(
-            "div",
-            { staticClass: "map-container" },
-            [
-              _c("pop-map", {
-                attrs: {
-                  user: _vm.user,
-                  classification: _vm.popClassification,
-                  popMaster: _vm.pop,
-                  darkMode: _vm.darkMode
-                }
-              })
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "columns" }, [
-            _c("div", { staticClass: "column is-8" }, [
-              _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-                _vm._v(_vm._s(_vm.pop.direccion))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
-                _vm._v(
-                  "Comuna de " +
-                    _vm._s(_vm.pop.comuna ? _vm.pop.comuna.nombre_comuna : "")
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "is-size-7 has-text-weight-normal" }, [
-                _vm._v(
-                  "\n                        Zona " +
-                    _vm._s(
-                      _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
-                    ) +
-                    " - CRM " +
-                    _vm._s(
-                      _vm.pop.comuna ? _vm.pop.comuna.zona.crm.nombre_crm : ""
-                    ) +
-                    "\n                    "
-                )
-              ])
+    _c("div", { staticClass: "card is-shadowless" }, [
+      _c("div", { staticClass: "card-content is-paddingless" }, [
+        _c(
+          "div",
+          { staticClass: "map-container" },
+          [
+            _c("pop-map", {
+              attrs: {
+                user: _vm.user,
+                classification: _vm.popClassification,
+                popMaster: _vm.pop,
+                darkMode: _vm.darkMode
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-content" }, [
+        _c("div", { staticClass: "columns" }, [
+          _c("div", { staticClass: "column is-8" }, [
+            _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
+              _vm._v(_vm._s(_vm.pop.direccion))
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "column" }, [
-              _c("div", { staticClass: "level" }, [
-                _c("div", { staticClass: "level-item" }, [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-5 has-text-weight-semibold" },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.pop.latitude) +
-                          "\n                                "
-                      ),
-                      _c(
-                        "p",
-                        { staticClass: "is-size-6 has-text-weight-light" },
-                        [_vm._v("Latitud")]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "level-item" }, [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-5 has-text-weight-semibold" },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.pop.longitude) +
-                          "\n                                "
-                      ),
-                      _c(
-                        "p",
-                        { staticClass: "is-size-6 has-text-weight-light" },
-                        [_vm._v("Longitud")]
-                      )
-                    ]
-                  )
-                ])
+            _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
+              _vm._v(
+                "Comuna de " +
+                  _vm._s(_vm.pop.comuna ? _vm.pop.comuna.nombre_comuna : "")
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "is-size-7 has-text-weight-normal" }, [
+              _vm._v(
+                "\n                        Zona " +
+                  _vm._s(
+                    _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
+                  ) +
+                  " - CRM " +
+                  _vm._s(
+                    _vm.pop.comuna ? _vm.pop.comuna.zona.crm.nombre_crm : ""
+                  ) +
+                  "\n                    "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column" }, [
+            _c("div", { staticClass: "level" }, [
+              _c("div", { staticClass: "level-item" }, [
+                _c(
+                  "div",
+                  { staticClass: "is-size-5 has-text-weight-semibold" },
+                  [
+                    _vm._v(
+                      _vm._s(_vm.pop.latitude) +
+                        "\n                                "
+                    ),
+                    _c(
+                      "p",
+                      { staticClass: "is-size-6 has-text-weight-light" },
+                      [_vm._v("Latitud")]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item" }, [
+                _c(
+                  "div",
+                  { staticClass: "is-size-5 has-text-weight-semibold" },
+                  [
+                    _vm._v(
+                      _vm._s(_vm.pop.longitude) +
+                        "\n                                "
+                    ),
+                    _c(
+                      "p",
+                      { staticClass: "is-size-6 has-text-weight-light" },
+                      [_vm._v("Longitud")]
+                    )
+                  ]
+                )
               ])
             ])
           ])
         ])
-      ]
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

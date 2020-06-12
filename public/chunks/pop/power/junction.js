@@ -202,18 +202,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditJunctionParameters: function EditJunctionParameters() {
       return __webpack_require__.e(/*! import() | chunks/pop/power/modals/editJunction */ "chunks/pop/power/modals/editJunction").then(__webpack_require__.bind(null, /*! ./modals/EditJunctionParameters */ "./resources/js/components/pop/power/modals/EditJunctionParameters.vue"));
     }
   },
-  props: ['pop', 'can', 'junction', 'user'],
+  props: ['can', 'junction', 'user'],
   data: function data() {
     return {
       isEditJunctionModalActive: false
     };
+  },
+  watch: {
+    junction: function junction(val) {}
   },
   mounted: function mounted() {// console.log(this.junction)
   },
@@ -694,11 +696,7 @@ var render = function() {
                       },
                       [
                         _c("edit-junction-parameters", {
-                          attrs: {
-                            junction: _vm.junction,
-                            user: _vm.user,
-                            pop: _vm.pop
-                          }
+                          attrs: { junction: _vm.junction, user: _vm.user }
                         })
                       ],
                       1

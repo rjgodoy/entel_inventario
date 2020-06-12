@@ -3,12 +3,12 @@
         <div class="columns">
             <div class="column">
                 <div class="has-text-weight-light is-size-7">Marca</div>
-                <div class="has-text-weight-semibold is-size-4">{{ airConditioner.air_conditioner_brand.brand }}</div>
+                <div class="has-text-weight-semibold is-size-4">{{ airConditioner.air_conditioner_brand ? airConditioner.air_conditioner_brand.brand : 'Sin Información' }}</div>
                 <div class="has-text-weight-light is-size-7">Modelo</div>
-                <div class="has-text-weight-semibold is-size-6">{{ airConditioner.air_conditioner_brand.model }}</div>
+                <div class="has-text-weight-semibold is-size-6">{{ airConditioner.air_conditioner_brand ? airConditioner.air_conditioner_brand.model : 'Sin Información' }}</div>
             </div>
             <div class="column has-text-right">
-                <font-awesome-icon v-if="airConditioner.air_conditioner_brand.air_conditioner_type.icon"
+                <font-awesome-icon v-if="airConditioner.air_conditioner_brand && airConditioner.air_conditioner_brand.air_conditioner_type.icon"
                     :icon="[airConditioner.air_conditioner_brand.air_conditioner_type.icon_type, airConditioner.air_conditioner_brand.air_conditioner_type.icon]" 
                     size="3x" 
                     class="has-text-grey-lighter" 
@@ -19,7 +19,7 @@
         <div class="columns">
             <div class="column">
                 <div class="has-text-weight-light is-size-7">Tipo equipo</div>
-                <div class="has-text-weight-semibold is-size-6">{{ airConditioner.air_conditioner_brand.air_conditioner_type.type }}</div>
+                <div class="has-text-weight-semibold is-size-6">{{ airConditioner.air_conditioner_brand && airConditioner.air_conditioner_brand.air_conditioner_type.type }}</div>
                 <div class="has-text-weight-light is-size-7">Capacidad</div>
                 <div class="has-text-weight-normal is-size-6">{{ airConditioner.capacity | numeral('0,0') }} <span class="is-size-7">BTU</span></div>
             </div>

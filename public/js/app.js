@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/capacityPlanning":"chunks/capacityPlanning","chunks/comsite":"chunks/comsite","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chu~fd58a5cd":"vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chu~fd58a5cd","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage","chunks/dashboard":"chunks/dashboard","vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop":"vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","chunks/admin/approve":"chunks/admin/approve","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/pops":"chunks/admin/pops","chunks/capacity/modals/modalRoom":"chunks/capacity/modals/modalRoom","chunks/maps/mapView":"chunks/maps/mapView","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/characteristicsSide":"chunks/pop/characteristicsSide","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/capacity/modals/calculator":"chunks/capacity/modals/calculator","chunks/capacity/modals/requests":"chunks/capacity/modals/requests","chunks/capacity/modals/projection":"chunks/capacity/modals/projection","vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart":"vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart","vendors~chunks/capacity/modals/capacity":"vendors~chunks/capacity/modals/capacity","chunks/capacity/modals/capacity":"chunks/capacity/modals/capacity","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/pop/infrastructure/SpaceChart":"chunks/pop/infrastructure/SpaceChart","chunks/pop/layout/modals/airConditioner":"chunks/pop/layout/modals/airConditioner","chunks/pop/layout/modals/generator":"chunks/pop/layout/modals/generator","chunks/pop/layout/modals/junction":"chunks/pop/layout/modals/junction","chunks/pop/layout/modals/powerRectifier":"chunks/pop/layout/modals/powerRectifier","chunks/pop/layout/capacityChart":"chunks/pop/layout/capacityChart","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","vendors~canvg":"vendors~canvg","vendors~pdfmake":"vendors~pdfmake","vendors~xlsx":"vendors~xlsx","xlsx":"xlsx","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/comsite":"chunks/comsite","chunks/layouts/footer":"chunks/layouts/footer","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc":"vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage","chunks/dashboard":"chunks/dashboard","vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop":"vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop","chunks/capacityPlanning":"chunks/capacityPlanning","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","chunks/admin/approve":"chunks/admin/approve","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/files":"chunks/admin/files","chunks/admin/pops":"chunks/admin/pops","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/maps/mapView":"chunks/maps/mapView","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/capacity/calculator":"chunks/capacity/calculator","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/modalRoom":"chunks/capacity/modals/modalRoom","chunks/capacity/requests":"chunks/capacity/requests","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/capacity/projection":"chunks/capacity/projection","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristicsSide":"chunks/pop/characteristicsSide","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/layout/modals/airConditioner":"chunks/pop/layout/modals/airConditioner","chunks/pop/layout/modals/generator":"chunks/pop/layout/modals/generator","chunks/pop/layout/modals/junction":"chunks/pop/layout/modals/junction","chunks/pop/layout/modals/powerRectifier":"chunks/pop/layout/modals/powerRectifier","chunks/pop/layout/capacityChart":"chunks/pop/layout/capacityChart","chunks/capacity/modals/calculator":"chunks/capacity/modals/calculator","chunks/capacity/modals/requests":"chunks/capacity/modals/requests","chunks/capacity/modals/projection":"chunks/capacity/modals/projection","chunks/capacity/modals/capacity":"chunks/capacity/modals/capacity","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","vendors~canvg":"vendors~canvg","vendors~pdfmake":"vendors~pdfmake","vendors~xlsx":"vendors~xlsx","xlsx":"xlsx","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/infrastructure/SpaceChart":"chunks/pop/infrastructure/SpaceChart","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -12207,56 +12207,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -12267,6 +12217,9 @@ var Clock = __webpack_require__(/*! ./Clock.vue */ "./resources/js/components/Cl
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    Footer: function Footer() {
+      return __webpack_require__.e(/*! import() | chunks/layouts/footer */ "chunks/layouts/footer").then(__webpack_require__.bind(null, /*! ./layouts/Footer */ "./resources/js/components/layouts/Footer.vue"));
+    },
     'clock': Clock
   },
   props: ['user', 'user_permissions', 'app_name', 'crms', 'menu_data', 'pops', 'last_data_counters'],
@@ -52219,486 +52172,488 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sticky" }, [
-    _c(
-      "header",
-      {
-        staticClass: "section has-background-black-ter",
-        staticStyle: { "padding-top": "0px", "padding-bottom": "0px" }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "columns",
-            staticStyle: { "padding-top": "24px", "padding-bottom": "24px" }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "column is-3 is-small",
-                staticStyle: { "padding-top": "10px", "padding-left": "12px" }
-              },
-              [
-                _c("div", {}, [
-                  _c("nav", { staticClass: "navbar is-transparent" }, [
-                    _c("div", { staticClass: "navbar-brand" }, [
-                      _c("a", {
-                        staticClass: "navbar-item",
-                        staticStyle: {
-                          background:
-                            "url('/img/iconografia/entel-logo-negativo.png') no-repeat center center",
-                          "background-size": "contain",
-                          width: "60px"
-                        },
-                        attrs: { href: "#" }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "navbar-item" }, [
-                        _c(
-                          "div",
-                          { staticClass: "title is-5 has-text-grey-light" },
-                          [
-                            _c("div", { staticClass: "is-5 has-text-white" }, [
-                              _vm._v(_vm._s(_vm.app_name))
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(0),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "subtitle is-7 has-text-grey-light"
-                              },
-                              [_vm._v("Gerencia O&M Redes de Acceso")]
-                            )
-                          ]
-                        )
+  return _c(
+    "div",
+    { staticClass: "sticky" },
+    [
+      _c(
+        "header",
+        {
+          staticClass: "section has-background-black-ter",
+          staticStyle: { "padding-top": "0px", "padding-bottom": "0px" }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "columns",
+              staticStyle: { "padding-top": "24px", "padding-bottom": "24px" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "column is-3 is-small",
+                  staticStyle: { "padding-top": "10px", "padding-left": "12px" }
+                },
+                [
+                  _c("div", {}, [
+                    _c("nav", { staticClass: "navbar is-transparent" }, [
+                      _c("div", { staticClass: "navbar-brand" }, [
+                        _c("a", {
+                          staticClass: "navbar-item",
+                          staticStyle: {
+                            background:
+                              "url('/img/iconografia/entel-logo-negativo.png') no-repeat center center",
+                            "background-size": "contain",
+                            width: "60px"
+                          },
+                          attrs: { href: "#" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "navbar-item" }, [
+                          _c(
+                            "div",
+                            { staticClass: "title is-5 has-text-grey-light" },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "is-5 has-text-white" },
+                                [_vm._v(_vm._s(_vm.app_name))]
+                              ),
+                              _vm._v(" "),
+                              _vm._m(0),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "subtitle is-7 has-text-grey-light"
+                                },
+                                [_vm._v("Gerencia O&M Redes de Acceso")]
+                              )
+                            ]
+                          )
+                        ])
                       ])
                     ])
                   ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "column is-6 is-small",
-                staticStyle: { "padding-top": "20px" }
-              },
-              [
-                _c("div", { staticClass: "columns" }, [
-                  _c("div", { staticClass: "column is-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column" }, [
-                    _c(
-                      "ul",
-                      { staticClass: "columns" },
-                      _vm._l(_vm.menu_data, function(menu) {
-                        return _vm.canView(menu.path)
-                          ? _c(
-                              "li",
-                              {
-                                key: menu.id,
-                                staticClass: "column has-text-centered",
-                                class: _vm.currentRoute
-                                  .toLowerCase()
-                                  .includes(menu.path)
-                                  ? "is-active"
-                                  : ""
-                              },
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    class:
-                                      _vm.currentRoute.toLowerCase() ===
-                                      menu.path
-                                        ? menu.path == "/eco"
-                                          ? "has-text-eco"
-                                          : "has-text-link"
-                                        : "",
-                                    attrs: { to: menu.path }
-                                  },
-                                  [
-                                    _c("b-icon", {
-                                      class: _vm.currentRoute
-                                        .toLowerCase()
-                                        .includes(menu.path)
-                                        ? menu.path == "/eco"
-                                          ? "has-text-eco"
-                                          : "has-text-link"
-                                        : "has-text-grey-light",
-                                      attrs: {
-                                        pack: menu.icon_type,
-                                        icon: menu.icon
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "p",
-                                      {
-                                        staticClass: "is-size-7",
-                                        class: _vm.currentRoute
-                                          .toLowerCase()
-                                          .includes(menu.path)
-                                          ? "has-text-white"
-                                          : "has-text-grey-light"
-                                      },
-                                      [_vm._v(_vm._s(menu.title))]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm.currentRoute
-                                      .toLowerCase()
-                                      .includes(menu.path)
-                                      ? _c("div", {
-                                          class:
-                                            menu.path == "/eco"
-                                              ? "has-text-eco"
-                                              : "has-text-link",
-                                          staticStyle: {
-                                            "border-bottom": "3px solid",
-                                            "padding-top": "5px"
-                                          }
-                                        })
-                                      : _vm._e()
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column is-1" })
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "column is-3 is-small",
-                staticStyle: { "padding-top": "0px" }
-              },
-              [
-                _c("div", { staticClass: "is-size-6" }, [
-                  _c(
-                    "div",
-                    { staticClass: "navbar-end" },
-                    [
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "column is-6 is-small",
+                  staticStyle: { "padding-top": "20px" }
+                },
+                [
+                  _c("div", { staticClass: "columns" }, [
+                    _c("div", { staticClass: "column is-1" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "column" }, [
                       _c(
-                        "b-dropdown",
-                        {
-                          attrs: {
-                            hoverable: "",
-                            position: "is-bottom-left",
-                            "aria-role": "menu"
-                          }
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "navbar-item",
-                              attrs: { slot: "trigger", role: "button" },
-                              slot: "trigger"
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                class: _vm.userRequestAlerts.length
-                                  ? "has-text-info"
-                                  : "has-text-grey-light",
-                                attrs: { icon: ["fas", "bell"] }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.userRequestAlerts, function(alert) {
-                            return _c(
-                              "b-dropdown-item",
-                              { key: alert.id, attrs: { "has-link": "" } },
-                              [
-                                _c("router-link", { attrs: { to: "/admin" } }, [
-                                  _c("p", [
-                                    _c(
-                                      "small",
-                                      { staticClass: "has-text-info" },
-                                      [_vm._v(_vm._s(alert.created_at))]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("p", [
-                                    _vm._v(
-                                      "El usuario " +
-                                        _vm._s(alert.name) +
-                                        " " +
-                                        _vm._s(alert.apellido) +
-                                        " ha solicitado"
-                                    )
-                                  ]),
-                                  _c("p", [_vm._v("acceder a Inventario.")])
-                                ])
-                              ],
-                              1
-                            )
-                          }),
-                          _vm._v(" "),
-                          !_vm.userRequestAlerts.length
+                        "ul",
+                        { staticClass: "columns" },
+                        _vm._l(_vm.menu_data, function(menu) {
+                          return _vm.canView(menu.path)
                             ? _c(
-                                "b-dropdown-item",
-                                { attrs: { "aria-role": "menuitem" } },
-                                [
-                                  _c("font-awesome-icon", {
-                                    attrs: { icon: ["fas", "home"] }
-                                  }),
-                                  _vm._v(
-                                    "\n                                 No tienes notificaciones\n                            "
-                                  )
-                                ],
-                                1
-                              )
-                            : _vm._e()
-                        ],
-                        2
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-dropdown",
-                        {
-                          attrs: {
-                            hoverable: "",
-                            position: "is-bottom-left",
-                            "aria-role": "menu"
-                          }
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "navbar-item has-text-grey-light",
-                              attrs: { slot: "trigger", role: "button" },
-                              slot: "trigger"
-                            },
-                            [
-                              _c("span", [_vm._v(" Menu ")]),
-                              _vm._v(" "),
-                              _c("b-icon", {
-                                attrs: { icon: "angle-down", pack: "fas" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            { attrs: { custom: "", "aria-role": "menuitem" } },
-                            [
-                              _c("div", { staticClass: "has-text-left" }, [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(_vm.welcomeText)
-                                ),
-                                _c("br"),
-                                _c("b", [
-                                  _vm._v(
-                                    _vm._s(_vm.user.name) +
-                                      " " +
-                                      _vm._s(_vm.user.apellido)
-                                  )
-                                ])
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("hr", {
-                            staticClass: "dropdown-divider",
-                            attrs: { "aria-role": "menuitem" }
-                          }),
-                          _vm._v(" "),
-                          _vm.canView("/admin")
-                            ? _c(
-                                "b-dropdown-item",
-                                { attrs: { "aria-role": "menuitem" } },
+                                "li",
+                                {
+                                  key: menu.id,
+                                  staticClass: "column has-text-centered",
+                                  class: _vm.currentRoute
+                                    .toLowerCase()
+                                    .includes(menu.path)
+                                    ? "is-active"
+                                    : ""
+                                },
                                 [
                                   _c(
                                     "router-link",
                                     {
-                                      staticClass:
-                                        "bd-is-rss is-small has-text-dark",
-                                      attrs: { to: "/admin" }
+                                      class:
+                                        _vm.currentRoute.toLowerCase() ===
+                                        menu.path
+                                          ? menu.path == "/eco"
+                                            ? "has-text-eco"
+                                            : "has-text-link"
+                                          : "",
+                                      attrs: { to: menu.path }
                                     },
                                     [
-                                      _c("font-awesome-icon", {
-                                        attrs: { icon: ["fas", "cogs"] }
+                                      _c("b-icon", {
+                                        class: _vm.currentRoute
+                                          .toLowerCase()
+                                          .includes(menu.path)
+                                          ? menu.path == "/eco"
+                                            ? "has-text-eco"
+                                            : "has-text-link"
+                                          : "has-text-grey-light",
+                                        attrs: {
+                                          pack: menu.icon_type,
+                                          icon: menu.icon
+                                        }
                                       }),
-                                      _vm._v(
-                                        "\n                                     Administración\n                                "
-                                      )
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "is-size-7",
+                                          class: _vm.currentRoute
+                                            .toLowerCase()
+                                            .includes(menu.path)
+                                            ? "has-text-white"
+                                            : "has-text-grey-light"
+                                        },
+                                        [_vm._v(_vm._s(menu.title))]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.currentRoute
+                                        .toLowerCase()
+                                        .includes(menu.path)
+                                        ? _c("div", {
+                                            class:
+                                              menu.path == "/eco"
+                                                ? "has-text-eco"
+                                                : "has-text-link",
+                                            staticStyle: {
+                                              "border-bottom": "3px solid",
+                                              "padding-top": "5px"
+                                            }
+                                          })
+                                        : _vm._e()
                                     ],
                                     1
                                   )
                                 ],
                                 1
                               )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("hr", { staticClass: "dropdown-divider" }),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            {
-                              attrs: { disabled: "" },
-                              on: { click: _vm.changeStyle },
-                              model: {
-                                value: _vm.darkMode,
-                                callback: function($$v) {
-                                  _vm.darkMode = $$v
-                                },
-                                expression: "darkMode"
-                              }
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                attrs: { icon: ["fas", "adjust"] }
-                              }),
-                              _vm._v(
-                                "\n                                 " +
-                                  _vm._s(_vm.style) +
-                                  "\n                            "
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("hr", { staticClass: "navbar-divider" }),
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            { attrs: { "aria-role": "menuitem" } },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "bd-is-rss is-small has-text-dark",
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.logout($event)
-                                    }
-                                  }
-                                },
+                            : _vm._e()
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "column is-1" })
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "column is-3 is-small",
+                  staticStyle: { "padding-top": "0px" }
+                },
+                [
+                  _c("div", { staticClass: "is-size-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "navbar-end" },
+                      [
+                        _c(
+                          "b-dropdown",
+                          {
+                            attrs: {
+                              hoverable: "",
+                              position: "is-bottom-left",
+                              "aria-role": "menu"
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "navbar-item",
+                                attrs: { slot: "trigger", role: "button" },
+                                slot: "trigger"
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  class: _vm.userRequestAlerts.length
+                                    ? "has-text-info"
+                                    : "has-text-grey-light",
+                                  attrs: { icon: ["fas", "bell"] }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.userRequestAlerts, function(alert) {
+                              return _c(
+                                "b-dropdown-item",
+                                { key: alert.id, attrs: { "has-link": "" } },
                                 [
-                                  _c("font-awesome-icon", {
-                                    attrs: { icon: ["fas", "sign-out-alt"] }
-                                  }),
-                                  _vm._v(
-                                    "\n                                     Log Out\n                                "
+                                  _c(
+                                    "router-link",
+                                    { attrs: { to: "/admin#users" } },
+                                    [
+                                      _c("p", [
+                                        _c(
+                                          "small",
+                                          { staticClass: "has-text-info" },
+                                          [_vm._v(_vm._s(alert.created_at))]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", [
+                                        _vm._v(
+                                          "El usuario " +
+                                            _vm._s(alert.name) +
+                                            " " +
+                                            _vm._s(alert.apellido) +
+                                            " ha solicitado"
+                                        )
+                                      ]),
+                                      _c("p", [_vm._v("acceder a Inventario.")])
+                                    ]
                                   )
                                 ],
                                 1
                               )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
+                            }),
+                            _vm._v(" "),
+                            !_vm.userRequestAlerts.length
+                              ? _c(
+                                  "b-dropdown-item",
+                                  { attrs: { "aria-role": "menuitem" } },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      attrs: { icon: ["fas", "home"] }
+                                    }),
+                                    _vm._v(
+                                      "\n                                 No tienes notificaciones\n                            "
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-dropdown",
+                          {
+                            attrs: {
+                              hoverable: "",
+                              position: "is-bottom-left",
+                              "aria-role": "menu"
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "navbar-item has-text-grey-light",
+                                attrs: { slot: "trigger", role: "button" },
+                                slot: "trigger"
+                              },
+                              [
+                                _c("span", [_vm._v(" Menu ")]),
+                                _vm._v(" "),
+                                _c("b-icon", {
+                                  attrs: { icon: "angle-down", pack: "fas" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-dropdown-item",
+                              {
+                                attrs: { custom: "", "aria-role": "menuitem" }
+                              },
+                              [
+                                _c("div", { staticClass: "has-text-left" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.welcomeText)
+                                  ),
+                                  _c("br"),
+                                  _c("b", [
+                                    _vm._v(
+                                      _vm._s(_vm.user.name) +
+                                        " " +
+                                        _vm._s(_vm.user.apellido)
+                                    )
+                                  ])
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("hr", {
+                              staticClass: "dropdown-divider",
+                              attrs: { "aria-role": "menuitem" }
+                            }),
+                            _vm._v(" "),
+                            _vm.canView("/admin")
+                              ? _c(
+                                  "b-dropdown-item",
+                                  { attrs: { "aria-role": "menuitem" } },
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "bd-is-rss is-small has-text-dark",
+                                        attrs: { to: "/admin" }
+                                      },
+                                      [
+                                        _c("font-awesome-icon", {
+                                          attrs: { icon: ["fas", "cogs"] }
+                                        }),
+                                        _vm._v(
+                                          "\n                                     Administración\n                                "
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("hr", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "b-dropdown-item",
+                              {
+                                attrs: { disabled: "" },
+                                on: { click: _vm.changeStyle },
+                                model: {
+                                  value: _vm.darkMode,
+                                  callback: function($$v) {
+                                    _vm.darkMode = $$v
+                                  },
+                                  expression: "darkMode"
+                                }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  attrs: { icon: ["fas", "adjust"] }
+                                }),
+                                _vm._v(
+                                  "\n                                 " +
+                                    _vm._s(_vm.style) +
+                                    "\n                            "
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("hr", { staticClass: "navbar-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "b-dropdown-item",
+                              { attrs: { "aria-role": "menuitem" } },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "bd-is-rss is-small has-text-dark",
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.logout($event)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      attrs: { icon: ["fas", "sign-out-alt"] }
+                                    }),
+                                    _vm._v(
+                                      "\n                                     Log Out\n                                "
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "navbar-end",
+                        staticStyle: { "padding-right": "20px" }
+                      },
+                      [_c("clock")],
+                      1
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "level is-link is-bold",
+              staticStyle: {
+                "margin-right": "-24px",
+                "margin-left": "-24px",
+                "margin-top": "-24px"
+              }
+            },
+            [
+              _c("div", { staticClass: "level-item" }, [
+                _c("div", { staticClass: "container has-text-centered" }, [
                   _c(
-                    "div",
+                    "h1",
                     {
-                      staticClass: "navbar-end",
-                      staticStyle: { "padding-right": "20px" }
+                      staticClass:
+                        "is-size-5 has-text-white has-text-weight-bold",
+                      staticStyle: { padding: "10px 0 10px 0" }
                     },
-                    [_c("clock")],
-                    1
+                    [_vm._v(_vm._s(this.$route.name.toUpperCase()))]
                   )
                 ])
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("main", { staticClass: "sticky-content" }, [
         _c(
           "div",
-          {
-            staticClass: "level is-link is-bold",
-            staticStyle: {
-              "margin-right": "-24px",
-              "margin-left": "-24px",
-              "margin-top": "-24px"
-            }
-          },
+          { staticClass: "section is-paddingless has-background-light" },
           [
-            _c("div", { staticClass: "level-item" }, [
-              _c("div", { staticClass: "container has-text-centered" }, [
-                _c(
-                  "h1",
-                  {
-                    staticClass:
-                      "is-size-5 has-text-white has-text-weight-bold",
-                    staticStyle: { padding: "10px 0 10px 0" }
-                  },
-                  [_vm._v(_vm._s(this.$route.name.toUpperCase()))]
-                )
-              ])
-            ])
-          ]
+            _c(
+              "keep-alive",
+              [
+                _c("router-view", {
+                  attrs: {
+                    user: _vm.user,
+                    user_permissions: _vm.user_permissions,
+                    popList: _vm.pops,
+                    crms: _vm.crms,
+                    last_data_counters: _vm.last_data_counters,
+                    darkMode: _vm.darkMode
+                  }
+                })
+              ],
+              1
+            )
+          ],
+          1
         )
-      ]
-    ),
-    _vm._v(" "),
-    _c("main", { staticClass: "sticky-content" }, [
-      _c(
-        "div",
-        { staticClass: "section is-paddingless has-background-light" },
-        [
-          _c(
-            "keep-alive",
-            [
-              _c("router-view", {
-                attrs: {
-                  user: _vm.user,
-                  user_permissions: _vm.user_permissions,
-                  popList: _vm.pops,
-                  crms: _vm.crms,
-                  last_data_counters: _vm.last_data_counters,
-                  darkMode: _vm.darkMode
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("hr", { staticClass: "has-background-light is-marginless" }),
-    _vm._v(" "),
-    _c(
-      "footer",
-      {
-        class:
-          _vm.currentRoute.toLowerCase() == "/capacity"
-            ? "has-background-black-ter"
-            : "has-background-white",
-        staticStyle: { "padding-top": "0.5rem", "padding-bottom": "0rem" }
-      },
-      [_vm._m(1)]
-    )
-  ])
+      ]),
+      _vm._v(" "),
+      _c("Footer", { attrs: { user: _vm.user } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -52709,24 +52664,6 @@ var staticRenderFns = [
       _vm._v("Subgerencia Infraestructura, "),
       _c("br", { staticClass: "is-hidden-fullhd" }),
       _vm._v(" Poder y Clima")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "has-text-centered" }, [
-      _c(
-        "a",
-        { attrs: { href: "http://www.anidalatam.com", target: "blank" } },
-        [
-          _c("img", {
-            staticClass: "img-container",
-            staticStyle: { width: "100px" },
-            attrs: { alt: "image", src: "/img/logo_anida.png" }
-          })
-        ]
-      )
     ])
   }
 ]
@@ -71033,7 +70970,7 @@ var Register = function Register() {
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard~chu~fd58a5cd"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ../components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {
@@ -71041,15 +70978,19 @@ var PopTable = function PopTable() {
 };
 
 var Pop = function Pop() {
-  return Promise.all(/*! import() | chunks/pop */[__webpack_require__.e("vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/pop")]).then(__webpack_require__.bind(null, /*! ../components/pop/Pop.vue */ "./resources/js/components/pop/Pop.vue"));
+  return Promise.all(/*! import() | chunks/pop */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/pop")]).then(__webpack_require__.bind(null, /*! ../components/pop/Pop.vue */ "./resources/js/components/pop/Pop.vue"));
 };
 
 var CapacityPlanning = function CapacityPlanning() {
-  return __webpack_require__.e(/*! import() | chunks/capacityPlanning */ "chunks/capacityPlanning").then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ../components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+};
+
+var RoomDetail = function RoomDetail() {
+  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ../components/capacity/RoomDetail.vue */ "./resources/js/components/capacity/RoomDetail.vue"));
 };
 
 var Eco = function Eco() {
-  return Promise.all(/*! import() | chunks/eco */[__webpack_require__.e("vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/eco")]).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
+  return Promise.all(/*! import() | chunks/eco */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/eco")]).then(__webpack_require__.bind(null, /*! ../components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
 };
 
 var Comsite = function Comsite() {
@@ -71057,7 +70998,7 @@ var Comsite = function Comsite() {
 };
 
 var Documents = function Documents() {
-  return Promise.all(/*! import() | chunks/documents */[__webpack_require__.e("vendors~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/documents")]).then(__webpack_require__.bind(null, /*! ../components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
+  return Promise.all(/*! import() | chunks/documents */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop"), __webpack_require__.e("chunks/documents")]).then(__webpack_require__.bind(null, /*! ../components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
 };
 
 var Admin = function Admin() {
@@ -71111,6 +71052,10 @@ var Admin = function Admin() {
       path: '/capacity',
       name: 'Capacity Planning',
       component: CapacityPlanning
+    }, {
+      path: '/capacity/:id',
+      name: 'Detalle de Sala',
+      component: RoomDetail
     }, {
       path: '/comsite',
       name: 'Comsite',

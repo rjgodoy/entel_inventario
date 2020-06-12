@@ -2,7 +2,7 @@
     <div class="">
         <!-- TECNOLOGIAS -->
         <!-- ########### -->
-        <section class="section has-background-white-bis is-bold" style="padding-top: 20px; padding-bottom: 20px;">
+        <section class="section has-background-white-bis is-bold" style="padding-top: 20px; padding-bottom: 20px; border-bottom: solid 0.5px rgba(0,0,0,0.2)">
             <div class="columns">
                 <div class="column has-text-weight-semibold is-size-3 has-text-left">Tecnologías</div>
             </div>
@@ -84,7 +84,6 @@
             </div>
         </section>
 
-        <hr class="has-background-grey-lighter is-marginless"></hr>
 
         <section class="section" style="padding-top: 20px;">
             <div class="columns">

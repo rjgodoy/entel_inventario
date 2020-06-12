@@ -272,7 +272,9 @@ $radius-rounded: 290486px !default;
 .map-container:before, .map-container:after, .map:before, .map:after {
     position: absolute;
     display: block;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
     content: '';
     z-index: 5;
 }

@@ -9,54 +9,54 @@
                         <div class="tile is-child">
 
                             <div class="" style="padding: 10px;">
-                                <div class="is-size-5 title has-text-weight-semibold has-text-white">Negocio Fijo</div>
+                                <div class="is-size-5 title has-text-weight-semibold has-text-grey-dark">Negocio Fijo</div>
 
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="pe_3g ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pe_3g ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="pe_3g ? false : true"
+                                        :disabled="!pe_3g"
                                     />
                                     <label  :class="pe_3g ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">PE 3G</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="pe_3g" @input="updateParameter('pe_3g', pe_3g)"><div class="is-size-6">PE 3G</div></b-checkbox>
+                                    <b-checkbox :value="pe_3g" @input="updateParameter('pe_3g', pe_3g)"><div class="is-size-6">PE 3G</div></b-checkbox>
                                 </div>
 
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="mpls ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="mpls ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="mpls ? false : true"
+                                        :disabled="!mpls"
                                     />
                                     <label :class="mpls ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">MPLS</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="mpls" @input="updateParameter('mpls', mpls)"><div class="is-size-6">MPLS</div></b-checkbox>
+                                    <b-checkbox :value="mpls" @input="updateParameter('mpls', mpls)"><div class="is-size-6">MPLS</div></b-checkbox>
                                 </div>
 
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="olt ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="olt ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="olt ? false : true"
+                                        :disabled="!olt"
                                     />
                                     <label :class="olt ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">OLT</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="olt" @input="updateParameter('olt', olt)"><div class="is-size-6">OLT</div></b-checkbox>
+                                    <b-checkbox :value="olt" @input="updateParameter('olt', olt)"><div class="is-size-6">OLT</div></b-checkbox>
                                 </div>
 
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="olt_3play ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="olt_3play ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="olt_3play ? false : true"
+                                        :disabled="!olt_3play"
                                     />
                                     <label :class="olt_3play ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">OLT 3Play</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="olt_3play" @input="updateParameter('olt_3play', olt_3play)"><div class="is-size-6">OLT 3Play</div></b-checkbox>
+                                    <b-checkbox :value="olt_3play" @input="updateParameter('olt_3play', olt_3play)"><div class="is-size-6">OLT 3Play</div></b-checkbox>
                                 </div>
 
                                 <div class="field">
@@ -87,12 +87,12 @@
                         <div class="tile is-child">
                             
                             <div class="" style="padding: 10px;">
-                                <div class="is-size-5 title has-text-weight-semibold has-text-white">Negocio Movil</div>
+                                <div class="is-size-5 title has-text-weight-semibold has-text-grey-dark">Negocio Movil</div>
                                 <div class="field">
                                     <font-awesome-icon 
                                         :icon="pop.red_minima_n1 ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.red_minima_n1 ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="pop.red_minima_n1 ? false : true"
+                                        :disabled="!pop.red_minima_n1"
                                     />
                                     <label :class="pop.red_minima_n1 ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">Red Mínima N1</label>
                                 </div>
@@ -101,7 +101,7 @@
                                     <font-awesome-icon 
                                         :icon="pop.red_minima_n2 ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pop.red_minima_n2 ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="pop.red_minima_n2 ? false : true"
+                                        :disabled="!pop.red_minima_n2"
                                     />
                                     <label :class="pop.red_minima_n2 ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">Red Mínima N2</label>
                                 </div>
@@ -110,36 +110,36 @@
                                     <font-awesome-icon 
                                         :icon="vip ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="vip ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="vip ? false : true"
+                                        :disabled="!vip"
                                     />
                                     <label :class="vip ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">VIP</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="vip" @input="updateParameter('vip', vip)"><div class="is-size-6">VIP</div></b-checkbox>
+                                    <b-checkbox :value="vip" @input="updateParameter('vip', vip)"><div class="is-size-6">VIP</div></b-checkbox>
                                 </div>
 
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="localidad_obligatoria ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="localidad_obligatoria ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="localidad_obligatoria ? false : true"
+                                        :disabled="!localidad_obligatoria"
                                     />
                                     <label :class="localidad_obligatoria ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">Localidad Obligatoria</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="localidad_obligatoria" @input="updateParameter('localidad_obligatoria', localidad_obligatoria)"><div class="is-size-6">Localidad Obligatoria</div></b-checkbox>
+                                    <b-checkbox :value="localidad_obligatoria" @input="updateParameter('localidad_obligatoria', localidad_obligatoria)"><div class="is-size-6">Localidad Obligatoria</div></b-checkbox>
                                 </div>
 
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="ranco ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="ranco ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="ranco ? false : true"
+                                        :disabled="!ranco"
                                     />
                                     <label :class="ranco ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">RAN Consolidado (RANCO)</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="ranco" @input="updateParameter('ranco', ranco)"><div class="is-size-6">RAN Consolidado (RANCO)</div></b-checkbox>
+                                    <b-checkbox :value="ranco" @input="updateParameter('ranco', ranco)"><div class="is-size-6">RAN Consolidado (RANCO)</div></b-checkbox>
                                 </div>
 
                             </div>
@@ -152,42 +152,42 @@
                         <!-- <div class="has-text-weight-bold has-text-dark is-size-5 has-text-left tile" style="padding-bottom: 24px;">CARACTERISTICAS INFRAESTRUCTURA</div> -->
                         <div class="tile is-child">
 
-                            <div class="is-size-5 title has-text-weight-semibold has-text-white">CARACTERISTICAS INFRAESTRUCTURA</div>
+                            <div class="is-size-5 title has-text-weight-semibold has-text-grey-dark">CARACTERISTICAS INFRAESTRUCTURA</div>
                             <div class="" style="padding: 10px;">
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="offgrid ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="offgrid ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="offgrid ? false : true"
+                                        :disabled="!offgrid"
                                     />
                                     <label :class="offgrid ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">Offgrid</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="offgrid" @input="updateParameter('offgrid', offgrid)"><div class="is-size-6">Offgrid</div></b-checkbox>
+                                    <b-checkbox :value="offgrid" @input="updateParameter('offgrid', offgrid)"><div class="is-size-6">Offgrid</div></b-checkbox>
                                 </div>
 
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="solar ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="solar ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="solar ? false : true"
+                                        :disabled="!solar"
                                     />
                                     <label :class="solar ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">Paneles Solares</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="solar" @input="updateParameter('solar', solar)"><div class="is-size-6">Paneles Solares</div></b-checkbox>
+                                    <b-checkbox :value="solar" @input="updateParameter('solar', solar)"><div class="is-size-6">Paneles Solares</div></b-checkbox>
                                 </div>
 
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="eolica ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="eolica ? 'has-text-eco' : 'has-text-grey-light'"
-                                        :disabled="eolica ? false : true"
+                                        :disabled="!eolica"
                                     />
                                     <label :class="eolica ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">Eólico</label>
                                 </div>
                                 <div class="field" v-if="isEditMode">
-                                    <b-checkbox v-model="eolica" @input="updateParameter('eolica', eolica)"><div class="is-size-6">Eólico</div></b-checkbox>
+                                    <b-checkbox :value="eolica" @input="updateParameter('eolica', eolica)"><div class="is-size-6">Eólico</div></b-checkbox>
                                 </div>
 
                             </div>
@@ -221,31 +221,62 @@ export default {
         'secondaryText',
     ],
 
-    mounted() {
-        console.log(this.bafi)
-    },
-
     data() {
         return {
-            pe_3g: this.pop.pe_3g ? true : false,
-            mpls: this.pop.mpls ? true : false,
-            olt: this.pop.olt ? true : false,
-            olt_3play: this.pop.olt_3play ? true : false,
 
-            vip: this.pop.vip ? true : false,
-            localidad_obligatoria: this.pop.localidad_obligatoria ? true : false,
-            ranco: this.pop.ranco ? true : false,
-
-            offgrid: this.pop.offgrid ? true : false,
-            solar: this.pop.solar ? true : false,
-            eolica: this.pop.eolica ? true : false,
         }
+    },
+
+    computed: {
+        pe_3g() {
+            // console.log(!!+this.pop.pe_3g)
+            return !!+this.pop.pe_3g
+        },
+
+        mpls() {
+            return !!+this.pop.mpls
+        },
+
+        olt() {
+            return !!+this.pop.olt
+        },
+
+        olt_3play() {
+            return !!+this.pop.olt_3play
+        },
+
+        vip() {
+            return !!+this.pop.vip
+        },
+
+        localidad_obligatoria() {
+            return !!+this.pop.localidad_obligatoria
+        },
+
+        ranco() {
+            return !!+this.pop.ranco
+        },
+
+        offgrid() {
+            return !!+this.pop.offgrid
+        },
+
+        solar() {
+            return !!+this.pop.solar
+        },
+
+        eolica() {
+            return !!+this.pop.eolica
+        },
+
     },
 
     watch: {
         pop(val) {
 
-        },
+            console.log(val)
+            console.log(this.pe_3g)
+        }
     },
 
     methods: {
@@ -253,7 +284,7 @@ export default {
             let params = {
                 'api_token': this.user.api_token,
                 'parameter': param,
-                'value': val,
+                'value': !val,
                 'user_id': this.user.id
             }
 
@@ -265,8 +296,9 @@ export default {
                     type: 'is-success',
                     duration: 2000
                 })
+                this.$eventBus.$emit('parameter-updated');
             })
-            this.$eventBus.$emit('parameter-updated');
+            
         }
     }
 }

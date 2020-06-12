@@ -270,9 +270,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     Sites: function Sites() {
       return __webpack_require__.e(/*! import() | chunks/pop/sites */ "chunks/pop/sites").then(__webpack_require__.bind(null, /*! ./Sites */ "./resources/js/components/pop/Sites.vue"));
     },
-    Characteristics: function Characteristics() {
-      return __webpack_require__.e(/*! import() | chunks/pop/characteristics */ "chunks/pop/characteristics").then(__webpack_require__.bind(null, /*! ./Characteristics */ "./resources/js/components/pop/Characteristics.vue"));
-    },
+    // Characteristics: () => import(/* webpackChunkName: "chunks/pop/characteristics"*/'./Characteristics'),
     CharacteristicsSide: function CharacteristicsSide() {
       return __webpack_require__.e(/*! import() | chunks/pop/characteristicsSide */ "chunks/pop/characteristicsSide").then(__webpack_require__.bind(null, /*! ./CharacteristicsSide */ "./resources/js/components/pop/CharacteristicsSide.vue"));
     },
@@ -334,7 +332,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('parameter-updated', this.getAllData);
   },
   mounted: function mounted() {
-    console.log(this.$route);
+    // console.log(this.$route)
     this.getAllData();
     this.getTabs();
   },
@@ -1182,7 +1180,10 @@ var render = function() {
         _c("div", { staticClass: "columns is-marginless" }, [
           _c(
             "div",
-            { staticClass: "column is-2 has-background-white is-paddingless" },
+            {
+              staticClass: "column is-2 has-background-white is-paddingless",
+              staticStyle: { "border-right": "solid 0.5px rgba(0,0,0,0.1)" }
+            },
             [
               _c("section", { staticClass: "section" }, [
                 _c(
@@ -1310,8 +1311,8 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass:
-                "column is-2 has-background-link has-text-white is-paddingless shadow-inset-dark-light"
+              staticClass: "column is-2 has-background-white is-paddingless",
+              staticStyle: { "border-left": "solid 0.5px rgba(0,0,0,0.1)" }
             },
             [
               _c("section", { staticClass: "section" }, [

@@ -2,7 +2,7 @@
     <section class="section">
         <div class="columns">
             
-            <div class="column">
+            <div class="column" v-if="verticalStructures.length">
 
                 <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="verticalStructures.length">
                     <div class="field">
@@ -45,7 +45,7 @@
                 </section>
             </div>
 
-            <div class="column" v-if="verticalStructures.length == 0">
+            <div class="column" v-if="!verticalStructures.length">
                 <section class="section">
                     <div class="box">
                         POP no tiene estructura vertical.
@@ -53,7 +53,7 @@
                 </section>
             </div>
 
-            <div class="column is-6">
+            <div class="column is-6" v-if="infrastructures.length">
                 <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="infrastructures.length">
                     <div class="field">
                         <div class="has-text-weight-semibold has-text-dark is-size-4 has-text-left">Infraestructura</div>
@@ -87,7 +87,7 @@
                 </section>
             </div>
 
-            <div class="column" v-if="infrastructures.length == 0">
+            <div class="column is-6" v-if="!infrastructures.length">
                 <section class="section">
                     <div class="box">
                         POP no tiene infraestructura.
@@ -103,8 +103,9 @@
 <script>
     export default {
         components: {
-            SpaceChart: () => import(/* webpackChunkName: "chunks/pop/infrastructure/spaceChart"*/'./SpaceChart')
+
         },
+
         props : [
             'user',
             'pop',
@@ -113,12 +114,14 @@
             'primaryText',
             'secondaryText',
         ],
+
         data() {
             return {
                 verticalStructures: [],
                 infrastructures: [],
             }
         },
+        
         mounted() {
             this.getVerticalStructures()
             this.getInfrastructures()

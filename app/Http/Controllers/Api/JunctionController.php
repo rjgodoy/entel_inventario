@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Junction as JunctionResource;
+use App\Http\Resources\JunctionCollection;
 use App\Imports\JunctionsImport;
 use App\Models\Junction;
 use App\Models\JunctionMeasurement;
@@ -48,6 +49,21 @@ class JunctionController extends Controller
         ->get();
 
         return new JunctionResource($junctions);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function popJunctions($pop_id)
+    {
+        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection')
+        ->where('pop_id', $pop_id)
+        ->get();
+
+        return new JunctionCollection($junctions);
     }
 
     /**

@@ -204,7 +204,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -390,7 +389,11 @@ var render = function() {
         "section",
         {
           staticClass: "section has-background-white-bis is-bold",
-          staticStyle: { "padding-top": "20px", "padding-bottom": "20px" }
+          staticStyle: {
+            "padding-top": "20px",
+            "padding-bottom": "20px",
+            "border-bottom": "solid 0.5px rgba(0,0,0,0.2)"
+          }
         },
         [
           _vm._m(0),
@@ -744,8 +747,6 @@ var render = function() {
           ])
         ]
       ),
-      _vm._v(" "),
-      _c("hr", { staticClass: "has-background-grey-lighter is-marginless" }),
       _vm._v(" "),
       _c(
         "section",

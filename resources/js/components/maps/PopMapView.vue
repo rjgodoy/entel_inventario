@@ -1,5 +1,6 @@
 <template>
     <GmapMap
+        class="map"
         style="
             min-height: 788px;
             /*min-height: 576px; */
@@ -75,6 +76,7 @@
             'popMaster',
             'darkMode'
         ],
+
         data() {
             return {
                 pops: [],
@@ -110,6 +112,7 @@
                         "featureType": "poi.business","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]}]
             }
         },
+
         computed: {
             google: gmapApi,
             mapStyle() {
@@ -146,6 +149,13 @@
         mounted() {
             this.setMap()
             this.getDependences()
+        },
+
+        watch: {
+            popMaster(val) {
+                this.setMap()
+                this.getDependences()
+            }
         },
 
         methods: {
@@ -205,8 +215,8 @@
                 `);
             },
 
-            getDependences() {
-                axios.get(`/api/dependences/${this.popMaster.id}?api_token=${this.user.api_token}`)
+            async getDependences() {
+                await axios.get(`/api/dependences/${this.popMaster.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
                     this.dependences = response.data.data
 

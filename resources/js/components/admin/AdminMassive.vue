@@ -6,7 +6,7 @@
                     <div class="tile is-child box" :class="boxBackground" >
                         <div :class="secondaryText"> 
                             <div class="is-size-6 has-text-weight-semibold">
-                                Efizzity
+                                Efizity
                             </div>
 
                             <b-field>

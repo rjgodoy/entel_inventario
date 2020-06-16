@@ -202,6 +202,207 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditJunctionParameters: function EditJunctionParameters() {
@@ -211,18 +412,73 @@ __webpack_require__.r(__webpack_exports__);
   props: ['can', 'junction', 'user'],
   data: function data() {
     return {
-      isEditJunctionModalActive: false
+      junctionTypeId: this.junction.junction_type_id,
+      junctionTypes: [],
+      junctionConnectionId: this.junction.junction_connection_id,
+      junctionConnections: [],
+      isEditJunctionModalActive: false,
+      isEditMode: false,
+      clientNumber: this.junction.client_number,
+      junctionNumber: this.junction.junction_number,
+      useFactor: this.junction.use_factor
     };
   },
   watch: {
     junction: function junction(val) {}
   },
-  mounted: function mounted() {// console.log(this.junction)
+  mounted: function mounted() {
+    this.getJunctionTypes();
+    this.getJunctionConnections();
   },
   computed: {
-    capacidadTotal: function capacidadTotal() {
-      return this.junction.latest_protection ? this.junction.latest_protection.nominal_a * 380 * 1.7320508 : 0;
+    powerA: function powerA() {
+      var latestProtectionRA = this.junction.latest_protection ? this.junction.latest_protection.regulada_a : 0;
+      var latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0;
+
+      if (this.junction.junction_type_id == 1) {
+        return latestProtectionRA * latestMeasureRA_V / 1000;
+      } else {
+        return latestProtectionRA * 380 * Math.sqrt(3) / 1000;
+      }
     },
+    powerB: function powerB() {
+      var latestProtectionRB = this.junction.latest_protection ? this.junction.latest_protection.regulada_b : 0;
+
+      if (this.junction.junction_type_id == 1) {
+        return latestProtectionRB * 220 / 1000;
+      } else {
+        return latestProtectionRB * 380 * Math.sqrt(3) / 1000;
+      }
+    },
+    powerUsedA: function powerUsedA() {
+      var latestMeasureRA_A = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_amp_measure : 0;
+      var latestMeasureSA_A = this.junction.latest_measurement ? this.junction.latest_measurement.s_a_amp_measure : 0;
+      var latestMeasureTA_A = this.junction.latest_measurement ? this.junction.latest_measurement.t_a_amp_measure : 0;
+      var latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0;
+      var latestMeasureSA_V = this.junction.latest_measurement ? this.junction.latest_measurement.s_a_volt_measure : 0;
+      var latestMeasureTA_V = this.junction.latest_measurement ? this.junction.latest_measurement.t_a_volt_measure : 0;
+
+      if (this.junction.junction_type_id == 1) {
+        return latestMeasureRA_A * latestMeasureRA_V / 1000;
+      } else {
+        return (latestMeasureRA_A * latestMeasureRA_V + latestMeasureSA_A * latestMeasureSA_V + latestMeasureTA_A * latestMeasureTA_V) / 1000;
+      }
+    },
+    powerUsedB: function powerUsedB() {
+      var latestMeasureRB_A = this.junction.latest_measurement ? this.junction.latest_measurement.r_b_amp_measure : 0;
+      var latestMeasureSB_A = this.junction.latest_measurement ? this.junction.latest_measurement.s_b_amp_measure : 0;
+      var latestMeasureTB_A = this.junction.latest_measurement ? this.junction.latest_measurement.t_b_amp_measure : 0;
+      var latestMeasureRB_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_b_volt_measure : 0;
+      var latestMeasureSB_V = this.junction.latest_measurement ? this.junction.latest_measurement.s_b_volt_measure : 0;
+      var latestMeasureTB_V = this.junction.latest_measurement ? this.junction.latest_measurement.t_b_volt_measure : 0;
+
+      if (this.junction.junction_type_id == 1) {
+        return latestMeasureRB_A * latestMeasureRB_V / 1000;
+      } else {
+        return (latestMeasureRB_A * latestMeasureRB_V + latestMeasureSB_A * latestMeasureSB_V + latestMeasureTB_A * latestMeasureTB_V) / 1000;
+      }
+    },
+    totalCapacity: function totalCapacity() {},
     consumoTablero: function consumoTablero() {
       return this.junction.latest_measurement ? (this.junction.latest_measurement.r_measure + this.junction.latest_measurement.s_measure + this.junction.latest_measurement.t_measure) * 220 : 0;
     },
@@ -230,7 +486,40 @@ __webpack_require__.r(__webpack_exports__);
       return this.capacidadTotal != 0 ? this.consumoTablero / this.capacidadTotal : 0;
     }
   },
-  methods: {}
+  methods: {
+    getJunctionTypes: function getJunctionTypes() {
+      var _this = this;
+
+      axios.get("/api/junctionTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+        _this.junctionTypes = response.data.junctions;
+      });
+    },
+    getJunctionConnections: function getJunctionConnections() {
+      var _this2 = this;
+
+      axios.get("/api/junctionConnections?api_token=".concat(this.user.api_token)).then(function (response) {
+        _this2.junctionConnections = response.data.junctions;
+      });
+    },
+    saveChanges: function saveChanges() {
+      if (!this.isEditMode) {
+        var params = {
+          'api_token': this.user.api_token,
+          'user_id': this.user.id,
+          'client_number': this.clientNumber,
+          'junction_number': this.junctionNumber,
+          'junction_type_id': this.junctionTypeId,
+          'junction_connection_id': this.junctionConnectionId,
+          'use_factor': this.useFactor.includes(',') ? parseFloat(this.useFactor.split(',')[0] + '.' + this.useFactor.split(',')[1]) : parseFloat(this.useFactor)
+        };
+        axios.put("/api/junctionUpdateTypes/".concat(this.junction.id), params).then(function (response) {
+          console.log(response.data);
+        });
+      } else {
+        console.log('change what you want!');
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -277,92 +566,280 @@ var render = function() {
                   _vm._v("Distribuidora")
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "has-text-weight-semibold is-size-5",
-                    staticStyle: { "padding-top": "12px" }
-                  },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm.junction.client_number
-                          ? _vm.junction.client_number
-                          : "Sin información"
-                      )
-                    )
-                  ]
-                ),
+                _c("div", {
+                  staticClass: "is-divider",
+                  staticStyle: { "margin-top": "16px", "margin-bottom": "8px" }
+                }),
                 _vm._v(" "),
-                _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
-                  _vm._v("Número Cliente")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "has-text-weight-semibold is-size-6",
-                    class: _vm.junction.junction_number ? "" : "has-text-info",
-                    staticStyle: { "padding-top": "12px" }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(
-                          _vm.junction.junction_number
-                            ? _vm.junction.junction_number
-                            : "Sin información"
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-light is-size-7" },
+                    [_vm._v("Número Cliente")]
+                  ),
+                  _vm._v(" "),
+                  !_vm.isEditMode
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-bold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.junction.client_number
+                                  ? _vm.junction.client_number
+                                  : "Sin información"
+                              )
+                            )
+                          ]
                         )
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
-                  _vm._v("Número Empalme")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditMode
+                    ? _c(
+                        "div",
+                        [
+                          _c("b-input", {
+                            staticClass: "has-text-weight-bold is-size-5",
+                            model: {
+                              value: _vm.clientNumber,
+                              callback: function($$v) {
+                                _vm.clientNumber = $$v
+                              },
+                              expression: "clientNumber"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "is-divider" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
-                  _vm._v("Tipo Empalme")
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-light is-size-7" },
+                    [_vm._v("Número Empalme")]
+                  ),
+                  _vm._v(" "),
+                  !_vm.isEditMode
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "has-text-weight-bold is-size-5",
+                            class: _vm.junction.junction_number
+                              ? ""
+                              : "has-text-info"
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(
+                                  _vm.junction.junction_number
+                                    ? _vm.junction.junction_number
+                                    : "Sin información"
+                                ) +
+                                "\n                                "
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditMode
+                    ? _c(
+                        "div",
+                        [
+                          _c("b-input", {
+                            staticClass: "has-text-weight-bold is-size-5",
+                            model: {
+                              value: _vm.junctionNumber,
+                              callback: function($$v) {
+                                _vm.junctionNumber = $$v
+                              },
+                              expression: "junctionNumber"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "has-text-weight-semibold is-size-6" },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm.junction.junction_type
-                          ? _vm.junction.junction_type.type
-                          : "Sin información"
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-light is-size-7" },
+                    [_vm._v("Tipo Empalme")]
+                  ),
+                  _vm._v(" "),
+                  !_vm.isEditMode
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-bold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.junction.junction_type
+                                  ? _vm.junction.junction_type.type
+                                  : "Sin información"
+                              )
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditMode
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "b-select",
+                            {
+                              attrs: { placeholder: "Select a name" },
+                              model: {
+                                value: _vm.junctionTypeId,
+                                callback: function($$v) {
+                                  _vm.junctionTypeId = $$v
+                                },
+                                expression: "junctionTypeId"
+                              }
+                            },
+                            _vm._l(_vm.junctionTypes, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(option.type) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ],
+                        1
                       )
-                    )
-                  ]
-                ),
+                    : _vm._e()
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "has-text-weight-light is-size-7",
-                    staticStyle: { "margin-top": "5px" }
-                  },
-                  [_vm._v("Tipo Conexión")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "has-text-weight-semibold is-size-6" },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm.junction.junction_connection
-                          ? _vm.junction.junction_connection.connection
-                          : "Sin información"
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-light is-size-7" },
+                    [_vm._v("Tipo Conexión")]
+                  ),
+                  _vm._v(" "),
+                  !_vm.isEditMode
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-bold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.junction.junction_connection
+                                  ? _vm.junction.junction_connection.connection
+                                  : "Sin información"
+                              )
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditMode
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "b-select",
+                            {
+                              attrs: { placeholder: "Select a name" },
+                              model: {
+                                value: _vm.junctionConnectionId,
+                                callback: function($$v) {
+                                  _vm.junctionConnectionId = $$v
+                                },
+                                expression: "junctionConnectionId"
+                              }
+                            },
+                            _vm._l(_vm.junctionConnections, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(option.connection) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ],
+                        1
                       )
-                    )
-                  ]
-                )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "field" }, [
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-light is-size-7" },
+                    [_vm._v("Factor de Uso")]
+                  ),
+                  _vm._v(" "),
+                  !_vm.isEditMode
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-bold is-size-5" },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.junction.use_factor) +
+                                "\n                                "
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditMode
+                    ? _c(
+                        "div",
+                        [
+                          _c("b-input", {
+                            staticClass: "has-text-weight-bold is-size-5",
+                            model: {
+                              value: _vm.useFactor,
+                              callback: function($$v) {
+                                _vm.useFactor = $$v
+                              },
+                              expression: "useFactor"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "column" }, [
@@ -385,12 +862,13 @@ var render = function() {
                       attrs: { "data-content": "Protecciones" }
                     }),
                     _vm._v(" "),
-                    _vm.junction.latest_protection
+                    _vm.junction.latest_protection &&
+                    _vm.junction.latest_protection.nominal_a
                       ? _c("div", { staticClass: "level" }, [
                           _c("div", { staticClass: "level-item" }, [
                             _c("div", { staticClass: "has-text-centered" }, [
                               _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Nominal 1")
+                                _vm._v("Nominal A")
                               ]),
                               _vm._v(" "),
                               _c(
@@ -415,7 +893,7 @@ var render = function() {
                           _c("div", { staticClass: "level-item" }, [
                             _c("div", { staticClass: "has-text-centered" }, [
                               _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Regulada 1")
+                                _vm._v("Regulada A")
                               ]),
                               _vm._v(" "),
                               _c(
@@ -438,56 +916,77 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Nominal 2")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_protection.nominal_b
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
+                          !!+_vm.junction.latest_protection.nominal_b
+                            ? _c("div", { staticClass: "level-item" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "has-text-centered" },
+                                  [
+                                    _c("div", { staticClass: "is-size-7" }, [
+                                      _vm._v("Nominal B")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "has-text-weight-semibold"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            " +
+                                            _vm._s(
+                                              _vm.junction.latest_protection
+                                                .nominal_b
+                                            ) +
+                                            "\n                                            "
+                                        ),
+                                        _c(
+                                          "span",
+                                          { staticClass: "is-size-6" },
+                                          [_vm._v("A")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Regulada 2")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_protection
-                                          .regulada_b
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ])
+                          !!+_vm.junction.latest_protection.regulada_b
+                            ? _c("div", { staticClass: "level-item" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "has-text-centered" },
+                                  [
+                                    _c("div", { staticClass: "is-size-7" }, [
+                                      _vm._v("Regulada B")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "has-text-weight-semibold"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            " +
+                                            _vm._s(
+                                              _vm.junction.latest_protection
+                                                .regulada_b
+                                            ) +
+                                            "\n                                            "
+                                        ),
+                                        _c(
+                                          "span",
+                                          { staticClass: "is-size-6" },
+                                          [_vm._v("A")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
                         ])
                       : _vm._e(),
                     _vm._v(" "),
@@ -497,12 +996,13 @@ var render = function() {
                       attrs: { "data-content": "Mediciones" }
                     }),
                     _vm._v(" "),
-                    _vm.junction.latest_measurement
+                    _vm.junction.latest_measurement &&
+                    _vm.junction.latest_measurement.r_a_amp_measure
                       ? _c("div", { staticClass: "level" }, [
                           _c("div", { staticClass: "level-item" }, [
                             _c("div", { staticClass: "has-text-centered" }, [
                               _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Fase R")
+                                _vm._v("Medición R (A)")
                               ]),
                               _vm._v(" "),
                               _c(
@@ -513,7 +1013,7 @@ var render = function() {
                                     "\n                                            " +
                                       _vm._s(
                                         _vm.junction.latest_measurement
-                                          .r_measure
+                                          .r_a_amp_measure
                                       ) +
                                       "\n                                            "
                                   ),
@@ -535,7 +1035,7 @@ var render = function() {
                                       _vm._s(
                                         _vm._f("numeral")(
                                           _vm.junction.latest_measurement
-                                            .r_measure * 220,
+                                            .r_a_amp_measure * 220,
                                           0,
                                           0
                                         )
@@ -553,7 +1053,7 @@ var render = function() {
                           _c("div", { staticClass: "level-item" }, [
                             _c("div", { staticClass: "has-text-centered" }, [
                               _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Fase S")
+                                _vm._v("Medición S (A)")
                               ]),
                               _vm._v(" "),
                               _c(
@@ -564,7 +1064,7 @@ var render = function() {
                                     "\n                                            " +
                                       _vm._s(
                                         _vm.junction.latest_measurement
-                                          .s_measure
+                                          .s_a_amp_measure
                                       ) +
                                       "\n                                            "
                                   ),
@@ -586,7 +1086,7 @@ var render = function() {
                                       _vm._s(
                                         _vm._f("numeral")(
                                           _vm.junction.latest_measurement
-                                            .s_measure * 220,
+                                            .s_a_amp_measure * 220,
                                           0,
                                           0
                                         )
@@ -604,7 +1104,7 @@ var render = function() {
                           _c("div", { staticClass: "level-item" }, [
                             _c("div", { staticClass: "has-text-centered" }, [
                               _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Fase T")
+                                _vm._v("Medición T (A)")
                               ]),
                               _vm._v(" "),
                               _c(
@@ -615,7 +1115,7 @@ var render = function() {
                                     "\n                                            " +
                                       _vm._s(
                                         _vm.junction.latest_measurement
-                                          .t_measure
+                                          .t_a_amp_measure
                                       ) +
                                       "\n                                            "
                                   ),
@@ -637,7 +1137,7 @@ var render = function() {
                                       _vm._s(
                                         _vm._f("numeral")(
                                           _vm.junction.latest_measurement
-                                            .t_measure * 220,
+                                            .t_a_amp_measure * 220,
                                           0,
                                           0
                                         )
@@ -654,7 +1154,481 @@ var render = function() {
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.can.update
+                    _vm.junction.latest_measurement &&
+                    _vm.junction.latest_measurement.r_b_amp_measure
+                      ? _c("div", { staticClass: "level" }, [
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición R (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .r_b_amp_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .r_b_amp_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición S (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .s_b_amp_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .s_b_amp_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición T (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .t_b_amp_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .t_b_amp_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.junction.latest_measurement &&
+                    _vm.junction.latest_measurement.r_a_volt_measure
+                      ? _c("div", { staticClass: "level" }, [
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición R (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .r_a_volt_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .r_a_volt_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición S (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .s_a_volt_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .s_a_volt_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición T (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .t_a_volt_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .t_a_volt_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.junction.latest_measurement &&
+                    _vm.junction.latest_measurement.r_b_volt_measure
+                      ? _c("div", { staticClass: "level" }, [
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición R (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .r_b_volt_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .r_b_volt_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición S (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .s_b_volt_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .s_b_volt_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "level-item" }, [
+                            _c("div", { staticClass: "has-text-centered" }, [
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v("Medición T (A)")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "has-text-weight-semibold" },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.junction.latest_measurement
+                                          .t_b_volt_measure
+                                      ) +
+                                      "\n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-6" }, [
+                                    _vm._v("A")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm._f("numeral")(
+                                          _vm.junction.latest_measurement
+                                            .t_b_volt_measure * 220,
+                                          0,
+                                          0
+                                        )
+                                      ) +
+                                      " \n                                            "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("W")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.can.update & _vm.isEditMode
                       ? _c(
                           "button",
                           {
@@ -707,7 +1681,27 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", [_vm._v("Power A: " + _vm._s(_vm.powerA))]),
+            _vm._v(" "),
+            _c("div", [_vm._v("Power B: " + _vm._s(_vm.powerB))]),
+            _vm._v(" "),
+            _c("div", [_vm._v("Power Used A: " + _vm._s(_vm.powerUsedA))]),
+            _vm._v(" "),
+            _c("div", [_vm._v("Power Used B: " + _vm._s(_vm.powerUsedB))]),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v(
+                "Potencia disponible A: " +
+                  _vm._s(_vm.powerA * _vm.useFactor - _vm.powerUsedA)
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v(
+                "Potencia disponible B: " +
+                  _vm._s(_vm.powerB * _vm.useFactor - _vm.powerUsedB)
+              )
+            ]),
             _vm._v(" "),
             _c("div", {
               staticClass: "is-divider",
@@ -726,7 +1720,7 @@ var render = function() {
                     { staticClass: "has-text-weight-semibold is-size-4" },
                     [
                       _vm._v(
-                        _vm._s(_vm._f("numeral")(_vm.capacidadTotal, 0, 0)) +
+                        _vm._s(_vm._f("numeral")(_vm.totalCapacity, 0, 0)) +
                           " \n                                "
                       ),
                       _c("span", { staticClass: "is-size-6" }, [_vm._v("W/kW")])
@@ -776,7 +1770,43 @@ var render = function() {
                   )
                 ])
               ]
-            )
+            ),
+            _vm._v(" "),
+            _vm.can.update
+              ? _c(
+                  "div",
+                  { staticClass: "field has-text-centered" },
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: {
+                          type: _vm.isEditMode ? "is-info" : "is-link",
+                          size: "is-small"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.isEditMode = !_vm.isEditMode
+                            _vm.saveChanges()
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "edit"] }
+                        }),
+                        _vm._v(
+                          "\n                          " +
+                            _vm._s(_vm.isEditMode ? "Modo Edición" : "Editar") +
+                            "\n                    "
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              : _vm._e()
           ],
           1
         )
@@ -784,16 +1814,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column is-4" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

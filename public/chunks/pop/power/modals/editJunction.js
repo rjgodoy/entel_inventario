@@ -77,13 +77,301 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'junction'],
   data: function data() {
     return {
-      phaseR: this.junction.latest_measurement ? this.junction.latest_measurement.r_measure : 0,
-      phaseS: this.junction.latest_measurement ? this.junction.latest_measurement.s_measure : 0,
-      phaseT: this.junction.latest_measurement ? this.junction.latest_measurement.t_measure : 0
+      nominal_a: this.junction.latest_protection ? this.junction.latest_protection.nominal_a : 0,
+      regulada_a: this.junction.latest_protection ? this.junction.latest_protection.regulada_a : 0,
+      nominal_b: this.junction.latest_protection ? this.junction.latest_protection.nominal_b : 0,
+      regulada_b: this.junction.latest_protection ? this.junction.latest_protection.regulada_b : 0,
+      RA_amp_measure: this.junction.latest_measurement ? this.junction.latest_measurement.r_a_amp_measure : 0,
+      SA_amp_measure: this.junction.latest_measurement ? this.junction.latest_measurement.s_a_amp_measure : 0,
+      TA_amp_measure: this.junction.latest_measurement ? this.junction.latest_measurement.t_a_amp_measure : 0,
+      RB_amp_measure: this.junction.latest_measurement ? this.junction.latest_measurement.r_b_amp_measure : 0,
+      SB_amp_measure: this.junction.latest_measurement ? this.junction.latest_measurement.s_b_amp_measure : 0,
+      TB_amp_measure: this.junction.latest_measurement ? this.junction.latest_measurement.t_b_amp_measure : 0,
+      RA_volt_measure: this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0,
+      SA_volt_measure: this.junction.latest_measurement ? this.junction.latest_measurement.s_a_volt_measure : 0,
+      TA_volt_measure: this.junction.latest_measurement ? this.junction.latest_measurement.t_a_volt_measure : 0,
+      RB_volt_measure: this.junction.latest_measurement ? this.junction.latest_measurement.r_b_volt_measure : 0,
+      SB_volt_measure: this.junction.latest_measurement ? this.junction.latest_measurement.s_b_volt_measure : 0,
+      TB_volt_measure: this.junction.latest_measurement ? this.junction.latest_measurement.t_b_volt_measure : 0,
+      useFactor: this.junction.use_factor
     };
   },
   methods: {
@@ -97,11 +385,26 @@ __webpack_require__.r(__webpack_exports__);
         'api_token': this.user.api_token,
         'pop_id': this.junction.pop_id,
         'user_id': this.user.id,
-        'phase_r': this.phaseR,
-        'phase_s': this.phaseS,
-        'phase_t': this.phaseT
+        'nominal_a': this.nominal_a,
+        'regulada_a': this.regulada_a,
+        'nominal_b': this.nominal_b,
+        'regulada_b': this.regulada_b,
+        'r_a_amp_measure': this.RA_amp_measure,
+        's_a_amp_measure': this.SA_amp_measure,
+        't_a_amp_measure': this.TA_amp_measure,
+        'r_b_amp_measure': this.RB_amp_measure,
+        's_b_amp_measure': this.SB_amp_measure,
+        't_b_amp_measure': this.TB_amp_measure,
+        'r_a_volt_measure': this.RA_volt_measure,
+        's_a_volt_measure': this.SA_volt_measure,
+        't_a_volt_measure': this.TA_volt_measure,
+        'r_b_volt_measure': this.RB_volt_measure,
+        's_b_volt_measure': this.SB_volt_measure,
+        't_b_volt_measure': this.TB_volt_measure,
+        'use_factor': this.useFactor
       };
-      axios.put("/api/junctions/".concat(this.junction.id), params, config).then(function (response) {// console.log(response)
+      axios.put("/api/junctions/".concat(this.junction.id), params, config).then(function (response) {
+        console.log(response);
       });
       this.$parent.close();
       this.$eventBus.$emit('junction-measurements-updated');
@@ -130,6 +433,280 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("section", { staticClass: "modal-card-body" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns" }, [
+        _c("div", { staticClass: "column" }, [
+          _c(
+            "div",
+            {
+              staticClass: "box is-shadowless",
+              staticStyle: { border: "solid 0.5px black" }
+            },
+            [
+              _c("div", { staticClass: "columns" }, [
+                _c("div", { staticClass: "column" }, [
+                  _c("div", { staticClass: "has-text-centered" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "is-size-6 has-text-weight-semibold has-text-centered"
+                      },
+                      [_vm._v("Nominal (A)")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", {}, [
+                      _c("div", { staticClass: "control has-icons-right" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.nominal_a,
+                              expression: "nominal_a"
+                            }
+                          ],
+                          staticClass: "input",
+                          attrs: { type: "number" },
+                          domProps: { value: _vm.nominal_a },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.nominal_a = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(2)
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "has-text-weight-normal is-size-6" },
+                      [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(
+                              _vm._f("numeral")(
+                                _vm.nominal_a ? _vm.nominal_a * 220 : 0,
+                                0,
+                                0
+                              )
+                            ) +
+                            " \n                                    "
+                        ),
+                        _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column" }, [
+                  _c("div", { staticClass: "has-text-centered" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "is-size-6 has-text-weight-semibold has-text-centered"
+                      },
+                      [_vm._v("Regulada (A)")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", {}, [
+                      _c("div", { staticClass: "control has-icons-right" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.regulada_a,
+                              expression: "regulada_a"
+                            }
+                          ],
+                          staticClass: "input",
+                          attrs: { type: "number" },
+                          domProps: { value: _vm.regulada_a },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.regulada_a = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(3)
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "has-text-weight-normal is-size-6" },
+                      [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(
+                              _vm._f("numeral")(
+                                _vm.regulada_a ? _vm.regulada_a * 220 : 0,
+                                0,
+                                0
+                              )
+                            ) +
+                            " \n                                    "
+                        ),
+                        _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column" }, [
+          _c(
+            "div",
+            {
+              staticClass: "box is-shadowless",
+              staticStyle: { border: "solid 0.5px black" }
+            },
+            [
+              _c("div", { staticClass: "columns" }, [
+                _c("div", { staticClass: "column" }, [
+                  _c("div", { staticClass: "has-text-centered" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "is-size-6 has-text-weight-semibold has-text-centered"
+                      },
+                      [_vm._v("Nominal (A)")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", {}, [
+                      _c("div", { staticClass: "control has-icons-right" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.nominal_b,
+                              expression: "nominal_b"
+                            }
+                          ],
+                          staticClass: "input",
+                          attrs: { type: "number" },
+                          domProps: { value: _vm.nominal_b },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.nominal_b = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(4)
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "has-text-weight-normal is-size-6" },
+                      [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(
+                              _vm._f("numeral")(
+                                _vm.nominal_b ? _vm.nominal_b * 220 : 0,
+                                0,
+                                0
+                              )
+                            ) +
+                            " \n                                    "
+                        ),
+                        _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "column" }, [
+                  _c("div", { staticClass: "has-text-centered" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "is-size-6 has-text-weight-semibold has-text-centered"
+                      },
+                      [_vm._v("Regulada (A)")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", {}, [
+                      _c("div", { staticClass: "control has-icons-right" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.regulada_b,
+                              expression: "regulada_b"
+                            }
+                          ],
+                          staticClass: "input",
+                          attrs: { type: "number" },
+                          domProps: { value: _vm.regulada_b },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.regulada_b = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(5)
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "has-text-weight-normal is-size-6" },
+                      [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(
+                              _vm._f("numeral")(
+                                _vm.regulada_b ? _vm.regulada_b * 220 : 0,
+                                0,
+                                0
+                              )
+                            ) +
+                            " \n                                    "
+                        ),
+                        _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "modal-card-body" }, [
+      _vm._m(6),
+      _vm._v(" "),
       _c("div", { staticClass: "level" }, [
         _c("div", { staticClass: "level-item" }, [
           _c("div", { staticClass: "has-text-centered" }, [
@@ -149,24 +726,24 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.phaseR,
-                      expression: "phaseR"
+                      value: _vm.RA_amp_measure,
+                      expression: "RA_amp_measure"
                     }
                   ],
                   staticClass: "input",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.phaseR },
+                  domProps: { value: _vm.RA_amp_measure },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.phaseR = $event.target.value
+                      _vm.RA_amp_measure = $event.target.value
                     }
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(7)
               ])
             ]),
             _vm._v(" "),
@@ -174,7 +751,11 @@ var render = function() {
               _vm._v(
                 "\n                        " +
                   _vm._s(
-                    _vm._f("numeral")(_vm.phaseR ? _vm.phaseR * 220 : 0, 0, 0)
+                    _vm._f("numeral")(
+                      _vm.RA_amp_measure ? _vm.RA_amp_measure * 220 : 0,
+                      0,
+                      0
+                    )
                   ) +
                   " \n                        "
               ),
@@ -201,24 +782,24 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.phaseS,
-                      expression: "phaseS"
+                      value: _vm.SA_amp_measure,
+                      expression: "SA_amp_measure"
                     }
                   ],
                   staticClass: "input",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.phaseS },
+                  domProps: { value: _vm.SA_amp_measure },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.phaseS = $event.target.value
+                      _vm.SA_amp_measure = $event.target.value
                     }
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(8)
               ])
             ]),
             _vm._v(" "),
@@ -226,7 +807,11 @@ var render = function() {
               _vm._v(
                 "\n                        " +
                   _vm._s(
-                    _vm._f("numeral")(_vm.phaseS ? _vm.phaseS * 220 : 0, 0, 0)
+                    _vm._f("numeral")(
+                      _vm.SA_amp_measure ? _vm.SA_amp_measure * 220 : 0,
+                      0,
+                      0
+                    )
                   ) +
                   " \n                        "
               ),
@@ -253,24 +838,24 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.phaseT,
-                      expression: "phaseT"
+                      value: _vm.TA_amp_measure,
+                      expression: "TA_amp_measure"
                     }
                   ],
                   staticClass: "input",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.phaseT },
+                  domProps: { value: _vm.TA_amp_measure },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.phaseT = $event.target.value
+                      _vm.TA_amp_measure = $event.target.value
                     }
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(9)
               ])
             ]),
             _vm._v(" "),
@@ -278,7 +863,527 @@ var render = function() {
               _vm._v(
                 "\n                        " +
                   _vm._s(
-                    _vm._f("numeral")(_vm.phaseT ? _vm.phaseT * 220 : 0, 0, 0)
+                    _vm._f("numeral")(
+                      _vm.TA_amp_measure ? _vm.TA_amp_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "modal-card-body" }, [
+      _c("div", { staticClass: "level" }, [
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase R")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.RB_amp_measure,
+                      expression: "RB_amp_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.RB_amp_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.RB_amp_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(10)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.RB_amp_measure ? _vm.RB_amp_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase S")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.SB_amp_measure,
+                      expression: "SB_amp_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.SB_amp_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.SB_amp_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(11)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.SB_amp_measure ? _vm.SB_amp_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase T")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.TB_amp_measure,
+                      expression: "TB_amp_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.TB_amp_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.TB_amp_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(12)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.TB_amp_measure ? _vm.TB_amp_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "modal-card-body" }, [
+      _c("div", { staticClass: "level" }, [
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase R")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.RA_volt_measure,
+                      expression: "RA_volt_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.RA_volt_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.RA_volt_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(13)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.RA_volt_measure ? _vm.RA_volt_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase S")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.SA_volt_measure,
+                      expression: "SA_volt_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.SA_volt_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.SA_volt_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(14)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.SA_volt_measure ? _vm.SA_volt_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase T")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.TA_volt_measure,
+                      expression: "TA_volt_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.TA_volt_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.TA_volt_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(15)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.TA_volt_measure ? _vm.TA_volt_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "modal-card-body" }, [
+      _c("div", { staticClass: "level" }, [
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase R")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.RB_volt_measure,
+                      expression: "RB_volt_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.RB_volt_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.RB_volt_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(16)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.RB_volt_measure ? _vm.RB_volt_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase S")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.SB_volt_measure,
+                      expression: "SB_volt_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.SB_volt_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.SB_volt_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(17)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.SB_volt_measure ? _vm.SB_volt_measure * 220 : 0,
+                      0,
+                      0
+                    )
+                  ) +
+                  " \n                        "
+              ),
+              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level-item" }, [
+          _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "is-size-6 has-text-weight-semibold has-text-centered"
+              },
+              [_vm._v("Fase T")]
+            ),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "control has-icons-right" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.TB_volt_measure,
+                      expression: "TB_volt_measure"
+                    }
+                  ],
+                  staticClass: "input",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.TB_volt_measure },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.TB_volt_measure = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(18)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(
+                    _vm._f("numeral")(
+                      _vm.TB_volt_measure ? _vm.TB_volt_measure * 220 : 0,
+                      0,
+                      0
+                    )
                   ) +
                   " \n                        "
               ),
@@ -319,8 +1424,132 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("header", { staticClass: "modal-card-head has-text-centered" }, [
       _c("p", { staticClass: "modal-card-title has-text-weight-bold" }, [
-        _vm._v("Edición de mediciones")
+        _vm._v("Edición de Parámetros de Tablero")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "block has-text-centered" }, [
+      _c("div", { staticClass: "has-text-weight-semibold is-size-4" }, [
+        _vm._v("Protecciones")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "block has-text-centered" }, [
+      _c("div", { staticClass: "has-text-weight-semibold is-size-4" }, [
+        _vm._v("Mediciones")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small is-right" }, [
+      _c("span", [_vm._v("A")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-right" }, [
+      _c("span", [_vm._v("A")])
     ])
   },
   function() {

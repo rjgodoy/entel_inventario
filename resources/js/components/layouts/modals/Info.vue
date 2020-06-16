@@ -4,16 +4,20 @@
             <p class="modal-card-title has-text-weight-bold">Documentos de ayuda</p>
         </header> -->
         <section class="modal-card-body">
-            <div class="container">
+            <div class="is-italic is-size-4 has-text-link has-text-weight-normal has-text-centered">Documentos de Ayuda</div>
+            <div class="section container">
                 <ul>
-                    <li v-for="file in files" :key="file.id">
+                    <li v-for="file in files" :key="file.id" style="padding-top: 4px;">
                         <a class="has-text-dark" @click="readFile(file)">
                             <!-- <font-awesome-icon 
                                 :icon="['fas', faFile(file.extension).icon]"
                                 :class="faFile(file.extension).type"
                                 size="2x"
                                 style="padding-bottom: 5px;"/> -->
-                            <div class="is-size-5">{{ file.filename }}</div>
+                            <div class="is-size-5 is-italic"> 
+                                <!-- <font-awesome-icon :icon="['fas', 'info-circle']" /> -->
+                                <div class="has-text-info">{{ file.filename }}</div>
+                            </div>
                             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
                         </a>
                     </li>
@@ -61,13 +65,8 @@
                 }
                 axios.get(`/api/getFiles`, { params })
                 .then(response => {
-                    console.log(response.data)
                     this.files = response.data.files
                 })
-            },
-
-            getFile(file) {
-                window.open(file.route, "_blank");
             },
 
             faFile(ext) {
@@ -115,19 +114,19 @@
                     let link = document.createElement('a');
                     link.href = objectUrl;
                     link.open = file.basename;
-                    // link.target = "_blank";
+                    link.target = "_blank";
                     link.click();
                     setTimeout(function () {
-                    //     // For Firefox it is necessary to delay revoking the ObjectURL
+                        // For Firefox it is necessary to delay revoking the ObjectURL
                         URL.revokeObjectURL(objectUrl)
                     }, 100)
 
                     this.isLoading = false
-                    this.$buefy.toast.open({
-                        message: 'El archivo se ha descargado exitosamente.',
-                        type: 'is-success',
-                        duration: 5000
-                    })
+                    // this.$buefy.toast.open({
+                    //     message: 'El archivo se ha descargado exitosamente.',
+                    //     type: 'is-success',
+                    //     duration: 5000
+                    // })
                 }).catch((error) => {
                     console.log(error)
                     this.isLoading = false

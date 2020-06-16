@@ -10,27 +10,27 @@
                             </div>
                             <div class="block">
                                 <div class="has-text-weight-bold is-size-5">Inventario Infraestructura</div>
-                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Escribir detalle aquí...</div>
+                                <!-- <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Escribir detalle aquí...</div> -->
                             </div>
                         </div>
                         <div class="column is-3">
                             <div class="block">
                                 <div class="has-text-weight-bold is-size-5">Fuentes de Información</div>
-                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Escribir detalle aquí...</div>
+                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Ver fuentes de información -></div>
                             </div>
                             <div class="block">
                                 <div class="has-text-weight-bold is-size-5">Documentos de ayuda</div>
                                 <a class="has-text-weight-normal is-size-6" 
                                     @click="isModalInfoActive = true" 
                                     style="padding-top: 8px;">
-                                    Escribir detalle aquí...
+                                    Ver documentos 
                                 </a>
                             </div>
                         </div>
                         <div class="column is-3">
                             <div class="block">
                                 <div class="has-text-weight-bold is-size-5">Ultimas Actualizaciones</div>
-                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Escribir detalle aquí...</div>
+                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Detalle...</div>
                             </div>
                         </div>
                         <div class="column">

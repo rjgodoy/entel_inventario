@@ -479,20 +479,33 @@ export default {
     },
 
     created() {
-        this.styleMode()
-        this.getCrms()
-        this.getFilterButtons()
+        
     },
 
     mounted() {
+        this.styleMode()
+        this.getCrms()
+        this.getFilterButtons()
         this.getPops()
-        this.getPopsMap()
+        // this.getPopsMap()
     },
 
     watch: {
-        core(val) { this.getPops(); this.getPopsMap() },
-        critic(val) { this.getPops(); this.getPopsMap() },
-        vip(val) { this.getPops(); this.getPopsMap() },
+        core(val) { 
+            this.getPops();
+            // this.getPopsMap() 
+        },
+
+        critic(val) { 
+            this.getPops();
+            // this.getPopsMap() 
+        },
+
+        vip(val) { 
+            this.getPops();
+            // this.getPopsMap() 
+        },
+
 
         selectedPops(val) { 
             val.length != 0 ? this.popsMap = val : this.getPops()
@@ -532,13 +545,13 @@ export default {
         changeEquipment(equipment) {
             equipment.selected = +!equipment.selected
             this.getPops()
-            this.getPopsMap()
+            // this.getPopsMap()
         },
 
         changeCharacteristic(characteristic) {
             characteristic.selected = +!characteristic.selected
             this.getPops()
-            this.getPopsMap()
+            // this.getPopsMap()
         },
 
         selectPop(pop) {
@@ -552,13 +565,13 @@ export default {
             this.selectedZona = null
             this.zonas = crm.zonas
             this.getPops()
-            this.getPopsMap()
+            // this.getPopsMap()
         },
 
         selectZona(zona) {
             this.selectedZona = this.selectedZona != zona ? zona : null
             this.getPops()
-            this.getPopsMap()
+            // this.getPopsMap()
         },
 
         popClassification(pop) {
@@ -619,45 +632,46 @@ export default {
             .then((response) => {
                 // console.log(response)
                 this.pops = response.data
+                setInterval(this.getPopsMap(params), 200)
             })
         },
 
         // APIs
-        getPopsMap() {
-            var params = {
-                'api_token': this.user.api_token,
+        getPopsMap(params) {
+            // var params = {
+            //     'api_token': this.user.api_token,
 
-                'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                'zona_id': this.selectedZona ? this.selectedZona.id : 0,
-                'text': this.searchText != '' ?  this.searchText : 0,
+            //     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+            //     'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+            //     'text': this.searchText != '' ?  this.searchText : 0,
 
-                'core': this.core,
-                'critic': this.critic,
-                'vip': this.vip,
+            //     'core': this.core,
+            //     'critic': this.critic,
+            //     'vip': this.vip,
 
-                'pe_3g': this.characteristics.pe_3g.selected,
-                'mpls': this.characteristics.mpls.selected,
-                'olt': this.characteristics.olt.selected,
-                'olt_3play': this.characteristics.olt_3play.selected,
-                'red_minima_n1': this.characteristics.red_minima_n1.selected,
-                'red_minima_n2': this.characteristics.red_minima_n2.selected,
-                'lloo': this.characteristics.lloo.selected,
-                'ranco': this.characteristics.ranco.selected,
-                'bafi': this.characteristics.bafi.selected,
-                'offgrid': this.characteristics.offgrid.selected,
-                'solar': this.characteristics.solar.selected,
-                'eolica': this.characteristics.eolica.selected,
-                'alba_project': this.characteristics.alba_project.selected,
-                'protected_zone': this.characteristics.protected_zone.selected,
+            //     'pe_3g': this.characteristics.pe_3g.selected,
+            //     'mpls': this.characteristics.mpls.selected,
+            //     'olt': this.characteristics.olt.selected,
+            //     'olt_3play': this.characteristics.olt_3play.selected,
+            //     'red_minima_n1': this.characteristics.red_minima_n1.selected,
+            //     'red_minima_n2': this.characteristics.red_minima_n2.selected,
+            //     'lloo': this.characteristics.lloo.selected,
+            //     'ranco': this.characteristics.ranco.selected,
+            //     'bafi': this.characteristics.bafi.selected,
+            //     'offgrid': this.characteristics.offgrid.selected,
+            //     'solar': this.characteristics.solar.selected,
+            //     'eolica': this.characteristics.eolica.selected,
+            //     'alba_project': this.characteristics.alba_project.selected,
+            //     'protected_zone': this.characteristics.protected_zone.selected,
 
-                'electric_line': this.equipments.electric_line.selected,
-                'junction': this.equipments.junction.selected,
-                'generator_set': this.equipments.generator_set.selected,
-                'power_rectifier': this.equipments.power_rectifier.selected,
-                'air_conditioner': this.equipments.air_conditioner.selected,
-                'vertical_structure': this.equipments.vertical_structure.selected,
-                'infrastructure': this.equipments.infrastructure.selected
-            }
+            //     'electric_line': this.equipments.electric_line.selected,
+            //     'junction': this.equipments.junction.selected,
+            //     'generator_set': this.equipments.generator_set.selected,
+            //     'power_rectifier': this.equipments.power_rectifier.selected,
+            //     'air_conditioner': this.equipments.air_conditioner.selected,
+            //     'vertical_structure': this.equipments.vertical_structure.selected,
+            //     'infrastructure': this.equipments.infrastructure.selected
+            // }
 
             axios.get('/api/popsMap', { params: params })
             .then((response) => {

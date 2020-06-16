@@ -140,7 +140,7 @@ var render = function() {
                     { staticClass: "is-size-6 has-text-weight-semibold" },
                     [
                       _vm._v(
-                        "\n                            Efizzity\n                        "
+                        "\n                            Efizity\n                        "
                       )
                     ]
                   ),

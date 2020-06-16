@@ -15,16 +15,19 @@
                 </div>
             </div>
 
-            <a class="tile is-child box is-bold is-dark has-text-white" style="position: relative;" 
+            <a class="tile is-child box is-bold is-white" style="position: relative; border: solid 1px #eee" 
                 @click="downloadVerticalStructures">
-                <b-icon 
-                    style="padding-top: 20px; padding-left: 5px;"
-                    pack="fas" 
-                    icon="download" 
-                    class="has-text-eco fa-2x">
-                </b-icon> 
-                <div class="is-size-4 has-text-weight-bold" style="margin-top: 10px;">
-                    <p class="is-size-6 has-text-weight-semibold">Descargar listado de Estructuras Verticales</p>
+                <div class="columns">
+                    <div class="column is-1 has-text-centered">
+                        <font-awesome-icon 
+                            :icon="['fas','download']" 
+                            class="has-text-eco"/>
+                    </div>
+                    <div class="column">
+                        <div class="is-size-4 has-text-weight-bold" style="margin-top: 2px;">
+                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de Estructuras Verticales</p>
+                        </div>
+                    </div>
                 </div>
                 <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
             </a>
@@ -34,6 +37,7 @@
 </template>
 
 <script>
+    var moment = require('moment')
     export default {
         props : [
             'user',
@@ -56,6 +60,13 @@
                 isLoading: false
             }
         },
+
+        computed: {
+            middleFileName() {
+                return this.selectedZona ? `Zona ${this.selectedZona.nombre_zona} - ` : (this.selectedCrm ? `CRM ${this.selectedCrm.nombre_crm} - ` : '')
+            },
+        },
+
         created(){
             this.getVerticalStructureData()
         },
@@ -144,7 +155,7 @@
                     const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
                     link.href = data
-                    link.download = 'listado_estructuras_verticales.xlsx'
+                    link.download = `Listado Estructuras Verticales - ${this.middleFileName}${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
                     link.click()
                     // setTimeout(function () {
                     //     // For Firefox it is necessary to delay revoking the ObjectURL
@@ -155,7 +166,7 @@
                     this.$buefy.toast.open({
                         message: 'La planilla se ha descargado exitosamente.',
                         type: 'is-success',
-                        duration: 5000
+                        duration: 2500
                     })
                 }).catch((error) => {
                     console.log(error)
@@ -163,7 +174,7 @@
                     this.$buefy.toast.open({
                         message: 'Ha ocurrido un error. Favor contactar al administrador',
                         type: 'is-danger',
-                        duration: 5000
+                        duration: 2500
                     })
                 })
             },

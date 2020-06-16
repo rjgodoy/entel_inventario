@@ -671,8 +671,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         // console.log(response)
         var blob = new Blob([response.data], {
           type: file.mime
-        }); // const objectUrl = window.URL.createObjectURL(blob)
-        // IE doesn't allow using a blob object directly as link href
+        });
+        var objectUrl = window.URL.createObjectURL(blob); // IE doesn't allow using a blob object directly as link href
         // instead it is necessary to use msSaveOrOpenBlob
 
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
@@ -680,15 +680,15 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           return;
         }
 
-        var data = window.URL.createObjectURL(blob);
         var link = document.createElement('a');
-        link.href = data;
-        link.download = file.basename;
-        link.click(); // setTimeout(function () {
-        //     // For Firefox it is necessary to delay revoking the ObjectURL
-        //     window.URL.revokeObjectURL(data)
-        // }, 100)
-
+        link.href = objectUrl;
+        link.open = file.basename;
+        link.target = '_blank';
+        link.click();
+        setTimeout(function () {
+          //     // For Firefox it is necessary to delay revoking the ObjectURL
+          window.URL.revokeObjectURL(objectUrl);
+        }, 100);
         _this4.isLoading = false;
 
         _this4.$buefy.toast.open({
@@ -1414,7 +1414,6 @@ var render = function() {
                               {
                                 staticClass: "box tile is-child",
                                 staticStyle: { position: "relative" },
-                                attrs: { target: "_blank" },
                                 on: {
                                   click: function($event) {
                                     _vm.readFile(file)

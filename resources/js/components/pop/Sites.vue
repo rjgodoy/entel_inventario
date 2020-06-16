@@ -113,6 +113,19 @@
                                         {{ site.site_type.site_type.toUpperCase() }}
                                     </b-tag>
                                 </b-taglist>
+
+                                <b-taglist attached class="is-right">
+                                    <b-tag type="is-dark" class="has-text-weight-normal">
+                                        Estado
+                                    </b-tag>
+                                    <b-tag 
+                                        class="has-text-weight-bold has-text-white"
+                                        :class="status(site).id == 1 ? 'is-success' : 
+                                            (status(site).id == 2 ? 'is-danger' : 
+                                                (status(site).id == 0 ? 'has-text-dark' : 'is-warning'))">
+                                        {{ status(site).state.toUpperCase() }}
+                                    </b-tag>
+                                </b-taglist>
                             </div>
                         </div>
 
@@ -158,19 +171,20 @@
                         <div class="is-divider" data-content="TECNOLOGIAS" style="margin: 10px auto 10px auto"></div>
 
                         <div class="" style="padding-top: 20px;">
-                            <div class="columns is-multiline">
-                                <div v-for="tech in site.technologies" class="column is-4 has-text-centered" v-if="tech">
-                                    <div class="is-size-6 has-text-weight-normal">{{ tech.nem_tech }}
-                                        <div class="subtitle is-size-6 has-text-weight-light">Tecnología</div>
+                            <div class="columns is-multiline" v-if="site.technologies.length">
+                                <div v-for="tech in site.technologies" class="column is-4 has-text-centered">
+                                    <div class="is-size-6 has-text-weight-bold box">{{ tech.nem_tech }}
+                                        <div class="subtitle is-size-6 has-text-weight-light">{{ tech.technology_type.type }} - {{ tech.frequency }}</div>
                                     </div>
                                 </div>
+                            </div>
+                            
+                            <div class="columns" v-if="!site.technologies.length">
                                 <div class="column">
-                                    <div v-if="!site.technologies.length" class="subtitle is-size-5 has-text-weight-light has-text-centered">Sitio no tiene tecnologías móviles</div>
+                                    <div class="subtitle is-size-5 has-text-weight-light has-text-centered">Sitio no tiene tecnologías móviles</div>
                                 </div>
                             </div>
                         </div>
-
-                        
                     </div>
 
                 </div>
@@ -337,6 +351,61 @@
                 }
             },
             
+        },
+
+        methods: {
+            status(site) {
+                let state = 'Inactivo'
+                let id = 0
+
+                switch(site.site_type_id) {
+                    case 1:
+                    case 3:
+                    case 4:
+                        id = site.state_id
+                        state = site.state.state
+                        break
+                    case 2:
+                        site.technologies.forEach(element => {
+                            switch (element.state_id) {
+                                case 1:
+                                    id = element.state_id
+                                    state = element.state.state
+                                    break
+                                case 2:
+                                    if (id == 0) {
+                                        id = element.state_id
+                                        state = element.state.state
+                                    }
+                                    break
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                    if (id != 1) {
+                                        id = element.state_id
+                                        state = element.state.state
+                                    }
+                                    break
+                                case null:
+                                default:
+                                    break
+                            }
+                        })
+                        break
+                }
+
+                return {
+                    'id': id,
+                    'state': state
+                }
+            },
         },
 
         beforeDestroy() {

@@ -216,10 +216,10 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-library.add(farCheckCircle, faExclamationTriangle);
+library.add(faEdit, farCheckCircle, faExclamationTriangle);
     // import LeaderLine from 'leader-line'
     export default {
         components: {
@@ -277,7 +277,7 @@ library.add(farCheckCircle, faExclamationTriangle);
         },
 
         mounted() {
-            // this.getJunctions()
+            this.getJunctions()
             // this.getGeneratorSets()
             // this.getPowerRectifiers()
             // this.getAirConditioners()
@@ -292,7 +292,6 @@ library.add(farCheckCircle, faExclamationTriangle);
             getJunctions() {
                 axios.get(`/api/popJunctions/${this.room.pop.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
-                    // console.log(response.data)
                     this.junctions = response.data.junctions
                     this.canEditJunctions = response.data.can
                 })

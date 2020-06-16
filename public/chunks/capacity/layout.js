@@ -232,7 +232,7 @@ __webpack_require__.r(__webpack_exports__);
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"]); // import LeaderLine from 'leader-line'
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"]); // import LeaderLine from 'leader-line'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -288,8 +288,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       this.getJunctions;
     });
   },
-  mounted: function mounted() {// this.getJunctions()
-    // this.getGeneratorSets()
+  mounted: function mounted() {
+    this.getJunctions(); // this.getGeneratorSets()
     // this.getPowerRectifiers()
     // this.getAirConditioners()
     // let leader = new LeaderLine(
@@ -302,7 +302,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this = this;
 
       axios.get("/api/popJunctions/".concat(this.room.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        // console.log(response.data)
         _this.junctions = response.data.junctions;
         _this.canEditJunctions = response.data.can;
       })["catch"](function (error) {

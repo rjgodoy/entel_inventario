@@ -39,6 +39,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -67,12 +71,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get("/api/getFiles", {
         params: params
       }).then(function (response) {
-        console.log(response.data);
         _this.files = response.data.files;
       });
-    },
-    getFile: function getFile(file) {
-      window.open(file.route, "_blank");
     },
     faFile: function faFile(ext) {
       var icon = ext == 'pdf' ? 'file-pdf' : ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'file-image' : ext == 'xls' || ext == 'xlsx' ? 'file-excel' : 'file';
@@ -112,20 +112,18 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
         var link = document.createElement('a');
         link.href = objectUrl;
-        link.open = file.basename; // link.target = "_blank";
-
+        link.open = file.basename;
+        link.target = "_blank";
         link.click();
         setTimeout(function () {
-          //     // For Firefox it is necessary to delay revoking the ObjectURL
+          // For Firefox it is necessary to delay revoking the ObjectURL
           URL.revokeObjectURL(objectUrl);
         }, 100);
-        _this2.isLoading = false;
-
-        _this2.$buefy.toast.open({
-          message: 'El archivo se ha descargado exitosamente.',
-          type: 'is-success',
-          duration: 5000
-        });
+        _this2.isLoading = false; // this.$buefy.toast.open({
+        //     message: 'El archivo se ha descargado exitosamente.',
+        //     type: 'is-success',
+        //     duration: 5000
+        // })
       })["catch"](function (error) {
         console.log(error);
         _this2.isLoading = false;
@@ -159,42 +157,57 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "modal-card box" }, [
     _c("section", { staticClass: "modal-card-body" }, [
-      _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "is-italic is-size-4 has-text-link has-text-weight-normal has-text-centered"
+        },
+        [_vm._v("Documentos de Ayuda")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "section container" }, [
         _c(
           "ul",
           _vm._l(_vm.files, function(file) {
-            return _c("li", { key: file.id }, [
-              _c(
-                "a",
-                {
-                  staticClass: "has-text-dark",
-                  on: {
-                    click: function($event) {
-                      return _vm.readFile(file)
-                    }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "is-size-5" }, [
-                    _vm._v(_vm._s(file.filename))
-                  ]),
-                  _vm._v(" "),
-                  _c("b-loading", {
-                    attrs: {
-                      "is-full-page": false,
-                      active: _vm.isLoading,
-                      "can-cancel": true
-                    },
+            return _c(
+              "li",
+              { key: file.id, staticStyle: { "padding-top": "4px" } },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "has-text-dark",
                     on: {
-                      "update:active": function($event) {
-                        _vm.isLoading = $event
+                      click: function($event) {
+                        return _vm.readFile(file)
                       }
                     }
-                  })
-                ],
-                1
-              )
-            ])
+                  },
+                  [
+                    _c("div", { staticClass: "is-size-5 is-italic" }, [
+                      _c("div", { staticClass: "has-text-info" }, [
+                        _vm._v(_vm._s(file.filename))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("b-loading", {
+                      attrs: {
+                        "is-full-page": false,
+                        active: _vm.isLoading,
+                        "can-cancel": true
+                      },
+                      on: {
+                        "update:active": function($event) {
+                          _vm.isLoading = $event
+                        }
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]
+            )
           }),
           0
         )

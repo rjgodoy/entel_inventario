@@ -22,7 +22,13 @@
                                 <h2 class="subtitle">{{ popNems }}
                                     <span class="is-size-5" v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
                                     </span>
+                                    <div v-if="pop.current_office" style="padding-top: 4px;">
+                                        <b-tag type="is-link" size="is-medium" class="has-text-weight-semibold">
+                                            <font-awesome-icon :icon="['fas', 'home']" style="padding-bottom: 2px;"/>&nbsp;&nbsp;OFICINA CRM
+                                        </b-tag>
+                                    </div>
                                 </h2>
+
                             </div>
                         </div>
 
@@ -61,7 +67,7 @@
                                             <b-tag size="is-medium" :type="pop.vip == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
                                                 <font-awesome-icon :icon="pop.vip == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
-                                            <b-tag size="is-medium" type="is-black">VIP</b-tag>
+                                            <b-tag size="is-medium" type="is-black">{{ pop.current_entel_vip ? 'VIP Entel' : 'VIP' }}</b-tag>
                                         </b-taglist>
                                     </div>
                                 </div>
@@ -245,10 +251,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle)
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),

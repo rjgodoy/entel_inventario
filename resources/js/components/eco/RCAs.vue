@@ -281,7 +281,8 @@
                     const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
                     link.href = data
-                    link.download = file.basename
+                    link.target = "_blank"
+                    link.open = file.basename
                     link.click()
                     // setTimeout(function () {
                     //     // For Firefox it is necessary to delay revoking the ObjectURL

@@ -382,6 +382,14 @@ fieldset[disabled] .pagination-ellipsis {
   margin-top: 0px;
 }
 
+.item.is-bold.is-white,
+.section.is-bold.is-white,
+.level.is-bold.is-white,
+.box.is-bold.is-white {
+  color: #333;
+  background: white;
+}
+
 .item.is-bold.is-link,
 .section.is-bold.is-link,
 .level.is-bold.is-link,

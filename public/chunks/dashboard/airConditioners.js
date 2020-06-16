@@ -44,6 +44,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'selectedCrm', 'selectedZona', // 'csrf',
   'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
@@ -60,7 +65,11 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getAirConditionerData();
   },
-  mounted: function mounted() {},
+  computed: {
+    middleFileName: function middleFileName() {
+      return this.selectedZona ? "Zona ".concat(this.selectedZona.nombre_zona, " - ") : this.selectedCrm ? "CRM ".concat(this.selectedCrm.nombre_crm, " - ") : '';
+    }
+  },
   watch: {
     selectedCrm: function selectedCrm(newValue, oldValue) {
       this.crmSelected = newValue;
@@ -169,7 +178,7 @@ __webpack_require__.r(__webpack_exports__);
         var data = window.URL.createObjectURL(blob);
         var link = document.createElement('a');
         link.href = data;
-        link.download = 'listado_aires_acondicionados.xlsx';
+        link.download = "Listado Aires Acondicionados - ".concat(_this2.middleFileName).concat(moment().format('YYYY-MM-DD hh:mm:ss'), ".xlsx");
         link.click(); // setTimeout(function () {
         //     // For Firefox it is necessary to delay revoking the ObjectURL
         //     window.URL.revokeObjectURL(data)
@@ -267,18 +276,26 @@ var render = function() {
       _c(
         "a",
         {
-          staticClass: "tile is-child box is-bold is-dark has-text-white",
-          staticStyle: { position: "relative" },
+          staticClass: "tile is-child box is-bold is-white",
+          staticStyle: { position: "relative", border: "solid 1px #eee" },
           on: { click: _vm.downloadAirConditioners }
         },
         [
-          _c("b-icon", {
-            staticClass: "has-text-eco fa-2x",
-            staticStyle: { "padding-top": "20px", "padding-left": "5px" },
-            attrs: { pack: "fas", icon: "download" }
-          }),
-          _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "columns" }, [
+            _c(
+              "div",
+              { staticClass: "column is-1 has-text-centered" },
+              [
+                _c("font-awesome-icon", {
+                  staticClass: "has-text-eco",
+                  attrs: { icon: ["fas", "download"] }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
           _vm._v(" "),
           _c("b-loading", {
             attrs: {
@@ -303,18 +320,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "is-size-4 has-text-weight-bold",
-        staticStyle: { "margin-top": "10px" }
-      },
-      [
-        _c("p", { staticClass: "is-size-6 has-text-weight-semibold" }, [
-          _vm._v("Descargar listado de Aires Acondicionados")
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "column" }, [
+      _c(
+        "div",
+        {
+          staticClass: "is-size-4 has-text-weight-bold",
+          staticStyle: { "margin-top": "2px" }
+        },
+        [
+          _c("p", { staticClass: "is-size-6 has-text-weight-semibold" }, [
+            _vm._v("Descargar listado de Aires Acondicionados")
+          ])
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true

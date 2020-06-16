@@ -257,11 +257,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
@@ -705,6 +711,33 @@ var render = function() {
                           ),
                           _vm._v(" más.\n                                ")
                         ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.pop.current_office
+                      ? _c(
+                          "div",
+                          { staticStyle: { "padding-top": "4px" } },
+                          [
+                            _c(
+                              "b-tag",
+                              {
+                                staticClass: "has-text-weight-semibold",
+                                attrs: { type: "is-link", size: "is-medium" }
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  staticStyle: { "padding-bottom": "2px" },
+                                  attrs: { icon: ["fas", "home"] }
+                                }),
+                                _vm._v(
+                                  "  OFICINA CRM\n                                    "
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
                       : _vm._e()
                   ])
                 ])
@@ -892,7 +925,15 @@ var render = function() {
                               {
                                 attrs: { size: "is-medium", type: "is-black" }
                               },
-                              [_vm._v("VIP")]
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.pop.current_entel_vip
+                                      ? "VIP Entel"
+                                      : "VIP"
+                                  )
+                                )
+                              ]
                             )
                           ],
                           1

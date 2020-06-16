@@ -153,6 +153,9 @@ Route::middleware('auth:api')->group(function () {
 
 			// Clients Connection
 				Route::apiResource('junctions','Api\JunctionController');
+				Route::put('junctionUpdateTypes/{id}','Api\JunctionController@updateTypes');
+				Route::get('junctionTypes','Api\JunctionController@junctionTypes');
+				Route::get('junctionConnections','Api\JunctionController@junctionConnections');
 				Route::get('popJunctions/{pop_id}','Api\JunctionController@popJunctions');
 				Route::post('junction/efizity','Api\JunctionController@syncEfizity');
 
@@ -306,6 +309,7 @@ Route::middleware('auth:api')->group(function () {
 			Route::get('popTechnologies', 'Api\PopController@technologies');
 
 			Route::get('popMenu', 'Api\PopController@popMenu');
+			Route::put('vipEntel/{id}', 'Api\PopController@updateVipEntel');
 
             Route::apiResource('folders', 'Api\FolderController');
 			Route::apiResource('files', 'Api\FileController');

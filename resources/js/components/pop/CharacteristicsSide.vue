@@ -118,6 +118,19 @@
                                     <b-checkbox :value="vip" @input="updateParameter('vip', vip)"><div class="is-size-6">VIP</div></b-checkbox>
                                 </div>
 
+                                <div class="field" v-if="vip & !isEditMode">
+                                    <font-awesome-icon 
+                                        :icon="vip_entel ? ['fas', 'check-circle'] : ['far', 'times-circle']"
+                                        :class="vip_entel ? 'has-text-eco' : 'has-text-grey-light'"
+                                        :disabled="!vip_entel"
+                                    />
+                                    <label :class="vip_entel ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">VIP Entel</label>
+                                </div>
+                                <div class="field" v-if="vip & isEditMode">
+                                    <b-checkbox :value="vip_entel" @input="updateVipEntel()"><div class="is-size-6">VIP Entel</div></b-checkbox>
+                                </div>
+
+
                                 <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="localidad_obligatoria ? ['fas', 'check-circle'] : ['far', 'times-circle']"
@@ -249,6 +262,10 @@ export default {
             return !!+this.pop.vip
         },
 
+        vip_entel() {
+            return this.pop.current_entel_vip ? true : false
+        },
+
         localidad_obligatoria() {
             return !!+this.pop.localidad_obligatoria
         },
@@ -271,9 +288,12 @@ export default {
 
     },
 
+    mounted() {
+        // console.log(this.pop.current_entel_vip.isEmpty())
+    },
+
     watch: {
         pop(val) {
-
             console.log(val)
             console.log(this.pe_3g)
         }
@@ -289,6 +309,26 @@ export default {
             }
 
             axios.put(`/api/pop/${this.pop.id}`, params)
+            .then(response => {
+                // console.log(response.data)
+                this.$buefy.toast.open({
+                    message: 'Parámetro actualizado exitosamente.',
+                    type: 'is-success',
+                    duration: 2000
+                })
+                this.$eventBus.$emit('parameter-updated');
+            })
+            
+        },
+
+        updateVipEntel() {
+            let params = {
+                'api_token': this.user.api_token,
+                'value': !this.vip_entel,
+                'user_id': this.user.id
+            }
+
+            axios.put(`/api/vipEntel/${this.pop.id}`, params)
             .then(response => {
                 console.log(response.data)
                 this.$buefy.toast.open({

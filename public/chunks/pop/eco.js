@@ -126,22 +126,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUpload"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUpload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFilePdf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileExcel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileImage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleLeft"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
@@ -149,7 +138,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     return {
       rcas: [],
       dropFiles: [],
-      temporaryStorages: []
+      temporaryStorages: [],
+      temporaryStoragesData: [],
+      isLoading: false
     };
   },
   computed: {
@@ -163,6 +154,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           if (bool == false) {
             bool = element.pop.id == _this.pop.id ? true : false;
           }
+
+          _this.temporaryStoragesData.push(element);
         });
       }
 
@@ -181,7 +174,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this2 = this;
 
       axios.get("/api/rcas/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-        // console.log(response.data)
+        console.log(response.data);
         _this2.rcas = response.data;
       });
     },
@@ -225,6 +218,69 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       } catch (e) {
         console.log(e);
       }
+    },
+    faFile: function faFile(ext) {
+      var icon = ext == 'pdf' ? 'file-pdf' : ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'file-image' : ext == 'xls' || ext == 'xlsx' ? 'file-excel' : 'file';
+      var type = ext == 'pdf' ? 'has-text-info' : ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'has-text-warning' : ext == 'xls' || ext == 'xlsx' ? 'has-text-success' : 'has-text-primary';
+      return {
+        'icon': icon,
+        'type': type
+      };
+    },
+    readFile: function readFile(file) {
+      var _this6 = this;
+
+      this.isLoading = true;
+      var params = {
+        'api_token': this.user.api_token,
+        'route': file.route,
+        'mime': file.mime,
+        'basename': file.basename,
+        'dirname': file.dirname
+      }; // console.log(params)
+
+      axios.get('/api/viewFile', {
+        params: params,
+        responseType: 'arraybuffer'
+      }).then(function (response) {
+        // console.log(response)
+        var blob = new Blob([response.data], {
+          type: file.mime
+        });
+        var objectUrl = URL.createObjectURL(blob); // IE doesn't allow using a blob object directly as link href
+        // instead it is necessary to use msSaveOrOpenBlob
+
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(newBlob);
+          return;
+        }
+
+        var link = document.createElement('a');
+        link.href = objectUrl;
+        link.open = file.basename; // link.target = "_blank";
+
+        link.click();
+        setTimeout(function () {
+          // For Firefox it is necessary to delay revoking the ObjectURL
+          URL.revokeObjectURL(objectUrl);
+        }, 100);
+        _this6.isLoading = false;
+
+        _this6.$buefy.toast.open({
+          message: 'El archivo se ha descargado exitosamente.',
+          type: 'is-success',
+          duration: 5000
+        });
+      })["catch"](function (error) {
+        console.log(error);
+        _this6.isLoading = false;
+
+        _this6.$buefy.toast.open({
+          message: 'Ha ocurrido un error. Favor contactar al administrador',
+          type: 'is-danger',
+          duration: 5000
+        });
+      });
     }
   }
 });
@@ -356,8 +412,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              !_vm.isTempStorage &
-              _vm.temporaryStorages.environmentalData.length
+              !_vm.isTempStorage & _vm.temporaryStoragesData.length
                 ? _c(
                     "div",
                     [
@@ -374,9 +429,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._l(_vm.temporaryStorages.environmentalData, function(
-                        ts
-                      ) {
+                      _vm._l(_vm.temporaryStoragesData, function(ts) {
                         return _c(
                           "div",
                           {
@@ -411,7 +464,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              !_vm.temporaryStorages.environmentalData.length
+              !_vm.temporaryStoragesData.length
                 ? _c(
                     "div",
                     {
@@ -471,14 +524,70 @@ var render = function() {
                                       {
                                         attrs: {
                                           field: "basename",
-                                          label: "First Name"
+                                          label: "Nombre archivo"
                                         }
                                       },
                                       [
-                                        _vm._v(
-                                          "\n                                    " +
-                                            _vm._s(props.row.basename) +
-                                            "\n                                "
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass: "has-text-dark",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.readFile(props.row)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "columns" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "column is-1"
+                                                  },
+                                                  [
+                                                    _c("font-awesome-icon", {
+                                                      class: _vm.faFile(
+                                                        props.row.extension
+                                                      ).type,
+                                                      attrs: {
+                                                        icon: [
+                                                          "fas",
+                                                          _vm.faFile(
+                                                            props.row.extension
+                                                          ).icon
+                                                        ]
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "column" },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.row.basename
+                                                          )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
                                       ]
                                     )
@@ -488,7 +597,7 @@ var render = function() {
                             ],
                             null,
                             false,
-                            2153886371
+                            1317482038
                           )
                         },
                         [

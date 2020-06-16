@@ -187,18 +187,20 @@
             },
 
             getInfoWindowContent(pop) {
-                // console.log(pop)
+                var thisPop = this.siteDependence(pop.id)
+                console.log(thisPop)
                 return (`
                     <div class="card">
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
-                                    <span class="tag ${this.classification == 'A' ? 'is-danger' : (this.classification == 'B' ? 'is-warning' : (this.classification_type_id == 'C' ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
-                                        ${this.classification}
+                                    <span class="tag ${thisPop.classification_type_id == 1 ? 'is-danger' : (thisPop.classification_type_id == 2 ? 'is-warning' : (thisPop.classification_type_id_type_id == 3 ? 'is-blue' : 'is-link'))} is-large has-text-weight-bold" data-tooltip="Categoría">
+                                        ${ thisPop.classification_type.classification_type }
                                     </span>
                                 </div>
                                 <div class="media-content">
-                                    <p class="has-text-weight-bold is-size-4">${pop.nombre}</p>
+                                    <p class="has-text-weight-semibold is-size-6 has-text-info">${thisPop.nem_site}</p>
+                                    <p class="has-text-weight-bold is-size-4">${thisPop.nombre}</p>
                                     <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.comuna.nombre_comuna}</p>
                                     <p class="has-text-weight-light is-size-6">Zona ${pop.comuna.zona.nombre_zona}, CRM ${pop.comuna.zona.crm.nombre_crm}</p>
                                 </div>
@@ -262,6 +264,16 @@
                     })
                     this.dependencesActive = 1
                 } 
+            },
+
+            siteDependence(pop_id) {
+                var dep;
+                this.dependences.forEach(element => {
+                    if(element.dependence.pop_id == pop_id) {
+                        dep = element.dependence
+                    }
+                })
+                return dep
             },
 
             removeLines() {

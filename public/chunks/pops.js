@@ -567,27 +567,22 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
     };
   },
-  created: function created() {
+  created: function created() {},
+  mounted: function mounted() {
     this.styleMode();
     this.getCrms();
     this.getFilterButtons();
-  },
-  mounted: function mounted() {
-    this.getPops();
-    this.getPopsMap();
+    this.getPops(); // this.getPopsMap()
   },
   watch: {
     core: function core(val) {
-      this.getPops();
-      this.getPopsMap();
+      this.getPops(); // this.getPopsMap() 
     },
     critic: function critic(val) {
-      this.getPops();
-      this.getPopsMap();
+      this.getPops(); // this.getPopsMap() 
     },
     vip: function vip(val) {
-      this.getPops();
-      this.getPopsMap();
+      this.getPops(); // this.getPopsMap() 
     },
     selectedPops: function selectedPops(val) {
       val.length != 0 ? this.popsMap = val : this.getPops();
@@ -623,13 +618,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     },
     changeEquipment: function changeEquipment(equipment) {
       equipment.selected = +!equipment.selected;
-      this.getPops();
-      this.getPopsMap();
+      this.getPops(); // this.getPopsMap()
     },
     changeCharacteristic: function changeCharacteristic(characteristic) {
       characteristic.selected = +!characteristic.selected;
-      this.getPops();
-      this.getPopsMap();
+      this.getPops(); // this.getPopsMap()
     },
     selectPop: function selectPop(pop) {
       this.popsMap = [pop];
@@ -640,13 +633,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       this.selectedCrm = this.selectedCrm != crm ? crm : null;
       this.selectedZona = null;
       this.zonas = crm.zonas;
-      this.getPops();
-      this.getPopsMap();
+      this.getPops(); // this.getPopsMap()
     },
     selectZona: function selectZona(zona) {
       this.selectedZona = this.selectedZona != zona ? zona : null;
-      this.getPops();
-      this.getPopsMap();
+      this.getPops(); // this.getPopsMap()
     },
     popClassification: function popClassification(pop) {
       var id = 6;
@@ -706,42 +697,43 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       }).then(function (response) {
         // console.log(response)
         _this3.pops = response.data;
+        setInterval(_this3.getPopsMap(params), 200);
       });
     },
     // APIs
-    getPopsMap: function getPopsMap() {
+    getPopsMap: function getPopsMap(params) {
       var _this4 = this;
 
-      var params = {
-        'api_token': this.user.api_token,
-        'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-        'zona_id': this.selectedZona ? this.selectedZona.id : 0,
-        'text': this.searchText != '' ? this.searchText : 0,
-        'core': this.core,
-        'critic': this.critic,
-        'vip': this.vip,
-        'pe_3g': this.characteristics.pe_3g.selected,
-        'mpls': this.characteristics.mpls.selected,
-        'olt': this.characteristics.olt.selected,
-        'olt_3play': this.characteristics.olt_3play.selected,
-        'red_minima_n1': this.characteristics.red_minima_n1.selected,
-        'red_minima_n2': this.characteristics.red_minima_n2.selected,
-        'lloo': this.characteristics.lloo.selected,
-        'ranco': this.characteristics.ranco.selected,
-        'bafi': this.characteristics.bafi.selected,
-        'offgrid': this.characteristics.offgrid.selected,
-        'solar': this.characteristics.solar.selected,
-        'eolica': this.characteristics.eolica.selected,
-        'alba_project': this.characteristics.alba_project.selected,
-        'protected_zone': this.characteristics.protected_zone.selected,
-        'electric_line': this.equipments.electric_line.selected,
-        'junction': this.equipments.junction.selected,
-        'generator_set': this.equipments.generator_set.selected,
-        'power_rectifier': this.equipments.power_rectifier.selected,
-        'air_conditioner': this.equipments.air_conditioner.selected,
-        'vertical_structure': this.equipments.vertical_structure.selected,
-        'infrastructure': this.equipments.infrastructure.selected
-      };
+      // var params = {
+      //     'api_token': this.user.api_token,
+      //     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
+      //     'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+      //     'text': this.searchText != '' ?  this.searchText : 0,
+      //     'core': this.core,
+      //     'critic': this.critic,
+      //     'vip': this.vip,
+      //     'pe_3g': this.characteristics.pe_3g.selected,
+      //     'mpls': this.characteristics.mpls.selected,
+      //     'olt': this.characteristics.olt.selected,
+      //     'olt_3play': this.characteristics.olt_3play.selected,
+      //     'red_minima_n1': this.characteristics.red_minima_n1.selected,
+      //     'red_minima_n2': this.characteristics.red_minima_n2.selected,
+      //     'lloo': this.characteristics.lloo.selected,
+      //     'ranco': this.characteristics.ranco.selected,
+      //     'bafi': this.characteristics.bafi.selected,
+      //     'offgrid': this.characteristics.offgrid.selected,
+      //     'solar': this.characteristics.solar.selected,
+      //     'eolica': this.characteristics.eolica.selected,
+      //     'alba_project': this.characteristics.alba_project.selected,
+      //     'protected_zone': this.characteristics.protected_zone.selected,
+      //     'electric_line': this.equipments.electric_line.selected,
+      //     'junction': this.equipments.junction.selected,
+      //     'generator_set': this.equipments.generator_set.selected,
+      //     'power_rectifier': this.equipments.power_rectifier.selected,
+      //     'air_conditioner': this.equipments.air_conditioner.selected,
+      //     'vertical_structure': this.equipments.vertical_structure.selected,
+      //     'infrastructure': this.equipments.infrastructure.selected
+      // }
       axios.get('/api/popsMap', {
         params: params
       }).then(function (response) {

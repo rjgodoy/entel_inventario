@@ -202,23 +202,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getData;
-    }() // downloadPops() {
-    //     this.buttonLoading = 1
-    //     axios.get(`/api/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
-    //         responseType: 'blob',
-    //     })
-    //     .then((response) => {
-    //         // console.log(response.data)
-    //         const blob = new Blob([response.data], { type: 'application/xls' })
-    //         // const objectUrl = window.URL.createObjectURL(blob)
-    //         let link = document.createElement('a')
-    //         link.href = window.URL.createObjectURL(blob)
-    //         link.download = 'test.xlsx'
-    //         link.click()
-    //         this.buttonLoading = 0
-    //     })
-    // }
-
+    }()
   }
 });
 

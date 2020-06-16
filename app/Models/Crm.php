@@ -12,4 +12,14 @@ class Crm extends Model
     {
         return $this->hasMany(Zona::class);
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function office() 
+    {
+        return $this->belongsTo(CrmOffice::class);
+    }
 }

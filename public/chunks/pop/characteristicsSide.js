@@ -214,6 +214,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -242,6 +255,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     vip: function vip() {
       return !!+this.pop.vip;
     },
+    vip_entel: function vip_entel() {
+      return this.pop.current_entel_vip ? true : false;
+    },
     localidad_obligatoria: function localidad_obligatoria() {
       return !!+this.pop.localidad_obligatoria;
     },
@@ -257,6 +273,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     eolica: function eolica() {
       return !!+this.pop.eolica;
     }
+  },
+  mounted: function mounted() {// console.log(this.pop.current_entel_vip.isEmpty())
   },
   watch: {
     pop: function pop(val) {
@@ -275,8 +293,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'user_id': this.user.id
       };
       axios.put("/api/pop/".concat(this.pop.id), params).then(function (response) {
-        console.log(response.data);
-
+        // console.log(response.data)
         _this.$buefy.toast.open({
           message: 'Parámetro actualizado exitosamente.',
           type: 'is-success',
@@ -284,6 +301,26 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         });
 
         _this.$eventBus.$emit('parameter-updated');
+      });
+    },
+    updateVipEntel: function updateVipEntel() {
+      var _this2 = this;
+
+      var params = {
+        'api_token': this.user.api_token,
+        'value': !this.vip_entel,
+        'user_id': this.user.id
+      };
+      axios.put("/api/vipEntel/".concat(this.pop.id), params).then(function (response) {
+        console.log(response.data);
+
+        _this2.$buefy.toast.open({
+          message: 'Parámetro actualizado exitosamente.',
+          type: 'is-success',
+          duration: 2000
+        });
+
+        _this2.$eventBus.$emit('parameter-updated');
       });
     }
   }
@@ -750,6 +787,64 @@ var render = function() {
                         [
                           _c("div", { staticClass: "is-size-6" }, [
                             _vm._v("VIP")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.vip & !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("font-awesome-icon", {
+                        class: _vm.vip_entel
+                          ? "has-text-eco"
+                          : "has-text-grey-light",
+                        attrs: {
+                          icon: _vm.vip_entel
+                            ? ["fas", "check-circle"]
+                            : ["far", "times-circle"],
+                          disabled: !_vm.vip_entel
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "is-size-6",
+                          class: _vm.vip_entel
+                            ? "has-text-weight-bold"
+                            : "has-text-grey-light has-text-weight-light"
+                        },
+                        [_vm._v("VIP Entel")]
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.vip & _vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c(
+                        "b-checkbox",
+                        {
+                          attrs: { value: _vm.vip_entel },
+                          on: {
+                            input: function($event) {
+                              return _vm.updateVipEntel()
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "is-size-6" }, [
+                            _vm._v("VIP Entel")
                           ])
                         ]
                       )

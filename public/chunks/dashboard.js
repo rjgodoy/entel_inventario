@@ -448,11 +448,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMapMarkedAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faServer"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFileInvoiceDollar"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSearch"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMapMarkedAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faServer"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFileInvoiceDollar"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSearch"]);
 
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
@@ -550,7 +555,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       boxBackgroundClimate: '',
       boxBackgroundInfrastructure: '',
       selectedPrimaryBoxText: 'has-text-white',
-      selectedSecondaryBoxText: 'has-text-light',
+      selectedSecondaryBoxText: 'has-text-white',
       // selectedPop: null,
       selectedSite: null,
       selectedCrm: null,
@@ -636,6 +641,9 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       } else {
         return;
       }
+    },
+    middleFileName: function middleFileName() {
+      return this.selectedZona ? "Zona ".concat(this.selectedZona.nombre_zona, " - ") : this.selectedCrm ? "CRM ".concat(this.selectedCrm.nombre_crm, " - ") : '';
     },
     textSwitchCore: function textSwitchCore() {
       return this.core ? 'has-text-link' : '';
@@ -763,6 +771,64 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
       return getCounters;
     }(),
+    status: function status(site) {
+      var state = 'Inactivo';
+      var id = 0;
+
+      switch (site.site_type_id) {
+        case 1:
+        case 3:
+        case 4:
+          id = site.state_id;
+          state = site.state.state;
+          break;
+
+        case 2:
+          site.technologies.forEach(function (element) {
+            switch (element.state_id) {
+              case 1:
+                id = element.state_id;
+                state = element.state.state;
+                break;
+
+              case 2:
+                if (id == 0) {
+                  id = element.state_id;
+                  state = element.state.state;
+                }
+
+                break;
+
+              case 3:
+              case 4:
+              case 5:
+              case 6:
+              case 7:
+              case 8:
+              case 9:
+              case 10:
+              case 11:
+              case 12:
+                if (id != 1) {
+                  id = element.state_id;
+                  state = element.state.state;
+                }
+
+                break;
+
+              case null:
+              default:
+                break;
+            }
+          });
+          break;
+      }
+
+      return {
+        'id': id,
+        'state': state
+      };
+    },
     // Triggers
     selectPop: function selectPop(pop) {
       this.pops = [pop];
@@ -907,7 +973,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         var data = window.URL.createObjectURL(blob);
         var link = document.createElement('a');
         link.href = data;
-        link.download = 'listado_pops.xlsx';
+        link.download = "Listado PoP - ".concat(_this6.middleFileName).concat(moment().format('YYYY-MM-DD hh:mm:ss'), ".xlsx");
         link.click(); // setTimeout(function () {
         //     // For Firefox it is necessary to delay revoking the ObjectURL
         //     window.URL.revokeObjectURL(data)
@@ -1064,11 +1130,8 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        staticClass: "tile is-child box",
-                        class:
-                          _vm.selectedCrm == crm
-                            ? "is-bold is-link"
-                            : _vm.boxBackground,
+                        staticClass: "tile is-child box is-bold",
+                        class: _vm.selectedCrm == crm ? "is-link" : "is-white",
                         on: {
                           click: function($event) {
                             return _vm.selectCrm(crm)
@@ -1120,7 +1183,7 @@ var render = function() {
                                   "div",
                                   {
                                     staticClass:
-                                      "is-size-7 has-text-weight-semibold"
+                                      "is-size-7 has-text-weight-normal"
                                   },
                                   [_vm._v(_vm._s(crm.subgerente_crm))]
                                 )
@@ -1165,11 +1228,11 @@ var render = function() {
                             _c(
                               "a",
                               {
-                                staticClass: "tile is-child box",
+                                staticClass: "tile is-child box is-bold",
                                 class:
                                   _vm.selectedZona == zona
-                                    ? "is-bold is-link"
-                                    : _vm.boxBackground,
+                                    ? "is-link"
+                                    : "is-white",
                                 on: {
                                   click: function($event) {
                                     return _vm.selectZona(zona)
@@ -1305,8 +1368,41 @@ var render = function() {
                                   class: _vm.secondaryText
                                 },
                                 [
+                                  _c(
+                                    "span",
+                                    [
+                                      _c(
+                                        "b-tooltip",
+                                        {
+                                          attrs: {
+                                            label: _vm.status(props.option)
+                                              .state,
+                                            position: "is-right",
+                                            type: "is-dark"
+                                          }
+                                        },
+                                        [
+                                          _c("font-awesome-icon", {
+                                            class:
+                                              _vm.status(props.option).id == 1
+                                                ? "has-text-success"
+                                                : _vm.status(props.option).id ==
+                                                  2
+                                                ? "has-text-danger"
+                                                : _vm.status(props.option).id ==
+                                                  0
+                                                ? ""
+                                                : "has-text-warning",
+                                            attrs: { icon: ["fas", "circle"] }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
                                   _vm._v(
-                                    "\n                                " +
+                                    "\n                                  " +
                                       _vm._s(props.option.nem_site) +
                                       "\n                            "
                                   )
@@ -1567,7 +1663,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "tile is-child box",
+                          staticClass: "tile is-child box is-bold is-white",
                           class:
                             _vm.currentTab === "pops"
                               ? "is-bold is-link"
@@ -1598,7 +1694,7 @@ var render = function() {
                           _c(
                             "div",
                             {
-                              staticClass: "is-size-4 has-text-weight-bold",
+                              staticClass: "is-size-4 has-text-weight-semibold",
                               class:
                                 _vm.currentTab === "pops"
                                   ? "has-text-white"
@@ -1633,7 +1729,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "tile is-child box",
+                          staticClass: "tile is-child box is-bold is-white",
                           class:
                             _vm.currentTab === "sites"
                               ? "is-bold is-link"
@@ -1699,7 +1795,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "tile is-child box",
+                          staticClass: "tile is-child box is-bold is-white",
                           class:
                             _vm.currentTab === "technologies"
                               ? "is-bold is-link"
@@ -1775,7 +1871,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "tile is-child box",
+                          staticClass: "tile is-child box is-bold is-white",
                           class:
                             _vm.currentTab === "critics"
                               ? "is-bold is-link"
@@ -1836,7 +1932,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "tile is-child box",
+                          staticClass: "tile is-child box is-bold is-white",
                           class:
                             _vm.currentTab === "alba"
                               ? "is-bold is-link"
@@ -1897,8 +1993,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass:
-                            "tile is-child box is-bold is-dark has-text-white",
+                          staticClass: "tile is-child box is-bold is-dark",
                           staticStyle: { position: "relative" },
                           on: { click: _vm.downloadPops }
                         },

@@ -6,6 +6,7 @@ use App\Exports\AllInfoPopsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Pop as PopResource;
 use App\Http\Resources\PopCollection;
+use App\Models\EntelVip;
 use App\Models\GeneratorSet;
 use App\Models\Log;
 use App\Models\LogType;
@@ -240,11 +241,13 @@ class PopController extends Controller
     public function show($id)
     {
         $pop = Pop::with(
-            'comuna.zona.crm', 
+            'comuna.zona.crm.office', 
+            'comuna.zona.responsable', 
             'sites.classification_type', 
             'sites.technologies.state', 
-            'comuna.zona.responsable', 
-            'sites.site_type', 
+            'sites.technologies.technology_type', 
+            'sites.site_type',
+            'sites.state', 
             'sites.attention_priority_type', 
             'sites.dependences', 
             'sites.category_type', 
@@ -254,20 +257,23 @@ class PopController extends Controller
             'rooms.air_conditioners.air_conditioner_brand.air_conditioner_type',
             'rooms.air_conditioners.air_conditioner_chillers',
             'rooms.air_conditioners.air_conditioner_condensers',
-            'protected_zones'
+            'protected_zones',
+            'current_entel_vip',
+            'current_office'
             )
             ->where('id', $id)
-            ->whereHas('sites', function($q) {
-                $q->where(function($p) {
-                    $p->whereIn('site_type_id', [1,3,4])->where('state_id', 1);
-                })
-                ->orWhere(function($r) {
-                    $r->whereIn('sites.site_type_id', [2])
-                    ->whereHas('technologies', function($s) {
-                        $s->where('state_id', 1);
-                    });
-                });
-            })
+            // ->whereHas('sites', function($q) {
+            //     $q->where(function($p) {
+            //         $p->whereIn('site_type_id', [1,3,4])
+            //         ->where('state_id', 1);
+            //     })
+            //     ->orWhere(function($r) {
+            //         $r->whereIn('sites.site_type_id', [2])
+            //         ->whereHas('technologies', function($s) {
+            //             $s->where('state_id', 1);
+            //         });
+            //     });
+            // })
             ->first();
 
         return new PopResource($pop);
@@ -337,6 +343,37 @@ class PopController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateVipEntel(Request $request, $id)
+    {
+        $vip = EntelVip::where('pop_id', $id)->first();
+        if($vip) {
+            $vip->delete();
+        } else {
+            EntelVip::create([
+                'pop_id' => $id
+            ]);
+        }
+        
+        $boolean = $request->value ? 'SI' : 'NO';
+
+        // Busca el dato que se actualizó par incorporarlo en el Log
+        Log::create([
+            'pop_id' => $id,
+            'user_id' => $request->user_id,
+            'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
+            'description' => 'Se ha actualizado el parámetro "VIP Entel" a "'.$boolean.'"'
+        ]);
+
+        return $request;
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -364,7 +401,7 @@ class PopController extends Controller
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
         $condition_zona = $zona_id != 0 ? 'id = '.$zona_id : 'id != '.$zona_id;
 
-        $sites = Site::with('pop.comuna.zona.crm', 'classification_type')
+        $sites = Site::with('pop.comuna.zona.crm', 'state', 'classification_type', 'technologies.technology_type', 'technologies.state')
             ->where(function($p) use($text) {
                 $p->where(function($q) use ($text) {
                     $q->where('nem_site', 'LIKE', "%$text%")
@@ -375,19 +412,24 @@ class PopController extends Controller
                         $u->where('nombre', 'LIKE', "%$text%")
                         ->orWhere('direccion', 'LIKE', "%$text%");
                     });
-                });
-            })
-            ->where(function($r) {
-                $r->where(function($p) {
-                    $p->whereIn('site_type_id', [1,3,4])->where('state_id', 1);
                 })
-                ->orWhere(function($t) {
-                    $t->whereIn('sites.site_type_id', [2])
-                    ->whereHas('technologies', function($s) {
-                        $s->where('state_id', 1);
+                ->orWhere(function($s) use($text) {
+                    $s->whereHas('technologies', function($u) use ($text) {
+                        $u->where('nem_tech', 'LIKE', "%$text%");
                     });
                 });
             })
+            // ->where(function($r) {
+            //     $r->where(function($p) {
+            //         $p->whereIn('site_type_id', [1,3,4])->where('state_id', 1);
+            //     })
+            //     ->orWhere(function($t) {
+            //         $t->whereIn('sites.site_type_id', [2])
+            //         ->whereHas('technologies', function($s) {
+            //             $s->where('state_id', 1);
+            //         });
+            //     });
+            // })
             ->whereRaw($condition_core)
             ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
                 $q->whereRaw($condition_crm)
@@ -412,7 +454,8 @@ class PopController extends Controller
             //     'classification_types.classification_type',
             //     'pops.alba_project'
             // )
-            ->orderBy('classification_type_id')
+            ->orderBy('state_id', 'asc')
+            ->orderBy('classification_type_id', 'asc')
             ->paginate(10);
     
         return $sites;
@@ -465,7 +508,7 @@ class PopController extends Controller
         $condition_vip = 'pops.vip IN ('.$request->vip.',1)';
         $condition_lloo = 'pops.localidad_obligatoria IN ('.$request->lloo.',1)';
         $condition_ranco = 'pops.ranco IN ('.$request->ranco.',1)';
-        $condition_bafi = $bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'state_id = 1';
+        $condition_bafi = $bafi ? 'technology_type_id = 3 AND frequency = 3500' : '1 = 1';
         $condition_offgrid = 'pops.offgrid IN ('.$request->offgrid.',1)';
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
@@ -491,37 +534,13 @@ class PopController extends Controller
 
         $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
             ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi) { 
-                $q->where(function($p) use($text) {
-                    $p->where(function($w) use($text) {
-                        if ($text) {
-                            $w->whereIn('site_type_id', [1,3,4])
-                            ->where('state_id', 1)
-                            ->where(function($r) use($text) {
-                                $r->where('sites.nem_site', 'LIKE', "%$text%")
-                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                            });
-                        } else {
-                            $w->whereIn('site_type_id', [1,3,4])
-                            ->where('state_id', 1);
-                        }
-                    })
-                    ->orWhere(function($s) use($text) {
-                        if ($text) {
-                            $s->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($r) {
-                                $r->where('state_id', 1);
-                            })
-                            ->where(function($q) use($text) {
-                                $q->where('sites.nem_site', 'LIKE', "%$text%")
-                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                            });
-                        } else {
-                            $s->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($r) {
-                                $r->where('state_id', 1);
-                            });
-                        }
-                    });
+                $q->where(function ($p) use ($text) {
+                    if ($text) {
+                        $p->where('nem_site', 'LIKE', "%$text%")
+                        ->orWhere('nombre', 'LIKE', "%$text%");
+                    } else {
+                        $p;
+                    }
                 })
                 ->where(function($q) use($condition_bafi, $bafi) {
                     if($bafi) {
@@ -620,7 +639,7 @@ class PopController extends Controller
         $condition_vip = 'pops.vip IN ('.$request->vip.',1)';
         $condition_lloo = 'pops.localidad_obligatoria IN ('.$request->lloo.',1)';
         $condition_ranco = 'pops.ranco IN ('.$request->ranco.',1)';
-        $condition_bafi = $request->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
+        $condition_bafi = $request->bafi ? 'technology_type_id = 3 AND frequency = 3500' : '1 = 1';
         $condition_offgrid = 'pops.offgrid IN ('.$request->offgrid.',1)';
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
@@ -648,36 +667,12 @@ class PopController extends Controller
         $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
             ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi) { 
                 $q->where(function($p) use($text) {
-                    $p->where(function($w) use($text) {
-                        if ($text) {
-                            $w->whereIn('site_type_id', [1,3,4])
-                            ->where('state_id', 1)
-                            ->where(function($r) use($text) {
-                                $r->where('sites.nem_site', 'LIKE', "%$text%")
-                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                            });
-                        } else {
-                            $w->whereIn('site_type_id', [1,3,4])
-                            ->where('state_id', 1);
-                        }
-                    })
-                    ->orWhere(function($s) use($text) {
-                        if ($text) {
-                            $s->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($r) {
-                                $r->where('state_id', 1);
-                            })
-                            ->where(function($q) use($text) {
-                                $q->where('sites.nem_site', 'LIKE', "%$text%")
-                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                            });
-                        } else {
-                            $s->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($r) {
-                                $r->where('state_id', 1);
-                            });
-                        }
-                    });
+                    if ($text) {
+                        $p->where('nem_site', 'LIKE', "%$text%")
+                        ->orWhere('nombre', 'LIKE', "%$text%");
+                    } else {
+                        $p;
+                    }
                 })
                 ->where(function($q) use($condition_bafi, $bafi) {
                     if($bafi) {

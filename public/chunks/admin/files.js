@@ -107,6 +107,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -220,202 +227,214 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section container" }, [
-    _c(
-      "section",
-      { staticClass: "box" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "b-field",
-          { attrs: { label: "Nombre archivo" } },
-          [
-            _c("b-input", {
-              attrs: { width: "50", required: "" },
-              model: {
-                value: _vm.filename,
-                callback: function($$v) {
-                  _vm.filename = $$v
-                },
-                expression: "filename"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "b-upload",
-          {
-            model: {
-              value: _vm.file,
-              callback: function($$v) {
-                _vm.file = $$v
-              },
-              expression: "file"
-            }
-          },
-          [
-            _c(
-              "a",
-              { staticClass: "button is-primary is-fullwidth" },
-              [
-                _c("b-icon", { attrs: { icon: "upload", pack: "fas" } }),
-                _vm._v(" "),
-                _c("span", [
-                  _vm._v(_vm._s(_vm.file.name || "Click para subir"))
-                ])
-              ],
-              1
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "b-button",
-          {
-            staticClass: "is-link",
-            attrs: { disabled: !_vm.filename || !_vm.file.name },
-            on: { click: _vm.submit }
-          },
-          [_vm._v("Subir")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "section" },
-          [
-            _c("b-table", {
-              attrs: {
-                data: _vm.isEmpty ? [] : _vm.files,
-                bordered: false,
-                striped: false,
-                narrowed: false,
-                hoverable: false,
-                loading: false,
-                focusable: false,
-                "mobile-cards": false
-              },
-              scopedSlots: _vm._u([
+    _c("section", { staticClass: "box" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "columns", staticStyle: { "margin-top": "20px" } },
+        [
+          _c("div", { staticClass: "column" }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "column" },
+            [
+              _c(
+                "b-field",
+                { attrs: { label: "Nombre archivo" } },
+                [
+                  _c("b-input", {
+                    attrs: { width: "50", required: "" },
+                    model: {
+                      value: _vm.filename,
+                      callback: function($$v) {
+                        _vm.filename = $$v
+                      },
+                      expression: "filename"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-upload",
                 {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: { field: "filename", label: "First Name" },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "header",
-                                fn: function(ref) {
-                                  var column = ref.column
-                                  return [
-                                    _c("div", { staticClass: "is-size-6" }, [
-                                      _vm._v(_vm._s(column.label))
-                                    ])
-                                  ]
-                                }
-                              }
-                            ],
-                            null,
-                            true
-                          )
-                        },
-                        [
-                          _vm._v(" "),
-                          _c("div", { staticClass: "is-size-6" }, [
-                            _vm._v(_vm._s(props.row.filename))
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: { field: "basename", label: "Last Name" },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "header",
-                                fn: function(ref) {
-                                  var column = ref.column
-                                  return [
-                                    _c("div", { staticClass: "is-size-6" }, [
-                                      _vm._v(_vm._s(column.label))
-                                    ])
-                                  ]
-                                }
-                              }
-                            ],
-                            null,
-                            true
-                          )
-                        },
-                        [
-                          _vm._v(" "),
-                          _c("div", { staticClass: "is-size-6" }, [
-                            _vm._v(_vm._s(props.row.basename))
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-table-column",
-                        {
-                          attrs: { label: "Eliminar" },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "header",
-                                fn: function(ref) {
-                                  var column = ref.column
-                                  return [
-                                    _c("div", { staticClass: "is-size-6" }, [
-                                      _vm._v(_vm._s(column.label))
-                                    ])
-                                  ]
-                                }
-                              }
-                            ],
-                            null,
-                            true
-                          )
-                        },
-                        [
-                          _vm._v(" "),
-                          _c(
-                            "b-button",
-                            {
-                              staticClass: "has-text-danger",
-                              on: {
-                                click: function($event) {
-                                  return _vm.confirmDeleteFile(props.row)
-                                }
-                              }
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                attrs: { icon: ["far", "trash-alt"] }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]
+                  model: {
+                    value: _vm.file,
+                    callback: function($$v) {
+                      _vm.file = $$v
+                    },
+                    expression: "file"
                   }
+                },
+                [
+                  _c(
+                    "a",
+                    { staticClass: "button is-primary is-fullwidth" },
+                    [
+                      _c("b-icon", { attrs: { icon: "upload", pack: "fas" } }),
+                      _vm._v(" "),
+                      _c("span", [
+                        _vm._v(_vm._s(_vm.file.name || "Click para subir"))
+                      ])
+                    ],
+                    1
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                {
+                  staticClass: "is-link",
+                  attrs: { disabled: !_vm.filename || !_vm.file.name },
+                  on: { click: _vm.submit }
+                },
+                [_vm._v("Subir")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "column" })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "section" },
+        [
+          _c("b-table", {
+            attrs: {
+              data: _vm.isEmpty ? [] : _vm.files,
+              bordered: false,
+              striped: false,
+              narrowed: false,
+              hoverable: false,
+              loading: false,
+              focusable: false,
+              "mobile-cards": false
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
+                    _c(
+                      "b-table-column",
+                      {
+                        attrs: { field: "filename", label: "First Name" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "header",
+                              fn: function(ref) {
+                                var column = ref.column
+                                return [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(_vm._s(column.label))
+                                  ])
+                                ]
+                              }
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      },
+                      [
+                        _vm._v(" "),
+                        _c("div", { staticClass: "is-size-6" }, [
+                          _vm._v(_vm._s(props.row.filename))
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-table-column",
+                      {
+                        attrs: { field: "basename", label: "Last Name" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "header",
+                              fn: function(ref) {
+                                var column = ref.column
+                                return [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(_vm._s(column.label))
+                                  ])
+                                ]
+                              }
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      },
+                      [
+                        _vm._v(" "),
+                        _c("div", { staticClass: "is-size-6" }, [
+                          _vm._v(_vm._s(props.row.basename))
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-table-column",
+                      {
+                        attrs: { label: "Eliminar" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "header",
+                              fn: function(ref) {
+                                var column = ref.column
+                                return [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(_vm._s(column.label))
+                                  ])
+                                ]
+                              }
+                            }
+                          ],
+                          null,
+                          true
+                        )
+                      },
+                      [
+                        _vm._v(" "),
+                        _c(
+                          "b-button",
+                          {
+                            staticClass: "has-text-danger",
+                            on: {
+                              click: function($event) {
+                                return _vm.confirmDeleteFile(props.row)
+                              }
+                            }
+                          },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: ["far", "trash-alt"] }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
                 }
-              ])
-            })
-          ],
-          1
-        )
-      ],
-      1
-    )
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = [

@@ -204,6 +204,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -357,6 +371,66 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         });
         return tec;
       }
+    }
+  },
+  methods: {
+    status: function status(site) {
+      var state = 'Inactivo';
+      var id = 0;
+
+      switch (site.site_type_id) {
+        case 1:
+        case 3:
+        case 4:
+          id = site.state_id;
+          state = site.state.state;
+          break;
+
+        case 2:
+          site.technologies.forEach(function (element) {
+            switch (element.state_id) {
+              case 1:
+                id = element.state_id;
+                state = element.state.state;
+                break;
+
+              case 2:
+                if (id == 0) {
+                  id = element.state_id;
+                  state = element.state.state;
+                }
+
+                break;
+
+              case 3:
+              case 4:
+              case 5:
+              case 6:
+              case 7:
+              case 8:
+              case 9:
+              case 10:
+              case 11:
+              case 12:
+                if (id != 1) {
+                  id = element.state_id;
+                  state = element.state.state;
+                }
+
+                break;
+
+              case null:
+              default:
+                break;
+            }
+          });
+          break;
+      }
+
+      return {
+        'id': id,
+        'state': state
+      };
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -839,6 +913,51 @@ var render = function() {
                             )
                           ],
                           1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-taglist",
+                          { staticClass: "is-right", attrs: { attached: "" } },
+                          [
+                            _c(
+                              "b-tag",
+                              {
+                                staticClass: "has-text-weight-normal",
+                                attrs: { type: "is-dark" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    Estado\n                                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-tag",
+                              {
+                                staticClass:
+                                  "has-text-weight-bold has-text-white",
+                                class:
+                                  _vm.status(site).id == 1
+                                    ? "is-success"
+                                    : _vm.status(site).id == 2
+                                    ? "is-danger"
+                                    : _vm.status(site).id == 0
+                                    ? "has-text-dark"
+                                    : "is-warning"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(
+                                      _vm.status(site).state.toUpperCase()
+                                    ) +
+                                    "\n                                "
+                                )
+                              ]
+                            )
+                          ],
+                          1
                         )
                       ],
                       1
@@ -1060,59 +1179,52 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("div", { staticStyle: { "padding-top": "20px" } }, [
-                    _c(
-                      "div",
-                      { staticClass: "columns is-multiline" },
-                      [
-                        _vm._l(site.technologies, function(tech) {
-                          return tech
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass: "column is-4 has-text-centered"
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-6 has-text-weight-normal"
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(tech.nem_tech) +
-                                          "\n                                    "
-                                      ),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "subtitle is-size-6 has-text-weight-light"
-                                        },
-                                        [_vm._v("Tecnología")]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "column" }, [
-                          !site.technologies.length
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "subtitle is-size-5 has-text-weight-light has-text-centered"
-                                },
-                                [_vm._v("Sitio no tiene tecnologías móviles")]
-                              )
-                            : _vm._e()
-                        ])
-                      ],
-                      2
-                    )
+                    site.technologies.length
+                      ? _c(
+                          "div",
+                          { staticClass: "columns is-multiline" },
+                          _vm._l(site.technologies, function(tech) {
+                            return _c(
+                              "div",
+                              { staticClass: "column is-4 has-text-centered" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-bold box"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(tech.nem_tech) +
+                                        "\n                                    "
+                                    ),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "subtitle is-size-6 has-text-weight-light"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(tech.technology_type.type) +
+                                            " - " +
+                                            _vm._s(tech.frequency)
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !site.technologies.length
+                      ? _c("div", { staticClass: "columns" }, [_vm._m(2, true)])
+                      : _vm._e()
                   ])
                 ])
               ])
@@ -1181,6 +1293,21 @@ var staticRenderFns = [
             "column has-text-weight-semibold has-text-dark is-size-3 has-text-left"
         },
         [_vm._v("Sitios")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "subtitle is-size-5 has-text-weight-light has-text-centered"
+        },
+        [_vm._v("Sitio no tiene tecnologías móviles")]
       )
     ])
   }

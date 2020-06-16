@@ -219,10 +219,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "article",
-    {
-      staticClass: "tile is-child box is-bold is-smart",
-      class: _vm.boxBackground
-    },
+    { staticClass: "tile is-child box", class: _vm.boxBackground },
     [
       _c("div", {
         staticClass: "has-text-dark",

@@ -133,7 +133,7 @@
                             </div>
 
                             <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
-                                <a class="box tile is-child" target="_blank" @click="readFile(file); load = file.id" style="position: relative;">
+                                <a class="box tile is-child" @click="readFile(file); load = file.id" style="position: relative;">
                                     <font-awesome-icon 
                                         :icon="['fas', faFile(file.extension).icon]"
                                         :class="faFile(file.extension).type"
@@ -586,7 +586,7 @@ export default {
             .then((response) => {
                 // console.log(response)
                 const blob = new Blob([response.data], { type: file.mime })
-                // const objectUrl = window.URL.createObjectURL(blob)
+                const objectUrl = window.URL.createObjectURL(blob)
 
                 // IE doesn't allow using a blob object directly as link href
                 // instead it is necessary to use msSaveOrOpenBlob
@@ -595,15 +595,15 @@ export default {
                     return
                 }
 
-                const data = window.URL.createObjectURL(blob)
                 let link = document.createElement('a')
-                link.href = data
-                link.download = file.basename
+                link.href = objectUrl
+                link.open = file.basename
+                link.target = '_blank'
                 link.click()
-                // setTimeout(function () {
+                setTimeout(function () {
                 //     // For Firefox it is necessary to delay revoking the ObjectURL
-                //     window.URL.revokeObjectURL(data)
-                // }, 100)
+                    window.URL.revokeObjectURL(objectUrl)
+                }, 100)
 
                 this.isLoading = false
                 this.$buefy.toast.open({

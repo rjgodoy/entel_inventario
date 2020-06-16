@@ -29,7 +29,7 @@
 
                 <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="crm in crms" :key="crm.id">
-                        <a class="tile is-child box" :class="selectedCrm == crm ? 'is-bold is-link' : boxBackground" @click="selectCrm(crm)">
+                        <a class="tile is-child box is-bold" :class="selectedCrm == crm ? 'is-link' : 'is-white'" @click="selectCrm(crm)">
                             <div :class="selectedCrm == crm ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
                                     CRM {{ crm.nombre_crm }}
@@ -37,7 +37,7 @@
 
                                 <div style="margin-top: 10px;" class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only">
                                     <div class="is-size-7 has-text-weight-light" v-text="'Subgerente'"></div> 
-                                    <div class="is-size-7 has-text-weight-semibold">{{ crm.subgerente_crm }}</div>
+                                    <div class="is-size-7 has-text-weight-normal">{{ crm.subgerente_crm }}</div>
                                 </div>
                             </div>
                         </a>
@@ -50,7 +50,7 @@
                 <div class="container" style="margin: -20px auto 10px auto;">
                     <div class="tile is-ancestor">
                         <div class="tile is-parent" v-for="zona in zonas" :key="zona.id">
-                            <a class="tile is-child box" :class="selectedZona == zona ? 'is-bold is-link' : boxBackground" @click="selectZona(zona)">
+                            <a class="tile is-child box is-bold" :class="selectedZona == zona ? 'is-link' : 'is-white'" @click="selectZona(zona)">
                                 <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
                                     <div class="is-size-6 has-text-weight-semibold">
                                         Zona {{ zona.nombre_zona }}
@@ -94,7 +94,12 @@
 
                             <div class="column is-5">
                                 <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
-                                    {{ props.option.nem_site }}
+                                    <span>
+                                        <b-tooltip :label="status(props.option).state" position="is-right" type="is-dark">
+                                            <font-awesome-icon :icon="['fas', 'circle']" :class="status(props.option).id == 1 ? 'has-text-success' : (status(props.option).id == 2 ? 'has-text-danger' : (status(props.option).id == 0 ? '' : 'has-text-warning'))"/>
+                                        </b-tooltip>
+                                    </span>
+                                    &nbsp;&nbsp;{{ props.option.nem_site }}
                                 </div>
                                 <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
                                     {{ props.option ? props.option.nombre : '' }}
@@ -160,7 +165,7 @@
                         <div class="tile is-vertical">
                             <div class="tile">
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'pops' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'pops'">
+                                    <a class="tile is-child box is-bold is-white" :class="currentTab === 'pops' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'pops'">
                                         <div class="" style="padding-top: 10px;" >
                                             <b-icon 
                                                 pack="fas" 
@@ -170,14 +175,14 @@
                                             </b-icon>
                                         </div>
                                         
-                                        <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'pops' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
+                                        <div class="is-size-4 has-text-weight-semibold" :class="currentTab === 'pops' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
                                             <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'pops' ? 'has-text-white' : secondaryText">POP</p>
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'sites' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'sites'">
+                                    <a class="tile is-child box is-bold is-white" :class="currentTab === 'sites' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'sites'">
                                         <div class="" style="padding-top: 10px;">
                                             <b-icon 
                                                 pack="fas" 
@@ -193,7 +198,7 @@
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'technologies' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'technologies'">
+                                    <a class="tile is-child box is-bold is-white" :class="currentTab === 'technologies' ? 'is-bold is-link' : boxBackground" @click="currentTab = 'technologies'">
                                         <div class="" style="padding-top: 10px; padding-left: 5px;">
                                             <b-icon 
                                                 pack="fas" 
@@ -211,7 +216,7 @@
 
                             <div class="tile">
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'critics' ? 'is-bold is-link' : boxBackground" @click="viewCriticPops">
+                                    <a class="tile is-child box is-bold is-white" :class="currentTab === 'critics' ? 'is-bold is-link' : boxBackground" @click="viewCriticPops">
                                         <div class="" style="padding-top: 10px;">
                                             <b-icon 
                                                 pack="fas" 
@@ -227,7 +232,7 @@
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box" :class="currentTab === 'alba' ? 'is-bold is-link' : boxBackground" @click="viewAlbaPops">
+                                    <a class="tile is-child box is-bold is-white" :class="currentTab === 'alba' ? 'is-bold is-link' : boxBackground" @click="viewAlbaPops">
                                         <div class="" style="padding-top: 10px;">
                                             <b-icon 
                                                 pack="fas" 
@@ -243,7 +248,7 @@
                                 </div>
 
                                 <div class="tile is-parent">
-                                    <a class="tile is-child box is-bold is-dark has-text-white" style="position: relative;" 
+                                    <a class="tile is-child box is-bold is-dark" style="position: relative;" 
                                         @click="downloadPops">
                                         <b-icon 
                                             style="padding-top: 20px; padding-left: 5px;"
@@ -427,11 +432,11 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch } from "@fortawesome/free-solid-svg-icons";
+    import { faCircle, faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-    library.add(faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch);
+    library.add(faCircle, faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch);
 
     var moment = require('moment');
     import debounce from 'lodash/debounce'
@@ -517,7 +522,7 @@
                 boxBackgroundInfrastructure: '',
                 
                 selectedPrimaryBoxText: 'has-text-white',
-                selectedSecondaryBoxText: 'has-text-light',
+                selectedSecondaryBoxText: 'has-text-white',
 
                 // selectedPop: null,
                 selectedSite: null,
@@ -624,6 +629,10 @@
                 }
             },
 
+            middleFileName() {
+                return this.selectedZona ? `Zona ${this.selectedZona.nombre_zona} - ` : (this.selectedCrm ? `CRM ${this.selectedCrm.nombre_crm} - ` : '')
+            },
+
             textSwitchCore() {
                 return this.core ? 'has-text-link' : ''
             }
@@ -688,6 +697,59 @@
                     this.criticsQuantity = response.data.critics
                     this.albaQuantity = response.data.alba_project
                 })
+            },
+
+            status(site) {
+                let state = 'Inactivo'
+                let id = 0
+
+                switch(site.site_type_id) {
+                    case 1:
+                    case 3:
+                    case 4:
+                        id = site.state_id
+                        state = site.state.state
+                        break
+                    case 2:
+                        site.technologies.forEach(element => {
+                            switch (element.state_id) {
+                                case 1:
+                                    id = element.state_id
+                                    state = element.state.state
+                                    break
+                                case 2:
+                                    if (id == 0) {
+                                        id = element.state_id
+                                        state = element.state.state
+                                    }
+                                    break
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                    if (id != 1) {
+                                        id = element.state_id
+                                        state = element.state.state
+                                    }
+                                    break
+                                case null:
+                                default:
+                                    break
+                            }
+                        })
+                        break
+                }
+
+                return {
+                    'id': id,
+                    'state': state
+                }
             },
 
             // Triggers
@@ -827,7 +889,7 @@
                     const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
                     link.href = data
-                    link.download = 'listado_pops.xlsx'
+                    link.download = `Listado PoP - ${this.middleFileName}${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
                     link.click()
                     // setTimeout(function () {
                     //     // For Firefox it is necessary to delay revoking the ObjectURL

@@ -154,39 +154,15 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'vertical_structures.beacons.beacon_type')
+            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->where(function ($p) use ($text) {
-                        $p->where(function ($w) use ($text) {
-                            if ($text) {
-                                $w->whereIn('site_type_id', [1,3,4])
-                                ->where('state_id', 1)
-                                ->where(function ($r) use ($text) {
-                                    $r->where('sites.nem_site', 'LIKE', "%$text%")
-                                    ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                                });
-                            } else {
-                                $w->whereIn('site_type_id', [1,3,4])
-                                ->where('state_id', 1);
-                            }
-                        })
-                        ->orWhere(function ($s) use ($text) {
-                            if ($text) {
-                                $s->whereIn('site_type_id', [2])
-                                ->whereHas('technologies', function($r) {
-                                    $r->where('state_id', 1);
-                                })
-                                ->where(function ($q) use ($text) {
-                                    $q->where('sites.nem_site', 'LIKE', "%$text%")
-                                    ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                                });
-                            } else {
-                                $s->whereIn('site_type_id', [2])
-                                ->whereHas('technologies', function($r) {
-                                    $r->where('state_id', 1);
-                                });
-                            }
-                        });
+                        if ($text) {
+                            $p->where('nem_site', 'LIKE', "%$text%")
+                            ->orWhere('nombre', 'LIKE', "%$text%");
+                        } else {
+                            $p;
+                        }
                     })
                     ->where(function($q) use($condition_bafi, $bafi) {
                         if($bafi) {
@@ -310,6 +286,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 
 			'RED MINIMA',
 			'VIP',
+            'VIP ENTEL',
 			'LOCALIDAD OBLIGATORIA',
 			'RAN CONSOLIDADO',
 	        
@@ -445,6 +422,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 
             $red_minima,
             $pop->vip ? 'SI' : 'NO',
+            $pop->current_entel_vip ? 'SI' : 'NO',
             $localidad_obligatoria ? 'SI' : 'NO',
             $ranco ? 'SI' : 'NO',
 
@@ -453,6 +431,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $pop->eolica ? 'SI' : 'NO',
             $pop->vertical_structures->first() ? ($pop->vertical_structures->first()->beacons->first() ? $pop->vertical_structures->first()->beacons->first()->beacon_type->type : null) : null,
             $pop->gestion_ambiental ? 'SI' : 'NO' ,
+
             $pop->alba_project ? 'SI' : 'NO'
 
         ];
@@ -549,7 +528,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'W1:AF1',
+            'W1:AG1',
             [
                 'font' => [
                     'size' => 11,
@@ -573,7 +552,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AG1:AJ1',
+            'AH1:AK1',
             [
                 'font' => [
                     'size' => 11,
@@ -597,7 +576,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AK1',
+            'AL1',
             [
                 'font' => [
                     'size' => 11,
@@ -621,7 +600,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AL1',
+            'AM1',
             [
                 'font' => [
                     'size' => 11,

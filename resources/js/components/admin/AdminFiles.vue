@@ -5,50 +5,57 @@
             <header class="has-text-centered">
                 <p class="is-size-4 has-text-weight-bold">Subir Archivo de Información</p>
             </header>
+            <div class="columns" style="margin-top: 20px">
+                <div class="column"></div>
+                <div class="column">
 
-            <b-field label="Nombre archivo">
-                <b-input v-model="filename" width="50" required></b-input>
-            </b-field>
+                    <b-field label="Nombre archivo">
+                        <b-input v-model="filename" width="50" required></b-input>
+                    </b-field>
 
-            <b-upload v-model="file">
-                <a class="button is-primary is-fullwidth">
-                    <b-icon icon="upload" pack="fas"></b-icon>
-                    <span>{{ file.name || "Click para subir"}}</span>
-                </a>
-            </b-upload>
+                    <b-upload v-model="file">
+                        <a class="button is-primary is-fullwidth">
+                            <b-icon icon="upload" pack="fas"></b-icon>
+                            <span>{{ file.name || "Click para subir"}}</span>
+                        </a>
+                    </b-upload>
 
-            <!-- <b-field>
-                <b-upload
-                    v-model="dropFiles"
-                    multiple
-                    drag-drop>
-                    <section class="section">
-                        <div class="content has-text-centered">
-                            <p>
-                                <b-icon
-                                    icon="upload"
-                                    pack="fas"
-                                    size="is-large">
-                                </b-icon>
-                            </p>
-                            <p>Puedes hacer click o arrastrar tus archivos aquí</p>
-                        </div>
-                    </section>
-                </b-upload>
-            </b-field> -->
+                    <!-- <b-field>
+                        <b-upload
+                            v-model="dropFiles"
+                            multiple
+                            drag-drop>
+                            <section class="section">
+                                <div class="content has-text-centered">
+                                    <p>
+                                        <b-icon
+                                            icon="upload"
+                                            pack="fas"
+                                            size="is-large">
+                                        </b-icon>
+                                    </p>
+                                    <p>Puedes hacer click o arrastrar tus archivos aquí</p>
+                                </div>
+                            </section>
+                        </b-upload>
+                    </b-field> -->
 
-            <!-- <div class="tags">
-                <span v-for="(file, index) in dropFiles"
-                    :key="index"
-                    class="tag is-primary" >
-                    {{ file.name }}
-                    <button class="delete is-small"
-                        type="button"
-                        @click="deleteDropFile(index)">
-                    </button>
-                </span>
-            </div> -->
-            <b-button class="is-link" @click="submit" :disabled="!filename || !file.name ">Subir</b-button>
+                    <!-- <div class="tags">
+                        <span v-for="(file, index) in dropFiles"
+                            :key="index"
+                            class="tag is-primary" >
+                            {{ file.name }}
+                            <button class="delete is-small"
+                                type="button"
+                                @click="deleteDropFile(index)">
+                            </button>
+                        </span>
+                    </div> -->
+                    <b-button class="is-link" @click="submit" :disabled="!filename || !file.name ">Subir</b-button>
+                </div>
+                <div class="column"></div>
+            </div>
+            
 
             <div class="section">
                 <b-table

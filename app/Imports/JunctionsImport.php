@@ -22,15 +22,9 @@ class JunctionsImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        // Busca la compañia electrica. Si no existe la crea y rescata el id.
-        $electric_company = ElectricCompany::where('name', $row['distribuidora'])->get();
-        if ($electric_company->isEmpty()) {
-            $electric_company_id = ElectricCompany::create([
-                'name' => $row['distribuidora']
-            ])->id;
-        } else {
-            $electric_company_id = $electric_company->first()->id;
-        }
+        $companyName = $row['distribuidora'] == 'CHILECTRA' ? 'ENEL' : $row['distribuidora'];
+        $electric_company = ElectricCompany::where('name', $companyName)->first();
+        $electric_company_id = $electric_company ? $electric_company->id : ElectricCompany::create([ 'name' => $row['distribuidora'] ])->id;
 
         // Busca el sitio. Si no encuentra el sitio, no ingrese el dato a junctions (empalmes)
         $site = Site::where('nem_site', $row['codigo'])->get();

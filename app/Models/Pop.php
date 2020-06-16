@@ -71,6 +71,26 @@ class Pop extends Model
      *
      * @var array
      */
+    public function entel_vips() 
+    {
+        return $this->hasMany(EntelVip::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_entel_vip() 
+    {
+        return $this->hasOne(EntelVip::class)->latest();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function generator_sets() 
     {
         return $this->hasMany(GeneratorSet::class);
@@ -94,6 +114,26 @@ class Pop extends Model
     public function net_type() 
     {
         return $this->belongsTo(NetType::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function offices() 
+    {
+        return $this->hasMany(CrmOffice::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_office() 
+    {
+        return $this->hasOne(CrmOffice::class)->latest();
     }
 
     /**

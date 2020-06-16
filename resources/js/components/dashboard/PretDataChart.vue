@@ -1,5 +1,5 @@
 <template>
-    <article class="tile is-child box is-bold is-smart" :class="boxBackground">
+    <article class="tile is-child box" :class="boxBackground">
         <!-- <div class='chart'> -->
             <div id='chart' class="has-text-dark" style="height: 200px; width: 100%"></div>
         <!-- </div> -->

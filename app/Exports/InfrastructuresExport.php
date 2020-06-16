@@ -153,22 +153,22 @@ class InfrastructuresExport implements FromCollection, WithTitle, ShouldAutoSize
 	                    $p->where(function($w) use($text) {
 	                        if ($text) {
 	                            $w->whereIn('site_type_id', [1,3,4])
-	                            ->where('state_id', 1)
+	                            // ->where('state_id', 1)
 	                            ->where(function($r) use($text) {
 	                                $r->where('nem_site', 'LIKE', "%$text%")
 	                                ->orWhere('nombre', 'LIKE', "%$text%");
 	                            });
 	                        } else {
-	                            $w->whereIn('site_type_id', [1,3,4])
-	                            ->where('state_id', 1);
+	                            $w->whereIn('site_type_id', [1,3,4]);
+	                            // ->where('state_id', 1);
 	                        }
 	                    })
 	                    ->orWhere(function($s) use($text) {
 	                        if ($text) {
 	                            $s->whereIn('site_type_id', [2])
-	                            ->whereHas('technologies', function($r) {
-	                                $r->where('state_id', 1);
-	                            })
+	                            // ->whereHas('technologies', function($r) {
+	                            //     $r->where('state_id', 1);
+	                            // })
 	                            ->where(function($q) use($text) {
 	                                $q->where('nem_site', 'LIKE', "%$text%")
 	                                ->orWhere('nombre', 'LIKE', "%$text%");

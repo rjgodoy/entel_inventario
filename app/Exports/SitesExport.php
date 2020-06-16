@@ -145,38 +145,14 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $site = Site::with('pop', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type')
-            	->where(function($p) use($text, $condition_bafi) {
-                    $p->where(function($w) use($text) {
-                        if ($text) {
-                            $w->whereIn('site_type_id', [1,3,4])
-                            ->where('state_id', 1)
-                            ->where(function($r) use($text) {
-                                $r->where('sites.nem_site', 'LIKE', "%$text%")
-                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                            });
-                        } else {
-                            $w->whereIn('site_type_id', [1,3,4])
-                            ->where('state_id', 1);
-                        }
-                    })
-                    ->orWhere(function($s) use($text) {
-                        if ($text) {
-                            $s->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($r) {
-                                $r->where('state_id', 1);
-                            })
-                            ->where(function($q) use($text) {
-                                $q->where('sites.nem_site', 'LIKE', "%$text%")
-                                ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                            });
-                        } else {
-                            $s->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($r) {
-                                $r->where('state_id', 1);
-                            });
-                        }
-                    });
+            $site = Site::with('pop.comuna.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type')
+            	->where(function($p) use($text) {
+                    if ($text) {
+                        $p->where('nem_site', 'LIKE', "%$text%")
+                        ->orWhere('nombre', 'LIKE', "%$text%");
+                    } else {
+                        $p;
+                    }
                 })
                 ->where(function($q) use($condition_bafi, $bafi) {
                     if($bafi) {
@@ -276,8 +252,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             'RED MINIMA',
 	        'LOCALIDAD OBLIGATORIA',
 	        'RANCO',
-	        'BAFI'
-
+	        'BAFI',
+            'ESTADO'
         ];
     }
 
@@ -315,6 +291,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $site->localidad_obligatoria ? 'SI' : 'NO',
             $site->ranco ? 'SI' : 'NO',
             $bafi ? 'SI' : 'NO',
+
+            $site->state->state,
 
   		];
   	}
@@ -385,7 +363,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'I1:Q1',
+            'I1:R1',
             [
                 'font' => [
                     'size' => 11,

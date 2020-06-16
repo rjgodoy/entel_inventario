@@ -145,7 +145,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                Escribir detalle aquí...\n                            "
+                        "\n                                Ver documentos \n                            "
                       )
                     ]
                   )
@@ -242,16 +242,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "block" }, [
         _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
           _vm._v("Inventario Infraestructura")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-normal is-size-6",
-            staticStyle: { "padding-top": "8px" }
-          },
-          [_vm._v("Escribir detalle aquí...")]
-        )
+        ])
       ])
     ])
   },
@@ -270,7 +261,7 @@ var staticRenderFns = [
           staticClass: "has-text-weight-normal is-size-6",
           staticStyle: { "padding-top": "8px" }
         },
-        [_vm._v("Escribir detalle aquí...")]
+        [_vm._v("Ver fuentes de información ->")]
       )
     ])
   },
@@ -290,7 +281,7 @@ var staticRenderFns = [
             staticClass: "has-text-weight-normal is-size-6",
             staticStyle: { "padding-top": "8px" }
           },
-          [_vm._v("Escribir detalle aquí...")]
+          [_vm._v("Detalle...")]
         )
       ])
     ])

@@ -153,39 +153,15 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type')
+            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->where(function ($p) use ($text) {
-                        $p->where(function ($w) use ($text) {
-                            if ($text) {
-                                $w->whereIn('site_type_id', [1,3,4])
-                                ->where('state_id', 1)
-                                ->where(function ($r) use ($text) {
-                                    $r->where('sites.nem_site', 'LIKE', "%$text%")
-                                    ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                                });
-                            } else {
-                                $w->whereIn('site_type_id', [1,3,4])
-                                ->where('state_id', 1);
-                            }
-                        })
-                        ->orWhere(function ($s) use ($text) {
-                            if ($text) {
-                                $s->whereIn('site_type_id', [2])
-                                ->whereHas('technologies', function($r) {
-                                    $r->where('state_id', 1);
-                                })
-                                ->where(function ($q) use ($text) {
-                                    $q->where('sites.nem_site', 'LIKE', "%$text%")
-                                    ->orWhere('sites.nombre', 'LIKE', "%$text%");
-                                });
-                            } else {
-                                $s->whereIn('site_type_id', [2])
-                                ->whereHas('technologies', function($r) {
-                                    $r->where('state_id', 1);
-                                });
-                            }
-                        });
+                        if ($text) {
+                            $p->where('nem_site', 'LIKE', "%$text%")
+                            ->orWhere('nombre', 'LIKE', "%$text%");
+                        } else {
+                            $p;
+                        }
                     })
                     ->where(function($q) use($condition_bafi, $bafi) {
                         if($bafi) {
@@ -278,6 +254,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'LONGITUD',
 
             'VIP',
+            'VIP ENTEL',
 
             'OFFGRID',
             'PANEL SOLAR',
@@ -322,6 +299,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             // // $pop->towers->first() ? $pop->history_tower_types->first()->tower_type->tower_type : '',
 
             $pop->vip ? 'SI' : 'NO',
+            $pop->current_entel_vip ? 'SI' : 'NO',
 
             $pop->offgrid ? 'SI' : 'NO',
             $pop->solar ? 'SI' : 'NO',
@@ -418,7 +396,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'M1',
+            'M1:N1',
             [
                 'font' => [
                     'size' => 11,
@@ -442,7 +420,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'N1:P1',
+            'O1:Q1',
             [
                 'font' => [
                     'size' => 11,
@@ -466,7 +444,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'Q1',
+            'R1',
             [
                 'font' => [
                     'size' => 11,
@@ -490,7 +468,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'R1',
+            'S1',
             [
                 'font' => [
                     'size' => 11,

@@ -28,56 +28,27 @@ class DashboardApiController extends Controller
     public function index(Request $request)
     {
 
-        // $pops = Pop::with(['comuna.zona.crm', 'sites.classification_type', 'sites.technologies', 'sites' => function($q) {
-        //             $q->where('state_id', 1);
-        //         }])->groupBy('id')->get();
-
         $core = $request->core;
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
 
-        $condition_core = $core ? 'classification_type_id = '.$core : 'classification_type_id != '.$core;
-        $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
-        $condition_zona = $zona_id != 0 ? 'id = '.$zona_id : 'id != '.$zona_id;
+        $condition_core = $core ? 'classification_type_id = '.$core : '1 = 1';
+        $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : '1 = 1';
+        $condition_zona = $zona_id != 0 ? 'id = '.$zona_id : '1 = 1';
 
-        $pops = Pop::whereHas('sites', function($q) use($condition_core) { 
-                    $q->where(function($p) {
-                        $p->where(function($w) {
-                            $w->whereIn('site_type_id', [1,3,4])
-                            ->where('state_id', 1);
-                        })
-                        ->orWhere(function($s) {
-                            $s->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($r) {
-                                $r->where('state_id', 1);
-                            });
-                        });
-                    })
-                    ->whereRaw($condition_core);
-                    })
-                    ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
-                        $q->whereRaw($condition_crm)
-                        ->whereRaw($condition_zona);
-                    })
-                    ->distinct('pops.id')->count();
+        $pops = Pop::whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                $q->whereRaw($condition_crm)->whereRaw($condition_zona);
+            })
+            ->whereHas('sites', function($q) use($condition_core) { 
+                $q->whereRaw($condition_core);
+            })
+            ->distinct('pops.id')->count();
 
-
-        $sites = Site::where(function($q) use ($condition_core) {
-                        $q->where(function($w) {
-                            $w->whereIn('site_type_id', [1,3,4])
-                            ->where('state_id', 1);
-                        })->orWhere(function($s) {
-                            $s->whereIn('site_type_id', [2])
-                            ->whereHas('technologies', function($r) {
-                                $r->where('state_id', 1);
-                            });
-                        });
-                    })
-                    ->whereRaw($condition_core)
-                    ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
-                        $q->whereRaw($condition_crm)->whereRaw($condition_zona);
-                    })
-                    ->distinct('sites.id')->count();
+        $sites = Site::whereRaw($condition_core)
+            ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                $q->whereRaw($condition_crm)->whereRaw($condition_zona);
+            })
+            ->distinct('sites.id')->count();
 
         $technologies = Technology::whereHas('site', function($p) use($condition_core) { 
                 $p->whereRaw($condition_core);
@@ -88,23 +59,23 @@ class DashboardApiController extends Controller
                 $q->whereRaw($condition_crm)->whereRaw($condition_zona);
             })
             ->whereRaw('IF(frequency = 900, technology_type_id != 1, 1)')
-            ->where('state_id', 1)
+            // ->where('state_id', 1)
             ->distinct('technologies.id')->count();
 
         $critics = Room::whereHas('pop.sites', function($q) use($condition_core) { 
-                $q->where(function($p) {
-                    $p->where(function($w) {
-                        $w->whereIn('site_type_id', [1,3,4])
-                        ->where('state_id', 1);
-                    })
-                    ->orWhere(function($s) {
-                        $s->whereIn('site_type_id', [2])
-                        ->whereHas('technologies', function($r) {
-                            $r->where('state_id', 1);
-                        });
-                    });
-                })
-                ->whereRaw($condition_core);
+                $q->whereRaw($condition_core);
+                // ->where(function($p) {
+                //     $p->where(function($w) {
+                //         $w->whereIn('site_type_id', [1,3,4])
+                //         ->where('state_id', 1);
+                //     })
+                //     ->orWhere(function($s) {
+                //         $s->whereIn('site_type_id', [2])
+                //         ->whereHas('technologies', function($r) {
+                //             $r->where('state_id', 1);
+                //         });
+                //     });
+                // })
             })
             ->whereHas('pop.comuna.zona', function($q) use($crm_id, $zona_id) {
                 $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
@@ -149,42 +120,25 @@ class DashboardApiController extends Controller
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
 
-        $condition_core = $core ? 'sites.classification_type_id = '.$core : 'sites.classification_type_id != '.$core;
-        $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : 'zonas.crm_id != '.$crm_id;
-        $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
+        $condition_core = $core ? 'sites.classification_type_id = '.$core : '1 = 1';
+        $condition_crm = $crm_id != 0 ? 'zonas.crm_id = '.$crm_id : '1 = 1';
+        $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : '1 = 1';
 
-        // if (Cache::has('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id)) {
-        //     $popsMap = Cache::get('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id);
-        // } else {
-        //     $popsMap = Cache::remember('dashboardMap_core_'.$core.'_crm_'.$crm_id.'_zona_'.$zona_id, $this->seconds, function () use ($condition_core, $condition_crm, $condition_zona) {
-
-                $popsMap = Pop::whereHas('comuna.zona', function($query) use($condition_crm, $condition_zona) {
-                        $query->whereRaw($condition_crm)
-                            ->whereRaw($condition_zona);
-                    })->whereHas('sites', function($q) use($condition_core) { 
-                        $q->where(function($p) {
-                            $p->whereIn('site_type_id', [1,3,4])
-                            ->orWhere(function($query) {
-                                $query->whereIn('site_type_id', [2])
-                                ->whereHas('technologies', function($r) {
-                                    $r->where('state_id', 1);
-                                });
-                            });
-                        })
-                        ->whereRaw($condition_core);
-                    })
-                    ->select(
-                        'id',
-                        'nombre',
-                        'direccion',
-                        'latitude',
-                        'longitude'
-                    )
-                    ->get();
-
-        //         return $popsMap; 
-        //     });
-        // }
+        $popsMap = Pop::whereHas('comuna.zona', function($query) use($condition_crm, $condition_zona) {
+                $query->whereRaw($condition_crm)
+                    ->whereRaw($condition_zona);
+            })
+            ->whereHas('sites', function($q) use($condition_core) { 
+                $q->whereRaw($condition_core);
+            })
+            ->select(
+                'id',
+                'nombre',
+                'direccion',
+                'latitude',
+                'longitude'
+            )
+            ->get();
 
         return $popsMap;
     }
@@ -389,14 +343,16 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id 
                             WHERE (P.pop_type_id IS NULL OR P.pop_type_id = 0 OR P.pop_type_id = 1)
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            $condition
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                                -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                                -- )
                             ) AS opto,
 
                     -- POP RADIO
@@ -404,14 +360,16 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id
                             WHERE P.pop_type_id = 2
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            $condition
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     )
                             ) AS radio,
 
                     -- POP REPETIDOR
@@ -419,14 +377,16 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id
                             WHERE P.pop_type_id = 3
-                            AND P.id IN (
-                                SELECT S.pop_id
-                                FROM entel_pops.sites S
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            $condition
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id
+                            --     FROM entel_pops.sites S
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     )
                             ) AS repetidor,
 
                     -- POP INDOOR
@@ -434,14 +394,16 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id
                             WHERE P.pop_type_id = 4
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            $condition
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     )
                             ) AS indoor,
 
                     -- POP OUTDOOR
@@ -449,14 +411,16 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id
                             WHERE P.pop_type_id = 5
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            $condition
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     )
                             ) AS outdoor,
 
                     -- POP POLE SITE
@@ -464,14 +428,16 @@ class DashboardApiController extends Controller
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.pop_type_id = 6
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            $condition
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     )
                             ) AS pole_site
 
                     FROM entel_pops.crms
@@ -507,84 +473,96 @@ class DashboardApiController extends Controller
                     @opto:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE (P.pop_type_id IS NULL OR P.pop_type_id = 0 OR P.pop_type_id = 1)
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS opto,
 
                     -- POP RADIO
                     @radio:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.pop_type_id = 2
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS radio,
 
                     -- POP REPETIDOR
                     @repetidor:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.pop_type_id = 3
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS repetidor,
 
                     -- POP INDOOR
                     @indoor:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.pop_type_id = 4
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS indoor,
 
                     -- POP OUTDOOR
                     @outdoor:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.pop_type_id = 5
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS outdoor,
 
                     -- POP POLE SITE
                     @pole_site:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.pop_type_id = 6
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS pole_site
 
                     FROM entel_pops.zonas
@@ -620,85 +598,97 @@ class DashboardApiController extends Controller
                     -- POP OPTO
                     @opto:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.comuna_id = @comuna_id
                             AND (P.pop_type_id IS NULL OR P.pop_type_id = 0 OR P.pop_type_id = 1)
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS opto,
 
                     -- POP RADIO
                     @radio:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.comuna_id = @comuna_id
                             AND P.pop_type_id = 2
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS radio,
 
                     -- POP REPETIDOR
                     @repetidor:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.comuna_id = @comuna_id
                             AND P.pop_type_id = 3
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS repetidor,
 
                     -- POP INDOOR
                     @indoor:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.comuna_id = @comuna_id
                             AND P.pop_type_id = 4
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS indoor,
 
                     -- POP OUTDOOR
                     @outdoor:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.comuna_id = @comuna_id
                             AND P.pop_type_id = 5
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS outdoor,
 
                     -- POP POLE SITE
                     @pole_site:=(SELECT count(DISTINCT P.id) 
                             FROM entel_pops.pops P
+                            LEFT JOIN entel_pops.sites S ON S.pop_id = P.id $condition
                             WHERE P.comuna_id = @comuna_id
                             AND P.pop_type_id = 6
-                            AND P.id IN (
-                                SELECT S.pop_id 
-                                FROM entel_pops.sites S  
-                                LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
-                                WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
-                                $condition
-                                )
+                            AND P.deleted_at IS NULL
+                            -- AND P.id IN (
+                            --     SELECT S.pop_id 
+                            --     FROM entel_pops.sites S  
+                            --     LEFT JOIN entel_pops.technologies T ON S.id = T.site_id
+                            --     -- WHERE ((T.state_id = 1 AND S.site_type_id = 2) OR (S.state_id = 1 AND S.site_type_id IN (1,3,4)))
+                            --     $condition
+                            --     )
                             ) AS pole_site
 
                     FROM entel_pops.comunas
@@ -734,44 +724,49 @@ class DashboardApiController extends Controller
                     -- SITIOS FIJOS
                     @fijo:=(SELECT count(DISTINCT S.id) 
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
                             WHERE S.site_type_id = 1
-                            AND S.state_id = 1
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1
                             $condition
                             ) AS fijo,
 
                     -- SITIOS MOVILES
                     @movil:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id AND T.state_id = 1 
+                            LEFT JOIN entel_pops.technologies T ON S.id = T.site_id 
+                            -- AND T.state_id = 1 
                             WHERE S.site_type_id = 2
+                            AND S.deleted_at IS NULL
                             $condition
                             ) AS movil,
 
                     -- SWITCH
                     @switch:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
                             WHERE S.site_type_id = 3
-                            AND S.state_id = 1
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1
                             $condition
                             ) AS switch,
                             
                     -- PHONE
                     @phone:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
                             WHERE S.site_type_id = 4
-                            AND S.state_id = 1
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1
                             $condition
                             ) AS phone
 
@@ -807,40 +802,45 @@ class DashboardApiController extends Controller
                     -- SITIOS FIJOS
                     @fijo:=(SELECT count(DISTINCT S.id) 
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
                             WHERE S.site_type_id = 1
-                            AND S.state_id = 1 
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1 
                             $condition
                             ) AS fijo,
 
                     -- SITIOS MOVILES
                     @movil:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id AND T.state_id = 1 
+                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id 
+                            -- AND T.state_id = 1 
                             WHERE S.site_type_id = 2
+                            AND S.deleted_at IS NULL
                             $condition
                             ) AS movil,
 
                     -- SWITCH
                     @switch:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
                             WHERE S.site_type_id = 3
-                            AND S.state_id = 1
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1
                             $condition
                             ) AS switch,
                             
                     -- PHONE
                     @phone:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
                             WHERE S.site_type_id = 4
-                            AND S.state_id = 1
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1
                             $condition
                             ) AS phone
 
@@ -877,36 +877,41 @@ class DashboardApiController extends Controller
                     -- SITIOS FIJOS
                     @fijo:=(SELECT count(DISTINCT S.id) 
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id AND P.deleted_at IS NULL
                             WHERE S.site_type_id = 1
-                            AND S.state_id = 1 
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1 
                             $condition
                             ) AS fijo,
 
                     -- SITIOS MOVILES
                     @movil:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id AND T.state_id = 1 
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id AND P.deleted_at IS NULL
+                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id 
+                            -- AND T.state_id = 1 
                             WHERE S.site_type_id = 2
+                            AND S.deleted_at IS NULL
                             $condition
                             ) AS movil,
 
                     -- SWITCH
                     @switch:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id AND P.deleted_at IS NULL
                             WHERE S.site_type_id = 3
-                            AND S.state_id = 1 
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1 
                             $condition
                             ) AS switch,
                             
                     -- PHONE
                     @phone:=(SELECT count(DISTINCT S.id)
                             FROM entel_pops.sites S
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id AND P.deleted_at IS NULL
                             WHERE S.site_type_id = 4
-                            AND S.state_id = 1 
+                            AND S.deleted_at IS NULL
+                            -- AND S.state_id = 1 
                             $condition
                             ) AS phone
 
@@ -941,59 +946,80 @@ class DashboardApiController extends Controller
 
                     -- TECNOLOGIAS
                     @2g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE T.technology_type_id = 1 AND T.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 1 AND T.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tec2g1900,
                     
                     @3g900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE T.technology_type_id = 2 AND T.frequency = 900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 2 AND T.frequency = 900 
+                            -- AND T.state_id IN (1)
                             ) as tec3g900,
 
                     @3g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE T.technology_type_id = 2 AND t.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 2 AND t.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tec3g1900,
 
                     @4g700:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
-                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.deleted_at IS NULL
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 700 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 700 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE700,
 
                     @4g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE1900,
 
                     @4g2600:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 2600 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 2600 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE2600,
 
                     @4g3500:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 3500 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 3500 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE3500
 
                     FROM entel_pops.crms
@@ -1028,52 +1054,73 @@ class DashboardApiController extends Controller
 
                     -- TECNOLOGIAS
                     @2g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE T.technology_type_id = 1 AND t.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 1 AND t.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tec2g1900,
                     
                     @3g900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE T.technology_type_id = 2 AND t.frequency = 900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 2 AND t.frequency = 900 
+                            -- AND T.state_id IN (1)
                             ) as tec3g900,
 
                     @3g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE T.technology_type_id = 2 AND t.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 2 AND t.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tec3g1900,
 
                     @4g700:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 700 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 700 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE700,
 
                     @4g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE1900,
 
                     @4g2600:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 2600 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 2600 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE2600,
 
                     @4g3500:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 3500 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 3500 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE3500
 
                     FROM entel_pops.zonas
@@ -1109,45 +1156,66 @@ class DashboardApiController extends Controller
 
                     -- TECNOLOGIAS
                     @2g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
-                            WHERE T.technology_type_id = 1 AND t.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 1 AND t.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tec2g1900,
                     
                     @3g900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
-                            WHERE T.technology_type_id = 2 AND t.frequency = 900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 2 AND t.frequency = 900 
+                            -- AND T.state_id IN (1)
                             ) as tec3g900,
 
                     @3g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
-                            WHERE T.technology_type_id = 2 AND t.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 2 AND t.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tec3g1900,
 
                     @4g700:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 700 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 700 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE700,
 
                     @4g1900:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 1900 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 1900 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE1900,
 
                     @4g2600:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 2600 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 2600 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE2600,
 
                     @4g3500:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
-                            INNER JOIN entel_pops.sites S ON T.site_id = S.id AND S.state_id = 1 $condition
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id 
+                            -- AND S.state_id = 1 
+                            $condition
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
-                            WHERE T.technology_type_id = 3 AND t.frequency = 3500 AND T.state_id IN (1)
+                            WHERE T.technology_type_id = 3 AND t.frequency = 3500 
+                            -- AND T.state_id IN (1)
                             ) as tecLTE3500
 
                     FROM entel_pops.comunas

@@ -44,6 +44,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'selectedCrm', 'selectedZona', // 'csrf',
   'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
@@ -56,6 +61,11 @@ __webpack_require__.r(__webpack_exports__);
       buttonLoading: '',
       isLoading: false
     };
+  },
+  computed: {
+    middleFileName: function middleFileName() {
+      return this.selectedZona ? "Zona ".concat(this.selectedZona.nombre_zona, " - ") : this.selectedCrm ? "CRM ".concat(this.selectedCrm.nombre_crm, " - ") : '';
+    }
   },
   created: function created() {
     this.getVerticalStructureData();
@@ -142,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
         var data = window.URL.createObjectURL(blob);
         var link = document.createElement('a');
         link.href = data;
-        link.download = 'listado_estructuras_verticales.xlsx';
+        link.download = "Listado Estructuras Verticales - ".concat(_this2.middleFileName).concat(moment().format('YYYY-MM-DD hh:mm:ss'), ".xlsx");
         link.click(); // setTimeout(function () {
         //     // For Firefox it is necessary to delay revoking the ObjectURL
         //     window.URL.revokeObjectURL(data)
@@ -153,7 +163,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$buefy.toast.open({
           message: 'La planilla se ha descargado exitosamente.',
           type: 'is-success',
-          duration: 5000
+          duration: 2500
         });
       })["catch"](function (error) {
         console.log(error);
@@ -162,7 +172,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$buefy.toast.open({
           message: 'Ha ocurrido un error. Favor contactar al administrador',
           type: 'is-danger',
-          duration: 5000
+          duration: 2500
         });
       });
     }
@@ -240,18 +250,26 @@ var render = function() {
       _c(
         "a",
         {
-          staticClass: "tile is-child box is-bold is-dark has-text-white",
-          staticStyle: { position: "relative" },
+          staticClass: "tile is-child box is-bold is-white",
+          staticStyle: { position: "relative", border: "solid 1px #eee" },
           on: { click: _vm.downloadVerticalStructures }
         },
         [
-          _c("b-icon", {
-            staticClass: "has-text-eco fa-2x",
-            staticStyle: { "padding-top": "20px", "padding-left": "5px" },
-            attrs: { pack: "fas", icon: "download" }
-          }),
-          _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "columns" }, [
+            _c(
+              "div",
+              { staticClass: "column is-1 has-text-centered" },
+              [
+                _c("font-awesome-icon", {
+                  staticClass: "has-text-eco",
+                  attrs: { icon: ["fas", "download"] }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
           _vm._v(" "),
           _c("b-loading", {
             attrs: {
@@ -276,18 +294,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "is-size-4 has-text-weight-bold",
-        staticStyle: { "margin-top": "10px" }
-      },
-      [
-        _c("p", { staticClass: "is-size-6 has-text-weight-semibold" }, [
-          _vm._v("Descargar listado de Estructuras Verticales")
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "column" }, [
+      _c(
+        "div",
+        {
+          staticClass: "is-size-4 has-text-weight-bold",
+          staticStyle: { "margin-top": "2px" }
+        },
+        [
+          _c("p", { staticClass: "is-size-6 has-text-weight-semibold" }, [
+            _vm._v("Descargar listado de Estructuras Verticales")
+          ])
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true

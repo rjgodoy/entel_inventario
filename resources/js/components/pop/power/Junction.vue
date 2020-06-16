@@ -10,22 +10,79 @@
                             <div class="has-text-weight-semibold is-size-4">{{ junction.electric_company ? junction.electric_company.name : 'Sin información' }}</div>
                             <div class="has-text-weight-light is-size-7">Distribuidora</div>
 
+                            <div class="is-divider" style="margin-top: 16px; margin-bottom: 8px;"></div>
 
-                            <div class="has-text-weight-semibold is-size-5" style="padding-top: 12px;">{{ junction.client_number ? junction.client_number : 'Sin información' }}</div>
-                            <div class="has-text-weight-light is-size-7">Número Cliente</div>
+                            <div class="field">
+                                <div class="has-text-weight-light is-size-7">Número Cliente</div>
+                                <div v-if="!isEditMode">
+                                    <div class="has-text-weight-bold is-size-5">{{ junction.client_number ? junction.client_number : 'Sin información' }}</div>
+                                </div>
+                                <div v-if="isEditMode">
+                                    <b-input class="has-text-weight-bold is-size-5" v-model="clientNumber"/>
+                                </div>
+                            </div>
+                            
 
-                            <div class="has-text-weight-semibold is-size-6" 
-                                style="padding-top: 12px;"
-                                :class="junction.junction_number ? '' : 'has-text-info'">
-                                {{ junction.junction_number ? junction.junction_number : 'Sin información' }}</div>
-                            <div class="has-text-weight-light is-size-7">Número Empalme</div>
+                            <div class="field">
+                                <div class="has-text-weight-light is-size-7">Número Empalme</div>
+                                <div v-if="!isEditMode">
+                                    <div class="has-text-weight-bold is-size-5" 
+                                        :class="junction.junction_number ? '' : 'has-text-info'">
+                                        {{ junction.junction_number ? junction.junction_number : 'Sin información' }}
+                                    </div>
+                                </div>
+                                <div v-if="isEditMode">
+                                    <b-input class="has-text-weight-bold is-size-5" v-model="junctionNumber"/>
+                                </div>
+                            </div>
+                            
 
-                            <div class="is-divider"></div>
+                            <div class="field">
+                                <div class="has-text-weight-light is-size-7">Tipo Empalme</div>
+                                <div v-if="!isEditMode">
+                                    <div class="has-text-weight-bold is-size-5">{{ junction.junction_type ? junction.junction_type.type : 'Sin información' }}</div>
+                                </div>
+                                <div v-if="isEditMode">
+                                    <b-select placeholder="Select a name" v-model="junctionTypeId">
+                                        <option
+                                            v-for="option in junctionTypes"
+                                            :value="option.id"
+                                            :key="option.id">
+                                            {{ option.type }}
+                                        </option>
+                                    </b-select>
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <div class="has-text-weight-light is-size-7">Tipo Conexión</div>
+                                <div v-if="!isEditMode">
+                                    <div class="has-text-weight-bold is-size-5">{{ junction.junction_connection ? junction.junction_connection.connection : 'Sin información' }}</div>
+                                </div>
+                                <div v-if="isEditMode">
+                                    <b-select placeholder="Select a name" v-model="junctionConnectionId">
+                                        <option
+                                            v-for="option in junctionConnections"
+                                            :value="option.id"
+                                            :key="option.id">
+                                            {{ option.connection }}
+                                        </option>
+                                    </b-select>
+                                </div>
+                            </div>
 
-                            <div class="has-text-weight-light is-size-7">Tipo Empalme</div>
-                            <div class="has-text-weight-semibold is-size-6">{{ junction.junction_type ? junction.junction_type.type : 'Sin información' }}</div>
-                            <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Tipo Conexión</div>
-                            <div class="has-text-weight-semibold is-size-6">{{ junction.junction_connection ? junction.junction_connection.connection : 'Sin información' }}</div>
+                            <div class="field">
+                                <div class="has-text-weight-light is-size-7">Factor de Uso</div>
+                                <div v-if="!isEditMode">
+                                    <div class="has-text-weight-bold is-size-5">
+                                        {{ junction.use_factor }}
+                                    </div>
+                                </div>
+                                <div v-if="isEditMode">
+                                    <b-input class="has-text-weight-bold is-size-5" v-model="useFactor"/>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="column">
@@ -34,10 +91,10 @@
                                 <div class="is-divider" data-content="Protecciones" style="margin-bottom: 16px;"></div>
                                 <!-- <div class="has-text-weight-semibold is-size-5 has-text-centered">{{ junction.latest_protection ? junction.latest_protection.nominal_a : 'Sin información' }}<span class="is-size-6">A</span></div> -->
 
-                                <div class="level" v-if="junction.latest_protection">
+                                <div class="level" v-if="junction.latest_protection && junction.latest_protection.nominal_a">
                                     <div class="level-item">
                                         <div class="has-text-centered">
-                                            <div class="is-size-7">Nominal 1</div>
+                                            <div class="is-size-7">Nominal A</div>
                                             <div class="has-text-weight-semibold">
                                                 {{ junction.latest_protection.nominal_a }}
                                                 <span class="is-size-6">A</span>
@@ -47,16 +104,17 @@
 
                                     <div class="level-item">
                                         <div class="has-text-centered">
-                                            <div class="is-size-7">Regulada 1</div>
+                                            <div class="is-size-7">Regulada A</div>
                                             <div class="has-text-weight-semibold">
                                                 {{ junction.latest_protection.regulada_a }}
                                                 <span class="is-size-6">A</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="level-item">
+
+                                    <div class="level-item" v-if="!!+junction.latest_protection.nominal_b">
                                         <div class="has-text-centered">
-                                            <div class="is-size-7">Nominal 2</div>
+                                            <div class="is-size-7">Nominal B</div>
                                             <div class="has-text-weight-semibold">
                                                 {{ junction.latest_protection.nominal_b }}
                                                 <span class="is-size-6">A</span>
@@ -64,9 +122,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="level-item">
+                                    <div class="level-item" v-if="!!+junction.latest_protection.regulada_b">
                                         <div class="has-text-centered">
-                                            <div class="is-size-7">Regulada 2</div>
+                                            <div class="is-size-7">Regulada B</div>
                                             <div class="has-text-weight-semibold">
                                                 {{ junction.latest_protection.regulada_b }}
                                                 <span class="is-size-6">A</span>
@@ -77,16 +135,16 @@
                             
                             
                                 <div class="is-divider" data-content="Mediciones" style="margin-bottom: 16px;"></div>
-                                <div class="level" v-if="junction.latest_measurement">
+                                <div class="level" v-if="junction.latest_measurement && junction.latest_measurement.r_a_amp_measure">
                                     <div class="level-item">
                                         <div class="has-text-centered">
-                                            <div class="is-size-7">Fase R</div>
+                                            <div class="is-size-7">Medición R (A)</div>
                                             <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.r_measure }}
+                                                {{ junction.latest_measurement.r_a_amp_measure }}
                                                 <span class="is-size-6">A</span>
                                             </div>
                                             <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.r_measure * 220 | numeral(0,0) }} 
+                                                {{ junction.latest_measurement.r_a_amp_measure * 220 | numeral(0,0) }} 
                                                 <span class="is-size-7">W</span>
                                             </div>
                                         </div>
@@ -94,33 +152,162 @@
 
                                     <div class="level-item">
                                         <div class="has-text-centered">
-                                            <div class="is-size-7">Fase S</div>
+                                            <div class="is-size-7">Medición S (A)</div>
                                             <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.s_measure }}
+                                                {{ junction.latest_measurement.s_a_amp_measure }}
                                                 <span class="is-size-6">A</span>
                                             </div>
                                             <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.s_measure * 220 | numeral(0,0) }} 
+                                                {{ junction.latest_measurement.s_a_amp_measure * 220 | numeral(0,0) }} 
                                                 <span class="is-size-7">W</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="level-item">
                                         <div class="has-text-centered">
-                                            <div class="is-size-7">Fase T</div>
+                                            <div class="is-size-7">Medición T (A)</div>
                                             <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.t_measure }}
+                                                {{ junction.latest_measurement.t_a_amp_measure }}
                                                 <span class="is-size-6">A</span>
                                             </div>
                                             <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.t_measure * 220 | numeral(0,0) }} 
+                                                {{ junction.latest_measurement.t_a_amp_measure * 220 | numeral(0,0) }} 
                                                 <span class="is-size-7">W</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button v-if="can.update" 
+                                <div class="level" v-if="junction.latest_measurement && junction.latest_measurement.r_b_amp_measure">
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición R (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.r_b_amp_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.r_b_amp_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición S (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.s_b_amp_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.s_b_amp_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición T (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.t_b_amp_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.t_b_amp_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="level" v-if="junction.latest_measurement && junction.latest_measurement.r_a_volt_measure">
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición R (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.r_a_volt_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.r_a_volt_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición S (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.s_a_volt_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.s_a_volt_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición T (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.t_a_volt_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.t_a_volt_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="level" v-if="junction.latest_measurement && junction.latest_measurement.r_b_volt_measure">
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición R (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.r_b_volt_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.r_b_volt_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición S (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.s_b_volt_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.s_b_volt_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="level-item">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-7">Medición T (A)</div>
+                                            <div class="has-text-weight-semibold">
+                                                {{ junction.latest_measurement.t_b_volt_measure }}
+                                                <span class="is-size-6">A</span>
+                                            </div>
+                                            <div class="has-text-weight-normal is-size-6">
+                                                {{ junction.latest_measurement.t_b_volt_measure * 220 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button v-if="can.update & isEditMode" 
                                     @click="isEditJunctionModalActive = true"
                                     class="button is-size-7 is-small is-fullwidth" 
                                     style="padding-top: 0px; padding-bottom: 0px;">
@@ -136,23 +323,29 @@
                                         :junction="junction"
                                         :user="user"/>
                                 </b-modal>
-
-
                             </div>
                         </div>
-
-                        
                     </div>
 
-                    <div class="columns">
+                    <div>Power A: {{ powerA }}</div>
+                    <div>Power B: {{ powerB }}</div>
+
+                    <div>Power Used A: {{ powerUsedA }}</div>
+                    <div>Power Used B: {{ powerUsedB }}</div>
+
+                    <div>Potencia disponible A: {{ powerA * useFactor - powerUsedA }}</div>
+                    <div>Potencia disponible B: {{ powerB * useFactor - powerUsedB }}</div>
+                    
+
+                    <!-- <div class="columns">
                         <div class="column is-4">
                             
                         </div>
-                        <!-- <div class="column is-6">
+                        <div class="column is-6">
                             <div class="has-text-weight-light is-size-7">Credenciales de acceso</div>
                             <div class="has-text-weight-normal is-size-6">{{ junction.access_credentials ? junction.access_credentials : 'Sin credenciales' }}</div>
-                        </div> -->
-                    </div>
+                        </div>
+                    </div> -->
 
                     <div class="is-divider" data-content="Capacidades"></div>
 
@@ -160,7 +353,7 @@
                         <div class="level-item">
                             <div class="has-text-centered">
                                 <div class="is-size-6">Capacidad total</div>
-                                <div class="has-text-weight-semibold is-size-4">{{ capacidadTotal | numeral(0,0) }} 
+                                <div class="has-text-weight-semibold is-size-4">{{ totalCapacity | numeral(0,0) }} 
                                     <span class="is-size-6">W/kW</span>
                                 </div>
                             </div>
@@ -185,6 +378,14 @@
                             {{ usagePercent | numeral('0.[00]%') }}
                         </span>
                     </b-progress>
+
+                    <div class="field has-text-centered" v-if="can.update">
+                        <b-button :type="isEditMode ? 'is-info' : 'is-link'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
+                            <font-awesome-icon :icon="['fas', 'edit']"/>
+                            &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar' }}
+                        </b-button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -205,7 +406,16 @@
 
         data() {
             return {
+                junctionTypeId: this.junction.junction_type_id,
+                junctionTypes: [],
+                junctionConnectionId: this.junction.junction_connection_id,
+                junctionConnections: [],
+
                 isEditJunctionModalActive: false,
+                isEditMode: false,
+                clientNumber: this.junction.client_number,
+                junctionNumber: this.junction.junction_number,
+                useFactor: this.junction.use_factor
             }
         },
 
@@ -216,12 +426,60 @@
         },
 
         mounted() {
-            // console.log(this.junction)
+            this.getJunctionTypes()
+            this.getJunctionConnections()
         },
 
         computed: {
-            capacidadTotal() {
-                return this.junction.latest_protection ? this.junction.latest_protection.nominal_a * 380 * 1.7320508 : 0
+            powerA() {
+                let latestProtectionRA = this.junction.latest_protection ? this.junction.latest_protection.regulada_a : 0
+                let latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0
+                if (this.junction.junction_type_id == 1) {
+                    return latestProtectionRA * latestMeasureRA_V / 1000
+                } else {
+                    return latestProtectionRA * 380 * Math.sqrt(3) / 1000
+                }
+            },
+
+            powerB() {
+                let latestProtectionRB = this.junction.latest_protection ? this.junction.latest_protection.regulada_b : 0
+                if (this.junction.junction_type_id == 1) {
+                    return latestProtectionRB * 220 / 1000
+                } else {
+                    return latestProtectionRB * 380 * Math.sqrt(3) / 1000
+                }
+            },
+
+            powerUsedA(){
+                let latestMeasureRA_A = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_amp_measure : 0
+                let latestMeasureSA_A = this.junction.latest_measurement ? this.junction.latest_measurement.s_a_amp_measure : 0
+                let latestMeasureTA_A = this.junction.latest_measurement ? this.junction.latest_measurement.t_a_amp_measure : 0
+                let latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0
+                let latestMeasureSA_V = this.junction.latest_measurement ? this.junction.latest_measurement.s_a_volt_measure : 0
+                let latestMeasureTA_V = this.junction.latest_measurement ? this.junction.latest_measurement.t_a_volt_measure : 0
+                if (this.junction.junction_type_id == 1) {
+                    return latestMeasureRA_A * latestMeasureRA_V / 1000
+                } else {
+                    return ( (latestMeasureRA_A * latestMeasureRA_V) + (latestMeasureSA_A * latestMeasureSA_V) + (latestMeasureTA_A * latestMeasureTA_V) ) / 1000
+                }
+            },
+
+            powerUsedB(){
+                let latestMeasureRB_A = this.junction.latest_measurement ? this.junction.latest_measurement.r_b_amp_measure : 0
+                let latestMeasureSB_A = this.junction.latest_measurement ? this.junction.latest_measurement.s_b_amp_measure : 0
+                let latestMeasureTB_A = this.junction.latest_measurement ? this.junction.latest_measurement.t_b_amp_measure : 0
+                let latestMeasureRB_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_b_volt_measure : 0
+                let latestMeasureSB_V = this.junction.latest_measurement ? this.junction.latest_measurement.s_b_volt_measure : 0
+                let latestMeasureTB_V = this.junction.latest_measurement ? this.junction.latest_measurement.t_b_volt_measure : 0
+                if (this.junction.junction_type_id == 1) {
+                    return latestMeasureRB_A * latestMeasureRB_V / 1000
+                } else {
+                    return ( (latestMeasureRB_A * latestMeasureRB_V) + (latestMeasureSB_A * latestMeasureSB_V) + (latestMeasureTB_A * latestMeasureTB_V) ) / 1000
+                }
+            },
+
+            totalCapacity(){
+
             },
 
             consumoTablero() {
@@ -233,7 +491,37 @@
             }
         },
 
-        methods: {            
+        methods: {
+            getJunctionTypes() {
+                axios.get(`/api/junctionTypes?api_token=${this.user.api_token}`).then(response => {
+                    this.junctionTypes = response.data.junctions
+                })
+            },
+
+            getJunctionConnections() {
+                axios.get(`/api/junctionConnections?api_token=${this.user.api_token}`).then(response => {
+                    this.junctionConnections = response.data.junctions
+                })
+            },
+
+            saveChanges() {
+                if (!this.isEditMode) {
+                    let params = {
+                        'api_token': this.user.api_token,
+                        'user_id': this.user.id,
+                        'client_number': this.clientNumber,
+                        'junction_number': this.junctionNumber,
+                        'junction_type_id': this.junctionTypeId,
+                        'junction_connection_id': this.junctionConnectionId,
+                        'use_factor': this.useFactor.includes(',') ? parseFloat(this.useFactor.split(',')[0] + '.' + this.useFactor.split(',')[1]) : parseFloat(this.useFactor)
+                    }
+                    axios.put(`/api/junctionUpdateTypes/${this.junction.id}`, params).then(response => {
+                        console.log(response.data)
+                    })
+                } else {
+                    console.log('change what you want!')
+                }
+            }        
         }
     }
 </script>

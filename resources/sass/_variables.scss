@@ -183,6 +183,11 @@ $radius-rounded: 290486px !default;
 .level,
 .box {
     &.is-bold {
+        &.is-white {
+            color: #333;
+            background: rgba(255,255,255,1);
+            // background: linear-gradient(270deg, #eee 0%, #fff 90%, #fff 100%);
+        }
         &.is-link {
             color: white;
             background: rgba(0,92,255,1);

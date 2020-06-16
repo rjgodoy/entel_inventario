@@ -177,13 +177,12 @@ class EcoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function rcasPop(Request $request)
+    public function rcasPop(Request $request, $pop_id)
     {
-        $files = Storage::disk('local')->files('Gestion Ambiental');
-        $rcas = [];
-        foreach ($files as $file) {
-            array_push($rcas, pathinfo($file));
-        }
+        $rcas = File::where('pop_id', $pop_id)
+        ->where('filename', 'LIKE', '%RCA%')
+        ->get();
+
         return new EcoResource($rcas);
     }
 

@@ -252,6 +252,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'type': type
       };
     },
+    openFile: function openFile(file) {
+      if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+        window.open('/storage/' + file.route, "_blank");
+      } else {
+        this.readFile(file);
+      }
+    },
     readFile: function readFile(file) {
       var _this4 = this;
 
@@ -281,7 +288,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         var data = window.URL.createObjectURL(blob);
         var link = document.createElement('a');
         link.href = data;
-        link.target = "_blank";
+        link.target = "_self";
         link.open = file.basename;
         link.click(); // setTimeout(function () {
         //     // For Firefox it is necessary to delay revoking the ObjectURL
@@ -345,43 +352,6 @@ var render = function() {
     "div",
     { staticClass: "tile is-child box" },
     [
-      _c("div", { staticClass: "is-pulled-right" }, [
-        _vm.canUpload
-          ? _c("span", {}, [
-              _c(
-                "button",
-                {
-                  staticClass: "button",
-                  on: {
-                    click: function($event) {
-                      _vm.isUploadModalActive = true
-                    }
-                  }
-                },
-                [_vm._v("Subir archivos")]
-              )
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.canDelete
-          ? _c("span", {}, [
-              _c(
-                "button",
-                {
-                  staticClass: "button",
-                  class: _vm.edit && "is-danger",
-                  on: {
-                    click: function($event) {
-                      _vm.edit = !_vm.edit
-                    }
-                  }
-                },
-                [_vm._v("Editar")]
-              )
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
       _c("div", { staticClass: "title is-size-4" }, [_vm._v("RCAs")]),
       _vm._v(" "),
       _c(
@@ -484,7 +454,7 @@ var render = function() {
                               staticClass: "is-size-6",
                               on: {
                                 click: function($event) {
-                                  return _vm.readFile(props.row)
+                                  return _vm.openFile(props.row)
                                 }
                               }
                             },

@@ -60,10 +60,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
  // import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -101,7 +97,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         longitude: -70.6561017,
         zoom: 5,
         storageIcon: '../img/markers/storagePin.png',
-        protectedZoneIcon: '../img/markers/entelEcoPin.png'
+        protectedZoneIcon: '../img/markers/entel_pop_eco.png'
       }
     };
   },
@@ -137,8 +133,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this2 = this;
 
       axios.get("/api/ecoZones?api_token=".concat(this.user.api_token)).then(function (response) {
-        _this2.protectedZones = response.data.environmentalData;
-        console.log(_this2.protectedZones);
+        _this2.protectedZones = response.data.environmentalData; // console.log(this.protectedZones)
       });
     },
     getStorageZones: function getStorageZones() {
@@ -171,81 +166,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "section has-background-light" }, [
-    _c("div", { staticClass: "tile is-ancestor" }, [
-      _c("div", { staticClass: "tile" }, [
-        _c(
-          "div",
-          { staticClass: "tile is-parent is-4" },
-          [
-            _c("pop-protected-zones", {
-              attrs: {
-                popProtectedZones: _vm.popProtectedZones,
-                user: _vm.user
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "tile is-parent" }, [
+  return _c("div", [
+    _c(
+      "section",
+      {
+        staticClass: "section has-background-white is-paddingless",
+        staticStyle: { "border-bottom": "solid 2px white" }
+      },
+      [
+        _c("div", { staticClass: "columns is-marginless" }, [
           _c(
             "div",
-            {
-              staticClass: "tile is-child card",
-              staticStyle: { border: "solid 4px white" }
-            },
+            { staticClass: "column tile is-parent is-4 is-paddingless" },
             [
-              _c("eco-map-view", {
+              _c("pop-protected-zones", {
                 attrs: {
-                  user: _vm.user,
-                  pops: _vm.pops,
-                  map_attributes: _vm.map_attributes
+                  popProtectedZones: _vm.popProtectedZones,
+                  user: _vm.user
                 }
               })
             ],
             1
-          )
-        ]),
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "column tile is-parent is-paddingless" }, [
+            _c(
+              "div",
+              { staticClass: "tile is-child map-container" },
+              [
+                _c("eco-map-view", {
+                  attrs: {
+                    user: _vm.user,
+                    pops: _vm.pops,
+                    map_attributes: _vm.map_attributes
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("section", { staticClass: "section has-background-light" }, [
+      _c("div", { staticClass: "tile is-ancestor" }, [
+        _c(
+          "div",
+          { staticClass: "tile is-parent" },
+          [_c("rcas", { attrs: { user: _vm.user } })],
+          1
+        ),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "tile is-parent is-3" },
+          { staticClass: "tile is-parent" },
+          [_c("documents", { attrs: { user: _vm.user } })],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tile is-parent" },
           [
-            _c("protected-zones", {
-              attrs: { protectedZones: _vm.protectedZones, user: _vm.user }
+            _c("temporal-storages", {
+              attrs: { storageZones: _vm.storageZones, user: _vm.user }
             })
           ],
           1
         )
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "tile is-ancestor" }, [
-      _c(
-        "div",
-        { staticClass: "tile is-parent" },
-        [_c("rcas", { attrs: { user: _vm.user } })],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "tile is-parent" },
-        [_c("documents", { attrs: { user: _vm.user } })],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "tile is-parent" },
-        [
-          _c("temporal-storages", {
-            attrs: { storageZones: _vm.storageZones, user: _vm.user }
-          })
-        ],
-        1
-      )
     ])
   ])
 }

@@ -44,7 +44,7 @@
         components: {
             AdminPops: () => import(/* webpackChunkName: "chunks/admin/pops"*/"./AdminPops"),
             AdminTps: () => import(/* webpackChunkName: "chunks/admin/tps"*/"./AdminTps"),
-            AdminApprove: () => import(/* webpackChunkName: "chunks/admin/approve"*/"./AdminApprove"),
+            // AdminApprove: () => import(/* webpackChunkName: "chunks/admin/approve"*/"./AdminApprove"),
             AdminMassive: () => import(/* webpackChunkName: "chunks/admin/massive"*/"./AdminMassive"),
             AdminUsers: () => import(/* webpackChunkName: "chunks/admin/usersPermissions"*/"./AdminUsers"),
             AdminFiles: () => import(/* webpackChunkName: "chunks/admin/files"*/"./AdminFiles"),

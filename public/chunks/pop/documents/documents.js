@@ -199,8 +199,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -400,6 +398,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'type': type
       };
     },
+    openFile: function openFile(file) {
+      if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+        window.open('/storage/' + file.route, "_blank");
+      } else {
+        this.readFile(file);
+      }
+    },
     readFile: function readFile(file) {
       var _this3 = this;
 
@@ -429,7 +434,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         var link = document.createElement('a');
         link.href = objectUrl;
         link.open = file.basename;
-        link.target = '_blank';
+        link.target = '_self';
         link.click();
         setTimeout(function () {
           // For Firefox it is necessary to delay revoking the ObjectURL
@@ -759,7 +764,7 @@ var render = function() {
                                 staticStyle: { position: "relative" },
                                 on: {
                                   click: function($event) {
-                                    _vm.readFile(file)
+                                    _vm.openFile(file)
                                     _vm.load = file.id
                                   }
                                 }
@@ -805,84 +810,6 @@ var render = function() {
                     2
                   )
                 : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "container" },
-                [
-                  _c(
-                    "b-carousel",
-                    {
-                      attrs: {
-                        autoplay: false,
-                        "with-carousel-list": "",
-                        indicator: false,
-                        overlay: _vm.gallery
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "list",
-                          fn: function(props) {
-                            return [
-                              _c("b-carousel-list", {
-                                attrs: {
-                                  data: _vm.photos,
-                                  config: _vm.al,
-                                  refresh: _vm.gallery,
-                                  "as-indicator": ""
-                                },
-                                on: {
-                                  switch: function($event) {
-                                    return props.switch($event, false)
-                                  }
-                                },
-                                model: {
-                                  value: props.active,
-                                  callback: function($$v) {
-                                    _vm.$set(props, "active", $$v)
-                                  },
-                                  expression: "props.active"
-                                }
-                              })
-                            ]
-                          }
-                        }
-                      ])
-                    },
-                    [
-                      _vm._l(_vm.photos, function(item, i) {
-                        return _c("b-carousel-item", { key: i }, [
-                          _c(
-                            "figure",
-                            {
-                              staticClass: "image",
-                              on: {
-                                click: function($event) {
-                                  return _vm.switchGallery(true)
-                                }
-                              }
-                            },
-                            [_c("img", { attrs: { src: item.image } })]
-                          )
-                        ])
-                      }),
-                      _vm._v(" "),
-                      _vm.gallery
-                        ? _c("span", {
-                            staticClass: "modal-close is-large",
-                            on: {
-                              click: function($event) {
-                                return _vm.switchGallery(false)
-                              }
-                            }
-                          })
-                        : _vm._e()
-                    ],
-                    2
-                  )
-                ],
-                1
-              ),
               _vm._v(" "),
               _vm.edit
                 ? _c(
@@ -1037,6 +964,84 @@ var render = function() {
                     2
                   )
                 : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "container" },
+                [
+                  _c(
+                    "b-carousel",
+                    {
+                      attrs: {
+                        autoplay: false,
+                        "with-carousel-list": "",
+                        indicator: false,
+                        overlay: _vm.gallery
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "list",
+                          fn: function(props) {
+                            return [
+                              _c("b-carousel-list", {
+                                attrs: {
+                                  data: _vm.photos,
+                                  config: _vm.al,
+                                  refresh: _vm.gallery,
+                                  "as-indicator": ""
+                                },
+                                on: {
+                                  switch: function($event) {
+                                    return props.switch($event, false)
+                                  }
+                                },
+                                model: {
+                                  value: props.active,
+                                  callback: function($$v) {
+                                    _vm.$set(props, "active", $$v)
+                                  },
+                                  expression: "props.active"
+                                }
+                              })
+                            ]
+                          }
+                        }
+                      ])
+                    },
+                    [
+                      _vm._l(_vm.photos, function(item, i) {
+                        return _c("b-carousel-item", { key: i }, [
+                          _c(
+                            "figure",
+                            {
+                              staticClass: "image",
+                              on: {
+                                click: function($event) {
+                                  return _vm.switchGallery(true)
+                                }
+                              }
+                            },
+                            [_c("img", { attrs: { src: item.image } })]
+                          )
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm.gallery
+                        ? _c("span", {
+                            staticClass: "modal-close is-large",
+                            on: {
+                              click: function($event) {
+                                return _vm.switchGallery(false)
+                              }
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _vm.noFiles
                 ? _c("section", { staticClass: "section container" }, [

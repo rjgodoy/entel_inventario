@@ -79,6 +79,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
@@ -207,14 +217,14 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "has-text-weight-normal is-size-6" },
+                        { staticClass: "has-text-weight-semibold is-size-5" },
                         [
                           _vm._v(
                             _vm._s(_vm._f("numeral")(data.volt, "0,0")) + " "
                           ),
                           data.volt
                             ? _c("span", { staticClass: "is-size-7" }, [
-                                _vm._v("V")
+                                _vm._v("kV")
                               ])
                             : _vm._e()
                         ]
@@ -231,7 +241,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "has-text-weight-normal is-size-6" },
+                        { staticClass: "has-text-weight-semibold is-size-5" },
                         [
                           _vm._v(
                             _vm._s(_vm._f("numeral")(data.distance, "0,0")) +
@@ -280,9 +290,9 @@ var render = function() {
                                       "b-select",
                                       {
                                         attrs: {
-                                          placeholder: "",
                                           icon: "bolt",
-                                          "icon-pack": "fas"
+                                          "icon-pack": "fas",
+                                          placeholder: ""
                                         },
                                         on: {
                                           input: function($event) {
@@ -306,11 +316,18 @@ var render = function() {
                                           return _c(
                                             "option",
                                             {
+                                              key: electricLine.id,
                                               domProps: {
                                                 value: electricLine.id
                                               }
                                             },
-                                            [_vm._v(_vm._s(electricLine.id))]
+                                            [
+                                              _vm._v(
+                                                "\n                                        " +
+                                                  _vm._s(electricLine.id) +
+                                                  "\n                                    "
+                                              )
+                                            ]
                                           )
                                         }
                                       ),

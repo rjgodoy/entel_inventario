@@ -348,10 +348,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var classification;
 
       if (this.pop.sites) {
-        this.pop.sites.forEach(function (item) {
-          if (item.classification_type_id && item.classification_type_id < id) {
-            id = item.classification_type_id;
-            classification = item.classification_type.classification_type;
+        this.pop.sites.forEach(function (element) {
+          if (element.classification_type_id < id && element.state_id != 2) {
+            id = element.classification_type_id;
+            classification = element.classification_type.classification_type;
           }
         });
       }

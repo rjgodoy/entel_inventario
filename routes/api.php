@@ -182,6 +182,8 @@ Route::middleware('auth:api')->group(function () {
 					'uses' => 'Api\Infraestructura\PowerRectifierController@powerRectifierDataZona'
 				]);
 
+				Route::apiResource('batteries','Api\Infraestructura\BatteryController');
+
 			// Air Conditioners
 				Route::apiResource('airConditioners','Api\Infraestructura\AirConditionerController');
 				Route::get('airConditionersExport', 'Api\Infraestructura\AirConditionerController@export');
@@ -337,15 +339,15 @@ Route::middleware('auth:api')->group(function () {
             Route::get('roles','Api\MainController@roles');
 			Route::get('tabs', 'Api\AdminController@tabs');
 
-			Route::apiResource('tempSgcPops','Api\TempSgcPopController');
-			Route::get('popsExisting', [
-				'as' => 'tempSgcPops.popsExisting',
-				'uses' => 'Api\TempSgcPopController@existing'
-			]);
-			Route::get('popsToAdd', [
-				'as' => 'tempSgcPops.popsToAdd',
-				'uses' => 'Api\TempSgcPopController@toAdd'
-			]);
+			// Route::apiResource('tempSgcPops','Api\TempSgcPopController');
+			// Route::get('popsExisting', [
+			// 	'as' => 'tempSgcPops.popsExisting',
+			// 	'uses' => 'Api\TempSgcPopController@existing'
+			// ]);
+			// Route::get('popsToAdd', [
+			// 	'as' => 'tempSgcPops.popsToAdd',
+			// 	'uses' => 'Api\TempSgcPopController@toAdd'
+			// ]);
 
 			Route::get('searchPopsEdicion/{text}/{core}', [
 				'as' => 'pop.searchEdicion',
@@ -358,6 +360,7 @@ Route::middleware('auth:api')->group(function () {
 
 			Route::get('classificationTypes','Api\SiteController@classificationTypes');
 			Route::get('attentionPriorityTypes','Api\SiteController@attentionPriorityTypes');
+			Route::get('stateTypes','Api\SiteController@stateTypes');
 
 			// PSG
 			Route::apiResource('psgTp','Api\PsgTpController');

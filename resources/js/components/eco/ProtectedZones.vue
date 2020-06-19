@@ -1,5 +1,5 @@
 <template>
-    <div class="tile is-child box">
+    <div class="box">
         <div class="title is-size-4">Zonas protegidas</div>
 
         <!-- <b-field grouped group-multiline> -->

@@ -58,9 +58,7 @@ __webpack_require__.r(__webpack_exports__);
     AdminTps: function AdminTps() {
       return __webpack_require__.e(/*! import() | chunks/admin/tps */ "chunks/admin/tps").then(__webpack_require__.bind(null, /*! ./AdminTps */ "./resources/js/components/admin/AdminTps.vue"));
     },
-    AdminApprove: function AdminApprove() {
-      return __webpack_require__.e(/*! import() | chunks/admin/approve */ "chunks/admin/approve").then(__webpack_require__.bind(null, /*! ./AdminApprove */ "./resources/js/components/admin/AdminApprove.vue"));
-    },
+    // AdminApprove: () => import(/* webpackChunkName: "chunks/admin/approve"*/"./AdminApprove"),
     AdminMassive: function AdminMassive() {
       return __webpack_require__.e(/*! import() | chunks/admin/massive */ "chunks/admin/massive").then(__webpack_require__.bind(null, /*! ./AdminMassive */ "./resources/js/components/admin/AdminMassive.vue"));
     },

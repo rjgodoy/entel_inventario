@@ -481,7 +481,7 @@ var render = function() {
                         },
                         [_vm._v("NO")]
                       ),
-                      _vm._v(" tiene asociada ninguna zona de acopio temporal.")
+                      _vm._v(" tiene asignada Zona de Acopio Temporal.")
                     ]
                   )
                 : _vm._e()

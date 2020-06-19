@@ -421,6 +421,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"]);
@@ -428,7 +430,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     MapView: function MapView() {
-      return Promise.all(/*! import() | chunks/maps/mapView */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("chunks/maps/mapView")]).then(__webpack_require__.bind(null, /*! ../maps/MapView.vue */ "./resources/js/components/maps/MapView.vue"));
+      return Promise.all(/*! import() | chunks/maps/mapView */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("chunks/maps/mapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopsMapView.vue */ "./resources/js/components/maps/PopsMapView.vue"));
     },
     VuePagination: _VuePagination_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
@@ -1636,359 +1638,375 @@ var render = function() {
       _vm._v(" "),
       _c(
         "section",
-        { staticClass: "section tile is-ancestor has-background-light" },
+        { staticClass: "section has-background-white is-paddingless" },
         [
-          _c("div", { staticClass: "tile is-7 is-parent" }, [
+          _c("div", { staticClass: "columns is-marginless" }, [
             _c(
               "div",
-              {
-                staticClass: "tile is-child box",
-                staticStyle: { "max-height": "100%", "min-height": "800px" }
-              },
+              { staticClass: "column tile is-parent is-5 is-paddingless" },
               [
-                _c("div", { staticClass: "field" }, [
-                  _c(
-                    "p",
-                    { staticClass: "control has-icons-left has-icons-right" },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.searchText,
-                            expression: "searchText"
-                          }
-                        ],
-                        staticClass: "input is-rounded",
-                        class: _vm.bodyBackground + " " + _vm.primaryText,
-                        attrs: {
-                          type: "text",
-                          "arial-label": "Buscar",
-                          placeholder: "Buscar...",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.searchText },
-                        on: {
-                          keyup: _vm.getPops,
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.searchText = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        { staticClass: "icon is-small is-left" },
-                        [
-                          _c("font-awesome-icon", { attrs: { icon: "search" } })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "icon is-small is-right" }, [
-                        _c("button", {
-                          staticClass: "delete",
-                          on: { click: _vm.clearSearch }
-                        })
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
                 _c(
-                  "table",
+                  "div",
                   {
-                    staticClass: "table is-fullwidth",
-                    class: _vm.boxBackground
+                    staticClass: "tile is-child box is-shadowless",
+                    staticStyle: {
+                      "max-height": "100%",
+                      "min-height": "800px",
+                      "padding-bottom": "48px"
+                    }
                   },
                   [
-                    _c("thead", [
-                      _c("tr", [
-                        _c(
-                          "th",
-                          {
-                            staticClass: "is-size-7 has-text-weight-semibold",
-                            class: _vm.secondaryText
-                          },
-                          [
-                            _c("abbr", { attrs: { title: "Id" } }, [
-                              _vm._v("Id")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass: "is-size-7 has-text-weight-semibold",
-                            class: _vm.secondaryText
-                          },
-                          [
-                            _c("abbr", { attrs: { title: "Pop" } }, [
-                              _vm._v("Nombre POP")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "is-size-7 has-text-weight-semibold has-text-centered",
-                            class: _vm.secondaryText
-                          },
-                          [
-                            _c("abbr", { attrs: { title: "Sitios" } }, [
-                              _vm._v("Sitios")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "is-size-7 has-text-weight-semibold has-text-centered",
-                            class: _vm.secondaryText
-                          },
-                          [
-                            _c("abbr", { attrs: { title: "Categoría" } }, [
-                              _vm._v("Categoría")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("th", {
-                          staticClass:
-                            "is-size-7 has-text-weight-semibold has-text-centered"
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.pops.data, function(pop) {
-                        return _c("tr", { key: pop.id }, [
-                          _c(
-                            "td",
-                            {
-                              staticClass: "has-text-weight-light",
-                              class: _vm.primaryText
+                    _c("div", { staticClass: "field" }, [
+                      _c(
+                        "p",
+                        {
+                          staticClass: "control has-icons-left has-icons-right"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.searchText,
+                                expression: "searchText"
+                              }
+                            ],
+                            staticClass: "input is-rounded",
+                            class: _vm.bodyBackground + " " + _vm.primaryText,
+                            attrs: {
+                              type: "text",
+                              "arial-label": "Buscar",
+                              placeholder: "Buscar...",
+                              autofocus: ""
                             },
-                            [
-                              _c("b-checkbox", {
-                                attrs: {
-                                  size: "is-medium",
-                                  "native-value": pop
-                                },
-                                model: {
-                                  value: _vm.selectedPops,
-                                  callback: function($$v) {
-                                    _vm.selectedPops = $$v
-                                  },
-                                  expression: "selectedPops"
+                            domProps: { value: _vm.searchText },
+                            on: {
+                              keyup: _vm.getPops,
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
                                 }
+                                _vm.searchText = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "icon is-small is-left" },
+                            [
+                              _c("font-awesome-icon", {
+                                attrs: { icon: "search" }
                               })
                             ],
                             1
                           ),
                           _vm._v(" "),
-                          _c("td", {}, [
+                          _c(
+                            "span",
+                            { staticClass: "icon is-small is-right" },
+                            [
+                              _c("button", {
+                                staticClass: "delete",
+                                on: { click: _vm.clearSearch }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("table", { staticClass: "table is-fullwidth" }, [
+                      _c("thead", [
+                        _c("tr", [
+                          _c(
+                            "th",
+                            {
+                              staticClass: "is-size-7 has-text-weight-semibold",
+                              class: _vm.secondaryText
+                            },
+                            [
+                              _c("abbr", { attrs: { title: "Id" } }, [
+                                _vm._v("Id")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass: "is-size-7 has-text-weight-semibold",
+                              class: _vm.secondaryText
+                            },
+                            [
+                              _c("abbr", { attrs: { title: "Pop" } }, [
+                                _vm._v("Nombre POP")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "is-size-7 has-text-weight-semibold has-text-centered",
+                              class: _vm.secondaryText
+                            },
+                            [
+                              _c("abbr", { attrs: { title: "Sitios" } }, [
+                                _vm._v("Sitios")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "is-size-7 has-text-weight-semibold has-text-centered",
+                              class: _vm.secondaryText
+                            },
+                            [
+                              _c("abbr", { attrs: { title: "Categoría" } }, [
+                                _vm._v("Categoría")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("th", {
+                            staticClass:
+                              "is-size-7 has-text-weight-semibold has-text-centered"
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.pops.data, function(pop) {
+                          return _c("tr", { key: pop.id }, [
                             _c(
-                              "a",
+                              "td",
                               {
-                                staticClass: "is-size-6 has-text-weight-normal",
-                                attrs: {
-                                  href: "/pop/" + pop.id,
-                                  target: "_blank"
-                                }
+                                staticClass: "has-text-weight-light",
+                                class: _vm.primaryText
                               },
                               [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(pop ? pop.nombre : "") +
-                                    "\n                                "
-                                )
-                              ]
+                                _c("b-checkbox", {
+                                  attrs: {
+                                    size: "is-medium",
+                                    "native-value": pop
+                                  },
+                                  model: {
+                                    value: _vm.selectedPops,
+                                    callback: function($$v) {
+                                      _vm.selectedPops = $$v
+                                    },
+                                    expression: "selectedPops"
+                                  }
+                                })
+                              ],
+                              1
                             ),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "is-size-7 has-text-weight-normal",
-                                class: _vm.secondaryText
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(pop ? pop.direccion : "") +
-                                    ", " +
-                                    _vm._s(
-                                      pop.comuna ? pop.comuna.nombre_comuna : ""
-                                    ) +
-                                    "\n                                "
-                                )
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", {}, [
-                            _c(
-                              "div",
-                              { staticClass: "columns is-multiline" },
-                              _vm._l(pop.sites, function(site) {
-                                return _c(
-                                  "div",
-                                  {
-                                    key: site.id,
-                                    staticClass: "column is-6 has-text-centered"
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "is-size-7 has-text-weight-normal has-text-centered"
-                                      },
-                                      [_vm._v(_vm._s(site.nem_site))]
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", {}, [
-                            _c("div", { staticClass: "has-text-centered" }, [
+                            _c("td", {}, [
                               _c(
-                                "div",
+                                "a",
                                 {
                                   staticClass:
-                                    "tag has-text-weight-bold is-size-7"
+                                    "is-size-6 has-text-weight-normal",
+                                  attrs: {
+                                    href: "/pop/" + pop.id,
+                                    target: "_blank"
+                                  }
                                 },
                                 [
                                   _vm._v(
                                     "\n                                        " +
+                                      _vm._s(pop ? pop.nombre : "") +
+                                      "\n                                    "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-size-7 has-text-weight-normal",
+                                  class: _vm.secondaryText
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(pop ? pop.direccion : "") +
+                                      ", " +
                                       _vm._s(
-                                        pop
-                                          ? _vm.popClassification(pop)
-                                              .classification
+                                        pop.comuna
+                                          ? pop.comuna.nombre_comuna
                                           : ""
                                       ) +
                                       "\n                                    "
                                   )
                                 ]
                               )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "has-text-weight-light has-text-centered",
-                              class: _vm.primaryText
-                            },
-                            [
+                            ]),
+                            _vm._v(" "),
+                            _c("td", {}, [
                               _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "button is-small is-link is-outlined has-tooltip-left",
-                                  attrs: {
-                                    href: "/pop/" + pop.id,
-                                    type: "button",
-                                    target: "_blank",
-                                    "data-tooltip": "Ver información completa"
-                                  }
-                                },
-                                [
-                                  _c("font-awesome-icon", {
-                                    attrs: { icon: "info" }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "button is-small is-default",
-                                  attrs: { "data-tooltip": "Ver en mapa" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.selectPop(pop)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("font-awesome-icon", {
-                                    attrs: { icon: "map-marked-alt" }
-                                  })
-                                ],
-                                1
+                                "div",
+                                { staticClass: "columns is-multiline" },
+                                _vm._l(pop.sites, function(site) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: site.id,
+                                      staticClass:
+                                        "column is-6 has-text-centered"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-7 has-text-weight-normal has-text-centered"
+                                        },
+                                        [_vm._v(_vm._s(site.nem_site))]
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
                               )
-                            ]
-                          )
-                        ])
-                      }),
-                      0
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "block" }, [
-                  _c(
-                    "nav",
-                    {
-                      staticClass: "pagination",
-                      attrs: { role: "navigation", "aria-label": "pagination" }
-                    },
-                    [
-                      _c("vue-pagination", {
-                        attrs: {
-                          pagination: _vm.pops,
-                          offset: 4,
-                          primaryText: _vm.primaryText
-                        },
-                        on: {
-                          paginate: function($event) {
-                            return _vm.getPops()
+                            ]),
+                            _vm._v(" "),
+                            _c("td", {}, [
+                              _c("div", { staticClass: "has-text-centered" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "tag has-text-weight-bold is-size-7"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                            " +
+                                        _vm._s(
+                                          pop
+                                            ? _vm.popClassification(pop)
+                                                .classification
+                                            : ""
+                                        ) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "has-text-weight-light has-text-centered",
+                                class: _vm.primaryText
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "button is-small is-link is-outlined has-tooltip-left",
+                                    attrs: {
+                                      href: "/pop/" + pop.id,
+                                      type: "button",
+                                      target: "_blank",
+                                      "data-tooltip": "Ver información completa"
+                                    }
+                                  },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      attrs: { icon: "info" }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "button is-small is-default",
+                                    attrs: { "data-tooltip": "Ver en mapa" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.selectPop(pop)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      attrs: { icon: "map-marked-alt" }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
+                          ])
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "block" }, [
+                      _c(
+                        "nav",
+                        {
+                          staticClass: "pagination",
+                          attrs: {
+                            role: "navigation",
+                            "aria-label": "pagination"
                           }
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ])
+                        },
+                        [
+                          _c("vue-pagination", {
+                            attrs: {
+                              pagination: _vm.pops,
+                              offset: 4,
+                              primaryText: _vm.primaryText
+                            },
+                            on: {
+                              paginate: function($event) {
+                                return _vm.getPops()
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ]
+                )
               ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "tile is-parent is-vertical" }, [
-            _c(
-              "div",
-              {
-                staticClass: "tile is-child card",
-                staticStyle: { border: "solid 4px white" }
-              },
-              [
-                _c("map-view", {
-                  attrs: {
-                    user: _vm.user,
-                    pops: _vm.popsMap,
-                    map_attributes: _vm.map_attributes,
-                    darkMode: _vm.darkMode
-                  }
-                })
-              ],
-              1
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "column tile is-parent is-paddingless" }, [
+              _c(
+                "div",
+                { staticClass: "tile is-child map-container" },
+                [
+                  _c("map-view", {
+                    attrs: {
+                      user: _vm.user,
+                      pops: _vm.popsMap,
+                      map_attributes: _vm.map_attributes,
+                      darkMode: _vm.darkMode
+                    }
+                  })
+                ],
+                1
+              )
+            ])
           ])
         ]
       )

@@ -106,6 +106,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -872,15 +873,18 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
         });
       }
 
-      return "\n                <div class=\"card\">\n                    <!--div class=\"card-image\">\n                        <figure class=\"image is-4by3\">\n                            <img src=\"https://bulma.io/images/placeholders/640x480.png\" alt=\"Placeholder image\">\n                        </figure>\n                    </div-->\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(class_id == 1 ? 'is-danger' : class_id == 2 ? 'is-warning' : class_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(class_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(pop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.comuna.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.comuna.zona.nombre_zona, ", CRM ").concat(pop.comuna.zona.crm.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/pop/").concat(pop.id, "\" target=\"_blank\" class=\"button is-outlined is-primary is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
+      return "\n                <div class=\"card\">\n                    <!--div class=\"card-image\">\n                        <figure class=\"image is-4by3\">\n                            <img src=\"https://bulma.io/images/placeholders/640x480.png\" alt=\"Placeholder image\">\n                        </figure>\n                    </div-->\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(class_id == 1 ? 'is-danger' : class_id == 2 ? 'is-warning' : class_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(class_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(pop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.comuna.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.comuna.zona.nombre_zona, ", CRM ").concat(pop.comuna.zona.crm.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/pop/").concat(pop.id, "\" target=\"_blank\" class=\"button is-outlined is-link is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
     },
     icon: function icon(pop) {
       if (pop.protected_zones) {
         return {
           url: this.map_attributes.protectedZoneIcon,
-          scaledSize: new google.maps.Size(30, 54),
+          // scaledSize: new google.maps.Size(30, 54),
+          // origin: new google.maps.Point(0,0),
+          // anchor: new google.maps.Point(15,54)
+          scaledSize: new google.maps.Size(25, 25),
           origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(15, 54)
+          anchor: new google.maps.Point(12, 25)
         };
       } else if (pop.temporary_storage) {
         return {
@@ -999,11 +1003,12 @@ var render = function() {
     "GmapMap",
     {
       ref: "map",
+      staticClass: "map",
       staticStyle: { height: "100%", "padding-bottom": "-14px" },
       attrs: {
         center: _vm.center,
         zoom: _vm.zoom,
-        "map-type-id": "roadmap",
+        "map-type-id": "terrain",
         options: {
           zoomControl: true,
           mapTypeControl: false,

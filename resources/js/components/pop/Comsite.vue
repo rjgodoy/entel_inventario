@@ -20,10 +20,10 @@
                             <div class="is-size-6">{{ data.operador }}</div>
                             <div class="is-size-6">{{ data.propietario }}</div>
                             <div class="is-size-6">{{ data.celular_propietario }} / {{ data.telefono_propietario }}</div>
-                            <div class="is-size-6">{{ data.rol_propiedad ? data.rol_propiedad : 'Sin daots de ROL' }}</div>
+                            <div class="is-size-6">{{ data.rol_propiedad ? data.rol_propiedad : 'Sin datos de ROL' }}</div>
                         </div>
                     </div>
-                    <div class="columns" v-if="data.started_at != '1969-12-31'">
+                    <!-- <div class="columns" v-if="data.started_at != '1969-12-31'">
                         <div class="column has-text-right is-one-fifth">
                             <div>{{ dateMoment(data.started_at) }}</div>
                             <div class="has-text-weight-normal is-size-7">Fecha inicio</div>
@@ -35,7 +35,7 @@
                             <div>{{ dateMoment(data.ended_at) }}</div>
                             <div class="has-text-weight-normal is-size-7">Fecha término</div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="has-text-centered has-text-weight-normal is-size-6" style="margin-top: -20px;" v-if="data.started_at != '1969-12-31'">{{ dateFromNow(data.started_at) }}</div>
                     
                 </div>

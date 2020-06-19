@@ -8,7 +8,7 @@
             <div class="section container">
                 <ul>
                     <li v-for="file in files" :key="file.id" style="padding-top: 4px;">
-                        <a class="has-text-dark" @click="readFile(file)">
+                        <a class="has-text-dark" @click="openFile(file)">
                             <!-- <font-awesome-icon 
                                 :icon="['fas', faFile(file.extension).icon]"
                                 :class="faFile(file.extension).type"
@@ -85,6 +85,14 @@
                     }
             },
 
+            openFile(file) {   
+                if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+                    window.open('/storage/'+file.route, "_blank");    
+                } else {
+                    this.readFile(file)
+                }
+            },
+
             readFile(file) {
                 this.isLoading = true
                 var params = {
@@ -114,10 +122,11 @@
                     let link = document.createElement('a');
                     link.href = objectUrl;
                     link.open = file.basename;
-                    link.target = "_blank";
+                    link.target = "_self";
                     link.click();
+
+                    // For Firefox it is necessary to delay revoking the ObjectURL
                     setTimeout(function () {
-                        // For Firefox it is necessary to delay revoking the ObjectURL
                         URL.revokeObjectURL(objectUrl)
                     }, 100)
 

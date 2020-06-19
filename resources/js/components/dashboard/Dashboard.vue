@@ -651,6 +651,10 @@
                 axios.get(`/api/dashboardMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
                 .then((response) => {
                     try {
+                        // this.pops = []
+                        // response.data.forEach(element =>{
+                        //     setInterval(this.pops.push(element), 0.1)
+                        // })
                         this.pops = response.data
                     } catch (ex) {
                         console.log(ex);

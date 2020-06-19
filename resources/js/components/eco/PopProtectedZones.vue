@@ -1,5 +1,5 @@
 <template>
-    <div class="tile is-child box">
+    <div class="tile is-child box is-shadowless">
         <div class="title is-size-4">POP en zonas protegidas</div>
 
         <!-- <b-field grouped group-multiline> -->

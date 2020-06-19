@@ -37,7 +37,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="!temporaryStoragesData.length" class="is-size-6 has-text-weight-light has-text-centered">Este PoP <span class="has-text-weight-semibold has-text-positive">NO</span> tiene asociada ninguna zona de acopio temporal.</div>
+                            <div v-if="!temporaryStoragesData.length" class="is-size-6 has-text-weight-light has-text-centered">Este PoP <span class="has-text-weight-semibold has-text-positive">NO</span> tiene asignada Zona de Acopio Temporal.</div>
                         </div>
                     </div>
                 </div>

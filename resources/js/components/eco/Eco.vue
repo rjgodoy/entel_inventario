@@ -1,18 +1,15 @@
 <template>
-    <section class="section has-background-light">
-
-        <div class="tile is-ancestor">
-
-            <div class="tile">
-                <div class="tile is-parent is-4">
+    <div>
+        <section class="section has-background-white is-paddingless" style="border-bottom: solid 2px white">
+            <div class="columns is-marginless">
+                <div class="column tile is-parent is-4 is-paddingless">
                     <pop-protected-zones 
                         :popProtectedZones=popProtectedZones
                         :user="user"/>
                 </div>
 
-                <div class="tile is-parent">
-
-                    <div class="tile is-child card" style="border: solid 4px white">
+                <div class="column tile is-parent is-paddingless">
+                    <div class="tile is-child map-container">
                         <eco-map-view
                             :user="user"
                             :pops="pops"
@@ -21,34 +18,33 @@
                     </div>    
                 </div>
 
-                <div class="tile is-parent is-3">
+                <!-- <div class="tile is-parent is-3">
                     <protected-zones 
                         :protectedZones=protectedZones
                         :user="user"/>
                     
+                </div> -->
+            </div>
+        </section>
+
+        <section class="section has-background-light">
+            <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                    <rcas :user="user"/>
+                </div>
+
+                <div class="tile is-parent">
+                    <documents :user="user"/>
+                </div>
+
+                <div class="tile is-parent">
+                    <temporal-storages 
+                        :storageZones=storageZones
+                        :user="user"/>
                 </div>
             </div>
-        </div>
-
-        <div class="tile is-ancestor">
-            <div class="tile is-parent">
-                <rcas :user="user"/>
-            </div>
-
-            <div class="tile is-parent">
-                <documents :user="user"/>
-            </div>
-
-            <div class="tile is-parent">
-                <temporal-storages 
-                    :storageZones=storageZones
-                    :user="user"/>
-            </div>
-        </div>
-
-        
-
-    </section>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -81,7 +77,7 @@ library.add(farCheckCircle);
                     longitude: -70.6561017,
                     zoom: 5,
                     storageIcon: '../img/markers/storagePin.png',
-                    protectedZoneIcon: '../img/markers/entelEcoPin.png'
+                    protectedZoneIcon: '../img/markers/entel_pop_eco.png'
                 },
             }
         },
@@ -116,7 +112,7 @@ library.add(farCheckCircle);
             getProtectedZones() {
                 axios.get(`/api/ecoZones?api_token=${this.user.api_token}`).then((response) => {
                     this.protectedZones = response.data.environmentalData
-                    console.log(this.protectedZones)
+                    // console.log(this.protectedZones)
                 })
             },
 

@@ -78,7 +78,7 @@ class AdminController extends Controller
      */
     public function tabs()
     {
-        $tabs = AdminTab::all();
+        $tabs = AdminTab::where('active', 1)->get();
         return new AdminResource($tabs);
     }
 

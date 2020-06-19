@@ -207,7 +207,7 @@
                             </div>
 
                             <div class="content">
-                                <a href="/pop/${pop.id}" class="button is-outlined is-primary is-small">
+                                <a href="/pop/${pop.id}" target="_blank" class="button is-outlined is-link is-small">
                                     <font-awesome-icon icon="info-circle"/>
                                     &nbsp;Ver detalles
                                 </a>

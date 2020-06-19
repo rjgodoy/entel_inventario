@@ -96,10 +96,23 @@ class SiteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->value;
         $site = Site::find($id);
         $site->update([
             $request->parameter => $request->value
         ]);
+
+        $parameterTypeName = '';
+        switch ($request->parameter) {
+            case 'classification_type_id':
+                $parameterTypeName = 'Categoría';
+                break;
+            case 'attention_priority_type_id':
+                $parameterTypeName = 'Prioridad de atención';
+                break;
+            default:
+                break;
+        }
 
         // Busca el dato que se actualizó par incorporarlo en el Log
         $strClassName = '';
@@ -111,13 +124,14 @@ class SiteController extends Controller
             $strClassName = ucwords($strClassName.=$word);
         }
         $className = "\\App\\Models\\".$strClassName;
-        $parameterTypeName = app($className)->find($request->value)->first()->$parameterType;
+        $parameter = app($className)->find($request->value);
+        // return $parameter->$parameterType;
 
         Log::create([
             'pop_id' => $site->pop_id,
             'user_id' => $request->user_id,
             'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
-            'description' => 'Se ha actualizado el parámetro "'. $strClassName.'" a "'.$parameterTypeName.'"'
+            'description' => 'Se ha actualizado el parámetro "'. $parameterTypeName.'" a "'.$parameter->$parameterType.'"'
         ]);
 
         return $site;

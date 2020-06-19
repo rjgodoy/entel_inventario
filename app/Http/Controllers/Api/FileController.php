@@ -42,9 +42,10 @@ class FileController extends Controller
     public function store(Request $request)
     {
 
-        if ($request->folder_id != 'null' || $request->folder_id != 'undefined') {
+        if (($request->folder_id != 'null' && $request->folder_id != 'undefined' && $request->folder_id != '') 
+            && ($request->pop_id != 'null' && $request->pop_id != 'undefined' && $request->pop_id != '') ) {
             $folder = Folder::find($request->folder_id);
-            $upload_path = 'Files'.$request->pop_id;
+            $upload_path = 'Files/'.$request->pop_id;
             $array = [$folder];
             while ($folder->parent_id != null) {
                 $parentFolder = Folder::find($folder->parent_id);
@@ -55,8 +56,19 @@ class FileController extends Controller
                 $upload_path = $upload_path.'/'.$array[$i]->name;
             }
             // return $upload_path;
-            
-        } else if ($request->pop_id != 'null' || $request->pop_id != 'undefined') {
+        } elseif($request->folder_id != 'null' && $request->folder_id != 'undefined' && $request->folder_id != '') {
+            $folder = Folder::find($request->folder_id);
+            $upload_path = 'Files';
+            $array = [$folder];
+            while ($folder->parent_id != null) {
+                $parentFolder = Folder::find($folder->parent_id);
+                array_unshift($array, $parentFolder);
+                $folder = $parentFolder;
+            }
+            for ($i=0; $i < count($array); $i++) { 
+                $upload_path = $upload_path.'/'.$array[$i]->name;
+            }
+        } elseif ($request->pop_id != 'null' && $request->pop_id != 'undefined' && $request->pop_id != '') {
             $folder = Folder::where('name', $request->folder_name)->where('pop_id', $request->pop_id)->first();
             $upload_path = 'Files/'.$request->pop_id.'/'.$folder->name;
             // return $upload_path;
@@ -72,7 +84,6 @@ class FileController extends Controller
         $file_route = Storage::disk('local')->putFile($upload_path, $request->file);
 
         if ($request->folder_id) {
-            
             $file = File::create([
                 'pop_id' => $folder->pop_id,
                 'user_id' => $request->user_id,
@@ -83,7 +94,7 @@ class FileController extends Controller
                 'mime' => $file_mime,
                 'extension' => $file_extension,
                 'route' => $file_route,
-                'filename' => $request->filename ? $request->filename : null
+                'filename' => $request->filename != '' && $request->filename != null ? $request->filename : $file_name
             ]);
         }
 

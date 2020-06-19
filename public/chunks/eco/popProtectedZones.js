@@ -160,7 +160,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "tile is-child box" },
+    { staticClass: "tile is-child box is-shadowless" },
     [
       _c("div", { staticClass: "title is-size-4" }, [
         _vm._v("POP en zonas protegidas")

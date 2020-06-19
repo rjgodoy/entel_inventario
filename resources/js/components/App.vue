@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <div class="level is-link is-bold" style="margin-right: -24px; margin-left: -24px; margin-top: -24px">
+            <div class="level is-link is-bold" style="margin-right: -24px; margin-left: -24px; margin-top: -24px;">
                 <div class="level-item">
                     <div class="container has-text-centered">
                         <h1 class="is-size-5 has-text-white has-text-weight-bold" style="padding: 10px 0 10px 0;">{{ this.$route.name.toUpperCase() }}</h1>
@@ -277,11 +277,11 @@
             },
 
             getUserRequestAlerts() {
-                axios.get(`/api/userRequestAlerts?api_token=${this.user.api_token}`)
+                axios.get(`/api/userRequests?api_token=${this.user.api_token}`)
                 .then(response => {
                     if (this.user.roles[0].name == 'admin'
                     || this.user.roles[0].name == 'developer') {
-                        this.userRequestAlerts = response.data.data
+                        this.userRequestAlerts = response.data.requests
                     } else {
 
                     }

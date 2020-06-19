@@ -4,7 +4,7 @@
         ref="map"
         :center="center"
         :zoom="zoom"
-        map-type-id="roadmap"
+        map-type-id="terrain"
         :options="{
             zoomControl: true,
             mapTypeControl: false,
@@ -46,7 +46,7 @@
                 @click="toggleInfoWindow(pop, index)"
                 :position="google && new google.maps.LatLng({ lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) })"
                 :icon="icon"
-            />
+            ></GmapMarker>
             <gmap-info-window 
                 :options="infoOptions"
                 :position="infoWindowPos"
@@ -267,7 +267,7 @@ export default {
                         </div>
 
                         <div class="content">
-                            <a href="/pop/${pop.id}" target="_blank" class="button is-outlined is-primary is-small">
+                            <a href="/pop/${pop.id}" target="_blank" class="button is-outlined is-link is-small">
                                 <font-awesome-icon icon="info-circle"/>
                                 &nbsp;Ver detalles
                             </a>

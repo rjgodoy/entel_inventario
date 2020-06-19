@@ -28,9 +28,9 @@
                     <div class="columns">
                         <div class="column is-4">
                             <div class="has-text-weight-light is-size-7">Voltaje</div>
-                            <div class="has-text-weight-normal is-size-6">{{ data.volt | numeral('0,0') }} <span class="is-size-7" v-if="data.volt">V</span></div>
+                            <div class="has-text-weight-semibold is-size-5">{{ data.volt | numeral('0,0') }} <span class="is-size-7" v-if="data.volt">kV</span></div>
                             <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Distancia</div>
-                            <div class="has-text-weight-normal is-size-6">{{ data.distance | numeral('0,0') }} <span class="is-size-7" v-if="data.distance">m</span></div>
+                            <div class="has-text-weight-semibold is-size-5">{{ data.distance | numeral('0,0') }} <span class="is-size-7" v-if="data.distance">m</span></div>
                         </div>
                     </div>
 
@@ -40,8 +40,18 @@
                             <div class="tile is-child box has-background-light">
                                 <div class="title is-size-5 has-text-weight-semibold">Transformador Nº {{ transformer.id }}</div>
                                 <b-field v-if="electricLines.can.update">
-                                    <b-select placeholder="" icon="bolt" icon-pack="fas" v-model="electricLineSelected" @input="setTransformerElectricLine(transformer.id, electricLineSelected)">
-                                        <option v-for="electricLine in electricLines.electricLine" :value="electricLine.id">{{ electricLine.id }}</option>
+                                    <b-select 
+                                        icon="bolt" 
+                                        icon-pack="fas" 
+                                        placeholder="" 
+                                        v-model="electricLineSelected" 
+                                        @input="setTransformerElectricLine(transformer.id, electricLineSelected)">
+                                        <option
+                                            v-for="electricLine in electricLines.electricLine"
+                                            :value="electricLine.id"
+                                            :key="electricLine.id">
+                                            {{ electricLine.id }}
+                                        </option>
                                     </b-select>
                                 </b-field>
                                 <div class="columns">

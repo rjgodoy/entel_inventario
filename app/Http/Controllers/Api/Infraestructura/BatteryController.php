@@ -1,18 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Infraestructura;
 
-use App\Models\Menu;
-use App\Models\Role;
-
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MainCollection;
-use App\Http\Resources\Main as MainResource;
-use App\Models\UserRequest;
+use Illuminate\Http\Request;
 
-class MainController extends Controller
+class BatteryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -68,29 +61,4 @@ class MainController extends Controller
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function menu(Request $request) 
-    {
-        $menus = Menu::where('active', 1)->orderBy('order', 'asc')->get();
-        return new MainResource($menus);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function roles(Request $request) 
-    {
-        $roles = Role::all();
-        return new MainResource($roles);
-    }
-
 }

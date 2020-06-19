@@ -1,13 +1,13 @@
 <template>
     <div class="tile is-child box">
-        <div class="is-pulled-right">
+        <!-- <div class="is-pulled-right">
             <span class="" v-if="canUpload">
                 <button class="button" @click="isUploadModalActive = true">Subir archivos</button>
             </span>
             <span class="" v-if="canDelete">
                 <button class="button" :class="edit && 'is-danger'" @click="edit = !edit">Editar</button>
             </span>
-        </div>
+        </div> -->
         
         <div class="title is-size-4">RCAs</div>
 
@@ -68,7 +68,7 @@
                             <font-awesome-icon :icon="['fas', faFile(props.row.extension).icon]" :class="faFile(props.row.extension).type"/>
                         </div>
                         <div class="column">
-                            <div class="is-size-6" @click="readFile(props.row)">{{ props.row.basename }}</div>
+                            <div class="is-size-6" @click="openFile(props.row)">{{ props.row.basename }}</div>
                             <div class="is-size-7 has-text-dark">{{ props.row.size / 1000 }} kb</div>
                         </div>
                     </a>
@@ -254,6 +254,14 @@
                     }
             },
 
+            openFile(file) {   
+                if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+                    window.open('/storage/'+file.route, "_blank");    
+                } else {
+                    this.readFile(file)
+                }
+            },
+
             readFile(file) {
                 this.isLoading = true
                 var params = {
@@ -281,7 +289,7 @@
                     const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
                     link.href = data
-                    link.target = "_blank"
+                    link.target = "_self"
                     link.open = file.basename
                     link.click()
                     // setTimeout(function () {

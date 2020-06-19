@@ -218,6 +218,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -235,7 +290,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       popData: this.pop,
       selectedSite: null,
       parameter: '',
-      isEditParameterModalActive: false
+      isEditParameterModalActive: false,
+      parameter_id: null
     };
   },
   watch: {
@@ -866,102 +922,123 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-taglist",
-                          { staticClass: "is-right", attrs: { attached: "" } },
-                          [
-                            _c(
-                              "b-tag",
-                              {
-                                staticClass: "has-text-weight-normal",
-                                attrs: { type: "is-dark" }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    Tipo Sitio\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-tag",
-                              {
-                                staticClass:
-                                  "has-text-weight-bold has-text-white",
-                                class:
-                                  site.site_type_id == 1
-                                    ? "is-smart"
-                                    : site.site_type_id == 2
-                                    ? "is-positive"
-                                    : site.site_type_id == 3
-                                    ? "is-eco"
-                                    : "is-warning"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(
-                                      site.site_type.site_type.toUpperCase()
-                                    ) +
-                                    "\n                                "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-taglist",
-                          { staticClass: "is-right", attrs: { attached: "" } },
-                          [
-                            _c(
-                              "b-tag",
-                              {
-                                staticClass: "has-text-weight-normal",
-                                attrs: { type: "is-dark" }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    Estado\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-tag",
-                              {
-                                staticClass:
-                                  "has-text-weight-bold has-text-white",
-                                class:
-                                  _vm.status(site).id == 1
-                                    ? "is-success"
-                                    : _vm.status(site).id == 2
-                                    ? "is-danger"
-                                    : _vm.status(site).id == 0
-                                    ? "has-text-dark"
-                                    : "is-warning"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(
-                                      _vm.status(site).state.toUpperCase()
-                                    ) +
-                                    "\n                                "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
+                    _c("div", { staticClass: "column" }, [
+                      _c("div", { staticClass: "field" }, [
+                        _c("div", { staticClass: "control" }, [
+                          _c(
+                            "div",
+                            { staticClass: "tags has-addons is-right" },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "tag is-dark has-text-weight-normal"
+                                },
+                                [_vm._v("Tipo Sitio")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "tag has-text-weight-bold has-text-white",
+                                  class:
+                                    site.site_type_id == 1
+                                      ? "is-smart"
+                                      : site.site_type_id == 2
+                                      ? "is-positive"
+                                      : site.site_type_id == 3
+                                      ? "is-eco"
+                                      : "is-warning"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                                " +
+                                      _vm._s(
+                                        site.site_type.site_type.toUpperCase()
+                                      ) +
+                                      "\n                                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "field" }, [
+                        _c("div", { staticClass: "control" }, [
+                          _c(
+                            "div",
+                            { staticClass: "tags has-addons is-right" },
+                            [
+                              !_vm.isEditMode || site.site_type_id == 2
+                                ? _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "tag is-dark has-text-weight-normal"
+                                    },
+                                    [_vm._v("Estado")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.isEditMode && site.site_type_id != 2
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "tag is-info has-text-weight-normal has-text-white",
+                                      staticStyle: {
+                                        border: "solid 0.5px grey"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.isEditParameterModalActive = true
+                                          _vm.parameter = "state_id"
+                                          _vm.selectedSite = site
+                                          _vm.parameter_id = site.state_id
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                            Editar Estado\n                                        "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "tag has-text-weight-bold has-text-white",
+                                  class:
+                                    _vm.status(site).id == 1
+                                      ? "is-success"
+                                      : _vm.status(site).id == 2
+                                      ? "is-danger"
+                                      : _vm.status(site).id == 0
+                                      ? "has-text-dark"
+                                      : "is-warning"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.status(site).state.toUpperCase()
+                                      ) +
+                                      "\n                                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
@@ -1018,6 +1095,8 @@ var render = function() {
                                     _vm.isEditParameterModalActive = true
                                     _vm.parameter = "classification_type_id"
                                     _vm.selectedSite = site
+                                    _vm.parameter_id =
+                                      site.classification_type_id
                                   }
                                 }
                               },
@@ -1099,6 +1178,8 @@ var render = function() {
                                     _vm.isEditParameterModalActive = true
                                     _vm.parameter = "attention_priority_type_id"
                                     _vm.selectedSite = site
+                                    _vm.parameter_id =
+                                      site.attention_priority_type_id
                                   }
                                 }
                               },
@@ -1256,7 +1337,8 @@ var render = function() {
               pop: _vm.pop,
               site: _vm.selectedSite,
               user: _vm.user,
-              parameter: _vm.parameter
+              parameter: _vm.parameter,
+              parameter_id: _vm.parameter_id
             }
           })
         ],

@@ -180,137 +180,139 @@
             </div>
         </div>
 
-        <section class="section tile is-ancestor has-background-light">
-            <div class="tile is-7 is-parent">
-                <div class="tile is-child box" style="max-height: 100%; min-height: 800px;">
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                            <input 
-                                class="input is-rounded" 
-                                :class="bodyBackground + ' ' + primaryText" 
-                                @keyup="getPops"
-                                v-model="searchText"
-                                type="text"
-                                arial-label="Buscar"
-                                placeholder="Buscar..."
-                                autofocus
-                                >
-                            <span class="icon is-small is-left">
-                                <font-awesome-icon icon="search"/>
-                            </span>
-                            <span class="icon is-small is-right">
-                                <button class="delete" @click="clearSearch"></button>
-                            </span>
-                        </p>
-                    </div>
+        <section class="section has-background-white is-paddingless">
+            <div class="columns is-marginless">
+                <div class="column tile is-parent is-5 is-paddingless">
+                    <div class="tile is-child box is-shadowless" style="max-height: 100%; min-height: 800px; padding-bottom: 48px">
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                                <input 
+                                    class="input is-rounded" 
+                                    :class="bodyBackground + ' ' + primaryText" 
+                                    @keyup="getPops"
+                                    v-model="searchText"
+                                    type="text"
+                                    arial-label="Buscar"
+                                    placeholder="Buscar..."
+                                    autofocus
+                                    >
+                                <span class="icon is-small is-left">
+                                    <font-awesome-icon icon="search"/>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <button class="delete" @click="clearSearch"></button>
+                                </span>
+                            </p>
+                        </div>
 
-                    <table class="table is-fullwidth" :class="boxBackground">
-                        <thead>
-                            <tr>
-                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id</abbr></th>
-                                <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Nombre POP</abbr></th>
-                                <th class="is-size-7 has-text-weight-semibold has-text-centered" :class="secondaryText"><abbr title="Sitios">Sitios</abbr></th>
-                                <th class="is-size-7 has-text-weight-semibold has-text-centered" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
-                                <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            <tr class="" v-for="pop in pops.data" :key="pop.id">
-                                <td class="has-text-weight-light" :class="primaryText">
-                                    <b-checkbox v-model="selectedPops"
-                                        size="is-medium"
-                                        :native-value="pop">
-                                    </b-checkbox>
-                                </td>
+                        <table class="table is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Id">Id</abbr></th>
+                                    <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Pop">Nombre POP</abbr></th>
+                                    <th class="is-size-7 has-text-weight-semibold has-text-centered" :class="secondaryText"><abbr title="Sitios">Sitios</abbr></th>
+                                    <th class="is-size-7 has-text-weight-semibold has-text-centered" :class="secondaryText"><abbr title="Categoría">Categoría</abbr></th>
+                                    <th class="is-size-7 has-text-weight-semibold has-text-centered"></th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr class="" v-for="pop in pops.data" :key="pop.id">
+                                    <td class="has-text-weight-light" :class="primaryText">
+                                        <b-checkbox v-model="selectedPops"
+                                            size="is-medium"
+                                            :native-value="pop">
+                                        </b-checkbox>
+                                    </td>
 
-                                <td class="">
-                                    <!-- <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? pop.sites[0].nem_site : '' }}
-                                    </div> -->
-                                    <a :href="'/pop/' + pop.id" target="_blank" class="is-size-6 has-text-weight-normal">
-                                        {{ pop ? pop.nombre : '' }}
-                                    </a>
-                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop ? pop.direccion : '' }}, {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}
-                                    </div>
-                                </td>
-
-                                <td class="">
-                                    <div class="columns is-multiline">
-                                        <div class="column is-6 has-text-centered" v-for="site in pop.sites" :key="site.id">
-                                            <div class="is-size-7 has-text-weight-normal has-text-centered">{{ site.nem_site }}</div>
+                                    <td class="">
+                                        <!-- <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                            {{ pop ? pop.sites[0].nem_site : '' }}
+                                        </div> -->
+                                        <a :href="'/pop/' + pop.id" target="_blank" class="is-size-6 has-text-weight-normal">
+                                            {{ pop ? pop.nombre : '' }}
+                                        </a>
+                                        <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                            {{ pop ? pop.direccion : '' }}, {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
 
-                                <!-- <td class="">
-                                    <div class="is-size-6 has-text-weight-light" :class="secondaryText">
-                                        {{ pop ? pop.direccion : '' }}
-                                    </div>
-                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}
-                                    </div>
-                                    <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                        {{ pop.comuna.zona ? 'Zona: ' + pop.comuna.zona.nombre_zona : '' }} - {{ pop.comuna.zona.crm ? 'CRM: ' + pop.comuna.zona.crm.nombre_crm : '' }}
-                                    </div>
-                                </td> -->
-
-                                <td class="">
-                                    <div class="has-text-centered">
-                                        <div class="tag has-text-weight-bold is-size-7">
-                                            {{ pop ? popClassification(pop).classification : '' }}
+                                    <td class="">
+                                        <div class="columns is-multiline">
+                                            <div class="column is-6 has-text-centered" v-for="site in pop.sites" :key="site.id">
+                                                <div class="is-size-7 has-text-weight-normal has-text-centered">{{ site.nem_site }}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
 
-                                <td class="has-text-weight-light has-text-centered" :class="primaryText">
-                                    <a 
-                                        class="button is-small is-link is-outlined has-tooltip-left" 
-                                        :href="'/pop/' + pop.id" 
-                                        type="button" 
-                                        target="_blank"  
-                                        data-tooltip="Ver información completa"
-                                        >
-                                        <font-awesome-icon icon="info"/>
-                                    </a>
+                                    <!-- <td class="">
+                                        <div class="is-size-6 has-text-weight-light" :class="secondaryText">
+                                            {{ pop ? pop.direccion : '' }}
+                                        </div>
+                                        <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                            {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}
+                                        </div>
+                                        <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
+                                            {{ pop.comuna.zona ? 'Zona: ' + pop.comuna.zona.nombre_zona : '' }} - {{ pop.comuna.zona.crm ? 'CRM: ' + pop.comuna.zona.crm.nombre_crm : '' }}
+                                        </div>
+                                    </td> -->
 
-                                    <button 
-                                        class="button is-small is-default" 
-                                        @click="selectPop(pop)" 
-                                        data-tooltip="Ver en mapa"
-                                        >
-                                        <font-awesome-icon icon="map-marked-alt"/>
-                                    </button>
+                                    <td class="">
+                                        <div class="has-text-centered">
+                                            <div class="tag has-text-weight-bold is-size-7">
+                                                {{ pop ? popClassification(pop).classification : '' }}
+                                            </div>
+                                        </div>
+                                    </td>
 
-                                </td>
+                                    <td class="has-text-weight-light has-text-centered" :class="primaryText">
+                                        <a 
+                                            class="button is-small is-link is-outlined has-tooltip-left" 
+                                            :href="'/pop/' + pop.id" 
+                                            type="button" 
+                                            target="_blank"  
+                                            data-tooltip="Ver información completa"
+                                            >
+                                            <font-awesome-icon icon="info"/>
+                                        </a>
 
-                            </tr>    
-                        </tbody>
-                    </table>
+                                        <button 
+                                            class="button is-small is-default" 
+                                            @click="selectPop(pop)" 
+                                            data-tooltip="Ver en mapa"
+                                            >
+                                            <font-awesome-icon icon="map-marked-alt"/>
+                                        </button>
 
-                    <div class="block">
-                        <nav class="pagination" role="navigation" aria-label="pagination">
-                            <vue-pagination  
-                                :pagination="pops"
-                                @paginate="getPops()"
-                                :offset="4"
-                                :primaryText="primaryText">
-                            </vue-pagination>
-                        </nav>
+                                    </td>
+
+                                </tr>    
+                            </tbody>
+                        </table>
+
+                        <div class="block">
+                            <nav class="pagination" role="navigation" aria-label="pagination">
+                                <vue-pagination  
+                                    :pagination="pops"
+                                    @paginate="getPops()"
+                                    :offset="4"
+                                    :primaryText="primaryText">
+                                </vue-pagination>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="tile is-parent is-vertical">
-                <div class="tile is-child card" style="border: solid 4px white">
-                    <map-view
-                        :user="user"
-                        :pops="popsMap"
-                        :map_attributes="map_attributes"
-                        :darkMode="darkMode"                    
-                    ></map-view>
-                </div> 
+                <div class="column tile is-parent is-paddingless">
+                    <div class="tile is-child map-container">
+                        <map-view
+                            :user="user"
+                            :pops="popsMap"
+                            :map_attributes="map_attributes"
+                            :darkMode="darkMode"                    
+                        ></map-view>
+                    </div> 
+                </div>
             </div>
         </section>
 
@@ -326,7 +328,7 @@ import VuePagination from '../VuePagination.vue';
 
 export default {
     components: {
-        MapView: () => import(/* webpackChunkName: "chunks/maps/mapView"*/'../maps/MapView.vue'),
+        MapView: () => import(/* webpackChunkName: "chunks/maps/mapView"*/'../maps/PopsMapView.vue'),
         VuePagination,
     },
     props : [

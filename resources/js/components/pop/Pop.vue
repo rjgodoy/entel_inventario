@@ -322,10 +322,10 @@
             popClassification() {
                 var id = 6; var classification
                 if (this.pop.sites) {
-                    this.pop.sites.forEach(function(item) {
-                        if (item.classification_type_id && item.classification_type_id < id) { 
-                            id = item.classification_type_id
-                            classification = item.classification_type.classification_type
+                    this.pop.sites.forEach(element => {
+                        if (element.classification_type_id < id && element.state_id != 2) { 
+                            id = element.classification_type_id
+                            classification = element.classification_type.classification_type
                         }
                     })
                 }

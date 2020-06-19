@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function userRequests(Request $request)
     {
-        $requests = UserRequest::where('status', 0)->get();
+        $requests = UserRequest::all();
 
         return response()->json(
             [
@@ -120,6 +120,10 @@ class UserController extends Controller
      */
     public function newUserAccepted(Request $request)
     {   
+
+        $user = User::where('name', $request->user['name'])->first();
+        $sex = $user ? $user->sexo : null;
+
         $user = User::create([
             'name' => $request->user['name'],
             'apellido' => $request->user['apellido'],
@@ -127,15 +131,16 @@ class UserController extends Controller
             'username' => $request->user['username'],
             'password' => $request->user['password'],
             'api_token' => Hash::make(Str::random(10)),
-            'estado' => 1
+            'estado' => 1,
+            'sexo' => $sex
         ]);
 
         if ($user) {
             $userRequest = UserRequest::find($request->user['id']);
             $userRequest->update([
-                'status' => 1,
                 'done_by' => $request->admin_id
             ]);
+            $userRequest->delete();
         }
 
         Mail::to($request->user['email'])->send(new UserRequestAccepted());
@@ -156,9 +161,10 @@ class UserController extends Controller
     {   
         $userRequest = UserRequest::find($request->user['id']);
         $userRequest->update([
-            'status' => 2,
+            'rejected' => 1,
             'done_by' => $request->admin_id
         ]);
+        $userRequest->delete();
 
         Mail::to($request->user['email'])->send(new UserRequestRejected());
 

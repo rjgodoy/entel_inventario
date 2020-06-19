@@ -654,6 +654,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'type': type
       };
     },
+    openFile: function openFile(file) {
+      if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+        window.open('/storage/' + file.route, "_blank");
+      } else {
+        this.readFile(file);
+      }
+    },
     readFile: function readFile(file) {
       var _this4 = this;
 
@@ -683,7 +690,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         var link = document.createElement('a');
         link.href = objectUrl;
         link.open = file.basename;
-        link.target = '_blank';
+        link.target = '_self';
         link.click();
         setTimeout(function () {
           //     // For Firefox it is necessary to delay revoking the ObjectURL
@@ -1416,7 +1423,7 @@ var render = function() {
                                 staticStyle: { position: "relative" },
                                 on: {
                                   click: function($event) {
-                                    _vm.readFile(file)
+                                    _vm.openFile(file)
                                     _vm.load = file.id
                                   }
                                 }

@@ -4,7 +4,7 @@
             <p class="modal-card-title has-text-weight-bold">Editar Parámetro</p>
         </header>
         <section class="modal-card-body">
-            <div class="container" style="width: 50%; margin-top: 30px;">
+            <div class="container is-fullwidth">
                 <b-select placeholder="Select a name" v-model="value">
                     <option
                         v-for="option in parameters"
@@ -28,12 +28,13 @@
             'pop',
             'site',
             'user',
-            'parameter'
+            'parameter',
+            'parameter_id'
         ],
 
         data() {
             return {
-                value: null,
+                value: this.parameter_id,
                 isFetching: false,
                 text: '',
                 page: 1,
@@ -62,7 +63,7 @@
         },
 
         mounted() {
-            console.log(this.parameterName)
+            // console.log(this.parameter)
             this.getParameters()
         },
 
@@ -73,7 +74,7 @@
                     'parameter': this.parameter,
                 }
                 axios.get(`/api/${this.itemName}Parameters`, { params }).then(response => {
-                    // console.log(response.data)
+                    console.log(response.data)
                     this.parameters = response.data.data
                 })
 

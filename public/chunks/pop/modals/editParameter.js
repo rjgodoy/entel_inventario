@@ -34,10 +34,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['pop', 'site', 'user', 'parameter'],
+  props: ['pop', 'site', 'user', 'parameter', 'parameter_id'],
   data: function data() {
     return {
-      value: null,
+      value: this.parameter_id,
       isFetching: false,
       text: '',
       page: 1,
@@ -64,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log(this.parameterName);
+    // console.log(this.parameter)
     this.getParameters();
   },
   methods: {
@@ -78,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/api/".concat(this.itemName, "Parameters"), {
         params: params
       }).then(function (response) {
-        // console.log(response.data)
+        console.log(response.data);
         _this.parameters = response.data.data;
       });
     },
@@ -132,10 +132,7 @@ var render = function() {
       _c("section", { staticClass: "modal-card-body" }, [
         _c(
           "div",
-          {
-            staticClass: "container",
-            staticStyle: { width: "50%", "margin-top": "30px" }
-          },
+          { staticClass: "container is-fullwidth" },
           [
             _c(
               "b-select",

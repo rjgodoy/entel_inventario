@@ -483,7 +483,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     // ###### Map ###########
     // PopsMap,
     MapView: function MapView() {
-      return __webpack_require__.e(/*! import() | chunks/maps/mapView/ */ "chunks/maps/mapView").then(__webpack_require__.bind(null, /*! ../maps/MapView */ "./resources/js/components/maps/MapView.vue"));
+      return __webpack_require__.e(/*! import() | chunks/maps/mapView/ */ "chunks/maps/mapView/").then(__webpack_require__.bind(null, /*! ../maps/MapView */ "./resources/js/components/maps/MapView.vue"));
     },
     // MapView,
     // ###### Charts ########
@@ -661,6 +661,10 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       var zona_id = this.selectedZona ? this.selectedZona.id : 0;
       axios.get("/api/dashboardMap?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
         try {
+          // this.pops = []
+          // response.data.forEach(element =>{
+          //     setInterval(this.pops.push(element), 0.1)
+          // })
           _this.pops = response.data;
         } catch (ex) {
           console.log(ex);

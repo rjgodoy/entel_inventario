@@ -133,7 +133,7 @@
                             </div>
 
                             <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
-                                <a class="box tile is-child" @click="readFile(file); load = file.id" style="position: relative;">
+                                <a class="box tile is-child" @click="openFile(file); load = file.id" style="position: relative;">
                                     <font-awesome-icon 
                                         :icon="['fas', faFile(file.extension).icon]"
                                         :class="faFile(file.extension).type"
@@ -571,6 +571,14 @@ export default {
                 }
         },
 
+        openFile(file) {   
+            if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+                window.open('/storage/'+file.route, "_blank");    
+            } else {
+                this.readFile(file)
+            }
+        },
+
         readFile(file) {
             this.isLoading = true
             var params = {
@@ -598,7 +606,7 @@ export default {
                 let link = document.createElement('a')
                 link.href = objectUrl
                 link.open = file.basename
-                link.target = '_blank'
+                link.target = '_self'
                 link.click()
                 setTimeout(function () {
                 //     // For Firefox it is necessary to delay revoking the ObjectURL

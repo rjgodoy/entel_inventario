@@ -6,6 +6,11 @@ use App\Exports\AirConditionersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AirConditioner as AirConditionerResource;
 use App\Models\AirConditioner;
+use App\Models\AirConditionerBrand;
+use App\Models\AirConditionerType;
+use App\Models\Pop;
+use App\Models\PsgTp;
+use App\Models\PsgTpSource;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -157,7 +162,43 @@ class AirConditionerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tp = PsgTpSource::where('PLANNED_ID', $request->tp_id)->first();
+        // return $tp;
+        if($air_conditioner_type = AirConditionerType::where('type', $tp->TIPO)->first()) {
+            $air_conditioner_type_id = $air_conditioner_type->id;
+        } else {
+            $air_conditioner_type_id = AirConditionerType::create([ 'type' => $tp->TIPO ])->id;
+        }
+
+        if($air_conditioner_brand = AirConditionerBrand::where('brand', $tp->MARCA)
+            ->where(function($q) {
+                $q->where('model', null)->orWhere('model', '');
+            })->first()
+        ) {
+            $air_conditioner_brand_id = $air_conditioner_brand->id;
+        } else {
+            $air_conditioner_brand_id = AirConditionerBrand::create([
+                'air_conditioner_type_id' => $air_conditioner_type_id,
+                'brand' => $tp->MARCA
+            ])->id;
+        }
+
+        $site_id = $request->site_id;
+        $pop_id = Pop::whereHas('sites', function($q) use($site_id) {
+            $q->where('id', $site_id);
+        })->first()->id;
+
+        $psgTp = PsgTp::where('tp_id', $tp->PLANNED_ID)->first();
+
+        $newAC = AirConditioner::create([
+            'pop_id' => $pop_id,
+            'air_conditioner_brand_id' => $air_conditioner_brand_id,
+            'capacity' => str_replace('.', '', $tp->CAPACIDAD_BTU),
+            'installed_at' => $psgTp->executed_at
+        ]);
+        $psgTp->delete();
+
+        return $newAC;
     }
 
     /**

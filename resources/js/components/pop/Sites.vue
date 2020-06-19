@@ -101,7 +101,22 @@
                                 <div class="is-size-5 has-text-weight-light" v-if="site.nombre">{{ site.nombre }}</div>
                             </div>
                             <div class="column">
-                                <b-taglist attached class="is-right">
+
+                                <div class="field">
+                                    <div class="control">
+                                        <div class="tags has-addons is-right">
+                                            <span class="tag is-dark has-text-weight-normal">Tipo Sitio</span>
+                                            <span class="tag has-text-weight-bold has-text-white" 
+                                                :class="site.site_type_id == 1 ? 'is-smart' : 
+                                            (site.site_type_id == 2 ? 'is-positive' : 
+                                                (site.site_type_id == 3 ? 'is-eco' : 'is-warning'))">
+                                                    {{ site.site_type.site_type.toUpperCase() }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <b-taglist attached class="is-right">
                                     <b-tag type="is-dark" class="has-text-weight-normal">
                                         Tipo Sitio
                                     </b-tag>
@@ -112,11 +127,44 @@
                                                 (site.site_type_id == 3 ? 'is-eco' : 'is-warning'))">
                                         {{ site.site_type.site_type.toUpperCase() }}
                                     </b-tag>
-                                </b-taglist>
+                                </b-taglist> -->
 
-                                <b-taglist attached class="is-right">
-                                    <b-tag type="is-dark" class="has-text-weight-normal">
+                                <div class="field">
+                                    <div class="control">
+                                        <div class="tags has-addons is-right">
+                                            <span class="tag is-dark has-text-weight-normal" v-if="!isEditMode || site.site_type_id == 2">Estado</span>
+                                            <a class="tag is-info has-text-weight-normal has-text-white" 
+                                                v-if="isEditMode && site.site_type_id != 2"
+                                                @click="isEditParameterModalActive = true; 
+                                                    parameter = 'state_id'; 
+                                                    selectedSite = site;
+                                                    parameter_id = site.state_id" 
+                                                style="border: solid 0.5px grey;">
+                                                Editar Estado
+                                            </a>
+                                            <span class="tag has-text-weight-bold has-text-white" 
+                                                :class="status(site).id == 1 ? 'is-success' : 
+                                                    (status(site).id == 2 ? 'is-danger' : 
+                                                        (status(site).id == 0 ? 'has-text-dark' : 'is-warning'))">
+                                                {{ status(site).state.toUpperCase() }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <b-taglist attached class="is-right">
+                                    <b-tag type="is-dark" class="has-text-weight-normal" v-if="!isEditMode || site.site_type_id == 2">
                                         Estado
+                                    </b-tag>
+                                    <b-tag v-if="isEditMode && site.site_type_id != 2" 
+                                        type="is-info" 
+                                        @click="isEditParameterModalActive = true; 
+                                            parameter = 'classification_type_id'; 
+                                            selectedSite = site;
+                                            parameter_id = site.classification_type_id" 
+                                        style="border: solid 0.5px grey;">
+                                        <div  class="title is-size-4 has-text-weight-bold">{{ site.classification_type.classification_type }}</div>
+                                        Editar Estado
                                     </b-tag>
                                     <b-tag 
                                         class="has-text-weight-bold has-text-white"
@@ -125,7 +173,7 @@
                                                 (status(site).id == 0 ? 'has-text-dark' : 'is-warning'))">
                                         {{ status(site).state.toUpperCase() }}
                                     </b-tag>
-                                </b-taglist>
+                                </b-taglist> -->
                             </div>
                         </div>
 
@@ -138,7 +186,10 @@
 
                                 <a v-if="isEditMode" 
                                     class="tile is-child box" 
-                                    @click="isEditParameterModalActive = true; parameter = 'classification_type_id'; selectedSite = site" 
+                                    @click="isEditParameterModalActive = true; 
+                                        parameter = 'classification_type_id'; 
+                                        selectedSite = site;
+                                        parameter_id = site.classification_type_id" 
                                     style="border: solid 0.5px grey;">
                                     <div  class="title is-size-4 has-text-weight-bold">{{ site.classification_type.classification_type }}</div>
                                     <div class="subtitle is-size-7 has-text-weight-normal">Categoría</div>
@@ -153,7 +204,10 @@
 
                                 <a v-if="isEditMode" 
                                     class="tile is-child box" 
-                                    @click="isEditParameterModalActive = true; parameter = 'attention_priority_type_id'; selectedSite = site" 
+                                    @click="isEditParameterModalActive = true; 
+                                        parameter = 'attention_priority_type_id'; 
+                                        selectedSite = site;
+                                        parameter_id = site.attention_priority_type_id"
                                     style="border: solid 0.5px grey;">
                                     <div class="title is-size-4 has-text-weight-bold">{{ site.attention_priority_type.attention_priority_type }}</div>
                                     <div class="subtitle is-size-7 has-text-weight-normal">Prioridad atención</div>
@@ -200,6 +254,7 @@
                 :site="selectedSite"
                 :user="user"
                 :parameter="parameter"
+                :parameter_id="parameter_id"
                 />
         </b-modal>
     </div>
@@ -228,7 +283,8 @@
                 popData: this.pop,
                 selectedSite: null,
                 parameter: '',
-                isEditParameterModalActive: false
+                isEditParameterModalActive: false,
+                parameter_id: null
             }
         },
 

@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
-                            <a class="box tile is-child" @click="readFile(file); load = file.id" style="position: relative;">
+                            <a class="box tile is-child" @click="openFile(file); load = file.id" style="position: relative;">
                                 <font-awesome-icon 
                                     :icon="['fas', faFile(file.extension).icon]"
                                     :class="faFile(file.extension).type"
@@ -73,36 +73,6 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="container">
-                        <b-carousel
-                            :autoplay="false"
-                            with-carousel-list
-                            :indicator="false"
-                            :overlay="gallery">
-                            <b-carousel-item v-for="(item, i) in photos" :key="i">
-                                <figure @click="switchGallery(true)" class="image">
-                                    <img :src="item.image">
-                                </figure>
-                            </b-carousel-item>
-                            <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
-                            <template slot="list" slot-scope="props">
-                                <b-carousel-list
-                                    v-model="props.active"
-                                    :data="photos"
-                                    :config="al"
-                                    :refresh="gallery"
-                                    @switch="props.switch($event, false)"
-                                    as-indicator />
-                            </template>
-                            <!-- <template slot="overlay">
-                                <div class="has-text-centered has-text-white">
-                                    {{ item.basename }}
-                                </div>
-                            </template> -->
-                        </b-carousel>
-                    </div>
-
 
                     <div class="columns is-multiline" v-if="edit">
                         <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
@@ -141,6 +111,34 @@
                         </div>
                     </div>
 
+                    <div class="container">
+                        <b-carousel
+                            :autoplay="false"
+                            with-carousel-list
+                            :indicator="false"
+                            :overlay="gallery">
+                            <b-carousel-item v-for="(item, i) in photos" :key="i">
+                                <figure @click="switchGallery(true)" class="image">
+                                    <img :src="item.image">
+                                </figure>
+                            </b-carousel-item>
+                            <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
+                            <template slot="list" slot-scope="props">
+                                <b-carousel-list
+                                    v-model="props.active"
+                                    :data="photos"
+                                    :config="al"
+                                    :refresh="gallery"
+                                    @switch="props.switch($event, false)"
+                                    as-indicator />
+                            </template>
+                            <!-- <template slot="overlay">
+                                <div class="has-text-centered has-text-white">
+                                    {{ item.basename }}
+                                </div>
+                            </template> -->
+                        </b-carousel>
+                    </div>
 
                     <section v-if="noFiles" class="section container">
                         <div class="has-text-weight-normal">No hay archivos en esta sección.</div>
@@ -412,6 +410,15 @@ export default {
                 }
         },
 
+        openFile(file) {   
+            if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+                window.open('/storage/'+file.route, "_blank");    
+            } else {
+                this.readFile(file)
+            }
+            
+        },
+
         readFile(file) {
             this.isLoading = true
             var params = {
@@ -439,7 +446,7 @@ export default {
                 let link = document.createElement('a')
                 link.href = objectUrl
                 link.open = file.basename
-                link.target = '_blank'
+                link.target = '_self'
                 link.click()
                 setTimeout(function () {
                     // For Firefox it is necessary to delay revoking the ObjectURL

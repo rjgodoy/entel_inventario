@@ -176,64 +176,12 @@ var render = function() {
                         _vm._s(
                           data.rol_propiedad
                             ? data.rol_propiedad
-                            : "Sin daots de ROL"
+                            : "Sin datos de ROL"
                         )
                       )
                     ])
                   ])
                 ]),
-                _vm._v(" "),
-                data.started_at != "1969-12-31"
-                  ? _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column has-text-right is-one-fifth" },
-                        [
-                          _c("div", [
-                            _vm._v(_vm._s(_vm.dateMoment(data.started_at)))
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "has-text-weight-normal is-size-7" },
-                            [_vm._v("Fecha inicio")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "column is-three-fifths" },
-                        [
-                          _c("b-progress", {
-                            attrs: {
-                              type: "is-link",
-                              value: _vm.percentDate(
-                                data.started_at,
-                                data.ended_at
-                              ),
-                              "show-value": "",
-                              format: "percent",
-                              size: "is-medium"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "column has-text-left" }, [
-                        _c("div", [
-                          _vm._v(_vm._s(_vm.dateMoment(data.ended_at)))
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "has-text-weight-normal is-size-7" },
-                          [_vm._v("Fecha término")]
-                        )
-                      ])
-                    ])
-                  : _vm._e(),
                 _vm._v(" "),
                 data.started_at != "1969-12-31"
                   ? _c(

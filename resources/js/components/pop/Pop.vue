@@ -45,7 +45,7 @@
                                     <div class="control">
                                         <b-taglist attached>
                                             <b-tag size="is-medium" :type="popClassification.id == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
-                                                <font-awesome-icon :icon="popCritical == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                                <font-awesome-icon :icon="popClassification.id == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
                                             <b-tag size="is-medium" type="is-black">CORE</b-tag>
                                         </b-taglist>
@@ -84,7 +84,7 @@
                             </div>
                         </div>
 
-                        <div class="column is-1 has-text-right">
+                        <div class="column is-1 has-text-right" v-if="canViewLog">
                             
                             <button
                                 class="button is-warning" 
@@ -152,6 +152,7 @@
                         </div>
                     </div>
                     <b-tooltip 
+                        v-if="canEdit"
                         :label="isEditMode ? 'Salir del modo edición' : 'Entrar en modo edición'" 
                         position="is-left"
                         type="is-link"
@@ -312,13 +313,28 @@
         },
 
         mounted() {
-            // console.log(this.$route)
+            // console.log(this.user)
             this.getAllData()
             this.getTabs()
             
         },
 
         computed: {
+            canViewLog() {
+                return this.user.roles[0].id == 1 
+                    || this.user.roles[0].id == 2
+                    || this.user.roles[0].id == 4
+                    || this.user.roles[0].id == 6
+                    || this.user.roles[0].id == 7
+                    || this.user.roles[0].id == 8 ? true : false
+            },
+
+            canEdit() {
+                return this.user.roles[0].id == 1 
+                    || this.user.roles[0].id == 2
+                    || this.user.roles[0].id == 8 ? true : false
+            },
+
             popClassification() {
                 var id = 6; var classification
                 if (this.pop.sites) {
@@ -481,8 +497,6 @@
             tec4g3500() {
                 return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
             },
-
-            
 
             popCritical() {
                 var criticity = 0;

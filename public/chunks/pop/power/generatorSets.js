@@ -23,6 +23,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     GeneratorSet: function GeneratorSet() {
@@ -85,7 +89,12 @@ var render = function() {
                 _vm._v(" "),
                 _c("generator-set", {
                   staticClass: "column is-8",
-                  attrs: { generatorSet: generatorSet }
+                  attrs: {
+                    generatorSet: generatorSet,
+                    can: _vm.can,
+                    user: _vm.user,
+                    pop: _vm.pop
+                  }
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "column is-2" })

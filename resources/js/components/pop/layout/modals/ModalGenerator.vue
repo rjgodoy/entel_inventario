@@ -1,9 +1,9 @@
 <template>
     <div class="modal-card" style="width: 800px;">
-        <header class="modal-card-head has-text-centered" style="background: rgba(0,0,0,0)">
-            <p class="modal-card-title has-text-white has-text-weight-bold">Grupo Electrógeno</p>
+        <header class="modal-card-head has-text-centered" style="background: rgba(255,255,255,0);">
+            <p class="modal-card-title has-text-white has-text-weight-bold">GRUPO ELECTROGENO</p>
         </header>
-        <section class="modal-card-body" style="background: rgba(0,0,0,0)">
+        <section class="modal-card-body" style="background: rgba(255,255,255,0);">
             <generator-set
                 :generatorSet="generatorSet"
                 :pop="pop"

@@ -55,19 +55,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     PopMap: function PopMap() {
-      return Promise.all(/*! import() | chunks/maps/popMapView */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("chunks/maps/popMapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
+      return Promise.all(/*! import() | chunks/maps/popMapView */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("chunks/maps/popMapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
     }
   },
-  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
+  props: ['user', 'pop', 'isEditMode', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
-    return {};
+    return {
+      address: this.pop.direccion
+    };
   },
   mounted: function mounted() {},
+  watch: {
+    isEditMode: function isEditMode(val) {
+      if (this.address != this.pop.direccion) {
+        this.updateParameter('direccion', this.address);
+      }
+    }
+  },
   computed: {
     popClassification: function popClassification() {
       var id = 6;
@@ -135,6 +146,28 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     //         return this.popClassification.id == 1 ? 'is-info' : (this.popClassification.id == 2 ? 'is-warning' : (this.popClassification.id == 3 ? 'is-primary' : (this.popClassification.id == 4 ? 'is-smart' : (this.popClassification.id == 5 ? 'is-eco' : 'is-white'))))
     //     }
 
+  },
+  methods: {
+    updateParameter: function updateParameter(param, val) {
+      var _this = this;
+
+      var params = {
+        'api_token': this.user.api_token,
+        'parameter': param,
+        'value': val,
+        'user_id': this.user.id
+      };
+      axios.put("/api/pop/".concat(this.pop.id), params).then(function (response) {
+        // console.log(response.data)
+        _this.$buefy.toast.open({
+          message: 'Parámetro actualizado exitosamente.',
+          type: 'is-success',
+          duration: 2000
+        });
+
+        _this.$eventBus.$emit('parameter-updated');
+      });
+    }
   }
 });
 
@@ -177,32 +210,54 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-content" }, [
         _c("div", { staticClass: "columns" }, [
-          _c("div", { staticClass: "column is-8" }, [
-            _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-              _vm._v(_vm._s(_vm.pop.direccion))
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
-              _vm._v(
-                "Comuna de " +
-                  _vm._s(_vm.pop.comuna ? _vm.pop.comuna.nombre_comuna : "")
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "is-size-7 has-text-weight-normal" }, [
-              _vm._v(
-                "\n                        Zona " +
-                  _vm._s(
-                    _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
-                  ) +
-                  " - CRM " +
-                  _vm._s(
-                    _vm.pop.comuna ? _vm.pop.comuna.zona.crm.nombre_crm : ""
-                  ) +
-                  "\n                    "
-              )
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "column is-8" },
+            [
+              !_vm.isEditMode
+                ? _c(
+                    "div",
+                    { staticClass: "is-size-5 has-text-weight-semibold" },
+                    [_vm._v(_vm._s(_vm.pop.direccion))]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isEditMode
+                ? _c("b-input", {
+                    staticClass: "is-size-5 has-text-weight-semibold",
+                    model: {
+                      value: _vm.address,
+                      callback: function($$v) {
+                        _vm.address = $$v
+                      },
+                      expression: "address"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
+                _vm._v(
+                  "Comuna de " +
+                    _vm._s(_vm.pop.comuna ? _vm.pop.comuna.nombre_comuna : "")
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "is-size-7 has-text-weight-normal" }, [
+                _vm._v(
+                  "\n                        Zona " +
+                    _vm._s(
+                      _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
+                    ) +
+                    " - CRM " +
+                    _vm._s(
+                      _vm.pop.comuna ? _vm.pop.comuna.zona.crm.nombre_crm : ""
+                    ) +
+                    "\n                    "
+                )
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "column" }, [
             _c("div", { staticClass: "level" }, [

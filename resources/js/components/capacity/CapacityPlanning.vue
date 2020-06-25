@@ -227,14 +227,14 @@
                 </div>
             </div>
 
-            <b-modal :active.sync="isComponentModalActive"
+            <!-- <b-modal :active.sync="isComponentModalActive"
                 has-modal-card full-screen :can-cancel="false">
                 <modal-room
                     :user="user"
                     :pop="popSelected"
                     :room="roomSelected"
                 ></modal-room>
-            </b-modal>
+            </b-modal> -->
         </div>
     </div>
 </template>
@@ -273,9 +273,9 @@ export default {
             // currentPop: [],
             // currentRoom: [],
 
-            isComponentModalActive: false,
-            popSelected: null,
-            roomSelected: null
+            // isComponentModalActive: false,
+            // popSelected: null,
+            // roomSelected: null
         }
     },
 
@@ -329,7 +329,9 @@ export default {
         //     this.currentRoom = room
         //     this.currentPop = pop
         // }
-    }
+    },
+
+
 }
 </script>
 

@@ -16,6 +16,11 @@ class GeneratorSet extends Model
         return $this->belongsTo(Pop::class);
     }
 
+    public function current_generator_set_capacity() 
+    {
+        return $this->hasOne(GeneratorSetCapacity::class)->latest();
+    }
+
     public function current_generator_group() 
     {
         return $this->hasOne(GeneratorGroup::class)->latest();
@@ -24,6 +29,11 @@ class GeneratorSet extends Model
     public function current_generator_motor() 
     {
         return $this->hasOne(GeneratorMotor::class)->latest();
+    }
+
+    public function current_generator_responsable() 
+    {
+        return $this->hasOne(GeneratorSetResponsable::class)->latest();
     }
 
     public function current_generator_tank() 
@@ -38,9 +48,23 @@ class GeneratorSet extends Model
 
     public function current_maintainer() 
     {
-        return $this->belongsToMany(TelecomCompany::class)->latest();
+        return $this->hasOne(GeneratorSetMaintainer::class)->latest();
     }
 
+    public function generator_set_capacities() 
+    {
+        return $this->hasMany(GeneratorSetCapacity::class);
+    }
+
+    public function generator_set_topology_type() 
+    {
+        return $this->belongsTo(GeneratorSetTopologyType::class);
+    }
+
+    public function generator_set_level_type() 
+    {
+        return $this->belongsTo(GeneratorSetLevelType::class);
+    }
 
     public function generator_set_type() 
     {
@@ -57,6 +81,11 @@ class GeneratorSet extends Model
         return $this->hasMany(GeneratorMotor::class);
     }
 
+    public function generator_set_responsables() 
+    {
+        return $this->hasMany(GeneratorSetResponsable::class);
+    }
+
     public function generator_tanks() 
     {
         return $this->hasMany(GeneratorTank::class);
@@ -67,8 +96,8 @@ class GeneratorSet extends Model
         return $this->hasMany(GeneratorTta::class);
     }
 
-    public function maintainers() 
+    public function generator_set_maintainers() 
     {
-        return $this->belongsToMany(TelecomCompany::class)->withTimestamps();
+        return $this->hasMany(GeneratorSetMaintainer::class);
     }
 }

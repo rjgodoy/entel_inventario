@@ -61,8 +61,8 @@
                                                             />
                                                     </div>
                                                     <div class="column" v-if="folder.site">
-                                                        <p class="has-text-weight-semibold is-size-7">{{ folder.site && folder.site.nem_site }}</p>
-                                                        <p class="has-text-weight-normal is-size-6">{{ folder.site && folder.site.nombre }}</p>
+                                                        <p class="has-text-weight-semibold is-size-7">{{ folder.site ? folder.site.nem_site : (folder.pop ? folder.pop.sites[0].nem_site : '') }}</p>
+                                                        <p class="has-text-weight-normal is-size-6">{{ folder.site ? folder.site.nombre : (folder.pop ? folder.pop.sites[0].nombre : '') }}</p>
                                                     </div>
                                                     <div class="column" v-if="!folder.site">
                                                         <p class="has-text-weight-semibold is-size-7">{{ folder.name }}</p>

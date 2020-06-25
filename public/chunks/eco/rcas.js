@@ -168,6 +168,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -176,7 +180,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalUpload: function ModalUpload() {
-      return __webpack_require__.e(/*! import() | chunks/eco/modals/upload */ "chunks/eco/modals/upload").then(__webpack_require__.bind(null, /*! ./modals/ModalUpload */ "./resources/js/components/eco/modals/ModalUpload.vue"));
+      return Promise.all(/*! import() | chunks/eco/modals/upload */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("chunks/eco/modals/upload")]).then(__webpack_require__.bind(null, /*! ./modals/ModalUpload */ "./resources/js/components/eco/modals/ModalUpload.vue"));
     }
   },
   props: ['user'],
@@ -203,6 +207,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     canDelete: function canDelete() {
       return this.rcas.can && this.rcas.can["delete"];
     }
+  },
+  created: function created() {
+    this.$eventBus.$on('reload-rcas', this.getRCAs);
   },
   mounted: function mounted() {
     this.getRCAs();
@@ -328,6 +335,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         }
       });
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$eventBus.$off('reload-rcas');
   }
 });
 
@@ -352,6 +362,43 @@ var render = function() {
     "div",
     { staticClass: "tile is-child box" },
     [
+      _c("div", { staticClass: "is-pulled-right" }, [
+        _vm.canUpload
+          ? _c("span", {}, [
+              _c(
+                "button",
+                {
+                  staticClass: "button",
+                  on: {
+                    click: function($event) {
+                      _vm.isUploadModalActive = true
+                    }
+                  }
+                },
+                [_vm._v("Subir archivos")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.canDelete
+          ? _c("span", {}, [
+              _c(
+                "button",
+                {
+                  staticClass: "button",
+                  class: _vm.edit && "is-danger",
+                  on: {
+                    click: function($event) {
+                      _vm.edit = !_vm.edit
+                    }
+                  }
+                },
+                [_vm._v("Editar")]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "title is-size-4" }, [_vm._v("RCAs")]),
       _vm._v(" "),
       _c(
@@ -533,32 +580,64 @@ var render = function() {
                     [
                       _vm._v(" "),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-right" },
-                        [
-                          _c("div", { staticClass: "is-size-7" }, [
-                            _vm._v(_vm._s(props.row.site.nem_site))
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "is-size-7",
-                              attrs: {
-                                to: "/pop/" + props.row.site.pop.id,
-                                target: "_blank"
-                              }
-                            },
+                      props.row.site || props.row.pop
+                        ? _c(
+                            "div",
+                            { staticClass: "has-text-right" },
                             [
-                              _c("div", { staticClass: "is-size-6" }, [
-                                _vm._v(_vm._s(props.row.site.pop.nombre))
-                              ])
-                            ]
+                              _c("div", { staticClass: "is-size-7" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    props.row.site
+                                      ? props.row.site.nem_site
+                                      : props.row.pop
+                                      ? props.row.pop.sites[0].nem_site
+                                      : ""
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "is-size-7",
+                                  attrs: {
+                                    to:
+                                      "/pop/" +
+                                      (props.row.site
+                                        ? props.row.site.pop_id
+                                        : props.row.pop
+                                        ? props.row.pop.id
+                                        : ""),
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _c("div", { staticClass: "is-size-6" }, [
+                                    _vm._v(
+                                      _vm._s(
+                                        props.row.site
+                                          ? props.row.site.pop.nombre
+                                          : props.row.pop
+                                          ? props.row.pop.sites[0].nombre
+                                          : ""
+                                      )
+                                    )
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !props.row.site && !props.row.pop
+                        ? _c(
+                            "div",
+                            { staticClass: "has-text-right is-size-6" },
+                            [_vm._v("RCA GENERAL")]
+                          )
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),

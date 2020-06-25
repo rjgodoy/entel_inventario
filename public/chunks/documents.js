@@ -1160,8 +1160,12 @@ var render = function() {
                                                   [
                                                     _vm._v(
                                                       _vm._s(
-                                                        folder.site &&
-                                                          folder.site.nem_site
+                                                        folder.site
+                                                          ? folder.site.nem_site
+                                                          : folder.pop
+                                                          ? folder.pop.sites[0]
+                                                              .nem_site
+                                                          : ""
                                                       )
                                                     )
                                                   ]
@@ -1176,8 +1180,12 @@ var render = function() {
                                                   [
                                                     _vm._v(
                                                       _vm._s(
-                                                        folder.site &&
-                                                          folder.site.nombre
+                                                        folder.site
+                                                          ? folder.site.nombre
+                                                          : folder.pop
+                                                          ? folder.pop.sites[0]
+                                                              .nombre
+                                                          : ""
                                                       )
                                                     )
                                                   ]

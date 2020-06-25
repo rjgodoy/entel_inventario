@@ -432,7 +432,7 @@ export default {
                 responseType: 'arraybuffer' 
             })
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 const blob = new Blob([response.data], { type: file.mime })
                 const objectUrl = window.URL.createObjectURL(blob)
 

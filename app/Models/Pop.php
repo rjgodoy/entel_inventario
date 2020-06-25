@@ -51,9 +51,9 @@ class Pop extends Model
      *
      * @var array
      */
-    public function documents() 
+    public function files() 
     {
-        return $this->belongsToMany(Document::class);
+        return $this->hasMany(File::class);
     }
 
     /**

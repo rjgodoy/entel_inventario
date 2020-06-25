@@ -72484,7 +72484,7 @@ var Export = /** @class */ (function (_super) {
             var canvg;
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Promise.all(/*! import() | canvg */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("vendors~canvg")]).then(__webpack_require__.bind(null, /*! ../../canvg/index.js */ "./node_modules/@amcharts/amcharts4/.internal/canvg/index.js"))];
+                    case 0: return [4 /*yield*/, Promise.all(/*! import() | canvg */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("vendors~canvg")]).then(__webpack_require__.bind(null, /*! ../../canvg/index.js */ "./node_modules/@amcharts/amcharts4/.internal/canvg/index.js"))];
                     case 1:
                         canvg = (_a.sent());
                         if (canvg.default != null) {

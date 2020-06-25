@@ -72,7 +72,7 @@ var render = function() {
         "section",
         {
           staticClass: "modal-card-body",
-          staticStyle: { background: "rgba(0,0,0,0)" }
+          staticStyle: { background: "rgba(255,255,255,0)" }
         },
         [
           _c("generator-set", {
@@ -98,7 +98,7 @@ var staticRenderFns = [
       "header",
       {
         staticClass: "modal-card-head has-text-centered",
-        staticStyle: { background: "rgba(0,0,0,0)" }
+        staticStyle: { background: "rgba(255,255,255,0)" }
       },
       [
         _c(
@@ -106,7 +106,7 @@ var staticRenderFns = [
           {
             staticClass: "modal-card-title has-text-white has-text-weight-bold"
           },
-          [_vm._v("Grupo Electrógeno")]
+          [_vm._v("GRUPO ELECTROGENO")]
         )
       ]
     )

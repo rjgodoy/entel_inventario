@@ -106,7 +106,7 @@ var staticRenderFns = [
           {
             staticClass: "modal-card-title has-text-white has-text-weight-bold"
           },
-          [_vm._v("Planta Rectificadora")]
+          [_vm._v("PLANTA RECTIFICADORA")]
         )
       ]
     )

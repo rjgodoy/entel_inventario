@@ -3,8 +3,8 @@
         <div class="" v-for="junction in junctions" :key="junction.id">
 
             <div class="columns">
-                <div class="column is-3"></div>
-                <div class="column is-6">
+                <div class="column is-2"></div>
+                <div class="column is-8">
                     <junction 
                         :junction="junction" 
                         :can="can"
@@ -12,7 +12,7 @@
                         :pop="pop"
                     />
                 </div>
-                <div class="column is-3"></div>
+                <div class="column is-2"></div>
             </div>
             
         </div>

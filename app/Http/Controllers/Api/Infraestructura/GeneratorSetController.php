@@ -6,6 +6,10 @@ use App\Exports\GeneratorSetsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GeneratorSet as GeneratorSetResource;
 use App\Models\GeneratorSet;
+use App\Models\GeneratorSetCapacity;
+use App\Models\GeneratorSetMaintainer;
+use App\Models\GeneratorSetResponsable;
+use App\Models\Log;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -211,8 +215,13 @@ class GeneratorSetController extends Controller
             'current_generator_tank.generator_tank_type',
             // 'generator_tanks.generator_tank_type', 
             'current_generator_tta.generator_tta_type',
+            'current_generator_responsable.generator_set_responsable_area',
             // 'generator_ttas.generator_tta_type',
-            'current_maintainer'
+            'current_maintainer.telecom_company',
+            'current_generator_set_capacity',
+            'generator_set_topology_type',
+            'generator_set_level_type'
+
              )->where('pop_id', $id)->get();
         return new GeneratorSetResource($generatorSets);
     }
@@ -226,7 +235,49 @@ class GeneratorSetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $generatorSet = GeneratorSet::find($id);
+        if(($generatorSet->current_generator_set_capacity && $generatorSet->current_generator_set_capacity->prime_capacity != $request->prime_capacity) || ($generatorSet->current_generator_set_capacity && $generatorSet->current_generator_set_capacity->used_capacity != $request->used_capacity)) {
+            GeneratorSetCapacity::create([
+                'generator_set_id' => $id,
+                'prime_capacity' => $request->prime_capacity,
+                'used_capacity' => $request->used_capacity
+            ]);
+        }
+
+        if($generatorSet->current_maintainer && $generatorSet->current_maintainer->telecom_company_id != $request->maintainer_id) {
+            $generatorSetMaintainer = GeneratorSetMaintainer::create([
+                'telecom_company_id' => $request->maintainer_id,
+                'generator_set_id' => $id
+            ]);
+        }
+
+        $pop_id = $generatorSet->pop_id; 
+        $generators = GeneratorSet::where('pop_id', $pop_id)->get();
+        foreach ($generators as $generator) {
+            // if($generator->current_generator_responsable && $generator->current_generator_responsable->generator_set_responsable_area_id != $request->generator_set_responsable_area_id) {
+                $generatorSetResponsable = GeneratorSetResponsable::create([
+                    'generator_set_responsable_area_id' => $request->generator_set_responsable_area_id,
+                    'generator_set_id' => $generator->id
+                ]);
+            }
+        // }
+        
+        if($generatorSet->generator_set_topology_type_id != $request->generator_set_topology_type_id || 
+            $generatorSet->generator_set_level_type_id != $request->generator_set_level_type_id) {
+            $generatorSet->update([
+                'generator_set_topology_type_id' => $request->generator_set_topology_type_id,
+                'generator_set_level_type_id' => $request->generator_set_level_type_id
+            ]);
+        }
+
+        Log::create([
+            'pop_id' => $request->pop_id,
+            'user_id' => $request->user_id,
+            'log_type_id' => 1,
+            'description' => 'Se ha introducido nuevos parámetros en el grupo electrógeno.'
+        ]);
+
+        return;
     }
 
     /**

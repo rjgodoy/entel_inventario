@@ -120,20 +120,25 @@ class UserController extends Controller
      */
     public function newUserAccepted(Request $request)
     {   
+        // Busca algun nombre similar para asignar el sexo al nuevo usuario
+        $userSex = User::where('name', $request->user['name'])->first();
+        $sex = $userSex ? $userSex->sexo : null;
 
-        $user = User::where('name', $request->user['name'])->first();
-        $sex = $user ? $user->sexo : null;
-
-        $user = User::create([
+        // Crea al nuevo usuario
+        $user = User::updateOrCreate([
+            'email' => $request->user['email'],
+            'username' => $request->user['username']
+        ],[
             'name' => $request->user['name'],
             'apellido' => $request->user['apellido'],
-            'email' => $request->user['email'],
-            'username' => $request->user['username'],
             'password' => $request->user['password'],
             'api_token' => Hash::make(Str::random(10)),
             'estado' => 1,
             'sexo' => $sex
         ]);
+
+        // Asigna Rol
+        $user->roles()->attach(5);
 
         if ($user) {
             $userRequest = UserRequest::find($request->user['id']);

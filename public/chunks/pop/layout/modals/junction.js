@@ -99,7 +99,7 @@ var staticRenderFns = [
           {
             staticClass: "modal-card-title has-text-white has-text-weight-bold"
           },
-          [_vm._v("Empalme")]
+          [_vm._v("EMPALME")]
         )
       ]
     )

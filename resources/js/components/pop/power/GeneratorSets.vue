@@ -4,7 +4,11 @@
             
             <div class="columns">
                 <div class="column is-2"></div>
-                <generator-set class="column is-8" :generatorSet="generatorSet"/>
+                <generator-set class="column is-8" 
+                    :generatorSet="generatorSet"
+                    :can="can"
+                    :user="user"
+                    :pop="pop"/>
                 <div class="column is-2"></div>
             </div>
 
@@ -17,21 +21,26 @@
         components: {
             GeneratorSet: () => import(/* webpackChunkName: "chunks/pop/power/generatorSet"*/'./GeneratorSet'),
         },
+
         props : [
             'user',
             'pop'
         ],
+
         data() {
             return {
                 generatorSets: Array,
                 can: null
             }
         },
+        
         mounted() {
             this.getGeneratorSets()
         },
+
         computed: {
         },
+
         methods: {
             getGeneratorSets() {
                 axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)

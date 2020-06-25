@@ -143,8 +143,9 @@ class EcoController extends Controller
     {
         // $rcas = Folder::with('subfolders.files', 'site', 'files')->where('name', 'Gestión Ambiental')->get();
 
-        $rcas = File::with('site.pop')->whereHas('folder', function($q) {
-            $q->where('name', 'Gestión Ambiental');
+        $rcas = File::with('site.pop', 'pop.sites')->whereHas('folder', function($q) {
+            $q->where('name', 'Gestión Ambiental')
+            ->orWhere('name', 'LIKE', '%RCA%');
         })
         ->where('filename', 'LIKE', '%RCA%')
         ->get();

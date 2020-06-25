@@ -94,11 +94,11 @@ var render = function() {
         _vm._l(_vm.junctions, function(junction) {
           return _c("div", { key: junction.id }, [
             _c("div", { staticClass: "columns" }, [
-              _c("div", { staticClass: "column is-3" }),
+              _c("div", { staticClass: "column is-2" }),
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "column is-6" },
+                { staticClass: "column is-8" },
                 [
                   _c("junction", {
                     attrs: {
@@ -112,7 +112,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-3" })
+              _c("div", { staticClass: "column is-2" })
             ])
           ])
         }),

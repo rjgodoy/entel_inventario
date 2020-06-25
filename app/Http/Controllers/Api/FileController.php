@@ -70,11 +70,19 @@ class FileController extends Controller
             }
         } elseif ($request->pop_id != 'null' && $request->pop_id != 'undefined' && $request->pop_id != '') {
             $folder = Folder::where('name', $request->folder_name)->where('pop_id', $request->pop_id)->first();
-            $upload_path = 'Files/'.$request->pop_id.'/'.$folder->name;
-            // return $upload_path;
+            if ($folder) {
+                $upload_path = 'Files/'.$request->pop_id.'/'.$folder->name;
+            } else {
+                $folder = Folder::create([
+                    'name' => $request->folder_name,
+                    'pop_id' => $request->pop_id,
+                    'creator_id' => $request->user_id
+                ]);
+                $upload_path = 'Files/'.$request->pop_id.'/'.$folder->name;
+            }
         } else {
             $folder = null;
-            $upload_path = 'General';
+            $upload_path = 'Files/'.$request->folder_name;
         }
 
         $file_name = $request->file->getClientOriginalName();
@@ -83,11 +91,11 @@ class FileController extends Controller
         $file_extension = $request->file->getClientOriginalExtension();
         $file_route = Storage::disk('local')->putFile($upload_path, $request->file);
 
-        if ($request->folder_id) {
+        // if ($request->folder_id) {
             $file = File::create([
-                'pop_id' => $folder->pop_id,
+                'pop_id' => $request->pop_id ? $request->pop_id : ($folder ? $folder->pop_id : null),
                 'user_id' => $request->user_id,
-                'folder_id' => $request->folder_id,
+                'folder_id' => $request->folder_id ? $request->folder_id : ($folder ? $folder->id : null),
                 'dirname' => $upload_path,
                 'basename' => $file_name,
                 'size' => $file_size,
@@ -96,7 +104,7 @@ class FileController extends Controller
                 'route' => $file_route,
                 'filename' => $request->filename != '' && $request->filename != null ? $request->filename : $file_name
             ]);
-        }
+        // }
 
     }
 

@@ -1,13 +1,13 @@
 <template>
     <div class="tile is-child box">
-        <!-- <div class="is-pulled-right">
+        <div class="is-pulled-right">
             <span class="" v-if="canUpload">
                 <button class="button" @click="isUploadModalActive = true">Subir archivos</button>
             </span>
             <span class="" v-if="canDelete">
                 <button class="button" :class="edit && 'is-danger'" @click="edit = !edit">Editar</button>
             </span>
-        </div> -->
+        </div>
         
         <div class="title is-size-4">RCAs</div>
 
@@ -85,12 +85,16 @@
                             {{ column.label }}
                         </b-tooltip>
                     </template>
-                    <div class="has-text-right">
-                        <div class="is-size-7">{{ props.row.site.nem_site }}</div>
-                        <router-link class="is-size-7" :to="'/pop/' + props.row.site.pop.id" target="_blank">
-                            <div class="is-size-6">{{ props.row.site.pop.nombre }}</div>
+                    <div class="has-text-right" v-if="props.row.site || props.row.pop">
+                        <div class="is-size-7">{{ props.row.site ? props.row.site.nem_site : (props.row.pop ? props.row.pop.sites[0].nem_site : '') }}</div>
+                        <router-link 
+                            class="is-size-7" 
+                            :to="'/pop/' + (props.row.site ? props.row.site.pop_id : (props.row.pop ? props.row.pop.id : ''))" 
+                            target="_blank">
+                            <div class="is-size-6">{{ props.row.site ? props.row.site.pop.nombre : (props.row.pop ? props.row.pop.sites[0].nombre : '') }}</div>
                         </router-link>
                     </div>
+                    <div class="has-text-right is-size-6" v-if="!props.row.site && !props.row.pop">RCA GENERAL</div>
                     
                 </b-table-column>
 
@@ -195,6 +199,10 @@
             canDelete() {
                 return this.rcas.can && this.rcas.can.delete
             }
+        },
+
+        created() {
+            this.$eventBus.$on('reload-rcas', this.getRCAs)
         },
 
         mounted() {
@@ -328,6 +336,10 @@
                 })
             },
 
+        },
+
+        beforeDestroy() {
+            this.$eventBus.$off('reload-rcas')
         }
     }
 </script>

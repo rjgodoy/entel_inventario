@@ -252,7 +252,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/airConditioner */ "chunks/pop/layout/modals/airConditioner").then(__webpack_require__.bind(null, /*! ./modals/ModalAirConditioner */ "./resources/js/components/pop/layout/modals/ModalAirConditioner.vue"));
     },
     CapacityChart: function CapacityChart() {
-      return Promise.all(/*! import() | chunks/pop/layout/capacityChart */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("chunks/pop/layout/capacityChart")]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/pop/layout/CapacityChart.vue"));
+      return Promise.all(/*! import() | chunks/pop/layout/capacityChart */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("chunks/pop/layout/capacityChart")]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/pop/layout/CapacityChart.vue"));
     },
     // GrowingChart: () => import(/* webpackChunkName: "chunks/pop/layout/growingChart"*/'./GrowingChart'),
     SpaceChart: function SpaceChart() {

@@ -263,6 +263,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -338,11 +339,17 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('parameter-updated', this.getAllData);
   },
   mounted: function mounted() {
-    // console.log(this.$route)
+    // console.log(this.user)
     this.getAllData();
     this.getTabs();
   },
   computed: {
+    canViewLog: function canViewLog() {
+      return this.user.roles[0].id == 1 || this.user.roles[0].id == 2 || this.user.roles[0].id == 4 || this.user.roles[0].id == 6 || this.user.roles[0].id == 7 || this.user.roles[0].id == 8 ? true : false;
+    },
+    canEdit: function canEdit() {
+      return this.user.roles[0].id == 1 || this.user.roles[0].id == 2 || this.user.roles[0].id == 8 ? true : false;
+    },
     popClassification: function popClassification() {
       var id = 6;
       var classification;
@@ -815,7 +822,7 @@ var render = function() {
                                 _c("font-awesome-icon", {
                                   attrs: {
                                     icon:
-                                      _vm.popCritical == 1
+                                      _vm.popClassification.id == 1
                                         ? ["far", "check-circle"]
                                         : ["far", "times-circle"]
                                   }
@@ -994,50 +1001,55 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-1 has-text-right" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "button is-warning",
-                    staticStyle: { height: "auto", "margin-right": "-24px" },
-                    attrs: {
-                      type: "button",
-                      "data-target": "quickviewDefault",
-                      "data-show": "quickview"
-                    },
-                    on: { click: _vm.openLog }
-                  },
-                  [
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "column",
-                          staticStyle: {
-                            "padding-left": "8px",
-                            "padding-right": "5px"
-                          }
+              _vm.canViewLog
+                ? _c("div", { staticClass: "column is-1 has-text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button is-warning",
+                        staticStyle: {
+                          height: "auto",
+                          "margin-right": "-24px"
                         },
-                        [
-                          _vm._v("\n                                     "),
-                          _c("br"),
-                          _c("font-awesome-icon", {
-                            attrs: {
-                              icon: ["fas", "sign-in-alt"],
-                              rotation: "180"
-                            }
-                          }),
-                          _c("br"),
-                          _vm._v(" \n                                ")
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ])
-                  ]
-                )
-              ])
+                        attrs: {
+                          type: "button",
+                          "data-target": "quickviewDefault",
+                          "data-show": "quickview"
+                        },
+                        on: { click: _vm.openLog }
+                      },
+                      [
+                        _c("div", { staticClass: "columns" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "column",
+                              staticStyle: {
+                                "padding-left": "8px",
+                                "padding-right": "5px"
+                              }
+                            },
+                            [
+                              _vm._v("\n                                     "),
+                              _c("br"),
+                              _c("font-awesome-icon", {
+                                attrs: {
+                                  icon: ["fas", "sign-in-alt"],
+                                  rotation: "180"
+                                }
+                              }),
+                              _c("br"),
+                              _vm._v(" \n                                ")
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._m(0)
+                        ])
+                      ]
+                    )
+                  ])
+                : _vm._e()
             ])
           ])
         ])
@@ -1148,68 +1160,72 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "b-tooltip",
-                  {
-                    attrs: {
-                      label: _vm.isEditMode
-                        ? "Salir del modo edición"
-                        : "Entrar en modo edición",
-                      position: "is-left",
-                      type: "is-link",
-                      animated: ""
-                    }
-                  },
-                  [
-                    _c(
-                      "button",
+                _vm.canEdit
+                  ? _c(
+                      "b-tooltip",
                       {
-                        staticClass: "button",
-                        class: _vm.isEditMode ? "is-info" : "is-link",
-                        staticStyle: {
-                          height: "48px",
-                          "margin-right": "-24px"
-                        },
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.isEditMode = !_vm.isEditMode
-                          }
+                        attrs: {
+                          label: _vm.isEditMode
+                            ? "Salir del modo edición"
+                            : "Entrar en modo edición",
+                          position: "is-left",
+                          type: "is-link",
+                          animated: ""
                         }
                       },
                       [
-                        _c("div", { staticClass: "columns" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "column",
-                              staticStyle: {
-                                "padding-left": "8px",
-                                "padding-right": "5px"
-                              }
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button",
+                            class: _vm.isEditMode ? "is-info" : "is-link",
+                            staticStyle: {
+                              height: "48px",
+                              "margin-right": "-24px"
                             },
-                            [
-                              _c("font-awesome-icon", {
-                                attrs: {
-                                  icon: _vm.isEditMode
-                                    ? ["fas", "edit"]
-                                    : ["fas", "edit"]
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", [
-                                _vm._v(
-                                  _vm._s(_vm.isEditMode ? "MODO EDICION" : "")
-                                )
-                              ])
-                            ],
-                            1
-                          )
-                        ])
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.isEditMode = !_vm.isEditMode
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "columns" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "column",
+                                  staticStyle: {
+                                    "padding-left": "8px",
+                                    "padding-right": "5px"
+                                  }
+                                },
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: {
+                                      icon: _vm.isEditMode
+                                        ? ["fas", "edit"]
+                                        : ["fas", "edit"]
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.isEditMode ? "MODO EDICION" : ""
+                                      )
+                                    )
+                                  ])
+                                ],
+                                1
+                              )
+                            ])
+                          ]
+                        )
                       ]
                     )
-                  ]
-                )
+                  : _vm._e()
               ],
               1
             )

@@ -166,6 +166,11 @@ Route::middleware('auth:api')->group(function () {
 				Route::get('generatorSetDataCrm', 'Api\Infraestructura\GeneratorSetController@generatorSetDataCrm');
 				Route::get('generatorSetDataZona', 'Api\Infraestructura\GeneratorSetController@generatorSetDataZona');
 
+				Route::apiResource('telecomCompanies','Api\TelecomCompanyController');
+				Route::apiResource('generatorSetTopologyTypes','Api\GeneratorSetTopologyTypeController');
+				Route::apiResource('generatorSetLevelTypes','Api\GeneratorSetLevelTypeController');
+				Route::apiResource('generatorSetResponsableAreas','Api\GeneratorSetResponsableAreaController');
+
 			// Power Rectifiers
 				Route::apiResource('powerRectifiers','Api\Infraestructura\PowerRectifierController');
 				Route::get('powerRectifiersExport', 'Api\Infraestructura\PowerRectifierController@export');

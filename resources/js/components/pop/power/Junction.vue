@@ -327,7 +327,7 @@
                         </div>
                     </div>
 
-                    <div>Power A: {{ powerA }}</div>
+                    <!-- <div>Power A: {{ powerA }}</div>
                     <div>Power B: {{ powerB }}</div>
 
                     <div>Power Used A: {{ powerUsedA }}</div>
@@ -335,17 +335,12 @@
 
                     <div>Potencia disponible A: {{ powerA * useFactor - powerUsedA }}</div>
                     <div>Potencia disponible B: {{ powerB * useFactor - powerUsedB }}</div>
-                    
 
-                    <!-- <div class="columns">
-                        <div class="column is-4">
-                            
-                        </div>
-                        <div class="column is-6">
-                            <div class="has-text-weight-light is-size-7">Credenciales de acceso</div>
-                            <div class="has-text-weight-normal is-size-6">{{ junction.access_credentials ? junction.access_credentials : 'Sin credenciales' }}</div>
-                        </div>
-                    </div> -->
+                    <div>Without Batteries Capacity: {{ withoutBatteriesCapacity }}</div>
+                    <div>Without Batteries Disponibility: {{ withoutBatteriesDisponibility }}</div>
+
+                    <div>Puntual Consumption: {{ junction.latest_measurement.punctual_consumption }}</div> -->
+                    
 
                     <div class="is-divider" data-content="Capacidades"></div>
 
@@ -354,7 +349,7 @@
                             <div class="has-text-centered">
                                 <div class="is-size-6">Capacidad total</div>
                                 <div class="has-text-weight-semibold is-size-4">{{ totalCapacity | numeral(0,0) }} 
-                                    <span class="is-size-6">W/kW</span>
+                                    <span class="is-size-6">kW</span>
                                 </div>
                             </div>
                         </div>
@@ -362,8 +357,17 @@
                         <div class="level-item">
                             <div class="has-text-centered">
                                 <div class="is-size-6">Capacidad utilizada</div>
-                                <div class="has-text-weight-semibold is-size-4">{{ consumoTablero | numeral(0,0) }} 
-                                    <span class="is-size-6">W/kW</span>
+                                <div class="has-text-weight-semibold is-size-4">{{ totalUsedCapacity | numeral(0,0) }} 
+                                    <span class="is-size-6">kW</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="level-item">
+                            <div class="has-text-centered">
+                                <div class="is-size-6">Capacidad disponible</div>
+                                <div class="has-text-weight-semibold is-size-4">{{ totalDisponibility | numeral(0,0) }} 
+                                    <span class="is-size-6">kW</span>
                                 </div>
                             </div>
                         </div>
@@ -380,9 +384,9 @@
                     </b-progress>
 
                     <div class="field has-text-centered" v-if="can.update">
-                        <b-button :type="isEditMode ? 'is-info' : 'is-link'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
+                        <b-button :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
                             <font-awesome-icon :icon="['fas', 'edit']"/>
-                            &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar' }}
+                            &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar parámetros de Empalme' }}
                         </b-button>
                     </div>
                     
@@ -415,7 +419,8 @@
                 isEditMode: false,
                 clientNumber: this.junction.client_number,
                 junctionNumber: this.junction.junction_number,
-                useFactor: this.junction.use_factor
+                useFactor: this.junction.use_factor,
+                punctualConsumption: this.junction.latest_measurement.punctual_consumption
             }
         },
 
@@ -426,6 +431,7 @@
         },
 
         mounted() {
+            console.log('hello!!')
             this.getJunctionTypes()
             this.getJunctionConnections()
         },
@@ -434,7 +440,7 @@
             powerA() {
                 let latestProtectionRA = this.junction.latest_protection ? this.junction.latest_protection.regulada_a : 0
                 let latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0
-                if (this.junction.junction_type_id == 1) {
+                if (this.junction.junction_type_id == 2) {
                     return latestProtectionRA * latestMeasureRA_V / 1000
                 } else {
                     return latestProtectionRA * 380 * Math.sqrt(3) / 1000
@@ -443,7 +449,7 @@
 
             powerB() {
                 let latestProtectionRB = this.junction.latest_protection ? this.junction.latest_protection.regulada_b : 0
-                if (this.junction.junction_type_id == 1) {
+                if (this.junction.junction_type_id == 2) {
                     return latestProtectionRB * 220 / 1000
                 } else {
                     return latestProtectionRB * 380 * Math.sqrt(3) / 1000
@@ -457,7 +463,7 @@
                 let latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0
                 let latestMeasureSA_V = this.junction.latest_measurement ? this.junction.latest_measurement.s_a_volt_measure : 0
                 let latestMeasureTA_V = this.junction.latest_measurement ? this.junction.latest_measurement.t_a_volt_measure : 0
-                if (this.junction.junction_type_id == 1) {
+                if (this.junction.junction_type_id == 2) {
                     return latestMeasureRA_A * latestMeasureRA_V / 1000
                 } else {
                     return ( (latestMeasureRA_A * latestMeasureRA_V) + (latestMeasureSA_A * latestMeasureSA_V) + (latestMeasureTA_A * latestMeasureTA_V) ) / 1000
@@ -471,27 +477,67 @@
                 let latestMeasureRB_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_b_volt_measure : 0
                 let latestMeasureSB_V = this.junction.latest_measurement ? this.junction.latest_measurement.s_b_volt_measure : 0
                 let latestMeasureTB_V = this.junction.latest_measurement ? this.junction.latest_measurement.t_b_volt_measure : 0
-                if (this.junction.junction_type_id == 1) {
+                if (this.junction.junction_type_id == 2) {
                     return latestMeasureRB_A * latestMeasureRB_V / 1000
                 } else {
                     return ( (latestMeasureRB_A * latestMeasureRB_V) + (latestMeasureSB_A * latestMeasureSB_V) + (latestMeasureTB_A * latestMeasureTB_V) ) / 1000
                 }
             },
 
-            totalCapacity(){
-
+            photovoltaicCapacity() {    // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+                let capacity = 0
+                if (this.junction.latest_solar_panel) {
+                    const solarPanelGroupQuantity = 6
+                    for (var i = 1; i < solarPanelGroupQuantity; i++) {
+                        capacity = capacity + (this.junction.latest_solar_panel['unit_capacity_group_'+i] * this.junction.latest_solar_panel['quantity_group_'+i])
+                    }
+                }
+                return capacity
             },
 
-            consumoTablero() {
-                return this.junction.latest_measurement ? (this.junction.latest_measurement.r_measure + this.junction.latest_measurement.s_measure + this.junction.latest_measurement.t_measure) * 220 : 0
+            averageConsumptionPerPhotovoltaicGroup() {  // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+                return 0
+            },
+
+            totalCapacity(){
+                return (this.powerA + this.powerB) * this.useFactor + this.photovoltaicCapacity
+            },
+
+            withoutBatteriesCapacity() {
+                return this.powerUsedA + this.powerUsedB + this.averageConsumptionPerPhotovoltaicGroup
+            },
+
+            withoutBatteriesDisponibility() {
+                return this.totalCapacity - this.withoutBatteriesCapacity
+            },
+
+            batteriesRecharge() {  // FALTA MEDICIONES DE PLANTA
+                return 75
+            },
+
+            totalUsedCapacity() {
+                return this.withoutBatteriesCapacity + this.batteriesRecharge + this.punctualConsumption
+            },
+
+            totalDisponibility: {
+                get() {
+                    return this.totalCapacity - this.totalUsedCapacity
+                },
+                set() {
+                    this.emitToParent()
+                }
             },
 
             usagePercent() {
-                return this.capacidadTotal != 0 ? this.consumoTablero / this.capacidadTotal : 0
+                return this.totalCapacity != 0 ? this.totalUsedCapacity / this.totalCapacity : 0
             }
         },
 
         methods: {
+            emitToParent (event) {
+                this.$emit('childToParent', this.totalDisponibility)
+            },
+
             getJunctionTypes() {
                 axios.get(`/api/junctionTypes?api_token=${this.user.api_token}`).then(response => {
                     this.junctionTypes = response.data.junctions

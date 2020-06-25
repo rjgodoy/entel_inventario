@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TelecomCompany extends Model
 {
-    public function generator_sets() 
+    public function generator_set_maintainers() 
     {
-        return $this->belongsToMany(GeneratorSet::class)->withTimestamps();
+        return $this->hasMany(GeneratorSetMaintainer::class)->withTimestamps();
     }
 }

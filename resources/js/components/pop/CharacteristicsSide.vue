@@ -294,8 +294,8 @@ export default {
 
     watch: {
         pop(val) {
-            console.log(val)
-            console.log(this.pe_3g)
+            // console.log(val)
+            // console.log(this.pe_3g)
         }
     },
 
@@ -330,7 +330,7 @@ export default {
 
             axios.put(`/api/vipEntel/${this.pop.id}`, params)
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 this.$buefy.toast.open({
                     message: 'Parámetro actualizado exitosamente.',
                     type: 'is-success',

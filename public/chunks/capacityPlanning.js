@@ -369,12 +369,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         current_page: 1
       },
       searchText: '',
-      currentCrm: 0,
-      // currentPop: [],
+      currentCrm: 0 // currentPop: [],
       // currentRoom: [],
-      isComponentModalActive: false,
-      popSelected: null,
-      roomSelected: null
+      // isComponentModalActive: false,
+      // popSelected: null,
+      // roomSelected: null
+
     };
   },
   watch: {
@@ -491,10 +491,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
-      return Promise.all(/*! import() | chunks/capacity/capacity */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity"), __webpack_require__.e("chunks/capacity/capacity")]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/Capacity.vue"));
+      return Promise.all(/*! import() | chunks/capacity/capacity */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity"), __webpack_require__.e("chunks/capacity/capacity")]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projec~c17718bc"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/Projection.vue"));
+      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/Projection.vue"));
     },
     Requests: function Requests() {
       return __webpack_require__.e(/*! import() | chunks/capacity/requests */ "chunks/capacity/requests").then(__webpack_require__.bind(null, /*! ./Requests */ "./resources/js/components/capacity/Requests.vue"));
@@ -503,7 +503,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/calculator */ "chunks/capacity/calculator").then(__webpack_require__.bind(null, /*! ./Calculator */ "./resources/js/components/capacity/Calculator.vue"));
     },
     Layout: function Layout() {
-      return __webpack_require__.e(/*! import() | chunks/capacity/layout */ "chunks/capacity/layout").then(__webpack_require__.bind(null, /*! ./Layout */ "./resources/js/components/capacity/Layout.vue"));
+      return Promise.all(/*! import() | chunks/capacity/layout */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("chunks/capacity/layout")]).then(__webpack_require__.bind(null, /*! ./Layout */ "./resources/js/components/capacity/Layout.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ../pop/documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
@@ -554,6 +554,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return this.currentTab;
     }
   },
+  created: function created() {
+    this.$eventBus.$on('change-room', this.getRoomData);
+  },
   mounted: function mounted() {
     // console.log(this.room_id)
     this.getRoomData(); // this.graphData()
@@ -566,7 +569,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         // console.log(response.data.room)
         _this.room = response.data.room;
       });
-    } // getPopData() {
+    },
+    // getPopData() {
     //     axios.get(`/api/pop/${this.pop.id}?api_token=${this.user.api_token}`)
     //     .then((response) => {
     //         // console.log(response.data.data)
@@ -583,7 +587,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     //         }
     //     })
     // },
-
+    beforeDestroy: function beforeDestroy() {
+      this.$eventBus.$off('change-room');
+    }
   }
 });
 
@@ -832,858 +838,809 @@ var render = function() {
       staticStyle: { "padding-top": "0" }
     },
     [
-      _c(
-        "div",
-        { staticClass: "columns hero-body" },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "column is-1 section",
-              staticStyle: {
-                "padding-left": "10px",
-                "padding-right": "0px",
-                "padding-top": "20px"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "columns is-multiline" },
-                _vm._l(_vm.crms, function(crm) {
-                  return _c(
-                    "div",
-                    {
-                      key: crm.id,
-                      staticClass: "column is-12",
+      _c("div", { staticClass: "columns hero-body" }, [
+        _c(
+          "div",
+          {
+            staticClass: "column is-1 section",
+            staticStyle: {
+              "padding-left": "10px",
+              "padding-right": "0px",
+              "padding-top": "20px"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "columns is-multiline" },
+              _vm._l(_vm.crms, function(crm) {
+                return _c(
+                  "div",
+                  {
+                    key: crm.id,
+                    staticClass: "column is-12",
+                    on: {
+                      click: function($event) {
+                        _vm.currentCrm = _vm.currentCrm === crm.id ? 0 : crm.id
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "tile is-child box has-text-centered has-text-white",
+                        class:
+                          _vm.currentCrm === crm.id
+                            ? "is-bold is-link"
+                            : "has-background-black-ter"
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "is-size-4 has-text-weight-semibold",
+                          domProps: { textContent: _vm._s(crm.sigla_crm) }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticStyle: { "padding-top": "5px" } }, [
+                          _c(
+                            "div",
+                            { staticClass: "is-size-7 has-text-weight-normal" },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(crm.nombre_crm) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              }),
+              0
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "column section",
+            staticStyle: { "padding-top": "20px", "padding-right": "10px" }
+          },
+          [
+            _c("div", { staticClass: "box has-background-black-ter" }, [
+              _c("div", { staticClass: "field" }, [
+                _c(
+                  "p",
+                  { staticClass: "control has-icons-left has-icons-right" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.searchText,
+                          expression: "searchText"
+                        }
+                      ],
+                      staticClass:
+                        "input is-rounded has-background-black-ter has-text-light",
+                      attrs: {
+                        type: "text",
+                        "arial-label": "Buscar",
+                        placeholder: "Buscar...",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.searchText },
                       on: {
-                        click: function($event) {
-                          _vm.currentCrm =
-                            _vm.currentCrm === crm.id ? 0 : crm.id
+                        keyup: _vm.getRoomsData,
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.searchText = $event.target.value
                         }
                       }
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "tile is-child box has-text-centered has-text-white",
-                          class:
-                            _vm.currentCrm === crm.id
-                              ? "is-bold is-link"
-                              : "has-background-black-ter"
-                        },
-                        [
-                          _c("div", {
-                            staticClass: "is-size-4 has-text-weight-semibold",
-                            domProps: { textContent: _vm._s(crm.sigla_crm) }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticStyle: { "padding-top": "5px" } }, [
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      { staticClass: "icon is-small is-left" },
+                      [_c("font-awesome-icon", { attrs: { icon: "search" } })],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "icon is-small is-right" }, [
+                      _c("button", {
+                        staticClass: "delete",
+                        on: { click: _vm.clearSearch }
+                      })
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table is-fullwidth has-background-black-ter has-text-white"
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.roomsData.data, function(pop) {
+                      return _c("tr", { key: pop.id }, [
+                        _c("td", {}, [
+                          _c("div", { staticClass: "field" }, [
                             _c(
-                              "div",
+                              "a",
                               {
-                                staticClass: "is-size-7 has-text-weight-normal"
+                                staticClass: "is-size-6 has-text-weight-bold",
+                                attrs: {
+                                  target: "_blank",
+                                  href: "/pop/" + pop.id
+                                }
                               },
                               [
                                 _vm._v(
-                                  "\n                                " +
-                                    _vm._s(crm.nombre_crm) +
-                                    "\n                            "
+                                  "\n                                        " +
+                                    _vm._s(pop ? pop.nombre : "") +
+                                    "\n                                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-6 has-text-weight-light"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        Comuna de " +
+                                    _vm._s(
+                                      pop ? pop.comuna.nombre_comuna : ""
+                                    ) +
+                                    "\n                                    "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-7 has-text-weight-light"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(
+                                      pop
+                                        ? "Zona: " + pop.comuna.zona.nombre_zona
+                                        : ""
+                                    ) +
+                                    " - " +
+                                    _vm._s(
+                                      pop
+                                        ? "CRM: " +
+                                            pop.comuna.zona.crm.nombre_crm
+                                        : ""
+                                    ) +
+                                    "\n                                    "
                                 )
                               ]
                             )
                           ])
-                        ]
-                      )
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "column section",
-              staticStyle: { "padding-top": "20px", "padding-right": "10px" }
-            },
-            [
-              _c("div", { staticClass: "box has-background-black-ter" }, [
-                _c("div", { staticClass: "field" }, [
-                  _c(
-                    "p",
-                    { staticClass: "control has-icons-left has-icons-right" },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.searchText,
-                            expression: "searchText"
-                          }
-                        ],
-                        staticClass:
-                          "input is-rounded has-background-black-ter has-text-light",
-                        attrs: {
-                          type: "text",
-                          "arial-label": "Buscar",
-                          placeholder: "Buscar...",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.searchText },
-                        on: {
-                          keyup: _vm.getRoomsData,
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.searchText = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        { staticClass: "icon is-small is-left" },
-                        [
-                          _c("font-awesome-icon", { attrs: { icon: "search" } })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "icon is-small is-right" }, [
-                        _c("button", {
-                          staticClass: "delete",
-                          on: { click: _vm.clearSearch }
-                        })
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table is-fullwidth has-background-black-ter has-text-white"
-                  },
-                  [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.roomsData.data, function(pop) {
-                        return _c("tr", { key: pop.id }, [
-                          _c("td", {}, [
-                            _c("div", { staticClass: "field" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "is-size-6 has-text-weight-bold",
-                                  attrs: {
-                                    target: "_blank",
-                                    href: "/pop/" + pop.id
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(pop ? pop.nombre : "") +
-                                      "\n                                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "is-size-6 has-text-weight-light"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        Comuna de " +
-                                      _vm._s(
-                                        pop ? pop.comuna.nombre_comuna : ""
-                                      ) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "is-size-7 has-text-weight-light"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(
-                                        pop
-                                          ? "Zona: " +
-                                              pop.comuna.zona.nombre_zona
-                                          : ""
-                                      ) +
-                                      " - " +
-                                      _vm._s(
-                                        pop
-                                          ? "CRM: " +
-                                              pop.comuna.zona.crm.nombre_crm
-                                          : ""
-                                      ) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            {},
-                            _vm._l(pop.rooms, function(room) {
-                              return _c(
-                                "div",
-                                { key: room.id, staticClass: "field" },
-                                _vm._l(
-                                  { id: parseInt(Math.random() * 50 + 1) },
-                                  function(id) {
-                                    return _c(
-                                      "div",
-                                      {
-                                        key: id,
-                                        attrs: { set: (_vm.energy = id) }
-                                      },
-                                      _vm._l(
-                                        {
-                                          id: parseInt(Math.random() * 50 + 1)
-                                        },
-                                        function(id) {
-                                          return _c(
-                                            "div",
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {},
+                          _vm._l(pop.rooms, function(room) {
+                            return _c(
+                              "div",
+                              { key: room.id, staticClass: "field" },
+                              _vm._l(
+                                { id: parseInt(Math.random() * 50 + 1) },
+                                function(id) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: id,
+                                      attrs: { set: (_vm.energy = id) }
+                                    },
+                                    _vm._l(
+                                      { id: parseInt(Math.random() * 50 + 1) },
+                                      function(id) {
+                                        return _c(
+                                          "div",
+                                          {
+                                            key: id,
+                                            attrs: { set: (_vm.climate = id) }
+                                          },
+                                          _vm._l(
                                             {
-                                              key: id,
-                                              attrs: { set: (_vm.climate = id) }
+                                              id: parseInt(
+                                                Math.random() * 50 + 1
+                                              )
                                             },
-                                            _vm._l(
-                                              {
-                                                id: parseInt(
-                                                  Math.random() * 50 + 1
-                                                )
-                                              },
-                                              function(id) {
-                                                return _c(
-                                                  "div",
-                                                  {
-                                                    key: id,
-                                                    staticClass:
-                                                      "columns is-vcentered",
-                                                    attrs: {
-                                                      set: (_vm.space = id)
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass:
-                                                          "column is-6"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "router-link",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-6 has-text-weight-bold has-text-white",
-                                                            attrs: {
-                                                              to:
-                                                                "/capacity/" +
-                                                                room.id,
-                                                              target: "_blank"
-                                                            }
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "\n                                                        " +
-                                                                _vm._s(
-                                                                  room.name
-                                                                ) +
-                                                                " "
-                                                            ),
-                                                            room.old_name
-                                                              ? _c(
-                                                                  "p",
-                                                                  {
-                                                                    staticClass:
-                                                                      "has-text-weight-light"
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      _vm._s(
-                                                                        room.old_name
-                                                                      )
+                                            function(id) {
+                                              return _c(
+                                                "div",
+                                                {
+                                                  key: id,
+                                                  staticClass:
+                                                    "columns is-vcentered",
+                                                  attrs: {
+                                                    set: (_vm.space = id)
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "column is-6"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "router-link",
+                                                        {
+                                                          staticClass:
+                                                            "is-size-6 has-text-weight-bold has-text-white",
+                                                          attrs: {
+                                                            to:
+                                                              "/capacity/" +
+                                                              room.id,
+                                                            target: "_blank"
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                        " +
+                                                              _vm._s(
+                                                                room.name
+                                                              ) +
+                                                              " "
+                                                          ),
+                                                          room.old_name
+                                                            ? _c(
+                                                                "p",
+                                                                {
+                                                                  staticClass:
+                                                                    "has-text-weight-light"
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      room.old_name
                                                                     )
-                                                                  ]
-                                                                )
-                                                              : _vm._e()
-                                                          ]
-                                                        )
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass:
-                                                          "column is-2 has-text-centered"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "has-text-centered is-size-7"
-                                                          },
-                                                          [_vm._v("GENERAL")]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticStyle: {
-                                                              padding: "12px",
-                                                              border:
-                                                                "1px solid #888",
-                                                              "border-radius":
-                                                                "15px"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "div",
-                                                              {
-                                                                staticStyle: {
-                                                                  "padding-top":
-                                                                    "10px"
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "font-awesome-icon",
-                                                                  {
-                                                                    class:
-                                                                      _vm.energy <=
-                                                                        5 ||
-                                                                      _vm.climate <=
-                                                                        5 ||
-                                                                      _vm.space <=
-                                                                        5
-                                                                        ? "has-text-info"
-                                                                        : (_vm.energy >
-                                                                            5 &&
-                                                                            _vm.energy <=
-                                                                              10) ||
-                                                                          (_vm.climate >
-                                                                            5 &&
-                                                                            _vm.climate <=
-                                                                              10) ||
-                                                                          (_vm.space >
-                                                                            5 &&
-                                                                            _vm.space <=
-                                                                              10)
-                                                                        ? "has-text-warning"
-                                                                        : "has-text-success",
-                                                                    attrs: {
-                                                                      icon:
-                                                                        "circle",
-                                                                      size: "2x"
-                                                                    }
-                                                                  }
-                                                                )
-                                                              ],
-                                                              1
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "div",
-                                                              {
-                                                                staticClass:
-                                                                  "has-text-centered has-text-white"
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "div",
-                                                                  {
-                                                                    staticClass:
-                                                                      " is-size-4 has-text-weight-bold",
-                                                                    staticStyle: {
-                                                                      "padding-top":
-                                                                        "12px"
-                                                                    }
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      _vm._s(
-                                                                        Math.min(
-                                                                          _vm.energy,
-                                                                          _vm.climate
-                                                                        )
-                                                                      ) +
-                                                                        "\n                                                                "
-                                                                    ),
-                                                                    _c(
-                                                                      "span",
-                                                                      {
-                                                                        staticClass:
-                                                                          "is-size-6 has-text-weight-light"
-                                                                      },
-                                                                      [
-                                                                        _vm._v(
-                                                                          "kW"
-                                                                        )
-                                                                      ]
-                                                                    )
-                                                                  ]
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "p",
-                                                                  {
-                                                                    staticClass:
-                                                                      "has-text-weight-light is-size-7"
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      "Disponibles"
-                                                                    )
-                                                                  ]
-                                                                )
-                                                              ]
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass:
-                                                          "column has-text-centered",
-                                                        staticStyle: {
-                                                          "padding-top": "0"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "columns",
-                                                            staticStyle: {
-                                                              padding: "8px"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "div",
-                                                              {
-                                                                staticClass:
-                                                                  "column has-text-centered is-size-7"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "ENERGIA"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _vm.canViewClimate
-                                                              ? _c(
-                                                                  "div",
-                                                                  {
-                                                                    staticClass:
-                                                                      "column has-text-centered is-size-7"
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      "CLIMA"
-                                                                    )
-                                                                  ]
-                                                                )
-                                                              : _vm._e(),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "div",
-                                                              {
-                                                                staticClass:
-                                                                  "column has-text-centered is-size-7"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "ESPACIO"
-                                                                )
-                                                              ]
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticStyle: {
-                                                              "margin-top":
-                                                                "-32px",
-                                                              padding: "12px",
-                                                              border:
-                                                                "1px solid #888",
-                                                              "border-radius":
-                                                                "15px"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "div",
-                                                              {
-                                                                staticClass:
-                                                                  "columns"
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "div",
-                                                                  {
-                                                                    staticClass:
-                                                                      "column"
-                                                                  },
-                                                                  [
-                                                                    _c(
-                                                                      "font-awesome-icon",
-                                                                      {
-                                                                        class:
+                                                                  )
+                                                                ]
+                                                              )
+                                                            : _vm._e()
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "column is-2 has-text-centered"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "has-text-centered is-size-7"
+                                                        },
+                                                        [_vm._v("GENERAL")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticStyle: {
+                                                            padding: "12px",
+                                                            border:
+                                                              "1px solid #888",
+                                                            "border-radius":
+                                                              "15px"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticStyle: {
+                                                                "padding-top":
+                                                                  "10px"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "font-awesome-icon",
+                                                                {
+                                                                  class:
+                                                                    _vm.energy <=
+                                                                      5 ||
+                                                                    _vm.climate <=
+                                                                      5 ||
+                                                                    _vm.space <=
+                                                                      5
+                                                                      ? "has-text-info"
+                                                                      : (_vm.energy >
+                                                                          5 &&
                                                                           _vm.energy <=
-                                                                          5
-                                                                            ? "has-text-info"
-                                                                            : _vm.energy >
-                                                                                5 &&
-                                                                              _vm.energy <=
-                                                                                10
-                                                                            ? "has-text-warning"
-                                                                            : "has-text-success",
-                                                                        attrs: {
-                                                                          icon:
-                                                                            "circle",
-                                                                          size:
-                                                                            "2x"
-                                                                        }
-                                                                      }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "div",
-                                                                      {
-                                                                        staticClass:
-                                                                          "has-text-centered has-text-white"
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "div",
-                                                                          {
-                                                                            staticClass:
-                                                                              " is-size-5 has-text-weight-bold"
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              _vm._s(
-                                                                                _vm.canViewClimate
-                                                                                  ? _vm.energy
-                                                                                  : Math.min(
-                                                                                      _vm.energy,
-                                                                                      _vm.climate
-                                                                                    )
-                                                                              ) +
-                                                                                "\n                                                                        "
-                                                                            ),
-                                                                            _c(
-                                                                              "span",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "is-size-6 has-text-weight-light"
-                                                                              },
-                                                                              [
-                                                                                _vm._v(
-                                                                                  "kW"
-                                                                                )
-                                                                              ]
-                                                                            )
-                                                                          ]
-                                                                        ),
-                                                                        _vm._v(
-                                                                          " "
-                                                                        ),
-                                                                        _c(
-                                                                          "p",
-                                                                          {
-                                                                            staticClass:
-                                                                              "has-text-weight-light is-size-7"
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              "Disponibles"
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ]
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _vm.canViewClimate
-                                                                  ? _c(
-                                                                      "div",
-                                                                      {
-                                                                        staticClass:
-                                                                          "column"
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "font-awesome-icon",
-                                                                          {
-                                                                            class:
-                                                                              _vm.climate <=
-                                                                              5
-                                                                                ? "has-text-info"
-                                                                                : _vm.climate >
-                                                                                    5 &&
-                                                                                  _vm.climate <=
-                                                                                    10
-                                                                                ? "has-text-warning"
-                                                                                : "has-text-success",
-                                                                            attrs: {
-                                                                              icon:
-                                                                                "circle",
-                                                                              size:
-                                                                                "2x"
-                                                                            }
-                                                                          }
-                                                                        ),
-                                                                        _vm._v(
-                                                                          " "
-                                                                        ),
-                                                                        _c(
-                                                                          "div",
-                                                                          {
-                                                                            staticClass:
-                                                                              "has-text-centered has-text-white"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  " is-size-5 has-text-weight-bold"
-                                                                              },
-                                                                              [
-                                                                                _vm._v(
-                                                                                  _vm._s(
-                                                                                    _vm.climate
-                                                                                  ) +
-                                                                                    "\n                                                                        "
-                                                                                ),
-                                                                                _c(
-                                                                                  "span",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "is-size-6 has-text-weight-light"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "kW"
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ]
-                                                                            ),
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            _c(
-                                                                              "p",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "has-text-weight-light is-size-7"
-                                                                              },
-                                                                              [
-                                                                                _vm._v(
-                                                                                  "Disponibles"
-                                                                                )
-                                                                              ]
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ],
-                                                                      1
-                                                                    )
-                                                                  : _vm._e(),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "div",
-                                                                  {
-                                                                    staticClass:
-                                                                      "column"
-                                                                  },
-                                                                  [
-                                                                    _c(
-                                                                      "font-awesome-icon",
-                                                                      {
-                                                                        class:
+                                                                            10) ||
+                                                                        (_vm.climate >
+                                                                          5 &&
+                                                                          _vm.climate <=
+                                                                            10) ||
+                                                                        (_vm.space >
+                                                                          5 &&
                                                                           _vm.space <=
-                                                                          5
-                                                                            ? "has-text-info"
-                                                                            : _vm.space >
-                                                                                5 &&
-                                                                              _vm.space <=
-                                                                                10
-                                                                            ? "has-text-warning"
-                                                                            : "has-text-success",
-                                                                        attrs: {
-                                                                          icon:
-                                                                            "circle",
-                                                                          size:
-                                                                            "2x"
-                                                                        }
+                                                                            10)
+                                                                      ? "has-text-warning"
+                                                                      : "has-text-success",
+                                                                  attrs: {
+                                                                    icon:
+                                                                      "circle",
+                                                                    size: "2x"
+                                                                  }
+                                                                }
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "has-text-centered has-text-white"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    " is-size-4 has-text-weight-bold",
+                                                                  staticStyle: {
+                                                                    "padding-top":
+                                                                      "12px"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      Math.min(
+                                                                        _vm.energy,
+                                                                        _vm.climate
+                                                                      )
+                                                                    ) +
+                                                                      "\n                                                                "
+                                                                  ),
+                                                                  _c(
+                                                                    "span",
+                                                                    {
+                                                                      staticClass:
+                                                                        "is-size-6 has-text-weight-light"
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "kW"
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "p",
+                                                                {
+                                                                  staticClass:
+                                                                    "has-text-weight-light is-size-7"
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Disponibles"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "column has-text-centered",
+                                                      staticStyle: {
+                                                        "padding-top": "0"
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "columns",
+                                                          staticStyle: {
+                                                            padding: "8px"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "column has-text-centered is-size-7"
+                                                            },
+                                                            [_vm._v("ENERGIA")]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _vm.canViewClimate
+                                                            ? _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "column has-text-centered is-size-7"
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "CLIMA"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "column has-text-centered is-size-7"
+                                                            },
+                                                            [_vm._v("ESPACIO")]
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticStyle: {
+                                                            "margin-top":
+                                                              "-32px",
+                                                            padding: "12px",
+                                                            border:
+                                                              "1px solid #888",
+                                                            "border-radius":
+                                                              "15px"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "columns"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "column"
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "font-awesome-icon",
+                                                                    {
+                                                                      class:
+                                                                        _vm.energy <=
+                                                                        5
+                                                                          ? "has-text-info"
+                                                                          : _vm.energy >
+                                                                              5 &&
+                                                                            _vm.energy <=
+                                                                              10
+                                                                          ? "has-text-warning"
+                                                                          : "has-text-success",
+                                                                      attrs: {
+                                                                        icon:
+                                                                          "circle",
+                                                                        size:
+                                                                          "2x"
                                                                       }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "div",
-                                                                      {
-                                                                        staticClass:
-                                                                          "has-text-centered has-text-white"
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "div",
-                                                                          {
-                                                                            staticClass:
-                                                                              " is-size-5 has-text-weight-bold"
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              _vm._s(
-                                                                                _vm.space
+                                                                    }
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "div",
+                                                                    {
+                                                                      staticClass:
+                                                                        "has-text-centered has-text-white"
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "div",
+                                                                        {
+                                                                          staticClass:
+                                                                            " is-size-5 has-text-weight-bold"
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            _vm._s(
+                                                                              _vm.canViewClimate
+                                                                                ? _vm.energy
+                                                                                : Math.min(
+                                                                                    _vm.energy,
+                                                                                    _vm.climate
+                                                                                  )
+                                                                            ) +
+                                                                              "\n                                                                        "
+                                                                          ),
+                                                                          _c(
+                                                                            "span",
+                                                                            {
+                                                                              staticClass:
+                                                                                "is-size-6 has-text-weight-light"
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                "kW"
                                                                               )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "p",
+                                                                        {
+                                                                          staticClass:
+                                                                            "has-text-weight-light is-size-7"
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            "Disponibles"
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ],
+                                                                1
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _vm.canViewClimate
+                                                                ? _c(
+                                                                    "div",
+                                                                    {
+                                                                      staticClass:
+                                                                        "column"
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "font-awesome-icon",
+                                                                        {
+                                                                          class:
+                                                                            _vm.climate <=
+                                                                            5
+                                                                              ? "has-text-info"
+                                                                              : _vm.climate >
+                                                                                  5 &&
+                                                                                _vm.climate <=
+                                                                                  10
+                                                                              ? "has-text-warning"
+                                                                              : "has-text-success",
+                                                                          attrs: {
+                                                                            icon:
+                                                                              "circle",
+                                                                            size:
+                                                                              "2x"
+                                                                          }
+                                                                        }
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "div",
+                                                                        {
+                                                                          staticClass:
+                                                                            "has-text-centered has-text-white"
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "div",
+                                                                            {
+                                                                              staticClass:
+                                                                                " is-size-5 has-text-weight-bold"
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  _vm.climate
+                                                                                ) +
+                                                                                  "\n                                                                        "
+                                                                              ),
+                                                                              _c(
+                                                                                "span",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "is-size-6 has-text-weight-light"
+                                                                                },
+                                                                                [
+                                                                                  _vm._v(
+                                                                                    "kW"
+                                                                                  )
+                                                                                ]
+                                                                              )
+                                                                            ]
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "p",
+                                                                            {
+                                                                              staticClass:
+                                                                                "has-text-weight-light is-size-7"
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                "Disponibles"
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ],
+                                                                    1
+                                                                  )
+                                                                : _vm._e(),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "column"
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "font-awesome-icon",
+                                                                    {
+                                                                      class:
+                                                                        _vm.space <=
+                                                                        5
+                                                                          ? "has-text-info"
+                                                                          : _vm.space >
+                                                                              5 &&
+                                                                            _vm.space <=
+                                                                              10
+                                                                          ? "has-text-warning"
+                                                                          : "has-text-success",
+                                                                      attrs: {
+                                                                        icon:
+                                                                          "circle",
+                                                                        size:
+                                                                          "2x"
+                                                                      }
+                                                                    }
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "div",
+                                                                    {
+                                                                      staticClass:
+                                                                        "has-text-centered has-text-white"
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "div",
+                                                                        {
+                                                                          staticClass:
+                                                                            " is-size-5 has-text-weight-bold"
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            _vm._s(
+                                                                              _vm.space
                                                                             )
-                                                                          ]
-                                                                        ),
-                                                                        _vm._v(
-                                                                          " "
-                                                                        ),
-                                                                        _c(
-                                                                          "p",
-                                                                          {
-                                                                            staticClass:
-                                                                              "has-text-weight-light is-size-7"
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              "Disponibles"
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ]
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              ]
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              }
-                                            ),
-                                            0
-                                          )
-                                        }
-                                      ),
-                                      0
-                                    )
-                                  }
-                                ),
-                                0
-                              )
-                            }),
-                            0
-                          )
-                        ])
-                      }),
-                      0
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "nav",
-                  {
-                    staticClass: "pagination",
-                    attrs: { role: "navigation", "aria-label": "pagination" }
-                  },
-                  [
-                    _c("vue-pagination", {
-                      staticClass: "has-text-white",
-                      attrs: { pagination: _vm.roomsData, offset: 4 },
-                      on: {
-                        paginate: function($event) {
-                          return _vm.getRoomsData()
-                        }
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "p",
+                                                                        {
+                                                                          staticClass:
+                                                                            "has-text-weight-light is-size-7"
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            "Disponibles"
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ],
+                                                                1
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          ),
+                                          0
+                                        )
+                                      }
+                                    ),
+                                    0
+                                  )
+                                }
+                              ),
+                              0
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "nav",
+                {
+                  staticClass: "pagination",
+                  attrs: { role: "navigation", "aria-label": "pagination" }
+                },
+                [
+                  _c("vue-pagination", {
+                    staticClass: "has-text-white",
+                    attrs: { pagination: _vm.roomsData, offset: 4 },
+                    on: {
+                      paginate: function($event) {
+                        return _vm.getRoomsData()
                       }
-                    })
-                  ],
-                  1
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-modal",
-            {
-              attrs: {
-                active: _vm.isComponentModalActive,
-                "has-modal-card": "",
-                "full-screen": "",
-                "can-cancel": false
-              },
-              on: {
-                "update:active": function($event) {
-                  _vm.isComponentModalActive = $event
-                }
-              }
-            },
-            [
-              _c("modal-room", {
-                attrs: {
-                  user: _vm.user,
-                  pop: _vm.popSelected,
-                  room: _vm.roomSelected
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
+                    }
+                  })
+                ],
+                1
+              )
+            ])
+          ]
+        )
+      ])
     ]
   )
 }
@@ -1748,140 +1705,127 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "modal-card", staticStyle: { width: "auto" } },
-    [
-      _c("header", { staticClass: "modal-card-head has-background-white" }, [
-        _c(
-          "div",
-          { staticClass: "modal-card-title has-text-weight-semibold" },
-          [
-            _vm._v(
-              _vm._s(_vm.room.pop ? _vm.room.pop.nombre : "") +
-                " - " +
-                _vm._s(_vm.room.name) +
-                ": " +
-                _vm._s(_vm.room.old_name)
-            )
-          ]
+  return _c("div", { staticStyle: { width: "auto" } }, [
+    _c("header", { staticClass: "modal-card-head has-background-white" }, [
+      _c("div", { staticClass: "modal-card-title has-text-weight-semibold" }, [
+        _vm._v(
+          _vm._s(_vm.room.pop ? _vm.room.pop.nombre : "") +
+            " - " +
+            _vm._s(_vm.room.name) +
+            ": " +
+            _vm._s(_vm.room.old_name)
         )
-      ]),
-      _vm._v(" "),
-      _c(
-        "section",
-        {
-          staticClass: "section modal-card-body hero is-light",
-          staticStyle: { "padding-top": "0" }
-        },
-        [
-          _c("div", { staticClass: "columns hero-body" }, [
-            _c(
-              "div",
-              {
-                staticClass: "column is-1 section",
-                staticStyle: {
-                  "padding-left": "10px",
-                  "padding-right": "0px",
-                  "padding-top": "20px"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "columns is-multiline" },
-                  _vm._l(_vm.tabs, function(tab) {
-                    return _c(
-                      "div",
-                      {
-                        key: tab.component,
-                        staticClass: "column is-12",
-                        class:
-                          _vm.currentTab === tab.component &&
-                          (_vm.currentTab == "eco"
-                            ? "has-background-eco"
-                            : "is-bold is-link"),
-                        on: {
-                          click: function($event) {
-                            _vm.currentTab = tab.component
-                          }
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "section",
+      {
+        staticClass: "section modal-card-body hero is-light",
+        staticStyle: { "padding-top": "0" }
+      },
+      [
+        _c("div", { staticClass: "columns hero-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "column is-1 section",
+              staticStyle: {
+                "padding-left": "10px",
+                "padding-right": "0px",
+                "padding-top": "20px"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "columns is-multiline" },
+                _vm._l(_vm.tabs, function(tab) {
+                  return _c(
+                    "div",
+                    {
+                      key: tab.component,
+                      staticClass: "column is-12",
+                      class:
+                        _vm.currentTab === tab.component &&
+                        (_vm.currentTab == "eco"
+                          ? "has-background-eco"
+                          : "is-bold is-link"),
+                      on: {
+                        click: function($event) {
+                          _vm.currentTab = tab.component
                         }
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "tile is-child box has-text-centered",
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tile is-child box has-text-centered",
+                          class:
+                            _vm.currentTab === tab.component
+                              ? "is-bold is-link"
+                              : ""
+                        },
+                        [
+                          _c("font-awesome-icon", {
                             class:
                               _vm.currentTab === tab.component
-                                ? "is-bold is-link"
-                                : ""
-                          },
-                          [
-                            _c("font-awesome-icon", {
-                              class:
-                                _vm.currentTab === tab.component
-                                  ? "has-text-white"
-                                  : "has-text-grey",
-                              attrs: {
-                                icon: [tab.icon_type, tab.icon],
-                                size: "2x"
-                              }
-                            }),
-                            _vm._v(" "),
+                                ? "has-text-white"
+                                : "has-text-grey",
+                            attrs: {
+                              icon: [tab.icon_type, tab.icon],
+                              size: "2x"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticStyle: { "padding-top": "5px" } }, [
                             _c(
                               "div",
-                              { staticStyle: { "padding-top": "5px" } },
+                              {
+                                staticClass: "is-size-7 has-text-weight-normal"
+                              },
                               [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "is-size-7 has-text-weight-normal"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(tab.title) +
-                                        "\n                                "
-                                    )
-                                  ]
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(tab.title) +
+                                    "\n                                "
                                 )
                               ]
                             )
-                          ],
-                          1
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "column container is-paddingless" },
-              [
-                _c(
-                  "keep-alive",
-                  [
-                    _c(_vm.currentTabComponent, {
-                      tag: "component",
-                      attrs: { user: _vm.user, room: _vm.room }
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ])
-        ]
-      )
-    ]
-  )
+                          ])
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "column container is-paddingless" },
+            [
+              _c(
+                "keep-alive",
+                [
+                  _c(_vm.currentTabComponent, {
+                    tag: "component",
+                    attrs: { user: _vm.user, room: _vm.room }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

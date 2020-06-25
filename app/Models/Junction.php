@@ -51,5 +51,17 @@ class Junction extends Model
         return $this->hasOne(JunctionProtection::class)->latest();
     }
 
+    public function latest_solar_panel()
+    {
+        return $this->hasOne(SolarPanel::class)->latest();
+    }
+
+    public function solar_panels()
+    {
+        return $this->hasMany(SolarPanel::class);
+    }
+
+
+
 
 }

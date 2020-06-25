@@ -403,6 +403,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditJunctionParameters: function EditJunctionParameters() {
@@ -420,13 +424,15 @@ __webpack_require__.r(__webpack_exports__);
       isEditMode: false,
       clientNumber: this.junction.client_number,
       junctionNumber: this.junction.junction_number,
-      useFactor: this.junction.use_factor
+      useFactor: this.junction.use_factor,
+      punctualConsumption: this.junction.latest_measurement.punctual_consumption
     };
   },
   watch: {
     junction: function junction(val) {}
   },
   mounted: function mounted() {
+    console.log('hello!!');
     this.getJunctionTypes();
     this.getJunctionConnections();
   },
@@ -435,7 +441,7 @@ __webpack_require__.r(__webpack_exports__);
       var latestProtectionRA = this.junction.latest_protection ? this.junction.latest_protection.regulada_a : 0;
       var latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0;
 
-      if (this.junction.junction_type_id == 1) {
+      if (this.junction.junction_type_id == 2) {
         return latestProtectionRA * latestMeasureRA_V / 1000;
       } else {
         return latestProtectionRA * 380 * Math.sqrt(3) / 1000;
@@ -444,7 +450,7 @@ __webpack_require__.r(__webpack_exports__);
     powerB: function powerB() {
       var latestProtectionRB = this.junction.latest_protection ? this.junction.latest_protection.regulada_b : 0;
 
-      if (this.junction.junction_type_id == 1) {
+      if (this.junction.junction_type_id == 2) {
         return latestProtectionRB * 220 / 1000;
       } else {
         return latestProtectionRB * 380 * Math.sqrt(3) / 1000;
@@ -458,7 +464,7 @@ __webpack_require__.r(__webpack_exports__);
       var latestMeasureSA_V = this.junction.latest_measurement ? this.junction.latest_measurement.s_a_volt_measure : 0;
       var latestMeasureTA_V = this.junction.latest_measurement ? this.junction.latest_measurement.t_a_volt_measure : 0;
 
-      if (this.junction.junction_type_id == 1) {
+      if (this.junction.junction_type_id == 2) {
         return latestMeasureRA_A * latestMeasureRA_V / 1000;
       } else {
         return (latestMeasureRA_A * latestMeasureRA_V + latestMeasureSA_A * latestMeasureSA_V + latestMeasureTA_A * latestMeasureTA_V) / 1000;
@@ -472,21 +478,62 @@ __webpack_require__.r(__webpack_exports__);
       var latestMeasureSB_V = this.junction.latest_measurement ? this.junction.latest_measurement.s_b_volt_measure : 0;
       var latestMeasureTB_V = this.junction.latest_measurement ? this.junction.latest_measurement.t_b_volt_measure : 0;
 
-      if (this.junction.junction_type_id == 1) {
+      if (this.junction.junction_type_id == 2) {
         return latestMeasureRB_A * latestMeasureRB_V / 1000;
       } else {
         return (latestMeasureRB_A * latestMeasureRB_V + latestMeasureSB_A * latestMeasureSB_V + latestMeasureTB_A * latestMeasureTB_V) / 1000;
       }
     },
-    totalCapacity: function totalCapacity() {},
-    consumoTablero: function consumoTablero() {
-      return this.junction.latest_measurement ? (this.junction.latest_measurement.r_measure + this.junction.latest_measurement.s_measure + this.junction.latest_measurement.t_measure) * 220 : 0;
+    photovoltaicCapacity: function photovoltaicCapacity() {
+      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+      var capacity = 0;
+
+      if (this.junction.latest_solar_panel) {
+        var solarPanelGroupQuantity = 6;
+
+        for (var i = 1; i < solarPanelGroupQuantity; i++) {
+          capacity = capacity + this.junction.latest_solar_panel['unit_capacity_group_' + i] * this.junction.latest_solar_panel['quantity_group_' + i];
+        }
+      }
+
+      return capacity;
+    },
+    averageConsumptionPerPhotovoltaicGroup: function averageConsumptionPerPhotovoltaicGroup() {
+      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+      return 0;
+    },
+    totalCapacity: function totalCapacity() {
+      return (this.powerA + this.powerB) * this.useFactor + this.photovoltaicCapacity;
+    },
+    withoutBatteriesCapacity: function withoutBatteriesCapacity() {
+      return this.powerUsedA + this.powerUsedB + this.averageConsumptionPerPhotovoltaicGroup;
+    },
+    withoutBatteriesDisponibility: function withoutBatteriesDisponibility() {
+      return this.totalCapacity - this.withoutBatteriesCapacity;
+    },
+    batteriesRecharge: function batteriesRecharge() {
+      // FALTA MEDICIONES DE PLANTA
+      return 75;
+    },
+    totalUsedCapacity: function totalUsedCapacity() {
+      return this.withoutBatteriesCapacity + this.batteriesRecharge + this.punctualConsumption;
+    },
+    totalDisponibility: {
+      get: function get() {
+        return this.totalCapacity - this.totalUsedCapacity;
+      },
+      set: function set() {
+        this.emitToParent();
+      }
     },
     usagePercent: function usagePercent() {
-      return this.capacidadTotal != 0 ? this.consumoTablero / this.capacidadTotal : 0;
+      return this.totalCapacity != 0 ? this.totalUsedCapacity / this.totalCapacity : 0;
     }
   },
   methods: {
+    emitToParent: function emitToParent(event) {
+      this.$emit('childToParent', this.totalDisponibility);
+    },
     getJunctionTypes: function getJunctionTypes() {
       var _this = this;
 
@@ -1681,28 +1728,6 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", [_vm._v("Power A: " + _vm._s(_vm.powerA))]),
-            _vm._v(" "),
-            _c("div", [_vm._v("Power B: " + _vm._s(_vm.powerB))]),
-            _vm._v(" "),
-            _c("div", [_vm._v("Power Used A: " + _vm._s(_vm.powerUsedA))]),
-            _vm._v(" "),
-            _c("div", [_vm._v("Power Used B: " + _vm._s(_vm.powerUsedB))]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v(
-                "Potencia disponible A: " +
-                  _vm._s(_vm.powerA * _vm.useFactor - _vm.powerUsedA)
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v(
-                "Potencia disponible B: " +
-                  _vm._s(_vm.powerB * _vm.useFactor - _vm.powerUsedB)
-              )
-            ]),
-            _vm._v(" "),
             _c("div", {
               staticClass: "is-divider",
               attrs: { "data-content": "Capacidades" }
@@ -1723,7 +1748,7 @@ var render = function() {
                         _vm._s(_vm._f("numeral")(_vm.totalCapacity, 0, 0)) +
                           " \n                                "
                       ),
-                      _c("span", { staticClass: "is-size-6" }, [_vm._v("W/kW")])
+                      _c("span", { staticClass: "is-size-6" }, [_vm._v("kW")])
                     ]
                   )
                 ])
@@ -1740,10 +1765,31 @@ var render = function() {
                     { staticClass: "has-text-weight-semibold is-size-4" },
                     [
                       _vm._v(
-                        _vm._s(_vm._f("numeral")(_vm.consumoTablero, 0, 0)) +
+                        _vm._s(_vm._f("numeral")(_vm.totalUsedCapacity, 0, 0)) +
                           " \n                                "
                       ),
-                      _c("span", { staticClass: "is-size-6" }, [_vm._v("W/kW")])
+                      _c("span", { staticClass: "is-size-6" }, [_vm._v("kW")])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item" }, [
+                _c("div", { staticClass: "has-text-centered" }, [
+                  _c("div", { staticClass: "is-size-6" }, [
+                    _vm._v("Capacidad disponible")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-semibold is-size-4" },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("numeral")(_vm.totalDisponibility, 0, 0)
+                        ) + " \n                                "
+                      ),
+                      _c("span", { staticClass: "is-size-6" }, [_vm._v("kW")])
                     ]
                   )
                 ])
@@ -1781,7 +1827,9 @@ var render = function() {
                       "b-button",
                       {
                         attrs: {
-                          type: _vm.isEditMode ? "is-info" : "is-link",
+                          type: _vm.isEditMode
+                            ? "is-info"
+                            : "is-link is-outlined",
                           size: "is-small"
                         },
                         on: {
@@ -1797,7 +1845,11 @@ var render = function() {
                         }),
                         _vm._v(
                           "\n                          " +
-                            _vm._s(_vm.isEditMode ? "Modo Edición" : "Editar") +
+                            _vm._s(
+                              _vm.isEditMode
+                                ? "Modo Edición"
+                                : "Editar parámetros de Empalme"
+                            ) +
                             "\n                    "
                         )
                       ],

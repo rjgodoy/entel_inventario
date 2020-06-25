@@ -17,7 +17,9 @@
             <div class="card-content">
                 <div class="columns">
                     <div class="column is-8">
-                        <div class="is-size-5 has-text-weight-semibold">{{ pop.direccion }}</div>
+                        <div class="is-size-5 has-text-weight-semibold" v-if="!isEditMode">{{ pop.direccion }}</div>
+                        <b-input class="is-size-5 has-text-weight-semibold" v-model="address" v-if="isEditMode"></b-input>
+
                         <div class="is-size-6 has-text-weight-normal">Comuna de {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}</div>
                         <div class="is-size-7 has-text-weight-normal">
                             Zona {{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }} - CRM {{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}
@@ -53,6 +55,7 @@
         props : [
             'user',
             'pop',
+            'isEditMode',
             'bodyBackground',
             'boxBackground',
             'primaryText',
@@ -61,10 +64,20 @@
         ],
         data() {
             return {
+                address: this.pop.direccion
             }
         },
         mounted() {
         },
+
+        watch: {
+            isEditMode(val){
+                if(this.address != this.pop.direccion) {
+                    this.updateParameter('direccion', this.address)
+                }
+            }
+        },
+
         computed: {
             popClassification() {
                 var id = 6; var classification
@@ -133,6 +146,29 @@
         //     heroBackground() {
         //         return this.popClassification.id == 1 ? 'is-info' : (this.popClassification.id == 2 ? 'is-warning' : (this.popClassification.id == 3 ? 'is-primary' : (this.popClassification.id == 4 ? 'is-smart' : (this.popClassification.id == 5 ? 'is-eco' : 'is-white'))))
         //     }
+        },
+
+        methods: {
+            updateParameter(param, val) {
+                let params = {
+                    'api_token': this.user.api_token,
+                    'parameter': param,
+                    'value': val,
+                    'user_id': this.user.id
+                }
+
+                axios.put(`/api/pop/${this.pop.id}`, params)
+                .then(response => {
+                    // console.log(response.data)
+                    this.$buefy.toast.open({
+                        message: 'Parámetro actualizado exitosamente.',
+                        type: 'is-success',
+                        duration: 2000
+                    })
+                    this.$eventBus.$emit('parameter-updated');
+                })
+                
+            },
         }
     }
 </script>

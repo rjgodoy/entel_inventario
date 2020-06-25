@@ -62,14 +62,19 @@ class RoomController extends Controller
     public function show($id)
     {
         $room = Room::with(
-            'pop.rooms',
+            'pop.rooms.current_room_distribution',
+            'pop.rooms.fire_detections.fire_detection_type',
+            'pop.rooms.fire_detections.fire_extintion_type',
             'pop.junctions',
             'pop.generator_sets',
             'pop.power_rectifiers',
             'air_conditioners.air_conditioner_consumptions',
             'air_conditioners.air_conditioner_brand.air_conditioner_type',
             'air_conditioners.air_conditioner_chillers',
-            'air_conditioners.air_conditioner_condensers'
+            'air_conditioners.air_conditioner_condensers',
+            'current_room_distribution',
+            'fire_detections.fire_detection_type',
+            'fire_detections.fire_extintion_type'
         )->where('id', $id)->first();
 
         return new RoomResource($room);

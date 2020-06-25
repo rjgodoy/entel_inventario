@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-card" style="width: auto">
+    <div class="" style="width: auto">
         <header class="modal-card-head has-background-white">
             <div class="modal-card-title has-text-weight-semibold">{{ room.pop ? room.pop.nombre : '' }} - {{ room.name }}: {{ room.old_name }}</div>
         </header>
@@ -120,6 +120,10 @@ export default {
         },
     },
 
+    created() {
+        this.$eventBus.$on('change-room', this.getRoomData);
+    },
+
     mounted() {
         // console.log(this.room_id)
         this.getRoomData()
@@ -153,6 +157,9 @@ export default {
         //         }
         //     })
         // },
+        beforeDestroy() {
+            this.$eventBus.$off('change-room');
+        }
     },
 }
 </script>

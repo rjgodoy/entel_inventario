@@ -419,7 +419,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         params: params,
         responseType: 'arraybuffer'
       }).then(function (response) {
-        console.log(response);
+        // console.log(response)
         var blob = new Blob([response.data], {
           type: file.mime
         });

@@ -277,9 +277,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   mounted: function mounted() {// console.log(this.pop.current_entel_vip.isEmpty())
   },
   watch: {
-    pop: function pop(val) {
-      console.log(val);
-      console.log(this.pe_3g);
+    pop: function pop(val) {// console.log(val)
+      // console.log(this.pe_3g)
     }
   },
   methods: {
@@ -312,8 +311,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'user_id': this.user.id
       };
       axios.put("/api/vipEntel/".concat(this.pop.id), params).then(function (response) {
-        console.log(response.data);
-
+        // console.log(response.data)
         _this2.$buefy.toast.open({
           message: 'Parámetro actualizado exitosamente.',
           type: 'is-success',

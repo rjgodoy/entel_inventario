@@ -213,7 +213,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/documents/modals/newFolder */ "chunks/pop/documents/modals/newFolder").then(__webpack_require__.bind(null, /*! ./modals/ModalNewFolder */ "./resources/js/components/pop/documents/modals/ModalNewFolder.vue"));
     }
   },
-  props: ['user', 'pop', 'popCritical', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   data: function data() {
     return {
       folders: [],

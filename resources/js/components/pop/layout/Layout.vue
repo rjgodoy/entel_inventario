@@ -87,7 +87,7 @@
 
                                 <!-- Salas -->
                                 <div class="tile is-parent columns is-multiline">
-                                    <div class="column tile is-6" v-for="room in pop.rooms" :key="room.id">
+                                    <div class="column tile is-6" v-for="room in orderedRooms" :key="room.id">
                                         <div class="tile box" :class="room_id && room.id != room_id ? 'is-shadowless has-background-white-bis' : ''">
                                             <div class="tile is-vertical">
                                                 <div class="is-size-5 has-text-weight-normal" 
@@ -259,6 +259,13 @@ library.add(farCheckCircle, faExclamationTriangle);
                 isAirConditionerModalActive: false,
             }
         },
+
+        computed: {
+            orderedRooms: function () {
+                return _.orderBy(this.pop.rooms, 'order')
+            },
+        },
+
         mounted() {
             this.getJunctions()
             this.getGeneratorSets()

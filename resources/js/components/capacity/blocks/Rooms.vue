@@ -1,35 +1,131 @@
 <template>
-    <div>
-        <div>Capacidad Total: {{ totalCapacity }}</div>
-        <div>Capacidad Usada: {{ usedCapacity }}</div>
-        <div>Capacidad Disponible: {{ availableCapacity }}</div>
+    <section class="" style="padding: 24px;">
 
-        <div class="tile is-parent columns is-multiline">
-            <div class="column tile is-6" v-for="sala in orderedRooms" :key="sala.order">
-                <Room 
-                    :sala=sala
-                    :room=room
-                    :pop=pop
-                    :user=user
-                    :can=can
-                    @room-distribution="roomsDistribution"
-                />
+        <div class="columns tile is-ancestor">
+
+            <div class="column is-2 tile is-parent">
+                <div class="tile is-child box is-dark is-bold">
+
+                    <div class="block">
+                        <div class="title has-text-weight-bold is-size-6 has-text-white">PLANTAS RECTIFICADORAS</div>
+                        <div class="columns">
+                            <div class="column is-8">
+                                <div class="has-text-weight-normal is-size-6">Capacidad Total</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Usada</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Disponible</div>
+                            </div>
+                            <div class="column has-text-right">
+                                <div class="has-text-weight-normal is-size-6">{{ totalPowerRectifiersCapacity | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ usedPowerRectifiersCapacity | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ availablePowerRectifiersCapacity | numeral('0,0.0') }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="block">
+                        <div class="title has-text-weight-bold is-size-6 has-text-white">BATERIAS</div>
+                        <div class="columns">
+                            <div class="column is-8">
+                                <div class="has-text-weight-normal is-size-6">Capacidad Total</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Usada</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Disponible</div>
+                            </div>
+                            <div class="column has-text-right">
+                                <div class="has-text-weight-normal is-size-6">{{ totalBatteryCapacity | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ usedBatteryCapacity | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ availableBatteryCapacity | numeral('0,0.0') }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    
+                    <div class="block">
+                        <div class="title has-text-weight-bold is-size-6 has-text-white">AIRES ACONDICIONADOS</div>
+                        <div class="columns">
+                            <div class="column is-8">
+                                <div class="has-text-weight-normal is-size-6">Capacidad Total</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Usada</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Disponible</div>
+                            </div>
+                            <div class="column has-text-right">
+                                <div class="has-text-weight-normal is-size-6">{{ totalCapacity | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ usedCapacity | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ availableCapacity | numeral('0,0.0') }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    
+                    <div class="block">
+                        <div class="title has-text-weight-bold is-size-6 has-text-white">DISTRIBUCION</div>
+                        <div class="columns">
+                            <div class="column is-8">
+                                <div class="has-text-weight-normal is-size-6">Capacidad Total</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Usada</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Disponible</div>
+                            </div>
+                            <div class="column has-text-right">
+                                <div class="has-text-weight-normal is-size-6">{{ totalCapacity | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ usedCapacity | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ availableCapacity | numeral('0,0.0') }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    
+                    <div class="block">
+                        <div class="title has-text-weight-bold is-size-6 has-text-white">ESPACIO</div>
+                        <div class="columns">
+                            <div class="column is-8">
+                                <div class="has-text-weight-normal is-size-6">Capacidad Total</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Usada</div>
+                                <div class="has-text-weight-normal is-size-6">Capacidad Disponible</div>
+                            </div>
+                            <div class="column has-text-right">
+                                <div class="has-text-weight-normal is-size-6">{{ totalSurface | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ usedSurface | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-normal is-size-6">{{ availableSurface | numeral('0,0.0') }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="column tile is-parent">
+                <div class="columns is-multiline tile">
+                    <div class="column tile is-6" v-for="sala in orderedRooms" :key="sala.id">
+                        <Room 
+                            :sala=sala
+                            :room=room
+                            :pop=pop
+                            :user=user
+                            @room-distribution="roomsDistribution"
+                            @room-surface="roomsSurface"
+                            @power-rectifier-data="powerRectifiersTotalCapacity"
+                            @battery-data="batteryTotalCapacity"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
     export default {
         components: {
             Room: () => import(/* webpackChunkName: "chunks/pop/layout/room"*/'../../pop/layout/Room'),
-            // ModalGenerator: () => import(/* webpackChunkName: "chunks/pop/layout/modals/generator"*/'../../pop/layout/modals/ModalGenerator'),
         },
 
         props : [
             'room',
             'salas',
-            'can',
             'user',
             'pop'
         ],
@@ -38,18 +134,16 @@
             return {
                 totalCapacity: 0,
                 usedCapacity: 0,
-                availableCapacity: 0
-                // powerRectifiers: Array,
-                // airConditioners: Array,
+                totalPowerRectifiersCapacity: 0,
+                usedPowerRectifiersCapacity: 0,
+                availablePowerRectifiersCapacity: 0,
+                totalBatteryCapacity: 0,
+                usedBatteryCapacity: 0,
+                availableBatteryCapacity: 0,
 
-                // powerRectifierSelected: null,
-                // airConditionerSelected: null,
-
-                // canEditPowerRectifiers: null,
-                // canEditAirConditioners: null,
-
-                // isPowerRectifierModalActive: false,
-                // isAirConditionerModalActive: false,
+                totalSurface: 0,
+                usedSurface: 0,
+                
             }
         },
 
@@ -58,153 +152,29 @@
                 return _.orderBy(this.salas, 'order')
             },
 
-            // responsable() {
-            //     let area = 'Sin Información'; let id = null;
-            //     if (this.generatorSets.length) {
-            //         Object.keys(this.generatorSets).forEach(element => {
-            //             if(this.generatorSets[element].current_generator_responsable) {
-            //                 switch(this.generatorSets[element].current_generator_responsable.generator_set_responsable_area_id) {
-            //                     case 1:
-            //                         id = 1
-            //                         area = this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
-            //                         break
-            //                     case 2:
-            //                         id = id == 1 ? id : 2
-            //                         arae = id == 1 ? area : this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
-            //                         break
-            //                     case 3:
-            //                         id = id == 1 || id == 2 ? id : 3
-            //                         area = id == 1 || id == 2 ? area : this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
-            //                         break
-            //                     default:
-            //                         break
-            //                 }
-            //             }
-            //         })
-            //     }
-                
+            availableCapacity() {
+                return this.totalCapacity - this.usedCapacity
+            },
 
-            //     return {
-            //         'id': id,
-            //         'area': area
-            //     }
-            // },
-
-            // totalCapacityA() {
-            //     let sum = 0; let res = 0; let div = 1; 
-            //     if (this.generatorSets.length) {
-            //         Object.keys(this.generatorSets).forEach(element => {
-            //             let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
-            //             let capacity = primeCapacity * 0.8
-
-            //             switch(this.generatorSets[element].generator_set_topology_type_id) {
-            //                 case 1:
-            //                     sum = sum + capacity
-            //                     break
-            //                 case 2:
-            //                     sum = sum + capacity
-            //                     res = res + capacity
-            //                     div = div++
-            //                     break
-            //                 case 3:
-            //                     sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum
-            //                     break
-            //                 default:
-            //                     break
-            //             }
-            //         })
-            //     }
-            //     return sum - (res / div)
-                  
-            // },
-
-            // totalCapacityB() {
-            //     let sum = 0
-            //     if (this.generatorSets.length) {
-            //         Object.keys(this.generatorSets).forEach(element => {
-            //             let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
-            //             let capacity = primeCapacity * 0.8
-
-            //             switch(this.generatorSets[element].generator_set_topology_type_id) {
-            //                 case 1:
-            //                 case 2:
-            //                 default:
-            //                     break
-            //                 case 3:
-            //                     sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum
-            //                     break
-            //             }
-            //         })
-            //     }
-            //     return sum
-            // },
-
-            // totalCapacity() {
-            //     return this.responsable.id == 1 ? this.totalCapacityA + this.totalCapacityB : 123
-            // },
-
-            // usedA() {
-            //     let sum = 0
-            //     if (this.generatorSets.length) {
-            //         Object.keys(this.generatorSets).forEach(element => {
-            //             let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
-
-            //             switch(this.generatorSets[element].generator_set_topology_type_id) {
-            //                 case 1:
-            //                 case 2:
-            //                     sum = sum + usedCapacity
-            //                     break
-            //                 case 3:
-            //                     sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum
-            //                     break
-            //                 default:
-            //                     break
-            //             }
-            //         })
-            //     }
-            //     return sum
-            // },
-
-            // usedB() {
-            //     let sum = 0
-            //     if (this.generatorSets.length) {
-            //         Object.keys(this.generatorSets).forEach(element => {
-            //             let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
-
-            //             switch(this.generatorSets[element].generator_set_topology_type_id) {
-            //                 case 1:
-            //                 case 2:
-            //                 default:
-            //                     break
-            //                 case 3:
-            //                     sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum
-            //                     break
-            //             }
-            //         })
-            //     }
-            //     return sum
-            // },
-
-            // totalUsed() {
-            //     return this.responsable.id == 1 ? this.usedA + this.usedB : 456
-            // },
-
-            // availableA() {
-            //     return this.totalCapacityA - this.usedA
-            // },
-
-            // availableB() {
-            //     return this.totalCapacityB - this.usedB
-            // },
-
-            // totalAvailable() {
-            //     return this.responsable.id == 1 ? this.availableA + this.availableB : 789
-            // }
-
+            availableSurface() {
+                return this.totalSurface - this.usedSurface
+            }
         },
 
         watch: {
             room(val) {
+                this.totalCapacity = 0
+                this.usedCapacity = 0
+
+                this.totalSurface = 0
+                this.usedSurface = 0
+                this.totalPowerRectifiersCapacity = 0
+                this.usedPowerRectifiersCapacity = 0
+                this.availablePowerRectifiersCapacity = 0
+
+                this.totalBatteryCapacity = 0,
+                this.usedBatteryCapacity = 0,
+                this.availableBatteryCapacity = 0
                 // console.log(val)
             }
         },
@@ -216,33 +186,26 @@
 
         methods: {
             roomsDistribution(value) {
-                this.totalCapacity = this.totalCapacity + value.totalCapacity
-                this.usedCapacity = this.usedCapacity + value.usedCapacity
-                this.availableCapacity = this.availableCapacity + value.availableCapacity
-            }
-            // getPowerRectifiers() {
-            //     axios.get(`/api/powerRectifiers/${this.pop.id}?api_token=${this.user.api_token}`)
-            //     .then((response) => {
-            //         // console.log(response.data)
-            //         this.powerRectifiers = response.data.powerRectifiers
-            //         this.canEditPowerRectifiers = response.data.can
-            //     })
-            //     .catch((error) => {
-            //         console.log('Error al traer los datos de Empalmes: ' + error);
-            //     });
-            // },
+                this.totalCapacity += value.totalCapacity
+                this.usedCapacity += value.usedCapacity
+            },
 
-            // getAirConditioners() {
-            //     axios.get(`/api/airConditioners/${this.pop.id}?api_token=${this.user.api_token}`)
-            //     .then((response) => {
-            //         // console.log(response.data)
-            //         this.airConditioners = response.data.airConditioner
-            //         this.canEditAirConditioners = response.data.can
-            //     })
-            //     .catch((error) => {
-            //         console.log('Error al traer los datos de Empalmes: ' + error);
-            //     });
-            // },
+            roomsSurface(value) {
+                this.totalSurface += value.totalSurface
+                this.usedSurface += value.usedSurface
+            },
+
+            powerRectifiersTotalCapacity(value) {
+                this.totalPowerRectifiersCapacity += value.totalPRCapacity
+                this.usedPowerRectifiersCapacity += value.usedPRCapacity
+                this.availablePowerRectifiersCapacity += value.availablePRCapacity
+            },
+
+            batteryTotalCapacity(value) {
+                this.totalBatteryCapacity += value.totalBatteryCapacity
+                this.usedBatteryCapacity += value.usedBatteryCapacity
+                this.availableBatteryCapacity += value.availableBatteryCapacity
+            }
         }
     }
 </script>

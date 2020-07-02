@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $connection = 'mysql_entel_pops';
-    protected $table = 'rooms';
+    protected $table = 'entel_pops.rooms';
 
     protected $guarded = [];
 
@@ -29,6 +29,16 @@ class Room extends Model
     public function current_room_distribution() 
     {
         return $this->hasOne(RoomDistribution::class)->latest();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_room_surface() 
+    {
+        return $this->hasOne(RoomSurface::class)->latest();
     }
 
     /**
@@ -66,6 +76,16 @@ class Room extends Model
      *
      * @var array
      */
+    public function planes() 
+    {
+        return $this->hasMany(Plane::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function projections()
     {
         return $this->hasMany(Projection::class);
@@ -79,6 +99,16 @@ class Room extends Model
     public function room_distributions()
     {
         return $this->hasMany(RoomDistribution::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function room_surfaces()
+    {
+        return $this->hasMany(RoomSurface::class);
     }
 
 }

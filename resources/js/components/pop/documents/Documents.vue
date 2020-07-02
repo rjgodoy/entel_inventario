@@ -191,7 +191,6 @@ export default {
     props : [
         'user',
         'pop',
-        'popCritical',
         'bodyBackground',
         'boxBackground',
         'primaryText',

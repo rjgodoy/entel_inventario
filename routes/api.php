@@ -172,6 +172,9 @@ Route::middleware('auth:api')->group(function () {
 				Route::apiResource('generatorSetResponsableAreas','Api\GeneratorSetResponsableAreaController');
 
 			// Power Rectifiers
+				Route::apiResource('plane','Api\PlaneController');
+				Route::get('roomPlanes/{pop_id}','Api\PlaneController@roomPlanes');
+
 				Route::apiResource('powerRectifiers','Api\Infraestructura\PowerRectifierController');
 				Route::get('powerRectifiersExport', 'Api\Infraestructura\PowerRectifierController@export');
 				Route::get('powerRectifierData/{core}', [
@@ -237,6 +240,7 @@ Route::middleware('auth:api')->group(function () {
 					'uses' => 'Api\Infraestructura\InfrastructureController@infrastructureDataZona'
 				]);
 
+
 			// Sites Stats Chart
 				Route::get('siteStats', 'Api\SiteController@stats')->name('site.stats');
 
@@ -280,6 +284,9 @@ Route::middleware('auth:api')->group(function () {
 
 				Route::apiResource('rooms','Api\RoomController');
 				Route::get('capacityProjection','Api\RoomController@projection');
+
+				Route::post('createRoomDistribution/{room_id}', 'Api\RoomController@createRoomDistribution');
+				Route::post('createRoomSurface/{room_id}', 'Api\RoomController@createRoomSurface');
 
 			});
 			

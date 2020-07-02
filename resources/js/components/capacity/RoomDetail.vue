@@ -1,14 +1,13 @@
 <template>
-    <div class="" style="width: auto">
+    <div class="" >
         <header class="modal-card-head has-background-white">
             <div class="modal-card-title has-text-weight-semibold">{{ room.pop ? room.pop.nombre : '' }} - {{ room.name }}: {{ room.old_name }}</div>
         </header>
 
-        <section class="section modal-card-body hero is-light" style="padding-top: 0">
-            <div class="columns hero-body">
+        <section class="modal-card-body hero is-light" style="padding-top: 0">
+            <div class="columns section">
 
-                <div class="column is-1 section" style="padding-left: 10px; padding-right: 0px; padding-top: 20px;">
-
+                <div class="column is-1">
                     <div class="columns is-multiline">
                         <div class="column is-12"
                             v-for="tab in tabs" 
@@ -30,15 +29,14 @@
                     </div>
                 </div>
 
-                <div class="column container is-paddingless">
-                    <!-- <div class="box"> -->
-                        <keep-alive>
-                            <component :is="currentTabComponent"
-                                :user="user"
-                                :room="room"
-                            ></component>
-                        </keep-alive>
-                    <!-- </div> -->
+                <div class="column" style="padding-left: 48px;">
+                    <keep-alive>
+                        <component :is="currentTabComponent"
+                            :user="user"
+                            :room="room"
+                            :pop="room.pop"
+                        ></component>
+                    </keep-alive>
                 </div>
 
             </div>
@@ -121,6 +119,8 @@ export default {
     },
 
     created() {
+        this.$eventBus.$on('room-distribution', this.getRoomData);
+        this.$eventBus.$on('room-surface', this.getRoomData);
         this.$eventBus.$on('change-room', this.getRoomData);
     },
 
@@ -158,6 +158,8 @@ export default {
         //     })
         // },
         beforeDestroy() {
+            this.$eventBus.$off('room-distribution');
+            this.$eventBus.$off('room-surface');
             this.$eventBus.$off('change-room');
         }
     },

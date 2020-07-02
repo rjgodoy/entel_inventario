@@ -72484,7 +72484,7 @@ var Export = /** @class */ (function (_super) {
             var canvg;
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Promise.all(/*! import() | canvg */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("vendors~canvg")]).then(__webpack_require__.bind(null, /*! ../../canvg/index.js */ "./node_modules/@amcharts/amcharts4/.internal/canvg/index.js"))];
+                    case 0: return [4 /*yield*/, Promise.all(/*! import() | canvg */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~62b71c60"), __webpack_require__.e("vendors~canvg")]).then(__webpack_require__.bind(null, /*! ../../canvg/index.js */ "./node_modules/@amcharts/amcharts4/.internal/canvg/index.js"))];
                     case 1:
                         canvg = (_a.sent());
                         if (canvg.default != null) {
@@ -99955,83 +99955,6 @@ var Validatable = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./node_modules/@amcharts/amcharts4/.internal/themes/animated.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@amcharts/amcharts4/.internal/themes/animated.js ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core_Registry__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Registry */ "./node_modules/@amcharts/amcharts4/.internal/core/Registry.js");
-
-var theme = function (object) {
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SpriteState")) {
-        object.transitionDuration = 400;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Component")) {
-        object.rangeChangeDuration = 500;
-        object.interpolationDuration = 500;
-        object.sequencedInterpolation = false;
-        if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "SankeyDiagram")) {
-            object.sequencedInterpolation = true;
-        }
-        if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSeries")) {
-            object.sequencedInterpolation = true;
-        }
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Chart")) {
-        object.defaultState.transitionDuration = 2000;
-        object.hiddenState.transitionDuration = 1000;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Tooltip")) {
-        object.animationDuration = 400;
-        object.defaultState.transitionDuration = 400;
-        object.hiddenState.transitionDuration = 400;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Scrollbar")) {
-        object.animationDuration = 500;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Series")) {
-        object.defaultState.transitionDuration = 1000;
-        object.hiddenState.transitionDuration = 700;
-        object.hiddenState.properties.opacity = 1;
-        object.showOnInit = true;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "MapSeries")) {
-        object.hiddenState.properties.opacity = 0;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "PercentSeries")) {
-        object.hiddenState.properties.opacity = 0;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "FunnelSlice")) {
-        object.defaultState.transitionDuration = 800;
-        object.hiddenState.transitionDuration = 1000;
-        object.hiddenState.properties.opacity = 1;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Slice")) {
-        object.defaultState.transitionDuration = 700;
-        object.hiddenState.transitionDuration = 1000;
-        object.hiddenState.properties.opacity = 1;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Preloader")) {
-        object.hiddenState.transitionDuration = 2000;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column")) {
-        object.defaultState.transitionDuration = 700;
-        object.hiddenState.transitionDuration = 1000;
-        object.hiddenState.properties.opacity = 1;
-    }
-    if (Object(_core_Registry__WEBPACK_IMPORTED_MODULE_0__["is"])(object, "Column3D")) {
-        object.hiddenState.properties.opacity = 0;
-    }
-};
-/* harmony default export */ __webpack_exports__["default"] = (theme);
-//# sourceMappingURL=animated.js.map
-
-/***/ }),
-
 /***/ "./node_modules/@amcharts/amcharts4/charts.js":
 /*!****************************************************!*\
   !*** ./node_modules/@amcharts/amcharts4/charts.js ***!
@@ -101568,23 +101491,6 @@ __webpack_require__.r(__webpack_exports__);
     "Minimize": ""
 });
 //# sourceMappingURL=en.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@amcharts/amcharts4/themes/animated.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@amcharts/amcharts4/themes/animated.js ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _internal_themes_animated__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../.internal/themes/animated */ "./node_modules/@amcharts/amcharts4/.internal/themes/animated.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _internal_themes_animated__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
-//# sourceMappingURL=animated.js.map
 
 /***/ }),
 

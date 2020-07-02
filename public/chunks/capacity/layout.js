@@ -56,185 +56,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMicrochip"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faGasPump"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExclamationTriangle"]); // import LeaderLine from 'leader-line'
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMicrochip"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faGasPump"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExclamationTriangle"]); // import LeaderLine from 'leader-line'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    MiniJunctions: function MiniJunctions() {
+      return __webpack_require__.e(/*! import() | chunks/capacity/blocks/junction */ "chunks/capacity/blocks/junction").then(__webpack_require__.bind(null, /*! ../capacity/blocks/Junctions */ "./resources/js/components/capacity/blocks/Junctions.vue"));
+    },
     MiniGeneratorSets: function MiniGeneratorSets() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/blocks/generator */ "chunks/pop/layout/blocks/generator").then(__webpack_require__.bind(null, /*! ../capacity/blocks/GeneratorSets */ "./resources/js/components/capacity/blocks/GeneratorSets.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/blocks/generator */ "chunks/capacity/blocks/generator").then(__webpack_require__.bind(null, /*! ../capacity/blocks/GeneratorSets */ "./resources/js/components/capacity/blocks/GeneratorSets.vue"));
     },
     MiniRooms: function MiniRooms() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/blocks/generator */ "chunks/pop/layout/blocks/generator").then(__webpack_require__.bind(null, /*! ../capacity/blocks/Rooms */ "./resources/js/components/capacity/blocks/Rooms.vue"));
-    },
-    ModalJunction: function ModalJunction() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/junction */ "chunks/pop/layout/modals/junction").then(__webpack_require__.bind(null, /*! ../pop/layout/modals/ModalJunction */ "./resources/js/components/pop/layout/modals/ModalJunction.vue"));
-    },
-    ModalPowerRectifier: function ModalPowerRectifier() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/powerRectifier */ "chunks/pop/layout/modals/powerRectifier").then(__webpack_require__.bind(null, /*! ../pop/layout/modals/ModalPowerRectifier */ "./resources/js/components/pop/layout/modals/ModalPowerRectifier.vue"));
-    },
-    ModalAirConditioner: function ModalAirConditioner() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/airConditioner */ "chunks/pop/layout/modals/airConditioner").then(__webpack_require__.bind(null, /*! ../pop/layout/modals/ModalAirConditioner */ "./resources/js/components/pop/layout/modals/ModalAirConditioner.vue"));
-    },
-    CapacityChart: function CapacityChart() {
-      return Promise.all(/*! import() | chunks/pop/layout/capacityChart */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("chunks/pop/layout/capacityChart")]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/capacity/CapacityChart.vue"));
-    } // GrowingChart: () => import(/* webpackChunkName: "chunks/pop/layout/growingChart"*/'./GrowingChart'),
-
+      return __webpack_require__.e(/*! import() | chunks/capacity/blocks/room */ "chunks/capacity/blocks/room").then(__webpack_require__.bind(null, /*! ../capacity/blocks/Rooms */ "./resources/js/components/capacity/blocks/Rooms.vue"));
+    }
   },
   props: ['user', 'room'],
   data: function data() {
     return {
       junctions: [],
       generatorSets: Array,
-      // powerRectifiers: Array,
-      // airConditioners: Array,
-      junctionSelected: '',
-      generatorSetSelected: null,
-      // powerRectifierSelected: null,
-      // airConditionerSelected: null,
       canEditJunctions: null,
-      canEditGeneratorGroups: null,
-      // canEditPowerRectifiers: null,
-      // canEditAirConditioners: null,
-      isJunctionModalActive: false,
-      isGeneratorModalActive: false // isPowerRectifierModalActive: false,
-      // isAirConditionerModalActive: false,
-
+      canEditGeneratorGroups: null
     };
   },
   computed: {
@@ -243,54 +89,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     },
     salas: function salas() {
       return this.pop && this.pop.rooms ? this.pop.rooms : '';
-    } // totalCapacityA() {
-    //     let sum; let res; let div; 
-    //     switch(this.generatorSet.generator_set_topology_type_id) {
-    //         case 1:
-    //             sum = c9 + 
-    //             break
-    //         case 1:
-    //             break
-    //         case 1:
-    //             break
-    //         case 1:
-    //             break
-    //     }
-    //     SUMIFS(C8;C9;"A+B";C10;"A") + 
-    //     SUMIFS(C17;C18;"A+B";C19;"A") + 
-    //     SUMIFS(C26;C27;"A+B";C28;"A") + 
-    //     SUMIFS(C35;C36;"A+B";C37;"A") + 
-    //     SUMIF(C9;"ÚNICO";C8) + 
-    //     SUMIF(C18;"ÚNICO";C17) + 
-    //     SUMIF(C27;"ÚNICO";C26) + 
-    //     SUMIF(C36;"ÚNICO";C35) + 
-    //     SUMIF(C9;"N+1";C8) + 
-    //     SUMIF(C18;"N+1";C17) + 
-    //     SUMIF(C27;"N+1";C26) + 
-    //     SUMIF(C36;"N+1";C35
-    //     ) - (
-    //     SUMIF(C9;"N+1";C8) + 
-    //     SUMIF(C18;"N+1";C17) + 
-    //     SUMIF(C27;"N+1";C26) + 
-    //     SUMIF(C36;"N+1";C35)
-    //     )/
-    //     IF( 
-    //         COUNTIF(C9;"N+1")+
-    //         COUNTIF(C18;"N+1")+
-    //         COUNTIF(C27;"N+1")+
-    //         COUNTIF(C36;"N+1")=0;1;
-    //     (COUNTIF(C9;"N+1")+
-    //         COUNTIF(C18;"N+1")+
-    //         COUNTIF(C27;"N+1")+
-    //         COUNTIF(C36;"N+1"))
-    //     )
-    // }
-
+    }
   },
   watch: {
     room: function room(val) {
-      // console.log(this.pop)
-      // console.log(this.salas)
       this.getJunctions();
       this.getGeneratorSets();
     }
@@ -301,12 +103,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   },
   mounted: function mounted() {
     this.getJunctions();
-    this.getGeneratorSets(); // this.getPowerRectifiers()
-    // this.getAirConditioners()
-    // let leader = new LeaderLine(
-    //     document.getElementById('alpha'),
-    //     document.getElementById('beta')
-    // );
+    this.getGeneratorSets();
   },
   methods: {
     getJunctions: function () {
@@ -382,29 +179,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       }
 
       return getGeneratorSets;
-    }() // getPowerRectifiers() {
-    //     axios.get(`/api/powerRectifiers/${this.pop.id}?api_token=${this.user.api_token}`)
-    //     .then((response) => {
-    //         // console.log(response.data)
-    //         this.powerRectifiers = response.data.powerRectifiers
-    //         this.canEditPowerRectifiers = response.data.can
-    //     })
-    //     .catch((error) => {
-    //         console.log('Error al traer los datos de Empalmes: ' + error);
-    //     });
-    // },
-    // getAirConditioners() {
-    //     axios.get(`/api/airConditioners/${this.pop.id}?api_token=${this.user.api_token}`)
-    //     .then((response) => {
-    //         // console.log(response.data)
-    //         this.airConditioners = response.data.airConditioner
-    //         this.canEditAirConditioners = response.data.can
-    //     })
-    //     .catch((error) => {
-    //         console.log('Error al traer los datos de Empalmes: ' + error);
-    //     });
-    // },
-
+    }()
   },
   beforeDestroy: function beforeDestroy() {
     this.$eventBus.$off('junction-measurements-updated');
@@ -429,146 +204,43 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {},
-    [
-      _c("section", {}, [
+  return _c("div", {}, [
+    _c(
+      "section",
+      {},
+      [
         _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "columns" }, [
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "section" }, [
-              _c("div", { staticClass: "tile is-ancestor" }, [
-                _c(
-                  "div",
-                  { staticClass: "tile is-vertical" },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "tile" },
-                      [
-                        _c("div", { staticClass: "tile is-parent" }),
-                        _vm._v(" "),
-                        _vm._l(_vm.junctions, function(junction) {
-                          return _c(
-                            "div",
-                            { key: junction.id, staticClass: "tile is-parent" },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "tile is-child is-size-5 has-text-weight-normal",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.isJunctionModalActive = true
-                                      _vm.junctionSelected = junction
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "b-message",
-                                    {
-                                      staticClass: "box is-paddingless",
-                                      attrs: { type: "is-success" }
-                                    },
-                                    [
-                                      _c("div", { staticClass: "columns" }, [
-                                        _c("div", { staticClass: "column" }, [
-                                          _vm._v("Empalme")
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "column is-2 has-text-centered"
-                                          },
-                                          [
-                                            _c("font-awesome-icon", {
-                                              staticClass: "has-text-success",
-                                              attrs: {
-                                                icon: ["far", "check-circle"],
-                                                size: "2x"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "tile is-parent" })
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c("MiniGeneratorSets", {
-                      attrs: {
-                        pop: _vm.pop,
-                        generatorSets: _vm.generatorSets,
-                        can: _vm.canEditGeneratorGroups,
-                        user: _vm.user
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("MiniRooms", {
-                      attrs: {
-                        pop: _vm.pop,
-                        room: _vm.room,
-                        salas: _vm.salas,
-                        can: _vm.canEditGeneratorGroups,
-                        user: _vm.user
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
+        _c("MiniJunctions", {
           attrs: {
-            active: _vm.isJunctionModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
-          },
-          on: {
-            "update:active": function($event) {
-              _vm.isJunctionModalActive = $event
-            }
+            pop: _vm.pop,
+            junctions: _vm.junctions,
+            can: _vm.canEditJunctions,
+            user: _vm.user
           }
-        },
-        [
-          _c("modal-junction", {
-            attrs: {
-              junction: _vm.junctionSelected,
-              can: _vm.canEditJunctions,
-              user: _vm.user
-            }
-          })
-        ],
-        1
-      )
-    ],
-    1
-  )
+        }),
+        _vm._v(" "),
+        _c("MiniGeneratorSets", {
+          attrs: {
+            pop: _vm.pop,
+            generatorSets: _vm.generatorSets,
+            can: _vm.canEditGeneratorGroups,
+            user: _vm.user
+          }
+        }),
+        _vm._v(" "),
+        _c("MiniRooms", {
+          attrs: {
+            pop: _vm.pop,
+            room: _vm.room,
+            salas: _vm.salas,
+            user: _vm.user
+          }
+        })
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -582,7 +254,7 @@ var staticRenderFns = [
           staticClass:
             "has-text-weight-semibold has-text-dark is-size-3 has-text-left"
         },
-        [_vm._v("Layout")]
+        [_vm._v("Layout del POP")]
       )
     ])
   }

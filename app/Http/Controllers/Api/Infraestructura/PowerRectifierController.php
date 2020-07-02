@@ -168,7 +168,13 @@ class PowerRectifierController extends Controller
      */
     public function show($id)
     {
-        $powerRectifier = PowerRectifier::with('power_rectifier_type', 'power_rectifier_modules')
+        $powerRectifier = PowerRectifier::with(
+            'power_rectifier_type', 
+            'power_rectifier_modules', 
+            'plane.battery_banks.battery_bank_brand',
+            'plane.plane_type',
+            'power_rectifier_mode'
+        )
         ->where('pop_id', $id)
         ->get();
 

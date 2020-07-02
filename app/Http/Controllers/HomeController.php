@@ -72,9 +72,9 @@ class HomeController extends Controller
 
         // CONTADORES
         // $pop_news_day = Pop::whereDay('created_at', Carbon::now()->format('d'))->count();
-        $pop_news_month = Pop::whereMonth('created_at', Carbon::now()->format('m'))->count();
+        $pop_news_month = Pop::whereMonth('created_at', Carbon::now()->format('m'))->whereYear('created_at', Carbon::now()->format('Y'))->count();
         // $sites_news_day = Site::whereDay('created_at', Carbon::now()->format('d'))->count();
-        $sites_news_month = Site::whereMonth('created_at', Carbon::now()->format('m'))->count();
+        $sites_news_month = Site::whereMonth('created_at', Carbon::now()->format('m'))->whereYear('created_at', Carbon::now()->format('Y'))->count();
         // $technologies_news_day = Technology::whereDay('created_at', Carbon::now()->format('d'))->count();
         // $technologies_news_month = Technology::whereMonth('created_at', Carbon::now()->format('m'))->count();
 
@@ -95,6 +95,8 @@ class HomeController extends Controller
         $last_updated_pops = Carbon::parse(Pop::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
         $last_updated_sites = Carbon::parse(Site::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
         $last_updated_technologies = Carbon::parse(Technology::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
+
+
         
         $last_data_counters = [
             // 'pop_news_day' => $pop_news_day,

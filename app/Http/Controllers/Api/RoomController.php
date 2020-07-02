@@ -8,6 +8,8 @@ use App\Http\Resources\RoomCollection;
 use App\Models\Pop;
 use App\Models\Projection;
 use App\Models\Room;
+use App\Models\RoomDistribution;
+use App\Models\RoomSurface;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -63,18 +65,38 @@ class RoomController extends Controller
     {
         $room = Room::with(
             'pop.rooms.current_room_distribution',
+            'pop.rooms.current_room_surface',
             'pop.rooms.fire_detections.fire_detection_type',
             'pop.rooms.fire_detections.fire_extintion_type',
             'pop.junctions',
             'pop.generator_sets',
             'pop.power_rectifiers',
+            'pop.current_autonomy',
+
+            'pop.rooms.planes.power_rectifiers.power_rectifier_type', 
+            'pop.rooms.planes.power_rectifiers.power_rectifier_modules', 
+            'pop.rooms.planes.battery_banks.battery_bank_brand',
+            'pop.rooms.planes.power_rectifiers.power_rectifier_mode',
+            'pop.rooms.planes.current_redundant_modules',
+            'pop.rooms.planes.plane_type',
+
             'air_conditioners.air_conditioner_consumptions',
             'air_conditioners.air_conditioner_brand.air_conditioner_type',
             'air_conditioners.air_conditioner_chillers',
             'air_conditioners.air_conditioner_condensers',
+
             'current_room_distribution',
+            'current_room_surface',
+
             'fire_detections.fire_detection_type',
-            'fire_detections.fire_extintion_type'
+            'fire_detections.fire_extintion_type',
+
+            'planes.power_rectifiers.power_rectifier_type', 
+            'planes.power_rectifiers.power_rectifier_modules', 
+            'planes.battery_banks.battery_bank_brand',
+            'planes.power_rectifiers.power_rectifier_mode',
+            'planes.current_redundant_modules',
+            'planes.plane_type'
         )->where('id', $id)->first();
 
         return new RoomResource($room);
@@ -116,6 +138,40 @@ class RoomController extends Controller
                 ->orderBy('month', 'desc')
                 ->get();
         return new RoomResource($data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function createRoomDistribution(Request $request, $room_id)
+    {
+        $newDistribution = RoomDistribution:: create([
+            'room_id' => $room_id,
+            'total_capacity' => $request->total_capacity,
+            'used_capacity' => $request->used_capacity
+        ]);
+        return $newDistribution;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function createRoomSurface(Request $request, $room_id)
+    {
+        $newSurface = RoomSurface:: create([
+            'room_id' => $room_id,
+            'total_surface' => $request->total_surface,
+            'used_surface' => $request->used_surface
+        ]);
+        return $newSurface;
     }
 
 }

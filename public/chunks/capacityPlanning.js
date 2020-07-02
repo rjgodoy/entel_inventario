@@ -394,6 +394,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.getRoomsData();
   },
   methods: {
+    orderedRooms: function orderedRooms(pop) {
+      return _.orderBy(pop.rooms, 'order');
+    },
     getRoomsData: function getRoomsData() {
       var _this = this;
 
@@ -481,8 +484,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -491,10 +492,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
-      return Promise.all(/*! import() | chunks/capacity/capacity */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity"), __webpack_require__.e("chunks/capacity/capacity")]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/Capacity.vue"));
+      return Promise.all(/*! import() | chunks/capacity/capacity */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~62b71c60"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity"), __webpack_require__.e("chunks/capacity/capacity")]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/Projection.vue"));
+      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~62b71c60"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/Projection.vue"));
     },
     Requests: function Requests() {
       return __webpack_require__.e(/*! import() | chunks/capacity/requests */ "chunks/capacity/requests").then(__webpack_require__.bind(null, /*! ./Requests */ "./resources/js/components/capacity/Requests.vue"));
@@ -503,7 +504,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/calculator */ "chunks/capacity/calculator").then(__webpack_require__.bind(null, /*! ./Calculator */ "./resources/js/components/capacity/Calculator.vue"));
     },
     Layout: function Layout() {
-      return Promise.all(/*! import() | chunks/capacity/layout */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~5206684a"), __webpack_require__.e("chunks/capacity/layout")]).then(__webpack_require__.bind(null, /*! ./Layout */ "./resources/js/components/capacity/Layout.vue"));
+      return Promise.all(/*! import() | chunks/capacity/layout */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~62b71c60"), __webpack_require__.e("chunks/capacity/layout")]).then(__webpack_require__.bind(null, /*! ./Layout */ "./resources/js/components/capacity/Layout.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ../pop/documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
@@ -555,6 +556,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     }
   },
   created: function created() {
+    this.$eventBus.$on('room-distribution', this.getRoomData);
+    this.$eventBus.$on('room-surface', this.getRoomData);
     this.$eventBus.$on('change-room', this.getRoomData);
   },
   mounted: function mounted() {
@@ -588,6 +591,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     //     })
     // },
     beforeDestroy: function beforeDestroy() {
+      this.$eventBus.$off('room-distribution');
+      this.$eventBus.$off('room-surface');
       this.$eventBus.$off('change-room');
     }
   }
@@ -1043,7 +1048,7 @@ var render = function() {
                         _c(
                           "td",
                           {},
-                          _vm._l(pop.rooms, function(room) {
+                          _vm._l(_vm.orderedRooms(pop), function(room) {
                             return _c(
                               "div",
                               { key: room.id, staticClass: "field" },
@@ -1705,7 +1710,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticStyle: { width: "auto" } }, [
+  return _c("div", {}, [
     _c("header", { staticClass: "modal-card-head has-background-white" }, [
       _c("div", { staticClass: "modal-card-title has-text-weight-semibold" }, [
         _vm._v(
@@ -1721,100 +1726,84 @@ var render = function() {
     _c(
       "section",
       {
-        staticClass: "section modal-card-body hero is-light",
+        staticClass: "modal-card-body hero is-light",
         staticStyle: { "padding-top": "0" }
       },
       [
-        _c("div", { staticClass: "columns hero-body" }, [
-          _c(
-            "div",
-            {
-              staticClass: "column is-1 section",
-              staticStyle: {
-                "padding-left": "10px",
-                "padding-right": "0px",
-                "padding-top": "20px"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "columns is-multiline" },
-                _vm._l(_vm.tabs, function(tab) {
-                  return _c(
-                    "div",
-                    {
-                      key: tab.component,
-                      staticClass: "column is-12",
-                      class:
-                        _vm.currentTab === tab.component &&
-                        (_vm.currentTab == "eco"
-                          ? "has-background-eco"
-                          : "is-bold is-link"),
-                      on: {
-                        click: function($event) {
-                          _vm.currentTab = tab.component
-                        }
+        _c("div", { staticClass: "columns section" }, [
+          _c("div", { staticClass: "column is-1" }, [
+            _c(
+              "div",
+              { staticClass: "columns is-multiline" },
+              _vm._l(_vm.tabs, function(tab) {
+                return _c(
+                  "div",
+                  {
+                    key: tab.component,
+                    staticClass: "column is-12",
+                    class:
+                      _vm.currentTab === tab.component &&
+                      (_vm.currentTab == "eco"
+                        ? "has-background-eco"
+                        : "is-bold is-link"),
+                    on: {
+                      click: function($event) {
+                        _vm.currentTab = tab.component
                       }
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "tile is-child box has-text-centered",
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tile is-child box has-text-centered",
+                        class:
+                          _vm.currentTab === tab.component
+                            ? "is-bold is-link"
+                            : ""
+                      },
+                      [
+                        _c("font-awesome-icon", {
                           class:
                             _vm.currentTab === tab.component
-                              ? "is-bold is-link"
-                              : ""
-                        },
-                        [
-                          _c("font-awesome-icon", {
-                            class:
-                              _vm.currentTab === tab.component
-                                ? "has-text-white"
-                                : "has-text-grey",
-                            attrs: {
-                              icon: [tab.icon_type, tab.icon],
-                              size: "2x"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticStyle: { "padding-top": "5px" } }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "is-size-7 has-text-weight-normal"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(tab.title) +
-                                    "\n                                "
-                                )
-                              ]
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          ),
+                              ? "has-text-white"
+                              : "has-text-grey",
+                          attrs: { icon: [tab.icon_type, tab.icon], size: "2x" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticStyle: { "padding-top": "5px" } }, [
+                          _c(
+                            "div",
+                            { staticClass: "is-size-7 has-text-weight-normal" },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(tab.title) +
+                                  "\n                                "
+                              )
+                            ]
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  ]
+                )
+              }),
+              0
+            )
+          ]),
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "column container is-paddingless" },
+            { staticClass: "column", staticStyle: { "padding-left": "48px" } },
             [
               _c(
                 "keep-alive",
                 [
                   _c(_vm.currentTabComponent, {
                     tag: "component",
-                    attrs: { user: _vm.user, room: _vm.room }
+                    attrs: { user: _vm.user, room: _vm.room, pop: _vm.room.pop }
                   })
                 ],
                 1

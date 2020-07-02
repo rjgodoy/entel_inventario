@@ -66,6 +66,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     GeneratorSet: function GeneratorSet() {
@@ -299,6 +313,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Room: function Room() {
@@ -508,157 +533,158 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.generatorSets.length
-        ? _c("section", { staticClass: "section" }, [
-            _vm.generatorSets.length
-              ? _c(
+  return _vm.generatorSets.length
+    ? _c(
+        "section",
+        { staticStyle: { padding: "24px" } },
+        [
+          _c("div", { staticClass: "columns tile is-ancestor" }, [
+            _c("div", { staticClass: "column is-3 tile is-parent" }, [
+              _c("div", { staticClass: "tile is-child box is-dark is-bold" }, [
+                _c(
                   "div",
                   {
-                    staticClass: "box is-shadowless columns is-paddingless",
-                    staticStyle: { border: "solid 0.5px black" }
+                    staticClass:
+                      "title has-text-weight-bold is-size-5 has-text-white"
                   },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "column is-8" },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "has-text-weight-semibold is-size-6" },
-                          [_vm._v("Grupos Electrógenos")]
-                        ),
-                        _vm._v(" "),
+                  [_vm._v("GRUPOS ELECTROGENOS")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v("Responsable: " + _vm._s(_vm.responsable.area))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v(
+                    "Capacidad total Plano A: " + _vm._s(_vm.totalCapacityA)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v(
+                    "Capacidad total Plano B: " + _vm._s(_vm.totalCapacityB)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v("Capacidad utilizada Plano A: " + _vm._s(_vm.usedA))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v("Capacidad utilizada Plano B: " + _vm._s(_vm.usedB))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v(
+                    "Capacidad disponible Plano A: " + _vm._s(_vm.availableA)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v(
+                    "Capacidad disponible Plano B: " + _vm._s(_vm.availableB)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v("Capacidad Total: " + _vm._s(_vm.totalCapacity))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v("Capacidad Total utilizado: " + _vm._s(_vm.totalUsed))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+                  _vm._v(
+                    "Capacidad Total disponible: " + _vm._s(_vm.totalAvailable)
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column tile is-parent" }, [
+              _c("div", { staticClass: "columns is-multiline tile" }, [
+                _c("div", { staticClass: "column tile" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "box tile is-child",
+                      staticStyle: { border: "solid 0.5px black" }
+                    },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "columns is-multiline" },
                         _vm._l(_vm.generatorSets, function(generatorSet) {
                           return _c(
-                            "div",
+                            "a",
                             {
                               key: generatorSet.id,
-                              staticClass: "tile is-parent columns"
+                              staticClass: "column is-4",
+                              on: {
+                                click: function($event) {
+                                  _vm.isGeneratorModalActive = true
+                                  _vm.generatorSetSelected = generatorSet
+                                }
+                              }
                             },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "tile is-child column is-4",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.isGeneratorModalActive = true
-                                      _vm.generatorSetSelected = generatorSet
-                                    }
-                                  }
-                                },
-                                [_vm._m(0, true)]
-                              )
-                            ]
+                            [_vm._m(1, true)]
                           )
-                        })
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "column has-background-light" }, [
-                      _c("div", [
-                        _vm._v("Responsable: " + _vm._s(_vm.responsable.area))
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "Capacidad total Plano A: " +
-                            _vm._s(_vm.totalCapacityA)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "Capacidad total Plano B: " +
-                            _vm._s(_vm.totalCapacityB)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "Capacidad utilizada Plano A: " + _vm._s(_vm.usedA)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "Capacidad utilizada Plano B: " + _vm._s(_vm.usedB)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "Capacidad disponible Plano A: " +
-                            _vm._s(_vm.availableA)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "Capacidad disponible Plano B: " +
-                            _vm._s(_vm.availableB)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v("Capacidad Total: " + _vm._s(_vm.totalCapacity))
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "Capacidad Total utilizado: " + _vm._s(_vm.totalUsed)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "Capacidad Total disponible: " +
-                            _vm._s(_vm.totalAvailable)
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            active: _vm.isGeneratorModalActive,
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
-          },
-          on: {
-            "update:active": function($event) {
-              _vm.isGeneratorModalActive = $event
-            }
-          }
-        },
-        [
-          _c("modal-generator", {
-            attrs: {
-              generatorSet: _vm.generatorSetSelected,
-              can: _vm.can,
-              user: _vm.user
-            }
-          })
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-modal",
+            {
+              attrs: {
+                active: _vm.isGeneratorModalActive,
+                "has-modal-card": "",
+                "trap-focus": "",
+                "aria-role": "dialog",
+                "aria-modal": ""
+              },
+              on: {
+                "update:active": function($event) {
+                  _vm.isGeneratorModalActive = $event
+                }
+              }
+            },
+            [
+              _c("modal-generator", {
+                attrs: {
+                  generatorSet: _vm.generatorSetSelected,
+                  can: _vm.can,
+                  user: _vm.user
+                }
+              })
+            ],
+            1
+          )
         ],
         1
       )
-    ],
-    1
-  )
+    : _vm._e()
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
+        _vm._v("Grupos Electrógenos")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -697,39 +723,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [_vm._v("Capacidad Total: " + _vm._s(_vm.totalCapacity))]),
-    _vm._v(" "),
-    _c("div", [_vm._v("Capacidad Usada: " + _vm._s(_vm.usedCapacity))]),
-    _vm._v(" "),
-    _c("div", [
-      _vm._v("Capacidad Disponible: " + _vm._s(_vm.availableCapacity))
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "tile is-parent columns is-multiline" },
-      _vm._l(_vm.orderedRooms, function(sala) {
-        return _c(
+  return _c("section", { staticStyle: { padding: "24px" } }, [
+    _c("div", { staticClass: "columns tile is-ancestor" }, [
+      _c("div", { staticClass: "column is-3 tile is-parent" }, [
+        _c("div", { staticClass: "tile is-child box is-dark is-bold" }, [
+          _c(
+            "div",
+            {
+              staticClass: "title has-text-weight-bold is-size-5 has-text-white"
+            },
+            [_vm._v("DISTRIBUCION")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+            _vm._v("Capacidad Total: " + _vm._s(_vm.totalCapacity))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+            _vm._v("Capacidad Usada: " + _vm._s(_vm.usedCapacity))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
+            _vm._v("Capacidad Disponible: " + _vm._s(_vm.availableCapacity))
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "column tile is-parent" }, [
+        _c(
           "div",
-          { key: sala.order, staticClass: "column tile is-6" },
-          [
-            _c("Room", {
-              attrs: {
-                sala: sala,
-                room: _vm.room,
-                pop: _vm.pop,
-                user: _vm.user,
-                can: _vm.can
-              },
-              on: { "room-distribution": _vm.roomsDistribution }
-            })
-          ],
-          1
+          { staticClass: "columns is-multiline tile" },
+          _vm._l(_vm.orderedRooms, function(sala) {
+            return _c(
+              "div",
+              { key: sala.order, staticClass: "column tile is-6" },
+              [
+                _c("Room", {
+                  attrs: {
+                    sala: sala,
+                    room: _vm.room,
+                    pop: _vm.pop,
+                    user: _vm.user,
+                    can: _vm.can
+                  },
+                  on: { "room-distribution": _vm.roomsDistribution }
+                })
+              ],
+              1
+            )
+          }),
+          0
         )
-      }),
-      0
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

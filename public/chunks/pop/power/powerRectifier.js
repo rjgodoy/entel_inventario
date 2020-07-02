@@ -51,14 +51,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['powerRectifier'],
   data: function data() {
     return {};
   },
-  mounted: function mounted() {},
-  computed: {},
+  mounted: function mounted() {
+    console.log(this.powerRectifier);
+  },
+  computed: {
+    powerRectfierModules: function powerRectfierModules() {
+      return this.powerRectifier.power_rectifier_modules;
+    },
+    powerPlantAModulesQuantity: function powerPlantAModulesQuantity() {
+      return this.powerRectfierModules.length;
+    },
+    totalModulesCapacityMasterA: function totalModulesCapacityMasterA() {
+      var _this = this;
+
+      var totalCapacity = 0;
+      Object.keys(this.powerRectfierModules).forEach(function (element) {
+        totalCapacity = totalCapacity + _this.powerRectfierModules[element].capacity;
+      });
+      return totalCapacity;
+    }
+  },
   methods: {}
 });
 
@@ -82,135 +151,149 @@ var render = function() {
   return _c("div", { staticClass: "tile is-child box" }, [
     _c("div", { staticClass: "columns" }, [
       _c("div", { staticClass: "column" }, [
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-light is-size-7",
-            staticStyle: { "margin-top": "5px" }
-          },
-          [_vm._v("Marca")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
-          _vm._v(
-            _vm._s(
-              _vm.powerRectifier.power_rectifier_type
-                ? _vm.powerRectifier.power_rectifier_type.power_rectifier_type
-                : "Sin información"
-            )
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-light is-size-7",
-            staticStyle: { "margin-top": "5px" }
-          },
-          [_vm._v("Modelo")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
-          _vm._v(
-            _vm._s(
-              _vm.powerRectifier.power_rectifier_type
-                ? _vm.powerRectifier.power_rectifier_type.power_rectifier_model
-                : "Sin información"
-            )
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "column has-text-right" },
-        [
-          _c("font-awesome-icon", {
-            staticClass: "has-text-grey-lighter",
-            staticStyle: { opacity: "0.5" },
-            attrs: { icon: ["fas", "random"], size: "3x" }
-          })
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }, [
-        _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
-          _vm._v("Voltaje")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-          _vm._v(
-            _vm._s(
-              _vm.powerRectifier.volt
-                ? _vm.powerRectifier.volt
-                : "Sin información"
-            ) + " "
-          ),
-          _vm.powerRectifier.volt
-            ? _c("span", { staticClass: "is-size-7" }, [_vm._v("V")])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-light is-size-7",
-            staticStyle: { "margin-top": "5px" }
-          },
-          [_vm._v("Capacidad total")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-          _vm._v(
-            _vm._s(
-              _vm.powerRectifier.capacity
-                ? _vm.powerRectifier.capacity
-                : "Sin información"
-            ) + " "
-          ),
-          _vm.powerRectifier.capacity
-            ? _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
-            : _vm._e()
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "column" }, [
-        _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
-          _vm._v("Nº módulos")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-          _vm._v(
-            _vm._s(
-              _vm.powerRectifier.modules
-                ? _vm.powerRectifier.modules
-                : "Sin información"
-            )
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }, [
-        _vm.powerRectifier.room
-          ? _c("div", {}, [
-              _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
-                _vm._v(
-                  _vm._s(_vm.powerRectifier.room.site.nem_site) +
-                    " - " +
-                    _vm._s(_vm.powerRectifier.room.name)
+        _c("div", { staticClass: "columns" }, [
+          _c("div", { staticClass: "column" }, [
+            _c(
+              "div",
+              {
+                staticClass: "has-text-weight-light is-size-7",
+                staticStyle: { "margin-top": "5px" }
+              },
+              [_vm._v("Marca")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
+              _vm._v(
+                _vm._s(
+                  _vm.powerRectifier.power_rectifier_type
+                    ? _vm.powerRectifier.power_rectifier_type
+                        .power_rectifier_type
+                    : "Sin información"
                 )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "has-text-weight-normal is-size-7" }, [
-                _vm._v("Sitio")
-              ])
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "has-text-weight-light is-size-7",
+                staticStyle: { "margin-top": "5px" }
+              },
+              [_vm._v("Modelo")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
+              _vm._v(
+                _vm._s(
+                  _vm.powerRectifier.power_rectifier_type
+                    ? _vm.powerRectifier.power_rectifier_type
+                        .power_rectifier_model
+                    : "Sin información"
+                )
+              )
             ])
-          : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column" }, [
+            _c(
+              "div",
+              { staticClass: "column has-text-right" },
+              [
+                _c("font-awesome-icon", {
+                  staticClass: "has-text-grey-lighter",
+                  staticStyle: { opacity: "0.5" },
+                  attrs: { icon: ["fas", "random"], size: "3x" }
+                })
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field" }, [
+          _c(
+            "div",
+            {
+              staticClass: "has-text-weight-light is-size-7",
+              staticStyle: { "margin-top": "5px" }
+            },
+            [_vm._v("Modo")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
+            _vm._v(
+              "\n                        " +
+                _vm._s(
+                  _vm.powerRectifier.power_rectifier_mode
+                    ? _vm.powerRectifier.power_rectifier_mode.mode
+                    : "Sin información"
+                ) +
+                "\n                    "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field" }, [
+          _c(
+            "div",
+            {
+              staticClass: "has-text-weight-light is-size-7",
+              staticStyle: { "margin-top": "5px" }
+            },
+            [_vm._v("Capacidad total")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
+            _vm._v(
+              "\n                        " +
+                _vm._s(
+                  _vm._f("numeral")(
+                    _vm.powerRectifier.capacity
+                      ? _vm.powerRectifier.capacity
+                      : "Sin información",
+                    "0,0.0"
+                  )
+                ) +
+                " "
+            ),
+            _vm.powerRectifier.capacity
+              ? _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
+              : _vm._e()
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "column" }, [
+        _c("div", { staticClass: "field" }, [
+          _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
+            _vm._v("Nº módulos")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
+            _vm._v(
+              "\n                        " +
+                _vm._s(_vm.powerPlantAModulesQuantity) +
+                "\n                    "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field" }, [
+          _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
+            _vm._v("Capacidad Módulos")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
+            _vm._v(
+              "\n                        " +
+                _vm._s(
+                  _vm._f("numeral")(_vm.totalModulesCapacityMasterA, "0,0.0")
+                ) +
+                " "
+            ),
+            _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
+          ])
+        ])
       ])
     ])
   ])

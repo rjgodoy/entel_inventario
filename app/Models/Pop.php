@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Autonomy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -15,6 +16,26 @@ class Pop extends Model
     protected $guarded = [];
 
     ##################### RELACIONES CON entel_pops #####################
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function autonomies() 
+    {
+        return $this->hasMany(Autonomy::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_autonomy() 
+    {
+        return $this->hasOne(Autonomy::class)->latest();
+    }
 
     /**
      * The attributes that are mass assignable.

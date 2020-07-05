@@ -1141,8 +1141,8 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(
-                            _vm.pop.theoretical_autonomy
-                              ? _vm.pop.theoretical_autonomy
+                            _vm.pop.current_autonomy
+                              ? _vm.pop.current_autonomy.theoretical
                               : "-"
                           ) + " "
                         ),

@@ -147,7 +147,7 @@
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ pop.theoretical_autonomy ? pop.theoretical_autonomy : '-' }} <span class="is-size-6">hrs.</span></p>
+                            <p class="is-size-5 has-text-weight-semibold">{{ pop.current_autonomy ? pop.current_autonomy.theoretical : '-' }} <span class="is-size-6">hrs.</span></p>
                             <p class="is-size-7 has-text-weight-semibold">AUTONOMIA TEORICA</p>
                         </div>
                     </div>

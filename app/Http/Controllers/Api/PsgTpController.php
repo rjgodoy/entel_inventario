@@ -97,7 +97,7 @@ class PsgTpController extends Controller
                     'updated_at' => $tp->FECHA_MODIFICACION
                 ]);
         } 
-        $psgTpData = PsgTp::with('psg_tp_state', 'site')->where('site_id', '!=', null)->orderBy('created_at', 'desc')->get();
+        $psgTpData = PsgTp::with('psg_tp_state', 'site')->where('site_id', '!=', null)->orderBy('created_at', 'asc')->get();
         return $psgTpData;
     }
 

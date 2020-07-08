@@ -26,7 +26,43 @@ class RoomController extends Controller
 
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
 
-        $pops = Pop::with('comuna.zona.crm', 'sites', 'rooms')
+        $pops = Pop::with(
+                'comuna.zona.crm', 
+                'sites', 
+                'rooms.pop.current_autonomy',
+
+                'junctions',
+                'generator_sets',
+                'power_rectifiers',
+                'current_autonomy',
+
+                'rooms.pop.rooms.planes.power_rectifiers.power_rectifier_type', 
+                'rooms.pop.rooms.planes.power_rectifiers.power_rectifier_modules', 
+                'rooms.pop.rooms.planes.battery_banks.battery_bank_brand',
+                'rooms.pop.rooms.planes.power_rectifiers.power_rectifier_mode',
+                'rooms.pop.rooms.planes.current_redundant_modules',
+                'rooms.pop.rooms.planes.plane_type', 
+                
+                'rooms.pop.rooms.power_rectifiers.plane',
+                'rooms.pop.rooms.current_room_delegation',
+                'rooms.planes.power_rectifiers.power_rectifier_type', 
+                'rooms.planes.power_rectifiers.power_rectifier_modules', 
+                'rooms.planes.battery_banks.battery_bank_brand',
+                'rooms.planes.power_rectifiers.power_rectifier_mode',
+                'rooms.planes.current_redundant_modules',
+                'rooms.planes.plane_type',
+
+                'rooms.power_rectifiers',
+                'rooms.current_room_delegation',
+                'rooms.air_conditioners.air_conditioner_consumptions',
+                'rooms.air_conditioners.air_conditioner_brand.air_conditioner_type',
+                'rooms.air_conditioners.air_conditioner_chillers',
+                'rooms.air_conditioners.air_conditioner_condensers',
+
+
+                'rooms.current_room_distribution',
+                'rooms.current_room_surface'
+            )
             ->whereHas('sites', function($q) use($text) {
                 if ($text) {
                     $q->where('nem_site', 'LIKE', "%$text%")
@@ -64,39 +100,48 @@ class RoomController extends Controller
     public function show($id)
     {
         $room = Room::with(
-            'pop.rooms.current_room_distribution',
-            'pop.rooms.current_room_surface',
-            'pop.rooms.fire_detections.fire_detection_type',
-            'pop.rooms.fire_detections.fire_extintion_type',
             'pop.junctions',
             'pop.generator_sets',
-            'pop.power_rectifiers',
             'pop.current_autonomy',
 
-            'pop.rooms.planes.power_rectifiers.power_rectifier_type', 
-            'pop.rooms.planes.power_rectifiers.power_rectifier_modules', 
+            'pop.rooms.current_room_distribution',
+            'pop.rooms.current_room_surface',
+            'pop.rooms.current_room_delegation',
+
+            'pop.rooms.fire_detections.fire_detection_type',
+            'pop.rooms.fire_detections.fire_extintion_type',
+
+            'pop.rooms.power_rectifiers.plane',
+            'pop.rooms.power_rectifiers.power_rectifier_type',
+            'pop.rooms.power_rectifiers.power_rectifier_modules',
+            'pop.rooms.power_rectifiers.power_rectifier_mode',
+
+            // 'pop.rooms.planes.power_rectifiers.power_rectifier_type', 
+            // 'pop.rooms.planes.power_rectifiers.power_rectifier_modules', 
+            // 'pop.rooms.planes.power_rectifiers.power_rectifier_mode',
             'pop.rooms.planes.battery_banks.battery_bank_brand',
-            'pop.rooms.planes.power_rectifiers.power_rectifier_mode',
             'pop.rooms.planes.current_redundant_modules',
-            'pop.rooms.planes.plane_type',
+            'pop.rooms.planes.plane_type'
+            
+            
 
-            'air_conditioners.air_conditioner_consumptions',
-            'air_conditioners.air_conditioner_brand.air_conditioner_type',
-            'air_conditioners.air_conditioner_chillers',
-            'air_conditioners.air_conditioner_condensers',
+            // 'air_conditioners.air_conditioner_consumptions',
+            // 'air_conditioners.air_conditioner_brand.air_conditioner_type',
+            // 'air_conditioners.air_conditioner_chillers',
+            // 'air_conditioners.air_conditioner_condensers',
 
-            'current_room_distribution',
-            'current_room_surface',
+            // 'current_room_distribution',
+            // 'current_room_surface',
 
-            'fire_detections.fire_detection_type',
-            'fire_detections.fire_extintion_type',
+            // 'fire_detections.fire_detection_type',
+            // 'fire_detections.fire_extintion_type'
 
-            'planes.power_rectifiers.power_rectifier_type', 
-            'planes.power_rectifiers.power_rectifier_modules', 
-            'planes.battery_banks.battery_bank_brand',
-            'planes.power_rectifiers.power_rectifier_mode',
-            'planes.current_redundant_modules',
-            'planes.plane_type'
+            // 'planes.power_rectifiers.power_rectifier_type', 
+            // 'planes.power_rectifiers.power_rectifier_modules', 
+            // 'planes.battery_banks.battery_bank_brand',
+            // 'planes.power_rectifiers.power_rectifier_mode',
+            // 'planes.current_redundant_modules',
+            // 'planes.plane_type'
         )->where('id', $id)->first();
 
         return new RoomResource($room);

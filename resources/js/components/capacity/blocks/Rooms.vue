@@ -3,7 +3,7 @@
 
         <div class="columns tile is-ancestor">
 
-            <div class="column is-2 tile is-parent">
+            <!-- <div class="column is-2 tile is-parent">
                 <div class="tile is-child box is-dark is-bold">
 
                     <div class="block">
@@ -95,7 +95,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
             <div class="column tile is-parent">
                 <div class="columns is-multiline tile">
@@ -175,7 +175,6 @@
                 this.totalBatteryCapacity = 0,
                 this.usedBatteryCapacity = 0,
                 this.availableBatteryCapacity = 0
-                // console.log(val)
             }
         },
         

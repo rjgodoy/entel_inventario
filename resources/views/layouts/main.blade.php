@@ -49,7 +49,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="has-background-black-bis">
     <div id="app">
         {{-- {{ auth()->user()->permissions }} --}}
 

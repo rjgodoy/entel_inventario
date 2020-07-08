@@ -127,12 +127,12 @@
                                     </router-link>
                                 </b-dropdown-item>
 
-                                <hr class="dropdown-divider">
+                                <!-- <hr class="dropdown-divider"> -->
 
-                                <b-dropdown-item @click="changeStyle" v-model="darkMode" disabled>
+                                <!-- <b-dropdown-item @click="changeStyle" v-model="darkMode" disabled>
                                     <font-awesome-icon :icon="['fas','adjust']" />
                                     &nbsp;{{ style }}
-                                </b-dropdown-item>
+                                </b-dropdown-item> -->
 
                                 <hr class="navbar-divider">
 

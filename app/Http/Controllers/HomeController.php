@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\AirConditioner;
 use App\Models\Crm;
 use App\Models\Folder;
+use App\Models\GeneratorGroup;
+use App\Models\GeneratorMotor;
 use App\Models\GeneratorSet;
+use App\Models\GeneratorSetMaintainer;
+use App\Models\GeneratorTank;
+use App\Models\GeneratorTta;
 use App\Models\Junction;
 use App\Models\Menu;
 use App\Models\Pop;
@@ -47,6 +52,61 @@ class HomeController extends Controller
     {
         $roles = Role::pluck('slug')->toArray();
         $request->user()->authorizeRoles($roles);
+
+
+        // $nem_techs = ['ZA113', 'BI225'];
+
+        // foreach ($nem_techs as $nem_tech) {
+        //     $site = Site::where('nem_site', $nem_tech)->first();
+
+        //     if($site) {
+        //         $generatorSet = GeneratorSet::create([
+        //             'pop_id' => $site->pop_id,
+        //             'serial_number' => $nem_tech,
+        //             // 'created_at' => Carbon::now(),
+        //             // 'updated_at' => Carbon::now()
+        //         ]);
+
+        //         $generatorGroup = GeneratorGroup::create([
+        //             'generator_set_id' => $generatorSet->id,
+        //             'serial_number' => $nem_tech,
+        //             // 'created_at' => Carbon::now(),
+        //             // 'updated_at' => Carbon::now()
+        //         ]);
+
+        //         $generatorMotor = GeneratorMotor::create([
+        //             'generator_set_id' => $generatorSet->id,
+        //             'serial_number' => $nem_tech,
+        //             // 'created_at' => Carbon::now(),
+        //             // 'updated_at' => Carbon::now()
+        //         ]);
+
+        //         $generatorTank = GeneratorTank::create([
+        //             'generator_set_id' => $generatorSet->id,
+        //             'serial_number' => $nem_tech,
+        //             // 'created_at' => Carbon::now(),
+        //             // 'updated_at' => Carbon::now()
+        //         ]);
+
+        //         $generatorTta = GeneratorTta::create([
+        //             'generator_set_id' => $generatorSet->id,
+        //             'serial_number' => $nem_tech,
+        //             // 'created_at' => Carbon::now(),
+        //             // 'updated_at' => Carbon::now()
+        //         ]);
+
+        //         $generatorSetMaintainer = GeneratorSetMaintainer::create([
+        //             'generator_set_id' => $generatorSet->id,
+        //             'telecom_company_id' => 1,
+        //             // 'created_at' => Carbon::now(),
+        //             // 'updated_at' => Carbon::now()
+        //         ]);
+
+        //     }
+        // }
+
+
+
         
         // ⚠️ Create api_token
         // $users = User::where('estado', 1)->get();

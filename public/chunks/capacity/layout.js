@@ -56,6 +56,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -77,8 +80,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   props: ['user', 'room'],
   data: function data() {
     return {
-      junctions: [],
-      generatorSets: Array,
+      junctions: Object,
+      generatorSets: Object,
       canEditJunctions: null,
       canEditGeneratorGroups: null
     };
@@ -211,23 +214,39 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _c("MiniJunctions", {
-          attrs: {
-            pop: _vm.pop,
-            junctions: _vm.junctions,
-            can: _vm.canEditJunctions,
-            user: _vm.user
-          }
-        }),
-        _vm._v(" "),
-        _c("MiniGeneratorSets", {
-          attrs: {
-            pop: _vm.pop,
-            generatorSets: _vm.generatorSets,
-            can: _vm.canEditGeneratorGroups,
-            user: _vm.user
-          }
-        }),
+        _c("div", { staticClass: "columns tile is-ancestor" }, [
+          _c(
+            "div",
+            { staticClass: "column is-5 tile" },
+            [
+              _c("MiniJunctions", {
+                attrs: {
+                  pop: _vm.pop,
+                  junctions: _vm.junctions,
+                  can: _vm.canEditJunctions,
+                  user: _vm.user
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "column tile" },
+            [
+              _c("MiniGeneratorSets", {
+                attrs: {
+                  pop: _vm.pop,
+                  generatorSets: _vm.generatorSets,
+                  can: _vm.canEditGeneratorGroups,
+                  user: _vm.user
+                }
+              })
+            ],
+            1
+          )
+        ]),
         _vm._v(" "),
         _c("MiniRooms", {
           attrs: {

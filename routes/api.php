@@ -173,7 +173,7 @@ Route::middleware('auth:api')->group(function () {
 
 			// Power Rectifiers
 				Route::apiResource('plane','Api\PlaneController');
-				Route::get('roomPlanes/{pop_id}','Api\PlaneController@roomPlanes');
+				Route::get('roomPlanes/{room_id}','Api\PlaneController@roomPlanes');
 
 				Route::apiResource('powerRectifiers','Api\Infraestructura\PowerRectifierController');
 				Route::get('powerRectifiersExport', 'Api\Infraestructura\PowerRectifierController@export');

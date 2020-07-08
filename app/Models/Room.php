@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Room extends Model
 {
+    use SoftDeletes;
+    
     protected $connection = 'mysql_entel_pops';
     protected $table = 'entel_pops.rooms';
 
@@ -78,7 +81,7 @@ class Room extends Model
      */
     public function planes() 
     {
-        return $this->hasMany(Plane::class);
+        return $this->belongsToMany(Plane::class, 'entel_g_redes_inventario.plane_room')->withTimestamps();
     }
 
     /**
@@ -99,6 +102,26 @@ class Room extends Model
     public function room_distributions()
     {
         return $this->hasMany(RoomDistribution::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function room_delegations()
+    {
+        return $this->hasMany(RoomDelegation::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_room_delegation()
+    {
+        return $this->hasOne(RoomDelegation::class)->latest();
     }
 
     /**

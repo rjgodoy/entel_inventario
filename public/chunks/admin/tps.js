@@ -153,10 +153,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/api/psgTp?api_token=".concat(this.user.api_token, "&page=").concat(this.currentPage)).then(function (response) {
         console.log(response.data);
         _this.data = response.data;
-        _this.loading = false;
-        var i = 0;
-        _this.finished = []; // this.data.forEach((element, index, array) => {
-        //     element.psg_tp_state.id == 8 && this.finished.push(element) 
+        _this.loading = false; // let i = 0
+        // this.finished = []
+        // this.data.forEach((element, index, array) => {
+        //     element.psg_tp_state_id == 8 && this.finished.push(element) 
         //     i++
         //     if(i == array.length && this.finished.length) {
         //         console.log(this.finished.length)
@@ -165,57 +165,47 @@ __webpack_require__.r(__webpack_exports__);
         // })
       });
     },
-    insertFinisheds: function insertFinisheds() {
-      var _this2 = this;
-
-      // console.log(this.finished)
-      var resource = '';
-      this.finished.forEach(function (element) {
-        switch (element.work_type_id) {
-          case 1:
-            resource = 'powerRectifiers';
-            break;
-
-          case 2:
-            resource = 'generatorSets';
-            break;
-
-          case 3:
-            resource = 'infrastructures';
-            break;
-
-          case 4:
-            resource = 'airConditioners';
-            break;
-
-          case 5:
-            resource = 'transformers';
-            break;
-
-          case 6:
-            resource = 'verticalStructures';
-            break;
-
-          case 7:
-            resource = 'batteries';
-            break;
-
-          default:
-            break;
-        }
-
-        var params = {
-          'api_token': _this2.user.api_token,
-          'tp_id': element.tp_id,
-          'site_id': element.site_id
-        };
-        axios.post("/api/".concat(resource), params).then(function (response) {
-          console.log(response.data);
-
-          _this2.syncData();
-        });
-      });
-    },
+    // insertFinisheds() {
+    //     // console.log(this.finished)
+    //     let resource = ''
+    //     this.finished.forEach(element => {
+    //          switch(element.work_type_id) {
+    //             case 1:
+    //                 resource = 'powerRectifiers'
+    //                 break
+    //             case 2:
+    //                 resource = 'generatorSets'
+    //                 break
+    //             case 3:
+    //                 resource = 'infrastructures'
+    //                 break
+    //             case 4:
+    //                 resource = 'airConditioners'
+    //                 break
+    //             case 5:
+    //                 resource = 'transformers'
+    //                 break
+    //             case 6:
+    //                 resource = 'verticalStructures'
+    //                 break
+    //             case 7:
+    //                 resource = 'batteries'
+    //                 break
+    //             default:
+    //                 break
+    //         }
+    //         let params = {
+    //             'api_token': this.user.api_token,
+    //             'tp_id': element.tp_id,
+    //             'site_id': element.site_id
+    //         }
+    //         axios.post(`/api/${resource}`, params)
+    //         .then(response => {
+    //             console.log(response.data)
+    //             this.syncData()
+    //         })
+    //     })
+    // },
     tagColor: function tagColor(state_id) {
       var color = '';
       var text = '';

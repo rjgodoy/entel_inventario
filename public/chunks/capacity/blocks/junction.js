@@ -85,10 +85,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalJunction: function ModalJunction() {
@@ -167,18 +163,27 @@ __webpack_require__.r(__webpack_exports__);
       return this.totalCapacity - this.withoutBatteriesCapacity;
     },
     batteriesRecharge: function batteriesRecharge() {
-      // FALTA MEDICIONES DE PLANTA
-      return 75;
+      var _this3 = this;
+
+      var total = 0;
+      Object.keys(this.pop.rooms).forEach(function (element) {
+        var room = _this3.pop.rooms[element];
+        Object.keys(room.planes).forEach(function (item) {
+          var plane = room.planes[item];
+          total += _this3.batteryRechargePower(plane);
+        });
+      });
+      return total;
     },
     totalUsedCapacity: function totalUsedCapacity() {
-      var _this3 = this;
+      var _this4 = this;
 
       var punctualConsumption = 0;
 
       if (this.junctions.length) {
         Object.keys(this.junctions).forEach(function (element) {
-          if (_this3.junctions[element].latest_measurement) {
-            punctualConsumption += _this3.junctions[element].latest_measurement.punctual_consumption;
+          if (_this4.junctions[element].latest_measurement) {
+            punctualConsumption += _this4.junctions[element].latest_measurement.punctual_consumption;
           }
         });
       }
@@ -260,6 +265,16 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return capacity;
+    },
+    batteryRechargePower: function batteryRechargePower(plane) {
+      return this.rechargeCurrent(plane) * plane.float_tension / 1000;
+    },
+    rechargeCurrent: function rechargeCurrent(plane) {
+      var current = 0;
+      Object.keys(plane.battery_banks).forEach(function (item) {
+        current += plane.battery_banks[item].capacity;
+      });
+      return plane.recharge_factor * current;
     }
   }
 });
@@ -283,10 +298,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "tile" },
     [
-      _c("section", { staticStyle: { padding: "24px" } }, [
+      _c("section", { staticClass: "tile", staticStyle: { padding: "24px" } }, [
         _c("div", { staticClass: "columns tile is-ancestor" }, [
-          _c("div", { staticClass: "column is-2 tile is-parent" }, [
+          _c("div", { staticClass: "column tile is-parent" }, [
             _c("div", { staticClass: "tile is-child box is-dark is-bold" }, [
               _c("div", { staticClass: "block" }, [
                 _c(
@@ -391,19 +407,19 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "box tile is-child",
+                    staticClass: "box tile",
                     staticStyle: { border: "solid 0.5px black" }
                   },
                   [
                     _c(
                       "div",
-                      { staticClass: "columns is-multiline" },
+                      { staticClass: "columns tile is-parent" },
                       _vm._l(_vm.junctions, function(junction) {
                         return _c(
                           "a",
                           {
                             key: junction.id,
-                            staticClass: "column is-4",
+                            staticClass: "box tile is-child column",
                             on: {
                               click: function($event) {
                                 _vm.isJunctionModalActive = true
@@ -460,7 +476,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box is-success" }, [
+    return _c("div", {}, [
       _c("div", { staticClass: "columns" }, [
         _c("div", { staticClass: "column" }, [
           _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [

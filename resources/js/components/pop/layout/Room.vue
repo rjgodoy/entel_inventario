@@ -12,55 +12,58 @@
 
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
-                    <b-field label="PLANTAS RECTIFICADORAS" label-position="on-border" class="tile" 
-                        :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
-                        <div class="tile is-vertical box is-shadowless" style="border: solid 0.1rem #cccccc">
+                    <b-field label="PLANTAS RECTIFICADORAS" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
+                        <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
 
-                            <div class="tile" v-if="hasPlanes(sala)">
-                                <div class="tile is-parent"
-                                    v-for="plane in planes" 
-                                    v-if="plane.room_id == sala.id" 
-                                    :key="plane.id">
-                                    <b-field :label="'PLANO '+ plane.plane_type.type" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
-                                        <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
-                                            <div class="tile is-vertical">
-                                                <div class="tile is-parent" 
-                                                    v-if="hasPowerRectifiers(plane)"
-                                                    v-for="powerRectifier in plane.power_rectifiers" 
-                                                    :key="powerRectifier.id" 
-                                                    @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier">
-                                                    <a class="box tile is-child">
-                                                        <div class="field">
-                                                            <div class="has-text-weight-bold is-size-6">PLANTA Nº {{ powerRectifier.id }}</div>
+                            <div class="tile is-vertical" v-if="hasPlanes(sala)">
+                                <div class="tile is-parent columns is-multiline">
+                                    <div class="tile is-parent column is-6" v-for="plane in planes" :key="plane.id">
+
+                                        <b-field :label="'PLANO '+ plane.plane_type.type" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
+                                            <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                                <div class="tile is-vertical">
+
+                                                    <div class="tile is-parent" v-if="sala.power_rectifiers.length">
+                                                        <div class="columns is-multiline tile">
+                                                            <div class="tile is-child column is-6" 
+                                                                v-for="powerRectifier in sala.power_rectifiers" 
+                                                                :key="powerRectifier.id" 
+                                                                @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier"
+                                                                v-if="powerRectifierBelongsToPlane(powerRectifier, plane)">
+                                                                <a class="box">
+                                                                    <div class="field">
+                                                                        <div class="has-text-weight-bold is-size-7">PLANTA Nº </div>
+                                                                        <span class="has-text-weight-bold is-size-6">{{ powerRectifier.id }}</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </a>
-                                                </div>
+                                                    </div>
 
-                                                <div class="tile is-parent">
-                                                    <div class="box tile is-child">
-                                                        <div class="is-size-7">Capacidad nominal: {{ nominalCapacity(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Capacidad instalada: {{ installedCapacity(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Potencia real de carga: {{ chargeRealPower(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Corriente recarga: {{ rechargeCurrent(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Potencia recarga baterías: {{ batteryRechargePower(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Corriente total carga + baterías: {{ totalCurrent(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Potencia total carga + baterías: {{ totalPower(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Capacidad real: {{ realPlaneCapacity(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Capacidad disponible: {{ availablePlaneCapacity(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Porcentaje Uso: {{ usePercentPlane(plane) * 100 | numeral('0,0.0') }}</div>
+                                                    <div class="tile is-parent">
+                                                        <div class="box tile is-child">
+                                                            <div class="is-size-7">Capacidad nominal: {{ nominalCapacity(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Capacidad instalada: {{ installedCapacity(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Potencia real de carga: {{ chargeRealPower(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Corriente recarga: {{ rechargeCurrent(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Potencia recarga baterías: {{ batteryRechargePower(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Corriente total carga + baterías: {{ totalCurrent(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Potencia total carga + baterías: {{ totalPower(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Capacidad real: {{ realPlaneCapacity(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Capacidad disponible: {{ availablePlaneCapacity(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Porcentaje Uso: {{ usePercentPlane(plane) * 100 | numeral('0,0.0') }}</div>
 
-                                                        <div class="is-size-7">Capacidad baterias: {{ batteryTotalCapacityPlane(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Utilizado baterias: {{ chargeRealPower(plane) | numeral('0,0.0') }}</div>
-                                                        <div class="is-size-7">Disponible baterias: {{ availableBatteryCapacityPlane(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Capacidad baterias: {{ batteryTotalCapacityPlane(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Utilizado baterias: {{ chargeRealPower(plane) | numeral('0,0.0') }}</div>
+                                                            <div class="is-size-7">Disponible baterias: {{ availableBatteryCapacityPlane(plane) | numeral('0,0.0') }}</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </b-field>
-                                </div> 
-                            </div>
+                                        </b-field>
+                                    </div> 
+                                </div>
 
-                            <div class="tile" v-if="hasPlanes(sala)">
                                 <div class="tile is-parent">
                                     <b-field label="CAPACIDAD SALA" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
 
@@ -97,7 +100,7 @@
                     <b-field label="CLIMATIZACION" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
 
-                            <div class="tile is-vertical" v-if="hasAirConditioners(sala)">
+                            <div class="tile is-parent is-vertical" v-if="hasAirConditioners(sala)">
                                 <a class="tile is-child box" 
                                     v-for="airConditioner in airConditioners" 
                                     v-if="airConditioner.room_id == sala.id" 
@@ -128,7 +131,7 @@
                         :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div v-if="!canEditSurface" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
 
-                            <div class="tile is-vertical" v-if="sala.current_room_surface">
+                            <div class="tile is-parent is-vertical" v-if="sala.current_room_surface">
                                 <div class="tile box is-child has-text-centered">
                                     <div class="field">
                                         <div class="has-text-weight-bold is-size-6">SUPERFICIE</div>
@@ -165,10 +168,8 @@
                             </div>
                         </div>
 
-                        <a v-if="canEditSurface" 
-                            @click="isSurfaceModalActive = true"
-                            class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-vertical" v-if="sala.current_room_surface">
+                        <a v-if="canEditSurface" @click="isSurfaceModalActive = true" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                            <div class="tile is-parent is-vertical" v-if="sala.current_room_surface">
                                 <div class="tile box is-child has-text-centered">
                                     <div class="field">
                                         <div class="has-text-weight-bold is-size-6">SUPERFICIE</div>
@@ -211,34 +212,33 @@
                         :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
 
-                            <div class="tile is-vertical" v-if="sala.fire_detections.length">
-                                <div class="tile box is-child has-text-right">
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">INCENDIO</div>
+                            <div class="tile is-parent is-vertical" v-if="sala.fire_detections.length">
+                                <b-field label="INCENDIO" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
+                                    <div class="tile box is-child is-shadowless" style="border: solid 0.1rem #cccccc">
+                                        <div class="field">
+                                            <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
+                                            <div class="has-text-weight-normal is-size-7">Detección</div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
+                                            <div class="has-text-weight-normal is-size-7">Extinción</div>
+                                        </div>
                                     </div>
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
-                                        <div class="has-text-weight-normal is-size-7">Detección</div>
-                                    </div>
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
-                                        <div class="has-text-weight-normal is-size-7">Extinción</div>
-                                    </div>
-                                </div>
 
-                                <!-- <div class="tile box is-child has-text-right">
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">VIGILANCIA</div>
-                                    </div>
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
-                                        <div class="has-text-weight-normal is-size-7">Cámara</div>
-                                    </div>
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
-                                        <div class="has-text-weight-normal is-size-7">Gestión Remota</div>
-                                    </div>
-                                </div> -->
+                                    <!-- <div class="tile box is-child has-text-right">
+                                        <div class="field">
+                                            <div class="has-text-weight-bold is-size-6">VIGILANCIA</div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
+                                            <div class="has-text-weight-normal is-size-7">Cámara</div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
+                                            <div class="has-text-weight-normal is-size-7">Gestión Remota</div>
+                                        </div>
+                                    </div> -->
+                                </b-field>
                             </div>
 
                             <div class="tile columns is-vcentered" v-if="!sala.fire_detections.length">
@@ -260,7 +260,7 @@
                     <b-field label="DISTRIBUCION" label-position="on-border" class="tile"
                         :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div v-if="!canEditDistribution" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-vertical" v-if="true">
+                            <div class="tile is-parent is-vertical" v-if="true">
                                 <div class="tile box is-child has-text-right">
                                     <div class="level">
                                         <div class="level-item has-text-centered">
@@ -289,7 +289,7 @@
                         <a v-if="canEditDistribution" 
                             @click="isDistributionModalActive = true"
                             class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-vertical" v-if="true">
+                            <div class="tile is-parent is-vertical" v-if="true">
                                 <div class="tile box is-child has-text-right">
                                     <div class="level">
                                         <div class="level-item has-text-centered">
@@ -420,7 +420,7 @@
         },
 
         mounted() {
-            console.log(this.sala)
+            // console.log(this.sala)
             this.getAirConditioners()
             // this.getPowerRectifiers()
             this.getPlanes()
@@ -525,7 +525,7 @@
 
             batteryData(value) {
                 this.$emit('battery-data', value);
-            }
+            },
         },
 
         methods: {
@@ -539,7 +539,7 @@
                     let plane = sala.planes[element]
                     powerRectifiersInRoom += plane.power_rectifiers.length                        
                 })
-                console.log(powerRectifiersInRoom)
+                // console.log(powerRectifiersInRoom)
                 return powerRectifiersInRoom
             },
 
@@ -547,19 +547,23 @@
                 let bool = false
                 if(this.planes) {
                     Object.keys(this.planes).forEach(element => {
-                        bool = !bool ? this.planes[element].room_id == sala.id : bool
+                        let plane = this.planes[element]
+                        Object.keys(plane.rooms).forEach(item => {
+                            bool = !bool ? plane.rooms[item].id == sala.id : bool
+                        })
                     })
                 }
                 return bool
             },
 
-            hasPowerRectifiers(plane) {
+            powerRectifierBelongsToPlane(powerRectifier, plane) {
                 let bool = false
-                if(plane.power_rectifiers) {
+                // if (plane.power_rectifiers) {
                     Object.keys(plane.power_rectifiers).forEach(element => {
-                        bool = !bool ? plane.power_rectifiers[element].plane_id == plane.id : bool
+                        let pr = plane.power_rectifiers[element]
+                        bool = pr.id == powerRectifier.id && !bool ? true : bool
                     })
-                }
+                // }
                 return bool
             },
 
@@ -574,9 +578,8 @@
             },
 
             getPlanes() {
-                axios.get(`/api/roomPlanes/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/roomPlanes/${this.sala.id}?api_token=${this.user.api_token}`)
                 .then((response) => {
-                    // console.log(response.data)
                     this.planes = response.data.planes
                     this.canEditPowerRectifiers = response.data.can ? response.data.can : false
                 })
@@ -656,6 +659,7 @@
                 return this.totalPower(plane) / this.realPlaneCapacity(plane)
             },
 
+
             batteryTotalCapacityPlane(plane) {
                 let capacity = 0
                 Object.keys(plane.battery_banks).forEach(item => {
@@ -672,8 +676,8 @@
 
             totalCapacityRoom(sala) {
                 let realRoomCapacity = 0
-                Object.keys(sala.planes).forEach(element => {
-                    let plane = sala.planes[element]
+                Object.keys(this.planes).forEach(element => {
+                    let plane = this.planes[element]
                     realRoomCapacity += this.realPlaneCapacity(plane)
                 })
                 this.totalPRCapacity = realRoomCapacity
@@ -682,8 +686,8 @@
 
             usedCapacityRoom(sala) {
                 let usedRoomCapacity = 0
-                Object.keys(sala.planes).forEach(element => {
-                    let plane = sala.planes[element]
+                Object.keys(this.planes).forEach(element => {
+                    let plane = this.planes[element]
                     usedRoomCapacity += this.totalPower(plane)
                 })
                 this.usedPRCapacity = usedRoomCapacity
@@ -692,13 +696,40 @@
 
             availableCapacityRoom(sala) {
                 let availableRoomCapacity = 10000000
-                Object.keys(sala.planes).forEach(element => {
-                    let plane = sala.planes[element]
-                    // if (plane.room_id == sala.id) {
-                    if(availableRoomCapacity > this.availablePlaneCapacity(plane)) {
-                        availableRoomCapacity = this.availablePlaneCapacity(plane)
+                let availableRoomCapacityA = 10000000
+                let availableRoomCapacityB = 10000000
+                Object.keys(this.planes).forEach(element => {
+                    let plane = this.planes[element]
+                    if(sala.current_room_delegation) {
+                        switch(sala.current_room_delegation.plane_delegation_type_id) {
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                                availableRoomCapacity = this.availablePlaneCapacity(plane)
+                                break
+                            case 5:
+                            case 6:
+                                if(availableRoomCapacity > this.availablePlaneCapacity(plane)) {
+                                    availableRoomCapacity = this.availablePlaneCapacity(plane)
+                                }
+                                break
+                            case 7:
+                                if(availableRoomCapacityA > this.availablePlaneCapacity(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                                    availableRoomCapacityA = this.availablePlaneCapacity(plane)
+                                    // i++
+                                } 
+
+                                if(availableRoomCapacityB > this.availablePlaneCapacity(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                                    availableRoomCapacityB = this.availablePlaneCapacity(plane)
+                                }
+                                availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB
+                                break
+                            case 8:
+                            default:
+                                break
+                        }
                     }
-                    // }
                 })
                 availableRoomCapacity = availableRoomCapacity < 10000000 ? availableRoomCapacity : 0
                 this.availablePRCapacity = availableRoomCapacity

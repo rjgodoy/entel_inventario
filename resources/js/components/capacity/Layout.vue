@@ -5,22 +5,25 @@
                 <div class="has-text-weight-semibold has-text-dark is-size-3 has-text-left">Layout del POP</div>
             </div>
 
-            <!-- Empalme -->
-            <MiniJunctions 
-                :pop="pop"
-                :junctions="junctions"
-                :can="canEditJunctions"
-                :user="user"
-            />
-                
-            <!-- Grupo Electrógeno -->
-            <MiniGeneratorSets 
-                :pop="pop"
-                :generatorSets="generatorSets"
-                :can="canEditGeneratorGroups"
-                :user="user"
-            />
-                            
+            <div class="columns tile is-ancestor">
+                <div class="column is-5 tile">
+                    <MiniJunctions 
+                        :pop="pop"
+                        :junctions="junctions"
+                        :can="canEditJunctions"
+                        :user="user"
+                    />
+                </div>
+                <div class="column tile">
+                    <MiniGeneratorSets 
+                        :pop="pop"
+                        :generatorSets="generatorSets"
+                        :can="canEditGeneratorGroups"
+                        :user="user"
+                    />
+                </div>
+            </div>
+                    
             <!-- Salas -->
             <MiniRooms 
                 :pop="pop"
@@ -55,8 +58,8 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
 
         data() {
             return {
-                junctions: [],
-                generatorSets: Array,
+                junctions: Object,
+                generatorSets: Object,
 
                 canEditJunctions: null,
                 canEditGeneratorGroups: null,

@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <section class="" 
+    <div class="tile">
+        <section class="tile" 
             style="padding: 24px;">
             <div class="columns tile is-ancestor">
 
-                <div class="column is-2 tile is-parent">
+                <div class="column tile is-parent">
                     <div class="tile is-child box is-dark is-bold">
                         <div class="block">
                             <div class="title has-text-weight-bold is-size-6 has-text-white">EMPALMES</div>
@@ -31,16 +31,12 @@
                 <div class="column tile is-parent">
                     <div class="columns is-multiline tile">
                         <div class="column tile">
-                            <div class="box tile is-child" style="border: solid 0.5px black">
-                                <!-- <div class="field">
-                                    <div class="has-text-weight-semibold is-size-6">Empalmes</div>
-                                </div> -->
-                                
-                                <div class="columns is-multiline">
-                                    <a class="column is-4" 
+                            <div class="box tile" style="border: solid 0.5px black">
+                                <div class="columns tile is-parent">
+                                    <a class="box tile is-child column" 
                                         v-for="junction in junctions" :key="junction.id"
                                         @click="isJunctionModalActive = true; junctionSelected = junction">
-                                        <div class="box is-success">
+                                        <div class="">
                                             <div class="columns">
                                                 <div class="column">
                                                     <div class="has-text-weight-semibold is-size-6">Empalme</div>
@@ -159,8 +155,16 @@
                 return this.totalCapacity - this.withoutBatteriesCapacity
             },
 
-            batteriesRecharge() {  // FALTA MEDICIONES DE PLANTA
-                return 75
+            batteriesRecharge() {
+                let total = 0
+                Object.keys(this.pop.rooms).forEach(element => {
+                    let room = this.pop.rooms[element]
+                    Object.keys(room.planes).forEach(item => {
+                        let plane = room.planes[item]
+                        total += this.batteryRechargePower(plane)
+                    })
+                })
+                return total
             },
 
             totalUsedCapacity() {
@@ -255,6 +259,18 @@
                     }
                 }
                 return capacity
+            },
+
+            batteryRechargePower(plane) {
+                return this.rechargeCurrent(plane) * plane.float_tension / 1000
+            },
+
+            rechargeCurrent(plane) {
+                let current = 0
+                Object.keys(plane.battery_banks).forEach(item => {
+                    current += plane.battery_banks[item].capacity
+                })
+                return plane.recharge_factor * current
             },
 
         }

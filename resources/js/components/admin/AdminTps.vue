@@ -152,10 +152,10 @@
                     console.log(response.data)
                     this.data = response.data
                     this.loading = false
-                    let i = 0
-                    this.finished = []
+                    // let i = 0
+                    // this.finished = []
                     // this.data.forEach((element, index, array) => {
-                    //     element.psg_tp_state.id == 8 && this.finished.push(element) 
+                    //     element.psg_tp_state_id == 8 && this.finished.push(element) 
                     //     i++
                     //     if(i == array.length && this.finished.length) {
                     //         console.log(this.finished.length)
@@ -165,48 +165,48 @@
                 })
             },
 
-            insertFinisheds() {
-                // console.log(this.finished)
-                let resource = ''
-                this.finished.forEach(element => {
-                     switch(element.work_type_id) {
-                        case 1:
-                            resource = 'powerRectifiers'
-                            break
-                        case 2:
-                            resource = 'generatorSets'
-                            break
-                        case 3:
-                            resource = 'infrastructures'
-                            break
-                        case 4:
-                            resource = 'airConditioners'
-                            break
-                        case 5:
-                            resource = 'transformers'
-                            break
-                        case 6:
-                            resource = 'verticalStructures'
-                            break
-                        case 7:
-                            resource = 'batteries'
-                            break
-                        default:
-                            break
-                    }
-                    let params = {
-                        'api_token': this.user.api_token,
-                        'tp_id': element.tp_id,
-                        'site_id': element.site_id
-                    }
-                    axios.post(`/api/${resource}`, params)
-                    .then(response => {
-                        console.log(response.data)
-                        this.syncData()
-                    })
-                })
+            // insertFinisheds() {
+            //     // console.log(this.finished)
+            //     let resource = ''
+            //     this.finished.forEach(element => {
+            //          switch(element.work_type_id) {
+            //             case 1:
+            //                 resource = 'powerRectifiers'
+            //                 break
+            //             case 2:
+            //                 resource = 'generatorSets'
+            //                 break
+            //             case 3:
+            //                 resource = 'infrastructures'
+            //                 break
+            //             case 4:
+            //                 resource = 'airConditioners'
+            //                 break
+            //             case 5:
+            //                 resource = 'transformers'
+            //                 break
+            //             case 6:
+            //                 resource = 'verticalStructures'
+            //                 break
+            //             case 7:
+            //                 resource = 'batteries'
+            //                 break
+            //             default:
+            //                 break
+            //         }
+            //         let params = {
+            //             'api_token': this.user.api_token,
+            //             'tp_id': element.tp_id,
+            //             'site_id': element.site_id
+            //         }
+            //         axios.post(`/api/${resource}`, params)
+            //         .then(response => {
+            //             console.log(response.data)
+            //             this.syncData()
+            //         })
+            //     })
                 
-            },
+            // },
 
             tagColor(state_id) {
                 let color = ''

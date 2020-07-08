@@ -19,9 +19,9 @@ class Plane extends Model
      *
      * @var array
      */
-    public function room() 
+    public function rooms() 
     {
-        return $this->belongsTo(Room::class);
+        return $this->belongsToMany(Room::class, 'entel_g_redes_inventario.plane_room')->withTimestamps();
     }
 
     /**

@@ -53,8 +53,8 @@ class GeneratorSetController extends Controller
                             INNER JOIN entel_pops.pops P ON GS.pop_id = P.id
                             INNER JOIN entel_pops.sites S ON P.id = S.pop_id
                             $condition_core
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                            AND T.state_id IN (1)
+                            -- INNER JOIN entel_pops.technologies T ON S.id = T.site_id
+                            -- AND T.state_id IN (1)
 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
@@ -66,8 +66,8 @@ class GeneratorSetController extends Controller
                             INNER JOIN entel_pops.pops P ON GS.pop_id = P.id
                             INNER JOIN entel_pops.sites S ON P.id = S.pop_id
                             $condition_core
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                            AND T.state_id IN (1)
+                            -- INNER JOIN entel_pops.technologies T ON S.id = T.site_id
+                            -- AND T.state_id IN (1)
 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
@@ -108,8 +108,8 @@ class GeneratorSetController extends Controller
                             INNER JOIN entel_pops.pops P ON GS.pop_id = P.id
                             INNER JOIN entel_pops.sites S ON P.id = S.pop_id
                             $condition_core
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                            AND T.state_id IN (1)
+                            -- INNER JOIN entel_pops.technologies T ON S.id = T.site_id
+                            -- AND T.state_id IN (1)
 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
                             ) AS q_info,
@@ -119,8 +119,8 @@ class GeneratorSetController extends Controller
                             INNER JOIN entel_pops.pops P ON GS.pop_id = P.id
                             INNER JOIN entel_pops.sites S ON P.id = S.pop_id
                             $condition_core
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                            AND T.state_id IN (1)
+                            -- INNER JOIN entel_pops.technologies T ON S.id = T.site_id
+                            -- AND T.state_id IN (1)
 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
 
@@ -161,8 +161,8 @@ class GeneratorSetController extends Controller
                             INNER JOIN entel_pops.pops P ON GS.pop_id = P.id
                             INNER JOIN entel_pops.sites S ON P.id = S.pop_id
                             $condition_core
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                            AND T.state_id IN (1)
+                            -- INNER JOIN entel_pops.technologies T ON S.id = T.site_id
+                            -- AND T.state_id IN (1)
                             WHERE P.comuna_id = @comuna_id
                             ) AS q_info,
 
@@ -171,8 +171,8 @@ class GeneratorSetController extends Controller
                             INNER JOIN entel_pops.pops P ON GS.pop_id = P.id
                             INNER JOIN entel_pops.sites S ON P.id = S.pop_id
                             $condition_core
-                            INNER JOIN entel_pops.technologies T ON S.id = T.site_id
-                            AND T.state_id IN (1)
+                            -- INNER JOIN entel_pops.technologies T ON S.id = T.site_id
+                            -- AND T.state_id IN (1)
 
                             WHERE P.comuna_id = @comuna_id
 

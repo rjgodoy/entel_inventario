@@ -58,18 +58,19 @@ class PlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function roomPlanes($pop_id)
+    public function roomPlanes($room_id)
     {
         $planes = Plane::with(
+            'rooms.current_room_delegation',
             'power_rectifiers.power_rectifier_type', 
             'power_rectifiers.power_rectifier_modules', 
-            'battery_banks.battery_bank_brand',
             'power_rectifiers.power_rectifier_mode',
+            'battery_banks.battery_bank_brand',
             'plane_type',
             'current_redundant_modules'
         )
-        ->whereHas('room', function($q) use($pop_id) {
-            $q->where('pop_id', $pop_id);
+        ->whereHas('rooms', function($q) use($room_id) {
+            $q->where('id', $room_id);
         })
         ->get();
 

@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\UpdatePops',
         'App\Console\Commands\UpdateComsites',
+        // 'App\Console\Commands\UpdatePsgTps',
     ];
 
     /**
@@ -25,8 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('update:pops')->everyMinute();
-        $schedule->command('update:comsites')->everyMinute();
+        // $schedule->command('update:pops')->daily();
+        $schedule->command('update:comsites')->daily();
+        // $schedule->command('update:psg_tps')->everyMinute();
     }
 
     /**

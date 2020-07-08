@@ -55,8 +55,8 @@ export default {
     components: {
         Capacity: () => import(/* webpackChunkName: "chunks/capacity/capacity"*/'./Capacity'),
         Projection: () => import(/* webpackChunkName: "chunks/capacity/projection"*/'./Projection'),
-        Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./Requests'),
-        Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./Calculator'),
+        // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./Requests'),
+        // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./Calculator'),
         Layout: () => import(/* webpackChunkName: "chunks/capacity/layout"*/'./Layout'),
         Documents: () => import(/* webpackChunkName: "chunks/pop/documents/documents"*/'../pop/documents/Documents'),
     },
@@ -68,8 +68,6 @@ export default {
     data() {
         return {
             room: '',
-            // chartData: [],
-            // actualData: [],
             currentTab: 'layout',
             tabs: [
                 {
@@ -84,24 +82,24 @@ export default {
                     "icon": "chart-line",
                     "icon_type": "fas"
                 },
-                {
-                    "title": "Reserva",
-                    "component": "requests",
-                    "icon": "file-invoice",
-                    "icon_type": "fas"
-                },
+                // {
+                //     "title": "Reserva",
+                //     "component": "requests",
+                //     "icon": "file-invoice",
+                //     "icon_type": "fas"
+                // },
                 {
                     "title": "Layout",
                     "component": "layout",
                     "icon": "bezier-curve",
                     "icon_type": "fas"
                 },
-                {
-                    "title": "Calculador",
-                    "component": "calculator",
-                    "icon": "calculator",
-                    "icon_type": "fas"
-                },
+                // {
+                //     "title": "Calculador",
+                //     "component": "calculator",
+                //     "icon": "calculator",
+                //     "icon_type": "fas"
+                // },
                 {
                     "title": "Documentos",
                     "component": "documents",
@@ -125,38 +123,17 @@ export default {
     },
 
     mounted() {
-        // console.log(this.room_id)
         this.getRoomData()
-        // this.graphData()
     },
 
     methods: {
         getRoomData() {
             axios.get(`/api/rooms/${this.$route.params.id}?api_token=${this.user.api_token}`)
             .then(response => {
-                // console.log(response.data.room)
                 this.room = response.data.room
             })
         },
 
-        // getPopData() {
-        //     axios.get(`/api/pop/${this.pop.id}?api_token=${this.user.api_token}`)
-        //     .then((response) => {
-        //         // console.log(response.data.data)
-        //         this.popData = response.data.data
-        //     })
-        // },
-
-        // graphData() {
-        //     axios.get(`/api/capacityProjection?room_id=${this.room.id}&api_token=${this.user.api_token}`)
-        //     .then((response) => {
-        //         // console.log(response)
-        //         if(response.data.data) {
-        //             this.chartData = response.data.data
-        //             this.actualData = response.data.data[0]
-        //         }
-        //     })
-        // },
         beforeDestroy() {
             this.$eventBus.$off('room-distribution');
             this.$eventBus.$off('room-surface');

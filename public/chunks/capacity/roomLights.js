@@ -13,10 +13,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
 
+var _computed;
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
 //
 //
 //
@@ -116,7 +122,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // library.add(faCircle, faSearch);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['user', 'user_permissions', 'room'],
+  props: ['user', 'room'],
   data: function data() {
     return {
       junctions: Object,
@@ -128,20 +134,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.getRoomsData();
     }
   },
-  computed: {
+  computed: (_computed = {
     totalCapacity: function totalCapacity() {
+      // return this.junctionsTotalAvailableCapacity
+      // return this.generatorSetTotalAvailableCapacity
+      // return this.powerRectifiersAvailableCapacity
+      // return this.batteriesAvailableCapacity
+      // return this.distributionAvailableCapacity
       return Math.min(this.totalAvailableEnergyCapacity, this.totalAvailableClimateCapacity);
     },
     totalAvailableEnergyCapacity: function totalAvailableEnergyCapacity() {
       return Math.min(this.junctionsTotalAvailableCapacity, this.generatorSetTotalAvailableCapacity, this.powerRectifiersAvailableCapacity, this.batteriesAvailableCapacity, this.distributionAvailableCapacity);
     },
     totalAvailableClimateCapacity: function totalAvailableClimateCapacity() {
-      return Math.min(10, 15);
+      return Math.min(20, 25);
     },
     canViewClimate: function canViewClimate() {
-      return this.user.roles[0].slug == 'engineer-admin' || this.user.roles[0].slug == 'admin' || this.user.roles[0].slug == 'developer' || this.user.roles[0].slug == 'super-viewer' || this.user_permissions.find(function (element) {
-        return element.slug == 'edit-air-conditioner';
-      }) ? true : false;
+      return this.user.roles[0].slug == 'engineer-admin' || this.user.roles[0].slug == 'admin' || this.user.roles[0].slug == 'developer' || this.user.roles[0].slug == 'super-viewer' ? true : false;
     },
     // ✅#################### Junctions
     jnctionsTotalCapacity: function jnctionsTotalCapacity() {
@@ -380,32 +389,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this10 = this;
 
       var realRoomCapacity = 0;
-      Object.keys(this.room.planes).forEach(function (element) {
-        var plane = _this10.room.planes[element];
-        realRoomCapacity += _this10.realPlaneCapacity(plane);
-      });
+
+      if (this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type) {
+        var planes = this.room.current_room_delegation.plane_delegation_type.planes;
+        Object.keys(planes).forEach(function (element) {
+          var plane = planes[element];
+          realRoomCapacity += _this10.realPlaneCapacity(plane);
+        });
+      }
+
       return realRoomCapacity;
     },
     powerRectifiersUsedCapacity: function powerRectifiersUsedCapacity() {
       var _this11 = this;
 
       var usedRoomCapacity = 0;
-      Object.keys(this.room.planes).forEach(function (element) {
-        var plane = _this11.room.planes[element];
-        usedRoomCapacity += _this11.totalPower(plane);
-      });
+
+      if (this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type) {
+        var planes = this.room.current_room_delegation.plane_delegation_type.planes;
+        Object.keys(planes).forEach(function (element) {
+          var plane = planes[element];
+          usedRoomCapacity += _this11.totalPower(plane);
+        });
+      }
+
       return usedRoomCapacity;
     },
     powerRectifiersAvailableCapacity: function powerRectifiersAvailableCapacity() {
       var _this12 = this;
 
-      var availableRoomCapacity = 10000000;
-      var availableRoomCapacityA = 10000000;
-      var availableRoomCapacityB = 10000000;
-      Object.keys(this.room.planes).forEach(function (element) {
-        var plane = _this12.room.planes[element];
+      var original = 10000000;
+      var availableRoomCapacity = original;
+      var availableRoomCapacityA = original;
+      var availableRoomCapacityB = original;
 
-        if (_this12.room.current_room_delegation) {
+      if (this.room.current_room_delegation) {
+        Object.keys(this.room.current_room_delegation.plane_delegation_type.planes).forEach(function (element) {
+          var plane = _this12.room.current_room_delegation.plane_delegation_type.planes[element];
+
           switch (_this12.room.current_room_delegation.plane_delegation_type_id) {
             case 1:
             case 2:
@@ -438,74 +459,117 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             default:
               break;
           }
-        }
-      });
-      availableRoomCapacity = availableRoomCapacity < 10000000 ? availableRoomCapacity : 0;
+        });
+      }
+
+      availableRoomCapacity = availableRoomCapacity < original ? availableRoomCapacity : 0;
       return availableRoomCapacity;
     },
     // ✅#################### Batteries
     popAutonomy: function popAutonomy() {
       return this.room.pop.current_autonomy ? this.room.pop.current_autonomy.theoretical : 0;
     },
-    batteriesTotalCapacity: function batteriesTotalCapacity() {
+    // batteriesTotalCapacity() {
+    //     let capacity = 0
+    //     Object.keys(this.room.planes).forEach(element => {
+    //         let plane = this.room.planes[element]
+    //         Object.keys(plane.battery_banks).forEach(item => {
+    //             capacity += plane.battery_banks[item].capacity
+    //         })
+    //     })
+    //     let total = (((capacity * 48) / 1000) / this.popAutonomy)
+    //     return total
+    // },
+    // batteriesUsedCapacity() {
+    //     let used = 0
+    //     Object.keys(this.room.planes).forEach(element => {
+    //         let plane = this.room.planes[element]
+    //         used += this.chargeRealPower(plane)
+    //     })
+    //     return used
+    // },
+    batteriesAvailableCapacity: function batteriesAvailableCapacity() {
       var _this13 = this;
 
-      var capacity = 0;
-      Object.keys(this.room.planes).forEach(function (element) {
-        var plane = _this13.room.planes[element];
-        Object.keys(plane.battery_banks).forEach(function (item) {
-          capacity += plane.battery_banks[item].capacity;
+      var original = 10000000;
+      var available = original;
+
+      if (this.room.current_room_delegation) {
+        var planes = this.room.current_room_delegation.plane_delegation_type.planes;
+        Object.keys(planes).forEach(function (element) {
+          var plane = planes[element];
+
+          if (available > _this13.availableBatteryCapacityPlane(plane)) {
+            available = _this13.availableBatteryCapacityPlane(plane);
+          }
         });
-      });
-      var total = capacity * 48 / 1000 / this.popAutonomy;
+      }
+
+      var total = available == original ? 0 : available * 2;
       return total;
-    },
-    batteriesUsedCapacity: function batteriesUsedCapacity() {
-      var _this14 = this;
+    }
+  }, _defineProperty(_computed, "batteriesAvailableCapacity", function batteriesAvailableCapacity() {
+    var _this14 = this;
 
-      var used = 0;
-      Object.keys(this.room.planes).forEach(function (element) {
-        var plane = _this14.room.planes[element];
-        used += _this14.chargeRealPower(plane);
-      });
-      return used;
-    },
-    batteriesAvailableCapacity: function batteriesAvailableCapacity() {
-      var _this15 = this;
+    var original = 10000000;
+    var available = original;
+    var availableA = original;
+    var availableB = original;
 
-      var available = 10000000;
-      Object.keys(this.room.planes).forEach(function (element) {
-        var plane = _this15.room.planes[element];
+    if (this.room.current_room_delegation) {
+      Object.keys(this.room.current_room_delegation.plane_delegation_type.planes).forEach(function (element) {
+        var plane = _this14.room.current_room_delegation.plane_delegation_type.planes[element];
 
-        if (available > _this15.availableBatteryCapacityPlane(plane)) {
-          available = _this15.availableBatteryCapacityPlane(plane);
+        switch (_this14.room.current_room_delegation.plane_delegation_type_id) {
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+            available = _this14.availableBatteryCapacityPlane(plane);
+            break;
+
+          case 5:
+          case 6:
+            if (available > _this14.availableBatteryCapacityPlane(plane)) {
+              available = _this14.availableBatteryCapacityPlane(plane);
+            }
+
+            break;
+
+          case 7:
+            if (availableA > _this14.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+              availableA = _this14.availableBatteryCapacityPlane(plane);
+            }
+
+            if (availableB > _this14.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+              availableB = _this14.availableBatteryCapacityPlane(plane);
+            }
+
+            available = availableA + availableB;
+            break;
+
+          case 8:
+          default:
+            break;
         }
       });
-      var total = available == 10000000 ? 0 : available * 2;
-      return total;
-    },
-    // #################### Climate
-    // ✅#################### Distribution
-    distributionTotalCapacity: function distributionTotalCapacity() {
-      return this.room.current_room_distribution ? this.room.current_room_distribution.total_capacity : 0;
-    },
-    distributionUsedCapacity: function distributionUsedCapacity() {
-      return this.room.current_room_distribution ? this.room.current_room_distribution.used_capacity : 0;
-    },
-    distributionAvailableCapacity: function distributionAvailableCapacity() {
-      return this.distributionTotalCapacity - this.distributionUsedCapacity;
-    },
-    // ✅#################### Surface
-    totalSurface: function totalSurface() {
-      return this.room.current_room_surface ? this.room.current_room_surface.total_surface : 0;
-    },
-    usedSurface: function usedSurface() {
-      return this.room.current_room_surface ? this.room.current_room_surface.used_surface : 0;
-    },
-    totalAvailableSurface: function totalAvailableSurface() {
-      return this.totalSurface - this.usedSurface;
     }
-  },
+
+    available = available < original ? available * 2 : 0;
+    return available;
+  }), _defineProperty(_computed, "distributionTotalCapacity", function distributionTotalCapacity() {
+    return this.room.current_room_distribution ? this.room.current_room_distribution.total_capacity : 0;
+  }), _defineProperty(_computed, "distributionUsedCapacity", function distributionUsedCapacity() {
+    return this.room.current_room_distribution ? this.room.current_room_distribution.used_capacity : 0;
+  }), _defineProperty(_computed, "distributionAvailableCapacity", function distributionAvailableCapacity() {
+    return this.distributionTotalCapacity - this.distributionUsedCapacity;
+  }), _defineProperty(_computed, "totalSurface", function totalSurface() {
+    return this.room.current_room_surface ? this.room.current_room_surface.total_surface : 0;
+  }), _defineProperty(_computed, "usedSurface", function usedSurface() {
+    return this.room.current_room_surface ? this.room.current_room_surface.used_surface : 0;
+  }), _defineProperty(_computed, "totalAvailableSurface", function totalAvailableSurface() {
+    return this.totalSurface - this.usedSurface;
+  }), _computed),
   created: function created() {},
   mounted: function mounted() {
     this.getJunctions();
@@ -516,7 +580,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _getJunctions = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this16 = this;
+        var _this15 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -524,7 +588,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios.get("/api/popJunctions/".concat(this.room.pop_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-                  _this16.junctions = response.data.junctions;
+                  _this15.junctions = response.data.junctions;
                 })["catch"](function (error) {
                   console.log('Error al traer los datos de Empalmes: ' + error);
                 });
@@ -547,7 +611,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _getGeneratorSets = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this17 = this;
+        var _this16 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -555,8 +619,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.next = 2;
                 return axios.get("/api/generatorSets/".concat(this.room.pop_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-                  _this17.generatorSets = response.data.generatorSets;
-                  _this17.canEditGeneratorGroups = response.data.can;
+                  _this16.generatorSets = response.data.generatorSets;
+                  _this16.canEditGeneratorGroups = response.data.can;
                 })["catch"](function (error) {
                   console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
                 });
@@ -821,17 +885,19 @@ var render = function() {
                         { staticClass: " is-size-5 has-text-weight-bold" },
                         [
                           _vm._v(
-                            _vm._s(
-                              _vm._f("numeral")(
-                                _vm.canViewClimate
-                                  ? _vm.totalAvailableEnergyCapacity
-                                  : Math.min(
-                                      _vm.totalAvailableEnergyCapacity,
-                                      _vm.totalAvailableClimateCapacity
-                                    ),
-                                "0,0.0"
-                              )
-                            ) + "\n                            "
+                            "\n                                " +
+                              _vm._s(
+                                _vm._f("numeral")(
+                                  _vm.canViewClimate
+                                    ? _vm.totalAvailableEnergyCapacity
+                                    : Math.min(
+                                        _vm.totalAvailableEnergyCapacity,
+                                        _vm.totalAvailableClimateCapacity
+                                      ),
+                                  "0,0.0"
+                                )
+                              ) +
+                              "\n                                "
                           ),
                           _c(
                             "span",

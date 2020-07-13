@@ -173,7 +173,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 // import { library } from "@fortawesome/fontawesome-svg-core";
 // import { faCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
@@ -503,11 +502,7 @@ var render = function() {
                         { staticClass: "column" },
                         [
                           _c("RoomLights", {
-                            attrs: {
-                              room: room,
-                              user_permissions: _vm.user_permissions,
-                              user: _vm.user
-                            }
+                            attrs: { room: room, user: _vm.user }
                           })
                         ],
                         1

@@ -49,7 +49,6 @@
 
                                     <RoomLights 
                                         :room=room
-                                        :user_permissions=user_permissions
                                         :user=user
                                     />
                                     

@@ -1,6 +1,6 @@
 <template>
     <section class="" style="padding: 24px;">
-
+        <b-button :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode">Editar Salas</b-button>
         <div class="columns tile is-ancestor">
 
             <!-- <div class="column is-2 tile is-parent">
@@ -99,12 +99,13 @@
 
             <div class="column tile is-parent">
                 <div class="columns is-multiline tile">
-                    <div class="column tile is-6" v-for="sala in orderedRooms" :key="sala.id">
+                    <div class="column tile is-parent is-6" v-for="sala in orderedRooms" :key="sala.id">
                         <Room 
                             :sala=sala
                             :room=room
                             :pop=pop
                             :user=user
+                            :isEditMode=isEditMode
                             @room-distribution="roomsDistribution"
                             @room-surface="roomsSurface"
                             @power-rectifier-data="powerRectifiersTotalCapacity"
@@ -143,6 +144,7 @@
 
                 totalSurface: 0,
                 usedSurface: 0,
+                isEditMode: false
                 
             }
         },

@@ -4,6 +4,23 @@
         <div class="tile is-vertical">
 
             <div class="block">
+                <div class="is-pulled-right">
+                    <div class="has-text-weight-light is-size-7">Tipo Alimentación</div>
+                    <div v-if="!isEditMode">
+                        <div class="has-text-weight-bold is-size-5">{{ planeType }}</div>
+                    </div>
+                    <div v-if="isEditMode">
+                        <b-select placeholder="Select a name" v-model="planeTypeId" @input="updatePlaneType(sala)">
+                            <option
+                                v-for="option in planeTypes"
+                                :value="option.id"
+                                :key="option.id">
+                                {{ option.type }}
+                            </option>
+                        </b-select>
+                    </div>
+                </div>
+
                 <router-link class="is-size-5" :to="'/capacity/'+sala.id" @click.native="reload"
                     :class="room.id && sala.id != room.id ? 'has-text-grey-light has-text-weight-light' : 'has-text-weight-bold'">
                     {{ sala.name }} - {{ sala.old_name }}
@@ -15,7 +32,7 @@
                     <b-field label="PLANTAS RECTIFICADORAS" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
 
-                            <div class="tile is-vertical" v-if="hasPlanes(sala)">
+                            <div class="tile is-vertical">
                                 <div class="tile is-parent columns is-multiline">
                                     <div class="tile is-parent column is-6" v-for="plane in planes" :key="plane.id">
 
@@ -28,12 +45,12 @@
                                                             <div class="tile is-child column is-6" 
                                                                 v-for="powerRectifier in sala.power_rectifiers" 
                                                                 :key="powerRectifier.id" 
-                                                                @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier"
+                                                                
                                                                 v-if="powerRectifierBelongsToPlane(powerRectifier, plane)">
-                                                                <a class="box">
+                                                                <a class="box" @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier">
                                                                     <div class="field">
-                                                                        <div class="has-text-weight-bold is-size-7">PLANTA Nº </div>
-                                                                        <span class="has-text-weight-bold is-size-6">{{ powerRectifier.id }}</span>
+                                                                        <div class="has-text-weight-bold is-size-7">PLANTA</div>
+                                                                        <span class="has-text-weight-bold is-size-6">Nº {{ powerRectifier.id }}</span>
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -98,24 +115,31 @@
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <b-field label="CLIMATIZACION" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
-                        <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                        <div class="tile is-parent box is-shadowless" style="border: solid 0.1rem #cccccc">
 
-                            <div class="tile is-parent is-vertical" v-if="hasAirConditioners(sala)">
-                                <a class="tile is-child box" 
-                                    v-for="airConditioner in airConditioners" 
-                                    v-if="airConditioner.room_id == sala.id" 
-                                    :key="airConditioner.id" 
-                                    @click="isAirConditionerModalActive = true; airConditionerSelected = airConditioner">
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">AIRE ACONDICIONADO Nº {{ airConditioner.id }}</div>
+                            <div class="tile is-vertical">
+
+                                <div class="tile is-parent" v-if="hasAirConditioners(sala)">
+                                    <div class="columns is-multiline tile">
+                                        <div class="tile is-child column is-3"
+                                            v-for="airConditioner in airConditioners" 
+                                            v-if="airConditioner.room_id == sala.id" 
+                                            :key="airConditioner.id" >
+                                            <a class="box" @click="isAirConditionerModalActive = true; airConditionerSelected = airConditioner">
+                                                <div class="field">
+                                                    <div class="has-text-weight-bold is-size-7">AIRE ACONDICIONADO</div>
+                                                    <span class="has-text-weight-bold is-size-6">Nº {{ airConditioner.id }}</span>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </a>
-                            </div>
+                                </div>
 
-                            <div class="tile columns is-vcentered" v-if="!hasAirConditioners(sala)">
-                                <div class="column">
-                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                        NO TIENE EQUIPOS DE CLIMA
+                                <div class="tile columns is-vcentered" v-if="!hasAirConditioners(sala)">
+                                    <div class="column">
+                                        <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                            NO TIENE EQUIPOS DE CLIMA
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -139,19 +163,25 @@
                                     <div class="level">
                                         <div class="level-item">
                                             <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ totalSurface }} <span class="is-size-7">m2</span></div>
+                                                <div class="has-text-weight-bold is-size-6">{{ totalSurface }}
+                                                    <!-- <span class="is-size-7"> m2</span> -->
+                                                </div>
                                                 <div class="has-text-weight-normal is-size-7">Total</div>
                                             </div>
                                         </div>
                                         <div class="level-item">
                                             <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ usedSurface }} <span class="is-size-7">m2</span></div>
+                                                <div class="has-text-weight-bold is-size-6">{{ usedSurface }}
+                                                    <!-- <span class="is-size-7"> m2</span> -->
+                                                </div>
                                                 <div class="has-text-weight-normal is-size-7">Usada</div>
                                             </div>
                                         </div>
                                         <div class="level-item">
                                             <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ availableSurface }} <span class="is-size-7">m2</span></div>
+                                                <div class="has-text-weight-bold is-size-6">{{ availableSurface }}
+                                                    <!-- <span class="is-size-7"> m2</span> -->
+                                                </div>
                                                 <div class="has-text-weight-normal is-size-7">Disponible</div>
                                             </div>
                                         </div>
@@ -177,19 +207,25 @@
                                     <div class="level">
                                         <div class="level-item">
                                             <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ totalSurface }} <span class="is-size-7">m2</span></div>
+                                                <div class="has-text-weight-bold is-size-6">{{ totalSurface }}
+                                                    <!-- <span class="is-size-7"> m2</span> -->
+                                                </div>
                                                 <div class="has-text-weight-normal is-size-7">Total</div>
                                             </div>
                                         </div>
                                         <div class="level-item">
                                             <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ usedSurface }} <span class="is-size-7">m2</span></div>
+                                                <div class="has-text-weight-bold is-size-6">{{ usedSurface }}
+                                                    <!-- <span class="is-size-7"> m2</span> -->
+                                                </div>
                                                 <div class="has-text-weight-normal is-size-7">Usada</div>
                                             </div>
                                         </div>
                                         <div class="level-item">
                                             <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ availableSurface }} <span class="is-size-7">m2</span></div>
+                                                <div class="has-text-weight-bold is-size-6">{{ availableSurface }}
+                                                    <!-- <span class="is-size-7"> m2</span> -->
+                                                </div>
                                                 <div class="has-text-weight-normal is-size-7">Disponible</div>
                                             </div>
                                         </div>
@@ -387,7 +423,8 @@
             'room',
             'sala',
             'user',
-            'pop'
+            'pop',
+            'isEditMode'
         ],
 
         data() {
@@ -414,13 +451,15 @@
 
                 totalBatteryCapacity: 0,
                 usedBatteryCapacity: 0,
-                availableBatteryCapacity: 0
+                availableBatteryCapacity: 0,
 
+                planeTypeId: this.sala.current_room_delegation ? this.sala.current_room_delegation.plane_delegation_type_id : null,
+                planeTypes: []
             }
         },
 
         mounted() {
-            // console.log(this.sala)
+            this.getPlaneTypes()
             this.getAirConditioners()
             // this.getPowerRectifiers()
             this.getPlanes()
@@ -431,6 +470,55 @@
         },
 
         computed: {
+            planeType() {
+                let type = 'Sin Información'
+                switch(this.planeTypeId) {
+                    case 1:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 1 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    case 2:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 2 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    case 3:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 3 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    case 4:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 4 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    case 5:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 5 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    case 6:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 6 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    case 7:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 7 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    case 8:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 8 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    default:
+                        break
+                }
+                return type
+            },
+
             isRoomSelected() {
                 return this.room.id && this.sala.id != this.room.id
             },
@@ -526,6 +614,17 @@
             batteryData(value) {
                 this.$emit('battery-data', value);
             },
+
+            planeTypeId(value) {
+                
+            },
+
+            isEditMode(val) {
+                if (val == false) {
+                    this.getPlanes()
+                    this.$eventBus.$emit('room-data')
+                }
+            }
         },
 
         methods: {
@@ -541,6 +640,12 @@
                 })
                 // console.log(powerRectifiersInRoom)
                 return powerRectifiersInRoom
+            },
+
+            getPlaneTypes() {
+                axios.get(`/api/planeTypes?api_token=${this.user.api_token}`).then(response => {
+                    this.planeTypes = response.data.planes
+                })
             },
 
             hasPlanes(sala) {
@@ -578,7 +683,7 @@
             },
 
             getPlanes() {
-                axios.get(`/api/roomPlanes/${this.sala.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/roomPlanes/${this.sala.id}?api_token=${this.user.api_token}&plane_delegation_type_id=${this.planeTypeId}`)
                 .then((response) => {
                     this.planes = response.data.planes
                     this.canEditPowerRectifiers = response.data.can ? response.data.can : false
@@ -772,6 +877,22 @@
                 let total = available * 2
                 this.availableBatteryCapacity = total
                 return total
+            },
+
+            updatePlaneType(sala) {
+                let params = {
+                    'api_token': this.user.api_token,
+                    'user_id': this.user.id,
+                    'plane_type_id': this.planeTypeId
+                }
+
+                axios.put(`/api/roomPlaneType/${this.sala.id}`, params)
+                .then(response => {
+                    console.log(response.data)
+                })
+                // this.$parent.close()
+                // this.$eventBus.$emit('junction-measurements-updated');
+                
             },
 
             reload() {

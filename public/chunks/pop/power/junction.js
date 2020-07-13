@@ -407,6 +407,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditJunctionParameters: function EditJunctionParameters() {
@@ -437,6 +481,90 @@ __webpack_require__.r(__webpack_exports__);
     this.getJunctionConnections();
   },
   computed: {
+    junctionType: function junctionType() {
+      var _this = this;
+
+      var type = 'Sin Información';
+
+      switch (this.junctionTypeId) {
+        case 1:
+          Object.keys(this.junctionTypes).forEach(function (item) {
+            type = _this.junctionTypes[item].id == 1 && type == 'Sin Información' ? _this.junctionTypes[item].type : type;
+          });
+          break;
+
+        case 2:
+          Object.keys(this.junctionTypes).forEach(function (item) {
+            type = _this.junctionTypes[item].id == 2 && type == 'Sin Información' ? _this.junctionTypes[item].type : type;
+          });
+          break;
+
+        case 3:
+          Object.keys(this.junctionTypes).forEach(function (item) {
+            type = _this.junctionTypes[item].id == 3 && type == 'Sin Información' ? _this.junctionTypes[item].type : type;
+          });
+          break;
+
+        case 4:
+          Object.keys(this.junctionTypes).forEach(function (item) {
+            type = _this.junctionTypes[item].id == 4 && type == 'Sin Información' ? _this.junctionTypes[item].type : type;
+          });
+          break;
+
+        default:
+          break;
+      }
+
+      return type;
+    },
+    junctionConnection: function junctionConnection() {
+      var _this2 = this;
+
+      var connection = 'Sin Información';
+
+      switch (this.junctionConnectionId) {
+        case 1:
+          Object.keys(this.junctionConnections).forEach(function (item) {
+            connection = _this2.junctionConnections[item].id == 1 && connection == 'Sin Información' ? _this2.junctionConnections[item].connection : connection;
+          });
+          break;
+
+        case 2:
+          Object.keys(this.junctionConnections).forEach(function (item) {
+            connection = _this2.junctionConnections[item].id == 2 && connection == 'Sin Información' ? _this2.junctionConnections[item].connection : connection;
+          });
+          break;
+
+        case 3:
+          Object.keys(this.junctionConnections).forEach(function (item) {
+            connection = _this2.junctionConnections[item].id == 3 && connection == 'Sin Información' ? _this2.junctionConnections[item].connection : connection;
+          });
+          break;
+
+        case 4:
+          Object.keys(this.junctionConnections).forEach(function (item) {
+            connection = _this2.junctionConnections[item].id == 4 && connection == 'Sin Información' ? _this2.junctionConnections[item].connection : connection;
+          });
+          break;
+
+        default:
+          break;
+      }
+
+      return connection;
+    },
+    hasAProtections: function hasAProtections() {
+      return this.junction.latest_protection && (!!+this.junction.latest_protection.nominal_a || !!+this.junction.latest_protection.regulada_a);
+    },
+    hasBProtections: function hasBProtections() {
+      return this.junction.latest_protection && (!!+this.junction.latest_protection.nominal_b || !!+this.junction.latest_protection.regulada_b);
+    },
+    hasAMeasurements: function hasAMeasurements() {
+      return this.junction.latest_measurement && (this.junction.latest_measurement.r_a_amp_measure || this.junction.latest_measurement.s_a_amp_measure || this.junction.latest_measurement.t_a_amp_measure || this.junction.latest_measurement.r_a_volt_measure || this.junction.latest_measurement.s_a_volt_measure || this.junction.latest_measurement.t_a_volt_measure);
+    },
+    hasBMeasurements: function hasBMeasurements() {
+      return this.junction.latest_measurement && (this.junction.latest_measurement.r_b_amp_measure || this.junction.latest_measurement.s_b_amp_measure || this.junction.latest_measurement.t_b_amp_measure || this.junction.latest_measurement.r_b_volt_measure || this.junction.latest_measurement.s_b_volt_measure || this.junction.latest_measurement.t_b_volt_measure);
+    },
     powerA: function powerA() {
       var latestProtectionRA = this.junction.latest_protection ? this.junction.latest_protection.regulada_a : 0;
       var latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0;
@@ -535,17 +663,17 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('childToParent', this.totalDisponibility);
     },
     getJunctionTypes: function getJunctionTypes() {
-      var _this = this;
+      var _this3 = this;
 
       axios.get("/api/junctionTypes?api_token=".concat(this.user.api_token)).then(function (response) {
-        _this.junctionTypes = response.data.junctions;
+        _this3.junctionTypes = response.data.junctions;
       });
     },
     getJunctionConnections: function getJunctionConnections() {
-      var _this2 = this;
+      var _this4 = this;
 
       axios.get("/api/junctionConnections?api_token=".concat(this.user.api_token)).then(function (response) {
-        _this2.junctionConnections = response.data.junctions;
+        _this4.junctionConnections = response.data.junctions;
       });
     },
     saveChanges: function saveChanges() {
@@ -557,7 +685,7 @@ __webpack_require__.r(__webpack_exports__);
           'junction_number': this.junctionNumber,
           'junction_type_id': this.junctionTypeId,
           'junction_connection_id': this.junctionConnectionId,
-          'use_factor': this.useFactor.includes(',') ? parseFloat(this.useFactor.split(',')[0] + '.' + this.useFactor.split(',')[1]) : parseFloat(this.useFactor)
+          'use_factor': parseFloat(this.useFactor)
         };
         axios.put("/api/junctionUpdateTypes/".concat(this.junction.id), params).then(function (response) {
           console.log(response.data);
@@ -676,9 +804,7 @@ var render = function() {
                           "div",
                           {
                             staticClass: "has-text-weight-bold is-size-5",
-                            class: _vm.junction.junction_number
-                              ? ""
-                              : "has-text-info"
+                            class: _vm.junction.junction_number ? "" : ""
                           },
                           [
                             _vm._v(
@@ -727,15 +853,7 @@ var render = function() {
                         _c(
                           "div",
                           { staticClass: "has-text-weight-bold is-size-5" },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.junction.junction_type
-                                  ? _vm.junction.junction_type.type
-                                  : "Sin información"
-                              )
-                            )
-                          ]
+                          [_vm._v(_vm._s(_vm.junctionType))]
                         )
                       ])
                     : _vm._e(),
@@ -792,15 +910,7 @@ var render = function() {
                         _c(
                           "div",
                           { staticClass: "has-text-weight-bold is-size-5" },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.junction.junction_connection
-                                  ? _vm.junction.junction_connection.connection
-                                  : "Sin información"
-                              )
-                            )
-                          ]
+                          [_vm._v(_vm._s(_vm.junctionConnection))]
                         )
                       ])
                     : _vm._e(),
@@ -905,774 +1015,950 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", {
                       staticClass: "is-divider",
-                      staticStyle: { "margin-bottom": "16px" },
+                      staticStyle: { "margin-bottom": "24px" },
                       attrs: { "data-content": "Protecciones" }
                     }),
                     _vm._v(" "),
-                    _vm.junction.latest_protection &&
-                    _vm.junction.latest_protection.nominal_a
-                      ? _c("div", { staticClass: "level" }, [
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Nominal A")
-                              ]),
-                              _vm._v(" "),
+                    _c("div", { staticClass: "tile is-ancestor" }, [
+                      _vm.hasAProtections
+                        ? _c(
+                            "div",
+                            { staticClass: "tile is-parent" },
+                            [
                               _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
+                                "b-field",
+                                {
+                                  staticClass: "tile",
+                                  attrs: {
+                                    label: "PROTECCIONES A",
+                                    "label-position": "on-border"
+                                  }
+                                },
                                 [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_protection.nominal_a
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "tile box is-shadowless",
+                                      staticStyle: {
+                                        border: "solid 0.1rem #cccccc"
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "tile" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-parent level-item"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "tile is-child has-text-centered"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "is-size-7"
+                                                      },
+                                                      [_vm._v("Nominal A")]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "has-text-weight-semibold"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                                " +
+                                                            _vm._s(
+                                                              _vm.junction
+                                                                .latest_protection
+                                                                .nominal_a
+                                                            ) +
+                                                            "\n                                                                "
+                                                        ),
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "is-size-6"
+                                                          },
+                                                          [_vm._v("A")]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-parent level-item"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "tile is-child has-text-centered"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass: "is-size-7"
+                                                      },
+                                                      [_vm._v("Regulada A")]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "has-text-weight-semibold"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                                " +
+                                                            _vm._s(
+                                                              _vm.junction
+                                                                .latest_protection
+                                                                .regulada_a
+                                                            ) +
+                                                            "\n                                                                "
+                                                        ),
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "is-size-6"
+                                                          },
+                                                          [_vm._v("A")]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  )
                                 ]
                               )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Regulada A")
-                              ]),
-                              _vm._v(" "),
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.hasBProtections
+                        ? _c(
+                            "div",
+                            { staticClass: "tile is-parent" },
+                            [
                               _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
+                                "b-field",
+                                {
+                                  staticClass: "tile",
+                                  attrs: {
+                                    label: "PROTECCIONES B",
+                                    "label-position": "on-border"
+                                  }
+                                },
                                 [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_protection
-                                          .regulada_a
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "tile box is-shadowless",
+                                      staticStyle: {
+                                        border: "solid 0.1rem #cccccc"
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "tile" }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "tile is-parent level-item"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Nominal B")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                            " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_protection
+                                                            .nominal_b
+                                                        ) +
+                                                        "\n                                                            "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("A")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "tile is-parent level-item"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Regulada B")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                            " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_protection
+                                                            .regulada_b
+                                                        ) +
+                                                        "\n                                                            "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("A")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  )
                                 ]
                               )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          !!+_vm.junction.latest_protection.nominal_b
-                            ? _c("div", { staticClass: "level-item" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "has-text-centered" },
-                                  [
-                                    _c("div", { staticClass: "is-size-7" }, [
-                                      _vm._v("Nominal B")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "has-text-weight-semibold"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                            " +
-                                            _vm._s(
-                                              _vm.junction.latest_protection
-                                                .nominal_b
-                                            ) +
-                                            "\n                                            "
-                                        ),
-                                        _c(
-                                          "span",
-                                          { staticClass: "is-size-6" },
-                                          [_vm._v("A")]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          !!+_vm.junction.latest_protection.regulada_b
-                            ? _c("div", { staticClass: "level-item" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "has-text-centered" },
-                                  [
-                                    _c("div", { staticClass: "is-size-7" }, [
-                                      _vm._v("Regulada B")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "has-text-weight-semibold"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                            " +
-                                            _vm._s(
-                                              _vm.junction.latest_protection
-                                                .regulada_b
-                                            ) +
-                                            "\n                                            "
-                                        ),
-                                        _c(
-                                          "span",
-                                          { staticClass: "is-size-6" },
-                                          [_vm._v("A")]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ])
-                            : _vm._e()
-                        ])
-                      : _vm._e(),
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.hasAProtections && !_vm.hasBProtections
+                        ? _c(
+                            "div",
+                            { staticClass: "tile columns is-vcentered" },
+                            [_vm._m(0)]
+                          )
+                        : _vm._e()
+                    ]),
                     _vm._v(" "),
                     _c("div", {
                       staticClass: "is-divider",
-                      staticStyle: { "margin-bottom": "16px" },
+                      staticStyle: { "margin-bottom": "24px" },
                       attrs: { "data-content": "Mediciones" }
                     }),
                     _vm._v(" "),
-                    _vm.junction.latest_measurement &&
-                    _vm.junction.latest_measurement.r_a_amp_measure
-                      ? _c("div", { staticClass: "level" }, [
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición R (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .r_a_amp_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .r_a_amp_measure * 220,
-                                          0,
-                                          0
+                    _vm.hasAMeasurements
+                      ? _c(
+                          "b-field",
+                          {
+                            staticClass: "tile",
+                            attrs: {
+                              label: "MEDICIONES A",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tile box is-shadowless",
+                                staticStyle: { border: "solid 0.1rem #cccccc" }
+                              },
+                              [
+                                _c("div", { staticClass: "tile is-vertical" }, [
+                                  _vm.junction.latest_measurement &&
+                                  _vm.junction.latest_measurement
+                                    .r_a_amp_measure
+                                    ? _c("div", { staticClass: "tile level" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición R (A)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .r_a_amp_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("A")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición S (A)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .s_a_amp_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("A")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición T (A)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .t_a_amp_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("A")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición S (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .s_a_amp_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .s_a_amp_measure * 220,
-                                          0,
-                                          0
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.junction.latest_measurement &&
+                                  _vm.junction.latest_measurement
+                                    .r_a_volt_measure
+                                    ? _c("div", { staticClass: "tile level" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición R (V)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .r_a_volt_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("V")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición S (V)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .s_a_volt_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("V")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición T (V)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .t_a_volt_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("V")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición T (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .t_a_amp_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .t_a_amp_measure * 220,
-                                          0,
-                                          0
-                                        )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ])
-                        ])
+                                      ])
+                                    : _vm._e()
+                                ])
+                              ]
+                            )
+                          ]
+                        )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.junction.latest_measurement &&
-                    _vm.junction.latest_measurement.r_b_amp_measure
-                      ? _c("div", { staticClass: "level" }, [
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición R (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .r_b_amp_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .r_b_amp_measure * 220,
-                                          0,
-                                          0
+                    _vm.hasBMeasurements
+                      ? _c(
+                          "b-field",
+                          {
+                            staticClass: "tile",
+                            attrs: {
+                              label: "MEDICIONES B",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tile box is-shadowless",
+                                staticStyle: { border: "solid 0.1rem #cccccc" }
+                              },
+                              [
+                                _c("div", { staticClass: "tile is-vertical" }, [
+                                  _vm.junction.latest_measurement &&
+                                  _vm.junction.latest_measurement
+                                    .r_b_amp_measure
+                                    ? _c("div", { staticClass: "tile level" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición R (A)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .r_b_amp_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("A")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición S (A)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .s_b_amp_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("A")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición T (A)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .t_b_amp_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("A")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición S (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .s_b_amp_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .s_b_amp_measure * 220,
-                                          0,
-                                          0
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.junction.latest_measurement &&
+                                  _vm.junction.latest_measurement
+                                    .r_b_volt_measure
+                                    ? _c("div", { staticClass: "tile level" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición R (V)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .r_b_volt_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("V")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición S (V)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .s_b_volt_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("V")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "tile level-item" },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "tile is-child has-text-centered"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "is-size-7" },
+                                                  [_vm._v("Medición T (V)")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.junction
+                                                            .latest_measurement
+                                                            .t_b_volt_measure
+                                                        ) +
+                                                        "\n                                                        "
+                                                    ),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "is-size-6"
+                                                      },
+                                                      [_vm._v("V")]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
                                         )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición T (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .t_b_amp_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .t_b_amp_measure * 220,
-                                          0,
-                                          0
-                                        )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ])
-                        ])
+                                      ])
+                                    : _vm._e()
+                                ])
+                              ]
+                            )
+                          ]
+                        )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.junction.latest_measurement &&
-                    _vm.junction.latest_measurement.r_a_volt_measure
-                      ? _c("div", { staticClass: "level" }, [
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición R (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .r_a_volt_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .r_a_volt_measure * 220,
-                                          0,
-                                          0
-                                        )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición S (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .s_a_volt_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .s_a_volt_measure * 220,
-                                          0,
-                                          0
-                                        )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición T (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .t_a_volt_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .t_a_volt_measure * 220,
-                                          0,
-                                          0
-                                        )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ])
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.junction.latest_measurement &&
-                    _vm.junction.latest_measurement.r_b_volt_measure
-                      ? _c("div", { staticClass: "level" }, [
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición R (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .r_b_volt_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .r_b_volt_measure * 220,
-                                          0,
-                                          0
-                                        )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición S (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .s_b_volt_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .s_b_volt_measure * 220,
-                                          0,
-                                          0
-                                        )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "level-item" }, [
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v("Medición T (A)")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "has-text-weight-semibold" },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm.junction.latest_measurement
-                                          .t_b_volt_measure
-                                      ) +
-                                      "\n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-6" }, [
-                                    _vm._v("A")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                            " +
-                                      _vm._s(
-                                        _vm._f("numeral")(
-                                          _vm.junction.latest_measurement
-                                            .t_b_volt_measure * 220,
-                                          0,
-                                          0
-                                        )
-                                      ) +
-                                      " \n                                            "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("W")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ])
-                        ])
+                    !_vm.hasAMeasurements && !_vm.hasBMeasurements
+                      ? _c(
+                          "div",
+                          { staticClass: "tile columns is-vcentered" },
+                          [_vm._m(1)]
+                        )
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.can.update & _vm.isEditMode
@@ -1866,7 +2152,46 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "has-text-centered has-text-weight-light has-text-grey is-size-7"
+        },
+        [
+          _vm._v(
+            "\n                                            NO TIENE PROTECCIONES REGISTRADAS\n                                        "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "has-text-centered has-text-weight-light has-text-grey is-size-7"
+        },
+        [
+          _vm._v(
+            "\n                                        NO TIENE MEDICIONES REGISTRADAS\n                                    "
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

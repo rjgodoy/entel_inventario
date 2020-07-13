@@ -5,337 +5,352 @@
         </header>
 
         <section class="modal-card-body">
-            <div class="block has-text-centered">
-                <div class="has-text-weight-semibold is-size-4">Protecciones</div>
-            </div>
-            <div class="columns">
-                
-                <div class="column">
-                    <div class="box is-shadowless" style="border: solid 0.5px black">
-                        <div class="columns">
-                            <div class="column">
-                                <div class="has-text-centered">
-                                    <div class="is-size-6 has-text-weight-semibold has-text-centered">Nominal (A)</div>
-                                    <div class="">
-                                        <div class="control has-icons-right">
-                                            <input class="input" type="number" v-model="nominal_a">
-                                            <span class="icon is-small is-right">
-                                                <span>A</span>
-                                            </span>
+            <div class="block">
+                <div class="block has-text-centered">
+                    <div class="has-text-weight-semibold is-size-4">Protecciones</div>
+                </div>
+                <div class="columns">
+                    
+                    <div class="column">
+                        <b-field label="PROTECCIONES A" label-position="on-border" class="tile">
+                            <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                <div class="columns">
+                                    <div class="column">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-6 has-text-weight-semibold has-text-centered">Nominal (A)</div>
+                                            <div class="">
+                                                <div class="control has-icons-right">
+                                                    <input class="input" type="number" v-model="nominal_a">
+                                                    <span class="icon is-small is-right">
+                                                        <span>A</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="has-text-weight-normal is-size-6">
+                                                {{ nominal_a ? nominal_a * 220 : 0 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div> -->
                                         </div>
                                     </div>
-                                    <div class="has-text-weight-normal is-size-6">
-                                        {{ nominal_a ? nominal_a * 220 : 0 | numeral(0,0) }} 
-                                        <span class="is-size-7">W</span>
+
+                                    <div class="column">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-6 has-text-weight-semibold has-text-centered">Regulada (A)</div>
+                                            <div class="">
+                                                <div class="control has-icons-right">
+                                                    <input class="input" type="number" v-model="regulada_a">
+                                                    <span class="icon is-small is-right">
+                                                        <span>A</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="has-text-weight-normal is-size-6">
+                                                {{ regulada_a ? regulada_a * 220 : 0 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </b-field>
+                    </div>
+
+                    <div class="column">
+                        <b-field label="PROTECCIONES B" label-position="on-border" class="tile">
+                            <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                <div class="columns">
+                                    <div class="column">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-6 has-text-weight-semibold has-text-centered">Nominal (A)</div>
+                                            <div class="">
+                                                <div class="control has-icons-right">
+                                                    <input class="input" type="number" v-model="nominal_b">
+                                                    <span class="icon is-right">
+                                                        <span>A</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="has-text-weight-normal is-size-6">
+                                                {{ nominal_b ? nominal_b * 220 : 0 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="column">
+                                        <div class="has-text-centered">
+                                            <div class="is-size-6 has-text-weight-semibold has-text-centered">Regulada (A)</div>
+                                            <div class="">
+                                                <div class="control has-icons-right">
+                                                    <input class="input" type="number" v-model="regulada_b">
+                                                    <span class="icon is-right">
+                                                        <span>A</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="has-text-weight-normal is-size-6">
+                                                {{ regulada_b ? regulada_b * 220 : 0 | numeral(0,0) }} 
+                                                <span class="is-size-7">W</span>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </b-field>
+                    </div>
+
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="block">
+                <div class="block has-text-centered">
+                    <div class="has-text-weight-semibold is-size-4">Mediciones</div>
+                </div>
+
+                <b-field label="MEDICIONES A" label-position="on-border" class="tile" style="padding-bottom: 12px">
+                    <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                        <div class="tile is-vertical">
+                            <!-- Medicion R en Amp -> A -->
+                            <div class="tile level">
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R (A)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="RA_amp_measure">
+                                                <span class="icon is-small is-right">
+                                                    <span>A</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ RA_amp_measure ? RA_amp_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase S (A)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="SA_amp_measure">
+                                                <span class="icon is-small is-right">
+                                                    <span>A</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ SA_amp_measure ? SA_amp_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase T (A)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="TA_amp_measure">
+                                                <span class="icon is-right">
+                                                    <span>A</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ TA_amp_measure ? TA_amp_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="column">
-                                <div class="has-text-centered">
-                                    <div class="is-size-6 has-text-weight-semibold has-text-centered">Regulada (A)</div>
-                                    <div class="">
-                                        <div class="control has-icons-right">
-                                            <input class="input" type="number" v-model="regulada_a">
-                                            <span class="icon is-small is-right">
-                                                <span>A</span>
-                                            </span>
+                            <!-- Medicion R en Volt -> A -->
+                            <div class="tile level">
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R (V)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="RA_volt_measure">
+                                                <span class="icon is-small is-right">
+                                                    <span>V</span>
+                                                </span>
+                                            </div>
                                         </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ RA_volt_measure ? RA_volt_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
                                     </div>
-                                    <div class="has-text-weight-normal is-size-6">
-                                        {{ regulada_a ? regulada_a * 220 : 0 | numeral(0,0) }} 
-                                        <span class="is-size-7">W</span>
+                                </div>
+
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase S (V)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="SA_volt_measure">
+                                                <span class="icon is-small is-right">
+                                                    <span>V</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ SA_volt_measure ? SA_volt_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase T (V)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="TA_volt_measure">
+                                                <span class="icon is-right">
+                                                    <span>V</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ TA_volt_measure ? TA_volt_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="column">
-                    <div class="box is-shadowless" style="border: solid 0.5px black">
-                        <div class="columns">
-                            <div class="column">
-                                <div class="has-text-centered">
-                                    <div class="is-size-6 has-text-weight-semibold has-text-centered">Nominal (A)</div>
-                                    <div class="">
-                                        <div class="control has-icons-right">
-                                            <input class="input" type="number" v-model="nominal_b">
-                                            <span class="icon is-right">
-                                                <span>A</span>
-                                            </span>
+                </b-field>
+            
+                <b-field label="MEDICIONES B" label-position="on-border" class="tile">
+                    <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                        <div class="tile is-vertical">
+                            <!-- Medicion R en Amp -> B -->
+                            <div class="tile level">
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R (A)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="RB_amp_measure">
+                                                <span class="icon is-small is-right">
+                                                    <span>A</span>
+                                                </span>
+                                            </div>
                                         </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ RB_amp_measure ? RB_amp_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
                                     </div>
-                                    <div class="has-text-weight-normal is-size-6">
-                                        {{ nominal_b ? nominal_b * 220 : 0 | numeral(0,0) }} 
-                                        <span class="is-size-7">W</span>
+                                </div>
+
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase S (A)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="SB_amp_measure">
+                                                <span class="icon is-small is-right">
+                                                    <span>A</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ SB_amp_measure ? SB_amp_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase T (A)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="TB_amp_measure">
+                                                <span class="icon is-right">
+                                                    <span>A</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ TB_amp_measure ? TB_amp_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="column">
-                                <div class="has-text-centered">
-                                    <div class="is-size-6 has-text-weight-semibold has-text-centered">Regulada (A)</div>
-                                    <div class="">
-                                        <div class="control has-icons-right">
-                                            <input class="input" type="number" v-model="regulada_b">
-                                            <span class="icon is-right">
-                                                <span>A</span>
-                                            </span>
+                            <!-- Medicion R en Volt -> B -->
+                            <div class="tile level">
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R (V)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="RB_volt_measure">
+                                                <span class="icon is-small is-right">
+                                                    <span>V</span>
+                                                </span>
+                                            </div>
                                         </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ RB_volt_measure ? RB_volt_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
                                     </div>
-                                    <div class="has-text-weight-normal is-size-6">
-                                        {{ regulada_b ? regulada_b * 220 : 0 | numeral(0,0) }} 
-                                        <span class="is-size-7">W</span>
+                                </div>
+
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase S (V)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="SB_volt_measure">
+                                                <span class="icon is-small is-right">
+                                                    <span>V</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ SB_volt_measure ? SB_volt_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="tile is-parent level-item">
+                                    <div class="tile is-child has-text-centered">
+                                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase T (V)</div>
+                                        <div class="">
+                                            <div class="control has-icons-right">
+                                                <input class="input" type="number" v-model="TB_volt_measure">
+                                                <span class="icon is-right">
+                                                    <span>V</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                            {{ TB_volt_measure ? TB_volt_measure * 220 : 0 | numeral(0,0) }} 
+                                            <span class="is-size-7">W</span>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </b-field>
             </div>
         </section>
 
-        <!-- Medicion R en Amp -> A -->
-        <section class="modal-card-body">
-            <div class="block has-text-centered">
-                <div class="has-text-weight-semibold is-size-4">Mediciones</div>
-            </div>
-
-            <div class="level">
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="RA_amp_measure">
-                                <span class="icon is-small is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ RA_amp_measure ? RA_amp_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase S</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="SA_amp_measure">
-                                <span class="icon is-small is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ SA_amp_measure ? SA_amp_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase T</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="TA_amp_measure">
-                                <span class="icon is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ TA_amp_measure ? TA_amp_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Medicion R en Amp -> B -->
-        <section class="modal-card-body">
-            <div class="level">
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="RB_amp_measure">
-                                <span class="icon is-small is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ RB_amp_measure ? RB_amp_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase S</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="SB_amp_measure">
-                                <span class="icon is-small is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ SB_amp_measure ? SB_amp_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase T</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="TB_amp_measure">
-                                <span class="icon is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ TB_amp_measure ? TB_amp_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Medicion R en Volt -> A -->
-        <section class="modal-card-body">
-            <div class="level">
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="RA_volt_measure">
-                                <span class="icon is-small is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ RA_volt_measure ? RA_volt_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase S</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="SA_volt_measure">
-                                <span class="icon is-small is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ SA_volt_measure ? SA_volt_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase T</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="TA_volt_measure">
-                                <span class="icon is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ TA_volt_measure ? TA_volt_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Medicion R en Volt -> B -->
-        <section class="modal-card-body">
-            <div class="level">
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase R</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="RB_volt_measure">
-                                <span class="icon is-small is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ RB_volt_measure ? RB_volt_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase S</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="SB_volt_measure">
-                                <span class="icon is-small is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ SB_volt_measure ? SB_volt_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="level-item">
-                    <div class="has-text-centered">
-                        <div class="is-size-6 has-text-weight-semibold has-text-centered">Fase T</div>
-                        <div class="">
-                            <div class="control has-icons-right">
-                                <input class="input" type="number" v-model="TB_volt_measure">
-                                <span class="icon is-right">
-                                    <span>A</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="has-text-weight-normal is-size-6">
-                            {{ TB_volt_measure ? TB_volt_measure * 220 : 0 | numeral(0,0) }} 
-                            <span class="is-size-7">W</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="$parent.close()">Close</button>
-            <button class="button is-primary" @click="save">Guardar</button>
+            <button class="button is-link" @click="save">Guardar</button>
         </footer>
     </div>
 </template>

@@ -253,6 +253,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     }
   },
   created: function created() {
+    this.$eventBus.$on('room-data', this.getRoomData);
     this.$eventBus.$on('room-distribution', this.getRoomData);
     this.$eventBus.$on('room-surface', this.getRoomData);
     this.$eventBus.$on('change-room', this.getRoomData);
@@ -269,6 +270,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       });
     },
     beforeDestroy: function beforeDestroy() {
+      this.$eventBus.$off('room-data');
       this.$eventBus.$off('room-distribution');
       this.$eventBus.$off('room-surface');
       this.$eventBus.$off('change-room');

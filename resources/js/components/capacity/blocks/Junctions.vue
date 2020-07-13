@@ -1,37 +1,34 @@
 <template>
     <div class="tile">
-        <section class="tile" 
-            style="padding: 24px;">
-            <div class="columns tile is-ancestor">
+        <section class="tile" style="padding: 24px;">
+            <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                    <div class="tile box">
+                        <div class="tile columns">
 
-                <div class="column tile is-parent">
-                    <div class="tile is-child box is-dark is-bold">
-                        <div class="block">
-                            <div class="title has-text-weight-bold is-size-6 has-text-white">EMPALMES</div>
-                            <div>
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ responsable.area }}</div>
-                                <div class="has-text-weight-normal is-size-6">Responsable</div>
+                            <div class="tile column has-background-dark has-text-weight-bold has-text-white">
+                                <div class="tile is-child">
+                                    <div class="title has-text-weight-bold is-size-6 has-text-white">EMPALMES</div>
+                                    <div>
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ responsable.area }}</div>
+                                        <div class="has-text-weight-normal is-size-6">Responsable</div>
+                                    </div>
+                                    <div>
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacity | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">Capacidad Total</div>
+                                    </div>
+                                    <div>
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalUsedCapacity | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">Capacidad Total utilizado</div>
+                                    </div>
+                                    <div>
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalDisponibility | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">Capacidad Total disponible</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacity | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">Capacidad Total</div>
-                            </div>
-                            <div>
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalUsedCapacity | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">Capacidad Total utilizado</div>
-                            </div>
-                            <div>
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalDisponibility | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">Capacidad Total disponible</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="column tile is-parent">
-                    <div class="columns is-multiline tile">
-                        <div class="column tile">
-                            <div class="box tile" style="border: solid 0.5px black">
+                            <div class="column tile">
                                 <div class="columns tile is-parent">
                                     <a class="box tile is-child column" 
                                         v-for="junction in junctions" :key="junction.id"
@@ -53,10 +50,10 @@
                                     </a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
         <b-modal :active.sync="isJunctionModalActive"
@@ -71,7 +68,6 @@
                 />
         </b-modal>
     </div>
-        
 </template>
 
 <script>
@@ -159,10 +155,12 @@
                 let total = 0
                 Object.keys(this.pop.rooms).forEach(element => {
                     let room = this.pop.rooms[element]
-                    Object.keys(room.planes).forEach(item => {
-                        let plane = room.planes[item]
-                        total += this.batteryRechargePower(plane)
-                    })
+                    if(room.power_rectifiers.length) {
+                        Object.keys(room.planes).forEach(item => {
+                            let roomPlane = room.planes[item]
+                            total += this.batteryRechargePower(roomPlane)
+                        })
+                    }
                 })
                 return total
             },

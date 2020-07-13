@@ -1,144 +1,137 @@
 <template>
     <div class="tile">
-        <section class="tile" 
-            v-if="generatorSets.length" style="padding: 24px;">
-            <div class="columns tile is-ancestor">
+        <section class="tile" style="padding: 24px;">
+            <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                    <div class="tile box">
+                        <div class="tile columns">
 
-                <div class="column is-4 tile is-parent">
-                    <div class="tile is-child box is-dark is-bold">
-                        <div class="block">
-                            <div class="title has-text-weight-bold is-size-6 has-text-white">GRUPOS ELECTROGENOS</div>
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ responsable.area }}</div>
-                                <div class="has-text-weight-normal is-size-6">Responsable</div>
-                            </div>
-                            <!-- <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacityA | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">total Plano A</div>
-                            </div>
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacityB | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">total Plano B</div>
-                            </div>
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ usedA | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">utilizada Plano A</div>
-                            </div>
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ usedB | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">utilizada Plano B</div>
-                            </div>
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ availableA | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">disponible Plano A</div>
-                            </div>
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ availableB | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">disponible Plano B</div>
-                            </div> -->
-
-                            <hr style="margin: 8px 0 8px 0;" />
-
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacity | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">Total</div>
-                            </div>
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalUsed | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">Total utilizado</div>
-                            </div>
-                            <div class="">
-                                <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalAvailable | numeral('0,0.0') }}</div>
-                                <div class="has-text-weight-normal is-size-6">Total disponible</div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <div class="column tile is-parent">
-                    <div class="columns is-multiline tile">
-                        <div class="column tile">
-                            <div class="box tile" style="border: solid 0.5px black">
-                                <div class="columns tile">
-                                    <div class="column tile is-6">
-                                        <!-- <div class=""> -->
-                                            <b-field label="CAPACIDAD PLANOS" label-position="on-border" class="tile">
-                                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
-                                                    <div class="columns tile">
-                                                        <div class="column tile is-child">
-                                                            <div class="">
-                                                                <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ totalCapacityA | numeral('0,0.0') }}</div>
-                                                                <div class="has-text-weight-normal is-size-7">total Plano A</div>
-                                                            </div>
-                                                            <div class="">
-                                                                <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ usedA | numeral('0,0.0') }}</div>
-                                                                <div class="has-text-weight-normal is-size-7">utilizada Plano A</div>
-                                                            </div>
-                                                            <div class="">
-                                                                <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ availableA | numeral('0,0.0') }}</div>
-                                                                <div class="has-text-weight-normal is-size-7">disponible Plano A</div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="column">
-                                                            <div class="">
-                                                                <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ totalCapacityB | numeral('0,0.0') }}</div>
-                                                                <div class="has-text-weight-normal is-size-7">total Plano B</div>
-                                                            </div>
-                                                            
-                                                            <div class="">
-                                                                <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ usedB | numeral('0,0.0') }}</div>
-                                                                <div class="has-text-weight-normal is-size-7">utilizada Plano B</div>
-                                                            </div>
-                                                            
-                                                            <div class="">
-                                                                <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ availableB | numeral('0,0.0') }}</div>
-                                                                <div class="has-text-weight-normal is-size-7">disponible Plano B</div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </b-field>
-                                        <!-- </div> -->
+                            <div class="tile column is-4 has-background-dark has-text-weight-bold has-text-white">
+                                <div class="tile is-child">
+                                    <div class="title has-text-weight-bold is-size-6 has-text-white">GRUPOS ELECTROGENOS</div>
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ responsable.area }}</div>
+                                        <div class="has-text-weight-normal is-size-6">Responsable</div>
                                     </div>
-                                    <div class="column tile">
-                                        <div class="columns tile is-parent">
-                                            <a class="column tile is-child box" 
-                                                v-for="generatorSet in generatorSets" :key="generatorSet.id"
-                                                @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
-                                                <div class="">
-                                                    <div class="columns">
-                                                        <div class="column">
-                                                            <div class="has-text-weight-semibold is-size-6">Grupo Electrógeno</div>
-                                                        </div>
-                                                        <div class="column is-2 has-text-centered">
-                                                            <!-- <font-awesome-icon 
-                                                                :icon="['far', 'check-circle']"
-                                                                size="2x"
-                                                                class="has-text-success"
-                                                            /> -->
-                                                        </div>
-                                                    </div>   
-                                                </div>
-                                            </a>
-                                        </div>
+                                    <!-- <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacityA | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">total Plano A</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacityB | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">total Plano B</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ usedA | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">utilizada Plano A</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ usedB | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">utilizada Plano B</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ availableA | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">disponible Plano A</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ availableB | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">disponible Plano B</div>
+                                    </div> -->
+
+                                    <hr style="margin: 8px 0 8px 0;" />
+
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacity | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">Total</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalUsed | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">Total utilizado</div>
+                                    </div>
+                                    <div class="">
+                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalAvailable | numeral('0,0.0') }}</div>
+                                        <div class="has-text-weight-normal is-size-6">Total disponible</div>
                                     </div>
                                 </div>
-                                
-                                
+                            </div>
 
+                            <div class="column tile">
+                                <div class="columns tile is-parent">
+                                    <div class="columns tile">
+                                        <div class="column tile is-6">
+                                            <!-- <div class=""> -->
+                                                <b-field label="CAPACIDAD PLANOS" label-position="on-border" class="tile">
+                                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                                        <div class="columns tile">
+                                                            <div class="column tile is-child">
+                                                                <div class="">
+                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ totalCapacityA | numeral('0,0.0') }}</div>
+                                                                    <div class="has-text-weight-normal is-size-7">total Plano A</div>
+                                                                </div>
+                                                                <div class="">
+                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ usedA | numeral('0,0.0') }}</div>
+                                                                    <div class="has-text-weight-normal is-size-7">utilizada Plano A</div>
+                                                                </div>
+                                                                <div class="">
+                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ availableA | numeral('0,0.0') }}</div>
+                                                                    <div class="has-text-weight-normal is-size-7">disponible Plano A</div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="column">
+                                                                <div class="">
+                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ totalCapacityB | numeral('0,0.0') }}</div>
+                                                                    <div class="has-text-weight-normal is-size-7">total Plano B</div>
+                                                                </div>
+                                                                
+                                                                <div class="">
+                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ usedB | numeral('0,0.0') }}</div>
+                                                                    <div class="has-text-weight-normal is-size-7">utilizada Plano B</div>
+                                                                </div>
+                                                                
+                                                                <div class="">
+                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ availableB | numeral('0,0.0') }}</div>
+                                                                    <div class="has-text-weight-normal is-size-7">disponible Plano B</div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </b-field>
+                                            <!-- </div> -->
+                                        </div>
+                                        <div class="column tile">
+                                            <div class="columns tile is-parent">
+                                                <a class="column tile is-child box" 
+                                                    v-for="generatorSet in generatorSets" :key="generatorSet.id"
+                                                    @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
+                                                    <div class="">
+                                                        <div class="columns">
+                                                            <div class="column">
+                                                                <div class="has-text-weight-semibold is-size-6">Grupo Electrógeno</div>
+                                                            </div>
+                                                            <div class="column is-2 has-text-centered">
+                                                                <!-- <font-awesome-icon 
+                                                                    :icon="['far', 'check-circle']"
+                                                                    size="2x"
+                                                                    class="has-text-success"
+                                                                /> -->
+                                                            </div>
+                                                        </div>   
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
-
             </div>
-
-            
-
         </section>
         <b-modal :active.sync="isGeneratorModalActive"
             has-modal-card
@@ -150,8 +143,7 @@
                 :can="can"
                 :user="user"/>
         </b-modal>
-    </div>
-        
+    </div> 
 </template>
 
 <script>

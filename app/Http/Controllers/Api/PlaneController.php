@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Plane as PlaneResource;
 use App\Http\Resources\PlaneCollection;
 use App\Models\Plane;
+use App\Models\PlaneType;
+use App\Models\RoomDelegation;
 use Illuminate\Http\Request;
 
 class PlaneController extends Controller
@@ -58,10 +60,18 @@ class PlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function roomPlanes($room_id)
+    public function roomPlanes(Request $request, $room_id)
     {
+        $plane_delegation_type_id = $request->plane_delegation_type_id;
+
         $planes = Plane::with(
-            'rooms.current_room_delegation',
+            'rooms.current_room_delegation.plane_delegation_type.planes.power_rectifiers.power_rectifier_type',
+            // 'rooms.current_room_delegation.plane_delegation_type.planes.power_rectifiers.power_rectifier_modules',
+            // 'rooms.current_room_delegation.plane_delegation_type.planes.power_rectifiers.power_rectifier_mode',
+            // 'rooms.current_room_delegation.plane_delegation_type.planes.battery_banks.battery_bank_brand',
+            // 'rooms.current_room_delegation.plane_delegation_type.planes.plane_type',
+            // 'rooms.current_room_delegation.plane_delegation_type.planes.current_redundant_modules',
+
             'power_rectifiers.power_rectifier_type', 
             'power_rectifiers.power_rectifier_modules', 
             'power_rectifiers.power_rectifier_mode',
@@ -72,10 +82,42 @@ class PlaneController extends Controller
         ->whereHas('rooms', function($q) use($room_id) {
             $q->where('id', $room_id);
         })
+        ->whereHas('plane_delegation_types', function($p) use($plane_delegation_type_id) {
+            $p->where('id', $plane_delegation_type_id);
+        })
         ->get();
 
         return new PlaneCollection($planes);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function planeTypes()
+    {
+        $planeTypes = PlaneType::all();
+        return new PlaneCollection($planeTypes);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateRoomPlaneType(Request $request, $room_id)
+    {
+        $roomDelegation = RoomDelegation::create([
+            'room_id' => $room_id,
+            'plane_delegation_type_id' => $request->plane_type_id
+        ]);
+
+        return $roomDelegation;
+    }
+    
 
     /**
      * Update the specified resource in storage.

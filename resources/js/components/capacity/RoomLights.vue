@@ -44,8 +44,10 @@
                                 :class="totalAvailableEnergyCapacity <= 5 ? 'has-text-info' : (totalAvailableEnergyCapacity > 5 && totalAvailableEnergyCapacity <= 10 ? 'has-text-warning' : 'has-text-success')"
                                 />
                             <div class="has-text-centered has-text-white">
-                                <div class=" is-size-5 has-text-weight-bold">{{ canViewClimate ? totalAvailableEnergyCapacity : Math.min(totalAvailableEnergyCapacity, totalAvailableClimateCapacity) | numeral('0,0.0') }}
-                                <span class="is-size-6 has-text-weight-light">kW</span></div>
+                                <div class=" is-size-5 has-text-weight-bold">
+                                    {{ canViewClimate ? totalAvailableEnergyCapacity : Math.min(totalAvailableEnergyCapacity, totalAvailableClimateCapacity) | numeral('0,0.0') }}
+                                    <span class="is-size-6 has-text-weight-light">kW</span>
+                                </div>
                                 <p class="has-text-weight-light is-size-7">Disponibles</p>
                             </div>
                         </div>
@@ -102,7 +104,6 @@
         },
         props : [
             'user',
-            'user_permissions',
             'room'
         ],
         data() {
@@ -120,6 +121,11 @@
 
         computed: {
             totalCapacity() {
+                // return this.junctionsTotalAvailableCapacity
+                // return this.generatorSetTotalAvailableCapacity
+                // return this.powerRectifiersAvailableCapacity
+                // return this.batteriesAvailableCapacity
+                // return this.distributionAvailableCapacity
                 return Math.min(this.totalAvailableEnergyCapacity, this.totalAvailableClimateCapacity)
             },
 
@@ -134,7 +140,7 @@
             },
 
             totalAvailableClimateCapacity() {
-                return Math.min(10, 15)
+                return Math.min(20, 25)
             },
 
             canViewClimate() {
@@ -142,8 +148,7 @@
                     || this.user.roles[0].slug == 'admin' 
                     || this.user.roles[0].slug == 'developer'
                     || this.user.roles[0].slug == 'super-viewer' 
-                    || this.user_permissions.find(element => element.slug == 'edit-air-conditioner'
-                    ) ? true : false
+                    ? true : false
             },
 
             // ✅#################### Junctions
@@ -353,59 +358,68 @@
             // ✅#################### Power Rectifiers
                 powerRectifiersTotalCapacity() {
                     let realRoomCapacity = 0
-                    Object.keys(this.room.planes).forEach(element => {
-                        let plane = this.room.planes[element]
-                        realRoomCapacity += this.realPlaneCapacity(plane)
-                    })
+                    if(this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type) {
+                        let planes = this.room.current_room_delegation.plane_delegation_type.planes
+                        Object.keys(planes).forEach(element => {
+                            let plane = planes[element]
+                            realRoomCapacity += this.realPlaneCapacity(plane)
+                        })
+                    }
                     return realRoomCapacity
                 },
 
                 powerRectifiersUsedCapacity() {
                     let usedRoomCapacity = 0
-                    Object.keys(this.room.planes).forEach(element => {
-                        let plane = this.room.planes[element]
-                        usedRoomCapacity += this.totalPower(plane)
-                    })
+                    if(this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type) {
+                        let planes = this.room.current_room_delegation.plane_delegation_type.planes
+                        Object.keys(planes).forEach(element => {
+                            let plane = planes[element]
+                            usedRoomCapacity += this.totalPower(plane)
+                        })
+                    }
                     return usedRoomCapacity
                 },
 
                 powerRectifiersAvailableCapacity() {
-                    let availableRoomCapacity = 10000000
-                    let availableRoomCapacityA = 10000000
-                    let availableRoomCapacityB = 10000000
-                    Object.keys(this.room.planes).forEach(element => {
-                        let plane = this.room.planes[element]
-                        if(this.room.current_room_delegation) {
-                            switch(this.room.current_room_delegation.plane_delegation_type_id) {
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                    availableRoomCapacity = this.availablePlaneCapacity(plane)
-                                    break
-                                case 5:
-                                case 6:
-                                    if(availableRoomCapacity > this.availablePlaneCapacity(plane)) {
+                    const original = 10000000
+                    let availableRoomCapacity = original
+                    let availableRoomCapacityA = original
+                    let availableRoomCapacityB = original
+                    if(this.room.current_room_delegation) {
+                        Object.keys(this.room.current_room_delegation.plane_delegation_type.planes).forEach(element => {
+                            let plane = this.room.current_room_delegation.plane_delegation_type.planes[element]
+                            
+                                switch(this.room.current_room_delegation.plane_delegation_type_id) {
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
                                         availableRoomCapacity = this.availablePlaneCapacity(plane)
-                                    }
-                                    break
-                                case 7:
-                                    if(availableRoomCapacityA > this.availablePlaneCapacity(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
-                                        availableRoomCapacityA = this.availablePlaneCapacity(plane)
-                                    } 
+                                        break
+                                    case 5:
+                                    case 6:
+                                        if(availableRoomCapacity > this.availablePlaneCapacity(plane)) {
+                                            availableRoomCapacity = this.availablePlaneCapacity(plane)
+                                        }
+                                        break
+                                    case 7:
+                                        if(availableRoomCapacityA > this.availablePlaneCapacity(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                                            availableRoomCapacityA = this.availablePlaneCapacity(plane)
+                                        } 
 
-                                    if(availableRoomCapacityB > this.availablePlaneCapacity(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
-                                        availableRoomCapacityB = this.availablePlaneCapacity(plane)
-                                    }
-                                    availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB
-                                    break
-                                case 8:
-                                default:
-                                    break
+                                        if(availableRoomCapacityB > this.availablePlaneCapacity(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                                            availableRoomCapacityB = this.availablePlaneCapacity(plane)
+                                        }
+                                        availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB
+                                        break
+                                    case 8:
+                                    default:
+                                        break
+                                
                             }
-                        }
-                    })
-                    availableRoomCapacity = availableRoomCapacity < 10000000 ? availableRoomCapacity : 0
+                        })
+                    }
+                    availableRoomCapacity = availableRoomCapacity < original ? availableRoomCapacity : 0
                     return availableRoomCapacity
                 },
 
@@ -415,37 +429,84 @@
                     return this.room.pop.current_autonomy ? this.room.pop.current_autonomy.theoretical : 0
                 },
 
-                batteriesTotalCapacity() {
-                    let capacity = 0
-                    Object.keys(this.room.planes).forEach(element => {
-                        let plane = this.room.planes[element]
-                        Object.keys(plane.battery_banks).forEach(item => {
-                            capacity += plane.battery_banks[item].capacity
-                        })
-                    })
-                    let total = (((capacity * 48) / 1000) / this.popAutonomy)
-                    return total
-                },
+                // batteriesTotalCapacity() {
+                //     let capacity = 0
+                //     Object.keys(this.room.planes).forEach(element => {
+                //         let plane = this.room.planes[element]
+                //         Object.keys(plane.battery_banks).forEach(item => {
+                //             capacity += plane.battery_banks[item].capacity
+                //         })
+                //     })
+                //     let total = (((capacity * 48) / 1000) / this.popAutonomy)
+                //     return total
+                // },
 
-                batteriesUsedCapacity() {
-                    let used = 0
-                    Object.keys(this.room.planes).forEach(element => {
-                        let plane = this.room.planes[element]
-                        used += this.chargeRealPower(plane)
-                    })
-                    return used
+                // batteriesUsedCapacity() {
+                //     let used = 0
+                //     Object.keys(this.room.planes).forEach(element => {
+                //         let plane = this.room.planes[element]
+                //         used += this.chargeRealPower(plane)
+                //     })
+                //     return used
+                // },
+
+                batteriesAvailableCapacity() {
+                    const original = 10000000
+                    let available = original
+                    if(this.room.current_room_delegation) {
+                        let planes = this.room.current_room_delegation.plane_delegation_type.planes
+                        Object.keys(planes).forEach(element => {
+                            let plane = planes[element]
+                            if(available > this.availableBatteryCapacityPlane(plane)) {
+                                available = this.availableBatteryCapacityPlane(plane)
+                            }
+                        })
+                    }
+                    let total = available == original ? 0 : available * 2
+                    return total
                 },
 
                 batteriesAvailableCapacity() {
-                    let available = 10000000
-                    Object.keys(this.room.planes).forEach(element => {
-                        let plane = this.room.planes[element]
-                        if(available > this.availableBatteryCapacityPlane(plane)) {
-                            available = this.availableBatteryCapacityPlane(plane)
-                        }
-                    })
-                    let total = available == 10000000 ? 0 : available * 2
-                    return total
+                    const original = 10000000
+                    let available = original
+                    let availableA = original
+                    let availableB = original
+                    if(this.room.current_room_delegation) {
+                        Object.keys(this.room.current_room_delegation.plane_delegation_type.planes).forEach(element => {
+                            let plane = this.room.current_room_delegation.plane_delegation_type.planes[element]
+                            
+                                switch(this.room.current_room_delegation.plane_delegation_type_id) {
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        available = this.availableBatteryCapacityPlane(plane)
+                                        break
+                                    case 5:
+                                    case 6:
+                                        if(available > this.availableBatteryCapacityPlane(plane)) {
+                                            available = this.availableBatteryCapacityPlane(plane)
+                                        }
+                                        break
+                                    case 7:
+                                        if(availableA > this.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                                            availableA = this.availableBatteryCapacityPlane(plane)
+                                        } 
+
+                                        if(availableB > this.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                                            availableB = this.availableBatteryCapacityPlane(plane)
+                                        }
+                                        available = availableA + availableB
+                                        break
+                                    case 8:
+                                    default:
+                                        break
+                                
+                            }
+                        })
+                    }
+                    available = available < original ? available * 2 : 0
+                    return available
                 },
 
 

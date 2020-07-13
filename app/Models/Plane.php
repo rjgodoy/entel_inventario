@@ -27,6 +27,16 @@ class Plane extends Model
     /**
      * The attributes that are mass assignable.
      *
+     * @var boolean
+     */
+    public function plane_delegation_types()
+    {
+        return $this->belongsToMany(PlaneDelegationType::class)->withTimestamps();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     public function plane_redundant_modules() 

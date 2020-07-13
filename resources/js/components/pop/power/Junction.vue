@@ -27,7 +27,7 @@
                                 <div class="has-text-weight-light is-size-7">Número Empalme</div>
                                 <div v-if="!isEditMode">
                                     <div class="has-text-weight-bold is-size-5" 
-                                        :class="junction.junction_number ? '' : 'has-text-info'">
+                                        :class="junction.junction_number ? '' : ''">
                                         {{ junction.junction_number ? junction.junction_number : 'Sin información' }}
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                             <div class="field">
                                 <div class="has-text-weight-light is-size-7">Tipo Empalme</div>
                                 <div v-if="!isEditMode">
-                                    <div class="has-text-weight-bold is-size-5">{{ junction.junction_type ? junction.junction_type.type : 'Sin información' }}</div>
+                                    <div class="has-text-weight-bold is-size-5">{{ junctionType }}</div>
                                 </div>
                                 <div v-if="isEditMode">
                                     <b-select placeholder="Select a name" v-model="junctionTypeId">
@@ -57,7 +57,7 @@
                             <div class="field">
                                 <div class="has-text-weight-light is-size-7">Tipo Conexión</div>
                                 <div v-if="!isEditMode">
-                                    <div class="has-text-weight-bold is-size-5">{{ junction.junction_connection ? junction.junction_connection.connection : 'Sin información' }}</div>
+                                    <div class="has-text-weight-bold is-size-5">{{ junctionConnection }}</div>
                                 </div>
                                 <div v-if="isEditMode">
                                     <b-select placeholder="Select a name" v-model="junctionConnectionId">
@@ -82,227 +82,271 @@
                                     <b-input class="has-text-weight-bold is-size-5" v-model="useFactor"/>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="column">
                             <div class="box">
                                 <div class="title has-text-centered is-size-5 has-text-weight-semibold">Tablero Empalme</div>
-                                <div class="is-divider" data-content="Protecciones" style="margin-bottom: 16px;"></div>
-                                <!-- <div class="has-text-weight-semibold is-size-5 has-text-centered">{{ junction.latest_protection ? junction.latest_protection.nominal_a : 'Sin información' }}<span class="is-size-6">A</span></div> -->
+                                <div class="is-divider" data-content="Protecciones" style="margin-bottom: 24px;"></div>
 
-                                <div class="level" v-if="junction.latest_protection && junction.latest_protection.nominal_a">
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Nominal A</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_protection.nominal_a }}
-                                                <span class="is-size-6">A</span>
+                                <div class="tile is-ancestor">
+                                    <div class="tile is-parent" v-if="hasAProtections">
+                                        <b-field label="PROTECCIONES A" label-position="on-border" class="tile">
+                                            <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                                <div class="tile">
+                                                    <div class="tile level">
+                                                        <div class="tile is-parent level-item">
+                                                            <div class="tile is-child has-text-centered">
+                                                                <div class="is-size-7">Nominal A</div>
+                                                                <div class="has-text-weight-semibold">
+                                                                    {{ junction.latest_protection.nominal_a }}
+                                                                    <span class="is-size-6">A</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tile is-parent level-item">
+                                                            <div class="tile is-child has-text-centered">
+                                                                <div class="is-size-7">Regulada A</div>
+                                                                <div class="has-text-weight-semibold">
+                                                                    {{ junction.latest_protection.regulada_a }}
+                                                                    <span class="is-size-6">A</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </b-field>
                                     </div>
 
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Regulada A</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_protection.regulada_a }}
-                                                <span class="is-size-6">A</span>
+                                    <div class="tile is-parent" v-if="hasBProtections">
+                                        <b-field label="PROTECCIONES B" label-position="on-border" class="tile">
+                                            <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                                <div class="tile">
+                                                    <div class="tile is-parent level-item">
+                                                        <div class="tile is-child has-text-centered">
+                                                            <div class="is-size-7">Nominal B</div>
+                                                            <div class="has-text-weight-semibold">
+                                                                {{ junction.latest_protection.nominal_b }}
+                                                                <span class="is-size-6">A</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="tile is-parent level-item">
+                                                        <div class="tile is-child has-text-centered">
+                                                            <div class="is-size-7">Regulada B</div>
+                                                            <div class="has-text-weight-semibold">
+                                                                {{ junction.latest_protection.regulada_b }}
+                                                                <span class="is-size-6">A</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </b-field>
                                     </div>
 
-                                    <div class="level-item" v-if="!!+junction.latest_protection.nominal_b">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Nominal B</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_protection.nominal_b }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="level-item" v-if="!!+junction.latest_protection.regulada_b">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Regulada B</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_protection.regulada_b }}
-                                                <span class="is-size-6">A</span>
+                                    <div class="tile columns is-vcentered" v-if="!hasAProtections && !hasBProtections">
+                                        <div class="column">
+                                            <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                                NO TIENE PROTECCIONES REGISTRADAS
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             
                             
-                                <div class="is-divider" data-content="Mediciones" style="margin-bottom: 16px;"></div>
-                                <div class="level" v-if="junction.latest_measurement && junction.latest_measurement.r_a_amp_measure">
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición R (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.r_a_amp_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.r_a_amp_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="is-divider" data-content="Mediciones"style="margin-bottom: 24px;"></div>
+                                <b-field label="MEDICIONES A" label-position="on-border" class="tile" v-if="hasAMeasurements">
+                                    <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                        <div class="tile is-vertical">
+                                            <div class="tile level" v-if="junction.latest_measurement && junction.latest_measurement.r_a_amp_measure">
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición R (A)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.r_a_amp_measure }}
+                                                            <span class="is-size-6">A</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.r_a_amp_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
 
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición S (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.s_a_amp_measure }}
-                                                <span class="is-size-6">A</span>
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición S (A)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.s_a_amp_measure }}
+                                                            <span class="is-size-6">A</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.s_a_amp_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición T (A)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.t_a_amp_measure }}
+                                                            <span class="is-size-6">A</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.t_a_amp_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.s_a_amp_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición T (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.t_a_amp_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.t_a_amp_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="level" v-if="junction.latest_measurement && junction.latest_measurement.r_b_amp_measure">
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición R (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.r_b_amp_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.r_b_amp_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            <div class="tile level" v-if="junction.latest_measurement && junction.latest_measurement.r_a_volt_measure">
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición R (V)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.r_a_volt_measure }}
+                                                            <span class="is-size-6">V</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.r_a_volt_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
 
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición S (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.s_b_amp_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.s_b_amp_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición S (V)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.s_a_volt_measure }}
+                                                            <span class="is-size-6">V</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.s_a_volt_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición T (V)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.t_a_volt_measure }}
+                                                            <span class="is-size-6">V</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.t_a_volt_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición T (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.t_b_amp_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.t_b_amp_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </b-field>
 
-                                <div class="level" v-if="junction.latest_measurement && junction.latest_measurement.r_a_volt_measure">
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición R (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.r_a_volt_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.r_a_volt_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <b-field label="MEDICIONES B" label-position="on-border" class="tile" v-if="hasBMeasurements">
+                                    <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                        <div class="tile is-vertical">
+                                            <div class="tile level" v-if="junction.latest_measurement && junction.latest_measurement.r_b_amp_measure">
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición R (A)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.r_b_amp_measure }}
+                                                            <span class="is-size-6">A</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.r_b_amp_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
 
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición S (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.s_a_volt_measure }}
-                                                <span class="is-size-6">A</span>
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición S (A)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.s_b_amp_measure }}
+                                                            <span class="is-size-6">A</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.s_b_amp_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición T (A)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.t_b_amp_measure }}
+                                                            <span class="is-size-6">A</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.t_b_amp_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.s_a_volt_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición T (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.t_a_volt_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.t_a_volt_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="level" v-if="junction.latest_measurement && junction.latest_measurement.r_b_volt_measure">
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición R (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.r_b_volt_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.r_b_volt_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            <div class="tile level" v-if="junction.latest_measurement && junction.latest_measurement.r_b_volt_measure">
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición R (V)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.r_b_volt_measure }}
+                                                            <span class="is-size-6">V</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.r_b_volt_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
 
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición S (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.s_b_volt_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.s_b_volt_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición S (V)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.s_b_volt_measure }}
+                                                            <span class="is-size-6">V</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.s_b_volt_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <div class="tile level-item">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <div class="is-size-7">Medición T (V)</div>
+                                                        <div class="has-text-weight-semibold">
+                                                            {{ junction.latest_measurement.t_b_volt_measure }}
+                                                            <span class="is-size-6">V</span>
+                                                        </div>
+                                                        <!-- <div class="has-text-weight-normal is-size-6">
+                                                            {{ junction.latest_measurement.t_b_volt_measure * 220 | numeral(0,0) }} 
+                                                            <span class="is-size-7">W</span>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="level-item">
-                                        <div class="has-text-centered">
-                                            <div class="is-size-7">Medición T (A)</div>
-                                            <div class="has-text-weight-semibold">
-                                                {{ junction.latest_measurement.t_b_volt_measure }}
-                                                <span class="is-size-6">A</span>
-                                            </div>
-                                            <div class="has-text-weight-normal is-size-6">
-                                                {{ junction.latest_measurement.t_b_volt_measure * 220 | numeral(0,0) }} 
-                                                <span class="is-size-7">W</span>
-                                            </div>
+                                </b-field>
+
+                                <div class="tile columns is-vcentered" v-if="!hasAMeasurements && !hasBMeasurements">
+                                    <div class="column">
+                                        <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                            NO TIENE MEDICIONES REGISTRADAS
                                         </div>
                                     </div>
                                 </div>
@@ -437,6 +481,80 @@
         },
 
         computed: {
+            junctionType() {
+                let type = 'Sin Información'
+                switch(this.junctionTypeId) {
+                    case 1:
+                        Object.keys(this.junctionTypes).forEach(item => {
+                           type = this.junctionTypes[item].id == 1 && type == 'Sin Información' ? this.junctionTypes[item].type : type
+                        })
+                        break
+                    case 2:
+                        Object.keys(this.junctionTypes).forEach(item => {
+                           type = this.junctionTypes[item].id == 2 && type == 'Sin Información' ? this.junctionTypes[item].type : type
+                        })
+                        break
+                    case 3:
+                        Object.keys(this.junctionTypes).forEach(item => {
+                           type = this.junctionTypes[item].id == 3 && type == 'Sin Información' ? this.junctionTypes[item].type : type
+                        })
+                        break
+                    case 4:
+                        Object.keys(this.junctionTypes).forEach(item => {
+                           type = this.junctionTypes[item].id == 4 && type == 'Sin Información' ? this.junctionTypes[item].type : type
+                        })
+                        break
+                    default:
+                        break
+                }
+                return type
+            },
+
+            junctionConnection() {
+                let connection = 'Sin Información'
+                switch(this.junctionConnectionId) {
+                    case 1:
+                        Object.keys(this.junctionConnections).forEach(item => {
+                           connection = this.junctionConnections[item].id == 1 && connection == 'Sin Información' ? this.junctionConnections[item].connection : connection
+                        })
+                        break
+                    case 2:
+                        Object.keys(this.junctionConnections).forEach(item => {
+                           connection = this.junctionConnections[item].id == 2 && connection == 'Sin Información' ? this.junctionConnections[item].connection : connection
+                        })
+                        break
+                    case 3:
+                        Object.keys(this.junctionConnections).forEach(item => {
+                           connection = this.junctionConnections[item].id == 3 && connection == 'Sin Información' ? this.junctionConnections[item].connection : connection
+                        })
+                        break
+                    case 4:
+                        Object.keys(this.junctionConnections).forEach(item => {
+                           connection = this.junctionConnections[item].id == 4 && connection == 'Sin Información' ? this.junctionConnections[item].connection : connection
+                        })
+                        break
+                    default:
+                        break
+                }
+                return connection
+            },
+
+            hasAProtections() {
+                return this.junction.latest_protection && (!!+this.junction.latest_protection.nominal_a || !!+this.junction.latest_protection.regulada_a)
+            },
+
+            hasBProtections() {
+                return this.junction.latest_protection && (!!+this.junction.latest_protection.nominal_b || !!+this.junction.latest_protection.regulada_b)
+            },
+
+            hasAMeasurements() {
+                return this.junction.latest_measurement && (this.junction.latest_measurement.r_a_amp_measure || this.junction.latest_measurement.s_a_amp_measure || this.junction.latest_measurement.t_a_amp_measure || this.junction.latest_measurement.r_a_volt_measure || this.junction.latest_measurement.s_a_volt_measure || this.junction.latest_measurement.t_a_volt_measure)
+            },
+
+            hasBMeasurements() {
+                return this.junction.latest_measurement && (this.junction.latest_measurement.r_b_amp_measure || this.junction.latest_measurement.s_b_amp_measure || this.junction.latest_measurement.t_b_amp_measure || this.junction.latest_measurement.r_b_volt_measure || this.junction.latest_measurement.s_b_volt_measure || this.junction.latest_measurement.t_b_volt_measure)
+            },
+
             powerA() {
                 let latestProtectionRA = this.junction.latest_protection ? this.junction.latest_protection.regulada_a : 0
                 let latestMeasureRA_V = this.junction.latest_measurement ? this.junction.latest_measurement.r_a_volt_measure : 0
@@ -559,7 +677,7 @@
                         'junction_number': this.junctionNumber,
                         'junction_type_id': this.junctionTypeId,
                         'junction_connection_id': this.junctionConnectionId,
-                        'use_factor': this.useFactor.includes(',') ? parseFloat(this.useFactor.split(',')[0] + '.' + this.useFactor.split(',')[1]) : parseFloat(this.useFactor)
+                        'use_factor': parseFloat(this.useFactor)
                     }
                     axios.put(`/api/junctionUpdateTypes/${this.junction.id}`, params).then(response => {
                         console.log(response.data)

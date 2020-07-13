@@ -128,6 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Room: function Room() {
@@ -146,7 +147,8 @@ __webpack_require__.r(__webpack_exports__);
       usedBatteryCapacity: 0,
       availableBatteryCapacity: 0,
       totalSurface: 0,
-      usedSurface: 0
+      usedSurface: 0,
+      isEditMode: false
     };
   },
   computed: {
@@ -214,40 +216,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticStyle: { padding: "24px" } }, [
-    _c("div", { staticClass: "columns tile is-ancestor" }, [
-      _c("div", { staticClass: "column tile is-parent" }, [
-        _c(
-          "div",
-          { staticClass: "columns is-multiline tile" },
-          _vm._l(_vm.orderedRooms, function(sala) {
-            return _c(
-              "div",
-              { key: sala.id, staticClass: "column tile is-6" },
-              [
-                _c("Room", {
-                  attrs: {
-                    sala: sala,
-                    room: _vm.room,
-                    pop: _vm.pop,
-                    user: _vm.user
-                  },
-                  on: {
-                    "room-distribution": _vm.roomsDistribution,
-                    "room-surface": _vm.roomsSurface,
-                    "power-rectifier-data": _vm.powerRectifiersTotalCapacity,
-                    "battery-data": _vm.batteryTotalCapacity
-                  }
-                })
-              ],
-              1
-            )
-          }),
-          0
-        )
+  return _c(
+    "section",
+    { staticStyle: { padding: "24px" } },
+    [
+      _c(
+        "b-button",
+        {
+          attrs: {
+            type: _vm.isEditMode ? "is-info" : "is-link is-outlined",
+            size: "is-small"
+          },
+          on: {
+            click: function($event) {
+              _vm.isEditMode = !_vm.isEditMode
+            }
+          }
+        },
+        [_vm._v("Editar Salas")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns tile is-ancestor" }, [
+        _c("div", { staticClass: "column tile is-parent" }, [
+          _c(
+            "div",
+            { staticClass: "columns is-multiline tile" },
+            _vm._l(_vm.orderedRooms, function(sala) {
+              return _c(
+                "div",
+                { key: sala.id, staticClass: "column tile is-parent is-6" },
+                [
+                  _c("Room", {
+                    attrs: {
+                      sala: sala,
+                      room: _vm.room,
+                      pop: _vm.pop,
+                      user: _vm.user,
+                      isEditMode: _vm.isEditMode
+                    },
+                    on: {
+                      "room-distribution": _vm.roomsDistribution,
+                      "room-surface": _vm.roomsSurface,
+                      "power-rectifier-data": _vm.powerRectifiersTotalCapacity,
+                      "battery-data": _vm.batteryTotalCapacity
+                    }
+                  })
+                ],
+                1
+              )
+            }),
+            0
+          )
+        ])
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

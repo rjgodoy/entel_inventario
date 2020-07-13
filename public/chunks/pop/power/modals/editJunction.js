@@ -351,6 +351,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'junction'],
   data: function data() {
@@ -433,965 +448,957 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("section", { staticClass: "modal-card-body" }, [
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", { staticClass: "columns" }, [
-        _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "block" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "columns" }, [
           _c(
             "div",
-            {
-              staticClass: "box is-shadowless",
-              staticStyle: { border: "solid 0.5px black" }
-            },
+            { staticClass: "column" },
             [
-              _c("div", { staticClass: "columns" }, [
-                _c("div", { staticClass: "column" }, [
-                  _c("div", { staticClass: "has-text-centered" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "is-size-6 has-text-weight-semibold has-text-centered"
-                      },
-                      [_vm._v("Nominal (A)")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", {}, [
-                      _c("div", { staticClass: "control has-icons-right" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.nominal_a,
-                              expression: "nominal_a"
-                            }
-                          ],
-                          staticClass: "input",
-                          attrs: { type: "number" },
-                          domProps: { value: _vm.nominal_a },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.nominal_a = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm._m(2)
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "has-text-weight-normal is-size-6" },
-                      [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(
-                              _vm._f("numeral")(
-                                _vm.nominal_a ? _vm.nominal_a * 220 : 0,
-                                0,
-                                0
+              _c(
+                "b-field",
+                {
+                  staticClass: "tile",
+                  attrs: {
+                    label: "PROTECCIONES A",
+                    "label-position": "on-border"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tile box is-shadowless",
+                      staticStyle: { border: "solid 0.1rem #cccccc" }
+                    },
+                    [
+                      _c("div", { staticClass: "columns" }, [
+                        _c("div", { staticClass: "column" }, [
+                          _c("div", { staticClass: "has-text-centered" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Nominal (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.nominal_a,
+                                        expression: "nominal_a"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.nominal_a },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.nominal_a = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("A")])]
+                                  )
+                                ]
                               )
-                            ) +
-                            " \n                                    "
-                        ),
-                        _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "column" }, [
-                  _c("div", { staticClass: "has-text-centered" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "is-size-6 has-text-weight-semibold has-text-centered"
-                      },
-                      [_vm._v("Regulada (A)")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", {}, [
-                      _c("div", { staticClass: "control has-icons-right" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.regulada_a,
-                              expression: "regulada_a"
-                            }
-                          ],
-                          staticClass: "input",
-                          attrs: { type: "number" },
-                          domProps: { value: _vm.regulada_a },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.regulada_a = $event.target.value
-                            }
-                          }
-                        }),
+                            ])
+                          ])
+                        ]),
                         _vm._v(" "),
-                        _vm._m(3)
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "has-text-weight-normal is-size-6" },
-                      [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(
-                              _vm._f("numeral")(
-                                _vm.regulada_a ? _vm.regulada_a * 220 : 0,
-                                0,
-                                0
+                        _c("div", { staticClass: "column" }, [
+                          _c("div", { staticClass: "has-text-centered" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Regulada (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.regulada_a,
+                                        expression: "regulada_a"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.regulada_a },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.regulada_a = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("A")])]
+                                  )
+                                ]
                               )
-                            ) +
-                            " \n                                    "
-                        ),
-                        _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "column" }, [
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c(
             "div",
-            {
-              staticClass: "box is-shadowless",
-              staticStyle: { border: "solid 0.5px black" }
-            },
+            { staticClass: "column" },
             [
-              _c("div", { staticClass: "columns" }, [
-                _c("div", { staticClass: "column" }, [
-                  _c("div", { staticClass: "has-text-centered" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "is-size-6 has-text-weight-semibold has-text-centered"
-                      },
-                      [_vm._v("Nominal (A)")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", {}, [
-                      _c("div", { staticClass: "control has-icons-right" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.nominal_b,
-                              expression: "nominal_b"
-                            }
-                          ],
-                          staticClass: "input",
-                          attrs: { type: "number" },
-                          domProps: { value: _vm.nominal_b },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.nominal_b = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm._m(4)
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "has-text-weight-normal is-size-6" },
-                      [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(
-                              _vm._f("numeral")(
-                                _vm.nominal_b ? _vm.nominal_b * 220 : 0,
-                                0,
-                                0
+              _c(
+                "b-field",
+                {
+                  staticClass: "tile",
+                  attrs: {
+                    label: "PROTECCIONES B",
+                    "label-position": "on-border"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tile box is-shadowless",
+                      staticStyle: { border: "solid 0.1rem #cccccc" }
+                    },
+                    [
+                      _c("div", { staticClass: "columns" }, [
+                        _c("div", { staticClass: "column" }, [
+                          _c("div", { staticClass: "has-text-centered" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Nominal (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.nominal_b,
+                                        expression: "nominal_b"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.nominal_b },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.nominal_b = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "icon is-right" }, [
+                                    _c("span", [_vm._v("A")])
+                                  ])
+                                ]
                               )
-                            ) +
-                            " \n                                    "
-                        ),
-                        _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "column" }, [
-                  _c("div", { staticClass: "has-text-centered" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "is-size-6 has-text-weight-semibold has-text-centered"
-                      },
-                      [_vm._v("Regulada (A)")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", {}, [
-                      _c("div", { staticClass: "control has-icons-right" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.regulada_b,
-                              expression: "regulada_b"
-                            }
-                          ],
-                          staticClass: "input",
-                          attrs: { type: "number" },
-                          domProps: { value: _vm.regulada_b },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.regulada_b = $event.target.value
-                            }
-                          }
-                        }),
+                            ])
+                          ])
+                        ]),
                         _vm._v(" "),
-                        _vm._m(5)
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "has-text-weight-normal is-size-6" },
-                      [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(
-                              _vm._f("numeral")(
-                                _vm.regulada_b ? _vm.regulada_b * 220 : 0,
-                                0,
-                                0
+                        _c("div", { staticClass: "column" }, [
+                          _c("div", { staticClass: "has-text-centered" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Regulada (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.regulada_b,
+                                        expression: "regulada_b"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.regulada_b },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.regulada_b = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "icon is-right" }, [
+                                    _c("span", [_vm._v("A")])
+                                  ])
+                                ]
                               )
-                            ) +
-                            " \n                                    "
-                        ),
-                        _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ],
+            1
           )
         ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("section", { staticClass: "modal-card-body" }, [
-      _vm._m(6),
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "level" }, [
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase R")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.RA_amp_measure,
-                      expression: "RA_amp_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.RA_amp_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.RA_amp_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(7)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.RA_amp_measure ? _vm.RA_amp_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase S")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.SA_amp_measure,
-                      expression: "SA_amp_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.SA_amp_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.SA_amp_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(8)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.SA_amp_measure ? _vm.SA_amp_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase T")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.TA_amp_measure,
-                      expression: "TA_amp_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.TA_amp_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.TA_amp_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(9)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.TA_amp_measure ? _vm.TA_amp_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("section", { staticClass: "modal-card-body" }, [
-      _c("div", { staticClass: "level" }, [
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase R")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.RB_amp_measure,
-                      expression: "RB_amp_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.RB_amp_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.RB_amp_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(10)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.RB_amp_measure ? _vm.RB_amp_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase S")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.SB_amp_measure,
-                      expression: "SB_amp_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.SB_amp_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.SB_amp_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(11)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.SB_amp_measure ? _vm.SB_amp_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase T")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.TB_amp_measure,
-                      expression: "TB_amp_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.TB_amp_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.TB_amp_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(12)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.TB_amp_measure ? _vm.TB_amp_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("section", { staticClass: "modal-card-body" }, [
-      _c("div", { staticClass: "level" }, [
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase R")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.RA_volt_measure,
-                      expression: "RA_volt_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.RA_volt_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.RA_volt_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(13)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.RA_volt_measure ? _vm.RA_volt_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase S")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.SA_volt_measure,
-                      expression: "SA_volt_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.SA_volt_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.SA_volt_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(14)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.SA_volt_measure ? _vm.SA_volt_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase T")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.TA_volt_measure,
-                      expression: "TA_volt_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.TA_volt_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.TA_volt_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(15)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.TA_volt_measure ? _vm.TA_volt_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("section", { staticClass: "modal-card-body" }, [
-      _c("div", { staticClass: "level" }, [
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase R")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.RB_volt_measure,
-                      expression: "RB_volt_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.RB_volt_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.RB_volt_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(16)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.RB_volt_measure ? _vm.RB_volt_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase S")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.SB_volt_measure,
-                      expression: "SB_volt_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.SB_volt_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.SB_volt_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(17)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.SB_volt_measure ? _vm.SB_volt_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level-item" }, [
-          _c("div", { staticClass: "has-text-centered" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "is-size-6 has-text-weight-semibold has-text-centered"
-              },
-              [_vm._v("Fase T")]
-            ),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("div", { staticClass: "control has-icons-right" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.TB_volt_measure,
-                      expression: "TB_volt_measure"
-                    }
-                  ],
-                  staticClass: "input",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.TB_volt_measure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.TB_volt_measure = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(18)
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm._f("numeral")(
-                      _vm.TB_volt_measure ? _vm.TB_volt_measure * 220 : 0,
-                      0,
-                      0
-                    )
-                  ) +
-                  " \n                        "
-              ),
-              _c("span", { staticClass: "is-size-7" }, [_vm._v("W")])
-            ])
-          ])
-        ])
-      ])
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "block" },
+        [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "b-field",
+            {
+              staticClass: "tile",
+              staticStyle: { "padding-bottom": "12px" },
+              attrs: { label: "MEDICIONES A", "label-position": "on-border" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "tile box is-shadowless",
+                  staticStyle: { border: "solid 0.1rem #cccccc" }
+                },
+                [
+                  _c("div", { staticClass: "tile is-vertical" }, [
+                    _c("div", { staticClass: "tile level" }, [
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase R (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.RA_amp_measure,
+                                        expression: "RA_amp_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.RA_amp_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.RA_amp_measure = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("A")])]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase S (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.SA_amp_measure,
+                                        expression: "SA_amp_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.SA_amp_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.SA_amp_measure = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("A")])]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase T (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.TA_amp_measure,
+                                        expression: "TA_amp_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.TA_amp_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.TA_amp_measure = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "icon is-right" }, [
+                                    _c("span", [_vm._v("A")])
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "tile level" }, [
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase R (V)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.RA_volt_measure,
+                                        expression: "RA_volt_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.RA_volt_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.RA_volt_measure =
+                                          $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("V")])]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase S (V)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.SA_volt_measure,
+                                        expression: "SA_volt_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.SA_volt_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.SA_volt_measure =
+                                          $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("V")])]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase T (V)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.TA_volt_measure,
+                                        expression: "TA_volt_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.TA_volt_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.TA_volt_measure =
+                                          $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "icon is-right" }, [
+                                    _c("span", [_vm._v("V")])
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "b-field",
+            {
+              staticClass: "tile",
+              attrs: { label: "MEDICIONES B", "label-position": "on-border" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "tile box is-shadowless",
+                  staticStyle: { border: "solid 0.1rem #cccccc" }
+                },
+                [
+                  _c("div", { staticClass: "tile is-vertical" }, [
+                    _c("div", { staticClass: "tile level" }, [
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase R (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.RB_amp_measure,
+                                        expression: "RB_amp_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.RB_amp_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.RB_amp_measure = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("A")])]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase S (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.SB_amp_measure,
+                                        expression: "SB_amp_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.SB_amp_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.SB_amp_measure = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("A")])]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase T (A)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.TB_amp_measure,
+                                        expression: "TB_amp_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.TB_amp_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.TB_amp_measure = $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "icon is-right" }, [
+                                    _c("span", [_vm._v("A")])
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "tile level" }, [
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase R (V)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.RB_volt_measure,
+                                        expression: "RB_volt_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.RB_volt_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.RB_volt_measure =
+                                          $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("V")])]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase S (V)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.SB_volt_measure,
+                                        expression: "SB_volt_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.SB_volt_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.SB_volt_measure =
+                                          $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "icon is-small is-right" },
+                                    [_c("span", [_vm._v("V")])]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent level-item" }, [
+                        _c(
+                          "div",
+                          { staticClass: "tile is-child has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold has-text-centered"
+                              },
+                              [_vm._v("Fase T (V)")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", {}, [
+                              _c(
+                                "div",
+                                { staticClass: "control has-icons-right" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.TB_volt_measure,
+                                        expression: "TB_volt_measure"
+                                      }
+                                    ],
+                                    staticClass: "input",
+                                    attrs: { type: "number" },
+                                    domProps: { value: _vm.TB_volt_measure },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.TB_volt_measure =
+                                          $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "icon is-right" }, [
+                                    _c("span", [_vm._v("V")])
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
     _c("footer", { staticClass: "modal-card-foot" }, [
@@ -1409,11 +1416,9 @@ var render = function() {
         [_vm._v("Close")]
       ),
       _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "button is-primary", on: { click: _vm.save } },
-        [_vm._v("Guardar")]
-      )
+      _c("button", { staticClass: "button is-link", on: { click: _vm.save } }, [
+        _vm._v("Guardar")
+      ])
     ])
   ])
 }
@@ -1442,138 +1447,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "block has-text-centered" }, [
       _c("div", { staticClass: "has-text-weight-semibold is-size-4" }, [
         _vm._v("Mediciones")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-small is-right" }, [
-      _c("span", [_vm._v("A")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon is-right" }, [
-      _c("span", [_vm._v("A")])
     ])
   }
 ]

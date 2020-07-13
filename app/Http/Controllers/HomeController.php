@@ -52,9 +52,19 @@ class HomeController extends Controller
     {
         $roles = Role::pluck('slug')->toArray();
         $request->user()->authorizeRoles($roles);
+        
+        // $ids = [6, 20, 21, 39, 75, 76, 85, 101, 147, 200, 207, 233, 252, 289, 295, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 325, 342, 378, 380, 391, 394, 406, 407, 448, 474, 489, 490, 493, 499, 521, 543, 544, 556, 630, 666, 674, 711]; 
+        // foreach ($ids as $id) {
+        //     GeneratorSet::find($id)->delete();
+        //     GeneratorGroup::where('generator_set_id', $id)->delete();
+        //     GeneratorMotor::where('generator_set_id', $id)->delete();
+        //     GeneratorTank::where('generator_set_id', $id)->delete();
+        //     GeneratorTta::where('generator_set_id', $id)->delete();
+        //     GeneratorSetMaintainer::where('generator_set_id', $id)->delete();
+        // }
 
 
-        // $nem_techs = ['ZA113', 'BI225'];
+        // $nem_techs = ['BI327', 'ESTAY003', 'ESTLA020', 'ESTRM028', 'ESTTA046', 'SA769', 'SWPM', 'ZC500'];
 
         // foreach ($nem_techs as $nem_tech) {
         //     $site = Site::where('nem_site', $nem_tech)->first();

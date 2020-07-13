@@ -157,14 +157,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalGenerator: function ModalGenerator() {
@@ -374,407 +366,364 @@ var render = function() {
     "div",
     { staticClass: "tile" },
     [
-      _vm.generatorSets.length
-        ? _c(
-            "section",
-            { staticClass: "tile", staticStyle: { padding: "24px" } },
-            [
-              _c("div", { staticClass: "columns tile is-ancestor" }, [
-                _c("div", { staticClass: "column is-4 tile is-parent" }, [
-                  _c(
-                    "div",
-                    { staticClass: "tile is-child box is-dark is-bold" },
-                    [
-                      _c("div", { staticClass: "block" }, [
+      _c("section", { staticClass: "tile", staticStyle: { padding: "24px" } }, [
+        _c("div", { staticClass: "tile is-ancestor" }, [
+          _c("div", { staticClass: "tile is-parent" }, [
+            _c("div", { staticClass: "tile box" }, [
+              _c("div", { staticClass: "tile columns" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "tile column is-4 has-background-dark has-text-weight-bold has-text-white"
+                  },
+                  [
+                    _c("div", { staticClass: "tile is-child" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "title has-text-weight-bold is-size-6 has-text-white"
+                        },
+                        [_vm._v("GRUPOS ELECTROGENOS")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", {}, [
                         _c(
                           "div",
                           {
                             staticClass:
-                              "title has-text-weight-bold is-size-6 has-text-white"
+                              "has-text-weight-normal is-size-6 is-pulled-right"
                           },
-                          [_vm._v("GRUPOS ELECTROGENOS")]
+                          [_vm._v(_vm._s(_vm.responsable.area))]
                         ),
                         _vm._v(" "),
-                        _c("div", {}, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "has-text-weight-normal is-size-6 is-pulled-right"
-                            },
-                            [_vm._v(_vm._s(_vm.responsable.area))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "has-text-weight-normal is-size-6" },
-                            [_vm._v("Responsable")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("hr", { staticStyle: { margin: "8px 0 8px 0" } }),
-                        _vm._v(" "),
-                        _c("div", {}, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "has-text-weight-normal is-size-6 is-pulled-right"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(_vm.totalCapacity, "0,0.0")
-                                )
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-normal is-size-6" },
+                          [_vm._v("Responsable")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("hr", { staticStyle: { margin: "8px 0 8px 0" } }),
+                      _vm._v(" "),
+                      _c("div", {}, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "has-text-weight-normal is-size-6 is-pulled-right"
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("numeral")(_vm.totalCapacity, "0,0.0")
                               )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "has-text-weight-normal is-size-6" },
-                            [_vm._v("Total")]
-                          )
-                        ]),
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
-                        _c("div", {}, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "has-text-weight-normal is-size-6 is-pulled-right"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(_vm.totalUsed, "0,0.0")
-                                )
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "has-text-weight-normal is-size-6" },
-                            [_vm._v("Total utilizado")]
-                          )
-                        ]),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-normal is-size-6" },
+                          [_vm._v("Total")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {}, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "has-text-weight-normal is-size-6 is-pulled-right"
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm._f("numeral")(_vm.totalUsed, "0,0.0"))
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
-                        _c("div", {}, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "has-text-weight-normal is-size-6 is-pulled-right"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(_vm.totalAvailable, "0,0.0")
-                                )
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-normal is-size-6" },
+                          [_vm._v("Total utilizado")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {}, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "has-text-weight-normal is-size-6 is-pulled-right"
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("numeral")(_vm.totalAvailable, "0,0.0")
                               )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "has-text-weight-normal is-size-6" },
-                            [_vm._v("Total disponible")]
-                          )
-                        ])
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-normal is-size-6" },
+                          [_vm._v("Total disponible")]
+                        )
                       ])
-                    ]
-                  )
-                ]),
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
-                _c("div", { staticClass: "column tile is-parent" }, [
-                  _c("div", { staticClass: "columns is-multiline tile" }, [
-                    _c("div", { staticClass: "column tile" }, [
+                _c("div", { staticClass: "column tile" }, [
+                  _c("div", { staticClass: "columns tile is-parent" }, [
+                    _c("div", { staticClass: "columns tile" }, [
                       _c(
                         "div",
-                        {
-                          staticClass: "box tile",
-                          staticStyle: { border: "solid 0.5px black" }
-                        },
+                        { staticClass: "column tile is-6" },
                         [
-                          _c("div", { staticClass: "columns tile" }, [
-                            _c(
-                              "div",
-                              { staticClass: "column tile is-6" },
-                              [
-                                _c(
-                                  "b-field",
-                                  {
-                                    staticClass: "tile",
-                                    attrs: {
-                                      label: "CAPACIDAD PLANOS",
-                                      "label-position": "on-border"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "tile is-parent box is-shadowless",
-                                        staticStyle: {
-                                          border: "solid 0.05rem black"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          { staticClass: "columns tile" },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "column tile is-child"
-                                              },
-                                              [
-                                                _c("div", {}, [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7 is-pulled-right"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm._f("numeral")(
-                                                            _vm.totalCapacityA,
-                                                            "0,0.0"
-                                                          )
-                                                        )
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7"
-                                                    },
-                                                    [_vm._v("total Plano A")]
-                                                  )
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("div", {}, [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7 is-pulled-right"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm._f("numeral")(
-                                                            _vm.usedA,
-                                                            "0,0.0"
-                                                          )
-                                                        )
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "utilizada Plano A"
-                                                      )
-                                                    ]
-                                                  )
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("div", {}, [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7 is-pulled-right"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm._f("numeral")(
-                                                            _vm.availableA,
-                                                            "0,0.0"
-                                                          )
-                                                        )
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "disponible Plano A"
-                                                      )
-                                                    ]
-                                                  )
-                                                ])
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              { staticClass: "column" },
-                                              [
-                                                _c("div", {}, [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7 is-pulled-right"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm._f("numeral")(
-                                                            _vm.totalCapacityB,
-                                                            "0,0.0"
-                                                          )
-                                                        )
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7"
-                                                    },
-                                                    [_vm._v("total Plano B")]
-                                                  )
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("div", {}, [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7 is-pulled-right"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm._f("numeral")(
-                                                            _vm.usedB,
-                                                            "0,0.0"
-                                                          )
-                                                        )
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "utilizada Plano B"
-                                                      )
-                                                    ]
-                                                  )
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("div", {}, [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7 is-pulled-right"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm._f("numeral")(
-                                                            _vm.availableB,
-                                                            "0,0.0"
-                                                          )
-                                                        )
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-normal is-size-7"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "disponible Plano B"
-                                                      )
-                                                    ]
-                                                  )
-                                                ])
-                                              ]
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "column tile" }, [
+                          _c(
+                            "b-field",
+                            {
+                              staticClass: "tile",
+                              attrs: {
+                                label: "CAPACIDAD PLANOS",
+                                "label-position": "on-border"
+                              }
+                            },
+                            [
                               _c(
                                 "div",
-                                { staticClass: "columns tile is-parent" },
-                                _vm._l(_vm.generatorSets, function(
-                                  generatorSet
-                                ) {
-                                  return _c(
-                                    "a",
-                                    {
-                                      key: generatorSet.id,
-                                      staticClass: "column tile is-child box",
-                                      on: {
-                                        click: function($event) {
-                                          _vm.isGeneratorModalActive = true
-                                          _vm.generatorSetSelected = generatorSet
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(0, true)]
-                                  )
-                                }),
-                                0
+                                {
+                                  staticClass:
+                                    "tile is-parent box is-shadowless",
+                                  staticStyle: { border: "solid 0.05rem black" }
+                                },
+                                [
+                                  _c("div", { staticClass: "columns tile" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "column tile is-child" },
+                                      [
+                                        _c("div", {}, [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7 is-pulled-right"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.totalCapacityA,
+                                                    "0,0.0"
+                                                  )
+                                                )
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("total Plano A")]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", {}, [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7 is-pulled-right"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.usedA,
+                                                    "0,0.0"
+                                                  )
+                                                )
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("utilizada Plano A")]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("div", {}, [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7 is-pulled-right"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.availableA,
+                                                    "0,0.0"
+                                                  )
+                                                )
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("disponible Plano A")]
+                                          )
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "column" }, [
+                                      _c("div", {}, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7 is-pulled-right"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("numeral")(
+                                                  _vm.totalCapacityB,
+                                                  "0,0.0"
+                                                )
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7"
+                                          },
+                                          [_vm._v("total Plano B")]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", {}, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7 is-pulled-right"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("numeral")(
+                                                  _vm.usedB,
+                                                  "0,0.0"
+                                                )
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7"
+                                          },
+                                          [_vm._v("utilizada Plano B")]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", {}, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7 is-pulled-right"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("numeral")(
+                                                  _vm.availableB,
+                                                  "0,0.0"
+                                                )
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7"
+                                          },
+                                          [_vm._v("disponible Plano B")]
+                                        )
+                                      ])
+                                    ])
+                                  ])
+                                ]
                               )
-                            ])
-                          ])
-                        ]
-                      )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "column tile" }, [
+                        _c(
+                          "div",
+                          { staticClass: "columns tile is-parent" },
+                          _vm._l(_vm.generatorSets, function(generatorSet) {
+                            return _c(
+                              "a",
+                              {
+                                key: generatorSet.id,
+                                staticClass: "column tile is-child box",
+                                on: {
+                                  click: function($event) {
+                                    _vm.isGeneratorModalActive = true
+                                    _vm.generatorSetSelected = generatorSet
+                                  }
+                                }
+                              },
+                              [_vm._m(0, true)]
+                            )
+                          }),
+                          0
+                        )
+                      ])
                     ])
                   ])
                 ])
               ])
-            ]
-          )
-        : _vm._e(),
+            ])
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "b-modal",

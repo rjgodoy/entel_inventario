@@ -66,102 +66,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -175,11 +79,15 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    RoomLights: function RoomLights() {
+      return Promise.all(/*! import() | chunks/capacity/roomLights */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~91d94541"), __webpack_require__.e("chunks/capacity/roomLights")]).then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
+    },
     PolarAreaChart: _constants_chartJs_PolarAreaChart_js__WEBPACK_IMPORTED_MODULE_3__["default"],
     CapacityChart: _CapacityChart__WEBPACK_IMPORTED_MODULE_4__["default"],
     GaugeChart: _GaugeChart__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
-  props: ['actualData', 'user'],
+  props: [// 'actualData', 
+  'user', 'room'],
   data: function data() {
     return {
       energy: 15,
@@ -251,7 +159,14 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
       this.chartData = _defineProperty({
         labels: ['Empalme', 'Generador', 'Rectificador', 'Baterías', 'Distribucion', 'Clima', 'Espacio'],
         datasets: [{
-          data: [this.actualData.junction ? numeral((1 - this.actualData.junction) * 100).format('0,0') : null, this.actualData.generator ? numeral((1 - this.actualData.generator) * 100).format('0,0') : null, this.actualData.rectifier ? numeral((1 - this.actualData.rectifier) * 100).format('0,0') : null, this.actualData.battery ? numeral((1 - this.actualData.battery) * 100).format('0,0') : null, this.actualData.distribution ? numeral((1 - this.actualData.distribution) * 100).format('0,0') : null, this.actualData.climate ? numeral((1 - this.actualData.climate) * 100).format('0,0') : null, this.actualData.space ? numeral((1 - this.actualData.space) * 100).format('0,0') : null],
+          data: [// this.actualData.junction ? numeral((1 - this.actualData.junction) * 100).format('0,0') : null,
+            // this.actualData.generator ? numeral((1 - this.actualData.generator) * 100).format('0,0') : null,
+            // this.actualData.rectifier ? numeral((1 - this.actualData.rectifier) * 100).format('0,0') : null,
+            // this.actualData.battery ? numeral((1 - this.actualData.battery) * 100).format('0,0') : null,
+            // this.actualData.distribution ? numeral((1 - this.actualData.distribution) * 100).format('0,0') : null,
+            // this.actualData.climate ? numeral((1 - this.actualData.climate) * 100).format('0,0') : null,
+            // this.actualData.space ? numeral((1 - this.actualData.space) * 100).format('0,0') : null,
+          ],
           backgroundColor: ['rgba(102, 183, 220, 0.5)', 'rgba(104, 148, 220, 0.5)', 'rgba(104, 113, 220, 0.5)', 'rgba(118, 103, 220, 0.5)', 'rgba(163, 103, 220, 0.5)', 'rgba(199, 103, 220, 0.5)', 'rgba(220, 103, 206, 0.5)'] // label: 'My dataset' // for legend
 
         }]
@@ -610,274 +525,22 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column is-4" }, [
-        _c(
-          "div",
-          { staticClass: "box" },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "has-text-centered has-text-dark is-size-5",
-                staticStyle: { "padding-bottom": "20px" }
-              },
-              [_vm._v("Estado actual (%)")]
-            ),
-            _vm._v(" "),
-            _c("capacity-chart", { attrs: { actualData: _vm.actualData } })
-          ],
-          1
-        )
-      ]),
+      _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "column" }, [
-        _c("div", { staticClass: "columns" }, [
-          _c("div", { staticClass: "column is-4 has-text-centered" }, [
-            _c("div", { staticClass: "has-text-centered is-size-7" }, [
-              _vm._v("GENERAL")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticStyle: {
-                  padding: "12px",
-                  border: "1px solid #888",
-                  "border-radius": "15px"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  { staticStyle: { "padding-top": "10px" } },
-                  [
-                    _c("font-awesome-icon", {
-                      class:
-                        _vm.energy <= 5 || _vm.climate <= 5 || _vm.space <= 5
-                          ? "has-text-info"
-                          : (_vm.energy > 5 && _vm.energy <= 10) ||
-                            (_vm.climate > 5 && _vm.climate <= 10) ||
-                            (_vm.space > 5 && _vm.space <= 10)
-                          ? "has-text-warning"
-                          : "has-text-success",
-                      attrs: { icon: "circle", size: "2x" }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "has-text-centered" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: " is-size-4 has-text-weight-bold",
-                      staticStyle: { "padding-top": "12px" }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(Math.min(_vm.energy, _vm.climate)) +
-                          "\n                                "
-                      ),
-                      _c(
-                        "span",
-                        { staticClass: "is-size-6 has-text-weight-light" },
-                        [_vm._v("kW")]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "has-text-weight-light is-size-7" }, [
-                    _vm._v("Disponibles")
-                  ])
-                ])
-              ]
-            )
-          ]),
+      _c(
+        "div",
+        { staticClass: "column box is-dark is-bold" },
+        [
+          _c("RoomLights", { attrs: { room: _vm.room, user: _vm.user } }),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "column has-text-centered",
-              staticStyle: { "padding-top": "18px" }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "columns", staticStyle: { padding: "8px" } },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "column has-text-centered is-size-7" },
-                    [_vm._v("ENERGIA")]
-                  ),
-                  _vm._v(" "),
-                  _vm.canViewClimate
-                    ? _c(
-                        "div",
-                        { staticClass: "column has-text-centered is-size-7" },
-                        [_vm._v("CLIMA")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "column has-text-centered is-size-7" },
-                    [_vm._v("ESPACIO")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticStyle: {
-                    "margin-top": "-32px",
-                    padding: "12px",
-                    border: "1px solid #888",
-                    "border-radius": "15px"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c("font-awesome-icon", {
-                          class:
-                            _vm.energy <= 5
-                              ? "has-text-info"
-                              : _vm.energy > 5 && _vm.energy <= 10
-                              ? "has-text-warning"
-                              : "has-text-success",
-                          attrs: { icon: "circle", size: "2x" }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "has-text-centered" }, [
-                          _c(
-                            "div",
-                            { staticClass: " is-size-5 has-text-weight-bold" },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.canViewClimate
-                                    ? _vm.energy
-                                    : Math.min(_vm.energy, _vm.climate)
-                                ) + "\n                                        "
-                              ),
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "is-size-6 has-text-weight-light"
-                                },
-                                [_vm._v("kW")]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "p",
-                            { staticClass: "has-text-weight-light is-size-7" },
-                            [_vm._v("Disponibles")]
-                          )
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _vm.canViewClimate
-                      ? _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c("font-awesome-icon", {
-                              class:
-                                _vm.climate <= 5
-                                  ? "has-text-info"
-                                  : _vm.climate > 5 && _vm.climate <= 10
-                                  ? "has-text-warning"
-                                  : "has-text-success",
-                              attrs: { icon: "circle", size: "2x" }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "has-text-centered" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: " is-size-5 has-text-weight-bold"
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.climate) +
-                                      "\n                                        "
-                                  ),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "is-size-6 has-text-weight-light"
-                                    },
-                                    [_vm._v("kW")]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass: "has-text-weight-light is-size-7"
-                                },
-                                [_vm._v("Disponibles")]
-                              )
-                            ])
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c("font-awesome-icon", {
-                          class:
-                            _vm.space <= 5
-                              ? "has-text-info"
-                              : _vm.space > 5 && _vm.space <= 10
-                              ? "has-text-warning"
-                              : "has-text-success",
-                          attrs: { icon: "circle", size: "2x" }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "has-text-centered" }, [
-                          _c(
-                            "div",
-                            { staticClass: " is-size-5 has-text-weight-bold" },
-                            [_vm._v(_vm._s(_vm.space))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "p",
-                            { staticClass: "has-text-weight-light is-size-7" },
-                            [_vm._v("Disponibles")]
-                          )
-                        ])
-                      ],
-                      1
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "columns" }, [
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "box" }, [_c("GaugeChart")], 1)
+          _c("div", { staticClass: "columns" }, [
+            _c("div", { staticClass: "column" }, [
+              _c("div", { staticClass: "box" }, [_c("GaugeChart")], 1)
+            ])
           ])
-        ])
-      ])
+        ],
+        1
+      )
     ])
   ])
 }
@@ -895,6 +558,23 @@ var staticRenderFns = [
         },
         [_vm._v("Dashobard")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-4" }, [
+      _c("div", { staticClass: "box" }, [
+        _c(
+          "div",
+          {
+            staticClass: "has-text-centered has-text-dark is-size-5",
+            staticStyle: { "padding-bottom": "20px" }
+          },
+          [_vm._v("Estado actual (%)")]
+        )
+      ])
     ])
   }
 ]

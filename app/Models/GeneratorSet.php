@@ -54,6 +54,11 @@ class GeneratorSet extends Model
         return $this->hasOne(GeneratorSetMaintainer::class)->latest();
     }
 
+    public function current_generator_set_corp_disponibility() 
+    {
+        return $this->hasOne(GeneratorSetCorpDisponibility::class)->latest();
+    }
+
     public function generator_set_capacities() 
     {
         return $this->hasMany(GeneratorSetCapacity::class);
@@ -102,5 +107,10 @@ class GeneratorSet extends Model
     public function generator_set_maintainers() 
     {
         return $this->hasMany(GeneratorSetMaintainer::class);
+    }
+
+    public function generator_set_corp_disponibilities() 
+    {
+        return $this->hasMany(GeneratorSetCorpDisponibility::class);
     }
 }

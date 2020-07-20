@@ -216,6 +216,7 @@ class GeneratorSetController extends Controller
             // 'generator_tanks.generator_tank_type', 
             'current_generator_tta.generator_tta_type',
             'current_generator_responsable.generator_set_responsable_area',
+            'current_generator_set_corp_disponibility',
             // 'generator_ttas.generator_tta_type',
             'current_maintainer.telecom_company',
             'current_generator_set_capacity',

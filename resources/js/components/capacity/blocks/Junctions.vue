@@ -1,60 +1,62 @@
 <template>
-    <div class="tile">
-        <section class="tile" style="padding: 24px;">
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <div class="tile box">
-                        <div class="tile columns">
+    <div class="tile is-parent">
+        <section class="tile box">
+            <b-field label="EMPALMES" label-position="on-border" class="tile">
+                <div class="tile box is-shadowless" style="border: solid 0.05rem black">
+                    <div class="tile is-vertical">
+                        <div class="tile is-parent">
+                            <b-field label="CAPACIDADES" label-position="on-border" class="tile">
+                                <div class="tile box is-shadowless" style="border: solid 0.05rem black">
 
-                            <div class="tile column has-background-dark has-text-weight-bold has-text-white">
-                                <div class="tile is-child">
-                                    <div class="title has-text-weight-bold is-size-6 has-text-white">EMPALMES</div>
-                                    <div>
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ responsable.area }}</div>
-                                        <div class="has-text-weight-normal is-size-6">Responsable</div>
-                                    </div>
-                                    <div>
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacity | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">Capacidad Total</div>
-                                    </div>
-                                    <div>
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalUsedCapacity | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">Capacidad Total utilizado</div>
-                                    </div>
-                                    <div>
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalDisponibility | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">Capacidad Total disponible</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="column tile">
-                                <div class="columns tile is-parent">
-                                    <a class="box tile is-child column" 
-                                        v-for="junction in junctions" :key="junction.id"
-                                        @click="isJunctionModalActive = true; junctionSelected = junction">
-                                        <div class="">
-                                            <div class="columns">
-                                                <div class="column">
-                                                    <div class="has-text-weight-semibold is-size-6">Empalme</div>
-                                                </div>
-                                                <div class="column is-2 has-text-centered">
-                                                    <!-- <font-awesome-icon 
-                                                        :icon="['far', 'check-circle']"
-                                                        size="2x"
-                                                        class="has-text-success"
-                                                    /> -->
-                                                </div>
-                                            </div>   
+                                    <div class="tile">
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
+                                                <div class="has-text-weight-semibold is-size-6">{{ totalCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Total</div>
+                                            </div>
                                         </div>
-                                    </a>
-                                </div>
-                            </div>
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
+                                                <div class="has-text-weight-semibold is-size-6">{{ totalUsedCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Utilizado</div>
+                                            </div>
+                                        </div>
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
+                                                <div class="has-text-weight-semibold is-size-6">{{ totalDisponibility | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Disponible</div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </b-field>
+                        </div>
+                        <div class="tile is-parent">
+                            <div class="columns tile is-parent">
+                                <a class="box tile is-child column" 
+                                    v-for="junction in junctions" :key="junction.id"
+                                    @click="isJunctionModalActive = true; junctionSelected = junction">
+                                    <div class="">
+                                        <div class="columns">
+                                            <div class="column">
+                                                <div class="has-text-weight-semibold is-size-6">Empalme</div>
+                                            </div>
+                                            <div class="column is-2 has-text-centered">
+                                                <!-- <font-awesome-icon 
+                                                    :icon="['far', 'check-circle']"
+                                                    size="2x"
+                                                    class="has-text-success"
+                                                /> -->
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </b-field>
         </section>
         <b-modal :active.sync="isJunctionModalActive"
             has-modal-card

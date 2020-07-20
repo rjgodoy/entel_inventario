@@ -6,9 +6,9 @@
                     <div class="columns">
                         <div class="column">
                             <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Marca</div>
-                            <div class="has-text-weight-semibold is-size-5">{{ powerRectifier.power_rectifier_type ? powerRectifier.power_rectifier_type.power_rectifier_type : 'Sin información' }}</div>
+                            <div class="has-text-weight-semibold is-size-5">{{ powerRectifier.power_rectifier_type ? powerRectifier.power_rectifier_type.type : 'Sin información' }}</div>
                             <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Modelo</div>
-                            <div class="has-text-weight-semibold is-size-6">{{ powerRectifier.power_rectifier_type ? powerRectifier.power_rectifier_type.power_rectifier_model : 'Sin información' }}</div>
+                            <div class="has-text-weight-semibold is-size-6">{{ powerRectifier.power_rectifier_type ? powerRectifier.power_rectifier_type.model : 'Sin información' }}</div>
                         </div>
                         <div class="column">
                             <div class="column has-text-right">

@@ -183,7 +183,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     VuePagination: _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     RoomLights: function RoomLights() {
-      return Promise.all(/*! import() | chunks/capacity/roomLights */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~91d94541"), __webpack_require__.e("chunks/capacity/roomLights")]).then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/roomLights */ "chunks/capacity/roomLights").then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
     },
     ModalRoom: function ModalRoom() {
       return __webpack_require__.e(/*! import() | chunks/capacity/modals/modalRoom */ "chunks/capacity/modals/modalRoom").then(__webpack_require__.bind(null, /*! ./modals/ModalRoom */ "./resources/js/components/capacity/modals/ModalRoom.vue"));

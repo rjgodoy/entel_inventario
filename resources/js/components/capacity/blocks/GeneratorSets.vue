@@ -1,137 +1,102 @@
 <template>
-    <div class="tile">
-        <section class="tile" style="padding: 24px;">
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <div class="tile box">
-                        <div class="tile columns">
-
-                            <div class="tile column is-4 has-background-dark has-text-weight-bold has-text-white">
-                                <div class="tile is-child">
-                                    <div class="title has-text-weight-bold is-size-6 has-text-white">GRUPOS ELECTROGENOS</div>
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ responsable.area }}</div>
-                                        <div class="has-text-weight-normal is-size-6">Responsable</div>
+    <div class="tile is-parent">
+        <section class="tile box">
+            <b-field label="GRUPOS ELECTROGENOS" label-position="on-border" class="tile">
+                <div class="tile box is-shadowless" style="border: solid 0.05rem black">
+                    <div class="tile is-parent is-7">
+                        <b-field label="CAPACIDAD PLANOS" label-position="on-border" class="tile">
+                            <div class="tile box is-shadowless" style="border: solid 0.05rem black">
+                                <div class="tile is-vertical">
+                                    <div class="tile is-parent" v-if="totalGeneratorSetsCapacityA">
+                                        <b-field label="PLANO A" label-position="on-border" class="tile">
+                                            <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                                <div class="level tile">
+                                                    <div class="level-item">
+                                                        <div class="has-text-centered">
+                                                            <div class="has-text-weight-semibold is-size-6">{{ totalGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Total</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="level-item">
+                                                        <div class="has-text-centered">
+                                                            <div class="has-text-weight-semibold is-size-6">{{ usedGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Utilizada</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="level-item">
+                                                        <div class="has-text-centered">
+                                                            <div class="has-text-weight-semibold is-size-6">{{ availableGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Disponible</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </b-field>
                                     </div>
-                                    <!-- <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacityA | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">total Plano A</div>
-                                    </div>
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacityB | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">total Plano B</div>
-                                    </div>
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ usedA | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">utilizada Plano A</div>
-                                    </div>
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ usedB | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">utilizada Plano B</div>
-                                    </div>
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ availableA | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">disponible Plano A</div>
-                                    </div>
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ availableB | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">disponible Plano B</div>
-                                    </div> -->
-
-                                    <hr style="margin: 8px 0 8px 0;" />
-
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalCapacity | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">Total</div>
-                                    </div>
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalUsed | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">Total utilizado</div>
-                                    </div>
-                                    <div class="">
-                                        <div class="has-text-weight-normal is-size-6 is-pulled-right">{{ totalAvailable | numeral('0,0.0') }}</div>
-                                        <div class="has-text-weight-normal is-size-6">Total disponible</div>
+                                    <div class="tile is-parent" v-if="totalGeneratorSetsCapacityB">
+                                        <b-field label="PLANO B" label-position="on-border" class="tile">
+                                            <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                                <div class="level tile">
+                                                    <div class="level-item">
+                                                        <div class="has-text-centered">
+                                                            <div class="has-text-weight-semibold is-size-6">{{ totalGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Total</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="level-item">
+                                                        <div class="has-text-centered">
+                                                            <div class="has-text-weight-semibold is-size-6">{{ usedGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Utilizada</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="level-item">
+                                                        <div class="has-text-centered">
+                                                            <div class="has-text-weight-semibold is-size-6">{{ availableGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Disponible</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </b-field>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="column tile">
-                                <div class="columns tile is-parent">
-                                    <div class="columns tile">
-                                        <div class="column tile is-6">
-                                            <!-- <div class=""> -->
-                                                <b-field label="CAPACIDAD PLANOS" label-position="on-border" class="tile">
-                                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
-                                                        <div class="columns tile">
-                                                            <div class="column tile is-child">
-                                                                <div class="">
-                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ totalCapacityA | numeral('0,0.0') }}</div>
-                                                                    <div class="has-text-weight-normal is-size-7">total Plano A</div>
-                                                                </div>
-                                                                <div class="">
-                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ usedA | numeral('0,0.0') }}</div>
-                                                                    <div class="has-text-weight-normal is-size-7">utilizada Plano A</div>
-                                                                </div>
-                                                                <div class="">
-                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ availableA | numeral('0,0.0') }}</div>
-                                                                    <div class="has-text-weight-normal is-size-7">disponible Plano A</div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="column">
-                                                                <div class="">
-                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ totalCapacityB | numeral('0,0.0') }}</div>
-                                                                    <div class="has-text-weight-normal is-size-7">total Plano B</div>
-                                                                </div>
-                                                                
-                                                                <div class="">
-                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ usedB | numeral('0,0.0') }}</div>
-                                                                    <div class="has-text-weight-normal is-size-7">utilizada Plano B</div>
-                                                                </div>
-                                                                
-                                                                <div class="">
-                                                                    <div class="has-text-weight-normal is-size-7 is-pulled-right">{{ availableB | numeral('0,0.0') }}</div>
-                                                                    <div class="has-text-weight-normal is-size-7">disponible Plano B</div>
-                                                                </div>
-                                                            </div>
-
+                        </b-field>
+                    </div>
+                    <!-- <div class="tile is-parent"> -->
+                        <!-- <div class="columns tile is-parent">
+                            <b-field label="EQUIPOS" label-position="on-border" class="tile">
+                                <div class="tile box is-shadowless" style="border: solid 0.05rem black"> -->
+                                    <div class="tile is-parent columns is-multiline">
+                                        <div class="column tile is-parent" :class="generatorSets.length > 1 && 'is-6'" v-for="generatorSet in generatorSets" :key="generatorSet.id">
+                                            <div class="tile ">
+                                                <a class="tile is-parent box" @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
+                                                    <div class="columns">
+                                                        <div class="column">
+                                                            <div class="has-text-weight-semibold is-size-6">Grupo Electrógeno</div>
                                                         </div>
-                                                    </div>
-                                                </b-field>
-                                            <!-- </div> -->
-                                        </div>
-                                        <div class="column tile">
-                                            <div class="columns tile is-parent">
-                                                <a class="column tile is-child box" 
-                                                    v-for="generatorSet in generatorSets" :key="generatorSet.id"
-                                                    @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
-                                                    <div class="">
-                                                        <div class="columns">
-                                                            <div class="column">
-                                                                <div class="has-text-weight-semibold is-size-6">Grupo Electrógeno</div>
-                                                            </div>
-                                                            <div class="column is-2 has-text-centered">
-                                                                <!-- <font-awesome-icon 
-                                                                    :icon="['far', 'check-circle']"
-                                                                    size="2x"
-                                                                    class="has-text-success"
-                                                                /> -->
-                                                            </div>
-                                                        </div>   
-                                                    </div>
+                                                        <div class="column is-2 has-text-centered">
+                                                            <!-- <font-awesome-icon 
+                                                                :icon="['far', 'check-circle']"
+                                                                size="2x"
+                                                                class="has-text-success"
+                                                            /> -->
+                                                        </div>
+                                                    </div>   
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <!-- </div>
+                            </b-field>
+                        </div> -->
+                    <!-- </div> -->
                 </div>
-            </div>
+            </b-field>
         </section>
         <b-modal :active.sync="isGeneratorModalActive"
             has-modal-card
@@ -167,7 +132,7 @@
         },
 
         computed: {
-            responsable() {
+            generatorSetsResponsable() {
                 let area = 'Sin Información'; let id = null;
                 if (this.generatorSets.length) {
                     Object.keys(this.generatorSets).forEach(element => {
@@ -199,7 +164,7 @@
                 }
             },
 
-            totalCapacityA() {
+            totalGeneratorSetsCapacityA() {
                 let sum = 0; let res = 0; let div = 1; 
                 if (this.generatorSets.length) {
                     Object.keys(this.generatorSets).forEach(element => {
@@ -226,7 +191,7 @@
                 return sum - (res / div)
             },
 
-            totalCapacityB() {
+            totalGeneratorSetsCapacityB() {
                 let sum = 0
                 if (this.generatorSets.length) {
                     Object.keys(this.generatorSets).forEach(element => {
@@ -247,11 +212,19 @@
                 return sum
             },
 
-            totalCapacity() {
-                return this.responsable.id == 1 ? this.totalCapacityA + this.totalCapacityB : 123
+            totalGeneratorSetsCapacity() {
+                var total = 0
+                if (this.generatorSetsResponsable.id == 1) {
+                    total = this.totalGeneratorSetsCapacityA + this.totalGeneratorSetsCapacityB
+                } else {
+                    Object.keys(this.generatorSets).forEach(element => {
+                        total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.total_capacity : total
+                    })
+                }
+                return total
             },
 
-            usedA() {
+            usedGeneratorSetsCapacityA() {
                 let sum = 0
                 if (this.generatorSets.length) {
                     Object.keys(this.generatorSets).forEach(element => {
@@ -273,7 +246,7 @@
                 return sum
             },
 
-            usedB() {
+            usedGeneratorSetsCapacityB() {
                 let sum = 0
                 if (this.generatorSets.length) {
                     Object.keys(this.generatorSets).forEach(element => {
@@ -293,20 +266,36 @@
                 return sum
             },
 
-            totalUsed() {
-                return this.responsable.id == 1 ? this.usedA + this.usedB : 456
+            totalGeneratorSetsUsedCapacity() {
+                var total = 0
+                if (this.generatorSetsResponsable.id == 1) {
+                    total = this.usedGeneratorSetsCapacityA + this.usedGeneratorSetsCapacityB
+                } else {
+                    Object.keys(this.generatorSets).forEach(element => {
+                        total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.used_capacity : total
+                    })
+                }
+                return total
             },
 
-            availableA() {
-                return this.totalCapacityA - this.usedA
+            availableGeneratorSetsCapacityA() {
+                return this.totalGeneratorSetsCapacityA - this.usedGeneratorSetsCapacityA
             },
 
-            availableB() {
-                return this.totalCapacityB - this.usedB
+            availableGeneratorSetsCapacityB() {
+                return this.totalGeneratorSetsCapacityB - this.usedGeneratorSetsCapacityB
             },
 
-            totalAvailable() {
-                return this.responsable.id == 1 ? this.availableA + this.availableB : 789
+            totalAvailableGeneratorSetsCapacity() {
+                var total = 0
+                if (this.generatorSetsResponsable.id == 1) {
+                    total = this.availableGeneratorSetsCapacityA + this.availableGeneratorSetsCapacityB
+                } else {
+                    Object.keys(this.generatorSets).forEach(element => {
+                        total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.available_capacity : total
+                    })
+                }
+                return total
             }
 
         },

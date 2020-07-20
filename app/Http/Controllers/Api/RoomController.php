@@ -136,6 +136,13 @@ class RoomController extends Controller
             'pop.rooms.power_rectifiers.power_rectifier_modules',
             'pop.rooms.power_rectifiers.power_rectifier_mode',
 
+            'planes.power_rectifiers.power_rectifier_type', 
+            'planes.power_rectifiers.power_rectifier_modules', 
+            'planes.battery_banks.battery_bank_brand',
+            'planes.power_rectifiers.power_rectifier_mode',
+            'planes.current_redundant_modules',
+            'planes.plane_type',
+
             // 'pop.rooms.planes.power_rectifiers.power_rectifier_type', 
             // 'pop.rooms.planes.power_rectifiers.power_rectifier_modules', 
             // 'pop.rooms.planes.power_rectifiers.power_rectifier_mode',

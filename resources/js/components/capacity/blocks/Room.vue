@@ -1,38 +1,54 @@
 <template>
-    <div class="tile is-child box" :class="isRoomSelected ? 'is-shadowless has-background-white-bis shadow-dark' : ''"
-        :style="isRoomSelected ? '' : 'border: solid 0.5px black;'">
+    <!-- <div class="tile is-child box" :class="isRoomSelected ? 'is-shadowless has-background-white-bis shadow-dark' : ''" :style="isRoomSelected ? '' : 'border: solid 0.5px black;'"> -->
+    <div class="tile is-child box" :class="isRoomSelected ? 'is-shadowless has-background-white-bis shadow-dark' : ''">
         <div class="tile is-vertical">
 
-            <div class="block">
-                <div class="is-pulled-right">
-                    <div class="has-text-weight-light is-size-7">Tipo Alimentación</div>
-                    <div v-if="!isEditMode">
-                        <div class="has-text-weight-bold is-size-5">{{ planeType }}</div>
-                    </div>
-                    <div v-if="isEditMode">
-                        <b-select placeholder="Select a name" v-model="planeTypeId" @input="updatePlaneType(sala)">
-                            <option
-                                v-for="option in planeTypes"
-                                :value="option.id"
-                                :key="option.id">
-                                {{ option.type }}
-                            </option>
-                        </b-select>
+            <div class="tile">
+                <div class="tile is-parent">
+                    <div class="tile is-child is-size-5 has-text-weight-bold">{{ sala.name }} - {{ sala.old_name }}</div>
+                </div>
+                <div class="tile is-parent">
+                    <div class="tile is-child has-text-right">
+                        <div class="has-text-weight-light is-size-7">Tipo Alimentación</div>
+                        <div v-if="!isEditMode">
+                            <div class="has-text-weight-bold is-size-5">{{ planeType }}</div>
+                        </div>
+
+                        <div v-if="isEditMode">
+                            <div class="is-pulled-right">
+                                <b-select placeholder="Select a name" v-model="planeTypeId" @input="updatePlaneType(sala)">
+                                    <option
+                                        v-for="option in planeTypes"
+                                        :value="option.id"
+                                        :key="option.id">
+                                        {{ option.type }}
+                                    </option>
+                                </b-select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <a @click="isEditMode=!isEditMode">
+                                <b-tag v-if="canEditSurface" :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small">
+                                    {{ isEditMode ? 'Guardar' : 'Editar' }}
+                                </b-tag>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <router-link class="is-size-5" :to="'/capacity/'+sala.id" @click.native="reload"
+                <!-- <router-link class="is-size-5" :to="'/capacity/'+sala.id" @click.native="reload"
                     :class="room.id && sala.id != room.id ? 'has-text-grey-light has-text-weight-light' : 'has-text-weight-bold'">
                     {{ sala.name }} - {{ sala.old_name }}
-                </router-link>
+                </router-link> -->
+                
             </div>
 
-            <div class="tile is-ancestor">
+            <div class="tile">
                 <div class="tile is-parent">
                     <b-field label="PLANTAS RECTIFICADORAS" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
 
-                            <div class="tile is-vertical">
+                            <div class="tile is-vertical" v-if="sala.planes.length">
                                 <div class="tile is-parent columns is-multiline">
                                     <div class="tile is-parent column is-6" v-for="plane in planes" :key="plane.id">
 
@@ -49,8 +65,9 @@
                                                                 v-if="powerRectifierBelongsToPlane(powerRectifier, plane)">
                                                                 <a class="box" @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier">
                                                                     <div class="field">
-                                                                        <div class="has-text-weight-bold is-size-7">PLANTA</div>
-                                                                        <span class="has-text-weight-bold is-size-6">Nº {{ powerRectifier.id }}</span>
+                                                                        <div class="has-text-weight-normal is-size-7">PLANTA</div>
+                                                                        <span class="has-text-weight-bold is-size-6">{{ powerRectifier.power_rectifier_type.type }} {{ powerRectifier.power_rectifier_type.model }}
+                                                                        </span>
                                                                     </div>
                                                                 </a>
                                                             </div>
@@ -110,9 +127,8 @@
                         </div>
                     </b-field>
                 </div>
-            </div>
 
-            <div class="tile is-ancestor">
+
                 <div class="tile is-parent">
                     <b-field label="CLIMATIZACION" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div class="tile is-parent box is-shadowless" style="border: solid 0.1rem #cccccc">
@@ -149,24 +165,20 @@
                 </div>
             </div>
 
-            <div class="tile is-ancestor">
-                <div class="tile is-parent is-8">
+            <div class="tile">
+                <div class="tile is-parent">
                     <b-field label="ESPACIO" label-position="on-border" class="tile" 
                         :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div v-if="!canEditSurface" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-
                             <div class="tile is-parent is-vertical" v-if="sala.current_room_surface">
-                                <div class="tile box is-child has-text-centered">
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">SUPERFICIE</div>
-                                    </div>
+                                <div class="has-text-centered">
                                     <div class="level">
                                         <div class="level-item">
                                             <div class="">
                                                 <div class="has-text-weight-bold is-size-6">{{ totalSurface }}
                                                     <!-- <span class="is-size-7"> m2</span> -->
                                                 </div>
-                                                <div class="has-text-weight-normal is-size-7">Total</div>
+                                                <div class="has-text-weight-normal is-size-7">Espacio Total</div>
                                             </div>
                                         </div>
                                         <div class="level-item">
@@ -174,7 +186,7 @@
                                                 <div class="has-text-weight-bold is-size-6">{{ usedSurface }}
                                                     <!-- <span class="is-size-7"> m2</span> -->
                                                 </div>
-                                                <div class="has-text-weight-normal is-size-7">Usada</div>
+                                                <div class="has-text-weight-normal is-size-7">Espacio Utilizada</div>
                                             </div>
                                         </div>
                                         <div class="level-item">
@@ -182,13 +194,12 @@
                                                 <div class="has-text-weight-bold is-size-6">{{ availableSurface }}
                                                     <!-- <span class="is-size-7"> m2</span> -->
                                                 </div>
-                                                <div class="has-text-weight-normal is-size-7">Disponible</div>
+                                                <div class="has-text-weight-normal is-size-7">Espacio Disponible</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="tile columns is-vcentered" v-if="!sala.current_room_surface">
                                 <div class="column">
                                     <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
@@ -200,17 +211,14 @@
 
                         <a v-if="canEditSurface" @click="isSurfaceModalActive = true" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
                             <div class="tile is-parent is-vertical" v-if="sala.current_room_surface">
-                                <div class="tile box is-child has-text-centered">
-                                    <div class="field">
-                                        <div class="has-text-weight-bold is-size-6">SUPERFICIE</div>
-                                    </div>
+                                <div class="has-text-centered">
                                     <div class="level">
                                         <div class="level-item">
                                             <div class="">
                                                 <div class="has-text-weight-bold is-size-6">{{ totalSurface }}
                                                     <!-- <span class="is-size-7"> m2</span> -->
                                                 </div>
-                                                <div class="has-text-weight-normal is-size-7">Total</div>
+                                                <div class="has-text-weight-normal is-size-7">Espacio Total</div>
                                             </div>
                                         </div>
                                         <div class="level-item">
@@ -218,7 +226,7 @@
                                                 <div class="has-text-weight-bold is-size-6">{{ usedSurface }}
                                                     <!-- <span class="is-size-7"> m2</span> -->
                                                 </div>
-                                                <div class="has-text-weight-normal is-size-7">Usada</div>
+                                                <div class="has-text-weight-normal is-size-7">Espacio Utilizado</div>
                                             </div>
                                         </div>
                                         <div class="level-item">
@@ -226,7 +234,7 @@
                                                 <div class="has-text-weight-bold is-size-6">{{ availableSurface }}
                                                     <!-- <span class="is-size-7"> m2</span> -->
                                                 </div>
-                                                <div class="has-text-weight-normal is-size-7">Disponible</div>
+                                                <div class="has-text-weight-normal is-size-7">Espacio Disponible</div>
                                             </div>
                                         </div>
                                     </div>
@@ -243,37 +251,29 @@
                     </b-field>
                 </div>
 
-                <div class="tile is-parent">
-                    <b-field label="SEGURIDAD" label-position="on-border" class="tile"
+                <div class="tile is-parent is-4">
+                    <b-field label="EQUIPOS SEGURIDAD" label-position="on-border" class="tile"
                         :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
 
                             <div class="tile is-parent is-vertical" v-if="sala.fire_detections.length">
                                 <b-field label="INCENDIO" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                                     <div class="tile box is-child is-shadowless" style="border: solid 0.1rem #cccccc">
-                                        <div class="field">
-                                            <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
-                                            <div class="has-text-weight-normal is-size-7">Detección</div>
-                                        </div>
-                                        <div class="field">
-                                            <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
-                                            <div class="has-text-weight-normal is-size-7">Extinción</div>
+                                        <div class="level">
+                                            <div class="level-item">
+                                                <div class="">
+                                                    <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
+                                                    <div class="has-text-weight-normal is-size-7">Detección</div>
+                                                </div>
+                                            </div>
+                                            <div class="level-item">
+                                                <div class="">
+                                                    <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
+                                                    <div class="has-text-weight-normal is-size-7">Extinción</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <!-- <div class="tile box is-child has-text-right">
-                                        <div class="field">
-                                            <div class="has-text-weight-bold is-size-6">VIGILANCIA</div>
-                                        </div>
-                                        <div class="field">
-                                            <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
-                                            <div class="has-text-weight-normal is-size-7">Cámara</div>
-                                        </div>
-                                        <div class="field">
-                                            <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
-                                            <div class="has-text-weight-normal is-size-7">Gestión Remota</div>
-                                        </div>
-                                    </div> -->
                                 </b-field>
                             </div>
 
@@ -288,72 +288,95 @@
                         </div>
                     </b-field>
                 </div>
-            </div>
 
-            <div class="tile is-ancestor" v-if="sala.current_room_distribution">
                 <div class="tile is-parent">
-
                     <b-field label="DISTRIBUCION" label-position="on-border" class="tile"
                         :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
                         <div v-if="!canEditDistribution" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-parent is-vertical" v-if="true">
-                                <div class="tile box is-child has-text-right">
-                                    <div class="level">
-                                        <div class="level-item has-text-centered">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ totalCapacity }} <span class="is-size-7">kW</span></div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item has-text-centered">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ usedCapacity }} <span class="is-size-7">kW</span></div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Usada</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item has-text-centered">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ availableCapacity }} <span class="is-size-7">kW</span></div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
+                            <div class="tile is-parent is-vertical" v-if="sala.current_room_distribution">
+                                <div class="tile">
+                                    <div class="tile is-child">
+                                        <div class="tile columns is-vcentered">
+                                            <div class="column">
+                                                <div class="level has-text-centered">
+                                                    <div class="level-item">
+                                                        <div class="">
+                                                            <div class="has-text-weight-bold is-size-6">{{ totalCapacity }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="level-item">
+                                                        <div class="">
+                                                            <div class="has-text-weight-bold is-size-6">{{ usedCapacity }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Capacidad Utilizada</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="level-item">
+                                                        <div class="">
+                                                            <div class="has-text-weight-bold is-size-6">{{ availableCapacity }} <span class="is-size-7">kW</span></div>
+                                                            <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="tile columns is-vcentered" v-if="!sala.current_room_distribution">
+                                <div class="column">
+                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                        NO TIENE DATOS DE DISTRIBUCION
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                         <a v-if="canEditDistribution" 
                             @click="isDistributionModalActive = true"
                             class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-parent is-vertical" v-if="true">
-                                <div class="tile box is-child has-text-right">
-                                    <div class="level">
-                                        <div class="level-item has-text-centered">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ totalCapacity }} <span class="is-size-7">kW</span></div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
+                            <div class="tile is-parent is-vertical" v-if="sala.current_room_distribution">
+                                <div class="tile is-child">
+                                    <div class="tile columns is-vcentered">
+                                        <div class="column">
+                                            <div class="level has-text-centered">
+                                                <div class="level-item">
+                                                    <div class="">
+                                                        <div class="has-text-weight-bold is-size-6">{{ totalCapacity }} <span class="is-size-7">kW</span></div>
+                                                        <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
+                                                    </div>
+                                                </div>
+                                                <div class="level-item">
+                                                    <div class="">
+                                                        <div class="has-text-weight-bold is-size-6">{{ usedCapacity }} <span class="is-size-7">kW</span></div>
+                                                        <div class="has-text-weight-normal is-size-7">Capacidad Utilizada</div>
+                                                    </div>
+                                                </div>
+                                                <div class="level-item">
+                                                    <div class="">
+                                                        <div class="has-text-weight-bold is-size-6">{{ availableCapacity }} <span class="is-size-7">kW</span></div>
+                                                        <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="level-item has-text-centered">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ usedCapacity }} <span class="is-size-7">kW</span></div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Usada</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item has-text-centered">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ availableCapacity }} <span class="is-size-7">kW</span></div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
-                                            </div>
-                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tile columns is-vcentered" v-if="!sala.current_room_distribution">
+                                <div class="column">
+                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                        NO TIENE DATOS DE DISTRIBUCION
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </b-field>
-
                 </div>
             </div>
+
+            <!-- <div class="tile is-ancestor" v-if="sala.current_room_distribution">
+                
+            </div> -->
                 
             <!-- <div class="is-divider" data-content="ESPACIO"></div> -->
             <!-- <space-chart/> -->
@@ -461,7 +484,6 @@
         mounted() {
             this.getPlaneTypes()
             this.getAirConditioners()
-            // this.getPowerRectifiers()
             this.getPlanes()
             this.$emit('room-distribution', this.distribution);
             this.$emit('room-surface', this.surface);
@@ -686,7 +708,7 @@
                 axios.get(`/api/roomPlanes/${this.sala.id}?api_token=${this.user.api_token}&plane_delegation_type_id=${this.planeTypeId}`)
                 .then((response) => {
                     this.planes = response.data.planes
-                    this.canEditPowerRectifiers = response.data.can ? response.data.can : false
+                    this.canEditPowerRectifiers = response.data.can ? response.data.can.update : false
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Empalmes: ' + error);
@@ -698,7 +720,7 @@
                 .then((response) => {
                     // console.log(response.data)
                     this.airConditioners = response.data.airConditioner
-                    this.canEditAirConditioners = response.data.can
+                    this.canEditAirConditioners = response.data.can ? response.data.can.update : false
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Empalmes: ' + error);

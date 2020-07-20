@@ -75,7 +75,6 @@
     "/chunks/pop/layout/modals/junction.js": "/chunks/pop/layout/modals/junction.js",
     "/chunks/pop/layout/modals/powerRectifier.js": "/chunks/pop/layout/modals/powerRectifier.js",
     "/chunks/pop/layout/modals/surface.js": "/chunks/pop/layout/modals/surface.js",
-    "/chunks/pop/layout/room.js": "/chunks/pop/layout/room.js",
     "/chunks/pop/location.js": "/chunks/pop/location.js",
     "/chunks/pop/logs.js": "/chunks/pop/logs.js",
     "/chunks/pop/modals/editParameter.js": "/chunks/pop/modals/editParameter.js",
@@ -101,5 +100,10 @@
     "/vendors~pdfmake.js": "/vendors~pdfmake.js",
     "/vendors~xlsx.js": "/vendors~xlsx.js",
     "/xlsx.js": "/xlsx.js",
-    "/vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~62b71c60.js": "/vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~62b71c60.js"
+    "/vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/capacity/room~cb5ca774.js": "/vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/capacity/room~cb5ca774.js",
+    "/vendors~chunks/admin/files~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop.js": "/vendors~chunks/admin/files~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop.js",
+    "/vendors~chunks/capacity/modals/capacity.js": "/vendors~chunks/capacity/modals/capacity.js",
+    "/vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart.js": "/vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart.js",
+    "/vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart.js": "/vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart.js",
+    "/vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764.js": "/vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764.js"
 }

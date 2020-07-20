@@ -166,8 +166,7 @@ var render = function() {
               _vm._v(
                 _vm._s(
                   _vm.powerRectifier.power_rectifier_type
-                    ? _vm.powerRectifier.power_rectifier_type
-                        .power_rectifier_type
+                    ? _vm.powerRectifier.power_rectifier_type.type
                     : "Sin información"
                 )
               )
@@ -186,8 +185,7 @@ var render = function() {
               _vm._v(
                 _vm._s(
                   _vm.powerRectifier.power_rectifier_type
-                    ? _vm.powerRectifier.power_rectifier_type
-                        .power_rectifier_model
+                    ? _vm.powerRectifier.power_rectifier_type.model
                     : "Sin información"
                 )
               )

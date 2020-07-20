@@ -1,35 +1,42 @@
 <template>
     <section class="">
         <div class="">
-            <div class="has-text-weight-semibold has-text-dark is-size-3 has-text-left">Layout del POP</div>
+            <div class="has-text-weight-semibold has-text-dark is-size-3 has-text-left">Layout</div>
         </div>
 
-        <div class="tile is-ancestor">
-            <div class="is-5 tile is-parent">
-                <MiniJunctions 
-                    :pop="pop"
-                    :junctions="junctions"
-                    :can="canEditJunctions"
-                    :user="user"
-                />
-            </div>
-            <div class="tile is-parent" v-if="generatorSets.length">
-                <MiniGeneratorSets 
-                    :pop="pop"
-                    :generatorSets="generatorSets"
-                    :can="canEditGeneratorGroups"
-                    :user="user"
-                />
+        <div class="tile is-ancestor" style="padding-top: 24px;">
+            <div class="tile is-vertical">
+                <div class="tile">
+                    <div class="is-5 tile">
+                        <MiniJunctions 
+                            :pop="pop"
+                            :junctions="junctions"
+                            :can="canEditJunctions"
+                            :user="user"
+                        />
+                    </div>
+                    <div class="tile" v-if="generatorSets.length">
+                        <MiniGeneratorSets 
+                            :pop="pop"
+                            :generatorSets="generatorSets"
+                            :can="canEditGeneratorGroups"
+                            :user="user"
+                        />
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div class="tile">
+                        <MiniRooms 
+                            :pop="pop"
+                            :room="room"
+                            :salas="salas"
+                            :user="user"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
-                
-        <!-- Salas -->
-        <MiniRooms 
-            :pop="pop"
-            :room="room"
-            :salas="salas"
-            :user="user"
-        />
 
     </section>
         

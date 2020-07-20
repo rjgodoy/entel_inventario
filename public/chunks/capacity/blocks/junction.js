@@ -81,6 +81,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalJunction: function ModalJunction() {
@@ -297,153 +299,236 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "tile" },
+    { staticClass: "tile is-parent" },
     [
-      _c("section", { staticClass: "tile", staticStyle: { padding: "24px" } }, [
-        _c("div", { staticClass: "tile is-ancestor" }, [
-          _c("div", { staticClass: "tile is-parent" }, [
-            _c("div", { staticClass: "tile box" }, [
-              _c("div", { staticClass: "tile columns" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "tile column has-background-dark has-text-weight-bold has-text-white"
-                  },
-                  [
-                    _c("div", { staticClass: "tile is-child" }, [
+      _c(
+        "section",
+        { staticClass: "tile box" },
+        [
+          _c(
+            "b-field",
+            {
+              staticClass: "tile",
+              attrs: { label: "EMPALMES", "label-position": "on-border" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "tile box is-shadowless",
+                  staticStyle: { border: "solid 0.05rem black" }
+                },
+                [
+                  _c("div", { staticClass: "tile is-vertical" }, [
+                    _c(
+                      "div",
+                      { staticClass: "tile is-parent" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            staticClass: "tile",
+                            attrs: {
+                              label: "CAPACIDADES",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tile box is-shadowless",
+                                staticStyle: { border: "solid 0.05rem black" }
+                              },
+                              [
+                                _c("div", { staticClass: "tile" }, [
+                                  _c("div", { staticClass: "tile is-parent" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-centered tile is-child"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-semibold is-size-6"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("numeral")(
+                                                  _vm.totalCapacity,
+                                                  "0,0.0"
+                                                )
+                                              ) + "  "
+                                            ),
+                                            _c(
+                                              "span",
+                                              { staticClass: "is-size-7" },
+                                              [_vm._v("kW")]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7"
+                                          },
+                                          [_vm._v("Total")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "tile is-parent" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-centered tile is-child"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-semibold is-size-6"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("numeral")(
+                                                  _vm.totalUsedCapacity,
+                                                  "0,0.0"
+                                                )
+                                              ) + "  "
+                                            ),
+                                            _c(
+                                              "span",
+                                              { staticClass: "is-size-7" },
+                                              [_vm._v("kW")]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7"
+                                          },
+                                          [_vm._v("Utilizado")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "tile is-parent" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-centered tile is-child"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-semibold is-size-6"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("numeral")(
+                                                  _vm.totalDisponibility,
+                                                  "0,0.0"
+                                                )
+                                              ) + "  "
+                                            ),
+                                            _c(
+                                              "span",
+                                              { staticClass: "is-size-7" },
+                                              [_vm._v("kW")]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-normal is-size-7"
+                                          },
+                                          [_vm._v("Disponible")]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "tile is-parent" }, [
                       _c(
                         "div",
-                        {
-                          staticClass:
-                            "title has-text-weight-bold is-size-6 has-text-white"
-                        },
-                        [_vm._v("EMPALMES")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "has-text-weight-normal is-size-6 is-pulled-right"
-                          },
-                          [_vm._v(_vm._s(_vm.responsable.area))]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "has-text-weight-normal is-size-6" },
-                          [_vm._v("Responsable")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "has-text-weight-normal is-size-6 is-pulled-right"
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("numeral")(_vm.totalCapacity, "0,0.0")
-                              )
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "has-text-weight-normal is-size-6" },
-                          [_vm._v("Capacidad Total")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "has-text-weight-normal is-size-6 is-pulled-right"
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("numeral")(
-                                  _vm.totalUsedCapacity,
-                                  "0,0.0"
-                                )
-                              )
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "has-text-weight-normal is-size-6" },
-                          [_vm._v("Capacidad Total utilizado")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "has-text-weight-normal is-size-6 is-pulled-right"
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("numeral")(
-                                  _vm.totalDisponibility,
-                                  "0,0.0"
-                                )
-                              )
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "has-text-weight-normal is-size-6" },
-                          [_vm._v("Capacidad Total disponible")]
-                        )
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "column tile" }, [
-                  _c(
-                    "div",
-                    { staticClass: "columns tile is-parent" },
-                    _vm._l(_vm.junctions, function(junction) {
-                      return _c(
-                        "a",
-                        {
-                          key: junction.id,
-                          staticClass: "box tile is-child column",
-                          on: {
-                            click: function($event) {
-                              _vm.isJunctionModalActive = true
-                              _vm.junctionSelected = junction
-                            }
-                          }
-                        },
-                        [_vm._m(0, true)]
+                        { staticClass: "columns tile is-parent" },
+                        _vm._l(_vm.junctions, function(junction) {
+                          return _c(
+                            "a",
+                            {
+                              key: junction.id,
+                              staticClass: "box tile is-child column",
+                              on: {
+                                click: function($event) {
+                                  _vm.isJunctionModalActive = true
+                                  _vm.junctionSelected = junction
+                                }
+                              }
+                            },
+                            [
+                              _c("div", {}, [
+                                _c("div", { staticClass: "columns" }, [
+                                  _c("div", { staticClass: "column" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-semibold is-size-6"
+                                      },
+                                      [_vm._v("Empalme")]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "column is-2 has-text-centered"
+                                  })
+                                ])
+                              ])
+                            ]
+                          )
+                        }),
+                        0
                       )
-                    }),
-                    0
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "b-modal",
@@ -476,24 +561,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", {}, [
-      _c("div", { staticClass: "columns" }, [
-        _c("div", { staticClass: "column" }, [
-          _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
-            _vm._v("Empalme")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "column is-2 has-text-centered" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

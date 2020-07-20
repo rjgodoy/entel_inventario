@@ -57,6 +57,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -205,59 +212,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    {},
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "tile is-ancestor" }, [
-        _c(
-          "div",
-          { staticClass: "is-5 tile is-parent" },
-          [
-            _c("MiniJunctions", {
-              attrs: {
-                pop: _vm.pop,
-                junctions: _vm.junctions,
-                can: _vm.canEditJunctions,
-                user: _vm.user
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm.generatorSets.length
-          ? _c(
+  return _c("section", {}, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "tile is-ancestor",
+        staticStyle: { "padding-top": "24px" }
+      },
+      [
+        _c("div", { staticClass: "tile is-vertical" }, [
+          _c("div", { staticClass: "tile" }, [
+            _c(
               "div",
-              { staticClass: "tile is-parent" },
+              { staticClass: "is-5 tile" },
               [
-                _c("MiniGeneratorSets", {
+                _c("MiniJunctions", {
                   attrs: {
                     pop: _vm.pop,
-                    generatorSets: _vm.generatorSets,
-                    can: _vm.canEditGeneratorGroups,
+                    junctions: _vm.junctions,
+                    can: _vm.canEditJunctions,
+                    user: _vm.user
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm.generatorSets.length
+              ? _c(
+                  "div",
+                  { staticClass: "tile" },
+                  [
+                    _c("MiniGeneratorSets", {
+                      attrs: {
+                        pop: _vm.pop,
+                        generatorSets: _vm.generatorSets,
+                        can: _vm.canEditGeneratorGroups,
+                        user: _vm.user
+                      }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "tile" }, [
+            _c(
+              "div",
+              { staticClass: "tile" },
+              [
+                _c("MiniRooms", {
+                  attrs: {
+                    pop: _vm.pop,
+                    room: _vm.room,
+                    salas: _vm.salas,
                     user: _vm.user
                   }
                 })
               ],
               1
             )
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("MiniRooms", {
-        attrs: {
-          pop: _vm.pop,
-          room: _vm.room,
-          salas: _vm.salas,
-          user: _vm.user
-        }
-      })
-    ],
-    1
-  )
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -271,7 +293,7 @@ var staticRenderFns = [
           staticClass:
             "has-text-weight-semibold has-text-dark is-size-3 has-text-left"
         },
-        [_vm._v("Layout del POP")]
+        [_vm._v("Layout")]
       )
     ])
   }

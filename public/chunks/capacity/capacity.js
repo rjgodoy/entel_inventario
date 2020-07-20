@@ -80,7 +80,7 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     RoomLights: function RoomLights() {
-      return Promise.all(/*! import() | chunks/capacity/roomLights */[__webpack_require__.e("vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~91d94541"), __webpack_require__.e("chunks/capacity/roomLights")]).then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/roomLights */ "chunks/capacity/roomLights").then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
     },
     PolarAreaChart: _constants_chartJs_PolarAreaChart_js__WEBPACK_IMPORTED_MODULE_3__["default"],
     CapacityChart: _CapacityChart__WEBPACK_IMPORTED_MODULE_4__["default"],

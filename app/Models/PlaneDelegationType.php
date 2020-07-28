@@ -21,8 +21,8 @@ class PlaneDelegationType extends Model
      *
      * @var boolean
      */
-	public function planes()
+	public function plane_types()
     {
-        return $this->belongsToMany(Plane::class)->withTimestamps();
+        return $this->belongsToMany(PlaneType::class)->withTimestamps();
     }
 }

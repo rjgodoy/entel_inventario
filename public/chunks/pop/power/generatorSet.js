@@ -331,13 +331,13 @@ __webpack_require__.r(__webpack_exports__);
       return this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.prime_capacity : 0;
     },
     capacity: function capacity() {
-      return this.primeCapacity * 0.8;
+      return this.newPrimeCapacity * 0.8;
     },
     usedCapacity: function usedCapacity() {
       return this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.used_capacity : 0;
     },
     availableCapacity: function availableCapacity() {
-      return this.capacity - this.usedCapacity;
+      return this.capacity - this.newUsedCapacity;
     }
   },
   watch: {
@@ -448,19 +448,19 @@ __webpack_require__.r(__webpack_exports__);
     saveChanges: function saveChanges() {
       var _this9 = this;
 
-      if (!this.isEditMode && this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id) {
+      if (!this.isEditMode && (this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
         var params = {
           'api_token': this.user.api_token,
           'user_id': this.user.id,
           'generator_set_id': this.generatorSet.id,
-          'prime_capacity': this.newPrimeCapacity,
-          'used_capacity': this.newUsedCapacity,
+          'prime_capacity': parseFloat(this.newPrimeCapacity),
+          'used_capacity': parseFloat(this.newUsedCapacity),
           'maintainer_id': this.maintainer_id,
           'generator_set_responsable_area_id': this.responsable_area_id,
           'generator_set_topology_type_id': this.topology_id,
           'generator_set_level_type_id': this.level_id
-        };
-        console.log(params);
+        }; // console.log(params)
+
         axios.put("/api/generatorSets/".concat(this.generatorSet.id), params).then(function (response) {
           console.log(response.data);
 
@@ -1141,7 +1141,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "has-text-weight-semibold is-size-4" }, [
               _vm._v(
-                _vm._s(_vm._f("numeral")(_vm.capacity, 0, 0)) +
+                _vm._s(_vm._f("numeral")(_vm.capacity, "0,0.0")) +
                   " \n                        "
               ),
               _c("span", { staticClass: "is-size-6" }, [_vm._v("kW")])
@@ -1157,7 +1157,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "has-text-weight-semibold is-size-4" }, [
               _vm._v(
-                _vm._s(_vm._f("numeral")(_vm.availableCapacity, 0, 0)) +
+                _vm._s(_vm._f("numeral")(_vm.availableCapacity, "0,0.0")) +
                   " \n                        "
               ),
               _c("span", { staticClass: "is-size-6" }, [_vm._v("kW")])
@@ -1180,8 +1180,9 @@ var render = function() {
                     { staticClass: "has-text-weight-semibold is-size-5" },
                     [
                       _vm._v(
-                        _vm._s(_vm._f("numeral")(_vm.newUsedCapacity, 0, 0)) +
-                          " "
+                        _vm._s(
+                          _vm._f("numeral")(_vm.newUsedCapacity, "0,0.0")
+                        ) + " "
                       ),
                       _c("span", { staticClass: "is-size-6" }, [_vm._v("kW")])
                     ]

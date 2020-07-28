@@ -75,7 +75,7 @@
                                 <div class="has-text-weight-light is-size-7">Factor de Uso</div>
                                 <div v-if="!isEditMode">
                                     <div class="has-text-weight-bold is-size-5">
-                                        {{ junction.use_factor }}
+                                        {{ useFactor }}
                                     </div>
                                 </div>
                                 <div v-if="isEditMode">
@@ -92,7 +92,7 @@
                                 <div class="tile is-ancestor">
                                     <div class="tile is-parent" v-if="hasAProtections">
                                         <b-field label="PROTECCIONES A" label-position="on-border" class="tile">
-                                            <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                            <div class="tile box is-shadowless is-paddingless" style="border: solid 0.1rem #cccccc">
                                                 <div class="tile">
                                                     <div class="tile level">
                                                         <div class="tile is-parent level-item">
@@ -464,18 +464,22 @@
                 clientNumber: this.junction.client_number,
                 junctionNumber: this.junction.junction_number,
                 useFactor: this.junction.use_factor,
-                punctualConsumption: this.junction.latest_measurement.punctual_consumption
+                punctualConsumption: this.junction.latest_measurement ? this.junction.latest_measurement.punctual_consumption : 0
             }
         },
 
         watch: {
             junction(val) {
-
+                this.junctionTypeId = val.junction_type_id,
+                this.junctionConnectionId = val.junction_connection_id,
+                this.clientNumber = val.client_number,
+                this.junctionNumber = val.junction_number,
+                this.useFactor = val.use_factor,
+                this.punctualConsumption = val.latest_measurement ? val.latest_measurement.punctual_consumption : 0
             }
         },
 
         mounted() {
-            console.log('hello!!')
             this.getJunctionTypes()
             this.getJunctionConnections()
         },
@@ -658,7 +662,7 @@
 
             getJunctionTypes() {
                 axios.get(`/api/junctionTypes?api_token=${this.user.api_token}`).then(response => {
-                    this.junctionTypes = response.data.junctions
+                    this.junctionTypes = response.data.junctionTypes
                 })
             },
 

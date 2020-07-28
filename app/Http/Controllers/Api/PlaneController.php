@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Plane as PlaneResource;
 use App\Http\Resources\PlaneCollection;
 use App\Models\Plane;
+use App\Models\PlaneDelegationType;
 use App\Models\PlaneType;
 use App\Models\RoomDelegation;
 use Illuminate\Http\Request;
@@ -65,7 +66,7 @@ class PlaneController extends Controller
         $plane_delegation_type_id = $request->plane_delegation_type_id;
 
         $planes = Plane::with(
-            'rooms.current_room_delegation.plane_delegation_type.planes.power_rectifiers.power_rectifier_type',
+            'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.power_rectifier_type',
             // 'rooms.current_room_delegation.plane_delegation_type.planes.power_rectifiers.power_rectifier_modules',
             // 'rooms.current_room_delegation.plane_delegation_type.planes.power_rectifiers.power_rectifier_mode',
             // 'rooms.current_room_delegation.plane_delegation_type.planes.battery_banks.battery_bank_brand',
@@ -82,9 +83,9 @@ class PlaneController extends Controller
         ->whereHas('rooms', function($q) use($room_id) {
             $q->where('id', $room_id);
         })
-        ->whereHas('plane_delegation_types', function($p) use($plane_delegation_type_id) {
-            $p->where('id', $plane_delegation_type_id);
-        })
+        // ->whereHas('plane_delegation_types', function($p) use($plane_delegation_type_id) {
+        //     $p->where('id', $plane_delegation_type_id);
+        // })
         ->get();
 
         return new PlaneCollection($planes);
@@ -100,6 +101,18 @@ class PlaneController extends Controller
     {
         $planeTypes = PlaneType::all();
         return new PlaneCollection($planeTypes);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function planeDelegationTypes()
+    {
+        $planeDelegationTypes = PlaneDelegationType::all();
+        return new PlaneCollection($planeDelegationTypes);
     }
 
     /**

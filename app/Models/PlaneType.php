@@ -15,4 +15,14 @@ class PlaneType extends Model
     {
         return $this->hasMany(Plane::class);
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function plane_delegation_types() 
+    {
+        return $this->belongsToMany(PlaneDelegationType::class)->withTimestamps();
+    }
 }

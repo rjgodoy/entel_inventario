@@ -107,7 +107,6 @@
                         :room=room
                         :pop=pop
                         :user=user
-                        :isEditMode=isEditMode
                         @room-distribution="roomsDistribution"
                         @room-surface="roomsSurface"
                         @power-rectifier-data="powerRectifiersTotalCapacity"
@@ -146,8 +145,6 @@
 
                 totalSurface: 0,
                 usedSurface: 0,
-                isEditMode: false
-                
             }
         },
 

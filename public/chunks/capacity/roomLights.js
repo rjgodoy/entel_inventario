@@ -13,13 +13,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var _computed;
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
 //
@@ -126,28 +122,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       junctions: Object,
-      generatorSets: Object
+      generatorSets: Object,
+      roomPlanes: Array
     };
+  },
+  created: function created() {},
+  mounted: function mounted() {
+    this.getRoomPlanes();
+    this.getJunctions();
+    this.getGeneratorSets();
   },
   watch: {
     currentCrm: function currentCrm(newValue) {
       this.getRoomsData();
     }
   },
-  computed: (_computed = {
+  computed: {
     totalCapacity: function totalCapacity() {
       // return this.junctionsTotalAvailableCapacity
       // return this.generatorSetTotalAvailableCapacity
       // return this.powerRectifiersAvailableCapacity
       // return this.batteriesAvailableCapacity
       // return this.distributionAvailableCapacity
-      return Math.min(this.totalAvailableEnergyCapacity, this.totalAvailableClimateCapacity);
+      var total = Math.min(this.totalAvailableEnergyCapacity, this.totalAvailableClimateCapacity);
+
+      if (total >= 0) {
+        return total;
+      }
+
+      return 0;
     },
     totalAvailableEnergyCapacity: function totalAvailableEnergyCapacity() {
-      return Math.min(this.junctionsTotalAvailableCapacity, this.generatorSetTotalAvailableCapacity, this.powerRectifiersAvailableCapacity, this.batteriesAvailableCapacity, this.distributionAvailableCapacity);
+      var total = Math.min(this.junctionsTotalAvailableCapacity, this.generatorSetTotalAvailableCapacity, this.powerRectifiersAvailableCapacity, this.batteriesAvailableCapacity, this.distributionAvailableCapacity);
+
+      if (total >= 0) {
+        return total;
+      }
+
+      return 0;
     },
     totalAvailableClimateCapacity: function totalAvailableClimateCapacity() {
-      return Math.min(20, 25);
+      var total = Math.min(20, 25);
+
+      if (total >= 0) {
+        return total;
+      }
+
+      return 0;
     },
     canViewClimate: function canViewClimate() {
       return this.user.roles[0].slug == 'engineer-admin' || this.user.roles[0].slug == 'admin' || this.user.roles[0].slug == 'developer' || this.user.roles[0].slug == 'super-viewer' ? true : false;
@@ -388,30 +409,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     powerRectifiersTotalCapacity: function powerRectifiersTotalCapacity() {
       var _this10 = this;
 
-      var realRoomCapacity = 0;
+      var realRoomCapacity = 0; // if(this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type) {
+      //     let plane_types = this.room.current_room_delegation.plane_delegation_type.plane_types
+      //     Object.keys(plane_types).forEach(element => {
+      //         let planes = plane_types[element].planes
 
-      if (this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type) {
-        var planes = this.room.current_room_delegation.plane_delegation_type.planes;
-        Object.keys(planes).forEach(function (element) {
-          var plane = planes[element];
-          realRoomCapacity += _this10.realPlaneCapacity(plane);
-        });
-      }
+      Object.keys(this.roomPlanes).forEach(function (item) {
+        var plane = _this10.roomPlanes[item];
+        realRoomCapacity += _this10.realPlaneCapacity(plane);
+      }); //     })
+      // }
 
       return realRoomCapacity;
     },
     powerRectifiersUsedCapacity: function powerRectifiersUsedCapacity() {
       var _this11 = this;
 
-      var usedRoomCapacity = 0;
+      var usedRoomCapacity = 0; // if(this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type) {
+      //     let plane_types = this.room.current_room_delegation.plane_delegation_type.plane_types
+      //     Object.keys(plane_types).forEach(element => {
+      //         let planes = plane_types[element].planes
 
-      if (this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type) {
-        var planes = this.room.current_room_delegation.plane_delegation_type.planes;
-        Object.keys(planes).forEach(function (element) {
-          var plane = planes[element];
-          usedRoomCapacity += _this11.totalPower(plane);
-        });
-      }
+      Object.keys(this.roomPlanes).forEach(function (item) {
+        var plane = _this11.roomPlanes[item];
+        usedRoomCapacity += _this11.totalPower(plane);
+      }); // })
+      // }
 
       return usedRoomCapacity;
     },
@@ -423,9 +446,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var availableRoomCapacityA = original;
       var availableRoomCapacityB = original;
 
-      if (this.room.current_room_delegation) {
-        Object.keys(this.room.current_room_delegation.plane_delegation_type.planes).forEach(function (element) {
-          var plane = _this12.room.current_room_delegation.plane_delegation_type.planes[element];
+      if (this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type_id) {
+        Object.keys(this.roomPlanes).forEach(function (item) {
+          var plane = _this12.roomPlanes[item];
 
           switch (_this12.room.current_room_delegation.plane_delegation_type_id) {
             case 1:
@@ -446,11 +469,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             case 7:
               if (availableRoomCapacityA > _this12.availablePlaneCapacity(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
                 availableRoomCapacityA = _this12.availablePlaneCapacity(plane);
+                console.log(availableRoomCapacityA);
               }
 
               if (availableRoomCapacityB > _this12.availablePlaneCapacity(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
                 availableRoomCapacityB = _this12.availablePlaneCapacity(plane);
-              }
+                console.log(availableRoomCapacityB);
+              } // console.log(availableRoomCapacityA)
+
 
               availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB;
               break;
@@ -469,118 +495,137 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     popAutonomy: function popAutonomy() {
       return this.room.pop.current_autonomy ? this.room.pop.current_autonomy.theoretical : 0;
     },
-    // batteriesTotalCapacity() {
-    //     let capacity = 0
-    //     Object.keys(this.room.planes).forEach(element => {
-    //         let plane = this.room.planes[element]
-    //         Object.keys(plane.battery_banks).forEach(item => {
-    //             capacity += plane.battery_banks[item].capacity
-    //         })
-    //     })
-    //     let total = (((capacity * 48) / 1000) / this.popAutonomy)
-    //     return total
-    // },
-    // batteriesUsedCapacity() {
-    //     let used = 0
-    //     Object.keys(this.room.planes).forEach(element => {
-    //         let plane = this.room.planes[element]
-    //         used += this.chargeRealPower(plane)
-    //     })
-    //     return used
-    // },
-    batteriesAvailableCapacity: function batteriesAvailableCapacity() {
+    batteriesTotalCapacity: function batteriesTotalCapacity() {
       var _this13 = this;
+
+      var capacity = 0;
+      Object.keys(this.roomPlanes).forEach(function (element) {
+        var plane = _this13.roomPlanes[element];
+        Object.keys(plane.battery_banks).forEach(function (item) {
+          capacity += plane.battery_banks[item].capacity;
+        });
+      });
+      var total = capacity * 48 / 1000 / this.popAutonomy;
+      return total;
+    },
+    batteriesUsedCapacity: function batteriesUsedCapacity() {
+      var _this14 = this;
+
+      var used = 0;
+      Object.keys(this.roomPlanes).forEach(function (element) {
+        var plane = _this14.roomPlanes[element];
+        used += _this14.chargeRealPower(plane);
+      });
+      return used;
+    },
+    batteriesAvailableCapacity: function batteriesAvailableCapacity() {
+      var _this15 = this;
 
       var original = 10000000;
       var available = original;
+      var availableA = original;
+      var availableB = original;
 
-      if (this.room.current_room_delegation) {
-        var planes = this.room.current_room_delegation.plane_delegation_type.planes;
-        Object.keys(planes).forEach(function (element) {
-          var plane = planes[element];
+      if (this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type_id) {
+        Object.keys(this.roomPlanes).forEach(function (item) {
+          var plane = _this15.roomPlanes[item];
 
-          if (available > _this13.availableBatteryCapacityPlane(plane)) {
-            available = _this13.availableBatteryCapacityPlane(plane);
+          switch (_this15.room.current_room_delegation.plane_delegation_type_id) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+              available = _this15.availableBatteryCapacityPlane(plane);
+              break;
+
+            case 5:
+            case 6:
+              if (available > _this15.availableBatteryCapacityPlane(plane)) {
+                available = _this15.availableBatteryCapacityPlane(plane);
+              }
+
+              break;
+
+            case 7:
+              if (availableA > _this15.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                availableA = _this15.availableBatteryCapacityPlane(plane);
+              }
+
+              if (availableB > _this15.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                availableB = _this15.availableBatteryCapacityPlane(plane);
+              }
+
+              available = availableA + availableB;
+              break;
+
+            case 8:
+            default:
+              break;
           }
         });
-      }
 
-      var total = available == original ? 0 : available * 2;
-      return total;
-    }
-  }, _defineProperty(_computed, "batteriesAvailableCapacity", function batteriesAvailableCapacity() {
-    var _this14 = this;
-
-    var original = 10000000;
-    var available = original;
-    var availableA = original;
-    var availableB = original;
-
-    if (this.room.current_room_delegation) {
-      Object.keys(this.room.current_room_delegation.plane_delegation_type.planes).forEach(function (element) {
-        var plane = _this14.room.current_room_delegation.plane_delegation_type.planes[element];
-
-        switch (_this14.room.current_room_delegation.plane_delegation_type_id) {
+        switch (this.room.current_room_delegation.plane_delegation_type_id) {
           case 1:
           case 2:
           case 3:
           case 4:
-            available = _this14.availableBatteryCapacityPlane(plane);
+            available = available;
             break;
 
           case 5:
           case 6:
-            if (available > _this14.availableBatteryCapacityPlane(plane)) {
-              available = _this14.availableBatteryCapacityPlane(plane);
-            }
-
-            break;
-
           case 7:
-            if (availableA > _this14.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
-              availableA = _this14.availableBatteryCapacityPlane(plane);
-            }
-
-            if (availableB > _this14.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
-              availableB = _this14.availableBatteryCapacityPlane(plane);
-            }
-
-            available = availableA + availableB;
+            available = available * 2;
             break;
 
           case 8:
           default:
             break;
         }
-      });
-    }
+      }
 
-    available = available < original ? available * 2 : 0;
-    return available;
-  }), _defineProperty(_computed, "distributionTotalCapacity", function distributionTotalCapacity() {
-    return this.room.current_room_distribution ? this.room.current_room_distribution.total_capacity : 0;
-  }), _defineProperty(_computed, "distributionUsedCapacity", function distributionUsedCapacity() {
-    return this.room.current_room_distribution ? this.room.current_room_distribution.used_capacity : 0;
-  }), _defineProperty(_computed, "distributionAvailableCapacity", function distributionAvailableCapacity() {
-    return this.distributionTotalCapacity - this.distributionUsedCapacity;
-  }), _defineProperty(_computed, "totalSurface", function totalSurface() {
-    return this.room.current_room_surface ? this.room.current_room_surface.total_surface : 0;
-  }), _defineProperty(_computed, "usedSurface", function usedSurface() {
-    return this.room.current_room_surface ? this.room.current_room_surface.used_surface : 0;
-  }), _defineProperty(_computed, "totalAvailableSurface", function totalAvailableSurface() {
-    return this.totalSurface - this.usedSurface;
-  }), _computed),
-  created: function created() {},
-  mounted: function mounted() {
-    this.getJunctions();
-    this.getGeneratorSets();
+      available = available < original ? available : 0;
+      return available;
+    },
+    // #################### Climate
+    // ✅#################### Distribution
+    distributionTotalCapacity: function distributionTotalCapacity() {
+      return this.room.current_room_distribution ? this.room.current_room_distribution.total_capacity : 0;
+    },
+    distributionUsedCapacity: function distributionUsedCapacity() {
+      return this.room.current_room_distribution ? this.room.current_room_distribution.used_capacity : 0;
+    },
+    distributionAvailableCapacity: function distributionAvailableCapacity() {
+      return this.distributionTotalCapacity - this.distributionUsedCapacity;
+    },
+    // ✅#################### Surface
+    totalSurface: function totalSurface() {
+      return this.room.current_room_surface ? this.room.current_room_surface.total_surface : 0;
+    },
+    usedSurface: function usedSurface() {
+      return this.room.current_room_surface ? this.room.current_room_surface.used_surface : 0;
+    },
+    totalAvailableSurface: function totalAvailableSurface() {
+      return this.totalSurface - this.usedSurface;
+    }
   },
   methods: {
+    getRoomPlanes: function getRoomPlanes() {
+      var _this16 = this;
+
+      if (this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type_id) {
+        axios.get("/api/roomPlanes/".concat(this.room.id, "?api_token=").concat(this.user.api_token, "&plane_delegation_type_id=").concat(this.room.current_room_delegation.plane_type_id)).then(function (response) {
+          _this16.roomPlanes = response.data.planes;
+        })["catch"](function (error) {
+          console.log('Error al traer los datos de Empalmes: ' + error);
+        });
+      }
+    },
     getJunctions: function () {
       var _getJunctions = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this15 = this;
+        var _this17 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -588,7 +633,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context.next = 2;
                 return axios.get("/api/popJunctions/".concat(this.room.pop_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-                  _this15.junctions = response.data.junctions;
+                  _this17.junctions = response.data.junctions;
                 })["catch"](function (error) {
                   console.log('Error al traer los datos de Empalmes: ' + error);
                 });
@@ -611,7 +656,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _getGeneratorSets = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this16 = this;
+        var _this18 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -619,8 +664,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context2.next = 2;
                 return axios.get("/api/generatorSets/".concat(this.room.pop_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
-                  _this16.generatorSets = response.data.generatorSets;
-                  _this16.canEditGeneratorGroups = response.data.can;
+                  _this18.generatorSets = response.data.generatorSets;
+                  _this18.canEditGeneratorGroups = response.data.can;
                 })["catch"](function (error) {
                   console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
                 });
@@ -781,7 +826,8 @@ var render = function() {
           staticStyle: {
             padding: "8px",
             border: "1px solid #aaa",
-            "border-radius": "15px"
+            "border-radius": "15px",
+            position: "relative"
           }
         },
         [
@@ -860,64 +906,73 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "level", staticStyle: { padding: "4px" } }, [
-            _c("div", { staticClass: "level-item" }, [
-              _c(
-                "div",
-                {},
-                [
-                  _c("font-awesome-icon", {
-                    class:
-                      _vm.totalAvailableEnergyCapacity <= 5
-                        ? "has-text-info"
-                        : _vm.totalAvailableEnergyCapacity > 5 &&
-                          _vm.totalAvailableEnergyCapacity <= 10
-                        ? "has-text-warning"
-                        : "has-text-success",
-                    attrs: { icon: "circle", size: "2x" }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "has-text-centered has-text-white" },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: " is-size-5 has-text-weight-bold" },
-                        [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(
-                                _vm._f("numeral")(
-                                  _vm.canViewClimate
-                                    ? _vm.totalAvailableEnergyCapacity
-                                    : Math.min(
-                                        _vm.totalAvailableEnergyCapacity,
-                                        _vm.totalAvailableClimateCapacity
-                                      ),
-                                  "0,0.0"
-                                )
-                              ) +
-                              "\n                                "
-                          ),
-                          _c(
-                            "span",
-                            { staticClass: "is-size-6 has-text-weight-light" },
-                            [_vm._v("kW")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "p",
-                        { staticClass: "has-text-weight-light is-size-7" },
-                        [_vm._v("Disponibles")]
-                      )
-                    ]
-                  )
-                ],
-                1
-              )
-            ]),
+            _c(
+              "div",
+              {
+                staticClass: "level-item",
+                staticStyle: { position: "relative" }
+              },
+              [
+                _c(
+                  "div",
+                  {},
+                  [
+                    _c("font-awesome-icon", {
+                      class:
+                        _vm.totalAvailableEnergyCapacity <= 5
+                          ? "has-text-info"
+                          : _vm.totalAvailableEnergyCapacity > 5 &&
+                            _vm.totalAvailableEnergyCapacity <= 10
+                          ? "has-text-warning"
+                          : "has-text-success",
+                      attrs: { icon: "circle", size: "2x" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "has-text-centered has-text-white" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: " is-size-5 has-text-weight-bold" },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm._f("numeral")(
+                                    _vm.canViewClimate
+                                      ? _vm.totalAvailableEnergyCapacity
+                                      : Math.min(
+                                          _vm.totalAvailableEnergyCapacity,
+                                          _vm.totalAvailableClimateCapacity
+                                        ),
+                                    "0,0.0"
+                                  )
+                                ) +
+                                "\n                                "
+                            ),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "is-size-6 has-text-weight-light"
+                              },
+                              [_vm._v("kW")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          { staticClass: "has-text-weight-light is-size-7" },
+                          [_vm._v("Disponibles")]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]
+            ),
             _vm._v(" "),
             _vm.canViewClimate
               ? _c("div", { staticClass: "level-item" }, [

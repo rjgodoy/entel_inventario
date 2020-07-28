@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\Infraestructura;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Http\Resources\Transformer as TransformerResource;
-use App\Models\Transformer;
-
-class TransformerController extends Controller
+class BatteryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,8 +36,7 @@ class TransformerController extends Controller
      */
     public function show($id)
     {
-        $transformers = Transformer::with('phase_type', 'transformer_type', 'electric_line')->where('pop_id', $id)->get();
-        return new TransformerResource($transformers);
+        //
     }
 
     /**
@@ -52,13 +48,7 @@ class TransformerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $transformer = Transformer::find($id);
-
-        $transformer->update([
-            'electric_line_id' => $request->electric_line_id
-        ]);
-
-        return;
+        //
     }
 
     /**

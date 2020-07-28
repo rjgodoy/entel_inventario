@@ -9,6 +9,8 @@
 
                 <power-rectifier 
                     :powerRectifier="powerRectifier"
+                    :canEdit="canEdit"
+                    :user="user"
                     />
 
             </div>

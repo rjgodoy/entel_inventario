@@ -85,11 +85,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    GeneratorSet: function GeneratorSet() {
-      return __webpack_require__.e(/*! import() | chunks/pop/power/generatorSet */ "chunks/pop/power/generatorSet").then(__webpack_require__.bind(null, /*! ../../../pop/power/GeneratorSet */ "./resources/js/components/pop/power/GeneratorSet.vue"));
-    }
-  },
+  components: {},
   props: ['canEdit', 'sala', 'user'],
   data: function data() {
     return {
@@ -180,7 +176,7 @@ var render = function() {
                           [
                             _vm._v(
                               _vm._s(
-                                _vm._f("numeral")(_vm.newTotalCapacity, 0, 0)
+                                _vm._f("numeral")(_vm.newTotalCapacity, "0,0.0")
                               ) + " "
                             ),
                             _c("span", { staticClass: "is-size-6" }, [
@@ -224,7 +220,7 @@ var render = function() {
                           [
                             _vm._v(
                               _vm._s(
-                                _vm._f("numeral")(_vm.newUsedCapacity, 0, 0)
+                                _vm._f("numeral")(_vm.newUsedCapacity, "0,0.0")
                               ) + " "
                             ),
                             _c("span", { staticClass: "is-size-6" }, [
@@ -265,7 +261,7 @@ var render = function() {
                       _vm._v(
                         "\n                                " +
                           _vm._s(
-                            _vm._f("numeral")(_vm.availableCapacity, 0, 0)
+                            _vm._f("numeral")(_vm.availableCapacity, "0,0.0")
                           ) +
                           " "
                       ),

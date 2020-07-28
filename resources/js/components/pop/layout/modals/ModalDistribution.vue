@@ -30,7 +30,7 @@
                         <div class="level-item">
                             <div class="has-text-centered">
                                 <div class="is-size-6">Capacidad Total</div>
-                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">{{ newTotalCapacity | numeral(0,0) }} <span class="is-size-6">kW</span></div>
+                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">{{ newTotalCapacity | numeral('0,0.0') }} <span class="is-size-6">kW</span></div>
                                 <b-input v-if="isEditMode" type="number" class="has-text-weight-bold is-size-5" v-model="newTotalCapacity"/>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                         <div class="level-item">
                             <div class="has-text-centered">
                                 <div class="is-size-6">Capacidad Usada</div>
-                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">{{ newUsedCapacity | numeral(0,0) }} <span class="is-size-6">kW</span></div>
+                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">{{ newUsedCapacity | numeral('0,0.0') }} <span class="is-size-6">kW</span></div>
                                 <b-input v-if="isEditMode" type="number" class="has-text-weight-bold is-size-5" v-model="newUsedCapacity"/>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             <div class="has-text-centered">
                                 <div class="is-size-6">Capacidad Disponible</div>
                                 <div class="has-text-weight-semibold is-size-5">
-                                    {{ availableCapacity | numeral(0,0) }} <span class="is-size-6">kW</span>
+                                    {{ availableCapacity | numeral('0,0.0') }} <span class="is-size-6">kW</span>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,6 @@
 <script>    
     export default {
         components: {
-            GeneratorSet: () => import(/* webpackChunkName: "chunks/pop/power/generatorSet"*/'../../../pop/power/GeneratorSet')
         },
         props : [
             'canEdit',

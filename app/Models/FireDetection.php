@@ -21,8 +21,8 @@ class FireDetection extends Model
         return $this->belongsTo(FireDetectionType::class);
     }
 
-    public function fire_extintion_type() 
+    public function fire_extinction_type() 
     {
-        return $this->belongsTo(FireExtintionType::class);
+        return $this->belongsTo(FireExtinctionType::class);
     }
 }

@@ -2,16 +2,16 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class PowerRectifierCollection extends ResourceCollection
+class JunctionType extends JsonResource
 {
     /**
      * The "data" wrapper that should be applied.
      *
      * @var string
      */
-    public static $wrap = 'powerRectifiers';
+    public static $wrap = 'junctionType';
 
     /**
      * Indicates if the resource's collection keys should be preserved.
@@ -19,9 +19,9 @@ class PowerRectifierCollection extends ResourceCollection
      * @var bool
      */
     public $preserveKeys = true;
-    
+
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array

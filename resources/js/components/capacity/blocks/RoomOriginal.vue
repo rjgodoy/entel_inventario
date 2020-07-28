@@ -258,7 +258,7 @@
                                             <div class="has-text-weight-normal is-size-7">Detección</div>
                                         </div>
                                         <div class="field">
-                                            <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
+                                            <div class="has-text-weight-bold is-size-6">{{ extinctionType }}</div>
                                             <div class="has-text-weight-normal is-size-7">Extinción</div>
                                         </div>
                                     </div>
@@ -272,7 +272,7 @@
                                             <div class="has-text-weight-normal is-size-7">Cámara</div>
                                         </div>
                                         <div class="field">
-                                            <div class="has-text-weight-bold is-size-6">{{ extintionType }}</div>
+                                            <div class="has-text-weight-bold is-size-6">{{ extinctionType }}</div>
                                             <div class="has-text-weight-normal is-size-7">Gestión Remota</div>
                                         </div>
                                     </div> -->
@@ -554,8 +554,8 @@
                 return this.sala.fire_detections ? this.sala.fire_detections[0].fire_detection_type.type : 'No tiene'
             },
 
-            extintionType() {
-                return this.sala.fire_detections && this.sala.fire_detections[0].fire_extintion_type ? this.sala.fire_detections[0].fire_extintion_type.type : 'No tiene'
+            extinctionType() {
+                return this.sala.fire_detections && this.sala.fire_detections[0].fire_extinction_type ? this.sala.fire_detections[0].fire_extinction_type.type : 'No tiene'
             },
 
             canEditDistribution() {

@@ -83,6 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalJunction: function ModalJunction() {
@@ -199,7 +200,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    junctions: function junctions(val) {// console.log(val)
+    junctions: function junctions(val) {
+      var _this5 = this;
+
+      if (val.length) {
+        Object.keys(val).forEach(function (junction) {
+          if (_this5.junctionSelected && _this5.junctionSelected.id == val[junction].id) {
+            _this5.junctionSelected = val[junction];
+          }
+        });
+      }
     }
   },
   mounted: function mounted() {// console.log(this.generatorSets)
@@ -337,7 +347,8 @@ var render = function() {
                             _c(
                               "div",
                               {
-                                staticClass: "tile box is-shadowless",
+                                staticClass:
+                                  "tile box is-shadowless is-paddingless",
                                 staticStyle: { border: "solid 0.05rem black" }
                               },
                               [
@@ -482,39 +493,48 @@ var render = function() {
                     _c("div", { staticClass: "tile is-parent" }, [
                       _c(
                         "div",
-                        { staticClass: "columns tile is-parent" },
+                        { staticClass: "columns tile" },
                         _vm._l(_vm.junctions, function(junction) {
                           return _c(
-                            "a",
+                            "div",
                             {
                               key: junction.id,
-                              staticClass: "box tile is-child column",
-                              on: {
-                                click: function($event) {
-                                  _vm.isJunctionModalActive = true
-                                  _vm.junctionSelected = junction
-                                }
-                              }
+                              staticClass: "column tile is-parent"
                             },
                             [
-                              _c("div", {}, [
-                                _c("div", { staticClass: "columns" }, [
-                                  _c("div", { staticClass: "column" }, [
-                                    _c(
-                                      "div",
-                                      {
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "box tile is-child",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.isJunctionModalActive = true
+                                      _vm.junctionSelected = junction
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("div", {}, [
+                                    _c("div", { staticClass: "columns" }, [
+                                      _c("div", { staticClass: "column" }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "has-text-weight-semibold is-size-6"
+                                          },
+                                          [_vm._v("Empalme")]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", {
                                         staticClass:
-                                          "has-text-weight-semibold is-size-6"
-                                      },
-                                      [_vm._v("Empalme")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", {
-                                    staticClass: "column is-2 has-text-centered"
-                                  })
-                                ])
-                              ])
+                                          "column is-2 has-text-centered"
+                                      })
+                                    ])
+                                  ])
+                                ]
+                              )
                             ]
                           )
                         }),

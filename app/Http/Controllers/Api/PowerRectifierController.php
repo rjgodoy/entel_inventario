@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api\Infraestructura;
+namespace App\Http\Controllers\Api;
 
 use App\Exports\PowerRectifiersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PowerRectifier as PowerRectifierResource;
+use App\Http\Resources\PowerRectifierCollection;
+use App\Models\Plane;
 use App\Models\PowerRectifier;
+use App\Models\Room;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -182,6 +185,28 @@ class PowerRectifierController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function powerRectifiersWithoutRoom(Request $request, $pop_id)
+    {
+        $powerRectifiers = PowerRectifier::with(
+            'power_rectifier_type', 
+            'power_rectifier_modules', 
+            'plane.battery_banks.battery_bank_brand',
+            'plane.plane_type',
+            'power_rectifier_mode'
+        )
+        ->where('pop_id', $pop_id)
+        ->whereRaw('room_id IS NULL')
+        ->get();
+
+        return new PowerRectifierCollection($powerRectifiers);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -190,7 +215,44 @@ class PowerRectifierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->room_id && $request->plane_type_id) {
+            $room_id = $request->room_id;
+            $plane_type_id = $request->plane_type_id;
+
+            $powerR = PowerRectifier::where('room_id', $room_id)
+            ->whereHas('plane', function($q) use($plane_type_id) {
+                $q->where('plane_type_id', $plane_type_id);
+            })
+            ->first();
+
+            if($powerR) {
+                $plane_id = $powerR->plane_id;
+            } else {
+                $plane = Plane::create([
+                    'plane_type_id' => $request->plane_type_id
+                ]);
+                $plane_id = $plane->id;
+                $room = Room::find($room_id);
+                $room->planes()->attach($plane_id);
+            }
+
+            $powerRectifier = PowerRectifier::find($id);
+            $powerRectifier->update([
+                'room_id' => $room_id,
+                'plane_id' => $plane_id
+            ]);
+        }
+
+        if ($request->capacity) {
+            $powerRectifier = PowerRectifier::find($id);
+            if(!$powerRectifier->capacity || ($powerRectifier->capacity != $request->capacity)) {
+                $powerRectifier->update([
+                    'capacity' => $request->capacity
+                ]);
+            }
+        }
+
+        return $powerRectifier;
     }
 
     /**
@@ -201,7 +263,8 @@ class PowerRectifierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        PowerRectifier::find($id)->delete();
+        return 'deleted';
     }
 
     /**

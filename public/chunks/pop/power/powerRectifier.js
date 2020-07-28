@@ -102,16 +102,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['powerRectifier'],
+  props: ['powerRectifier', 'canEdit', 'user'],
   data: function data() {
-    return {};
+    return {
+      newPowerRectifierCapacity: this.powerRectifier.capacity ? this.powerRectifier.capacity : 0,
+      isEditMode: false
+    };
   },
   mounted: function mounted() {
-    console.log(this.powerRectifier);
+    console.log(this.canEdit);
   },
   computed: {
+    powerRectifierCapacity: function powerRectifierCapacity() {
+      return this.powerRectifier.capacity;
+    },
     powerRectfierModules: function powerRectfierModules() {
       return this.powerRectifier.power_rectifier_modules;
     },
@@ -128,7 +141,35 @@ __webpack_require__.r(__webpack_exports__);
       return totalCapacity;
     }
   },
-  methods: {}
+  methods: {
+    saveChanges: function saveChanges() {
+      var _this2 = this;
+
+      if (!this.isEditMode && this.powerRectifierCapacity != this.newPowerRectifierCapacity // this.usedCapacity != this.newUsedCapacity || 
+      // this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id ||
+      // this.generatorSet.generator_set_topology_type_id != this.topology_id ||
+      // this.generatorSet.generator_set_level_type_id != this.level_id ||
+      // this.currentGeneratorResponsableAreaId != this.responsable_area_id
+      ) {
+        var params = {
+          'api_token': this.user.api_token,
+          'user_id': this.user.id,
+          'capacity': parseFloat(this.newPowerRectifierCapacity) // 'used_capacity': parseFloat(this.newUsedCapacity),
+          // 'maintainer_id': this.maintainer_id,
+          // 'generator_set_responsable_area_id': this.responsable_area_id,
+          // 'generator_set_topology_type_id': this.topology_id,
+          // 'generator_set_level_type_id': this.level_id
+
+        }; // console.log(params)
+
+        axios.put("/api/powerRectifiers/".concat(this.powerRectifier.id), params).then(function (response) {
+          console.log(response.data);
+
+          _this2.$eventBus.$emit('power-rectifier-updated');
+        });
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -172,24 +213,32 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "has-text-weight-light is-size-7",
-                staticStyle: { "margin-top": "5px" }
-              },
-              [_vm._v("Modelo")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
-              _vm._v(
-                _vm._s(
-                  _vm.powerRectifier.power_rectifier_type
-                    ? _vm.powerRectifier.power_rectifier_type.model
-                    : "Sin información"
+            _vm.powerRectifier.power_rectifier_type.model
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "has-text-weight-light is-size-7",
+                    staticStyle: { "margin-top": "5px" }
+                  },
+                  [_vm._v("Modelo")]
                 )
-              )
-            ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.powerRectifier.power_rectifier_type.model
+              ? _c(
+                  "div",
+                  { staticClass: "has-text-weight-semibold is-size-6" },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm.powerRectifier.power_rectifier_type
+                          ? _vm.powerRectifier.power_rectifier_type.model
+                          : "Sin información"
+                      )
+                    )
+                  ]
+                )
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "column" }, [
@@ -231,34 +280,55 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "field" }, [
-          _c(
-            "div",
-            {
-              staticClass: "has-text-weight-light is-size-7",
-              staticStyle: { "margin-top": "5px" }
-            },
-            [_vm._v("Capacidad total")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
-            _vm._v(
-              "\n                        " +
-                _vm._s(
-                  _vm._f("numeral")(
-                    _vm.powerRectifier.capacity
-                      ? _vm.powerRectifier.capacity
-                      : "Sin información",
-                    "0,0.0"
-                  )
-                ) +
-                " "
+        _c(
+          "div",
+          { staticClass: "field" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "has-text-weight-light is-size-7",
+                staticStyle: { "margin-top": "5px" }
+              },
+              [_vm._v("Capacidad total")]
             ),
-            _vm.powerRectifier.capacity
-              ? _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
+            _vm._v(" "),
+            !_vm.isEditMode
+              ? _c(
+                  "div",
+                  { staticClass: "has-text-weight-semibold is-size-5" },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(
+                          _vm._f("numeral")(
+                            _vm.newPowerRectifierCapacity,
+                            "0,0.0"
+                          )
+                        ) +
+                        " "
+                    ),
+                    _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.isEditMode
+              ? _c("b-input", {
+                  staticClass: "has-text-weight-bold is-size-5",
+                  attrs: { type: "number" },
+                  model: {
+                    value: _vm.newPowerRectifierCapacity,
+                    callback: function($$v) {
+                      _vm.newPowerRectifierCapacity = $$v
+                    },
+                    expression: "newPowerRectifierCapacity"
+                  }
+                })
               : _vm._e()
-          ])
-        ])
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "column" }, [
@@ -293,7 +363,45 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm.canEdit
+      ? _c(
+          "div",
+          { staticClass: "field has-text-centered" },
+          [
+            _c(
+              "b-button",
+              {
+                attrs: {
+                  type: _vm.isEditMode ? "is-info" : "is-link is-outlined",
+                  size: "is-small"
+                },
+                on: {
+                  click: function($event) {
+                    _vm.isEditMode = !_vm.isEditMode
+                    _vm.saveChanges()
+                  }
+                }
+              },
+              [
+                _c("font-awesome-icon", { attrs: { icon: ["fas", "edit"] } }),
+                _vm._v(
+                  "\n                  " +
+                    _vm._s(
+                      _vm.isEditMode
+                        ? "Modo Edición"
+                        : "Editar parámetros de Grupo"
+                    ) +
+                    "\n            "
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

@@ -59,13 +59,13 @@ Vue.prototype.$eventBus = new Vue()
     Vue.use(VueGoogleMaps, {
         load: {
             key: 'AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE',
-            // libraries: 'places', // This is required if you use the Autocomplete plugin
+            libraries: 'places', // This is required if you use the Autocomplete plugin
             // libraries: 'places,drawing'
             // libraries: 'places,drawing,visualization'
             // (as you require)
 
             //// If you want to set the version, you can do so:
-            // v: '3.39',
+            v: '3.39',
         },
      
         // If you intend to programmatically custom event listener code

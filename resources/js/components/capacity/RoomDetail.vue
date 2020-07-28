@@ -623,8 +623,8 @@
             //     return this.room.fire_detections ? this.room.fire_detections[0].fire_detection_type.type : 'No tiene'
             // },
 
-            // extintionType() {
-            //     return this.room.fire_detections && this.room.fire_detections[0].fire_extintion_type ? this.room.fire_detections[0].fire_extintion_type.type : 'No tiene'
+            // extinctionType() {
+            //     return this.room.fire_detections && this.room.fire_detections[0].fire_extinction_type ? this.room.fire_detections[0].fire_extinction_type.type : 'No tiene'
             // },
 
             // canEditDistribution() {
@@ -751,16 +751,14 @@
             this.$eventBus.$on('room-data', this.getRoomData);
             this.$eventBus.$on('room-distribution', this.getRoomData);
             this.$eventBus.$on('room-surface', this.getRoomData);
+            this.$eventBus.$on('room-security', this.getRoomData);
             this.$eventBus.$on('change-room', this.getRoomData);
+            this.$eventBus.$on('new-power-rectifier', this.getRoomData)
+            this.$eventBus.$on('power-rectifier-updated', this.getRoomData)
         },
 
         mounted() {
             this.getRoomData()
-
-            // this.$emit('room-distribution', this.distribution);
-            // this.$emit('room-surface', this.surface);
-            // this.$emit('power-rectifier-data', this.powerRectifierData);
-            // this.$emit('battery-data', this.batteryData);
         },
 
         methods: {
@@ -1098,16 +1096,69 @@
             },
 
             availableCapacityBatteries(room) {
-                let available = 10000000
-                if (room.planes) {
-                    Object.keys(room.planes).forEach(element => {
-                        let plane = room.planes[element]
-                        if(available > this.availableBatteryCapacityPlane(plane)) {
-                            available = this.availableBatteryCapacityPlane(plane)
+                const original = 10000000
+                let available = original
+                let availableA = original
+                let availableB = original
+                if (room.planes && room.current_room_delegation) {
+                    // Object.keys(room.planes).forEach(element => {
+                    //     let plane = room.planes[element]
+                    //     if(available > this.availableBatteryCapacityPlane(plane)) {
+                    //         available = this.availableBatteryCapacityPlane(plane)
+                    //     }
+                    // })
+                    Object.keys(room.planes).forEach(item => {
+                        let plane = room.planes[item]
+                        
+                        switch(room.current_room_delegation.plane_delegation_type_id) {
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                                available = this.availableBatteryCapacityPlane(plane)
+                                break
+                            case 5:
+                            case 6:
+                                if(available > this.availableBatteryCapacityPlane(plane)) {
+                                    available = this.availableBatteryCapacityPlane(plane)
+                                }
+                                break
+                            case 7:
+                                if(availableA > this.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                                    availableA = this.availableBatteryCapacityPlane(plane)
+                                } 
+
+                                if(availableB > this.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                                    availableB = this.availableBatteryCapacityPlane(plane)
+                                }
+                                available = availableA + availableB
+                                break
+                            case 8:
+                            default:
+                                break
                         }
                     })
+                
+
+                    switch(room.current_room_delegation.plane_delegation_type_id) {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            available = available
+                            break
+                        case 5:
+                        case 6:
+                        case 7:
+                            available = available * 2
+                            break
+                        case 8:
+                        default:
+                            break
+                    }
                 }
-                let total = available != 10000000 ? available * 2 : 0
+
+                let total = available != 10000000 ? available : 0
                 this.availableBatteryCapacity = total
                 return total
             },  
@@ -1127,7 +1178,10 @@
             this.$eventBus.$off('room-data');
             this.$eventBus.$off('room-distribution');
             this.$eventBus.$off('room-surface');
+            this.$eventBus.$off('room-security');
             this.$eventBus.$off('change-room');
+            this.$eventBus.$off('new-power-rectifier')
+            this.$eventBus.$on('power-rectifier-updated')
         }
     }
 </script>

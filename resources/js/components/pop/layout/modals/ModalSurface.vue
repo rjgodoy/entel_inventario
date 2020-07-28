@@ -58,7 +58,6 @@
 <script>    
     export default {
         components: {
-            GeneratorSet: () => import(/* webpackChunkName: "chunks/pop/power/generatorSet"*/'../../../pop/power/GeneratorSet')
         },
         props : [
             'canEdit',

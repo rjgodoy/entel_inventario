@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/pop/power/powerRectifier */ "chunks/pop/power/powerRectifier").then(__webpack_require__.bind(null, /*! ../../../pop/power/PowerRectifier */ "./resources/js/components/pop/power/PowerRectifier.vue"));
     }
   },
-  props: ['pop', 'can', 'powerRectifier', 'user'],
+  props: ['pop', 'canEdit', 'powerRectifier', 'user'],
   data: function data() {
     return {};
   },
@@ -79,7 +79,7 @@ var render = function() {
             attrs: {
               powerRectifier: _vm.powerRectifier,
               pop: _vm.pop,
-              can: _vm.can,
+              canEdit: _vm.canEdit,
               user: _vm.user
             }
           })

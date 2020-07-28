@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FireExtintionType extends Model
+class FireExtinctionType extends Model
 {
     public function fire_detections() 
     {

@@ -10,6 +10,7 @@
     "/chunks/capacity/blocks/generator.js": "/chunks/capacity/blocks/generator.js",
     "/chunks/capacity/blocks/junction.js": "/chunks/capacity/blocks/junction.js",
     "/chunks/capacity/blocks/room.js": "/chunks/capacity/blocks/room.js",
+    "/chunks/capacity/blocks/solarPanels.js": "/chunks/capacity/blocks/solarPanels.js",
     "/chunks/capacity/capacity.js": "/chunks/capacity/capacity.js",
     "/chunks/capacity/layout.js": "/chunks/capacity/layout.js",
     "/chunks/capacity/modals/calculator.js": "/chunks/capacity/modals/calculator.js",
@@ -91,7 +92,7 @@
     "/chunks/pops.js": "/chunks/pops.js",
     "/chunks/register.js": "/chunks/register.js",
     "/vendors~canvg.js": "/vendors~canvg.js",
-    "/vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~91d94541.js": "/vendors~canvg~chunks/capacity/capacity~chunks/capacity/layout~chunks/capacity/modals/capacity~chunks~91d94541.js",
+    "/vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764.js": "/vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764.js",
     "/vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop.js": "/vendors~chunks/admin/files~chunks/capacityPlanning~chunks/documents~chunks/eco~chunks/pop.js",
     "/vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload.js": "/vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload.js",
     "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity.js": "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity.js",
@@ -100,10 +101,9 @@
     "/vendors~pdfmake.js": "/vendors~pdfmake.js",
     "/vendors~xlsx.js": "/vendors~xlsx.js",
     "/xlsx.js": "/xlsx.js",
-    "/vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/capacity/room~cb5ca774.js": "/vendors~canvg~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/capacity/room~cb5ca774.js",
-    "/vendors~chunks/admin/files~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop.js": "/vendors~chunks/admin/files~chunks/capacity/modals/modalRoom~chunks/documents~chunks/eco~chunks/pop.js",
-    "/vendors~chunks/capacity/modals/capacity.js": "/vendors~chunks/capacity/modals/capacity.js",
-    "/vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart.js": "/vendors~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~chunks/dashboard/pretDataChart.js",
-    "/vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart.js": "/vendors~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart.js",
-    "/vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764.js": "/vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764.js"
+    "/chunks/pop/layout/modals/newAirConditioner.js": "/chunks/pop/layout/modals/newAirConditioner.js",
+    "/chunks/pop/layout/modals/newPowerRectifier.js": "/chunks/pop/layout/modals/newPowerRectifier.js",
+    "/vendors~chunks/capacity/capacity.js": "/vendors~chunks/capacity/capacity.js",
+    "/vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard/pretDataChart.js": "/vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard/pretDataChart.js",
+    "/vendors~chunks/capacity/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart.js": "/vendors~chunks/capacity/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart.js"
 }

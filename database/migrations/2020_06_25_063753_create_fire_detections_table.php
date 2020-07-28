@@ -17,7 +17,7 @@ class CreateFireDetectionsTable extends Migration
         //     $table->bigIncrements('id');
         //     $table->bigInteger('room_id')->unsigned();
         //     $table->bigInteger('fire_detection_type_id')->unsigned();
-        //     $table->bigInteger('extintion_type_id')->unsigned()->nullable();
+        //     $table->bigInteger('extinction_type_id')->unsigned()->nullable();
         //     $table->timestamps();
         // });
     }

@@ -444,6 +444,88 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalPowerRectifier: function ModalPowerRectifier() {
@@ -452,14 +534,23 @@ __webpack_require__.r(__webpack_exports__);
     ModalAirConditioner: function ModalAirConditioner() {
       return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/airConditioner */ "chunks/pop/layout/modals/airConditioner").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalAirConditioner */ "./resources/js/components/pop/layout/modals/ModalAirConditioner.vue"));
     },
+    ModalNewPowerRectifier: function ModalNewPowerRectifier() {
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newPowerRectifier */ "chunks/pop/layout/modals/newPowerRectifier").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalNewPowerRectifier */ "./resources/js/components/pop/layout/modals/ModalNewPowerRectifier.vue"));
+    },
+    ModalNewAirConditioner: function ModalNewAirConditioner() {
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newAirConditioner */ "chunks/pop/layout/modals/newAirConditioner").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalNewAirConditioner */ "./resources/js/components/pop/layout/modals/ModalNewAirConditioner.vue"));
+    },
     ModalDistribution: function ModalDistribution() {
       return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/distribution */ "chunks/pop/layout/modals/distribution").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalDistribution */ "./resources/js/components/pop/layout/modals/ModalDistribution.vue"));
     },
     ModalSurface: function ModalSurface() {
       return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/surface */ "chunks/pop/layout/modals/surface").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalSurface */ "./resources/js/components/pop/layout/modals/ModalSurface.vue"));
+    },
+    ModalSecurity: function ModalSecurity() {
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/surface */ "chunks/pop/layout/modals/surface").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalSecurity */ "./resources/js/components/pop/layout/modals/ModalSecurity.vue"));
     }
   },
-  props: ['room', 'sala', 'user', 'pop', 'isEditMode'],
+  props: ['room', 'sala', 'user', 'pop'],
   data: function data() {
     return {
       planes: Array,
@@ -474,6 +565,9 @@ __webpack_require__.r(__webpack_exports__);
       isAirConditionerModalActive: false,
       isDistributionModalActive: false,
       isSurfaceModalActive: false,
+      isSecurityModalActive: false,
+      isNewPowerRectifierModalActive: false,
+      isNewAirConditionerModalActive: false,
       totalPRCapacity: 0,
       usedPRCapacity: 0,
       availablePRCapacity: 0,
@@ -481,11 +575,15 @@ __webpack_require__.r(__webpack_exports__);
       usedBatteryCapacity: 0,
       availableBatteryCapacity: 0,
       planeTypeId: this.sala.current_room_delegation ? this.sala.current_room_delegation.plane_delegation_type_id : null,
-      planeTypes: []
+      planeDelegationTypes: [],
+      isEditMode: false
     };
   },
+  created: function created() {
+    this.$eventBus.$on('new-power-rectifier', this.getPlanes);
+  },
   mounted: function mounted() {
-    this.getPlaneTypes();
+    this.getPlaneDelegationTypes();
     this.getAirConditioners();
     this.getPlanes();
     this.$emit('room-distribution', this.distribution);
@@ -498,60 +596,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var type = 'Sin Información';
-
-      switch (this.planeTypeId) {
-        case 1:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this.planeTypes[item].id == 1 && type == 'Sin Información' ? _this.planeTypes[item].type : type;
-          });
-          break;
-
-        case 2:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this.planeTypes[item].id == 2 && type == 'Sin Información' ? _this.planeTypes[item].type : type;
-          });
-          break;
-
-        case 3:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this.planeTypes[item].id == 3 && type == 'Sin Información' ? _this.planeTypes[item].type : type;
-          });
-          break;
-
-        case 4:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this.planeTypes[item].id == 4 && type == 'Sin Información' ? _this.planeTypes[item].type : type;
-          });
-          break;
-
-        case 5:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this.planeTypes[item].id == 5 && type == 'Sin Información' ? _this.planeTypes[item].type : type;
-          });
-          break;
-
-        case 6:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this.planeTypes[item].id == 6 && type == 'Sin Información' ? _this.planeTypes[item].type : type;
-          });
-          break;
-
-        case 7:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this.planeTypes[item].id == 7 && type == 'Sin Información' ? _this.planeTypes[item].type : type;
-          });
-          break;
-
-        case 8:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this.planeTypes[item].id == 8 && type == 'Sin Información' ? _this.planeTypes[item].type : type;
-          });
-          break;
-
-        default:
-          break;
-      }
-
+      Object.keys(this.planeDelegationTypes).forEach(function (item) {
+        type = _this.planeDelegationTypes[item].id == _this.planeTypeId && type == 'Sin Información' ? _this.planeDelegationTypes[item].type : type;
+      });
       return type;
     },
     isRoomSelected: function isRoomSelected() {
@@ -579,10 +626,10 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     detectionType: function detectionType() {
-      return this.sala.fire_detections ? this.sala.fire_detections[0].fire_detection_type.type : 'No tiene';
+      return this.sala.current_fire_detection ? this.sala.current_fire_detection.fire_detection_type.type : 'No tiene';
     },
-    extintionType: function extintionType() {
-      return this.sala.fire_detections && this.sala.fire_detections[0].fire_extintion_type ? this.sala.fire_detections[0].fire_extintion_type.type : 'No tiene';
+    extinctionType: function extinctionType() {
+      return this.sala.current_fire_detection && this.sala.current_fire_detection.fire_extinction_type ? this.sala.current_fire_detection.fire_extinction_type.type : 'No tiene';
     },
     canEditDistribution: function canEditDistribution() {
       return this.canEditAirConditioners && this.canEditPowerRectifiers;
@@ -598,6 +645,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     availableSurface: function availableSurface() {
       return this.totalSurface - this.usedSurface;
+    },
+    canEditSecurity: function canEditSecurity() {
+      return this.canEditAirConditioners && this.canEditPowerRectifiers;
     },
     powerRectifierData: function powerRectifierData() {
       return {
@@ -651,11 +701,11 @@ __webpack_require__.r(__webpack_exports__);
 
       return powerRectifiersInRoom;
     },
-    getPlaneTypes: function getPlaneTypes() {
+    getPlaneDelegationTypes: function getPlaneDelegationTypes() {
       var _this2 = this;
 
-      axios.get("/api/planeTypes?api_token=".concat(this.user.api_token)).then(function (response) {
-        _this2.planeTypes = response.data.planes;
+      axios.get("/api/planeDelegationTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+        _this2.planeDelegationTypes = response.data.planes;
       });
     },
     hasPlanes: function hasPlanes(sala) {
@@ -848,9 +898,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Batteries
     totalCapacityBatteries: function totalCapacityBatteries(sala) {
+      var _this10 = this;
+
       var capacity = 0;
-      Object.keys(sala.planes).forEach(function (element) {
-        var plane = sala.planes[element];
+      Object.keys(this.planes).forEach(function (element) {
+        var plane = _this10.planes[element];
         Object.keys(plane.battery_banks).forEach(function (item) {
           capacity += plane.battery_banks[item].capacity;
         });
@@ -860,30 +912,87 @@ __webpack_require__.r(__webpack_exports__);
       return total;
     },
     usedCapacityBatteries: function usedCapacityBatteries(sala) {
-      var _this10 = this;
+      var _this11 = this;
 
       var used = 0;
       Object.keys(sala.planes).forEach(function (element) {
         var plane = sala.planes[element];
-        used += _this10.chargeRealPower(plane);
+        used += _this11.chargeRealPower(plane);
       });
       this.usedBatteryCapacity = used;
       return used;
     },
     availableCapacityBatteries: function availableCapacityBatteries(sala) {
-      var _this11 = this;
+      var _this12 = this;
 
-      var available = 10000000;
-      Object.keys(sala.planes).forEach(function (element) {
-        var plane = sala.planes[element];
+      var original = 10000000;
+      var available = original;
+      var availableA = original;
+      var availableB = original; // Object.keys(this.planes).forEach(element => {
+      //     let plane = this.planes[element]
+      //     if(available > this.availableBatteryCapacityPlane(plane)) {
+      //         available = this.availableBatteryCapacityPlane(plane)
+      //     }
+      // })
 
-        if (available > _this11.availableBatteryCapacityPlane(plane)) {
-          available = _this11.availableBatteryCapacityPlane(plane);
+      Object.keys(this.planes).forEach(function (item) {
+        var plane = _this12.planes[item];
+
+        switch (_this12.room.current_room_delegation.plane_delegation_type_id) {
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+            available = _this12.availableBatteryCapacityPlane(plane);
+            break;
+
+          case 5:
+          case 6:
+            if (available > _this12.availableBatteryCapacityPlane(plane)) {
+              available = _this12.availableBatteryCapacityPlane(plane);
+            }
+
+            break;
+
+          case 7:
+            if (availableA > _this12.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+              availableA = _this12.availableBatteryCapacityPlane(plane);
+            }
+
+            if (availableB > _this12.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+              availableB = _this12.availableBatteryCapacityPlane(plane);
+            }
+
+            available = availableA + availableB;
+            break;
+
+          case 8:
+          default:
+            break;
         }
       });
-      var total = available * 2;
-      this.availableBatteryCapacity = total;
-      return total;
+
+      switch (this.room.current_room_delegation.plane_delegation_type_id) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+          available = available;
+          break;
+
+        case 5:
+        case 6:
+        case 7:
+          available = available * 2;
+          break;
+
+        case 8:
+        default:
+          break;
+      }
+
+      this.availableBatteryCapacity = available;
+      return available;
     },
     updatePlaneType: function updatePlaneType(sala) {
       var params = {
@@ -901,7 +1010,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$eventBus.$emit('change-room');
     }
   },
-  beforeDestroy: function beforeDestroy() {// this.$emit('room-distribution');
+  beforeDestroy: function beforeDestroy() {
+    this.$eventBus.$off('new-power-rectifier');
   }
 });
 
@@ -916,7 +1026,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -1056,8 +1165,7 @@ __webpack_require__.r(__webpack_exports__);
       usedBatteryCapacity: 0,
       availableBatteryCapacity: 0,
       totalSurface: 0,
-      usedSurface: 0,
-      isEditMode: false
+      usedSurface: 0
     };
   },
   computed: {
@@ -1187,7 +1295,7 @@ var render = function() {
                               expression: "planeTypeId"
                             }
                           },
-                          _vm._l(_vm.planeTypes, function(option) {
+                          _vm._l(_vm.planeDelegationTypes, function(option) {
                             return _c(
                               "option",
                               {
@@ -1277,488 +1385,528 @@ var render = function() {
                     [
                       _vm.sala.planes.length
                         ? _c("div", { staticClass: "tile is-vertical" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "tile is-parent columns is-multiline"
-                              },
-                              _vm._l(_vm.planes, function(plane) {
-                                return _c(
-                                  "div",
-                                  {
-                                    key: plane.id,
-                                    staticClass: "tile is-parent column is-6"
-                                  },
-                                  [
-                                    _c(
-                                      "b-field",
-                                      {
-                                        staticClass: "tile",
-                                        attrs: {
-                                          label:
-                                            "PLANO " + plane.plane_type.type,
-                                          "label-position": "on-border",
-                                          "custom-class": !_vm.isCurrentSala(
-                                            _vm.sala
-                                          )
-                                            ? "has-text-grey-light"
-                                            : ""
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "tile is-parent box is-shadowless",
-                                            staticStyle: {
-                                              border: "solid 0.05rem black"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass: "tile is-vertical"
-                                              },
-                                              [
-                                                _vm.sala.power_rectifiers.length
-                                                  ? _c(
-                                                      "div",
-                                                      {
-                                                        staticClass:
-                                                          "tile is-parent"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "columns is-multiline tile"
-                                                          },
-                                                          _vm._l(
-                                                            _vm.sala
-                                                              .power_rectifiers,
-                                                            function(
-                                                              powerRectifier
-                                                            ) {
-                                                              return _vm.powerRectifierBelongsToPlane(
-                                                                powerRectifier,
-                                                                plane
-                                                              )
-                                                                ? _c(
-                                                                    "div",
-                                                                    {
-                                                                      key:
-                                                                        powerRectifier.id,
-                                                                      staticClass:
-                                                                        "tile is-child column is-6"
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "a",
-                                                                        {
-                                                                          staticClass:
-                                                                            "box",
-                                                                          on: {
-                                                                            click: function(
-                                                                              $event
-                                                                            ) {
-                                                                              _vm.isPowerRectifierModalActive = true
-                                                                              _vm.powerRectifierSelected = powerRectifier
+                            _c("div", { staticClass: "tile is-parent" }, [
+                              _c(
+                                "div",
+                                { staticClass: "tile columns is-multiline" },
+                                _vm._l(_vm.planes, function(plane) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: plane.id,
+                                      staticClass: "tile is-parent column is-6"
+                                    },
+                                    [
+                                      _c(
+                                        "b-field",
+                                        {
+                                          staticClass: "tile",
+                                          attrs: {
+                                            label:
+                                              "PLANO " + plane.plane_type.type,
+                                            "label-position": "on-border",
+                                            "custom-class": !_vm.isCurrentSala(
+                                              _vm.sala
+                                            )
+                                              ? "has-text-grey-light"
+                                              : ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "tile is-parent box is-shadowless",
+                                              staticStyle: {
+                                                border: "solid 0.05rem black"
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "tile is-vertical"
+                                                },
+                                                [
+                                                  _vm.sala.power_rectifiers
+                                                    .length
+                                                    ? _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "tile is-parent"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "columns is-multiline tile"
+                                                            },
+                                                            _vm._l(
+                                                              _vm.sala
+                                                                .power_rectifiers,
+                                                              function(
+                                                                powerRectifier
+                                                              ) {
+                                                                return _vm.powerRectifierBelongsToPlane(
+                                                                  powerRectifier,
+                                                                  plane
+                                                                )
+                                                                  ? _c(
+                                                                      "div",
+                                                                      {
+                                                                        key:
+                                                                          powerRectifier.id,
+                                                                        staticClass:
+                                                                          "tile is-child column is-6"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "a",
+                                                                          {
+                                                                            staticClass:
+                                                                              "box",
+                                                                            on: {
+                                                                              click: function(
+                                                                                $event
+                                                                              ) {
+                                                                                _vm.isPowerRectifierModalActive = true
+                                                                                _vm.powerRectifierSelected = powerRectifier
+                                                                              }
                                                                             }
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "div",
-                                                                            {
-                                                                              staticClass:
-                                                                                "field"
-                                                                            },
-                                                                            [
-                                                                              _c(
-                                                                                "div",
-                                                                                {
-                                                                                  staticClass:
-                                                                                    "has-text-weight-normal is-size-7"
-                                                                                },
-                                                                                [
-                                                                                  _vm._v(
-                                                                                    "PLANTA"
-                                                                                  )
-                                                                                ]
-                                                                              ),
-                                                                              _vm._v(
-                                                                                " "
-                                                                              ),
-                                                                              _c(
-                                                                                "span",
-                                                                                {
-                                                                                  staticClass:
-                                                                                    "has-text-weight-bold is-size-6"
-                                                                                },
-                                                                                [
-                                                                                  _vm._v(
-                                                                                    _vm._s(
-                                                                                      powerRectifier
-                                                                                        .power_rectifier_type
-                                                                                        .type
-                                                                                    ) +
-                                                                                      " " +
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "field"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "div",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "has-text-weight-normal is-size-7"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "PLANTA"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "span",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "has-text-weight-bold is-size-6"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
                                                                                       _vm._s(
                                                                                         powerRectifier
                                                                                           .power_rectifier_type
-                                                                                          .model
+                                                                                          .type
                                                                                       ) +
-                                                                                      "\n                                                                    "
-                                                                                  )
-                                                                                ]
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ]
+                                                                                        " " +
+                                                                                        _vm._s(
+                                                                                          powerRectifier
+                                                                                            .power_rectifier_type
+                                                                                            .model
+                                                                                        ) +
+                                                                                        "\n                                                                        "
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ]
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  : _vm._e()
+                                                              }
+                                                            ),
+                                                            0
+                                                          )
+                                                        ]
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "tile is-parent"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "box tile is-child"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Capacidad nominal: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.nominalCapacity(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                : _vm._e()
-                                                            }
+                                                              )
+                                                            ]
                                                           ),
-                                                          0
-                                                        )
-                                                      ]
-                                                    )
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "tile is-parent"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass:
-                                                          "box tile is-child"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Capacidad nominal: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.nominalCapacity(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Capacidad instalada: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.installedCapacity(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Capacidad instalada: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.installedCapacity(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Potencia real de carga: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.chargeRealPower(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Potencia real de carga: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.chargeRealPower(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Corriente recarga: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.rechargeCurrent(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Corriente recarga: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.rechargeCurrent(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Potencia recarga baterías: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.batteryRechargePower(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Potencia recarga baterías: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.batteryRechargePower(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Corriente total carga + baterías: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.totalCurrent(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Corriente total carga + baterías: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.totalCurrent(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Potencia total carga + baterías: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.totalPower(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Potencia total carga + baterías: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.totalPower(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Capacidad real: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.realPlaneCapacity(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Capacidad real: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.realPlaneCapacity(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Capacidad disponible: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.availablePlaneCapacity(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Capacidad disponible: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.availablePlaneCapacity(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Porcentaje Uso: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.usePercentPlane(
+                                                                        plane
+                                                                      ) * 100,
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Porcentaje Uso: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.usePercentPlane(
-                                                                      plane
-                                                                    ) * 100,
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Capacidad baterias: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.batteryTotalCapacityPlane(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Capacidad baterias: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.batteryTotalCapacityPlane(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Utilizado baterias: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.chargeRealPower(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Utilizado baterias: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.chargeRealPower(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "is-size-7"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Disponible baterias: " +
+                                                                  _vm._s(
+                                                                    _vm._f(
+                                                                      "numeral"
+                                                                    )(
+                                                                      _vm.availableBatteryCapacityPlane(
+                                                                        plane
+                                                                      ),
+                                                                      "0,0.0"
+                                                                    )
                                                                   )
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "is-size-7"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Disponible baterias: " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "numeral"
-                                                                  )(
-                                                                    _vm.availableBatteryCapacityPlane(
-                                                                      plane
-                                                                    ),
-                                                                    "0,0.0"
-                                                                  )
-                                                                )
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              }),
-                              0
-                            ),
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                }),
+                                0
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm.canEditPowerRectifiers
+                              ? _c("div", { staticClass: "tile is-parent" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "tile is-child has-text-centered"
+                                    },
+                                    [
+                                      _c(
+                                        "b-button",
+                                        {
+                                          staticClass:
+                                            "is-default has-text-weight-light has-text-grey is-size-7"
+                                        },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.isNewPowerRectifierModalActive = true
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Agregar Planta Rectificadora"
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ])
+                              : _vm._e(),
                             _vm._v(" "),
                             _c(
                               "div",
@@ -1925,10 +2073,32 @@ var render = function() {
                                       "has-text-centered has-text-weight-light has-text-grey is-size-7"
                                   },
                                   [
-                                    _vm._v(
-                                      "\n                                    NO TIENE PLANTAS RECTIFICADORAS\n                                "
+                                    _c("div", {}, [
+                                      _vm._v("NO TIENE PLANTAS RECTIFICADORAS")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "b-tag",
+                                      {
+                                        staticClass:
+                                          "is-default has-text-weight-light has-text-grey is-size-7"
+                                      },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            on: {
+                                              click: function($event) {
+                                                _vm.isNewPowerRectifierModalActive = true
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Agregar")]
+                                        )
+                                      ]
                                     )
-                                  ]
+                                  ],
+                                  1
                                 )
                               ])
                             ]
@@ -2054,10 +2224,32 @@ var render = function() {
                                         "has-text-centered has-text-weight-light has-text-grey is-size-7"
                                     },
                                     [
-                                      _vm._v(
-                                        "\n                                        NO TIENE EQUIPOS DE CLIMA\n                                    "
+                                      _c("div", {}, [
+                                        _vm._v("NO TIENE EQUIPOS DE CLIMA")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-tag",
+                                        {
+                                          staticClass:
+                                            "is-default has-text-weight-light has-text-grey is-size-7"
+                                        },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.isNewAirConditionerModalActive = true
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Agregar")]
+                                          )
+                                        ]
                                       )
-                                    ]
+                                    ],
+                                    1
                                   )
                                 ])
                               ]
@@ -2408,135 +2600,286 @@ var render = function() {
                   }
                 },
                 [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "tile box is-shadowless",
-                      staticStyle: { border: "solid 0.1rem #cccccc" }
-                    },
-                    [
-                      _vm.sala.fire_detections.length
-                        ? _c(
-                            "div",
-                            { staticClass: "tile is-parent is-vertical" },
-                            [
-                              _c(
-                                "b-field",
-                                {
-                                  staticClass: "tile",
-                                  attrs: {
-                                    label: "INCENDIO",
-                                    "label-position": "on-border",
-                                    "custom-class": !_vm.isCurrentSala(_vm.sala)
-                                      ? "has-text-grey-light"
-                                      : ""
-                                  }
-                                },
+                  !_vm.canEditSecurity
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "tile box is-shadowless",
+                          staticStyle: { border: "solid 0.1rem #cccccc" }
+                        },
+                        [
+                          _vm.sala.current_fire_detection
+                            ? _c(
+                                "div",
+                                { staticClass: "tile is-parent is-vertical" },
                                 [
                                   _c(
-                                    "div",
+                                    "b-field",
                                     {
-                                      staticClass:
-                                        "tile box is-child is-shadowless",
-                                      staticStyle: {
-                                        border: "solid 0.1rem #cccccc"
+                                      staticClass: "tile",
+                                      attrs: {
+                                        label: "INCENDIO",
+                                        "label-position": "on-border",
+                                        "custom-class": !_vm.isCurrentSala(
+                                          _vm.sala
+                                        )
+                                          ? "has-text-grey-light"
+                                          : ""
                                       }
                                     },
                                     [
-                                      _c("div", { staticClass: "level" }, [
-                                        _c(
-                                          "div",
-                                          { staticClass: "level-item" },
-                                          [
-                                            _c("div", {}, [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "has-text-weight-bold is-size-6"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(_vm.detectionType)
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "tile box is-child is-shadowless",
+                                          staticStyle: {
+                                            border: "solid 0.1rem #cccccc"
+                                          }
+                                        },
+                                        [
+                                          _c("div", { staticClass: "level" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "level-item" },
+                                              [
+                                                _c("div", {}, [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-weight-bold is-size-6"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.detectionType
+                                                        )
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-weight-normal is-size-7"
+                                                    },
+                                                    [_vm._v("Detección")]
                                                   )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "has-text-weight-normal is-size-7"
-                                                },
-                                                [_vm._v("Detección")]
-                                              )
-                                            ])
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "level-item" },
-                                          [
-                                            _c("div", {}, [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "has-text-weight-bold is-size-6"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(_vm.extintionType)
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "level-item" },
+                                              [
+                                                _c("div", {}, [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-weight-bold is-size-6"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.extinctionType
+                                                        )
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-weight-normal is-size-7"
+                                                    },
+                                                    [_vm._v("Extinción")]
                                                   )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "has-text-weight-normal is-size-7"
-                                                },
-                                                [_vm._v("Extinción")]
-                                              )
-                                            ])
-                                          ]
-                                        )
-                                      ])
+                                                ])
+                                              ]
+                                            )
+                                          ])
+                                        ]
+                                      )
                                     ]
                                   )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.sala.current_fire_detection
+                            ? _c(
+                                "div",
+                                { staticClass: "tile columns is-vcentered" },
+                                [
+                                  _c("div", { staticClass: "column" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-centered has-text-weight-light has-text-grey is-size-7"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    NO TIENE EQUIPOS DE SEGURIDAD\n                                "
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ]
                               )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      !_vm.sala.fire_detections.length
-                        ? _c(
-                            "div",
-                            { staticClass: "tile columns is-vcentered" },
-                            [
-                              _c("div", { staticClass: "column" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "has-text-centered has-text-weight-light has-text-grey is-size-7"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    NO TIENE EQUIPOS DE SEGURIDAD\n                                "
+                            : _vm._e()
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.canEditSecurity
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "tile box is-shadowless",
+                          staticStyle: { border: "solid 0.1rem #cccccc" },
+                          on: {
+                            click: function($event) {
+                              _vm.isSecurityModalActive = true
+                            }
+                          }
+                        },
+                        [
+                          _vm.sala.current_fire_detection
+                            ? _c(
+                                "div",
+                                { staticClass: "tile is-parent is-vertical" },
+                                [
+                                  _c(
+                                    "b-field",
+                                    {
+                                      staticClass: "tile",
+                                      attrs: {
+                                        label: "INCENDIO",
+                                        "label-position": "on-border",
+                                        "custom-class": !_vm.isCurrentSala(
+                                          _vm.sala
+                                        )
+                                          ? "has-text-grey-light"
+                                          : ""
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "tile box is-child is-shadowless",
+                                          staticStyle: {
+                                            border: "solid 0.1rem #cccccc"
+                                          }
+                                        },
+                                        [
+                                          _c("div", { staticClass: "level" }, [
+                                            _c(
+                                              "div",
+                                              { staticClass: "level-item" },
+                                              [
+                                                _c("div", {}, [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-weight-bold is-size-6"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.detectionType
+                                                        )
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-weight-normal is-size-7"
+                                                    },
+                                                    [_vm._v("Detección")]
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "level-item" },
+                                              [
+                                                _c("div", {}, [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-weight-bold is-size-6"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.extinctionType
+                                                        )
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "has-text-weight-normal is-size-7"
+                                                    },
+                                                    [_vm._v("Extinción")]
+                                                  )
+                                                ])
+                                              ]
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !_vm.sala.current_fire_detection
+                            ? _c(
+                                "div",
+                                { staticClass: "tile columns is-vcentered" },
+                                [
+                                  _c("div", { staticClass: "column" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-centered has-text-weight-light has-text-grey is-size-7"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    NO TIENE EQUIPOS DE SEGURIDAD\n                                "
+                                        )
+                                      ]
                                     )
-                                  ]
-                                )
-                              ])
-                            ]
-                          )
-                        : _vm._e()
-                    ]
-                  )
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    : _vm._e()
                 ]
               )
             ],
@@ -2613,7 +2956,12 @@ var render = function() {
                                                             [
                                                               _vm._v(
                                                                 _vm._s(
-                                                                  _vm.totalCapacity
+                                                                  _vm._f(
+                                                                    "numeral"
+                                                                  )(
+                                                                    _vm.totalCapacity,
+                                                                    "0,0.0"
+                                                                  )
                                                                 ) + " "
                                                               ),
                                                               _c(
@@ -2660,7 +3008,12 @@ var render = function() {
                                                             [
                                                               _vm._v(
                                                                 _vm._s(
-                                                                  _vm.usedCapacity
+                                                                  _vm._f(
+                                                                    "numeral"
+                                                                  )(
+                                                                    _vm.usedCapacity,
+                                                                    "0,0.0"
+                                                                  )
                                                                 ) + " "
                                                               ),
                                                               _c(
@@ -2707,7 +3060,12 @@ var render = function() {
                                                             [
                                                               _vm._v(
                                                                 _vm._s(
-                                                                  _vm.availableCapacity
+                                                                  _vm._f(
+                                                                    "numeral"
+                                                                  )(
+                                                                    _vm.availableCapacity,
+                                                                    "0,0.0"
+                                                                  )
                                                                 ) + " "
                                                               ),
                                                               _c(
@@ -2822,7 +3180,10 @@ var render = function() {
                                                       [
                                                         _vm._v(
                                                           _vm._s(
-                                                            _vm.totalCapacity
+                                                            _vm._f("numeral")(
+                                                              _vm.totalCapacity,
+                                                              "0,0.0"
+                                                            )
                                                           ) + " "
                                                         ),
                                                         _c(
@@ -2866,7 +3227,10 @@ var render = function() {
                                                       [
                                                         _vm._v(
                                                           _vm._s(
-                                                            _vm.usedCapacity
+                                                            _vm._f("numeral")(
+                                                              _vm.usedCapacity,
+                                                              "0,0.0"
+                                                            )
                                                           ) + " "
                                                         ),
                                                         _c(
@@ -2910,7 +3274,10 @@ var render = function() {
                                                       [
                                                         _vm._v(
                                                           _vm._s(
-                                                            _vm.availableCapacity
+                                                            _vm._f("numeral")(
+                                                              _vm.availableCapacity,
+                                                              "0,0.0"
+                                                            )
                                                           ) + " "
                                                         ),
                                                         _c(
@@ -3002,7 +3369,7 @@ var render = function() {
           _c("modal-power-rectifier", {
             attrs: {
               powerRectifier: _vm.powerRectifierSelected,
-              can: _vm.canEditPowerRectifiers,
+              canEdit: _vm.canEditPowerRectifiers,
               user: _vm.user
             }
           })
@@ -3064,6 +3431,82 @@ var render = function() {
           })
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isSecurityModalActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isSecurityModalActive = $event
+            }
+          }
+        },
+        [
+          _c("modal-security", {
+            attrs: {
+              sala: _vm.sala,
+              user: _vm.user,
+              canEdit: _vm.canEditSecurity
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isNewPowerRectifierModalActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isNewPowerRectifierModalActive = $event
+            }
+          }
+        },
+        [
+          _c("modal-new-power-rectifier", {
+            attrs: { room: _vm.room, rooms: _vm.pop.rooms, user: _vm.user }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isNewAirConditionerModalActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isNewAirConditionerModalActive = $event
+            }
+          }
+        },
+        [
+          _c("modal-new-air-conditioner", {
+            attrs: { room: _vm.room, user: _vm.user }
+          })
+        ],
+        1
       )
     ],
     1
@@ -3106,8 +3549,7 @@ var render = function() {
                     sala: sala,
                     room: _vm.room,
                     pop: _vm.pop,
-                    user: _vm.user,
-                    isEditMode: _vm.isEditMode
+                    user: _vm.user
                   },
                   on: {
                     "room-distribution": _vm.roomsDistribution,

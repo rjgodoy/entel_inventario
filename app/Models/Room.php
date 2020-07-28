@@ -53,6 +53,16 @@ class Room extends Model
     {
         return $this->hasMany(FireDetection::class);
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_fire_detection() 
+    {
+        return $this->hasOne(FireDetection::class)->latest();
+    }
     
     /**
      * The attributes that are mass assignable.

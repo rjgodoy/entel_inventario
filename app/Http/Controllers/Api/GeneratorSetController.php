@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Infraestructura;
+namespace App\Http\Controllers\Api;
 
 use App\Exports\GeneratorSetsExport;
 use App\Http\Controllers\Controller;
@@ -237,7 +237,10 @@ class GeneratorSetController extends Controller
     public function update(Request $request, $id)
     {
         $generatorSet = GeneratorSet::find($id);
-        if(($generatorSet->current_generator_set_capacity && $generatorSet->current_generator_set_capacity->prime_capacity != $request->prime_capacity) || ($generatorSet->current_generator_set_capacity && $generatorSet->current_generator_set_capacity->used_capacity != $request->used_capacity)) {
+        if(
+            (!$generatorSet->current_generator_set_capacity || ($generatorSet->current_generator_set_capacity && $generatorSet->current_generator_set_capacity->prime_capacity != $request->prime_capacity)) || 
+            (!$generatorSet->current_generator_set_capacity || ($generatorSet->current_generator_set_capacity && $generatorSet->current_generator_set_capacity->used_capacity != $request->used_capacity))
+        ) {
             GeneratorSetCapacity::create([
                 'generator_set_id' => $id,
                 'prime_capacity' => $request->prime_capacity,

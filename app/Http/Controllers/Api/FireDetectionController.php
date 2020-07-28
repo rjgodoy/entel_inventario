@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\Infraestructura;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\FireDetection;
 use Illuminate\Http\Request;
 
-class BatteryController extends Controller
+class FireDetectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +26,12 @@ class BatteryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newDistribution = FireDetection::create([
+            'room_id' => $request->room_id,
+            'fire_detection_type_id' => $request->fire_detection_type_id,
+            'fire_extinction_type_id' => $request->fire_extinction_type_id
+        ]);
+        return $newDistribution;
     }
 
     /**

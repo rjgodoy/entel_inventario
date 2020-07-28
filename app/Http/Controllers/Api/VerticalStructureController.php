@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Infraestructura;
+namespace App\Http\Controllers\Api;
 
 use App\Exports\VerticalStructuresExport;
 use App\Http\Controllers\Controller;

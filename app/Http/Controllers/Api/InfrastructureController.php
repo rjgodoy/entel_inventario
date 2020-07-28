@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Api\Infraestructura;
+namespace App\Http\Controllers\Api;
 
-use App\Exports\ElectricLinesExport;
+use App\Exports\InfrastructuresExport;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ElectricLine as ElectricLineResource;
-use App\Http\Resources\ElectricLineCollection;
-use App\Models\ElectricLine;
+use App\Http\Resources\Infrastructure as InfrastructureResource;
+use App\Models\Infrastructure;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
-class ElectricLineController extends Controller
+class InfrastructureController extends Controller
 {
     protected $seconds = 2592000;
-    
 
     /**
      * Display a listing of the resource.
@@ -31,41 +29,41 @@ class ElectricLineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function electricLineData($core)
+    public function infrastructureData($core)
     {
-        if (Cache::has('electricLinesData_core'.$core)) {
-            $electricLinesQuantity = Cache::get('electricLinesData_core'.$core);
+        if (Cache::has('infrastructuresData_core'.$core)) {
+            $infrastructuresQuantity = Cache::get('infrastructuresData_core'.$core);
         } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_core'.$core, $this->seconds, function () use ($core) {
+            $infrastructuresQuantity = Cache::remember('infrastructuresData_core'.$core, $this->seconds, function () use ($core) {
 
                 $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
-                $electricLinesQuantity = DB::select(DB::raw("
+                $infrastructuresQuantity = DB::select(DB::raw("
                     SELECT
                     @crm_id:=id AS id,
                     @crm:=nombre_crm AS nombre,
 
-                    @q_info:=(SELECT count(DISTINCT EL.pop_id) 
-                            FROM entel_g_redes_inventario.electric_lines EL 
-                            INNER JOIN entel_pops.pops P ON EL.pop_id = P.id
+                    @q_info:=(SELECT count(DISTINCT AC.pop_id) 
+                            FROM entel_g_redes_inventario.infrastructures AC 
+                            INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
                             $condition
                             ) AS q_info,
 
-                    @q_electric_lines:=(SELECT count(DISTINCT EL.id) 
-                            FROM entel_g_redes_inventario.electric_lines EL 
-                            INNER JOIN entel_pops.pops P ON EL.pop_id = P.id
+                    @q_infrastructures:=(SELECT count(DISTINCT AC.id) 
+                            FROM entel_g_redes_inventario.infrastructures AC 
+                            INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
                             $condition
-                            ) AS q_electric_lines
+                            ) AS q_infrastructures
 
                     FROM entel_pops.crms
                 "));
-                return $electricLinesQuantity;
+                return $infrastructuresQuantity;
             });
         }
-        return new ElectricLineResource($electricLinesQuantity);
+        return new InfrastructureResource($infrastructuresQuantity);
     }
 
     /**
@@ -73,40 +71,40 @@ class ElectricLineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function electricLineDataCrm($crm_id, $core)
+    public function infrastructureDataCrm($crm_id, $core)
     {
-        if (Cache::has('electricLinesData_crm'.$crm_id.'_core'.$core)) {
-            $electricLinesQuantity = Cache::get('electricLinesData_crm'.$crm_id.'_core'.$core);
+        if (Cache::has('infrastructuresData_crm'.$crm_id.'_core'.$core)) {
+            $infrastructuresQuantity = Cache::get('infrastructuresData_crm'.$crm_id.'_core'.$core);
         } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
+            $infrastructuresQuantity = Cache::remember('infrastructuresData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
 
                 $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
-                $electricLinesQuantity = DB::select(DB::raw("
+                $infrastructuresQuantity = DB::select(DB::raw("
                     SELECT
                     @zona_id:=id AS id,
                     @zona:=nombre_zona AS nombre,
 
-                    @q_info:=(SELECT count(DISTINCT EL.pop_id) 
-                            FROM entel_g_redes_inventario.electric_lines EL 
-                            INNER JOIN entel_pops.pops P ON EL.pop_id = P.id
+                    @q_info:=(SELECT count(DISTINCT AC.pop_id) 
+                            FROM entel_g_redes_inventario.infrastructures AC 
+                            INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
                             $condition
                             ) AS q_info,
 
-                    @q_electric_lines:=(SELECT count(DISTINCT EL.id) 
-                            FROM entel_g_redes_inventario.electric_lines EL 
-                            INNER JOIN entel_pops.pops P ON EL.pop_id = P.id
+                    @q_infrastructures:=(SELECT count(DISTINCT AC.id) 
+                            FROM entel_g_redes_inventario.infrastructures AC 
+                            INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
                             $condition
-                            ) AS q_electric_lines
+                            ) AS q_infrastructures
 
                     FROM entel_pops.zonas
                     WHERE crm_id = $crm_id
                 "));
-                return $electricLinesQuantity;
+                return $infrastructuresQuantity;
             });
         }
-        return new ElectricLineResource($electricLinesQuantity);
+        return new InfrastructureResource($infrastructuresQuantity);
     }
 
     /**
@@ -114,40 +112,40 @@ class ElectricLineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function electricLineDataZona($zona_id, $core)
+    public function infrastructureDataZona($zona_id, $core)
     {
-        if (Cache::has('electricLinesData_zona'.$zona_id.'_core'.$core)) {
-            $electricLinesQuantity = Cache::get('electricLinesData_zona'.$zona_id.'_core'.$core);
+        if (Cache::has('infrastructuresData_zona'.$zona_id.'_core'.$core)) {
+            $infrastructuresQuantity = Cache::get('infrastructuresData_zona'.$zona_id.'_core'.$core);
         } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
+            $infrastructuresQuantity = Cache::remember('infrastructuresData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
 
                 $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
-                $electricLinesQuantity = DB::select(DB::raw("
+                $infrastructuresQuantity = DB::select(DB::raw("
                     SELECT
                     @comuna_id:=id AS id,
                     @comuna:=nombre_comuna AS nombre,
 
-                    @q_info:=(SELECT count(DISTINCT EL.pop_id) 
-                            FROM entel_g_redes_inventario.electric_lines EL 
-                            INNER JOIN entel_pops.pops P ON EL.pop_id = P.id
+                    @q_info:=(SELECT count(DISTINCT AC.pop_id) 
+                            FROM entel_g_redes_inventario.infrastructures AC 
+                            INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
                             $condition
                             WHERE P.comuna_id = @comuna_id
                             ) AS q_info,
 
-                    @q_electric_lines:=(SELECT count(DISTINCT EL.id) 
-                            FROM entel_g_redes_inventario.electric_lines EL
-                            INNER JOIN entel_pops.pops P ON EL.pop_id = P.id 
+                    @q_infrastructures:=(SELECT count(DISTINCT AC.id) 
+                            FROM entel_g_redes_inventario.infrastructures AC
+                            INNER JOIN entel_pops.pops P ON AC.pop_id = P.id 
                             $condition
                             WHERE P.comuna_id = @comuna_id
-                            ) AS q_electric_lines
+                            ) AS q_infrastructures
 
                     FROM entel_pops.comunas
                     WHERE zona_id = $zona_id
                 "));
-                return $electricLinesQuantity;
+                return $infrastructuresQuantity;
             });
         }
-        return new ElectricLineResource($electricLinesQuantity);
+        return new InfrastructureResource($infrastructuresQuantity);
     }
 
     /**
@@ -169,8 +167,8 @@ class ElectricLineController extends Controller
      */
     public function show($id)
     {
-        $electricLines = ElectricLine::with('electric_line_type', 'phase_type', 'transformers')->where('pop_id', $id)->get();
-        return new ElectricLineResource($electricLines);
+        $infrastructure = Infrastructure::with('infrastructure_type')->where('pop_id', $id)->get();
+        return new InfrastructureResource($infrastructure);
     }
 
     /**
@@ -204,6 +202,6 @@ class ElectricLineController extends Controller
      */
     public function export(Request $request)
     {
-        return (new ElectricLinesExport($request))->download('electric_lines.xlsx');
+        return (new InfrastructuresExport($request))->download('infraestructuras.xlsx');
     }
 }

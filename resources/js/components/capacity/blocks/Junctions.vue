@@ -6,7 +6,7 @@
                     <div class="tile is-vertical">
                         <div class="tile is-parent">
                             <b-field label="CAPACIDADES" label-position="on-border" class="tile">
-                                <div class="tile box is-shadowless" style="border: solid 0.05rem black">
+                                <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black">
 
                                     <div class="tile">
                                         <div class="tile is-parent">
@@ -33,25 +33,26 @@
                             </b-field>
                         </div>
                         <div class="tile is-parent">
-                            <div class="columns tile is-parent">
-                                <a class="box tile is-child column" 
-                                    v-for="junction in junctions" :key="junction.id"
-                                    @click="isJunctionModalActive = true; junctionSelected = junction">
-                                    <div class="">
-                                        <div class="columns">
-                                            <div class="column">
-                                                <div class="has-text-weight-semibold is-size-6">Empalme</div>
-                                            </div>
-                                            <div class="column is-2 has-text-centered">
-                                                <!-- <font-awesome-icon 
-                                                    :icon="['far', 'check-circle']"
-                                                    size="2x"
-                                                    class="has-text-success"
-                                                /> -->
-                                            </div>
-                                        </div>   
-                                    </div>
-                                </a>
+                            <div class="columns tile">
+                                <div class="column tile is-parent" v-for="junction in junctions" :key="junction.id">
+                                    <a class="box tile is-child" 
+                                        @click="isJunctionModalActive = true; junctionSelected = junction">
+                                        <div class="">
+                                            <div class="columns">
+                                                <div class="column">
+                                                    <div class="has-text-weight-semibold is-size-6">Empalme</div>
+                                                </div>
+                                                <div class="column is-2 has-text-centered">
+                                                    <!-- <font-awesome-icon 
+                                                        :icon="['far', 'check-circle']"
+                                                        size="2x"
+                                                        class="has-text-success"
+                                                    /> -->
+                                                </div>
+                                            </div>   
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -191,7 +192,13 @@
 
         watch: {
             junctions(val) {
-                // console.log(val)
+                if (val.length) {
+                    Object.keys(val).forEach(junction => {
+                        if (this.junctionSelected && this.junctionSelected.id == val[junction].id) {
+                            this.junctionSelected = val[junction]
+                        }
+                    }) 
+                }               
             }
         },
         

@@ -469,14 +469,15 @@ __webpack_require__.r(__webpack_exports__);
       clientNumber: this.junction.client_number,
       junctionNumber: this.junction.junction_number,
       useFactor: this.junction.use_factor,
-      punctualConsumption: this.junction.latest_measurement.punctual_consumption
+      punctualConsumption: this.junction.latest_measurement ? this.junction.latest_measurement.punctual_consumption : 0
     };
   },
   watch: {
-    junction: function junction(val) {}
+    junction: function junction(val) {
+      this.junctionTypeId = val.junction_type_id, this.junctionConnectionId = val.junction_connection_id, this.clientNumber = val.client_number, this.junctionNumber = val.junction_number, this.useFactor = val.use_factor, this.punctualConsumption = val.latest_measurement ? val.latest_measurement.punctual_consumption : 0;
+    }
   },
   mounted: function mounted() {
-    console.log('hello!!');
     this.getJunctionTypes();
     this.getJunctionConnections();
   },
@@ -666,7 +667,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.get("/api/junctionTypes?api_token=".concat(this.user.api_token)).then(function (response) {
-        _this3.junctionTypes = response.data.junctions;
+        _this3.junctionTypes = response.data.junctionTypes;
       });
     },
     getJunctionConnections: function getJunctionConnections() {
@@ -970,7 +971,7 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                                    " +
-                                _vm._s(_vm.junction.use_factor) +
+                                _vm._s(_vm.useFactor) +
                                 "\n                                "
                             )
                           ]
@@ -1038,7 +1039,8 @@ var render = function() {
                                   _c(
                                     "div",
                                     {
-                                      staticClass: "tile box is-shadowless",
+                                      staticClass:
+                                        "tile box is-shadowless is-paddingless",
                                       staticStyle: {
                                         border: "solid 0.1rem #cccccc"
                                       }

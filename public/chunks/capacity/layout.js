@@ -64,6 +64,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -72,11 +80,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    MiniJunctions: function MiniJunctions() {
+    Junctions: function Junctions() {
       return __webpack_require__.e(/*! import() | chunks/capacity/blocks/junction */ "chunks/capacity/blocks/junction").then(__webpack_require__.bind(null, /*! ../capacity/blocks/Junctions */ "./resources/js/components/capacity/blocks/Junctions.vue"));
     },
-    MiniGeneratorSets: function MiniGeneratorSets() {
+    GeneratorSets: function GeneratorSets() {
       return __webpack_require__.e(/*! import() | chunks/capacity/blocks/generator */ "chunks/capacity/blocks/generator").then(__webpack_require__.bind(null, /*! ../capacity/blocks/GeneratorSets */ "./resources/js/components/capacity/blocks/GeneratorSets.vue"));
+    },
+    SolarPanels: function SolarPanels() {
+      return __webpack_require__.e(/*! import() | chunks/capacity/blocks/solarPanels */ "chunks/capacity/blocks/solarPanels").then(__webpack_require__.bind(null, /*! ../capacity/blocks/SolarPanels */ "./resources/js/components/capacity/blocks/SolarPanels.vue"));
     },
     MiniRooms: function MiniRooms() {
       return __webpack_require__.e(/*! import() | chunks/capacity/blocks/room */ "chunks/capacity/blocks/room").then(__webpack_require__.bind(null, /*! ../capacity/blocks/Rooms */ "./resources/js/components/capacity/blocks/Rooms.vue"));
@@ -226,9 +237,9 @@ var render = function() {
           _c("div", { staticClass: "tile" }, [
             _c(
               "div",
-              { staticClass: "is-5 tile" },
+              { staticClass: "tile is-4" },
               [
-                _c("MiniJunctions", {
+                _c("Junctions", {
                   attrs: {
                     pop: _vm.pop,
                     junctions: _vm.junctions,
@@ -245,7 +256,7 @@ var render = function() {
                   "div",
                   { staticClass: "tile" },
                   [
-                    _c("MiniGeneratorSets", {
+                    _c("GeneratorSets", {
                       attrs: {
                         pop: _vm.pop,
                         generatorSets: _vm.generatorSets,
@@ -256,7 +267,23 @@ var render = function() {
                   ],
                   1
                 )
-              : _vm._e()
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tile is-2" },
+              [
+                _c("SolarPanels", {
+                  attrs: {
+                    pop: _vm.pop,
+                    junctions: _vm.junctions,
+                    can: _vm.canEditJunctions,
+                    user: _vm.user
+                  }
+                })
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "tile" }, [

@@ -179,18 +179,6 @@ class JunctionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function junctionTypes()
-    {
-        $junctionTypes = JunctionType::all();
-        return new JunctionCollection($junctionTypes);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function junctionConnections()
     {
         $junctionConnections = JunctionConnection::all();

@@ -7,8 +7,8 @@
         <div class="tile is-ancestor" style="padding-top: 24px;">
             <div class="tile is-vertical">
                 <div class="tile">
-                    <div class="is-5 tile">
-                        <MiniJunctions 
+                    <div class="tile is-4">
+                        <Junctions 
                             :pop="pop"
                             :junctions="junctions"
                             :can="canEditJunctions"
@@ -16,10 +16,18 @@
                         />
                     </div>
                     <div class="tile" v-if="generatorSets.length">
-                        <MiniGeneratorSets 
+                        <GeneratorSets 
                             :pop="pop"
                             :generatorSets="generatorSets"
                             :can="canEditGeneratorGroups"
+                            :user="user"
+                        />
+                    </div>
+                    <div class="tile is-2">
+                        <SolarPanels 
+                            :pop="pop"
+                            :junctions="junctions"
+                            :can="canEditJunctions"
                             :user="user"
                         />
                     </div>
@@ -51,8 +59,9 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
     // import LeaderLine from 'leader-line'
     export default {
         components: {
-            MiniJunctions: () => import(/* webpackChunkName: "chunks/capacity/blocks/junction"*/'../capacity/blocks/Junctions'),
-            MiniGeneratorSets: () => import(/* webpackChunkName: "chunks/capacity/blocks/generator"*/'../capacity/blocks/GeneratorSets'),
+            Junctions: () => import(/* webpackChunkName: "chunks/capacity/blocks/junction"*/'../capacity/blocks/Junctions'),
+            GeneratorSets: () => import(/* webpackChunkName: "chunks/capacity/blocks/generator"*/'../capacity/blocks/GeneratorSets'),
+            SolarPanels: () => import(/* webpackChunkName: "chunks/capacity/blocks/solarPanels"*/'../capacity/blocks/SolarPanels'),
             MiniRooms: () => import(/* webpackChunkName: "chunks/capacity/blocks/room"*/'../capacity/blocks/Rooms'),
         },
 

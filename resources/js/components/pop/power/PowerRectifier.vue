@@ -7,8 +7,8 @@
                         <div class="column">
                             <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Marca</div>
                             <div class="has-text-weight-semibold is-size-5">{{ powerRectifier.power_rectifier_type ? powerRectifier.power_rectifier_type.type : 'Sin información' }}</div>
-                            <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Modelo</div>
-                            <div class="has-text-weight-semibold is-size-6">{{ powerRectifier.power_rectifier_type ? powerRectifier.power_rectifier_type.model : 'Sin información' }}</div>
+                            <div class="has-text-weight-light is-size-7" style="margin-top: 5px;" v-if="powerRectifier.power_rectifier_type.model">Modelo</div>
+                            <div class="has-text-weight-semibold is-size-6" v-if="powerRectifier.power_rectifier_type.model">{{ powerRectifier.power_rectifier_type ? powerRectifier.power_rectifier_type.model : 'Sin información' }}</div>
                         </div>
                         <div class="column">
                             <div class="column has-text-right">
@@ -31,9 +31,10 @@
 
                     <div class="field">
                         <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Capacidad total</div>
-                        <div class="has-text-weight-semibold is-size-5">
-                            {{ powerRectifier.capacity ? powerRectifier.capacity : 'Sin información' | numeral('0,0.0') }} <span class="is-size-7" v-if="powerRectifier.capacity">kW</span>
+                        <div class="has-text-weight-semibold is-size-5" v-if="!isEditMode">
+                            {{ newPowerRectifierCapacity | numeral('0,0.0') }} <span class="is-size-7">kW</span>
                         </div>
+                        <b-input v-if="isEditMode" type="number" class="has-text-weight-bold is-size-5" v-model="newPowerRectifierCapacity"/>
                     </div>
                 </div>
 
@@ -87,6 +88,12 @@
                     </div>
                 </div>
             </div> -->
+            <div class="field has-text-centered" v-if="canEdit">
+                <b-button :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
+                    <font-awesome-icon :icon="['fas', 'edit']"/>
+                    &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar parámetros de Grupo' }}
+                </b-button>
+            </div>
         </div>
     <!-- </section> -->
 </template>
@@ -97,19 +104,27 @@
         },
 
         props : [
-            'powerRectifier'
+            'powerRectifier',
+            'canEdit',
+            'user'
         ],
 
         data() {
             return {
+                newPowerRectifierCapacity: this.powerRectifier.capacity ? this.powerRectifier.capacity : 0,
+                isEditMode: false
             }
         },
 
         mounted() {
-            console.log(this.powerRectifier)
+            console.log(this.canEdit)
         },
 
         computed: {
+            powerRectifierCapacity() {
+                return this.powerRectifier.capacity
+            },
+
             powerRectfierModules() {
                 return this.powerRectifier.power_rectifier_modules
             },
@@ -128,7 +143,35 @@
         },
 
         methods: {
-            
+            saveChanges() {
+                if (!this.isEditMode && (
+                    this.powerRectifierCapacity != this.newPowerRectifierCapacity
+                    // this.usedCapacity != this.newUsedCapacity || 
+                    // this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id ||
+                    // this.generatorSet.generator_set_topology_type_id != this.topology_id ||
+                    // this.generatorSet.generator_set_level_type_id != this.level_id ||
+                    // this.currentGeneratorResponsableAreaId != this.responsable_area_id
+                    )
+                ) {
+
+                    let params = {
+                        'api_token': this.user.api_token,
+                        'user_id': this.user.id,
+                        'capacity': parseFloat(this.newPowerRectifierCapacity),
+                        // 'used_capacity': parseFloat(this.newUsedCapacity),
+                        // 'maintainer_id': this.maintainer_id,
+                        // 'generator_set_responsable_area_id': this.responsable_area_id,
+                        // 'generator_set_topology_type_id': this.topology_id,
+                        // 'generator_set_level_type_id': this.level_id
+                    }
+                    // console.log(params)
+                    axios.put(`/api/powerRectifiers/${this.powerRectifier.id}`, params)
+                    .then(response => {
+                        console.log(response.data)
+                        this.$eventBus.$emit('power-rectifier-updated');
+                    })
+                }
+            }       
         }
     }
 </script>

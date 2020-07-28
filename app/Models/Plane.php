@@ -24,15 +24,15 @@ class Plane extends Model
         return $this->belongsToMany(Room::class, 'entel_g_redes_inventario.plane_room')->withTimestamps();
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var boolean
-     */
-    public function plane_delegation_types()
-    {
-        return $this->belongsToMany(PlaneDelegationType::class)->withTimestamps();
-    }
+    // /**
+    //  * The attributes that are mass assignable.
+    //  *
+    //  * @var boolean
+    //  */
+    // public function plane_delegation_types()
+    // {
+    //     return $this->belongsToMany(PlaneDelegationType::class)->withTimestamps();
+    // }
 
     /**
      * The attributes that are mass assignable.

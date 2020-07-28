@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFireExtintionTypesTable extends Migration
+class CreateFireExtinctionTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFireExtintionTypesTable extends Migration
      */
     public function up()
     {
-        // Schema::create('fire_extintion_types', function (Blueprint $table) {
+        // Schema::create('fire_extinction_types', function (Blueprint $table) {
         //     $table->bigIncrements('id');
         //     $table->string('type');
         //     $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFireExtintionTypesTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('fire_extintion_types');
+        // Schema::dropIfExists('fire_extinction_types');
     }
 }

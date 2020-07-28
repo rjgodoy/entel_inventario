@@ -1,3 +1,4 @@
+<!-- ESTE COMPONENTE ES EXCLUSIVAMENTE PARA LOS MARGENES DE LA VISTA DEL POP, NO PARA USO EN EL CAPACITY PLANNING, YA QUE EN ESA VISTA MUESTRA UN SOLO EQUIPO EN UN MODAL-->
 <template>
     <section class="" v-if="generatorSets.length">  
         <div class="" v-for="generatorSet in generatorSets">

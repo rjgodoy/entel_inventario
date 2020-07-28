@@ -27,6 +27,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     PowerRectifier: function PowerRectifier() {
@@ -92,7 +94,11 @@ var render = function() {
                 { staticClass: "column is-6 tile is-parent" },
                 [
                   _c("power-rectifier", {
-                    attrs: { powerRectifier: powerRectifier }
+                    attrs: {
+                      powerRectifier: powerRectifier,
+                      canEdit: _vm.canEdit,
+                      user: _vm.user
+                    }
                   })
                 ],
                 1

@@ -11,23 +11,47 @@
                     <div class="columns">
 
                         <div class="column is-1 has-text-centered">
-                            <b-button type="is-primary" size="is-medium" :class="popClassification.id == 1 ? 'is-info' : (popClassification.id == 2 ? 'is-warning' : (popClassification.id == 3 ? 'is-primary' : (popClassification.id == 4 ? 'is-smart' : 'is-eco')))">
-                                <div class="title is-size-4">{{ popClassification.classification }}</div>
-                            </b-button>
+                            <b-tooltip label="Corresponde a la categoría más crítica entre todos sus Sitios activos."
+                            type="is-link"
+                            position="is-right"
+                            size="is-large"
+                            multilined>
+                                <b-button type="is-primary" size="is-large" :class="popClassification.id == 1 ? 'is-info' : (popClassification.id == 2 ? 'is-warning' : (popClassification.id == 3 ? 'is-primary' : (popClassification.id == 4 ? 'is-smart' : 'is-eco')))" @click="currentTab = 'sites'">
+                                    <div class="title is-size-4">{{ popClassification.classification }}</div>
+                                </b-button>
+                            </b-tooltip>
                         </div>
 
                         <div class="column is-5">
                             <div class="is-size-4">
                                 <h1 class="title">{{ pop.nombre }}</h1>
-                                <h2 class="subtitle">{{ popNems }}
+                                <h2 class="subtitle" style="margin-bottom: 4px;">{{ popNems }}
                                     <span class="is-size-5" v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
                                     </span>
-                                    <div v-if="pop.current_office" style="padding-top: 4px;">
+                                </h2>
+                                <div v-if="pop.current_office || pop.alba_project">
+                                    <div v-if="pop.current_office" style="padding-bottom: 4px;">
                                         <b-tag type="is-link" size="is-medium" class="has-text-weight-semibold">
                                             <font-awesome-icon :icon="['fas', 'home']" style="padding-bottom: 2px;"/>&nbsp;&nbsp;OFICINA CRM
                                         </b-tag>
                                     </div>
-                                </h2>
+                                    <div v-if="pop.alba_project" style="padding-top: 4px;">
+                                        <div class="">
+                                            <div>
+                                                <b-tooltip label="Entel" position="is-bottom" type="is-black">
+                                                    <div>
+                                                    <img alt="image" class="img-container" src="/img/iconografia/entel-logo-negativo.png" style="width: 32px"/>
+                                                    </div>
+                                                </b-tooltip>
+                                                <b-tooltip label="American Tower" position="is-bottom" type="is-black" style="padding-left: 8px;">
+                                                    <div>
+                                                        <img alt="image" class="img-container" src="/img/logos/american_tower_logo_simple.png" style="width: 36px"/>
+                                                    </div>
+                                                </b-tooltip>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -73,10 +97,10 @@
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="pop.alba_project == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
-                                                <font-awesome-icon :icon="pop.alba_project == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                            <b-tag size="is-medium" :type="pop.alba_project ? 'is-eco' : 'is-positive'" class="has-text-white">
+                                                <font-awesome-icon :icon="pop.alba_project ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
-                                            <b-tag size="is-medium" type="is-black">Alba</b-tag>
+                                            <b-tag size="is-medium" type="is-black">Proyecto Alba</b-tag>
                                         </b-taglist>
                                     </div>
                                 </div>
@@ -116,14 +140,18 @@
                 <nav class="level">
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popAttentionPriority }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">PRIORIDAD ATENCION</p>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ popAttentionPriority }}</b-tag>
+                            <div style="padding-top: 4px;">
+                                <div class="is-size-7 has-text-weight-semibold">PRIORIDAD ATENCION</div>
+                            </div>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popDependences }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">DEPENDENCIAS DIRECTAS</p>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ popDependences }}</b-tag>
+                            <div style="padding-top: 4px;">
+                                <div class="is-size-7 has-text-weight-semibold">DEPENDENCIAS DIRECTAS</div>
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="level-item has-text-centered">
@@ -134,20 +162,26 @@
                     </div> -->
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popCategory ? popCategory : '-' }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">CLASIFICACION PLANIFICACION</p>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ popCategory ? popCategory : '-' }}</b-tag>
+                            <div style="padding-top: 4px;">
+                                <div class="is-size-7 has-text-weight-semibold">CLASIFICACION PLANIFICACION</div>
+                            </div>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ popAttentionType }}</p>
-                            <p class="is-size-7 has-text-weight-semibold">TIPO ATENCION</p>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ popAttentionType }}</b-tag>
+                            <div style="padding-top: 4px;">
+                                <div class="is-size-7 has-text-weight-semibold">TIPO ATENCION</div>
+                            </div>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <p class="is-size-5 has-text-weight-semibold">{{ pop.current_autonomy ? pop.current_autonomy.theoretical : '-' }} <span class="is-size-6">hrs.</span></p>
-                            <p class="is-size-7 has-text-weight-semibold">AUTONOMIA TEORICA</p>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ pop.current_autonomy ? pop.current_autonomy.theoretical : '-' }} <span class="is-size-6">hrs.</span></b-tag>
+                            <div style="padding-top: 4px;">
+                                <div class="is-size-7 has-text-weight-semibold">AUTONOMIA TEORICA</div>
+                            </div>
                         </div>
                     </div>
                     <b-tooltip 
@@ -309,6 +343,7 @@
         created() {
             this.styleMode()
             this.$eventBus.$on('parameter-updated', this.getAllData)
+            this.$eventBus.$on('generator-set-capacities-updated', this.getAllData);
         },
 
         mounted() {

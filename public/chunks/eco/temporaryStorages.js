@@ -109,6 +109,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalNewStorage: function ModalNewStorage() {
@@ -163,20 +175,26 @@ var render = function() {
     "div",
     { staticClass: "tile is-child box" },
     [
-      _vm.canCreate
-        ? _c(
-            "button",
-            {
-              staticClass: "button is-pulled-right",
-              on: {
-                click: function($event) {
-                  _vm.isNewStorageModalActive = true
-                }
-              }
-            },
-            [_vm._v("+")]
-          )
-        : _vm._e(),
+      _c("div", { staticClass: "has-text-right is-pulled-right" }, [
+        _vm.canCreate
+          ? _c("div", { staticClass: "field" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "button is-small",
+                  on: {
+                    click: function($event) {
+                      _vm.isNewStorageModalActive = true
+                    }
+                  }
+                },
+                [_vm._v("Agregar ZAT")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "title is-size-4" }, [
         _vm._v("Zonas Acopio Temporal")
@@ -347,7 +365,27 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c(
+        "a",
+        {
+          staticClass: "button is-small",
+          attrs: {
+            href:
+              "https://docs.google.com/spreadsheets/d/1LUXLXKgrBecj1HG0Y0WVmTv6yWA8s_VV5Qxxxl4AOrc/edit#gid=1768973228",
+            target: "_blank"
+          }
+        },
+        [_vm._v("\n                Ver planilla de materiales\n            ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

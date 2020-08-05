@@ -3,23 +3,20 @@
 namespace App\Exports;
 
 use App\Models\Pop;
+use App\Models\Rca;
+use App\Models\TemporaryStorage;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-
-// use Maatwebsite\Excel\Concerns\FromArray;
-use Maatwebsite\Excel\Concerns\Exportable;
-// use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-// use Maatwebsite\Excel\Concerns\WithCustomStartCell;
-// use Maatwebsite\Excel\Concerns\WithDrawings;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
-use Maatwebsite\Excel\Events\BeforeExport;
-use Maatwebsite\Excel\Events\BeforeWriting;
-use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Events\BeforeExport;
+use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Events\BeforeWriting;
 
 // use PhpOffice\PhpSpreadsheet\Shared\Date;
 // use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
@@ -153,7 +150,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip')
+            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->where(function ($p) use ($text) {
                         if ($text) {
@@ -221,6 +218,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ->whereRaw($condition_alba_project)
                 ->orderBy('pops.id', 'asc')
                 ->get();
+
         }
 
         return $pop;
@@ -231,7 +229,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
      */
     public function title(): string
     {
-        return 'PoP';
+        return 'POP';
     }
 
     /**
@@ -259,7 +257,10 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'OFFGRID',
             'PANEL SOLAR',
             'EOLICA',
-            'GESTION AMBIENTAL',
+            'BALIZA',
+            'ZONA PROTEGIDA',
+            'RCA',
+            'ZONA ACOPIO TEMPORAL (ZAT)',
             'PROYECTO ALBA'
         ];
     }
@@ -269,6 +270,8 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
      */
     public function map($pop): array
     {
+        $temporary_storage = TemporaryStorage::with('pop')->where('zona_id', $pop->comuna->zona_id)->first();
+        $rca = Rca::where('pop_id', $pop->id)->first();
         return [
             $pop->id,
             $pop->pop_e_id,
@@ -304,7 +307,10 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $pop->offgrid ? 'SI' : 'NO',
             $pop->solar ? 'SI' : 'NO',
             $pop->eolica ? 'SI' : 'NO',
-            $pop->gestion_ambiental ? 'SI' : 'NO' ,
+            $pop->vertical_structures->first() ? ($pop->vertical_structures->first()->beacons->first() ? $pop->vertical_structures->first()->beacons->first()->beacon_type->type : null) : null,
+            $pop->protected_zones->first() ? $pop->protected_zones->first()->cod_zone.' - '.$pop->protected_zones->first()->name : 'NO',
+            $rca ? 'SI' : 'NO',
+            $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
             $pop->alba_project ? 'SI' : 'NO'
 
         ];
@@ -420,7 +426,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'O1:Q1',
+            'O1:R1',
             [
                 'font' => [
                     'size' => 11,
@@ -444,7 +450,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'R1',
+            'S1:U1',
             [
                 'font' => [
                     'size' => 11,
@@ -468,7 +474,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'S1',
+            'V1',
             [
                 'font' => [
                     'size' => 11,

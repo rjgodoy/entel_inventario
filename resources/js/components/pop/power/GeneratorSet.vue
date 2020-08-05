@@ -1,5 +1,5 @@
 <template>
-    <section class="section is-paddingless">
+    <section class="section" style="padding-top: 0px;">
 
         <div class="columns">
             <div class="column is-3"></div>
@@ -38,11 +38,24 @@
                 </div>
 
                 <div class="column">
-                    <div class="has-text-weight-light is-size-7">Marca</div>
-                    <div class="has-text-weight-semibold is-size-5">{{ generatorSet.generator_set_type ? generatorSet.generator_set_type.type : 'Sin información' }}</div>
+                    <div v-if="!isEditMode">
+                        <div class="has-text-weight-light is-size-7">Marca</div>
+                        <div class="has-text-weight-semibold is-size-5">{{ currentGeneratorSetType }}</div>
 
-                    <div class="has-text-weight-light is-size-7" style="padding-top: 8px;">Modelo</div>
-                    <div class="has-text-weight-semibold is-size-6">{{ generatorSet.generator_set_type ? generatorSet.generator_set_type.model : 'Sin información' }}</div>
+                        <div class="has-text-weight-light is-size-7" style="padding-top: 8px;">Modelo</div>
+                        <div class="has-text-weight-semibold is-size-6">{{ currentGeneratorSetModel }}</div>
+                    </div>
+                    <div v-if="isEditMode">
+                        <b-select placeholder="Selecciona..." v-model="generator_set_type_id">
+                            <option
+                                v-for="option in generatorSetTypes"
+                                :value="option.id"
+                                :key="option.id">
+                                {{ option.type }} - {{ option.model }}
+                            </option>
+                        </b-select>
+                    </div>
+
 
                     <div class="has-text-weight-light is-size-7" style="padding-top: 8px;">Número Serie</div>
                     <div class="has-text-weight-semibold is-size-6" :class="generatorSet.serial_number ? '' : 'has-text-info'">
@@ -275,6 +288,8 @@
             </div>
         </div>
 
+        <div class="is-divider" style="padding-bottom: 0px"></div>
+
     </section>
 </template>
 
@@ -295,16 +310,20 @@
                 responsableAreas: [],
                 topologyTypes: [],
                 levelTypes: [],
+                generatorSetTypes: [],
 
                 currentMaintainerName: 'Sin Información',
                 currentResponsableArea: 'Sin Información',
                 currentTopologyType: 'Sin Información',
                 currentLevelType: 'Sin Información',
+                currentGeneratorSetType: 'Sin Información',
+                currentGeneratorSetModel: 'Sin Información',
 
                 maintainer_id: this.generatorSet.current_maintainer ? this.generatorSet.current_maintainer.telecom_company_id : null,
                 responsable_area_id: this.generatorSet.current_generator_responsable ? this.generatorSet.current_generator_responsable.generator_set_responsable_area_id : null,
                 topology_id: this.generatorSet.generator_set_topology_type_id,
                 level_id: this.generatorSet.generator_set_level_type_id,
+                generator_set_type_id: this.generatorSet.generator_set_type_id,
 
                 newPrimeCapacity: this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.prime_capacity : 0,
                 newUsedCapacity: this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.used_capacity : 0,
@@ -318,6 +337,7 @@
             this.getResponsableAreas()
             this.getTopologyTypes()
             this.getLevelTypes()
+            this.getGeneratorSetTypes()
         },
 
         computed: {
@@ -383,6 +403,15 @@
                         this.currentLevelType = item.type
                     }
                 }) 
+            },
+
+            generator_set_type_id(val) {
+                this.generatorSetTypes.forEach(item => {
+                    if(item.id == val) {
+                        this.currentGeneratorSetType = item.type
+                        this.currentGeneratorSetModel = item.model
+                    }
+                }) 
             }
 
         },
@@ -445,6 +474,20 @@
                 })
             },
 
+            getGeneratorSetTypes() {
+                axios.get(`/api/generatorSetTypes?api_token=${this.user.api_token}`).then(response => {
+                    // console.log(response.data.telecomCompanies)
+                    this.generatorSetTypes = response.data.generatorSetTypes
+                    if(response.data.generatorSetTypes) {
+                        this.generatorSetTypes.forEach(item => {
+                            if(item.id == this.generator_set_type_id) {
+                                this.currentGeneratorSetType = item.type
+                            }
+                        }) 
+                    }
+                })
+            },
+
             saveChanges() {
                 if (!this.isEditMode && 
                     (this.primeCapacity != this.newPrimeCapacity || 
@@ -452,18 +495,20 @@
                     this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id ||
                     this.generatorSet.generator_set_topology_type_id != this.topology_id ||
                     this.generatorSet.generator_set_level_type_id != this.level_id ||
+                    this.generatorSet.generator_set_type_id != this.generator_set_type_id ||
                     this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
 
                     let params = {
                         'api_token': this.user.api_token,
-                        'user_id': this.user.id,
-                        'generator_set_id': this.generatorSet.id,
+                        'user_id': parseFloat(this.user.id),
+                        'generator_set_id': parseFloat(this.generatorSet.id),
                         'prime_capacity': parseFloat(this.newPrimeCapacity),
                         'used_capacity': parseFloat(this.newUsedCapacity),
-                        'maintainer_id': this.maintainer_id,
-                        'generator_set_responsable_area_id': this.responsable_area_id,
-                        'generator_set_topology_type_id': this.topology_id,
-                        'generator_set_level_type_id': this.level_id
+                        'maintainer_id': parseFloat(this.maintainer_id),
+                        'generator_set_responsable_area_id': parseFloat(this.responsable_area_id),
+                        'generator_set_topology_type_id': parseFloat(this.topology_id),
+                        'generator_set_level_type_id': parseFloat(this.level_id),
+                        'generator_set_type_id': parseFloat(this.generator_set_type_id)
                     }
                     // console.log(params)
                     axios.put(`/api/generatorSets/${this.generatorSet.id}`, params).then(response => {

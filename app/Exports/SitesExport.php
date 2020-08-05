@@ -234,9 +234,21 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
     {
         return [
             'ID SITIO',
-            'CODIGO PLANIFICACION',
 	        'NEMONICO',
 	        'NOMBRE',
+
+            'ID POP',
+            'COD PLANIFICACION',
+            'NOMBRE',
+            'DIRECCION',
+            'COMUNA',
+            'REGION',
+            'NOMBRE REGION',
+            'COD ZONA',
+            'NOMBRE ZONA',
+            'CRM',
+            'LATITUD',
+            'LONGITUD',
 
             'CLASIFICACION SITIO',
             'PRIORIDAD ATENCION',
@@ -271,25 +283,35 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 
         return [
             $site->id,
-            $site->pop->pop_e_id,
             $site->nem_site,
             $site->nombre,
 
+            $site->pop->id,
+            $site->pop->pop_e_id,
+            $site->pop->nombre,
+            $site->pop->direccion,
+            $site->pop->comuna->nombre_comuna,
+            $site->pop->comuna->region->cod_region,
+            $site->pop->comuna->region->nombre_region,
+            $site->pop->comuna->zona->cod_zona,
+            $site->pop->comuna->zona->nombre_zona,
+            $site->pop->comuna->zona->crm->nombre_crm,
+            $site->pop->latitude,
+            $site->pop->longitude,
+
             $site->classification_type->classification_type,
             $site->attention_priority_type->attention_priority_type,
-            $site->category_type && $site->category_type->category_type,
+            $site->category_type ? $site->category_type->category_type : null,
             $site->attention_type->attention_type,
 
-            $site->pe_3g ? 'SI' : 'NO',
-            $site->mpls ? 'SI' : 'NO',
-            $site->olt ? 'SI' : 'NO',
-            $site->olt_3play ? 'SI' : 'NO',
+            $site->pop->pe_3g ? 'SI' : 'NO',
+            $site->pop->mpls ? 'SI' : 'NO',
+            $site->pop->olt ? 'SI' : 'NO',
+            $site->pop->olt_3play ? 'SI' : 'NO',
             $site->classification_type_id == 1 ? 'SI' : 'NO',
-
             $site->red_minima,
-
-            $site->localidad_obligatoria ? 'SI' : 'NO',
-            $site->ranco ? 'SI' : 'NO',
+            $site->pop->localidad_obligatoria ? 'SI' : 'NO',
+            $site->pop->ranco ? 'SI' : 'NO',
             $bafi ? 'SI' : 'NO',
 
             $site->state->state,
@@ -315,7 +337,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
     public static function afterSheet(AfterSheet $event) 
     {
         $event->sheet->styleCells(
-            'A1:D1',
+            'A1:C1',
             [
                 'font' => [
                     'size' => 11,
@@ -339,7 +361,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'E1:H1',
+            'D1:O1',
             [
                 'font' => [
                     'size' => 11,
@@ -357,13 +379,37 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                 ],
                 'fill' => [
                     'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'color' => ['argb' => 'c04f4d']
+                    'color' => ['argb' => 'f79647']
                 ]
             ]
         );
 
         $event->sheet->styleCells(
-            'I1:R1',
+            'P1:S1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '9cbb59']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'T1:AB1',
             [
                 'font' => [
                     'size' => 11,
@@ -382,6 +428,30 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                 'fill' => [
                     'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => ['argb' => '4bacc6']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'AC1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => 'c04f4d']
                 ]
             ]
         );

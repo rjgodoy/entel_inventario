@@ -82,9 +82,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -460,15 +457,15 @@ var render = function() {
       staticStyle: {
         "min-height": "788px",
         "/*min-height": "576px",
-        "*/\n        height": "100%"
+        "*/ height": "100%"
       },
       attrs: {
         center: _vm.center,
         zoom: _vm.zoom,
-        "map-type-id": "roadmap",
+        "map-type-id": "terrain",
         options: {
           zoomControl: true,
-          mapTypeControl: false,
+          mapTypeControl: true,
           scaleControl: false,
           streetViewControl: true,
           rotateControl: false,

@@ -1,17 +1,14 @@
 <template>
     <GmapMap
         class="map"
-        style="
-            min-height: 788px;
-            /*min-height: 576px; */
-            height: 100%"
+        style=" min-height: 788px; /*min-height: 576px; */ height: 100%"
         ref="map"
         :center="center"
         :zoom="zoom"
-        map-type-id="roadmap"
+        map-type-id="terrain"
         :options="{
             zoomControl: true,
-            mapTypeControl: false,
+            mapTypeControl: true,
             scaleControl: false,
             streetViewControl: true,
             rotateControl: false,

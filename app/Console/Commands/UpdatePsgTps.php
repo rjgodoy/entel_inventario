@@ -5,6 +5,12 @@ namespace App\Console\Commands;
 use App\Models\AirConditioner;
 use App\Models\AirConditionerBrand;
 use App\Models\AirConditionerType;
+use App\Models\GeneratorGroup;
+use App\Models\GeneratorMotor;
+use App\Models\GeneratorSet;
+use App\Models\GeneratorSetType;
+use App\Models\GeneratorTank;
+use App\Models\GeneratorTta;
 use App\Models\Pop;
 use App\Models\PsgTp;
 use App\Models\PsgTpSource;
@@ -72,7 +78,7 @@ class UpdatePsgTps extends Command
         foreach ($psgTpsSource as $tp) {
             // Verifica si el Pop existe en Inventario. Si no existe, lo deja NULL
             $site_id = $tp->SITIO && ($site = Site::where('nem_site', $tp->SITIO)->first()) ? $site->id : null;
-            $psgTp = PsgTp::withTrashed()->updateOrCreate([
+            PsgTp::withTrashed()->updateOrCreate([
                 'tp_id' => $tp->PLANNED_ID,
             ],[
                 'table_id' => $tp->ID,
@@ -93,18 +99,54 @@ class UpdatePsgTps extends Command
 
             if($tp->psg_tp_state_id == 8) {
                 $resource = '';
+                $psg = PsgTpSource::where('PLANNED_ID', $tp->tp_id)->first();
+                $site_id = $tp->site_id;
+                $pop_id = Pop::whereHas('sites', function($q) use($site_id) {
+                    $q->where('id', $site_id);
+                })->first()->id;
+                $psgTp = PsgTp::where('tp_id', $psg->PLANNED_ID)->first();
+
                 switch($tp->work_type_id) {
                     case 1:
                         $resource = 'powerRectifiers';
                         break;
                     case 2:
                         $resource = 'generatorSets';
+
+                        if($generator_set_type = GeneratorSetType::where('type', $psg->MARCA)->where('model', $psg->MODELO)->first()) {
+                            $generator_set_type_id = $generator_set_type->id;
+                        } else {
+                            $generator_set_type_id = GeneratorSetType::create([ 
+                                'type' => $psg->MARCA,
+                                'model' => $psg->MODELO
+                            ])->id;
+                        }
+                        $newGS_id = GeneratorSet::create([
+                            'pop_id' => $pop_id,
+                            'generator_set_type_id' => $generator_set_type_id,
+                        ])->id;
+
+                        $newGG = GeneratorGroup::create([
+                            'generator_set_id' => $newGS_id,
+                            'power' => $psg->POTENCIA == '90 KVA' ? 90 : $psg->POTENCIA,
+                        ]);
+                        $newGM = GeneratorMotor::create([
+                            'generator_set_id' => $newGS_id
+                        ]);
+                        $newGT = GeneratorTank::create([
+                            'generator_set_id' => $newGS_id,
+                            'capacity' => $psg->CAPACIDAD_ESTANQUE,
+                        ]);
+                        $newGTTA = GeneratorTta::create([
+                            'generator_set_id' => $newGS_id
+                        ]);
+
+                        $psgTp->delete();
                         break;
                     case 3:
                         $resource = 'infrastructures';
                         break;
                     case 4:
-                        $psg = PsgTpSource::where('PLANNED_ID', $tp->tp_id)->first();
                         // return $tp;
                         if($air_conditioner_type = AirConditionerType::where('type', $psg->TIPO)->first()) {
                             $air_conditioner_type_id = $air_conditioner_type->id;
@@ -125,12 +167,12 @@ class UpdatePsgTps extends Command
                             ])->id;
                         }
 
-                        $site_id = $tp->site_id;
-                        $pop_id = Pop::whereHas('sites', function($q) use($site_id) {
-                            $q->where('id', $site_id);
-                        })->first()->id;
+                        // $site_id = $tp->site_id;
+                        // $pop_id = Pop::whereHas('sites', function($q) use($site_id) {
+                        //     $q->where('id', $site_id);
+                        // })->first()->id;
 
-                        $psgTp = PsgTp::where('tp_id', $psg->PLANNED_ID)->first();
+                        // $psgTp = PsgTp::where('tp_id', $psg->PLANNED_ID)->first();
 
                         $newAC = AirConditioner::create([
                             'pop_id' => $pop_id,

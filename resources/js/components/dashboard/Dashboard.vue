@@ -554,41 +554,50 @@
 
             selectedCrm(newValue) {
                 this.selectedZona = null
-                if (this.currentTab == 'critics') {
-                    this.viewCriticPops()
+                switch(this.currentTab) {
+                    case 'critics':
+                        this.viewCriticPops()
+                        break
+                    case 'alba':
+                        this.viewAlbaPops()
+                        break
+                    default:
+                        this.getPops()
+                        break
                 }
-                else if (this.currentTab == 'alba') {
-                    this.viewAlbaPops()
-                } else if (newValue) {
-                    this.getPops()
+
+                if(newValue) {
                     this.zonas = newValue.zonas
-                } else {
-                    this.getPops()
                 }
                 this.getCounters()
             },
 
             selectedZona(newValue) {
-                if (this.currentTab == 'critics'){
-                    this.viewCriticPops()
-                }
-                else if (this.currentTab == 'alba') {
-                    this.viewAlbaPops()
-                } else {
-                    this.getPops()
+                switch(this.currentTab) {
+                    case 'critics':
+                        this.viewCriticPops()
+                        break
+                    case 'alba':
+                        this.viewAlbaPops()
+                        break
+                    default:
+                        this.getPops()
+                        break
                 }
                 this.getCounters()
             },
 
             core(newValue, oldValue) {
-                if (this.currentTab == 'critics') {
-                    this.viewCriticPops()
-                } 
-                else if (this.currentTab == 'alba') {
-                    this.viewAlbaPops()
-                }
-                else {
-                    this.getPops()
+                switch(this.currentTab) {
+                    case 'critics':
+                        this.viewCriticPops()
+                        break
+                    case 'alba':
+                        this.viewAlbaPops()
+                        break
+                    default:
+                        this.getPops()
+                        break
                 }
                 this.getCounters()
             },
@@ -859,7 +868,8 @@
                     this.$buefy.toast.open({
                         message: this.message,
                         type: 'is-success',
-                        duration: 5000
+                        duration: 3000,
+                        queue: false
                     })
                 }
             },
@@ -904,7 +914,8 @@
                     this.$buefy.toast.open({
                         message: 'La planilla se ha descargado exitosamente.',
                         type: 'is-success',
-                        duration: 5000
+                        duration: 3000,
+                        queue: false
                     })
                 }).catch((error) => {
                     console.log(error)
@@ -912,7 +923,8 @@
                     this.$buefy.toast.open({
                         message: 'Ha ocurrido un error. Favor contactar al administrador',
                         type: 'is-danger',
-                        duration: 5000
+                        duration: 3000,
+                        queue: false
                     })
                 })
             },

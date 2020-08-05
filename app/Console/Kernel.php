@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\UpdatePops',
         'App\Console\Commands\UpdateComsites',
-        // 'App\Console\Commands\UpdatePsgTps',
+        'App\Console\Commands\UpdatePsgTps',
+        'App\Console\Commands\SearchRcas',
     ];
 
     /**
@@ -26,9 +27,24 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('update:pops')->daily();
-        $schedule->command('update:comsites')->daily();
-        // $schedule->command('update:psg_tps')->everyMinute();
+        // $schedule->command('update:pops')
+            // ->daily()
+            // ->timezone('America/Santiago')
+            // ->at('04:00')
+            // ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+        $schedule->command('update:comsites')
+            ->sundays()
+            ->timezone('America/Santiago')
+            ->at('02:00')
+            ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+        $schedule->command('update:psg_tps')
+            // ->everyMinute();
+            ->daily()
+            ->timezone('America/Santiago')
+            ->at('01:00')
+            ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+        $schedule->command('search:rcas')
+            ->everyMinute();
     }
 
     /**

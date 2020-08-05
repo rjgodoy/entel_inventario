@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/chunks/admin.js": "/chunks/admin.js",
+    "/chunks/admin/adminTpsTable.js": "/chunks/admin/adminTpsTable.js",
     "/chunks/admin/files.js": "/chunks/admin/files.js",
     "/chunks/admin/massive.js": "/chunks/admin/massive.js",
     "/chunks/admin/pops.js": "/chunks/admin/pops.js",
@@ -20,7 +21,6 @@
     "/chunks/capacity/modals/requests.js": "/chunks/capacity/modals/requests.js",
     "/chunks/capacity/projection.js": "/chunks/capacity/projection.js",
     "/chunks/capacity/roomLights.js": "/chunks/capacity/roomLights.js",
-    "/chunks/capacity/roomsTable.js": "/chunks/capacity/roomsTable.js",
     "/chunks/capacityPlanning.js": "/chunks/capacityPlanning.js",
     "/chunks/comsite.js": "/chunks/comsite.js",
     "/chunks/dashboard.js": "/chunks/dashboard.js",
@@ -74,6 +74,8 @@
     "/chunks/pop/layout/modals/distribution.js": "/chunks/pop/layout/modals/distribution.js",
     "/chunks/pop/layout/modals/generator.js": "/chunks/pop/layout/modals/generator.js",
     "/chunks/pop/layout/modals/junction.js": "/chunks/pop/layout/modals/junction.js",
+    "/chunks/pop/layout/modals/newAirConditioner.js": "/chunks/pop/layout/modals/newAirConditioner.js",
+    "/chunks/pop/layout/modals/newPowerRectifier.js": "/chunks/pop/layout/modals/newPowerRectifier.js",
     "/chunks/pop/layout/modals/powerRectifier.js": "/chunks/pop/layout/modals/powerRectifier.js",
     "/chunks/pop/layout/modals/surface.js": "/chunks/pop/layout/modals/surface.js",
     "/chunks/pop/location.js": "/chunks/pop/location.js",
@@ -100,10 +102,5 @@
     "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a.js": "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a.js",
     "/vendors~pdfmake.js": "/vendors~pdfmake.js",
     "/vendors~xlsx.js": "/vendors~xlsx.js",
-    "/xlsx.js": "/xlsx.js",
-    "/chunks/pop/layout/modals/newAirConditioner.js": "/chunks/pop/layout/modals/newAirConditioner.js",
-    "/chunks/pop/layout/modals/newPowerRectifier.js": "/chunks/pop/layout/modals/newPowerRectifier.js",
-    "/vendors~chunks/capacity/capacity.js": "/vendors~chunks/capacity/capacity.js",
-    "/vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard/pretDataChart.js": "/vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard/pretDataChart.js",
-    "/vendors~chunks/capacity/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart.js": "/vendors~chunks/capacity/capacity~chunks/pop/infrastructure/SpaceChart~chunks/pop/layout/capacityChart.js"
+    "/xlsx.js": "/xlsx.js"
 }

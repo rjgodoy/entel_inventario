@@ -1,6 +1,18 @@
 <template>
     <div class="tile is-child box">
-        <button v-if="canCreate" class="button is-pulled-right" @click="isNewStorageModalActive = true">+</button>
+        <div class="has-text-right is-pulled-right">
+            <div class="field" v-if="canCreate">
+                <button class="button is-small" @click="isNewStorageModalActive = true">Agregar ZAT</button>
+            </div>
+            <div class="field">
+                <a class="button is-small" 
+                    href="https://docs.google.com/spreadsheets/d/1LUXLXKgrBecj1HG0Y0WVmTv6yWA8s_VV5Qxxxl4AOrc/edit#gid=1768973228" 
+                    target="_blank">
+                    Ver planilla de materiales
+                </a>
+            </div>
+        </div>
+        
         <div class="title is-size-4">Zonas Acopio Temporal</div>
 
         <!-- <b-field grouped group-multiline> -->

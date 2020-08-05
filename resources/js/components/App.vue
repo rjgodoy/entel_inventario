@@ -180,7 +180,7 @@
         <!-- <hr class="has-background-light is-marginless"></hr>
         <footer :class="currentRoute.toLowerCase() == '/capacity' ? 'has-background-black-ter' : 'has-background-white'" style="padding-top: 0.5rem; padding-bottom: 0rem;">
             <div class="has-text-centered">
-                <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
+                <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logos/logo_anida.png" style="width: 100px"/></a>
             </div>
         </footer> -->
 

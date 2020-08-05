@@ -29,214 +29,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Table: function Table() {
+      return __webpack_require__.e(/*! import() | chunks/admin/adminTpsTable */ "chunks/admin/adminTpsTable").then(__webpack_require__.bind(null, /*! ./AdminTpsTable */ "./resources/js/components/admin/AdminTpsTable.vue"));
+    }
+  },
   props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
-  created: function created() {},
   mounted: function mounted() {
-    // Se conecta a la base de datos de PSG y extrae la información a la tabla de Inventario
     this.syncData();
   },
   data: function data() {
     return {
       data: [],
-      finished: [],
-      isEmpty: false,
-      isBordered: false,
-      isStriped: false,
-      isNarrowed: true,
-      isHoverable: false,
-      isFocusable: false,
-      isLoading: false,
-      checkboxPosition: 'left',
-      checkedRows: [],
-      isPaginated: true,
-      isPaginationSimple: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 20,
-      loading: true
+      dataHistory: [],
+      tab: 0,
+      loading: true,
+      loadingHistory: true
     };
+  },
+  watch: {
+    tab: function tab(val) {
+      this.syncData();
+    }
   },
   methods: {
     syncData: function syncData() {
       var _this = this;
 
-      axios.get("/api/psgTp?api_token=".concat(this.user.api_token, "&page=").concat(this.currentPage)).then(function (response) {
-        console.log(response.data);
-        _this.data = response.data;
-        _this.loading = false; // let i = 0
-        // this.finished = []
-        // this.data.forEach((element, index, array) => {
-        //     element.psg_tp_state_id == 8 && this.finished.push(element) 
-        //     i++
-        //     if(i == array.length && this.finished.length) {
-        //         console.log(this.finished.length)
-        //         this.insertFinisheds()
-        //     }
-        // })
-      });
-    },
-    // insertFinisheds() {
-    //     // console.log(this.finished)
-    //     let resource = ''
-    //     this.finished.forEach(element => {
-    //          switch(element.work_type_id) {
-    //             case 1:
-    //                 resource = 'powerRectifiers'
-    //                 break
-    //             case 2:
-    //                 resource = 'generatorSets'
-    //                 break
-    //             case 3:
-    //                 resource = 'infrastructures'
-    //                 break
-    //             case 4:
-    //                 resource = 'airConditioners'
-    //                 break
-    //             case 5:
-    //                 resource = 'transformers'
-    //                 break
-    //             case 6:
-    //                 resource = 'verticalStructures'
-    //                 break
-    //             case 7:
-    //                 resource = 'batteries'
-    //                 break
-    //             default:
-    //                 break
-    //         }
-    //         let params = {
-    //             'api_token': this.user.api_token,
-    //             'tp_id': element.tp_id,
-    //             'site_id': element.site_id
-    //         }
-    //         axios.post(`/api/${resource}`, params)
-    //         .then(response => {
-    //             console.log(response.data)
-    //             this.syncData()
-    //         })
-    //     })
-    // },
-    tagColor: function tagColor(state_id) {
-      var color = '';
-      var text = '';
-
-      switch (state_id) {
-        case 8:
-          color = 'is-eco';
-          text = 'has-text-white';
-          break;
-        // case 1:
-        // case 2:
-        // case 3:
-        // case 4:
-        // case 5:
-        // case 6:
-        // case 7:
-        // case 9:
-        // case 10:
-        // case 11:
-        // case 12:
-
-        default:
-          color = 'is-gray';
-          text = 'has-text-dark';
-          break;
+      if (+this.tab) {
+        axios.get("/api/psgTp?api_token=".concat(this.user.api_token, "&page=").concat(this.currentPage, "&history=1")).then(function (response) {
+          console.log(response.data);
+          _this.dataHistory = response.data;
+          _this.loadingHistory = false;
+        });
+      } else {
+        axios.get("/api/psgTp?api_token=".concat(this.user.api_token, "&page=").concat(this.currentPage, "&history=0")).then(function (response) {
+          console.log(response.data);
+          _this.data = response.data;
+          _this.loading = false;
+        });
       }
-
-      return {
-        'color': color,
-        'text': text
-      };
     }
   }
 });
@@ -263,412 +96,66 @@ var render = function() {
       "div",
       { staticClass: "box", staticStyle: { position: "relative" } },
       [
-        _vm._m(0),
+        _c(
+          "b-tabs",
+          {
+            staticClass: "block",
+            attrs: { type: "is-boxed", size: "is-medium" },
+            model: {
+              value: _vm.tab,
+              callback: function($$v) {
+                _vm.tab = $$v
+              },
+              expression: "tab"
+            }
+          },
+          [
+            _c("b-tab-item", { attrs: { label: "Programados" } }),
+            _vm._v(" "),
+            _c("b-tab-item", { attrs: { label: "Ejecutados" } })
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("b-table", {
-          attrs: {
-            data: _vm.isEmpty ? [] : _vm.data,
-            paginated: _vm.isPaginated,
-            "per-page": _vm.perPage,
-            "current-page": _vm.currentPage,
-            "pagination-simple": _vm.isPaginationSimple,
-            "pagination-position": _vm.paginationPosition,
-            "default-sort-direction": _vm.defaultSortDirection,
-            "sort-icon": _vm.sortIcon,
-            "sort-icon-size": _vm.sortIconSize,
-            "pagination-size": "is-small",
-            "default-sort": "FECHA_INGRESO",
-            "aria-next-label": "Next page",
-            "aria-previous-label": "Previous page",
-            "aria-page-label": "Page",
-            "aria-current-label": "Current page"
-          },
-          on: {
-            "update:currentPage": function($event) {
-              _vm.currentPage = $event
-            },
-            "update:current-page": function($event) {
-              _vm.currentPage = $event
-            }
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(props) {
-                return [
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        width: "90",
-                        field: "tp_id",
-                        label: "ID TP",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(column.label) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _c("div", { staticClass: "is-size-7" }, [
-                        _c("div", { staticClass: "is-size-6" }, [
-                          _vm._v(_vm._s(props.row.tp_id))
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        field: "site.nem_site",
-                        label: "Sitio",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(column.label) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "is-size-6 has-text-weight-normal" },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              props.row.site ? props.row.site.nem_site : ""
-                            ) +
-                              " - " +
-                              _vm._s(
-                                props.row.site ? props.row.site.nombre : ""
-                              )
-                          )
-                        ]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        field: "title",
-                        label: "Título",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(column.label) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _c(
-                        "b-tooltip",
-                        {
-                          staticClass: "is-size-6",
-                          attrs: {
-                            label: props.row.description,
-                            type: "is-link",
-                            position: "is-right",
-                            size: "is-large",
-                            multilined: ""
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "is-size-6 has-text-weight-normal" },
-                            [_vm._v(_vm._s(props.row.title))]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        field: "created_at",
-                        label: "Fecha Ingreso",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(column.label) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "is-size-6 has-text-weight-normal" },
-                        [_vm._v(_vm._s(props.row.created_at))]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        field: "user",
-                        label: "Usuario Creador",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(column.label) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "is-size-6 has-text-weight-normal" },
-                        [_vm._v(_vm._s(props.row.user))]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        field: "psg_tp_state.state",
-                        label: "Estado",
-                        sortable: "",
-                        searchable: "",
-                        centered: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(column.label) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _c(
-                        "b-tag",
-                        {
-                          staticClass: "is-size-7 has-text-weight-semibold",
-                          class: _vm.tagColor(props.row.psg_tp_state.id).text,
-                          attrs: {
-                            type: _vm.tagColor(props.row.psg_tp_state.id).color
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                props.row.psg_tp_state.state.toUpperCase()
-                              ) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              }
-            }
-          ])
-        }),
+        _vm.tab == 0
+          ? _c(
+              "div",
+              [
+                _c("Table", {
+                  attrs: {
+                    title: "Trabajos programados - Instalaciones de Equipos",
+                    data: _vm.data,
+                    loading: _vm.loading,
+                    tab: _vm.tab
+                  }
+                })
+              ],
+              1
+            )
+          : _vm._e(),
         _vm._v(" "),
-        _c("b-loading", {
-          attrs: {
-            "is-full-page": false,
-            active: _vm.loading,
-            "can-cancel": true
-          },
-          on: {
-            "update:active": function($event) {
-              _vm.loading = $event
-            }
-          }
-        })
+        _vm.tab == 1
+          ? _c(
+              "div",
+              [
+                _c("Table", {
+                  attrs: {
+                    title: "Trabajos ejecutados",
+                    data: _vm.dataHistory,
+                    loading: _vm.loadingHistory,
+                    tab: _vm.tab
+                  }
+                })
+              ],
+              1
+            )
+          : _vm._e()
       ],
       1
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "block" }, [
-      _c(
-        "div",
-        { staticClass: "has-text-weight-bold has-text-centered is-size-4" },
-        [_vm._v("Trabajos programados - Instalaciones de Equipos")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

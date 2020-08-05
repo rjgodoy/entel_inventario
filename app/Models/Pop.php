@@ -232,6 +232,16 @@ class Pop extends Model
      *
      * @var array
      */
+    public function current_temporary_storage() 
+    {
+        return $this->hasOne(TemporaryStorage::class)->latest();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function vertical_structures() 
     {
         return $this->hasMany(VerticalStructure::class);

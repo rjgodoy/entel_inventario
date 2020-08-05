@@ -1049,7 +1049,7 @@ var render = function() {
         "map-type-id": "terrain",
         options: {
           zoomControl: true,
-          mapTypeControl: false,
+          mapTypeControl: true,
           scaleControl: false,
           streetViewControl: true,
           rotateControl: false,

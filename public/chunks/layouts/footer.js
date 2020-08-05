@@ -270,20 +270,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "column is-3" }, [
-      _c("div", { staticClass: "block" }, [
-        _c("div", { staticClass: "has-text-weight-bold is-size-5" }, [
-          _vm._v("Ultimas Actualizaciones")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "has-text-weight-normal is-size-6",
-            staticStyle: { "padding-top": "8px" }
-          },
-          [_vm._v("Detalle...")]
-        )
-      ])
+      _c("div", { staticClass: "block" })
     ])
   },
   function() {
@@ -305,7 +292,7 @@ var staticRenderFns = [
               _c("img", {
                 staticClass: "img-container",
                 staticStyle: { width: "100px" },
-                attrs: { alt: "image", src: "/img/logo_anida.png" }
+                attrs: { alt: "image", src: "/img/logos/logo_anida.png" }
               })
             ]
           )

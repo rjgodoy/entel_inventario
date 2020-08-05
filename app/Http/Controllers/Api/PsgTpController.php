@@ -18,38 +18,21 @@ class PsgTpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $psgTpData = PsgTp::with('psg_tp_state', 'site')
-            ->where('site_id', '!=', null)
-            ->orderBy('created_at', 'asc')
-            ->get();
-
-        // $psgTpsSource = PsgTpSource::join('TIPO_TRABAJO_INVENTARIO', 'TIPO_TRABAJO_INVENTARIO.ID_TIPOCLASIF', '=', 'CONSOLIDADO_INVENTARIO.ID_TPCLAS')
-        //     ->join('TRABAJO_INVENTARIO', 'TRABAJO_INVENTARIO.ID', '=', 'TIPO_TRABAJO_INVENTARIO.ID_TRABAJO')
-        //     ->leftJoin('SITIOS_PLANNED', 'CONSOLIDADO_INVENTARIO.PLANNED_ID', '=', 'SITIOS_PLANNED.PLANNED_ID')
-        //     ->leftJoin('o_m.SITIOS', 'SITIOS.SITE_ID', '=', 'SITIOS_PLANNED.SITE_ID')
-        //     ->join('PLANNED', 'CONSOLIDADO_INVENTARIO.PLANNED_ID', '=', 'PLANNED.ID')
-        //     // ->whereRaw('PLANNED.ESTADOS_ID NOT IN (8) AND SITIOS.SITIO IS NOT NULL')
-        //     // ->whereRaw('SITIOS.SITIO IS NOT NULL')
-        //     ->select(
-        //         'CONSOLIDADO_INVENTARIO.*',
-        //         'SITIOS_PLANNED.SITE_ID',
-        //         'SITIOS.SITIO',
-        //         'TRABAJO_INVENTARIO.ID as TIPO_TRABAJO_ID',
-        //         'TRABAJO_INVENTARIO.DESCRIPCION',
-        //         'PLANNED.ESTADOS_ID',
-        //         'PLANNED.TP_FECHA_EXEC',
-        //         'PLANNED.DESCRIPCION as DESCRIPCION_TP'
-        //     )
-        //     ->groupBy('CONSOLIDADO_INVENTARIO.ID')
-        //     ->orderBy('CONSOLIDADO_INVENTARIO.FECHA_INGRESO')
-        //     ->get();
-
-        // return self::update($psgTpsSource);
-
-        // $psgTpData = PsgTp::with('psg_tp_state', 'site')->get();
+        if ($request->history) {
+            $psgTpData = PsgTp::with('psg_tp_state', 'site')
+                ->where('psg_tp_state_id', 8)
+                ->onlyTrashed()
+                ->orderBy('deleted_at', 'desc')
+                ->get();
+        } else {
+            $psgTpData = PsgTp::with('psg_tp_state', 'site')
+                ->where('site_id', '!=', null)
+                ->orderBy('created_at', 'asc')
+                ->get();
+        }
+        
         return $psgTpData;
     }
 

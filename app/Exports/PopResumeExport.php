@@ -2,24 +2,22 @@
 
 namespace App\Exports;
 
+use App\Models\File;
 use App\Models\Pop;
+use App\Models\Rca;
+use App\Models\TemporaryStorage;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-
-// use Maatwebsite\Excel\Concerns\FromArray;
-use Maatwebsite\Excel\Concerns\Exportable;
-// use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-// use Maatwebsite\Excel\Concerns\WithCustomStartCell;
-// use Maatwebsite\Excel\Concerns\WithDrawings;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
-use Maatwebsite\Excel\Events\BeforeExport;
-use Maatwebsite\Excel\Events\BeforeWriting;
-use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Events\BeforeExport;
+use Maatwebsite\Excel\Events\BeforeSheet;
+use Maatwebsite\Excel\Events\BeforeWriting;
 
 // use PhpOffice\PhpSpreadsheet\Shared\Date;
 // use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
@@ -153,8 +151,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $infrastructure = $this->infrastructure;
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type')
+            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->where(function ($p) use ($text) {
                         if ($text) {
@@ -221,7 +218,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 
                 ->whereRaw($condition_alba_project)
                 ->orderBy('pops.id', 'asc')
-                ->get();
+                ->get();   
         }
 
         return $pop;
@@ -294,8 +291,9 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 	        'PANEL SOLAR',
 	        'EOLICA',
             'BALIZA',
-	        'GESTION AMBIENTAL',
-	        // ->'AU1','BALIZAS',
+	        'ZONA PROTEGIDA',
+	        'RCA',
+            'ZONA ACOPIO TEMPORAL (ZAT)',
 	        'PROYECTO ALBA'
 
         ];
@@ -318,7 +316,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
     	$red_minima = 0; $localidad_obligatoria = 0; $ranco = 0;
     	
     	foreach ($pop->sites as $site) {
-    		if ($site->classification_type_id && $site->classification_type_id < $class_id) {
+    		if ($site->classification_type_id && $site->classification_type_id <= $class_id) {
     			$class_id = $site->classification_type_id;
                 $classification = $site->classification_type->classification_type;
                 if ($site->site_type_id == 1 || $site->site_type_id == 4) {
@@ -375,6 +373,9 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 
             $q_sites++;
     	}
+
+        $temporary_storage = TemporaryStorage::with('pop')->where('zona_id', $pop->comuna->zona_id)->first();
+        $rca = Rca::where('pop_id', $pop->id)->first();
                         
         return [
             $pop->id,
@@ -430,7 +431,9 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $pop->solar ? 'SI' : 'NO',
             $pop->eolica ? 'SI' : 'NO',
             $pop->vertical_structures->first() ? ($pop->vertical_structures->first()->beacons->first() ? $pop->vertical_structures->first()->beacons->first()->beacon_type->type : null) : null,
-            $pop->gestion_ambiental ? 'SI' : 'NO' ,
+            $pop->protected_zones->first() ? $pop->protected_zones->first()->cod_zone.' - '.$pop->protected_zones->first()->name : 'NO',
+            $rca ? 'SI' : 'NO',
+            $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
 
             $pop->alba_project ? 'SI' : 'NO'
 
@@ -576,7 +579,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AL1',
+            'AL1:AN1',
             [
                 'font' => [
                     'size' => 11,
@@ -600,7 +603,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AM1',
+            'AO1',
             [
                 'font' => [
                     'size' => 11,

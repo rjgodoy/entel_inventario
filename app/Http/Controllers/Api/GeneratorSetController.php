@@ -10,6 +10,7 @@ use App\Models\GeneratorSetCapacity;
 use App\Models\GeneratorSetMaintainer;
 use App\Models\GeneratorSetResponsable;
 use App\Models\Log;
+use App\Models\TelecomCompany;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -237,14 +238,23 @@ class GeneratorSetController extends Controller
     public function update(Request $request, $id)
     {
         $generatorSet = GeneratorSet::find($id);
+        $pop_id = $generatorSet->pop_id; 
+
         if(
             (!$generatorSet->current_generator_set_capacity || ($generatorSet->current_generator_set_capacity && $generatorSet->current_generator_set_capacity->prime_capacity != $request->prime_capacity)) || 
             (!$generatorSet->current_generator_set_capacity || ($generatorSet->current_generator_set_capacity && $generatorSet->current_generator_set_capacity->used_capacity != $request->used_capacity))
-        ) {
+            ) {
             GeneratorSetCapacity::create([
                 'generator_set_id' => $id,
                 'prime_capacity' => $request->prime_capacity,
                 'used_capacity' => $request->used_capacity
+            ]);
+
+            Log::create([
+                'pop_id' => $pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'Se han actualizado las capacidades del grupo electrógeno: Prime->'.$request->prime_capacity.' kVa; Utilizada->'.$request->used_capacity
             ]);
         }
 
@@ -253,18 +263,24 @@ class GeneratorSetController extends Controller
                 'telecom_company_id' => $request->maintainer_id,
                 'generator_set_id' => $id
             ]);
+            $newMaintainer = TelecomCompany::find($request->maintainer_id)->name;
+            Log::create([
+                'pop_id' => $pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'El nuvo mantenedor del grupo electrógeno es '.$newMaintainer
+            ]);
         }
 
-        $pop_id = $generatorSet->pop_id; 
         $generators = GeneratorSet::where('pop_id', $pop_id)->get();
         foreach ($generators as $generator) {
-            // if($generator->current_generator_responsable && $generator->current_generator_responsable->generator_set_responsable_area_id != $request->generator_set_responsable_area_id) {
+            if($generator->current_generator_responsable && $generator->current_generator_responsable->generator_set_responsable_area_id != $request->generator_set_responsable_area_id) {
                 $generatorSetResponsable = GeneratorSetResponsable::create([
                     'generator_set_responsable_area_id' => $request->generator_set_responsable_area_id,
                     'generator_set_id' => $generator->id
                 ]);
             }
-        // }
+        }
         
         if($generatorSet->generator_set_topology_type_id != $request->generator_set_topology_type_id || 
             $generatorSet->generator_set_level_type_id != $request->generator_set_level_type_id) {
@@ -272,14 +288,27 @@ class GeneratorSetController extends Controller
                 'generator_set_topology_type_id' => $request->generator_set_topology_type_id,
                 'generator_set_level_type_id' => $request->generator_set_level_type_id
             ]);
+
+            Log::create([
+                'pop_id' => $pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'Se han actualizado los parámetros de "Topología" y "Plano" en el grupo electrógeno.'
+            ]);
         }
 
-        Log::create([
-            'pop_id' => $request->pop_id,
-            'user_id' => $request->user_id,
-            'log_type_id' => 1,
-            'description' => 'Se ha introducido nuevos parámetros en el grupo electrógeno.'
-        ]);
+        if($generatorSet->generator_set_type_id != $request->generator_set_type_id) {
+            $generatorSet->update([
+                'generator_set_type_id' => $request->generator_set_type_id
+            ]);
+
+            Log::create([
+                'pop_id' => $pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'Se ha actualizado la marca y modelo en el grupo electrógeno.'
+            ]);
+        }
 
         return;
     }

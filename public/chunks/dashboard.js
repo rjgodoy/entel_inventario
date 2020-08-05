@@ -580,37 +580,56 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     selectedCrm: function selectedCrm(newValue) {
       this.selectedZona = null;
 
-      if (this.currentTab == 'critics') {
-        this.viewCriticPops();
-      } else if (this.currentTab == 'alba') {
-        this.viewAlbaPops();
-      } else if (newValue) {
-        this.getPops();
+      switch (this.currentTab) {
+        case 'critics':
+          this.viewCriticPops();
+          break;
+
+        case 'alba':
+          this.viewAlbaPops();
+          break;
+
+        default:
+          this.getPops();
+          break;
+      }
+
+      if (newValue) {
         this.zonas = newValue.zonas;
-      } else {
-        this.getPops();
       }
 
       this.getCounters();
     },
     selectedZona: function selectedZona(newValue) {
-      if (this.currentTab == 'critics') {
-        this.viewCriticPops();
-      } else if (this.currentTab == 'alba') {
-        this.viewAlbaPops();
-      } else {
-        this.getPops();
+      switch (this.currentTab) {
+        case 'critics':
+          this.viewCriticPops();
+          break;
+
+        case 'alba':
+          this.viewAlbaPops();
+          break;
+
+        default:
+          this.getPops();
+          break;
       }
 
       this.getCounters();
     },
     core: function core(newValue, oldValue) {
-      if (this.currentTab == 'critics') {
-        this.viewCriticPops();
-      } else if (this.currentTab == 'alba') {
-        this.viewAlbaPops();
-      } else {
-        this.getPops();
+      switch (this.currentTab) {
+        case 'critics':
+          this.viewCriticPops();
+          break;
+
+        case 'alba':
+          this.viewAlbaPops();
+          break;
+
+        default:
+          this.getPops();
+          break;
       }
 
       this.getCounters();
@@ -944,7 +963,8 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         this.$buefy.toast.open({
           message: this.message,
           type: 'is-success',
-          duration: 5000
+          duration: 3000,
+          queue: false
         });
       }
     },
@@ -988,7 +1008,8 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         _this6.$buefy.toast.open({
           message: 'La planilla se ha descargado exitosamente.',
           type: 'is-success',
-          duration: 5000
+          duration: 3000,
+          queue: false
         });
       })["catch"](function (error) {
         console.log(error);
@@ -997,7 +1018,8 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         _this6.$buefy.toast.open({
           message: 'Ha ocurrido un error. Favor contactar al administrador',
           type: 'is-danger',
-          duration: 5000
+          duration: 3000,
+          queue: false
         });
       });
     },

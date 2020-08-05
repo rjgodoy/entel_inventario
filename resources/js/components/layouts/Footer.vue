@@ -29,8 +29,8 @@
                         </div>
                         <div class="column is-3">
                             <div class="block">
-                                <div class="has-text-weight-bold is-size-5">Ultimas Actualizaciones</div>
-                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Detalle...</div>
+                                <!-- <div class="has-text-weight-bold is-size-5">Ultimas Actualizaciones</div> -->
+                                <!-- <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Detalle...</div> -->
                             </div>
                         </div>
                         <div class="column">
@@ -59,7 +59,7 @@
         <hr class="has-background-dark is-marginless"></hr>
         <footer class="has-background-black-bis" style="padding-top: 0.5rem; padding-bottom: 0rem;">
             <div class="has-text-centered">
-                <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logo_anida.png" style="width: 100px"/></a>
+                <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logos/logo_anida.png" style="width: 100px"/></a>
             </div>
         </footer>
     </div>

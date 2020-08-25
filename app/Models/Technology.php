@@ -14,7 +14,7 @@ class Technology extends Model
 
     public function site() 
     {
-        return $this->belongsTo(Site::class);
+        return $this->belongsTo(Site::class)->withTrashed();
     }
 
     public function technology_type() 

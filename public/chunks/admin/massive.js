@@ -51,20 +51,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUpload"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUpload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
+  components: {
+    ModalInfoBox: function ModalInfoBox() {
+      return __webpack_require__.e(/*! import() | chunks/admin/modals/modalInfoCircle */ "chunks/admin/modals/modalInfoCircle").then(__webpack_require__.bind(null, /*! ./modals/ModalInfoBox */ "./resources/js/components/admin/modals/ModalInfoBox.vue"));
+    }
+  },
   props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
   created: function created() {},
   mounted: function mounted() {},
   data: function data() {
     return {
       file: [],
-      isLoading: false
+      isLoading: false,
+      isModalInfoBoxActive: false
     };
   },
   methods: {
@@ -123,100 +138,142 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "tile is-ancestor" }, [
-        _c("div", { staticClass: "tile is-parent" }, [
-          _c(
-            "div",
-            { staticClass: "tile is-child box", class: _vm.boxBackground },
-            [
-              _c(
-                "div",
-                { class: _vm.secondaryText },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "is-size-6 has-text-weight-semibold" },
-                    [
-                      _vm._v(
-                        "\n                            Efizity\n                        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-field",
-                    [
-                      _c(
-                        "b-upload",
-                        {
-                          attrs: { "drag-drop": "" },
-                          on: { input: _vm.submit },
-                          model: {
-                            value: _vm.file,
-                            callback: function($$v) {
-                              _vm.file = $$v
-                            },
-                            expression: "file"
+  return _c(
+    "div",
+    { staticClass: "section" },
+    [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "tile is-ancestor" }, [
+          _c("div", { staticClass: "tile is-parent" }, [
+            _c(
+              "div",
+              { staticClass: "tile is-child box", class: _vm.boxBackground },
+              [
+                _c(
+                  "div",
+                  { class: _vm.secondaryText },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "is-size-6 has-text-weight-semibold" },
+                      [
+                        _vm._v(
+                          "\n                            Efizity\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.isModalInfoBoxActive = true
                           }
-                        },
-                        [
-                          _c("section", { staticClass: "section" }, [
-                            _c(
-                              "div",
-                              { staticClass: "content has-text-centered" },
-                              [
-                                _c(
-                                  "p",
-                                  [
-                                    _c("b-icon", {
-                                      attrs: {
-                                        icon: "upload",
-                                        pack: "fas",
-                                        size: "is-large"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("p", [
-                                  _vm._v(
-                                    "Drop your files here or click to upload"
-                                  )
-                                ])
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("b-loading", {
-                            attrs: {
-                              "is-full-page": false,
-                              active: _vm.isLoading,
-                              "can-cancel": true
-                            },
-                            on: {
-                              "update:active": function($event) {
-                                _vm.isLoading = $event
-                              }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "info-circle"] }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-field",
+                      [
+                        _c(
+                          "b-upload",
+                          {
+                            attrs: { "drag-drop": "" },
+                            on: { input: _vm.submit },
+                            model: {
+                              value: _vm.file,
+                              callback: function($$v) {
+                                _vm.file = $$v
+                              },
+                              expression: "file"
                             }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ]
-          )
+                          },
+                          [
+                            _c("section", { staticClass: "section" }, [
+                              _c(
+                                "div",
+                                { staticClass: "content has-text-centered" },
+                                [
+                                  _c(
+                                    "p",
+                                    [
+                                      _c("b-icon", {
+                                        attrs: {
+                                          icon: "upload",
+                                          pack: "fas",
+                                          size: "is-large"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(
+                                      "Drop your files here or click to upload"
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("b-loading", {
+                              attrs: {
+                                "is-full-page": false,
+                                active: _vm.isLoading,
+                                "can-cancel": true
+                              },
+                              on: {
+                                "update:active": function($event) {
+                                  _vm.isLoading = $event
+                                }
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
+          ])
         ])
-      ])
-    ])
-  ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isModalInfoBoxActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isModalInfoBoxActive = $event
+            }
+          }
+        },
+        [_c("modal-info-box")],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

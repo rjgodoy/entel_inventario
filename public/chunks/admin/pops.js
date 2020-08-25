@@ -368,12 +368,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSearch"]);
@@ -399,6 +393,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       site_type: 0,
       nem: '',
       siteName: '',
+      site_type_tab_id: 0,
       pe_3g: false,
       mpls: false,
       olt: false,
@@ -409,7 +404,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       vip: false,
       localidad_obligatoria: false,
       ranco: false,
-      bafi: false,
       offgrid: false,
       solar: false,
       eolica: false,
@@ -444,6 +438,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       }, {
         id: 4,
         label: 'Phone'
+      }, {
+        id: 5,
+        label: 'Repetidor'
       }]
     };
   },
@@ -476,41 +473,41 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   },
   computed: {
     site_type_id: function site_type_id() {
-      return this.site_type == 0 ? 1 : this.site_type == 1 ? 3 : 4;
+      return this.site_type_tab_id == 0 ? 1 : this.site_type_tab_id == 1 ? 3 : this.site_type_tab_id == 2 ? 4 : 5;
     },
     filteredComunasArray: function filteredComunasArray() {
       var _this = this;
 
       return this.comunas.filter(function (option) {
-        return option.nombre_comuna.toString().toLowerCase().indexOf(_this.name.toLowerCase()) >= 0;
+        return option.nombre_comuna ? option.nombre_comuna.toString().toLowerCase().indexOf(_this.name.toLowerCase()) >= 0 : '';
       });
     },
     filteredPopTypesArray: function filteredPopTypesArray() {
       var _this2 = this;
 
       return this.popTypes.filter(function (option) {
-        return option.type.toString().toLowerCase().indexOf(_this2.popType.toLowerCase()) >= 0;
+        return option.type ? option.type.toString().toLowerCase().indexOf(_this2.popType.toLowerCase()) >= 0 : '';
       });
     },
     filteredNetTypesArray: function filteredNetTypesArray() {
       var _this3 = this;
 
       return this.netTypes.filter(function (option) {
-        return option.type.toString().toLowerCase().indexOf(_this3.netType.toLowerCase()) >= 0;
+        return option.type ? option.type.toString().toLowerCase().indexOf(_this3.netType.toLowerCase()) >= 0 : '';
       });
     },
     filteredClassificationsArray: function filteredClassificationsArray() {
       var _this4 = this;
 
       return this.classificationTypes.filter(function (option) {
-        return option.classification_type.toString().toLowerCase().indexOf(_this4.classificationType.toLowerCase()) >= 0;
+        return option.classification_type ? option.classification_type.toString().toLowerCase().indexOf(_this4.classificationType.toLowerCase()) >= 0 : '';
       });
     },
     filteredAttentionPrioritiesArray: function filteredAttentionPrioritiesArray() {
       var _this5 = this;
 
       return this.attentionPriorityTypes.filter(function (option) {
-        return option.attention_priority_type.toString().toLowerCase().indexOf(_this5.attentionPriorityType.toLowerCase()) >= 0;
+        return option.attention_priority_type ? option.attention_priority_type.toString().toLowerCase().indexOf(_this5.attentionPriorityType.toLowerCase()) >= 0 : '';
       });
     },
     latitude: function latitude() {
@@ -612,20 +609,19 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'site_name': this.siteName,
         'classification_type_id': this.classification_type_id,
         'attention_priority_type_id': this.attention_priority_type_id,
-        'pe_3g': this.pe_3g,
-        'mpls': this.mpls,
-        'olt': this.olt,
-        'olt_3play': this.olt_3play,
-        'red_minima_n1': this.red_minima_n1,
-        'red_minima_n2': this.red_minima_n2,
-        'core': this.core,
-        'vip': this.vip,
-        'localidad_obligatoria': this.localidad_obligatoria,
-        'ranco': this.ranco,
-        'bafi': this.bafi,
-        'offgrid': this.offgrid,
-        'solar': this.solar,
-        'eolica': this.eolica
+        'pe_3g': +this.pe_3g,
+        'mpls': +this.mpls,
+        'olt': +this.olt,
+        'olt_3play': +this.olt_3play,
+        'red_minima_n1': +this.red_minima_n1,
+        'red_minima_n2': +this.red_minima_n2,
+        'core': +this.core,
+        'vip': +this.vip,
+        'localidad_obligatoria': +this.localidad_obligatoria,
+        'ranco': +this.ranco,
+        'offgrid': +this.offgrid,
+        'solar': +this.solar,
+        'eolica': +this.eolica
       };
       axios.post('/api/pop', params).then(function (response) {
         console.log(response.data);
@@ -790,7 +786,7 @@ var render = function() {
                               placeholder:
                                 "Buscar el PoP por nemónico, nombre o direccion del sitio...",
                               "keep-first": true,
-                              "open-on-focus": _vm.text ? true : false,
+                              "open-on-focus": _vm.text ? true : true,
                               loading: _vm.isFetching,
                               "check-infinite-scroll": true,
                               "custom-formatter": _vm.searchFormat,
@@ -1251,11 +1247,11 @@ var render = function() {
                     {
                       attrs: { type: "is-toggle", expanded: "" },
                       model: {
-                        value: _vm.site_type,
+                        value: _vm.site_type_tab_id,
                         callback: function($$v) {
-                          _vm.site_type = $$v
+                          _vm.site_type_tab_id = $$v
                         },
-                        expression: "site_type"
+                        expression: "site_type_tab_id"
                       }
                     },
                     _vm._l(_vm.siteTypes, function(site_type) {
@@ -1687,32 +1683,6 @@ var render = function() {
                           {
                             attrs: { type: "is-link" },
                             model: {
-                              value: _vm.bafi,
-                              callback: function($$v) {
-                                _vm.bafi = $$v
-                              },
-                              expression: "bafi"
-                            }
-                          },
-                          [
-                            _c("div", { staticClass: "is-size-6" }, [
-                              _vm._v("Bafi")
-                            ])
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-checkbox",
-                          {
-                            attrs: { type: "is-link" },
-                            model: {
                               value: _vm.offgrid,
                               callback: function($$v) {
                                 _vm.offgrid = $$v
@@ -1728,10 +1698,8 @@ var render = function() {
                         )
                       ],
                       1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
+                    ),
+                    _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "column" },
@@ -1756,8 +1724,10 @@ var render = function() {
                         )
                       ],
                       1
-                    ),
-                    _vm._v(" "),
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
                     _c(
                       "div",
                       { staticClass: "column" },

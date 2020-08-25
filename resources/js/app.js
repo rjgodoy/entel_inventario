@@ -63,9 +63,6 @@ Vue.prototype.$eventBus = new Vue()
             // libraries: 'places,drawing'
             // libraries: 'places,drawing,visualization'
             // (as you require)
-
-            //// If you want to set the version, you can do so:
-            v: '3.39',
         },
      
         // If you intend to programmatically custom event listener code

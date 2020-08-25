@@ -109,54 +109,101 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['powerRectifier', 'canEdit', 'user'],
   data: function data() {
     return {
+      powerRectifierModes: [],
+      currentPowerRectifierMode: 'Sin Información',
       newPowerRectifierCapacity: this.powerRectifier.capacity ? this.powerRectifier.capacity : 0,
+      powerRectifierModulesCapacity: this.currentPowerRectifierModulesCapacity(),
+      powerRectifierModulesQuantity: this.powerRectifier.power_rectifier_modules.length,
+      power_rectifier_mode_id: this.powerRectifier.power_rectifier_mode_id,
       isEditMode: false
     };
   },
   mounted: function mounted() {
-    console.log(this.canEdit);
+    this.getPowerRectifierModes();
   },
   computed: {
-    powerRectifierCapacity: function powerRectifierCapacity() {
-      return this.powerRectifier.capacity;
-    },
-    powerRectfierModules: function powerRectfierModules() {
-      return this.powerRectifier.power_rectifier_modules;
-    },
-    powerPlantAModulesQuantity: function powerPlantAModulesQuantity() {
-      return this.powerRectfierModules.length;
-    },
     totalModulesCapacityMasterA: function totalModulesCapacityMasterA() {
+      return this.powerRectifierModulesQuantity * this.powerRectifierModulesCapacity;
+    }
+  },
+  watch: {
+    power_rectifier_mode_id: function power_rectifier_mode_id(val) {
       var _this = this;
 
-      var totalCapacity = 0;
-      Object.keys(this.powerRectfierModules).forEach(function (element) {
-        totalCapacity = totalCapacity + _this.powerRectfierModules[element].capacity;
+      this.powerRectifierModes.forEach(function (item) {
+        if (item.id == val) {
+          _this.currentPowerRectifierMode = item.mode;
+        }
       });
-      return totalCapacity;
     }
   },
   methods: {
-    saveChanges: function saveChanges() {
+    getPowerRectifierModes: function getPowerRectifierModes() {
       var _this2 = this;
 
-      if (!this.isEditMode && this.powerRectifierCapacity != this.newPowerRectifierCapacity // this.usedCapacity != this.newUsedCapacity || 
-      // this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id ||
-      // this.generatorSet.generator_set_topology_type_id != this.topology_id ||
-      // this.generatorSet.generator_set_level_type_id != this.level_id ||
-      // this.currentGeneratorResponsableAreaId != this.responsable_area_id
-      ) {
+      axios.get("/api/powerRectifierModes?api_token=".concat(this.user.api_token)).then(function (response) {
+        // console.log(response.data.telecomCompanies)
+        _this2.powerRectifierModes = response.data.powerRectifierModes;
+
+        if (response.data.powerRectifierModes) {
+          _this2.powerRectifierModes.forEach(function (item) {
+            if (item.id == _this2.power_rectifier_mode_id) {
+              _this2.currentPowerRectifierMode = item.mode;
+            }
+          });
+        }
+      });
+    },
+    currentPowerRectifierModulesCapacity: function currentPowerRectifierModulesCapacity() {
+      var _this3 = this;
+
+      var capacity = 0;
+
+      if (this.powerRectifier.power_rectifier_modules.length) {
+        Object.keys(this.powerRectifier.power_rectifier_modules).forEach(function (element) {
+          capacity = _this3.powerRectifier.power_rectifier_modules[element].capacity;
+          return capacity;
+        });
+      }
+
+      return capacity;
+    },
+    saveChanges: function saveChanges() {
+      var _this4 = this;
+
+      if (!this.isEditMode && (this.powerRectifier.capacity != this.newPowerRectifierCapacity || this.powerRectifier.power_rectifier_mode_id != this.power_rectifier_mode_id || this.powerRectifier.power_rectifier_modules.length != this.powerRectifierModulesQuantity || this.currentPowerRectifierModulesCapacity() != this.powerRectifierModulesCapacity)) {
         var params = {
           'api_token': this.user.api_token,
           'user_id': this.user.id,
-          'capacity': parseFloat(this.newPowerRectifierCapacity) // 'used_capacity': parseFloat(this.newUsedCapacity),
-          // 'maintainer_id': this.maintainer_id,
-          // 'generator_set_responsable_area_id': this.responsable_area_id,
+          'capacity': parseFloat(this.newPowerRectifierCapacity),
+          'power_rectifier_mode_id': this.power_rectifier_mode_id,
+          'power_rectifier_modules_quantity': this.powerRectifierModulesQuantity,
+          'power_rectifier_modules_capacities': this.powerRectifierModulesCapacity // 'generator_set_responsable_area_id': this.responsable_area_id,
           // 'generator_set_topology_type_id': this.topology_id,
           // 'generator_set_level_type_id': this.level_id
 
@@ -165,7 +212,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.put("/api/powerRectifiers/".concat(this.powerRectifier.id), params).then(function (response) {
           console.log(response.data);
 
-          _this2.$eventBus.$emit('power-rectifier-updated');
+          _this4.$eventBus.$emit('power-rectifier-updated');
         });
       }
     }
@@ -267,17 +314,51 @@ var render = function() {
             [_vm._v("Modo")]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
-            _vm._v(
-              "\n                        " +
-                _vm._s(
-                  _vm.powerRectifier.power_rectifier_mode
-                    ? _vm.powerRectifier.power_rectifier_mode.mode
-                    : "Sin información"
-                ) +
-                "\n                    "
-            )
-          ])
+          !_vm.isEditMode
+            ? _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.currentPowerRectifierMode) +
+                    "\n                    "
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isEditMode
+            ? _c(
+                "div",
+                [
+                  _c(
+                    "b-select",
+                    {
+                      attrs: { placeholder: "Selecciona..." },
+                      model: {
+                        value: _vm.power_rectifier_mode_id,
+                        callback: function($$v) {
+                          _vm.power_rectifier_mode_id = $$v
+                        },
+                        expression: "power_rectifier_mode_id"
+                      }
+                    },
+                    _vm._l(_vm.powerRectifierModes, function(option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option.id } },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(option.mode) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ],
+                1
+              )
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c(
@@ -331,38 +412,107 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "column" }, [
-        _c("div", { staticClass: "field" }, [
-          _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
-            _vm._v("Nº módulos")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
-            _vm._v(
-              "\n                        " +
-                _vm._s(_vm.powerPlantAModulesQuantity) +
-                "\n                    "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "field" }, [
-          _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
-            _vm._v("Capacidad Módulos")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "has-text-weight-semibold is-size-5" }, [
-            _vm._v(
-              "\n                        " +
-                _vm._s(
-                  _vm._f("numeral")(_vm.totalModulesCapacityMasterA, "0,0.0")
-                ) +
-                " "
-            ),
-            _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
-          ])
-        ])
-      ])
+      _c(
+        "div",
+        { staticClass: "column" },
+        [
+          _c(
+            "b-field",
+            { attrs: { label: "MODULOS", "label-position": "on-border" } },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: " box is-shadowless",
+                  staticStyle: { border: "solid 0.1rem #cccccc" }
+                },
+                [
+                  _c("div", { staticClass: "field" }, [
+                    _c(
+                      "div",
+                      { staticClass: "has-text-weight-light is-size-7" },
+                      [_vm._v("Nº módulos")]
+                    ),
+                    _vm._v(" "),
+                    !_vm.isEditMode
+                      ? _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(_vm.powerRectifierModulesQuantity) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditMode
+                      ? _c(
+                          "div",
+                          [
+                            _c("b-input", {
+                              staticClass: "has-text-weight-bold is-size-5",
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.powerRectifierModulesQuantity,
+                                callback: function($$v) {
+                                  _vm.powerRectifierModulesQuantity = $$v
+                                },
+                                expression: "powerRectifierModulesQuantity"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("b-input", {
+                              staticClass: "has-text-weight-bold is-size-5",
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.powerRectifierModulesCapacity,
+                                callback: function($$v) {
+                                  _vm.powerRectifierModulesCapacity = $$v
+                                },
+                                expression: "powerRectifierModulesCapacity"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field" }, [
+                    _c(
+                      "div",
+                      { staticClass: "has-text-weight-light is-size-7" },
+                      [_vm._v("Capacidad Total Módulos")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "has-text-weight-semibold is-size-5" },
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(
+                              _vm._f("numeral")(
+                                _vm.totalModulesCapacityMasterA,
+                                "0,0.0"
+                              )
+                            ) +
+                            " "
+                        ),
+                        _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
     _vm.canEdit

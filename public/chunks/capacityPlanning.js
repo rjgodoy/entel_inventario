@@ -408,6 +408,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -428,6 +441,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ../pop/documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
+    },
+    ModalNewRoom: function ModalNewRoom() {
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newRoom */ "chunks/pop/layout/modals/newRoom").then(__webpack_require__.bind(null, /*! ../pop/layout/modals/ModalNewRoom */ "./resources/js/components/pop/layout/modals/ModalNewRoom.vue"));
     }
   },
   props: ['user'],
@@ -482,6 +498,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       isAirConditionerModalActive: false,
       isDistributionModalActive: false,
       isSurfaceModalActive: false,
+      isNewRoomModalActive: false,
       totalPRCapacity: 0,
       usedPRCapacity: 0,
       availablePRCapacity: 0,
@@ -499,35 +516,35 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
         "total": this.totalJunctionsCapacity,
         "used": this.totalUsedJunctionsCapacity,
         "available": this.totalAvailableJunctionsCapacity,
-        "isLoading": this.totalJunctionsCapacity ? false : true,
+        "isLoading": this.totalJunctionsCapacity || !this.junctions.length ? false : true,
         "thresholds": this.thresholds.junctions
       }, {
         "title": "Grupo Electrógeno",
         "total": this.totalGeneratorSetsCapacity,
         "used": this.totalGeneratorSetsUsedCapacity,
         "available": this.totalAvailableGeneratorSetsCapacity,
-        "isLoading": this.totalGeneratorSetsCapacity ? false : true,
+        "isLoading": this.totalGeneratorSetsCapacity || !this.generatorSets.length ? false : true,
         "thresholds": this.thresholds.generatorSets
       }, {
         "title": "Plantas Rectificadoras",
         "total": this.totalCapacityRoom,
         "used": this.usedCapacityRoom,
         "available": this.availableCapacityRoom(this.room),
-        "isLoading": this.totalCapacityRoom ? false : true,
+        "isLoading": this.totalCapacityRoom || !this.powerRectifiersInRoom(this.room) ? false : true,
         "thresholds": this.thresholds.powerRectifiers
       }, {
         "title": "Baterías",
         "total": this.totalCapacityBatteries(this.room),
         "used": this.usedCapacityBatteries(this.room),
         "available": this.availableCapacityBatteries(this.room),
-        "isLoading": this.totalCapacityBatteries(this.room) ? false : true,
+        "isLoading": this.totalCapacityBatteries(this.room) || !this.batteryBanksInRoom(this.room) ? false : true,
         "thresholds": this.thresholds.batteries
       }, {
         "title": "Clima",
         "total": this.totalJunctionsCapacity,
         "used": this.totalUsedJunctionsCapacity,
         "available": this.totalAvailableJunctionsCapacity,
-        "isLoading": this.totalJunctionsCapacity ? false : true,
+        "isLoading": this.totalJunctionsCapacity || !this.junctions.length ? false : true,
         "thresholds": this.thresholds.climate
       }, {
         "title": "Distribución",
@@ -1097,7 +1114,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     this.$eventBus.$on('room-security', this.getRoomData);
     this.$eventBus.$on('change-room', this.getRoomData);
     this.$eventBus.$on('new-power-rectifier', this.getRoomData);
+    this.$eventBus.$on('new-junction', this.getRoomData);
     this.$eventBus.$on('power-rectifier-updated', this.getRoomData);
+    this.$eventBus.$on('new-plane-updated', this.getRoomData);
+    this.$eventBus.$on('new-battery-bank', this.getRoomData);
+    this.$eventBus.$on('new-room', this.getRoomData);
   },
   mounted: function mounted() {
     this.getRoomData();
@@ -1227,10 +1248,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     },
     powerRectifiersInRoom: function powerRectifiersInRoom(room) {
       var powerRectifiersInRoom = 0;
-      Object.keys(room.planes).forEach(function (element) {
-        var plane = room.planes[element];
-        powerRectifiersInRoom += plane.power_rectifiers.length;
-      }); // console.log(powerRectifiersInRoom)
+
+      if (room.planes) {
+        Object.keys(room.planes).forEach(function (element) {
+          var plane = room.planes[element];
+          powerRectifiersInRoom += plane.power_rectifiers.length;
+        });
+      }
 
       return powerRectifiersInRoom;
     },
@@ -1430,6 +1454,17 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     availableRoomCapacity = availableRoomCapacity < 10000000 ? availableRoomCapacity : 0;
     this.availablePRCapacity = availableRoomCapacity;
     return availableRoomCapacity;
+  }), _defineProperty(_methods, "batteryBanksInRoom", function batteryBanksInRoom(room) {
+    var batteryBanks = 0;
+
+    if (room.planes) {
+      Object.keys(room.planes).forEach(function (element) {
+        var plane = room.planes[element];
+        batteryBanks += plane.battery_banks.length;
+      });
+    }
+
+    return batteryBanks;
   }), _defineProperty(_methods, "totalCapacityBatteries", function totalCapacityBatteries(room) {
     var capacity = 0;
 
@@ -1531,7 +1566,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       }
     }
 
-    var total = available != 10000000 ? available : 0;
+    var total = available < 10000000 ? available : 0;
     this.availableBatteryCapacity = total;
     return total;
   }), _defineProperty(_methods, "roomName", function roomName(room_id) {
@@ -1554,7 +1589,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     this.$eventBus.$off('room-security');
     this.$eventBus.$off('change-room');
     this.$eventBus.$off('new-power-rectifier');
-    this.$eventBus.$on('power-rectifier-updated');
+    this.$eventBus.$off('new-junction');
+    this.$eventBus.$off('power-rectifier-updated');
+    this.$eventBus.$off('new-plane-updated');
+    this.$eventBus.$off('new-battery-bank');
+    this.$eventBus.$off('new-room');
   }
 });
 
@@ -2069,288 +2108,352 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
-    _c(
-      "header",
-      { staticClass: "modal-card-head has-background-white has-text-centered" },
-      [
-        _c("div", { staticClass: "columns modal-card-title" }, [
-          _c(
-            "div",
-            { staticClass: "column is-2" },
-            [
-              _vm.previewRoom.id
-                ? _c(
-                    "b-tag",
-                    { attrs: { type: "is-link", size: "is-small" } },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: { to: "/capacity/" + _vm.previewRoom.id },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.getRoomData()
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "has-text-weight-semibold is-size-6 has-text-white"
-                            },
-                            [_vm._v(_vm._s(_vm.previewRoom.name))]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "has-text-weight-semibold" }, [
-              _vm._v(
-                _vm._s(_vm.pop ? _vm.pop.nombre : "") +
-                  " - " +
-                  _vm._s(_vm.room.name) +
-                  ": " +
-                  _vm._s(_vm.room.old_name)
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "column is-2" },
-            [
-              _vm.nextRoom.id
-                ? _c(
-                    "b-tag",
-                    { attrs: { type: "is-link", size: "is-small" } },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: { to: "/capacity/" + _vm.nextRoom.id },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.getRoomData()
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "has-text-weight-semibold is-size-6 has-text-white"
-                            },
-                            [_vm._v(_vm._s(_vm.nextRoom.name))]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c("section", { staticClass: "section is-paddingless" }, [
-      _c("div", { staticClass: "box" }, [
-        _c(
-          "div",
-          { staticClass: "level" },
-          _vm._l(_vm.capacityData, function(data) {
-            return _c(
-              "div",
-              {
-                staticClass: "level-item",
-                staticStyle: { position: "relative" }
-              },
-              [
-                _c("div", {}, [
-                  _c("div", { staticClass: "is-size-6" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "has-text-weight-semibold",
-                        staticStyle: { "padding-bottom": "4px" }
-                      },
-                      [_vm._v(_vm._s(data.title))]
-                    ),
-                    _vm._v(" "),
-                    _c("div", {}, [
-                      _vm._v(
-                        "Total: " +
-                          _vm._s(_vm._f("numeral")(data.total, "0,0.0"))
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", {}, [
-                      _vm._v(
-                        "Utilizada: " +
-                          _vm._s(_vm._f("numeral")(data.used, "0,0.0"))
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", {}, [
-                      _vm._v(
-                        "Disponible: " +
-                          _vm._s(_vm._f("numeral")(data.available, "0,0.0"))
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "block",
-                      staticStyle: { "padding-top": "8px" }
-                    },
-                    [
-                      _c("b-progress", {
-                        attrs: {
-                          value: (data.available * 100) / data.total,
-                          "show-value": "",
-                          format: "percent",
-                          size: "is-small",
-                          type:
-                            data.available <= data.thresholds.critical
-                              ? "is-danger"
-                              : data.available <= data.thresholds.warning
-                              ? "is-warning"
-                              : "is-success"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("b-loading", {
-                  attrs: {
-                    "is-full-page": false,
-                    active: data.isLoading,
-                    "can-cancel": true
-                  },
-                  on: {
-                    "update:active": function($event) {
-                      return _vm.$set(data, "isLoading", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            )
-          }),
-          0
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "section",
-      {
-        staticClass: "modal-card-body hero is-light",
-        staticStyle: { "padding-top": "0" }
-      },
-      [
-        _c("div", { staticClass: "columns section" }, [
-          _c("div", { staticClass: "column is-1" }, [
+  return _c(
+    "div",
+    {},
+    [
+      _c(
+        "header",
+        {
+          staticClass: "modal-card-head has-background-white has-text-centered"
+        },
+        [
+          _c("div", { staticClass: "columns modal-card-title" }, [
             _c(
               "div",
-              { staticClass: "columns is-multiline" },
-              _vm._l(_vm.tabs, function(tab) {
-                return _c(
-                  "div",
-                  {
-                    key: tab.component,
-                    staticClass: "column is-12",
-                    class:
-                      _vm.currentTab === tab.component &&
-                      (_vm.currentTab == "eco"
-                        ? "has-background-eco"
-                        : "is-bold is-link"),
-                    on: {
-                      click: function($event) {
-                        _vm.currentTab = tab.component
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tile is-child box has-text-centered",
-                        class:
-                          _vm.currentTab === tab.component
-                            ? "is-bold is-link"
-                            : ""
-                      },
+              { staticClass: "column is-2" },
+              [
+                _vm.previewRoom.id
+                  ? _c(
+                      "b-tag",
+                      { attrs: { type: "is-link", size: "is-small" } },
                       [
-                        _c("font-awesome-icon", {
-                          class:
-                            _vm.currentTab === tab.component
-                              ? "has-text-white"
-                              : "has-text-grey",
-                          attrs: { icon: [tab.icon_type, tab.icon], size: "2x" }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticStyle: { "padding-top": "5px" } }, [
-                          _c(
-                            "div",
-                            { staticClass: "is-size-7 has-text-weight-normal" },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(tab.title) +
-                                  "\n                                "
-                              )
-                            ]
-                          )
-                        ])
+                        _c(
+                          "router-link",
+                          {
+                            attrs: { to: "/capacity/" + _vm.previewRoom.id },
+                            nativeOn: {
+                              click: function($event) {
+                                return _vm.getRoomData()
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "has-text-weight-semibold is-size-6 has-text-white"
+                              },
+                              [_vm._v(_vm._s(_vm.previewRoom.name))]
+                            )
+                          ]
+                        )
                       ],
                       1
                     )
-                  ]
+                  : _vm._e()
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "column" }, [
+              _c("div", { staticClass: "has-text-weight-semibold" }, [
+                _vm._v(
+                  _vm._s(_vm.pop ? _vm.pop.nombre : "") +
+                    " - " +
+                    _vm._s(_vm.room.name) +
+                    ": " +
+                    _vm._s(_vm.room.old_name)
                 )
-              }),
-              0
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "has-text-centered",
+                  staticStyle: { "padding-top": "16px" }
+                },
+                [
+                  _vm.canEditPowerRectifiers
+                    ? _c(
+                        "b-button",
+                        {
+                          attrs: { size: "is-small" },
+                          on: {
+                            click: function($event) {
+                              _vm.isNewRoomModalActive = true
+                            }
+                          }
+                        },
+                        [_vm._v("Agregar nueva sala al POP")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "column is-2" },
+              [
+                _vm.nextRoom.id
+                  ? _c(
+                      "b-tag",
+                      { attrs: { type: "is-link", size: "is-small" } },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: { to: "/capacity/" + _vm.nextRoom.id },
+                            nativeOn: {
+                              click: function($event) {
+                                return _vm.getRoomData()
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "has-text-weight-semibold is-size-6 has-text-white"
+                              },
+                              [_vm._v(_vm._s(_vm.nextRoom.name))]
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ],
+              1
             )
-          ]),
-          _vm._v(" "),
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("section", { staticClass: "section is-paddingless" }, [
+        _c("div", { staticClass: "box" }, [
           _c(
             "div",
-            { staticClass: "column", staticStyle: { "padding-left": "48px" } },
-            [
-              _c(
-                "keep-alive",
+            { staticClass: "level" },
+            _vm._l(_vm.capacityData, function(data) {
+              return _c(
+                "div",
+                {
+                  staticClass: "level-item",
+                  staticStyle: { position: "relative" }
+                },
                 [
-                  _c(_vm.currentTabComponent, {
-                    tag: "component",
-                    attrs: { user: _vm.user, room: _vm.room, pop: _vm.pop }
+                  _c("div", {}, [
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "has-text-weight-semibold",
+                          staticStyle: { "padding-bottom": "4px" }
+                        },
+                        [_vm._v(_vm._s(data.title))]
+                      ),
+                      _vm._v(" "),
+                      _c("div", {}, [
+                        _vm._v(
+                          "Total: " +
+                            _vm._s(_vm._f("numeral")(data.total, "0,0.0"))
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {}, [
+                        _vm._v(
+                          "Utilizada: " +
+                            _vm._s(_vm._f("numeral")(data.used, "0,0.0"))
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {}, [
+                        _vm._v(
+                          "Disponible: " +
+                            _vm._s(_vm._f("numeral")(data.available, "0,0.0"))
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "block",
+                        staticStyle: { "padding-top": "8px" }
+                      },
+                      [
+                        _c("b-progress", {
+                          attrs: {
+                            value: (data.available * 100) / data.total,
+                            "show-value": "",
+                            format: "percent",
+                            size: "is-small",
+                            type:
+                              data.available <= data.thresholds.critical
+                                ? "is-danger"
+                                : data.available <= data.thresholds.warning
+                                ? "is-warning"
+                                : "is-success"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("b-loading", {
+                    attrs: {
+                      "is-full-page": false,
+                      active: data.isLoading,
+                      "can-cancel": true
+                    },
+                    on: {
+                      "update:active": function($event) {
+                        return _vm.$set(data, "isLoading", $event)
+                      }
+                    }
                   })
                 ],
                 1
               )
-            ],
-            1
+            }),
+            0
           )
         ])
-      ]
-    )
-  ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          staticClass: "modal-card-body hero is-light",
+          staticStyle: { "padding-top": "0" }
+        },
+        [
+          _c("div", { staticClass: "columns section" }, [
+            _c("div", { staticClass: "column is-1" }, [
+              _c(
+                "div",
+                { staticClass: "columns is-multiline" },
+                _vm._l(_vm.tabs, function(tab) {
+                  return _c(
+                    "div",
+                    {
+                      key: tab.component,
+                      staticClass: "column is-12",
+                      class:
+                        _vm.currentTab === tab.component &&
+                        (_vm.currentTab == "eco"
+                          ? "has-background-eco"
+                          : "is-bold is-link"),
+                      on: {
+                        click: function($event) {
+                          _vm.currentTab = tab.component
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tile is-child box has-text-centered",
+                          class:
+                            _vm.currentTab === tab.component
+                              ? "is-bold is-link"
+                              : ""
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            class:
+                              _vm.currentTab === tab.component
+                                ? "has-text-white"
+                                : "has-text-grey",
+                            attrs: {
+                              icon: [tab.icon_type, tab.icon],
+                              size: "2x"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticStyle: { "padding-top": "5px" } }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-7 has-text-weight-normal"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(tab.title) +
+                                    "\n                                "
+                                )
+                              ]
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "column",
+                staticStyle: { "padding-left": "48px" }
+              },
+              [
+                _c(
+                  "keep-alive",
+                  [
+                    _c(_vm.currentTabComponent, {
+                      tag: "component",
+                      attrs: {
+                        user: _vm.user,
+                        room: _vm.room,
+                        pop: _vm.room.pop
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isNewRoomModalActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isNewRoomModalActive = $event
+            }
+          }
+        },
+        [_c("modal-new-room", { attrs: { pop: _vm.pop, user: _vm.user } })],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

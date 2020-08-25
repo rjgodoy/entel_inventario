@@ -494,7 +494,10 @@ __webpack_require__.r(__webpack_exports__);
     saveChanges: function saveChanges() {
       var _this11 = this;
 
+      console.log(this.currentGeneratorResponsableAreaId);
+
       if (!this.isEditMode && (this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.generatorSet.generator_set_type_id != this.generator_set_type_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
+        console.log(this.currentGeneratorResponsableAreaId);
         var params = {
           'api_token': this.user.api_token,
           'user_id': parseFloat(this.user.id),
@@ -506,8 +509,8 @@ __webpack_require__.r(__webpack_exports__);
           'generator_set_topology_type_id': parseFloat(this.topology_id),
           'generator_set_level_type_id': parseFloat(this.level_id),
           'generator_set_type_id': parseFloat(this.generator_set_type_id)
-        }; // console.log(params)
-
+        };
+        console.log(params);
         axios.put("/api/generatorSets/".concat(this.generatorSet.id), params).then(function (response) {
           console.log(response.data);
 

@@ -18,6 +18,7 @@ Route::post('registerRequest', 'Api\AdminController@registerRequest');
 Route::middleware('auth:api')->group(function () {
 
     Route::get('menu', 'Api\MainController@menu');
+    Route::apiResource('permissions', 'Api\PermissionController');
     
     Route::get('userRequestAlerts','Api\MainController@userRequestAlerts');
 
@@ -71,7 +72,11 @@ Route::middleware('auth:api')->group(function () {
 			Route::get('albaPopList', 'Api\DashboardApiController@albaPopList');
 			Route::get('albaPopsMap', 'Api\DashboardApiController@albaPopsMap');
 
+			Route::apiResource('autonomies', 'Api\AutonomyController');
+
 		// Electric Lines
+			Route::apiResource('electricCompanies','Api\ElectricCompanyController');
+
 			Route::apiResource('electricLines','Api\ElectricLineController');
 			Route::get('electricLinesExport', 'Api\ElectricLineController@export');
 			Route::get('electricLineData/{core}','Api\ElectricLineController@electricLineData');
@@ -105,13 +110,16 @@ Route::middleware('auth:api')->group(function () {
 			Route::apiResource('generatorSetTypes','Api\GeneratorSetTypeController');
 
 		// Power Rectifiers
-			Route::apiResource('plane','Api\PlaneController');
+			Route::apiResource('planes','Api\PlaneController');
 			Route::get('planeTypes','Api\PlaneController@planeTypes');
 			Route::get('planeDelegationTypes','Api\PlaneController@planeDelegationTypes');
-			Route::put('roomPlaneType/{room_id}','Api\PlaneController@updateRoomPlaneType');
+			Route::put('roomPlaneDelegationType/{room_id}','Api\PlaneController@updateRoomPlaneDelegationType');
 			Route::get('roomPlanes/{room_id}','Api\PlaneController@roomPlanes');
 
 			Route::apiResource('powerRectifiers','Api\PowerRectifierController');
+			Route::apiResource('powerRectifierTypes','Api\PowerRectifierTypeController');
+			Route::apiResource('powerRectifierModes','Api\PowerRectifierModeController');
+
 			Route::get('powerRectifiersExport', 'Api\PowerRectifierController@export');
 			Route::get('powerRectifierData/{core}','Api\PowerRectifierController@powerRectifierData');
 			Route::get('powerRectifierDataCrm/{crm_id}/{core}','Api\PowerRectifierController@powerRectifierDataCrm');
@@ -119,6 +127,8 @@ Route::middleware('auth:api')->group(function () {
 			Route::get('powerRectifiersWithoutRoom/{pop_id}','Api\PowerRectifierController@powerRectifiersWithoutRoom');
 
 			Route::apiResource('batteries','Api\BatteryController');
+			Route::apiResource('batteryBanks','Api\BatteryBankController');
+			Route::apiResource('batteryBankBrands','Api\BatteryBankBrandController');
 
 		// Air Conditioners
 			Route::apiResource('airConditioners','Api\AirConditionerController');

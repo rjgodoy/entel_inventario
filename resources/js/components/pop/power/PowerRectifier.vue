@@ -24,8 +24,19 @@
 
                     <div class="field">
                         <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Modo</div>
-                        <div class="has-text-weight-semibold is-size-5">
-                            {{ powerRectifier.power_rectifier_mode ? powerRectifier.power_rectifier_mode.mode : 'Sin información' }}
+                        <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">
+                            {{ currentPowerRectifierMode }}
+                        </div>
+
+                        <div v-if="isEditMode">
+                            <b-select placeholder="Selecciona..." v-model="power_rectifier_mode_id">
+                                <option
+                                    v-for="option in powerRectifierModes"
+                                    :value="option.id"
+                                    :key="option.id">
+                                    {{ option.mode }}
+                                </option>
+                            </b-select>
                         </div>
                     </div>
 
@@ -40,19 +51,28 @@
 
 
                 <div class="column">
-                    <div class="field">
-                        <div class="has-text-weight-light is-size-7">Nº módulos</div>
-                        <div class="has-text-weight-semibold is-size-5">
-                            {{ powerPlantAModulesQuantity }}
-                        </div>
-                    </div>
+                     <b-field label="MODULOS" label-position="on-border" class="">
+                        <div class=" box is-shadowless" style="border: solid 0.1rem #cccccc">
 
-                    <div class="field">
-                        <div class="has-text-weight-light is-size-7">Capacidad Módulos</div>
-                        <div class="has-text-weight-semibold is-size-5">
-                            {{ totalModulesCapacityMasterA | numeral('0,0.0') }} <span class="is-size-7">kW</span>
+                            <div class="field">
+                                <div class="has-text-weight-light is-size-7">Nº módulos</div>
+                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">
+                                    {{ powerRectifierModulesQuantity }}
+                                </div>
+                                <div v-if="isEditMode">
+                                    <b-input type="text" class="has-text-weight-bold is-size-5" v-model="powerRectifierModulesQuantity"/>
+                                    <b-input type="text" class="has-text-weight-bold is-size-5" v-model="powerRectifierModulesCapacity"/>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="has-text-weight-light is-size-7">Capacidad Total Módulos</div>
+                                <div class="has-text-weight-semibold is-size-5">
+                                    {{ totalModulesCapacityMasterA | numeral('0,0.0') }} <span class="is-size-7">kW</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </b-field>
                 </div>
             </div>
 
@@ -111,55 +131,81 @@
 
         data() {
             return {
+                powerRectifierModes: [],
+
+                currentPowerRectifierMode: 'Sin Información',
+
                 newPowerRectifierCapacity: this.powerRectifier.capacity ? this.powerRectifier.capacity : 0,
+                powerRectifierModulesCapacity: this.currentPowerRectifierModulesCapacity(),
+                powerRectifierModulesQuantity: this.powerRectifier.power_rectifier_modules.length,
+                power_rectifier_mode_id: this.powerRectifier.power_rectifier_mode_id,
+
                 isEditMode: false
             }
         },
 
         mounted() {
-            console.log(this.canEdit)
+            this.getPowerRectifierModes()
         },
 
         computed: {
-            powerRectifierCapacity() {
-                return this.powerRectifier.capacity
-            },
-
-            powerRectfierModules() {
-                return this.powerRectifier.power_rectifier_modules
-            },
-
-            powerPlantAModulesQuantity() {
-                return this.powerRectfierModules.length
-            },
-
             totalModulesCapacityMasterA() {
-                let totalCapacity = 0
-                Object.keys(this.powerRectfierModules).forEach(element => {
-                    totalCapacity = totalCapacity + this.powerRectfierModules[element].capacity
-                })
-                return totalCapacity
-            }
+                return this.powerRectifierModulesQuantity * this.powerRectifierModulesCapacity
+            },
+        },
+
+        watch: {
+            power_rectifier_mode_id(val) {
+                this.powerRectifierModes.forEach(item => {
+                    if(item.id == val) {
+                        this.currentPowerRectifierMode = item.mode
+                    }
+                }) 
+            },
         },
 
         methods: {
+            getPowerRectifierModes() {
+                axios.get(`/api/powerRectifierModes?api_token=${this.user.api_token}`)
+                .then(response => {
+                    // console.log(response.data.telecomCompanies)
+                    this.powerRectifierModes = response.data.powerRectifierModes
+                    if(response.data.powerRectifierModes) {
+                        this.powerRectifierModes.forEach(item => {
+                            if(item.id == this.power_rectifier_mode_id) {
+                                this.currentPowerRectifierMode = item.mode
+                            }
+                        }) 
+                    }
+                })
+            },
+
+            currentPowerRectifierModulesCapacity() {
+                let capacity = 0
+                if (this.powerRectifier.power_rectifier_modules.length) {
+                    Object.keys(this.powerRectifier.power_rectifier_modules).forEach(element => {
+                        capacity = this.powerRectifier.power_rectifier_modules[element].capacity
+                        return capacity
+                    })
+                }
+                return capacity
+            },
+
             saveChanges() {
                 if (!this.isEditMode && (
-                    this.powerRectifierCapacity != this.newPowerRectifierCapacity
-                    // this.usedCapacity != this.newUsedCapacity || 
-                    // this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id ||
-                    // this.generatorSet.generator_set_topology_type_id != this.topology_id ||
-                    // this.generatorSet.generator_set_level_type_id != this.level_id ||
-                    // this.currentGeneratorResponsableAreaId != this.responsable_area_id
+                    this.powerRectifier.capacity != this.newPowerRectifierCapacity ||
+                    this.powerRectifier.power_rectifier_mode_id != this.power_rectifier_mode_id ||
+                    this.powerRectifier.power_rectifier_modules.length != this.powerRectifierModulesQuantity ||
+                    (this.currentPowerRectifierModulesCapacity() != this.powerRectifierModulesCapacity)
                     )
                 ) {
-
                     let params = {
                         'api_token': this.user.api_token,
                         'user_id': this.user.id,
                         'capacity': parseFloat(this.newPowerRectifierCapacity),
-                        // 'used_capacity': parseFloat(this.newUsedCapacity),
-                        // 'maintainer_id': this.maintainer_id,
+                        'power_rectifier_mode_id': this.power_rectifier_mode_id,
+                        'power_rectifier_modules_quantity': this.powerRectifierModulesQuantity,
+                        'power_rectifier_modules_capacities': this.powerRectifierModulesCapacity,
                         // 'generator_set_responsable_area_id': this.responsable_area_id,
                         // 'generator_set_topology_type_id': this.topology_id,
                         // 'generator_set_level_type_id': this.level_id

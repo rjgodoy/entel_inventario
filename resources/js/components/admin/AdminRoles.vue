@@ -115,10 +115,7 @@
                             </option>
                         </b-select>
 
-                        <!-- <span class="tag" :class="props.row.roles.length ? 'is-success' : 'is-info'">
-                            
-                            {{ new Date(props.row.date).toLocaleDateString() }}
-                        </span> -->
+                        <!-- <b-button class="is-size-7" @click="selectedUser=props.row; userRole=props.row.roles[0]; isModalPermissionsActive=true">Permisos</b-button> -->
                     </b-table-column>
 
                     <!-- <b-table-column label="Gender">
@@ -137,6 +134,17 @@
                 </template>
             </b-table>
         </div>
+
+        <b-modal :active.sync="isModalPermissionsActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-permissions 
+                :thisUser="user"
+                :user="selectedUser"
+                :role="userRole"/>
+        </b-modal>
     </section>
 </template>
 
@@ -144,7 +152,7 @@
 
     export default {
         components: {
-
+            ModalPermissions: () => import(/* webpackChunkName: "chunks/admin/modals/modalInfoCircle"*/'./modals/ModalPermissions'),
         },
         props : [
             'user',
@@ -173,10 +181,15 @@
                 currentPage: 1,
                 perPage: 20,
 
+                selectedUser: null,
+                userRole: null,
+
                 roleId: null,
 
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
+
+                isModalPermissionsActive: false
             }
         },
         methods: {

@@ -5,7 +5,18 @@
         </div>
 
         <div class="tile is-ancestor" style="padding-top: 24px;">
+
             <div class="tile is-vertical">
+                <div class="tile">
+                    <div class="tile is-parent is-4">
+                        <div class="tile box is-child">
+                            <b-button class="is-pulled-right" size="is-small" @click="isEditMode = !isEditMode; updateAutonomy()">Editar autonomía del POP</b-button>
+                            <div class="is-size-6">Autonomía del POP</div>
+                            <div v-if="!isEditMode" class="is-size-5 has-text-weight-semibold">{{ newTheoreticalAutonomy }} <span class="is-size-6">hrs</span></div>
+                            <b-input v-if="isEditMode" size="is-small" v-model="newTheoreticalAutonomy"></b-input>
+                        </div>
+                    </div>
+                </div>
                 <div class="tile">
                     <div class="tile is-4">
                         <Junctions 
@@ -77,12 +88,16 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
 
                 canEditJunctions: null,
                 canEditGeneratorGroups: null,
+
+                isEditMode: false,
+                newTheoreticalAutonomy: this.pop && this.pop.current_autonomy ? this.pop.current_autonomy.theoretical : 0
+
             }
         },
 
         computed: {
             pop() {
-                return this.room ? this.room.pop : null
+                return this.room && this.room.pop
             },
 
             salas() {
@@ -94,6 +109,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
             room(val) {
                 this.getJunctions()
                 this.getGeneratorSets()
+                this.newTheoreticalAutonomy = this.pop && this.pop.current_autonomy ? this.pop.current_autonomy.theoretical : 0
             }
         },
 
@@ -133,6 +149,20 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
                     });
                 }
             },
+
+            updateAutonomy() {
+                if(!this.isEditMode && this.pop && this.pop.current_autonomy && this.newTheoreticalAutonomy != this.pop.current_autonomy.theoretical) {
+                    let params = {
+                        'api_token': this.user.api_token,
+                        'pop_id': this.pop.id,
+                        'theoretical_autonomy': parseFloat(this.newTheoreticalAutonomy)
+                    }
+                    axios.post(`/api/autonomies`, params)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                }
+            }
         },
 
         beforeDestroy() {

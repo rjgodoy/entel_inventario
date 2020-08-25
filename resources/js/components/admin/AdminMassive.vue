@@ -9,6 +9,8 @@
                                 Efizity
                             </div>
 
+                            <a @click="isModalInfoBoxActive=true"><font-awesome-icon :icon="['fas', 'info-circle']" /></a>
+
                             <b-field>
                                 <b-upload v-model="file"
                                     @input="submit"
@@ -35,19 +37,27 @@
             </div>
         </div>
 
+        <b-modal :active.sync="isModalInfoBoxActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-info-box />
+        </b-modal>
+
     </div>
 </template>
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-library.add(faUpload);
+library.add(faUpload, faInfoCircle);
 
 export default {
     components: {
-
+        ModalInfoBox: () => import(/* webpackChunkName: "chunks/admin/modals/modalInfoCircle"*/'./modals/ModalInfoBox'),
     },
     props : [
         'user',
@@ -65,6 +75,7 @@ export default {
         return {
             file: [],
             isLoading: false,
+            isModalInfoBoxActive: false
         }
     },
 

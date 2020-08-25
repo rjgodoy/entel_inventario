@@ -3,7 +3,7 @@
         <section class="tile box">
             <b-field label="EMPALMES" label-position="on-border" class="tile">
                 <div class="tile box is-shadowless" style="border: solid 0.05rem black">
-                    <div class="tile is-vertical">
+                    <div class="tile is-vertical" v-if="junctions.length">
                         <div class="tile is-parent">
                             <b-field label="CAPACIDADES" label-position="on-border" class="tile">
                                 <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black">
@@ -56,6 +56,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="tile columns is-vcentered" v-if="!junctions.length">
+                        <div class="column">
+                            <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                <div class="block">NO TIENE EMPALMES REGISTRADOS</div>
+                                <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
+                                    <a @click="isNewJunctionModalActive = true">Agregar</a>
+                                </b-tag>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </b-field>
         </section>
@@ -70,6 +80,16 @@
                 :user="user"
                 />
         </b-modal>
+        <b-modal :active.sync="isNewJunctionModalActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-new-junction 
+                :user="user"
+                :pop="pop"
+                />
+        </b-modal>
     </div>
 </template>
 
@@ -77,6 +97,7 @@
     export default {
         components: {
             ModalJunction: () => import(/* webpackChunkName: "chunks/pop/layout/modals/junction"*/'../../pop/layout/modals/ModalJunction'),
+            ModalNewJunction: () => import(/* webpackChunkName: "chunks/pop/layout/modals/newJunction"*/'../../pop/layout/modals/ModalNewJunction'),
         },
 
         props : [
@@ -90,6 +111,7 @@
             return {
                 junctionSelected: null,
                 isJunctionModalActive: false,
+                isNewJunctionModalActive: false
             }
         },
 
@@ -201,13 +223,14 @@
                 }               
             }
         },
+
+        created() {
+        },
         
         mounted() {
             // console.log(this.generatorSets)
             // this.getGeneratorSets()
         },
-
-        
 
         methods: {
             powerA(junction) {
@@ -280,6 +303,9 @@
                 return plane.recharge_factor * current
             },
 
+        },
+
+        beforeDestroy() {
         }
     }
 </script>

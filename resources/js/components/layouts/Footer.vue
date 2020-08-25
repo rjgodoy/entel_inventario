@@ -16,11 +16,11 @@
                         <div class="column is-3">
                             <div class="block">
                                 <div class="has-text-weight-bold is-size-5">Fuentes de Información</div>
-                                <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Ver fuentes de información -></div>
+                                <div class="has-text-weight-normal is-size-6 has-text-grey" style="padding-top: 8px; font-style: italic">Proximamente</div>
                             </div>
                             <div class="block">
                                 <div class="has-text-weight-bold is-size-5">Documentos de ayuda</div>
-                                <a class="has-text-weight-normal is-size-6" 
+                                <a class="has-text-weight-normal is-size-6 has-text-white" 
                                     @click="isModalInfoActive = true" 
                                     style="padding-top: 8px;">
                                     Ver documentos 
@@ -29,15 +29,25 @@
                         </div>
                         <div class="column is-3">
                             <div class="block">
-                                <!-- <div class="has-text-weight-bold is-size-5">Ultimas Actualizaciones</div> -->
-                                <!-- <div class="has-text-weight-normal is-size-6" style="padding-top: 8px;">Detalle...</div> -->
+                                <div class="has-text-weight-bold is-size-5">Ultimas Actualizaciones</div>
+                                <div class="" v-for="lastData in last_updated_data" style="padding-top: 16px;">
+                                    <div class="columns is-vcentered">
+                                        <div class="column is-3 has-text-centered">
+                                            <div class="box has-background-black-ter has-text-white is-shadowless" style="border: solid 0.1rem #cccccc; padding: 4px;">
+                                                <div class="is-size-5 has-text-weight-bold">{{ dateSet(lastData.date).day }}</div>
+                                                <div class="is-size-7">{{ dateSet(lastData.date).month }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="column is-size-6 has-text-weight-bold">{{ lastData.table }}</div>
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
                         <div class="column">
                             <div class="block">
                                 <div class="has-text-weight-bold is-size-5">Contacto</div>
                                 <div class="field" style="padding-top: 8px;">
-                                    <a class="has-text-weight-normal is-size-6" href="mailto:proyectosinfraestructura@entel.cl">
+                                    <a class="has-text-weight-normal is-size-6 has-text-white" href="mailto:proyectosinfraestructura@entel.cl">
                                         <font-awesome-icon :icon="['fas', 'envelope']"/>
                                         <span>&nbsp;proyectosinfraestructura@entel.cl</span>
                                     </a>
@@ -66,13 +76,16 @@
 </template>
 
 <script>
+    var moment = require('moment')
+    import 'moment/locale/es'
     export default {
         components: {
             ModalInfo: () => import(/* webpackChunkName: "chunks/layouts/modals/info"*/'./modals/Info'),
         },
 
         props: [
-            'user'
+            'user',
+            'last_updated_data'
             // isHoverable: {
             //     type: Boolean,
             //     default: false
@@ -80,18 +93,25 @@
         ],
         data () {
             return {
-                isModalInfoActive: false
+                isModalInfoActive: false,
             }
         },
-        computed: {
-            
+
+        mounted() {
+            moment.locale('es')
         },
+
         created () {
+
         },
-        beforeDestroy () {
-        },
+
         methods: {
-            
+            dateSet(dateUpdated) {
+                return { 
+                    'day': moment(dateUpdated, "YYYY-MM-DD hh:mm:ss").format('DD'), 
+                    'month': moment(dateUpdated, "YYYY-MM-DD hh:mm:ss").format('MMM').toUpperCase() 
+                }
+            }
         }
     }
 </script>

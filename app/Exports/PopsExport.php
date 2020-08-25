@@ -58,6 +58,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
     
     public function __construct(object $request)
     {
+        $this->dashboard = $request->dashboard ? $request->dashboard : 0;
         $this->text = $request->text ? $request->text : 0;
         $this->selectedIds = $request->selectedIds ? $request->selectedIds : [];
 

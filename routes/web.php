@@ -25,6 +25,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
 
     // Route::get('/separate_folders', 'Api\FolderController@separateFolders');
+    Route::get('/api_pops', 'HomeController@apiPops');
 
 	Route::get('/', function () {
 	    return redirect('/dashboard');

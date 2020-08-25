@@ -61,6 +61,7 @@
             :app_name="'{{ config('app.name') }}'"
             :user='@json(auth()->user())'
             :user_permissions='@json(auth()->user()->permissions)'
+            :last_updated_data='@json($last_updated_data)'
         ></router-view>
 
     </div>

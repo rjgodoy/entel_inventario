@@ -274,7 +274,7 @@ class GeneratorSetController extends Controller
 
         $generators = GeneratorSet::where('pop_id', $pop_id)->get();
         foreach ($generators as $generator) {
-            if($generator->current_generator_responsable && $generator->current_generator_responsable->generator_set_responsable_area_id != $request->generator_set_responsable_area_id) {
+            if(!$generator->current_generator_responsable || ($generator->current_generator_responsable && $generator->current_generator_responsable->generator_set_responsable_area_id != $request->generator_set_responsable_area_id)) {
                 $generatorSetResponsable = GeneratorSetResponsable::create([
                     'generator_set_responsable_area_id' => $request->generator_set_responsable_area_id,
                     'generator_set_id' => $generator->id

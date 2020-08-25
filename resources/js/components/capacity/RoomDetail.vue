@@ -11,6 +11,10 @@
                 </div>
                 <div class="column">
                     <div class="has-text-weight-semibold">{{ pop ? pop.nombre : '' }} - {{ room.name }}: {{ room.old_name }}</div>
+
+                    <div class="has-text-centered" style="padding-top: 16px;">
+                        <b-button v-if="canEditPowerRectifiers" size="is-small" @click="isNewRoomModalActive = true">Agregar nueva sala al POP</b-button>
+                    </div>
                 </div>
                 <div class="column is-2">
                     <b-tag type="is-link" size="is-small" v-if="nextRoom.id">
@@ -20,8 +24,6 @@
                     </b-tag>
                 </div>
             </div>
-            
-            
         </header>
 
         <section class="section is-paddingless">
@@ -81,7 +83,7 @@
                         <component :is="currentTabComponent"
                             :user="user"
                             :room="room"
-                            :pop="pop"
+                            :pop="room.pop"
                         ></component>
                     </keep-alive>
                 </div>
@@ -89,6 +91,17 @@
             </div>
             
         </section>
+
+        <b-modal :active.sync="isNewRoomModalActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-new-room
+                :pop="pop" 
+                :user="user"
+                />
+        </b-modal>
     </div>
 </template>
 
@@ -107,6 +120,7 @@
             // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./Calculator'),
             Layout: () => import(/* webpackChunkName: "chunks/capacity/layout"*/'./Layout'),
             Documents: () => import(/* webpackChunkName: "chunks/pop/documents/documents"*/'../pop/documents/Documents'),
+            ModalNewRoom: () => import(/* webpackChunkName: "chunks/pop/layout/modals/newRoom"*/'../pop/layout/modals/ModalNewRoom'),
         },
 
         props : [
@@ -173,6 +187,7 @@
                 isAirConditionerModalActive: false,
                 isDistributionModalActive: false,
                 isSurfaceModalActive: false,
+                isNewRoomModalActive: false,
 
                 totalPRCapacity: 0,
                 usedPRCapacity: 0,
@@ -194,7 +209,7 @@
                     "total": this.totalJunctionsCapacity,
                     "used": this.totalUsedJunctionsCapacity,
                     "available": this.totalAvailableJunctionsCapacity,
-                    "isLoading": this.totalJunctionsCapacity ? false : true,
+                    "isLoading": this.totalJunctionsCapacity || !this.junctions.length ? false : true,
                     "thresholds": this.thresholds.junctions
                 },
                 {
@@ -202,7 +217,7 @@
                     "total": this.totalGeneratorSetsCapacity,
                     "used": this.totalGeneratorSetsUsedCapacity,
                     "available": this.totalAvailableGeneratorSetsCapacity,
-                    "isLoading": this.totalGeneratorSetsCapacity ? false : true,
+                    "isLoading": this.totalGeneratorSetsCapacity || !this.generatorSets.length ? false : true,
                     "thresholds": this.thresholds.generatorSets
                 },
                 {
@@ -210,7 +225,7 @@
                     "total": this.totalCapacityRoom,
                     "used": this.usedCapacityRoom,
                     "available": this.availableCapacityRoom(this.room),
-                    "isLoading": this.totalCapacityRoom ? false : true,
+                    "isLoading": this.totalCapacityRoom || !this.powerRectifiersInRoom(this.room) ? false : true,
                     "thresholds": this.thresholds.powerRectifiers
                 },
                 {
@@ -218,7 +233,7 @@
                     "total": this.totalCapacityBatteries(this.room),
                     "used": this.usedCapacityBatteries(this.room),
                     "available": this.availableCapacityBatteries(this.room),
-                    "isLoading": this.totalCapacityBatteries(this.room) ? false : true,
+                    "isLoading": this.totalCapacityBatteries(this.room) || !this.batteryBanksInRoom(this.room) ? false : true,
                     "thresholds": this.thresholds.batteries
                 },
                 {
@@ -226,7 +241,7 @@
                     "total": this.totalJunctionsCapacity,
                     "used": this.totalUsedJunctionsCapacity,
                     "available": this.totalAvailableJunctionsCapacity,
-                    "isLoading": this.totalJunctionsCapacity ? false : true,
+                    "isLoading": this.totalJunctionsCapacity || !this.junctions.length ? false : true,
                     "thresholds": this.thresholds.climate
                 },
                 {
@@ -754,7 +769,11 @@
             this.$eventBus.$on('room-security', this.getRoomData);
             this.$eventBus.$on('change-room', this.getRoomData);
             this.$eventBus.$on('new-power-rectifier', this.getRoomData)
+            this.$eventBus.$on('new-junction', this.getRoomData)
             this.$eventBus.$on('power-rectifier-updated', this.getRoomData)
+            this.$eventBus.$on('new-plane-updated', this.getRoomData)
+            this.$eventBus.$on('new-battery-bank', this.getRoomData)
+            this.$eventBus.$on('new-room', this.getRoomData)
         },
 
         mounted() {
@@ -865,11 +884,12 @@
 
             powerRectifiersInRoom(room) {
                 let powerRectifiersInRoom = 0
-                Object.keys(room.planes).forEach(element => {
-                    let plane = room.planes[element]
-                    powerRectifiersInRoom += plane.power_rectifiers.length                        
-                })
-                // console.log(powerRectifiersInRoom)
+                if (room.planes) {
+                    Object.keys(room.planes).forEach(element => {
+                        let plane = room.planes[element]
+                        powerRectifiersInRoom += plane.power_rectifiers.length                        
+                    })
+                }
                 return powerRectifiersInRoom
             },
 
@@ -1068,6 +1088,17 @@
 
 
             // Batteries
+            batteryBanksInRoom(room) {
+                let batteryBanks = 0
+                if (room.planes) {
+                    Object.keys(room.planes).forEach(element => {
+                        let plane = room.planes[element]
+                        batteryBanks += plane.battery_banks.length                        
+                    })
+                }
+                return batteryBanks
+            },
+
             totalCapacityBatteries(room) {
                 let capacity = 0
                 if (room.planes) {
@@ -1158,7 +1189,7 @@
                     }
                 }
 
-                let total = available != 10000000 ? available : 0
+                let total = available < 10000000 ? available : 0
                 this.availableBatteryCapacity = total
                 return total
             },  
@@ -1181,7 +1212,11 @@
             this.$eventBus.$off('room-security');
             this.$eventBus.$off('change-room');
             this.$eventBus.$off('new-power-rectifier')
-            this.$eventBus.$on('power-rectifier-updated')
+            this.$eventBus.$off('new-junction')
+            this.$eventBus.$off('power-rectifier-updated')
+            this.$eventBus.$off('new-plane-updated')
+            this.$eventBus.$off('new-battery-bank')
+            this.$eventBus.$off('new-room')
         }
     }
 </script>

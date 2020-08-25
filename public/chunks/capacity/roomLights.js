@@ -155,7 +155,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     totalAvailableEnergyCapacity: function totalAvailableEnergyCapacity() {
       var total = Math.min(this.junctionsTotalAvailableCapacity, this.generatorSetTotalAvailableCapacity, this.powerRectifiersAvailableCapacity, this.batteriesAvailableCapacity, this.distributionAvailableCapacity);
 
-      if (total >= 0) {
+      if (total > 0) {
         return total;
       }
 
@@ -613,8 +613,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getRoomPlanes: function getRoomPlanes() {
       var _this16 = this;
 
-      if (this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type_id) {
-        axios.get("/api/roomPlanes/".concat(this.room.id, "?api_token=").concat(this.user.api_token, "&plane_delegation_type_id=").concat(this.room.current_room_delegation.plane_type_id)).then(function (response) {
+      if (this.room.current_room_delegation && this.room.current_room_delegation.id) {
+        console.log(this.room.id);
+        console.log(this.room.current_room_delegation);
+        axios.get("/api/roomPlanes/".concat(this.room.id, "?api_token=").concat(this.user.api_token, "&plane_delegation_type_id=").concat(this.room.current_room_delegation.plane_delegation_type_id)).then(function (response) {
+          console.log(response.data);
           _this16.roomPlanes = response.data.planes;
         })["catch"](function (error) {
           console.log('Error al traer los datos de Empalmes: ' + error);

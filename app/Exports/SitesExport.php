@@ -145,7 +145,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $site = Site::with('pop.comuna.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type')
+            $site = Site::with('pop.comuna.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies')
             	->where(function($p) use($text) {
                     if ($text) {
                         $p->where('nem_site', 'LIKE', "%$text%")
@@ -265,6 +265,15 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 	        'LOCALIDAD OBLIGATORIA',
 	        'RANCO',
 	        'BAFI',
+
+            'TEC 2G 1900',
+            'TEC 3G 900',
+            'TEC 3G 1900',
+            'TEC LTE 700',
+            'TEC LTE 1900',
+            'TEC LTE 2600',
+            'TEC LTE 3500',
+
             'ESTADO'
         ];
     }
@@ -275,8 +284,29 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
     public function map($site): array
     {
         $bafi = 0;
+        $tech_2g1900 = null;
+        $tech_3g900 = null;
+        $tech_3g1900 = null;
+        $tech_4g700 = null;
+        $tech_4g1900 = null;
+        $tech_4g2600 = null;
+        $tech_4g3500 = null;
+
         foreach ($site->technologies as $technology) {
-            if($technology->technology_type_id == 3 && $technology->frequency == 3500) {
+            if($technology->technology_type_id == 1 && $technology->frequency == 1900) {
+                $tech_2g1900 = $technology->nem_tech;
+            } elseif($technology->technology_type_id == 2 && $technology->frequency == 900) {
+                $tech_3g900 = $technology->nem_tech;
+            } elseif($technology->technology_type_id == 2 && $technology->frequency == 1900) {
+                $tech_3g1900 = $technology->nem_tech;
+            } elseif($technology->technology_type_id == 3 && $technology->frequency == 700) {
+                $tech_4g700 = $technology->nem_tech;
+            } elseif($technology->technology_type_id == 3 && $technology->frequency == 1900) {
+                $tech_4g1900 = $technology->nem_tech;
+            } elseif($technology->technology_type_id == 3 && $technology->frequency == 2600) {
+                $tech_4g2600 = $technology->nem_tech;
+            } elseif($technology->technology_type_id == 3 && $technology->frequency == 3500) {
+                $tech_4g3500 = $technology->nem_tech;
                 $bafi = 1;
             }
         }
@@ -313,6 +343,14 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $site->pop->localidad_obligatoria ? 'SI' : 'NO',
             $site->pop->ranco ? 'SI' : 'NO',
             $bafi ? 'SI' : 'NO',
+
+            $tech_2g1900,
+            $tech_3g900,
+            $tech_3g1900,
+            $tech_4g700,
+            $tech_4g1900,
+            $tech_4g2600,
+            $tech_4g3500,
 
             $site->state->state,
 
@@ -433,7 +471,31 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AC1',
+            'AC1:AI1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '5081bd']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'AJ1',
             [
                 'font' => [
                     'size' => 11,

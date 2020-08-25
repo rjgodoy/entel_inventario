@@ -102,7 +102,16 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $last_room = Room::where('pop_id', $request->pop_id)->orderBy('order', 'desc')->first();
+        $order = $last_room ? $last_room->order + 1 : 1;
+
+        Room::create([
+            'pop_id' => $request->pop_id,
+            'name' => $request->name,
+            'old_name' => $request->alias,
+            'criticity' => 1,
+            'order' => $order
+        ]);
     }
 
     /**

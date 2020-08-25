@@ -21,7 +21,7 @@
                                     icon="search"
                                     placeholder="Buscar el PoP por nemónico, nombre o direccion del sitio..."
                                     :keep-first="true"
-                                    :open-on-focus="text ? true : false"
+                                    :open-on-focus="text ? true : true"
                                     :loading="isFetching"
                                     :check-infinite-scroll="true"
                                     :custom-formatter="searchFormat"
@@ -141,7 +141,7 @@
                         <div class="field is-size-5 has-text-weight-semibold">Datos del Sitio</div>
 
                         <div class="block has-text-centered" style="padding-top: 12px;">
-                            <b-tabs type="is-toggle" expanded v-model="site_type">
+                            <b-tabs type="is-toggle" expanded v-model="site_type_tab_id">
                                 <b-tab-item 
                                     v-for="site_type in siteTypes" 
                                     :key="site_type.id" 
@@ -278,20 +278,12 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-checkbox 
-                                        v-model="bafi"
-                                        type="is-link">
-                                        <div class="is-size-6">Bafi</div>
-                                    </b-checkbox>
-                                </div>
-                                <div class="column">
-                                    <b-checkbox 
                                         v-model="offgrid"
                                         type="is-link">
                                         <div class="is-size-6">Offgrid</div>
                                     </b-checkbox>
                                 </div>
-                            </div>
-                            <div class="columns">
+                            
                                 <div class="column">
                                     <b-checkbox 
                                         v-model="solar"
@@ -299,6 +291,8 @@
                                         <div class="is-size-6">Solar</div>
                                     </b-checkbox>
                                 </div>
+                            </div>
+                            <div class="columns">
                                 <div class="column">
                                     <b-checkbox 
                                         v-model="eolica"
@@ -354,7 +348,9 @@
                 site_type: 0,
                 nem: '',
                 siteName: '',
-                
+
+                site_type_tab_id: 0,
+
                 pe_3g: false,
                 mpls: false,
                 olt: false,
@@ -365,7 +361,6 @@
                 vip: false,
                 localidad_obligatoria: false,
                 ranco: false,
-                bafi: false,
                 offgrid: false,
                 solar: false,
                 eolica: false,
@@ -408,6 +403,10 @@
                     {
                         id: 4,
                         label: 'Phone',
+                    },
+                    {
+                        id: 5,
+                        label: 'Repetidor',
                     }
                 ]
                 
@@ -440,51 +439,51 @@
 
         computed: {
             site_type_id() {
-                return this.site_type == 0 ? 1 : (this.site_type == 1 ? 3 : 4)
+                return this.site_type_tab_id == 0 ? 1 : (this.site_type_tab_id == 1 ? 3 : (this.site_type_tab_id == 2 ? 4 : 5))
             },
 
             filteredComunasArray() {
                 return this.comunas.filter((option) => {
-                    return option.nombre_comuna
+                    return option.nombre_comuna ? option.nombre_comuna
                         .toString()
                         .toLowerCase()
-                        .indexOf(this.name.toLowerCase()) >= 0
+                        .indexOf(this.name.toLowerCase()) >= 0 : ''
                 })
             },
 
             filteredPopTypesArray() {
                 return this.popTypes.filter((option) => {
-                    return option.type
+                    return option.type ? option.type
                         .toString()
                         .toLowerCase()
-                        .indexOf(this.popType.toLowerCase()) >= 0
+                        .indexOf(this.popType.toLowerCase()) >= 0 : ''
                 })
             },
 
             filteredNetTypesArray() {
                 return this.netTypes.filter((option) => {
-                    return option.type
+                    return option.type ? option.type
                         .toString()
                         .toLowerCase()
-                        .indexOf(this.netType.toLowerCase()) >= 0
+                        .indexOf(this.netType.toLowerCase()) >= 0 : ''
                 })
             },
 
             filteredClassificationsArray() {
                 return this.classificationTypes.filter((option) => {
-                    return option.classification_type
+                    return option.classification_type ? option.classification_type
                         .toString()
                         .toLowerCase()
-                        .indexOf(this.classificationType.toLowerCase()) >= 0
+                        .indexOf(this.classificationType.toLowerCase()) >= 0 : ''
                 })
             },
 
             filteredAttentionPrioritiesArray() {
                 return this.attentionPriorityTypes.filter((option) => {
-                    return option.attention_priority_type
+                    return option.attention_priority_type ? option.attention_priority_type
                         .toString()
                         .toLowerCase()
-                        .indexOf(this.attentionPriorityType.toLowerCase()) >= 0
+                        .indexOf(this.attentionPriorityType.toLowerCase()) >= 0 : ''
                 })
             },
 
@@ -600,20 +599,19 @@
                     'classification_type_id': this.classification_type_id,
                     'attention_priority_type_id': this.attention_priority_type_id,
 
-                    'pe_3g': this.pe_3g,
-                    'mpls': this.mpls,
-                    'olt': this.olt,
-                    'olt_3play': this.olt_3play,
-                    'red_minima_n1': this.red_minima_n1,
-                    'red_minima_n2': this.red_minima_n2,
-                    'core': this.core,
-                    'vip': this.vip,
-                    'localidad_obligatoria': this.localidad_obligatoria,
-                    'ranco': this.ranco,
-                    'bafi': this.bafi,
-                    'offgrid': this.offgrid,
-                    'solar': this.solar,
-                    'eolica': this.eolica,
+                    'pe_3g': +this.pe_3g,
+                    'mpls': +this.mpls,
+                    'olt': +this.olt,
+                    'olt_3play': +this.olt_3play,
+                    'red_minima_n1': +this.red_minima_n1,
+                    'red_minima_n2': +this.red_minima_n2,
+                    'core': +this.core,
+                    'vip': +this.vip,
+                    'localidad_obligatoria': +this.localidad_obligatoria,
+                    'ranco': +this.ranco,
+                    'offgrid': +this.offgrid,
+                    'solar': +this.solar,
+                    'eolica': +this.eolica,
                 }
                 axios.post('/api/pop', params)
                 .then(response => {

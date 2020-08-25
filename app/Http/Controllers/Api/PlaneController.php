@@ -7,6 +7,7 @@ use App\Http\Resources\Plane as PlaneResource;
 use App\Http\Resources\PlaneCollection;
 use App\Models\Plane;
 use App\Models\PlaneDelegationType;
+use App\Models\PlaneRedundantModule;
 use App\Models\PlaneType;
 use App\Models\RoomDelegation;
 use Illuminate\Http\Request;
@@ -83,9 +84,11 @@ class PlaneController extends Controller
         ->whereHas('rooms', function($q) use($room_id) {
             $q->where('id', $room_id);
         })
-        // ->whereHas('plane_delegation_types', function($p) use($plane_delegation_type_id) {
-        //     $p->where('id', $plane_delegation_type_id);
-        // })
+        ->whereHas('plane_type', function($p) use($plane_delegation_type_id) {
+            $p->whereHas('plane_delegation_types', function($p) use($plane_delegation_type_id) {
+                $p->where('id', $plane_delegation_type_id);
+            });
+        })
         ->get();
 
         return new PlaneCollection($planes);
@@ -121,11 +124,11 @@ class PlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateRoomPlaneType(Request $request, $room_id)
+    public function updateRoomPlaneDelegationType(Request $request, $room_id)
     {
         $roomDelegation = RoomDelegation::create([
             'room_id' => $room_id,
-            'plane_delegation_type_id' => $request->plane_type_id
+            'plane_delegation_type_id' => $request->plane_delegation_type_id
         ]);
 
         return $roomDelegation;
@@ -141,7 +144,31 @@ class PlaneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $plane = Plane::find($id);
+        $plane->update([
+            'float_tension' => $request->float_tension,
+            'current' => $request->current,
+            'recharge_factor' => $request->recharge_factor
+        ]);
+
+        if ($request->redundant_modules_quantity && $request->redundant_modules_capacity) {
+            $plane_redundant_module = PlaneRedundantModule::where('plane_id', $id)->first();
+            if ($plane_redundant_module) {
+                $plane_redundant_module->update([
+                    'quantity' => $request->redundant_modules_quantity,
+                    'capacity' => $request->redundant_modules_capacity
+                ]);
+            } else {
+                PlaneRedundantModule::create([
+                    'plane_id' => $id,
+                    'quantity' => $request->redundant_modules_quantity,
+                    'capacity' => $request->redundant_modules_capacity
+                ]);
+            }
+
+        }
+
+        return 'plane updated';
     }
 
     /**

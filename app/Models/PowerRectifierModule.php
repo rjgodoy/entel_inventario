@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PowerRectifierModule extends Model
 {
 	use SoftDeletes;
+
+	protected $guarded = [];
 	
     public function power_rectifier() 
     {

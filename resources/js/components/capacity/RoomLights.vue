@@ -106,6 +106,7 @@
             'user',
             'room'
         ],
+        
         data() {
             return {
                 junctions: Object,
@@ -152,7 +153,7 @@
                     this.batteriesAvailableCapacity,
                     this.distributionAvailableCapacity
                 )
-                if (total >= 0) {
+                if (total > 0) {
                     return total
                 }
                 return 0
@@ -575,9 +576,13 @@
 
         methods: {
             getRoomPlanes() {
-                if(this.room.current_room_delegation && this.room.current_room_delegation.plane_delegation_type_id) {
-                    axios.get(`/api/roomPlanes/${this.room.id}?api_token=${this.user.api_token}&plane_delegation_type_id=${this.room.current_room_delegation.plane_type_id}`)
+                if (this.room.current_room_delegation && this.room.current_room_delegation.id) {
+                    console.log(this.room.id)
+                    console.log(this.room.current_room_delegation)
+
+                    axios.get(`/api/roomPlanes/${this.room.id}?api_token=${this.user.api_token}&plane_delegation_type_id=${this.room.current_room_delegation.plane_delegation_type_id}`)
                     .then((response) => {
+                        console.log(response.data)
                         this.roomPlanes = response.data.planes
                     })
                     .catch((error) => {

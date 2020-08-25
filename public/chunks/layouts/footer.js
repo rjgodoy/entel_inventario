@@ -9,6 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment_locale_es__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment/locale/es */ "./node_modules/moment/locale/es.js");
+/* harmony import */ var moment_locale_es__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment_locale_es__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -76,13 +78,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalInfo: function ModalInfo() {
       return __webpack_require__.e(/*! import() | chunks/layouts/modals/info */ "chunks/layouts/modals/info").then(__webpack_require__.bind(null, /*! ./modals/Info */ "./resources/js/components/layouts/modals/Info.vue"));
     }
   },
-  props: ['user' // isHoverable: {
+  props: ['user', 'last_updated_data' // isHoverable: {
   //     type: Boolean,
   //     default: false
   // }
@@ -92,10 +107,18 @@ __webpack_require__.r(__webpack_exports__);
       isModalInfoActive: false
     };
   },
-  computed: {},
+  mounted: function mounted() {
+    moment.locale('es');
+  },
   created: function created() {},
-  beforeDestroy: function beforeDestroy() {},
-  methods: {}
+  methods: {
+    dateSet: function dateSet(dateUpdated) {
+      return {
+        'day': moment(dateUpdated, "YYYY-MM-DD hh:mm:ss").format('DD'),
+        'month': moment(dateUpdated, "YYYY-MM-DD hh:mm:ss").format('MMM').toUpperCase()
+      };
+    }
+  }
 });
 
 /***/ }),
@@ -135,7 +158,8 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "has-text-weight-normal is-size-6",
+                      staticClass:
+                        "has-text-weight-normal is-size-6 has-text-white",
                       staticStyle: { "padding-top": "8px" },
                       on: {
                         click: function($event) {
@@ -152,7 +176,77 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "column is-3" }, [
+                _c(
+                  "div",
+                  { staticClass: "block" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "has-text-weight-bold is-size-5" },
+                      [_vm._v("Ultimas Actualizaciones")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.last_updated_data, function(lastData) {
+                      return _c(
+                        "div",
+                        { staticStyle: { "padding-top": "16px" } },
+                        [
+                          _c("div", { staticClass: "columns is-vcentered" }, [
+                            _c(
+                              "div",
+                              { staticClass: "column is-3 has-text-centered" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "box has-background-black-ter has-text-white is-shadowless",
+                                    staticStyle: {
+                                      border: "solid 0.1rem #cccccc",
+                                      padding: "4px"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "is-size-5 has-text-weight-bold"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.dateSet(lastData.date).day)
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "is-size-7" }, [
+                                      _vm._v(
+                                        _vm._s(_vm.dateSet(lastData.date).month)
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "column is-size-6 has-text-weight-bold"
+                              },
+                              [_vm._v(_vm._s(lastData.table))]
+                            )
+                          ])
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "column" }, [
                 _c("div", { staticClass: "block" }, [
@@ -170,7 +264,8 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "has-text-weight-normal is-size-6",
+                          staticClass:
+                            "has-text-weight-normal is-size-6 has-text-white",
                           attrs: {
                             href: "mailto:proyectosinfraestructura@entel.cl"
                           }
@@ -217,7 +312,7 @@ var render = function() {
       _vm._v(" "),
       _c("hr", { staticClass: "has-background-dark is-marginless" }),
       _vm._v(" "),
-      _vm._m(3)
+      _vm._m(2)
     ],
     1
   )
@@ -258,19 +353,11 @@ var staticRenderFns = [
       _c(
         "div",
         {
-          staticClass: "has-text-weight-normal is-size-6",
-          staticStyle: { "padding-top": "8px" }
+          staticClass: "has-text-weight-normal is-size-6 has-text-grey",
+          staticStyle: { "padding-top": "8px", "font-style": "italic" }
         },
-        [_vm._v("Ver fuentes de información ->")]
+        [_vm._v("Proximamente")]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-3" }, [
-      _c("div", { staticClass: "block" })
     ])
   },
   function() {

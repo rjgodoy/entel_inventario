@@ -175,7 +175,7 @@
             </div>
         </main>
 
-        <Footer :user="user"/>
+        <Footer :user="user" :last_updated_data="last_updated_data"/>
 
         <!-- <hr class="has-background-light is-marginless"></hr>
         <footer :class="currentRoute.toLowerCase() == '/capacity' ? 'has-background-black-ter' : 'has-background-white'" style="padding-top: 0.5rem; padding-bottom: 0rem;">
@@ -208,7 +208,8 @@
             'crms',
             'menu_data',
             'pops',
-            'last_data_counters'
+            'last_data_counters',
+            'last_updated_data'
         ],
 
         data() {

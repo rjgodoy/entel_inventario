@@ -959,7 +959,7 @@ var render = function() {
                           [
                             _vm._v(
                               _vm._s(
-                                _vm._f("numeral")(_vm.newTotalSurface, 0, 0)
+                                _vm._f("numeral")(_vm.newTotalSurface, "0,0.0")
                               ) + " "
                             ),
                             _c("span", { staticClass: "is-size-6" }, [
@@ -1003,7 +1003,7 @@ var render = function() {
                           [
                             _vm._v(
                               _vm._s(
-                                _vm._f("numeral")(_vm.newUsedSurface, 0, 0)
+                                _vm._f("numeral")(_vm.newUsedSurface, "0,0.0")
                               ) + " "
                             ),
                             _c("span", { staticClass: "is-size-6" }, [
@@ -1044,7 +1044,7 @@ var render = function() {
                       _vm._v(
                         "\n                                " +
                           _vm._s(
-                            _vm._f("numeral")(_vm.availableSurface, 0, 0)
+                            _vm._f("numeral")(_vm.availableSurface, "0,0.0")
                           ) +
                           " "
                       ),

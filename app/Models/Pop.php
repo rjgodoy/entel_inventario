@@ -214,7 +214,7 @@ class Pop extends Model
      */
     public function sites() 
     {
-        return $this->hasMany(Site::class);
+        return $this->hasMany(Site::class)->withTrashed();
     }
 
     /**

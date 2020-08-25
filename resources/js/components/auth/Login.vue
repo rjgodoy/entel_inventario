@@ -26,7 +26,7 @@
         </form>
 
         <p class="has-text-centered">
-            <router-link to="/password/email" class="is-size-6">Recuperar contraseña</router-link>
+            <router-link to="/password/email" class="is-size-6 has-text-white">Recuperar contraseña</router-link>
         </p>
 
     </div>

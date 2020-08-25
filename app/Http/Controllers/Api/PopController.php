@@ -187,10 +187,10 @@ class PopController extends Controller
      */
     public function store(Request $request)
     {        
-
+        // return $request;
         $pop = Pop::updateOrCreate([
             'latitude' => $request->latitude,
-            'longitude' => $request->longitude
+            'longitude' => $request->longitude,
         ],[
             'pop_e_id' => $request->pop_e_id,
             'nombre' => $request->nombre,
@@ -198,11 +198,20 @@ class PopController extends Controller
             'comuna_id' => $request->comuna_id,
             'pop_type_id' => $request->pop_type_id,
             'net_type_id' => $request->net_type_id,
+
+            'pe_3g' => $request->pe_3g,
+            'mpls' => $request->mpls,
+            'olt' => $request->olt,
+            'olt_3play' => $request->olt_3play,
+            'localidad_obligatoria' => $request->localidad_obligatoria,
+            'ranco' => $request->ranco,
             'vip' => $request->vip,
             'offgrid' => $request->offgrid,
             'solar' => $request->solar,
             'eolica' => $request->eolica,
         ]);
+
+        // return $pop->id;
 
         $site = Site::create([
             'pop_id' => $pop->id,
@@ -212,21 +221,13 @@ class PopController extends Controller
             'classification_type_id' => $request->classification_type_id,
             'attention_priority_type_id' => $request->attention_priority_type_id,
             'category_type_id'=> null,
-            'attention_type_id'=> 2,
+            'attention_type_id'=> 1,
             'solution_type_id'=> null,
             'site_class_type_id' => null,
             'coverage_type_id'=> null,
             'transport_type_id'=> null,
-
-            'pe_3g' => $request->pe_3g,
-            'mpls' => $request->mpls,
-            'olt' => $request->olt,
-            'olt_3play' => $request->olt_3play,
-            'red_minima' => $request->red_minima_n1 ? $request->red_minima_n1 : ($request->red_minima_n2 ? $request->red_minima_n2 : null),
-            'core' => $request->core,
-            'localidad_obligatoria' => $request->localidad_obligatoria,
-            'ranco' => $request->ranco,
-            'bafi' => $request->bafi,
+            'red_minima' => $request->red_minima_n1 ? $request->red_minima_n1 : ($request->red_minima_n2 ? $request->red_minima_n2 : 0),
+            'core' => $request->core
         ]);
 
         return $pop;
@@ -263,38 +264,26 @@ class PopController extends Controller
             'current_autonomy'
             )
             ->where('id', $id)
-            // ->whereHas('sites', function($q) {
-            //     $q->where(function($p) {
-            //         $p->whereIn('site_type_id', [1,3,4])
-            //         ->where('state_id', 1);
-            //     })
-            //     ->orWhere(function($r) {
-            //         $r->whereIn('sites.site_type_id', [2])
-            //         ->whereHas('technologies', function($s) {
-            //             $s->where('state_id', 1);
-            //         });
-            //     });
-            // })
             ->first();
 
         return new PopResource($pop);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function technologies(Request $request)
-    {
-        $pop_id = $request->pop_id;
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function technologies(Request $request)
+    // {
+    //     $pop_id = $request->pop_id;
 
-        $technologies = Technology::with(['technology_type', 'site' => function($q) use($pop_id) { 
-            $q->where('pop_id', $pop_id); 
-        }])->get();
-        return new PopResource($technologies);
-    }
+    //     $technologies = Technology::with(['technology_type', 'site' => function($q) use($pop_id) { 
+    //         $q->where('pop_id', $pop_id); 
+    //     }])->get();
+    //     return new PopResource($technologies);
+    // }
 
     /**
      * Display the specified resource.
@@ -402,7 +391,7 @@ class PopController extends Controller
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
         $condition_zona = $zona_id != 0 ? 'id = '.$zona_id : 'id != '.$zona_id;
 
-        $sites = Site::with('pop.comuna.zona.crm', 'state', 'classification_type', 'technologies.technology_type', 'technologies.state')
+        $sites = Site::withTrashed()->with('pop.comuna.zona.crm', 'state', 'classification_type', 'technologies.technology_type', 'technologies.state')
             ->where(function($p) use($text) {
                 $p->where(function($q) use ($text) {
                     $q->where('nem_site', 'LIKE', "%$text%")
@@ -416,7 +405,7 @@ class PopController extends Controller
                 })
                 ->orWhere(function($s) use($text) {
                     $s->whereHas('technologies', function($u) use ($text) {
-                        $u->where('nem_tech', 'LIKE', "%$text%");
+                        $u->withTrashed()->where('nem_tech', 'LIKE', "%$text%");
                     });
                 });
             })
@@ -549,7 +538,7 @@ class PopController extends Controller
                             $q->whereRaw($condition_bafi);
                         });
                     } else {
-                        $q->whereRaw('1 = 1');
+                        $q;
                     }
                 })
                 ->whereRaw($condition_core);
@@ -681,7 +670,7 @@ class PopController extends Controller
                             $q->whereRaw($condition_bafi);
                         });
                     } else {
-                        $q->whereRaw('1 = 1');
+                        $q;
                     }
                 })
                 ->whereRaw($condition_core);
@@ -744,35 +733,35 @@ class PopController extends Controller
         return $pops;
     }
 
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function searchPopsEdicion($text, $core)
-    {
-        $pops = Pop::with('comuna.zona.crm', 'comuna.region')
-            ->where(function($query) use ($text) {
-                $query->where('pops.nem_fijo', 'LIKE', "%$text%")
-                    ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
-                    ->orWhere('pops.nombre', 'LIKE', "%$text%")
-                    ->orWhere('pops.direccion', 'LIKE', "%$text%");
-            })
-            // Classificación
-            ->leftJoin('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
+    // /**
+    //  * Search the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function searchPopsEdicion($text, $core)
+    // {
+    //     $pops = Pop::with('comuna.zona.crm', 'comuna.region')
+    //         ->where(function($query) use ($text) {
+    //             $query->where('pops.nem_fijo', 'LIKE', "%$text%")
+    //                 ->orWhere('pops.nem_movil', 'LIKE', "%$text%")
+    //                 ->orWhere('pops.nombre', 'LIKE', "%$text%")
+    //                 ->orWhere('pops.direccion', 'LIKE', "%$text%");
+    //         })
+    //         // Classificación
+    //         ->leftJoin('classification_types', 'pops.classification_type_id', '=', 'classification_types.id')
 
-            // Tipo Atención
-            ->leftJoin('attentions', function ($join) {
-                $join->on('pops.id', '=', 'attentions.pop_id')
-                ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-            })
+    //         // Tipo Atención
+    //         ->leftJoin('attentions', function ($join) {
+    //             $join->on('pops.id', '=', 'attentions.pop_id')
+    //             ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
+    //         })
 
-            ->orderBy('pops.id')
-            ->get();
+    //         ->orderBy('pops.id')
+    //         ->get();
     
-        return $pops;
-    }
+    //     return $pops;
+    // }
 
     /**
      * Search the specified resource from storage.

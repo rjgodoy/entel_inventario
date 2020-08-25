@@ -25,11 +25,19 @@ class AllInfoPopsExport implements WithMultipleSheets, WithEvents
     public function sheets(): array
     {
         $sheets = [];
+        // $sheets[] = new ResumeExport($this->request);
 
-        $sheets[] = new ResumeExport($this->request);
-        $sheets[] = new PopResumeExport($this->request);
-        $sheets[] = new PopsExport($this->request);
-        $sheets[] = new SitesExport($this->request);
+        // if($this->request->resumen) {
+            $sheets[] = new PopResumeExport($this->request);
+        // }
+        
+        // if($this->request->pops) {
+            // $sheets[] = new PopsExport($this->request);
+        // }
+
+        // if($this->request->sites) {
+            // $sheets[] = new SitesExport($this->request);
+        // }
 
         return $sheets;
     }

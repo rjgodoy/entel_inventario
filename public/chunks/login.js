@@ -245,7 +245,10 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "is-size-6", attrs: { to: "/password/email" } },
+          {
+            staticClass: "is-size-6 has-text-white",
+            attrs: { to: "/password/email" }
+          },
           [_vm._v("Recuperar contraseña")]
         )
       ],

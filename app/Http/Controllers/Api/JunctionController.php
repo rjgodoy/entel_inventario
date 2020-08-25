@@ -35,7 +35,12 @@ class JunctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Junction::create([
+            'pop_id' => $request->pop_id,
+            'electric_company_id' => $request->electric_company_id
+        ]);
+
+        return 'junction created';
     }
 
     /**

@@ -489,6 +489,7 @@
             },
 
             saveChanges() {
+                console.log(this.currentGeneratorResponsableAreaId)
                 if (!this.isEditMode && 
                     (this.primeCapacity != this.newPrimeCapacity || 
                     this.usedCapacity != this.newUsedCapacity || 
@@ -497,7 +498,7 @@
                     this.generatorSet.generator_set_level_type_id != this.level_id ||
                     this.generatorSet.generator_set_type_id != this.generator_set_type_id ||
                     this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
-
+                    console.log(this.currentGeneratorResponsableAreaId)
                     let params = {
                         'api_token': this.user.api_token,
                         'user_id': parseFloat(this.user.id),
@@ -510,7 +511,7 @@
                         'generator_set_level_type_id': parseFloat(this.level_id),
                         'generator_set_type_id': parseFloat(this.generator_set_type_id)
                     }
-                    // console.log(params)
+                    console.log(params)
                     axios.put(`/api/generatorSets/${this.generatorSet.id}`, params).then(response => {
                         console.log(response.data)
                         this.$eventBus.$emit('generator-set-capacities-updated');

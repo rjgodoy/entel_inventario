@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        'App\Console\Commands\UpdateCells',
         'App\Console\Commands\UpdatePops',
         'App\Console\Commands\UpdateComsites',
         'App\Console\Commands\UpdatePsgTps',
@@ -27,24 +28,36 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('update:pops')
-            // ->daily()
-            // ->timezone('America/Santiago')
-            // ->at('04:00')
-            // ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+        $schedule->command('search:rcas')
+            ->everyMinute();
+
+        $schedule->command('update:psg_tps')
+            ->daily()
+            ->timezone('America/Santiago')
+            ->at('00:00')
+            ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+
         $schedule->command('update:comsites')
             ->sundays()
             ->timezone('America/Santiago')
-            ->at('02:00')
+            ->at('00:30'); // Siempre falla en el primer intento. Por eso hay un segundo intento.
+        $schedule->command('update:comsites')
+            ->sundays()
+            ->timezone('America/Santiago')
+            ->at('00:45')
             ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
-        $schedule->command('update:psg_tps')
-            // ->everyMinute();
+
+        $schedule->command('update:cells')
             ->daily()
             ->timezone('America/Santiago')
             ->at('01:00')
             ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
-        $schedule->command('search:rcas')
-            ->everyMinute();
+        $schedule->command('update:pops')
+            ->daily()
+            ->timezone('America/Santiago')
+            ->at('04:30')
+            ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+        
     }
 
     /**

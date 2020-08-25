@@ -72,6 +72,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -99,12 +110,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       junctions: Object,
       generatorSets: Object,
       canEditJunctions: null,
-      canEditGeneratorGroups: null
+      canEditGeneratorGroups: null,
+      isEditMode: false,
+      newTheoreticalAutonomy: this.pop && this.pop.current_autonomy ? this.pop.current_autonomy.theoretical : 0
     };
   },
   computed: {
     pop: function pop() {
-      return this.room ? this.room.pop : null;
+      return this.room && this.room.pop;
     },
     salas: function salas() {
       return this.pop && this.pop.rooms ? this.pop.rooms : '';
@@ -114,6 +127,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     room: function room(val) {
       this.getJunctions();
       this.getGeneratorSets();
+      this.newTheoreticalAutonomy = this.pop && this.pop.current_autonomy ? this.pop.current_autonomy.theoretical : 0;
     }
   },
   created: function created() {
@@ -198,7 +212,19 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       }
 
       return getGeneratorSets;
-    }()
+    }(),
+    updateAutonomy: function updateAutonomy() {
+      if (!this.isEditMode && this.pop && this.pop.current_autonomy && this.newTheoreticalAutonomy != this.pop.current_autonomy.theoretical) {
+        var params = {
+          'api_token': this.user.api_token,
+          'pop_id': this.pop.id,
+          'theoretical_autonomy': parseFloat(this.newTheoreticalAutonomy)
+        };
+        axios.post("/api/autonomies", params).then(function (response) {
+          console.log(response.data);
+        });
+      }
+    }
   },
   beforeDestroy: function beforeDestroy() {
     this.$eventBus.$off('junction-measurements-updated');
@@ -234,6 +260,62 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "tile is-vertical" }, [
+          _c("div", { staticClass: "tile" }, [
+            _c("div", { staticClass: "tile is-parent is-4" }, [
+              _c(
+                "div",
+                { staticClass: "tile box is-child" },
+                [
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "is-pulled-right",
+                      attrs: { size: "is-small" },
+                      on: {
+                        click: function($event) {
+                          _vm.isEditMode = !_vm.isEditMode
+                          _vm.updateAutonomy()
+                        }
+                      }
+                    },
+                    [_vm._v("Editar autonomía del POP")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "is-size-6" }, [
+                    _vm._v("Autonomía del POP")
+                  ]),
+                  _vm._v(" "),
+                  !_vm.isEditMode
+                    ? _c(
+                        "div",
+                        { staticClass: "is-size-5 has-text-weight-semibold" },
+                        [
+                          _vm._v(_vm._s(_vm.newTheoreticalAutonomy) + " "),
+                          _c("span", { staticClass: "is-size-6" }, [
+                            _vm._v("hrs")
+                          ])
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditMode
+                    ? _c("b-input", {
+                        attrs: { size: "is-small" },
+                        model: {
+                          value: _vm.newTheoreticalAutonomy,
+                          callback: function($$v) {
+                            _vm.newTheoreticalAutonomy = $$v
+                          },
+                          expression: "newTheoreticalAutonomy"
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            ])
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "tile" }, [
             _c(
               "div",

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BatteryBank extends Model
 {
 	use SoftDeletes;
+
+    protected $guarded = [];
 	
 	public function plane() 
     {

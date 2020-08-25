@@ -147,7 +147,7 @@
         },
 
         methods: {
-            async getData() {
+            getData() {
                 // Si no hay un CRM seleccionado
                 if (!this.selectedCrm) {                             
 

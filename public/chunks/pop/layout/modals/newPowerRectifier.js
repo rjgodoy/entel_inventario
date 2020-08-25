@@ -108,6 +108,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrashAlt"]);
@@ -117,15 +154,27 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     return {
       powerRectifiersWithoutRoom: Array,
       planeTypes: Array,
+      powerRectifierTypes: Array,
+      powerRectifierModes: Array,
       roomDestiny: null,
-      planeType: null
+      planeType: null,
+      power_rectifier_type: null,
+      power_rectifier_mode: null,
+      capacity: 0
     };
+  },
+  computed: {
+    canSave: function canSave() {
+      return this.roomDestiny && this.planeType && this.power_rectifier_type && this.power_rectifier_mode && !this.powerRectifiersWithoutRoom.length && this.capacity > 0;
+    }
   },
   watch: {},
   created: function created() {},
   mounted: function mounted() {
-    this.getPlaneTypes();
     this.getPopPowerRectifiersWithoutRoom();
+    this.getPlaneTypes();
+    this.getPowerRectifierModes();
+    this.getPowerRectifierTypes();
   },
   methods: {
     getPlaneTypes: function getPlaneTypes() {
@@ -135,8 +184,22 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         _this.planeTypes = response.data.planes;
       });
     },
-    getPopPowerRectifiersWithoutRoom: function getPopPowerRectifiersWithoutRoom() {
+    getPowerRectifierTypes: function getPowerRectifierTypes() {
       var _this2 = this;
+
+      axios.get("/api/powerRectifierTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+        _this2.powerRectifierTypes = response.data.powerRectifierTypes;
+      });
+    },
+    getPowerRectifierModes: function getPowerRectifierModes() {
+      var _this3 = this;
+
+      axios.get("/api/powerRectifierModes?api_token=".concat(this.user.api_token)).then(function (response) {
+        _this3.powerRectifierModes = response.data.powerRectifierModes;
+      });
+    },
+    getPopPowerRectifiersWithoutRoom: function getPopPowerRectifiersWithoutRoom() {
+      var _this4 = this;
 
       var params = {
         'api_token': this.user.api_token
@@ -144,37 +207,59 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get("/api/powerRectifiersWithoutRoom/".concat(this.room.pop_id), {
         params: params
       }).then(function (response) {
-        _this2.powerRectifiersWithoutRoom = response.data.powerRectifiers;
+        _this4.powerRectifiersWithoutRoom = response.data.powerRectifiers;
       });
     },
     asignRoom: function asignRoom(powerRectifier) {
-      var _this3 = this;
+      var _this5 = this;
 
-      if (this.roomDestiny && this.planeType) {
+      if (this.roomDestiny && this.planeType && this.powerRectifiersWithoutRoom.length) {
         this.$buefy.dialog.confirm({
           message: "Confirma asignaci\xF3n de la planta rectificadora ".concat(powerRectifier.power_rectifier_type.type, " - ").concat(powerRectifier.power_rectifier_type.model, " a sala ").concat(this.roomDestiny.name, ", alimentando al plano ").concat(this.planeType.type, "?"),
           type: 'is-link',
           onConfirm: function onConfirm() {
-            axios.put("/api/powerRectifiers/".concat(powerRectifier.id, "?api_token=").concat(_this3.user.api_token, "&room_id=").concat(_this3.roomDestiny.id, "&plane_type_id=").concat(_this3.planeType.id)).then(function (response) {
+            axios.put("/api/powerRectifiers/".concat(powerRectifier.id, "?api_token=").concat(_this5.user.api_token, "&room_id=").concat(_this5.roomDestiny.id, "&plane_type_id=").concat(_this5.planeType.id)).then(function (response) {
               console.log(response.data);
 
-              _this3.getPopPowerRectifiersWithoutRoom();
+              _this5.getPopPowerRectifiersWithoutRoom();
 
-              _this3.$eventBus.$emit('new-power-rectifier');
+              _this5.$eventBus.$emit('new-power-rectifier');
             });
           }
         });
       }
     },
+    newPowerRectifier: function newPowerRectifier() {
+      var _this6 = this;
+
+      if (this.canSave) {
+        var params = {
+          'api_token': this.user.api_token,
+          'pop_id': this.roomDestiny.pop_id,
+          'room_id': this.roomDestiny.id,
+          'plane_type_id': this.planeType.id,
+          'power_rectifier_type_id': this.power_rectifier_type.id,
+          'power_rectifier_mode_id': this.power_rectifier_mode.id,
+          'capacity': parseFloat(this.capacity)
+        };
+        axios.post("/api/powerRectifiers", params).then(function (response) {
+          console.log(response.data); // this.getPopPowerRectifiersWithoutRoom()
+
+          _this6.$eventBus.$emit('new-power-rectifier');
+
+          _this6.$parent.close();
+        });
+      }
+    },
     confirmDelete: function confirmDelete(powerRectifier) {
-      var _this4 = this;
+      var _this7 = this;
 
       this.$buefy.dialog.confirm({
         message: 'Desea eliminar la planta rectificadora del POP?',
         type: 'is-danger',
         onConfirm: function onConfirm() {
-          axios["delete"]("/api/powerRectifiers/".concat(powerRectifier.id, "?api_token=").concat(_this4.user.api_token)).then(function (response) {
-            _this4.getPopPowerRectifiersWithoutRoom();
+          axios["delete"]("/api/powerRectifiers/".concat(powerRectifier.id, "?api_token=").concat(_this7.user.api_token)).then(function (response) {
+            _this7.getPopPowerRectifiersWithoutRoom();
           });
         }
       });
@@ -203,284 +288,410 @@ var render = function() {
     "div",
     { staticClass: "modal-card", staticStyle: { width: "800px" } },
     [
-      _c("form", { attrs: { action: "" } }, [
-        _c(
-          "div",
-          { staticClass: "modal-card", staticStyle: { width: "auto" } },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "section",
-              { staticClass: "modal-card-body" },
-              [
-                _vm.powerRectifiersWithoutRoom.length
-                  ? _c("div", [
-                      _c("div", { staticClass: "block" }, [
-                        _c("div", { staticClass: "field" }, [
-                          _c("div", { staticClass: "is-size-5" }, [
-                            _vm._v("Asignar Sala")
+      _c("div", { staticClass: "modal-card", staticStyle: { width: "auto" } }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("section", { staticClass: "modal-card-body" }, [
+          _vm.powerRectifiersWithoutRoom.length
+            ? _c("div", [
+                _c("div", { staticClass: "block" }, [
+                  _c("div", { staticClass: "field" }, [
+                    _c("div", { staticClass: "is-size-5" }, [
+                      _vm._v("Asignar Sala")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "is-size-6 has-text-weight-light" },
+                      [
+                        _vm._v(
+                          "⚠️ Plantas rectificadoras registradas en el POP " +
+                            _vm._s(_vm.room.pop.nombre) +
+                            ", sin sala asignada."
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "columns is-multiline" },
+                    _vm._l(_vm.powerRectifiersWithoutRoom, function(
+                      powerRectifier
+                    ) {
+                      return _c("div", { staticClass: "column is-4" }, [
+                        _c("div", { staticClass: "box" }, [
+                          _c("div", { staticClass: "field" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "has-text-weight-normal is-size-6"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(
+                                      powerRectifier.power_rectifier_type.type
+                                    ) +
+                                    "\n                                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "has-text-weight-light is-size-7"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(
+                                      powerRectifier.power_rectifier_type.model
+                                    ) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "is-size-6 has-text-weight-light" },
-                            [
-                              _vm._v(
-                                "⚠️ Plantas rectificadoras registradas en el POP " +
-                                  _vm._s(_vm.room.pop.nombre) +
-                                  ", sin sala asignada."
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "columns is-multiline" },
-                          _vm._l(_vm.powerRectifiersWithoutRoom, function(
-                            powerRectifier
-                          ) {
-                            return _c("div", { staticClass: "column is-4" }, [
-                              _c("div", { staticClass: "box" }, [
-                                _c("div", { staticClass: "field" }, [
+                          _c("div", { staticClass: "field columns" }, [
+                            _c("div", { staticClass: "column is-5" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field" },
+                                [
                                   _c(
-                                    "div",
+                                    "b-select",
                                     {
-                                      staticClass:
-                                        "has-text-weight-normal is-size-6"
+                                      attrs: {
+                                        placeholder: "Sala",
+                                        size: "is-small"
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          return _vm.asignRoom(powerRectifier)
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.roomDestiny,
+                                        callback: function($$v) {
+                                          _vm.roomDestiny = $$v
+                                        },
+                                        expression: "roomDestiny"
+                                      }
                                     },
-                                    [
-                                      _vm._v(
-                                        "\n                                            " +
-                                          _vm._s(
-                                            powerRectifier.power_rectifier_type
-                                              .type
-                                          ) +
-                                          "\n                                        "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "has-text-weight-light is-size-7"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            " +
-                                          _vm._s(
-                                            powerRectifier.power_rectifier_type
-                                              .model
-                                          ) +
-                                          "\n                                        "
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "field columns" }, [
-                                  _c("div", { staticClass: "column is-5" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "field" },
-                                      [
-                                        _c(
-                                          "b-select",
-                                          {
-                                            attrs: {
-                                              placeholder: "Sala",
-                                              size: "is-small"
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                return _vm.asignRoom(
-                                                  powerRectifier
-                                                )
-                                              }
-                                            },
-                                            model: {
-                                              value: _vm.roomDestiny,
-                                              callback: function($$v) {
-                                                _vm.roomDestiny = $$v
-                                              },
-                                              expression: "roomDestiny"
-                                            }
-                                          },
-                                          _vm._l(_vm.rooms, function(option) {
-                                            return _c(
-                                              "option",
-                                              {
-                                                key: option.id,
-                                                domProps: { value: option }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                        " +
-                                                    _vm._s(option.name) +
-                                                    "\n                                                    "
-                                                )
-                                              ]
-                                            )
-                                          }),
-                                          0
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "column is-5" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "field" },
-                                      [
-                                        _c(
-                                          "b-select",
-                                          {
-                                            attrs: {
-                                              placeholder: "Plano",
-                                              size: "is-small"
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                return _vm.asignRoom(
-                                                  powerRectifier
-                                                )
-                                              }
-                                            },
-                                            model: {
-                                              value: _vm.planeType,
-                                              callback: function($$v) {
-                                                _vm.planeType = $$v
-                                              },
-                                              expression: "planeType"
-                                            }
-                                          },
-                                          _vm._l(_vm.planeTypes, function(
-                                            option
-                                          ) {
-                                            return _c(
-                                              "option",
-                                              {
-                                                key: option.id,
-                                                domProps: { value: option }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                        " +
-                                                    _vm._s(option.type) +
-                                                    "\n                                                    "
-                                                )
-                                              ]
-                                            )
-                                          }),
-                                          0
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "column is-2" }, [
-                                    _c("div", { staticClass: "field" }, [
-                                      _c(
-                                        "button",
+                                    _vm._l(_vm.rooms, function(option) {
+                                      return _c(
+                                        "option",
                                         {
-                                          staticClass:
-                                            "button is-small is-pulled-right has-text-danger",
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.confirmDelete(
-                                                powerRectifier
-                                              )
-                                            }
-                                          }
+                                          key: option.id,
+                                          domProps: { value: option }
                                         },
                                         [
-                                          _c("font-awesome-icon", {
-                                            attrs: {
-                                              icon: ["far", "trash-alt"]
-                                            }
-                                          })
-                                        ],
-                                        1
+                                          _vm._v(
+                                            "\n                                                        " +
+                                              _vm._s(option.name) +
+                                              "\n                                                    "
+                                          )
+                                        ]
                                       )
-                                    ])
-                                  ])
-                                ])
+                                    }),
+                                    0
+                                  )
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "column is-5" }, [
+                              _c(
+                                "div",
+                                { staticClass: "field" },
+                                [
+                                  _c(
+                                    "b-select",
+                                    {
+                                      attrs: {
+                                        placeholder: "Plano",
+                                        size: "is-small"
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          return _vm.asignRoom(powerRectifier)
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.planeType,
+                                        callback: function($$v) {
+                                          _vm.planeType = $$v
+                                        },
+                                        expression: "planeType"
+                                      }
+                                    },
+                                    _vm._l(_vm.planeTypes, function(option) {
+                                      return _c(
+                                        "option",
+                                        {
+                                          key: option.id,
+                                          domProps: { value: option }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                        " +
+                                              _vm._s(option.type) +
+                                              "\n                                                    "
+                                          )
+                                        ]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "column is-2" }, [
+                              _c("div", { staticClass: "field" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "button is-small is-pulled-right has-text-danger",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.confirmDelete(powerRectifier)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      attrs: { icon: ["far", "trash-alt"] }
+                                    })
+                                  ],
+                                  1
+                                )
                               ])
                             ])
-                          }),
-                          0
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("hr")
-                    ])
-                  : _vm._e(),
+                          ])
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ]),
                 _vm._v(" "),
+                _c("hr")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "field columns" }, [
+            _c("div", { staticClass: "column is-2" }, [
+              _c(
+                "div",
+                { staticClass: "field" },
+                [
+                  _c(
+                    "b-select",
+                    {
+                      attrs: { placeholder: "Sala", size: "" },
+                      model: {
+                        value: _vm.roomDestiny,
+                        callback: function($$v) {
+                          _vm.roomDestiny = $$v
+                        },
+                        expression: "roomDestiny"
+                      }
+                    },
+                    _vm._l(_vm.rooms, function(option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option } },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(option.name) +
+                              "\n                                "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column is-2" }, [
+              _c(
+                "div",
+                { staticClass: "field" },
+                [
+                  _c(
+                    "b-select",
+                    {
+                      attrs: { placeholder: "Plano", size: "" },
+                      model: {
+                        value: _vm.planeType,
+                        callback: function($$v) {
+                          _vm.planeType = $$v
+                        },
+                        expression: "planeType"
+                      }
+                    },
+                    _vm._l(_vm.planeTypes, function(option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option } },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(option.type) +
+                              "\n                                "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column is-4" }, [
+              _c(
+                "div",
+                { staticClass: "field" },
+                [
+                  _c(
+                    "b-select",
+                    {
+                      attrs: { placeholder: "Marca/Modelo", size: "" },
+                      model: {
+                        value: _vm.power_rectifier_type,
+                        callback: function($$v) {
+                          _vm.power_rectifier_type = $$v
+                        },
+                        expression: "power_rectifier_type"
+                      }
+                    },
+                    _vm._l(_vm.powerRectifierTypes, function(option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option } },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(option.type) +
+                              " - " +
+                              _vm._s(option.model) +
+                              "\n                                "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column is-2" }, [
+              _c(
+                "div",
+                { staticClass: "field" },
+                [
+                  _c(
+                    "b-select",
+                    {
+                      attrs: { placeholder: "Modo", size: "" },
+                      model: {
+                        value: _vm.power_rectifier_mode,
+                        callback: function($$v) {
+                          _vm.power_rectifier_mode = $$v
+                        },
+                        expression: "power_rectifier_mode"
+                      }
+                    },
+                    _vm._l(_vm.powerRectifierModes, function(option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option } },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(option.mode) +
+                              "\n                                "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "column is-2" },
+              [
                 _c(
                   "b-field",
-                  { attrs: { label: "Email" } },
+                  { attrs: { label: "Capacidad" } },
                   [
                     _c("b-input", {
-                      attrs: {
-                        type: "email",
-                        value: _vm.room.name,
-                        placeholder: "Your email",
-                        required: ""
+                      model: {
+                        value: _vm.capacity,
+                        callback: function($$v) {
+                          _vm.capacity = $$v
+                        },
+                        expression: "capacity"
                       }
                     })
                   ],
                   1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-field",
-                  { attrs: { label: "Password" } },
-                  [
-                    _c("b-input", {
-                      attrs: {
-                        type: "password",
-                        value: _vm.room.id,
-                        "password-reveal": "",
-                        placeholder: "Your password",
-                        required: ""
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("b-checkbox", [_vm._v("Remember me")])
+                )
               ],
               1
-            ),
-            _vm._v(" "),
-            _c("footer", { staticClass: "modal-card-foot" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "button",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.$parent.close()
-                    }
-                  }
-                },
-                [_vm._v("Close")]
-              ),
-              _vm._v(" "),
-              _c("button", { staticClass: "button is-primary" }, [
-                _vm._v("Login")
-              ])
-            ])
-          ]
-        )
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("footer", { staticClass: "modal-card-foot" }, [
+          _c(
+            "button",
+            {
+              staticClass: "button",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.$parent.close()
+                }
+              }
+            },
+            [_vm._v("Close")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "button is-link",
+              attrs: { disabled: !_vm.canSave },
+              on: {
+                click: function($event) {
+                  return _vm.newPowerRectifier()
+                }
+              }
+            },
+            [_vm._v("Guardar")]
+          )
+        ])
       ])
     ]
   )

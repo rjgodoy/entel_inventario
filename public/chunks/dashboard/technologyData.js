@@ -87,6 +87,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 // const RadialChart = () => ({
 //     // The component to load (should be a Promise)
 //     component: import('../RadialChart.vue'),
@@ -126,6 +129,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    total2G900: function total2G900() {
+      var counter = 0;
+      this.technologyData.forEach(function (element) {
+        return counter = counter + element.tec2g900;
+      });
+      return counter;
+    },
     total2G1900: function total2G1900() {
       var counter = 0;
       this.technologyData.forEach(function (element) {
@@ -176,7 +186,7 @@ __webpack_require__.r(__webpack_exports__);
       return counter;
     },
     totalTechnologies: function totalTechnologies() {
-      return this.total2G1900 + this.total3G900 + this.total3G1900 + this.totalLTE700 + this.totalLTE1900 + this.totalLTE2600 + this.totalLTE3500;
+      return this.total2G900 + this.total2G1900 + this.total3G900 + this.total3G1900 + this.totalLTE700 + this.totalLTE1900 + this.totalLTE2600 + this.totalLTE3500;
     }
   },
   methods: {
@@ -277,7 +287,7 @@ var render = function() {
             _c(
               "th",
               { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "2G" } }, [_vm._v("2G 1900")])]
+              [_c("abbr", { attrs: { title: "2G" } }, [_vm._v("2G")])]
             ),
             _vm._v(" "),
             _c(
@@ -356,7 +366,13 @@ var render = function() {
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(crm.tec2g1900, "0,0")))]
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm._f("numeral")(crm.tec2g900 + crm.tec2g1900, "0,0")
+                      )
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
@@ -436,43 +452,49 @@ var render = function() {
               _c(
                 "td",
                 { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.total2G1900, "0,0")))]
+                [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("numeral")(_vm.total2G900 + _vm.total2G1900, "0,0")
+                    )
+                  )
+                ]
               ),
               _vm._v(" "),
               _c(
                 "td",
                 { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.total3G900, "0,0")))]
+                [_vm._v(_vm._s(_vm._f("numeral")(_vm.total3G900, "0,0")))]
               ),
               _vm._v(" "),
               _c(
                 "td",
                 { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.total3G1900, "0,0")))]
+                [_vm._v(_vm._s(_vm._f("numeral")(_vm.total3G1900, "0,0")))]
               ),
               _vm._v(" "),
               _c(
                 "td",
                 { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalLTE700, "0,0")))]
+                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE700, "0,0")))]
               ),
               _vm._v(" "),
               _c(
                 "td",
                 { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalLTE1900, "0,0")))]
+                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE1900, "0,0")))]
               ),
               _vm._v(" "),
               _c(
                 "td",
                 { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalLTE2600, "0,0")))]
+                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE2600, "0,0")))]
               ),
               _vm._v(" "),
               _c(
                 "td",
                 { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalLTE3500, "0,0")))]
+                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE3500, "0,0")))]
               ),
               _vm._v(" "),
               _c(
@@ -480,7 +502,7 @@ var render = function() {
                 { staticClass: "has-text-right", class: _vm.primaryText },
                 [
                   _vm._v(
-                    _vm._s(_vm._f("numeral")(this.totalTechnologies, "0,0"))
+                    _vm._s(_vm._f("numeral")(_vm.totalTechnologies, "0,0"))
                   )
                 ]
               )

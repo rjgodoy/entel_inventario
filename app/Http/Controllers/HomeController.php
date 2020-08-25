@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\CellsImport;
+use App\Imports\JunctionsImport;
 use App\Models\AirConditioner;
 use App\Models\Crm;
 use App\Models\Folder;
@@ -13,6 +15,7 @@ use App\Models\GeneratorTank;
 use App\Models\GeneratorTta;
 use App\Models\Junction;
 use App\Models\Menu;
+use App\Models\Plane;
 use App\Models\Pop;
 use App\Models\PowerRectifier;
 use App\Models\PsgTp;
@@ -28,6 +31,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
@@ -52,71 +56,70 @@ class HomeController extends Controller
     {
         $roles = Role::pluck('slug')->toArray();
         $request->user()->authorizeRoles($roles);
-        
-        // $ids = [6, 20, 21, 39, 75, 76, 85, 101, 147, 200, 207, 233, 252, 289, 295, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 325, 342, 378, 380, 391, 394, 406, 407, 448, 474, 489, 490, 493, 499, 521, 543, 544, 556, 630, 666, 674, 711]; 
-        // foreach ($ids as $id) {
-        //     GeneratorSet::find($id)->delete();
-        //     GeneratorGroup::where('generator_set_id', $id)->delete();
-        //     GeneratorMotor::where('generator_set_id', $id)->delete();
-        //     GeneratorTank::where('generator_set_id', $id)->delete();
-        //     GeneratorTta::where('generator_set_id', $id)->delete();
-        //     GeneratorSetMaintainer::where('generator_set_id', $id)->delete();
-        // }
 
+        // Latest Updates
+        $latest = [
+            [
+                'date' => $lastUpdatePops = DB::table('entel_pops.pops')->latest('updated_at')->first()->updated_at,
+                'table' => 'POPs'
+            ],
+            [
+                'date' => $lastUpdateSites = DB::table('entel_pops.sites')->latest('updated_at')->first()->updated_at,
+                'table' => 'Sitios'
+            ],
+            [
+                'date' => $lastUpdateTechnologies = DB::table('entel_pops.technologies')->latest('updated_at')->first()->updated_at,
+                'table' => 'Tecnologías'
+            ],
+            [
+                'date' => $lastUpdateComsites = DB::table('entel_g_redes_inventario.comsites')->latest('updated_at')->first()->updated_at,
+                'table' => 'Comsites'
+            ],
+            [
+                'date' => $lastUpdateJunctions = DB::table('entel_g_redes_inventario.junctions')->latest('updated_at')->first()->updated_at,
+                'table' => 'Empalmes'
+            ],
+            [
+                'date' => $lastUpdateElectricLines = DB::table('entel_g_redes_inventario.electric_lines')->latest('updated_at')->first()->updated_at,
+                'table' => 'Lineas Elécrtricas'
+            ],
+            [
+                'date' => $lastUpdateGeneratorSets = DB::table('entel_g_redes_inventario.generator_sets')->latest('updated_at')->first()->updated_at,
+                'table' => 'Grupos Electrógenos'
+            ],
+            [
+                'date' => $lastUpdatePowerRectifiers = DB::table('entel_g_redes_inventario.power_rectifiers')->latest('updated_at')->first()->updated_at,
+                'table' => 'Plantas Rectificadoras'
+            ],
+            // [
+            //     'date' => $lastUpdateBatteries = DB::table('entel_g_redes_inventario.batteries')->latest('updated_at')->first()->updated_at,
+            //     'table' => 'Baterías'
+            // ],
+            [
+                'date' => $lastUpdateBatteryBanks = DB::table('entel_g_redes_inventario.battery_banks')->latest('updated_at')->first()->updated_at,
+                'table' => 'Bancos Baterías'
+            ],
+            [
+                'date' => $lastUpdateAirConditioners = DB::table('entel_g_redes_inventario.air_conditioners')->latest('updated_at')->first()->updated_at,
+                'table' => 'Aires Acondicionados'
+            ],
+            [
+                'date' => $lastUpdateVerticalStructures = DB::table('entel_g_redes_inventario.vertical_structures')->latest('updated_at')->first()->updated_at,
+                'table' => 'Estructuras Verticales'
+            ],
+            [
+                'date' => $lastUpdateInfrastructures = DB::table('entel_g_redes_inventario.infrastructures')->latest('updated_at')->first()->updated_at,
+                'table' => 'Infraestructuras'
+            ]
+        ];
 
-        // $nem_techs = ['BI327', 'ESTAY003', 'ESTLA020', 'ESTRM028', 'ESTTA046', 'SA769', 'SWPM', 'ZC500'];
+        usort($latest, function($a1, $a2) {
+           $v1 = strtotime($a1['date']);
+           $v2 = strtotime($a2['date']);
+           return $v1 - $v2; // $v2 - $v1 to reverse direction
+        });
 
-        // foreach ($nem_techs as $nem_tech) {
-        //     $site = Site::where('nem_site', $nem_tech)->first();
-
-        //     if($site) {
-        //         $generatorSet = GeneratorSet::create([
-        //             'pop_id' => $site->pop_id,
-        //             'serial_number' => $nem_tech,
-        //             // 'created_at' => Carbon::now(),
-        //             // 'updated_at' => Carbon::now()
-        //         ]);
-
-        //         $generatorGroup = GeneratorGroup::create([
-        //             'generator_set_id' => $generatorSet->id,
-        //             'serial_number' => $nem_tech,
-        //             // 'created_at' => Carbon::now(),
-        //             // 'updated_at' => Carbon::now()
-        //         ]);
-
-        //         $generatorMotor = GeneratorMotor::create([
-        //             'generator_set_id' => $generatorSet->id,
-        //             'serial_number' => $nem_tech,
-        //             // 'created_at' => Carbon::now(),
-        //             // 'updated_at' => Carbon::now()
-        //         ]);
-
-        //         $generatorTank = GeneratorTank::create([
-        //             'generator_set_id' => $generatorSet->id,
-        //             'serial_number' => $nem_tech,
-        //             // 'created_at' => Carbon::now(),
-        //             // 'updated_at' => Carbon::now()
-        //         ]);
-
-        //         $generatorTta = GeneratorTta::create([
-        //             'generator_set_id' => $generatorSet->id,
-        //             'serial_number' => $nem_tech,
-        //             // 'created_at' => Carbon::now(),
-        //             // 'updated_at' => Carbon::now()
-        //         ]);
-
-        //         $generatorSetMaintainer = GeneratorSetMaintainer::create([
-        //             'generator_set_id' => $generatorSet->id,
-        //             'telecom_company_id' => 1,
-        //             // 'created_at' => Carbon::now(),
-        //             // 'updated_at' => Carbon::now()
-        //         ]);
-
-        //     }
-        // }
-
-
-
+        $last_updated_data = array_slice(array_reverse($latest), 0, 3);
         
         // ⚠️ Create api_token
         // $users = User::where('estado', 1)->get();
@@ -181,15 +184,35 @@ class HomeController extends Controller
             'equipment' => $equipment,
             'last_updated_pops' => $last_updated_pops,
             'last_updated_sites' => $last_updated_sites,
-            'last_updated_technologies' => $last_updated_technologies
-
+            'last_updated_technologies' => $last_updated_technologies,
         ]; 
 
         return view('layouts.main', compact(
             'menu',
             'crms',
-            'last_data_counters'
+            'last_data_counters',
+            'last_updated_data'
         ));
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function apiPops(Request $request)
+    {
+        $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
+        $token = 'a3QwEBesPKm9b2f';
+        $hash = md5($now.''.$token);
+        $url = 'https://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
+        dd($url);
+        // Storage::disk('local')->put('file.csv', fopen($url, 'r'));
+
+        (new CellsImport)->import('file.csv');
+        dd('success');
+
+    }
+
     
 }

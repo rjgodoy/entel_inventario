@@ -13,6 +13,6 @@
 Button Text
 @endcomponent
 
-Saludos a todos, menos a uno...<br>
+<br>
 {{ config('app.name') }}
 @endcomponent

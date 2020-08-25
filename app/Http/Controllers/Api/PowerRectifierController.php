@@ -6,8 +6,11 @@ use App\Exports\PowerRectifiersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PowerRectifier as PowerRectifierResource;
 use App\Http\Resources\PowerRectifierCollection;
+use App\Models\Log;
 use App\Models\Plane;
 use App\Models\PowerRectifier;
+use App\Models\PowerRectifierMode;
+use App\Models\PowerRectifierModule;
 use App\Models\Room;
 use DB;
 use Illuminate\Http\Request;
@@ -15,7 +18,7 @@ use Illuminate\Support\Facades\Cache;
 
 class PowerRectifierController extends Controller
 {
-    protected $seconds = 2592000;
+    protected $seconds = 86400;
 
     /**
      * Display a listing of the resource.
@@ -160,7 +163,32 @@ class PowerRectifierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $plane_type_id = $request->plane_type_id;
+        $powerR = PowerRectifier::where('room_id', $request->room_id)
+            ->whereHas('plane', function($q) use($plane_type_id) {
+                $q->where('plane_type_id', $plane_type_id);
+            })
+            ->first();
+
+        if($powerR) {
+            $plane_id = $powerR->plane_id;
+        } else {
+            $plane = Plane::create([
+                'plane_type_id' => $request->plane_type_id
+            ]);
+            $plane_id = $plane->id;
+            $room = Room::find($request->room_id);
+            $room->planes()->attach($plane_id);
+        }
+
+        PowerRectifier::create([
+            'pop_id' => $request->pop_id,
+            'room_id' => $request->room_id,
+            'plane_id' => $plane_id,
+            'power_rectifier_type_id' => $request->power_rectifier_type_id,
+            'power_rectifier_mode_id' => $request->power_rectifier_mode_id,
+            'capacity' => $request->capacity
+        ]);
     }
 
     /**
@@ -215,6 +243,9 @@ class PowerRectifierController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $powerRectifier = PowerRectifier::find($id);
+        $pop_id = $powerRectifier->pop_id;
+
         if ($request->room_id && $request->plane_type_id) {
             $room_id = $request->room_id;
             $plane_type_id = $request->plane_type_id;
@@ -236,7 +267,6 @@ class PowerRectifierController extends Controller
                 $room->planes()->attach($plane_id);
             }
 
-            $powerRectifier = PowerRectifier::find($id);
             $powerRectifier->update([
                 'room_id' => $room_id,
                 'plane_id' => $plane_id
@@ -244,12 +274,67 @@ class PowerRectifierController extends Controller
         }
 
         if ($request->capacity) {
-            $powerRectifier = PowerRectifier::find($id);
             if(!$powerRectifier->capacity || ($powerRectifier->capacity != $request->capacity)) {
                 $powerRectifier->update([
                     'capacity' => $request->capacity
                 ]);
             }
+            Log::create([
+                'pop_id' => $pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'Se ha actualizado la capacidad de la planta ID '.$powerRectifier->id.' a '.$request->capacity.'.'
+            ]);
+        }
+
+        if($powerRectifier->power_rectifier_mode_id != $request->power_rectifier_mode_id) {
+            $powerRectifier->update([
+                'power_rectifier_mode_id' => $request->power_rectifier_mode_id
+            ]);
+
+            $powerRectifierMode = PowerRectifierMode::find($request->power_rectifier_mode_id);
+
+            Log::create([
+                'pop_id' => $pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'Se ha actualizado la planta ID '.$powerRectifier->id.' a modo '.$powerRectifierMode->mode.'.'
+            ]);
+        }
+
+        if(!$powerRectifier->power_rectifier_modules->count()) {
+            for ($i=0; $i < $request->power_rectifier_modules_quantity ; $i++) { 
+                PowerRectifierModule::create([
+                    'power_rectifier_id' => $powerRectifier->id,
+                    'capacity' => $request->power_rectifier_modules_capacities
+                ]);
+            }
+            Log::create([
+                'pop_id' => $pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'Se han ingresado nuevos módulos de la planta ID '.$powerRectifier->id.'.'
+            ]);
+
+        } elseif ($powerRectifier->power_rectifier_modules->count() != $request->power_rectifier_modules_quantity || $powerRectifier->power_rectifier_modules->first()->capacity != $request->power_rectifier_modules_capacities) {
+
+            $modules = PowerRectifierModule::where('power_rectifier_id', $powerRectifier->id)->get();
+            foreach ($modules as $module) {
+                $module->delete();
+            }
+            for ($i=0; $i < $request->power_rectifier_modules_quantity ; $i++) { 
+                PowerRectifierModule::create([
+                    'power_rectifier_id' => $powerRectifier->id,
+                    'capacity' => $request->power_rectifier_modules_capacities
+                ]);
+            }
+
+            Log::create([
+                'pop_id' => $pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'Se han actualizado los módulos de la planta ID '.$powerRectifier->id.'..'
+            ]);
         }
 
         return $powerRectifier;

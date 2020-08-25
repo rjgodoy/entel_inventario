@@ -40,7 +40,7 @@ class SiteController extends Controller
                 FROM entel_pops.sites 
                 GROUP BY year, month
                 ORDER BY year desc, month desc
-                limit 6
+                limit 3
             "));
 
         return new SiteResource($data);

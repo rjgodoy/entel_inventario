@@ -561,41 +561,40 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getComunas: function getComunas() {
       var _this6 = this;
 
-      axios.get("/api/comunas?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/comunas").then(function (response) {
         _this6.comunas = response.data.data;
       });
     },
     getPopTypes: function getPopTypes() {
       var _this7 = this;
 
-      axios.get("/api/popTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/popTypes").then(function (response) {
         _this7.popTypes = response.data.popTypes;
       });
     },
     getNetTypes: function getNetTypes() {
       var _this8 = this;
 
-      axios.get("/api/netTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/netTypes").then(function (response) {
         _this8.netTypes = response.data.netTypes;
       });
     },
     getClassificationTypes: function getClassificationTypes() {
       var _this9 = this;
 
-      axios.get("/api/classificationTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/classificationTypes").then(function (response) {
         _this9.classificationTypes = response.data;
       });
     },
     getAttentionPriorityTypes: function getAttentionPriorityTypes() {
       var _this10 = this;
 
-      axios.get("/api/attentionPriorityTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/attentionPriorityTypes").then(function (response) {
         _this10.attentionPriorityTypes = response.data;
       });
     },
     postNewPop: function postNewPop() {
       var params = {
-        'api_token': this.user.api_token,
         'pop_e_id': this.pop_e_id.toUpperCase(),
         'nombre': this.nombre,
         'direccion': this.direccion,
@@ -652,7 +651,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       }
 
       this.isFetching = true;
-      axios.get("/api/allPops?api_token=".concat(this.user.api_token, "&text=").concat(name, "&page=").concat(this.page)).then(function (response) {
+      axios.get("/api/allPops?text=".concat(name, "&page=").concat(this.page)).then(function (response) {
         console.log(response.data.meta.last_page);
         response.data.pops.forEach(function (item) {
           return _this11.pops.push(item);

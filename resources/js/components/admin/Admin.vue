@@ -93,7 +93,7 @@
             },
 
             getTabs() {
-                axios.get(`/api/tabs?api_token=${this.user.api_token}`)
+                axios.get(`/api/tabs`)
                 .then((response) => {
                     this.tabs = response.data.data
                 })

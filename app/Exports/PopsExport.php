@@ -151,7 +151,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones')
+            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->where(function ($p) use ($text) {
                         if ($text) {
@@ -262,7 +262,10 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'ZONA PROTEGIDA',
             'RCA',
             'ZONA ACOPIO TEMPORAL (ZAT)',
-            'PROYECTO ALBA'
+            'PROYECTO ALBA',
+
+            'Q CONTRATOS COMSITE',
+            'Nº CONTRATOS'
         ];
     }
 
@@ -273,6 +276,14 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
     {
         $temporary_storage = TemporaryStorage::with('pop')->where('zona_id', $pop->comuna->zona_id)->first();
         $rca = Rca::where('pop_id', $pop->id)->first();
+
+        $id_comsites = null;
+        if ($pop->comsites->count()) { 
+            foreach ($pop->comsites as $comsite) {
+                $id_comsites = $id_comsites == null ? $pop->comsites->first()->id : $id_comsites.', '.$pop->comsites->first()->id;
+            }
+        }
+
         return [
             $pop->id,
             $pop->pop_e_id,
@@ -312,7 +323,10 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $pop->protected_zones->first() ? $pop->protected_zones->first()->cod_zone.' - '.$pop->protected_zones->first()->name : 'NO',
             $rca ? 'SI' : 'NO',
             $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
-            $pop->alba_project ? 'SI' : 'NO'
+            $pop->alba_project ? 'SI' : 'NO',
+
+            $pop->comsites->count(),
+            $id_comsites
 
         ];
     }
@@ -494,6 +508,30 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 'fill' => [
                     'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => ['argb' => 'c04f4d']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'W1:X1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '5081bd']
                 ]
             ]
         );

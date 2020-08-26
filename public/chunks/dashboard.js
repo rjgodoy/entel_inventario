@@ -678,7 +678,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
       var crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
       var zona_id = this.selectedZona ? this.selectedZona.id : 0;
-      axios.get("/api/dashboardMap?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+      axios.get("/api/dashboardMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
         try {
           // this.pops = []
           // response.data.forEach(element =>{
@@ -704,7 +704,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 this.currentTab = 'critics';
                 crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/criticPopsMap?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                axios.get("/api/criticPopsMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
                   _this2.pops = response.data.data;
                 });
@@ -738,7 +738,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 this.currentTab = 'alba';
                 crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/albaPopsMap?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                axios.get("/api/albaPopsMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
                   _this3.pops = response.data.data;
                 });
@@ -772,7 +772,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
               case 0:
                 crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/dashboard?api_token=".concat(this.user.api_token, "&core=").concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                axios.get("/api/dashboard?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   _this4.popsQuantity = response.data.pops;
                   _this4.sitesQuantity = response.data.sites;
                   _this4.technologiesQuantity = response.data.technologies;
@@ -889,7 +889,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       }
 
       this.isFetching = true;
-      axios.get("/api/searchPops?api_token=".concat(this.user.api_token, "&text=").concat(text, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&core=").concat(this.core, "&page=").concat(this.page)).then(function (response) {
+      axios.get("/api/searchPops?text=".concat(text, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&core=").concat(this.core, "&page=").concat(this.page)).then(function (response) {
         response.data.data.forEach(function (item) {
           return _this5.popSearch.push(item);
         });
@@ -973,7 +973,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
       this.isLoading = true;
       var params = {
-        'api_token': this.user.api_token,
         'core': this.core,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
         'zona_id': this.selectedZona ? this.selectedZona.id : 0

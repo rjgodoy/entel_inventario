@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comsite extends Model
 {
+    protected $connection = 'mysql';
+    protected $table = 'entel_g_redes_inventario.comsites';
+
     protected $guarded = [];
 
     public function pop() 

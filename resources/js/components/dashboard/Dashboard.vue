@@ -657,7 +657,7 @@
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/dashboardMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
+                axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
                 .then((response) => {
                     try {
                         // this.pops = []
@@ -677,7 +677,7 @@
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/criticPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                axios.get(`/api/criticPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     // console.log(response.data)
                     this.pops = response.data.data
 
@@ -691,7 +691,7 @@
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/albaPopsMap?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                axios.get(`/api/albaPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     // console.log(response.data)
                     this.pops = response.data.data
                 })
@@ -703,7 +703,7 @@
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/dashboard?api_token=${this.user.api_token}&core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
+                axios.get(`/api/dashboard?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     this.popsQuantity = response.data.pops
                     this.sitesQuantity = response.data.sites
                     this.technologiesQuantity = response.data.technologies
@@ -798,7 +798,7 @@
                     return
                 }
                 this.isFetching = true
-                axios.get(`/api/searchPops?api_token=${this.user.api_token}&text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
+                axios.get(`/api/searchPops?text=${text}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&core=${this.core}&page=${this.page}`)
                     .then((response) => {
                         response.data.data.forEach((item) => this.popSearch.push(item))
                         this.page++
@@ -878,7 +878,6 @@
                 this.isLoading = true
 
                 var params = {
-                    'api_token': this.user.api_token,
                     'core': this.core,
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0

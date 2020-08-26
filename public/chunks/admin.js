@@ -111,7 +111,7 @@ __webpack_require__.r(__webpack_exports__);
     getTabs: function getTabs() {
       var _this = this;
 
-      axios.get("/api/tabs?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/tabs").then(function (response) {
         _this.tabs = response.data.data;
       });
     }

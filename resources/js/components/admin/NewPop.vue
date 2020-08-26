@@ -548,35 +548,35 @@
             },
 
             getComunas() {
-                axios.get(`/api/comunas?api_token=${this.user.api_token}`)
+                axios.get(`/api/comunas`)
                 .then(response => {
                     this.comunas = response.data.data
                 })
             },
 
             getPopTypes() {
-                axios.get(`/api/popTypes?api_token=${this.user.api_token}`)
+                axios.get(`/api/popTypes`)
                 .then(response => {
                     this.popTypes = response.data.popTypes
                 })
             },
 
             getNetTypes() {
-                axios.get(`/api/netTypes?api_token=${this.user.api_token}`)
+                axios.get(`/api/netTypes`)
                 .then(response => {
                     this.netTypes = response.data.netTypes
                 })
             },
 
             getClassificationTypes() {
-                axios.get(`/api/classificationTypes?api_token=${this.user.api_token}`)
+                axios.get(`/api/classificationTypes`)
                 .then(response => {
                     this.classificationTypes = response.data
                 })
             },
 
             getAttentionPriorityTypes() {
-                axios.get(`/api/attentionPriorityTypes?api_token=${this.user.api_token}`)
+                axios.get(`/api/attentionPriorityTypes`)
                 .then(response => {
                     this.attentionPriorityTypes = response.data
                 })
@@ -584,7 +584,6 @@
 
             postNewPop() {
                 let params = {
-                    'api_token': this.user.api_token,
                     'pop_e_id': this.pop_e_id.toUpperCase(),
                     'nombre': this.nombre,
                     'direccion': this.direccion,
@@ -639,7 +638,7 @@
                     return
                 }
                 this.isFetching = true
-                axios.get(`/api/allPops?api_token=${this.user.api_token}&text=${name}&page=${this.page}`)
+                axios.get(`/api/allPops?text=${name}&page=${this.page}`)
                     .then( response  => {
                         console.log(response.data.meta.last_page)
                         response.data.pops.forEach((item) => this.pops.push(item))

@@ -2,18 +2,29 @@
 
 namespace App\Models;
 
+use App\Permissions\HasPermissionsTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Permissions\HasPermissionsTrait;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
+    use HasApiTokens, Notifiable, HasPermissionsTrait;
+
     protected $connection = 'mysql_entel_corp';
     protected $table = 'users';
 
-    use Notifiable;
-    use HasPermissionsTrait;
+    /**
+     * Find the user instance for the given username.
+     *
+     * @param  string  $username
+     * @return \App\User
+     */
+    public function findForPassport($username)
+    {
+        return $this->where('username', $username)->first();
+    }
 
     /**
      * The attributes that are mass assignable.

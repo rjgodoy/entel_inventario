@@ -145,7 +145,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $site = Site::with('pop.comuna.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies')
+            $site = Site::with('pop.comuna.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies', 'pop.comsites')
             	->where(function($p) use($text) {
                     if ($text) {
                         $p->where('nem_site', 'LIKE', "%$text%")
@@ -274,7 +274,10 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             'TEC LTE 2600',
             'TEC LTE 3500',
 
-            'ESTADO'
+            'ESTADO',
+
+            'Q CONTRATOS COMSITE',
+            'Nº CONTRATOS'
         ];
     }
 
@@ -308,6 +311,13 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             } elseif($technology->technology_type_id == 3 && $technology->frequency == 3500) {
                 $tech_4g3500 = $technology->nem_tech;
                 $bafi = 1;
+            }
+        }
+
+        $id_comsites = null;
+        if ($site->pop->comsites->count()) { 
+            foreach ($site->pop->comsites as $comsite) {
+                $id_comsites = $id_comsites == null ? $site->pop->comsites->first()->id : $id_comsites.', '.$site->pop->comsites->first()->id;
             }
         }
 
@@ -353,6 +363,9 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $tech_4g3500,
 
             $site->state->state,
+
+            $site->pop->comsites->count(),
+            $id_comsites
 
   		];
   	}
@@ -514,6 +527,30 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                 'fill' => [
                     'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => ['argb' => 'c04f4d']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'AK1:AL1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '5081bd']
                 ]
             ]
         );

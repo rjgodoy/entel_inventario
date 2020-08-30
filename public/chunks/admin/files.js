@@ -114,6 +114,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -304,106 +308,108 @@ var render = function() {
         "div",
         { staticClass: "section" },
         [
-          _c("b-table", {
-            attrs: {
-              data: _vm.isEmpty ? [] : _vm.files,
-              bordered: false,
-              striped: false,
-              narrowed: false,
-              hoverable: false,
-              loading: false,
-              focusable: false,
-              "mobile-cards": false
+          _c(
+            "b-table",
+            {
+              attrs: {
+                data: _vm.isEmpty ? [] : _vm.files,
+                bordered: false,
+                striped: false,
+                narrowed: false,
+                hoverable: false,
+                loading: false,
+                focusable: false,
+                "mobile-cards": false
+              }
             },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(props) {
-                  return [
-                    _c(
-                      "b-table-column",
-                      {
-                        attrs: { field: "filename", label: "First Name" },
-                        scopedSlots: _vm._u(
-                          [
-                            {
-                              key: "header",
-                              fn: function(ref) {
-                                var column = ref.column
-                                return [
-                                  _c("div", { staticClass: "is-size-6" }, [
-                                    _vm._v(_vm._s(column.label))
-                                  ])
-                                ]
-                              }
-                            }
-                          ],
-                          null,
-                          true
+            [
+              _c("b-table-column", {
+                attrs: { field: "filename", label: "First Name" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "header",
+                    fn: function(ref) {
+                      var column = ref.column
+                      return [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "is-size-6",
+                            attrs: { "append-to-body": "" }
+                          },
+                          [_vm._v(_vm._s(column.label))]
                         )
-                      },
-                      [
-                        _vm._v(" "),
+                      ]
+                    }
+                  },
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
                         _c("div", { staticClass: "is-size-6" }, [
                           _vm._v(_vm._s(props.row.filename))
                         ])
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-table-column",
-                      {
-                        attrs: { field: "basename", label: "Last Name" },
-                        scopedSlots: _vm._u(
-                          [
-                            {
-                              key: "header",
-                              fn: function(ref) {
-                                var column = ref.column
-                                return [
-                                  _c("div", { staticClass: "is-size-6" }, [
-                                    _vm._v(_vm._s(column.label))
-                                  ])
-                                ]
-                              }
-                            }
-                          ],
-                          null,
-                          true
+                    }
+                  }
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "basename", label: "Last Name" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "header",
+                    fn: function(ref) {
+                      var column = ref.column
+                      return [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "is-size-6",
+                            attrs: { "append-to-body": "" }
+                          },
+                          [_vm._v(_vm._s(column.label))]
                         )
-                      },
-                      [
-                        _vm._v(" "),
+                      ]
+                    }
+                  },
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
                         _c("div", { staticClass: "is-size-6" }, [
                           _vm._v(_vm._s(props.row.basename))
                         ])
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-table-column",
-                      {
-                        attrs: { label: "Eliminar" },
-                        scopedSlots: _vm._u(
-                          [
-                            {
-                              key: "header",
-                              fn: function(ref) {
-                                var column = ref.column
-                                return [
-                                  _c("div", { staticClass: "is-size-6" }, [
-                                    _vm._v(_vm._s(column.label))
-                                  ])
-                                ]
-                              }
-                            }
-                          ],
-                          null,
-                          true
+                    }
+                  }
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { label: "Eliminar" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "header",
+                    fn: function(ref) {
+                      var column = ref.column
+                      return [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "is-size-6",
+                            attrs: { "append-to-body": "" }
+                          },
+                          [_vm._v(_vm._s(column.label))]
                         )
-                      },
-                      [
-                        _vm._v(" "),
+                      ]
+                    }
+                  },
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
                         _c(
                           "b-button",
                           {
@@ -421,14 +427,14 @@ var render = function() {
                           ],
                           1
                         )
-                      ],
-                      1
-                    )
-                  ]
-                }
-              }
-            ])
-          })
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          )
         ],
         1
       )

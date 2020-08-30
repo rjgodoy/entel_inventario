@@ -60,49 +60,57 @@
                 aria-page-label="Page"
                 aria-current-label="Current page">
 
-                <template slot-scope="props">
-                    <b-table-column field="id" label="ID" width="40" searchable sortable numeric>
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="id" label="ID" width="40" searchable sortable numeric>
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.id }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
-                    <b-table-column field="name" label="First Name" searchable sortable>
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="name" label="First Name" searchable sortable>
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.name }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
-                    <b-table-column field="apellido" label="Last Name" searchable sortable>
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="apellido" label="Last Name" searchable sortable>
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.apellido }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
-                    <b-table-column field="nombre_cargo_especifico" label="Cargo" searchable sortable>
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="nombre_cargo_especifico" label="Cargo" searchable sortable>
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.nombre_cargo_especifico }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
-                    <b-table-column field="role" label="Role" centered>
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="role" label="Role" centered>
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <b-select 
                             @input="updateUserRole(props.row.id, roleId)"
                             :placeholder="props.row.roles.length ? props.row.roles[0].name : 'Sin rol asignado'"
@@ -114,24 +122,24 @@
                                 {{ role.name }}
                             </option>
                         </b-select>
+                    </template>
 
-                        <!-- <b-button class="is-size-7" @click="selectedUser=props.row; userRole=props.row.roles[0]; isModalPermissionsActive=true">Permisos</b-button> -->
-                    </b-table-column>
+                    <!-- <b-button class="is-size-7" @click="selectedUser=props.row; userRole=props.row.roles[0]; isModalPermissionsActive=true">Permisos</b-button> -->
+                </b-table-column>
 
-                    <!-- <b-table-column label="Gender">
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
-                        <span>
-                            <b-icon pack="fas"
-                                :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                            </b-icon>
-                            {{ props.row.gender }}
-                        </span>
-                    </b-table-column> -->
-                </template>
+                <!-- <b-table-column label="Gender">
+                    <template slot="header" slot-scope="{ column }">
+                        <b-tooltip :label="column.label">
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <span>
+                        <b-icon pack="fas"
+                            :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
+                        </b-icon>
+                        {{ props.row.gender }}
+                    </span>
+                </b-table-column> -->
             </b-table>
         </div>
 
@@ -207,7 +215,7 @@
             getRoles() {
                 axios.get(`/api/roles`)
                 .then(response => {
-                    this.roles = response.data.data
+                    this.roles = response.data.roles
                 })
             },
 

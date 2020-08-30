@@ -68,30 +68,34 @@
                     :focusable="false"
                     :mobile-cards="false">
 
-                    <template slot-scope="props">
-                        <b-table-column field="filename" label="First Name">
-                            <template slot="header" slot-scope="{ column }">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </template>
+                    <b-table-column field="filename" label="First Name">
+                        <template v-slot:header="{ column }">
+                            <div class="is-size-6" append-to-body>{{ column.label }}</div>
+                        </template>
+                        <template v-slot="props">
                             <div class="is-size-6">{{ props.row.filename }}</div>
-                        </b-table-column>
+                        </template>
+                    </b-table-column>
 
-                        <b-table-column field="basename" label="Last Name">
-                            <template slot="header" slot-scope="{ column }">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </template>
+                    <b-table-column field="basename" label="Last Name">
+                        <template v-slot:header="{ column }">
+                            <div class="is-size-6" append-to-body>{{ column.label }}</div>
+                        </template>
+                        <template v-slot="props">
                             <div class="is-size-6">{{ props.row.basename }}</div>
-                        </b-table-column>
+                        </template>
+                    </b-table-column>
 
-                        <b-table-column label="Eliminar">
-                            <template slot="header" slot-scope="{ column }">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </template>
+                    <b-table-column label="Eliminar">
+                        <template v-slot:header="{ column }">
+                            <div class="is-size-6" append-to-body>{{ column.label }}</div>
+                        </template>
+                        <template v-slot="props">
                             <b-button class="has-text-danger" @click="confirmDeleteFile(props.row)">
                                 <font-awesome-icon :icon="['far', 'trash-alt']"/>
                             </b-button>
-                        </b-table-column>
-                    </template>
+                        </template>
+                    </b-table-column>
                 </b-table>
             </div>
 

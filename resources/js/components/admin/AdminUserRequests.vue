@@ -29,61 +29,83 @@
                 aria-page-label="Page"
                 aria-current-label="Current page">
 
-                <template slot-scope="props">
-                    <b-table-column field="id" label="ID" width="40" numeric>
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="id" label="ID" width="40" numeric>
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.id }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
-                    <b-table-column field="name" label="Nombre">
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="name" label="Nombre">
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.name }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
-                    <b-table-column field="apellido" label="Apellido">
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="apellido" label="Apellido">
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.apellido }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
-                    <b-table-column field="username" label="Username">
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="username" label="Username">
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.username }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
-                    <b-table-column field="email" label="Email">
-                        <template slot="header" slot-scope="{ column }">
-                            <b-tooltip :label="column.label">
-                                <div class="is-size-6">{{ column.label }}</div>
-                            </b-tooltip>
-                        </template>
+                <b-table-column field="email" label="Email">
+                    <template v-slot:header="{ column }">
+                        <b-tooltip :label="column.label" append-to-body>
+                            <div class="is-size-6">{{ column.label }}</div>
+                        </b-tooltip>
+                    </template>
+                    <template v-slot="props">
                         <div class="is-size-6">{{ props.row.email }}</div>
-                    </b-table-column>
+                    </template>
+                </b-table-column>
 
 
-                    <b-table-column >
-                        <p class="control">
-                            <button class="button is-success" @click="confirm(props.row)">Aceptar</button>
-                            <button class="button is-danger" @click="rejected(props.row)">Rechazar</button>
-                        </p>
-                    </b-table-column>
+                <b-table-column >
+                    <p class="control">
+                        <button class="button is-success" @click="confirm(props.row)">Aceptar</button>
+                        <button class="button is-danger" @click="rejected(props.row)">Rechazar</button>
+                    </p>
+                </b-table-column>
 
+                <template slot="empty">
+                    <section class="section">
+                        <div class="content has-text-grey has-text-centered">
+                            <p>
+                                <b-icon
+                                    icon="emoticon-sad"
+                                    size="is-large">
+                                </b-icon>
+                            </p>
+                            <p>No hay solicitudes.</p>
+                        </div>
+                    </section>
                 </template>
+
             </b-table>
         </div>
     </section>

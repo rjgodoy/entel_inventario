@@ -151,14 +151,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -432,11 +424,6 @@ var render = function() {
                 fn: function(props) {
                   return [
                     _c("b-input", {
-                      attrs: {
-                        placeholder: "Search...",
-                        icon: "magnify",
-                        size: "is-small"
-                      },
                       model: {
                         value: props.filters[props.column.field],
                         callback: function($$v) {
@@ -532,11 +519,6 @@ var render = function() {
                 fn: function(props) {
                   return [
                     _c("b-input", {
-                      attrs: {
-                        placeholder: "Search...",
-                        icon: "magnify",
-                        size: "is-small"
-                      },
                       model: {
                         value: props.filters[props.column.field],
                         callback: function($$v) {

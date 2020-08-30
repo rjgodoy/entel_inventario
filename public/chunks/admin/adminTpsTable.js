@@ -114,6 +114,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['title', 'data', 'loading', 'tab'],
   data: function data() {
@@ -202,128 +210,118 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("b-table", {
-        attrs: {
-          data: _vm.isEmpty ? [] : _vm.data,
-          paginated: _vm.isPaginated,
-          "per-page": _vm.perPage,
-          "current-page": _vm.currentPage,
-          "pagination-simple": _vm.isPaginationSimple,
-          "pagination-position": _vm.paginationPosition,
-          "default-sort-direction": _vm.defaultSortDirection,
-          "sort-icon": _vm.sortIcon,
-          "sort-icon-size": _vm.sortIconSize,
-          "pagination-size": "is-small",
-          "default-sort": "FECHA_INGRESO",
-          "aria-next-label": "Next page",
-          "aria-previous-label": "Previous page",
-          "aria-page-label": "Page",
-          "aria-current-label": "Current page"
-        },
-        on: {
-          "update:currentPage": function($event) {
-            _vm.currentPage = $event
+      _c(
+        "b-table",
+        {
+          attrs: {
+            data: _vm.isEmpty ? [] : _vm.data,
+            paginated: _vm.isPaginated,
+            "per-page": _vm.perPage,
+            "current-page": _vm.currentPage,
+            "pagination-simple": _vm.isPaginationSimple,
+            "pagination-position": _vm.paginationPosition,
+            "default-sort-direction": _vm.defaultSortDirection,
+            "sort-icon": _vm.sortIcon,
+            "sort-icon-size": _vm.sortIconSize,
+            "pagination-size": "is-small",
+            "default-sort": "FECHA_INGRESO",
+            "aria-next-label": "Next page",
+            "aria-previous-label": "Previous page",
+            "aria-page-label": "Page",
+            "aria-current-label": "Current page"
           },
-          "update:current-page": function($event) {
-            _vm.currentPage = $event
+          on: {
+            "update:currentPage": function($event) {
+              _vm.currentPage = $event
+            },
+            "update:current-page": function($event) {
+              _vm.currentPage = $event
+            }
           }
         },
-        scopedSlots: _vm._u([
-          {
-            key: "default",
-            fn: function(props) {
-              return [
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
-                      width: "90",
-                      field: "tp_id",
-                      label: "ID TP",
-                      sortable: "",
-                      searchable: ""
-                    },
-                    scopedSlots: _vm._u(
+        [
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              width: "90",
+              field: "tp_id",
+              label: "ID TP",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c("div", { staticClass: "is-size-7" }, [
                       _c("div", { staticClass: "is-size-6" }, [
                         _vm._v(_vm._s(props.row.tp_id))
                       ])
                     ])
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
-                      field: "site.nem_site",
-                      label: "Sitio",
-                      sortable: "",
-                      searchable: ""
-                    },
-                    scopedSlots: _vm._u(
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              field: "site.nem_site",
+              label: "Sitio",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c(
                       "div",
                       { staticClass: "is-size-6 has-text-weight-normal" },
@@ -340,49 +338,46 @@ var render = function() {
                       ]
                     )
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
-                      field: "title",
-                      label: "Título",
-                      sortable: "",
-                      searchable: ""
-                    },
-                    scopedSlots: _vm._u(
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              field: "title",
+              label: "Título",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c(
                       "b-tooltip",
                       {
@@ -403,200 +398,187 @@ var render = function() {
                         )
                       ]
                     )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
-                      field: "user",
-                      label: "Creador",
-                      sortable: "",
-                      searchable: ""
-                    },
-                    scopedSlots: _vm._u(
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              field: "user",
+              label: "Creador",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c(
                       "div",
                       { staticClass: "is-size-6 has-text-weight-normal" },
                       [_vm._v(_vm._s(props.row.user))]
                     )
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
-                      field: "created_at",
-                      label: "Fecha Ingreso TP",
-                      sortable: "",
-                      searchable: ""
-                    },
-                    scopedSlots: _vm._u(
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              field: "created_at",
+              label: "Fecha Ingreso TP",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c(
                       "div",
                       { staticClass: "is-size-6 has-text-weight-normal" },
                       [_vm._v(_vm._s(props.row.created_at))]
                     )
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
-                      field: "executed_at",
-                      label: "Fecha Ejecución TP",
-                      sortable: "",
-                      searchable: "",
-                      centered: ""
-                    },
-                    scopedSlots: _vm._u(
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              field: "executed_at",
+              label: "Fecha Ejecución TP",
+              sortable: "",
+              searchable: "",
+              centered: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c(
                       "div",
                       { staticClass: "is-size-6 has-text-weight-normal" },
                       [_vm._v(_vm._s(props.row.executed_at))]
                     )
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
-                      field: "psg_tp_state.state",
-                      label: "Estado",
-                      sortable: "",
-                      searchable: "",
-                      centered: ""
-                    },
-                    scopedSlots: _vm._u(
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              field: "psg_tp_state.state",
+              label: "Estado",
+              sortable: "",
+              searchable: "",
+              centered: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c(
                       "b-tag",
                       {
@@ -614,14 +596,14 @@ var render = function() {
                         )
                       ]
                     )
-                  ],
-                  1
-                )
-              ]
-            }
-          }
-        ])
-      }),
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("b-loading", {
         attrs: {

@@ -32,11 +32,7 @@
                 <template
                     slot="searchable"
                     slot-scope="props">
-                    <b-input 
-                        v-model="props.filters[props.column.field]"
-                        placeholder="Search..."
-                        icon="magnify"
-                        size="is-small" />
+                    <b-input v-model="props.filters[props.column.field]" />
                 </template>
                 <template v-slot:header="{ column }">
                     <b-tooltip :label="column.label" class="is-size-6" append-to-body>
@@ -60,11 +56,7 @@
                 <template 
                     slot="searchable"
                     slot-scope="props">
-                    <b-input
-                        v-model="props.filters[props.column.field]"
-                        placeholder="Search..."
-                        icon="magnify"
-                        size="is-small" />
+                    <b-input v-model="props.filters[props.column.field]" />
                 </template>
                 <template v-slot:header="{ column }">
                     <b-tooltip :label="column.label" class="is-size-6" append-to-body>

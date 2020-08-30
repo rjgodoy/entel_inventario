@@ -857,7 +857,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
         lat: parseFloat(pop.latitude),
         lng: parseFloat(pop.longitude)
       };
-      axios.get("/api/popInfo?api_token=".concat(this.user.api_token, "&pop_id=").concat(pop.id)).then(function (response) {
+      axios.get("/api/popInfo?pop_id=".concat(pop.id)).then(function (response) {
         console.log(response.data);
         _this.infoContent = _this.getInfoWindowContent(response.data);
       }); // this.infoContent = this.getInfoPop(pop);

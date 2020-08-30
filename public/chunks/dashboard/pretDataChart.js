@@ -116,8 +116,8 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     graphData: function graphData() {
       var _this = this;
 
-      axios.get("/api/siteStats?api_token=".concat(this.user.api_token)).then(function (response) {
-        console.log(response.data);
+      axios.get("/api/siteStats").then(function (response) {
+        // console.log(response.data)
         _this.chartData = response.data.data;
 
         _this.graph();

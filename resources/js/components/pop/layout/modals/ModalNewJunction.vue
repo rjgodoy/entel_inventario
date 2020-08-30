@@ -55,7 +55,7 @@
 
         methods: {
             getElectricCompanies() {
-                axios.get(`/api/electricCompanies?api_token=${this.user.api_token}`)
+                axios.get(`/api/electricCompanies`)
                 .then(response => {
                     this.electricCompanies = response.data.electricCompanies
                 })
@@ -63,7 +63,6 @@
 
             newJunction() {
                 let params = {
-                    'api_token': this.user.api_token,
                     'pop_id': this.pop.id,
                     'electric_company_id': this.electric_company_id
                 }

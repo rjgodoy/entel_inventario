@@ -286,7 +286,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'parameter': param,
         'value': !val,
         'user_id': this.user.id
@@ -306,7 +305,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this2 = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'value': !this.vip_entel,
         'user_id': this.user.id
       };

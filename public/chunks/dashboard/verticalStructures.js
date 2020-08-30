@@ -97,7 +97,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       var _this = this;
 
       if (this.crmSelected == null) {
-        axios.get("/api/verticalStructureData/".concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
+        axios.get("/api/verticalStructureData/".concat(this.core)).then(function (response) {
           _this.verticalStructureData = response.data.data;
 
           _this.totalVerticalStructures();
@@ -105,7 +105,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
           console.log('handle server error from here');
         });
       } else if (this.zonaSelected == null) {
-        axios.get("/api/verticalStructureDataCrm/".concat(this.crmSelected.id, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
+        axios.get("/api/verticalStructureDataCrm/".concat(this.crmSelected.id, "/").concat(this.core)).then(function (response) {
           _this.verticalStructureData = response.data.data;
 
           _this.totalVerticalStructures();
@@ -113,7 +113,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
           console.log('handle server error from here');
         });
       } else {
-        axios.get("/api/verticalStructureDataZona/".concat(this.zonaSelected.id, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
+        axios.get("/api/verticalStructureDataZona/".concat(this.zonaSelected.id, "/").concat(this.core)).then(function (response) {
           console.log(response);
           _this.verticalStructureData = response.data.data;
 
@@ -128,7 +128,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
       this.isLoading = true;
       var params = {
-        'api_token': this.user.api_token,
         'core': this.core,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
         'zona_id': this.selectedZona ? this.selectedZona.id : 0

@@ -170,7 +170,7 @@
 
         methods: {
             getDistributionTypes() {
-                axios.get(`/api/fireDetectionTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/fireDetectionTypes`).then(response => {
                     console.log(response.data.fireDetectionTypes)
                     this.fireDetectionTypes = response.data.fireDetectionTypes
                     // if(response.data.fireDetectionTypes) {
@@ -184,7 +184,7 @@
             },
 
             getExtinctionTypes() {
-                axios.get(`/api/fireExtinctionTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/fireExtinctionTypes`).then(response => {
                     this.fireExtinctionTypes = response.data.fireExtinctionTypes
                     // if(response.data.fireExtinctionTypes) {
                     //     this.fireExtinctionTypes.forEach(item => {
@@ -204,7 +204,6 @@
                     ) {
 
                     let params = {
-                        'api_token': this.user.api_token,
                         'user_id': this.user.id,
                         'fire_detection_type_id': this.fire_detection_type_id,
                         'fire_extinction_type_id': this.fire_extinction_type_id,

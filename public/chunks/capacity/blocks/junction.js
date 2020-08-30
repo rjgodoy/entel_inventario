@@ -189,16 +189,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var total = 0;
-      Object.keys(this.pop.rooms).forEach(function (element) {
-        var room = _this3.pop.rooms[element];
 
-        if (room.power_rectifiers.length) {
-          Object.keys(room.planes).forEach(function (item) {
-            var roomPlane = room.planes[item];
-            total += _this3.batteryRechargePower(roomPlane);
-          });
-        }
-      });
+      if (this.pop.rooms && this.pop.rooms.length) {
+        Object.keys(this.pop.rooms).forEach(function (element) {
+          var room = _this3.pop.rooms[element];
+
+          if (room.power_rectifiers.length) {
+            Object.keys(room.planes).forEach(function (item) {
+              var roomPlane = room.planes[item];
+              total += _this3.batteryRechargePower(roomPlane);
+            });
+          }
+        });
+      }
+
       return total;
     },
     totalUsedCapacity: function totalUsedCapacity() {

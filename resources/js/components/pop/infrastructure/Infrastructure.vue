@@ -129,7 +129,7 @@
         methods: {
             // APIs
             getVerticalStructures() {
-                axios.get(`/api/verticalStructures/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/verticalStructures/${this.pop.id}`)
                 .then((response) => {
                     this.verticalStructures = response.data.data
                     console.log(this.verticalStructures)
@@ -140,7 +140,7 @@
             },
 
             getInfrastructures() {
-                axios.get(`/api/infrastructures/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/infrastructures/${this.pop.id}`)
                 .then((response) => {
                     this.infrastructures = response.data.data
                     console.log(this.infrastructures)

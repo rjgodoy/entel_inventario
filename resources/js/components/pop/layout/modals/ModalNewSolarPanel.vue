@@ -67,51 +67,7 @@
         },
 
         methods: {
-            // getPlaneTypes() {
-            //     axios.get(`/api/planeTypes?api_token=${this.user.api_token}`).then(response => {
-            //         this.planeTypes = response.data.planes
-            //     })
-            // },
 
-            // getPopPowerRectifiersWithoutRoom() {
-            //     let params = {
-            //         'api_token': this.user.api_token
-            //     }
-            //     axios.get(`/api/powerRectifiersWithoutRoom/${this.room.pop_id}`, {params})
-            //     .then(response => {
-            //         this.powerRectifiersWithoutRoom = response.data.powerRectifiers
-            //     })
-            // },
-
-            // asignRoom(powerRectifier) {
-            //     if(this.roomDestiny && this.planeType) {
-            //         this.$buefy.dialog.confirm({
-            //             message: `Confirma asignación de la planta rectificadora ${powerRectifier.power_rectifier_type.type} - ${powerRectifier.power_rectifier_type.model} a sala ${ this.roomDestiny.name }, alimentando al plano ${this.planeType.type}?`,
-            //             type: 'is-link',
-            //             onConfirm: () => {
-            //                 axios.put(`/api/powerRectifiers/${powerRectifier.id}?api_token=${this.user.api_token}&room_id=${this.roomDestiny.id}&plane_type_id=${this.planeType.id}`)
-            //                 .then(response => {
-            //                     console.log(response.data)
-            //                     this.getPopPowerRectifiersWithoutRoom()
-            //                     this.$eventBus.$emit('new-power-rectifier')
-            //                 })
-            //             }
-            //         })
-            //     }
-            // },
-
-            // confirmDelete(powerRectifier) {
-            //     this.$buefy.dialog.confirm({
-            //         message: 'Desea eliminar la planta rectificadora del POP?',
-            //         type: 'is-danger',
-            //         onConfirm: () => {
-            //             axios.delete(`/api/powerRectifiers/${powerRectifier.id}?api_token=${this.user.api_token}`)
-            //             .then(response => {
-            //                 this.getPopPowerRectifiersWithoutRoom()
-            //             })
-            //         }
-            //     })
-            // },
         }
     }
 </script>

@@ -129,27 +129,14 @@ class HomeController extends Controller
         //     ])->save();
         // }
 
-        if (Cache::has('crms')) {
-            $crms = Cache::get('crms');
-        } else {
-            $crms = Cache::rememberForever('crms', function () {
-                $crms = Crm::with('zonas.comunas', 'zonas.responsable')->get();
-                return $crms;
-            });
-        }
-
-        $menu = Menu::where('active', 1)
-            ->orderBy('order', 'asc')
-            ->get();
-
 
         // CONTADORES
         // $pop_news_day = Pop::whereDay('created_at', Carbon::now()->format('d'))->count();
-        $pop_news_month = Pop::whereMonth('created_at', Carbon::now()->format('m'))->whereYear('created_at', Carbon::now()->format('Y'))->count();
+        // $pop_news_month = Pop::whereMonth('created_at', Carbon::now()->format('m'))->whereYear('created_at', Carbon::now()->format('Y'))->count();
         // $sites_news_day = Site::whereDay('created_at', Carbon::now()->format('d'))->count();
         $sites_news_month = Site::whereMonth('created_at', Carbon::now()->format('m'))->whereYear('created_at', Carbon::now()->format('Y'))->count();
         // $technologies_news_day = Technology::whereDay('created_at', Carbon::now()->format('d'))->count();
-        // $technologies_news_month = Technology::whereMonth('created_at', Carbon::now()->format('m'))->count();
+        $technologies_news_month = Technology::whereMonth('created_at', Carbon::now()->format('m'))->whereYear('created_at', Carbon::now()->format('Y'))->count();
 
         // Equipos
         // $equipments_news_day = 
@@ -163,35 +150,37 @@ class HomeController extends Controller
 
 
         $last_site = Site::with('pop.comuna.zona.crm')->latest()->first();
+        $last_technology = Technology::with('site.pop.comuna.zona.crm')->latest()->first();
         $equipment = PsgTp::whereMonth('created_at', '>', Carbon::now()->format('m'))->count();
 
         $last_updated_pops = Carbon::parse(Pop::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
         $last_updated_sites = Carbon::parse(Site::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
         $last_updated_technologies = Carbon::parse(Technology::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
 
-
         
         $last_data_counters = [
             // 'pop_news_day' => $pop_news_day,
-            'pop_news_month' => $pop_news_month,
+            // 'pop_news_month' => $pop_news_month,
             // 'sites_news_day' => $sites_news_day,
             'sites_news_month' => $sites_news_month,
             // 'technologies_news_day' => $technologies_news_day,
-            // 'technologies_news_month' => $technologies_news_month,
+            'technologies_news_month' => $technologies_news_month,
             // 'equipments_news_day' => $equipments_news_day,
             // 'equipments_news_month' => $equipments_news_month,
             'last_site' => $last_site,
+            'last_technology' => $last_technology,
             'equipment' => $equipment,
             'last_updated_pops' => $last_updated_pops,
             'last_updated_sites' => $last_updated_sites,
             'last_updated_technologies' => $last_updated_technologies,
         ]; 
 
+        $darkMode = 0;
+
         return view('layouts.main', compact(
-            'menu',
-            'crms',
             'last_data_counters',
-            'last_updated_data'
+            'last_updated_data',
+            'darkMode'
         ));
     }
 
@@ -207,7 +196,7 @@ class HomeController extends Controller
         $hash = md5($now.''.$token);
         $url = 'https://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
         dd($url);
-        // Storage::disk('local')->put('file.csv', fopen($url, 'r'));
+        Storage::disk('local')->put('file.csv', fopen($url, 'r'));
 
         (new CellsImport)->import('file.csv');
         dd('success');

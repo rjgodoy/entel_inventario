@@ -527,9 +527,9 @@ export default {
     methods: {
         // BUTTONS
         getCrms() {
-            axios.get(`/api/crms?api_token=${this.user.api_token}`)
+            axios.get(`/api/crms`)
             .then((response) => {
-                this.crms = response.data.data;
+                this.crms = response.data.crms;
             })
             .catch(() => {
                 console.log('handle server error from here');
@@ -537,7 +537,7 @@ export default {
         },
 
         getFilterButtons() {
-            axios.get(`/api/filters?api_token=${this.user.api_token}`)
+            axios.get(`/api/filters`)
             .then((response) => {
                 // console.log(response.data)
                 this.filters = response.data;
@@ -595,8 +595,6 @@ export default {
         // APIs
         getPops() {
             var params = {
-                'api_token': this.user.api_token,
-
                 'page': this.pops.current_page,
                 'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                 'zona_id': this.selectedZona ? this.selectedZona.id : 0,
@@ -641,8 +639,6 @@ export default {
         // APIs
         getPopsMap(params) {
             // var params = {
-            //     'api_token': this.user.api_token,
-
             //     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
             //     'zona_id': this.selectedZona ? this.selectedZona.id : 0,
             //     'text': this.searchText != '' ?  this.searchText : 0,
@@ -750,8 +746,6 @@ export default {
             this.isLoading = true
 
             var params = {
-                'api_token': this.user.api_token,
-
                 'selectedIds': this.selectedIds,
                 'text': this.searchText != '' ?  this.searchText : 0,
 

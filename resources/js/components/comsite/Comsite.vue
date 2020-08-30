@@ -161,7 +161,7 @@ export default {
     },
     methods: {
         getComsiteData() {
-            axios.get(`/api/comsites?api_token=${this.user.api_token}&page=${this.comsiteData.current_page}&text=${this.searchText}`)
+            axios.get(`/api/comsites?page=${this.comsiteData.current_page}&text=${this.searchText}`)
             .then((response) => {
                 this.comsiteData = response.data
                 console.log(response.data)
@@ -221,7 +221,7 @@ export default {
             this.getComsiteData()
         },
         lastUpdated() {
-            axios.get(`/api/comsiteLastData?api_token=${this.user.api_token}`).then((response) => {
+            axios.get(`/api/comsiteLastData`).then((response) => {
                 this.last_updated = response.data.data
             })
         },

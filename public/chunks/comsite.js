@@ -262,7 +262,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getComsiteData: function getComsiteData() {
       var _this = this;
 
-      axios.get("/api/comsites?api_token=".concat(this.user.api_token, "&page=").concat(this.comsiteData.current_page, "&text=").concat(this.searchText)).then(function (response) {
+      axios.get("/api/comsites?page=".concat(this.comsiteData.current_page, "&text=").concat(this.searchText)).then(function (response) {
         _this.comsiteData = response.data;
         console.log(response.data);
       });
@@ -321,7 +321,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     lastUpdated: function lastUpdated() {
       var _this2 = this;
 
-      axios.get("/api/comsiteLastData?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/comsiteLastData").then(function (response) {
         _this2.last_updated = response.data.data;
       });
     }

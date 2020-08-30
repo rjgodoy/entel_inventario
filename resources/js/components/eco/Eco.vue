@@ -103,21 +103,21 @@ library.add(farCheckCircle);
 
         methods: {
             getPopProtectedZones() {
-                axios.get(`/api/eco?api_token=${this.user.api_token}`).then((response) => {
+                axios.get(`/api/eco`).then((response) => {
                     this.popProtectedZones = response.data.environmentalData
                     // console.log(this.popProtectedZones)
                 })
             },
 
             getProtectedZones() {
-                axios.get(`/api/ecoZones?api_token=${this.user.api_token}`).then((response) => {
+                axios.get(`/api/ecoZones`).then((response) => {
                     this.protectedZones = response.data.environmentalData
                     // console.log(this.protectedZones)
                 })
             },
 
             getStorageZones() {
-                axios.get(`/api/storages?api_token=${this.user.api_token}`).then((response) => {
+                axios.get(`/api/storages`).then((response) => {
                     this.storageZones = response.data
                     // console.log(this.storageZones)
                 })

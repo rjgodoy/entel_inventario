@@ -13,15 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::group(['prefix' => 'auth'], function () {
-//     Route::post('login', 'AuthController@login');
-//     // Route::post('signup', 'AuthController@signup');
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', 'AuthController@login');
+    // Route::post('signup', 'AuthController@signup');
   
-//     Route::group(['middleware' => 'auth:api'], function() {
-//         Route::get('logout', 'AuthController@logout');
-//         Route::get('user', 'AuthController@user');
-//     });
-// });
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@user');
+    });
+});
 
 Route::get('/user', function (Request $request) {
 	return $request->user();
@@ -53,9 +53,8 @@ Route::middleware('auth:api')->group(function () {
 		Route::apiResource('psgTp','Api\PsgTpController');
 
         Route::get('userRequests','Api\UserController@userRequests');
-        Route::get('roles','Api\MainController@roles');
+        Route::apiResource('roles','Api\RoleController');
 		Route::get('tabs', 'Api\AdminController@tabs');
-		Route::get('searchPopsEdicion/{text}/{core}','Api\PopController@searchPopsEdicion');
 		Route::get('classificationTypes','Api\SiteController@classificationTypes');
 		Route::get('attentionPriorityTypes','Api\SiteController@attentionPriorityTypes');
 		Route::get('stateTypes','Api\SiteController@stateTypes');
@@ -66,7 +65,8 @@ Route::middleware('auth:api')->group(function () {
 	});
 	##############################################################################################
 
-    Route::get('menu', 'Api\MainController@menu');
+    // Route::get('menu', 'Api\MainController@menu');
+    Route::apiResource('menus', 'Api\MenuController');
     Route::apiResource('permissions', 'Api\PermissionController');
     
     Route::get('userRequestAlerts','Api\MainController@userRequestAlerts');

@@ -98,7 +98,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   mounted: function mounted() {},
   methods: {
     // getPops() {
-    //     axios.get(`api/allPops?api_token=${this.user.api_token}`)
+    //     axios.get(`api/allPops`)
     //     .then(response => {
     //         this.pops = response.data.pops
     //         console.log(response.data.pops)
@@ -131,7 +131,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       }
 
       this.isFetching = true;
-      axios.get("/api/allPops?api_token=".concat(this.user.api_token, "&text=").concat(name, "&page=").concat(this.page)).then(function (response) {
+      axios.get("/api/allPops?text=".concat(name, "&page=").concat(this.page)).then(function (response) {
         console.log(response.data.meta.last_page);
         response.data.pops.forEach(function (item) {
           return _this.pops.push(item);
@@ -158,7 +158,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         });
       } else {
         var params = {
-          'api_token': this.user.api_token,
           'pop_id': this.selected.id,
           'zona_id': this.selected.comuna.zona_id,
           'user_id': this.user.id

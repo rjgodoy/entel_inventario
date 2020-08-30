@@ -166,7 +166,7 @@
 
         methods: {
             getPowerRectifierModes() {
-                axios.get(`/api/powerRectifierModes?api_token=${this.user.api_token}`)
+                axios.get(`/api/powerRectifierModes`)
                 .then(response => {
                     // console.log(response.data.telecomCompanies)
                     this.powerRectifierModes = response.data.powerRectifierModes
@@ -200,7 +200,6 @@
                     )
                 ) {
                     let params = {
-                        'api_token': this.user.api_token,
                         'user_id': this.user.id,
                         'capacity': parseFloat(this.newPowerRectifierCapacity),
                         'power_rectifier_mode_id': this.power_rectifier_mode_id,

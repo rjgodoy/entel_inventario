@@ -195,7 +195,6 @@
         methods: {
             getUsers() {
                 var params = {
-                    'api_token': this.user.api_token,
                     'role_id': this.selectedRole
                 }
                 axios.get('/api/users', { params: params })
@@ -206,7 +205,7 @@
             },
 
             getRoles() {
-                axios.get(`/api/roles?api_token=${this.user.api_token}`)
+                axios.get(`/api/roles`)
                 .then(response => {
                     this.roles = response.data.data
                 })
@@ -214,10 +213,9 @@
 
             updateUserRole(user_id, role_id) {
                 var params = {
-                    'api_token': this.user.api_token,
                     'role_id': role_id,
                 }
-                axios.put(`/api/users/${user_id}?api_token=${this.user.api_token}&role_id=${role_id}`)
+                axios.put(`/api/users/${user_id}?role_id=${role_id}`)
                 .then(response => {
                     console.log(response)
                     // this.roles = response.data.data

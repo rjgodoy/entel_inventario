@@ -50,7 +50,7 @@
         methods: {
             // APIs
             getAirConditioners() {
-                axios.get(`/api/airConditioners/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/airConditioners/${this.pop.id}`)
                 .then((response) => {
                     this.airConditioners = response.data.airConditioner
                     this.can = response.data.can

@@ -1,6 +1,6 @@
 <template>
     <section class="hero is-fullheight is-black has-background">
-        <img class="hero-background is-transparent" src="/img/bg-hero-satellite.jpg" />
+        <img class="hero-background is-transparent" :src="'/img/backgrounds/' + backgroundImage + '.jpg'" />
         <div class="hero-body">
             <div class="container">
                 <div class="columns is-centered">
@@ -39,12 +39,12 @@
             }
         },
         mounted() {
-            console.log(this.$route.path)
         },
+
         computed: {
+            backgroundImage() {
+                return Math.floor(Math.random() * 5) + 1
+            }
         },
-        methods: {
-            
-        }
     }
 </script>

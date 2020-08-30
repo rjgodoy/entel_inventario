@@ -666,21 +666,20 @@ __webpack_require__.r(__webpack_exports__);
     getJunctionTypes: function getJunctionTypes() {
       var _this3 = this;
 
-      axios.get("/api/junctionTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/junctionTypes").then(function (response) {
         _this3.junctionTypes = response.data.junctionTypes;
       });
     },
     getJunctionConnections: function getJunctionConnections() {
       var _this4 = this;
 
-      axios.get("/api/junctionConnections?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/junctionConnections").then(function (response) {
         _this4.junctionConnections = response.data.junctions;
       });
     },
     saveChanges: function saveChanges() {
       if (!this.isEditMode) {
         var params = {
-          'api_token': this.user.api_token,
           'user_id': this.user.id,
           'client_number': this.clientNumber,
           'junction_number': this.junctionNumber,

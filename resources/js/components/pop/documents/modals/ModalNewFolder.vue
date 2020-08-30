@@ -44,7 +44,6 @@
         methods: {
             createFolder() {
                 var params = {
-                    'api_token': this.user.api_token,
                     'name': this.name,
                     'pop_id': this.pop.id,
                     'folderTab': this.folderTab.label,

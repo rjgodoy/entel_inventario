@@ -453,6 +453,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -509,15 +549,17 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     },
     InfrastructuresData: function InfrastructuresData() {
       return __webpack_require__.e(/*! import() | chunks/dashboard/infrastructures */ "chunks/dashboard/infrastructures").then(__webpack_require__.bind(null, /*! ./InfrastructuresData */ "./resources/js/components/dashboard/InfrastructuresData.vue"));
+    },
+    ModalDownload: function ModalDownload() {
+      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ./ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
     }
   },
-  props: ['user', 'message', 'last_data_counters', 'crms', 'darkMode'],
+  props: ['user', 'last_data_counters', 'darkMode'],
   created: function created() {
     this.styleMode();
   },
   mounted: function mounted() {
-    // console.log(this.last_data_counters)
-    // this.getCrms()
+    this.getCrms();
     this.getCounters(); // this.lastUpdate()
     // this.syncCounter()
 
@@ -529,6 +571,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       core: 0,
       pops: [],
       zonas: [],
+      crms: Array,
       isFetching: false,
       selected: null,
       page: 1,
@@ -568,6 +611,8 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       criticsQuantity: 0,
       albaQuantity: 0,
       isLoading: false,
+      isDownloadModalActive: false,
+      cells: Array,
       // lastUpdateData: [],
       // lastDataCounter: [],
       currentTab: 'pops'
@@ -669,12 +714,19 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     }
   },
   methods: {
+    getCrms: function getCrms() {
+      var _this = this;
+
+      axios.get("/api/crms").then(function (response) {
+        _this.crms = response.data.crms;
+      });
+    },
     searchFormat: function searchFormat(pop) {
       this.selectedSite = this.selected;
       return this.searchText;
     },
     getPops: lodash_debounce__WEBPACK_IMPORTED_MODULE_3___default()(function () {
-      var _this = this;
+      var _this2 = this;
 
       var crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
       var zona_id = this.selectedZona ? this.selectedZona.id : 0;
@@ -684,7 +736,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
           // response.data.forEach(element =>{
           //     setInterval(this.pops.push(element), 0.1)
           // })
-          _this.pops = response.data;
+          _this2.pops = response.data;
         } catch (ex) {
           console.log(ex);
         }
@@ -694,7 +746,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       var _viewCriticPops = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this2 = this;
+        var _this3 = this;
 
         var crm_id, zona_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -706,7 +758,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
                 axios.get("/api/criticPopsMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
-                  _this2.pops = response.data.data;
+                  _this3.pops = response.data.data;
                 });
                 this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0;
 
@@ -728,7 +780,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       var _viewAlbaPops = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this3 = this;
+        var _this4 = this;
 
         var crm_id, zona_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
@@ -740,7 +792,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
                 axios.get("/api/albaPopsMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
-                  _this3.pops = response.data.data;
+                  _this4.pops = response.data.data;
                 });
                 this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0;
 
@@ -763,7 +815,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       var _getCounters = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var _this4 = this;
+        var _this5 = this;
 
         var crm_id, zona_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -773,11 +825,11 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
                 zona_id = this.selectedZona ? this.selectedZona.id : 0;
                 axios.get("/api/dashboard?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
-                  _this4.popsQuantity = response.data.pops;
-                  _this4.sitesQuantity = response.data.sites;
-                  _this4.technologiesQuantity = response.data.technologies;
-                  _this4.criticsQuantity = response.data.critics;
-                  _this4.albaQuantity = response.data.alba_project;
+                  _this5.popsQuantity = response.data.pops;
+                  _this5.sitesQuantity = response.data.sites;
+                  _this5.technologiesQuantity = response.data.technologies;
+                  _this5.criticsQuantity = response.data.critics;
+                  _this5.albaQuantity = response.data.alba_project;
                 });
 
               case 3:
@@ -865,7 +917,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       this.selectedZona = this.selectedZona != zona ? zona : null;
     },
     getAsyncData: lodash_debounce__WEBPACK_IMPORTED_MODULE_3___default()(function (text) {
-      var _this5 = this;
+      var _this6 = this;
 
       // String update
       if (this.searchText !== text) {
@@ -891,15 +943,15 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       this.isFetching = true;
       axios.get("/api/searchPops?text=".concat(text, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&core=").concat(this.core, "&page=").concat(this.page)).then(function (response) {
         response.data.data.forEach(function (item) {
-          return _this5.popSearch.push(item);
+          return _this6.popSearch.push(item);
         });
-        _this5.page++;
-        _this5.totalPages = response.data.last_page;
-        _this5.counter = response.data.total;
+        _this6.page++;
+        _this6.totalPages = response.data.last_page;
+        _this6.counter = response.data.total;
       })["catch"](function (error) {
         throw error;
       })["finally"](function () {
-        _this5.isFetching = false;
+        _this6.isFetching = false;
       });
     }, 150),
     getMoreAsyncData: lodash_debounce__WEBPACK_IMPORTED_MODULE_3___default()(function () {
@@ -969,19 +1021,22 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       }
     },
     downloadPops: function downloadPops() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.isLoading = true;
       var params = {
         'core': this.core,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-        'zona_id': this.selectedZona ? this.selectedZona.id : 0
+        'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+        'resume': +this.cells.resume,
+        'pops': +this.cells.pops,
+        'sites': +this.cells.sites
       };
       axios.get('/api/pop/export', {
         params: params,
         responseType: 'arraybuffer'
       }).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data)
         var blob = new Blob([response.data], {
           type: 'application/xlsx'
         }); // const objectUrl = window.URL.createObjectURL(blob)
@@ -996,15 +1051,15 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         var data = window.URL.createObjectURL(blob);
         var link = document.createElement('a');
         link.href = data;
-        link.download = "Listado PoP - ".concat(_this6.middleFileName).concat(moment().format('YYYY-MM-DD hh:mm:ss'), ".xlsx");
+        link.download = "Listado PoP - ".concat(_this7.middleFileName).concat(moment().format('YYYY-MM-DD hh:mm:ss'), ".xlsx");
         link.click(); // setTimeout(function () {
         //     // For Firefox it is necessary to delay revoking the ObjectURL
         //     window.URL.revokeObjectURL(data)
         // }, 100)
 
-        _this6.isLoading = false;
+        _this7.isLoading = false;
 
-        _this6.$buefy.toast.open({
+        _this7.$buefy.toast.open({
           message: 'La planilla se ha descargado exitosamente.',
           type: 'is-success',
           duration: 3000,
@@ -1012,15 +1067,19 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         });
       })["catch"](function (error) {
         console.log(error);
-        _this6.isLoading = false;
+        _this7.isLoading = false;
 
-        _this6.$buefy.toast.open({
+        _this7.$buefy.toast.open({
           message: 'Ha ocurrido un error. Favor contactar al administrador',
           type: 'is-danger',
           duration: 3000,
           queue: false
         });
       });
+    },
+    onClickDownload: function onClickDownload(value) {
+      this.cells = value;
+      this.downloadPops();
     },
     isMobile: function isMobile() {
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -1098,1380 +1157,1478 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
-    _c(
-      "section",
-      { staticClass: "section is-marginless", class: _vm.bodyBackground },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "container",
-            staticStyle: { "margin-top": "-32px", "margin-bottom": "20px" }
-          },
-          [
-            _c("b-field", [
-              _c("div", { staticClass: "columns" }, [
-                _c("div", { staticClass: "column" }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "column has-text-centered" },
-                  [
-                    _c(
-                      "b-switch",
-                      {
-                        staticClass: "is-size-6 has-text-weight-semibold",
-                        class: _vm.textSwitchCore,
-                        attrs: {
-                          type: "is-link",
-                          size: "is-medium",
-                          outlined: true
-                        },
-                        on: { input: _vm.switchCore }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            POP CORE\n                        "
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "column" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tile is-ancestor" },
-              _vm._l(_vm.crms, function(crm) {
-                return _c(
-                  "div",
-                  { key: crm.id, staticClass: "tile is-parent" },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "tile is-child box is-bold",
-                        class: _vm.selectedCrm == crm ? "is-link" : "is-white",
-                        on: {
-                          click: function($event) {
-                            return _vm.selectCrm(crm)
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            class:
-                              _vm.selectedCrm == crm
-                                ? _vm.selectedSecondaryBoxText
-                                : _vm.secondaryText
+  return _c(
+    "div",
+    {},
+    [
+      _c(
+        "section",
+        { staticClass: "section is-marginless", class: _vm.bodyBackground },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "container",
+              staticStyle: { "margin-top": "-32px", "margin-bottom": "20px" }
+            },
+            [
+              _c("b-field", [
+                _c("div", { staticClass: "columns" }, [
+                  _c("div", { staticClass: "column" }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "column has-text-centered" },
+                    [
+                      _c(
+                        "b-switch",
+                        {
+                          staticClass: "is-size-6 has-text-weight-semibold",
+                          class: _vm.textSwitchCore,
+                          attrs: {
+                            type: "is-link",
+                            size: "is-medium",
+                            outlined: true
                           },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "is-size-6 has-text-weight-semibold"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                CRM " +
-                                    _vm._s(crm.nombre_crm) +
-                                    "\n                            "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only",
-                                staticStyle: { "margin-top": "10px" }
-                              },
-                              [
-                                _c("div", {
+                          on: { input: _vm.switchCore }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            POP CORE\n                        "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "column" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "tile is-ancestor" },
+                _vm._l(_vm.crms, function(crm) {
+                  return _c(
+                    "div",
+                    { key: crm.id, staticClass: "tile is-parent" },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "tile is-child box is-bold",
+                          class:
+                            _vm.selectedCrm == crm ? "is-link" : "is-white",
+                          on: {
+                            click: function($event) {
+                              return _vm.selectCrm(crm)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              class:
+                                _vm.selectedCrm == crm
+                                  ? _vm.selectedSecondaryBoxText
+                                  : _vm.secondaryText
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
                                   staticClass:
-                                    "is-size-7 has-text-weight-light",
-                                  domProps: {
-                                    textContent: _vm._s("Subgerente")
+                                    "is-size-6 has-text-weight-semibold"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                CRM " +
+                                      _vm._s(crm.nombre_crm) +
+                                      "\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only",
+                                  staticStyle: { "margin-top": "10px" }
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass:
+                                      "is-size-7 has-text-weight-light",
+                                    domProps: {
+                                      textContent: _vm._s("Subgerente")
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-normal"
+                                    },
+                                    [_vm._v(_vm._s(crm.subgerente_crm))]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.selectedCrm != null
+            ? _c(
+                "div",
+                {
+                  class: _vm.innerBackground + " " + _vm.bodyBackground,
+                  staticStyle: { margin: "0 -24px 0 -24px" }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "container",
+                      staticStyle: { margin: "-20px auto 10px auto" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "tile is-ancestor" },
+                        _vm._l(_vm.zonas, function(zona) {
+                          return _c(
+                            "div",
+                            { key: zona.id, staticClass: "tile is-parent" },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "tile is-child box is-bold",
+                                  class:
+                                    _vm.selectedZona == zona
+                                      ? "is-link"
+                                      : "is-white",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.selectZona(zona)
+                                    }
                                   }
-                                }),
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      class:
+                                        _vm.selectedZona == zona
+                                          ? _vm.selectedSecondaryBoxText
+                                          : _vm.secondaryText
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-6 has-text-weight-semibold"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    Zona " +
+                                              _vm._s(zona.nombre_zona) +
+                                              "\n                                "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only",
+                                          staticStyle: { "margin-top": "10px" }
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-7 has-text-weight-light"
+                                            },
+                                            [_vm._v("Coordinador")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-7 has-text-weight-semibold"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  zona.responsable.nombre
+                                                ) +
+                                                  " " +
+                                                  _vm._s(
+                                                    zona.responsable.apellido
+                                                  )
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "container",
+              staticStyle: { width: "50%", "margin-top": "30px" }
+            },
+            [
+              _c(
+                "b-autocomplete",
+                {
+                  attrs: {
+                    autofocus: "",
+                    size: "is-default",
+                    data: _vm.popSearch,
+                    rounded: "",
+                    "icon-pack": "fas",
+                    icon: "search",
+                    placeholder:
+                      "Buscar por nemónico, nombre o direccion del sitio...",
+                    "keep-first": true,
+                    "open-on-focus": _vm.searchText ? true : false,
+                    "custom-formatter": _vm.searchFormat,
+                    loading: _vm.isFetching,
+                    "check-infinite-scroll": true,
+                    clearable: ""
+                  },
+                  on: {
+                    typing: _vm.getAsyncData,
+                    select: function(option) {
+                      return (_vm.selected = option)
+                    },
+                    "infinite-scroll": _vm.getMoreAsyncData
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "columns",
+                              staticStyle: { padding: "10px" }
+                            },
+                            [
+                              _c("div", { staticClass: "column is-5" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-size-7 has-text-weight-semibold",
+                                    class: _vm.secondaryText
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      [
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            attrs: {
+                                              label: _vm.status(props.option)
+                                                .state,
+                                              position: "is-right",
+                                              type: "is-dark"
+                                            }
+                                          },
+                                          [
+                                            _c("font-awesome-icon", {
+                                              class:
+                                                _vm.status(props.option).id == 1
+                                                  ? "has-text-success"
+                                                  : _vm.status(props.option)
+                                                      .id == 2
+                                                  ? "has-text-danger"
+                                                  : _vm.status(props.option)
+                                                      .id == 0
+                                                  ? ""
+                                                  : "has-text-warning",
+                                              attrs: { icon: ["fas", "circle"] }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(
+                                      "\n                                  " +
+                                        _vm._s(props.option.nem_site) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
                                 _vm._v(" "),
                                 _c(
                                   "div",
                                   {
                                     staticClass:
-                                      "is-size-7 has-text-weight-normal"
+                                      "is-size-6 has-text-weight-semibold",
+                                    class: _vm.primaryText
                                   },
-                                  [_vm._v(_vm._s(crm.subgerente_crm))]
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ]
-                )
-              }),
-              0
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm.selectedCrm != null
-          ? _c(
-              "div",
-              {
-                class: _vm.innerBackground + " " + _vm.bodyBackground,
-                staticStyle: { margin: "0 -24px 0 -24px" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "container",
-                    staticStyle: { margin: "-20px auto 10px auto" }
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "tile is-ancestor" },
-                      _vm._l(_vm.zonas, function(zona) {
-                        return _c(
-                          "div",
-                          { key: zona.id, staticClass: "tile is-parent" },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "tile is-child box is-bold",
-                                class:
-                                  _vm.selectedZona == zona
-                                    ? "is-link"
-                                    : "is-white",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.selectZona(zona)
-                                  }
-                                }
-                              },
-                              [
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          props.option
+                                            ? props.option.nombre
+                                            : ""
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
                                 _c(
                                   "div",
                                   {
-                                    class:
-                                      _vm.selectedZona == zona
-                                        ? _vm.selectedSecondaryBoxText
-                                        : _vm.secondaryText
+                                    staticClass:
+                                      "is-size-7 has-text-weight-normal",
+                                    class: _vm.secondaryText
                                   },
                                   [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "is-size-6 has-text-weight-semibold"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                    Zona " +
-                                            _vm._s(zona.nombre_zona) +
-                                            "\n                                "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only",
-                                        staticStyle: { "margin-top": "10px" }
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "is-size-7 has-text-weight-light"
-                                          },
-                                          [_vm._v("Coordinador")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "is-size-7 has-text-weight-semibold"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(zona.responsable.nombre) +
-                                                " " +
-                                                _vm._s(
-                                                  zona.responsable.apellido
-                                                )
-                                            )
-                                          ]
-                                        )
-                                      ]
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          props.option
+                                            ? props.option.pop.comuna
+                                                .nombre_comuna
+                                            : ""
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-size-7 has-text-weight-normal",
+                                    class: _vm.secondaryText
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          props.option
+                                            ? "Zona " +
+                                                props.option.pop.comuna.zona
+                                                  .nombre_zona
+                                            : ""
+                                        ) +
+                                        " - " +
+                                        _vm._s(
+                                          props.option
+                                            ? "CRM " +
+                                                props.option.pop.comuna.zona.crm
+                                                  .nombre_crm
+                                            : ""
+                                        ) +
+                                        "\n                            "
                                     )
                                   ]
                                 )
-                              ]
-                            )
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  ]
-                )
-              ]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "container",
-            staticStyle: { width: "50%", "margin-top": "30px" }
-          },
-          [
-            _c(
-              "b-autocomplete",
-              {
-                attrs: {
-                  autofocus: "",
-                  size: "is-default",
-                  data: _vm.popSearch,
-                  rounded: "",
-                  "icon-pack": "fas",
-                  icon: "search",
-                  placeholder:
-                    "Buscar por nemónico, nombre o direccion del sitio...",
-                  "keep-first": true,
-                  "open-on-focus": _vm.searchText ? true : false,
-                  "custom-formatter": _vm.searchFormat,
-                  loading: _vm.isFetching,
-                  "check-infinite-scroll": true,
-                  clearable: ""
-                },
-                on: {
-                  typing: _vm.getAsyncData,
-                  select: function(option) {
-                    return (_vm.selected = option)
-                  },
-                  "infinite-scroll": _vm.getMoreAsyncData
-                },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(props) {
-                      return [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "columns",
-                            staticStyle: { padding: "10px" }
-                          },
-                          [
-                            _c("div", { staticClass: "column is-5" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-semibold",
-                                  class: _vm.secondaryText
-                                },
-                                [
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "column is-2" }, [
+                                _c("div", { staticClass: "tags has-addons" }, [
+                                  _c("span", { staticClass: "tag is-dark" }, [
+                                    _vm._v("categoría")
+                                  ]),
+                                  _vm._v(" "),
                                   _c(
                                     "span",
+                                    {
+                                      staticClass: "tag has-text-weight-bold",
+                                      class:
+                                        props.option.classification_type_id == 1
+                                          ? "is-danger"
+                                          : props.option
+                                              .classification_type_id == 2
+                                          ? "is-warning"
+                                          : props.option
+                                              .classification_type_id == 3
+                                          ? "is-link"
+                                          : "is-info"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(
+                                            props.option
+                                              ? props.option.classification_type
+                                                  .classification_type
+                                              : ""
+                                          ) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", {}, [
+                                  props.option.pop.alba_project == 1
+                                    ? _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "tag is-light is-info has-text-weight-bold is-size-7"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(
+                                                props.option.pop.alba_project ==
+                                                  1
+                                                  ? "alba"
+                                                  : ""
+                                              ) +
+                                              "\n                                "
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "column is-3" }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "column has-text-right" },
+                                [
+                                  _c("div", {}, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "button is-small is-default is-fullwidth",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.selectPop(props.option.pop)
+                                            _vm.selectedSite = props.option
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("font-awesome-icon", {
+                                          attrs: { icon: "map-marked-alt" }
+                                        }),
+                                        _vm._v(
+                                          " Ver en mapa\n                                "
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {},
                                     [
                                       _c(
-                                        "b-tooltip",
+                                        "router-link",
                                         {
+                                          staticClass:
+                                            "button is-small is-link is-fullwidth",
                                           attrs: {
-                                            label: _vm.status(props.option)
-                                              .state,
-                                            position: "is-right",
-                                            type: "is-dark"
+                                            to: "/pop/" + props.option.pop.id,
+                                            target: "_blank"
                                           }
                                         },
                                         [
                                           _c("font-awesome-icon", {
-                                            class:
-                                              _vm.status(props.option).id == 1
-                                                ? "has-text-success"
-                                                : _vm.status(props.option).id ==
-                                                  2
-                                                ? "has-text-danger"
-                                                : _vm.status(props.option).id ==
-                                                  0
-                                                ? ""
-                                                : "has-text-warning",
-                                            attrs: { icon: ["fas", "circle"] }
-                                          })
+                                            attrs: { icon: "info-circle" }
+                                          }),
+                                          _vm._v(
+                                            " Ver detalles\n                                "
+                                          )
                                         ],
                                         1
                                       )
                                     ],
                                     1
-                                  ),
-                                  _vm._v(
-                                    "\n                                  " +
-                                      _vm._s(props.option.nem_site) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-6 has-text-weight-semibold",
-                                  class: _vm.primaryText
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        props.option ? props.option.nombre : ""
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal",
-                                  class: _vm.secondaryText
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        props.option
-                                          ? props.option.pop.comuna
-                                              .nombre_comuna
-                                          : ""
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "is-size-7 has-text-weight-normal",
-                                  class: _vm.secondaryText
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        props.option
-                                          ? "Zona " +
-                                              props.option.pop.comuna.zona
-                                                .nombre_zona
-                                          : ""
-                                      ) +
-                                      " - " +
-                                      _vm._s(
-                                        props.option
-                                          ? "CRM " +
-                                              props.option.pop.comuna.zona.crm
-                                                .nombre_crm
-                                          : ""
-                                      ) +
-                                      "\n                            "
                                   )
                                 ]
                               )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "column is-2" }, [
-                              _c("div", { staticClass: "tags has-addons" }, [
-                                _c("span", { staticClass: "tag is-dark" }, [
-                                  _vm._v("categoría")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass: "tag has-text-weight-bold",
-                                    class:
-                                      props.option.classification_type_id == 1
-                                        ? "is-danger"
-                                        : props.option.classification_type_id ==
-                                          2
-                                        ? "is-warning"
-                                        : props.option.classification_type_id ==
-                                          3
-                                        ? "is-link"
-                                        : "is-info"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(
-                                          props.option
-                                            ? props.option.classification_type
-                                                .classification_type
-                                            : ""
-                                        ) +
-                                        "\n                                "
-                                    )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", {}, [
-                                props.option.pop.alba_project == 1
-                                  ? _c(
-                                      "span",
-                                      {
-                                        staticClass:
-                                          "tag is-light is-info has-text-weight-bold is-size-7"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                    " +
-                                            _vm._s(
-                                              props.option.pop.alba_project == 1
-                                                ? "alba"
-                                                : ""
-                                            ) +
-                                            "\n                                "
-                                        )
-                                      ]
-                                    )
-                                  : _vm._e()
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "column is-3" }),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "column has-text-right" },
-                              [
-                                _c("div", {}, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "button is-small is-default is-fullwidth",
-                                      on: {
-                                        click: function($event) {
-                                          _vm.selectPop(props.option.pop)
-                                          _vm.selectedSite = props.option
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("font-awesome-icon", {
-                                        attrs: { icon: "map-marked-alt" }
-                                      }),
-                                      _vm._v(
-                                        " Ver en mapa\n                                "
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {},
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass:
-                                          "button is-small is-link is-fullwidth",
-                                        attrs: {
-                                          to: "/pop/" + props.option.pop.id,
-                                          target: "_blank"
-                                        }
-                                      },
-                                      [
-                                        _c("font-awesome-icon", {
-                                          attrs: { icon: "info-circle" }
-                                        }),
-                                        _vm._v(
-                                          " Ver detalles\n                                "
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ]
+                            ]
+                          )
+                        ]
+                      }
                     }
-                  }
-                ])
-              },
-              [
-                _c("template", { slot: "header" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "is-size-7 has-text-weight-semibold has-text-link"
-                    },
-                    [
-                      _vm._v(" " + _vm._s(_vm.counter) + " "),
-                      _c("span", { staticClass: "has-text-weight-normal" }, [
-                        _vm._v("Sitios")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._v(" "),
-                _c("template", { slot: "footer" }, [
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.page > _vm.totalPages,
-                          expression: "page > totalPages"
-                        }
-                      ],
-                      staticClass: "has-text-grey"
-                    },
-                    [_vm._v(" No hay más sitios. ")]
-                  )
-                ])
-              ],
-              2
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            class: _vm.bodyBackground,
-            staticStyle: { margin: "20px 0 -30px 0" }
-          },
-          [
-            _c("div", {}, [
-              _c("div", { staticClass: "tile is-ancestor" }, [
-                _c("div", { staticClass: "tile is-vertical" }, [
-                  _c("div", { staticClass: "tile" }, [
-                    _c("div", { staticClass: "tile is-parent" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "tile is-child box is-bold is-white",
-                          class:
-                            _vm.currentTab === "pops"
-                              ? "is-bold is-link"
-                              : _vm.boxBackground,
-                          on: {
-                            click: function($event) {
-                              _vm.currentTab = "pops"
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticStyle: { "padding-top": "10px" } },
-                            [
-                              _c("b-icon", {
-                                staticClass: "fa-2x",
-                                class:
-                                  _vm.currentTab === "pops"
-                                    ? "has-text-smart"
-                                    : "has-text-smart",
-                                attrs: { pack: "fas", icon: "map-marker-alt" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "is-size-4 has-text-weight-semibold",
-                              class:
-                                _vm.currentTab === "pops"
-                                  ? "has-text-white"
-                                  : _vm.primaryText,
-                              staticStyle: { "margin-top": "10px" }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(_vm.popsQuantity, "0,0")
-                                ) + "\n                                        "
-                              ),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "is-size-6 has-text-weight-normal",
-                                  class:
-                                    _vm.currentTab === "pops"
-                                      ? "has-text-white"
-                                      : _vm.secondaryText
-                                },
-                                [_vm._v("POP")]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "tile is-parent" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "tile is-child box is-bold is-white",
-                          class:
-                            _vm.currentTab === "sites"
-                              ? "is-bold is-link"
-                              : _vm.boxBackground,
-                          on: {
-                            click: function($event) {
-                              _vm.currentTab = "sites"
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticStyle: { "padding-top": "10px" } },
-                            [
-                              _c("b-icon", {
-                                staticClass: "fa-2x",
-                                class:
-                                  _vm.currentTab === "sites"
-                                    ? "has-text-eco"
-                                    : "has-text-eco",
-                                attrs: { pack: "fas", icon: "server" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "is-size-4 has-text-weight-bold",
-                              class:
-                                _vm.currentTab === "sites"
-                                  ? "has-text-white"
-                                  : _vm.primaryText,
-                              staticStyle: { "margin-top": "10px" }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(_vm.sitesQuantity, "0,0")
-                                ) + "\n                                        "
-                              ),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "is-size-6 has-text-weight-normal",
-                                  class:
-                                    _vm.currentTab === "sites"
-                                      ? "has-text-white"
-                                      : _vm.secondaryText
-                                },
-                                [_vm._v("Sitios")]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "tile is-parent" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "tile is-child box is-bold is-white",
-                          class:
-                            _vm.currentTab === "technologies"
-                              ? "is-bold is-link"
-                              : _vm.boxBackground,
-                          on: {
-                            click: function($event) {
-                              _vm.currentTab = "technologies"
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticStyle: {
-                                "padding-top": "10px",
-                                "padding-left": "5px"
-                              }
-                            },
-                            [
-                              _c("b-icon", {
-                                staticClass: "fa-2x",
-                                class:
-                                  _vm.currentTab === "technologies"
-                                    ? "has-text-positive"
-                                    : "has-text-positive",
-                                attrs: { pack: "fas", icon: "signal" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "is-size-4 has-text-weight-bold",
-                              class:
-                                _vm.currentTab === "technologies"
-                                  ? "has-text-white"
-                                  : _vm.primaryText,
-                              staticStyle: { "margin-top": "10px" }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(
-                                    _vm.technologiesQuantity,
-                                    "0,0"
-                                  )
-                                ) + "\n                                        "
-                              ),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "is-size-6 has-text-weight-normal",
-                                  class:
-                                    _vm.currentTab === "technologies"
-                                      ? "has-text-white"
-                                      : _vm.secondaryText
-                                },
-                                [_vm._v("Tecnologías")]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "tile" }, [
-                    _c("div", { staticClass: "tile is-parent" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "tile is-child box is-bold is-white",
-                          class:
-                            _vm.currentTab === "critics"
-                              ? "is-bold is-link"
-                              : _vm.boxBackground,
-                          on: { click: _vm.viewCriticPops }
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticStyle: { "padding-top": "10px" } },
-                            [
-                              _c("b-icon", {
-                                staticClass: "has-text-yellow fa-2x",
-                                attrs: {
-                                  pack: "fas",
-                                  icon: "exclamation-triangle"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "is-size-4 has-text-weight-bold",
-                              class:
-                                _vm.currentTab === "critics"
-                                  ? "has-text-white"
-                                  : _vm.primaryText,
-                              staticStyle: { "margin-top": "10px" }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(_vm.criticsQuantity, "0,0")
-                                ) + "\n                                        "
-                              ),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "is-size-6 has-text-weight-normal",
-                                  class:
-                                    _vm.currentTab === "critics"
-                                      ? "has-text-white"
-                                      : _vm.secondaryText
-                                },
-                                [_vm._v("POP Críticos")]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "tile is-parent" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "tile is-child box is-bold is-white",
-                          class:
-                            _vm.currentTab === "alba"
-                              ? "is-bold is-link"
-                              : _vm.boxBackground,
-                          on: { click: _vm.viewAlbaPops }
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticStyle: { "padding-top": "10px" } },
-                            [
-                              _c("b-icon", {
-                                staticClass: "has-text-smart fa-2x",
-                                attrs: {
-                                  pack: "fas",
-                                  icon: "file-invoice-dollar"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "is-size-4 has-text-weight-bold",
-                              class:
-                                _vm.currentTab === "alba"
-                                  ? "has-text-white"
-                                  : _vm.primaryText,
-                              staticStyle: { "margin-top": "10px" }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(_vm.albaQuantity, "0,0")
-                                ) + "\n                                        "
-                              ),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "is-size-6 has-text-weight-normal",
-                                  class:
-                                    _vm.currentTab === "alba"
-                                      ? "has-text-white"
-                                      : _vm.secondaryText
-                                },
-                                [_vm._v("Proyecto Alba")]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "tile is-parent" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "tile is-child box is-bold is-dark",
-                          staticStyle: { position: "relative" },
-                          on: { click: _vm.downloadPops }
-                        },
-                        [
-                          _c("b-icon", {
-                            staticClass: "has-text-eco fa-2x",
-                            staticStyle: {
-                              "padding-top": "20px",
-                              "padding-left": "5px"
-                            },
-                            attrs: { pack: "fas", icon: "download" }
-                          }),
-                          _vm._v(" "),
-                          _vm._m(0),
-                          _vm._v(" "),
-                          _c("b-loading", {
-                            attrs: {
-                              "is-full-page": false,
-                              active: _vm.isLoading,
-                              "can-cancel": true
-                            },
-                            on: {
-                              "update:active": function($event) {
-                                _vm.isLoading = $event
-                              }
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "tile" }, [
-                    _c("div", { staticClass: "tile is-parent" }, [
-                      _c("div", { staticClass: "tile is-child box" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "is-size-5 has-text-weight-semibold title"
-                          },
-                          [_vm._v("Nuevos POP")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "is-size-3 has-text-centered" },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.last_data_counters &&
-                                  _vm.last_data_counters.pop_news_month
-                              ) + "\n                                        "
-                            ),
-                            _c(
-                              "p",
-                              {
-                                staticClass: "is-size-6 has-text-weight-light"
-                              },
-                              [_vm._v("POP nuevos ingresados este mes")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "field",
-                            staticStyle: { "margin-top": "20px" }
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "is-size-7 has-text-weight-light"
-                              },
-                              [_vm._v("Utimo POP ingresado:")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "is-size-6",
-                                attrs: {
-                                  to:
-                                    "/pop/" +
-                                    _vm.last_data_counters.last_site.pop.id,
-                                  target: "_blank"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(
-                                      _vm.last_data_counters.last_site.nem_site
-                                    ) +
-                                    " - " +
-                                    _vm._s(
-                                      _vm.last_data_counters.last_site.nombre
-                                    ) +
-                                    "\n                                        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "is-size-7" }, [
-                              _c("p", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.last_data_counters.last_site.pop.comuna
-                                      .zona.nombre_zona
-                                  )
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                { staticClass: "has-text-weight-light" },
-                                [
-                                  _vm._v(
-                                    "CRM " +
-                                      _vm._s(
-                                        _vm.last_data_counters.last_site.pop
-                                          .comuna.zona.crm.nombre_crm
-                                      )
-                                  )
-                                ]
-                              )
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "has-text-right is-size-7 has-text-weight-light",
-                            staticStyle: { "padding-top": "10px" }
-                          },
-                          [
-                            _vm._v(
-                              "Fecha actualización: " +
-                                _vm._s(_vm.last_data_counters.last_updated_pops)
-                            )
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "tile is-parent" }, [
-                      _c("div", { staticClass: "tile is-child box" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "is-size-5 has-text-weight-semibold title"
-                          },
-                          [_vm._v("Nuevos Sitios")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "is-size-3 has-text-centered" },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.last_data_counters &&
-                                  _vm.last_data_counters.sites_news_month
-                              ) + "\n                                        "
-                            ),
-                            _c(
-                              "p",
-                              {
-                                staticClass: "is-size-6 has-text-weight-light"
-                              },
-                              [_vm._v("Sitios nuevos ingresados este mes")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "field",
-                            staticStyle: { "margin-top": "20px" }
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "is-size-7 has-text-weight-light"
-                              },
-                              [_vm._v("Utimo Sitio ingresado:")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "is-size-6",
-                                attrs: {
-                                  to:
-                                    "/pop/" +
-                                    _vm.last_data_counters.last_site.pop.id,
-                                  target: "_blank"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                            " +
-                                    _vm._s(
-                                      _vm.last_data_counters.last_site.nem_site
-                                    ) +
-                                    " - " +
-                                    _vm._s(
-                                      _vm.last_data_counters.last_site.nombre
-                                    ) +
-                                    "\n                                        "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "is-size-7" }, [
-                              _c("p", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.last_data_counters.last_site.pop.comuna
-                                      .zona.nombre_zona
-                                  )
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                { staticClass: "has-text-weight-light" },
-                                [
-                                  _vm._v(
-                                    "CRM " +
-                                      _vm._s(
-                                        _vm.last_data_counters.last_site.pop
-                                          .comuna.zona.crm.nombre_crm
-                                      )
-                                  )
-                                ]
-                              )
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "has-text-right is-size-7 has-text-weight-light",
-                            staticStyle: { "padding-top": "10px" }
-                          },
-                          [
-                            _vm._v(
-                              "Fecha actualización: " +
-                                _vm._s(
-                                  _vm.last_data_counters.last_updated_sites
-                                )
-                            )
-                          ]
-                        )
-                      ])
-                    ])
                   ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "tile is-parent is-vertical is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only"
-                  },
-                  [
+                },
+                [
+                  _c("template", { slot: "header" }, [
                     _c(
                       "div",
                       {
-                        staticClass: "tile is-child card",
-                        class: _vm.boxBackground,
-                        staticStyle: { border: "solid 4px white" }
+                        staticClass:
+                          "is-size-7 has-text-weight-semibold has-text-link"
                       },
                       [
-                        _c("map-view", {
-                          attrs: {
-                            user: _vm.user,
-                            pops: _vm.pops,
-                            map_attributes: _vm.map_attributes,
-                            darkMode: _vm.darkMode
-                          }
-                        })
-                      ],
-                      1
+                        _vm._v(" " + _vm._s(_vm.counter) + " "),
+                        _c("span", { staticClass: "has-text-weight-normal" }, [
+                          _vm._v("Sitios")
+                        ])
+                      ]
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "tile" }, [
-                  _c("div", { staticClass: "tile is-parent is-vertical" }, [
+                  ]),
+                  _vm._v(" "),
+                  _vm._v(" "),
+                  _c("template", { slot: "footer" }, [
                     _c(
-                      "article",
+                      "span",
                       {
-                        staticClass: "tile is-child box",
-                        class: _vm.boxBackground
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.page > _vm.totalPages,
+                            expression: "page > totalPages"
+                          }
+                        ],
+                        staticClass: "has-text-grey"
                       },
-                      [
+                      [_vm._v(" No hay más sitios. ")]
+                    )
+                  ])
+                ],
+                2
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              class: _vm.bodyBackground,
+              staticStyle: { margin: "20px 0 -30px 0" }
+            },
+            [
+              _c("div", {}, [
+                _c("div", { staticClass: "tile is-ancestor" }, [
+                  _c("div", { staticClass: "tile is-vertical" }, [
+                    _c("div", { staticClass: "tile" }, [
+                      _c("div", { staticClass: "tile is-parent" }, [
                         _c(
-                          "keep-alive",
+                          "a",
+                          {
+                            staticClass: "tile is-child box is-bold is-white",
+                            class:
+                              _vm.currentTab === "pops"
+                                ? "is-bold is-link"
+                                : _vm.boxBackground,
+                            on: {
+                              click: function($event) {
+                                _vm.currentTab = "pops"
+                              }
+                            }
+                          },
                           [
-                            _c(_vm.currentTabComponent, {
-                              tag: "component",
+                            _c(
+                              "div",
+                              { staticStyle: { "padding-top": "10px" } },
+                              [
+                                _c("b-icon", {
+                                  staticClass: "fa-2x",
+                                  class:
+                                    _vm.currentTab === "pops"
+                                      ? "has-text-smart"
+                                      : "has-text-smart",
+                                  attrs: { pack: "fas", icon: "map-marker-alt" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-4 has-text-weight-semibold",
+                                class:
+                                  _vm.currentTab === "pops"
+                                    ? "has-text-white"
+                                    : _vm.primaryText,
+                                staticStyle: { "margin-top": "10px" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("numeral")(_vm.popsQuantity, "0,0")
+                                  ) +
+                                    "\n                                        "
+                                ),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-semibold",
+                                    class:
+                                      _vm.currentTab === "pops"
+                                        ? "has-text-white"
+                                        : _vm.secondaryText,
+                                    staticStyle: { "margin-bottom": "-2px" }
+                                  },
+                                  [_vm._v("POP")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "has-text-weight-light is-size-7"
+                                  },
+                                  [_vm._v("activos")]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "tile is-child box is-bold is-white",
+                            class:
+                              _vm.currentTab === "sites"
+                                ? "is-bold is-link"
+                                : _vm.boxBackground,
+                            on: {
+                              click: function($event) {
+                                _vm.currentTab = "sites"
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticStyle: { "padding-top": "10px" } },
+                              [
+                                _c("b-icon", {
+                                  staticClass: "fa-2x",
+                                  class:
+                                    _vm.currentTab === "sites"
+                                      ? "has-text-eco"
+                                      : "has-text-eco",
+                                  attrs: { pack: "fas", icon: "server" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-4 has-text-weight-bold",
+                                class:
+                                  _vm.currentTab === "sites"
+                                    ? "has-text-white"
+                                    : _vm.primaryText,
+                                staticStyle: { "margin-top": "10px" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("numeral")(_vm.sitesQuantity, "0,0")
+                                  ) +
+                                    "\n                                        "
+                                ),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-semibold",
+                                    class:
+                                      _vm.currentTab === "sites"
+                                        ? "has-text-white"
+                                        : _vm.secondaryText,
+                                    staticStyle: { "margin-bottom": "-2px" }
+                                  },
+                                  [_vm._v("Sitios")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "has-text-weight-light is-size-7"
+                                  },
+                                  [_vm._v("activos")]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "tile is-child box is-bold is-white",
+                            class:
+                              _vm.currentTab === "technologies"
+                                ? "is-bold is-link"
+                                : _vm.boxBackground,
+                            on: {
+                              click: function($event) {
+                                _vm.currentTab = "technologies"
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticStyle: {
+                                  "padding-top": "10px",
+                                  "padding-left": "5px"
+                                }
+                              },
+                              [
+                                _c("b-icon", {
+                                  staticClass: "fa-2x",
+                                  class:
+                                    _vm.currentTab === "technologies"
+                                      ? "has-text-positive"
+                                      : "has-text-positive",
+                                  attrs: { pack: "fas", icon: "signal" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-4 has-text-weight-bold",
+                                class:
+                                  _vm.currentTab === "technologies"
+                                    ? "has-text-white"
+                                    : _vm.primaryText,
+                                staticStyle: { "margin-top": "10px" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("numeral")(
+                                      _vm.technologiesQuantity,
+                                      "0,0"
+                                    )
+                                  ) +
+                                    "\n                                        "
+                                ),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-semibold",
+                                    class:
+                                      _vm.currentTab === "technologies"
+                                        ? "has-text-white"
+                                        : _vm.secondaryText,
+                                    staticStyle: { "margin-bottom": "-2px" }
+                                  },
+                                  [_vm._v("Tecnologías")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "has-text-weight-light is-size-7"
+                                  },
+                                  [_vm._v("activas")]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "tile" }, [
+                      _c("div", { staticClass: "tile is-parent" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "tile is-child box is-bold is-white",
+                            class:
+                              _vm.currentTab === "critics"
+                                ? "is-bold is-link"
+                                : _vm.boxBackground,
+                            on: { click: _vm.viewCriticPops }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticStyle: { "padding-top": "10px" } },
+                              [
+                                _c("b-icon", {
+                                  staticClass: "has-text-yellow fa-2x",
+                                  attrs: {
+                                    pack: "fas",
+                                    icon: "exclamation-triangle"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-4 has-text-weight-bold",
+                                class:
+                                  _vm.currentTab === "critics"
+                                    ? "has-text-white"
+                                    : _vm.primaryText,
+                                staticStyle: { "margin-top": "10px" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("numeral")(
+                                      _vm.criticsQuantity,
+                                      "0,0"
+                                    )
+                                  ) +
+                                    "\n                                        "
+                                ),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-semibold",
+                                    class:
+                                      _vm.currentTab === "critics"
+                                        ? "has-text-white"
+                                        : _vm.secondaryText
+                                  },
+                                  [_vm._v("POP Críticos")]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "tile is-child box is-bold is-white",
+                            class:
+                              _vm.currentTab === "alba"
+                                ? "is-bold is-link"
+                                : _vm.boxBackground,
+                            on: { click: _vm.viewAlbaPops }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticStyle: { "padding-top": "10px" } },
+                              [
+                                _c("b-icon", {
+                                  staticClass: "has-text-smart fa-2x",
+                                  attrs: {
+                                    pack: "fas",
+                                    icon: "file-invoice-dollar"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "is-size-4 has-text-weight-bold",
+                                class:
+                                  _vm.currentTab === "alba"
+                                    ? "has-text-white"
+                                    : _vm.primaryText,
+                                staticStyle: { "margin-top": "10px" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("numeral")(_vm.albaQuantity, "0,0")
+                                  ) +
+                                    "\n                                        "
+                                ),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass:
+                                      "is-size-6 has-text-weight-semibold",
+                                    class:
+                                      _vm.currentTab === "alba"
+                                        ? "has-text-white"
+                                        : _vm.secondaryText
+                                  },
+                                  [_vm._v("Proyecto Alba")]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "tile is-child box is-bold is-dark",
+                            staticStyle: { position: "relative" },
+                            on: {
+                              click: function($event) {
+                                _vm.isDownloadModalActive = true
+                              }
+                            }
+                          },
+                          [
+                            _c("b-icon", {
+                              staticClass: "has-text-eco fa-2x",
+                              staticStyle: {
+                                "padding-top": "20px",
+                                "padding-left": "5px"
+                              },
+                              attrs: { pack: "fas", icon: "download" }
+                            }),
+                            _vm._v(" "),
+                            _vm._m(0),
+                            _vm._v(" "),
+                            _c("b-loading", {
                               attrs: {
-                                user: _vm.user,
-                                bodyBackground: _vm.bodyBackground,
-                                boxBackground: _vm.boxBackground,
-                                primaryText: _vm.primaryText,
-                                secondaryText: _vm.secondaryText,
-                                selectedCrm: this.selectedCrm,
-                                selectedZona: this.selectedZona,
-                                core: _vm.core,
-                                last_updated: _vm.currentLastUpdateData
+                                "is-full-page": false,
+                                active: _vm.isLoading,
+                                "can-cancel": true
+                              },
+                              on: {
+                                "update:active": function($event) {
+                                  _vm.isLoading = $event
+                                }
                               }
                             })
                           ],
                           1
                         )
-                      ],
-                      1
-                    ),
+                      ])
+                    ]),
                     _vm._v(" "),
-                    this.currentTab !== "critics" && this.currentTab !== "alba"
-                      ? _c(
-                          "article",
-                          [
-                            _c(
-                              "keep-alive",
-                              [
-                                _c("pret-data-chart", {
+                    _c("div", { staticClass: "tile" }, [
+                      _c("div", { staticClass: "tile is-parent" }, [
+                        _c("div", { staticClass: "tile is-child box" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "is-size-6 has-text-weight-semibold title"
+                            },
+                            [_vm._v("Nuevos Sitios")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "has-text-centered",
+                              staticStyle: { margin: "auto 32px auto 32px" }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-size-3 has-text-weight-normal"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.last_data_counters &&
+                                        _vm.last_data_counters.sites_news_month
+                                    )
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "is-size-6 has-text-weight-light"
+                                },
+                                [_vm._v("Sitios nuevos ingresados este mes")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("hr", { staticClass: "is-paddingless" }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "field",
+                              staticStyle: { "margin-top": "-12px" }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "is-size-7 has-text-weight-light"
+                                },
+                                [_vm._v("Utimo Sitio ingresado:")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "is-size-6",
                                   attrs: {
-                                    user: _vm.user,
-                                    bodyBackground: _vm.bodyBackground,
-                                    boxBackground: _vm.boxBackground,
-                                    primaryText: _vm.primaryText,
-                                    secondaryText: _vm.secondaryText
+                                    to:
+                                      "/pop/" +
+                                      _vm.last_data_counters.last_site.pop.id,
+                                    target: "_blank"
                                   }
-                                })
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e()
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.last_data_counters.last_site
+                                          .nem_site
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        _vm.last_data_counters.last_site.nombre
+                                      ) +
+                                      "\n                                        "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "is-size-7 has-text-weight-light"
+                                },
+                                [
+                                  _c("div", [
+                                    _vm._v(
+                                      "Zona " +
+                                        _vm._s(
+                                          _vm.last_data_counters.last_site.pop
+                                            .comuna.zona.nombre_zona
+                                        ) +
+                                        " - "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "has-text-weight-light" },
+                                      [
+                                        _vm._v(
+                                          "CRM " +
+                                            _vm._s(
+                                              _vm.last_data_counters.last_site
+                                                .pop.comuna.zona.crm.nombre_crm
+                                            )
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "tile is-parent" }, [
+                        _c("div", { staticClass: "tile is-child box" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "is-size-6 has-text-weight-semibold title"
+                            },
+                            [_vm._v("Nuevas Tecnologías")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "has-text-centered",
+                              staticStyle: { margin: "auto 32px auto 32px" }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-size-3 has-text-weight-normal"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.last_data_counters &&
+                                        _vm.last_data_counters
+                                          .technologies_news_month
+                                    )
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "is-size-6 has-text-weight-light"
+                                },
+                                [
+                                  _vm._v(
+                                    "Tecnologías nuevas ingresados este mes"
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("hr", { staticClass: "is-paddingless" }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "field",
+                              staticStyle: { "margin-top": "-12px" }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "is-size-7 has-text-weight-light"
+                                },
+                                [_vm._v("Utima Tecnología ingresada:")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "is-size-6",
+                                  attrs: {
+                                    to:
+                                      "/pop/" +
+                                      _vm.last_data_counters.last_technology
+                                        .site.pop.id +
+                                      "#sites",
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(
+                                        _vm.last_data_counters.last_technology
+                                          .nem_tech
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        _vm.last_data_counters.last_technology
+                                          .ran_device_name
+                                      ) +
+                                      "\n                                        "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "is-size-7 has-text-weight-light"
+                                },
+                                [
+                                  _c("div", [
+                                    _vm._v(
+                                      "Zona " +
+                                        _vm._s(
+                                          _vm.last_data_counters.last_technology
+                                            .site.pop.comuna.zona.nombre_zona
+                                        ) +
+                                        " - "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "has-text-weight-light" },
+                                      [
+                                        _vm._v(
+                                          "CRM " +
+                                            _vm._s(
+                                              _vm.last_data_counters
+                                                .last_technology.site.pop.comuna
+                                                .zona.crm.nombre_crm
+                                            )
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "tile is-parent is-vertical is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only"
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tile is-child card",
+                          class: _vm.boxBackground,
+                          staticStyle: { border: "solid 4px white" }
+                        },
+                        [
+                          _c("map-view", {
+                            attrs: {
+                              user: _vm.user,
+                              pops: _vm.pops,
+                              map_attributes: _vm.map_attributes,
+                              darkMode: _vm.darkMode
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "tile" }, [
+                    _c("div", { staticClass: "tile is-parent is-vertical" }, [
+                      _c(
+                        "article",
+                        {
+                          staticClass: "tile is-child box",
+                          class: _vm.boxBackground
+                        },
+                        [
+                          _c(
+                            "keep-alive",
+                            [
+                              _c(_vm.currentTabComponent, {
+                                tag: "component",
+                                attrs: {
+                                  user: _vm.user,
+                                  bodyBackground: _vm.bodyBackground,
+                                  boxBackground: _vm.boxBackground,
+                                  primaryText: _vm.primaryText,
+                                  secondaryText: _vm.secondaryText,
+                                  selectedCrm: this.selectedCrm,
+                                  selectedZona: this.selectedZona,
+                                  core: _vm.core,
+                                  last_updated: _vm.currentLastUpdateData
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      this.currentTab !== "critics" &&
+                      this.currentTab !== "alba"
+                        ? _c(
+                            "article",
+                            [
+                              _c(
+                                "keep-alive",
+                                [
+                                  _c("pret-data-chart", {
+                                    attrs: {
+                                      user: _vm.user,
+                                      bodyBackground: _vm.bodyBackground,
+                                      boxBackground: _vm.boxBackground,
+                                      primaryText: _vm.primaryText,
+                                      secondaryText: _vm.secondaryText
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ])
                   ])
                 ])
               ])
-            ])
-          ]
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("section", { staticClass: "section", class: _vm.bodyBackground }, [
+        _c(
+          "div",
+          { staticClass: "columns is-multiline" },
+          [
+            _c("electric-lines-data", {
+              attrs: {
+                user: _vm.user,
+                bodyBackground: _vm.bodyBackground,
+                boxBackground: _vm.boxBackground,
+                primaryText: _vm.primaryText,
+                secondaryText: _vm.secondaryText,
+                selectedCrm: this.selectedCrm,
+                selectedZona: this.selectedZona,
+                core: _vm.core
+              }
+            }),
+            _vm._v(" "),
+            _c("generator-sets-data", {
+              attrs: {
+                user: _vm.user,
+                bodyBackground: _vm.bodyBackground,
+                boxBackground: _vm.boxBackground,
+                primaryText: _vm.primaryText,
+                secondaryText: _vm.secondaryText,
+                selectedCrm: this.selectedCrm,
+                selectedZona: this.selectedZona,
+                core: _vm.core
+              }
+            }),
+            _vm._v(" "),
+            _c("power-rectifiers-data", {
+              attrs: {
+                user: _vm.user,
+                bodyBackground: _vm.bodyBackground,
+                boxBackground: _vm.boxBackground,
+                primaryText: _vm.primaryText,
+                secondaryText: _vm.secondaryText,
+                selectedCrm: this.selectedCrm,
+                selectedZona: this.selectedZona,
+                core: _vm.core
+              }
+            }),
+            _vm._v(" "),
+            _c("air-conditioners-data", {
+              attrs: {
+                user: _vm.user,
+                bodyBackground: _vm.bodyBackground,
+                boxBackground: _vm.boxBackground,
+                primaryText: _vm.primaryText,
+                secondaryText: _vm.secondaryText,
+                selectedCrm: this.selectedCrm,
+                selectedZona: this.selectedZona,
+                core: _vm.core
+              }
+            }),
+            _vm._v(" "),
+            _c("vertical-structures-data", {
+              attrs: {
+                user: _vm.user,
+                bodyBackground: _vm.bodyBackground,
+                boxBackground: _vm.boxBackground,
+                primaryText: _vm.primaryText,
+                secondaryText: _vm.secondaryText,
+                selectedCrm: this.selectedCrm,
+                selectedZona: this.selectedZona,
+                core: _vm.core
+              }
+            }),
+            _vm._v(" "),
+            _c("infrastructures-data", {
+              attrs: {
+                user: _vm.user,
+                bodyBackground: _vm.bodyBackground,
+                boxBackground: _vm.boxBackground,
+                primaryText: _vm.primaryText,
+                secondaryText: _vm.secondaryText,
+                selectedCrm: this.selectedCrm,
+                selectedZona: this.selectedZona,
+                core: _vm.core
+              }
+            })
+          ],
+          1
         )
-      ]
-    ),
-    _vm._v(" "),
-    _c("section", { staticClass: "section", class: _vm.bodyBackground }, [
+      ]),
+      _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "columns is-multiline" },
-        [
-          _c("electric-lines-data", {
-            attrs: {
-              user: _vm.user,
-              bodyBackground: _vm.bodyBackground,
-              boxBackground: _vm.boxBackground,
-              primaryText: _vm.primaryText,
-              secondaryText: _vm.secondaryText,
-              selectedCrm: this.selectedCrm,
-              selectedZona: this.selectedZona,
-              core: _vm.core
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isDownloadModalActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isDownloadModalActive = $event
             }
-          }),
-          _vm._v(" "),
-          _c("generator-sets-data", {
-            attrs: {
-              user: _vm.user,
-              bodyBackground: _vm.bodyBackground,
-              boxBackground: _vm.boxBackground,
-              primaryText: _vm.primaryText,
-              secondaryText: _vm.secondaryText,
-              selectedCrm: this.selectedCrm,
-              selectedZona: this.selectedZona,
-              core: _vm.core
-            }
-          }),
-          _vm._v(" "),
-          _c("power-rectifiers-data", {
-            attrs: {
-              user: _vm.user,
-              bodyBackground: _vm.bodyBackground,
-              boxBackground: _vm.boxBackground,
-              primaryText: _vm.primaryText,
-              secondaryText: _vm.secondaryText,
-              selectedCrm: this.selectedCrm,
-              selectedZona: this.selectedZona,
-              core: _vm.core
-            }
-          }),
-          _vm._v(" "),
-          _c("air-conditioners-data", {
-            attrs: {
-              user: _vm.user,
-              bodyBackground: _vm.bodyBackground,
-              boxBackground: _vm.boxBackground,
-              primaryText: _vm.primaryText,
-              secondaryText: _vm.secondaryText,
-              selectedCrm: this.selectedCrm,
-              selectedZona: this.selectedZona,
-              core: _vm.core
-            }
-          }),
-          _vm._v(" "),
-          _c("vertical-structures-data", {
-            attrs: {
-              user: _vm.user,
-              bodyBackground: _vm.bodyBackground,
-              boxBackground: _vm.boxBackground,
-              primaryText: _vm.primaryText,
-              secondaryText: _vm.secondaryText,
-              selectedCrm: this.selectedCrm,
-              selectedZona: this.selectedZona,
-              core: _vm.core
-            }
-          }),
-          _vm._v(" "),
-          _c("infrastructures-data", {
-            attrs: {
-              user: _vm.user,
-              bodyBackground: _vm.bodyBackground,
-              boxBackground: _vm.boxBackground,
-              primaryText: _vm.primaryText,
-              secondaryText: _vm.secondaryText,
-              selectedCrm: this.selectedCrm,
-              selectedZona: this.selectedZona,
-              core: _vm.core
-            }
-          })
-        ],
+          }
+        },
+        [_c("modal-download", { on: { clicked: _vm.onClickDownload } })],
         1
       )
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {

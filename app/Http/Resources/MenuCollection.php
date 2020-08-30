@@ -4,8 +4,22 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class MainCollection extends ResourceCollection
+class MenuCollection extends ResourceCollection
 {
+    /**
+     * The "data" wrapper that should be applied.
+     *
+     * @var string
+     */
+    public static $wrap = 'menus';
+
+    /**
+     * Indicates if the resource's collection keys should be preserved.
+     *
+     * @var bool
+     */
+    public $preserveKeys = true;
+
     /**
      * Transform the resource collection into an array.
      *

@@ -130,7 +130,7 @@
             getData() {
                 // Si no hay un CRM seleccionado
                 if (!this.selectedCrm) {                             
-                    axios.get(`/api/sitesData?api_token=${this.user.api_token}&core=${this.core}`)
+                    axios.get(`/api/sitesData?core=${this.core}`)
                     .then((response) => {
                         this.sitesData = response.data.data;
                         // this.$eventBus.$emit('getSitesData', this.sitesData)
@@ -140,7 +140,7 @@
                 } 
                 //Si hay un CRM seleccionado, pero no hay zona seleccionada
                 else if (!this.selectedZona){
-                    axios.get(`/api/sitesDataCrm?api_token=${this.user.api_token}&crm_id=${this.selectedCrm.id}&core=${this.core}`)
+                    axios.get(`/api/sitesDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
                         this.sitesData = response.data.data;
                         // this.$eventBus.$emit('getSitesData', this.sitesData)
@@ -150,7 +150,7 @@
                 } 
                 // Si hay una zona seleccionada
                 else {
-                    axios.get(`/api/sitesDataZona?api_token=${this.user.api_token}&zona_id=${this.selectedZona.id}&core=${this.core}`)
+                    axios.get(`/api/sitesDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
                         this.sitesData = response.data.data;
                         // this.$eventBus.$emit('getSitesData', this.sitesData)
@@ -163,7 +163,7 @@
             // downloadSites() {
             //     this.buttonLoading = 1
 
-            //     axios.get(`/pop/export?api_token=${this.user.api_token}&core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
+            //     axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
             //         responseType: 'blob',
             //     })
             //     .then((response) => {

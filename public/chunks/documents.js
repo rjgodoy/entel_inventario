@@ -370,11 +370,22 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFilePdf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileExcel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileImage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleLeft"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFilePdf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileExcel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileImage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleLeft"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleRight"]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -403,7 +414,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       folders: [],
       files: [],
       photos: [],
-      activeTab: 0,
+      activeTab: 2,
       showCam: true,
       multiline: true,
       isLoading: false,
@@ -455,27 +466,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.getSideFolders();
   },
   computed: {
-    folderTab: {
-      get: function get() {
-        return this.baseTabs[this.activeTab];
-      },
-      set: function set(val) {
-        console.log(val);
-        this.bread = '';
-        this.currentFolderView = {
-          id: null,
-          parent_id: null
-        };
-        this.currentSideFolderView = {
-          id: null,
-          parent_id: null
-        };
-        this.meta.current_page = 1;
-        val == 8 || val == 9 ? this.getFolders() : this.getSideFolders();
-        this.folders = [];
-        this.files = [];
-        this.photos = [];
-      }
+    folderTab: function folderTab() {
+      return this.baseTabs[this.activeTab];
     },
     baseTabs: function baseTabs() {
       return [{
@@ -558,6 +550,22 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     }
   },
   methods: {
+    setFolderTab: function setFolderTab() {
+      this.bread = '';
+      this.currentFolderView = {
+        id: null,
+        parent_id: null
+      };
+      this.currentSideFolderView = {
+        id: null,
+        parent_id: null
+      };
+      this.meta.current_page = 1;
+      this.baseTabs[this.activeTab] == 8 || this.baseTabs[this.activeTab] == 9 ? this.getFolders() : this.getSideFolders();
+      this.folders = [];
+      this.files = [];
+      this.photos = [];
+    },
     selectedSide: function selectedSide(folder) {
       this.currentFolderView = folder; // this.folders.length && this.currentFolderView.parent_id ? this.setBreadcrum(folder.name) : this.bread = ''
 
@@ -577,7 +585,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       // console.log(this.currentFolderView.id)
       var params = {
-        'api_token': this.user.api_token,
         'page': this.meta.current_page,
         'folder_name': this.folderTab.label,
         // 'folder_id': this.currentFolderView.id,
@@ -602,7 +609,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       // console.log(this.currentFolderView.id)
       var params = {
-        'api_token': this.user.api_token,
         'folder_name': this.folderTab.label,
         'folder_id': this.currentFolderView.id // 'text': this.searchText,
 
@@ -623,7 +629,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this3 = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'folder_name': this.folderTab.label,
         'folder_id': this.currentFolderView.id
       };
@@ -633,8 +638,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         params: params
       }).then(function (response) {
         response.data.files.forEach(function (element) {
-          if (element.extension != 'jpg' && element.extension != 'png' && element.extension != 'jpeg' && element.extension != 'tiff') {
-            _this3.files.push(element);
+          _this3.files.push(element);
+
+          if (element.extension == 'jpg' || element.extension == 'png' || element.extension == 'jpeg' || element.extension == 'tiff') {
+            element.image = '/storage/' + element.route;
+
+            _this3.photos.push(element);
           } else {
             console.log(element);
             element.image = '/storage/' + element.route;
@@ -666,7 +675,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       this.isLoading = true;
       var params = {
-        'api_token': this.user.api_token,
         'route': file.route,
         'mime': file.mime
       }; // console.log(params)
@@ -723,7 +731,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         type: 'is-danger',
         onConfirm: function onConfirm() {
           var params = {
-            'api_token': _this5.user.api_token,
             'user_id': _this5.user.id
           };
           axios["delete"]("/api/folders/".concat(folder.id), {
@@ -762,7 +769,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         message: 'Desea eliminar este archivo?',
         type: 'is-danger',
         onConfirm: function onConfirm() {
-          axios["delete"]("/api/files/".concat(file.id, "?api_token=").concat(_this6.user.api_token)).then(function (response) {
+          axios["delete"]("/api/files/".concat(file.id)).then(function (response) {
             console.log(response);
 
             _this6.getFiles();
@@ -986,23 +993,27 @@ var render = function() {
   return _c("div", [
     _c(
       "section",
-      { staticClass: "section box", staticStyle: { padding: "auto 0 auto 0" } },
+      {
+        staticClass: "section has-background-light",
+        staticStyle: { padding: "auto 0 auto 0" }
+      },
       [
-        _c("div", { staticClass: "level" }, [
+        _c("div", { staticClass: "columns" }, [
           _c(
             "div",
             {
-              staticClass: "level-item",
+              staticClass: "column",
               staticStyle: { "margin-top": "-24px", "margin-bottom": "-48px" }
             },
             [
               _c(
                 "b-tabs",
                 {
+                  staticClass: "is-paddingless",
                   attrs: { type: "is-toggle", expanded: "" },
                   on: {
-                    change: function($event) {
-                      _vm.folderTab = _vm.activeTab
+                    input: function($event) {
+                      return _vm.setFolderTab()
                     }
                   },
                   model: {
@@ -1384,7 +1395,6 @@ var render = function() {
                               "a",
                               {
                                 staticClass: "box tile is-child",
-                                staticStyle: { position: "relative" },
                                 on: {
                                   click: function($event) {
                                     return _vm.selected(folder)
@@ -1405,7 +1415,8 @@ var render = function() {
                                   "div",
                                   {
                                     staticClass:
-                                      "is-size-6 has-text-weight-bold"
+                                      "is-size-6 has-text-weight-normal",
+                                    staticStyle: { "margin-bottom": "0" }
                                   },
                                   [_vm._v(_vm._s(folder.name))]
                                 )
@@ -1493,10 +1504,7 @@ var render = function() {
                           [
                             _c(
                               "div",
-                              {
-                                staticClass: "box tile is-child",
-                                staticStyle: { position: "relative" }
-                              },
+                              { staticClass: "box tile is-child" },
                               [
                                 _c(
                                   "a",
@@ -1534,7 +1542,7 @@ var render = function() {
                                   "div",
                                   {
                                     staticClass:
-                                      "is-size-6 has-text-weight-bold"
+                                      "is-size-6 has-text-weight-normal"
                                   },
                                   [_vm._v(_vm._s(folder.name))]
                                 )
@@ -1624,103 +1632,147 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "container" },
-                [
-                  _c(
-                    "b-carousel",
-                    {
-                      attrs: {
-                        autoplay: false,
-                        "with-carousel-list": "",
-                        indicator: false,
-                        overlay: _vm.gallery
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "list",
-                          fn: function(props) {
-                            return [
-                              _c("b-carousel-list", {
-                                attrs: {
-                                  data: _vm.photos,
-                                  config: _vm.al,
-                                  refresh: _vm.gallery,
-                                  "as-indicator": ""
-                                },
-                                on: {
-                                  switch: function($event) {
-                                    return props.switch($event, false)
-                                  }
-                                },
-                                model: {
-                                  value: props.active,
-                                  callback: function($$v) {
-                                    _vm.$set(props, "active", $$v)
-                                  },
-                                  expression: "props.active"
-                                }
-                              })
-                            ]
-                          }
-                        }
-                      ])
-                    },
-                    [
-                      _vm._l(_vm.photos, function(item, i) {
-                        return _c("b-carousel-item", { key: i }, [
-                          _c(
-                            "figure",
-                            {
-                              staticClass: "image",
-                              on: {
-                                click: function($event) {
-                                  return _vm.switchGallery(true)
-                                }
-                              }
+              _vm.photos.length
+                ? _c("div", [
+                    _c("hr"),
+                    _vm._v(" "),
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "container has-background-light" },
+                      [
+                        _c(
+                          "b-carousel",
+                          {
+                            attrs: {
+                              "icon-pack": "fas",
+                              "indicator-custom": "",
+                              autoplay: false,
+                              "with-carousel-list": "",
+                              indicator: false,
+                              overlay: _vm.gallery
                             },
-                            [_c("img", { attrs: { src: item.image } })]
-                          )
-                        ])
-                      }),
-                      _vm._v(" "),
-                      _vm.gallery
-                        ? _c("span", {
-                            staticClass: "modal-close is-large",
                             on: {
                               click: function($event) {
-                                return _vm.switchGallery(false)
+                                return _vm.switchGallery(true)
                               }
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm._v(" "),
-                      _c("template", { slot: "overlay" }, [
-                        _c(
-                          "div",
-                          { staticClass: "has-text-centered has-text-white" },
-                          [
-                            _vm._v(
-                              "\n                                    Hello i'am overlay!\n                                "
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "list",
+                                  fn: function(props) {
+                                    return [
+                                      _c(
+                                        "b-carousel-list",
+                                        _vm._b(
+                                          {
+                                            attrs: {
+                                              data: _vm.photos,
+                                              "as-indicator": "",
+                                              "has-drag": true
+                                            },
+                                            on: {
+                                              switch: function($event) {
+                                                return props.switch(
+                                                  $event,
+                                                  false
+                                                )
+                                              }
+                                            },
+                                            model: {
+                                              value: props.active,
+                                              callback: function($$v) {
+                                                _vm.$set(props, "active", $$v)
+                                              },
+                                              expression: "props.active"
+                                            }
+                                          },
+                                          "b-carousel-list",
+                                          _vm.al,
+                                          false
+                                        )
+                                      )
+                                    ]
+                                  }
+                                }
+                              ],
+                              null,
+                              false,
+                              3179916388
                             )
-                          ]
+                          },
+                          [
+                            _vm._l(_vm.photos, function(item, i) {
+                              return _c(
+                                "b-carousel-item",
+                                { key: i, staticClass: "has-text-centered" },
+                                [
+                                  _c("figure", { staticClass: "image" }, [
+                                    _c("img", {
+                                      staticStyle: {
+                                        "max-height": "800px",
+                                        width: "auto",
+                                        display: "block"
+                                      },
+                                      attrs: { src: item.image }
+                                    })
+                                  ])
+                                ]
+                              )
+                            }),
+                            _vm._v(" "),
+                            _vm.gallery
+                              ? _c("span", {
+                                  staticClass: "modal-close is-large",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.switchGallery(false)
+                                    }
+                                  }
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm._v(" "),
+                            _c("template", { slot: "overlay" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-centered has-text-white"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        Hello i'am overlay!\n                                    "
+                                  )
+                                ]
+                              )
+                            ])
+                          ],
+                          2
                         )
-                      ])
-                    ],
-                    2
-                  )
-                ],
-                1
-              ),
+                      ],
+                      1
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm.noFiles
-                ? _c("section", { staticClass: "section container" }, [
-                    _c("div", { staticClass: "has-text-weight-normal" }, [
-                      _vm._v("No hay archivos en esta sección.")
-                    ])
-                  ])
+                ? _c(
+                    "section",
+                    { staticClass: "section container columns is-vcentered" },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "column has-text-weight-normal has-text-grey-light"
+                        },
+                        [_vm._v("No hay archivos.")]
+                      )
+                    ]
+                  )
                 : _vm._e()
             ])
           ])
@@ -1810,7 +1862,18 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "block" }, [
+      _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
+        _vm._v("Visor de fotos")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

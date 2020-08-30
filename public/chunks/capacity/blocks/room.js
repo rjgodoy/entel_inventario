@@ -667,6 +667,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$eventBus.$on('new-power-rectifier', this.getPlanes);
+    this.$eventBus.$on('new-battery-bank', this.getPlanes);
   },
   mounted: function mounted() {
     this.getPlaneDelegationTypes();
@@ -790,7 +791,7 @@ __webpack_require__.r(__webpack_exports__);
     getPlaneDelegationTypes: function getPlaneDelegationTypes() {
       var _this2 = this;
 
-      axios.get("/api/planeDelegationTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/planeDelegationTypes").then(function (response) {
         _this2.planeDelegationTypes = response.data.planes;
       });
     },
@@ -846,7 +847,7 @@ __webpack_require__.r(__webpack_exports__);
     getPlanes: function getPlanes() {
       var _this5 = this;
 
-      axios.get("/api/roomPlanes/".concat(this.sala.id, "?api_token=").concat(this.user.api_token, "&plane_delegation_type_id=").concat(this.planeDelegationTypeId)).then(function (response) {
+      axios.get("/api/roomPlanes/".concat(this.sala.id, "?plane_delegation_type_id=").concat(this.planeDelegationTypeId)).then(function (response) {
         _this5.planes = response.data.planes;
         _this5.canEditPowerRectifiers = response.data.can ? response.data.can.update : false;
       })["catch"](function (error) {
@@ -856,7 +857,7 @@ __webpack_require__.r(__webpack_exports__);
     getAirConditioners: function getAirConditioners() {
       var _this6 = this;
 
-      axios.get("/api/airConditioners/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/airConditioners/".concat(this.pop.id)).then(function (response) {
         // console.log(response.data)
         _this6.airConditioners = response.data.airConditioner;
         _this6.canEditAirConditioners = response.data.can ? response.data.can.update : false;
@@ -1031,60 +1032,62 @@ __webpack_require__.r(__webpack_exports__);
       //     }
       // })
 
-      Object.keys(this.planes).forEach(function (item) {
-        var plane = _this12.planes[item];
+      if (this.room.current_room_delegation) {
+        Object.keys(this.planes).forEach(function (item) {
+          var plane = _this12.planes[item];
 
-        switch (_this12.room.current_room_delegation.plane_delegation_type_id) {
+          switch (_this12.room.current_room_delegation.plane_delegation_type_id) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+              available = _this12.availableBatteryCapacityPlane(plane);
+              break;
+
+            case 5:
+            case 6:
+              if (available > _this12.availableBatteryCapacityPlane(plane)) {
+                available = _this12.availableBatteryCapacityPlane(plane);
+              }
+
+              break;
+
+            case 7:
+              if (availableA > _this12.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                availableA = _this12.availableBatteryCapacityPlane(plane);
+              }
+
+              if (availableB > _this12.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                availableB = _this12.availableBatteryCapacityPlane(plane);
+              }
+
+              available = availableA + availableB;
+              break;
+
+            case 8:
+            default:
+              break;
+          }
+        });
+
+        switch (this.room.current_room_delegation.plane_delegation_type_id) {
           case 1:
           case 2:
           case 3:
           case 4:
-            available = _this12.availableBatteryCapacityPlane(plane);
+            available = available;
             break;
 
           case 5:
           case 6:
-            if (available > _this12.availableBatteryCapacityPlane(plane)) {
-              available = _this12.availableBatteryCapacityPlane(plane);
-            }
-
-            break;
-
           case 7:
-            if (availableA > _this12.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
-              availableA = _this12.availableBatteryCapacityPlane(plane);
-            }
-
-            if (availableB > _this12.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
-              availableB = _this12.availableBatteryCapacityPlane(plane);
-            }
-
-            available = availableA + availableB;
+            available = available * 2;
             break;
 
           case 8:
           default:
             break;
         }
-      });
-
-      switch (this.room.current_room_delegation.plane_delegation_type_id) {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-          available = available;
-          break;
-
-        case 5:
-        case 6:
-        case 7:
-          available = available * 2;
-          break;
-
-        case 8:
-        default:
-          break;
       }
 
       this.availableBatteryCapacity = available;
@@ -1092,7 +1095,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     updatePlaneDelegationType: function updatePlaneDelegationType(sala) {
       var params = {
-        'api_token': this.user.api_token,
         'user_id': this.user.id,
         'plane_delegation_type_id': this.planeDelegationTypeId
       };
@@ -1108,6 +1110,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeDestroy: function beforeDestroy() {
     this.$eventBus.$off('new-power-rectifier');
+    this.$eventBus.$off('new-battery-bank');
   }
 });
 

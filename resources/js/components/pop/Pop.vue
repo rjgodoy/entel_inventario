@@ -569,7 +569,7 @@
 
         methods: {
             getTabs() {
-                axios.get(`/api/popMenu?api_token=${this.user.api_token}`).then((response) => {
+                axios.get(`/api/popMenu`).then((response) => {
                     // console.log(response.data.data)
                     this.tabs = response.data.data
                 })
@@ -583,7 +583,7 @@
             },
 
             getAllData() {
-                axios.get(`/api/pop/${this.$route.params.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/pop/${this.$route.params.id}`)
                 .then((response) => {
                     this.pop = response.data.data
                 })

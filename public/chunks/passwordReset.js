@@ -130,153 +130,166 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { staticClass: "box", on: { submit: _vm.resetPassword } }, [
-      _c(
-        "div",
-        { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
-        [_vm._v("Cambiar Contraseña")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "field" }, [
-        _c(
-          "label",
-          {
-            staticClass: "label has-text-weight-normal",
-            attrs: { for: "email" }
-          },
-          [_vm._v("Email")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "control has-icon has-icon-right" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.state.email,
-                expression: "state.email"
-              }
-            ],
-            staticClass: "input",
-            attrs: { id: "email", type: "email", name: "email", disabled: "" },
-            domProps: { value: _vm.state.email },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.state, "email", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "field" }, [
-        _c(
-          "label",
-          {
-            staticClass: "label has-text-weight-normal",
-            attrs: { for: "password" }
-          },
-          [_vm._v("Contraseña")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "control has-icon has-icon-right" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.state.password,
-                expression: "state.password"
-              }
-            ],
-            staticClass: "input",
-            attrs: {
-              id: "password",
-              type: "password",
-              name: "password",
-              autofocus: ""
-            },
-            domProps: { value: _vm.state.password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.state, "password", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "field" }, [
-        _c(
-          "label",
-          {
-            staticClass: "label has-text-weight-normal",
-            attrs: { for: "password-confirm" }
-          },
-          [_vm._v("Repetir contraseña")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "control has-icon has-icon-right" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.state.password_confirmation,
-                expression: "state.password_confirmation"
-              }
-            ],
-            staticClass: "input",
-            attrs: {
-              id: "password-confirm",
-              type: "password",
-              name: "password_confirmation"
-            },
-            domProps: { value: _vm.state.password_confirmation },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(
-                  _vm.state,
-                  "password_confirmation",
-                  $event.target.value
-                )
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row mb-0" }, [
+    _c(
+      "form",
+      { staticClass: "box-translucent", on: { submit: _vm.resetPassword } },
+      [
         _c(
           "div",
-          { staticClass: "col-md-6 offset-md-4" },
-          [
-            _c(
-              "b-button",
-              {
-                attrs: {
-                  loading: _vm.buttonLoading ? true : false,
-                  type: "is-link",
-                  size: "is-normal"
-                },
-                on: { click: _vm.resetPassword }
+          { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
+          [_vm._v("Cambiar Contraseña")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "field" }, [
+          _c(
+            "label",
+            {
+              staticClass: "label has-text-weight-normal",
+              attrs: { for: "email" }
+            },
+            [_vm._v("Email")]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "control has-icon has-icon-right" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.state.email,
+                  expression: "state.email"
+                }
+              ],
+              staticClass: "input",
+              attrs: {
+                id: "email",
+                type: "email",
+                name: "email",
+                disabled: ""
               },
-              [_vm._v("\n                    Reset Password\n                ")]
-            )
-          ],
-          1
-        )
-      ])
-    ])
+              domProps: { value: _vm.state.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.state, "email", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field" }, [
+          _c(
+            "label",
+            {
+              staticClass: "label has-text-weight-normal",
+              attrs: { for: "password" }
+            },
+            [_vm._v("Contraseña")]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "control has-icon has-icon-right" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.state.password,
+                  expression: "state.password"
+                }
+              ],
+              staticClass: "input",
+              attrs: {
+                id: "password",
+                type: "password",
+                name: "password",
+                autofocus: ""
+              },
+              domProps: { value: _vm.state.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.state, "password", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field" }, [
+          _c(
+            "label",
+            {
+              staticClass: "label has-text-weight-normal",
+              attrs: { for: "password-confirm" }
+            },
+            [_vm._v("Repetir contraseña")]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "control has-icon has-icon-right" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.state.password_confirmation,
+                  expression: "state.password_confirmation"
+                }
+              ],
+              staticClass: "input",
+              attrs: {
+                id: "password-confirm",
+                type: "password",
+                name: "password_confirmation"
+              },
+              domProps: { value: _vm.state.password_confirmation },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.state,
+                    "password_confirmation",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row mb-0" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-6 offset-md-4" },
+            [
+              _c(
+                "b-button",
+                {
+                  attrs: {
+                    loading: _vm.buttonLoading ? true : false,
+                    type: "is-link",
+                    size: "is-normal"
+                  },
+                  on: { click: _vm.resetPassword }
+                },
+                [
+                  _vm._v(
+                    "\n                    Reset Password\n                "
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []

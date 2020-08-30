@@ -125,21 +125,21 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getPopProtectedZones: function getPopProtectedZones() {
       var _this = this;
 
-      axios.get("/api/eco?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/eco").then(function (response) {
         _this.popProtectedZones = response.data.environmentalData; // console.log(this.popProtectedZones)
       });
     },
     getProtectedZones: function getProtectedZones() {
       var _this2 = this;
 
-      axios.get("/api/ecoZones?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/ecoZones").then(function (response) {
         _this2.protectedZones = response.data.environmentalData; // console.log(this.protectedZones)
       });
     },
     getStorageZones: function getStorageZones() {
       var _this3 = this;
 
-      axios.get("/api/storages?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/storages").then(function (response) {
         _this3.storageZones = response.data; // console.log(this.storageZones)
       });
     }

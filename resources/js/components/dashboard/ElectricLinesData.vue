@@ -95,7 +95,7 @@
             },
             getElectricLineData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/electricLineData/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/electricLineData/${this.core}`)
                         .then((response) => {
                             this.electricLineData = response.data.electricLine;
                             this.totalElectricLines()
@@ -104,7 +104,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/electricLineDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/electricLineDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.electricLineData = response.data.electricLine;
                             this.totalElectricLines()
@@ -113,7 +113,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/electricLineDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/electricLineDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             this.electricLineData = response.data.electricLine;
                             this.totalElectricLines()
@@ -128,7 +128,6 @@
                 this.isLoading = true
 
                 var params = {
-                    'api_token': this.user.api_token,
                     'core': this.core,
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0

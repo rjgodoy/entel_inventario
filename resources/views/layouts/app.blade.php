@@ -51,11 +51,7 @@
 </head>
 <body>
     <div id="app">
-
-        <router-view
-            :app_name="'{{ config('app.name') }}'"
-        ></router-view>
-
+        <router-view :app_name="'{{ config('app.name') }}'"></router-view>
     </div>
 </body>
 </html>

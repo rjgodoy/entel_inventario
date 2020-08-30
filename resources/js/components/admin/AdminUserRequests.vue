@@ -126,7 +126,7 @@
         },
         methods: {
             getUserRequests() {
-                axios.get(`/api/userRequests?api_token=${this.user.api_token}`)
+                axios.get(`/api/userRequests`)
                 .then(response => {
                     console.log(response.data)
                     this.requests = response.data.requests
@@ -138,7 +138,6 @@
                     message: 'Desea dar acceso al nuevo usuario?',
                     onConfirm: () => {
                         let params = {
-                            'api_token': this.user.api_token,
                             'user': user,
                             'admin_id': this.user.id
                         }
@@ -168,7 +167,6 @@
                     hasIcon: true,
                     onConfirm: () => {
                         let params = {
-                            'api_token': this.user.api_token,
                             'user': user,
                             'admin_id': this.user.id
                         }

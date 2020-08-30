@@ -112,29 +112,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -157,6 +134,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       perPage: 10
     };
   },
+  computed: {
+    canDelete: function canDelete() {
+      return this.ecoDocs.can && this.ecoDocs.can["delete"];
+    }
+  },
   created: function created() {},
   mounted: function mounted() {
     this.getEcoDocs();
@@ -165,7 +147,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getEcoDocs: function getEcoDocs() {
       var _this = this;
 
-      axios.get("/api/ecoDocs?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/ecoDocs").then(function (response) {
         _this.ecoDocs = response.data;
       });
     },
@@ -190,7 +172,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       formData.append('file', file); // send upload request
 
       try {
-        var response = axios.post("/api/ecoDocs?api_token=".concat(this.user.api_token), formData, config).then(function (response) {
+        var response = axios.post("/api/ecoDocs", formData, config).then(function (response) {
           _this3.getEcoDocs();
         });
       } catch (e) {
@@ -211,7 +193,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     deleteFile: function deleteFile(file_id) {
       var _this5 = this;
 
-      axios["delete"]("/api/files/".concat(file_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios["delete"]("/api/files/".concat(file_id)).then(function (response) {
         console.log(response);
 
         _this5.getEcoDocs();
@@ -272,183 +254,154 @@ var render = function() {
             "update:current-page": function($event) {
               _vm.currentPage = $event
             }
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(props) {
-                return [
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        width: "60%",
-                        field: "basename",
-                        label: "Archivo",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                        " +
-                                        _vm._s(column.label) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _c("div", { staticClass: "is-size-6" }, [
-                        _vm._v(_vm._s(props.row.basename))
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        width: "",
-                        field: "site.nem_site",
-                        label: "PoP",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "searchable",
-                            fn: function(props) {
-                              return _c("b-input", {
-                                model: {
-                                  value: props.filters[props.column.field],
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      props.filters,
-                                      props.column.field,
-                                      $$v
-                                    )
-                                  },
-                                  expression:
-                                    "props.filters[props.column.field]"
-                                }
-                              })
-                            }
-                          },
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                        " +
-                                        _vm._s(column.label) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "is-size-7" }, [
-                        _vm._v(_vm._s(props.row.site.nem_site))
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "is-size-7",
-                          attrs: {
-                            to: "/pop/" + props.row.site.pop.id,
-                            target: "_blank"
-                          }
-                        },
-                        [
-                          _c("div", { staticClass: "is-size-6" }, [
-                            _vm._v(_vm._s(props.row.site.pop.nombre))
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _vm.ecoDocs.can.delete
-                    ? _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "id",
-                            label: "",
-                            width: "10",
-                            numeric: ""
-                          }
-                        },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "button",
-                              on: {
-                                click: function($event) {
-                                  return _vm.confirm(props.row)
-                                }
-                              }
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                attrs: { icon: ["far", "trash-alt"] }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    : _vm._e()
-                ]
-              }
-            }
-          ])
+          }
         },
         [
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              width: "60%",
+              field: "basename",
+              label: "Archivo",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v(_vm._s(props.row.basename))
+                    ])
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              width: "",
+              field: "site.nem_site",
+              label: "PoP",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "searchable",
+                fn: function(props) {
+                  return _c("b-input", {
+                    model: {
+                      value: props.filters[props.column.field],
+                      callback: function($$v) {
+                        _vm.$set(props.filters, props.column.field, $$v)
+                      },
+                      expression: "props.filters[props.column.field]"
+                    }
+                  })
+                }
+              },
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
+                    _c("div", { staticClass: "is-size-7" }, [
+                      _vm._v(_vm._s(props.row.site.nem_site))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "is-size-7",
+                        attrs: {
+                          to: "/pop/" + props.row.site.pop.id,
+                          target: "_blank"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "is-size-6" }, [
+                          _vm._v(_vm._s(props.row.site.pop.nombre))
+                        ])
+                      ]
+                    )
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _vm.canDelete
+            ? _c(
+                "b-table-column",
+                { attrs: { field: "id", label: "", width: "10", numeric: "" } },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button",
+                      on: {
+                        click: function($event) {
+                          return _vm.confirm(_vm.props.row)
+                        }
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        attrs: { icon: ["far", "trash-alt"] }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c("template", { slot: "empty" }, [
             _c("section", { staticClass: "section" }, [
@@ -466,7 +419,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("p", [_vm._v("Nothing here.")])
+                  _c("p", [_vm._v("No hay archivos")])
                 ]
               )
             ])

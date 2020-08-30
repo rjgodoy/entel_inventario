@@ -85,42 +85,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalNewStorage: function ModalNewStorage() {
@@ -200,79 +164,72 @@ var render = function() {
         _vm._v("Zonas Acopio Temporal")
       ]),
       _vm._v(" "),
-      _c("b-table", {
-        attrs: {
-          data: _vm.storageZones.environmentalData,
-          paginated: _vm.isPaginated,
-          "per-page": _vm.perPage,
-          "current-page": _vm.currentPage,
-          "pagination-simple": _vm.isPaginationSimple,
-          "pagination-position": _vm.paginationPosition,
-          "default-sort-direction": _vm.defaultSortDirection,
-          "sort-icon": _vm.sortIcon,
-          "sort-icon-size": _vm.sortIconSize,
-          "pagination-size": "is-small",
-          "default-sort": "user.first_name",
-          "aria-next-label": "Next page",
-          "aria-previous-label": "Previous page",
-          "aria-page-label": "Page",
-          "aria-current-label": "Current page"
-        },
-        on: {
-          "update:currentPage": function($event) {
-            _vm.currentPage = $event
+      _c(
+        "b-table",
+        {
+          attrs: {
+            data: _vm.storageZones.environmentalData,
+            paginated: _vm.isPaginated,
+            "per-page": _vm.perPage,
+            "current-page": _vm.currentPage,
+            "pagination-simple": _vm.isPaginationSimple,
+            "pagination-position": _vm.paginationPosition,
+            "default-sort-direction": _vm.defaultSortDirection,
+            "sort-icon": _vm.sortIcon,
+            "sort-icon-size": _vm.sortIconSize,
+            "pagination-size": "is-small",
+            "default-sort": "user.first_name",
+            "aria-next-label": "Next page",
+            "aria-previous-label": "Previous page",
+            "aria-page-label": "Page",
+            "aria-current-label": "Current page"
           },
-          "update:current-page": function($event) {
-            _vm.currentPage = $event
+          on: {
+            "update:currentPage": function($event) {
+              _vm.currentPage = $event
+            },
+            "update:current-page": function($event) {
+              _vm.currentPage = $event
+            }
           }
         },
-        scopedSlots: _vm._u([
-          {
-            key: "default",
-            fn: function(props) {
-              return [
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: {
-                      width: "70%",
-                      field: "nombre",
-                      label: "Nombre POP",
-                      sortable: "",
-                      searchable: ""
-                    },
-                    scopedSlots: _vm._u(
+        [
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              width: "70%",
+              field: "nombre",
+              label: "Nombre POP",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(column.label) +
+                            "\n                    "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c(
                       "router-link",
                       {
@@ -289,58 +246,55 @@ var render = function() {
                     _c("p", { staticClass: "is-size-7" }, [
                       _vm._v(_vm._s(props.row.comuna.nombre_comuna))
                     ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-table-column",
-                  {
-                    staticClass: "is-size-6",
-                    attrs: { field: "comuna.zona.nombre_zona", label: "Zona" },
-                    scopedSlots: _vm._u(
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: { field: "comuna.zona.nombre_zona", label: "Zona" },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
                       [
-                        {
-                          key: "header",
-                          fn: function(ref) {
-                            var column = ref.column
-                            return [
-                              _c(
-                                "b-tooltip",
-                                {
-                                  staticClass: "is-size-6",
-                                  attrs: { label: column.label }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(column.label) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          }
-                        }
-                      ],
-                      null,
-                      true
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(column.label) +
+                            "\n                    "
+                        )
+                      ]
                     )
-                  },
-                  [
-                    _vm._v(" "),
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
                     _c("div", { staticClass: "is-size-7" }, [
                       _c("p", [
                         _vm._v(_vm._s(props.row.comuna.zona.nombre_zona))
                       ])
                     ])
                   ]
-                )
-              ]
-            }
-          }
-        ])
-      }),
+                }
+              }
+            ])
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "b-modal",

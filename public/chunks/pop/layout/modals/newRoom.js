@@ -69,7 +69,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'pop_id': this.pop.id,
         'name': this.name,
         'alias': this.alias
@@ -86,7 +85,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     //         message: 'Desea eliminar la planta rectificadora del POP?',
     //         type: 'is-danger',
     //         onConfirm: () => {
-    //             axios.delete(`/api/powerRectifiers/${powerRectifier.id}?api_token=${this.user.api_token}`)
+    //             axios.delete(`/api/powerRectifiers/${powerRectifier.id}`)
     //             .then(response => {
     //                 this.getPopPowerRectifiersWithoutRoom()
     //             })

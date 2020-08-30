@@ -95,7 +95,7 @@ export default {
             let formData = new FormData();
             formData.append('file', this.file);
 
-            axios.post(`/api/junction/efizity?api_token=${this.user.api_token}`, formData, config)
+            axios.post(`/api/junction/efizity`, formData, config)
             .then((response) => {
                 console.log(response.data)
                 this.$buefy.toast.open({

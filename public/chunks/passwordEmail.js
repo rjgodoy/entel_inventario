@@ -113,87 +113,91 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { staticClass: "box", on: { submit: _vm.resetEmail } }, [
-      _c(
-        "div",
-        { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
-        [_vm._v("Recuperar Contraseña")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "field" }, [
+    _c(
+      "form",
+      { staticClass: "box-translucent", on: { submit: _vm.resetEmail } },
+      [
         _c(
-          "label",
-          {
-            staticClass: "label has-text-weight-normal",
-            attrs: { for: "email" }
-          },
-          [_vm._v("Email")]
+          "div",
+          { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
+          [_vm._v("Recuperar Contraseña")]
         ),
         _vm._v(" "),
-        _c("p", { staticClass: "control has-icon has-icon-right" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.state.email,
-                expression: "state.email"
-              }
-            ],
-            staticClass: "input",
-            attrs: {
-              id: "email",
-              type: "email",
-              name: "email",
-              placeholder: "",
-              autofocus: ""
-            },
-            domProps: { value: _vm.state.email },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.state, "email", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "p",
-        { staticClass: "control" },
-        [
+        _c("div", { staticClass: "field" }, [
           _c(
-            "b-button",
+            "label",
             {
-              attrs: {
-                loading: _vm.buttonLoading ? true : false,
-                type: "is-link",
-                size: "is-normal"
-              },
-              on: { click: _vm.resetEmail }
+              staticClass: "label has-text-weight-normal",
+              attrs: { for: "email" }
             },
-            [
-              _vm._v(
-                "\n                Enviar link de recuperación\n            "
-              )
-            ]
+            [_vm._v("Email")]
           ),
           _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "button is-link is-outlined",
-              attrs: { to: "/login" }
-            },
-            [_vm._v("\n                Login\n            ")]
-          )
-        ],
-        1
-      )
-    ])
+          _c("p", { staticClass: "control has-icon has-icon-right" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.state.email,
+                  expression: "state.email"
+                }
+              ],
+              staticClass: "input",
+              attrs: {
+                id: "email",
+                type: "email",
+                name: "email",
+                placeholder: "",
+                autofocus: ""
+              },
+              domProps: { value: _vm.state.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.state, "email", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "p",
+          { staticClass: "control" },
+          [
+            _c(
+              "b-button",
+              {
+                attrs: {
+                  loading: _vm.buttonLoading ? true : false,
+                  type: "is-link",
+                  size: "is-normal"
+                },
+                on: { click: _vm.resetEmail }
+              },
+              [
+                _vm._v(
+                  "\n                Enviar link de recuperación\n            "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "button is-link is-outlined",
+                attrs: { to: "/login" }
+              },
+              [_vm._v("\n                Login\n            ")]
+            )
+          ],
+          1
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []

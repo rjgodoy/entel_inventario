@@ -15,9 +15,9 @@
 // })->where('any', '^(?!api\/)[\/\w\.-]*');
 
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/{any}', function () {
+//     return view('layouts.app');
+// })->where('any', '.*');
 
 Auth::routes();
 

@@ -103,7 +103,7 @@
 
         methods: {
             getLogs() {
-                axios.get(`/api/logs/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/logs/${this.pop.id}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.logs = response.data.data

@@ -96,7 +96,7 @@
             },
             getInfrastructureData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/infrastructureData/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/infrastructureData/${this.core}`)
                         .then((response) => {
                             this.infrastructureData = response.data.data;
                             this.totalInfrastructures()
@@ -105,7 +105,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/infrastructureDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/infrastructureDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.infrastructureData = response.data.data;
                             this.totalInfrastructures()
@@ -114,7 +114,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/infrastructureDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/infrastructureDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             console.log(response)
                             this.infrastructureData = response.data.data;
@@ -130,7 +130,6 @@
                 this.isLoading = true
 
                 var params = {
-                    'api_token': this.user.api_token,
                     'core': this.core,
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0

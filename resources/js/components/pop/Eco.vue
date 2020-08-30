@@ -168,7 +168,7 @@
 
         methods: {
             getRCAs() {
-                axios.get(`/api/rcas/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/rcas/${this.pop.id}`)
                 .then(response => {
                     console.log(response.data)
                     this.rcas = response.data
@@ -176,7 +176,7 @@
             },
 
             getTempStorage() {
-                axios.get(`/api/ecoStorage/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/ecoStorage/${this.pop.id}`)
                 .then(response => {
                     // console.log(response.data)
                     this.temporaryStorages = response.data
@@ -194,7 +194,6 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                     },
                     params: {
-                        'api_token': this.user.api_token,
                         'pop_id': this.pop.id
                     }
                 }
@@ -235,7 +234,6 @@
             readFile(file) {
                 this.isLoading = true
                 var params = {
-                    'api_token': this.user.api_token,
                     'route': file.route,
                     'mime': file.mime,
                     'basename': file.basename,

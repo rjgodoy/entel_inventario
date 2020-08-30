@@ -95,7 +95,7 @@
             },
             getPowerRectifierData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/powerRectifierData/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/powerRectifierData/${this.core}`)
                         .then((response) => {
                             this.powerRectifierData = response.data.powerRectifiers;
                             this.totalPowerRectifiers()
@@ -104,7 +104,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`api/powerRectifierDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`api/powerRectifierDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.powerRectifierData = response.data.powerRectifiers;
                             this.totalPowerRectifiers()
@@ -113,7 +113,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/powerRectifierDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`api/powerRectifierDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             this.powerRectifierData = response.data.powerRectifiers;
                             this.totalPowerRectifiers()
@@ -128,7 +128,6 @@
                 this.isLoading = true
 
                 var params = {
-                    'api_token': this.user.api_token,
                     'core': this.core,
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0

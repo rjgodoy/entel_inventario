@@ -46,38 +46,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      buttonLoading: 0,
+      isLoading: 0,
       errors: [],
-      state: {
-        username: '',
-        password: ''
-      }
+      username: '',
+      password: ''
     };
   },
   methods: {
-    checkForm: function checkForm(e) {
+    login: function login() {
       var _this = this;
 
-      if (!this.state.username) {
+      if (!this.username) {
         this.$buefy.toast.open({
           message: 'Se requiere username.',
           type: 'is-danger',
           duration: 3000
         });
-      } else if (!this.state.password) {
+      } else if (!this.password) {
         this.$buefy.toast.open({
           message: 'Password required.',
           type: 'is-danger',
           duration: 3000
         });
       } else {
-        this.buttonLoading = 1;
-        var token = document.head.querySelector('meta[name="csrf-token"]'); // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+        this.isLoading = 1;
+        var credentials = {
+          'username': this.username,
+          'password': this.password
+        };
+        var config = {
+          headers: {
+            'content-type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        }; // window.axios.defaults.headers.common['XMLHttpRequest'] = token.content;
 
-        axios.post('/login', this.state).then(function (response) {
-          // console.log('error 0')
+        axios.post('/login', credentials, config).then(function (response) {
+          // console.log(response)
           if (response.status === 200) {
-            _this.buttonLoading = 0; // console.log('error 1')
+            _this.isLoading = 0;
 
             if (response.data.includes('not match')) {
               _this.$buefy.toast.open({
@@ -89,8 +96,7 @@ __webpack_require__.r(__webpack_exports__);
               _this.$router.go('/dashboard');
             }
           } else {
-            // console.log('error 2')
-            _this.buttonLoading = 0;
+            _this.isLoading = 0;
 
             _this.$buefy.toast.open({
               message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
@@ -102,8 +108,6 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
         });
       }
-
-      e.preventDefault();
     }
   }
 });
@@ -126,122 +130,138 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { staticClass: "box", on: { submit: _vm.checkForm } }, [
-      _c(
-        "div",
-        { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
-        [_vm._v("Login")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "field" }, [
+    _c(
+      "form",
+      {
+        staticClass: "box-translucent",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.login($event)
+          }
+        }
+      },
+      [
         _c(
-          "label",
-          {
-            staticClass: "label has-text-weight-normal",
-            attrs: { for: "username" }
-          },
-          [_vm._v("Usuario")]
+          "div",
+          { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
+          [_vm._v("Login")]
         ),
         _vm._v(" "),
-        _c("p", { staticClass: "control has-icon has-icon-right" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.state.username,
-                expression: "state.username"
-              }
-            ],
-            staticClass: "input",
-            attrs: {
-              id: "username",
-              type: "text",
-              name: "username",
-              placeholder: "",
-              autofocus: ""
-            },
-            domProps: { value: _vm.state.username },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.state, "username", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "field" }, [
-        _c(
-          "label",
-          {
-            staticClass: "label has-text-weight-normal",
-            attrs: { for: "password" }
-          },
-          [_vm._v("Password")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "control has-icon has-icon-right" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.state.password,
-                expression: "state.password"
-              }
-            ],
-            staticClass: "input",
-            attrs: {
-              id: "password",
-              type: "password",
-              placeholder: "",
-              name: "password"
-            },
-            domProps: { value: _vm.state.password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.state, "password", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c(
-        "p",
-        { staticClass: "control" },
-        [
+        _c("div", { staticClass: "field" }, [
           _c(
-            "button",
-            { staticClass: "button is-link", attrs: { type: "submit" } },
-            [_vm._v("Login")]
+            "label",
+            {
+              staticClass: "label has-text-weight-normal",
+              attrs: { for: "username" }
+            },
+            [_vm._v("Usuario")]
           ),
           _vm._v(" "),
+          _c("div", { staticClass: "control has-icon has-icon-right" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.username,
+                  expression: "username"
+                }
+              ],
+              staticClass: "input",
+              attrs: {
+                id: "username",
+                type: "text",
+                name: "username",
+                placeholder: "",
+                autofocus: ""
+              },
+              domProps: { value: _vm.username },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.username = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field" }, [
           _c(
-            "router-link",
+            "label",
             {
-              staticClass: "button is-default",
-              attrs: { to: "/register", type: "button" }
+              staticClass: "label has-text-weight-normal",
+              attrs: { for: "password" }
             },
-            [_vm._v("Solicita una cuenta")]
-          )
-        ],
-        1
-      )
-    ]),
+            [_vm._v("Password")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "control has-icon has-icon-right" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
+                }
+              ],
+              staticClass: "input",
+              attrs: {
+                id: "password",
+                type: "password",
+                placeholder: "",
+                name: "password"
+              },
+              domProps: { value: _vm.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "control" },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "button is-link",
+                class: _vm.isLoading && "is-loading",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Login")]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "is-pulled-right button is-default",
+                attrs: { to: "/register", type: "button" }
+              },
+              [_vm._v("Solicita una cuenta")]
+            )
+          ],
+          1
+        )
+      ]
+    ),
     _vm._v(" "),
     _c(
-      "p",
-      { staticClass: "has-text-centered" },
+      "div",
+      { staticClass: "block has-text-centered" },
       [
         _c(
           "router-link",

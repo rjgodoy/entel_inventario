@@ -100,7 +100,6 @@
             updatePlane() {
                 if(this.toSave) {
                     let params = {
-                        'api_token': this.user.api_token,
                         'float_tension': this.float_tension,
                         'current': this.current,
                         'recharge_factor': this.recharge_factor,
@@ -121,7 +120,7 @@
             //         message: 'Desea eliminar la planta rectificadora del POP?',
             //         type: 'is-danger',
             //         onConfirm: () => {
-            //             axios.delete(`/api/powerRectifiers/${powerRectifier.id}?api_token=${this.user.api_token}`)
+            //             axios.delete(`/api/powerRectifiers/${powerRectifier.id}`)
             //             .then(response => {
             //                 this.getPopPowerRectifiersWithoutRoom()
             //             })

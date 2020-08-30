@@ -338,7 +338,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("/api/dependences/".concat(this.popMaster.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+                return axios.get("/api/dependences/".concat(this.popMaster.id)).then(function (response) {
                   _this3.dependences = response.data.data;
 
                   if (_this3.dependences.length) {

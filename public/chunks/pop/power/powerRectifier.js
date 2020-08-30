@@ -166,7 +166,7 @@ __webpack_require__.r(__webpack_exports__);
     getPowerRectifierModes: function getPowerRectifierModes() {
       var _this2 = this;
 
-      axios.get("/api/powerRectifierModes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/powerRectifierModes").then(function (response) {
         // console.log(response.data.telecomCompanies)
         _this2.powerRectifierModes = response.data.powerRectifierModes;
 
@@ -198,7 +198,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.isEditMode && (this.powerRectifier.capacity != this.newPowerRectifierCapacity || this.powerRectifier.power_rectifier_mode_id != this.power_rectifier_mode_id || this.powerRectifier.power_rectifier_modules.length != this.powerRectifierModulesQuantity || this.currentPowerRectifierModulesCapacity() != this.powerRectifierModulesCapacity)) {
         var params = {
-          'api_token': this.user.api_token,
           'user_id': this.user.id,
           'capacity': parseFloat(this.newPowerRectifierCapacity),
           'power_rectifier_mode_id': this.power_rectifier_mode_id,

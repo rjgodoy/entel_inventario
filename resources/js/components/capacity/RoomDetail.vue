@@ -209,7 +209,7 @@
                     "total": this.totalJunctionsCapacity,
                     "used": this.totalUsedJunctionsCapacity,
                     "available": this.totalAvailableJunctionsCapacity,
-                    "isLoading": this.totalJunctionsCapacity || !this.junctions.length ? false : true,
+                    "isLoading": this.junctions.length && this.totalJunctionsCapacity == 0 ? true : false,
                     "thresholds": this.thresholds.junctions
                 },
                 {
@@ -217,7 +217,7 @@
                     "total": this.totalGeneratorSetsCapacity,
                     "used": this.totalGeneratorSetsUsedCapacity,
                     "available": this.totalAvailableGeneratorSetsCapacity,
-                    "isLoading": this.totalGeneratorSetsCapacity || !this.generatorSets.length ? false : true,
+                    "isLoading": this.totalGeneratorSetsCapacity || !this.generatorSets.length == 0 ? false : true,
                     "thresholds": this.thresholds.generatorSets
                 },
                 {
@@ -241,7 +241,7 @@
                     "total": this.totalJunctionsCapacity,
                     "used": this.totalUsedJunctionsCapacity,
                     "available": this.totalAvailableJunctionsCapacity,
-                    "isLoading": this.totalJunctionsCapacity || !this.junctions.length ? false : true,
+                    "isLoading": this.junctions.length && this.totalJunctionsCapacity == 0 ? true : false,
                     "thresholds": this.thresholds.climate
                 },
                 {
@@ -249,7 +249,7 @@
                     "total": this.totalDistributionCapacity,
                     "used": this.usedDistributionCapacity,
                     "available": this.availableDistributionCapacity,
-                    "isLoading": this.totalDistributionCapacity ? false : true,
+                    "isLoading": this.totalDistributionCapacity && !this.usedDistributionCapacity ? true : false,
                     "thresholds": this.thresholds.disponibility
                 },
                 {
@@ -257,7 +257,7 @@
                     "total": this.totalSurface,
                     "used": this.usedSurface,
                     "available": this.availableSurface,
-                    "isLoading": this.totalSurface ? false : true,
+                    "isLoading": this.totalSurface && !this.usedSurface ? true : false,
                     "thresholds": this.thresholds.surface
                 }]
             },
@@ -782,7 +782,7 @@
 
         methods: {
             getRoomData() {
-                axios.get(`/api/rooms/${this.$route.params.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/rooms/${this.$route.params.id}`)
                 .then(response => {
                     this.room = response.data.room
                     this.planeTypeId = this.room.current_room_delegation ? this.room.current_room_delegation.plane_delegation_type_id : null
@@ -801,7 +801,7 @@
             // Junctions
             async getJunctions() {
                 // if(this.pop) {
-                await axios.get(`/api/popJunctions/${this.pop.id}?api_token=${this.user.api_token}`)
+                await axios.get(`/api/popJunctions/${this.pop.id}`)
                 .then((response) => {
                     this.junctions = response.data.junctions
                     this.canEditJunctions = response.data.can
@@ -897,7 +897,7 @@
             // Generator Sets
             async getGeneratorSets() {
                 // if(this.pop) {
-                    await axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
+                    await axios.get(`/api/generatorSets/${this.pop.id}`)
                     .then((response) => {
                         this.generatorSets = response.data.generatorSets
                         this.canEditGeneratorGroups = response.data.can
@@ -911,7 +911,7 @@
 
             // Power Rectifiers
             getPlaneTypes() {
-                axios.get(`/api/planeTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/planeTypes`).then(response => {
                     this.planeTypes = response.data.planes
                 })
             },
@@ -951,7 +951,7 @@
             },
 
             getPlanes() {
-                axios.get(`/api/roomPlanes/${this.room.id}?api_token=${this.user.api_token}&plane_delegation_type_id=${this.planeTypeId}`)
+                axios.get(`/api/roomPlanes/${this.room.id}?plane_delegation_type_id=${this.planeTypeId}`)
                 .then((response) => {
                     this.planes = response.data.planes
                     this.canEditPowerRectifiers = response.data.can ? response.data.can : false
@@ -962,7 +962,7 @@
             },
 
             getAirConditioners() {
-                axios.get(`/api/airConditioners/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/airConditioners/${this.pop.id}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.airConditioners = response.data.airConditioner

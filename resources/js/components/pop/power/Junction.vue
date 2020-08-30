@@ -661,13 +661,13 @@
             },
 
             getJunctionTypes() {
-                axios.get(`/api/junctionTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/junctionTypes`).then(response => {
                     this.junctionTypes = response.data.junctionTypes
                 })
             },
 
             getJunctionConnections() {
-                axios.get(`/api/junctionConnections?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/junctionConnections`).then(response => {
                     this.junctionConnections = response.data.junctions
                 })
             },
@@ -675,7 +675,6 @@
             saveChanges() {
                 if (!this.isEditMode) {
                     let params = {
-                        'api_token': this.user.api_token,
                         'user_id': this.user.id,
                         'client_number': this.clientNumber,
                         'junction_number': this.junctionNumber,

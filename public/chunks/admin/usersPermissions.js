@@ -197,7 +197,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'role_id': this.selectedRole
       };
       axios.get('/api/users', {
@@ -210,16 +209,15 @@ __webpack_require__.r(__webpack_exports__);
     getRoles: function getRoles() {
       var _this2 = this;
 
-      axios.get("/api/roles?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/roles").then(function (response) {
         _this2.roles = response.data.data;
       });
     },
     updateUserRole: function updateUserRole(user_id, role_id) {
       var params = {
-        'api_token': this.user.api_token,
         'role_id': role_id
       };
-      axios.put("/api/users/".concat(user_id, "?api_token=").concat(this.user.api_token, "&role_id=").concat(role_id)).then(function (response) {
+      axios.put("/api/users/".concat(user_id, "?role_id=").concat(role_id)).then(function (response) {
         console.log(response); // this.roles = response.data.data
       });
     }
@@ -355,7 +353,7 @@ __webpack_require__.r(__webpack_exports__);
     getUserRequests: function getUserRequests() {
       var _this = this;
 
-      axios.get("/api/userRequests?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/userRequests").then(function (response) {
         console.log(response.data);
         _this.requests = response.data.requests;
       });
@@ -367,7 +365,6 @@ __webpack_require__.r(__webpack_exports__);
         message: 'Desea dar acceso al nuevo usuario?',
         onConfirm: function onConfirm() {
           var params = {
-            'api_token': _this2.user.api_token,
             'user': user,
             'admin_id': _this2.user.id
           };
@@ -395,7 +392,6 @@ __webpack_require__.r(__webpack_exports__);
         hasIcon: true,
         onConfirm: function onConfirm() {
           var params = {
-            'api_token': _this3.user.api_token,
             'user': user,
             'admin_id': _this3.user.id
           };

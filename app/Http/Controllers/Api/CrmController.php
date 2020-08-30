@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Crm as CrmResource;
+use App\Http\Resources\CrmCollection;
 use App\Models\Crm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -27,7 +28,7 @@ class CrmController extends Controller
                 return $crms;
             });
         }
-        return new CrmResource($crms);
+        return new CrmCollection($crms);
     }
 
     /**

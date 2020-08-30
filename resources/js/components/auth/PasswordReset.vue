@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="box" @submit="resetPassword">
+        <form class="box-translucent" @submit="resetPassword">
 
             <div class="field is-size-4 has-text-link has-text-weight-bold">Cambiar Contraseña</div>
 

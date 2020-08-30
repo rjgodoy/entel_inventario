@@ -151,7 +151,6 @@
         methods: {
             updateParameter(param, val) {
                 let params = {
-                    'api_token': this.user.api_token,
                     'parameter': param,
                     'value': val,
                     'user_id': this.user.id

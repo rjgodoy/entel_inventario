@@ -105,7 +105,7 @@
         methods: {
             // APIs
             getElectricLines() {
-                axios.get(`/api/electricLines/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/electricLines/${this.pop.id}`)
                 .then((response) => {
                     this.electricLines = response.data
                     // console.log(response.data)
@@ -116,7 +116,7 @@
             },
 
             setTransformerElectricLine(transformer_id, electricLine_id) {
-                axios.put(`/api/transformers/${transformer_id}?api_token=${this.user.api_token}&electric_line_id=${electricLine_id}`)
+                axios.put(`/api/transformers/${transformer_id}?electric_line_id=${electricLine_id}`)
                 .then((response) => {
                     // console.log(response)
                     this.getElectricLines()

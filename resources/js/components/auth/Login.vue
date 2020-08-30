@@ -1,33 +1,33 @@
 <template>
     <div>
-        <form class="box" @submit="checkForm">
+        <form class="box-translucent" @submit.prevent="login">
 
             <div class="field is-size-4 has-text-link has-text-weight-bold">Login</div>
 
             <div class="field">
                 <label for="username" class="label has-text-weight-normal">Usuario</label>
-                <p class="control has-icon has-icon-right">
-                    <input v-model="state.username" id="username" type="text" class="input" name="username" placeholder="" autofocus>
-                </p>
+                <div class="control has-icon has-icon-right">
+                    <input v-model="username" id="username" type="text" class="input" name="username" placeholder="" autofocus>
+                </div>
             </div>
 
             <div class="field">
                 <label for="password" class="label has-text-weight-normal">Password</label>
-                <p class="control has-icon has-icon-right">
-                    <input v-model="state.password" id="password" type="password" placeholder="" class="input" name="password">
-                </p>
+                <div class="control has-icon has-icon-right">
+                    <input v-model="password" id="password" type="password" placeholder="" class="input" name="password">
+                </div>
             </div>
 
             <hr>
-            <p class="control">
-                <button type="submit" class="button is-link">Login</button>
-                <router-link to="/register" type="button" class="button is-default">Solicita una cuenta</router-link>
-            </p>
+            <div class="control">
+                <button type="submit" class="button is-link" :class="isLoading && 'is-loading'">Login</button>
+                <router-link to="/register" type="button" class="is-pulled-right button is-default">Solicita una cuenta</router-link>
+            </div>
         </form>
 
-        <p class="has-text-centered">
+        <div class="block has-text-centered">
             <router-link to="/password/email" class="is-size-6 has-text-white">Recuperar contraseña</router-link>
-        </p>
+        </div>
 
     </div>
 </template>
@@ -37,40 +37,48 @@
     export default {
         data() {
             return {
-                buttonLoading: 0,
+                isLoading: 0,
                 errors: [],
-                state: {
-                    username: '',
-                    password: ''
-                },
+                username: '',
+                password: ''
             }
         },
         methods: {
-            checkForm(e) {
-                
-                if (!this.state.username) {
+            login() {
+                if (!this.username) {
                     this.$buefy.toast.open({
                         message: 'Se requiere username.',
                         type: 'is-danger',
                         duration: 3000
                     })
                 }
-                else if (!this.state.password) {
+                else if (!this.password) {
                     this.$buefy.toast.open({
                         message: 'Password required.',
                         type: 'is-danger',
                         duration: 3000
                     })
                 }
+
                 else {
-                    this.buttonLoading = 1
-                    var token = document.head.querySelector('meta[name="csrf-token"]');
-                    // window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-                    axios.post('/login', this.state).then((response) => { 
-                        // console.log('error 0')
+                    this.isLoading = 1
+                    let credentials = {
+                        'username': this.username,
+                        'password': this.password
+                    }
+
+                    const config = {
+                        headers: {
+                            'content-type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    }
+                    // window.axios.defaults.headers.common['XMLHttpRequest'] = token.content;
+                    axios.post('/login', credentials, config)
+                    .then(response => { 
+                        // console.log(response)
                         if (response.status === 200) {
-                            this.buttonLoading = 0
-                            // console.log('error 1')
+                            this.isLoading = 0
                             if (response.data.includes('not match')) {
                                 this.$buefy.toast.open({
                                     message: 'Las credenciales no concuerdan con nuestros registros.',
@@ -81,8 +89,7 @@
                                 this.$router.go('/dashboard')
                             }
                         } else {
-                            // console.log('error 2')
-                            this.buttonLoading = 0
+                            this.isLoading = 0
                             this.$buefy.toast.open({
                                 message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
                                 type: 'is-danger',
@@ -92,9 +99,7 @@
                     }).catch((error) => {
                         console.log(error)
                     })
-                    
                 }
-                e.preventDefault()
             }
         }
     }

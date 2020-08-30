@@ -414,7 +414,7 @@ __webpack_require__.r(__webpack_exports__);
     getMaintainers: function getMaintainers() {
       var _this6 = this;
 
-      axios.get("/api/telecomCompanies?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/telecomCompanies").then(function (response) {
         // console.log(response.data.telecomCompanies)
         _this6.maintainers = response.data.telecomCompanies;
 
@@ -430,7 +430,7 @@ __webpack_require__.r(__webpack_exports__);
     getResponsableAreas: function getResponsableAreas() {
       var _this7 = this;
 
-      axios.get("/api/generatorSetResponsableAreas?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/generatorSetResponsableAreas").then(function (response) {
         // console.log(response.data.responsableAreas)
         _this7.responsableAreas = response.data.responsableAreas;
 
@@ -446,7 +446,7 @@ __webpack_require__.r(__webpack_exports__);
     getTopologyTypes: function getTopologyTypes() {
       var _this8 = this;
 
-      axios.get("/api/generatorSetTopologyTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/generatorSetTopologyTypes").then(function (response) {
         // console.log(response.data.telecomCompanies)
         _this8.topologyTypes = response.data.topologyTypes;
 
@@ -462,7 +462,7 @@ __webpack_require__.r(__webpack_exports__);
     getLevelTypes: function getLevelTypes() {
       var _this9 = this;
 
-      axios.get("/api/generatorSetLevelTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/generatorSetLevelTypes").then(function (response) {
         // console.log(response.data.telecomCompanies)
         _this9.levelTypes = response.data.levelTypes;
 
@@ -478,7 +478,7 @@ __webpack_require__.r(__webpack_exports__);
     getGeneratorSetTypes: function getGeneratorSetTypes() {
       var _this10 = this;
 
-      axios.get("/api/generatorSetTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/generatorSetTypes").then(function (response) {
         // console.log(response.data.telecomCompanies)
         _this10.generatorSetTypes = response.data.generatorSetTypes;
 
@@ -499,7 +499,6 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.isEditMode && (this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.generatorSet.generator_set_type_id != this.generator_set_type_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
         console.log(this.currentGeneratorResponsableAreaId);
         var params = {
-          'api_token': this.user.api_token,
           'user_id': parseFloat(this.user.id),
           'generator_set_id': parseFloat(this.generatorSet.id),
           'prime_capacity': parseFloat(this.newPrimeCapacity),

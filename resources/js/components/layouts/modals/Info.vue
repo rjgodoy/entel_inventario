@@ -60,7 +60,6 @@
         methods: {
             getInfoFiles() {
                 let params = {
-                    'api_token': this.user.api_token,
                     'folder_id': 28177
                 }
                 axios.get(`/api/getFiles`, { params })
@@ -96,7 +95,6 @@
             readFile(file) {
                 this.isLoading = true
                 var params = {
-                    'api_token': this.user.api_token,
                     'route': file.route,
                     'mime': file.mime,
                     'basename': file.basename,

@@ -50,7 +50,7 @@ __webpack_require__.r(__webpack_exports__);
     getPowerRectifiers: function getPowerRectifiers() {
       var _this = this;
 
-      axios.get("/api/powerRectifiers/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/powerRectifiers/".concat(this.pop.id)).then(function (response) {
         _this.powerRectifiers = response.data.powerRectifiers;
         _this.can = response.data.can;
       })["catch"](function (error) {

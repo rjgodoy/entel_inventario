@@ -151,7 +151,6 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                     },
                     params: {
-                        'api_token': this.user.api_token,
                         'pop_id': this.selected ? this.selected.id : null,
                         'folder_name': 'Gestión Ambiental',
                         'folder_id': !this.selected ? 28172 : null,
@@ -198,7 +197,7 @@
                     return
                 }
                 this.isFetching = true
-                axios.get(`/api/allPops?api_token=${this.user.api_token}&text=${name}&page=${this.page}`)
+                axios.get(`/api/allPops?text=${name}&page=${this.page}`)
                     .then( response  => {
                         console.log(response.data.meta.last_page)
                         response.data.pops.forEach((item) => this.pops.push(item))

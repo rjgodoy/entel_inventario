@@ -213,7 +213,7 @@ export default {
     methods: {
         toggleInfoWindow(pop, idx) {
             this.infoWindowPos = { lat: parseFloat(pop.latitude), lng: parseFloat(pop.longitude) };
-            axios.get(`/api/popInfo?api_token=${this.user.api_token}&pop_id=${pop.id}`).then((response) => {
+            axios.get(`/api/popInfo?pop_id=${pop.id}`).then((response) => {
                 console.log(response.data)
                 this.infoContent = this.getInfoWindowContent(response.data);
             })

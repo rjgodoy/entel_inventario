@@ -169,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
     getDistributionTypes: function getDistributionTypes() {
       var _this = this;
 
-      axios.get("/api/fireDetectionTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/fireDetectionTypes").then(function (response) {
         console.log(response.data.fireDetectionTypes);
         _this.fireDetectionTypes = response.data.fireDetectionTypes; // if(response.data.fireDetectionTypes) {
         //     this.fireDetectionTypes.forEach(item => {
@@ -183,7 +183,7 @@ __webpack_require__.r(__webpack_exports__);
     getExtinctionTypes: function getExtinctionTypes() {
       var _this2 = this;
 
-      axios.get("/api/fireExtinctionTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/fireExtinctionTypes").then(function (response) {
         _this2.fireExtinctionTypes = response.data.fireExtinctionTypes; // if(response.data.fireExtinctionTypes) {
         //     this.fireExtinctionTypes.forEach(item => {
         //         if(item.id == this.fire_extinction_type_id) {
@@ -198,7 +198,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.isEditMode && (!this.fireDetection || this.fireDetection && this.fireDetection.fire_detection_type_id != this.fire_detection_type_id || this.fireDetection && this.fireDetection.fire_extinction_type_id != this.fire_extinction_type_id)) {
         var params = {
-          'api_token': this.user.api_token,
           'user_id': this.user.id,
           'fire_detection_type_id': this.fire_detection_type_id,
           'fire_extinction_type_id': this.fire_extinction_type_id,
@@ -312,7 +311,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.isEditMode && this.totalSurface != this.newTotalSurface || this.usedSurface != this.newUsedSurface) {
         var params = {
-          'api_token': this.user.api_token,
           'user_id': this.user.id,
           'total_surface': parseFloat(this.newTotalSurface),
           'used_surface': parseFloat(this.newUsedSurface)

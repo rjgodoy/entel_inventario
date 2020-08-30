@@ -117,7 +117,7 @@ library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclam
         methods: {
             // APIs
             getElectricLines() {
-                axios.get(`/api/electricLines/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/electricLines/${this.pop.id}`)
                 .then((response) => {
                     this.electricLines = response.data
                     console.log(response.data)
@@ -127,7 +127,7 @@ library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclam
                 });
             },
             getConnectionClients() {
-                axios.get(`/api/junctions/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/junctions/${this.pop.id}`)
                 .then((response) => {
                     this.junctions = response.data.data
                     // console.log(this.junctions)
@@ -137,7 +137,7 @@ library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclam
                 });
             },
             getGeneratorGroups() {
-                axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/generatorSets/${this.pop.id}`)
                 .then((response) => {
                     this.generatorSets = response.data.data
                     // console.log(this.generatorSets)
@@ -147,7 +147,7 @@ library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclam
                 });
             },
             getPowerRectifiers() {
-                axios.get(`/api/powerRectifiers/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/powerRectifiers/${this.pop.id}`)
                 .then((response) => {
                     this.powerRectifiers = response.data.data
                     // console.log(this.powerRectifiers)
@@ -157,7 +157,7 @@ library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclam
                 });
             },
             setTransformerElectricLine(transformer_id, electricLine_id) {
-                axios.put(`/api/transformers/${transformer_id}?api_token=${this.user.api_token}&electric_line_id=${electricLine_id}`)
+                axios.put(`/api/transformers/${transformer_id}?electric_line_id=${electricLine_id}`)
                 .then((response) => {
                     console.log(response)
                     this.getElectricLines()

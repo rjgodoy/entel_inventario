@@ -141,7 +141,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'folder_id': 28177
       };
       axios.get("/api/getFiles", {
@@ -164,7 +163,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         },
         params: {
-          'api_token': this.user.api_token,
           'folder_id': 28177,
           'user_id': this.user.id,
           'filename': this.filename
@@ -198,7 +196,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         message: 'Desea eliminar este archivo?',
         type: 'is-danger',
         onConfirm: function onConfirm() {
-          axios["delete"]("/api/files/".concat(file.id, "?api_token=").concat(_this3.user.api_token)).then(function (response) {
+          axios["delete"]("/api/files/".concat(file.id)).then(function (response) {
             console.log(response);
 
             _this3.getInfoFiles();

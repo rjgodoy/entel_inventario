@@ -96,7 +96,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       var formData = new FormData();
       formData.append('file', this.file);
-      axios.post("/api/junction/efizity?api_token=".concat(this.user.api_token), formData, config).then(function (response) {
+      axios.post("/api/junction/efizity", formData, config).then(function (response) {
         console.log(response.data);
 
         _this.$buefy.toast.open({

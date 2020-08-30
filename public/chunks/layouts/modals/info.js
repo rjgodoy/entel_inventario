@@ -65,7 +65,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'folder_id': 28177
       };
       axios.get("/api/getFiles", {
@@ -94,7 +93,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       this.isLoading = true;
       var params = {
-        'api_token': this.user.api_token,
         'route': file.route,
         'mime': file.mime,
         'basename': file.basename,

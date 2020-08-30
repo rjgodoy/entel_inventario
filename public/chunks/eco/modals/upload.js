@@ -157,7 +157,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         },
         params: {
-          'api_token': this.user.api_token,
           'pop_id': this.selected ? this.selected.id : null,
           'folder_name': 'Gestión Ambiental',
           'folder_id': !this.selected ? 28172 : null,
@@ -205,7 +204,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       }
 
       this.isFetching = true;
-      axios.get("/api/allPops?api_token=".concat(this.user.api_token, "&text=").concat(name, "&page=").concat(this.page)).then(function (response) {
+      axios.get("/api/allPops?text=".concat(name, "&page=").concat(this.page)).then(function (response) {
         console.log(response.data.meta.last_page);
         response.data.pops.forEach(function (item) {
           return _this3.pops.push(item);

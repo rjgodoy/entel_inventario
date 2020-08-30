@@ -580,7 +580,7 @@
                     console.log(this.room.id)
                     console.log(this.room.current_room_delegation)
 
-                    axios.get(`/api/roomPlanes/${this.room.id}?api_token=${this.user.api_token}&plane_delegation_type_id=${this.room.current_room_delegation.plane_delegation_type_id}`)
+                    axios.get(`/api/roomPlanes/${this.room.id}?plane_delegation_type_id=${this.room.current_room_delegation.plane_delegation_type_id}`)
                     .then((response) => {
                         console.log(response.data)
                         this.roomPlanes = response.data.planes
@@ -592,7 +592,7 @@
             },
 
             async getJunctions() {
-                await axios.get(`/api/popJunctions/${this.room.pop_id}?api_token=${this.user.api_token}`)
+                await axios.get(`/api/popJunctions/${this.room.pop_id}`)
                 .then((response) => {
                     this.junctions = response.data.junctions
                 })
@@ -602,7 +602,7 @@
             },
 
             async getGeneratorSets() {
-                await axios.get(`/api/generatorSets/${this.room.pop_id}?api_token=${this.user.api_token}`)
+                await axios.get(`/api/generatorSets/${this.room.pop_id}`)
                 .then((response) => {
                     this.generatorSets = response.data.generatorSets
                     this.canEditGeneratorGroups = response.data.can

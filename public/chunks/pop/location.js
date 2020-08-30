@@ -152,7 +152,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       var _this = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'parameter': param,
         'value': val,
         'user_id': this.user.id

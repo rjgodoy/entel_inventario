@@ -302,39 +302,42 @@ class PowerRectifierController extends Controller
             ]);
         }
 
-        if(!$powerRectifier->power_rectifier_modules->count()) {
-            for ($i=0; $i < $request->power_rectifier_modules_quantity ; $i++) { 
-                PowerRectifierModule::create([
-                    'power_rectifier_id' => $powerRectifier->id,
-                    'capacity' => $request->power_rectifier_modules_capacities
+        if($reqeust->power_rectifier_modules_quantity && $request->power_rectifier_modules_capacities) {
+            if(!$powerRectifier->power_rectifier_modules->count()) {
+                for ($i=0; $i < $request->power_rectifier_modules_quantity ; $i++) { 
+                    PowerRectifierModule::create([
+                        'power_rectifier_id' => $powerRectifier->id,
+                        'capacity' => $request->power_rectifier_modules_capacities
+                    ]);
+                }
+                Log::create([
+                    'pop_id' => $pop_id,
+                    'user_id' => $request->user_id,
+                    'log_type_id' => 1,
+                    'description' => 'Se han ingresado nuevos módulos de la planta ID '.$powerRectifier->id.'.'
+                ]);
+            } 
+
+            if ($powerRectifier->power_rectifier_modules->count() != $request->power_rectifier_modules_quantity || $powerRectifier->power_rectifier_modules->first()->capacity != $request->power_rectifier_modules_capacities) {
+
+                $modules = PowerRectifierModule::where('power_rectifier_id', $powerRectifier->id)->get();
+                foreach ($modules as $module) {
+                    $module->delete();
+                }
+                for ($i=0; $i < $request->power_rectifier_modules_quantity ; $i++) { 
+                    PowerRectifierModule::create([
+                        'power_rectifier_id' => $powerRectifier->id,
+                        'capacity' => $request->power_rectifier_modules_capacities
+                    ]);
+                }
+
+                Log::create([
+                    'pop_id' => $pop_id,
+                    'user_id' => $request->user_id,
+                    'log_type_id' => 1,
+                    'description' => 'Se han actualizado los módulos de la planta ID '.$powerRectifier->id.'..'
                 ]);
             }
-            Log::create([
-                'pop_id' => $pop_id,
-                'user_id' => $request->user_id,
-                'log_type_id' => 1,
-                'description' => 'Se han ingresado nuevos módulos de la planta ID '.$powerRectifier->id.'.'
-            ]);
-
-        } elseif ($powerRectifier->power_rectifier_modules->count() != $request->power_rectifier_modules_quantity || $powerRectifier->power_rectifier_modules->first()->capacity != $request->power_rectifier_modules_capacities) {
-
-            $modules = PowerRectifierModule::where('power_rectifier_id', $powerRectifier->id)->get();
-            foreach ($modules as $module) {
-                $module->delete();
-            }
-            for ($i=0; $i < $request->power_rectifier_modules_quantity ; $i++) { 
-                PowerRectifierModule::create([
-                    'power_rectifier_id' => $powerRectifier->id,
-                    'capacity' => $request->power_rectifier_modules_capacities
-                ]);
-            }
-
-            Log::create([
-                'pop_id' => $pop_id,
-                'user_id' => $request->user_id,
-                'log_type_id' => 1,
-                'description' => 'Se han actualizado los módulos de la planta ID '.$powerRectifier->id.'..'
-            ]);
         }
 
         return $powerRectifier;

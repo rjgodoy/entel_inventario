@@ -47,7 +47,7 @@
 
         methods : {
             graphData() {
-                axios.get(`/api/siteStats?api_token=${this.user.api_token}`).then((response) => {
+                axios.get(`/api/siteStats`).then((response) => {
                     // console.log(response.data)
                     this.chartData = response.data
                 })

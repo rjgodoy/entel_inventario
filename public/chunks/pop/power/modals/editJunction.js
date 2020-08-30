@@ -397,7 +397,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       var params = {
-        'api_token': this.user.api_token,
         'pop_id': this.junction.pop_id,
         'user_id': this.user.id,
         'nominal_a': this.nominal_a,

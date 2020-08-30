@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="box">
+		<div class="box-translucent">
 			<div class="field is-size-4 has-text-link has-text-weight-bold">Solicitar Cuenta</div>
 
 			<div class="field">

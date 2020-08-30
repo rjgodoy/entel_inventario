@@ -78,7 +78,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     getComsite: function getComsite() {
       var _this = this;
 
-      axios.get("/api/comsites/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/comsites/".concat(this.pop.id)).then(function (response) {
         _this.comsites = response.data.data;
       })["catch"](function (error) {
         console.log('Error al traer los datos de Comsite: ' + error);

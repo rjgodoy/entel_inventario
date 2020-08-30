@@ -56,14 +56,14 @@
         methods: {
             syncData() {
                 if(+this.tab) {
-                    axios.get(`/api/psgTp?api_token=${this.user.api_token}&page=${this.currentPage}&history=1`)
+                    axios.get(`/api/psgTp?page=${this.currentPage}&history=1`)
                     .then((response) => {
                         console.log(response.data)
                         this.dataHistory = response.data
                         this.loadingHistory = false
                     })
                 } else {
-                    axios.get(`/api/psgTp?api_token=${this.user.api_token}&page=${this.currentPage}&history=0`)
+                    axios.get(`/api/psgTp?page=${this.currentPage}&history=0`)
                     .then((response) => {
                         console.log(response.data)
                         this.data = response.data

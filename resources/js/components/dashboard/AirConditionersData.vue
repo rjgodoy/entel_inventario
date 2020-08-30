@@ -94,7 +94,7 @@
             },
             getAirConditionerData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/airConditionerData/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/airConditionerData/${this.core}`)
                         .then((response) => {
                             this.airConditionerData = response.data.airConditioner;
                             this.totalAirConditioners()
@@ -103,7 +103,7 @@
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/airConditionerDataCrm/${this.crmSelected.id}/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/airConditionerDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
                             this.airConditionerData = response.data.airConditioner;
                             this.totalAirConditioners()
@@ -112,7 +112,7 @@
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/airConditionerDataZona/${this.zonaSelected.id}/${this.core}?api_token=${this.user.api_token}`)
+                    axios.get(`/api/airConditionerDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             console.log(response)
                             this.airConditionerData = response.data.airConditioner;
@@ -157,7 +157,6 @@
                 this.isLoading = true
 
                 var params = {
-                    'api_token': this.user.api_token,
                     'core': this.core,
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0

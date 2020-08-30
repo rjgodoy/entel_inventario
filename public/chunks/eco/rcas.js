@@ -159,19 +159,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -218,7 +205,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getRCAs: function getRCAs() {
       var _this = this;
 
-      axios.get("/api/rcas?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/rcas").then(function (response) {
         console.log(response.data);
         _this.rcas = response.data;
       });
@@ -244,7 +231,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       formData.append('file', file); // send upload request
 
       try {
-        var response = axios.post("/api/rcas?api_token=".concat(this.user.api_token), formData, config).then(function (response) {
+        var response = axios.post("/api/rcas", formData, config).then(function (response) {
           _this3.getRCAs();
         });
       } catch (e) {
@@ -271,7 +258,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       this.isLoading = true;
       var params = {
-        'api_token': this.user.api_token,
         'route': file.route,
         'mime': file.mime
       }; // console.log(params)
@@ -327,7 +313,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         message: 'Desea eliminar este archivo?',
         type: 'is-danger',
         onConfirm: function onConfirm() {
-          axios["delete"]("/api/files/".concat(file.id, "?api_token=").concat(_this5.user.api_token)).then(function (response) {
+          axios["delete"]("/api/files/".concat(file.id)).then(function (response) {
             console.log(response);
 
             _this5.getRCAs();
@@ -428,258 +414,254 @@ var render = function() {
             "update:current-page": function($event) {
               _vm.currentPage = $event
             }
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(props) {
-                return [
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        width: "60%",
-                        field: "basename",
-                        label: "Archivo",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                        " +
-                                        _vm._s(column.label) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _c("a", { staticClass: "columns" }, [
-                        _c(
-                          "div",
-                          { staticClass: "column is-1" },
-                          [
-                            _c("font-awesome-icon", {
-                              class: _vm.faFile(props.row.extension).type,
-                              attrs: {
-                                icon: [
-                                  "fas",
-                                  _vm.faFile(props.row.extension).icon
-                                ]
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "column" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "is-size-6",
-                              on: {
-                                click: function($event) {
-                                  return _vm.openFile(props.row)
-                                }
-                              }
-                            },
-                            [_vm._v(_vm._s(props.row.basename))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "is-size-7 has-text-dark" },
-                            [_vm._v(_vm._s(props.row.size / 1000) + " kb")]
-                          )
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-table-column",
-                    {
-                      staticClass: "is-size-6",
-                      attrs: {
-                        width: "",
-                        field: "site.nem_site",
-                        label: "PoP",
-                        sortable: "",
-                        searchable: ""
-                      },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "searchable",
-                            fn: function(props) {
-                              return _c("b-input", {
-                                model: {
-                                  value: props.filters[props.column.field],
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      props.filters,
-                                      props.column.field,
-                                      $$v
-                                    )
-                                  },
-                                  expression:
-                                    "props.filters[props.column.field]"
-                                }
-                              })
-                            }
-                          },
-                          {
-                            key: "header",
-                            fn: function(ref) {
-                              var column = ref.column
-                              return [
-                                _c(
-                                  "b-tooltip",
-                                  {
-                                    staticClass: "is-size-6",
-                                    attrs: { label: column.label }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                        " +
-                                        _vm._s(column.label) +
-                                        "\n                    "
-                                    )
-                                  ]
-                                )
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    },
-                    [
-                      _vm._v(" "),
-                      _vm._v(" "),
-                      props.row.site || props.row.pop
-                        ? _c(
-                            "div",
-                            { staticClass: "has-text-right" },
-                            [
-                              _c("div", { staticClass: "is-size-7" }, [
-                                _vm._v(
-                                  _vm._s(
-                                    props.row.site
-                                      ? props.row.site.nem_site
-                                      : props.row.pop
-                                      ? props.row.pop.sites[0].nem_site
-                                      : ""
-                                  )
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass: "is-size-7",
-                                  attrs: {
-                                    to:
-                                      "/pop/" +
-                                      (props.row.site
-                                        ? props.row.site.pop_id
-                                        : props.row.pop
-                                        ? props.row.pop.id
-                                        : ""),
-                                    target: "_blank"
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "is-size-6" }, [
-                                    _vm._v(
-                                      _vm._s(
-                                        props.row.site
-                                          ? props.row.site.pop.nombre
-                                          : props.row.pop
-                                          ? props.row.pop.sites[0].nombre
-                                          : ""
-                                      )
-                                    )
-                                  ])
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      !props.row.site && !props.row.pop
-                        ? _c(
-                            "div",
-                            { staticClass: "has-text-right is-size-6" },
-                            [_vm._v("RCA GENERAL")]
-                          )
-                        : _vm._e()
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.canDelete && _vm.edit
-                    ? _c(
-                        "b-table-column",
-                        {
-                          attrs: {
-                            field: "id",
-                            label: "",
-                            width: "10",
-                            numeric: ""
-                          }
-                        },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "button is-small",
-                              on: {
-                                click: function($event) {
-                                  return _vm.confirmDelete(props.row)
-                                }
-                              }
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                staticClass: "is-size-7 has-text-danger",
-                                attrs: { icon: ["far", "trash-alt"] }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    : _vm._e()
-                ]
-              }
-            }
-          ])
+          }
         },
         [
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              width: "60%",
+              field: "basename",
+              label: "Archivo",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "searchable",
+                fn: function(props) {
+                  return [
+                    _c("b-input", {
+                      attrs: {
+                        placeholder: "Search...",
+                        icon: "magnify",
+                        size: "is-small"
+                      },
+                      model: {
+                        value: props.filters[props.column.field],
+                        callback: function($$v) {
+                          _vm.$set(props.filters, props.column.field, $$v)
+                        },
+                        expression: "props.filters[props.column.field]"
+                      }
+                    })
+                  ]
+                }
+              },
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
+                    _c("a", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column is-1" },
+                        [
+                          _c("font-awesome-icon", {
+                            class: _vm.faFile(props.row.extension).type,
+                            attrs: {
+                              icon: [
+                                "fas",
+                                _vm.faFile(props.row.extension).icon
+                              ]
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "column" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "is-size-6",
+                            on: {
+                              click: function($event) {
+                                return _vm.openFile(props.row)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(props.row.basename))]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "is-size-7 has-text-dark" }, [
+                          _vm._v(_vm._s(props.row.size / 1000) + " kb")
+                        ])
+                      ])
+                    ])
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("b-table-column", {
+            staticClass: "is-size-6",
+            attrs: {
+              width: "",
+              field: "site.nem_site",
+              label: "PoP",
+              sortable: "",
+              searchable: ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "searchable",
+                fn: function(props) {
+                  return [
+                    _c("b-input", {
+                      attrs: {
+                        placeholder: "Search...",
+                        icon: "magnify",
+                        size: "is-small"
+                      },
+                      model: {
+                        value: props.filters[props.column.field],
+                        callback: function($$v) {
+                          _vm.$set(props.filters, props.column.field, $$v)
+                        },
+                        expression: "props.filters[props.column.field]"
+                      }
+                    })
+                  ]
+                }
+              },
+              {
+                key: "header",
+                fn: function(ref) {
+                  var column = ref.column
+                  return [
+                    _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { label: column.label, "append-to-body": "" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(column.label) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ]
+                }
+              },
+              {
+                key: "default",
+                fn: function(props) {
+                  return [
+                    props.row.site || props.row.pop
+                      ? _c(
+                          "div",
+                          { staticClass: "has-text-right" },
+                          [
+                            _c("div", { staticClass: "is-size-7" }, [
+                              _vm._v(
+                                _vm._s(
+                                  props.row.site
+                                    ? props.row.site.nem_site
+                                    : props.row.pop
+                                    ? props.row.pop.sites[0].nem_site
+                                    : ""
+                                )
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "is-size-7",
+                                attrs: {
+                                  to:
+                                    "/pop/" +
+                                    (props.row.site
+                                      ? props.row.site.pop_id
+                                      : props.row.pop
+                                      ? props.row.pop.id
+                                      : ""),
+                                  target: "_blank"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "is-size-6" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      props.row.site
+                                        ? props.row.site.pop.nombre
+                                        : props.row.pop
+                                        ? props.row.pop.sites[0].nombre
+                                        : ""
+                                    )
+                                  )
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !props.row.site && !props.row.pop
+                      ? _c("div", { staticClass: "has-text-right is-size-6" }, [
+                          _vm._v("RCA GENERAL")
+                        ])
+                      : _vm._e()
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _vm.canDelete && _vm.edit
+            ? _c(
+                "b-table-column",
+                { attrs: { field: "id", label: "", width: "10", numeric: "" } },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button is-small",
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmDelete(_vm.props.row)
+                        }
+                      }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        staticClass: "is-size-7 has-text-danger",
+                        attrs: { icon: ["far", "trash-alt"] }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c("template", { slot: "empty" }, [
             _c("section", { staticClass: "section" }, [
@@ -697,7 +679,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("p", [_vm._v("Nothing here.")])
+                  _c("p", [_vm._v("No hay archivos.")])
                 ]
               )
             ])

@@ -601,7 +601,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getTabs: function getTabs() {
       var _this = this;
 
-      axios.get("/api/popMenu?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/popMenu").then(function (response) {
         // console.log(response.data.data)
         _this.tabs = response.data.data;
       });
@@ -616,7 +616,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getAllData: function getAllData() {
       var _this2 = this;
 
-      axios.get("/api/pop/".concat(this.$route.params.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/pop/".concat(this.$route.params.id)).then(function (response) {
         _this2.pop = response.data.data;
       });
     },

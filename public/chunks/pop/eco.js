@@ -173,7 +173,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getRCAs: function getRCAs() {
       var _this2 = this;
 
-      axios.get("/api/rcas/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/rcas/".concat(this.pop.id)).then(function (response) {
         console.log(response.data);
         _this2.rcas = response.data;
       });
@@ -181,7 +181,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getTempStorage: function getTempStorage() {
       var _this3 = this;
 
-      axios.get("/api/ecoStorage/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/ecoStorage/".concat(this.pop.id)).then(function (response) {
         // console.log(response.data)
         _this3.temporaryStorages = response.data;
       });
@@ -202,7 +202,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         },
         params: {
-          'api_token': this.user.api_token,
           'pop_id': this.pop.id
         }
       }; // form data
@@ -232,7 +231,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       this.isLoading = true;
       var params = {
-        'api_token': this.user.api_token,
         'route': file.route,
         'mime': file.mime,
         'basename': file.basename,

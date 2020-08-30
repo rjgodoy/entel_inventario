@@ -342,7 +342,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'folder_name': this.folderTab.label,
         'folder_id': this.currentFolderView.id,
         'pop_id': this.pop.id
@@ -366,7 +365,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this2 = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'folder_name': this.folderTab.label,
         'folder_id': this.currentFolderView.id
       };
@@ -410,7 +408,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       this.isLoading = true;
       var params = {
-        'api_token': this.user.api_token,
         'route': file.route,
         'mime': file.mime
       }; // console.log(params)
@@ -466,7 +463,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         type: 'is-danger',
         onConfirm: function onConfirm() {
           var params = {
-            'api_token': _this4.user.api_token,
             'user_id': _this4.user.id,
             'pop_id': _this4.pop.id
           };
@@ -508,7 +504,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         message: 'Desea eliminar este archivo?',
         type: 'is-danger',
         onConfirm: function onConfirm() {
-          axios["delete"]("/api/files/".concat(file.id, "?api_token=").concat(_this5.user.api_token)).then(function (response) {
+          axios["delete"]("/api/files/".concat(file.id)).then(function (response) {
             console.log(response);
 
             _this5.getFiles();

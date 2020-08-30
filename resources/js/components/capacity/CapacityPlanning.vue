@@ -105,7 +105,6 @@
 
                     <nav class="pagination" role="navigation" aria-label="pagination">
                         <vue-pagination  
-                            
                             :pagination="roomsData"
                             @paginate="getRoomsData()"
                             :offset="4">
@@ -136,10 +135,10 @@
         props : [
             'user',
             'user_permissions',
-            'crms'
         ],
         data() {
             return {
+                crms: Array,
                 roomsData: {
                     total: 0,
                     per_page: 2,
@@ -159,17 +158,24 @@
         },
 
         mounted() {
+            this.getCrms()
             this.getRoomsData()
         },
 
         methods: {
+            getCrms() {
+                axios.get(`/api/crms`)
+                .then((response) => {
+                    this.crms = response.data.crms
+                })
+            },
+
             orderedRooms: function(pop) {
                 return _.orderBy(pop.rooms, 'order')
             },
 
             getRoomsData() {
                 var params = {
-                    'api_token': this.user.api_token,
                     'page': this.roomsData.current_page,
                     'crm_id': this.currentCrm,
                     'text': this.searchText != '' ?  this.searchText : 0

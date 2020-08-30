@@ -182,28 +182,25 @@
 
         methods: {
             getPlaneTypes() {
-                axios.get(`/api/planeTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/planeTypes`).then(response => {
                     this.planeTypes = response.data.planes
                 })
             },
 
             getPowerRectifierTypes() {
-                axios.get(`/api/powerRectifierTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/powerRectifierTypes`).then(response => {
                     this.powerRectifierTypes = response.data.powerRectifierTypes
                 })
             },
 
             getPowerRectifierModes() {
-                axios.get(`/api/powerRectifierModes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/powerRectifierModes`).then(response => {
                     this.powerRectifierModes = response.data.powerRectifierModes
                 })
             },
 
             getPopPowerRectifiersWithoutRoom() {
-                let params = {
-                    'api_token': this.user.api_token
-                }
-                axios.get(`/api/powerRectifiersWithoutRoom/${this.room.pop_id}`, {params})
+                axios.get(`/api/powerRectifiersWithoutRoom/${this.room.pop_id}`)
                 .then(response => {
                     this.powerRectifiersWithoutRoom = response.data.powerRectifiers
                 })
@@ -215,7 +212,7 @@
                         message: `Confirma asignación de la planta rectificadora ${powerRectifier.power_rectifier_type.type} - ${powerRectifier.power_rectifier_type.model} a sala ${ this.roomDestiny.name }, alimentando al plano ${this.planeType.type}?`,
                         type: 'is-link',
                         onConfirm: () => {
-                            axios.put(`/api/powerRectifiers/${powerRectifier.id}?api_token=${this.user.api_token}&room_id=${this.roomDestiny.id}&plane_type_id=${this.planeType.id}`)
+                            axios.put(`/api/powerRectifiers/${powerRectifier.id}?room_id=${this.roomDestiny.id}&plane_type_id=${this.planeType.id}`)
                             .then(response => {
                                 console.log(response.data)
                                 this.getPopPowerRectifiersWithoutRoom()
@@ -229,7 +226,6 @@
             newPowerRectifier() {
                 if(this.canSave) {
                     let params = {
-                        'api_token': this.user.api_token,
                         'pop_id': this.roomDestiny.pop_id,
                         'room_id': this.roomDestiny.id,
                         'plane_type_id': this.planeType.id,
@@ -253,7 +249,7 @@
                     message: 'Desea eliminar la planta rectificadora del POP?',
                     type: 'is-danger',
                     onConfirm: () => {
-                        axios.delete(`/api/powerRectifiers/${powerRectifier.id}?api_token=${this.user.api_token}`)
+                        axios.delete(`/api/powerRectifiers/${powerRectifier.id}`)
                         .then(response => {
                             this.getPopPowerRectifiersWithoutRoom()
                         })

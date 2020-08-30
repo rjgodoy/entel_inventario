@@ -77,7 +77,6 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                     },
                     params: {
-                        'api_token': this.user.api_token,
                         'pop_id': this.pop.id,
                         'folder_name': this.folderTab.label,
                         'folder_id': this.folder_id,

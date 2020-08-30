@@ -40,7 +40,7 @@
         },
         methods: {
             getPowerRectifiers() {
-                axios.get(`/api/powerRectifiers/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/powerRectifiers/${this.pop.id}`)
                 .then((response) => {
                     this.powerRectifiers = response.data.powerRectifiers
                     this.can = response.data.can

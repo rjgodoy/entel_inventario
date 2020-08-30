@@ -96,7 +96,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       var _this = this;
 
       if (this.crmSelected == null) {
-        axios.get("/api/airConditionerData/".concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
+        axios.get("/api/airConditionerData/".concat(this.core)).then(function (response) {
           _this.airConditionerData = response.data.airConditioner;
 
           _this.totalAirConditioners();
@@ -104,7 +104,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
           console.log('handle server error from here');
         });
       } else if (this.zonaSelected == null) {
-        axios.get("/api/airConditionerDataCrm/".concat(this.crmSelected.id, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
+        axios.get("/api/airConditionerDataCrm/".concat(this.crmSelected.id, "/").concat(this.core)).then(function (response) {
           _this.airConditionerData = response.data.airConditioner;
 
           _this.totalAirConditioners();
@@ -112,7 +112,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
           console.log('handle server error from here');
         });
       } else {
-        axios.get("/api/airConditionerDataZona/".concat(this.zonaSelected.id, "/").concat(this.core, "?api_token=").concat(this.user.api_token)).then(function (response) {
+        axios.get("/api/airConditionerDataZona/".concat(this.zonaSelected.id, "/").concat(this.core)).then(function (response) {
           console.log(response);
           _this.airConditionerData = response.data.airConditioner;
 
@@ -154,7 +154,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
       this.isLoading = true;
       var params = {
-        'api_token': this.user.api_token,
         'core': this.core,
         'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
         'zona_id': this.selectedZona ? this.selectedZona.id : 0

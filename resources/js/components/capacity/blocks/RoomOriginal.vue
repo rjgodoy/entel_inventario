@@ -644,7 +644,7 @@
             },
 
             getPlaneTypes() {
-                axios.get(`/api/planeTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/planeTypes`).then(response => {
                     this.planeTypes = response.data.planes
                 })
             },
@@ -684,7 +684,7 @@
             },
 
             getPlanes() {
-                axios.get(`/api/roomPlanes/${this.sala.id}?api_token=${this.user.api_token}&plane_delegation_type_id=${this.planeTypeId}`)
+                axios.get(`/api/roomPlanes/${this.sala.id}?plane_delegation_type_id=${this.planeTypeId}`)
                 .then((response) => {
                     this.planes = response.data.planes
                     this.canEditPowerRectifiers = response.data.can ? response.data.can : false
@@ -695,7 +695,7 @@
             },
 
             getAirConditioners() {
-                axios.get(`/api/airConditioners/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/airConditioners/${this.pop.id}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.airConditioners = response.data.airConditioner
@@ -882,7 +882,6 @@
 
             updatePlaneType(sala) {
                 let params = {
-                    'api_token': this.user.api_token,
                     'user_id': this.user.id,
                     'plane_type_id': this.planeTypeId
                 }

@@ -129,7 +129,7 @@ __webpack_require__.r(__webpack_exports__);
     getVerticalStructures: function getVerticalStructures() {
       var _this = this;
 
-      axios.get("/api/verticalStructures/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/verticalStructures/".concat(this.pop.id)).then(function (response) {
         _this.verticalStructures = response.data.data;
         console.log(_this.verticalStructures);
       })["catch"](function (error) {
@@ -139,7 +139,7 @@ __webpack_require__.r(__webpack_exports__);
     getInfrastructures: function getInfrastructures() {
       var _this2 = this;
 
-      axios.get("/api/infrastructures/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/infrastructures/".concat(this.pop.id)).then(function (response) {
         _this2.infrastructures = response.data.data;
         console.log(_this2.infrastructures);
       })["catch"](function (error) {

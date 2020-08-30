@@ -51,19 +51,14 @@
 </head>
 <body class="has-background-black-bis">
     <div id="app">
-        {{-- {{ auth()->user()->permissions }} --}}
-
         <router-view
-            :crms='@json($crms)'
-            :menu_data='@json($menu)'
             :last_data_counters='@json($last_data_counters)'
-            :message="'{{ session()->get('message') }}'"
             :app_name="'{{ config('app.name') }}'"
             :user='@json(auth()->user())'
             :user_permissions='@json(auth()->user()->permissions)'
             :last_updated_data='@json($last_updated_data)'
+            :is_dark_mode="'{{ $darkMode }}'"
         ></router-view>
-
     </div>
 </body>
 </html>

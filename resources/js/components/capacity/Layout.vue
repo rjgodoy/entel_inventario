@@ -126,7 +126,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
         methods: {
             async getJunctions() {
                 if(this.pop) {
-                    await axios.get(`/api/popJunctions/${this.pop.id}?api_token=${this.user.api_token}`)
+                    await axios.get(`/api/popJunctions/${this.pop.id}`)
                     .then((response) => {
                         this.junctions = response.data.junctions
                         this.canEditJunctions = response.data.can
@@ -139,7 +139,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
 
             async getGeneratorSets() {
                 if(this.pop) {
-                    await axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
+                    await axios.get(`/api/generatorSets/${this.pop.id}`)
                     .then((response) => {
                         this.generatorSets = response.data.generatorSets
                         this.canEditGeneratorGroups = response.data.can
@@ -153,7 +153,6 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
             updateAutonomy() {
                 if(!this.isEditMode && this.pop && this.pop.current_autonomy && this.newTheoreticalAutonomy != this.pop.current_autonomy.theoretical) {
                     let params = {
-                        'api_token': this.user.api_token,
                         'pop_id': this.pop.id,
                         'theoretical_autonomy': parseFloat(this.newTheoreticalAutonomy)
                     }

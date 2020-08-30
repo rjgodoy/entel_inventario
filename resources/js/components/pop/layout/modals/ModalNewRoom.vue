@@ -61,7 +61,6 @@
         methods: {
             newRoom() {
                     let params = {
-                        'api_token': this.user.api_token,
                         'pop_id': this.pop.id,
                         'name': this.name,
                         'alias': this.alias,
@@ -79,7 +78,7 @@
             //         message: 'Desea eliminar la planta rectificadora del POP?',
             //         type: 'is-danger',
             //         onConfirm: () => {
-            //             axios.delete(`/api/powerRectifiers/${powerRectifier.id}?api_token=${this.user.api_token}`)
+            //             axios.delete(`/api/powerRectifiers/${powerRectifier.id}`)
             //             .then(response => {
             //                 this.getPopPowerRectifiersWithoutRoom()
             //             })

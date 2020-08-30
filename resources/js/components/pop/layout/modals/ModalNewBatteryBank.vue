@@ -62,7 +62,7 @@
 
         methods: {
             getBatteryBankBrands() {
-                axios.get(`/api/batteryBankBrands?api_token=${this.user.api_token}`)
+                axios.get(`/api/batteryBankBrands`)
                 .then(response => {
                     this.batteryBankBrands = response.data.batteryBankBrands
                 })
@@ -70,7 +70,6 @@
 
             newBatteryBank() {
                 let params = {
-                    'api_token': this.user.api_token,
                     'plane_id': this.plane.id,
                     'battery_bank_brand_id': this.battery_bank_brand_id,
                     'capacity': parseFloat(this.capacity)

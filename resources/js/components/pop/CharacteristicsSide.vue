@@ -302,7 +302,6 @@ export default {
     methods: {
         updateParameter(param, val) {
             let params = {
-                'api_token': this.user.api_token,
                 'parameter': param,
                 'value': !val,
                 'user_id': this.user.id
@@ -323,7 +322,6 @@ export default {
 
         updateVipEntel() {
             let params = {
-                'api_token': this.user.api_token,
                 'value': !this.vip_entel,
                 'user_id': this.user.id
             }

@@ -133,7 +133,7 @@ export default {
 
     methods: {
         getPopData() {
-            axios.get(`/api/pop/${this.pop.id}?api_token=${this.user.api_token}`)
+            axios.get(`/api/pop/${this.pop.id}`)
             .then((response) => {
                 // console.log(response.data.data)
                 this.popData = response.data.data
@@ -141,7 +141,7 @@ export default {
         },
 
         graphData() {
-            axios.get(`/api/capacityProjection?room_id=${this.room.id}&api_token=${this.user.api_token}`)
+            axios.get(`/api/capacityProjection?room_id=${this.room.id}`)
             .then((response) => {
                 // console.log(response)
                 if(response.data.data) {

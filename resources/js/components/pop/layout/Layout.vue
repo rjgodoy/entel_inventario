@@ -279,7 +279,7 @@ library.add(farCheckCircle, faExclamationTriangle);
         },
         methods: {
             getJunctions() {
-                axios.get(`/api/junctions/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/junctions/${this.pop.id}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.junctions = response.data.junction
@@ -291,7 +291,7 @@ library.add(farCheckCircle, faExclamationTriangle);
             },
 
             getGeneratorSets() {
-                axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/generatorSets/${this.pop.id}`)
                 .then((response) => {
                     this.generatorSets = response.data.generatorSets
                     this.canEditGeneratorGroups = response.data.can
@@ -302,7 +302,7 @@ library.add(farCheckCircle, faExclamationTriangle);
             },
 
             getPowerRectifiers() {
-                axios.get(`/api/powerRectifiers/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/powerRectifiers/${this.pop.id}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.powerRectifiers = response.data.powerRectifiers
@@ -314,7 +314,7 @@ library.add(farCheckCircle, faExclamationTriangle);
             },
 
             getAirConditioners() {
-                axios.get(`/api/airConditioners/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/airConditioners/${this.pop.id}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.airConditioners = response.data.airConditioner

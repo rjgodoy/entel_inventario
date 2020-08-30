@@ -1,29 +1,13 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+window._ = require('lodash');
 
-require('./bootstrap');
-window.Vue = require('vue');
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import routes from './routes';
+Vue.use(VueRouter);
 
-// Vue.directive('clickOutside', {
-//     bind: function (el, binding, vnode) {
-//         el.clickOutsideEvent = function (event) {
-//             // here I check that click was outside the el and his childrens
-//             if (!(el == event.target || el.contains(event.target))) {
-//                 // and if it did, call method provided in attribute value
-//                 vnode.context[binding.expression](event);
-//             }
-//         };
-//         document.body.addEventListener('click', el.clickOutsideEvent)
-//     },
-//     unbind: function (el) {
-//         document.body.removeEventListener('click', el.clickOutsideEvent)
-//     },
-// });
-
-Vue.prototype.$eventBus = new Vue()
+import axios from 'axios';
+window.axios = axios;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // ########################## Buefy Libraries ##########################
     import Buefy from 'buefy'
@@ -84,11 +68,10 @@ Vue.prototype.$eventBus = new Vue()
 
 
 Vue.config.productionTip = false
+Vue.prototype.$eventBus = new Vue()
 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
 
-import routes from './constants/routes'
+
 // import store from './constants/store'
 
 const app = new Vue({

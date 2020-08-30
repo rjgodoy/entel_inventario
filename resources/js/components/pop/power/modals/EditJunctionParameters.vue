@@ -393,7 +393,6 @@
                 }
 
                 let params = {
-                    'api_token': this.user.api_token,
                     'pop_id': this.junction.pop_id,
                     'user_id': this.user.id,
 

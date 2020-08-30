@@ -57,7 +57,7 @@ __webpack_require__.r(__webpack_exports__);
     getJunctions: function getJunctions() {
       var _this = this;
 
-      axios.get("/api/junctions/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/junctions/".concat(this.pop.id)).then(function (response) {
         _this.junctions = response.data.junction;
         _this.can = response.data.can;
       })["catch"](function (error) {

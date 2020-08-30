@@ -121,7 +121,7 @@
             },
 
             getData() {
-                axios.get(`/api/albaPopList?api_token=${this.user.api_token}&core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
+                axios.get(`/api/albaPopList?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.data = response.data;

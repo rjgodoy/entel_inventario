@@ -114,7 +114,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.isEditMode && this.totalCapacity != this.newTotalCapacity || this.usedCapacity != this.newUsedCapacity) {
         var params = {
-          'api_token': this.user.api_token,
           'user_id': this.user.id,
           'total_capacity': parseFloat(this.newTotalCapacity),
           'used_capacity': parseFloat(this.newUsedCapacity)

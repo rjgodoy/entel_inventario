@@ -180,33 +180,28 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getPlaneTypes: function getPlaneTypes() {
       var _this = this;
 
-      axios.get("/api/planeTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/planeTypes").then(function (response) {
         _this.planeTypes = response.data.planes;
       });
     },
     getPowerRectifierTypes: function getPowerRectifierTypes() {
       var _this2 = this;
 
-      axios.get("/api/powerRectifierTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/powerRectifierTypes").then(function (response) {
         _this2.powerRectifierTypes = response.data.powerRectifierTypes;
       });
     },
     getPowerRectifierModes: function getPowerRectifierModes() {
       var _this3 = this;
 
-      axios.get("/api/powerRectifierModes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/powerRectifierModes").then(function (response) {
         _this3.powerRectifierModes = response.data.powerRectifierModes;
       });
     },
     getPopPowerRectifiersWithoutRoom: function getPopPowerRectifiersWithoutRoom() {
       var _this4 = this;
 
-      var params = {
-        'api_token': this.user.api_token
-      };
-      axios.get("/api/powerRectifiersWithoutRoom/".concat(this.room.pop_id), {
-        params: params
-      }).then(function (response) {
+      axios.get("/api/powerRectifiersWithoutRoom/".concat(this.room.pop_id)).then(function (response) {
         _this4.powerRectifiersWithoutRoom = response.data.powerRectifiers;
       });
     },
@@ -218,7 +213,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           message: "Confirma asignaci\xF3n de la planta rectificadora ".concat(powerRectifier.power_rectifier_type.type, " - ").concat(powerRectifier.power_rectifier_type.model, " a sala ").concat(this.roomDestiny.name, ", alimentando al plano ").concat(this.planeType.type, "?"),
           type: 'is-link',
           onConfirm: function onConfirm() {
-            axios.put("/api/powerRectifiers/".concat(powerRectifier.id, "?api_token=").concat(_this5.user.api_token, "&room_id=").concat(_this5.roomDestiny.id, "&plane_type_id=").concat(_this5.planeType.id)).then(function (response) {
+            axios.put("/api/powerRectifiers/".concat(powerRectifier.id, "?room_id=").concat(_this5.roomDestiny.id, "&plane_type_id=").concat(_this5.planeType.id)).then(function (response) {
               console.log(response.data);
 
               _this5.getPopPowerRectifiersWithoutRoom();
@@ -234,7 +229,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       if (this.canSave) {
         var params = {
-          'api_token': this.user.api_token,
           'pop_id': this.roomDestiny.pop_id,
           'room_id': this.roomDestiny.id,
           'plane_type_id': this.planeType.id,
@@ -258,7 +252,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         message: 'Desea eliminar la planta rectificadora del POP?',
         type: 'is-danger',
         onConfirm: function onConfirm() {
-          axios["delete"]("/api/powerRectifiers/".concat(powerRectifier.id, "?api_token=").concat(_this7.user.api_token)).then(function (response) {
+          axios["delete"]("/api/powerRectifiers/".concat(powerRectifier.id)).then(function (response) {
             _this7.getPopPowerRectifiersWithoutRoom();
           });
         }

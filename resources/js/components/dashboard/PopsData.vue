@@ -151,7 +151,7 @@
                 // Si no hay un CRM seleccionado
                 if (!this.selectedCrm) {                             
 
-                    axios.get(`/api/popData?api_token=${this.user.api_token}&core=${this.core}`)
+                    axios.get(`/api/popData?core=${this.core}`)
                     .then((response) => {
                         this.popsData = response.data.data
                         // this.$eventBus.$emit('graphData', this.popsData)
@@ -159,7 +159,7 @@
                 } 
                 //Si hay un CRM seleccionado, pero no hay zona seleccionada
                 else if (!this.selectedZona){
-                    axios.get(`/api/popDataCrm?api_token=${this.user.api_token}&crm_id=${this.selectedCrm.id}&core=${this.core}`)
+                    axios.get(`/api/popDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
                         this.popsData = response.data.data
                         // this.$eventBus.$emit('graphData', this.popsData)
@@ -167,7 +167,7 @@
                 } 
                 // Si hay una zona seleccionada
                 else {
-                    axios.get(`/api/popDataZona?api_token=${this.user.api_token}&zona_id=${this.selectedZona.id}&core=${this.core}`)
+                    axios.get(`/api/popDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
                         this.popsData = response.data.data
                         // this.$eventBus.$emit('graphData', this.popsData)

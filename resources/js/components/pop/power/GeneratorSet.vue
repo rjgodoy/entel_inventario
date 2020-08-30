@@ -418,7 +418,7 @@
 
         methods: {
             getMaintainers() {
-                axios.get(`/api/telecomCompanies?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/telecomCompanies`).then(response => {
                     // console.log(response.data.telecomCompanies)
                     this.maintainers = response.data.telecomCompanies
                     if(response.data.telecomCompanies) {
@@ -432,7 +432,7 @@
             },
 
             getResponsableAreas() {
-                axios.get(`/api/generatorSetResponsableAreas?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/generatorSetResponsableAreas`).then(response => {
                     // console.log(response.data.responsableAreas)
                     this.responsableAreas = response.data.responsableAreas
                     
@@ -447,7 +447,7 @@
             },
 
             getTopologyTypes() {
-                axios.get(`/api/generatorSetTopologyTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/generatorSetTopologyTypes`).then(response => {
                     // console.log(response.data.telecomCompanies)
                     this.topologyTypes = response.data.topologyTypes
                     if(response.data.topologyTypes) {
@@ -461,7 +461,7 @@
             },
 
             getLevelTypes() {
-                axios.get(`/api/generatorSetLevelTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/generatorSetLevelTypes`).then(response => {
                     // console.log(response.data.telecomCompanies)
                     this.levelTypes = response.data.levelTypes
                     if(response.data.levelTypes) {
@@ -475,7 +475,7 @@
             },
 
             getGeneratorSetTypes() {
-                axios.get(`/api/generatorSetTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/generatorSetTypes`).then(response => {
                     // console.log(response.data.telecomCompanies)
                     this.generatorSetTypes = response.data.generatorSetTypes
                     if(response.data.generatorSetTypes) {
@@ -500,7 +500,6 @@
                     this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
                     console.log(this.currentGeneratorResponsableAreaId)
                     let params = {
-                        'api_token': this.user.api_token,
                         'user_id': parseFloat(this.user.id),
                         'generator_set_id': parseFloat(this.generatorSet.id),
                         'prime_capacity': parseFloat(this.newPrimeCapacity),

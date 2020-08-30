@@ -44,7 +44,7 @@
 
         methods: {
             getGeneratorSets() {
-                axios.get(`/api/generatorSets/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/generatorSets/${this.pop.id}`)
                 .then((response) => {
                     this.generatorSets = response.data.generatorSets
                     this.can = response.data.can

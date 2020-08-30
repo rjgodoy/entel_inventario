@@ -222,7 +222,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -240,9 +239,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     } // RoomsTable: () => import(/* webpackChunkName: "chunks/capacity/roomsTable"*/'./RoomsTable')
 
   },
-  props: ['user', 'user_permissions', 'crms'],
+  props: ['user', 'user_permissions'],
   data: function data() {
     return {
+      crms: Array,
       roomsData: {
         total: 0,
         per_page: 2,
@@ -260,17 +260,24 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     }
   },
   mounted: function mounted() {
+    this.getCrms();
     this.getRoomsData();
   },
   methods: {
+    getCrms: function getCrms() {
+      var _this = this;
+
+      axios.get("/api/crms").then(function (response) {
+        _this.crms = response.data.crms;
+      });
+    },
     orderedRooms: function orderedRooms(pop) {
       return _.orderBy(pop.rooms, 'order');
     },
     getRoomsData: function getRoomsData() {
-      var _this = this;
+      var _this2 = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'page': this.roomsData.current_page,
         'crm_id': this.currentCrm,
         'text': this.searchText != '' ? this.searchText : 0
@@ -278,7 +285,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get('/api/rooms', {
         params: params
       }).then(function (response) {
-        _this.roomsData = response.data;
+        _this2.roomsData = response.data;
       });
     },
     clearSearch: function clearSearch() {
@@ -516,14 +523,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
         "total": this.totalJunctionsCapacity,
         "used": this.totalUsedJunctionsCapacity,
         "available": this.totalAvailableJunctionsCapacity,
-        "isLoading": this.totalJunctionsCapacity || !this.junctions.length ? false : true,
+        "isLoading": this.junctions.length && this.totalJunctionsCapacity == 0 ? true : false,
         "thresholds": this.thresholds.junctions
       }, {
         "title": "Grupo Electrógeno",
         "total": this.totalGeneratorSetsCapacity,
         "used": this.totalGeneratorSetsUsedCapacity,
         "available": this.totalAvailableGeneratorSetsCapacity,
-        "isLoading": this.totalGeneratorSetsCapacity || !this.generatorSets.length ? false : true,
+        "isLoading": this.totalGeneratorSetsCapacity || !this.generatorSets.length == 0 ? false : true,
         "thresholds": this.thresholds.generatorSets
       }, {
         "title": "Plantas Rectificadoras",
@@ -544,21 +551,21 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
         "total": this.totalJunctionsCapacity,
         "used": this.totalUsedJunctionsCapacity,
         "available": this.totalAvailableJunctionsCapacity,
-        "isLoading": this.totalJunctionsCapacity || !this.junctions.length ? false : true,
+        "isLoading": this.junctions.length && this.totalJunctionsCapacity == 0 ? true : false,
         "thresholds": this.thresholds.climate
       }, {
         "title": "Distribución",
         "total": this.totalDistributionCapacity,
         "used": this.usedDistributionCapacity,
         "available": this.availableDistributionCapacity,
-        "isLoading": this.totalDistributionCapacity ? false : true,
+        "isLoading": this.totalDistributionCapacity && !this.usedDistributionCapacity ? true : false,
         "thresholds": this.thresholds.disponibility
       }, {
         "title": "Espacio",
         "total": this.totalSurface,
         "used": this.usedSurface,
         "available": this.availableSurface,
-        "isLoading": this.totalSurface ? false : true,
+        "isLoading": this.totalSurface && !this.usedSurface ? true : false,
         "thresholds": this.thresholds.surface
       }];
     },
@@ -1127,7 +1134,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     getRoomData: function getRoomData() {
       var _this17 = this;
 
-      axios.get("/api/rooms/".concat(this.$route.params.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/rooms/".concat(this.$route.params.id)).then(function (response) {
         _this17.room = response.data.room;
         _this17.planeTypeId = _this17.room.current_room_delegation ? _this17.room.current_room_delegation.plane_delegation_type_id : null;
 
@@ -1154,7 +1161,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("/api/popJunctions/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+                return axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
                   _this18.junctions = response.data.junctions;
                   _this18.canEditJunctions = response.data.can;
                 })["catch"](function (error) {
@@ -1270,7 +1277,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get("/api/generatorSets/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+                return axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
                   _this19.generatorSets = response.data.generatorSets;
                   _this19.canEditGeneratorGroups = response.data.can;
                 })["catch"](function (error) {
@@ -1295,7 +1302,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     getPlaneTypes: function getPlaneTypes() {
       var _this20 = this;
 
-      axios.get("/api/planeTypes?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/planeTypes").then(function (response) {
         _this20.planeTypes = response.data.planes;
       });
     },
@@ -1341,7 +1348,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     getPlanes: function getPlanes() {
       var _this23 = this;
 
-      axios.get("/api/roomPlanes/".concat(this.room.id, "?api_token=").concat(this.user.api_token, "&plane_delegation_type_id=").concat(this.planeTypeId)).then(function (response) {
+      axios.get("/api/roomPlanes/".concat(this.room.id, "?plane_delegation_type_id=").concat(this.planeTypeId)).then(function (response) {
         _this23.planes = response.data.planes;
         _this23.canEditPowerRectifiers = response.data.can ? response.data.can : false;
       })["catch"](function (error) {
@@ -1351,7 +1358,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     getAirConditioners: function getAirConditioners() {
       var _this24 = this;
 
-      axios.get("/api/airConditioners/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/airConditioners/".concat(this.pop.id)).then(function (response) {
         // console.log(response.data)
         _this24.airConditioners = response.data.airConditioner;
         _this24.canEditAirConditioners = response.data.can;

@@ -70,7 +70,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getBatteryBankBrands: function getBatteryBankBrands() {
       var _this = this;
 
-      axios.get("/api/batteryBankBrands?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/batteryBankBrands").then(function (response) {
         _this.batteryBankBrands = response.data.batteryBankBrands;
       });
     },
@@ -78,7 +78,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this2 = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'plane_id': this.plane.id,
         'battery_bank_brand_id': this.battery_bank_brand_id,
         'capacity': parseFloat(this.capacity)

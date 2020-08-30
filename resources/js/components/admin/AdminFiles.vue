@@ -137,7 +137,6 @@
         methods: {
             getInfoFiles() {
                 let params = {
-                    'api_token': this.user.api_token,
                     'folder_id': 28177
                 }
                 axios.get(`/api/getFiles`, { params })
@@ -159,7 +158,6 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                     },
                     params: {
-                        'api_token': this.user.api_token,
                         'folder_id': 28177,
                         'user_id': this.user.id,
                         'filename': this.filename
@@ -194,7 +192,7 @@
                     message: 'Desea eliminar este archivo?',
                     type: 'is-danger',
                     onConfirm: () => {
-                        axios.delete(`/api/files/${file.id}?api_token=${this.user.api_token}`)
+                        axios.delete(`/api/files/${file.id}`)
                         .then(response => {
                             console.log(response)
                             this.getInfoFiles()

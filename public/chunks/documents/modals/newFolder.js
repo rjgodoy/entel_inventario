@@ -40,7 +40,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     createFolder: function createFolder() {
       var params = {
-        'api_token': this.user.api_token,
         'name': this.name,
         'pop_id': this.folder.pop_id,
         'folderTab': this.folderTab.label,

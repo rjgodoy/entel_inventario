@@ -46,7 +46,7 @@
 
         methods: {
             getPermissions() {
-                axios.get(`/api/permissions?api_token=${this.thisUser.api_token}`)
+                axios.get(`/api/permissions`)
                 .then(response => {
                     this.permissions = response.data.permissions
                 })

@@ -176,7 +176,8 @@
                                         </div>
                                         
                                         <div class="is-size-4 has-text-weight-semibold" :class="currentTab === 'pops' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ popsQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'pops' ? 'has-text-white' : secondaryText">POP</p>
+                                            <div class="is-size-6 has-text-weight-semibold" :class="currentTab === 'pops' ? 'has-text-white' : secondaryText" style="margin-bottom: -2px">POP</div>
+                                            <div class="has-text-weight-light is-size-7">activos</div>
                                         </div>
                                     </a>
                                 </div>
@@ -192,7 +193,8 @@
                                             </b-icon>
                                         </div>
                                         <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'sites' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ sitesQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'sites' ? 'has-text-white' : secondaryText">Sitios</p>
+                                            <p class="is-size-6 has-text-weight-semibold" :class="currentTab === 'sites' ? 'has-text-white' : secondaryText" style="margin-bottom: -2px">Sitios</p>
+                                            <div class="has-text-weight-light is-size-7">activos</div>
                                         </div>
                                     </a>
                                 </div>
@@ -208,7 +210,8 @@
                                             </b-icon>
                                         </div>
                                         <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'technologies' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ technologiesQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'technologies' ? 'has-text-white' : secondaryText">Tecnologías</p>
+                                            <p class="is-size-6 has-text-weight-semibold" :class="currentTab === 'technologies' ? 'has-text-white' : secondaryText" style="margin-bottom: -2px">Tecnologías</p>
+                                            <div class="has-text-weight-light is-size-7">activas</div>
                                         </div>
                                     </a>
                                 </div>
@@ -226,7 +229,7 @@
                                             </b-icon>
                                         </div>
                                         <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'critics' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ criticsQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'critics' ? 'has-text-white' : secondaryText">POP Críticos</p>
+                                            <p class="is-size-6 has-text-weight-semibold" :class="currentTab === 'critics' ? 'has-text-white' : secondaryText">POP Críticos</p>
                                         </div>
                                     </a>
                                 </div>
@@ -242,14 +245,14 @@
                                             </b-icon>
                                         </div>
                                         <div class="is-size-4 has-text-weight-bold" :class="currentTab === 'alba' ? 'has-text-white' : primaryText" style="margin-top: 10px;">{{ albaQuantity | numeral('0,0') }}
-                                            <p class="is-size-6 has-text-weight-normal" :class="currentTab === 'alba' ? 'has-text-white' : secondaryText">Proyecto Alba</p>
+                                            <p class="is-size-6 has-text-weight-semibold" :class="currentTab === 'alba' ? 'has-text-white' : secondaryText">Proyecto Alba</p>
                                         </div>
                                     </a>
                                 </div>
 
                                 <div class="tile is-parent">
                                     <a class="tile is-child box is-bold is-dark" style="position: relative;" 
-                                        @click="downloadPops">
+                                        @click="isDownloadModalActive=true">
                                         <b-icon 
                                             style="padding-top: 20px; padding-left: 5px;"
                                             pack="fas" 
@@ -265,11 +268,11 @@
                             </div>
 
                             <div class="tile">
-                                <div class="tile is-parent">
+                                <!-- <div class="tile is-parent">
                                     <div class="tile is-child box">
-                                        <div class="is-size-5 has-text-weight-semibold title">Nuevos POP</div>
+                                        <div class="is-size-5 has-text-weight-semibold title">POP nuevos</div>
                                         <div class="is-size-3 has-text-centered">{{ last_data_counters && last_data_counters.pop_news_month }}
-                                            <p class="is-size-6 has-text-weight-light">POP nuevos ingresados este mes</p>
+                                            <p class="is-size-6 has-text-weight-normal">POP nuevos ingresados este mes</p>
                                         </div>
                                         <div class="field" style="margin-top: 20px;">
                                             <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
@@ -284,26 +287,53 @@
 
                                         <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 10px;">Fecha actualización: {{ last_data_counters.last_updated_pops }}</div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="tile is-parent">
                                     <div class="tile is-child box">
-                                        <div class="is-size-5 has-text-weight-semibold title">Nuevos Sitios</div>
-                                        <div class="is-size-3 has-text-centered">{{ last_data_counters && last_data_counters.sites_news_month }}
-                                            <p class="is-size-6 has-text-weight-light">Sitios nuevos ingresados este mes</p>
+                                        <div class="is-size-6 has-text-weight-semibold title">Nuevos Sitios</div>
+                                        <div style="margin: auto 32px auto 32px" class="has-text-centered">
+                                            <div class="is-size-3 has-text-weight-normal">{{ last_data_counters && last_data_counters.sites_news_month }}</div>
+                                            <div class="is-size-6 has-text-weight-light">Sitios nuevos ingresados este mes</div>
                                         </div>
-                                        <div class="field" style="margin-top: 20px;">
+                                        
+                                        <hr class="is-paddingless" />
+
+                                        <div class="field" style="margin-top: -12px;">
                                             <div class="is-size-7 has-text-weight-light">Utimo Sitio ingresado:</div>
                                             <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_site.pop.id" target="_blank">
                                                 {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
                                             </router-link>
-                                            <div class="is-size-7">
-                                                <p>{{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }}</p>
-                                                <p class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}</p>
+                                            <div class="is-size-7 has-text-weight-light">
+                                                <div>Zona {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - <span class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}</span></div>
                                             </div>
                                         </div>
 
-                                        <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 10px;">Fecha actualización: {{ last_data_counters.last_updated_sites }}</div>
+                                        <!-- <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 12px;">Fecha actualización: {{ last_data_counters.last_updated_sites }}</div> -->
+                                    </div>
+                                </div>
+
+                                <div class="tile is-parent">
+                                    <div class="tile is-child box">
+                                        <div class="is-size-6 has-text-weight-semibold title">Nuevas Tecnologías</div>
+                                        <div style="margin: auto 32px auto 32px" class="has-text-centered">
+                                            <div class="is-size-3 has-text-weight-normal">{{ last_data_counters && last_data_counters.technologies_news_month }}</div>
+                                            <div class="is-size-6 has-text-weight-light">Tecnologías nuevas ingresados este mes</div>
+                                        </div>
+
+                                        <hr class="is-paddingless" />
+
+                                        <div class="field" style="margin-top: -12px;">
+                                            <div class="is-size-7 has-text-weight-light">Utima Tecnología ingresada:</div>
+                                            <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_technology.site.pop.id + '#sites'" target="_blank">
+                                                {{ last_data_counters.last_technology.nem_tech }} - {{ last_data_counters.last_technology.ran_device_name }}
+                                            </router-link>
+                                            <div class="is-size-7 has-text-weight-light">
+                                                <div>Zona {{ last_data_counters.last_technology.site.pop.comuna.zona.nombre_zona }} - <span class="has-text-weight-light">CRM {{ last_data_counters.last_technology.site.pop.comuna.zona.crm.nombre_crm }}</span></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 12px; align-items: flex-end">Fecha actualización: {{ last_data_counters.last_updated_sites }}</div> -->
                                     </div>
                                 </div>
                             </div>
@@ -427,6 +457,16 @@
             </div>
         </section>
 
+        <b-modal :active.sync="isDownloadModalActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-download
+                @clicked="onClickDownload"
+                />
+        </b-modal>
+
     </div>
 </template>
 
@@ -464,33 +504,36 @@
             PowerRectifiersData: () => import(/* webpackChunkName: "chunks/dashboard/powerRectifiers"*/'./PowerRectifiersData'),
             AirConditionersData: () => import(/* webpackChunkName: "chunks/dashboard/airConditioners"*/'./AirConditionersData'),
             VerticalStructuresData: () => import(/* webpackChunkName: "chunks/dashboard/verticalStructures"*/'./VerticalStructuresData'),
-            InfrastructuresData: () => import(/* webpackChunkName: "chunks/dashboard/infrastructures"*/'./InfrastructuresData')
+            InfrastructuresData: () => import(/* webpackChunkName: "chunks/dashboard/infrastructures"*/'./InfrastructuresData'),
+            ModalDownload: () => import(/* webpackChunkName: "chunks/dashboard/modalDownload"*/'./ModalDownload'),
         },
+
         props : [
             'user',
-            'message',
             'last_data_counters',
-            'crms',
             'darkMode'
         ],
+
         created() {
             this.styleMode()
         },
 
         mounted() {
-            // console.log(this.last_data_counters)
-            // this.getCrms()
+            this.getCrms()
             this.getCounters()
             // this.lastUpdate()
             // this.syncCounter()
             this.loadMessage()
             this.getPops()
         },
+
         data: () => {
             return {
                 core: 0,
                 pops: [],
                 zonas: [],
+
+                crms: Array,
 
                 isFetching: false,
                 selected: null,
@@ -539,6 +582,9 @@
                 albaQuantity: 0,
 
                 isLoading: false,
+                isDownloadModalActive: false,
+
+                cells: Array,
 
                 // lastUpdateData: [],
                 // lastDataCounter: [],
@@ -648,6 +694,13 @@
         },
 
         methods: {
+            getCrms() {
+                axios.get(`/api/crms`)
+                .then((response) => {
+                    this.crms = response.data.crms
+                })
+            },
+
             searchFormat(pop) {
                 this.selectedSite = this.selected
                 return this.searchText
@@ -880,7 +933,10 @@
                 var params = {
                     'core': this.core,
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                    'zona_id': this.selectedZona ? this.selectedZona.id : 0
+                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
+                    'resume': +this.cells.resume,
+                    'pops': +this.cells.pops,
+                    'sites': +this.cells.sites
                 }
 
                 axios.get('/api/pop/export', { 
@@ -888,7 +944,7 @@
                     responseType: 'arraybuffer' 
                 })
                 .then((response) => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     const blob = new Blob([response.data], { type: 'application/xlsx' })
                     // const objectUrl = window.URL.createObjectURL(blob)
 
@@ -926,6 +982,11 @@
                         queue: false
                     })
                 })
+            },
+
+            onClickDownload (value) {
+                this.cells = value
+                this.downloadPops()
             },
 
             isMobile() {

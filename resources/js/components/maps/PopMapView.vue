@@ -215,7 +215,7 @@
             },
 
             async getDependences() {
-                await axios.get(`/api/dependences/${this.popMaster.id}?api_token=${this.user.api_token}`)
+                await axios.get(`/api/dependences/${this.popMaster.id}`)
                 .then((response) => {
                     this.dependences = response.data.data
 

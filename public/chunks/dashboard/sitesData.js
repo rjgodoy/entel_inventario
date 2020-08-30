@@ -136,26 +136,26 @@ __webpack_require__.r(__webpack_exports__);
 
       // Si no hay un CRM seleccionado
       if (!this.selectedCrm) {
-        axios.get("/api/sitesData?api_token=".concat(this.user.api_token, "&core=").concat(this.core)).then(function (response) {
+        axios.get("/api/sitesData?core=".concat(this.core)).then(function (response) {
           _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
         })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
         });
       } //Si hay un CRM seleccionado, pero no hay zona seleccionada
       else if (!this.selectedZona) {
-          axios.get("/api/sitesDataCrm?api_token=".concat(this.user.api_token, "&crm_id=").concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
+          axios.get("/api/sitesDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
             _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
           })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
           });
         } // Si hay una zona seleccionada
         else {
-            axios.get("/api/sitesDataZona?api_token=".concat(this.user.api_token, "&zona_id=").concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
+            axios.get("/api/sitesDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
               _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
             })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
             });
           }
     } // downloadSites() {
     //     this.buttonLoading = 1
-    //     axios.get(`/pop/export?api_token=${this.user.api_token}&core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
+    //     axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
     //         responseType: 'blob',
     //     })
     //     .then((response) => {

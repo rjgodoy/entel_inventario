@@ -95,7 +95,7 @@
 
         methods: {
             // getPops() {
-            //     axios.get(`api/allPops?api_token=${this.user.api_token}`)
+            //     axios.get(`api/allPops`)
             //     .then(response => {
             //         this.pops = response.data.pops
             //         console.log(response.data.pops)
@@ -124,7 +124,7 @@
                     return
                 }
                 this.isFetching = true
-                axios.get(`/api/allPops?api_token=${this.user.api_token}&text=${name}&page=${this.page}`)
+                axios.get(`/api/allPops?text=${name}&page=${this.page}`)
                     .then( response  => {
                         console.log(response.data.meta.last_page)
                         response.data.pops.forEach((item) => this.pops.push(item))
@@ -151,7 +151,6 @@
                     })
                 } else {
                     var params = {
-                        'api_token': this.user.api_token,
                         'pop_id': this.selected.id,
                         'zona_id': this.selected.comuna.zona_id,
                         'user_id': this.user.id

@@ -616,7 +616,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.room.current_room_delegation && this.room.current_room_delegation.id) {
         console.log(this.room.id);
         console.log(this.room.current_room_delegation);
-        axios.get("/api/roomPlanes/".concat(this.room.id, "?api_token=").concat(this.user.api_token, "&plane_delegation_type_id=").concat(this.room.current_room_delegation.plane_delegation_type_id)).then(function (response) {
+        axios.get("/api/roomPlanes/".concat(this.room.id, "?plane_delegation_type_id=").concat(this.room.current_room_delegation.plane_delegation_type_id)).then(function (response) {
           console.log(response.data);
           _this16.roomPlanes = response.data.planes;
         })["catch"](function (error) {
@@ -635,7 +635,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("/api/popJunctions/".concat(this.room.pop_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+                return axios.get("/api/popJunctions/".concat(this.room.pop_id)).then(function (response) {
                   _this17.junctions = response.data.junctions;
                 })["catch"](function (error) {
                   console.log('Error al traer los datos de Empalmes: ' + error);
@@ -666,7 +666,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get("/api/generatorSets/".concat(this.room.pop_id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+                return axios.get("/api/generatorSets/".concat(this.room.pop_id)).then(function (response) {
                   _this18.generatorSets = response.data.generatorSets;
                   _this18.canEditGeneratorGroups = response.data.can;
                 })["catch"](function (error) {

@@ -298,7 +298,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getJunctions: function getJunctions() {
       var _this = this;
 
-      axios.get("/api/junctions/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/junctions/".concat(this.pop.id)).then(function (response) {
         // console.log(response.data)
         _this.junctions = response.data.junction;
         _this.canEditJunctions = response.data.can;
@@ -309,7 +309,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getGeneratorSets: function getGeneratorSets() {
       var _this2 = this;
 
-      axios.get("/api/generatorSets/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
         _this2.generatorSets = response.data.generatorSets;
         _this2.canEditGeneratorGroups = response.data.can;
       })["catch"](function (error) {
@@ -319,7 +319,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getPowerRectifiers: function getPowerRectifiers() {
       var _this3 = this;
 
-      axios.get("/api/powerRectifiers/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/powerRectifiers/".concat(this.pop.id)).then(function (response) {
         // console.log(response.data)
         _this3.powerRectifiers = response.data.powerRectifiers;
         _this3.canEditPowerRectifiers = response.data.can;
@@ -330,7 +330,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getAirConditioners: function getAirConditioners() {
       var _this4 = this;
 
-      axios.get("/api/airConditioners/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/airConditioners/".concat(this.pop.id)).then(function (response) {
         // console.log(response.data)
         _this4.airConditioners = response.data.airConditioner;
         _this4.canEditAirConditioners = response.data.can;

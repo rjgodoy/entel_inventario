@@ -155,7 +155,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
                 }
 
                 _context.next = 3;
-                return axios.get("/api/popJunctions/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+                return axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
                   _this.junctions = response.data.junctions;
                   _this.canEditJunctions = response.data.can;
                 })["catch"](function (error) {
@@ -192,7 +192,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
                 }
 
                 _context2.next = 3;
-                return axios.get("/api/generatorSets/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+                return axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
                   _this2.generatorSets = response.data.generatorSets;
                   _this2.canEditGeneratorGroups = response.data.can;
                 })["catch"](function (error) {
@@ -216,7 +216,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     updateAutonomy: function updateAutonomy() {
       if (!this.isEditMode && this.pop && this.pop.current_autonomy && this.newTheoreticalAutonomy != this.pop.current_autonomy.theoretical) {
         var params = {
-          'api_token': this.user.api_token,
           'pop_id': this.pop.id,
           'theoretical_autonomy': parseFloat(this.newTheoreticalAutonomy)
         };

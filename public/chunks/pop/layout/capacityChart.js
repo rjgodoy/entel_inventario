@@ -116,7 +116,7 @@ _amcharts_amcharts4_core__WEBPACK_IMPORTED_MODULE_0__["useTheme"](_amcharts_amch
     graphData: function graphData() {
       var _this = this;
 
-      axios.get("/api/siteStats?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/siteStats").then(function (response) {
         // console.log(response.data)
         _this.chartData = response.data;
       });

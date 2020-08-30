@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="box" @submit="resetEmail">
+        <form class="box-translucent" @submit="resetEmail">
 
             <div class="field is-size-4 has-text-link has-text-weight-bold">Recuperar Contraseña</div>
 

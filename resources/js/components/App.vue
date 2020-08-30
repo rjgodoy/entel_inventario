@@ -6,7 +6,7 @@
 
                 <!-- ICONO Y NOMBRE -->
                 <!-- ################## -->
-                <div class="column is-3 is-small" style="padding-top: 10px; padding-left: 12px;">
+                <div class="column is-2" style="padding-top: 10px; padding-left: 12px;">
                     <div class="">
                         <nav class="navbar is-transparent">
                             <div class="navbar-brand">
@@ -32,21 +32,22 @@
 
                 <!-- LINKS DE MODULOS -->
                 <!-- ################## -->
-                <div class="column is-6 is-small" style="padding-top: 20px;">
+                <div class="column is-8 is-small" style="padding-top: 20px; padding-left: 64px; padding-right: 64px;">
                     <div class="columns">
                         <div class="column is-1"></div>
                         <div class="column">
                             <ul class="columns">
 
-                                <li v-if="canView(menu.path)" v-for="menu in menu_data" :key="menu.id" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
+                                <li v-if="canView(menu.path)" v-for="menu in menus" :key="menu.id" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
 
                                     <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
-                                        <b-icon 
-                                            :pack="menu.icon_type" 
-                                            :icon="menu.icon" 
-                                            :class="currentRoute.toLowerCase().includes(menu.path) ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : 'has-text-grey-light'">
-                                        </b-icon>
-                                        <p class="is-size-7" :class="currentRoute.toLowerCase().includes(menu.path) ? 'has-text-white' : 'has-text-grey-light'">{{ menu.title }}</p>
+                                        <font-awesome-icon
+                                            class="is-size-4"
+                                            size="2x"
+                                            :icon="[menu.icon_type, menu.icon]" 
+                                            :class="currentRoute.toLowerCase().includes(menu.path) ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : 'has-text-grey-light'"
+                                        />
+                                        <div class="is-size-7" :class="currentRoute.toLowerCase().includes(menu.path) ? 'has-text-white' : 'has-text-grey-light'">{{ menu.title }}</div>
 
                                         <div v-if="currentRoute.toLowerCase().includes(menu.path)" :class="menu.path == '/eco' ? 'has-text-eco' : 'has-text-link'" style="border-bottom: 3px solid; padding-top: 5px;"></div>
                                     </router-link>
@@ -61,7 +62,7 @@
 
                 <!-- PERFIL Y RELOJ -->
                 <!-- ################## -->
-                <div class="column is-3 is-small" style="padding-top: 0px;">
+                <div class="column is-2 is-small" style="padding-top: 0px;">
                     <div class="is-size-6">
                         <div class="navbar-end">
                             <b-dropdown   
@@ -92,6 +93,46 @@
                                 </b-dropdown-item>
                             </b-dropdown>
 
+                            <!-- <div class="dropdown">
+                                <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                                        <span>Menu</span>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item">
+                                            Overview
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            Modifiers
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            Grid
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            Form
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            Elements
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            Components
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            Layout
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a href="#" class="dropdown-item">
+                                            More
+                                        </a>
+                                    </div>
+                                </div>
+                            </div> -->
+
                             <b-dropdown   
                                 hoverable                 
                                 position="is-bottom-left"
@@ -106,7 +147,8 @@
 
                                 <b-dropdown-item custom aria-role="menuitem">
                                     <div class="has-text-left">
-                                        {{ welcomeText }}<br/><b>{{ user.name }} {{ user.apellido }}</b>
+                                        <div class="is-size-7 has-text-weight-light">{{ welcomeText }}</div>
+                                        <div class="is-size-6 has-text-weight-semibold">{{ user.name }} {{ user.apellido }}</div>
                                     </div>
                                 </b-dropdown-item>
 
@@ -120,12 +162,13 @@
                                 <hr class="dropdown-divider" aria-role="menuitem">
 
                                 
-                                <b-dropdown-item v-if="canView('/admin')" aria-role="menuitem">
-                                    <router-link class="bd-is-rss is-small has-text-dark" to="/admin">
+                                <router-link v-if="canView('/admin')" class="dropdown-item bd-is-rss is-small has-text-grey-dark" to="/admin" aria-role="menuitem">
+                                    <div class="is-size-6 has-text-weight-normal">
                                         <font-awesome-icon :icon="['fas','cogs']" />
                                         &nbsp;Administración
-                                    </router-link>
-                                </b-dropdown-item>
+                                    </div>
+                                </router-link>
+                                
 
                                 <!-- <hr class="dropdown-divider"> -->
 
@@ -136,12 +179,12 @@
 
                                 <hr class="navbar-divider">
 
-                                <b-dropdown-item aria-role="menuitem">
-                                    <a class="bd-is-rss is-small has-text-dark" @click.prevent="logout">
+                                <a class="bd-is-rss is-small has-text-grey-dark dropdown-item" aria-role="menuitem" @click.prevent="logout">
+                                    <div class="is-size-6 has-text-weight-normal">
                                         <font-awesome-icon :icon="['fas','sign-out-alt']" />
                                         &nbsp;Log Out
-                                    </a>
-                                </b-dropdown-item>
+                                    </div>
+                                </a>
                             </b-dropdown>
                         </div>
                         <div class="navbar-end" style="padding-right: 20px;">
@@ -166,8 +209,6 @@
                     <router-view
                         :user="user"
                         :user_permissions="user_permissions"
-                        :popList="pops"
-                        :crms="crms"
                         :last_data_counters='last_data_counters'
                         :darkMode="darkMode"
                     ></router-view>
@@ -205,31 +246,25 @@
             'user',
             'user_permissions',
             'app_name',
-            'crms',
-            'menu_data',
-            'pops',
             'last_data_counters',
-            'last_updated_data'
+            'last_updated_data',
+            'is_dark_mode'
         ],
 
         data() {
             return {
-                darkMode: 0,
+                menus: Array,
                 userRequestAlerts: [],
+                darkMode: this.is_dark_mode,
             }
         },
 
+        created() {
+        },
+
         mounted() {
+            this.getMenus()
             this.getUserRequestAlerts()
-            
-            // console.log(this.user_permissions[0])
-            // if (this.$route.query.message) {
-            //     this.$buefy.toast.open({
-            //         message: this.$route.query.message,
-            //         type: 'is-success',
-            //         duration: 3000
-            //     })
-            // }
         },
 
         computed: {
@@ -245,6 +280,13 @@
         },
 
         methods: {
+            getMenus() {
+                axios.get('/api/menus')
+                .then(response => {
+                    this.menus = response.data.menus
+                })
+            },
+
             goBack() {
                 window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
             },
@@ -278,22 +320,22 @@
             },
 
             getUserRequestAlerts() {
-                axios.get(`/api/userRequests?api_token=${this.user.api_token}`)
+                axios.get(`/api/userRequests`)
                 .then(response => {
                     if (this.user.roles[0].name == 'admin'
                     || this.user.roles[0].name == 'developer') {
                         this.userRequestAlerts = response.data.requests
                     } else {
-
+                        this.userRequestAlerts = []
                     }
                     
                 })
             },
 
             logout: function(e){
-                axios.post(`/logout?api_token=${this.user.api_token}`).then((response) => {
+                axios.post(`/logout`).then((response) => {
                     if (response.status === 200) {
-                        console.log(response)
+                        // console.log(response)
                     }
                 }).catch((error) => {
                     console.log(error);

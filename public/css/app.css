@@ -212,7 +212,9 @@
 .image.is-1by3 .has-ratio,
 .modal,
 .modal-background,
-.hero-video {
+.hero-video,
+.b-image-wrapper > img.has-ratio,
+.b-image-wrapper > img.placeholder {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -222,8 +224,8 @@
 
 .button,
 .input,
-.taginput .taginput-container.is-focusable,
 .textarea,
+.taginput .taginput-container.is-focusable,
 .select select,
 .file-cta,
 .file-name,
@@ -252,8 +254,8 @@
 
 .button:focus,
 .input:focus,
-.taginput .taginput-container.is-focusable:focus,
 .textarea:focus,
+.taginput .taginput-container.is-focusable:focus,
 .select select:focus,
 .file-cta:focus,
 .file-name:focus,
@@ -263,8 +265,8 @@
 .pagination-ellipsis:focus,
 .is-focused.button,
 .is-focused.input,
-.taginput .is-focused.taginput-container.is-focusable,
 .is-focused.textarea,
+.taginput .is-focused.taginput-container.is-focusable,
 .select select.is-focused,
 .is-focused.file-cta,
 .is-focused.file-name,
@@ -274,8 +276,8 @@
 .is-focused.pagination-ellipsis,
 .button:active,
 .input:active,
-.taginput .taginput-container.is-focusable:active,
 .textarea:active,
+.taginput .taginput-container.is-focusable:active,
 .select select:active,
 .file-cta:active,
 .file-name:active,
@@ -285,8 +287,8 @@
 .pagination-ellipsis:active,
 .is-active.button,
 .is-active.input,
-.taginput .is-active.taginput-container.is-focusable,
 .is-active.textarea,
+.taginput .is-active.taginput-container.is-focusable,
 .select select.is-active,
 .is-active.file-cta,
 .is-active.file-name,
@@ -299,8 +301,8 @@
 
 .button[disabled],
 .input[disabled],
-.taginput .taginput-container.is-focusable[disabled],
 .textarea[disabled],
+.taginput .taginput-container.is-focusable[disabled],
 .select select[disabled],
 .file-cta[disabled],
 .file-name[disabled],
@@ -310,9 +312,9 @@
 .pagination-ellipsis[disabled],
 fieldset[disabled] .button,
 fieldset[disabled] .input,
+fieldset[disabled] .textarea,
 fieldset[disabled] .taginput .taginput-container.is-focusable,
 .taginput fieldset[disabled] .taginput-container.is-focusable,
-fieldset[disabled] .textarea,
 fieldset[disabled] .select select,
 .select fieldset[disabled] select,
 fieldset[disabled] .file-cta,
@@ -577,6 +579,23 @@ fieldset[disabled] .pagination-ellipsis {
           filter: grayscale(100%);
 }
 
+.box-translucent {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 5px;
+  color: #333;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  padding: 1rem 2rem;
+}
+
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .box-translucent {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
 /*! bulma.io v0.8.2 | MIT License | github.com/jgthms/bulma */
 
 @keyframes spinAround {
@@ -793,7 +812,9 @@ fieldset[disabled] .pagination-ellipsis {
 .image.is-1by3 .has-ratio,
 .modal,
 .modal-background,
-.hero-video {
+.hero-video,
+.b-image-wrapper > img.has-ratio,
+.b-image-wrapper > img.placeholder {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -803,8 +824,8 @@ fieldset[disabled] .pagination-ellipsis {
 
 .button,
 .input,
-.taginput .taginput-container.is-focusable,
 .textarea,
+.taginput .taginput-container.is-focusable,
 .select select,
 .file-cta,
 .file-name,
@@ -833,8 +854,8 @@ fieldset[disabled] .pagination-ellipsis {
 
 .button:focus,
 .input:focus,
-.taginput .taginput-container.is-focusable:focus,
 .textarea:focus,
+.taginput .taginput-container.is-focusable:focus,
 .select select:focus,
 .file-cta:focus,
 .file-name:focus,
@@ -844,8 +865,8 @@ fieldset[disabled] .pagination-ellipsis {
 .pagination-ellipsis:focus,
 .is-focused.button,
 .is-focused.input,
-.taginput .is-focused.taginput-container.is-focusable,
 .is-focused.textarea,
+.taginput .is-focused.taginput-container.is-focusable,
 .select select.is-focused,
 .is-focused.file-cta,
 .is-focused.file-name,
@@ -855,8 +876,8 @@ fieldset[disabled] .pagination-ellipsis {
 .is-focused.pagination-ellipsis,
 .button:active,
 .input:active,
-.taginput .taginput-container.is-focusable:active,
 .textarea:active,
+.taginput .taginput-container.is-focusable:active,
 .select select:active,
 .file-cta:active,
 .file-name:active,
@@ -866,8 +887,8 @@ fieldset[disabled] .pagination-ellipsis {
 .pagination-ellipsis:active,
 .is-active.button,
 .is-active.input,
-.taginput .is-active.taginput-container.is-focusable,
 .is-active.textarea,
+.taginput .is-active.taginput-container.is-focusable,
 .select select.is-active,
 .is-active.file-cta,
 .is-active.file-name,
@@ -880,8 +901,8 @@ fieldset[disabled] .pagination-ellipsis {
 
 .button[disabled],
 .input[disabled],
-.taginput .taginput-container.is-focusable[disabled],
 .textarea[disabled],
+.taginput .taginput-container.is-focusable[disabled],
 .select select[disabled],
 .file-cta[disabled],
 .file-name[disabled],
@@ -891,9 +912,9 @@ fieldset[disabled] .pagination-ellipsis {
 .pagination-ellipsis[disabled],
 fieldset[disabled] .button,
 fieldset[disabled] .input,
+fieldset[disabled] .textarea,
 fieldset[disabled] .taginput .taginput-container.is-focusable,
 .taginput fieldset[disabled] .taginput-container.is-focusable,
-fieldset[disabled] .textarea,
 fieldset[disabled] .select select,
 .select fieldset[disabled] select,
 fieldset[disabled] .file-cta,
@@ -7520,8 +7541,8 @@ a.tag:hover {
 }
 
 .input,
-.taginput .taginput-container.is-focusable,
 .textarea,
+.taginput .taginput-container.is-focusable,
 .select select {
   background-color: white;
   border-color: #dbdbdb;
@@ -7530,72 +7551,72 @@ a.tag:hover {
 }
 
 .input::-moz-placeholder,
-.taginput .taginput-container.is-focusable::-moz-placeholder,
 .textarea::-moz-placeholder,
+.taginput .taginput-container.is-focusable::-moz-placeholder,
 .select select::-moz-placeholder {
   color: #7a7a7a;
 }
 
 .input::-webkit-input-placeholder,
-.taginput .taginput-container.is-focusable::-webkit-input-placeholder,
 .textarea::-webkit-input-placeholder,
+.taginput .taginput-container.is-focusable::-webkit-input-placeholder,
 .select select::-webkit-input-placeholder {
   color: #7a7a7a;
 }
 
 .input:-moz-placeholder,
-.taginput .taginput-container.is-focusable:-moz-placeholder,
 .textarea:-moz-placeholder,
+.taginput .taginput-container.is-focusable:-moz-placeholder,
 .select select:-moz-placeholder {
   color: #7a7a7a;
 }
 
 .input:-ms-input-placeholder,
-.taginput .taginput-container.is-focusable:-ms-input-placeholder,
 .textarea:-ms-input-placeholder,
+.taginput .taginput-container.is-focusable:-ms-input-placeholder,
 .select select:-ms-input-placeholder {
   color: #7a7a7a;
 }
 
 .input:hover,
-.taginput .taginput-container.is-focusable:hover,
 .textarea:hover,
+.taginput .taginput-container.is-focusable:hover,
 .select select:hover,
 .is-hovered.input,
-.taginput .is-hovered.taginput-container.is-focusable,
 .is-hovered.textarea,
+.taginput .is-hovered.taginput-container.is-focusable,
 .select select.is-hovered {
   border-color: #b5b5b5;
 }
 
 .input:focus,
-.taginput .taginput-container.is-focusable:focus,
 .textarea:focus,
+.taginput .taginput-container.is-focusable:focus,
 .select select:focus,
 .is-focused.input,
-.taginput .is-focused.taginput-container.is-focusable,
 .is-focused.textarea,
+.taginput .is-focused.taginput-container.is-focusable,
 .select select.is-focused,
 .input:active,
-.taginput .taginput-container.is-focusable:active,
 .textarea:active,
+.taginput .taginput-container.is-focusable:active,
 .select select:active,
 .is-active.input,
-.taginput .is-active.taginput-container.is-focusable,
 .is-active.textarea,
+.taginput .is-active.taginput-container.is-focusable,
 .select select.is-active {
   border-color: #005cff;
   box-shadow: 0 0 0 0.125em rgba(0, 92, 255, 0.25);
 }
 
 .input[disabled],
-.taginput .taginput-container.is-focusable[disabled],
 .textarea[disabled],
+.taginput .taginput-container.is-focusable[disabled],
 .select select[disabled],
 fieldset[disabled] .input,
+fieldset[disabled] .textarea,
 fieldset[disabled] .taginput .taginput-container.is-focusable,
 .taginput fieldset[disabled] .taginput-container.is-focusable,
-fieldset[disabled] .textarea,
 fieldset[disabled] .select select,
 .select fieldset[disabled] select {
   background-color: whitesmoke;
@@ -7605,617 +7626,615 @@ fieldset[disabled] .select select,
 }
 
 .input[disabled]::-moz-placeholder,
-.taginput .taginput-container.is-focusable[disabled]::-moz-placeholder,
 .textarea[disabled]::-moz-placeholder,
+.taginput .taginput-container.is-focusable[disabled]::-moz-placeholder,
 .select select[disabled]::-moz-placeholder,
 fieldset[disabled] .input::-moz-placeholder,
+fieldset[disabled] .textarea::-moz-placeholder,
 fieldset[disabled] .taginput .taginput-container.is-focusable::-moz-placeholder,
 .taginput fieldset[disabled] .taginput-container.is-focusable::-moz-placeholder,
-fieldset[disabled] .textarea::-moz-placeholder,
 fieldset[disabled] .select select::-moz-placeholder,
 .select fieldset[disabled] select::-moz-placeholder {
   color: rgba(122, 122, 122, 0.3);
 }
 
 .input[disabled]::-webkit-input-placeholder,
-.taginput .taginput-container.is-focusable[disabled]::-webkit-input-placeholder,
 .textarea[disabled]::-webkit-input-placeholder,
+.taginput .taginput-container.is-focusable[disabled]::-webkit-input-placeholder,
 .select select[disabled]::-webkit-input-placeholder,
 fieldset[disabled] .input::-webkit-input-placeholder,
+fieldset[disabled] .textarea::-webkit-input-placeholder,
 fieldset[disabled] .taginput .taginput-container.is-focusable::-webkit-input-placeholder,
 .taginput fieldset[disabled] .taginput-container.is-focusable::-webkit-input-placeholder,
-fieldset[disabled] .textarea::-webkit-input-placeholder,
 fieldset[disabled] .select select::-webkit-input-placeholder,
 .select fieldset[disabled] select::-webkit-input-placeholder {
   color: rgba(122, 122, 122, 0.3);
 }
 
 .input[disabled]:-moz-placeholder,
-.taginput .taginput-container.is-focusable[disabled]:-moz-placeholder,
 .textarea[disabled]:-moz-placeholder,
+.taginput .taginput-container.is-focusable[disabled]:-moz-placeholder,
 .select select[disabled]:-moz-placeholder,
 fieldset[disabled] .input:-moz-placeholder,
+fieldset[disabled] .textarea:-moz-placeholder,
 fieldset[disabled] .taginput .taginput-container.is-focusable:-moz-placeholder,
 .taginput fieldset[disabled] .taginput-container.is-focusable:-moz-placeholder,
-fieldset[disabled] .textarea:-moz-placeholder,
 fieldset[disabled] .select select:-moz-placeholder,
 .select fieldset[disabled] select:-moz-placeholder {
   color: rgba(122, 122, 122, 0.3);
 }
 
 .input[disabled]:-ms-input-placeholder,
-.taginput .taginput-container.is-focusable[disabled]:-ms-input-placeholder,
 .textarea[disabled]:-ms-input-placeholder,
+.taginput .taginput-container.is-focusable[disabled]:-ms-input-placeholder,
 .select select[disabled]:-ms-input-placeholder,
 fieldset[disabled] .input:-ms-input-placeholder,
+fieldset[disabled] .textarea:-ms-input-placeholder,
 fieldset[disabled] .taginput .taginput-container.is-focusable:-ms-input-placeholder,
 .taginput fieldset[disabled] .taginput-container.is-focusable:-ms-input-placeholder,
-fieldset[disabled] .textarea:-ms-input-placeholder,
 fieldset[disabled] .select select:-ms-input-placeholder,
 .select fieldset[disabled] select:-ms-input-placeholder {
   color: rgba(122, 122, 122, 0.3);
 }
 
 .input,
-.taginput .taginput-container.is-focusable,
-.textarea {
+.textarea,
+.taginput .taginput-container.is-focusable {
   box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
   max-width: 100%;
   width: 100%;
 }
 
 .input[readonly],
-.taginput .taginput-container.is-focusable[readonly],
-.textarea[readonly] {
+.textarea[readonly],
+.taginput .taginput-container.is-focusable[readonly] {
   box-shadow: none;
 }
 
 .is-white.input,
-.taginput .is-white.taginput-container.is-focusable,
-.is-white.textarea {
+.is-white.textarea,
+.taginput .is-white.taginput-container.is-focusable {
   border-color: white;
 }
 
 .is-white.input:focus,
-.taginput .is-white.taginput-container.is-focusable:focus,
 .is-white.textarea:focus,
+.taginput .is-white.taginput-container.is-focusable:focus,
 .is-white.is-focused.input,
-.taginput .is-white.is-focused.taginput-container.is-focusable,
 .is-white.is-focused.textarea,
+.taginput .is-white.is-focused.taginput-container.is-focusable,
 .is-white.input:active,
-.taginput .is-white.taginput-container.is-focusable:active,
 .is-white.textarea:active,
+.taginput .is-white.taginput-container.is-focusable:active,
 .is-white.is-active.input,
-.taginput .is-white.is-active.taginput-container.is-focusable,
-.is-white.is-active.textarea {
+.is-white.is-active.textarea,
+.taginput .is-white.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(255, 255, 255, 0.25);
 }
 
 .is-black.input,
-.taginput .is-black.taginput-container.is-focusable,
-.is-black.textarea {
+.is-black.textarea,
+.taginput .is-black.taginput-container.is-focusable {
   border-color: #0a0a0a;
 }
 
 .is-black.input:focus,
-.taginput .is-black.taginput-container.is-focusable:focus,
 .is-black.textarea:focus,
+.taginput .is-black.taginput-container.is-focusable:focus,
 .is-black.is-focused.input,
-.taginput .is-black.is-focused.taginput-container.is-focusable,
 .is-black.is-focused.textarea,
+.taginput .is-black.is-focused.taginput-container.is-focusable,
 .is-black.input:active,
-.taginput .is-black.taginput-container.is-focusable:active,
 .is-black.textarea:active,
+.taginput .is-black.taginput-container.is-focusable:active,
 .is-black.is-active.input,
-.taginput .is-black.is-active.taginput-container.is-focusable,
-.is-black.is-active.textarea {
+.is-black.is-active.textarea,
+.taginput .is-black.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(10, 10, 10, 0.25);
 }
 
 .is-black-ter.input,
-.taginput .is-black-ter.taginput-container.is-focusable,
-.is-black-ter.textarea {
+.is-black-ter.textarea,
+.taginput .is-black-ter.taginput-container.is-focusable {
   border-color: #242424;
 }
 
 .is-black-ter.input:focus,
-.taginput .is-black-ter.taginput-container.is-focusable:focus,
 .is-black-ter.textarea:focus,
+.taginput .is-black-ter.taginput-container.is-focusable:focus,
 .is-black-ter.is-focused.input,
-.taginput .is-black-ter.is-focused.taginput-container.is-focusable,
 .is-black-ter.is-focused.textarea,
+.taginput .is-black-ter.is-focused.taginput-container.is-focusable,
 .is-black-ter.input:active,
-.taginput .is-black-ter.taginput-container.is-focusable:active,
 .is-black-ter.textarea:active,
+.taginput .is-black-ter.taginput-container.is-focusable:active,
 .is-black-ter.is-active.input,
-.taginput .is-black-ter.is-active.taginput-container.is-focusable,
-.is-black-ter.is-active.textarea {
+.is-black-ter.is-active.textarea,
+.taginput .is-black-ter.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(36, 36, 36, 0.25);
 }
 
 .is-light.input,
-.taginput .is-light.taginput-container.is-focusable,
-.is-light.textarea {
+.is-light.textarea,
+.taginput .is-light.taginput-container.is-focusable {
   border-color: whitesmoke;
 }
 
 .is-light.input:focus,
-.taginput .is-light.taginput-container.is-focusable:focus,
 .is-light.textarea:focus,
+.taginput .is-light.taginput-container.is-focusable:focus,
 .is-light.is-focused.input,
-.taginput .is-light.is-focused.taginput-container.is-focusable,
 .is-light.is-focused.textarea,
+.taginput .is-light.is-focused.taginput-container.is-focusable,
 .is-light.input:active,
-.taginput .is-light.taginput-container.is-focusable:active,
 .is-light.textarea:active,
+.taginput .is-light.taginput-container.is-focusable:active,
 .is-light.is-active.input,
-.taginput .is-light.is-active.taginput-container.is-focusable,
-.is-light.is-active.textarea {
+.is-light.is-active.textarea,
+.taginput .is-light.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(245, 245, 245, 0.25);
 }
 
 .is-dark.input,
-.taginput .is-dark.taginput-container.is-focusable,
-.is-dark.textarea {
+.is-dark.textarea,
+.taginput .is-dark.taginput-container.is-focusable {
   border-color: #363636;
 }
 
 .is-dark.input:focus,
-.taginput .is-dark.taginput-container.is-focusable:focus,
 .is-dark.textarea:focus,
+.taginput .is-dark.taginput-container.is-focusable:focus,
 .is-dark.is-focused.input,
-.taginput .is-dark.is-focused.taginput-container.is-focusable,
 .is-dark.is-focused.textarea,
+.taginput .is-dark.is-focused.taginput-container.is-focusable,
 .is-dark.input:active,
-.taginput .is-dark.taginput-container.is-focusable:active,
 .is-dark.textarea:active,
+.taginput .is-dark.taginput-container.is-focusable:active,
 .is-dark.is-active.input,
-.taginput .is-dark.is-active.taginput-container.is-focusable,
-.is-dark.is-active.textarea {
+.is-dark.is-active.textarea,
+.taginput .is-dark.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(54, 54, 54, 0.25);
 }
 
 .is-primary.input,
-.taginput .is-primary.taginput-container.is-focusable,
-.is-primary.textarea {
+.is-primary.textarea,
+.taginput .is-primary.taginput-container.is-focusable {
   border-color: #00d1b2;
 }
 
 .is-primary.input:focus,
-.taginput .is-primary.taginput-container.is-focusable:focus,
 .is-primary.textarea:focus,
+.taginput .is-primary.taginput-container.is-focusable:focus,
 .is-primary.is-focused.input,
-.taginput .is-primary.is-focused.taginput-container.is-focusable,
 .is-primary.is-focused.textarea,
+.taginput .is-primary.is-focused.taginput-container.is-focusable,
 .is-primary.input:active,
-.taginput .is-primary.taginput-container.is-focusable:active,
 .is-primary.textarea:active,
+.taginput .is-primary.taginput-container.is-focusable:active,
 .is-primary.is-active.input,
-.taginput .is-primary.is-active.taginput-container.is-focusable,
-.is-primary.is-active.textarea {
+.is-primary.is-active.textarea,
+.taginput .is-primary.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
 }
 
 .is-info.input,
-.taginput .is-info.taginput-container.is-focusable,
-.is-info.textarea {
+.is-info.textarea,
+.taginput .is-info.taginput-container.is-focusable {
   border-color: #FF3E00;
 }
 
 .is-info.input:focus,
-.taginput .is-info.taginput-container.is-focusable:focus,
 .is-info.textarea:focus,
+.taginput .is-info.taginput-container.is-focusable:focus,
 .is-info.is-focused.input,
-.taginput .is-info.is-focused.taginput-container.is-focusable,
 .is-info.is-focused.textarea,
+.taginput .is-info.is-focused.taginput-container.is-focusable,
 .is-info.input:active,
-.taginput .is-info.taginput-container.is-focusable:active,
 .is-info.textarea:active,
+.taginput .is-info.taginput-container.is-focusable:active,
 .is-info.is-active.input,
-.taginput .is-info.is-active.taginput-container.is-focusable,
-.is-info.is-active.textarea {
+.is-info.is-active.textarea,
+.taginput .is-info.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(255, 62, 0, 0.25);
 }
 
 .is-link.input,
-.taginput .is-link.taginput-container.is-focusable,
-.is-link.textarea {
+.is-link.textarea,
+.taginput .is-link.taginput-container.is-focusable {
   border-color: #005cff;
 }
 
 .is-link.input:focus,
-.taginput .is-link.taginput-container.is-focusable:focus,
 .is-link.textarea:focus,
+.taginput .is-link.taginput-container.is-focusable:focus,
 .is-link.is-focused.input,
-.taginput .is-link.is-focused.taginput-container.is-focusable,
 .is-link.is-focused.textarea,
+.taginput .is-link.is-focused.taginput-container.is-focusable,
 .is-link.input:active,
-.taginput .is-link.taginput-container.is-focusable:active,
 .is-link.textarea:active,
+.taginput .is-link.taginput-container.is-focusable:active,
 .is-link.is-active.input,
-.taginput .is-link.is-active.taginput-container.is-focusable,
-.is-link.is-active.textarea {
+.is-link.is-active.textarea,
+.taginput .is-link.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(0, 92, 255, 0.25);
 }
 
 .is-success.input,
-.taginput .is-success.taginput-container.is-focusable,
-.is-success.textarea {
+.is-success.textarea,
+.taginput .is-success.taginput-container.is-focusable {
   border-color: #48c774;
 }
 
 .is-success.input:focus,
-.taginput .is-success.taginput-container.is-focusable:focus,
 .is-success.textarea:focus,
+.taginput .is-success.taginput-container.is-focusable:focus,
 .is-success.is-focused.input,
-.taginput .is-success.is-focused.taginput-container.is-focusable,
 .is-success.is-focused.textarea,
+.taginput .is-success.is-focused.taginput-container.is-focusable,
 .is-success.input:active,
-.taginput .is-success.taginput-container.is-focusable:active,
 .is-success.textarea:active,
+.taginput .is-success.taginput-container.is-focusable:active,
 .is-success.is-active.input,
-.taginput .is-success.is-active.taginput-container.is-focusable,
-.is-success.is-active.textarea {
+.is-success.is-active.textarea,
+.taginput .is-success.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(72, 199, 116, 0.25);
 }
 
 .is-warning.input,
-.taginput .is-warning.taginput-container.is-focusable,
-.is-warning.textarea {
+.is-warning.textarea,
+.taginput .is-warning.taginput-container.is-focusable {
   border-color: #ffdd57;
 }
 
 .is-warning.input:focus,
-.taginput .is-warning.taginput-container.is-focusable:focus,
 .is-warning.textarea:focus,
+.taginput .is-warning.taginput-container.is-focusable:focus,
 .is-warning.is-focused.input,
-.taginput .is-warning.is-focused.taginput-container.is-focusable,
 .is-warning.is-focused.textarea,
+.taginput .is-warning.is-focused.taginput-container.is-focusable,
 .is-warning.input:active,
-.taginput .is-warning.taginput-container.is-focusable:active,
 .is-warning.textarea:active,
+.taginput .is-warning.taginput-container.is-focusable:active,
 .is-warning.is-active.input,
-.taginput .is-warning.is-active.taginput-container.is-focusable,
-.is-warning.is-active.textarea {
+.is-warning.is-active.textarea,
+.taginput .is-warning.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(255, 221, 87, 0.25);
 }
 
 .is-danger.input,
-.taginput .is-danger.taginput-container.is-focusable,
-.is-danger.textarea {
+.is-danger.textarea,
+.taginput .is-danger.taginput-container.is-focusable {
   border-color: #ff3d00;
 }
 
 .is-danger.input:focus,
-.taginput .is-danger.taginput-container.is-focusable:focus,
 .is-danger.textarea:focus,
+.taginput .is-danger.taginput-container.is-focusable:focus,
 .is-danger.is-focused.input,
-.taginput .is-danger.is-focused.taginput-container.is-focusable,
 .is-danger.is-focused.textarea,
+.taginput .is-danger.is-focused.taginput-container.is-focusable,
 .is-danger.input:active,
-.taginput .is-danger.taginput-container.is-focusable:active,
 .is-danger.textarea:active,
+.taginput .is-danger.taginput-container.is-focusable:active,
 .is-danger.is-active.input,
-.taginput .is-danger.is-active.taginput-container.is-focusable,
-.is-danger.is-active.textarea {
+.is-danger.is-active.textarea,
+.taginput .is-danger.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(255, 61, 0, 0.25);
 }
 
 .is-twitter.input,
-.taginput .is-twitter.taginput-container.is-focusable,
-.is-twitter.textarea {
+.is-twitter.textarea,
+.taginput .is-twitter.taginput-container.is-focusable {
   border-color: #4099FF;
 }
 
 .is-twitter.input:focus,
-.taginput .is-twitter.taginput-container.is-focusable:focus,
 .is-twitter.textarea:focus,
+.taginput .is-twitter.taginput-container.is-focusable:focus,
 .is-twitter.is-focused.input,
-.taginput .is-twitter.is-focused.taginput-container.is-focusable,
 .is-twitter.is-focused.textarea,
+.taginput .is-twitter.is-focused.taginput-container.is-focusable,
 .is-twitter.input:active,
-.taginput .is-twitter.taginput-container.is-focusable:active,
 .is-twitter.textarea:active,
+.taginput .is-twitter.taginput-container.is-focusable:active,
 .is-twitter.is-active.input,
-.taginput .is-twitter.is-active.taginput-container.is-focusable,
-.is-twitter.is-active.textarea {
+.is-twitter.is-active.textarea,
+.taginput .is-twitter.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(64, 153, 255, 0.25);
 }
 
 .is-entel-link-corp.input,
-.taginput .is-entel-link-corp.taginput-container.is-focusable,
-.is-entel-link-corp.textarea {
+.is-entel-link-corp.textarea,
+.taginput .is-entel-link-corp.taginput-container.is-focusable {
   border-color: #10069f;
 }
 
 .is-entel-link-corp.input:focus,
-.taginput .is-entel-link-corp.taginput-container.is-focusable:focus,
 .is-entel-link-corp.textarea:focus,
+.taginput .is-entel-link-corp.taginput-container.is-focusable:focus,
 .is-entel-link-corp.is-focused.input,
-.taginput .is-entel-link-corp.is-focused.taginput-container.is-focusable,
 .is-entel-link-corp.is-focused.textarea,
+.taginput .is-entel-link-corp.is-focused.taginput-container.is-focusable,
 .is-entel-link-corp.input:active,
-.taginput .is-entel-link-corp.taginput-container.is-focusable:active,
 .is-entel-link-corp.textarea:active,
+.taginput .is-entel-link-corp.taginput-container.is-focusable:active,
 .is-entel-link-corp.is-active.input,
-.taginput .is-entel-link-corp.is-active.taginput-container.is-focusable,
-.is-entel-link-corp.is-active.textarea {
+.is-entel-link-corp.is-active.textarea,
+.taginput .is-entel-link-corp.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(16, 6, 159, 0.25);
 }
 
 .is-entel-secondary.input,
-.taginput .is-entel-secondary.taginput-container.is-focusable,
-.is-entel-secondary.textarea {
+.is-entel-secondary.textarea,
+.taginput .is-entel-secondary.taginput-container.is-focusable {
   border-color: #ff3d00;
 }
 
 .is-entel-secondary.input:focus,
-.taginput .is-entel-secondary.taginput-container.is-focusable:focus,
 .is-entel-secondary.textarea:focus,
+.taginput .is-entel-secondary.taginput-container.is-focusable:focus,
 .is-entel-secondary.is-focused.input,
-.taginput .is-entel-secondary.is-focused.taginput-container.is-focusable,
 .is-entel-secondary.is-focused.textarea,
+.taginput .is-entel-secondary.is-focused.taginput-container.is-focusable,
 .is-entel-secondary.input:active,
-.taginput .is-entel-secondary.taginput-container.is-focusable:active,
 .is-entel-secondary.textarea:active,
+.taginput .is-entel-secondary.taginput-container.is-focusable:active,
 .is-entel-secondary.is-active.input,
-.taginput .is-entel-secondary.is-active.taginput-container.is-focusable,
-.is-entel-secondary.is-active.textarea {
+.is-entel-secondary.is-active.textarea,
+.taginput .is-entel-secondary.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(255, 61, 0, 0.25);
 }
 
 .is-entel-secondary-corp.input,
-.taginput .is-entel-secondary-corp.taginput-container.is-focusable,
-.is-entel-secondary-corp.textarea {
+.is-entel-secondary-corp.textarea,
+.taginput .is-entel-secondary-corp.taginput-container.is-focusable {
   border-color: #cccccc;
 }
 
 .is-entel-secondary-corp.input:focus,
-.taginput .is-entel-secondary-corp.taginput-container.is-focusable:focus,
 .is-entel-secondary-corp.textarea:focus,
+.taginput .is-entel-secondary-corp.taginput-container.is-focusable:focus,
 .is-entel-secondary-corp.is-focused.input,
-.taginput .is-entel-secondary-corp.is-focused.taginput-container.is-focusable,
 .is-entel-secondary-corp.is-focused.textarea,
+.taginput .is-entel-secondary-corp.is-focused.taginput-container.is-focusable,
 .is-entel-secondary-corp.input:active,
-.taginput .is-entel-secondary-corp.taginput-container.is-focusable:active,
 .is-entel-secondary-corp.textarea:active,
+.taginput .is-entel-secondary-corp.taginput-container.is-focusable:active,
 .is-entel-secondary-corp.is-active.input,
-.taginput .is-entel-secondary-corp.is-active.taginput-container.is-focusable,
-.is-entel-secondary-corp.is-active.textarea {
+.is-entel-secondary-corp.is-active.textarea,
+.taginput .is-entel-secondary-corp.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(204, 204, 204, 0.25);
 }
 
 .is-eco.input,
-.taginput .is-eco.taginput-container.is-focusable,
-.is-eco.textarea {
+.is-eco.textarea,
+.taginput .is-eco.taginput-container.is-focusable {
   border-color: #42E8B4;
 }
 
 .is-eco.input:focus,
-.taginput .is-eco.taginput-container.is-focusable:focus,
 .is-eco.textarea:focus,
+.taginput .is-eco.taginput-container.is-focusable:focus,
 .is-eco.is-focused.input,
-.taginput .is-eco.is-focused.taginput-container.is-focusable,
 .is-eco.is-focused.textarea,
+.taginput .is-eco.is-focused.taginput-container.is-focusable,
 .is-eco.input:active,
-.taginput .is-eco.taginput-container.is-focusable:active,
 .is-eco.textarea:active,
+.taginput .is-eco.taginput-container.is-focusable:active,
 .is-eco.is-active.input,
-.taginput .is-eco.is-active.taginput-container.is-focusable,
-.is-eco.is-active.textarea {
+.is-eco.is-active.textarea,
+.taginput .is-eco.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(66, 232, 180, 0.25);
 }
 
 .is-eco-light.input,
-.taginput .is-eco-light.taginput-container.is-focusable,
-.is-eco-light.textarea {
+.is-eco-light.textarea,
+.taginput .is-eco-light.taginput-container.is-focusable {
   border-color: #DBFAF0;
 }
 
 .is-eco-light.input:focus,
-.taginput .is-eco-light.taginput-container.is-focusable:focus,
 .is-eco-light.textarea:focus,
+.taginput .is-eco-light.taginput-container.is-focusable:focus,
 .is-eco-light.is-focused.input,
-.taginput .is-eco-light.is-focused.taginput-container.is-focusable,
 .is-eco-light.is-focused.textarea,
+.taginput .is-eco-light.is-focused.taginput-container.is-focusable,
 .is-eco-light.input:active,
-.taginput .is-eco-light.taginput-container.is-focusable:active,
 .is-eco-light.textarea:active,
+.taginput .is-eco-light.taginput-container.is-focusable:active,
 .is-eco-light.is-active.input,
-.taginput .is-eco-light.is-active.taginput-container.is-focusable,
-.is-eco-light.is-active.textarea {
+.is-eco-light.is-active.textarea,
+.taginput .is-eco-light.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(219, 250, 240, 0.25);
 }
 
 .is-smart.input,
-.taginput .is-smart.taginput-container.is-focusable,
-.is-smart.textarea {
+.is-smart.textarea,
+.taginput .is-smart.taginput-container.is-focusable {
   border-color: #2FCBF1;
 }
 
 .is-smart.input:focus,
-.taginput .is-smart.taginput-container.is-focusable:focus,
 .is-smart.textarea:focus,
+.taginput .is-smart.taginput-container.is-focusable:focus,
 .is-smart.is-focused.input,
-.taginput .is-smart.is-focused.taginput-container.is-focusable,
 .is-smart.is-focused.textarea,
+.taginput .is-smart.is-focused.taginput-container.is-focusable,
 .is-smart.input:active,
-.taginput .is-smart.taginput-container.is-focusable:active,
 .is-smart.textarea:active,
+.taginput .is-smart.taginput-container.is-focusable:active,
 .is-smart.is-active.input,
-.taginput .is-smart.is-active.taginput-container.is-focusable,
-.is-smart.is-active.textarea {
+.is-smart.is-active.textarea,
+.taginput .is-smart.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(47, 203, 241, 0.25);
 }
 
 .is-smart-light.input,
-.taginput .is-smart-light.taginput-container.is-focusable,
-.is-smart-light.textarea {
+.is-smart-light.textarea,
+.taginput .is-smart-light.taginput-container.is-focusable {
   border-color: #EBFAFD;
 }
 
 .is-smart-light.input:focus,
-.taginput .is-smart-light.taginput-container.is-focusable:focus,
 .is-smart-light.textarea:focus,
+.taginput .is-smart-light.taginput-container.is-focusable:focus,
 .is-smart-light.is-focused.input,
-.taginput .is-smart-light.is-focused.taginput-container.is-focusable,
 .is-smart-light.is-focused.textarea,
+.taginput .is-smart-light.is-focused.taginput-container.is-focusable,
 .is-smart-light.input:active,
-.taginput .is-smart-light.taginput-container.is-focusable:active,
 .is-smart-light.textarea:active,
+.taginput .is-smart-light.taginput-container.is-focusable:active,
 .is-smart-light.is-active.input,
-.taginput .is-smart-light.is-active.taginput-container.is-focusable,
-.is-smart-light.is-active.textarea {
+.is-smart-light.is-active.textarea,
+.taginput .is-smart-light.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(235, 250, 253, 0.25);
 }
 
 .is-positive.input,
-.taginput .is-positive.taginput-container.is-focusable,
-.is-positive.textarea {
+.is-positive.textarea,
+.taginput .is-positive.taginput-container.is-focusable {
   border-color: #FD6C9B;
 }
 
 .is-positive.input:focus,
-.taginput .is-positive.taginput-container.is-focusable:focus,
 .is-positive.textarea:focus,
+.taginput .is-positive.taginput-container.is-focusable:focus,
 .is-positive.is-focused.input,
-.taginput .is-positive.is-focused.taginput-container.is-focusable,
 .is-positive.is-focused.textarea,
+.taginput .is-positive.is-focused.taginput-container.is-focusable,
 .is-positive.input:active,
-.taginput .is-positive.taginput-container.is-focusable:active,
 .is-positive.textarea:active,
+.taginput .is-positive.taginput-container.is-focusable:active,
 .is-positive.is-active.input,
-.taginput .is-positive.is-active.taginput-container.is-focusable,
-.is-positive.is-active.textarea {
+.is-positive.is-active.textarea,
+.taginput .is-positive.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(253, 108, 155, 0.25);
 }
 
 .is-positive-light.input,
-.taginput .is-positive-light.taginput-container.is-focusable,
-.is-positive-light.textarea {
+.is-positive-light.textarea,
+.taginput .is-positive-light.taginput-container.is-focusable {
   border-color: #FFE2EB;
 }
 
 .is-positive-light.input:focus,
-.taginput .is-positive-light.taginput-container.is-focusable:focus,
 .is-positive-light.textarea:focus,
+.taginput .is-positive-light.taginput-container.is-focusable:focus,
 .is-positive-light.is-focused.input,
-.taginput .is-positive-light.is-focused.taginput-container.is-focusable,
 .is-positive-light.is-focused.textarea,
+.taginput .is-positive-light.is-focused.taginput-container.is-focusable,
 .is-positive-light.input:active,
-.taginput .is-positive-light.taginput-container.is-focusable:active,
 .is-positive-light.textarea:active,
+.taginput .is-positive-light.taginput-container.is-focusable:active,
 .is-positive-light.is-active.input,
-.taginput .is-positive-light.is-active.taginput-container.is-focusable,
-.is-positive-light.is-active.textarea {
+.is-positive-light.is-active.textarea,
+.taginput .is-positive-light.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(255, 226, 235, 0.25);
 }
 
 .is-yellow.input,
-.taginput .is-yellow.taginput-container.is-focusable,
-.is-yellow.textarea {
+.is-yellow.textarea,
+.taginput .is-yellow.taginput-container.is-focusable {
   border-color: #FDE74C;
 }
 
 .is-yellow.input:focus,
-.taginput .is-yellow.taginput-container.is-focusable:focus,
 .is-yellow.textarea:focus,
+.taginput .is-yellow.taginput-container.is-focusable:focus,
 .is-yellow.is-focused.input,
-.taginput .is-yellow.is-focused.taginput-container.is-focusable,
 .is-yellow.is-focused.textarea,
+.taginput .is-yellow.is-focused.taginput-container.is-focusable,
 .is-yellow.input:active,
-.taginput .is-yellow.taginput-container.is-focusable:active,
 .is-yellow.textarea:active,
+.taginput .is-yellow.taginput-container.is-focusable:active,
 .is-yellow.is-active.input,
-.taginput .is-yellow.is-active.taginput-container.is-focusable,
-.is-yellow.is-active.textarea {
+.is-yellow.is-active.textarea,
+.taginput .is-yellow.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(253, 231, 76, 0.25);
 }
 
 .is-mirage.input,
-.taginput .is-mirage.taginput-container.is-focusable,
-.is-mirage.textarea {
+.is-mirage.textarea,
+.taginput .is-mirage.taginput-container.is-focusable {
   border-color: #191B22;
 }
 
 .is-mirage.input:focus,
-.taginput .is-mirage.taginput-container.is-focusable:focus,
 .is-mirage.textarea:focus,
+.taginput .is-mirage.taginput-container.is-focusable:focus,
 .is-mirage.is-focused.input,
-.taginput .is-mirage.is-focused.taginput-container.is-focusable,
 .is-mirage.is-focused.textarea,
+.taginput .is-mirage.is-focused.taginput-container.is-focusable,
 .is-mirage.input:active,
-.taginput .is-mirage.taginput-container.is-focusable:active,
 .is-mirage.textarea:active,
+.taginput .is-mirage.taginput-container.is-focusable:active,
 .is-mirage.is-active.input,
-.taginput .is-mirage.is-active.taginput-container.is-focusable,
-.is-mirage.is-active.textarea {
+.is-mirage.is-active.textarea,
+.taginput .is-mirage.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(25, 27, 34, 0.25);
 }
 
 .is-blackRussian.input,
-.taginput .is-blackRussian.taginput-container.is-focusable,
-.is-blackRussian.textarea {
+.is-blackRussian.textarea,
+.taginput .is-blackRussian.taginput-container.is-focusable {
   border-color: #23252C;
 }
 
 .is-blackRussian.input:focus,
-.taginput .is-blackRussian.taginput-container.is-focusable:focus,
 .is-blackRussian.textarea:focus,
+.taginput .is-blackRussian.taginput-container.is-focusable:focus,
 .is-blackRussian.is-focused.input,
-.taginput .is-blackRussian.is-focused.taginput-container.is-focusable,
 .is-blackRussian.is-focused.textarea,
+.taginput .is-blackRussian.is-focused.taginput-container.is-focusable,
 .is-blackRussian.input:active,
-.taginput .is-blackRussian.taginput-container.is-focusable:active,
 .is-blackRussian.textarea:active,
+.taginput .is-blackRussian.taginput-container.is-focusable:active,
 .is-blackRussian.is-active.input,
-.taginput .is-blackRussian.is-active.taginput-container.is-focusable,
-.is-blackRussian.is-active.textarea {
+.is-blackRussian.is-active.textarea,
+.taginput .is-blackRussian.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(35, 37, 44, 0.25);
 }
 
 .is-small.input,
-.taginput .is-small.taginput-container.is-focusable,
-.is-small.textarea {
+.is-small.textarea,
+.taginput .is-small.taginput-container.is-focusable {
   border-radius: 2px;
   font-size: 0.6rem;
 }
 
 .is-medium.input,
-.taginput .is-medium.taginput-container.is-focusable,
-.is-medium.textarea {
+.is-medium.textarea,
+.taginput .is-medium.taginput-container.is-focusable {
   font-size: 1.05rem;
 }
 
 .is-large.input,
-.taginput .is-large.taginput-container.is-focusable,
-.is-large.textarea {
+.is-large.textarea,
+.taginput .is-large.taginput-container.is-focusable {
   font-size: 1.3rem;
 }
 
 .is-fullwidth.input,
-.taginput .is-fullwidth.taginput-container.is-focusable,
-.is-fullwidth.textarea {
+.is-fullwidth.textarea,
+.taginput .is-fullwidth.taginput-container.is-focusable {
   display: block;
   width: 100%;
 }
 
 .is-inline.input,
-.taginput .is-inline.taginput-container.is-focusable,
-.is-inline.textarea {
+.is-inline.textarea,
+.taginput .is-inline.taginput-container.is-focusable {
   display: inline;
   width: auto;
 }
 
-.input.is-rounded,
-.taginput .is-rounded.taginput-container.is-focusable {
+.input.is-rounded {
   border-radius: 290486px;
   padding-left: calc(calc(0.75em - 1px) + 0.375em);
   padding-right: calc(calc(0.75em - 1px) + 0.375em);
 }
 
-.input.is-static,
-.taginput .is-static.taginput-container.is-focusable {
+.input.is-static {
   background-color: transparent;
   border-color: transparent;
   box-shadow: none;
@@ -9835,16 +9854,12 @@ fieldset[disabled] .select select:hover {
 
 .field.has-addons .control:not(:first-child):not(:last-child) .button,
 .field.has-addons .control:not(:first-child):not(:last-child) .input,
-.field.has-addons .control:not(:first-child):not(:last-child) .taginput .taginput-container.is-focusable,
-.taginput .field.has-addons .control:not(:first-child):not(:last-child) .taginput-container.is-focusable,
 .field.has-addons .control:not(:first-child):not(:last-child) .select select {
   border-radius: 0;
 }
 
 .field.has-addons .control:first-child:not(:only-child) .button,
 .field.has-addons .control:first-child:not(:only-child) .input,
-.field.has-addons .control:first-child:not(:only-child) .taginput .taginput-container.is-focusable,
-.taginput .field.has-addons .control:first-child:not(:only-child) .taginput-container.is-focusable,
 .field.has-addons .control:first-child:not(:only-child) .select select {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
@@ -9852,8 +9867,6 @@ fieldset[disabled] .select select:hover {
 
 .field.has-addons .control:last-child:not(:only-child) .button,
 .field.has-addons .control:last-child:not(:only-child) .input,
-.field.has-addons .control:last-child:not(:only-child) .taginput .taginput-container.is-focusable,
-.taginput .field.has-addons .control:last-child:not(:only-child) .taginput-container.is-focusable,
 .field.has-addons .control:last-child:not(:only-child) .select select {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
@@ -9862,11 +9875,7 @@ fieldset[disabled] .select select:hover {
 .field.has-addons .control .button:not([disabled]):hover,
 .field.has-addons .control .button:not([disabled]).is-hovered,
 .field.has-addons .control .input:not([disabled]):hover,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]):hover,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]):hover,
 .field.has-addons .control .input:not([disabled]).is-hovered,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]).is-hovered,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]).is-hovered,
 .field.has-addons .control .select select:not([disabled]):hover,
 .field.has-addons .control .select select:not([disabled]).is-hovered {
   z-index: 2;
@@ -9877,17 +9886,9 @@ fieldset[disabled] .select select:hover {
 .field.has-addons .control .button:not([disabled]):active,
 .field.has-addons .control .button:not([disabled]).is-active,
 .field.has-addons .control .input:not([disabled]):focus,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]):focus,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]):focus,
 .field.has-addons .control .input:not([disabled]).is-focused,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]).is-focused,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]).is-focused,
 .field.has-addons .control .input:not([disabled]):active,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]):active,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]):active,
 .field.has-addons .control .input:not([disabled]).is-active,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]).is-active,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]).is-active,
 .field.has-addons .control .select select:not([disabled]):focus,
 .field.has-addons .control .select select:not([disabled]).is-focused,
 .field.has-addons .control .select select:not([disabled]):active,
@@ -9900,17 +9901,9 @@ fieldset[disabled] .select select:hover {
 .field.has-addons .control .button:not([disabled]):active:hover,
 .field.has-addons .control .button:not([disabled]).is-active:hover,
 .field.has-addons .control .input:not([disabled]):focus:hover,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]):focus:hover,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]):focus:hover,
 .field.has-addons .control .input:not([disabled]).is-focused:hover,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]).is-focused:hover,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]).is-focused:hover,
 .field.has-addons .control .input:not([disabled]):active:hover,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]):active:hover,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]):active:hover,
 .field.has-addons .control .input:not([disabled]).is-active:hover,
-.field.has-addons .control .taginput .taginput-container.is-focusable:not([disabled]).is-active:hover,
-.taginput .field.has-addons .control .taginput-container.is-focusable:not([disabled]).is-active:hover,
 .field.has-addons .control .select select:not([disabled]):focus:hover,
 .field.has-addons .control .select select:not([disabled]).is-focused:hover,
 .field.has-addons .control .select select:not([disabled]):active:hover,
@@ -10063,45 +10056,29 @@ fieldset[disabled] .select select:hover {
 }
 
 .control.has-icons-left .input:focus ~ .icon,
-.control.has-icons-left .taginput .taginput-container.is-focusable:focus ~ .icon,
-.taginput .control.has-icons-left .taginput-container.is-focusable:focus ~ .icon,
 .control.has-icons-left .select:focus ~ .icon,
 .control.has-icons-right .input:focus ~ .icon,
-.control.has-icons-right .taginput .taginput-container.is-focusable:focus ~ .icon,
-.taginput .control.has-icons-right .taginput-container.is-focusable:focus ~ .icon,
 .control.has-icons-right .select:focus ~ .icon {
   color: #4a4a4a;
 }
 
 .control.has-icons-left .input.is-small ~ .icon,
-.control.has-icons-left .taginput .is-small.taginput-container.is-focusable ~ .icon,
-.taginput .control.has-icons-left .is-small.taginput-container.is-focusable ~ .icon,
 .control.has-icons-left .select.is-small ~ .icon,
 .control.has-icons-right .input.is-small ~ .icon,
-.control.has-icons-right .taginput .is-small.taginput-container.is-focusable ~ .icon,
-.taginput .control.has-icons-right .is-small.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-small ~ .icon {
   font-size: 0.6rem;
 }
 
 .control.has-icons-left .input.is-medium ~ .icon,
-.control.has-icons-left .taginput .is-medium.taginput-container.is-focusable ~ .icon,
-.taginput .control.has-icons-left .is-medium.taginput-container.is-focusable ~ .icon,
 .control.has-icons-left .select.is-medium ~ .icon,
 .control.has-icons-right .input.is-medium ~ .icon,
-.control.has-icons-right .taginput .is-medium.taginput-container.is-focusable ~ .icon,
-.taginput .control.has-icons-right .is-medium.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-medium ~ .icon {
   font-size: 1.05rem;
 }
 
 .control.has-icons-left .input.is-large ~ .icon,
-.control.has-icons-left .taginput .is-large.taginput-container.is-focusable ~ .icon,
-.taginput .control.has-icons-left .is-large.taginput-container.is-focusable ~ .icon,
 .control.has-icons-left .select.is-large ~ .icon,
 .control.has-icons-right .input.is-large ~ .icon,
-.control.has-icons-right .taginput .is-large.taginput-container.is-focusable ~ .icon,
-.taginput .control.has-icons-right .is-large.taginput-container.is-focusable ~ .icon,
 .control.has-icons-right .select.is-large ~ .icon {
   font-size: 1.3rem;
 }
@@ -10118,8 +10095,6 @@ fieldset[disabled] .select select:hover {
 }
 
 .control.has-icons-left .input,
-.control.has-icons-left .taginput .taginput-container.is-focusable,
-.taginput .control.has-icons-left .taginput-container.is-focusable,
 .control.has-icons-left .select select {
   padding-left: 2.5em;
 }
@@ -10129,8 +10104,6 @@ fieldset[disabled] .select select:hover {
 }
 
 .control.has-icons-right .input,
-.control.has-icons-right .taginput .taginput-container.is-focusable,
-.taginput .control.has-icons-right .taginput-container.is-focusable,
 .control.has-icons-right .select select {
   padding-right: 2.5em;
 }
@@ -20849,7 +20822,7 @@ label.panel-block:hover {
 }
 
 .carousel .carousel-indicator .indicator-item .indicator-style.is-dots {
-  border-radius: 10px;
+  border-radius: 290486px;
   height: 10px;
   width: 10px;
 }
@@ -21333,7 +21306,7 @@ label.panel-block:hover {
 }
 
 .b-checkbox.checkbox .control-label {
-  padding-left: 0.5em;
+  padding-left: calc(0.75em - 1px);
 }
 
 .b-checkbox.checkbox.button {
@@ -21942,39 +21915,19 @@ label.panel-block:hover {
 }
 
 .b-clockpicker .dropdown .input[readonly],
-.b-clockpicker .dropdown .taginput .taginput-container.is-focusable[readonly],
-.taginput .b-clockpicker .dropdown .taginput-container.is-focusable[readonly],
-.b-clockpicker .dropdown-trigger .input[readonly],
-.b-clockpicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly],
-.taginput .b-clockpicker .dropdown-trigger .taginput-container.is-focusable[readonly] {
+.b-clockpicker .dropdown-trigger .input[readonly] {
   cursor: pointer;
   box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
 }
 
 .b-clockpicker .dropdown .input[readonly]:focus,
-.b-clockpicker .dropdown .taginput .taginput-container.is-focusable[readonly]:focus,
-.taginput .b-clockpicker .dropdown .taginput-container.is-focusable[readonly]:focus,
 .b-clockpicker .dropdown .input[readonly].is-focused,
-.b-clockpicker .dropdown .taginput .taginput-container.is-focusable[readonly].is-focused,
-.taginput .b-clockpicker .dropdown .taginput-container.is-focusable[readonly].is-focused,
 .b-clockpicker .dropdown .input[readonly]:active,
-.b-clockpicker .dropdown .taginput .taginput-container.is-focusable[readonly]:active,
-.taginput .b-clockpicker .dropdown .taginput-container.is-focusable[readonly]:active,
 .b-clockpicker .dropdown .input[readonly].is-active,
-.b-clockpicker .dropdown .taginput .taginput-container.is-focusable[readonly].is-active,
-.taginput .b-clockpicker .dropdown .taginput-container.is-focusable[readonly].is-active,
 .b-clockpicker .dropdown-trigger .input[readonly]:focus,
-.b-clockpicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly]:focus,
-.taginput .b-clockpicker .dropdown-trigger .taginput-container.is-focusable[readonly]:focus,
 .b-clockpicker .dropdown-trigger .input[readonly].is-focused,
-.b-clockpicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly].is-focused,
-.taginput .b-clockpicker .dropdown-trigger .taginput-container.is-focusable[readonly].is-focused,
 .b-clockpicker .dropdown-trigger .input[readonly]:active,
-.b-clockpicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly]:active,
-.taginput .b-clockpicker .dropdown-trigger .taginput-container.is-focusable[readonly]:active,
-.b-clockpicker .dropdown-trigger .input[readonly].is-active,
-.b-clockpicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly].is-active,
-.taginput .b-clockpicker .dropdown-trigger .taginput-container.is-focusable[readonly].is-active {
+.b-clockpicker .dropdown-trigger .input[readonly].is-active {
   box-shadow: 0 0 0 0.125em rgba(0, 92, 255, 0.25);
 }
 
@@ -22015,7 +21968,6 @@ label.panel-block:hover {
 
 .b-clockpicker-period .b-clockpicker-btn {
   font-size: 16px;
-  text-transform: uppercase;
 }
 
 .b-clockpicker-time span {
@@ -22218,39 +22170,19 @@ label.panel-block:hover {
 }
 
 .datepicker .dropdown .input[readonly],
-.datepicker .dropdown .taginput .taginput-container.is-focusable[readonly],
-.taginput .datepicker .dropdown .taginput-container.is-focusable[readonly],
-.datepicker .dropdown-trigger .input[readonly],
-.datepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly],
-.taginput .datepicker .dropdown-trigger .taginput-container.is-focusable[readonly] {
+.datepicker .dropdown-trigger .input[readonly] {
   cursor: pointer;
   box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
 }
 
 .datepicker .dropdown .input[readonly]:focus,
-.datepicker .dropdown .taginput .taginput-container.is-focusable[readonly]:focus,
-.taginput .datepicker .dropdown .taginput-container.is-focusable[readonly]:focus,
 .datepicker .dropdown .input[readonly].is-focused,
-.datepicker .dropdown .taginput .taginput-container.is-focusable[readonly].is-focused,
-.taginput .datepicker .dropdown .taginput-container.is-focusable[readonly].is-focused,
 .datepicker .dropdown .input[readonly]:active,
-.datepicker .dropdown .taginput .taginput-container.is-focusable[readonly]:active,
-.taginput .datepicker .dropdown .taginput-container.is-focusable[readonly]:active,
 .datepicker .dropdown .input[readonly].is-active,
-.datepicker .dropdown .taginput .taginput-container.is-focusable[readonly].is-active,
-.taginput .datepicker .dropdown .taginput-container.is-focusable[readonly].is-active,
 .datepicker .dropdown-trigger .input[readonly]:focus,
-.datepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly]:focus,
-.taginput .datepicker .dropdown-trigger .taginput-container.is-focusable[readonly]:focus,
 .datepicker .dropdown-trigger .input[readonly].is-focused,
-.datepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly].is-focused,
-.taginput .datepicker .dropdown-trigger .taginput-container.is-focusable[readonly].is-focused,
 .datepicker .dropdown-trigger .input[readonly]:active,
-.datepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly]:active,
-.taginput .datepicker .dropdown-trigger .taginput-container.is-focusable[readonly]:active,
-.datepicker .dropdown-trigger .input[readonly].is-active,
-.datepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly].is-active,
-.taginput .datepicker .dropdown-trigger .taginput-container.is-focusable[readonly].is-active {
+.datepicker .dropdown-trigger .input[readonly].is-active {
   box-shadow: 0 0 0 0.125em rgba(0, 92, 255, 0.25);
 }
 
@@ -22599,8 +22531,6 @@ label.panel-block:hover {
 
 .dialog.is-small .modal-card,
 .dialog.is-small .input,
-.dialog.is-small .taginput .taginput-container.is-focusable,
-.taginput .dialog.is-small .taginput-container.is-focusable,
 .dialog.is-small .button {
   border-radius: 2px;
   font-size: 0.6rem;
@@ -22608,16 +22538,12 @@ label.panel-block:hover {
 
 .dialog.is-medium .modal-card,
 .dialog.is-medium .input,
-.dialog.is-medium .taginput .taginput-container.is-focusable,
-.taginput .dialog.is-medium .taginput-container.is-focusable,
 .dialog.is-medium .button {
   font-size: 1.05rem;
 }
 
 .dialog.is-large .modal-card,
 .dialog.is-large .input,
-.dialog.is-large .taginput .taginput-container.is-focusable,
-.taginput .dialog.is-large .taginput-container.is-focusable,
 .dialog.is-large .button {
   font-size: 1.3rem;
 }
@@ -22771,8 +22697,6 @@ label.panel-block:hover {
 
 .field.has-addons .control:first-child .control .button,
 .field.has-addons .control:first-child .control .input,
-.field.has-addons .control:first-child .control .taginput .taginput-container.is-focusable,
-.taginput .field.has-addons .control:first-child .control .taginput-container.is-focusable,
 .field.has-addons .control:first-child .control .select select {
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
@@ -22780,8 +22704,6 @@ label.panel-block:hover {
 
 .field.has-addons .control:last-child .control .button,
 .field.has-addons .control:last-child .control .input,
-.field.has-addons .control:last-child .control .taginput .taginput-container.is-focusable,
-.taginput .field.has-addons .control:last-child .control .taginput-container.is-focusable,
 .field.has-addons .control:last-child .control .select select {
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
@@ -22789,16 +22711,16 @@ label.panel-block:hover {
 
 .field.has-addons .control .control .button,
 .field.has-addons .control .control .input,
-.field.has-addons .control .control .taginput .taginput-container.is-focusable,
-.taginput .field.has-addons .control .control .taginput-container.is-focusable,
 .field.has-addons .control .control .select select {
   border-radius: 0;
 }
 
+.field.has-addons .b-numberinput .control {
+  margin-right: unset;
+}
+
 .field.has-addons .b-numberinput:not(:first-child) .control:first-child .button,
 .field.has-addons .b-numberinput:not(:first-child) .control:first-child .input,
-.field.has-addons .b-numberinput:not(:first-child) .control:first-child .taginput .taginput-container.is-focusable,
-.taginput .field.has-addons .b-numberinput:not(:first-child) .control:first-child .taginput-container.is-focusable,
 .field.has-addons .b-numberinput:not(:first-child) .control:first-child .select select {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
@@ -22806,8 +22728,6 @@ label.panel-block:hover {
 
 .field.has-addons .b-numberinput:not(:last-child) .control:last-child .button,
 .field.has-addons .b-numberinput:not(:last-child) .control:last-child .input,
-.field.has-addons .b-numberinput:not(:last-child) .control:last-child .taginput .taginput-container.is-focusable,
-.taginput .field.has-addons .b-numberinput:not(:last-child) .control:last-child .taginput-container.is-focusable,
 .field.has-addons .b-numberinput:not(:last-child) .control:last-child .select select {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
@@ -22850,13 +22770,9 @@ label.panel-block:hover {
 
 .field.is-floating-label.has-addons > .label + .control .button,
 .field.is-floating-label.has-addons > .label + .control .input,
-.field.is-floating-label.has-addons > .label + .control .taginput .taginput-container.is-focusable,
-.taginput .field.is-floating-label.has-addons > .label + .control .taginput-container.is-focusable,
 .field.is-floating-label.has-addons > .label + .control .select select,
 .field.is-floating-in-label.has-addons > .label + .control .button,
 .field.is-floating-in-label.has-addons > .label + .control .input,
-.field.is-floating-in-label.has-addons > .label + .control .taginput .taginput-container.is-focusable,
-.taginput .field.is-floating-in-label.has-addons > .label + .control .taginput-container.is-focusable,
 .field.is-floating-in-label.has-addons > .label + .control .select select {
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
@@ -22881,8 +22797,6 @@ label.panel-block:hover {
 }
 
 .field.is-floating-label .input:focus,
-.field.is-floating-label .taginput .taginput-container.is-focusable:focus,
-.taginput .field.is-floating-label .taginput-container.is-focusable:focus,
 .field.is-floating-label .textarea:focus,
 .field.is-floating-label .select select:focus {
   box-shadow: none;
@@ -22901,19 +22815,13 @@ label.panel-block:hover {
 }
 
 .field.is-floating-in-label > .datepicker .input,
-.field.is-floating-in-label > .datepicker .taginput .taginput-container.is-focusable,
-.taginput .field.is-floating-in-label > .datepicker .taginput-container.is-focusable,
-.field.is-floating-in-label > .timepicker .input,
-.field.is-floating-in-label > .timepicker .taginput .taginput-container.is-focusable,
-.taginput .field.is-floating-in-label > .timepicker .taginput-container.is-focusable {
+.field.is-floating-in-label > .timepicker .input {
   padding-top: calc(3.25em / 2 - (1.3rem * 3 / 4) / 2);
   padding-bottom: 1px;
   height: 3.25em;
 }
 
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .input,
-.field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .taginput .taginput-container.is-focusable,
-.taginput .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .taginput-container.is-focusable,
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) .textarea,
 .field.is-floating-in-label > :not(.datepicker):not(.timepicker):not(.taginput) select {
   padding-top: calc(3.25em / 2 - (1.3rem * 3 / 4) / 2);
@@ -22954,16 +22862,12 @@ label.panel-block:hover {
   height: 3.25em;
 }
 
-.field.is-floating-in-label.has-addons .control .button,
-.field.is-floating-in-label.has-addons .control .input,
-.field.is-floating-in-label.has-addons .control .taginput .taginput-container.is-focusable,
-.taginput .field.is-floating-in-label.has-addons .control .taginput-container.is-focusable,
-.field.is-floating-in-label.has-addons .control .select select,
-.field.is-floating-in-label.is-grouped .control .button,
-.field.is-floating-in-label.is-grouped .control .input,
-.field.is-floating-in-label.is-grouped .control .taginput .taginput-container.is-focusable,
-.taginput .field.is-floating-in-label.is-grouped .control .taginput-container.is-focusable,
-.field.is-floating-in-label.is-grouped .control .select select {
+.field.is-floating-in-label .has-addons .control .button,
+.field.is-floating-in-label .has-addons .control .input,
+.field.is-floating-in-label .has-addons .control .select select,
+.field.is-floating-in-label .is-grouped .control .button,
+.field.is-floating-in-label .is-grouped .control .input,
+.field.is-floating-in-label .is-grouped .control .select select {
   height: 3.25em;
 }
 
@@ -23029,6 +22933,11 @@ label.panel-block:hover {
   cursor: pointer;
 }
 
+.control.is-loading::after {
+  top: calc(50% - (1em / 2));
+  right: calc((2.5em / 2) - .5em);
+}
+
 .icon {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -23044,8 +22953,24 @@ label.panel-block:hover {
   stroke-width: 0;
   stroke: currentColor;
   pointer-events: none;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: auto;
+  height: auto;
+}
+
+.b-image-wrapper > img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.b-image-wrapper > img.has-ratio,
+.b-image-wrapper > img.placeholder {
+  height: 100%;
+  width: 100%;
+}
+
+.b-image-wrapper > img.placeholder {
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
 }
 
 .loading-overlay {
@@ -23539,8 +23464,8 @@ label.panel-block:hover {
 }
 
 .b-numberinput .button.is-rounded {
-  padding-left: 0.75em;
-  padding-right: 0.75em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .pagination .pagination-next,
@@ -23589,7 +23514,7 @@ label.panel-block:hover {
   transform: translateX(-50%);
   font-size: calc(0.8rem / 1.5);
   line-height: 0.8rem;
-  font-weight: bold;
+  font-weight: 700;
   color: white;
   white-space: nowrap;
 }
@@ -23980,7 +23905,7 @@ label.panel-block:hover {
 }
 
 .b-radio.radio .control-label {
-  padding-left: 0.5em;
+  padding-left: calc(0.75em - 1px);
 }
 
 .b-radio.radio.button {
@@ -24193,7 +24118,7 @@ label.panel-block:hover {
 
 .select select option {
   color: #4a4a4a;
-  padding: 0.25em 0.5em;
+  padding: calc(0.5em - 1px) calc(0.75em - 1px);
 }
 
 .select select option:disabled {
@@ -24208,11 +24133,23 @@ label.panel-block:hover {
   padding: 0.25em 0;
 }
 
+.select select[disabled] {
+  opacity: 1;
+}
+
 .select.is-empty select {
   color: rgba(122, 122, 122, 0.7);
 }
 
+.select.is-loading::after {
+  top: calc(50% - (1em / 2));
+  right: calc((2.5em / 2) - .5em);
+}
+
 .b-skeleton {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
   width: 100%;
 }
 
@@ -24237,6 +24174,14 @@ label.panel-block:hover {
 .b-skeleton.is-animated > .b-skeleton-item {
   -webkit-animation: skeleton-loading 1.5s infinite;
           animation: skeleton-loading 1.5s infinite;
+}
+
+.b-skeleton.is-centered {
+  align-items: center;
+}
+
+.b-skeleton.is-right {
+  align-items: flex-end;
 }
 
 .b-skeleton + .b-skeleton {
@@ -26177,9 +26122,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: white;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26188,9 +26131,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #0a0a0a;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26199,9 +26140,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #242424;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26210,9 +26149,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: whitesmoke;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26221,9 +26158,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #363636;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26232,9 +26167,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #00d1b2;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26243,9 +26176,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #FF3E00;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26254,9 +26185,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #005cff;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26265,9 +26194,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #48c774;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26276,9 +26203,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #ffdd57;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26287,9 +26212,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #ff3d00;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26298,9 +26221,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #4099FF;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26309,9 +26230,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #10069f;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26320,9 +26239,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #ff3d00;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26331,9 +26248,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #cccccc;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26342,9 +26257,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #42E8B4;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26353,9 +26266,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #DBFAF0;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26364,9 +26275,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #2FCBF1;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26375,9 +26284,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #EBFAFD;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26386,9 +26293,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #FD6C9B;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26397,9 +26302,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #FFE2EB;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26408,9 +26311,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #FDE74C;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26419,9 +26320,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #191B22;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26430,9 +26329,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #23252C;
 }
 
-.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.switch .taginput input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check,
-.taginput .switch input[type=checkbox] + .check.taginput-container.is-focusable[type=checkbox] + .switch input[type=checkbox] + .check.check {
+.switch input[type=checkbox] + .check.input[type=checkbox] + .switch input[type=checkbox] + .check.check {
   background: 'pink';
 }
 
@@ -26818,7 +26715,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .switch .control-label {
-  padding-left: 0.5em;
+  padding-left: calc(0.75em - 1px);
 }
 
 .switch:hover input[type=checkbox] + .check {
@@ -27716,6 +27613,10 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   transform: rotate(90deg);
 }
 
+.b-table .sort-icon.icon.is-desc {
+  transform: rotate(180deg) translateY(-50%) !important;
+}
+
 .b-table .table {
   width: 100%;
   border: 1px solid transparent;
@@ -27767,6 +27668,18 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   cursor: pointer;
 }
 
+.b-table .table th.is-sortable .is-relative,
+.b-table .table th.is-sortable .th-wrap .is-relative {
+  position: absolute;
+}
+
+.b-table .table th .sort-icon,
+.b-table .table th .multi-sort-cancel-icon {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+}
+
 .b-table .table th .multi-sort-cancel-icon {
   margin-left: 10px;
 }
@@ -27793,6 +27706,10 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .b-table .table .chevron-cell {
   vertical-align: middle;
+}
+
+.b-table .table .chevron-cell > a {
+  color: #005cff !important;
 }
 
 .b-table .table .checkbox-cell {
@@ -27839,6 +27756,10 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   padding-bottom: 1.5rem;
 }
 
+.b-table .table-wrapper {
+  position: relative;
+}
+
 .b-table .table-wrapper.has-sticky-header {
   height: 300px;
   overflow-y: auto;
@@ -27860,8 +27781,16 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 @media screen and (max-width: 768px) {
-  .b-table .table-wrapper.has-mobile-cards thead {
+  .b-table .table-wrapper.has-mobile-cards thead th {
     display: none;
+  }
+
+  .b-table .table-wrapper.has-mobile-cards thead .checkbox-cell {
+    display: block;
+    width: 100%;
+    text-align: right;
+    margin-bottom: 1rem;
+    border: 0;
   }
 
   .b-table .table-wrapper.has-mobile-cards tfoot th {
@@ -27917,8 +27846,16 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   }
 }
 
-.b-table .table-wrapper.is-card-list thead {
+.b-table .table-wrapper.is-card-list thead th {
   display: none;
+}
+
+.b-table .table-wrapper.is-card-list thead .checkbox-cell {
+  display: block;
+  width: 100%;
+  text-align: right;
+  margin-bottom: 1rem;
+  border: 0;
 }
 
 .b-table .table-wrapper.is-card-list tfoot th {
@@ -27973,32 +27910,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   text-align: left;
 }
 
-.b-table.is-loading {
-  position: relative;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.b-table.is-loading:after {
-  -webkit-animation: spinAround 500ms infinite linear;
-          animation: spinAround 500ms infinite linear;
-  border: 2px solid #dbdbdb;
-  border-radius: 290486px;
-  border-right-color: transparent;
-  border-top-color: transparent;
-  content: "";
-  display: block;
-  height: 1em;
-  position: relative;
-  width: 1em;
-  position: absolute;
-  top: 4em;
-  left: calc(50% - 2.5em);
-  width: 5em;
-  height: 5em;
-  border-width: 0.25em;
-}
-
 .b-tabs .tabs {
   margin-bottom: 0;
   flex-shrink: 0;
@@ -28038,6 +27949,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 .b-tabs.is-vertical {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .b-tabs.is-vertical > .tabs ul {
@@ -28123,243 +28035,324 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .tag .delete.is-white,
-.tag.is-delete.is-white {
+.tag.is-delete.is-white,
+.tag.has-delete-icon.is-white {
   background: white;
 }
 
 .tag .delete.is-white:hover,
-.tag.is-delete.is-white:hover {
+.tag.is-delete.is-white:hover,
+.tag.has-delete-icon.is-white:hover {
   background-color: #e6e5e5;
+  text-decoration: none;
 }
 
 .tag .delete.is-black,
-.tag.is-delete.is-black {
+.tag.is-delete.is-black,
+.tag.has-delete-icon.is-black {
   background: #0a0a0a;
 }
 
 .tag .delete.is-black:hover,
-.tag.is-delete.is-black:hover {
+.tag.is-delete.is-black:hover,
+.tag.has-delete-icon.is-black:hover {
   background-color: black;
+  text-decoration: none;
 }
 
 .tag .delete.is-black-ter,
-.tag.is-delete.is-black-ter {
+.tag.is-delete.is-black-ter,
+.tag.has-delete-icon.is-black-ter {
   background: #242424;
 }
 
 .tag .delete.is-black-ter:hover,
-.tag.is-delete.is-black-ter:hover {
+.tag.is-delete.is-black-ter:hover,
+.tag.has-delete-icon.is-black-ter:hover {
   background-color: #0a0a0a;
+  text-decoration: none;
 }
 
 .tag .delete.is-light,
-.tag.is-delete.is-light {
+.tag.is-delete.is-light,
+.tag.has-delete-icon.is-light {
   background: whitesmoke;
 }
 
 .tag .delete.is-light:hover,
-.tag.is-delete.is-light:hover {
+.tag.is-delete.is-light:hover,
+.tag.has-delete-icon.is-light:hover {
   background-color: #dbdbdb;
+  text-decoration: none;
 }
 
 .tag .delete.is-dark,
-.tag.is-delete.is-dark {
+.tag.is-delete.is-dark,
+.tag.has-delete-icon.is-dark {
   background: #363636;
 }
 
 .tag .delete.is-dark:hover,
-.tag.is-delete.is-dark:hover {
+.tag.is-delete.is-dark:hover,
+.tag.has-delete-icon.is-dark:hover {
   background-color: #1c1c1c;
+  text-decoration: none;
 }
 
 .tag .delete.is-primary,
-.tag.is-delete.is-primary {
+.tag.is-delete.is-primary,
+.tag.has-delete-icon.is-primary {
   background: #00d1b2;
 }
 
 .tag .delete.is-primary:hover,
-.tag.is-delete.is-primary:hover {
+.tag.is-delete.is-primary:hover,
+.tag.has-delete-icon.is-primary:hover {
   background-color: #009e86;
+  text-decoration: none;
 }
 
 .tag .delete.is-info,
-.tag.is-delete.is-info {
+.tag.is-delete.is-info,
+.tag.has-delete-icon.is-info {
   background: #FF3E00;
 }
 
 .tag .delete.is-info:hover,
-.tag.is-delete.is-info:hover {
+.tag.is-delete.is-info:hover,
+.tag.has-delete-icon.is-info:hover {
   background-color: #cc3200;
+  text-decoration: none;
 }
 
 .tag .delete.is-link,
-.tag.is-delete.is-link {
+.tag.is-delete.is-link,
+.tag.has-delete-icon.is-link {
   background: #005cff;
 }
 
 .tag .delete.is-link:hover,
-.tag.is-delete.is-link:hover {
+.tag.is-delete.is-link:hover,
+.tag.has-delete-icon.is-link:hover {
   background-color: #004acc;
+  text-decoration: none;
 }
 
 .tag .delete.is-success,
-.tag.is-delete.is-success {
+.tag.is-delete.is-success,
+.tag.has-delete-icon.is-success {
   background: #48c774;
 }
 
 .tag .delete.is-success:hover,
-.tag.is-delete.is-success:hover {
+.tag.is-delete.is-success:hover,
+.tag.has-delete-icon.is-success:hover {
   background-color: #34a85c;
+  text-decoration: none;
 }
 
 .tag .delete.is-warning,
-.tag.is-delete.is-warning {
+.tag.is-delete.is-warning,
+.tag.has-delete-icon.is-warning {
   background: #ffdd57;
 }
 
 .tag .delete.is-warning:hover,
-.tag.is-delete.is-warning:hover {
+.tag.is-delete.is-warning:hover,
+.tag.has-delete-icon.is-warning:hover {
   background-color: #ffd324;
+  text-decoration: none;
 }
 
 .tag .delete.is-danger,
-.tag.is-delete.is-danger {
+.tag.is-delete.is-danger,
+.tag.has-delete-icon.is-danger {
   background: #ff3d00;
 }
 
 .tag .delete.is-danger:hover,
-.tag.is-delete.is-danger:hover {
+.tag.is-delete.is-danger:hover,
+.tag.has-delete-icon.is-danger:hover {
   background-color: #cc3100;
+  text-decoration: none;
 }
 
 .tag .delete.is-twitter,
-.tag.is-delete.is-twitter {
+.tag.is-delete.is-twitter,
+.tag.has-delete-icon.is-twitter {
   background: #4099FF;
 }
 
 .tag .delete.is-twitter:hover,
-.tag.is-delete.is-twitter:hover {
+.tag.is-delete.is-twitter:hover,
+.tag.has-delete-icon.is-twitter:hover {
   background-color: #0d7eff;
+  text-decoration: none;
 }
 
 .tag .delete.is-entel-link-corp,
-.tag.is-delete.is-entel-link-corp {
+.tag.is-delete.is-entel-link-corp,
+.tag.has-delete-icon.is-entel-link-corp {
   background: #10069f;
 }
 
 .tag .delete.is-entel-link-corp:hover,
-.tag.is-delete.is-entel-link-corp:hover {
+.tag.is-delete.is-entel-link-corp:hover,
+.tag.has-delete-icon.is-entel-link-corp:hover {
   background-color: #0b046e;
+  text-decoration: none;
 }
 
 .tag .delete.is-entel-secondary,
-.tag.is-delete.is-entel-secondary {
+.tag.is-delete.is-entel-secondary,
+.tag.has-delete-icon.is-entel-secondary {
   background: #ff3d00;
 }
 
 .tag .delete.is-entel-secondary:hover,
-.tag.is-delete.is-entel-secondary:hover {
+.tag.is-delete.is-entel-secondary:hover,
+.tag.has-delete-icon.is-entel-secondary:hover {
   background-color: #cc3100;
+  text-decoration: none;
 }
 
 .tag .delete.is-entel-secondary-corp,
-.tag.is-delete.is-entel-secondary-corp {
+.tag.is-delete.is-entel-secondary-corp,
+.tag.has-delete-icon.is-entel-secondary-corp {
   background: #cccccc;
 }
 
 .tag .delete.is-entel-secondary-corp:hover,
-.tag.is-delete.is-entel-secondary-corp:hover {
+.tag.is-delete.is-entel-secondary-corp:hover,
+.tag.has-delete-icon.is-entel-secondary-corp:hover {
   background-color: #b3b2b2;
+  text-decoration: none;
 }
 
 .tag .delete.is-eco,
-.tag.is-delete.is-eco {
+.tag.is-delete.is-eco,
+.tag.has-delete-icon.is-eco {
   background: #42E8B4;
 }
 
 .tag .delete.is-eco:hover,
-.tag.is-delete.is-eco:hover {
+.tag.is-delete.is-eco:hover,
+.tag.has-delete-icon.is-eco:hover {
   background-color: #1bdca0;
+  text-decoration: none;
 }
 
 .tag .delete.is-eco-light,
-.tag.is-delete.is-eco-light {
+.tag.is-delete.is-eco-light,
+.tag.has-delete-icon.is-eco-light {
   background: #DBFAF0;
 }
 
 .tag .delete.is-eco-light:hover,
-.tag.is-delete.is-eco-light:hover {
+.tag.is-delete.is-eco-light:hover,
+.tag.has-delete-icon.is-eco-light:hover {
   background-color: #aef4dd;
+  text-decoration: none;
 }
 
 .tag .delete.is-smart,
-.tag.is-delete.is-smart {
+.tag.is-delete.is-smart,
+.tag.has-delete-icon.is-smart {
   background: #2FCBF1;
 }
 
 .tag .delete.is-smart:hover,
-.tag.is-delete.is-smart:hover {
+.tag.is-delete.is-smart:hover,
+.tag.has-delete-icon.is-smart:hover {
   background-color: #0fb5de;
+  text-decoration: none;
 }
 
 .tag .delete.is-smart-light,
-.tag.is-delete.is-smart-light {
+.tag.is-delete.is-smart-light,
+.tag.has-delete-icon.is-smart-light {
   background: #EBFAFD;
 }
 
 .tag .delete.is-smart-light:hover,
-.tag.is-delete.is-smart-light:hover {
+.tag.is-delete.is-smart-light:hover,
+.tag.has-delete-icon.is-smart-light:hover {
   background-color: #bdeef8;
+  text-decoration: none;
 }
 
 .tag .delete.is-positive,
-.tag.is-delete.is-positive {
+.tag.is-delete.is-positive,
+.tag.has-delete-icon.is-positive {
   background: #FD6C9B;
 }
 
 .tag .delete.is-positive:hover,
-.tag.is-delete.is-positive:hover {
+.tag.is-delete.is-positive:hover,
+.tag.has-delete-icon.is-positive:hover {
   background-color: #fc3a79;
+  text-decoration: none;
 }
 
 .tag .delete.is-positive-light,
-.tag.is-delete.is-positive-light {
+.tag.is-delete.is-positive-light,
+.tag.has-delete-icon.is-positive-light {
   background: #FFE2EB;
 }
 
 .tag .delete.is-positive-light:hover,
-.tag.is-delete.is-positive-light:hover {
+.tag.is-delete.is-positive-light:hover,
+.tag.has-delete-icon.is-positive-light:hover {
   background-color: #ffafc8;
+  text-decoration: none;
 }
 
 .tag .delete.is-yellow,
-.tag.is-delete.is-yellow {
+.tag.is-delete.is-yellow,
+.tag.has-delete-icon.is-yellow {
   background: #FDE74C;
 }
 
 .tag .delete.is-yellow:hover,
-.tag.is-delete.is-yellow:hover {
+.tag.is-delete.is-yellow:hover,
+.tag.has-delete-icon.is-yellow:hover {
   background-color: #fce01a;
+  text-decoration: none;
 }
 
 .tag .delete.is-mirage,
-.tag.is-delete.is-mirage {
+.tag.is-delete.is-mirage,
+.tag.has-delete-icon.is-mirage {
   background: #191B22;
 }
 
 .tag .delete.is-mirage:hover,
-.tag.is-delete.is-mirage:hover {
+.tag.is-delete.is-mirage:hover,
+.tag.has-delete-icon.is-mirage:hover {
   background-color: #030405;
+  text-decoration: none;
 }
 
 .tag .delete.is-blackRussian,
-.tag.is-delete.is-blackRussian {
+.tag.is-delete.is-blackRussian,
+.tag.has-delete-icon.is-blackRussian {
   background: #23252C;
 }
 
 .tag .delete.is-blackRussian:hover,
-.tag.is-delete.is-blackRussian:hover {
+.tag.is-delete.is-blackRussian:hover,
+.tag.has-delete-icon.is-blackRussian:hover {
   background-color: #0c0d10;
+  text-decoration: none;
+}
+
+.tag.has-delete-icon {
+  padding: 0px;
+}
+
+.tag.has-delete-icon .icon:first-child:not(:last-child) {
+  margin-right: 0px;
+  margin-left: 0px;
 }
 
 .taginput .taginput-container {
@@ -28370,6 +28363,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   padding-bottom: 0;
   padding-top: calc(0.275em - 1px);
   padding-left: 0;
+  padding-right: 0;
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -28402,19 +28396,19 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   margin-left: 0.275rem;
   margin-bottom: calc(0.275em - 1px);
   font-size: 0.9em;
-  height: 1.7em;
+  height: calc(2em - 1px);
 }
 
 .taginput .taginput-container > .tag .tag,
 .taginput .taginput-container > .tags .tag {
   margin-bottom: 0;
   font-size: 0.9em;
-  height: 1.7em;
+  height: calc(2em - 1px);
 }
 
 .taginput .taginput-container > .tag .tag.is-delete,
 .taginput .taginput-container > .tags .tag.is-delete {
-  width: 1.7em;
+  width: calc(2em - 1px);
 }
 
 .taginput .taginput-container .autocomplete {
@@ -28423,7 +28417,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .taginput .taginput-container .autocomplete input {
-  height: 1.7em;
+  height: calc(2em - 1px);
   margin-bottom: calc(0.275em - 1px);
   padding-top: 0;
   padding-bottom: 0;
@@ -28437,7 +28431,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .taginput .taginput-container .autocomplete .icon {
-  height: 1.7em;
+  height: calc(2em - 1px);
 }
 
 .taginput .taginput-container .autocomplete > .control.is-loading::after {
@@ -28454,39 +28448,19 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 }
 
 .timepicker .dropdown .input[readonly],
-.timepicker .dropdown .taginput .taginput-container.is-focusable[readonly],
-.taginput .timepicker .dropdown .taginput-container.is-focusable[readonly],
-.timepicker .dropdown-trigger .input[readonly],
-.timepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly],
-.taginput .timepicker .dropdown-trigger .taginput-container.is-focusable[readonly] {
+.timepicker .dropdown-trigger .input[readonly] {
   cursor: pointer;
   box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
 }
 
 .timepicker .dropdown .input[readonly]:focus,
-.timepicker .dropdown .taginput .taginput-container.is-focusable[readonly]:focus,
-.taginput .timepicker .dropdown .taginput-container.is-focusable[readonly]:focus,
 .timepicker .dropdown .input[readonly].is-focused,
-.timepicker .dropdown .taginput .taginput-container.is-focusable[readonly].is-focused,
-.taginput .timepicker .dropdown .taginput-container.is-focusable[readonly].is-focused,
 .timepicker .dropdown .input[readonly]:active,
-.timepicker .dropdown .taginput .taginput-container.is-focusable[readonly]:active,
-.taginput .timepicker .dropdown .taginput-container.is-focusable[readonly]:active,
 .timepicker .dropdown .input[readonly].is-active,
-.timepicker .dropdown .taginput .taginput-container.is-focusable[readonly].is-active,
-.taginput .timepicker .dropdown .taginput-container.is-focusable[readonly].is-active,
 .timepicker .dropdown-trigger .input[readonly]:focus,
-.timepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly]:focus,
-.taginput .timepicker .dropdown-trigger .taginput-container.is-focusable[readonly]:focus,
 .timepicker .dropdown-trigger .input[readonly].is-focused,
-.timepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly].is-focused,
-.taginput .timepicker .dropdown-trigger .taginput-container.is-focusable[readonly].is-focused,
 .timepicker .dropdown-trigger .input[readonly]:active,
-.timepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly]:active,
-.taginput .timepicker .dropdown-trigger .taginput-container.is-focusable[readonly]:active,
-.timepicker .dropdown-trigger .input[readonly].is-active,
-.timepicker .dropdown-trigger .taginput .taginput-container.is-focusable[readonly].is-active,
-.taginput .timepicker .dropdown-trigger .taginput-container.is-focusable[readonly].is-active {
+.timepicker .dropdown-trigger .input[readonly].is-active {
   box-shadow: 0 0 0 0.125em rgba(0, 92, 255, 0.25);
 }
 
@@ -28526,6 +28500,11 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
 
 .timepicker .dropdown-content .control.is-colon {
   font-size: 1.7em;
+  line-height: 1.7em;
+}
+
+.timepicker .dropdown-content .control.is-colon:last-child {
+  padding-right: calc(0.75em - 1px);
 }
 
 .timepicker.is-small {
@@ -28546,8 +28525,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   display: inline-flex;
 }
 
-.b-tooltip.is-top:before,
-.b-tooltip.is-top:after {
+.b-tooltip.is-top .tooltip-content {
   top: auto;
   right: auto;
   bottom: calc(100% + 5px + 2px);
@@ -28555,188 +28533,171 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   transform: translateX(-50%);
 }
 
-.b-tooltip.is-top.is-white:before {
+.b-tooltip.is-top .tooltip-content::before {
+  top: 100%;
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.b-tooltip.is-top.is-white .tooltip-content::before {
   border-top: 5px solid white;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-black:before {
+.b-tooltip.is-top.is-black .tooltip-content::before {
   border-top: 5px solid #0a0a0a;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-black-ter:before {
+.b-tooltip.is-top.is-black-ter .tooltip-content::before {
   border-top: 5px solid #242424;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-light:before {
+.b-tooltip.is-top.is-light .tooltip-content::before {
   border-top: 5px solid whitesmoke;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-dark:before {
+.b-tooltip.is-top.is-dark .tooltip-content::before {
   border-top: 5px solid #363636;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-primary:before {
+.b-tooltip.is-top.is-primary .tooltip-content::before {
   border-top: 5px solid #00d1b2;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-info:before {
+.b-tooltip.is-top.is-info .tooltip-content::before {
   border-top: 5px solid #FF3E00;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-link:before {
+.b-tooltip.is-top.is-link .tooltip-content::before {
   border-top: 5px solid #005cff;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-success:before {
+.b-tooltip.is-top.is-success .tooltip-content::before {
   border-top: 5px solid #48c774;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-warning:before {
+.b-tooltip.is-top.is-warning .tooltip-content::before {
   border-top: 5px solid #ffdd57;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-danger:before {
+.b-tooltip.is-top.is-danger .tooltip-content::before {
   border-top: 5px solid #ff3d00;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-twitter:before {
+.b-tooltip.is-top.is-twitter .tooltip-content::before {
   border-top: 5px solid #4099FF;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-entel-link-corp:before {
+.b-tooltip.is-top.is-entel-link-corp .tooltip-content::before {
   border-top: 5px solid #10069f;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-entel-secondary:before {
+.b-tooltip.is-top.is-entel-secondary .tooltip-content::before {
   border-top: 5px solid #ff3d00;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-entel-secondary-corp:before {
+.b-tooltip.is-top.is-entel-secondary-corp .tooltip-content::before {
   border-top: 5px solid #cccccc;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-eco:before {
+.b-tooltip.is-top.is-eco .tooltip-content::before {
   border-top: 5px solid #42E8B4;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-eco-light:before {
+.b-tooltip.is-top.is-eco-light .tooltip-content::before {
   border-top: 5px solid #DBFAF0;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-smart:before {
+.b-tooltip.is-top.is-smart .tooltip-content::before {
   border-top: 5px solid #2FCBF1;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-smart-light:before {
+.b-tooltip.is-top.is-smart-light .tooltip-content::before {
   border-top: 5px solid #EBFAFD;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-positive:before {
+.b-tooltip.is-top.is-positive .tooltip-content::before {
   border-top: 5px solid #FD6C9B;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-positive-light:before {
+.b-tooltip.is-top.is-positive-light .tooltip-content::before {
   border-top: 5px solid #FFE2EB;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-yellow:before {
+.b-tooltip.is-top.is-yellow .tooltip-content::before {
   border-top: 5px solid #FDE74C;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-mirage:before {
+.b-tooltip.is-top.is-mirage .tooltip-content::before {
   border-top: 5px solid #191B22;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-blackRussian:before {
+.b-tooltip.is-top.is-blackRussian .tooltip-content::before {
   border-top: 5px solid #23252C;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  bottom: calc(100% + 2px);
 }
 
-.b-tooltip.is-top.is-multiline.is-small:after {
+.b-tooltip.is-top.is-multiline.is-small .tooltip-content {
   width: 180px;
 }
 
-.b-tooltip.is-top.is-multiline.is-medium:after {
+.b-tooltip.is-top.is-multiline.is-medium .tooltip-content {
   width: 240px;
 }
 
-.b-tooltip.is-top.is-multiline.is-large:after {
+.b-tooltip.is-top.is-multiline.is-large .tooltip-content {
   width: 300px;
 }
 
-.b-tooltip.is-right:before,
-.b-tooltip.is-right:after {
+.b-tooltip.is-right .tooltip-content {
   top: 50%;
   right: auto;
   bottom: auto;
@@ -28744,188 +28705,171 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   transform: translateY(-50%);
 }
 
-.b-tooltip.is-right.is-white:before {
+.b-tooltip.is-right .tooltip-content::before {
+  top: 50%;
+  right: 100%;
+  bottom: auto;
+  left: auto;
+  transform: translateY(-50%);
+}
+
+.b-tooltip.is-right.is-white .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid white;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-black:before {
+.b-tooltip.is-right.is-black .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #0a0a0a;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-black-ter:before {
+.b-tooltip.is-right.is-black-ter .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #242424;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-light:before {
+.b-tooltip.is-right.is-light .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid whitesmoke;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-dark:before {
+.b-tooltip.is-right.is-dark .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #363636;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-primary:before {
+.b-tooltip.is-right.is-primary .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #00d1b2;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-info:before {
+.b-tooltip.is-right.is-info .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #FF3E00;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-link:before {
+.b-tooltip.is-right.is-link .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #005cff;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-success:before {
+.b-tooltip.is-right.is-success .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #48c774;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-warning:before {
+.b-tooltip.is-right.is-warning .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #ffdd57;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-danger:before {
+.b-tooltip.is-right.is-danger .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #ff3d00;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-twitter:before {
+.b-tooltip.is-right.is-twitter .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #4099FF;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-entel-link-corp:before {
+.b-tooltip.is-right.is-entel-link-corp .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #10069f;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-entel-secondary:before {
+.b-tooltip.is-right.is-entel-secondary .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #ff3d00;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-entel-secondary-corp:before {
+.b-tooltip.is-right.is-entel-secondary-corp .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #cccccc;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-eco:before {
+.b-tooltip.is-right.is-eco .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #42E8B4;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-eco-light:before {
+.b-tooltip.is-right.is-eco-light .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #DBFAF0;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-smart:before {
+.b-tooltip.is-right.is-smart .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #2FCBF1;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-smart-light:before {
+.b-tooltip.is-right.is-smart-light .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #EBFAFD;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-positive:before {
+.b-tooltip.is-right.is-positive .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #FD6C9B;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-positive-light:before {
+.b-tooltip.is-right.is-positive-light .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #FFE2EB;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-yellow:before {
+.b-tooltip.is-right.is-yellow .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #FDE74C;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-mirage:before {
+.b-tooltip.is-right.is-mirage .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #191B22;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-blackRussian:before {
+.b-tooltip.is-right.is-blackRussian .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #23252C;
   border-bottom: 5px solid transparent;
-  left: calc(100% + 2px);
 }
 
-.b-tooltip.is-right.is-multiline.is-small:after {
+.b-tooltip.is-right.is-multiline.is-small .tooltip-content {
   width: 180px;
 }
 
-.b-tooltip.is-right.is-multiline.is-medium:after {
+.b-tooltip.is-right.is-multiline.is-medium .tooltip-content {
   width: 240px;
 }
 
-.b-tooltip.is-right.is-multiline.is-large:after {
+.b-tooltip.is-right.is-multiline.is-large .tooltip-content {
   width: 300px;
 }
 
-.b-tooltip.is-bottom:before,
-.b-tooltip.is-bottom:after {
+.b-tooltip.is-bottom .tooltip-content {
   top: calc(100% + 5px + 2px);
   right: auto;
   bottom: auto;
@@ -28933,188 +28877,171 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   transform: translateX(-50%);
 }
 
-.b-tooltip.is-bottom.is-white:before {
+.b-tooltip.is-bottom .tooltip-content::before {
+  top: auto;
+  right: auto;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.b-tooltip.is-bottom.is-white .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid white;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-black:before {
+.b-tooltip.is-bottom.is-black .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #0a0a0a;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-black-ter:before {
+.b-tooltip.is-bottom.is-black-ter .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #242424;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-light:before {
+.b-tooltip.is-bottom.is-light .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid whitesmoke;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-dark:before {
+.b-tooltip.is-bottom.is-dark .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #363636;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-primary:before {
+.b-tooltip.is-bottom.is-primary .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #00d1b2;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-info:before {
+.b-tooltip.is-bottom.is-info .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #FF3E00;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-link:before {
+.b-tooltip.is-bottom.is-link .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #005cff;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-success:before {
+.b-tooltip.is-bottom.is-success .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #48c774;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-warning:before {
+.b-tooltip.is-bottom.is-warning .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #ffdd57;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-danger:before {
+.b-tooltip.is-bottom.is-danger .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #ff3d00;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-twitter:before {
+.b-tooltip.is-bottom.is-twitter .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #4099FF;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-entel-link-corp:before {
+.b-tooltip.is-bottom.is-entel-link-corp .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #10069f;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-entel-secondary:before {
+.b-tooltip.is-bottom.is-entel-secondary .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #ff3d00;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-entel-secondary-corp:before {
+.b-tooltip.is-bottom.is-entel-secondary-corp .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #cccccc;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-eco:before {
+.b-tooltip.is-bottom.is-eco .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #42E8B4;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-eco-light:before {
+.b-tooltip.is-bottom.is-eco-light .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #DBFAF0;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-smart:before {
+.b-tooltip.is-bottom.is-smart .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #2FCBF1;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-smart-light:before {
+.b-tooltip.is-bottom.is-smart-light .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #EBFAFD;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-positive:before {
+.b-tooltip.is-bottom.is-positive .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #FD6C9B;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-positive-light:before {
+.b-tooltip.is-bottom.is-positive-light .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #FFE2EB;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-yellow:before {
+.b-tooltip.is-bottom.is-yellow .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #FDE74C;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-mirage:before {
+.b-tooltip.is-bottom.is-mirage .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #191B22;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-blackRussian:before {
+.b-tooltip.is-bottom.is-blackRussian .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #23252C;
   border-left: 5px solid transparent;
-  top: calc(100% + 2px);
 }
 
-.b-tooltip.is-bottom.is-multiline.is-small:after {
+.b-tooltip.is-bottom.is-multiline.is-small .tooltip-content {
   width: 180px;
 }
 
-.b-tooltip.is-bottom.is-multiline.is-medium:after {
+.b-tooltip.is-bottom.is-multiline.is-medium .tooltip-content {
   width: 240px;
 }
 
-.b-tooltip.is-bottom.is-multiline.is-large:after {
+.b-tooltip.is-bottom.is-multiline.is-large .tooltip-content {
   width: 300px;
 }
 
-.b-tooltip.is-left:before,
-.b-tooltip.is-left:after {
+.b-tooltip.is-left .tooltip-content {
   top: 50%;
   right: calc(100% + 5px + 2px);
   bottom: auto;
@@ -29122,201 +29049,171 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   transform: translateY(-50%);
 }
 
-.b-tooltip.is-left.is-white:before {
+.b-tooltip.is-left .tooltip-content::before {
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  left: 100%;
+  transform: translateY(-50%);
+}
+
+.b-tooltip.is-left.is-white .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid white;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-black:before {
+.b-tooltip.is-left.is-black .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #0a0a0a;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-black-ter:before {
+.b-tooltip.is-left.is-black-ter .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #242424;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-light:before {
+.b-tooltip.is-left.is-light .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid whitesmoke;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-dark:before {
+.b-tooltip.is-left.is-dark .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #363636;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-primary:before {
+.b-tooltip.is-left.is-primary .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #00d1b2;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-info:before {
+.b-tooltip.is-left.is-info .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #FF3E00;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-link:before {
+.b-tooltip.is-left.is-link .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #005cff;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-success:before {
+.b-tooltip.is-left.is-success .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #48c774;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-warning:before {
+.b-tooltip.is-left.is-warning .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #ffdd57;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-danger:before {
+.b-tooltip.is-left.is-danger .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #ff3d00;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-twitter:before {
+.b-tooltip.is-left.is-twitter .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #4099FF;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-entel-link-corp:before {
+.b-tooltip.is-left.is-entel-link-corp .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #10069f;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-entel-secondary:before {
+.b-tooltip.is-left.is-entel-secondary .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #ff3d00;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-entel-secondary-corp:before {
+.b-tooltip.is-left.is-entel-secondary-corp .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #cccccc;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-eco:before {
+.b-tooltip.is-left.is-eco .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #42E8B4;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-eco-light:before {
+.b-tooltip.is-left.is-eco-light .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #DBFAF0;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-smart:before {
+.b-tooltip.is-left.is-smart .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #2FCBF1;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-smart-light:before {
+.b-tooltip.is-left.is-smart-light .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #EBFAFD;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-positive:before {
+.b-tooltip.is-left.is-positive .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #FD6C9B;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-positive-light:before {
+.b-tooltip.is-left.is-positive-light .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #FFE2EB;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-yellow:before {
+.b-tooltip.is-left.is-yellow .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #FDE74C;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-mirage:before {
+.b-tooltip.is-left.is-mirage .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #191B22;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-blackRussian:before {
+.b-tooltip.is-left.is-blackRussian .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #23252C;
-  right: calc(100% + 2px);
 }
 
-.b-tooltip.is-left.is-multiline.is-small:after {
+.b-tooltip.is-left.is-multiline.is-small .tooltip-content {
   width: 180px;
 }
 
-.b-tooltip.is-left.is-multiline.is-medium:after {
+.b-tooltip.is-left.is-multiline.is-medium .tooltip-content {
   width: 240px;
 }
 
-.b-tooltip.is-left.is-multiline.is-large:after {
+.b-tooltip.is-left.is-multiline.is-large .tooltip-content {
   width: 300px;
 }
 
-.b-tooltip:before,
-.b-tooltip:after {
-  position: absolute;
-  content: "";
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.b-tooltip:before {
-  z-index: 39;
-}
-
-.b-tooltip:after {
-  content: attr(data-label);
+.b-tooltip .tooltip-content {
   width: auto;
   padding: 0.35rem 0.75rem;
   border-radius: 6px;
@@ -29325,159 +29222,159 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
   z-index: 38;
   white-space: nowrap;
+  position: absolute;
 }
 
-.b-tooltip:not([data-label=""]):hover:before,
-.b-tooltip:not([data-label=""]):hover:after {
-  transition-delay: inherit;
-  opacity: 1;
-  visibility: visible;
+.b-tooltip .tooltip-content::before {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+  z-index: 38;
 }
 
-.b-tooltip.is-white:after {
+.b-tooltip .tooltip-trigger {
+  width: 100%;
+}
+
+.b-tooltip.is-white .tooltip-content {
   background: white;
   color: #0a0a0a;
 }
 
-.b-tooltip.is-black:after {
+.b-tooltip.is-black .tooltip-content {
   background: #0a0a0a;
   color: white;
 }
 
-.b-tooltip.is-black-ter:after {
+.b-tooltip.is-black-ter .tooltip-content {
   background: #242424;
   color: white;
 }
 
-.b-tooltip.is-light:after {
+.b-tooltip.is-light .tooltip-content {
   background: whitesmoke;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.b-tooltip.is-dark:after {
+.b-tooltip.is-dark .tooltip-content {
   background: #363636;
   color: #fff;
 }
 
-.b-tooltip.is-primary:after {
+.b-tooltip.is-primary .tooltip-content {
   background: #00d1b2;
   color: #fff;
 }
 
-.b-tooltip.is-info:after {
+.b-tooltip.is-info .tooltip-content {
   background: #FF3E00;
   color: #fff;
 }
 
-.b-tooltip.is-link:after {
+.b-tooltip.is-link .tooltip-content {
   background: #005cff;
   color: #fff;
 }
 
-.b-tooltip.is-success:after {
+.b-tooltip.is-success .tooltip-content {
   background: #48c774;
   color: #fff;
 }
 
-.b-tooltip.is-warning:after {
+.b-tooltip.is-warning .tooltip-content {
   background: #ffdd57;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.b-tooltip.is-danger:after {
+.b-tooltip.is-danger .tooltip-content {
   background: #ff3d00;
   color: #fff;
 }
 
-.b-tooltip.is-twitter:after {
+.b-tooltip.is-twitter .tooltip-content {
   background: #4099FF;
   color: #fff;
 }
 
-.b-tooltip.is-entel-link-corp:after {
+.b-tooltip.is-entel-link-corp .tooltip-content {
   background: #10069f;
   color: #fff;
 }
 
-.b-tooltip.is-entel-secondary:after {
+.b-tooltip.is-entel-secondary .tooltip-content {
   background: #ff3d00;
   color: #fff;
 }
 
-.b-tooltip.is-entel-secondary-corp:after {
+.b-tooltip.is-entel-secondary-corp .tooltip-content {
   background: #cccccc;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.b-tooltip.is-eco:after {
+.b-tooltip.is-eco .tooltip-content {
   background: #42E8B4;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.b-tooltip.is-eco-light:after {
+.b-tooltip.is-eco-light .tooltip-content {
   background: #DBFAF0;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.b-tooltip.is-smart:after {
+.b-tooltip.is-smart .tooltip-content {
   background: #2FCBF1;
   color: #fff;
 }
 
-.b-tooltip.is-smart-light:after {
+.b-tooltip.is-smart-light .tooltip-content {
   background: #EBFAFD;
   color: #fff;
 }
 
-.b-tooltip.is-positive:after {
+.b-tooltip.is-positive .tooltip-content {
   background: #FD6C9B;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.b-tooltip.is-positive-light:after {
+.b-tooltip.is-positive-light .tooltip-content {
   background: #FFE2EB;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.b-tooltip.is-yellow:after {
+.b-tooltip.is-yellow .tooltip-content {
   background: #FDE74C;
   color: rgba(0, 0, 0, 0.7);
 }
 
-.b-tooltip.is-mirage:after {
+.b-tooltip.is-mirage .tooltip-content {
   background: #191B22;
   color: #fff;
 }
 
-.b-tooltip.is-blackRussian:after {
+.b-tooltip.is-blackRussian .tooltip-content {
   background: #23252C;
   color: #fff;
 }
 
-.b-tooltip:not([data-label=""]).is-always:before,
-.b-tooltip:not([data-label=""]).is-always:after {
+.b-tooltip.is-always .tooltip-content::before,
+.b-tooltip.is-always .tooltip-content {
   opacity: 1;
   visibility: visible;
 }
 
-.b-tooltip.is-multiline:after {
+.b-tooltip.is-multiline .tooltip-content {
   display: flex-block;
   text-align: center;
   white-space: normal;
 }
 
-.b-tooltip.is-dashed {
+.b-tooltip.is-dashed .tooltip-trigger {
   border-bottom: 1px dashed #b5b5b5;
   cursor: default;
 }
 
-.b-tooltip.is-square:after {
+.b-tooltip.is-square .tooltip-content {
   border-radius: 0;
-}
-
-.b-tooltip.is-animated:before,
-.b-tooltip.is-animated:after {
-  transition: opacity 86ms ease-out, visibility 86ms ease-out;
 }
 
 .upload {

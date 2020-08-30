@@ -63,7 +63,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getElectricCompanies: function getElectricCompanies() {
       var _this = this;
 
-      axios.get("/api/electricCompanies?api_token=".concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/electricCompanies").then(function (response) {
         _this.electricCompanies = response.data.electricCompanies;
       });
     },
@@ -71,7 +71,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this2 = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'pop_id': this.pop.id,
         'electric_company_id': this.electric_company_id
       };

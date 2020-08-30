@@ -178,15 +178,17 @@
 
             batteriesRecharge() {
                 let total = 0
-                Object.keys(this.pop.rooms).forEach(element => {
-                    let room = this.pop.rooms[element]
-                    if(room.power_rectifiers.length) {
-                        Object.keys(room.planes).forEach(item => {
-                            let roomPlane = room.planes[item]
-                            total += this.batteryRechargePower(roomPlane)
-                        })
-                    }
-                })
+                if(this.pop.rooms && this.pop.rooms.length) {
+                    Object.keys(this.pop.rooms).forEach(element => {
+                        let room = this.pop.rooms[element]
+                        if(room.power_rectifiers.length) {
+                            Object.keys(room.planes).forEach(item => {
+                                let roomPlane = room.planes[item]
+                                total += this.batteryRechargePower(roomPlane)
+                            })
+                        }
+                    })
+                }
                 return total
             },
 

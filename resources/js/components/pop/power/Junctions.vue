@@ -46,7 +46,7 @@
         methods: {
             // APIs
             getJunctions() {
-                axios.get(`/api/junctions/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/junctions/${this.pop.id}`)
                 .then((response) => {
                     this.junctions = response.data.junction
                     this.can = response.data.can

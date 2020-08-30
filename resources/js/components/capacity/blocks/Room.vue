@@ -654,6 +654,7 @@
 
         created() {
             this.$eventBus.$on('new-power-rectifier', this.getPlanes)
+            this.$eventBus.$on('new-battery-bank', this.getPlanes)
         },
 
         mounted() {
@@ -803,7 +804,7 @@
             },
 
             getPlaneDelegationTypes() {
-                axios.get(`/api/planeDelegationTypes?api_token=${this.user.api_token}`).then(response => {
+                axios.get(`/api/planeDelegationTypes`).then(response => {
                     this.planeDelegationTypes = response.data.planes
                 })
             },
@@ -854,7 +855,7 @@
             },
 
             getPlanes() {
-                axios.get(`/api/roomPlanes/${this.sala.id}?api_token=${this.user.api_token}&plane_delegation_type_id=${this.planeDelegationTypeId}`)
+                axios.get(`/api/roomPlanes/${this.sala.id}?plane_delegation_type_id=${this.planeDelegationTypeId}`)
                 .then((response) => {
                     this.planes = response.data.planes
                     this.canEditPowerRectifiers = response.data.can ? response.data.can.update : false
@@ -865,7 +866,7 @@
             },
 
             getAirConditioners() {
-                axios.get(`/api/airConditioners/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/airConditioners/${this.pop.id}`)
                 .then((response) => {
                     // console.log(response.data)
                     this.airConditioners = response.data.airConditioner
@@ -1046,52 +1047,54 @@
                 //     }
                 // })
 
-                Object.keys(this.planes).forEach(item => {
-                    let plane = this.planes[item]
+                if(this.room.current_room_delegation) {
+                    Object.keys(this.planes).forEach(item => {
+                        let plane = this.planes[item]
+                        switch(this.room.current_room_delegation.plane_delegation_type_id) {
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                                available = this.availableBatteryCapacityPlane(plane)
+                                break
+                            case 5:
+                            case 6:
+                                if(available > this.availableBatteryCapacityPlane(plane)) {
+                                    available = this.availableBatteryCapacityPlane(plane)
+                                }
+                                break
+                            case 7:
+                                if(availableA > this.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                                    availableA = this.availableBatteryCapacityPlane(plane)
+                                } 
+
+                                if(availableB > this.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                                    availableB = this.availableBatteryCapacityPlane(plane)
+                                }
+                                available = availableA + availableB
+                                break
+                            case 8:
+                            default:
+                                break
+                        }
+                    })
+
                     switch(this.room.current_room_delegation.plane_delegation_type_id) {
                         case 1:
                         case 2:
                         case 3:
                         case 4:
-                            available = this.availableBatteryCapacityPlane(plane)
+                            available = available
                             break
                         case 5:
                         case 6:
-                            if(available > this.availableBatteryCapacityPlane(plane)) {
-                                available = this.availableBatteryCapacityPlane(plane)
-                            }
-                            break
                         case 7:
-                            if(availableA > this.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
-                                availableA = this.availableBatteryCapacityPlane(plane)
-                            } 
-
-                            if(availableB > this.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
-                                availableB = this.availableBatteryCapacityPlane(plane)
-                            }
-                            available = availableA + availableB
+                            available = available * 2
                             break
                         case 8:
                         default:
                             break
                     }
-                })
-
-                switch(this.room.current_room_delegation.plane_delegation_type_id) {
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        available = available
-                        break
-                    case 5:
-                    case 6:
-                    case 7:
-                        available = available * 2
-                        break
-                    case 8:
-                    default:
-                        break
                 }
                 
                 this.availableBatteryCapacity = available
@@ -1100,7 +1103,6 @@
 
             updatePlaneDelegationType(sala) {
                 let params = {
-                    'api_token': this.user.api_token,
                     'user_id': this.user.id,
                     'plane_delegation_type_id': this.planeDelegationTypeId
                 }
@@ -1121,6 +1123,7 @@
 
         beforeDestroy() {
             this.$eventBus.$off('new-power-rectifier')
+            this.$eventBus.$off('new-battery-bank')
         }
     }
 </script>

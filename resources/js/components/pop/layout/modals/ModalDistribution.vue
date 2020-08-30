@@ -122,7 +122,6 @@
                     this.usedCapacity != this.newUsedCapacity) {
 
                     let params = {
-                        'api_token': this.user.api_token,
                         'user_id': this.user.id,
                         'total_capacity': parseFloat(this.newTotalCapacity),
                         'used_capacity': parseFloat(this.newUsedCapacity)

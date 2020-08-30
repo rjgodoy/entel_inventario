@@ -104,7 +104,6 @@
                     this.usedSurface != this.newUsedSurface) {
 
                     let params = {
-                        'api_token': this.user.api_token,
                         'user_id': this.user.id,
                         'total_surface': parseFloat(this.newTotalSurface),
                         'used_surface': parseFloat(this.newUsedSurface)

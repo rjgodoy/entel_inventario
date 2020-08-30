@@ -1,10 +1,10 @@
 <template>
     <div>
-        <section class="section box" style="padding: auto 0 auto 0;">
-            <div class="level">
-                <div class="level-item" style="margin-top: -24px; margin-bottom: -48px">
-                    <b-tabs v-model="activeTab" @change="folderTab=activeTab" type="is-toggle" expanded>
-                        <b-tab-item v-for="(tab, index) in tabs" :key="index" v-if="tab.displayed" :label="tab.label"></b-tab-item>
+        <section class="section has-background-light" style="padding: auto 0 auto 0;">
+            <div class="columns">
+                <div class="column" style="margin-top: -24px; margin-bottom: -48px">
+                    <b-tabs v-model="activeTab" @input="setFolderTab()" type="is-toggle" expanded class="is-paddingless">
+                        <b-tab-item v-for="(tab, index) in tabs" :key="index" v-if="tab.displayed" :label="tab.label" ></b-tab-item>
                     </b-tabs>
                 </div>
                 
@@ -122,13 +122,13 @@
                         
                         <div class="columns is-multiline" v-if="!edit">
                             <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
-                                <a class="box tile is-child" @click="selected(folder)" style="position: relative;" >
+                                <a class="box tile is-child" @click="selected(folder)">
                                     <font-awesome-icon
                                         :icon="['fas', 'folder-open']"
                                         class="has-text-smart"
                                         size="3x"
                                         style="padding-bottom: 5px;"/>
-                                    <div class="is-size-6 has-text-weight-bold">{{ folder.name }}</div>
+                                    <div class="is-size-6 has-text-weight-normal" style="margin-bottom: 0">{{ folder.name }}</div>
                                 </a>
                             </div>
 
@@ -147,7 +147,7 @@
 
                         <div class="columns is-multiline" v-if="edit">
                             <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
-                                <div class="box tile is-child" style="position: relative;">
+                                <div class="box tile is-child">
                                     <a class="is-pulled-right has-text-danger" @click="confirmDeleteFolder(folder)">
                                         <font-awesome-icon 
                                             :icon="['far', 'trash-alt']"
@@ -159,7 +159,7 @@
                                         class="has-text-smart"
                                         size="3x"
                                         style="padding-bottom: 5px;"/>
-                                    <div class="is-size-6 has-text-weight-bold">{{ folder.name }}</div>
+                                    <div class="is-size-6 has-text-weight-normal">{{ folder.name }}</div>
                                 </div>
                             </div>
 
@@ -182,37 +182,48 @@
                             </div>
                         </div>
 
-                        <div class="container">
-                            <b-carousel
-                                :autoplay="false"
-                                with-carousel-list
-                                :indicator="false"
-                                :overlay="gallery">
-                                <b-carousel-item v-for="(item, i) in photos" :key="i">
-                                    <figure @click="switchGallery(true)" class="image">
-                                        <img :src="item.image">
-                                    </figure>
-                                </b-carousel-item>
-                                <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
-                                <template slot="list" slot-scope="props">
-                                    <b-carousel-list
-                                        v-model="props.active"
-                                        :data="photos"
-                                        :config="al"
-                                        :refresh="gallery"
-                                        @switch="props.switch($event, false)"
-                                        as-indicator />
-                                </template>
-                                <template slot="overlay">
-                                    <div class="has-text-centered has-text-white">
-                                        Hello i'am overlay!
-                                    </div>
-                                </template>
-                            </b-carousel>
+                        <div v-if="photos.length">
+                            <hr/>
+
+                            <div class="block">
+                                <div class="is-size-5 has-text-weight-semibold">Visor de fotos</div>
+                            </div>
+
+                            <div class="container has-background-light">
+                                <b-carousel
+                                    icon-pack="fas"
+                                    indicator-custom
+                                    :autoplay="false"
+                                    with-carousel-list
+                                    :indicator="false"
+                                    :overlay="gallery"
+                                    @click="switchGallery(true)">
+                                    <b-carousel-item v-for="(item, i) in photos" :key="i" class="has-text-centered">
+                                        <figure class="image">
+                                            <img :src="item.image" style="max-height: 800px; width: auto; display: block;">
+                                        </figure>
+                                    </b-carousel-item>
+                                    <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
+                                    <template slot="list" slot-scope="props">
+                                        <b-carousel-list
+                                            v-model="props.active"
+                                            :data="photos"
+                                            v-bind="al"
+                                            @switch="props.switch($event, false)"
+                                            as-indicator
+                                            :has-drag="true" />
+                                    </template>
+                                    <template slot="overlay">
+                                        <div class="has-text-centered has-text-white">
+                                            Hello i'am overlay!
+                                        </div>
+                                    </template>
+                                </b-carousel>
+                            </div>
                         </div>
 
-                        <section v-if="noFiles" class="section container">
-                            <div class="has-text-weight-normal">No hay archivos en esta sección.</div>
+                        <section v-if="noFiles" class="section container columns is-vcentered">
+                            <div class="column has-text-weight-normal has-text-grey-light">No hay archivos.</div>
                         </section>
                     </div>
                 </div>
@@ -259,10 +270,10 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
-library.add(faSearch, faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, farTrashAlt);
+library.add(faSearch, faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, farTrashAlt, faAngleRight);
 import VuePagination from '../VuePagination.vue'
 export default {
     components: {
@@ -287,11 +298,12 @@ export default {
             folders: [],
             files: [],
             photos: [],
-            activeTab: 0,
+            activeTab: 2,
             showCam: true,
             multiline: true,
             isLoading: false,
             load: 0,
+
             canCreateFolder: false,
             canDeleteFolder: false,
             canUploadFile: false,
@@ -300,8 +312,8 @@ export default {
             canViewManualesTab: false,
             canCreateManuales: false,
             canCreateProcedimientos: false,
-            searchText: '',
 
+            searchText: '',
             edit: false,
 
             isUploadModalActive: false,
@@ -347,27 +359,8 @@ export default {
     },
 
     computed: {
-        folderTab: {
-            get: function() {
-                return this.baseTabs[this.activeTab]
-            },
-            set: function(val) {
-                console.log(val)
-                this.bread = ''
-                this.currentFolderView= {
-                    id: null,
-                    parent_id: null
-                }
-                this.currentSideFolderView= {
-                    id: null,
-                    parent_id: null
-                }
-                this.meta.current_page = 1
-                val == 8 || val == 9 ? this.getFolders() : this.getSideFolders()
-                this.folders = []
-                this.files = []
-                this.photos = []
-            },
+        folderTab() {
+            return this.baseTabs[this.activeTab]
         },
 
         baseTabs() {
@@ -466,6 +459,23 @@ export default {
     },
     
     methods: {
+        setFolderTab() {
+            this.bread = ''
+            this.currentFolderView= {
+                id: null,
+                parent_id: null
+            }
+            this.currentSideFolderView= {
+                id: null,
+                parent_id: null
+            }
+            this.meta.current_page = 1
+            this.baseTabs[this.activeTab] == 8 || this.baseTabs[this.activeTab] == 9 ? this.getFolders() : this.getSideFolders()
+            this.folders = []
+            this.files = []
+            this.photos = []
+        },
+
         selectedSide(folder) {
             
             this.currentFolderView = folder
@@ -486,7 +496,6 @@ export default {
         getSideFolders() {
             // console.log(this.currentFolderView.id)
             let params = {
-                'api_token': this.user.api_token,
                 'page': this.meta.current_page,
                 'folder_name': this.folderTab.label,
                 // 'folder_id': this.currentFolderView.id,
@@ -510,7 +519,6 @@ export default {
         getFolders() {
             // console.log(this.currentFolderView.id)
             let params = {
-                'api_token': this.user.api_token,
                 'folder_name': this.folderTab.label,
                 'folder_id': this.currentFolderView.id,
                 // 'text': this.searchText,
@@ -529,7 +537,6 @@ export default {
         // File Management
         getFiles() {
             let params = {
-                'api_token': this.user.api_token,
                 'folder_name': this.folderTab.label,
                 'folder_id': this.currentFolderView.id
             }
@@ -538,12 +545,15 @@ export default {
             axios.get(`/api/files`, { params })
             .then(response => {
                 response.data.files.forEach(element => {
-                    if (element.extension != 'jpg' 
-                        && element.extension != 'png' 
-                        && element.extension != 'jpeg' 
-                        && element.extension != 'tiff') {
-                        this.files.push(element)
-                    } else {
+                    this.files.push(element)
+                    if (element.extension == 'jpg' 
+                        || element.extension == 'png' 
+                        || element.extension == 'jpeg' 
+                        || element.extension == 'tiff') {
+                        element.image = '/storage/'+element.route
+                        this.photos.push(element)
+                    } 
+                    else {
                         console.log(element)
                         element.image = '/storage/'+element.route
                         this.photos.push(element)
@@ -582,7 +592,6 @@ export default {
         readFile(file) {
             this.isLoading = true
             var params = {
-                'api_token': this.user.api_token,
                 'route': file.route,
                 'mime': file.mime,
             }
@@ -637,7 +646,6 @@ export default {
                 type: 'is-danger',
                 onConfirm: () => {
                     var params = {
-                        'api_token': this.user.api_token,
                         'user_id': this.user.id,
                     }
                     axios.delete(`/api/folders/${folder.id}`, { params })
@@ -675,7 +683,7 @@ export default {
                 message: 'Desea eliminar este archivo?',
                 type: 'is-danger',
                 onConfirm: () => {
-                    axios.delete(`/api/files/${file.id}?api_token=${this.user.api_token}`)
+                    axios.delete(`/api/files/${file.id}`)
                     .then(response => {
                         console.log(response)
                         this.getFiles()

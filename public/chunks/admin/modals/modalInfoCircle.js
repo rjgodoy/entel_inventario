@@ -91,7 +91,7 @@ __webpack_require__.r(__webpack_exports__);
     getPermissions: function getPermissions() {
       var _this = this;
 
-      axios.get("/api/permissions?api_token=".concat(this.thisUser.api_token)).then(function (response) {
+      axios.get("/api/permissions").then(function (response) {
         _this.permissions = response.data.permissions;
       });
     },

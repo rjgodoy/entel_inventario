@@ -185,7 +185,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "box" }, [
+    _c("div", { staticClass: "box-translucent" }, [
       _c(
         "div",
         { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },

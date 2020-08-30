@@ -111,7 +111,7 @@ var bulmaQuickview = __webpack_require__(/*! ../../../../node_modules/bulma-quic
     getLogs: function getLogs() {
       var _this = this;
 
-      axios.get("/api/logs/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/logs/".concat(this.pop.id)).then(function (response) {
         // console.log(response.data)
         _this.logs = response.data.data;
       });

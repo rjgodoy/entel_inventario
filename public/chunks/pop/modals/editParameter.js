@@ -72,7 +72,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'parameter': this.parameter
       };
       axios.get("/api/".concat(this.itemName, "Parameters"), {
@@ -86,7 +85,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var params = {
-        'api_token': this.user.api_token,
         'parameter': this.parameter,
         'value': this.value,
         'user_id': this.user.id

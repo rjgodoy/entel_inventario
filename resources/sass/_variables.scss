@@ -330,3 +330,33 @@ $radius-rounded: 290486px !default;
 .al img {
     filter: grayscale(100%);
 }
+
+
+.box-translucent {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 5px;
+    color: #333;
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+    // max-width: 50%;
+    padding: 1rem 2rem;
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .box-translucent {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);  
+  }
+}
+
+// body {
+//   background-image: url('https://41.media.tumblr.com/efd15be8d41b12a7b0ef17fba27c3e20/tumblr_mqqy59HMaf1qzattso1_1280.jpg');
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   height: 100vh;
+//   margin: 0;
+//   display: grid;
+//   place-items: center;
+// }

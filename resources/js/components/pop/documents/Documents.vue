@@ -345,7 +345,6 @@ export default {
 
         getFolders() {
             let params = {
-                'api_token': this.user.api_token,
                 'folder_name': this.folderTab.label,
                 'folder_id': this.currentFolderView.id,
                 'pop_id': this.pop.id
@@ -367,7 +366,6 @@ export default {
         // File Management
         getFiles() {
             let params = {
-                'api_token': this.user.api_token,
                 'folder_name': this.folderTab.label,
                 'folder_id': this.currentFolderView.id
             }
@@ -421,7 +419,6 @@ export default {
         readFile(file) {
             this.isLoading = true
             var params = {
-                'api_token': this.user.api_token,
                 'route': file.route,
                 'mime': file.mime,
             }
@@ -475,7 +472,6 @@ export default {
                 type: 'is-danger',
                 onConfirm: () => {
                     var params = {
-                        'api_token': this.user.api_token,
                         'user_id': this.user.id,
                         'pop_id': this.pop.id
                     }
@@ -515,7 +511,7 @@ export default {
                 message: 'Desea eliminar este archivo?',
                 type: 'is-danger',
                 onConfirm: () => {
-                    axios.delete(`/api/files/${file.id}?api_token=${this.user.api_token}`)
+                    axios.delete(`/api/files/${file.id}`)
                     .then(response => {
                         console.log(response)
                         this.getFiles()

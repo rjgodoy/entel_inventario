@@ -73,7 +73,7 @@
         methods: {
             // APIs
             getComsite() {
-                axios.get(`/api/comsites/${this.pop.id}?api_token=${this.user.api_token}`)
+                axios.get(`/api/comsites/${this.pop.id}`)
                 .then((response) => {
                     this.comsites = response.data.data
                 })

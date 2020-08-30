@@ -146,7 +146,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getPopData: function getPopData() {
       var _this = this;
 
-      axios.get("/api/pop/".concat(this.pop.id, "?api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/pop/".concat(this.pop.id)).then(function (response) {
         // console.log(response.data.data)
         _this.popData = response.data.data;
       });
@@ -154,7 +154,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     graphData: function graphData() {
       var _this2 = this;
 
-      axios.get("/api/capacityProjection?room_id=".concat(this.room.id, "&api_token=").concat(this.user.api_token)).then(function (response) {
+      axios.get("/api/capacityProjection?room_id=".concat(this.room.id)).then(function (response) {
         // console.log(response)
         if (response.data.data) {
           _this2.chartData = response.data.data;

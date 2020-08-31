@@ -10,8 +10,12 @@
                 <div class="tile">
                     <div class="tile is-parent is-4">
                         <div class="tile box is-child">
-                            <b-button class="is-pulled-right" size="is-small" @click="isEditMode = !isEditMode; updateAutonomy()">Editar autonomía del POP</b-button>
-                            <div class="is-size-6">Autonomía del POP</div>
+                            <a @click="isEditMode = !isEditMode; updateAutonomy()" v-if="canEditJunctions" class="is-pulled-right">
+                                <b-tag :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small">
+                                    {{ isEditMode ? 'Guardar' : 'Editar' }}
+                                </b-tag>
+                            </a>
+                            <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">AUTONOMIA DEL POP</div>
                             <div v-if="!isEditMode" class="is-size-5 has-text-weight-semibold">{{ newTheoreticalAutonomy }} <span class="is-size-6">hrs</span></div>
                             <b-input v-if="isEditMode" size="is-small" v-model="newTheoreticalAutonomy"></b-input>
                         </div>
@@ -34,7 +38,7 @@
                             :user="user"
                         />
                     </div>
-                    <div class="tile is-2">
+                    <div class="tile is-3">
                         <SolarPanels 
                             :pop="pop"
                             :junctions="junctions"

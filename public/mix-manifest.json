@@ -111,5 +111,12 @@
     "/vendors~pdfmake.js": "/vendors~pdfmake.js",
     "/vendors~xlsx.js": "/vendors~xlsx.js",
     "/xlsx.js": "/xlsx.js",
-    "/chunks/helpers/notFound.js": "/chunks/helpers/notFound.js"
+    "/chunks/helpers/notFound.js": "/chunks/helpers/notFound.js",
+    "/vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/popMapView.js": "/vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/popMapView.js",
+    "/chunks/reports.js": "/chunks/reports.js",
+    "/chunks/capacity/capacity~chunks/capacity/modals/capacity.js": "/chunks/capacity/capacity~chunks/capacity/modals/capacity.js",
+    "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~bd41b640.js": "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~bd41b640.js",
+    "/chunks/helpers.js": "/chunks/helpers.js",
+    "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504.js": "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504.js",
+    "/chunks/helpers/vuePagination.js": "/chunks/helpers/vuePagination.js"
 }

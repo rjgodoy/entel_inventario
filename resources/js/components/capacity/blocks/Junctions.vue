@@ -1,9 +1,12 @@
 <template>
     <div class="tile is-parent">
         <section class="tile box">
-            <b-field label="EMPALMES" label-position="on-border" class="tile">
-                <div class="tile box is-shadowless" style="border: solid 0.05rem black">
-                    <div class="tile is-vertical" v-if="junctions.length">
+            <!-- <b-field label="EMPALMES" label-position="on-border" class="tile"> -->
+                <!-- <div class="tile box is-shadowless" style="border: solid 0.05rem black"> -->
+                <div class="tile is-vertical" v-if="junctions.length">
+                    <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">EMPALMES</div>
+
+                    <div class="tile is-vertical">
                         <div class="tile is-parent">
                             <b-field label="CAPACIDADES" label-position="on-border" class="tile">
                                 <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black">
@@ -32,6 +35,7 @@
                                 </div>
                             </b-field>
                         </div>
+
                         <div class="tile is-parent">
                             <div class="columns tile">
                                 <div class="column tile is-parent" v-for="junction in junctions" :key="junction.id">
@@ -56,18 +60,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tile columns is-vcentered" v-if="!junctions.length">
-                        <div class="column">
-                            <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                <div class="block">NO TIENE EMPALMES REGISTRADOS</div>
-                                <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
-                                    <a @click="isNewJunctionModalActive = true">Agregar</a>
-                                </b-tag>
-                            </div>
+
+                </div>
+
+                <div class="tile columns is-vcentered" v-if="!junctions.length">
+                    <div class="column">
+                        <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                            <div class="block">NO TIENE EMPALMES REGISTRADOS</div>
+                            <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
+                                <a @click="isNewJunctionModalActive = true">Agregar</a>
+                            </b-tag>
                         </div>
                     </div>
                 </div>
-            </b-field>
+                <!-- </div> -->
+            <!-- </b-field> -->
         </section>
         <b-modal :active.sync="isJunctionModalActive"
             has-modal-card

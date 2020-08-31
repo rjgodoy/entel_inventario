@@ -274,13 +274,13 @@ import { faSearch, faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, fa
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
 library.add(faSearch, faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, farTrashAlt, faAngleRight);
-import VuePagination from '../VuePagination.vue'
+
 export default {
     components: {
         ModalUpload: () => import(/* webpackChunkName: "chunks/documents/modals/upload"*/'./modals/ModalUpload'),
         ModalNewFolder: () => import(/* webpackChunkName: "chunks/documents/modals/newFolder"*/'./modals/ModalNewFolder'),
         ModalNewRootFolder: () => import(/* webpackChunkName: "chunks/documents/modals/newRootFolder"*/'./modals/ModalNewRootFolder'),
-        VuePagination
+        VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
     },
     props : [
         'user',

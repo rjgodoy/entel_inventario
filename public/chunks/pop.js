@@ -297,6 +297,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -305,7 +309,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
-      return __webpack_require__.e(/*! import() | chunks/pop/location */ "chunks/pop/location").then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
+      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
     },
     Sites: function Sites() {
       return __webpack_require__.e(/*! import() | chunks/pop/sites */ "chunks/pop/sites").then(__webpack_require__.bind(null, /*! ./Sites */ "./resources/js/components/pop/Sites.vue"));
@@ -330,13 +334,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/eco */ "chunks/pop/eco").then(__webpack_require__.bind(null, /*! ./Eco */ "./resources/js/components/pop/Eco.vue"));
     },
     Comsite: function Comsite() {
-      return __webpack_require__.e(/*! import() | chunks/pop/comsite */ "chunks/pop/comsite").then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
+      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ./documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
     },
     Log: function Log() {
-      return __webpack_require__.e(/*! import() | chunks/pop/logs */ "chunks/pop/logs").then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
+      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
     }
   },
   props: ['user'],
@@ -1396,88 +1400,99 @@ var render = function() {
               staticStyle: { "border-right": "solid 0.5px rgba(0,0,0,0.1)" }
             },
             [
-              _c("section", { staticClass: "section" }, [
-                _c(
-                  "div",
-                  { staticClass: "columns is-multiline tile is-ancestor" },
-                  _vm._l(_vm.tabs, function(tab) {
-                    return _vm.showTab(tab)
-                      ? _c(
-                          "b-tooltip",
-                          {
-                            key: tab.component,
-                            staticClass:
-                              "column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent",
-                            class: !_vm.isMobile() && "is-6",
-                            attrs: { label: tab.title, type: "is-dark" }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "tile is-child box has-text-centered",
-                                class:
-                                  _vm.currentTab === tab.component &&
-                                  (_vm.currentTab == "eco"
-                                    ? "is-eco is-bold"
-                                    : "is-bold is-link"),
-                                on: {
-                                  click: function($event) {
-                                    _vm.currentTab = tab.component
-                                  }
+              _c(
+                "div",
+                {
+                  staticClass: "columns is-multiline",
+                  staticStyle: { padding: "24px" }
+                },
+                _vm._l(_vm.tabs, function(tab) {
+                  return _vm.showTab(tab)
+                    ? _c(
+                        "div",
+                        {
+                          key: tab.component,
+                          staticClass:
+                            "column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent",
+                          class: !_vm.isMobile() && "is-6",
+                          staticStyle: { padding: "8px" },
+                          attrs: { label: tab.title, type: "is-dark" }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "box is-bold tile is-child has-text-centered columns is-vcentered",
+                              class:
+                                _vm.currentTab === tab.component &&
+                                (_vm.currentTab == "eco"
+                                  ? "is-eco is-bold"
+                                  : "is-bold is-link"),
+                              style:
+                                !tab.title.includes(" ") &&
+                                "padding-right: 8px; padding-left: 8px",
+                              on: {
+                                click: function($event) {
+                                  _vm.currentTab = tab.component
                                 }
-                              },
-                              [
-                                _c("font-awesome-icon", {
-                                  class:
-                                    _vm.currentTab === tab.component
-                                      ? "has-text-white"
-                                      : "has-text-grey",
-                                  attrs: {
-                                    icon: [tab.icon_type, tab.icon],
-                                    size: "2x"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only",
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "column is-paddingless" },
+                                [
+                                  _c("font-awesome-icon", {
                                     class:
                                       _vm.currentTab === tab.component
                                         ? "has-text-white"
                                         : "has-text-grey",
-                                    staticStyle: { "padding-top": "12px" }
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "is-size-7 has-text-weight-normal"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        " +
-                                            _vm._s(tab.title) +
-                                            "\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ]
-                        )
-                      : _vm._e()
-                  }),
-                  1
-                )
-              ])
+                                    attrs: {
+                                      icon: [tab.icon_type, tab.icon],
+                                      size: "2x"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only",
+                                      class:
+                                        _vm.currentTab === tab.component
+                                          ? "has-text-white"
+                                          : "has-text-grey",
+                                      staticStyle: { "padding-top": "12px" }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-7 has-text-weight-semibold"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                            " +
+                                              _vm._s(tab.title.toUpperCase()) +
+                                              "\n                                        "
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                }),
+                0
+              )
             ]
           ),
           _vm._v(" "),

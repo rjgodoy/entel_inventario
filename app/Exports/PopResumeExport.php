@@ -316,6 +316,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
     	$red_minima = 0; $localidad_obligatoria = 0; $ranco = 0;
     	
     	foreach ($pop->sites as $site) {
+            
     		if ($site->classification_type_id && $site->classification_type_id <= $class_id) {
     			$class_id = $site->classification_type_id;
                 $classification = $site->classification_type->classification_type;

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="columns">
-            <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Sitios</div>
+            <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">SITIOS</div>
             <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.totalSites | numeral('0,0') }}</div>
         </div>
         
@@ -13,6 +13,7 @@
                     <th class="has-text-right" :class="secondaryText"><abbr title="Móvil">Móvil</abbr></th>
                     <th class="has-text-right" :class="secondaryText"><abbr title="Switch">Switch</abbr></th>
                     <th class="has-text-right" :class="secondaryText"><abbr title="Phone">Phone</abbr></th>
+                    <th class="has-text-right" :class="secondaryText"><abbr title="Repetidor">Repetidor</abbr></th>
                     <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
                 </tr>
             </thead>
@@ -23,7 +24,8 @@
                     <td class="has-text-right" :class="primaryText">{{ item.movil | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ item.switch | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ item.phone | numeral('0,0') }}</td>
-                    <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ item.fijo + item.movil + item.switch + item.phone | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ item.repetidor | numeral('0,0') }}</td>
+                    <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ item.fijo + item.movil + item.switch + item.phone + item.repetidor | numeral('0,0') }}</td>
                 </tr>
                 <tr class="is-size-7 has-text-weight-bold">
                     <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
@@ -31,6 +33,7 @@
                     <td class="has-text-right" :class="primaryText">{{ this.totalMovil | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ this.totalSwitch | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ this.totalPhone | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ this.totalRepetidor | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ this.totalSites | numeral('0,0') }}</td>
                 </tr>
             </tbody>
@@ -122,8 +125,13 @@
                 this.sitesData.forEach(element => counter = counter + element.phone)
                 return counter
             },
+            totalRepetidor() {
+                var counter = 0
+                this.sitesData.forEach(element => counter = counter + element.repetidor)
+                return counter
+            },
             totalSites() {
-                return this.totalFijo + this.totalMovil + this.totalSwitch + this.totalPhone
+                return this.totalFijo + this.totalMovil + this.totalSwitch + this.totalPhone + this.totalRepetidor
             },
         },
         methods: {

@@ -83,6 +83,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -265,24 +269,52 @@ var render = function() {
                 "div",
                 { staticClass: "tile box is-child" },
                 [
-                  _c(
-                    "b-button",
-                    {
-                      staticClass: "is-pulled-right",
-                      attrs: { size: "is-small" },
-                      on: {
-                        click: function($event) {
-                          _vm.isEditMode = !_vm.isEditMode
-                          _vm.updateAutonomy()
-                        }
-                      }
-                    },
-                    [_vm._v("Editar autonomía del POP")]
-                  ),
+                  _vm.canEditJunctions
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "is-pulled-right",
+                          on: {
+                            click: function($event) {
+                              _vm.isEditMode = !_vm.isEditMode
+                              _vm.updateAutonomy()
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-tag",
+                            {
+                              attrs: {
+                                type: _vm.isEditMode
+                                  ? "is-info"
+                                  : "is-link is-outlined",
+                                size: "is-small"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(
+                                    _vm.isEditMode ? "Guardar" : "Editar"
+                                  ) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("div", { staticClass: "is-size-6" }, [
-                    _vm._v("Autonomía del POP")
-                  ]),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "is-size-6 has-text-weight-bold",
+                      staticStyle: { "padding-bottom": "12px" }
+                    },
+                    [_vm._v("AUTONOMIA DEL POP")]
+                  ),
                   _vm._v(" "),
                   !_vm.isEditMode
                     ? _c(
@@ -352,7 +384,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "tile is-2" },
+              { staticClass: "tile is-3" },
               [
                 _c("SolarPanels", {
                   attrs: {

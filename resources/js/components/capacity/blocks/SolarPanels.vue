@@ -1,10 +1,11 @@
 <template>
     <div class="tile is-parent">
         <section class="tile box">
-            <b-field label="PANELES SOLARES" label-position="on-border" class="tile">
-                <div class="tile box is-shadowless" style="border: solid 0.05rem black">
-                    <div class="tile is-vertical" v-if="hasSolarPanels">
-                        <div class="columns tile is-parent">
+            <!-- <b-field label="PANELES SOLARES" label-position="on-border" class="tile"> -->
+                <!-- <div class="tile box is-shadowless" style="border: solid 0.05rem black"> -->
+                    <div class="tile is-vertical" >
+                        <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">PANELES SOLARES</div>
+                        <div class="columns tile is-parent" v-if="hasSolarPanels">
                             <a class="box tile is-child column" 
                                 v-for="solarPanel in solarPanels" :key="solarPanel.id"
                                 @click="isJunctionModalActive = true">
@@ -24,20 +25,20 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
 
-                    <div class="tile columns is-vcentered" v-if="!hasSolarPanels">
-                        <div class="column">
-                            <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                <div class="block">NO TIENE PANELES SOLARES</div>
-                                <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
-                                    <a @click="isNewSolarPanelModalActive = true">Agregar</a>
-                                </b-tag>
+                        <div class="tile columns is-vcentered" v-if="!hasSolarPanels">
+                            <div class="column">
+                                <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                    <div class="block">NO TIENE PANELES SOLARES</div>
+                                    <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
+                                        <a @click="isNewSolarPanelModalActive = true">Agregar</a>
+                                    </b-tag>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </b-field>
+                <!-- </div> -->
+            <!-- </b-field> -->
         </section>
         <b-modal :active.sync="isNewSolarPanelModalActive"
             has-modal-card

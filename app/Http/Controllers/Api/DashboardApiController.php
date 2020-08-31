@@ -655,7 +655,18 @@ class DashboardApiController extends Controller
                             WHERE S.site_type_id = 4
                             AND S.deleted_at IS NULL
                             $condition
-                            ) AS phone
+                            ) AS phone,
+
+                    -- SITIOS REPETIDORES
+                    @repetidor:=(SELECT count(DISTINCT S.id) 
+                            FROM entel_pops.sites S
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            WHERE S.site_type_id = 5
+                            AND S.deleted_at IS NULL
+                            $condition
+                            ) AS repetidor
 
                     FROM entel_pops.crms
                 "));
@@ -725,7 +736,17 @@ class DashboardApiController extends Controller
                             WHERE S.site_type_id = 4
                             AND S.deleted_at IS NULL
                             $condition
-                            ) AS phone
+                            ) AS phone,
+
+                    -- SITIOS REPETIDORES
+                    @repetidor:=(SELECT count(DISTINCT S.id)
+                            FROM entel_pops.sites S
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            WHERE S.site_type_id = 5
+                            AND S.deleted_at IS NULL
+                            $condition
+                            ) AS repetidor
 
                     FROM entel_pops.zonas
                     WHERE crm_id = $crm_id
@@ -796,7 +817,17 @@ class DashboardApiController extends Controller
                             AND P.comuna_id = @comuna_id
                             AND S.deleted_at IS NULL
                             $condition
-                            ) AS phone
+                            ) AS phone,
+
+                    -- SITIOS REPETIDORES
+                    @repetidor:=(SELECT count(DISTINCT S.id)
+                            FROM entel_pops.sites S
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            WHERE S.site_type_id = 5
+                            AND P.comuna_id = @comuna_id
+                            AND S.deleted_at IS NULL
+                            $condition
+                            ) AS repetidor
 
                     FROM entel_pops.comunas
                     WHERE zona_id = $zona_id
@@ -820,7 +851,7 @@ class DashboardApiController extends Controller
         //     $techQuantity = Cache::get('technologyData_core'.$core);
         // } else {
         //     $techQuantity = Cache::remember('technologyData_core'.$core, $this->seconds, function () use ($core) {
-                $condition = $core == 1 ? 'AND S.classification_type_id = 1 AND S.deleted_at IS NULL' : 'AND S.deleted_at IS NULL';
+                $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
                 $techQuantity = DB::select(DB::raw("
                     SELECT
@@ -906,7 +937,17 @@ class DashboardApiController extends Controller
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
                             WHERE T.technology_type_id = 3 AND t.frequency = 3500 
                             AND T.deleted_at IS NULL
-                            ) as tecLTE3500
+                            ) as tecLTE3500,
+
+                    @4g5800:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id
+                            $condition
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            WHERE T.technology_type_id = 3 AND t.frequency = 5800 
+                            AND T.deleted_at IS NULL
+                            ) as tecLTE5800
 
                     FROM entel_pops.crms
                 "));
@@ -931,7 +972,7 @@ class DashboardApiController extends Controller
         //     $techQuantity = Cache::get('technologyData_crm'.$crm_id.'_core'.$core);
         // } else {
         //     $techQuantity = Cache::remember('technologyData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
-                $condition = $core == 1 ? 'AND S.classification_type_id = 1 AND S.deleted_at IS NULL' : 'AND S.deleted_at IS NULL';
+                $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
                 $techQuantity = DB::select(DB::raw("
                     SELECT
@@ -1009,7 +1050,16 @@ class DashboardApiController extends Controller
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
                             WHERE T.technology_type_id = 3 AND t.frequency = 3500 
                             AND T.deleted_at IS NULL
-                            ) as tecLTE3500
+                            ) as tecLTE3500,
+
+                    @4g5800:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id
+                            $condition
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id
+                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            WHERE T.technology_type_id = 3 AND t.frequency = 5800 
+                            AND T.deleted_at IS NULL
+                            ) as tecLTE5800
 
                     FROM entel_pops.zonas
                     WHERE crm_id = $crm_id
@@ -1035,7 +1085,7 @@ class DashboardApiController extends Controller
         //     $techQuantity = Cache::get('technologyData_zona'.$zona_id.'_core'.$core);
         // } else {
         //     $techQuantity = Cache::remember('technologyData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
-                $condition = $core == 1 ? 'AND S.classification_type_id = 1 AND S.deleted_at IS NULL' : 'AND S.deleted_at IS NULL';
+                $condition = $core == 1 ? 'AND S.classification_type_id = 1' : '';
 
                 $techQuantity = DB::select(DB::raw("
                     SELECT
@@ -1105,7 +1155,15 @@ class DashboardApiController extends Controller
                             INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
                             WHERE T.technology_type_id = 3 AND t.frequency = 3500 
                             AND T.deleted_at IS NULL
-                            ) as tecLTE3500
+                            ) as tecLTE3500,
+
+                    @4g5800:=(SELECT COUNT(DISTINCT T.id) FROM entel_pops.technologies T 
+                            INNER JOIN entel_pops.sites S ON T.site_id = S.id
+                            $condition
+                            INNER JOIN entel_pops.pops P ON S.pop_id = P.id AND P.comuna_id = @comuna_id
+                            WHERE T.technology_type_id = 3 AND t.frequency = 5800 
+                            AND T.deleted_at IS NULL
+                            ) as tecLTE5800
 
                     FROM entel_pops.comunas
                     WHERE zona_id = $zona_id

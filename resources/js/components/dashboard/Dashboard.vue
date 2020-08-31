@@ -260,7 +260,7 @@
                                             class="has-text-eco fa-2x">
                                         </b-icon> 
                                         <div class="is-size-4 has-text-weight-bold" style="margin-top: 10px;">
-                                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de POP</p>
+                                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de POP, Sitios y Tecnologías</p>
                                         </div>
                                         <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
                                     </a>

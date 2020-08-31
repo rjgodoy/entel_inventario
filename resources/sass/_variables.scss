@@ -5,8 +5,8 @@ $link: #005cff;
 $link-invert: findColorInvert($link);
 $info: #FF3E00;
 $info-invert: findColorInvert($info);
-$entel-link-corp: #10069f;
-$entel-link-corp-invert: findColorInvert($entel-link-corp);
+$entel-corp: #10069f;
+$entel-corp-invert: findColorInvert($entel-corp);
 $entel-secondary: #ff3d00;
 $entel-secondary-invert: findColorInvert($entel-secondary);
 $entel-secondary-corp: #cccccc;
@@ -68,7 +68,7 @@ $colors: (
     "success": ($success, $success-invert),
     "warning": ($warning, $warning-invert),
     "danger": ($danger, $danger-invert),
-    "entel-link-corp": ($entel-link-corp, $entel-link-corp-invert),
+    "entel-corp": ($entel-corp, $entel-corp-invert),
     "entel-secondary": ($entel-secondary, $entel-secondary-invert),
     "entel-secondary-corp": ($entel-secondary-corp, $entel-secondary-corp-invert),
     "eco": ($eco, $eco-invert),

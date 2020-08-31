@@ -52,6 +52,9 @@ class RoomController extends Controller
                 'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.plane_type',
                 'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.plane',
 
+                'rooms.pop.rooms.current_fire_detection.fire_detection_type',
+                'rooms.pop.rooms.current_fire_detection.fire_extinction_type',
+
                 'rooms.planes.power_rectifiers.power_rectifier_type', 
                 'rooms.planes.power_rectifiers.power_rectifier_modules', 
                 'rooms.planes.battery_banks.battery_bank_brand',
@@ -67,6 +70,9 @@ class RoomController extends Controller
                 'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.current_redundant_modules',
                 'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.plane_type',
                 'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.plane',
+
+                'rooms.current_fire_detection.fire_detection_type',
+                'rooms.current_fire_detection.fire_extinction_type',
 
                 'rooms.air_conditioners.air_conditioner_consumptions',
                 'rooms.air_conditioners.air_conditioner_brand.air_conditioner_type',
@@ -166,6 +172,9 @@ class RoomController extends Controller
             'current_room_delegation.plane_delegation_type.plane_types.planes.current_redundant_modules',
             'current_room_delegation.plane_delegation_type.plane_types.planes.plane_type',
             'current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.plane',
+
+            'current_fire_detection.fire_detection_type',
+            'current_fire_detection.fire_extinction_type',
 
 
             'air_conditioners.air_conditioner_consumptions',

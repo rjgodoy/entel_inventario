@@ -2,7 +2,7 @@
     <div>
 
         <div class="columns">
-            <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Tecnologías</div>
+            <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">TECNOLOGÍAS</div>
             <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.totalTechnologies | numeral('0,0') }}</div>
         </div>
         
@@ -12,12 +12,13 @@
                     <th class="" :class="secondaryText">{{ selectedCrm == null ? 'CRM' : (selectedZona == null ? 'Zona' : 'Comuna') }}</th>
                     <!-- <th class="has-text-right" :class="secondaryText"><abbr title="2G">2G 900</abbr></th> -->
                     <th class="has-text-right" :class="secondaryText"><abbr title="2G">2G</abbr></th>
-                    <th class="has-text-right" :class="secondaryText"><abbr title="3G 900">3G 900</abbr></th>
-                    <th class="has-text-right" :class="secondaryText"><abbr title="3G 1900">3G 1900</abbr></th>
+                    <th class="has-text-right" :class="secondaryText"><abbr title="3G 900">3G</abbr></th>
+                    <!-- <th class="has-text-right" :class="secondaryText"><abbr title="3G 1900">3G 1900</abbr></th> -->
                     <th class="has-text-right" :class="secondaryText"><abbr title="LTE 700">LTE 700</abbr></th>
                     <th class="has-text-right" :class="secondaryText"><abbr title="LTE 1900">LTE 1900</abbr></th>
                     <th class="has-text-right" :class="secondaryText"><abbr title="LTE 2600">LTE 2600</abbr></th>
                     <th class="has-text-right" :class="secondaryText"><abbr title="LTE 3500">LTE 3500</abbr></th>
+                    <th class="has-text-right" :class="secondaryText"><abbr title="LTE 3500">LTE 5800</abbr></th>
                     <th class="has-text-right" :class="secondaryText"><abbr title="Total">Total</abbr></th>
                 </tr>
             </thead>
@@ -26,24 +27,26 @@
                     <td class=""><a href="" title="CRM Norte" class="has-text-weight-bold" :class="secondaryText">{{ crm.nombre }}</a></td>
                     <!-- <td class="has-text-right" :class="primaryText">{{ crm.tec2g900 | numeral('0,0') }}</td> -->
                     <td class="has-text-right" :class="primaryText">{{ crm.tec2g900 + crm.tec2g1900 | numeral('0,0') }}</td>
-                    <td class="has-text-right" :class="primaryText">{{ crm.tec3g900 | numeral('0,0') }}</td>
-                    <td class="has-text-right" :class="primaryText">{{ crm.tec3g1900 | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ crm.tec3g900 + crm.tec3g1900 | numeral('0,0') }}</td>
+                    <!-- <td class="has-text-right" :class="primaryText">{{ crm.tec3g1900 | numeral('0,0') }}</td> -->
                     <td class="has-text-right" :class="primaryText">{{ crm.tecLTE700 | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ crm.tecLTE1900 | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ crm.tecLTE2600 | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ crm.tecLTE3500 | numeral('0,0') }}</td>
-                    <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ crm.tec2g1900 + crm.tec3g900 + crm.tec3g1900 + crm.tecLTE700 + crm.tecLTE1900 + crm.tecLTE2600 + crm.tecLTE3500 | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ crm.tecLTE5800 | numeral('0,0') }}</td>
+                    <td class="has-text-right has-text-weight-bold" :class="primaryText">{{ crm.tec2g1900 + crm.tec3g900 + crm.tec3g1900 + crm.tecLTE700 + crm.tecLTE1900 + crm.tecLTE2600 + crm.tecLTE3500 + crm.tecLTE5800 | numeral('0,0') }}</td>
                 </tr>
                 <tr class="is-size-7 has-text-weight-bold">
                     <td><a href="" title="Total"  class="" :class="secondaryText">Total</a></td>
                     <!-- <td class="has-text-right" :class="primaryText">{{ total2G900 | numeral('0,0') }}</td> -->
                     <td class="has-text-right" :class="primaryText">{{ total2G900 + total2G1900 | numeral('0,0') }}</td>
-                    <td class="has-text-right" :class="primaryText">{{ total3G900 | numeral('0,0') }}</td>
-                    <td class="has-text-right" :class="primaryText">{{ total3G1900 | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ total3G900 + total3G1900| numeral('0,0') }}</td>
+                    <!-- <td class="has-text-right" :class="primaryText">{{ total3G1900 | numeral('0,0') }}</td> -->
                     <td class="has-text-right" :class="primaryText">{{ totalLTE700 | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ totalLTE1900 | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ totalLTE2600 | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ totalLTE3500 | numeral('0,0') }}</td>
+                    <td class="has-text-right" :class="primaryText">{{ totalLTE5800 | numeral('0,0') }}</td>
                     <td class="has-text-right" :class="primaryText">{{ totalTechnologies | numeral('0,0') }}</td>
                 </tr>
             </tbody>
@@ -173,8 +176,13 @@
                 this.technologyData.forEach(element => counter = counter + element.tecLTE3500)
                 return counter
             },
+            totalLTE5800() {
+                var counter = 0
+                this.technologyData.forEach(element => counter = counter + element.tecLTE5800)
+                return counter
+            },
             totalTechnologies() {
-                return this.total2G900 + this.total2G1900 + this.total3G900 + this.total3G1900 + this.totalLTE700 + this.totalLTE1900 + this.totalLTE2600 + this.totalLTE3500
+                return this.total2G900 + this.total2G1900 + this.total3G900 + this.total3G1900 + this.totalLTE700 + this.totalLTE1900 + this.totalLTE2600 + this.totalLTE3500 + this.totalLTE5800
             }
         },
         methods: {

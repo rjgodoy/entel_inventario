@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Plataforma Inventario') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -51,7 +51,18 @@
 </head>
 <body>
     <div id="app">
-        <router-view :app_name="'{{ config('app.name') }}'"></router-view>
+        @auth
+            <router-view
+                :last_data_counters='@json($last_data_counters)'
+                :app_name="'{{ config('app.name') }}'"
+                :user='@json(auth()->user())'
+                :user_permissions='@json(auth()->user()->permissions)'
+                :last_updated_data='@json($last_updated_data)'
+                :is_dark_mode="'{{ $darkMode }}'"
+            ></router-view>
+        @else
+            <router-view :app_name="'{{ config('app.name') }}'"></router-view>
+        @endauth
     </div>
 </body>
 </html>

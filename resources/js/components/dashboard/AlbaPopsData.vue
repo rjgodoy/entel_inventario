@@ -61,10 +61,9 @@
 </template>
 
 <script>
-    import VuePagination from '../VuePagination.vue';
     export default {
         components: {
-            'vue-pagination': VuePagination
+            VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
         },
         props : [
             'user',

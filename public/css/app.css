@@ -2307,106 +2307,106 @@ fieldset[disabled] .button.is-danger.is-inverted.is-outlined {
   color: #fff;
 }
 
-.button.is-entel-link-corp {
+.button.is-entel-corp {
   background-color: #10069f;
   border-color: transparent;
   color: #fff;
 }
 
-.button.is-entel-link-corp:hover, .button.is-entel-link-corp.is-hovered {
+.button.is-entel-corp:hover, .button.is-entel-corp.is-hovered {
   background-color: #0f0693;
   border-color: transparent;
   color: #fff;
 }
 
-.button.is-entel-link-corp:focus, .button.is-entel-link-corp.is-focused {
+.button.is-entel-corp:focus, .button.is-entel-corp.is-focused {
   border-color: transparent;
   color: #fff;
 }
 
-.button.is-entel-link-corp:focus:not(:active), .button.is-entel-link-corp.is-focused:not(:active) {
+.button.is-entel-corp:focus:not(:active), .button.is-entel-corp.is-focused:not(:active) {
   box-shadow: 0 0 0 0.125em rgba(16, 6, 159, 0.25);
 }
 
-.button.is-entel-link-corp:active, .button.is-entel-link-corp.is-active {
+.button.is-entel-corp:active, .button.is-entel-corp.is-active {
   background-color: #0e0586;
   border-color: transparent;
   color: #fff;
 }
 
-.button.is-entel-link-corp[disabled],
-fieldset[disabled] .button.is-entel-link-corp {
+.button.is-entel-corp[disabled],
+fieldset[disabled] .button.is-entel-corp {
   background-color: #10069f;
   border-color: transparent;
   box-shadow: none;
 }
 
-.button.is-entel-link-corp.is-inverted {
+.button.is-entel-corp.is-inverted {
   background-color: #fff;
   color: #10069f;
 }
 
-.button.is-entel-link-corp.is-inverted:hover, .button.is-entel-link-corp.is-inverted.is-hovered {
+.button.is-entel-corp.is-inverted:hover, .button.is-entel-corp.is-inverted.is-hovered {
   background-color: #f2f2f2;
 }
 
-.button.is-entel-link-corp.is-inverted[disabled],
-fieldset[disabled] .button.is-entel-link-corp.is-inverted {
+.button.is-entel-corp.is-inverted[disabled],
+fieldset[disabled] .button.is-entel-corp.is-inverted {
   background-color: #fff;
   border-color: transparent;
   box-shadow: none;
   color: #10069f;
 }
 
-.button.is-entel-link-corp.is-loading::after {
+.button.is-entel-corp.is-loading::after {
   border-color: transparent transparent #fff #fff !important;
 }
 
-.button.is-entel-link-corp.is-outlined {
+.button.is-entel-corp.is-outlined {
   background-color: transparent;
   border-color: #10069f;
   color: #10069f;
 }
 
-.button.is-entel-link-corp.is-outlined:hover, .button.is-entel-link-corp.is-outlined.is-hovered, .button.is-entel-link-corp.is-outlined:focus, .button.is-entel-link-corp.is-outlined.is-focused {
+.button.is-entel-corp.is-outlined:hover, .button.is-entel-corp.is-outlined.is-hovered, .button.is-entel-corp.is-outlined:focus, .button.is-entel-corp.is-outlined.is-focused {
   background-color: #10069f;
   border-color: #10069f;
   color: #fff;
 }
 
-.button.is-entel-link-corp.is-outlined.is-loading::after {
+.button.is-entel-corp.is-outlined.is-loading::after {
   border-color: transparent transparent #10069f #10069f !important;
 }
 
-.button.is-entel-link-corp.is-outlined.is-loading:hover::after, .button.is-entel-link-corp.is-outlined.is-loading.is-hovered::after, .button.is-entel-link-corp.is-outlined.is-loading:focus::after, .button.is-entel-link-corp.is-outlined.is-loading.is-focused::after {
+.button.is-entel-corp.is-outlined.is-loading:hover::after, .button.is-entel-corp.is-outlined.is-loading.is-hovered::after, .button.is-entel-corp.is-outlined.is-loading:focus::after, .button.is-entel-corp.is-outlined.is-loading.is-focused::after {
   border-color: transparent transparent #fff #fff !important;
 }
 
-.button.is-entel-link-corp.is-outlined[disabled],
-fieldset[disabled] .button.is-entel-link-corp.is-outlined {
+.button.is-entel-corp.is-outlined[disabled],
+fieldset[disabled] .button.is-entel-corp.is-outlined {
   background-color: transparent;
   border-color: #10069f;
   box-shadow: none;
   color: #10069f;
 }
 
-.button.is-entel-link-corp.is-inverted.is-outlined {
+.button.is-entel-corp.is-inverted.is-outlined {
   background-color: transparent;
   border-color: #fff;
   color: #fff;
 }
 
-.button.is-entel-link-corp.is-inverted.is-outlined:hover, .button.is-entel-link-corp.is-inverted.is-outlined.is-hovered, .button.is-entel-link-corp.is-inverted.is-outlined:focus, .button.is-entel-link-corp.is-inverted.is-outlined.is-focused {
+.button.is-entel-corp.is-inverted.is-outlined:hover, .button.is-entel-corp.is-inverted.is-outlined.is-hovered, .button.is-entel-corp.is-inverted.is-outlined:focus, .button.is-entel-corp.is-inverted.is-outlined.is-focused {
   background-color: #fff;
   color: #10069f;
 }
 
-.button.is-entel-link-corp.is-inverted.is-outlined.is-loading:hover::after, .button.is-entel-link-corp.is-inverted.is-outlined.is-loading.is-hovered::after, .button.is-entel-link-corp.is-inverted.is-outlined.is-loading:focus::after, .button.is-entel-link-corp.is-inverted.is-outlined.is-loading.is-focused::after {
+.button.is-entel-corp.is-inverted.is-outlined.is-loading:hover::after, .button.is-entel-corp.is-inverted.is-outlined.is-loading.is-hovered::after, .button.is-entel-corp.is-inverted.is-outlined.is-loading:focus::after, .button.is-entel-corp.is-inverted.is-outlined.is-loading.is-focused::after {
   border-color: transparent transparent #10069f #10069f !important;
 }
 
-.button.is-entel-link-corp.is-inverted.is-outlined[disabled],
-fieldset[disabled] .button.is-entel-link-corp.is-inverted.is-outlined {
+.button.is-entel-corp.is-inverted.is-outlined[disabled],
+fieldset[disabled] .button.is-entel-corp.is-inverted.is-outlined {
   background-color: transparent;
   border-color: #fff;
   box-shadow: none;
@@ -4120,7 +4120,7 @@ fieldset[disabled] .button {
   color: #fff;
 }
 
-.notification.is-entel-link-corp {
+.notification.is-entel-corp {
   background-color: #10069f;
   color: #fff;
 }
@@ -4396,19 +4396,19 @@ fieldset[disabled] .button {
   background-image: linear-gradient(to right, #ff3d00 30%, #ededed 30%);
 }
 
-.progress.is-entel-link-corp::-webkit-progress-value {
+.progress.is-entel-corp::-webkit-progress-value {
   background-color: #10069f;
 }
 
-.progress.is-entel-link-corp::-moz-progress-bar {
+.progress.is-entel-corp::-moz-progress-bar {
   background-color: #10069f;
 }
 
-.progress.is-entel-link-corp::-ms-fill {
+.progress.is-entel-corp::-ms-fill {
   background-color: #10069f;
 }
 
-.progress.is-entel-link-corp:indeterminate {
+.progress.is-entel-corp:indeterminate {
   background-image: linear-gradient(to right, #10069f 30%, #ededed 30%);
 }
 
@@ -4723,8 +4723,8 @@ fieldset[disabled] .button {
   color: #fff;
 }
 
-.table td.is-entel-link-corp,
-.table th.is-entel-link-corp {
+.table td.is-entel-corp,
+.table th.is-entel-corp {
   background-color: #10069f;
   border-color: #10069f;
   color: #fff;
@@ -5066,7 +5066,7 @@ fieldset[disabled] .button {
   color: #fff;
 }
 
-.tag:not(body).is-entel-link-corp {
+.tag:not(body).is-entel-corp {
   background-color: #10069f;
   color: #fff;
 }
@@ -5537,11 +5537,11 @@ fieldset[disabled] .select select:-ms-input-placeholder,
   box-shadow: 0 0 0 0.125em rgba(255, 61, 0, 0.25);
 }
 
-.is-entel-link-corp.input, .is-entel-link-corp.textarea, .taginput .is-entel-link-corp.taginput-container.is-focusable {
+.is-entel-corp.input, .is-entel-corp.textarea, .taginput .is-entel-corp.taginput-container.is-focusable {
   border-color: #10069f;
 }
 
-.is-entel-link-corp.input:focus, .is-entel-link-corp.textarea:focus, .taginput .is-entel-link-corp.taginput-container.is-focusable:focus, .is-entel-link-corp.is-focused.input, .is-entel-link-corp.is-focused.textarea, .taginput .is-entel-link-corp.is-focused.taginput-container.is-focusable, .is-entel-link-corp.input:active, .is-entel-link-corp.textarea:active, .taginput .is-entel-link-corp.taginput-container.is-focusable:active, .is-entel-link-corp.is-active.input, .is-entel-link-corp.is-active.textarea, .taginput .is-entel-link-corp.is-active.taginput-container.is-focusable {
+.is-entel-corp.input:focus, .is-entel-corp.textarea:focus, .taginput .is-entel-corp.taginput-container.is-focusable:focus, .is-entel-corp.is-focused.input, .is-entel-corp.is-focused.textarea, .taginput .is-entel-corp.is-focused.taginput-container.is-focusable, .is-entel-corp.input:active, .is-entel-corp.textarea:active, .taginput .is-entel-corp.taginput-container.is-focusable:active, .is-entel-corp.is-active.input, .is-entel-corp.is-active.textarea, .taginput .is-entel-corp.is-active.taginput-container.is-focusable {
   box-shadow: 0 0 0 0.125em rgba(16, 6, 159, 0.25);
 }
 
@@ -5957,19 +5957,19 @@ fieldset[disabled] .select select:hover {
   box-shadow: 0 0 0 0.125em rgba(255, 61, 0, 0.25);
 }
 
-.select.is-entel-link-corp:not(:hover)::after {
+.select.is-entel-corp:not(:hover)::after {
   border-color: #10069f;
 }
 
-.select.is-entel-link-corp select {
+.select.is-entel-corp select {
   border-color: #10069f;
 }
 
-.select.is-entel-link-corp select:hover, .select.is-entel-link-corp select.is-hovered {
+.select.is-entel-corp select:hover, .select.is-entel-corp select.is-hovered {
   border-color: #0e0586;
 }
 
-.select.is-entel-link-corp select:focus, .select.is-entel-link-corp select.is-focused, .select.is-entel-link-corp select:active, .select.is-entel-link-corp select.is-active {
+.select.is-entel-corp select:focus, .select.is-entel-corp select.is-focused, .select.is-entel-corp select:active, .select.is-entel-corp select.is-active {
   box-shadow: 0 0 0 0.125em rgba(16, 6, 159, 0.25);
 }
 
@@ -6473,25 +6473,25 @@ fieldset[disabled] .select select:hover {
   color: #fff;
 }
 
-.file.is-entel-link-corp .file-cta {
+.file.is-entel-corp .file-cta {
   background-color: #10069f;
   border-color: transparent;
   color: #fff;
 }
 
-.file.is-entel-link-corp:hover .file-cta, .file.is-entel-link-corp.is-hovered .file-cta {
+.file.is-entel-corp:hover .file-cta, .file.is-entel-corp.is-hovered .file-cta {
   background-color: #0f0693;
   border-color: transparent;
   color: #fff;
 }
 
-.file.is-entel-link-corp:focus .file-cta, .file.is-entel-link-corp.is-focused .file-cta {
+.file.is-entel-corp:focus .file-cta, .file.is-entel-corp.is-focused .file-cta {
   border-color: transparent;
   box-shadow: 0 0 0.5em rgba(16, 6, 159, 0.25);
   color: #fff;
 }
 
-.file.is-entel-link-corp:active .file-cta, .file.is-entel-link-corp.is-active .file-cta {
+.file.is-entel-corp:active .file-cta, .file.is-entel-corp.is-active .file-cta {
   background-color: #0e0586;
   border-color: transparent;
   color: #fff;
@@ -6999,7 +6999,7 @@ fieldset[disabled] .select select:hover {
   color: #ff3d00;
 }
 
-.help.is-entel-link-corp {
+.help.is-entel-corp {
   color: #10069f;
 }
 
@@ -7974,16 +7974,16 @@ button.dropdown-item.is-active {
   border-color: #ff3d00;
 }
 
-.message.is-entel-link-corp {
+.message.is-entel-corp {
   background-color: #f6f5ff;
 }
 
-.message.is-entel-link-corp .message-header {
+.message.is-entel-corp .message-header {
   background-color: #10069f;
   color: #fff;
 }
 
-.message.is-entel-link-corp .message-body {
+.message.is-entel-corp .message-body {
   border-color: #10069f;
 }
 
@@ -9008,63 +9008,63 @@ button.dropdown-item.is-active {
   }
 }
 
-.navbar.is-entel-link-corp {
+.navbar.is-entel-corp {
   background-color: #10069f;
   color: #fff;
 }
 
-.navbar.is-entel-link-corp .navbar-brand > .navbar-item,
-.navbar.is-entel-link-corp .navbar-brand .navbar-link {
+.navbar.is-entel-corp .navbar-brand > .navbar-item,
+.navbar.is-entel-corp .navbar-brand .navbar-link {
   color: #fff;
 }
 
-.navbar.is-entel-link-corp .navbar-brand > a.navbar-item:focus, .navbar.is-entel-link-corp .navbar-brand > a.navbar-item:hover, .navbar.is-entel-link-corp .navbar-brand > a.navbar-item.is-active,
-.navbar.is-entel-link-corp .navbar-brand .navbar-link:focus,
-.navbar.is-entel-link-corp .navbar-brand .navbar-link:hover,
-.navbar.is-entel-link-corp .navbar-brand .navbar-link.is-active {
+.navbar.is-entel-corp .navbar-brand > a.navbar-item:focus, .navbar.is-entel-corp .navbar-brand > a.navbar-item:hover, .navbar.is-entel-corp .navbar-brand > a.navbar-item.is-active,
+.navbar.is-entel-corp .navbar-brand .navbar-link:focus,
+.navbar.is-entel-corp .navbar-brand .navbar-link:hover,
+.navbar.is-entel-corp .navbar-brand .navbar-link.is-active {
   background-color: #0e0586;
   color: #fff;
 }
 
-.navbar.is-entel-link-corp .navbar-brand .navbar-link::after {
+.navbar.is-entel-corp .navbar-brand .navbar-link::after {
   border-color: #fff;
 }
 
-.navbar.is-entel-link-corp .navbar-burger {
+.navbar.is-entel-corp .navbar-burger {
   color: #fff;
 }
 
 @media screen and (min-width: 1024px) {
-  .navbar.is-entel-link-corp .navbar-start > .navbar-item,
-  .navbar.is-entel-link-corp .navbar-start .navbar-link,
-  .navbar.is-entel-link-corp .navbar-end > .navbar-item,
-  .navbar.is-entel-link-corp .navbar-end .navbar-link {
+  .navbar.is-entel-corp .navbar-start > .navbar-item,
+  .navbar.is-entel-corp .navbar-start .navbar-link,
+  .navbar.is-entel-corp .navbar-end > .navbar-item,
+  .navbar.is-entel-corp .navbar-end .navbar-link {
     color: #fff;
   }
-  .navbar.is-entel-link-corp .navbar-start > a.navbar-item:focus, .navbar.is-entel-link-corp .navbar-start > a.navbar-item:hover, .navbar.is-entel-link-corp .navbar-start > a.navbar-item.is-active,
-  .navbar.is-entel-link-corp .navbar-start .navbar-link:focus,
-  .navbar.is-entel-link-corp .navbar-start .navbar-link:hover,
-  .navbar.is-entel-link-corp .navbar-start .navbar-link.is-active,
-  .navbar.is-entel-link-corp .navbar-end > a.navbar-item:focus,
-  .navbar.is-entel-link-corp .navbar-end > a.navbar-item:hover,
-  .navbar.is-entel-link-corp .navbar-end > a.navbar-item.is-active,
-  .navbar.is-entel-link-corp .navbar-end .navbar-link:focus,
-  .navbar.is-entel-link-corp .navbar-end .navbar-link:hover,
-  .navbar.is-entel-link-corp .navbar-end .navbar-link.is-active {
+  .navbar.is-entel-corp .navbar-start > a.navbar-item:focus, .navbar.is-entel-corp .navbar-start > a.navbar-item:hover, .navbar.is-entel-corp .navbar-start > a.navbar-item.is-active,
+  .navbar.is-entel-corp .navbar-start .navbar-link:focus,
+  .navbar.is-entel-corp .navbar-start .navbar-link:hover,
+  .navbar.is-entel-corp .navbar-start .navbar-link.is-active,
+  .navbar.is-entel-corp .navbar-end > a.navbar-item:focus,
+  .navbar.is-entel-corp .navbar-end > a.navbar-item:hover,
+  .navbar.is-entel-corp .navbar-end > a.navbar-item.is-active,
+  .navbar.is-entel-corp .navbar-end .navbar-link:focus,
+  .navbar.is-entel-corp .navbar-end .navbar-link:hover,
+  .navbar.is-entel-corp .navbar-end .navbar-link.is-active {
     background-color: #0e0586;
     color: #fff;
   }
-  .navbar.is-entel-link-corp .navbar-start .navbar-link::after,
-  .navbar.is-entel-link-corp .navbar-end .navbar-link::after {
+  .navbar.is-entel-corp .navbar-start .navbar-link::after,
+  .navbar.is-entel-corp .navbar-end .navbar-link::after {
     border-color: #fff;
   }
-  .navbar.is-entel-link-corp .navbar-item.has-dropdown:focus .navbar-link,
-  .navbar.is-entel-link-corp .navbar-item.has-dropdown:hover .navbar-link,
-  .navbar.is-entel-link-corp .navbar-item.has-dropdown.is-active .navbar-link {
+  .navbar.is-entel-corp .navbar-item.has-dropdown:focus .navbar-link,
+  .navbar.is-entel-corp .navbar-item.has-dropdown:hover .navbar-link,
+  .navbar.is-entel-corp .navbar-item.has-dropdown.is-active .navbar-link {
     background-color: #0e0586;
     color: #fff;
   }
-  .navbar.is-entel-link-corp .navbar-dropdown a.navbar-item.is-active {
+  .navbar.is-entel-corp .navbar-dropdown a.navbar-item.is-active {
     background-color: #10069f;
     color: #fff;
   }
@@ -10466,16 +10466,16 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-i
   color: #ff3d00;
 }
 
-.panel.is-entel-link-corp .panel-heading {
+.panel.is-entel-corp .panel-heading {
   background-color: #10069f;
   color: #fff;
 }
 
-.panel.is-entel-link-corp .panel-tabs a.is-active {
+.panel.is-entel-corp .panel-tabs a.is-active {
   border-bottom-color: #10069f;
 }
 
-.panel.is-entel-link-corp .panel-block.is-active .panel-icon {
+.panel.is-entel-corp .panel-block.is-active .panel-icon {
   color: #10069f;
 }
 
@@ -12910,15 +12910,15 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   background-color: #ff3d00 !important;
 }
 
-.has-text-entel-link-corp {
+.has-text-entel-corp {
   color: #10069f !important;
 }
 
-a.has-text-entel-link-corp:hover, a.has-text-entel-link-corp:focus {
+a.has-text-entel-corp:hover, a.has-text-entel-corp:focus {
   color: #0b046e !important;
 }
 
-.has-background-entel-link-corp {
+.has-background-entel-corp {
   background-color: #10069f !important;
 }
 
@@ -15400,80 +15400,80 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   }
 }
 
-.hero.is-entel-link-corp {
+.hero.is-entel-corp {
   background-color: #10069f;
   color: #fff;
 }
 
-.hero.is-entel-link-corp a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
-.hero.is-entel-link-corp strong {
+.hero.is-entel-corp a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
+.hero.is-entel-corp strong {
   color: inherit;
 }
 
-.hero.is-entel-link-corp .title {
+.hero.is-entel-corp .title {
   color: #fff;
 }
 
-.hero.is-entel-link-corp .subtitle {
+.hero.is-entel-corp .subtitle {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.hero.is-entel-link-corp .subtitle a:not(.button),
-.hero.is-entel-link-corp .subtitle strong {
+.hero.is-entel-corp .subtitle a:not(.button),
+.hero.is-entel-corp .subtitle strong {
   color: #fff;
 }
 
 @media screen and (max-width: 1023px) {
-  .hero.is-entel-link-corp .navbar-menu {
+  .hero.is-entel-corp .navbar-menu {
     background-color: #10069f;
   }
 }
 
-.hero.is-entel-link-corp .navbar-item,
-.hero.is-entel-link-corp .navbar-link {
+.hero.is-entel-corp .navbar-item,
+.hero.is-entel-corp .navbar-link {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.hero.is-entel-link-corp a.navbar-item:hover, .hero.is-entel-link-corp a.navbar-item.is-active,
-.hero.is-entel-link-corp .navbar-link:hover,
-.hero.is-entel-link-corp .navbar-link.is-active {
+.hero.is-entel-corp a.navbar-item:hover, .hero.is-entel-corp a.navbar-item.is-active,
+.hero.is-entel-corp .navbar-link:hover,
+.hero.is-entel-corp .navbar-link.is-active {
   background-color: #0e0586;
   color: #fff;
 }
 
-.hero.is-entel-link-corp .tabs a {
+.hero.is-entel-corp .tabs a {
   color: #fff;
   opacity: 0.9;
 }
 
-.hero.is-entel-link-corp .tabs a:hover {
+.hero.is-entel-corp .tabs a:hover {
   opacity: 1;
 }
 
-.hero.is-entel-link-corp .tabs li.is-active a {
+.hero.is-entel-corp .tabs li.is-active a {
   opacity: 1;
 }
 
-.hero.is-entel-link-corp .tabs.is-boxed a, .hero.is-entel-link-corp .tabs.is-toggle a {
+.hero.is-entel-corp .tabs.is-boxed a, .hero.is-entel-corp .tabs.is-toggle a {
   color: #fff;
 }
 
-.hero.is-entel-link-corp .tabs.is-boxed a:hover, .hero.is-entel-link-corp .tabs.is-toggle a:hover {
+.hero.is-entel-corp .tabs.is-boxed a:hover, .hero.is-entel-corp .tabs.is-toggle a:hover {
   background-color: rgba(10, 10, 10, 0.1);
 }
 
-.hero.is-entel-link-corp .tabs.is-boxed li.is-active a, .hero.is-entel-link-corp .tabs.is-boxed li.is-active a:hover, .hero.is-entel-link-corp .tabs.is-toggle li.is-active a, .hero.is-entel-link-corp .tabs.is-toggle li.is-active a:hover {
+.hero.is-entel-corp .tabs.is-boxed li.is-active a, .hero.is-entel-corp .tabs.is-boxed li.is-active a:hover, .hero.is-entel-corp .tabs.is-toggle li.is-active a, .hero.is-entel-corp .tabs.is-toggle li.is-active a:hover {
   background-color: #fff;
   border-color: #fff;
   color: #10069f;
 }
 
-.hero.is-entel-link-corp.is-bold {
+.hero.is-entel-corp.is-bold {
   background-image: linear-gradient(141deg, #000c72 0%, #10069f 71%, #2d02bc 100%);
 }
 
 @media screen and (max-width: 768px) {
-  .hero.is-entel-link-corp.is-bold .navbar-menu {
+  .hero.is-entel-corp.is-bold .navbar-menu {
     background-image: linear-gradient(141deg, #000c72 0%, #10069f 71%, #2d02bc 100%);
   }
 }
@@ -17137,38 +17137,38 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   color: #ff3d00 !important;
 }
 
-.timeline .timeline-item .timeline-marker.is-entel-link-corp {
+.timeline .timeline-item .timeline-marker.is-entel-corp {
   background-color: #10069f !important;
   border-color: #10069f !important;
 }
 
-.timeline .timeline-item .timeline-marker.is-entel-link-corp .image {
+.timeline .timeline-item .timeline-marker.is-entel-corp .image {
   border-color: #10069f !important;
 }
 
-.timeline .timeline-item .timeline-marker.is-entel-link-corp.is-icon {
+.timeline .timeline-item .timeline-marker.is-entel-corp.is-icon {
   background-color: #10069f !important;
   border-color: #10069f !important;
 }
 
-.timeline .timeline-item .timeline-marker.is-entel-link-corp.is-icon > * {
+.timeline .timeline-item .timeline-marker.is-entel-corp.is-icon > * {
   color: #fff !important;
 }
 
-.timeline .timeline-item .timeline-marker.is-entel-link-corp.is-outlined {
+.timeline .timeline-item .timeline-marker.is-entel-corp.is-outlined {
   background-color: white !important;
   border-color: #10069f !important;
 }
 
-.timeline .timeline-item .timeline-marker.is-entel-link-corp.is-outlined .image {
+.timeline .timeline-item .timeline-marker.is-entel-corp.is-outlined .image {
   background-color: white !important;
 }
 
-.timeline .timeline-item .timeline-marker.is-entel-link-corp.is-outlined.is-icon {
+.timeline .timeline-item .timeline-marker.is-entel-corp.is-outlined.is-icon {
   background-color: white !important;
 }
 
-.timeline .timeline-item .timeline-marker.is-entel-link-corp.is-outlined.is-icon > * {
+.timeline .timeline-item .timeline-marker.is-entel-corp.is-outlined.is-icon > * {
   color: #10069f !important;
 }
 
@@ -17578,7 +17578,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   background-color: #ff3d00;
 }
 
-.timeline .timeline-item.is-entel-link-corp::before {
+.timeline .timeline-item.is-entel-corp::before {
   background-color: #10069f;
 }
 
@@ -17717,7 +17717,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   background-color: #ff3d00;
 }
 
-.timeline.is-centered .timeline-item.is-entel-link-corp::before {
+.timeline.is-centered .timeline-item.is-entel-corp::before {
   background-color: #10069f;
 }
 
@@ -18778,7 +18778,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   border-color: #ff3d00;
 }
 
-.b-checkbox.checkbox input[type=checkbox]:checked + .check.is-entel-link-corp {
+.b-checkbox.checkbox input[type=checkbox]:checked + .check.is-entel-corp {
   background: #10069f url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
   border-color: #10069f;
 }
@@ -18898,7 +18898,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   border-color: #ff3d00;
 }
 
-.b-checkbox.checkbox input[type=checkbox]:indeterminate + .check.is-entel-link-corp {
+.b-checkbox.checkbox input[type=checkbox]:indeterminate + .check.is-entel-corp {
   background: #10069f url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect style='fill:%23fff' width='0.7' height='0.2' x='.15' y='.4'%3E%3C/rect%3E%3C/svg%3E") no-repeat center center;
   border-color: #10069f;
 }
@@ -19009,7 +19009,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   box-shadow: 0 0 0.5em rgba(255, 61, 0, 0.8);
 }
 
-.b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-entel-link-corp {
+.b-checkbox.checkbox input[type=checkbox]:focus:checked + .check.is-entel-corp {
   box-shadow: 0 0 0.5em rgba(16, 6, 159, 0.8);
 }
 
@@ -19117,7 +19117,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   border-color: #ff3d00;
 }
 
-.b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-entel-link-corp {
+.b-checkbox.checkbox:hover input[type=checkbox]:not(:disabled) + .check.is-entel-corp {
   border-color: #10069f;
 }
 
@@ -19421,21 +19421,21 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   color: #fff;
 }
 
-.b-clockpicker.is-entel-link-corp .card-header {
+.b-clockpicker.is-entel-corp .card-header {
   background-color: #10069f;
   color: #fff;
 }
 
-.b-clockpicker.is-entel-link-corp .b-clockpicker-face:after {
+.b-clockpicker.is-entel-corp .b-clockpicker-face:after {
   background-color: #10069f;
 }
 
-.b-clockpicker.is-entel-link-corp .b-clockpicker-face-hand {
+.b-clockpicker.is-entel-corp .b-clockpicker-face-hand {
   background-color: #10069f;
   border-color: #10069f;
 }
 
-.b-clockpicker.is-entel-link-corp .b-clockpicker-face-number.active {
+.b-clockpicker.is-entel-corp .b-clockpicker-face-number.active {
   background-color: #10069f;
   color: #fff;
 }
@@ -20107,7 +20107,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   background-color: #ff3d00;
 }
 
-.datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-entel-link-corp {
+.datepicker .datepicker-table .datepicker-body.has-events .datepicker-cell.has-event .events .event.is-entel-corp {
   background-color: #10069f;
 }
 
@@ -20839,7 +20839,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   background: #ff3d00;
 }
 
-.notices .toast.is-entel-link-corp {
+.notices .toast.is-entel-corp {
   color: #fff;
   background: #10069f;
 }
@@ -20982,7 +20982,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   color: #ff3d00;
 }
 
-.notices .snackbar .action.is-entel-link-corp .button {
+.notices .snackbar .action.is-entel-corp .button {
   color: #10069f;
 }
 
@@ -21315,7 +21315,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   background: #ff3d00;
 }
 
-.b-radio.radio input[type=radio] + .check.is-entel-link-corp:before {
+.b-radio.radio input[type=radio] + .check.is-entel-corp:before {
   background: #10069f;
 }
 
@@ -21411,7 +21411,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   border-color: #ff3d00;
 }
 
-.b-radio.radio input[type=radio]:checked + .check.is-entel-link-corp {
+.b-radio.radio input[type=radio]:checked + .check.is-entel-corp {
   border-color: #10069f;
 }
 
@@ -21515,7 +21515,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   box-shadow: 0 0 0.5em rgba(255, 61, 0, 0.8);
 }
 
-.b-radio.radio input[type=radio]:focus:checked + .check.is-entel-link-corp {
+.b-radio.radio input[type=radio]:focus:checked + .check.is-entel-corp {
   box-shadow: 0 0 0.5em rgba(16, 6, 159, 0.8);
 }
 
@@ -21623,7 +21623,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   border-color: #ff3d00;
 }
 
-.b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-entel-link-corp {
+.b-radio.radio:hover input[type=radio]:not(:disabled) + .check.is-entel-corp {
   border-color: #10069f;
 }
 
@@ -21928,7 +21928,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   background-color: #ff3d00;
 }
 
-.b-sidebar .sidebar-content.is-entel-link-corp {
+.b-sidebar .sidebar-content.is-entel-corp {
   background-color: #10069f;
 }
 
@@ -22279,7 +22279,7 @@ a.has-text-blackRussian:hover, a.has-text-blackRussian:focus {
   background: #ff3d00 !important;
 }
 
-.b-slider.is-entel-link-corp .b-slider-fill {
+.b-slider.is-entel-corp .b-slider-fill {
   background: #10069f !important;
 }
 
@@ -22679,28 +22679,28 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background-position: left bottom;
 }
 
-.b-steps .steps .step-items .step-item.is-entel-link-corp::before, .b-steps .steps .step-items .step-item.is-entel-link-corp::after {
+.b-steps .steps .step-items .step-item.is-entel-corp::before, .b-steps .steps .step-items .step-item.is-entel-corp::after {
   background: linear-gradient(to left, #dbdbdb 50%, #10069f 50%);
   background-size: 200% 100%;
   background-position: right bottom;
 }
 
-.b-steps .steps .step-items .step-item.is-entel-link-corp.is-active .step-marker {
+.b-steps .steps .step-items .step-item.is-entel-corp.is-active .step-marker {
   background-color: white;
   border-color: #10069f;
   color: #10069f;
 }
 
-.b-steps .steps .step-items .step-item.is-entel-link-corp.is-active::before, .b-steps .steps .step-items .step-item.is-entel-link-corp.is-active::after {
+.b-steps .steps .step-items .step-item.is-entel-corp.is-active::before, .b-steps .steps .step-items .step-item.is-entel-corp.is-active::after {
   background-position: left bottom;
 }
 
-.b-steps .steps .step-items .step-item.is-entel-link-corp.is-previous .step-marker {
+.b-steps .steps .step-items .step-item.is-entel-corp.is-previous .step-marker {
   color: #fff;
   background-color: #10069f;
 }
 
-.b-steps .steps .step-items .step-item.is-entel-link-corp.is-previous::before, .b-steps .steps .step-items .step-item.is-entel-link-corp.is-previous::after {
+.b-steps .steps .step-items .step-item.is-entel-corp.is-previous::before, .b-steps .steps .step-items .step-item.is-entel-corp.is-previous::after {
   background-position: left bottom;
 }
 
@@ -23371,7 +23371,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background-position: left bottom;
 }
 
-.b-steps.is-vertical > .steps .step-items .step-item.is-entel-link-corp::before, .b-steps.is-vertical > .steps .step-items .step-item.is-entel-link-corp::after {
+.b-steps.is-vertical > .steps .step-items .step-item.is-entel-corp::before, .b-steps.is-vertical > .steps .step-items .step-item.is-entel-corp::after {
   background: linear-gradient(to top, #dbdbdb 50%, #10069f 50%);
   background-size: 100% 200%;
   background-position: left bottom;
@@ -23636,7 +23636,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: 'pink';
 }
 
-.switch input[type=checkbox] + .check.is-entel-link-corp-passive, .switch input[type=checkbox] + .check:hover {
+.switch input[type=checkbox] + .check.is-entel-corp-passive, .switch input[type=checkbox] + .check:hover {
   background: #10069f;
 }
 
@@ -23794,7 +23794,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #ff3d00;
 }
 
-.switch input[type=checkbox]:checked + .check.is-entel-link-corp {
+.switch input[type=checkbox]:checked + .check.is-entel-corp {
   background: #10069f;
 }
 
@@ -23902,7 +23902,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   box-shadow: 0 0 0.5em rgba(255, 61, 0, 0.8);
 }
 
-.switch input[type=checkbox]:focus + .check.is-entel-link-corp-passive, .switch input[type=checkbox]:active + .check.is-entel-link-corp-passive {
+.switch input[type=checkbox]:focus + .check.is-entel-corp-passive, .switch input[type=checkbox]:active + .check.is-entel-corp-passive {
   box-shadow: 0 0 0.5em rgba(16, 6, 159, 0.8);
 }
 
@@ -23998,7 +23998,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   box-shadow: 0 0 0.5em rgba(255, 61, 0, 0.8);
 }
 
-.switch input[type=checkbox]:focus:checked + .check.is-entel-link-corp, .switch input[type=checkbox]:active:checked + .check.is-entel-link-corp {
+.switch input[type=checkbox]:focus:checked + .check.is-entel-corp, .switch input[type=checkbox]:active:checked + .check.is-entel-corp {
   box-shadow: 0 0 0.5em rgba(16, 6, 159, 0.8);
 }
 
@@ -24098,7 +24098,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: rgba(255, 61, 0, 0.9);
 }
 
-.switch:hover input[type=checkbox] + .check.is-entel-link-corp-passive {
+.switch:hover input[type=checkbox] + .check.is-entel-corp-passive {
   background: rgba(16, 6, 159, 0.9);
 }
 
@@ -24194,7 +24194,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: rgba(255, 61, 0, 0.9);
 }
 
-.switch:hover input[type=checkbox]:checked + .check.is-entel-link-corp {
+.switch:hover input[type=checkbox]:checked + .check.is-entel-corp {
   background: rgba(16, 6, 159, 0.9);
 }
 
@@ -24400,15 +24400,15 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   border-color: rgba(255, 61, 0, 0.9);
 }
 
-.switch.is-outlined input[type=checkbox] + .check.is-entel-link-corp-passive {
+.switch.is-outlined input[type=checkbox] + .check.is-entel-corp-passive {
   border: 0.1rem solid rgba(16, 6, 159, 0.9);
 }
 
-.switch.is-outlined input[type=checkbox] + .check.is-entel-link-corp-passive:before {
+.switch.is-outlined input[type=checkbox] + .check.is-entel-corp-passive:before {
   background: #10069f;
 }
 
-.switch.is-outlined input[type=checkbox] + .check.is-entel-link-corp-passive:hover {
+.switch.is-outlined input[type=checkbox] + .check.is-entel-corp-passive:hover {
   border-color: rgba(16, 6, 159, 0.9);
 }
 
@@ -24648,12 +24648,12 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: #ff3d00;
 }
 
-.switch.is-outlined input[type=checkbox]:checked + .check.is-entel-link-corp {
+.switch.is-outlined input[type=checkbox]:checked + .check.is-entel-corp {
   background: transparent;
   border-color: #10069f;
 }
 
-.switch.is-outlined input[type=checkbox]:checked + .check.is-entel-link-corp:before {
+.switch.is-outlined input[type=checkbox]:checked + .check.is-entel-corp:before {
   background: #10069f;
 }
 
@@ -24809,7 +24809,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   border-color: rgba(255, 61, 0, 0.9);
 }
 
-.switch.is-outlined:hover input[type=checkbox]:checked + .check.is-entel-link-corp {
+.switch.is-outlined:hover input[type=checkbox]:checked + .check.is-entel-corp {
   border-color: rgba(16, 6, 159, 0.9);
 }
 
@@ -25425,11 +25425,11 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   text-decoration: none;
 }
 
-.tag .delete.is-entel-link-corp, .tag.is-delete.is-entel-link-corp, .tag.has-delete-icon.is-entel-link-corp {
+.tag .delete.is-entel-corp, .tag.is-delete.is-entel-corp, .tag.has-delete-icon.is-entel-corp {
   background: #10069f;
 }
 
-.tag .delete.is-entel-link-corp:hover, .tag.is-delete.is-entel-link-corp:hover, .tag.has-delete-icon.is-entel-link-corp:hover {
+.tag .delete.is-entel-corp:hover, .tag.is-delete.is-entel-corp:hover, .tag.has-delete-icon.is-entel-corp:hover {
   background-color: #0b046e;
   text-decoration: none;
 }
@@ -25786,7 +25786,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   border-left: 5px solid transparent;
 }
 
-.b-tooltip.is-top.is-entel-link-corp .tooltip-content::before {
+.b-tooltip.is-top.is-entel-corp .tooltip-content::before {
   border-top: 5px solid #10069f;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
@@ -25952,7 +25952,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   border-bottom: 5px solid transparent;
 }
 
-.b-tooltip.is-right.is-entel-link-corp .tooltip-content::before {
+.b-tooltip.is-right.is-entel-corp .tooltip-content::before {
   border-top: 5px solid transparent;
   border-right: 5px solid #10069f;
   border-bottom: 5px solid transparent;
@@ -26118,7 +26118,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   border-left: 5px solid transparent;
 }
 
-.b-tooltip.is-bottom.is-entel-link-corp .tooltip-content::before {
+.b-tooltip.is-bottom.is-entel-corp .tooltip-content::before {
   border-right: 5px solid transparent;
   border-bottom: 5px solid #10069f;
   border-left: 5px solid transparent;
@@ -26284,7 +26284,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   border-left: 5px solid #ff3d00;
 }
 
-.b-tooltip.is-left.is-entel-link-corp .tooltip-content::before {
+.b-tooltip.is-left.is-entel-corp .tooltip-content::before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #10069f;
@@ -26445,7 +26445,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   color: #fff;
 }
 
-.b-tooltip.is-entel-link-corp .tooltip-content {
+.b-tooltip.is-entel-corp .tooltip-content {
   background: #10069f;
   color: #fff;
 }
@@ -26635,7 +26635,7 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
   background: rgba(255, 61, 0, 0.05);
 }
 
-.upload .upload-draggable:hover.is-entel-link-corp, .upload .upload-draggable.is-hovered.is-entel-link-corp {
+.upload .upload-draggable:hover.is-entel-corp, .upload .upload-draggable.is-hovered.is-entel-corp {
   border-color: #10069f;
   background: rgba(16, 6, 159, 0.05);
 }
@@ -26706,4 +26706,289 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     z-index: -1;
   }
 }
-/* (ignored) *//* (ignored) *//* (ignored) */
+var map = {
+	"./af": "./node_modules/moment/locale/af.js",
+	"./af.js": "./node_modules/moment/locale/af.js",
+	"./ar": "./node_modules/moment/locale/ar.js",
+	"./ar-dz": "./node_modules/moment/locale/ar-dz.js",
+	"./ar-dz.js": "./node_modules/moment/locale/ar-dz.js",
+	"./ar-kw": "./node_modules/moment/locale/ar-kw.js",
+	"./ar-kw.js": "./node_modules/moment/locale/ar-kw.js",
+	"./ar-ly": "./node_modules/moment/locale/ar-ly.js",
+	"./ar-ly.js": "./node_modules/moment/locale/ar-ly.js",
+	"./ar-ma": "./node_modules/moment/locale/ar-ma.js",
+	"./ar-ma.js": "./node_modules/moment/locale/ar-ma.js",
+	"./ar-sa": "./node_modules/moment/locale/ar-sa.js",
+	"./ar-sa.js": "./node_modules/moment/locale/ar-sa.js",
+	"./ar-tn": "./node_modules/moment/locale/ar-tn.js",
+	"./ar-tn.js": "./node_modules/moment/locale/ar-tn.js",
+	"./ar.js": "./node_modules/moment/locale/ar.js",
+	"./az": "./node_modules/moment/locale/az.js",
+	"./az.js": "./node_modules/moment/locale/az.js",
+	"./be": "./node_modules/moment/locale/be.js",
+	"./be.js": "./node_modules/moment/locale/be.js",
+	"./bg": "./node_modules/moment/locale/bg.js",
+	"./bg.js": "./node_modules/moment/locale/bg.js",
+	"./bm": "./node_modules/moment/locale/bm.js",
+	"./bm.js": "./node_modules/moment/locale/bm.js",
+	"./bn": "./node_modules/moment/locale/bn.js",
+	"./bn.js": "./node_modules/moment/locale/bn.js",
+	"./bo": "./node_modules/moment/locale/bo.js",
+	"./bo.js": "./node_modules/moment/locale/bo.js",
+	"./br": "./node_modules/moment/locale/br.js",
+	"./br.js": "./node_modules/moment/locale/br.js",
+	"./bs": "./node_modules/moment/locale/bs.js",
+	"./bs.js": "./node_modules/moment/locale/bs.js",
+	"./ca": "./node_modules/moment/locale/ca.js",
+	"./ca.js": "./node_modules/moment/locale/ca.js",
+	"./cs": "./node_modules/moment/locale/cs.js",
+	"./cs.js": "./node_modules/moment/locale/cs.js",
+	"./cv": "./node_modules/moment/locale/cv.js",
+	"./cv.js": "./node_modules/moment/locale/cv.js",
+	"./cy": "./node_modules/moment/locale/cy.js",
+	"./cy.js": "./node_modules/moment/locale/cy.js",
+	"./da": "./node_modules/moment/locale/da.js",
+	"./da.js": "./node_modules/moment/locale/da.js",
+	"./de": "./node_modules/moment/locale/de.js",
+	"./de-at": "./node_modules/moment/locale/de-at.js",
+	"./de-at.js": "./node_modules/moment/locale/de-at.js",
+	"./de-ch": "./node_modules/moment/locale/de-ch.js",
+	"./de-ch.js": "./node_modules/moment/locale/de-ch.js",
+	"./de.js": "./node_modules/moment/locale/de.js",
+	"./dv": "./node_modules/moment/locale/dv.js",
+	"./dv.js": "./node_modules/moment/locale/dv.js",
+	"./el": "./node_modules/moment/locale/el.js",
+	"./el.js": "./node_modules/moment/locale/el.js",
+	"./en-au": "./node_modules/moment/locale/en-au.js",
+	"./en-au.js": "./node_modules/moment/locale/en-au.js",
+	"./en-ca": "./node_modules/moment/locale/en-ca.js",
+	"./en-ca.js": "./node_modules/moment/locale/en-ca.js",
+	"./en-gb": "./node_modules/moment/locale/en-gb.js",
+	"./en-gb.js": "./node_modules/moment/locale/en-gb.js",
+	"./en-ie": "./node_modules/moment/locale/en-ie.js",
+	"./en-ie.js": "./node_modules/moment/locale/en-ie.js",
+	"./en-il": "./node_modules/moment/locale/en-il.js",
+	"./en-il.js": "./node_modules/moment/locale/en-il.js",
+	"./en-in": "./node_modules/moment/locale/en-in.js",
+	"./en-in.js": "./node_modules/moment/locale/en-in.js",
+	"./en-nz": "./node_modules/moment/locale/en-nz.js",
+	"./en-nz.js": "./node_modules/moment/locale/en-nz.js",
+	"./en-sg": "./node_modules/moment/locale/en-sg.js",
+	"./en-sg.js": "./node_modules/moment/locale/en-sg.js",
+	"./eo": "./node_modules/moment/locale/eo.js",
+	"./eo.js": "./node_modules/moment/locale/eo.js",
+	"./es": "./node_modules/moment/locale/es.js",
+	"./es-do": "./node_modules/moment/locale/es-do.js",
+	"./es-do.js": "./node_modules/moment/locale/es-do.js",
+	"./es-us": "./node_modules/moment/locale/es-us.js",
+	"./es-us.js": "./node_modules/moment/locale/es-us.js",
+	"./es.js": "./node_modules/moment/locale/es.js",
+	"./et": "./node_modules/moment/locale/et.js",
+	"./et.js": "./node_modules/moment/locale/et.js",
+	"./eu": "./node_modules/moment/locale/eu.js",
+	"./eu.js": "./node_modules/moment/locale/eu.js",
+	"./fa": "./node_modules/moment/locale/fa.js",
+	"./fa.js": "./node_modules/moment/locale/fa.js",
+	"./fi": "./node_modules/moment/locale/fi.js",
+	"./fi.js": "./node_modules/moment/locale/fi.js",
+	"./fil": "./node_modules/moment/locale/fil.js",
+	"./fil.js": "./node_modules/moment/locale/fil.js",
+	"./fo": "./node_modules/moment/locale/fo.js",
+	"./fo.js": "./node_modules/moment/locale/fo.js",
+	"./fr": "./node_modules/moment/locale/fr.js",
+	"./fr-ca": "./node_modules/moment/locale/fr-ca.js",
+	"./fr-ca.js": "./node_modules/moment/locale/fr-ca.js",
+	"./fr-ch": "./node_modules/moment/locale/fr-ch.js",
+	"./fr-ch.js": "./node_modules/moment/locale/fr-ch.js",
+	"./fr.js": "./node_modules/moment/locale/fr.js",
+	"./fy": "./node_modules/moment/locale/fy.js",
+	"./fy.js": "./node_modules/moment/locale/fy.js",
+	"./ga": "./node_modules/moment/locale/ga.js",
+	"./ga.js": "./node_modules/moment/locale/ga.js",
+	"./gd": "./node_modules/moment/locale/gd.js",
+	"./gd.js": "./node_modules/moment/locale/gd.js",
+	"./gl": "./node_modules/moment/locale/gl.js",
+	"./gl.js": "./node_modules/moment/locale/gl.js",
+	"./gom-deva": "./node_modules/moment/locale/gom-deva.js",
+	"./gom-deva.js": "./node_modules/moment/locale/gom-deva.js",
+	"./gom-latn": "./node_modules/moment/locale/gom-latn.js",
+	"./gom-latn.js": "./node_modules/moment/locale/gom-latn.js",
+	"./gu": "./node_modules/moment/locale/gu.js",
+	"./gu.js": "./node_modules/moment/locale/gu.js",
+	"./he": "./node_modules/moment/locale/he.js",
+	"./he.js": "./node_modules/moment/locale/he.js",
+	"./hi": "./node_modules/moment/locale/hi.js",
+	"./hi.js": "./node_modules/moment/locale/hi.js",
+	"./hr": "./node_modules/moment/locale/hr.js",
+	"./hr.js": "./node_modules/moment/locale/hr.js",
+	"./hu": "./node_modules/moment/locale/hu.js",
+	"./hu.js": "./node_modules/moment/locale/hu.js",
+	"./hy-am": "./node_modules/moment/locale/hy-am.js",
+	"./hy-am.js": "./node_modules/moment/locale/hy-am.js",
+	"./id": "./node_modules/moment/locale/id.js",
+	"./id.js": "./node_modules/moment/locale/id.js",
+	"./is": "./node_modules/moment/locale/is.js",
+	"./is.js": "./node_modules/moment/locale/is.js",
+	"./it": "./node_modules/moment/locale/it.js",
+	"./it-ch": "./node_modules/moment/locale/it-ch.js",
+	"./it-ch.js": "./node_modules/moment/locale/it-ch.js",
+	"./it.js": "./node_modules/moment/locale/it.js",
+	"./ja": "./node_modules/moment/locale/ja.js",
+	"./ja.js": "./node_modules/moment/locale/ja.js",
+	"./jv": "./node_modules/moment/locale/jv.js",
+	"./jv.js": "./node_modules/moment/locale/jv.js",
+	"./ka": "./node_modules/moment/locale/ka.js",
+	"./ka.js": "./node_modules/moment/locale/ka.js",
+	"./kk": "./node_modules/moment/locale/kk.js",
+	"./kk.js": "./node_modules/moment/locale/kk.js",
+	"./km": "./node_modules/moment/locale/km.js",
+	"./km.js": "./node_modules/moment/locale/km.js",
+	"./kn": "./node_modules/moment/locale/kn.js",
+	"./kn.js": "./node_modules/moment/locale/kn.js",
+	"./ko": "./node_modules/moment/locale/ko.js",
+	"./ko.js": "./node_modules/moment/locale/ko.js",
+	"./ku": "./node_modules/moment/locale/ku.js",
+	"./ku.js": "./node_modules/moment/locale/ku.js",
+	"./ky": "./node_modules/moment/locale/ky.js",
+	"./ky.js": "./node_modules/moment/locale/ky.js",
+	"./lb": "./node_modules/moment/locale/lb.js",
+	"./lb.js": "./node_modules/moment/locale/lb.js",
+	"./lo": "./node_modules/moment/locale/lo.js",
+	"./lo.js": "./node_modules/moment/locale/lo.js",
+	"./lt": "./node_modules/moment/locale/lt.js",
+	"./lt.js": "./node_modules/moment/locale/lt.js",
+	"./lv": "./node_modules/moment/locale/lv.js",
+	"./lv.js": "./node_modules/moment/locale/lv.js",
+	"./me": "./node_modules/moment/locale/me.js",
+	"./me.js": "./node_modules/moment/locale/me.js",
+	"./mi": "./node_modules/moment/locale/mi.js",
+	"./mi.js": "./node_modules/moment/locale/mi.js",
+	"./mk": "./node_modules/moment/locale/mk.js",
+	"./mk.js": "./node_modules/moment/locale/mk.js",
+	"./ml": "./node_modules/moment/locale/ml.js",
+	"./ml.js": "./node_modules/moment/locale/ml.js",
+	"./mn": "./node_modules/moment/locale/mn.js",
+	"./mn.js": "./node_modules/moment/locale/mn.js",
+	"./mr": "./node_modules/moment/locale/mr.js",
+	"./mr.js": "./node_modules/moment/locale/mr.js",
+	"./ms": "./node_modules/moment/locale/ms.js",
+	"./ms-my": "./node_modules/moment/locale/ms-my.js",
+	"./ms-my.js": "./node_modules/moment/locale/ms-my.js",
+	"./ms.js": "./node_modules/moment/locale/ms.js",
+	"./mt": "./node_modules/moment/locale/mt.js",
+	"./mt.js": "./node_modules/moment/locale/mt.js",
+	"./my": "./node_modules/moment/locale/my.js",
+	"./my.js": "./node_modules/moment/locale/my.js",
+	"./nb": "./node_modules/moment/locale/nb.js",
+	"./nb.js": "./node_modules/moment/locale/nb.js",
+	"./ne": "./node_modules/moment/locale/ne.js",
+	"./ne.js": "./node_modules/moment/locale/ne.js",
+	"./nl": "./node_modules/moment/locale/nl.js",
+	"./nl-be": "./node_modules/moment/locale/nl-be.js",
+	"./nl-be.js": "./node_modules/moment/locale/nl-be.js",
+	"./nl.js": "./node_modules/moment/locale/nl.js",
+	"./nn": "./node_modules/moment/locale/nn.js",
+	"./nn.js": "./node_modules/moment/locale/nn.js",
+	"./oc-lnc": "./node_modules/moment/locale/oc-lnc.js",
+	"./oc-lnc.js": "./node_modules/moment/locale/oc-lnc.js",
+	"./pa-in": "./node_modules/moment/locale/pa-in.js",
+	"./pa-in.js": "./node_modules/moment/locale/pa-in.js",
+	"./pl": "./node_modules/moment/locale/pl.js",
+	"./pl.js": "./node_modules/moment/locale/pl.js",
+	"./pt": "./node_modules/moment/locale/pt.js",
+	"./pt-br": "./node_modules/moment/locale/pt-br.js",
+	"./pt-br.js": "./node_modules/moment/locale/pt-br.js",
+	"./pt.js": "./node_modules/moment/locale/pt.js",
+	"./ro": "./node_modules/moment/locale/ro.js",
+	"./ro.js": "./node_modules/moment/locale/ro.js",
+	"./ru": "./node_modules/moment/locale/ru.js",
+	"./ru.js": "./node_modules/moment/locale/ru.js",
+	"./sd": "./node_modules/moment/locale/sd.js",
+	"./sd.js": "./node_modules/moment/locale/sd.js",
+	"./se": "./node_modules/moment/locale/se.js",
+	"./se.js": "./node_modules/moment/locale/se.js",
+	"./si": "./node_modules/moment/locale/si.js",
+	"./si.js": "./node_modules/moment/locale/si.js",
+	"./sk": "./node_modules/moment/locale/sk.js",
+	"./sk.js": "./node_modules/moment/locale/sk.js",
+	"./sl": "./node_modules/moment/locale/sl.js",
+	"./sl.js": "./node_modules/moment/locale/sl.js",
+	"./sq": "./node_modules/moment/locale/sq.js",
+	"./sq.js": "./node_modules/moment/locale/sq.js",
+	"./sr": "./node_modules/moment/locale/sr.js",
+	"./sr-cyrl": "./node_modules/moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "./node_modules/moment/locale/sr-cyrl.js",
+	"./sr.js": "./node_modules/moment/locale/sr.js",
+	"./ss": "./node_modules/moment/locale/ss.js",
+	"./ss.js": "./node_modules/moment/locale/ss.js",
+	"./sv": "./node_modules/moment/locale/sv.js",
+	"./sv.js": "./node_modules/moment/locale/sv.js",
+	"./sw": "./node_modules/moment/locale/sw.js",
+	"./sw.js": "./node_modules/moment/locale/sw.js",
+	"./ta": "./node_modules/moment/locale/ta.js",
+	"./ta.js": "./node_modules/moment/locale/ta.js",
+	"./te": "./node_modules/moment/locale/te.js",
+	"./te.js": "./node_modules/moment/locale/te.js",
+	"./tet": "./node_modules/moment/locale/tet.js",
+	"./tet.js": "./node_modules/moment/locale/tet.js",
+	"./tg": "./node_modules/moment/locale/tg.js",
+	"./tg.js": "./node_modules/moment/locale/tg.js",
+	"./th": "./node_modules/moment/locale/th.js",
+	"./th.js": "./node_modules/moment/locale/th.js",
+	"./tl-ph": "./node_modules/moment/locale/tl-ph.js",
+	"./tl-ph.js": "./node_modules/moment/locale/tl-ph.js",
+	"./tlh": "./node_modules/moment/locale/tlh.js",
+	"./tlh.js": "./node_modules/moment/locale/tlh.js",
+	"./tr": "./node_modules/moment/locale/tr.js",
+	"./tr.js": "./node_modules/moment/locale/tr.js",
+	"./tzl": "./node_modules/moment/locale/tzl.js",
+	"./tzl.js": "./node_modules/moment/locale/tzl.js",
+	"./tzm": "./node_modules/moment/locale/tzm.js",
+	"./tzm-latn": "./node_modules/moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "./node_modules/moment/locale/tzm-latn.js",
+	"./tzm.js": "./node_modules/moment/locale/tzm.js",
+	"./ug-cn": "./node_modules/moment/locale/ug-cn.js",
+	"./ug-cn.js": "./node_modules/moment/locale/ug-cn.js",
+	"./uk": "./node_modules/moment/locale/uk.js",
+	"./uk.js": "./node_modules/moment/locale/uk.js",
+	"./ur": "./node_modules/moment/locale/ur.js",
+	"./ur.js": "./node_modules/moment/locale/ur.js",
+	"./uz": "./node_modules/moment/locale/uz.js",
+	"./uz-latn": "./node_modules/moment/locale/uz-latn.js",
+	"./uz-latn.js": "./node_modules/moment/locale/uz-latn.js",
+	"./uz.js": "./node_modules/moment/locale/uz.js",
+	"./vi": "./node_modules/moment/locale/vi.js",
+	"./vi.js": "./node_modules/moment/locale/vi.js",
+	"./x-pseudo": "./node_modules/moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "./node_modules/moment/locale/x-pseudo.js",
+	"./yo": "./node_modules/moment/locale/yo.js",
+	"./yo.js": "./node_modules/moment/locale/yo.js",
+	"./zh-cn": "./node_modules/moment/locale/zh-cn.js",
+	"./zh-cn.js": "./node_modules/moment/locale/zh-cn.js",
+	"./zh-hk": "./node_modules/moment/locale/zh-hk.js",
+	"./zh-hk.js": "./node_modules/moment/locale/zh-hk.js",
+	"./zh-mo": "./node_modules/moment/locale/zh-mo.js",
+	"./zh-mo.js": "./node_modules/moment/locale/zh-mo.js",
+	"./zh-tw": "./node_modules/moment/locale/zh-tw.js",
+	"./zh-tw.js": "./node_modules/moment/locale/zh-tw.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";/* (ignored) *//* (ignored) *//* (ignored) */

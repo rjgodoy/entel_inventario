@@ -42,6 +42,8 @@
                 </router-link> -->
             </div>
 
+            <hr/>
+
             <div class="tile">
                 <div class="tile is-parent is-8">
                     <b-field label="PLANOS" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">

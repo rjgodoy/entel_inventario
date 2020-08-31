@@ -122,10 +122,9 @@ import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 library.add(faSearch, faBars);
 
-import VuePagination from '../VuePagination.vue';
 export default {
     components: {
-        'vue-pagination': VuePagination
+        VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
     },
     props : [
         'user'

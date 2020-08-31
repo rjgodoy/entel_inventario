@@ -139,7 +139,7 @@
         <div class="card-footer">
             <a class="card-footer-item item is-link is-bold"
                 style="position: relative;" 
-                @click="downloadPops"
+                @click="isDownloadModalActive=true"
                 icon-pack="fas"
                 size="is-medium"
                 :loading="isLoading">
@@ -316,6 +316,16 @@
             </div>
         </section>
 
+        <b-modal :active.sync="isDownloadModalActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-download
+                @clicked="onClickDownload"
+                />
+        </b-modal>
+
     </div>
 </template>
 
@@ -324,12 +334,11 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faDownload, faSortDown, faSortUp, faSearch, faInfo, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 library.add(faDownload, faSortDown, faSortUp, faSearch, faInfo, faMapMarkedAlt);
 
-import VuePagination from '../VuePagination.vue';
-
 export default {
     components: {
         MapView: () => import(/* webpackChunkName: "chunks/maps/mapView"*/'../maps/PopsMapView.vue'),
-        VuePagination,
+        ModalDownload: () => import(/* webpackChunkName: "chunks/dashboard/modalDownload"*/'../dashboard/ModalDownload'),
+        VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
     },
     props : [
         'user',
@@ -468,6 +477,9 @@ export default {
             critic: 0,
             vip: 0,
 
+            isDownloadModalActive: false,
+            cells: Array,
+
             // checkboxPosition: 'left',
             // isPaginated: true,
             // isPaginationSimple: false,
@@ -589,7 +601,7 @@ export default {
             return {
                 'classification': classification, 
                 'id': id
-                }
+            }
         },
 
         // APIs
@@ -777,7 +789,11 @@ export default {
                 'power_rectifier': this.equipments.power_rectifier.selected,
                 'air_conditioner': this.equipments.air_conditioner.selected,
                 'vertical_structure': this.equipments.vertical_structure.selected,
-                'infrastructure': this.equipments.infrastructure.selected
+                'infrastructure': this.equipments.infrastructure.selected,
+
+                'resume': +this.cells.resume,
+                'pops': +this.cells.pops,
+                'sites': +this.cells.sites
             }
 
             axios.get('/api/pop/export', { 
@@ -821,6 +837,11 @@ export default {
                     duration: 5000
                 })
             })
+        },
+
+        onClickDownload (value) {
+            this.cells = value
+            this.downloadPops()
         },
 
     }

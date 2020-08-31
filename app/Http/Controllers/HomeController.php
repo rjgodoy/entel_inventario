@@ -177,7 +177,7 @@ class HomeController extends Controller
 
         $darkMode = 0;
 
-        return view('layouts.main', compact(
+        return view('layouts.app', compact(
             'last_data_counters',
             'last_updated_data',
             'darkMode'

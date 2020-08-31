@@ -73,6 +73,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
@@ -126,8 +129,15 @@ __webpack_require__.r(__webpack_exports__);
       });
       return counter;
     },
+    totalRepetidor: function totalRepetidor() {
+      var counter = 0;
+      this.sitesData.forEach(function (element) {
+        return counter = counter + element.repetidor;
+      });
+      return counter;
+    },
     totalSites: function totalSites() {
-      return this.totalFijo + this.totalMovil + this.totalSwitch + this.totalPhone;
+      return this.totalFijo + this.totalMovil + this.totalSwitch + this.totalPhone + this.totalRepetidor;
     }
   },
   methods: {
@@ -199,7 +209,7 @@ var render = function() {
             "column is-size-5 has-text-weight-semibold has-text-left",
           class: _vm.primaryText
         },
-        [_vm._v("Sitios")]
+        [_vm._v("SITIOS")]
       ),
       _vm._v(" "),
       _c(
@@ -258,6 +268,16 @@ var render = function() {
             _c(
               "th",
               { staticClass: "has-text-right", class: _vm.secondaryText },
+              [
+                _c("abbr", { attrs: { title: "Repetidor" } }, [
+                  _vm._v("Repetidor")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              { staticClass: "has-text-right", class: _vm.secondaryText },
               [_c("abbr", { attrs: { title: "Total" } }, [_vm._v("Total")])]
             )
           ])
@@ -306,6 +326,12 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(item.repetidor, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
                   {
                     staticClass: "has-text-right has-text-weight-bold",
                     class: _vm.primaryText
@@ -314,7 +340,11 @@ var render = function() {
                     _vm._v(
                       _vm._s(
                         _vm._f("numeral")(
-                          item.fijo + item.movil + item.switch + item.phone,
+                          item.fijo +
+                            item.movil +
+                            item.switch +
+                            item.phone +
+                            item.repetidor,
                           "0,0"
                         )
                       )
@@ -358,6 +388,12 @@ var render = function() {
                 "td",
                 { staticClass: "has-text-right", class: _vm.primaryText },
                 [_vm._v(_vm._s(_vm._f("numeral")(this.totalPhone, "0,0")))]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "has-text-right", class: _vm.primaryText },
+                [_vm._v(_vm._s(_vm._f("numeral")(this.totalRepetidor, "0,0")))]
               ),
               _vm._v(" "),
               _c(

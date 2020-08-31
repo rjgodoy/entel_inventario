@@ -212,30 +212,34 @@
             <div class="columns is-marginless">
 
                 <div class="column is-2 has-background-white is-paddingless" style="border-right: solid 0.5px rgba(0,0,0,0.1)">
-                    <section class="section">
-                        <div class="columns is-multiline tile is-ancestor">
-                            <b-tooltip class="column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent" :class="!isMobile() && 'is-6'" v-if="showTab(tab)" :label="tab.title" type="is-dark"
+                    <!-- <section class="section"> -->
+                        <div class="columns is-multiline" style="padding: 24px">
+                            <div class="column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent" :class="!isMobile() && 'is-6'" v-if="showTab(tab)" :label="tab.title" type="is-dark"
                                 v-for="tab in tabs" 
-                                :key="tab.component">
-                                <a class="tile is-child box has-text-centered"
+                                :key="tab.component"
+                                style="padding: 8px">
+                                <a class="box is-bold tile is-child has-text-centered columns is-vcentered" 
+                                    :style="!tab.title.includes(' ') && 'padding-right: 8px; padding-left: 8px'"
                                     @click="currentTab = tab.component" 
                                     :class="currentTab === tab.component && (currentTab == 'eco' ? 'is-eco is-bold' : 'is-bold is-link')">
-                                    <font-awesome-icon 
-                                        :icon="[tab.icon_type, tab.icon]"
-                                        size="2x"
-                                        :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'"/>
+                                    <div class="column is-paddingless">
+                                        <font-awesome-icon 
+                                            :icon="[tab.icon_type, tab.icon]"
+                                            size="2x"
+                                            :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'"/>
 
-                                    <div class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only"
-                                        :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'" 
-                                        style="padding-top: 12px;"> 
-                                        <div class="is-size-7 has-text-weight-normal">
-                                            {{ tab.title }}
+                                        <div class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only"
+                                            :class="currentTab === tab.component ? 'has-text-white' : 'has-text-grey'" 
+                                            style="padding-top: 12px;"> 
+                                            <div class="is-size-7 has-text-weight-semibold">
+                                                {{ tab.title.toUpperCase() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
-                            </b-tooltip>
+                            </div>
                         </div>
-                    </section>
+                    <!-- </section> -->
                 </div>
 
                 <div class="column section has-background-light" 

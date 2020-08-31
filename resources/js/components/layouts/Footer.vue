@@ -67,7 +67,8 @@
         </b-modal>
 
         <hr class="has-background-dark is-marginless"></hr>
-        <footer class="has-background-black-bis" style="padding-top: 0.5rem; padding-bottom: 0rem;">
+        
+        <footer class="has-background-black-bis" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
             <div class="has-text-centered">
                 <a href="http://www.anidalatam.com" target="blank"><img alt="image" class="img-container" src="/img/logos/logo_anida.png" style="width: 100px"/></a>
             </div>

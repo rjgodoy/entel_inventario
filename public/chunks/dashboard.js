@@ -2011,7 +2011,7 @@ var render = function() {
                               { staticStyle: { "padding-top": "10px" } },
                               [
                                 _c("b-icon", {
-                                  staticClass: "has-text-yellow fa-2x",
+                                  staticClass: "has-text-warning fa-2x",
                                   attrs: {
                                     pack: "fas",
                                     icon: "exclamation-triangle"

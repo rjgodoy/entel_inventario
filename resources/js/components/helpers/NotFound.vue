@@ -29,7 +29,7 @@
                                         <div class="has-text-weight-normal is-size-6 has-text-white">Tal vez buscas algo aquí:</div>
                                     </div>
                                     <div class="columns is-multiline has-text-white">
-                                        <div class="column is-6" v-for="link in links">
+                                        <div class="column is-6" v-for="link in links" v-if="canView(link.path)">
                                             <router-link :to="link.path" class="is-size-6 has-text-weight-bold">
                                                 <li>{{ link.title }}</li>
                                             </router-link>
@@ -48,7 +48,7 @@
 <script>
 
     export default {
-        props: ['user'],
+        props: ['user', 'user_permissions'],
 
         data() {
             return {
@@ -72,6 +72,30 @@
                 .then(response => {
                     this.links = response.data.menus
                 })
+            },
+
+            canView(path) {
+                if (path !== '/capacity' && path !== '/admin') {
+                    return true
+                } else if (path == '/capacity' && 
+                    (this.user.roles[0].name == 'developer' 
+                        || this.user.roles[0].name == 'admin' 
+                        || this.user.roles[0].name == 'engineer'
+                        || this.user.roles[0].name == 'engineer admin'
+                        || this.user.roles[0].name == 'super viewer'
+                        || this.user_permissions.find(element => element.slug == 'view-capacity')
+                        )) {
+                    return true
+                } else if (path == '/admin' && 
+                    (this.user.roles[0].name == 'developer' 
+                        || this.user.roles[0].name == 'admin' 
+                        || this.user_permissions.find(element => element.slug == 'view-admin'
+                        ))) {
+                    return true
+                } else {
+                    return false
+                }
+
             },
         }
     }

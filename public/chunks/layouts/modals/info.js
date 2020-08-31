@@ -166,12 +166,12 @@ var render = function() {
         "div",
         {
           staticClass:
-            "is-italic is-size-4 has-text-link has-text-weight-normal has-text-centered"
+            "is-italic is-size-4 has-text-link has-text-weight-normal has-text-centered block"
         },
         [_vm._v("Documentos de Ayuda")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "section container" }, [
+      _c("div", { staticClass: "container" }, [
         _c(
           "ul",
           _vm._l(_vm.files, function(file) {

@@ -4,27 +4,30 @@
             <section>
                 <div class="block">
                     <div class="is-size-5">Selecciona planillas a descargar</div>
-                    <b-tag v-if="isWarning" type="is-warning is-light" class="is-size-6">⚠️ Considerar mayor tiempo de descarga.</b-tag>
+                    <b-tag v-if="isWarning" type="is-default is-light">⚠️ Considerar mayor tiempo de descarga.</b-tag>
                 </div>
 
                 <div class="field">
                     <b-checkbox v-model="cells.resume">
-                        Resumen
+                        <div class="is-size-6">Resumen</div>
+                        <div class="is-size-7">Planilla resumen de POPs y sitios más importantes.</div>
                     </b-checkbox>
                 </div>
                 <div class="field">
                     <b-checkbox v-model="cells.pops">
-                        Pops
+                        <div class="is-size-6">POPs</div>
+                        <div class="is-size-7">Planilla desglosada por POP.</div>
                     </b-checkbox>
                 </div>
                 <div class="field">
                     <b-checkbox v-model="cells.sites">
-                        Sitios
+                        <div class="is-size-6">Sitios</div>
+                        <div class="is-size-7">Planilla desglosada por Sitios y sus tecnologías.</div>
                     </b-checkbox>
                 </div>
                 <!-- <div class="field">
                     <b-checkbox v-model="cells.technologies">
-                        Tecnologías
+                        <div>Tecnologías</div>
                     </b-checkbox>
                 </div> -->
                 <b-button @click="download()" type="is-link" :disabled="disableDownload">Download</b-button>

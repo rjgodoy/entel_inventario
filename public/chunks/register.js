@@ -188,7 +188,7 @@ var render = function() {
     _c("div", { staticClass: "box-translucent" }, [
       _c(
         "div",
-        { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
+        { staticClass: "field is-size-4 has-text-white has-text-weight-bold" },
         [_vm._v("Solicitar Cuenta")]
       ),
       _vm._v(" "),

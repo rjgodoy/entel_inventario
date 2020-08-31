@@ -16,7 +16,7 @@ let Eco = () => import(/* webpackChunkName: "chunks/eco"*/'./components/eco/Eco.
 let Comsite = () => import(/* webpackChunkName: "chunks/comsite"*/'./components/comsite/Comsite.vue')
 let Documents = () => import(/* webpackChunkName: "chunks/documents"*/'./components/documents/Documents.vue')
 let Admin = () => import(/* webpackChunkName: "chunks/admin"*/'./components/admin/Admin.vue')
-let NotFound = () => import(/* webpackChunkName: "chunks/notFound"*/ './components/NotFound');
+let NotFound = () => import(/* webpackChunkName: "chunks/helpers/notFound"*/ './components/helpers/NotFound');
 
 export default {
     mode: 'history',

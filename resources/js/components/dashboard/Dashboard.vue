@@ -224,7 +224,7 @@
                                             <b-icon 
                                                 pack="fas" 
                                                 icon="exclamation-triangle" 
-                                                class="has-text-yellow fa-2x"
+                                                class="has-text-warning fa-2x"
                                                 >
                                             </b-icon>
                                         </div>

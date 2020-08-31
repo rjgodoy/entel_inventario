@@ -2,7 +2,7 @@
     <div>
         <form class="box-translucent" @submit="resetEmail">
 
-            <div class="field is-size-4 has-text-link has-text-weight-bold">Recuperar Contraseña</div>
+            <div class="field is-size-4 has-text-white has-text-weight-bold">Recuperar Contraseña</div>
 
             <div class="field">
                 <label for="email" class="label has-text-weight-normal">Email</label>

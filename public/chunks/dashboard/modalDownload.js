@@ -47,6 +47,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -114,14 +117,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _vm.isWarning
-                  ? _c(
-                      "b-tag",
-                      {
-                        staticClass: "is-size-6",
-                        attrs: { type: "is-warning is-light" }
-                      },
-                      [_vm._v("⚠️ Considerar mayor tiempo de descarga.")]
-                    )
+                  ? _c("b-tag", { attrs: { type: "is-default is-light" } }, [
+                      _vm._v("⚠️ Considerar mayor tiempo de descarga.")
+                    ])
                   : _vm._e()
               ],
               1
@@ -142,7 +140,17 @@ var render = function() {
                       expression: "cells.resume"
                     }
                   },
-                  [_vm._v("\n                    Resumen\n                ")]
+                  [
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v("Resumen")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-7" }, [
+                      _vm._v(
+                        "Planilla resumen de POPs y sitios más importantes."
+                      )
+                    ])
+                  ]
                 )
               ],
               1
@@ -163,7 +171,13 @@ var render = function() {
                       expression: "cells.pops"
                     }
                   },
-                  [_vm._v("\n                    Pops\n                ")]
+                  [
+                    _c("div", { staticClass: "is-size-6" }, [_vm._v("POPs")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-7" }, [
+                      _vm._v("Planilla desglosada por POP.")
+                    ])
+                  ]
                 )
               ],
               1
@@ -184,7 +198,15 @@ var render = function() {
                       expression: "cells.sites"
                     }
                   },
-                  [_vm._v("\n                    Sitios\n                ")]
+                  [
+                    _c("div", { staticClass: "is-size-6" }, [_vm._v("Sitios")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "is-size-7" }, [
+                      _vm._v(
+                        "Planilla desglosada por Sitios y sus tecnologías."
+                      )
+                    ])
+                  ]
                 )
               ],
               1

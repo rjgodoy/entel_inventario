@@ -4,8 +4,8 @@
             <p class="modal-card-title has-text-weight-bold">Documentos de ayuda</p>
         </header> -->
         <section class="modal-card-body">
-            <div class="is-italic is-size-4 has-text-link has-text-weight-normal has-text-centered">Documentos de Ayuda</div>
-            <div class="section container">
+            <div class="is-italic is-size-4 has-text-link has-text-weight-normal has-text-centered block">Documentos de Ayuda</div>
+            <div class="container">
                 <ul>
                     <li v-for="file in files" :key="file.id" style="padding-top: 4px;">
                         <a class="has-text-dark" @click="openFile(file)">

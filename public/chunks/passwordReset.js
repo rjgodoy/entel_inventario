@@ -136,7 +136,9 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
+          {
+            staticClass: "field is-size-4 has-text-white has-text-weight-bold"
+          },
           [_vm._v("Cambiar Contraseña")]
         ),
         _vm._v(" "),

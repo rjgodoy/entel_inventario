@@ -79,33 +79,36 @@ __webpack_require__.r(__webpack_exports__);
             'content-type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest'
           }
-        }; // window.axios.defaults.headers.common['XMLHttpRequest'] = token.content;
+        };
+        axios.post('/api/auth/login', credentials, config).then(function (response) {
+          console.log(response);
 
-        axios.post('/login', credentials, config).then(function (response) {
-          // console.log(response)
           if (response.status === 200) {
-            _this.isLoading = 0;
+            axios.post('/login', credentials, config).then(function (response) {
+              _this.isLoading = 0;
+              console.log(response);
 
-            if (response.data.includes('not match')) {
-              _this.$buefy.toast.open({
-                message: 'Las credenciales no concuerdan con nuestros registros.',
-                type: 'is-danger',
-                duration: 3000
-              });
-            } else {
               _this.$router.go('/dashboard');
-            }
-          } else {
+            });
+          }
+        })["catch"](function (error) {
+          console.log(error.response.status);
+
+          if (error.response.status === 401) {
             _this.isLoading = 0;
 
+            _this.$buefy.toast.open({
+              message: 'Las credenciales no concuerdan con nuestros registros.',
+              type: 'is-danger',
+              duration: 3000
+            });
+          } else {
             _this.$buefy.toast.open({
               message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
               type: 'is-danger',
               duration: 3000
             });
           }
-        })["catch"](function (error) {
-          console.log(error);
         });
       }
     }
@@ -144,7 +147,9 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "field is-size-4 has-text-link has-text-weight-bold" },
+          {
+            staticClass: "field is-size-4 has-text-white has-text-weight-bold"
+          },
           [_vm._v("Login")]
         ),
         _vm._v(" "),

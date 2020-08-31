@@ -229,7 +229,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
      */
     public function title(): string
     {
-        return 'Todo';
+        return 'Resumen';
     }
 
     /**

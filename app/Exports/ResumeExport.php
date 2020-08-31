@@ -42,7 +42,7 @@ class ResumeExport implements WithTitle, WithDrawings
      */
     public function title(): string
     {
-        return 'Resumen';
+        return 'Inventario';
     }
 
     public function drawings()

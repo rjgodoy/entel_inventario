@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="box-translucent">
-			<div class="field is-size-4 has-text-link has-text-weight-bold">Solicitar Cuenta</div>
+			<div class="field is-size-4 has-text-white has-text-weight-bold">Solicitar Cuenta</div>
 
 			<div class="field">
 				<label for="name" class="label has-text-weight-normal">Nombre</label>

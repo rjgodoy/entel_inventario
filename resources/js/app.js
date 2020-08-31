@@ -10,8 +10,8 @@ window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // ########################## Buefy Libraries ##########################
-    import Buefy from 'buefy'
-    Vue.use(Buefy)
+import Buefy from 'buefy'
+Vue.use(Buefy)
 // #########################################################################
 
 

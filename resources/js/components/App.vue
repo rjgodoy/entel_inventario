@@ -15,7 +15,7 @@
                                 <div class="navbar-item">
                                     <div class="title is-5 has-text-grey-light">
                                         <div class="is-5 has-text-white">{{ app_name }}</div>
-                                        <div class="title is-6 has-text-grey-light">Subgerencia Infraestructura, <br class="is-hidden-fullhd" /> Poder y Clima</div>
+                                        <div class="title is-6 has-text-grey-light">Subgerencia Infraestructura, <br class="is-hidden-fullhd" />Poder y Clima</div>
                                         <div class="subtitle is-7 has-text-grey-light">Gerencia O&M Redes de Acceso</div>
                                     </div>
                                 </div>

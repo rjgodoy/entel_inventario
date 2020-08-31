@@ -2,7 +2,7 @@
     <div>
         <form class="box-translucent" @submit.prevent="login">
 
-            <div class="field is-size-4 has-text-link has-text-weight-bold">Login</div>
+            <div class="field is-size-4 has-text-white has-text-weight-bold">Login</div>
 
             <div class="field">
                 <label for="username" class="label has-text-weight-normal">Usuario</label>
@@ -73,31 +73,34 @@
                             'X-Requested-With': 'XMLHttpRequest',
                         }
                     }
-                    // window.axios.defaults.headers.common['XMLHttpRequest'] = token.content;
-                    axios.post('/login', credentials, config)
+
+                    axios.post('/api/auth/login', credentials, config)
                     .then(response => { 
-                        // console.log(response)
+                        console.log(response)
                         if (response.status === 200) {
-                            this.isLoading = 0
-                            if (response.data.includes('not match')) {
-                                this.$buefy.toast.open({
-                                    message: 'Las credenciales no concuerdan con nuestros registros.',
-                                    type: 'is-danger',
-                                    duration: 3000
-                                })
-                            } else {
+                            axios.post('/login', credentials, config)
+                            .then(response => {
+                                this.isLoading = 0
+                                console.log(response)
                                 this.$router.go('/dashboard')
-                            }
-                        } else {
+                            })
+                        }
+                    }).catch((error) => {
+                        console.log(error.response.status)
+                        if (error.response.status === 401) {
                             this.isLoading = 0
+                            this.$buefy.toast.open({
+                                message: 'Las credenciales no concuerdan con nuestros registros.',
+                                type: 'is-danger',
+                                duration: 3000
+                            })
+                        } else {
                             this.$buefy.toast.open({
                                 message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
                                 type: 'is-danger',
                                 duration: 3000
                             })
                         }
-                    }).catch((error) => {
-                        console.log(error)
                     })
                 }
             }

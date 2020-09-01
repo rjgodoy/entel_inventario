@@ -9,17 +9,17 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -91,7 +91,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMicrochip"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faGasPump"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExclamationTriangle"]); // import LeaderLine from 'leader-line'
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMicrochip"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faGasPump"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"]); // import LeaderLine from 'leader-line'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -137,86 +137,37 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   created: function created() {
     this.$eventBus.$on('junction-measurements-updated', this.getJunctions);
     this.$eventBus.$on('generator-set-capacities-updated', this.getGeneratorSets);
+    this.$eventBus.$on('new-solar-panel', this.getJunctions);
   },
   mounted: function mounted() {
     this.getJunctions();
     this.getGeneratorSets();
   },
   methods: {
-    getJunctions: function () {
-      var _getJunctions = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
+    getJunctions: function getJunctions() {
+      var _this = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!this.pop) {
-                  _context.next = 3;
-                  break;
-                }
-
-                _context.next = 3;
-                return axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
-                  _this.junctions = response.data.junctions;
-                  _this.canEditJunctions = response.data.can;
-                })["catch"](function (error) {
-                  console.log('Error al traer los datos de Empalmes: ' + error);
-                });
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getJunctions() {
-        return _getJunctions.apply(this, arguments);
+      if (this.pop) {
+        axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
+          _this.junctions = response.data.junctions;
+          _this.canEditJunctions = response.data.can;
+        })["catch"](function (error) {
+          console.log('Error al traer los datos de Empalmes: ' + error);
+        });
       }
+    },
+    getGeneratorSets: function getGeneratorSets() {
+      var _this2 = this;
 
-      return getJunctions;
-    }(),
-    getGeneratorSets: function () {
-      var _getGeneratorSets = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this2 = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                if (!this.pop) {
-                  _context2.next = 3;
-                  break;
-                }
-
-                _context2.next = 3;
-                return axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
-                  _this2.generatorSets = response.data.generatorSets;
-                  _this2.canEditGeneratorGroups = response.data.can;
-                })["catch"](function (error) {
-                  console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
-                });
-
-              case 3:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function getGeneratorSets() {
-        return _getGeneratorSets.apply(this, arguments);
+      if (this.pop) {
+        axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
+          _this2.generatorSets = response.data.generatorSets;
+          _this2.canEditGeneratorGroups = response.data.can;
+        })["catch"](function (error) {
+          console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
+        });
       }
-
-      return getGeneratorSets;
-    }(),
+    },
     updateAutonomy: function updateAutonomy() {
       if (!this.isEditMode && this.pop && this.pop.current_autonomy && this.newTheoreticalAutonomy != this.pop.current_autonomy.theoretical) {
         var params = {
@@ -232,6 +183,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
   beforeDestroy: function beforeDestroy() {
     this.$eventBus.$off('junction-measurements-updated');
     this.$eventBus.$off('generator-set-capacities-updated');
+    this.$eventBus.$off('new-solar-panel');
   }
 });
 
@@ -269,60 +221,59 @@ var render = function() {
                 "div",
                 { staticClass: "tile box is-child" },
                 [
-                  _vm.canEditJunctions
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "is-pulled-right",
-                          on: {
-                            click: function($event) {
-                              _vm.isEditMode = !_vm.isEditMode
-                              _vm.updateAutonomy()
-                            }
-                          }
-                        },
-                        [
+                  _c("div", { staticClass: "columns" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm.canEditJunctions
+                      ? _c("div", { staticClass: "column" }, [
                           _c(
-                            "b-tag",
+                            "a",
                             {
-                              attrs: {
-                                type: _vm.isEditMode
-                                  ? "is-info"
-                                  : "is-link is-outlined",
-                                size: "is-small"
+                              on: {
+                                click: function($event) {
+                                  _vm.isEditMode = !_vm.isEditMode
+                                  _vm.updateAutonomy()
+                                }
                               }
                             },
                             [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(
-                                    _vm.isEditMode ? "Guardar" : "Editar"
-                                  ) +
-                                  "\n                            "
+                              _c(
+                                "b-tag",
+                                {
+                                  staticClass:
+                                    "is-pulled-right has-text-weight-light is-size-7",
+                                  attrs: {
+                                    type: _vm.isEditMode
+                                      ? "is-info"
+                                      : "is-link is-outlined",
+                                    size: "is-small"
+                                  }
+                                },
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: {
+                                      icon: _vm.isEditMode
+                                        ? ["fas", "check"]
+                                        : ["fas", "pencil-alt"]
+                                    }
+                                  })
+                                ],
+                                1
                               )
-                            ]
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "is-size-6 has-text-weight-bold",
-                      staticStyle: { "padding-bottom": "12px" }
-                    },
-                    [_vm._v("AUTONOMIA DEL POP")]
-                  ),
+                        ])
+                      : _vm._e()
+                  ]),
                   _vm._v(" "),
                   !_vm.isEditMode
                     ? _c(
                         "div",
-                        { staticClass: "is-size-5 has-text-weight-semibold" },
+                        { staticClass: "is-size-4 has-text-weight-semibold" },
                         [
                           _vm._v(_vm._s(_vm.newTheoreticalAutonomy) + " "),
-                          _c("span", { staticClass: "is-size-6" }, [
+                          _c("span", { staticClass: "is-size-5" }, [
                             _vm._v("hrs")
                           ])
                         ]
@@ -331,7 +282,6 @@ var render = function() {
                   _vm._v(" "),
                   _vm.isEditMode
                     ? _c("b-input", {
-                        attrs: { size: "is-small" },
                         model: {
                           value: _vm.newTheoreticalAutonomy,
                           callback: function($$v) {
@@ -435,6 +385,16 @@ var staticRenderFns = [
         },
         [_vm._v("Layout")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "is-size-6 has-text-weight-bold" }, [
+        _vm._v("AUTONOMIA DEL POP")
+      ])
     ])
   }
 ]

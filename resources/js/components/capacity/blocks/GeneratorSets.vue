@@ -1,96 +1,99 @@
 <template>
     <div class="tile is-parent">
         <section class="tile box">
-            <!-- <b-field label="GRUPOS ELECTROGENOS" label-position="on-border" class="tile"> -->
-                <!-- <div class="tile box is-shadowless" style="border: solid 0.05rem black"> -->
-                <div class="tile is-vertical">
-                    <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">GRUPOS ELECTROGENOS</div>
+            <div class="tile is-vertical">
 
-                    <div class="tile is-vertical">
-                        <div class="tile">
+                <div class="columns">
+                    <div class="column">
+                        <div class="is-size-6 has-text-weight-bold">GRUPOS ELECTROGENOS</div>
+                    </div>
+                    <div class="column">
+                        <a @click="isNewGeneratorSetModalActive = true">
+                            <b-tag class="is-pulled-right is-link has-text-weight-light is-size-7 is-light">
+                                <font-awesome-icon :icon="['fas', 'plus']" />
+                            </b-tag>
+                        </a>
+                    </div>
+                </div>
 
-                            <div class="tile is-parent" v-if="totalGeneratorSetsCapacityA">
-                                <b-field label="CAPACIDAD PLANO A" label-position="on-border" class="tile">
-                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
-                                        <div class="level tile">
-                                            <div class="level-item">
-                                                <div class="has-text-centered">
-                                                    <div class="has-text-weight-semibold is-size-6">{{ totalGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                    <div class="has-text-weight-normal is-size-7">Total</div>
-                                                </div>
+                <div class="tile is-vertical" v-if="generatorSets.length">
+                    <div class="tile">
+
+                        <div class="tile is-parent" v-if="totalGeneratorSetsCapacityA">
+                            <b-field label="CAPACIDADES PLANO A" label-position="on-border" class="tile">
+                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                    <div class="level tile">
+                                        <div class="level-item">
+                                            <div class="has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ totalGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Total</div>
                                             </div>
-                                            
-                                            <div class="level-item">
-                                                <div class="has-text-centered">
-                                                    <div class="has-text-weight-semibold is-size-6">{{ usedGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                    <div class="has-text-weight-normal is-size-7">Utilizada</div>
-                                                </div>
+                                        </div>
+                                        
+                                        <div class="level-item">
+                                            <div class="has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ usedGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Utilizada</div>
                                             </div>
-                                            
-                                            <div class="level-item">
-                                                <div class="has-text-centered">
-                                                    <div class="has-text-weight-semibold is-size-6">{{ availableGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                    <div class="has-text-weight-normal is-size-7">Disponible</div>
-                                                </div>
+                                        </div>
+                                        
+                                        <div class="level-item">
+                                            <div class="has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ availableGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Disponible</div>
                                             </div>
                                         </div>
                                     </div>
-                                </b-field>
-                            </div>
-
-                            <div class="tile is-parent" v-if="totalGeneratorSetsCapacityB">
-                                <b-field label="PLANO B" label-position="on-border" class="tile">
-                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
-                                        <div class="level tile">
-                                            <div class="level-item">
-                                                <div class="has-text-centered">
-                                                    <div class="has-text-weight-semibold is-size-6">{{ totalGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                    <div class="has-text-weight-normal is-size-7">Total</div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="level-item">
-                                                <div class="has-text-centered">
-                                                    <div class="has-text-weight-semibold is-size-6">{{ usedGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                    <div class="has-text-weight-normal is-size-7">Utilizada</div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="level-item">
-                                                <div class="has-text-centered">
-                                                    <div class="has-text-weight-semibold is-size-6">{{ availableGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                    <div class="has-text-weight-normal is-size-7">Disponible</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </b-field>
-                            </div>
-
+                                </div>
+                            </b-field>
                         </div>
 
-                        <div class="tile is-parent columns is-multiline">
-                            <div class="column tile is-parent" :class="generatorSets.length > 1 && 'is-6'" v-for="generatorSet in generatorSets" :key="generatorSet.id">
-                                <div class="tile ">
-                                    <a class="tile is-parent box" @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
-                                        <div class="columns">
-                                            <div class="column">
-                                                <div class="has-text-weight-semibold is-size-6">Grupo Electrógeno</div>
+                        <div class="tile is-parent" v-if="totalGeneratorSetsCapacityB">
+                            <b-field label="CAPACIDADES PLANO B" label-position="on-border" class="tile">
+                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                    <div class="level tile">
+                                        <div class="level-item">
+                                            <div class="has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ totalGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Total</div>
                                             </div>
-                                            <div class="column is-2 has-text-centered">
-                                                <!-- <font-awesome-icon 
-                                                    :icon="['far', 'check-circle']"
-                                                    size="2x"
-                                                    class="has-text-success"
-                                                /> -->
+                                        </div>
+                                        
+                                        <div class="level-item">
+                                            <div class="has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ usedGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Utilizada</div>
                                             </div>
-                                        </div>   
-                                    </a>
+                                        </div>
+                                        
+                                        <div class="level-item">
+                                            <div class="has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ availableGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Disponible</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </b-field>
+                        </div>
+                    </div>
+
+                    <div class="tile is-parent">
+                        <div class="columns tile is-multiline">
+                            <div class="column tile is-parent is-6" v-for="generatorSet in generatorSets" :key="generatorSet.id">
+                                <a class="tile box is-dark is-bold has-text-warning" 
+                                    @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
+                                    <div class="columns">
+                                        <div class="column">
+                                            <div class="has-text-weight-semibold is-size-6">Grupo Electrógeno</div>
+                                        </div>
+                                    </div>   
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
         </section>
         <b-modal :active.sync="isGeneratorModalActive"
@@ -103,6 +106,17 @@
                 :can="can"
                 :user="user"/>
         </b-modal>
+
+        <b-modal :active.sync="isNewGeneratorSetModalActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-new-generator-set 
+                :user="user"
+                :pop="pop"
+                />
+        </b-modal>
     </div> 
 </template>
 
@@ -110,6 +124,7 @@
     export default {
         components: {
             ModalGenerator: () => import(/* webpackChunkName: "chunks/pop/layout/modals/generator"*/'../../pop/layout/modals/ModalGenerator'),
+            ModalNewGeneratorSet: () => import(/* webpackChunkName: "chunks/pop/layout/modals/newGeneratorSet"*/'../../pop/layout/modals/ModalNewGeneratorSet'),
         },
 
         props : [
@@ -123,6 +138,7 @@
             return {
                 generatorSetSelected: null,
                 isGeneratorModalActive: false,
+                isNewGeneratorSetModalActive: false
             }
         },
 

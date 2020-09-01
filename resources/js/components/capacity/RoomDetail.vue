@@ -107,10 +107,10 @@
 
 <script>   
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator } from "@fortawesome/free-solid-svg-icons";
+    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faFolderOpen as farFolderOpen } from '@fortawesome/free-regular-svg-icons'
-    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen); 
+    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck); 
 
     export default {
         components: {
@@ -788,6 +788,7 @@
             this.$eventBus.$on('new-battery-bank', this.getRoomData)
             this.$eventBus.$on('new-room', this.getRoomData)
             this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
+            this.$eventBus.$on('new-solar-panel', this.getRoomData)
         },
 
         mounted() {
@@ -1232,6 +1233,7 @@
             this.$eventBus.$off('new-battery-bank')
             this.$eventBus.$off('new-room')
             this.$eventBus.$off('air-conditioner-capacity');
+            this.$eventBus.$off('new-solar-panel')
         }
     }
 </script>

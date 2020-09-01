@@ -342,7 +342,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheck"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
@@ -1047,6 +1047,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     this.$eventBus.$on('new-battery-bank', this.getRoomData);
     this.$eventBus.$on('new-room', this.getRoomData);
     this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
+    this.$eventBus.$on('new-solar-panel', this.getRoomData);
   },
   mounted: function mounted() {
     this.getRoomData();
@@ -1521,6 +1522,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     this.$eventBus.$off('new-battery-bank');
     this.$eventBus.$off('new-room');
     this.$eventBus.$off('air-conditioner-capacity');
+    this.$eventBus.$off('new-solar-panel');
   }
 });
 

@@ -46,46 +46,101 @@
 
             <div class="tile">
                 <div class="tile is-parent is-8">
-                    <b-field label="PLANOS" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
-                        <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                    <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                        <div class="tile is-vertical" >
 
-                            <div class="tile is-vertical" v-if="sala.planes.length">
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="is-size-6 has-text-weight-bold">PLANOS</div>
+                                </div>
+                                <div class="column">
+                                    <a @click="isNewPowerRectifierModalActive = true">
+                                        <b-tag class="is-pulled-right is-link has-text-weight-light is-size-7">
+                                            <font-awesome-icon :icon="['fas', 'plus']" />
+                                        </b-tag>
+                                    </a>
+                                </div>
+                            </div>
 
-                                <div class="tile is-parent">
-                                    <b-field label="CAPACIDAD SALA" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
+                            <div class="tile is-parent" v-if="sala.planes.length">
+                                <b-field label="CAPACIDAD SALA" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
 
+                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                        <div class="tile columns is-vcentered">
+                                            <div class="column tile is-vertical">
+
+                                                <div class="is-size-6 has-text-weight-bold tile is-parent">PLANOS</div>
+
+                                                <div class="columns tile is-parent" style="padding-top: 0px">
+                                                    <div class="column">
+                                                        <div class="is-size-7">Total</div>
+                                                        <div class="is-size-6 has-text-weight-bold">{{ totalCapacityRoom(sala) | numeral('0,0.0') }}</div>
+                                                    </div>
+                                                    <div class="column">
+                                                        <div class="is-size-7">Utilizada</div>
+                                                        <div class="is-size-6 has-text-weight-bold">{{ usedCapacityRoom(sala) | numeral('0,0.0') }}</div>
+                                                    </div>
+                                                    <div class="column">
+                                                        <div class="is-size-7">Disponible</div>
+                                                        <div class="is-size-6 has-text-weight-bold">{{ availableCapacityRoom(sala) | numeral('0,0.0') }}</div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="column tile tile is-vertical">
+                                                <div class="is-size-6 has-text-weight-bold tile is-parent">BATERIAS</div>
+                                                <div class="columns tile is-parent" style="padding-top: 0px">
+                                                    <div class="column">
+                                                        <div class="is-size-7">Total</div>
+                                                        <div class="is-size-6 has-text-weight-bold">{{ totalCapacityBatteries(sala) | numeral('0,0.0') }}</div>
+                                                    </div>
+                                                    <div class="column">
+                                                        <div class="is-size-7">Utilizada</div>
+                                                        <div class="is-size-6 has-text-weight-bold">{{ usedCapacityBatteries(sala) | numeral('0,0.0') }}</div>
+                                                    </div>
+                                                    <div class="column">
+                                                        <div class="is-size-7">Disponible</div>
+                                                        <div class="is-size-6 has-text-weight-bold">{{ availableCapacityBatteries(sala) | numeral('0,0.0') }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </b-field>
+                            </div>
+
+                            <div class="tile is-parent" v-if="sala.planes.length">
+                                <div class="tile columns is-multiline">
+                                    <div class="tile is-parent column is-6" v-for="plane in planes" :key="plane.id">
                                         <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
                                             <div class="tile is-vertical">
-                                                <div class="is-size-7">Capacidad total sala: {{ totalCapacityRoom(sala) | numeral('0,0.0') }}</div>
-                                                <div class="is-size-7">Capacidad usada sala: {{ usedCapacityRoom(sala) | numeral('0,0.0') }}</div>
-                                                <div class="is-size-7">Capacidad disponible sala: {{ availableCapacityRoom(sala) | numeral('0,0.0') }}</div>
-                                                <div class="is-size-7">Capacidad total baterías: {{ totalCapacityBatteries(sala) | numeral('0,0.0') }}</div>
-                                                <div class="is-size-7">Capacidad total baterías: {{ usedCapacityBatteries(sala) | numeral('0,0.0') }}</div>
-                                                <div class="is-size-7">Capacidad total baterías: {{ availableCapacityBatteries(sala) | numeral('0,0.0') }}</div>
-                                            </div>
 
-                                        </div>
-                                    </b-field>
-                                </div>
+                                                <div class="columns">
+                                                    <div class="column">
+                                                        <div class="is-size-6 has-text-weight-bold">PLANO {{ plane.plane_type.type }}</div>
+                                                    </div>
+                                                    <div class="column">
+                                                        <a v-if="canEditPowerRectifiers" size="is-small" @click="isEditPlaneModalActive = true; selectedPlane = plane">
+                                                            <b-tag class="is-pulled-right is-link has-text-weight-light is-size-7">
+                                                                <font-awesome-icon :icon="['fas', 'pencil-alt']" />
+                                                            </b-tag>
+                                                        </a>
+                                                    </div>
+                                                </div>
 
-                                <div class="tile is-parent">
-                                    <div class="tile columns is-multiline">
-                                        <div class="tile is-parent column is-6" v-for="plane in planes" :key="plane.id">
-                                            <b-field :label="'PLANO '+ plane.plane_type.type" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
-                                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
-                                                    <div class="tile is-vertical">
+                                                <div class="tile is-parent">
+                                                    <div class="box tile is-child">
 
-                                                        <div class="tile is-parent">
-                                                            <div class="box tile is-child is-dark is-bold">
+                                                        <div>
+                                                            <div class="is-size-7">Tensión de flote: {{ plane.float_tension }}</div>
+                                                            <div class="is-size-7">Corriente: {{ plane.current }}</div>
+                                                            <div class="is-size-7">Factor de recarga: {{ plane.recharge_factor }}</div>
+                                                        </div>
 
-                                                                <div>
-                                                                    <div class="is-size-7">Tensión de flote: {{ plane.float_tension }}</div>
-                                                                    <div class="is-size-7">Corriente: {{ plane.current }}</div>
-                                                                    <div class="is-size-7">Factor de recarga: {{ plane.recharge_factor }}</div>
-                                                                </div>
-                                                                <br/>
-
-
+                                                        <b-tooltip position="is-bottom" multilined>
+                                                            <button class="button is-primary">Más info</button>
+                                                            <template v-slot:content>
                                                                 <div class="is-size-7">Capacidad nominal: {{ nominalCapacity(plane) | numeral('0,0.0') }}</div>
                                                                 <div class="is-size-7">Capacidad instalada: {{ installedCapacity(plane) | numeral('0,0.0') }}</div>
                                                                 <div class="is-size-7">Potencia real de carga: {{ chargeRealPower(plane) | numeral('0,0.0') }}</div>
@@ -101,111 +156,94 @@
                                                                 <div class="is-size-7">Utilizado baterias: {{ chargeRealPower(plane) | numeral('0,0.0') }}</div>
                                                                 <div class="is-size-7">Disponible baterias: {{ availableBatteryCapacityPlane(plane) | numeral('0,0.0') }}</div>
 
-                                                                <br/>
-                                                                <div class="has-text-centered">
-                                                                    <b-button v-if="canEditPowerRectifiers" size="is-small" @click="isEditPlaneModalActive = true; selectedPlane = plane">Editar parámetros del plano</b-button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                            </template>
+                                                        </b-tooltip>
 
-                                                        <div class="tile is-parent" v-if="sala.power_rectifiers.length">
-                                                            <b-field label="PLANTAS RECTIFICADORAS" label-position="on-border" class="tile">
-                                                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
-                                                                    <div class="tile is-parent">
-                                                                        <div class="columns is-multiline tile">
-                                                                            <div class="tile is-child column is-6" 
-                                                                                v-for="powerRectifier in sala.power_rectifiers" 
-                                                                                :key="powerRectifier.id" 
-                                                                                
-                                                                                v-if="powerRectifierBelongsToPlane(powerRectifier, plane)">
-                                                                                <a class="box" @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier">
-                                                                                    <div class="field">
-                                                                                        <div class="has-text-weight-normal is-size-7">PLANTA</div>
-                                                                                        <span class="has-text-weight-bold is-size-6">{{ powerRectifier.power_rectifier_type.type }} {{ powerRectifier.power_rectifier_type.model }}
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </b-field>
-                                                        </div>
-
-                                                        <div class="tile is-parent" v-if="canEditPowerRectifiers">
-                                                            <div class="tile is-child has-text-centered">
-                                                                <b-button class="is-default has-text-weight-light has-text-grey is-size-7">
-                                                                    <a @click="isNewBatteryBankModalActive = true; selectedPlane = plane">Agregar Banco de Baterías</a>
-                                                                </b-button>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="tile is-parent" v-if="plane.battery_banks.length && sala.power_rectifiers.length">
-                                                            <b-field label="BANCOS BATERIAS" label-position="on-border" class="tile">
-                                                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
-                                                                    <div class="tile is-parent">
-                                                                        <div class="columns is-multiline tile">
-                                                                            <div class="tile is-child column is-6" 
-                                                                                v-for="batteryBank in plane.battery_banks" 
-                                                                                :key="batteryBank.id" 
-                                                                                
-                                                                                v-if="batteryBankBelongsToPlane(batteryBank, plane)">
-                                                                                <a class="box" @click="isbatteryBankModalActive = true; batteryBankSelected = batteryBank">
-                                                                                    <div class="field">
-                                                                                        <div class="has-text-weight-normal is-size-7">BANCO Nº {{ batteryBank.id }}</div>
-                                                                                        <span class="has-text-weight-bold is-size-6">{{ batteryBank.battery_bank_brand.brand }} {{ batteryBank.battery_bank_brand.model }}
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </b-field>
-                                                        </div>
-
-                                                        
                                                     </div>
                                                 </div>
-                                            </b-field>
-                                        </div> 
-                                    </div>
-                                </div>
 
-                                <div class="tile is-parent" v-if="canEditPowerRectifiers">
-                                    <div class="tile is-child has-text-centered">
-                                        <b-button class="is-default has-text-weight-light has-text-grey is-size-7">
-                                            <a @click="isNewPowerRectifierModalActive = true">Agregar Planta Rectificadora</a>
-                                        </b-button>
-                                    </div>
-                                </div>
+                                                <div class="tile is-parent" v-if="sala.power_rectifiers.length">
+                                                    <b-field label="PLANTAS RECTIFICADORAS" label-position="on-border" class="tile">
+                                                        <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                                            <div class="tile is-parent">
+                                                                <div class="columns is-multiline tile">
+                                                                    <div class="tile is-child column is-6" 
+                                                                        v-for="powerRectifier in sala.power_rectifiers" 
+                                                                        :key="powerRectifier.id" 
+                                                                        
+                                                                        v-if="powerRectifierBelongsToPlane(powerRectifier, plane)">
+                                                                        <a class="box is-dark is-bold has-text-warning" @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier">
+                                                                            <div class="field">
+                                                                                <div class="has-text-weight-normal is-size-7">PLANTA</div>
+                                                                                <span class="has-text-weight-bold is-size-6">{{ powerRectifier.power_rectifier_type.type }} {{ powerRectifier.power_rectifier_type.model }}
+                                                                                </span>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </b-field>
+                                                </div>
 
-                                
+                                                <div class="tile is-parent" v-if="canEditPowerRectifiers">
+                                                    <div class="tile is-child has-text-centered">
+                                                        <b-button class="is-default has-text-weight-light has-text-grey is-size-7">
+                                                            <a @click="isNewBatteryBankModalActive = true; selectedPlane = plane">Agregar Banco de Baterías</a>
+                                                        </b-button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="tile is-parent" v-if="plane.battery_banks.length && sala.power_rectifiers.length">
+                                                    <b-field label="BANCOS BATERIAS" label-position="on-border" class="tile">
+                                                        <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                                            <div class="tile is-parent">
+                                                                <div class="columns is-multiline tile">
+                                                                    <div class="tile is-child column is-6" 
+                                                                        v-for="batteryBank in plane.battery_banks" 
+                                                                        :key="batteryBank.id" 
+                                                                        
+                                                                        v-if="batteryBankBelongsToPlane(batteryBank, plane)">
+                                                                        <a class="box is-dark is-bold has-text-warning" @click="isbatteryBankModalActive = true; batteryBankSelected = batteryBank">
+                                                                            <div class="field">
+                                                                                <div class="has-text-weight-normal is-size-7">BANCO Nº {{ batteryBank.id }}</div>
+                                                                                <span class="has-text-weight-bold is-size-6">{{ batteryBank.battery_bank_brand.brand }} {{ batteryBank.battery_bank_brand.model }}
+                                                                                </span>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </b-field>
+                                                </div>
+
+                                                
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
                             </div>
 
-                            <div class="tile columns is-vcentered" v-if="!hasPlanes(sala)">
+                            <div class="tile is-parent columns is-vcentered" v-if="!hasPlanes(sala)">
                                 <div class="column">
-                                    
                                     <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
                                         <div class="">NO TIENE PLANTAS RECTIFICADORAS</div>
-                                        <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
-                                            <a @click="isNewPowerRectifierModalActive = true">Agregar</a>
-                                        </b-tag>
                                     </div>
                                 </div>
                             </div>
-
+                            
                         </div>
-                    </b-field>
+                    </div>
                 </div>
 
                 <div class="tile is-parent">
                     <!-- <b-field label="CLIMATIZACION" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''"> -->
 
                         <div class="tile is-vertical">
-                            <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">CLIMA</div>
-
+                            
                             <div v-if="!canEditSurface" class="tile is-parent box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                <div class="is-size-6 has-text-weight-bold">CLIMA</div>
                                 <div class="tile is-parent is-vertical" v-if="sala.current_air_conditioner_capacity">
                                     <div class="has-text-centered">
                                         <div class="level">
@@ -246,6 +284,7 @@
                             </div>
 
                             <a v-if="canEditSurface" @click="isNewAirConditionerModalActive = true" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                <div class="is-size-6 has-text-weight-bold">CLIMA</div>
                                 <div class="tile is-parent is-vertical" v-if="sala.current_air_conditioner_capacity">
                                     <div class="has-text-centered">
                                         <div class="level">
@@ -555,13 +594,6 @@
                     </b-field>
                 </div>
             </div>
-
-            <!-- <div class="tile is-ancestor" v-if="sala.current_room_distribution">
-                
-            </div> -->
-                
-            <!-- <div class="is-divider" data-content="ESPACIO"></div> -->
-            <!-- <space-chart/> -->
             
         </div>
 

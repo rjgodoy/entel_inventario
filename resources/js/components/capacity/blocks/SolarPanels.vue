@@ -1,70 +1,64 @@
 <template>
     <div class="tile is-parent">
         <section class="tile box">
-            <!-- <b-field label="PANELES SOLARES" label-position="on-border" class="tile"> -->
-                <!-- <div class="tile box is-shadowless" style="border: solid 0.05rem black"> -->
-                    <div class="tile is-vertical">
+            <div class="tile is-vertical">
 
-                        <div class="field">
-                            <div class="is-pulled-right">
-                                <font-awesome-icon :icon="['fas', 'plus']"
-                                <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
-                                    <a @click="isNewSolarPanelModalActive = true">Agregar</a>
-                                </b-tag>
-                            </div>
-                            <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">PANELES SOLARES</div>
-                        </div>
-                        
+                <div class="columns">
+                    <div class="column">
+                        <div class="is-size-6 has-text-weight-bold">PANELES SOLARES</div>
+                    </div>
+                    <div class="column">
+                        <a @click="isNewSolarPanelModalActive = true">
+                            <b-tag class="is-pulled-right is-link has-text-weight-light is-size-7">
+                                <font-awesome-icon :icon="['fas', 'plus']"/>
+                            </b-tag>
+                        </a>
+                    </div>
+                </div>
 
-                        <div class="tile is-vertical is-parent">
+                <div class="tile is-vertical" v-if="hasSolarPanels()">
+                    <div class="tile is-parent">
+                        <b-field label="CAPACIDADES" label-position="on-border" class="tile">
+                            <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black">
 
-                            <b-field label="CAPACIDADES" label-position="on-border" class="tile is-parent">
-                                <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black">
-
-                                    <div class="tile">
-                                        <div class="tile is-parent">
-                                            <div class="has-text-centered tile is-child">
-                                                <div class="has-text-weight-semibold is-size-6">{{ photovoltaicCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
-                                                <div class="has-text-weight-normal is-size-7">Total</div>
-                                            </div>
+                                <div class="tile">
+                                    <div class="tile is-parent">
+                                        <div class="has-text-centered tile is-child">
+                                            <div class="has-text-weight-semibold is-size-6">{{ photovoltaicCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
+                                            <div class="has-text-weight-normal is-size-7">Total</div>
                                         </div>
                                     </div>
-
-                                </div>
-                            </b-field>
-
-                            <div class="tile is-parent columns is-multiline" v-if="hasSolarPanels">
-
-                                <div v-for="junction in junctions" class="tile">
-                                    <div class="tile column is-parent is-4" v-for="solarPanel in junction.solar_panels" :key="solarPanel.id">
-                                        <a class="box tile " @click="isJunctionModalActive = true">
-                                            <div class="">
-                                                <div class="columns">
-                                                    <div class="column is-4">
-                                                        <div class="has-text-weight-semibold is-size-6">Paneles Solar</div>
-                                                    </div>
-                                                </div>   
-                                            </div>
-                                        </a>
-                                    </div>
                                 </div>
 
                             </div>
-                        </div>
+                        </b-field>
+                    </div>
 
-                        <div class="tile columns is-vcentered" v-if="!hasSolarPanels">
-                            <div class="column">
-                                <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                    <div class="block">NO TIENE PANELES SOLARES</div>
-                                    <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
-                                        <a @click="isNewSolarPanelModalActive = true">Agregar</a>
-                                    </b-tag>
+                    <div class="tile is-parent">
+                        <div class="columns is-multiline tile">
+                            <div v-for="junction in junctions" class="tile">
+                                <div class="tile column is-parent is-4" v-for="solarPanel in junction.solar_panels" :key="solarPanel.id">
+                                    <a class="box tile is-dark is-bold has-text-warning" @click="isJunctionModalActive = true">
+                                        <div class="columns">
+                                            <div class="column">
+                                                <div class="has-text-weight-semibold is-size-6">P. Solar</div>
+                                            </div>
+                                        </div>   
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <!-- </div> -->
-            <!-- </b-field> -->
+                </div>
+
+                <div class="tile columns is-vcentered" v-if="!hasSolarPanels()">
+                    <div class="column">
+                        <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                            <div class="block">NO TIENE PANELES SOLARES</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <b-modal :active.sync="isNewSolarPanelModalActive"
             has-modal-card
@@ -101,12 +95,15 @@
         },
 
         computed: {
-            async hasSolarPanels() {
-                await Object.keys(this.junctions).forEach(element => {
-                    return this.junctions[element].solar_panels.length && true
-                })
-                return false
-            },
+            // hasSolarPanels() {
+            //     Object.keys(this.junctions).forEach(element => {
+            //         console.log(this.junctions[element].solar_panels.length)
+            //         if (this.junctions[element].solar_panels.length) {
+            //             return true
+            //         }
+            //     })
+            //     return false
+            // },
 
             photovoltaicCapacity() {
                 let capacity = 0
@@ -125,7 +122,7 @@
 
         watch: {
             junctions(val) {
-
+                // this.hasSolarPanels()
             }
         },
         
@@ -135,6 +132,18 @@
         },
 
         methods: {
+            hasSolarPanels() {
+                let panels = []
+                Object.keys(this.junctions).forEach(element => {
+                    console.log(this.junctions[element].solar_panels.length)
+                    if (this.junctions[element].solar_panels.length) {
+                        Object.keys(this.junctions[element].solar_panels).forEach(element => {
+                            panels.push(this.junctions[element].solar_panels)
+                        })
+                    }
+                })
+                return panels.length ? true : false
+            },
 
         }
     }

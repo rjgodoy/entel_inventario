@@ -117,17 +117,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalGenerator: function ModalGenerator() {
       return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/generator */ "chunks/pop/layout/modals/generator").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalGenerator */ "./resources/js/components/pop/layout/modals/ModalGenerator.vue"));
+    },
+    ModalNewGeneratorSet: function ModalNewGeneratorSet() {
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newGeneratorSet */ "chunks/pop/layout/modals/newGeneratorSet").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalNewGeneratorSet */ "./resources/js/components/pop/layout/modals/ModalNewGeneratorSet.vue"));
     }
   },
   props: ['generatorSets', 'can', 'user', 'pop'],
   data: function data() {
     return {
       generatorSetSelected: null,
-      isGeneratorModalActive: false
+      isGeneratorModalActive: false,
+      isNewGeneratorSetModalActive: false
     };
   },
   computed: {
@@ -364,355 +382,383 @@ var render = function() {
     [
       _c("section", { staticClass: "tile box" }, [
         _c("div", { staticClass: "tile is-vertical" }, [
-          _c(
-            "div",
-            {
-              staticClass: "is-size-6 has-text-weight-bold",
-              staticStyle: { "padding-bottom": "12px" }
-            },
-            [_vm._v("GRUPOS ELECTROGENOS")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "tile is-vertical" }, [
-            _c("div", { staticClass: "tile" }, [
-              _vm.totalGeneratorSetsCapacityA
-                ? _c(
-                    "div",
-                    { staticClass: "tile is-parent" },
-                    [
-                      _c(
-                        "b-field",
-                        {
-                          staticClass: "tile",
-                          attrs: {
-                            label: "CAPACIDAD PLANO A",
-                            "label-position": "on-border"
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "tile is-parent box is-shadowless",
-                              staticStyle: { border: "solid 0.05rem black" }
-                            },
-                            [
-                              _c("div", { staticClass: "level tile" }, [
-                                _c("div", { staticClass: "level-item" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "has-text-centered" },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-6"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm._f("numeral")(
-                                                _vm.totalGeneratorSetsCapacityA,
-                                                "0,0.0"
-                                              )
-                                            ) + " "
-                                          ),
-                                          _c(
-                                            "span",
-                                            { staticClass: "is-size-7" },
-                                            [_vm._v("kW")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-normal is-size-7"
-                                        },
-                                        [_vm._v("Total")]
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "level-item" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "has-text-centered" },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-6"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm._f("numeral")(
-                                                _vm.usedGeneratorSetsCapacityA,
-                                                "0,0.0"
-                                              )
-                                            ) + " "
-                                          ),
-                                          _c(
-                                            "span",
-                                            { staticClass: "is-size-7" },
-                                            [_vm._v("kW")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-normal is-size-7"
-                                        },
-                                        [_vm._v("Utilizada")]
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "level-item" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "has-text-centered" },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-6"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm._f("numeral")(
-                                                _vm.availableGeneratorSetsCapacityA,
-                                                "0,0.0"
-                                              )
-                                            ) + " "
-                                          ),
-                                          _c(
-                                            "span",
-                                            { staticClass: "is-size-7" },
-                                            [_vm._v("kW")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-normal is-size-7"
-                                        },
-                                        [_vm._v("Disponible")]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ])
-                            ]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.totalGeneratorSetsCapacityB
-                ? _c(
-                    "div",
-                    { staticClass: "tile is-parent" },
-                    [
-                      _c(
-                        "b-field",
-                        {
-                          staticClass: "tile",
-                          attrs: {
-                            label: "PLANO B",
-                            "label-position": "on-border"
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "tile is-parent box is-shadowless",
-                              staticStyle: { border: "solid 0.05rem black" }
-                            },
-                            [
-                              _c("div", { staticClass: "level tile" }, [
-                                _c("div", { staticClass: "level-item" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "has-text-centered" },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-6"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm._f("numeral")(
-                                                _vm.totalGeneratorSetsCapacityB,
-                                                "0,0.0"
-                                              )
-                                            ) + " "
-                                          ),
-                                          _c(
-                                            "span",
-                                            { staticClass: "is-size-7" },
-                                            [_vm._v("kW")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-normal is-size-7"
-                                        },
-                                        [_vm._v("Total")]
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "level-item" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "has-text-centered" },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-6"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm._f("numeral")(
-                                                _vm.usedGeneratorSetsCapacityB,
-                                                "0,0.0"
-                                              )
-                                            ) + " "
-                                          ),
-                                          _c(
-                                            "span",
-                                            { staticClass: "is-size-7" },
-                                            [_vm._v("kW")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-normal is-size-7"
-                                        },
-                                        [_vm._v("Utilizada")]
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "level-item" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "has-text-centered" },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-semibold is-size-6"
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm._f("numeral")(
-                                                _vm.availableGeneratorSetsCapacityB,
-                                                "0,0.0"
-                                              )
-                                            ) + " "
-                                          ),
-                                          _c(
-                                            "span",
-                                            { staticClass: "is-size-7" },
-                                            [_vm._v("kW")]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "has-text-weight-normal is-size-7"
-                                        },
-                                        [_vm._v("Disponible")]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ])
-                            ]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ]),
+          _c("div", { staticClass: "columns" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tile is-parent columns is-multiline" },
-              _vm._l(_vm.generatorSets, function(generatorSet) {
-                return _c(
-                  "div",
-                  {
-                    key: generatorSet.id,
-                    staticClass: "column tile is-parent",
-                    class: _vm.generatorSets.length > 1 && "is-6"
-                  },
-                  [
-                    _c("div", { staticClass: "tile " }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "tile is-parent box",
-                          on: {
-                            click: function($event) {
-                              _vm.isGeneratorModalActive = true
-                              _vm.generatorSetSelected = generatorSet
-                            }
-                          }
-                        },
-                        [_vm._m(0, true)]
+            _c("div", { staticClass: "column" }, [
+              _c(
+                "a",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.isNewGeneratorSetModalActive = true
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "b-tag",
+                    {
+                      staticClass:
+                        "is-pulled-right is-link has-text-weight-light is-size-7 is-light"
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        attrs: { icon: ["fas", "plus"] }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.generatorSets.length
+            ? _c("div", { staticClass: "tile is-vertical" }, [
+                _c("div", { staticClass: "tile" }, [
+                  _vm.totalGeneratorSetsCapacityA
+                    ? _c(
+                        "div",
+                        { staticClass: "tile is-parent" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              staticClass: "tile",
+                              attrs: {
+                                label: "CAPACIDADES PLANO A",
+                                "label-position": "on-border"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "tile is-parent box is-shadowless",
+                                  staticStyle: { border: "solid 0.05rem black" }
+                                },
+                                [
+                                  _c("div", { staticClass: "level tile" }, [
+                                    _c("div", { staticClass: "level-item" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "has-text-centered" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-semibold is-size-6"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.totalGeneratorSetsCapacityA,
+                                                    "0,0.0"
+                                                  )
+                                                ) + " "
+                                              ),
+                                              _c(
+                                                "span",
+                                                { staticClass: "is-size-7" },
+                                                [_vm._v("kW")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("Total")]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "level-item" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "has-text-centered" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-semibold is-size-6"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.usedGeneratorSetsCapacityA,
+                                                    "0,0.0"
+                                                  )
+                                                ) + " "
+                                              ),
+                                              _c(
+                                                "span",
+                                                { staticClass: "is-size-7" },
+                                                [_vm._v("kW")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("Utilizada")]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "level-item" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "has-text-centered" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-semibold is-size-6"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.availableGeneratorSetsCapacityA,
+                                                    "0,0.0"
+                                                  )
+                                                ) + " "
+                                              ),
+                                              _c(
+                                                "span",
+                                                { staticClass: "is-size-7" },
+                                                [_vm._v("kW")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("Disponible")]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        ],
+                        1
                       )
-                    ])
-                  ]
-                )
-              }),
-              0
-            )
-          ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.totalGeneratorSetsCapacityB
+                    ? _c(
+                        "div",
+                        { staticClass: "tile is-parent" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              staticClass: "tile",
+                              attrs: {
+                                label: "CAPACIDADES PLANO B",
+                                "label-position": "on-border"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "tile is-parent box is-shadowless",
+                                  staticStyle: { border: "solid 0.05rem black" }
+                                },
+                                [
+                                  _c("div", { staticClass: "level tile" }, [
+                                    _c("div", { staticClass: "level-item" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "has-text-centered" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-semibold is-size-6"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.totalGeneratorSetsCapacityB,
+                                                    "0,0.0"
+                                                  )
+                                                ) + " "
+                                              ),
+                                              _c(
+                                                "span",
+                                                { staticClass: "is-size-7" },
+                                                [_vm._v("kW")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("Total")]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "level-item" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "has-text-centered" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-semibold is-size-6"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.usedGeneratorSetsCapacityB,
+                                                    "0,0.0"
+                                                  )
+                                                ) + " "
+                                              ),
+                                              _c(
+                                                "span",
+                                                { staticClass: "is-size-7" },
+                                                [_vm._v("kW")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("Utilizada")]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "level-item" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "has-text-centered" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-semibold is-size-6"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("numeral")(
+                                                    _vm.availableGeneratorSetsCapacityB,
+                                                    "0,0.0"
+                                                  )
+                                                ) + " "
+                                              ),
+                                              _c(
+                                                "span",
+                                                { staticClass: "is-size-7" },
+                                                [_vm._v("kW")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-normal is-size-7"
+                                            },
+                                            [_vm._v("Disponible")]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "tile is-parent" }, [
+                  _c(
+                    "div",
+                    { staticClass: "columns tile is-multiline" },
+                    _vm._l(_vm.generatorSets, function(generatorSet) {
+                      return _c(
+                        "div",
+                        {
+                          key: generatorSet.id,
+                          staticClass: "column tile is-parent is-6"
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "tile box is-dark is-bold has-text-warning",
+                              on: {
+                                click: function($event) {
+                                  _vm.isGeneratorModalActive = true
+                                  _vm.generatorSetSelected = generatorSet
+                                }
+                              }
+                            },
+                            [_vm._m(1, true)]
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
@@ -742,6 +788,30 @@ var render = function() {
           })
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isNewGeneratorSetModalActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isNewGeneratorSetModalActive = $event
+            }
+          }
+        },
+        [
+          _c("modal-new-generator-set", {
+            attrs: { user: _vm.user, pop: _vm.pop }
+          })
+        ],
+        1
       )
     ],
     1
@@ -752,14 +822,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "is-size-6 has-text-weight-bold" }, [
+        _vm._v("GRUPOS ELECTROGENOS")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "columns" }, [
       _c("div", { staticClass: "column" }, [
         _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
           _vm._v("Grupo Electrógeno")
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "column is-2 has-text-centered" })
+      ])
     ])
   }
 ]

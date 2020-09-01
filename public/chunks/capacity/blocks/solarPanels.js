@@ -9,20 +9,6 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -113,44 +99,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   computed: {
-    hasSolarPanels: function () {
-      var _hasSolarPanels = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return Object.keys(this.junctions).forEach(function (element) {
-                  return _this.junctions[element].solar_panels.length && true;
-                });
-
-              case 2:
-                return _context.abrupt("return", false);
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function hasSolarPanels() {
-        return _hasSolarPanels.apply(this, arguments);
-      }
-
-      return hasSolarPanels;
-    }(),
+    // hasSolarPanels() {
+    //     Object.keys(this.junctions).forEach(element => {
+    //         console.log(this.junctions[element].solar_panels.length)
+    //         if (this.junctions[element].solar_panels.length) {
+    //             return true
+    //         }
+    //     })
+    //     return false
+    // },
     photovoltaicCapacity: function photovoltaicCapacity() {
-      var _this2 = this;
+      var _this = this;
 
       var capacity = 0;
       Object.keys(this.junctions).forEach(function (element) {
-        var junction = _this2.junctions[element];
+        var junction = _this.junctions[element];
 
         if (junction.solar_panels.length) {
           Object.keys(junction.solar_panels).forEach(function (element) {
@@ -163,12 +126,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   watch: {
-    junctions: function junctions(val) {}
+    junctions: function junctions(val) {// this.hasSolarPanels()
+    }
   },
   mounted: function mounted() {// console.log(this.generatorSets)
     // this.getGeneratorSets()
   },
-  methods: {}
+  methods: {
+    hasSolarPanels: function hasSolarPanels() {
+      var _this2 = this;
+
+      var panels = [];
+      Object.keys(this.junctions).forEach(function (element) {
+        console.log(_this2.junctions[element].solar_panels.length);
+
+        if (_this2.junctions[element].solar_panels.length) {
+          Object.keys(_this2.junctions[element].solar_panels).forEach(function (element) {
+            panels.push(_this2.junctions[element].solar_panels);
+          });
+        }
+      });
+      return panels.length ? true : false;
+    }
+  }
 });
 
 /***/ }),
@@ -194,111 +174,119 @@ var render = function() {
     [
       _c("section", { staticClass: "tile box" }, [
         _c("div", { staticClass: "tile is-vertical" }, [
-          _c("div", { staticClass: "field" }, [
-            _c(
-              "div",
-              { staticClass: "is-pulled-right" },
-              [
-                _c(
-                  "b-tag",
-                  {
-                    staticClass:
-                      "is-default has-text-weight-light has-text-grey is-size-7"
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.isNewSolarPanelModalActive = true
-                          }
-                        }
-                      },
-                      [_vm._v("Agregar")]
-                    )
-                  ]
-                )
-              ],
-              1
-            ),
+          _c("div", { staticClass: "columns" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "is-size-6 has-text-weight-bold",
-                staticStyle: { "padding-bottom": "12px" }
-              },
-              [_vm._v("PANELES SOLARES")]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tile is-vertical is-parent" },
-            [
+            _c("div", { staticClass: "column" }, [
               _c(
-                "b-field",
+                "a",
                 {
-                  staticClass: "tile is-parent",
-                  attrs: { label: "CAPACIDADES", "label-position": "on-border" }
+                  on: {
+                    click: function($event) {
+                      _vm.isNewSolarPanelModalActive = true
+                    }
+                  }
                 },
                 [
                   _c(
-                    "div",
+                    "b-tag",
                     {
-                      staticClass: "tile box is-shadowless is-paddingless",
-                      staticStyle: { border: "solid 0.05rem black" }
+                      staticClass:
+                        "is-pulled-right is-link has-text-weight-light is-size-7"
                     },
                     [
-                      _c("div", { staticClass: "tile" }, [
-                        _c("div", { staticClass: "tile is-parent" }, [
-                          _c(
-                            "div",
-                            { staticClass: "has-text-centered tile is-child" },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-semibold is-size-6"
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("numeral")(
-                                        _vm.photovoltaicCapacity,
-                                        "0,0.0"
-                                      )
-                                    ) + "  "
-                                  ),
-                                  _c("span", { staticClass: "is-size-7" }, [
-                                    _vm._v("kW")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "has-text-weight-normal is-size-7"
-                                },
-                                [_vm._v("Total")]
-                              )
-                            ]
-                          )
-                        ])
-                      ])
-                    ]
+                      _c("font-awesome-icon", {
+                        attrs: { icon: ["fas", "plus"] }
+                      })
+                    ],
+                    1
                   )
-                ]
-              ),
-              _vm._v(" "),
-              _vm.hasSolarPanels
-                ? _c(
+                ],
+                1
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.hasSolarPanels()
+            ? _c("div", { staticClass: "tile is-vertical" }, [
+                _c(
+                  "div",
+                  { staticClass: "tile is-parent" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        staticClass: "tile",
+                        attrs: {
+                          label: "CAPACIDADES",
+                          "label-position": "on-border"
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "tile box is-shadowless is-paddingless",
+                            staticStyle: { border: "solid 0.05rem black" }
+                          },
+                          [
+                            _c("div", { staticClass: "tile" }, [
+                              _c("div", { staticClass: "tile is-parent" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "has-text-centered tile is-child"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-semibold is-size-6"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("numeral")(
+                                              _vm.photovoltaicCapacity,
+                                              "0,0.0"
+                                            )
+                                          ) + "  "
+                                        ),
+                                        _c(
+                                          "span",
+                                          { staticClass: "is-size-7" },
+                                          [_vm._v("kW")]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-normal is-size-7"
+                                      },
+                                      [_vm._v("Total")]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "tile is-parent" }, [
+                  _c(
                     "div",
-                    { staticClass: "tile is-parent columns is-multiline" },
+                    { staticClass: "columns is-multiline tile" },
                     _vm._l(_vm.junctions, function(junction) {
                       return _c(
                         "div",
@@ -314,14 +302,15 @@ var render = function() {
                               _c(
                                 "a",
                                 {
-                                  staticClass: "box tile ",
+                                  staticClass:
+                                    "box tile is-dark is-bold has-text-warning",
                                   on: {
                                     click: function($event) {
                                       _vm.isJunctionModalActive = true
                                     }
                                   }
                                 },
-                                [_vm._m(0, true)]
+                                [_vm._m(1, true)]
                               )
                             ]
                           )
@@ -331,49 +320,13 @@ var render = function() {
                     }),
                     0
                   )
-                : _vm._e()
-            ],
-            1
-          ),
-          _vm._v(" "),
-          !_vm.hasSolarPanels
-            ? _c("div", { staticClass: "tile columns is-vcentered" }, [
-                _c("div", { staticClass: "column" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "has-text-centered has-text-weight-light has-text-grey is-size-7"
-                    },
-                    [
-                      _c("div", { staticClass: "block" }, [
-                        _vm._v("NO TIENE PANELES SOLARES")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "b-tag",
-                        {
-                          staticClass:
-                            "is-default has-text-weight-light has-text-grey is-size-7"
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              on: {
-                                click: function($event) {
-                                  _vm.isNewSolarPanelModalActive = true
-                                }
-                              }
-                            },
-                            [_vm._v("Agregar")]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
                 ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.hasSolarPanels()
+            ? _c("div", { staticClass: "tile columns is-vcentered" }, [
+                _vm._m(2)
               ])
             : _vm._e()
         ])
@@ -411,14 +364,41 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", {}, [
-      _c("div", { staticClass: "columns" }, [
-        _c("div", { staticClass: "column is-4" }, [
-          _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
-            _vm._v("Paneles Solar")
-          ])
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "is-size-6 has-text-weight-bold" }, [
+        _vm._v("PANELES SOLARES")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column" }, [
+        _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
+          _vm._v("P. Solar")
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "has-text-centered has-text-weight-light has-text-grey is-size-7"
+        },
+        [
+          _c("div", { staticClass: "block" }, [
+            _vm._v("NO TIENE PANELES SOLARES")
+          ])
+        ]
+      )
     ])
   }
 ]

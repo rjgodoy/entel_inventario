@@ -112,6 +112,13 @@
 
                                         <hr class="dropdown-divider" aria-role="menuitem">
 
+                                        <!-- <b-dropdown-item @click="changeStyle" v-model="darkMode" class="is-small has-text-grey-dark" disabled>
+                                            <div class="is-size-6 has-text-weight-normal">
+                                                <font-awesome-icon :icon="['fas','adjust']" />
+                                                &nbsp;{{ style }}
+                                            </div>
+                                        </b-dropdown-item> -->
+
                                         <router-link v-if="canView('/admin')" class="dropdown-item bd-is-rss is-small has-text-grey-dark" to="/admin" aria-role="menuitem">
                                             <div class="is-size-6 has-text-weight-normal">
                                                 <font-awesome-icon :icon="['fas','cogs']" />
@@ -119,12 +126,7 @@
                                             </div>
                                         </router-link>
 
-                                        <b-dropdown-item @click="changeStyle" v-model="darkMode" disabled>
-                                            <font-awesome-icon :icon="['fas','adjust']" />
-                                            &nbsp;{{ style }}
-                                        </b-dropdown-item>
-
-                                        <hr class="navbar-divider">
+                                        <hr class="navbar-divider" v-if="canView('/admin')" >
 
                                         <a class="bd-is-rss is-small has-text-grey-dark dropdown-item" aria-role="menuitem" @click.prevent="logout">
                                             <div class="is-size-6 has-text-weight-normal">

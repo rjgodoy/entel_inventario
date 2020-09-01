@@ -10,14 +10,22 @@
                 <div class="tile">
                     <div class="tile is-parent is-4">
                         <div class="tile box is-child">
-                            <a @click="isEditMode = !isEditMode; updateAutonomy()" v-if="canEditJunctions" class="is-pulled-right">
-                                <b-tag :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small">
-                                    {{ isEditMode ? 'Guardar' : 'Editar' }}
-                                </b-tag>
-                            </a>
-                            <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">AUTONOMIA DEL POP</div>
-                            <div v-if="!isEditMode" class="is-size-5 has-text-weight-semibold">{{ newTheoreticalAutonomy }} <span class="is-size-6">hrs</span></div>
-                            <b-input v-if="isEditMode" size="is-small" v-model="newTheoreticalAutonomy"></b-input>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="is-size-6 has-text-weight-bold">AUTONOMIA DEL POP</div>
+                                </div>
+                                <div class="column" v-if="canEditJunctions">
+                                    <a @click="isEditMode = !isEditMode; updateAutonomy()">
+                                        <b-tag class="is-pulled-right has-text-weight-light is-size-7" :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small">
+                                            <font-awesome-icon :icon="isEditMode ? ['fas', 'check'] : ['fas', 'pencil-alt']" />
+                                        </b-tag>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div v-if="!isEditMode" class="is-size-4 has-text-weight-semibold">{{ newTheoreticalAutonomy }} <span class="is-size-5">hrs</span></div>
+                            <b-input v-if="isEditMode" v-model="newTheoreticalAutonomy"></b-input>
                         </div>
                     </div>
                 </div>
@@ -120,6 +128,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
         created() {
             this.$eventBus.$on('junction-measurements-updated', this.getJunctions)
             this.$eventBus.$on('generator-set-capacities-updated', this.getGeneratorSets)
+            this.$eventBus.$on('new-solar-panel', this.getJunctions)
         },
 
         mounted() {
@@ -128,9 +137,9 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
         },
 
         methods: {
-            async getJunctions() {
+            getJunctions() {
                 if(this.pop) {
-                    await axios.get(`/api/popJunctions/${this.pop.id}`)
+                    axios.get(`/api/popJunctions/${this.pop.id}`)
                     .then((response) => {
                         this.junctions = response.data.junctions
                         this.canEditJunctions = response.data.can
@@ -141,9 +150,9 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
                 }
             },
 
-            async getGeneratorSets() {
+            getGeneratorSets() {
                 if(this.pop) {
-                    await axios.get(`/api/generatorSets/${this.pop.id}`)
+                    axios.get(`/api/generatorSets/${this.pop.id}`)
                     .then((response) => {
                         this.generatorSets = response.data.generatorSets
                         this.canEditGeneratorGroups = response.data.can
@@ -171,6 +180,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
         beforeDestroy() {
             this.$eventBus.$off('junction-measurements-updated')
             this.$eventBus.$off('generator-set-capacities-updated')
+            this.$eventBus.$off('new-solar-panel')
         }
     }
 </script>

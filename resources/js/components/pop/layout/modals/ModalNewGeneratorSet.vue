@@ -2,7 +2,7 @@
     <div class="modal-card" style="width: auto;">
         <div class="modal-card" style="width: auto">
             <header class="modal-card-head">
-                <p class="modal-card-title">Registrar Paneles Solares</p>
+                <p class="modal-card-title">Registrar Nuevo Generador</p>
             </header>
 
             <section class="modal-card-body">
@@ -56,7 +56,7 @@
     library.add(farTrashAlt);
     export default {
         props : [
-            'junctions',
+            'pop',
             'user'
         ],
 
@@ -92,7 +92,6 @@
 
                 axios.post('/api/solarPanels', params).then(response => {
                     console.log(response.data)
-                    this.$eventBus.$emit('new-solar-panel')
                     this.$parent.close()
                 })
             },

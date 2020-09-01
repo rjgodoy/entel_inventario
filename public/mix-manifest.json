@@ -115,5 +115,6 @@
     "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a.js": "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a.js",
     "/vendors~pdfmake.js": "/vendors~pdfmake.js",
     "/vendors~xlsx.js": "/vendors~xlsx.js",
-    "/xlsx.js": "/xlsx.js"
+    "/xlsx.js": "/xlsx.js",
+    "/chunks/pop/layout/modals/newGeneratorSet.js": "/chunks/pop/layout/modals/newGeneratorSet.js"
 }

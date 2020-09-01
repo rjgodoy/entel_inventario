@@ -93,6 +93,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.post('/api/solarPanels', params).then(function (response) {
         console.log(response.data);
 
+        _this.$eventBus.$emit('new-solar-panel');
+
         _this.$parent.close();
       });
     }

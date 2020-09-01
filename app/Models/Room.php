@@ -49,6 +49,16 @@ class Room extends Model
      *
      * @var array
      */
+    public function current_air_conditioner_capacity() 
+    {
+        return $this->hasOne(AirConditionerCapacity::class)->latest();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function fire_detections() 
     {
         return $this->hasMany(FireDetection::class);
@@ -142,6 +152,16 @@ class Room extends Model
     public function room_surfaces()
     {
         return $this->hasMany(RoomSurface::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function air_conditioner_capacities()
+    {
+        return $this->hasMany(AirConditionerCapacity::class);
     }
 
 }

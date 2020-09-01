@@ -458,10 +458,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
         "thresholds": this.thresholds.batteries
       }, {
         "title": "Clima",
-        "total": this.totalJunctionsCapacity,
-        "used": this.totalUsedJunctionsCapacity,
-        "available": this.totalAvailableJunctionsCapacity,
-        "isLoading": this.junctions.length && this.totalJunctionsCapacity == 0 ? true : false,
+        "total": this.totalClimateCapacity,
+        "used": this.usedClimateCapacity,
+        "available": this.totalAvailableClimateCapacity,
+        "isLoading": this.totalClimateCapacity && !this.usedClimateCapacity ? true : false,
         "thresholds": this.thresholds.climate
       }, {
         "title": "Distribución",
@@ -873,6 +873,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       this.usedPRCapacity = usedRoomCapacity;
       return usedRoomCapacity;
     },
+    // Climate
+    totalClimateCapacity: function totalClimateCapacity() {
+      return this.room.current_air_conditioner_capacity ? this.room.current_air_conditioner_capacity.total_capacity : 0;
+    },
+    usedClimateCapacity: function usedClimateCapacity() {
+      return this.room.current_air_conditioner_capacity ? this.room.current_air_conditioner_capacity.used_capacity : 0;
+    },
+    totalAvailableClimateCapacity: function totalAvailableClimateCapacity() {
+      return this.totalClimateCapacity - this.usedClimateCapacity;
+    },
     // Distribution
     totalDistributionCapacity: function totalDistributionCapacity() {
       return this.room.current_room_distribution ? this.room.current_room_distribution.total_capacity : 0;
@@ -1036,6 +1046,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     this.$eventBus.$on('new-plane-updated', this.getRoomData);
     this.$eventBus.$on('new-battery-bank', this.getRoomData);
     this.$eventBus.$on('new-room', this.getRoomData);
+    this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
   },
   mounted: function mounted() {
     this.getRoomData();
@@ -1140,18 +1151,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       }
     },
     photovoltaicCapacity: function photovoltaicCapacity(junction) {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
       var capacity = 0;
 
-      if (junction.latest_solar_panel) {
-        var solarPanelGroupQuantity = 6;
-
-        for (var i = 1; i < solarPanelGroupQuantity; i++) {
-          capacity = capacity + junction.latest_solar_panel['unit_capacity_group_' + i] * junction.latest_solar_panel['quantity_group_' + i];
-        }
+      if (junction.solar_panels.length) {
+        Object.keys(junction.solar_panels).forEach(function (element) {
+          var panel = junction.solar_panels[element];
+          capacity = capacity + panel.unit_capacity * panel.quantity;
+        });
       }
 
-      return capacity;
+      return capacity / 1000;
     },
     batteryRechargePower: function batteryRechargePower(plane) {
       return this.rechargeCurrent(plane) * plane.float_tension / 1000;
@@ -1511,6 +1520,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     this.$eventBus.$off('new-plane-updated');
     this.$eventBus.$off('new-battery-bank');
     this.$eventBus.$off('new-room');
+    this.$eventBus.$off('air-conditioner-capacity');
   }
 });
 

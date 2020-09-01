@@ -29,20 +29,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    AirConditioner: function AirConditioner() {
-      return __webpack_require__.e(/*! import() | chunks/pop/climate/airConditioner */ "chunks/pop/climate/airConditioner").then(__webpack_require__.bind(null, /*! ../../../pop/climate/AirConditioner */ "./resources/js/components/pop/climate/AirConditioner.vue"));
+  props: ['canEdit', 'sala', 'user'],
+  mounted: function mounted() {
+    console.log(this.sala.current_air_conditioner_capacity);
+  },
+  data: function data() {
+    return {
+      isEditMode: false,
+      newTotalCapacity: this.sala.current_air_conditioner_capacity ? this.sala.current_air_conditioner_capacity.total_capacity : 0,
+      newUsedCapacity: this.sala.current_air_conditioner_capacity ? this.sala.current_air_conditioner_capacity.used_capacity : 0
+    };
+  },
+  computed: {
+    totalCapacity: function totalCapacity() {
+      return this.sala.current_air_conditioner_capacity ? this.sala.current_air_conditioner_capacity.total_capacity : 0;
+    },
+    usedCapacity: function usedCapacity() {
+      return this.sala.current_air_conditioner_capacity ? this.sala.current_air_conditioner_capacity.used_capacity : 0;
+    },
+    availableCapacity: function availableCapacity() {
+      return this.newTotalCapacity - this.newUsedCapacity;
     }
   },
-  props: ['pop', 'can', 'airConditioner', 'user'],
-  data: function data() {
-    return {};
-  },
-  watch: {},
-  created: function created() {},
-  mounted: function mounted() {},
-  methods: {}
+  methods: {
+    saveChanges: function saveChanges() {
+      var _this = this;
+
+      if (!this.isEditMode && this.totalCapacity != this.newTotalCapacity || this.usedCapacity != this.newUsedCapacity) {
+        var params = {
+          'user_id': this.user.id,
+          'total_capacity': parseFloat(this.newTotalCapacity),
+          'used_capacity': parseFloat(this.newUsedCapacity),
+          'room_id': this.sala.id,
+          'pop_id': this.sala.pop_id
+        }; // console.log(params)
+
+        axios.post("/api/airConditionerCapacities", params).then(function (response) {
+          console.log(response.data);
+
+          _this.$eventBus.$emit('air-conditioner-capacity');
+        });
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -62,32 +127,177 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "modal-card", staticStyle: { width: "800px" } },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "section",
-        {
-          staticClass: "modal-card-body",
-          staticStyle: { background: "rgba(0,0,0,0)" }
-        },
-        [
-          _c("air-conditioner", {
-            attrs: {
-              airConditioner: _vm.airConditioner,
-              pop: _vm.pop,
-              can: _vm.can,
-              user: _vm.user
-            }
-          })
-        ],
-        1
-      )
-    ]
-  )
+  return _c("div", { staticClass: "modal-card" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "section",
+      {
+        staticClass: "modal-card-body",
+        staticStyle: { background: "rgba(255,255,255,0)" }
+      },
+      [
+        _c("section", { staticClass: "section is-paddingless" }, [
+          _c("div", { staticClass: "box" }, [
+            _c("div", { staticClass: "level" }, [
+              _c("div", { staticClass: "level-item" }, [
+                _c(
+                  "div",
+                  { staticClass: "has-text-centered" },
+                  [
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v("Capacidad Total")
+                    ]),
+                    _vm._v(" "),
+                    !_vm.isEditMode
+                      ? _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("numeral")(_vm.newTotalCapacity, "0,0.0")
+                              ) + " "
+                            ),
+                            _c("span", { staticClass: "is-size-6" }, [
+                              _vm._v("kW")
+                            ])
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditMode
+                      ? _c("b-input", {
+                          staticClass: "has-text-weight-bold is-size-5",
+                          attrs: { type: "number" },
+                          model: {
+                            value: _vm.newTotalCapacity,
+                            callback: function($$v) {
+                              _vm.newTotalCapacity = $$v
+                            },
+                            expression: "newTotalCapacity"
+                          }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item" }, [
+                _c(
+                  "div",
+                  { staticClass: "has-text-centered" },
+                  [
+                    _c("div", { staticClass: "is-size-6" }, [
+                      _vm._v("Capacidad Utilizada")
+                    ]),
+                    _vm._v(" "),
+                    !_vm.isEditMode
+                      ? _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("numeral")(_vm.newUsedCapacity, "0,0.0")
+                              ) + " "
+                            ),
+                            _c("span", { staticClass: "is-size-6" }, [
+                              _vm._v("kW")
+                            ])
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditMode
+                      ? _c("b-input", {
+                          staticClass: "has-text-weight-bold is-size-5",
+                          attrs: { type: "number" },
+                          model: {
+                            value: _vm.newUsedCapacity,
+                            callback: function($$v) {
+                              _vm.newUsedCapacity = $$v
+                            },
+                            expression: "newUsedCapacity"
+                          }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item" }, [
+                _c("div", { staticClass: "has-text-centered" }, [
+                  _c("div", { staticClass: "is-size-6" }, [
+                    _vm._v("Capacidad Disponible")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-semibold is-size-5" },
+                    [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(
+                            _vm._f("numeral")(_vm.availableCapacity, "0,0.0")
+                          ) +
+                          " "
+                      ),
+                      _c("span", { staticClass: "is-size-6" }, [_vm._v("kW")])
+                    ]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.canEdit
+              ? _c(
+                  "div",
+                  { staticClass: "field has-text-centered" },
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: {
+                          type: _vm.isEditMode
+                            ? "is-info"
+                            : "is-link is-outlined",
+                          size: "is-small"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.isEditMode = !_vm.isEditMode
+                            _vm.saveChanges()
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "edit"] }
+                        }),
+                        _vm._v(
+                          "\n                          " +
+                            _vm._s(
+                              _vm.isEditMode
+                                ? "Modo Edición"
+                                : "Editar Capacidad de Sala"
+                            ) +
+                            "\n                    "
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              : _vm._e()
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -98,7 +308,7 @@ var staticRenderFns = [
       "header",
       {
         staticClass: "modal-card-head has-text-centered",
-        staticStyle: { background: "rgba(0,0,0,0)" }
+        staticStyle: { background: "rgba(255,255,255,0)" }
       },
       [
         _c(
@@ -106,7 +316,7 @@ var staticRenderFns = [
           {
             staticClass: "modal-card-title has-text-white has-text-weight-bold"
           },
-          [_vm._v("Aire Acondicionado")]
+          [_vm._v("CLIMA")]
         )
       ]
     )

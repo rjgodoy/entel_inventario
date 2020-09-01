@@ -1,13 +1,11 @@
 <template>
     <div class="">
         
-        <section class="section" :class="bodyBackground">
+        <section class="" style="padding-top: 24px; padding-bottom: 12px;">
 
             <!-- ITEMS BUTTONS -->
             <div class="container">
-
-                <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
-
+                <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="tab in tabs" :key="tab.id">
                         <a class="tile is-child box" :key="tab.component" :class="currentTab === tab.component ? 'has-background-link' : boxBackground" @click="currentTab = tab.component">
                             <div :class="currentTab === tab.component ? selectedSecondaryBoxText : secondaryText"> 
@@ -15,7 +13,7 @@
                                     {{ tab.title }}
                                 </div>
 
-                                <div style="margin-top: 10px;">
+                                <div style="padding-top: 10px;">
                                     <div class="is-size-7 has-text-weight-light">{{ tab.description }}</div> 
                                 </div>
                             </div>
@@ -23,7 +21,6 @@
                     </div>
                 </div>
             </div>
-            
         </section>
 
         <keep-alive>

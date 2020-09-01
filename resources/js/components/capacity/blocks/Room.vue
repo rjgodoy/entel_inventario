@@ -200,35 +200,114 @@
                 </div>
 
                 <div class="tile is-parent">
-                    <b-field label="CLIMATIZACION" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''">
-                        <div class="tile is-parent box is-shadowless" style="border: solid 0.1rem #cccccc">
+                    <!-- <b-field label="CLIMATIZACION" label-position="on-border" class="tile" :custom-class="!isCurrentSala(sala) ? 'has-text-grey-light' : ''"> -->
 
-                            <div class="tile is-vertical">
+                        <div class="tile is-vertical">
+                            <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">CLIMA</div>
 
-                                <div class="tile is-parent" v-if="hasAirConditioners(sala)">
-                                    <div class="columns is-multiline tile">
-                                        <div class="tile is-child column is-3"
-                                            v-for="airConditioner in airConditioners" 
-                                            v-if="airConditioner.room_id == sala.id" 
-                                            :key="airConditioner.id" >
-                                            <a class="box" @click="isAirConditionerModalActive = true; airConditionerSelected = airConditioner">
-                                                <div class="field">
-                                                    <div class="has-text-weight-bold is-size-7">AIRE ACONDICIONADO</div>
-                                                    <span class="has-text-weight-bold is-size-6">Nº {{ airConditioner.id }}</span>
+                            <div v-if="!canEditSurface" class="tile is-parent box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                <div class="tile is-parent is-vertical" v-if="sala.current_air_conditioner_capacity">
+                                    <div class="has-text-centered">
+                                        <div class="level">
+                                            <div class="level-item">
+                                                <div class="">
+                                                    <div class="has-text-weight-bold is-size-6">{{ totalAirConditionerCapacity | numeral("0,0.0") }}
+                                                        <span class="is-size-7"> kW</span>
+                                                    </div>
+                                                    <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
                                                 </div>
-                                            </a>
+                                            </div>
+                                            <div class="level-item">
+                                                <div class="">
+                                                    <div class="has-text-weight-bold is-size-6">{{ usedAirConditionerCapacity | numeral("0,0.0") }}
+                                                        <span class="is-size-7"> kW</span>
+                                                    </div>
+                                                    <div class="has-text-weight-normal is-size-7">Capacidad Utilizada</div>
+                                                </div>
+                                            </div>
+                                            <div class="level-item">
+                                                <div class="">
+                                                    <div class="has-text-weight-bold is-size-6">{{ availableAirConditionerCapacity | numeral("0,0.0") }}
+                                                        <span class="is-size-7"> kW</span>
+                                                    </div>
+                                                    <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="tile columns is-vcentered" v-if="!hasAirConditioners(sala)">
+                                <div class="tile columns is-vcentered" v-if="!sala.current_air_conditioner_capacity">
                                     <div class="column">
                                         <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                            <div class="">NO TIENE EQUIPOS DE CLIMA</div>
-                                            <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
-                                                <a @click="isNewAirConditionerModalActive = true">Agregar</a>
-                                            </b-tag>
+                                            NO TIENE DATOS DE CLIMA
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a v-if="canEditSurface" @click="isNewAirConditionerModalActive = true" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                                <div class="tile is-parent is-vertical" v-if="sala.current_air_conditioner_capacity">
+                                    <div class="has-text-centered">
+                                        <div class="level">
+                                            <div class="level-item">
+                                                <div class="">
+                                                    <div class="has-text-weight-bold is-size-6">{{ totalAirConditionerCapacity | numeral("0,0.0") }}
+                                                        <span class="is-size-7"> kW</span>
+                                                    </div>
+                                                    <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
+                                                </div>
+                                            </div>
+                                            <div class="level-item">
+                                                <div class="">
+                                                    <div class="has-text-weight-bold is-size-6">{{ usedAirConditionerCapacity | numeral("0,0.0") }}
+                                                        <span class="is-size-7"> kW</span>
+                                                    </div>
+                                                    <div class="has-text-weight-normal is-size-7">Capacidad Utilizado</div>
+                                                </div>
+                                            </div>
+                                            <div class="level-item">
+                                                <div class="">
+                                                    <div class="has-text-weight-bold is-size-6">{{ availableAirConditionerCapacity | numeral("0,0.0") }}
+                                                        <span class="is-size-7"> kW</span>
+                                                    </div>
+                                                    <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tile columns is-vcentered" v-if="!sala.current_air_conditioner_capacity">
+                                    <div class="column">
+                                        <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                            NO TIENE DATOS DE CLIMA
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <div class="tile is-parent" v-if="hasAirConditioners(sala)">
+                                <div class="columns is-multiline tile">
+                                    <div class="tile is-child column is-3"
+                                        v-for="airConditioner in airConditioners" 
+                                        v-if="airConditioner.room_id == sala.id" 
+                                        :key="airConditioner.id" >
+                                        <a class="box" @click="isAirConditionerModalActive = true; airConditionerSelected = airConditioner">
+                                            <div class="field">
+                                                <div class="has-text-weight-bold is-size-7">AIRE ACONDICIONADO</div>
+                                                <span class="has-text-weight-bold is-size-6">Nº {{ airConditioner.id }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tile columns is-vcentered" v-if="!hasAirConditioners(sala)">
+                                <div class="column">
+                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
+                                        <div class="">NO TIENE EQUIPOS DE CLIMA</div>
+                                        <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
+                                            <a @click="isNewAirConditionerModalActive = true">Agregar</a>
+                                        </b-tag>
                                     </div>
                                 </div>
                             </div>
@@ -576,7 +655,8 @@
             aria-role="dialog"
             aria-modal>
             <modal-new-air-conditioner
-                :room="room" 
+                :canEdit="canEditAirConditioners"
+                :sala="sala" 
                 :user="user"
                 />
         </b-modal>
@@ -708,6 +788,13 @@
                 }
             },
 
+            airConditionerCapacity() {
+                return {
+                    'totalSurface': this.totalSurface,
+                    'usedSurface': this.usedSurface
+                }
+            },
+
             detectionType() {
                 return this.sala.current_fire_detection ? this.sala.current_fire_detection.fire_detection_type.type : 'No tiene'
             },
@@ -735,6 +822,20 @@
             availableSurface() {
                 return this.totalSurface - this.usedSurface
             },
+
+
+            totalAirConditionerCapacity() {
+                return this.sala.current_air_conditioner_capacity ? this.sala.current_air_conditioner_capacity.total_capacity : 0
+            },
+
+            usedAirConditionerCapacity() {
+                return this.sala.current_air_conditioner_capacity ? this.sala.current_air_conditioner_capacity.used_capacity : 0
+            },
+
+            availableAirConditionerCapacity() {
+                return this.totalAirConditionerCapacity - this.usedAirConditionerCapacity
+            },
+
 
             canEditSecurity() {
                 return this.canEditAirConditioners && this.canEditPowerRectifiers

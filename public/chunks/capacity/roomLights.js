@@ -161,14 +161,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return 0;
     },
+    // totalAvailableClimateCapacity() {
+    //     let total = Math.min(20, 25)
+    //     if (total >= 0) {
+    //         return total
+    //     }
+    //     return 0
+    // },
+    totalClimateCapacity: function totalClimateCapacity() {
+      return this.room.current_air_conditioner_capacity ? this.room.current_air_conditioner_capacity.total_capacity : 0;
+    },
+    usedClimateCapacity: function usedClimateCapacity() {
+      return this.room.current_air_conditioner_capacity ? this.room.current_air_conditioner_capacity.used_capacity : 0;
+    },
     totalAvailableClimateCapacity: function totalAvailableClimateCapacity() {
-      var total = Math.min(20, 25);
-
-      if (total >= 0) {
-        return total;
-      }
-
-      return 0;
+      return this.totalClimateCapacity - this.usedClimateCapacity;
     },
     canViewClimate: function canViewClimate() {
       return this.user.roles[0].slug == 'engineer-admin' || this.user.roles[0].slug == 'admin' || this.user.roles[0].slug == 'developer' || this.user.roles[0].slug == 'super-viewer' ? true : false;
@@ -779,18 +786,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     photovoltaicCapacity: function photovoltaicCapacity(junction) {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
       var capacity = 0;
 
-      if (junction.latest_solar_panel) {
-        var solarPanelGroupQuantity = 6;
-
-        for (var i = 1; i < solarPanelGroupQuantity; i++) {
-          capacity = capacity + junction.latest_solar_panel['unit_capacity_group_' + i] * junction.latest_solar_panel['quantity_group_' + i];
-        }
+      if (junction.solar_panels.length) {
+        Object.keys(junction.solar_panels).forEach(function (element) {
+          var panel = junction.solar_panels[element];
+          capacity = capacity + panel.unit_capacity * panel.quantity;
+        });
       }
 
-      return capacity;
+      return capacity / 1000;
     }
   }
 });

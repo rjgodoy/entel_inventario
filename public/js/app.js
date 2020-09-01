@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a":"vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764":"vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/files":"chunks/admin/files","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/maps/mapView":"chunks/maps/mapView","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristicsSide":"chunks/pop/characteristicsSide","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/modalRoom":"chunks/capacity/modals/modalRoom","chunks/capacity/roomLights":"chunks/capacity/roomLights","chunks/pop/layout/modals/newRoom":"chunks/pop/layout/modals/newRoom","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f","chunks/capacity/projection":"chunks/capacity/projection","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity","chunks/capacity/capacity~chunks/capacity/modals/capacity":"chunks/capacity/capacity~chunks/capacity/modals/capacity","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","chunks/maps/mapView/":"chunks/maps/mapView/","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/pop/layout/modals/airConditioner":"chunks/pop/layout/modals/airConditioner","chunks/pop/layout/modals/generator":"chunks/pop/layout/modals/generator","chunks/pop/layout/modals/junction":"chunks/pop/layout/modals/junction","chunks/pop/layout/modals/powerRectifier":"chunks/pop/layout/modals/powerRectifier","chunks/pop/infrastructure/SpaceChart":"chunks/pop/infrastructure/SpaceChart","chunks/pop/layout/capacityChart":"chunks/pop/layout/capacityChart","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/room":"chunks/capacity/blocks/room","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/capacity/modals/calculator":"chunks/capacity/modals/calculator","chunks/capacity/modals/requests":"chunks/capacity/modals/requests","chunks/capacity/modals/projection":"chunks/capacity/modals/projection","chunks/capacity/modals/capacity":"chunks/capacity/modals/capacity","vendors~canvg":"vendors~canvg","vendors~pdfmake":"vendors~pdfmake","vendors~xlsx":"vendors~xlsx","xlsx":"xlsx","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/pop/layout/modals/distribution":"chunks/pop/layout/modals/distribution","chunks/pop/layout/modals/editPlane":"chunks/pop/layout/modals/editPlane","chunks/pop/layout/modals/newAirConditioner":"chunks/pop/layout/modals/newAirConditioner","chunks/pop/layout/modals/newBatteryBank":"chunks/pop/layout/modals/newBatteryBank","chunks/pop/layout/modals/newPowerRectifier":"chunks/pop/layout/modals/newPowerRectifier","chunks/pop/layout/modals/surface":"chunks/pop/layout/modals/surface","chunks/pop/layout/modals/newSolarPanel":"chunks/pop/layout/modals/newSolarPanel","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a":"vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764":"vendors~canvg~chunks/capacityPlanning~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks~a8421764","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/files":"chunks/admin/files","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/maps/mapView":"chunks/maps/mapView","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristicsSide":"chunks/pop/characteristicsSide","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/modalRoom":"chunks/capacity/modals/modalRoom","chunks/capacity/roomLights":"chunks/capacity/roomLights","chunks/pop/layout/modals/newRoom":"chunks/pop/layout/modals/newRoom","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f","chunks/capacity/projection":"chunks/capacity/projection","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a","vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity":"vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity","chunks/capacity/capacity~chunks/capacity/modals/capacity":"chunks/capacity/capacity~chunks/capacity/modals/capacity","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","chunks/maps/mapView/":"chunks/maps/mapView/","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/pop/layout/modals/airConditioner":"chunks/pop/layout/modals/airConditioner","chunks/pop/layout/modals/generator":"chunks/pop/layout/modals/generator","chunks/pop/layout/modals/junction":"chunks/pop/layout/modals/junction","chunks/pop/layout/modals/powerRectifier":"chunks/pop/layout/modals/powerRectifier","chunks/pop/infrastructure/SpaceChart":"chunks/pop/infrastructure/SpaceChart","chunks/pop/layout/capacityChart":"chunks/pop/layout/capacityChart","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/room":"chunks/capacity/blocks/room","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/capacity/modals/calculator":"chunks/capacity/modals/calculator","chunks/capacity/modals/requests":"chunks/capacity/modals/requests","chunks/capacity/modals/projection":"chunks/capacity/modals/projection","chunks/capacity/modals/capacity":"chunks/capacity/modals/capacity","vendors~canvg":"vendors~canvg","vendors~pdfmake":"vendors~pdfmake","vendors~xlsx":"vendors~xlsx","xlsx":"xlsx","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/pop/layout/modals/distribution":"chunks/pop/layout/modals/distribution","chunks/pop/layout/modals/editPlane":"chunks/pop/layout/modals/editPlane","chunks/pop/layout/modals/newAirConditioner":"chunks/pop/layout/modals/newAirConditioner","chunks/pop/layout/modals/newBatteryBank":"chunks/pop/layout/modals/newBatteryBank","chunks/pop/layout/modals/newPowerRectifier":"chunks/pop/layout/modals/newPowerRectifier","chunks/pop/layout/modals/surface":"chunks/pop/layout/modals/surface","chunks/pop/layout/modals/newSolarPanel":"chunks/pop/layout/modals/newSolarPanel","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -12018,14 +12018,6 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -49728,7 +49720,10 @@ var render = function() {
     [
       _c(
         "section",
-        { staticClass: "section has-background-black-ter is-paddingless" },
+        {
+          staticClass: "section has-background-black-ter",
+          staticStyle: { "padding-top": "0px", "padding-bottom": "0px" }
+        },
         [
           _c(
             "div",
@@ -49896,250 +49891,311 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "column is-2",
-                  staticStyle: { "padding-top": "0" }
-                },
-                [
-                  _c("div", { staticClass: "is-size-6" }, [
-                    _c(
-                      "div",
-                      { staticClass: "navbar-end" },
-                      [
-                        _c(
-                          "b-dropdown",
-                          {
-                            attrs: {
-                              hoverable: "",
-                              position: "is-bottom-left",
-                              "aria-role": "menu"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "navbar-item is-small",
-                                attrs: { slot: "trigger", role: "button" },
-                                slot: "trigger"
-                              },
-                              [
-                                _c("font-awesome-icon", {
-                                  class: _vm.userRequestAlerts.length
-                                    ? "has-text-info"
-                                    : "has-text-grey-light",
-                                  attrs: { icon: ["fas", "bell"] }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.userRequestAlerts, function(alert) {
-                              return _c(
-                                "b-dropdown-item",
-                                { key: alert.id, attrs: { "has-link": "" } },
+              _c("div", { staticClass: "column is-2" }, [
+                _c("div", { staticClass: "columns is-vcentered" }, [
+                  _c(
+                    "div",
+                    { staticClass: "column has-text-right is-paddingless" },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "columns",
+                          staticStyle: {
+                            "padding-right": "32px",
+                            "margin-bottom": "6px"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "column control is-paddingless" },
+                            [
+                              _c(
+                                "b-dropdown",
+                                {
+                                  attrs: {
+                                    position: "is-bottom-left",
+                                    "aria-role": "menu"
+                                  }
+                                },
                                 [
                                   _c(
-                                    "router-link",
-                                    { attrs: { to: "/admin#users" } },
+                                    "a",
+                                    {
+                                      staticClass: "tag is-dark",
+                                      attrs: {
+                                        slot: "trigger",
+                                        role: "button"
+                                      },
+                                      slot: "trigger"
+                                    },
                                     [
-                                      _c("p", [
+                                      _c("font-awesome-icon", {
+                                        class: _vm.userRequestAlerts.length
+                                          ? "has-text-info"
+                                          : "has-text-grey-light",
+                                        attrs: { icon: ["fas", "bell"] }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.userRequestAlerts, function(
+                                    alert
+                                  ) {
+                                    return _c(
+                                      "b-dropdown-item",
+                                      {
+                                        key: alert.id,
+                                        attrs: { "has-link": "" }
+                                      },
+                                      [
                                         _c(
-                                          "small",
-                                          { staticClass: "has-text-info" },
-                                          [_vm._v(_vm._s(alert.created_at))]
+                                          "router-link",
+                                          { attrs: { to: "/admin#users" } },
+                                          [
+                                            _c("p", [
+                                              _c(
+                                                "small",
+                                                {
+                                                  staticClass: "has-text-info"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(alert.created_at)
+                                                  )
+                                                ]
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("p", [
+                                              _vm._v(
+                                                "El usuario " +
+                                                  _vm._s(alert.name) +
+                                                  " " +
+                                                  _vm._s(alert.apellido) +
+                                                  " ha solicitado"
+                                              )
+                                            ]),
+                                            _c("p", [
+                                              _vm._v("acceder a Inventario.")
+                                            ])
+                                          ]
                                         )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(
-                                          "El usuario " +
-                                            _vm._s(alert.name) +
-                                            " " +
-                                            _vm._s(alert.apellido) +
-                                            " ha solicitado"
-                                        )
-                                      ]),
-                                      _c("p", [_vm._v("acceder a Inventario.")])
+                                      ],
+                                      1
+                                    )
+                                  }),
+                                  _vm._v(" "),
+                                  !_vm.userRequestAlerts.length
+                                    ? _c(
+                                        "b-dropdown-item",
+                                        { attrs: { "aria-role": "menuitem" } },
+                                        [
+                                          _vm._v(
+                                            "\n                                        👍\n                                         No tienes notificaciones\n                                    "
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-dropdown",
+                                {
+                                  attrs: {
+                                    "aria-role": "menu",
+                                    position: "is-bottom-left",
+                                    "append-to-body": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "tag is-dark",
+                                      attrs: {
+                                        slot: "trigger",
+                                        role: "button"
+                                      },
+                                      slot: "trigger"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        MENU\n                                        "
+                                      ),
+                                      _c("b-icon", {
+                                        attrs: {
+                                          icon: "angle-down",
+                                          pack: "fas"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-dropdown-item",
+                                    {
+                                      attrs: {
+                                        custom: "",
+                                        "aria-role": "menuitem"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "has-text-left" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-7 has-text-weight-light"
+                                            },
+                                            [_vm._v(_vm._s(_vm.welcomeText))]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-6 has-text-weight-semibold"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.user.name) +
+                                                  " " +
+                                                  _vm._s(_vm.user.apellido)
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("hr", {
+                                    staticClass: "dropdown-divider",
+                                    attrs: { "aria-role": "menuitem" }
+                                  }),
+                                  _vm._v(" "),
+                                  _vm.canView("/admin")
+                                    ? _c(
+                                        "router-link",
+                                        {
+                                          staticClass:
+                                            "dropdown-item bd-is-rss is-small has-text-grey-dark",
+                                          attrs: {
+                                            to: "/admin",
+                                            "aria-role": "menuitem"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-6 has-text-weight-normal"
+                                            },
+                                            [
+                                              _c("font-awesome-icon", {
+                                                attrs: { icon: ["fas", "cogs"] }
+                                              }),
+                                              _vm._v(
+                                                "\n                                             Administración\n                                        "
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-dropdown-item",
+                                    {
+                                      attrs: { disabled: "" },
+                                      on: { click: _vm.changeStyle },
+                                      model: {
+                                        value: _vm.darkMode,
+                                        callback: function($$v) {
+                                          _vm.darkMode = $$v
+                                        },
+                                        expression: "darkMode"
+                                      }
+                                    },
+                                    [
+                                      _c("font-awesome-icon", {
+                                        attrs: { icon: ["fas", "adjust"] }
+                                      }),
+                                      _vm._v(
+                                        "\n                                         " +
+                                          _vm._s(_vm.style) +
+                                          "\n                                    "
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("hr", { staticClass: "navbar-divider" }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "bd-is-rss is-small has-text-grey-dark dropdown-item",
+                                      attrs: { "aria-role": "menuitem" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.logout($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-6 has-text-weight-normal"
+                                        },
+                                        [
+                                          _c("font-awesome-icon", {
+                                            attrs: {
+                                              icon: ["fas", "sign-out-alt"]
+                                            }
+                                          }),
+                                          _vm._v(
+                                            "\n                                             Log Out\n                                        "
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ]
                                   )
                                 ],
                                 1
                               )
-                            }),
-                            _vm._v(" "),
-                            !_vm.userRequestAlerts.length
-                              ? _c(
-                                  "b-dropdown-item",
-                                  { attrs: { "aria-role": "menuitem" } },
-                                  [
-                                    _c("font-awesome-icon", {
-                                      attrs: { icon: ["fas", "home"] }
-                                    }),
-                                    _vm._v(
-                                      "\n                                 No tienes notificaciones\n                            "
-                                    )
-                                  ],
-                                  1
-                                )
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-dropdown",
-                          {
-                            attrs: {
-                              hoverable: "",
-                              position: "is-bottom-left",
-                              "aria-role": "menu"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "navbar-item has-text-grey-light",
-                                attrs: { slot: "trigger", role: "button" },
-                                slot: "trigger"
-                              },
-                              [
-                                _c("span", [_vm._v(" Menu ")]),
-                                _vm._v(" "),
-                                _c("b-icon", {
-                                  attrs: { icon: "angle-down", pack: "fas" }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-dropdown-item",
-                              {
-                                attrs: { custom: "", "aria-role": "menuitem" }
-                              },
-                              [
-                                _c("div", { staticClass: "has-text-left" }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-7 has-text-weight-light"
-                                    },
-                                    [_vm._v(_vm._s(_vm.welcomeText))]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-6 has-text-weight-semibold"
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(_vm.user.name) +
-                                          " " +
-                                          _vm._s(_vm.user.apellido)
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("hr", {
-                              staticClass: "dropdown-divider",
-                              attrs: { "aria-role": "menuitem" }
-                            }),
-                            _vm._v(" "),
-                            _vm.canView("/admin")
-                              ? _c(
-                                  "router-link",
-                                  {
-                                    staticClass:
-                                      "dropdown-item bd-is-rss is-small has-text-grey-dark",
-                                    attrs: {
-                                      to: "/admin",
-                                      "aria-role": "menuitem"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "is-size-6 has-text-weight-normal"
-                                      },
-                                      [
-                                        _c("font-awesome-icon", {
-                                          attrs: { icon: ["fas", "cogs"] }
-                                        }),
-                                        _vm._v(
-                                          "\n                                     Administración\n                                "
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("hr", { staticClass: "navbar-divider" }),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "bd-is-rss is-small has-text-grey-dark dropdown-item",
-                                attrs: { "aria-role": "menuitem" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.logout($event)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "is-size-6 has-text-weight-normal"
-                                  },
-                                  [
-                                    _c("font-awesome-icon", {
-                                      attrs: { icon: ["fas", "sign-out-alt"] }
-                                    }),
-                                    _vm._v(
-                                      "\n                                     Log Out\n                                "
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "navbar-end",
-                        staticStyle: { "padding-right": "20px" }
-                      },
-                      [_c("clock")],
-                      1
-                    )
-                  ])
-                ]
-              )
+                            ],
+                            1
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticStyle: { "padding-right": "20px" } },
+                        [_c("clock")],
+                        1
+                      )
+                    ]
+                  )
+                ])
+              ])
             ]
           )
         ]
@@ -50153,7 +50209,7 @@ var render = function() {
                 "h1",
                 {
                   staticClass: "is-size-5 has-text-white has-text-weight-bold",
-                  staticStyle: { padding: "10px 0 10px 0" }
+                  staticStyle: { padding: "10px 10px 10px 10px" }
                 },
                 [_vm._v(_vm._s(this.$route.name.toUpperCase()))]
               )
@@ -50162,29 +50218,24 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("main", { staticClass: "sticky-content" }, [
-        _c(
-          "div",
-          { staticClass: "section is-paddingless has-background-light" },
-          [
-            _c(
-              "keep-alive",
-              [
-                _c("router-view", {
-                  attrs: {
-                    user: _vm.user,
-                    user_permissions: _vm.user_permissions,
-                    last_data_counters: _vm.last_data_counters,
-                    darkMode: _vm.darkMode
-                  }
-                })
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ]),
+      _c(
+        "section",
+        {
+          staticClass:
+            "sticky-content section is-paddingless has-background-light"
+        },
+        [
+          _c("router-view", {
+            attrs: {
+              user: _vm.user,
+              user_permissions: _vm.user_permissions,
+              last_data_counters: _vm.last_data_counters,
+              darkMode: _vm.darkMode
+            }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("Footer", {
         attrs: { user: _vm.user, last_updated_data: _vm.last_updated_data }
@@ -68411,8 +68462,11 @@ var Documents = function Documents() {
 
 var Admin = function Admin() {
   return __webpack_require__.e(/*! import() | chunks/admin */ "chunks/admin").then(__webpack_require__.bind(null, /*! ./components/admin/Admin.vue */ "./resources/js/components/admin/Admin.vue"));
-}; // let Reports = () => import(/* webpackChunkName: "chunks/reports"*/'./components/reports/Reports.vue')
+};
 
+var Reports = function Reports() {
+  return __webpack_require__.e(/*! import() | chunks/reports */ "chunks/reports").then(__webpack_require__.bind(null, /*! ./components/reports/Reports.vue */ "./resources/js/components/reports/Reports.vue"));
+};
 
 var NotFound = function NotFound() {
   return __webpack_require__.e(/*! import() | chunks/helpers/notFound */ "chunks/helpers/notFound").then(__webpack_require__.bind(null, /*! ./components/helpers/NotFound */ "./resources/js/components/helpers/NotFound.vue"));
@@ -68489,8 +68543,11 @@ var NotFound = function NotFound() {
       path: '/admin',
       name: 'Administración',
       component: Admin
-    } // { path: '/reports', name: 'Reportes', component: Reports },
-    ]
+    }, {
+      path: '/reports',
+      name: 'Reportes',
+      component: Reports
+    }]
   }]
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))

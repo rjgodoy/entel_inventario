@@ -47,9 +47,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AdminPops: function AdminPops() {
@@ -144,70 +141,85 @@ var render = function() {
     "div",
     {},
     [
-      _c("section", { staticClass: "section", class: _vm.bodyBackground }, [
-        _c("div", { staticClass: "container" }, [
-          _c(
-            "div",
-            {
-              staticClass: "tile is-ancestor",
-              staticStyle: { margin: "-40px 0 -40px 0" }
-            },
-            _vm._l(_vm.tabs, function(tab) {
-              return _c("div", { key: tab.id, staticClass: "tile is-parent" }, [
-                _c(
-                  "a",
-                  {
-                    key: tab.component,
-                    staticClass: "tile is-child box",
-                    class:
-                      _vm.currentTab === tab.component
-                        ? "has-background-link"
-                        : _vm.boxBackground,
-                    on: {
-                      click: function($event) {
-                        _vm.currentTab = tab.component
-                      }
-                    }
-                  },
+      _c(
+        "section",
+        { staticStyle: { "padding-top": "24px", "padding-bottom": "12px" } },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c(
+              "div",
+              { staticClass: "tile is-ancestor" },
+              _vm._l(_vm.tabs, function(tab) {
+                return _c(
+                  "div",
+                  { key: tab.id, staticClass: "tile is-parent" },
                   [
                     _c(
-                      "div",
+                      "a",
                       {
+                        key: tab.component,
+                        staticClass: "tile is-child box",
                         class:
                           _vm.currentTab === tab.component
-                            ? _vm.selectedSecondaryBoxText
-                            : _vm.secondaryText
+                            ? "has-background-link"
+                            : _vm.boxBackground,
+                        on: {
+                          click: function($event) {
+                            _vm.currentTab = tab.component
+                          }
+                        }
                       },
                       [
                         _c(
                           "div",
-                          { staticClass: "is-size-6 has-text-weight-semibold" },
+                          {
+                            class:
+                              _vm.currentTab === tab.component
+                                ? _vm.selectedSecondaryBoxText
+                                : _vm.secondaryText
+                          },
                           [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(tab.title) +
-                                "\n                            "
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "is-size-6 has-text-weight-semibold"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(tab.title) +
+                                    "\n                            "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticStyle: { "padding-top": "10px" } },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-size-7 has-text-weight-light"
+                                  },
+                                  [_vm._v(_vm._s(tab.description))]
+                                )
+                              ]
                             )
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticStyle: { "margin-top": "10px" } }, [
-                          _c(
-                            "div",
-                            { staticClass: "is-size-7 has-text-weight-light" },
-                            [_vm._v(_vm._s(tab.description))]
-                          )
-                        ])
+                        )
                       ]
                     )
                   ]
                 )
-              ])
-            }),
-            0
-          )
-        ])
-      ]),
+              }),
+              0
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c(
         "keep-alive",

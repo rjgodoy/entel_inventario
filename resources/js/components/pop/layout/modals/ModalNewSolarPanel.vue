@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-card" style="width: 800px;">
+    <div class="modal-card" style="width: auto;">
         <div class="modal-card" style="width: auto">
             <header class="modal-card-head">
                 <p class="modal-card-title">Registrar Paneles Solares</p>
@@ -7,22 +7,34 @@
 
             <section class="modal-card-body">
                 <div class="columns is-multiline">
-                    <div class="column is-6">
-                        <b-field label="Capacidad unitaria paneles FV">
+                    <div class="column is-4">
+                        <b-field label="Empalme">
+                            <b-select placeholder="Selecciona..." v-model="junctionSelected">
+                                <option
+                                    v-for="option in junctions"
+                                    :value="option"
+                                    :key="option.id">
+                                    {{ option.id }}
+                                </option>
+                            </b-select>
+                        </b-field>
+                    </div>
+                    <div class="column is-4">
+                        <b-field label="Capacidad unitaria">
                             <b-input
-                                type="unit_capacity_group"
-                                v-model="unit_capacity_group"
-                                placeholder="Capacidad unitaria paneles FV"
+                                type="unit_capacity"
+                                v-model="unit_capacity"
+                                placeholder="Capacidad unitaria"
                                 required>
                             </b-input>
                         </b-field>
                     </div>
-                    <div class="column is-6">
-                        <b-field label="Cantidad paneles FV">
+                    <div class="column is-4">
+                        <b-field label="Cantidad paneles">
                             <b-input
-                                type="quantity_group"
-                                v-model="quantity_group"
-                                placeholder="Cantidad paneles FV"
+                                type="quantity"
+                                v-model="quantity"
+                                placeholder="Cantidad paneles"
                                 required>
                             </b-input>
                         </b-field>
@@ -32,7 +44,7 @@
 
             <footer class="modal-card-foot">
                 <button class="button" type="button" @click="$parent.close()">Close</button>
-                <button class="button is-link">Registrar</button>
+                <button class="button is-link" @click="register()">Registrar</button>
             </footer>
         </div>
     </div>
@@ -44,12 +56,14 @@
     library.add(farTrashAlt);
     export default {
         props : [
-            'pop',
+            'junctions',
             'user'
         ],
 
         data() {
             return {
+                // junction_id: null,
+                junctionSelected: null,
                 unit_capacity: null,
                 quantity: null
             }
@@ -67,7 +81,20 @@
         },
 
         methods: {
+            register() {
+                const params = {
+                    'junction_id': this.junctionSelected.id,
+                    'unit_capacity': parseFloat(this.unit_capacity),
+                    'quantity': parseFloat(this.quantity),
+                    'user_id': this.user.id,
+                    'pop_id': this.junctionSelected.pop_id
+                }
 
+                axios.post('/api/solarPanels', params).then(response => {
+                    console.log(response.data)
+                    this.$parent.close()
+                })
+            },
         }
     }
 </script>

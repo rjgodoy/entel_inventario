@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Junction extends Model
 {
+    use SoftDeletes;
+    
     protected $connection = 'mysql'; 
     protected $table = 'entel_g_redes_inventario.junctions'; 
 
@@ -51,17 +54,9 @@ class Junction extends Model
         return $this->hasOne(JunctionProtection::class)->latest();
     }
 
-    public function latest_solar_panel()
-    {
-        return $this->hasOne(SolarPanel::class)->latest();
-    }
-
     public function solar_panels()
     {
         return $this->hasMany(SolarPanel::class);
     }
-
-
-
 
 }

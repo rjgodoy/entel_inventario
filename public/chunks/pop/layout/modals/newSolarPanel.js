@@ -51,13 +51,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrashAlt"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['pop', 'user'],
+  props: ['junctions', 'user'],
   data: function data() {
     return {
+      // junction_id: null,
+      junctionSelected: null,
       unit_capacity: null,
       quantity: null
     };
@@ -65,7 +79,24 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   watch: {},
   created: function created() {},
   mounted: function mounted() {},
-  methods: {}
+  methods: {
+    register: function register() {
+      var _this = this;
+
+      var params = {
+        'junction_id': this.junctionSelected.id,
+        'unit_capacity': parseFloat(this.unit_capacity),
+        'quantity': parseFloat(this.quantity),
+        'user_id': this.user.id,
+        'pop_id': this.junctionSelected.pop_id
+      };
+      axios.post('/api/solarPanels', params).then(function (response) {
+        console.log(response.data);
+
+        _this.$parent.close();
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -87,7 +118,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "modal-card", staticStyle: { width: "800px" } },
+    { staticClass: "modal-card", staticStyle: { width: "auto" } },
     [
       _c("div", { staticClass: "modal-card", staticStyle: { width: "auto" } }, [
         _vm._m(0),
@@ -96,24 +127,66 @@ var render = function() {
           _c("div", { staticClass: "columns is-multiline" }, [
             _c(
               "div",
-              { staticClass: "column is-6" },
+              { staticClass: "column is-4" },
               [
                 _c(
                   "b-field",
-                  { attrs: { label: "Capacidad unitaria paneles FV" } },
+                  { attrs: { label: "Empalme" } },
+                  [
+                    _c(
+                      "b-select",
+                      {
+                        attrs: { placeholder: "Selecciona..." },
+                        model: {
+                          value: _vm.junctionSelected,
+                          callback: function($$v) {
+                            _vm.junctionSelected = $$v
+                          },
+                          expression: "junctionSelected"
+                        }
+                      },
+                      _vm._l(_vm.junctions, function(option) {
+                        return _c(
+                          "option",
+                          { key: option.id, domProps: { value: option } },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(option.id) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "column is-4" },
+              [
+                _c(
+                  "b-field",
+                  { attrs: { label: "Capacidad unitaria" } },
                   [
                     _c("b-input", {
                       attrs: {
-                        type: "unit_capacity_group",
-                        placeholder: "Capacidad unitaria paneles FV",
+                        type: "unit_capacity",
+                        placeholder: "Capacidad unitaria",
                         required: ""
                       },
                       model: {
-                        value: _vm.unit_capacity_group,
+                        value: _vm.unit_capacity,
                         callback: function($$v) {
-                          _vm.unit_capacity_group = $$v
+                          _vm.unit_capacity = $$v
                         },
-                        expression: "unit_capacity_group"
+                        expression: "unit_capacity"
                       }
                     })
                   ],
@@ -125,24 +198,24 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "column is-6" },
+              { staticClass: "column is-4" },
               [
                 _c(
                   "b-field",
-                  { attrs: { label: "Cantidad paneles FV" } },
+                  { attrs: { label: "Cantidad paneles" } },
                   [
                     _c("b-input", {
                       attrs: {
-                        type: "quantity_group",
-                        placeholder: "Cantidad paneles FV",
+                        type: "quantity",
+                        placeholder: "Cantidad paneles",
                         required: ""
                       },
                       model: {
-                        value: _vm.quantity_group,
+                        value: _vm.quantity,
                         callback: function($$v) {
-                          _vm.quantity_group = $$v
+                          _vm.quantity = $$v
                         },
-                        expression: "quantity_group"
+                        expression: "quantity"
                       }
                     })
                   ],
@@ -169,7 +242,18 @@ var render = function() {
             [_vm._v("Close")]
           ),
           _vm._v(" "),
-          _c("button", { staticClass: "button is-link" }, [_vm._v("Registrar")])
+          _c(
+            "button",
+            {
+              staticClass: "button is-link",
+              on: {
+                click: function($event) {
+                  return _vm.register()
+                }
+              }
+            },
+            [_vm._v("Registrar")]
+          )
         ])
       ])
     ]

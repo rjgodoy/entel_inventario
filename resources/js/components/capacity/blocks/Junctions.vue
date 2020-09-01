@@ -289,15 +289,15 @@
                 }
             },
 
-            photovoltaicCapacity(junction) {    // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+            photovoltaicCapacity(junction) {
                 let capacity = 0
-                if (junction.latest_solar_panel) {
-                    const solarPanelGroupQuantity = 6
-                    for (var i = 1; i < solarPanelGroupQuantity; i++) {
-                        capacity = capacity + (junction.latest_solar_panel['unit_capacity_group_'+i] * junction.latest_solar_panel['quantity_group_'+i])
-                    }
+                if (junction.solar_panels.length) {
+                    Object.keys(junction.solar_panels).forEach(element => {
+                        let panel = junction.solar_panels[element]
+                        capacity = capacity + (panel.unit_capacity * panel.quantity)
+                    })
                 }
-                return capacity
+                return capacity / 1000
             },
 
             batteryRechargePower(plane) {

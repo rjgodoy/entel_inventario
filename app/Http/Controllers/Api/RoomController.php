@@ -81,7 +81,9 @@ class RoomController extends Controller
 
 
                 'rooms.current_room_distribution',
-                'rooms.current_room_surface'
+                'rooms.current_room_surface',
+
+                'rooms.current_air_conditioner_capacity'
             )
             ->whereHas('sites', function($q) use($text) {
                 if ($text) {
@@ -142,6 +144,7 @@ class RoomController extends Controller
             'pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.current_redundant_modules',
             'pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.plane_type',
             'pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.plane',
+            'pop.rooms.current_air_conditioner_capacity',
 
             'pop.rooms.current_fire_detection.fire_detection_type',
             'pop.rooms.current_fire_detection.fire_extinction_type',
@@ -183,7 +186,8 @@ class RoomController extends Controller
             'air_conditioners.air_conditioner_condensers',
 
             'current_room_distribution',
-            'current_room_surface'
+            'current_room_surface',
+            'current_air_conditioner_capacity'
         )->where('id', $id)->first();
 
         return new RoomResource($room);

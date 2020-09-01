@@ -3,27 +3,53 @@
         <section class="tile box">
             <!-- <b-field label="PANELES SOLARES" label-position="on-border" class="tile"> -->
                 <!-- <div class="tile box is-shadowless" style="border: solid 0.05rem black"> -->
-                    <div class="tile is-vertical" >
-                        <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">PANELES SOLARES</div>
-                        <div class="columns tile is-parent" v-if="hasSolarPanels">
-                            <a class="box tile is-child column" 
-                                v-for="solarPanel in solarPanels" :key="solarPanel.id"
-                                @click="isJunctionModalActive = true">
-                                <div class="">
-                                    <div class="columns">
-                                        <div class="column">
-                                            <div class="has-text-weight-semibold is-size-6">Paneles Solar</div>
+                    <div class="tile is-vertical">
+
+                        <div class="field">
+                            <div class="is-pulled-right">
+                                <font-awesome-icon :icon="['fas', 'plus']"
+                                <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
+                                    <a @click="isNewSolarPanelModalActive = true">Agregar</a>
+                                </b-tag>
+                            </div>
+                            <div class="is-size-6 has-text-weight-bold" style="padding-bottom: 12px;">PANELES SOLARES</div>
+                        </div>
+                        
+
+                        <div class="tile is-vertical is-parent">
+
+                            <b-field label="CAPACIDADES" label-position="on-border" class="tile is-parent">
+                                <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black">
+
+                                    <div class="tile">
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
+                                                <div class="has-text-weight-semibold is-size-6">{{ photovoltaicCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Total</div>
+                                            </div>
                                         </div>
-                                        <div class="column is-2 has-text-centered">
-                                            <!-- <font-awesome-icon 
-                                                :icon="['far', 'check-circle']"
-                                                size="2x"
-                                                class="has-text-success"
-                                            /> -->
-                                        </div>
-                                    </div>   
+                                    </div>
+
                                 </div>
-                            </a>
+                            </b-field>
+
+                            <div class="tile is-parent columns is-multiline" v-if="hasSolarPanels">
+
+                                <div v-for="junction in junctions" class="tile">
+                                    <div class="tile column is-parent is-4" v-for="solarPanel in junction.solar_panels" :key="solarPanel.id">
+                                        <a class="box tile " @click="isJunctionModalActive = true">
+                                            <div class="">
+                                                <div class="columns">
+                                                    <div class="column is-4">
+                                                        <div class="has-text-weight-semibold is-size-6">Paneles Solar</div>
+                                                    </div>
+                                                </div>   
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
 
                         <div class="tile columns is-vcentered" v-if="!hasSolarPanels">
@@ -47,7 +73,7 @@
             aria-modal>
             <modal-new-solar-panel 
                 :user="user"
-                :pop="pop"
+                :junctions="junctions"
                 />
         </b-modal>
     </div>
@@ -75,30 +101,31 @@
         },
 
         computed: {
-            solarPanels() {
-                let panels = []
-                Object.keys(this.junctions).forEach(element => {
-                    panels.push(this.junctions[element].latest_solar_panel)
+            async hasSolarPanels() {
+                await Object.keys(this.junctions).forEach(element => {
+                    return this.junctions[element].solar_panels.length && true
                 })
-                return panels
+                return false
             },
 
-            hasSolarPanels() {
-                let bool = false
+            photovoltaicCapacity() {
+                let capacity = 0
                 Object.keys(this.junctions).forEach(element => {
-                    bool = this.junctions[element].latest_solar_panel && !bool ? true : false
+                    const junction = this.junctions[element]
+                    if (junction.solar_panels.length) {
+                        Object.keys(junction.solar_panels).forEach(element => {
+                            let panel = junction.solar_panels[element]
+                            capacity = capacity + (panel.unit_capacity * panel.quantity)
+                        })
+                    }
                 })
-                return bool
-            },
-
-            averageConsumptionPerPhotovoltaicGroup() {  // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
-                return 0
+                return capacity / 1000
             },
         },
 
         watch: {
             junctions(val) {
-                // console.log(val)
+
             }
         },
         
@@ -108,16 +135,7 @@
         },
 
         methods: {
-            photovoltaicCapacity(junction) {    // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
-                let capacity = 0
-                if (junction.latest_solar_panel) {
-                    const solarPanelGroupQuantity = 6
-                    for (var i = 1; i < solarPanelGroupQuantity; i++) {
-                        capacity = capacity + (junction.latest_solar_panel['unit_capacity_group_'+i] * junction.latest_solar_panel['quantity_group_'+i])
-                    }
-                }
-                return capacity
-            },
+
         }
     }
 </script>

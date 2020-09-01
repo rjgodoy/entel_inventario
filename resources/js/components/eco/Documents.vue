@@ -53,9 +53,11 @@
             </b-table-column>
 
             <b-table-column field="id" label="" width="10" numeric v-if="canDelete">
-                <button class="button" @click="confirm(props.row)">
-                    <font-awesome-icon :icon="['far', 'trash-alt']"/>
-                </button>
+                <template v-slot="props">
+                    <button class="button" @click="confirm(props.row)">
+                        <font-awesome-icon :icon="['far', 'trash-alt']"/>
+                    </button>
+                </template>
             </b-table-column>
 
             <template slot="empty">

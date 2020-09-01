@@ -159,12 +159,24 @@
                 return 0
             },
 
+            // totalAvailableClimateCapacity() {
+            //     let total = Math.min(20, 25)
+            //     if (total >= 0) {
+            //         return total
+            //     }
+            //     return 0
+            // },
+
+            totalClimateCapacity() {
+                return this.room.current_air_conditioner_capacity ? this.room.current_air_conditioner_capacity.total_capacity : 0
+            },
+
+            usedClimateCapacity() {
+                return this.room.current_air_conditioner_capacity ? this.room.current_air_conditioner_capacity.used_capacity : 0
+            },
+
             totalAvailableClimateCapacity() {
-                let total = Math.min(20, 25)
-                if (total >= 0) {
-                    return total
-                }
-                return 0
+                return this.totalClimateCapacity - this.usedClimateCapacity
             },
 
             canViewClimate() {
@@ -713,15 +725,15 @@
                 }
             },
 
-            photovoltaicCapacity(junction) {    // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+            photovoltaicCapacity(junction) {
                 let capacity = 0
-                if (junction.latest_solar_panel) {
-                    const solarPanelGroupQuantity = 6
-                    for (var i = 1; i < solarPanelGroupQuantity; i++) {
-                        capacity = capacity + (junction.latest_solar_panel['unit_capacity_group_'+i] * junction.latest_solar_panel['quantity_group_'+i])
-                    }
+                if (junction.solar_panels.length) {
+                    Object.keys(junction.solar_panels).forEach(element => {
+                        let panel = junction.solar_panels[element]
+                        capacity = capacity + (panel.unit_capacity * panel.quantity)
+                    })
                 }
-                return capacity
+                return capacity / 1000
             },
 
             

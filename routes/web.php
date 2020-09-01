@@ -10,17 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/{any?}', function (){
-//     return view('/home');
-// })->where('any', '^(?!api\/)[\/\w\.-]*');
-
-
-// Route::get('/{any}', function () {
-//     return view('layouts.app');
-// })->where('any', '.*');
 
 Auth::routes();
-
 
 Route::middleware(['auth'])->group(function () {
 

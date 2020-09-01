@@ -51,7 +51,7 @@ class JunctionController extends Controller
      */
     public function show($id)
     {
-        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection', 'latest_solar_panel')
+        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection', 'solar_panels')
         ->where('pop_id', $id)
         ->get();
 
@@ -66,7 +66,7 @@ class JunctionController extends Controller
      */
     public function popJunctions($pop_id)
     {
-        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection', 'latest_solar_panel')
+        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection', 'solar_panels')
         ->where('pop_id', $pop_id)
         ->get();
 

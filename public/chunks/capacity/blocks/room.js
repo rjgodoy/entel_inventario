@@ -605,6 +605,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalPowerRectifier: function ModalPowerRectifier() {
@@ -714,6 +794,12 @@ __webpack_require__.r(__webpack_exports__);
         'usedSurface': this.usedSurface
       };
     },
+    airConditionerCapacity: function airConditionerCapacity() {
+      return {
+        'totalSurface': this.totalSurface,
+        'usedSurface': this.usedSurface
+      };
+    },
     detectionType: function detectionType() {
       return this.sala.current_fire_detection ? this.sala.current_fire_detection.fire_detection_type.type : 'No tiene';
     },
@@ -734,6 +820,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     availableSurface: function availableSurface() {
       return this.totalSurface - this.usedSurface;
+    },
+    totalAirConditionerCapacity: function totalAirConditionerCapacity() {
+      return this.sala.current_air_conditioner_capacity ? this.sala.current_air_conditioner_capacity.total_capacity : 0;
+    },
+    usedAirConditionerCapacity: function usedAirConditionerCapacity() {
+      return this.sala.current_air_conditioner_capacity ? this.sala.current_air_conditioner_capacity.used_capacity : 0;
+    },
+    availableAirConditionerCapacity: function availableAirConditionerCapacity() {
+      return this.totalAirConditionerCapacity - this.usedAirConditionerCapacity;
     },
     canEditSecurity: function canEditSecurity() {
       return this.canEditAirConditioners && this.canEditPowerRectifiers;
@@ -2542,157 +2637,406 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tile is-parent" },
-            [
+          _c("div", { staticClass: "tile is-parent" }, [
+            _c("div", { staticClass: "tile is-vertical" }, [
               _c(
-                "b-field",
+                "div",
                 {
-                  staticClass: "tile",
-                  attrs: {
-                    label: "CLIMATIZACION",
-                    "label-position": "on-border",
-                    "custom-class": !_vm.isCurrentSala(_vm.sala)
-                      ? "has-text-grey-light"
-                      : ""
-                  }
+                  staticClass: "is-size-6 has-text-weight-bold",
+                  staticStyle: { "padding-bottom": "12px" }
                 },
-                [
-                  _c(
+                [_vm._v("CLIMA")]
+              ),
+              _vm._v(" "),
+              !_vm.canEditSurface
+                ? _c(
                     "div",
                     {
                       staticClass: "tile is-parent box is-shadowless",
                       staticStyle: { border: "solid 0.1rem #cccccc" }
                     },
                     [
-                      _c("div", { staticClass: "tile is-vertical" }, [
-                        _vm.hasAirConditioners(_vm.sala)
-                          ? _c("div", { staticClass: "tile is-parent" }, [
-                              _c(
-                                "div",
-                                { staticClass: "columns is-multiline tile" },
-                                _vm._l(_vm.airConditioners, function(
-                                  airConditioner
-                                ) {
-                                  return airConditioner.room_id == _vm.sala.id
-                                    ? _c(
+                      _vm.sala.current_air_conditioner_capacity
+                        ? _c(
+                            "div",
+                            { staticClass: "tile is-parent is-vertical" },
+                            [
+                              _c("div", { staticClass: "has-text-centered" }, [
+                                _c("div", { staticClass: "level" }, [
+                                  _c("div", { staticClass: "level-item" }, [
+                                    _c("div", {}, [
+                                      _c(
                                         "div",
                                         {
-                                          key: airConditioner.id,
                                           staticClass:
-                                            "tile is-child column is-3"
+                                            "has-text-weight-bold is-size-6"
                                         },
                                         [
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass: "box",
-                                              on: {
-                                                click: function($event) {
-                                                  _vm.isAirConditionerModalActive = true
-                                                  _vm.airConditionerSelected = airConditioner
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                { staticClass: "field" },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-bold is-size-7"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "AIRE ACONDICIONADO"
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "span",
-                                                    {
-                                                      staticClass:
-                                                        "has-text-weight-bold is-size-6"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "Nº " +
-                                                          _vm._s(
-                                                            airConditioner.id
-                                                          )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("numeral")(
+                                                _vm.totalAirConditionerCapacity,
+                                                "0,0.0"
                                               )
-                                            ]
+                                            ) +
+                                              "\n                                                    "
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "is-size-7" },
+                                            [_vm._v(" kW")]
                                           )
                                         ]
-                                      )
-                                    : _vm._e()
-                                }),
-                                0
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        !_vm.hasAirConditioners(_vm.sala)
-                          ? _c(
-                              "div",
-                              { staticClass: "tile columns is-vcentered" },
-                              [
-                                _c("div", { staticClass: "column" }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "has-text-centered has-text-weight-light has-text-grey is-size-7"
-                                    },
-                                    [
-                                      _c("div", {}, [
-                                        _vm._v("NO TIENE EQUIPOS DE CLIMA")
-                                      ]),
+                                      ),
                                       _vm._v(" "),
                                       _c(
-                                        "b-tag",
+                                        "div",
                                         {
                                           staticClass:
-                                            "is-default has-text-weight-light has-text-grey is-size-7"
+                                            "has-text-weight-normal is-size-7"
+                                        },
+                                        [_vm._v("Capacidad Total")]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "level-item" }, [
+                                    _c("div", {}, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-bold is-size-6"
                                         },
                                         [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("numeral")(
+                                                _vm.usedAirConditionerCapacity,
+                                                "0,0.0"
+                                              )
+                                            ) +
+                                              "\n                                                    "
+                                          ),
                                           _c(
-                                            "a",
-                                            {
-                                              on: {
-                                                click: function($event) {
-                                                  _vm.isNewAirConditionerModalActive = true
-                                                }
-                                              }
-                                            },
-                                            [_vm._v("Agregar")]
+                                            "span",
+                                            { staticClass: "is-size-7" },
+                                            [_vm._v(" kW")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-normal is-size-7"
+                                        },
+                                        [_vm._v("Capacidad Utilizada")]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "level-item" }, [
+                                    _c("div", {}, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-bold is-size-6"
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("numeral")(
+                                                _vm.availableAirConditionerCapacity,
+                                                "0,0.0"
+                                              )
+                                            ) +
+                                              "\n                                                    "
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "is-size-7" },
+                                            [_vm._v(" kW")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-normal is-size-7"
+                                        },
+                                        [_vm._v("Capacidad Disponible")]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.sala.current_air_conditioner_capacity
+                        ? _c(
+                            "div",
+                            { staticClass: "tile columns is-vcentered" },
+                            [_vm._m(0)]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.canEditSurface
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "tile box is-shadowless",
+                      staticStyle: { border: "solid 0.1rem #cccccc" },
+                      on: {
+                        click: function($event) {
+                          _vm.isNewAirConditionerModalActive = true
+                        }
+                      }
+                    },
+                    [
+                      _vm.sala.current_air_conditioner_capacity
+                        ? _c(
+                            "div",
+                            { staticClass: "tile is-parent is-vertical" },
+                            [
+                              _c("div", { staticClass: "has-text-centered" }, [
+                                _c("div", { staticClass: "level" }, [
+                                  _c("div", { staticClass: "level-item" }, [
+                                    _c("div", {}, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-bold is-size-6"
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("numeral")(
+                                                _vm.totalAirConditionerCapacity,
+                                                "0,0.0"
+                                              )
+                                            ) +
+                                              "\n                                                    "
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "is-size-7" },
+                                            [_vm._v(" kW")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-normal is-size-7"
+                                        },
+                                        [_vm._v("Capacidad Total")]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "level-item" }, [
+                                    _c("div", {}, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-bold is-size-6"
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("numeral")(
+                                                _vm.usedAirConditionerCapacity,
+                                                "0,0.0"
+                                              )
+                                            ) +
+                                              "\n                                                    "
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "is-size-7" },
+                                            [_vm._v(" kW")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-normal is-size-7"
+                                        },
+                                        [_vm._v("Capacidad Utilizado")]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "level-item" }, [
+                                    _c("div", {}, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-bold is-size-6"
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("numeral")(
+                                                _vm.availableAirConditionerCapacity,
+                                                "0,0.0"
+                                              )
+                                            ) +
+                                              "\n                                                    "
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "is-size-7" },
+                                            [_vm._v(" kW")]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-normal is-size-7"
+                                        },
+                                        [_vm._v("Capacidad Disponible")]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.sala.current_air_conditioner_capacity
+                        ? _c(
+                            "div",
+                            { staticClass: "tile columns is-vcentered" },
+                            [_vm._m(1)]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.hasAirConditioners(_vm.sala)
+                ? _c("div", { staticClass: "tile is-parent" }, [
+                    _c(
+                      "div",
+                      { staticClass: "columns is-multiline tile" },
+                      _vm._l(_vm.airConditioners, function(airConditioner) {
+                        return airConditioner.room_id == _vm.sala.id
+                          ? _c(
+                              "div",
+                              {
+                                key: airConditioner.id,
+                                staticClass: "tile is-child column is-3"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "box",
+                                    on: {
+                                      click: function($event) {
+                                        _vm.isAirConditionerModalActive = true
+                                        _vm.airConditionerSelected = airConditioner
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("div", { staticClass: "field" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-bold is-size-7"
+                                        },
+                                        [_vm._v("AIRE ACONDICIONADO")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "has-text-weight-bold is-size-6"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "Nº " + _vm._s(airConditioner.id)
                                           )
                                         ]
                                       )
-                                    ],
-                                    1
-                                  )
-                                ])
+                                    ])
+                                  ]
+                                )
                               ]
                             )
                           : _vm._e()
-                      ])
-                    ]
-                  )
-                ]
-              )
-            ],
-            1
-          )
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.hasAirConditioners(_vm.sala)
+                ? _c("div", { staticClass: "tile columns is-vcentered" }, [
+                    _c("div", { staticClass: "column" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "has-text-centered has-text-weight-light has-text-grey is-size-7"
+                        },
+                        [
+                          _c("div", {}, [_vm._v("NO TIENE EQUIPOS DE CLIMA")]),
+                          _vm._v(" "),
+                          _c(
+                            "b-tag",
+                            {
+                              staticClass:
+                                "is-default has-text-weight-light has-text-grey is-size-7"
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.isNewAirConditionerModalActive = true
+                                    }
+                                  }
+                                },
+                                [_vm._v("Agregar")]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "tile" }, [
@@ -4004,7 +4348,11 @@ var render = function() {
         },
         [
           _c("modal-new-air-conditioner", {
-            attrs: { room: _vm.room, user: _vm.user }
+            attrs: {
+              canEdit: _vm.canEditAirConditioners,
+              sala: _vm.sala,
+              user: _vm.user
+            }
           })
         ],
         1
@@ -4037,7 +4385,46 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "has-text-centered has-text-weight-light has-text-grey is-size-7"
+        },
+        [
+          _vm._v(
+            "\n                                        NO TIENE DATOS DE CLIMA\n                                    "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "has-text-centered has-text-weight-light has-text-grey is-size-7"
+        },
+        [
+          _vm._v(
+            "\n                                        NO TIENE DATOS DE CLIMA\n                                    "
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

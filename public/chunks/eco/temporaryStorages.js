@@ -217,9 +217,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        " +
+                          "\n                    " +
                             _vm._s(column.label) +
-                            "\n                    "
+                            "\n                "
                         )
                       ]
                     )
@@ -269,9 +269,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        " +
+                          "\n                    " +
                             _vm._s(column.label) +
-                            "\n                    "
+                            "\n                "
                         )
                       ]
                     )

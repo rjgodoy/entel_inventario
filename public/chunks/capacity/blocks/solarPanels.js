@@ -9,6 +9,40 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -79,52 +113,62 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    solarPanels: function solarPanels() {
-      var _this = this;
+    hasSolarPanels: function () {
+      var _hasSolarPanels = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
 
-      var panels = [];
-      Object.keys(this.junctions).forEach(function (element) {
-        panels.push(_this.junctions[element].latest_solar_panel);
-      });
-      return panels;
-    },
-    hasSolarPanels: function hasSolarPanels() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return Object.keys(this.junctions).forEach(function (element) {
+                  return _this.junctions[element].solar_panels.length && true;
+                });
+
+              case 2:
+                return _context.abrupt("return", false);
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function hasSolarPanels() {
+        return _hasSolarPanels.apply(this, arguments);
+      }
+
+      return hasSolarPanels;
+    }(),
+    photovoltaicCapacity: function photovoltaicCapacity() {
       var _this2 = this;
 
-      var bool = false;
+      var capacity = 0;
       Object.keys(this.junctions).forEach(function (element) {
-        bool = _this2.junctions[element].latest_solar_panel && !bool ? true : false;
+        var junction = _this2.junctions[element];
+
+        if (junction.solar_panels.length) {
+          Object.keys(junction.solar_panels).forEach(function (element) {
+            var panel = junction.solar_panels[element];
+            capacity = capacity + panel.unit_capacity * panel.quantity;
+          });
+        }
       });
-      return bool;
-    },
-    averageConsumptionPerPhotovoltaicGroup: function averageConsumptionPerPhotovoltaicGroup() {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
-      return 0;
+      return capacity / 1000;
     }
   },
   watch: {
-    junctions: function junctions(val) {// console.log(val)
-    }
+    junctions: function junctions(val) {}
   },
   mounted: function mounted() {// console.log(this.generatorSets)
     // this.getGeneratorSets()
   },
-  methods: {
-    photovoltaicCapacity: function photovoltaicCapacity(junction) {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
-      var capacity = 0;
-
-      if (junction.latest_solar_panel) {
-        var solarPanelGroupQuantity = 6;
-
-        for (var i = 1; i < solarPanelGroupQuantity; i++) {
-          capacity = capacity + junction.latest_solar_panel['unit_capacity_group_' + i] * junction.latest_solar_panel['quantity_group_' + i];
-        }
-      }
-
-      return capacity;
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -150,37 +194,147 @@ var render = function() {
     [
       _c("section", { staticClass: "tile box" }, [
         _c("div", { staticClass: "tile is-vertical" }, [
+          _c("div", { staticClass: "field" }, [
+            _c(
+              "div",
+              { staticClass: "is-pulled-right" },
+              [
+                _c(
+                  "b-tag",
+                  {
+                    staticClass:
+                      "is-default has-text-weight-light has-text-grey is-size-7"
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.isNewSolarPanelModalActive = true
+                          }
+                        }
+                      },
+                      [_vm._v("Agregar")]
+                    )
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "is-size-6 has-text-weight-bold",
+                staticStyle: { "padding-bottom": "12px" }
+              },
+              [_vm._v("PANELES SOLARES")]
+            )
+          ]),
+          _vm._v(" "),
           _c(
             "div",
-            {
-              staticClass: "is-size-6 has-text-weight-bold",
-              staticStyle: { "padding-bottom": "12px" }
-            },
-            [_vm._v("PANELES SOLARES")]
-          ),
-          _vm._v(" "),
-          _vm.hasSolarPanels
-            ? _c(
-                "div",
-                { staticClass: "columns tile is-parent" },
-                _vm._l(_vm.solarPanels, function(solarPanel) {
-                  return _c(
-                    "a",
+            { staticClass: "tile is-vertical is-parent" },
+            [
+              _c(
+                "b-field",
+                {
+                  staticClass: "tile is-parent",
+                  attrs: { label: "CAPACIDADES", "label-position": "on-border" }
+                },
+                [
+                  _c(
+                    "div",
                     {
-                      key: solarPanel.id,
-                      staticClass: "box tile is-child column",
-                      on: {
-                        click: function($event) {
-                          _vm.isJunctionModalActive = true
-                        }
-                      }
+                      staticClass: "tile box is-shadowless is-paddingless",
+                      staticStyle: { border: "solid 0.05rem black" }
                     },
-                    [_vm._m(0, true)]
+                    [
+                      _c("div", { staticClass: "tile" }, [
+                        _c("div", { staticClass: "tile is-parent" }, [
+                          _c(
+                            "div",
+                            { staticClass: "has-text-centered tile is-child" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-semibold is-size-6"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm._f("numeral")(
+                                        _vm.photovoltaicCapacity,
+                                        "0,0.0"
+                                      )
+                                    ) + "  "
+                                  ),
+                                  _c("span", { staticClass: "is-size-7" }, [
+                                    _vm._v("kW")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-normal is-size-7"
+                                },
+                                [_vm._v("Total")]
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ]
                   )
-                }),
-                0
-              )
-            : _vm._e(),
+                ]
+              ),
+              _vm._v(" "),
+              _vm.hasSolarPanels
+                ? _c(
+                    "div",
+                    { staticClass: "tile is-parent columns is-multiline" },
+                    _vm._l(_vm.junctions, function(junction) {
+                      return _c(
+                        "div",
+                        { staticClass: "tile" },
+                        _vm._l(junction.solar_panels, function(solarPanel) {
+                          return _c(
+                            "div",
+                            {
+                              key: solarPanel.id,
+                              staticClass: "tile column is-parent is-4"
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "box tile ",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.isJunctionModalActive = true
+                                    }
+                                  }
+                                },
+                                [_vm._m(0, true)]
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ],
+            1
+          ),
           _vm._v(" "),
           !_vm.hasSolarPanels
             ? _c("div", { staticClass: "tile columns is-vcentered" }, [
@@ -243,7 +397,7 @@ var render = function() {
         },
         [
           _c("modal-new-solar-panel", {
-            attrs: { user: _vm.user, pop: _vm.pop }
+            attrs: { user: _vm.user, junctions: _vm.junctions }
           })
         ],
         1
@@ -259,13 +413,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", {}, [
       _c("div", { staticClass: "columns" }, [
-        _c("div", { staticClass: "column" }, [
+        _c("div", { staticClass: "column is-4" }, [
           _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
             _vm._v("Paneles Solar")
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "column is-2 has-text-centered" })
+        ])
       ])
     ])
   }

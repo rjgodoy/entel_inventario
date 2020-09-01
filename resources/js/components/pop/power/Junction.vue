@@ -606,15 +606,15 @@
                 }
             },
 
-            photovoltaicCapacity() {    // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+            photovoltaicCapacity() {
                 let capacity = 0
-                if (this.junction.latest_solar_panel) {
-                    const solarPanelGroupQuantity = 6
-                    for (var i = 1; i < solarPanelGroupQuantity; i++) {
-                        capacity = capacity + (this.junction.latest_solar_panel['unit_capacity_group_'+i] * this.junction.latest_solar_panel['quantity_group_'+i])
-                    }
+                if (this.junction.solar_panels.length) {
+                    Object.keys(this.junction.solar_panels).forEach(element => {
+                        let panel = this.junction.solar_panels[element]
+                        capacity = capacity + (panel.unit_capacity * panel.quantity)
+                    })
                 }
-                return capacity
+                return capacity / 1000
             },
 
             averageConsumptionPerPhotovoltaicGroup() {  // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS

@@ -79,11 +79,13 @@
             </b-table-column>
 
             <b-table-column field="id" label="" width="10" numeric v-if="canDelete && edit">
-                <button class="button is-small" @click="confirmDelete(props.row)">
-                    <font-awesome-icon 
-                        :icon="['far', 'trash-alt']" 
-                        class="is-size-7 has-text-danger"/>
-                </button>
+                <template v-slot="props">
+                    <button class="button is-small" @click="confirmDelete(props.row)">
+                        <font-awesome-icon 
+                            :icon="['far', 'trash-alt']" 
+                            class="is-size-7 has-text-danger"/>
+                    </button>
+                </template>
             </b-table-column>
 
 

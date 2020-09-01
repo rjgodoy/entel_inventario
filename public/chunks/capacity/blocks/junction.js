@@ -300,18 +300,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     photovoltaicCapacity: function photovoltaicCapacity(junction) {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
       var capacity = 0;
 
-      if (junction.latest_solar_panel) {
-        var solarPanelGroupQuantity = 6;
-
-        for (var i = 1; i < solarPanelGroupQuantity; i++) {
-          capacity = capacity + junction.latest_solar_panel['unit_capacity_group_' + i] * junction.latest_solar_panel['quantity_group_' + i];
-        }
+      if (junction.solar_panels.length) {
+        Object.keys(junction.solar_panels).forEach(function (element) {
+          var panel = junction.solar_panels[element];
+          capacity = capacity + panel.unit_capacity * panel.quantity;
+        });
       }
 
-      return capacity;
+      return capacity / 1000;
     },
     batteryRechargePower: function batteryRechargePower(plane) {
       return this.rechargeCurrent(plane) * plane.float_tension / 1000;

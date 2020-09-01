@@ -16,7 +16,7 @@ let Eco = () => import(/* webpackChunkName: "chunks/eco"*/'./components/eco/Eco.
 let Comsite = () => import(/* webpackChunkName: "chunks/comsite"*/'./components/comsite/Comsite.vue')
 let Documents = () => import(/* webpackChunkName: "chunks/documents"*/'./components/documents/Documents.vue')
 let Admin = () => import(/* webpackChunkName: "chunks/admin"*/'./components/admin/Admin.vue')
-// let Reports = () => import(/* webpackChunkName: "chunks/reports"*/'./components/reports/Reports.vue')
+let Reports = () => import(/* webpackChunkName: "chunks/reports"*/'./components/reports/Reports.vue')
 let NotFound = () => import(/* webpackChunkName: "chunks/helpers/notFound"*/ './components/helpers/NotFound');
 
 export default {
@@ -54,7 +54,7 @@ export default {
                 { path: '/eco', name: 'Gestion Ambiental', component: Eco },
                 { path: '/docs', name: 'Documentos', component: Documents },
                 { path: '/admin', name: 'Administración', component: Admin },
-                // { path: '/reports', name: 'Reportes', component: Reports },
+                { path: '/reports', name: 'Reportes', component: Reports },
             ]
         }
     ]

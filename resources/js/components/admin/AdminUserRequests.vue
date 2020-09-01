@@ -84,12 +84,13 @@
                     </template>
                 </b-table-column>
 
-
                 <b-table-column >
-                    <p class="control">
-                        <button class="button is-success" @click="confirm(props.row)">Aceptar</button>
-                        <button class="button is-danger" @click="rejected(props.row)">Rechazar</button>
-                    </p>
+                    <template v-slot="props">
+                        <p class="control">
+                            <button class="button is-success" @click="confirm(props.row)">Aceptar</button>
+                            <button class="button is-danger" @click="rejected(props.row)">Rechazar</button>
+                        </p>
+                    </template>
                 </b-table-column>
 
                 <template slot="empty">

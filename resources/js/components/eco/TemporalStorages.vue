@@ -32,32 +32,32 @@
             aria-page-label="Page"
             aria-current-label="Current page">
 
-                <b-table-column class="is-size-6" width="70%" field="nombre" label="Nombre POP" sortable searchable>
-                    <template v-slot:header="{ column }">
-                        <b-tooltip :label="column.label" class="is-size-6" append-to-body>
-                            {{ column.label }}
-                        </b-tooltip>
-                    </template>
-                    <template v-slot="props">
-                        <router-link class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
-                            <div class="is-size-6">{{ props.row.nombre }}</div>
-                        </router-link>
-                        <p class="is-size-7">{{ props.row.comuna.nombre_comuna }}</p>
-                    </template>
-                </b-table-column>
+            <b-table-column class="is-size-6" width="70%" field="nombre" label="Nombre POP" sortable searchable>
+                <template v-slot:header="{ column }">
+                    <b-tooltip :label="column.label" class="is-size-6" append-to-body>
+                        {{ column.label }}
+                    </b-tooltip>
+                </template>
+                <template v-slot="props">
+                    <router-link class="is-size-7" :to="'/pop/' + props.row.id" target="_blank">
+                        <div class="is-size-6">{{ props.row.nombre }}</div>
+                    </router-link>
+                    <p class="is-size-7">{{ props.row.comuna.nombre_comuna }}</p>
+                </template>
+            </b-table-column>
 
-                <b-table-column class="is-size-6" field="comuna.zona.nombre_zona" label="Zona">
-                    <template v-slot:header="{ column }">
-                        <b-tooltip :label="column.label" class="is-size-6" append-to-body>
-                            {{ column.label }}
-                        </b-tooltip>
-                    </template>
-                    <template v-slot="props">
-                        <div class="is-size-7">
-                            <p>{{ props.row.comuna.zona.nombre_zona }}</p>
-                        </div>
-                    </template>
-                </b-table-column>
+            <b-table-column class="is-size-6" field="comuna.zona.nombre_zona" label="Zona">
+                <template v-slot:header="{ column }">
+                    <b-tooltip :label="column.label" class="is-size-6" append-to-body>
+                        {{ column.label }}
+                    </b-tooltip>
+                </template>
+                <template v-slot="props">
+                    <div class="is-size-7">
+                        <p>{{ props.row.comuna.zona.nombre_zona }}</p>
+                    </div>
+                </template>
+            </b-table-column>
 
         </b-table>
 

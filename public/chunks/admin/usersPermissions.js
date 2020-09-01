@@ -356,6 +356,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
@@ -1187,35 +1188,44 @@ var render = function() {
               ])
             }),
             _vm._v(" "),
-            _c("b-table-column", [
-              _c("p", { staticClass: "control" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "button is-success",
-                    on: {
-                      click: function($event) {
-                        return _vm.confirm(_vm.props.row)
-                      }
-                    }
-                  },
-                  [_vm._v("Aceptar")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "button is-danger",
-                    on: {
-                      click: function($event) {
-                        return _vm.rejected(_vm.props.row)
-                      }
-                    }
-                  },
-                  [_vm._v("Rechazar")]
-                )
+            _c("b-table-column", {
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _c("p", { staticClass: "control" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button is-success",
+                            on: {
+                              click: function($event) {
+                                return _vm.confirm(props.row)
+                              }
+                            }
+                          },
+                          [_vm._v("Aceptar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "button is-danger",
+                            on: {
+                              click: function($event) {
+                                return _vm.rejected(props.row)
+                              }
+                            }
+                          },
+                          [_vm._v("Rechazar")]
+                        )
+                      ])
+                    ]
+                  }
+                }
               ])
-            ]),
+            }),
             _vm._v(" "),
             _c("template", { slot: "empty" }, [
               _c("section", { staticClass: "section" }, [

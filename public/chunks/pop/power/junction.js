@@ -614,18 +614,18 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     photovoltaicCapacity: function photovoltaicCapacity() {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+      var _this3 = this;
+
       var capacity = 0;
 
-      if (this.junction.latest_solar_panel) {
-        var solarPanelGroupQuantity = 6;
-
-        for (var i = 1; i < solarPanelGroupQuantity; i++) {
-          capacity = capacity + this.junction.latest_solar_panel['unit_capacity_group_' + i] * this.junction.latest_solar_panel['quantity_group_' + i];
-        }
+      if (this.junction.solar_panels.length) {
+        Object.keys(this.junction.solar_panels).forEach(function (element) {
+          var panel = _this3.junction.solar_panels[element];
+          capacity = capacity + panel.unit_capacity * panel.quantity;
+        });
       }
 
-      return capacity;
+      return capacity / 1000;
     },
     averageConsumptionPerPhotovoltaicGroup: function averageConsumptionPerPhotovoltaicGroup() {
       // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
@@ -664,17 +664,17 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('childToParent', this.totalDisponibility);
     },
     getJunctionTypes: function getJunctionTypes() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("/api/junctionTypes").then(function (response) {
-        _this3.junctionTypes = response.data.junctionTypes;
+        _this4.junctionTypes = response.data.junctionTypes;
       });
     },
     getJunctionConnections: function getJunctionConnections() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get("/api/junctionConnections").then(function (response) {
-        _this4.junctionConnections = response.data.junctions;
+        _this5.junctionConnections = response.data.junctions;
       });
     },
     saveChanges: function saveChanges() {

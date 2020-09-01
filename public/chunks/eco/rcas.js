@@ -151,6 +151,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -619,30 +621,41 @@ var render = function() {
           }),
           _vm._v(" "),
           _vm.canDelete && _vm.edit
-            ? _c(
-                "b-table-column",
-                { attrs: { field: "id", label: "", width: "10", numeric: "" } },
-                [
-                  _c(
-                    "button",
+            ? _c("b-table-column", {
+                attrs: { field: "id", label: "", width: "10", numeric: "" },
+                scopedSlots: _vm._u(
+                  [
                     {
-                      staticClass: "button is-small",
-                      on: {
-                        click: function($event) {
-                          return _vm.confirmDelete(_vm.props.row)
-                        }
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "button is-small",
+                              on: {
+                                click: function($event) {
+                                  return _vm.confirmDelete(props.row)
+                                }
+                              }
+                            },
+                            [
+                              _c("font-awesome-icon", {
+                                staticClass: "is-size-7 has-text-danger",
+                                attrs: { icon: ["far", "trash-alt"] }
+                              })
+                            ],
+                            1
+                          )
+                        ]
                       }
-                    },
-                    [
-                      _c("font-awesome-icon", {
-                        staticClass: "is-size-7 has-text-danger",
-                        attrs: { icon: ["far", "trash-alt"] }
-                      })
-                    ],
-                    1
-                  )
-                ]
-              )
+                    }
+                  ],
+                  null,
+                  false,
+                  3709482748
+                )
+              })
             : _vm._e(),
           _vm._v(" "),
           _c("template", { slot: "empty" }, [

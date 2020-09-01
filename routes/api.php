@@ -62,13 +62,10 @@ Route::middleware('auth:api')->group(function () {
 		
 	});
 	##############################################################################################
-
-    // Route::get('menu', 'Api\MainController@menu');
+	
     Route::apiResource('menus', 'Api\MenuController');
     Route::apiResource('permissions', 'Api\PermissionController');
-    
-    Route::get('userRequestAlerts','Api\MainController@userRequestAlerts');
-
+   
 
 	### DASHBOARD ######################################################################
 	// POP DATA
@@ -143,6 +140,9 @@ Route::middleware('auth:api')->group(function () {
 		Route::post('junction/efizity','Api\JunctionController@syncEfizity');
 		Route::put('junctionUpdateTypes/{id}','Api\JunctionController@updateTypes');
 
+	// Solar Panels
+		Route::apiResource('solarPanels','Api\SolarPanelController');
+
 	// Generator Sets
 		Route::apiResource('generatorSets','Api\GeneratorSetController');
 		Route::get('generatorSetsExport', 'Api\GeneratorSetController@export');
@@ -183,6 +183,7 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('airConditionerData/{core}','Api\AirConditionerController@airConditionerData');
 		Route::get('airConditionerDataCrm/{crm_id}/{core}','Api\AirConditionerController@airConditionerDataCrm');
 		Route::get('airConditionerDataZona/{zona_id}/{core}','Api\AirConditionerController@airConditionerDataZona');
+		Route::apiResource('airConditionerCapacities','Api\AirConditionerCapacityController');
 
 	// Estructuras Verticales
 		Route::apiResource('verticalStructures','Api\VerticalStructureController');

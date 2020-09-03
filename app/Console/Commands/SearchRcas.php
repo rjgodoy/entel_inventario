@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\File;
+use App\Models\Rca;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class SearchRcas extends Command
@@ -45,11 +48,13 @@ class SearchRcas extends Command
         ->get();
 
         foreach ($rcas as $rca) {
-            Rca::updateOrCreate([
-                'pop_id' => $rca->pop_id,
-                'title' => $rca->filename
-            ],[
-                
+            Rca::insertOrIgnore([
+                [
+                    'pop_id' => $rca->pop_id,
+                    'title' => $rca->filename,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]
             ]);
         }
         

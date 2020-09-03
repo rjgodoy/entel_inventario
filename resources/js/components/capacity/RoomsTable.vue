@@ -3,12 +3,12 @@
         <table class="table is-fullwidth has-background-black-ter has-text-white">
             <thead>
                 <tr class="">
-                    <th class="is-size-6 has-text-weight-semibold has-text-white" width="25%">
+                    <th class="is-size-6 has-text-weight-semibold has-text-white has-text-left">
                         <abbr title="id">POP</abbr>
                     </th>
-                    <th class="is-size-6 has-text-weight-semibold has-text-white" width="75%">
+                    <th class="is-size-6 has-text-weight-semibold has-text-white">
                         <div class="columns">
-                            <div class="column is-6">
+                            <div class="column is-4 has-text-left">
                                 <abbr title="Sala">SALA</abbr>
                             </div>
                             <div class="column has-text-centered">

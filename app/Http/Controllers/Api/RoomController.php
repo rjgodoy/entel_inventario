@@ -97,7 +97,7 @@ class RoomController extends Controller
             ->whereHas('rooms', function($p) {
                 $p->where('criticity', 1);
             })
-            ->paginate(10);
+            ->get();
 
         return new RoomCollection($pops);
     }

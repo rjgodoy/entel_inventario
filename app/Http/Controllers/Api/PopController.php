@@ -14,6 +14,7 @@ use App\Models\Pop;
 use App\Models\PopMenu;
 use App\Models\PopMenuType;
 use App\Models\Projection;
+use App\Models\Room;
 use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -230,6 +231,13 @@ class PopController extends Controller
             'core' => $request->core
         ]);
 
+        $room = Room::create([
+            'pop_id' => $pop->id,
+            'name' => 'Sala 1.1',
+            'criticity' => 0,
+            'order' => 0,
+        ]);
+
         return $pop;
     }
 
@@ -394,58 +402,29 @@ class PopController extends Controller
         $sites = Site::withTrashed()->with('pop.comuna.zona.crm', 'state', 'classification_type', 'technologies.technology_type', 'technologies.state')
             ->where(function($p) use($text) {
                 $p->where(function($q) use ($text) {
-                    $q->where('nem_site', 'LIKE', "%$text%")
+                    $q->where('nem_site', 'LIKE', "$text%")
                     ->orWhere('nombre', 'LIKE', "%$text%");
                 })
                 ->orWhere(function($s) use($text) {
                     $s->whereHas('pop', function($u) use ($text) {
-                        $u->where('nombre', 'LIKE', "%$text%")
-                        ->orWhere('direccion', 'LIKE', "%$text%");
+                        $u->where('nombre', 'LIKE', "$text%");
                     });
                 })
                 ->orWhere(function($s) use($text) {
                     $s->whereHas('technologies', function($u) use ($text) {
-                        $u->withTrashed()->where('nem_tech', 'LIKE', "%$text%");
+                        $u->where('nem_tech', 'LIKE', "$text%");
                     });
                 });
             })
-            // ->where(function($r) {
-            //     $r->where(function($p) {
-            //         $p->whereIn('site_type_id', [1,3,4])->where('state_id', 1);
-            //     })
-            //     ->orWhere(function($t) {
-            //         $t->whereIn('sites.site_type_id', [2])
-            //         ->whereHas('technologies', function($s) {
-            //             $s->where('state_id', 1);
-            //         });
-            //     });
-            // })
             ->whereRaw($condition_core)
             ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
                 $q->whereRaw($condition_crm)
                 ->whereRaw($condition_zona);
             })
-            
-            // ->select(
-            //     'pops.id',
-            //     'sites.id as site_id',
-            //     'sites.nem_site',
-            //     'sites.nombre as nombre_sitio',
-            //     'sites.classification_type_id',
-            //     'pops.nombre',
-            //     'pops.direccion',
-            //     'pops.latitude',
-            //     'pops.longitude',
-            //     'comunas.nombre_comuna',
-            //     'comunas.zona_id',
-            //     'zonas.crm_id',
-            //     'zonas.nombre_zona',
-            //     'crms.nombre_crm',
-            //     'classification_types.classification_type',
-            //     'pops.alba_project'
-            // )
-            ->orderBy('state_id', 'asc')
+            ->orderBy('nem_site', 'desc')
             ->orderBy('classification_type_id', 'asc')
+            // ->orderBy('nombre_sitio', 'asc')
+            ->orderBy('state_id', 'asc')
             ->paginate(10);
     
         return $sites;

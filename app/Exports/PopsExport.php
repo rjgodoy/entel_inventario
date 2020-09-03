@@ -102,7 +102,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $pop = Pop::whereIn('id', $popsIds)->get();
+            $pop = Pop::withTrashed()->whereIn('id', $popsIds)->get();
         } else {
             $text = $this->text;
 
@@ -172,6 +172,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                     })
                     ->whereRaw($condition_core);
                 })
+
                 ->whereHas('rooms', function ($r) use ($condition_critic) {
                     $r->whereRaw($condition_critic);
                 })
@@ -189,11 +190,11 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ->whereRaw($condition_offgrid)
                 ->whereRaw($condition_solar)
                 ->whereRaw($condition_eolica)
+                ->whereRaw($condition_alba_project)
 
                 ->where(function($q) use($condition_protected_zone, $protected_zone) {
                     $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
                 })
-
                 ->where(function($q) use($condition_electric_lines, $electric_line) {
                     $electric_line ? $q->whereRaw($condition_electric_lines) : $q->whereRaw('1 = 1');
                 })
@@ -215,8 +216,6 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ->where(function($q) use($condition_infrastructures, $infrastructure) {
                     $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
                 })
-                
-                ->whereRaw($condition_alba_project)
                 ->orderBy('pops.id', 'asc')
                 ->get();
 

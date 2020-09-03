@@ -46,12 +46,12 @@
                     <table class="table is-fullwidth has-background-black-ter has-text-white">
                         <thead>
                             <tr class="">
-                                <th class="is-size-6 has-text-weight-semibold has-text-white" width="25%">
+                                <th class="is-size-6 has-text-weight-semibold has-text-white has-text-left" width="25%">
                                     <abbr title="id">POP</abbr>
                                 </th>
-                                <th class="is-size-6 has-text-weight-semibold has-text-white" width="75%">
+                                <th class="is-size-6 has-text-weight-semibold has-text-white has-text-left" width="75%">
                                     <div class="columns">
-                                        <div class="column is-6">
+                                        <div class="column is-4">
                                             <abbr title="Sala">SALA</abbr>
                                         </div>
                                         <div class="column has-text-centered">
@@ -103,13 +103,13 @@
                         </tbody>
                     </table>
 
-                    <nav class="pagination" role="navigation" aria-label="pagination">
+                    <!-- <nav class="pagination" role="navigation" aria-label="pagination">
                         <vue-pagination  
                             :pagination="roomsData"
                             @paginate="getRoomsData()"
                             :offset="4">
                         </vue-pagination>
-                    </nav>
+                    </nav> -->
                 </div>
                 
             </div>
@@ -127,7 +127,7 @@
 
     export default {
         components: {
-            VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
+            // VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
             RoomLights: () => import(/* webpackChunkName: "chunks/capacity/roomLights"*/'./RoomLights'),
             ModalRoom: () => import(/* webpackChunkName: "chunks/capacity/modals/modalRoom"*/'./modals/ModalRoom')
             // RoomsTable: () => import(/* webpackChunkName: "chunks/capacity/roomsTable"*/'./RoomsTable')

@@ -1,7 +1,7 @@
 <template>
     <div class="modal-card" style="height: 700px; width: auto">
         <header class="modal-card-head has-text-centered">
-            <p class="modal-card-title has-text-weight-bold">Subir RCA</p>
+            <p class="modal-card-title has-text-weight-bold">Subir Archivo</p>
         </header>
 
         <section class="modal-card-body">

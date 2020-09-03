@@ -493,6 +493,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -953,7 +954,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       })["finally"](function () {
         _this6.isFetching = false;
       });
-    }, 150),
+    }, 350),
     getMoreAsyncData: lodash_debounce__WEBPACK_IMPORTED_MODULE_3___default()(function () {
       this.getAsyncData(this.searchText);
     }, 50),
@@ -2025,7 +2026,7 @@ var render = function() {
                             expression: "page > totalPages"
                           }
                         ],
-                        staticClass: "has-text-grey"
+                        staticClass: "has-text-grey is-size-7"
                       },
                       [_vm._v(" No hay más sitios. ")]
                     )

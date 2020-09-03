@@ -8,7 +8,7 @@ class ElectricLine extends Model
 {
     public function pop()
     {
-        return $this->belongsTo(Pop::class);
+        return $this->belongsTo(Pop::class)->withTrashed();
     }
 
     public function electric_line_type() 

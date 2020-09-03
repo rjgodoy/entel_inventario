@@ -114,7 +114,7 @@ class Pop extends Model
      */
     public function generator_sets() 
     {
-        return $this->hasMany(GeneratorSet::class);
+        return $this->hasMany(GeneratorSet::class)->withTrashed();
     }
 
     /**

@@ -46,7 +46,8 @@
             </div>
 
             <!-- ZONA BUTTONS -->
-            <div v-if="selectedCrm != null" class="" :class="innerBackground + ' ' + bodyBackground" style="margin: 0 -24px 0 -24px">
+            <div v-if="selectedCrm != null"  
+                :class="innerBackground + ' ' + bodyBackground" style="margin: 0 -24px 0 -24px">
                 <div class="container" style="margin: -20px auto 10px auto;">
                     <div class="tile is-ancestor">
                         <div class="tile is-parent" v-for="zona in zonas" :key="zona.id">
@@ -151,7 +152,7 @@
                         </div>
                     </template>
                     <template slot="footer">
-                        <span v-show="page > totalPages" class="has-text-grey"> No hay más sitios. </span>
+                        <span v-show="page > totalPages" class="has-text-grey is-size-7"> No hay más sitios. </span>
                     </template>
                 </b-autocomplete>
             </div>
@@ -864,7 +865,7 @@
                     .finally(() => {
                         this.isFetching = false
                     })
-            }, 150),
+            }, 350),
 
             getMoreAsyncData: debounce(function () {
                 this.getAsyncData(this.searchText)

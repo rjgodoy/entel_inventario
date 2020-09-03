@@ -138,9 +138,7 @@ __webpack_require__.r(__webpack_exports__);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSearch"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    VuePagination: function VuePagination() {
-      return __webpack_require__.e(/*! import() | chunks/helpers/vuePagination */ "chunks/helpers/vuePagination").then(__webpack_require__.bind(null, /*! ../helpers/VuePagination */ "./resources/js/components/helpers/VuePagination.vue"));
-    },
+    // VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
     RoomLights: function RoomLights() {
       return __webpack_require__.e(/*! import() | chunks/capacity/roomLights */ "chunks/capacity/roomLights").then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
     },
@@ -1779,25 +1777,6 @@ var render = function() {
                 0
               )
             ]
-          ),
-          _vm._v(" "),
-          _c(
-            "nav",
-            {
-              staticClass: "pagination",
-              attrs: { role: "navigation", "aria-label": "pagination" }
-            },
-            [
-              _c("vue-pagination", {
-                attrs: { pagination: _vm.roomsData, offset: 4 },
-                on: {
-                  paginate: function($event) {
-                    return _vm.getRoomsData()
-                  }
-                }
-              })
-            ],
-            1
           )
         ])
       ])
@@ -1814,7 +1793,8 @@ var staticRenderFns = [
         _c(
           "th",
           {
-            staticClass: "is-size-6 has-text-weight-semibold has-text-white",
+            staticClass:
+              "is-size-6 has-text-weight-semibold has-text-white has-text-left",
             attrs: { width: "25%" }
           },
           [_c("abbr", { attrs: { title: "id" } }, [_vm._v("POP")])]
@@ -1823,12 +1803,13 @@ var staticRenderFns = [
         _c(
           "th",
           {
-            staticClass: "is-size-6 has-text-weight-semibold has-text-white",
+            staticClass:
+              "is-size-6 has-text-weight-semibold has-text-white has-text-left",
             attrs: { width: "75%" }
           },
           [
             _c("div", { staticClass: "columns" }, [
-              _c("div", { staticClass: "column is-6" }, [
+              _c("div", { staticClass: "column is-4" }, [
                 _c("abbr", { attrs: { title: "Sala" } }, [_vm._v("SALA")])
               ]),
               _vm._v(" "),

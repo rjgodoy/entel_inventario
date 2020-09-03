@@ -96,17 +96,6 @@ class UpdatePops extends Command
                 ]
             ]);
 
-            // Insert Room
-            $lastPop = Pop::latest()->first();
-            Room::insertOrIgnore([
-                'pop_id' => $lastPop->id,
-                'name' => 'Sala 1.1',
-                'criticity' => 0,
-                'order' => 0,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]);
-
             // Insert Site
             $site = Site::withTrashed()->updateOrCreate(
                 [
@@ -126,7 +115,7 @@ class UpdatePops extends Command
                     'localidad_obligatoria' => $newPop->lloo700 || $newPop->lloo2600 ? 1 : 0
                 ]
             );
-            $site->state_id == 2 && $site->delete();
+            $site->state_id == 2 && !$site->deleted_at & $site->delete();
 
             // Insert Technologies
             $technology = Technology::withTrashed()->updateOrCreate(
@@ -141,9 +130,20 @@ class UpdatePops extends Command
                     'state_id' => $newPop->ran_device_status_id
                 ]
             );
-            $technology->state_id == 2 && $technology->delete();
+            $technology->state_id == 2 && !$technology->deleted_at & $technology->delete();
         }
 
+        // Insert Room
+        $popsWORoom = Pop::doesntHave('rooms');
+        foreach ($popsWORoom as $pop) {
+            Room::create([
+                'pop_id' => $pop->id,
+                'name' => 'Sala 1.1',
+                'criticity' => 0,
+                'order' => 0
+            ]);
+        }
+            
 
         $totalPops = \DB::table('entel_pops.pops')
             ->whereRaw('Date(created_at) = CURDATE()')
@@ -163,6 +163,8 @@ class UpdatePops extends Command
             'totalTechnologies' => $totalTechnologies,
         ]);
 
-        Mail::to('proyectosinfraestructura@entel.cl')->send(new PopsUpdated($counter));
+        if($totalPops || $totalSites || $totalTechnologies) {
+            Mail::to('proyectosinfraestructura@entel.cl')->send(new PopsUpdated($counter));
+        }
     }
 }

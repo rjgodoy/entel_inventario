@@ -13,6 +13,6 @@ class GeneratorSetCapacity extends Model
 	
     public function generator_set() 
     {
-        return $this->belongsTo(GeneratorSet::class);
+        return $this->belongsTo(GeneratorSet::class)->withTrashed();
     }
 }

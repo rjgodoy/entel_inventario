@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\File;
 use App\Models\Pop;
+use App\Models\PopResume;
 use App\Models\Rca;
 use App\Models\TemporaryStorage;
 use Maatwebsite\Excel\Concerns\Exportable;
@@ -103,7 +104,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $pop = Pop::whereIn('id', $popsIds)->get();
+            $pop = PopResume::withTrashed()->whereIn('id', $popsIds)->get();
         } else {
             $text = $this->text;
 
@@ -151,9 +152,11 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $infrastructure = $this->infrastructure;
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones')
-                ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
-                    $q->where(function ($p) use ($text) {
+            $pop = PopResume::with('pop.sites.classification_type', 'pop.sites.attention_priority_type')
+            ->whereHas('pop', function ($w) use ($text, $condition_core, $condition_bafi, $bafi, $condition_critic, $condition_crm, $condition_zona, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_vip, $condition_lloo, $condition_ranco, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone,
+            $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_alba_project) {
+                $w->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
+                    $q->withTrashed()->where(function ($p) use ($text) {
                         if ($text) {
                             $p->where('nem_site', 'LIKE', "%$text%")
                             ->orWhere('nombre', 'LIKE', "%$text%");
@@ -216,9 +219,10 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
                     $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
                 })
 
-                ->whereRaw($condition_alba_project)
-                ->orderBy('pops.id', 'asc')
-                ->get();   
+                ->whereRaw($condition_alba_project);
+            })
+            ->orderBy('pop_resumes.pop_id', 'asc')
+            ->get(); 
         }
 
         return $pop;
@@ -311,11 +315,8 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
     	$nem_fijo = null;
     	$nem_movil = null;
     	$q_sites = 0;
-
-    	$pe_3g = 0; $mpls = 0; $olt = 0; $olt_3play = 0; $bafi = 0;
-    	$red_minima = 0; $localidad_obligatoria = 0; $ranco = 0;
     	
-    	foreach ($pop->sites as $site) {
+    	foreach ($pop->pop->sites as $site) {
             
     		if ($site->classification_type_id && $site->classification_type_id <= $class_id) {
     			$class_id = $site->classification_type_id;
@@ -325,80 +326,32 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
                 } else {
                 	$nem_movil = $site->nem_site;
                 } 
-            }
-
-            // PRIORIDAD ATENCION
-            if ($site->attention_priority_type_id && $site->attention_priority_type_id < $att_pr_id) {
-            	$att_pr_id = $site->attention_priority_type_id;
-                $attention_priority = $site->attention_priority_type->attention_priority_type;
-            }
-
-            // CLASIFICACION PLANIFICACION
-            if ($site->category_type_id && $site->category_type_id < $cat_id) {
-            	$cat_id = $site->category_type_id;
-                $category = $site->category_type->category_type;
-            }
-
-            // ATENCION TERRENO
-            if ($site->attention_type_id && $site->attention_type_id < $att_id) {
-            	$att_id = $site->attention_type_id;
-                $attention = $site->attention_type->attention_type;
-            }
-
-            // EQUIPAMIENTO TECNOLOGIAS
-            $pe_3g = $site->pe_3g & !$pe_3g ? 1 : $pe_3g;
-            $mpls = $site->mpls & !$mpls ? 1 : $mpls;
-            $olt = $site->olt & !$olt ? 1 : $olt;
-            $olt_3play = $site->olt_3play & !$olt_3play ? 1 : $olt_3play;
-
-            $red_minima = $site->red_minima;
-            $localidad_obligatoria = $site->localidad_obligatoria & !$localidad_obligatoria ? 1 : $localidad_obligatoria;
-            $ranco = $site->ranco & !$ranco ? 1 : $ranco;
-            
-            // Q TECNOLOGIAS
-            $tech2g = 0; $tech3g = 0; $tech4g = 0;
-            foreach ($site->technologies as $technology) {
-            	if ($technology->technology_type_id == 1) {
-            		$tech2g++;
-            	} elseif ($technology->technology_type_id == 2) {
-					$tech3g++;
-            	} elseif ($technology->technology_type_id == 3) {
-            		$tech4g++;
-            	}
-
-            	if($technology->technology_type_id == 3 && $technology->frequency == 3500) {
-                    $bafi = 1;
-                }
-            		
-            }
+            }           
 
             $q_sites++;
     	}
-
-        $temporary_storage = TemporaryStorage::with('pop')->where('zona_id', $pop->comuna->zona_id)->first();
-        $rca = Rca::where('pop_id', $pop->id)->first();
                         
         return [
-            $pop->id,
+            $pop->pop_id,
             $nem_fijo,
             $nem_movil,
             $q_sites,
             $pop->pop_e_id,
             $pop->nombre,
             $pop->direccion,
-            $pop->comuna->nombre_comuna,
-            $pop->comuna->region->cod_region,
-            $pop->comuna->region->nombre_region,
-            $pop->comuna->zona->cod_zona,
-            $pop->comuna->zona->nombre_zona,
-            $pop->comuna->zona->crm->nombre_crm,
+            $pop->comuna,
+            $pop->cod_region,
+            $pop->region,
+            $pop->cod_zona,
+            $pop->zona,
+            $pop->crm,
             $pop->latitude,
             $pop->longitude,
 
-            $classification,
-            $attention_priority,
-            $category,
-            $attention,
+            $pop->classification,
+            $pop->attention_priority,
+            $pop->category,
+            $pop->attention_type,
 
             // $pop->pop_classes->first() ? $pop->pop_class->first()->pop_class_type->type : '',
             // $pop->pop_types->first() ? $pop->pops->first()->pop_type->type : '',
@@ -411,31 +364,30 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             // $pop->coverages->first() ? $pop->coverages->first()->coverage_type->type : '',
             // // $pop->towers->first() ? $pop->history_tower_types->first()->tower_type->tower_type : '',
 
-            $tech2g,
-            $tech3g,
-            $tech4g,
+            $pop->q_2g,
+            $pop->q_3g,
+            $pop->q_4g,
 
-            $pe_3g ? 'SI' : 'NO',
-            $mpls ? 'SI' : 'NO',
-            $olt ? 'SI' : 'NO',
-            $olt_3play ? 'SI' : 'NO',
+            $pop->pe_3g ? 'SI' : 'NO',
+            $pop->mpls ? 'SI' : 'NO',
+            $pop->olt ? 'SI' : 'NO',
+            $pop->olt_3play ? 'SI' : 'NO',
             $class_id == 1 ? 'SI' : 'NO',
-            $bafi ? 'SI' : 'NO',
+            $pop->bafi ? 'SI' : 'NO',
 
-            $red_minima,
+            $pop->red_minima,
             $pop->vip ? 'SI' : 'NO',
-            $pop->current_entel_vip ? 'SI' : 'NO',
-            $localidad_obligatoria ? 'SI' : 'NO',
-            $ranco ? 'SI' : 'NO',
+            $pop->vip_entel ? 'SI' : 'NO',
+            $pop->localidad_obligatoria ? 'SI' : 'NO',
+            $pop->ranco ? 'SI' : 'NO',
 
             $pop->offgrid ? 'SI' : 'NO',
             $pop->solar ? 'SI' : 'NO',
             $pop->eolica ? 'SI' : 'NO',
-            $pop->vertical_structures->first() ? ($pop->vertical_structures->first()->beacons->first() ? $pop->vertical_structures->first()->beacons->first()->beacon_type->type : null) : null,
-            $pop->protected_zones->first() ? $pop->protected_zones->first()->cod_zone.' - '.$pop->protected_zones->first()->name : 'NO',
-            $rca ? 'SI' : 'NO',
-            $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
-
+            $pop->beacon,
+            $pop->cod_protected_zone ? $pop->cod_protected_zone.' - '.$pop->protected_zone : null,
+            $pop->rca ? 'SI' : 'NO',
+            $pop->zat,
             $pop->alba_project ? 'SI' : 'NO'
 
         ];

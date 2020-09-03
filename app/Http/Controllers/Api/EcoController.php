@@ -166,7 +166,7 @@ class EcoController extends Controller
         $docs = File::with('site.pop')->whereHas('folder', function($q) {
             $q->where('name', 'Gestión Ambiental');
         })
-        ->where('filename', 'NOT LIKE', '%RCA%')
+        // ->where('filename', 'NOT LIKE', '%RCA%')
         ->get();
 
         return new FileCollection($docs);

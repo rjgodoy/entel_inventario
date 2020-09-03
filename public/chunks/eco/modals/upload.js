@@ -617,7 +617,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("header", { staticClass: "modal-card-head has-text-centered" }, [
       _c("p", { staticClass: "modal-card-title has-text-weight-bold" }, [
-        _vm._v("Subir RCA")
+        _vm._v("Subir Archivo")
       ])
     ])
   }

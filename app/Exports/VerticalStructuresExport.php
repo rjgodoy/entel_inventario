@@ -96,7 +96,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $verticalStructure = VerticalStructure::with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type')
+            $verticalStructure = VerticalStructure::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -147,101 +147,112 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $verticalStructure = VerticalStructure::with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
-            	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
-            		$a->where(function($p) use($text, $condition_bafi) {
-	                    $p->where(function($w) use($text) {
-	                        if ($text) {
-	                            $w->whereIn('site_type_id', [1,3,4])
-	                            // ->where('state_id', 1)
-	                            ->where(function($r) use($text) {
-	                                $r->where('nem_site', 'LIKE', "%$text%")
-	                                ->orWhere('nombre', 'LIKE', "%$text%");
-	                            });
-	                        } else {
-	                            $w->whereIn('site_type_id', [1,3,4]);
-	                            // ->where('state_id', 1);
-	                        }
-	                    })
-	                    ->orWhere(function($s) use($text) {
-	                        if ($text) {
-	                            $s->whereIn('site_type_id', [2])
-	                            // ->whereHas('technologies', function($r) {
-	                            //     $r->where('state_id', 1);
-	                            // })
-	                            ->where(function($q) use($text) {
-	                                $q->where('nem_site', 'LIKE', "%$text%")
-	                                ->orWhere('nombre', 'LIKE', "%$text%");
-	                            });
-	                        } else {
-	                            $s->whereIn('site_type_id', [2]);
-	                            // ->whereHas('technologies', function($o) {
-	                            //     $o->where('state_id', 1);
-	                            // });
-	                        }
-	                    });
-	                })
-	                ->where(function($q) use($condition_bafi, $bafi) {
-	                    if($bafi) {
-	                        $q->whereHas('technologies', function($q) use($condition_bafi) {
-	                            $q->whereRaw($condition_bafi);
-	                        });
-	                    } else {
-	                        $q->whereRaw('1 = 1');
-	                    }
-	                })
-            		->whereRaw($condition_core)
-	                ->whereRaw($condition_pe_3g)
-	                ->whereRaw($condition_mpls)
-	                ->whereRaw($condition_olt)
-	                ->whereRaw($condition_olt_3play)
-	                ->whereRaw($condition_lloo)
-	                ->whereRaw($condition_ranco);
-            	})
-    	        ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
-    	            $q->whereRaw($condition_crm)
-                    ->whereRaw($condition_zona);
-    	        })
-                // ->whereHas('pop.rooms', function($r) use($condition_critic) {
-                //     $r->whereRaw($condition_critic);
-                // })
-                ->whereHas('pop', function($s) use($condition_vip, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone, 
-                    $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_alba_project) {
-                    $s->whereRaw($condition_vip)
-                    ->whereRaw($condition_offgrid)
-                    ->whereRaw($condition_solar)
-                    ->whereRaw($condition_eolica)
+            // $verticalStructure = VerticalStructure::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
+            // 	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
+            // 		$a->where(function($p) use($text, $condition_bafi) {
+	           //          $p->where(function($w) use($text) {
+	           //              if ($text) {
+	           //                  $w->whereIn('site_type_id', [1,3,4])
+	           //                  // ->where('state_id', 1)
+	           //                  ->where(function($r) use($text) {
+	           //                      $r->where('nem_site', 'LIKE', "%$text%")
+	           //                      ->orWhere('nombre', 'LIKE', "%$text%");
+	           //                  });
+	           //              } else {
+	           //                  $w->whereIn('site_type_id', [1,3,4]);
+	           //                  // ->where('state_id', 1);
+	           //              }
+	           //          })
+	           //          ->orWhere(function($s) use($text) {
+	           //              if ($text) {
+	           //                  $s->whereIn('site_type_id', [2])
+	           //                  // ->whereHas('technologies', function($r) {
+	           //                  //     $r->where('state_id', 1);
+	           //                  // })
+	           //                  ->where(function($q) use($text) {
+	           //                      $q->where('nem_site', 'LIKE', "%$text%")
+	           //                      ->orWhere('nombre', 'LIKE', "%$text%");
+	           //                  });
+	           //              } else {
+	           //                  $s->whereIn('site_type_id', [2]);
+	           //                  // ->whereHas('technologies', function($o) {
+	           //                  //     $o->where('state_id', 1);
+	           //                  // });
+	           //              }
+	           //          });
+	           //      })
+	           //      ->where(function($q) use($condition_bafi, $bafi) {
+	           //          if($bafi) {
+	           //              $q->whereHas('technologies', function($q) use($condition_bafi) {
+	           //                  $q->whereRaw($condition_bafi);
+	           //              });
+	           //          } else {
+	           //              $q->whereRaw('1 = 1');
+	           //          }
+	           //      })
+            // 		->whereRaw($condition_core)
+	           //      ->whereRaw($condition_pe_3g)
+	           //      ->whereRaw($condition_mpls)
+	           //      ->whereRaw($condition_olt)
+	           //      ->whereRaw($condition_olt_3play)
+	           //      ->whereRaw($condition_lloo)
+	           //      ->whereRaw($condition_ranco);
+            // 	})
+    	       //  ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+    	       //      $q->whereRaw($condition_crm)
+            //         ->whereRaw($condition_zona);
+    	       //  })
+            //     // ->whereHas('pop.rooms', function($r) use($condition_critic) {
+            //     //     $r->whereRaw($condition_critic);
+            //     // })
+            //     ->whereHas('pop', function($s) use($condition_vip, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone, 
+            //         $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_alba_project) {
+            //         $s->whereRaw($condition_vip)
+            //         ->whereRaw($condition_offgrid)
+            //         ->whereRaw($condition_solar)
+            //         ->whereRaw($condition_eolica)
                     
-                    ->where(function($q) use($condition_protected_zone, $protected_zone) {
-                        $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
-                    })
+            //         ->where(function($q) use($condition_protected_zone, $protected_zone) {
+            //             $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
+            //         })
 
-                    ->where(function($q) use($condition_electric_lines, $electric_line) {
-                        $electric_line ? $q->whereRaw($condition_electric_lines) : $q->whereRaw('1 = 1');
-                    })
-                    ->where(function($q) use($condition_junctions, $junction) {
-                    $junction ? $q->whereRaw($condition_junctions) : $q->whereRaw('1 = 1');
-                    })
-                    ->where(function($q) use($condition_generators, $generator_set) {
-                        $generator_set ? $q->whereRaw($condition_generators) : $q->whereRaw('1 = 1');
-                    })
-                    ->where(function($q) use($condition_rectifiers, $power_rectifier) {
-                        $power_rectifier ? $q->whereRaw($condition_rectifiers) : $q->whereRaw('1 = 1');
-                    })
-                    ->where(function($q) use($condition_air_conditioners, $air_conditioner) {
-                        $air_conditioner ? $q->whereRaw($condition_air_conditioners) : $q->whereRaw('1 = 1');
-                    })
-                    ->where(function($q) use($condition_vertical_structures, $vertical_structure) {
-                        $vertical_structure ? $q->whereRaw($condition_vertical_structures) : $q->whereRaw('1 = 1');
-                    })
-                    ->where(function($q) use($condition_infrastructures, $infrastructure) {
-                        $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
-                    })
+            //         ->where(function($q) use($condition_electric_lines, $electric_line) {
+            //             $electric_line ? $q->whereRaw($condition_electric_lines) : $q->whereRaw('1 = 1');
+            //         })
+            //         ->where(function($q) use($condition_junctions, $junction) {
+            //         $junction ? $q->whereRaw($condition_junctions) : $q->whereRaw('1 = 1');
+            //         })
+            //         ->where(function($q) use($condition_generators, $generator_set) {
+            //             $generator_set ? $q->whereRaw($condition_generators) : $q->whereRaw('1 = 1');
+            //         })
+            //         ->where(function($q) use($condition_rectifiers, $power_rectifier) {
+            //             $power_rectifier ? $q->whereRaw($condition_rectifiers) : $q->whereRaw('1 = 1');
+            //         })
+            //         ->where(function($q) use($condition_air_conditioners, $air_conditioner) {
+            //             $air_conditioner ? $q->whereRaw($condition_air_conditioners) : $q->whereRaw('1 = 1');
+            //         })
+            //         ->where(function($q) use($condition_vertical_structures, $vertical_structure) {
+            //             $vertical_structure ? $q->whereRaw($condition_vertical_structures) : $q->whereRaw('1 = 1');
+            //         })
+            //         ->where(function($q) use($condition_infrastructures, $infrastructure) {
+            //             $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
+            //         })
 
-                    ->whereRaw($condition_alba_project);
+            //         ->whereRaw($condition_alba_project);
+            //     })
+            //     ->orderBy('pop_id', 'asc')
+    	       //  ->get();
+
+            $verticalStructure = VerticalStructure::with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
+                ->whereHas('pop.sites', function($a) use($condition_core) {
+                    $a->whereRaw($condition_core);
+                })
+                ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                    $q->whereRaw($condition_crm)
+                    ->whereRaw($condition_zona);
                 })
                 ->orderBy('pop_id', 'asc')
-    	        ->get();
+                ->get();
         }
 
         return $verticalStructure;
@@ -291,7 +302,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             $verticalStructure->pop->comuna->zona->nombre_zona,
             $verticalStructure->pop->comuna->zona->crm->nombre_crm,
 
-            $verticalStructure->vertical_structure_type ? $verticalStructure->vertical_structure_type->vertical_structure_type : null,
+            $verticalStructure->vertical_structure_type ? $verticalStructure->vertical_structure_type->type : null,
             $verticalStructure->height,
             $verticalStructure->use_factor,
             $verticalStructure->serial_number,

@@ -16,7 +16,7 @@ class GeneratorSet extends Model
 
     public function pop() 
     {
-        return $this->belongsTo(Pop::class);
+        return $this->belongsTo(Pop::class)->withTrashed();;
     }
 
     public function current_generator_set_capacity() 

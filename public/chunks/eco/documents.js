@@ -114,13 +114,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUpload"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFilePdf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileExcel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileImage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleLeft"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUpload"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
+  components: {
+    ModalUpload: function ModalUpload() {
+      return Promise.all(/*! import() | chunks/eco/modals/upload */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("chunks/eco/modals/upload")]).then(__webpack_require__.bind(null, /*! ./modals/ModalUpload */ "./resources/js/components/eco/modals/ModalUpload.vue"));
+    }
+  },
   props: ['user'],
   data: function data() {
     return {
@@ -133,23 +175,31 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       sortIcon: 'arrow-up',
       sortIconSize: 'is-small',
       currentPage: 1,
-      perPage: 10
+      perPage: 10,
+      edit: false,
+      isUploadModalActive: false
     };
   },
   computed: {
+    canUpload: function canUpload() {
+      return this.ecoDocs.can && this.ecoDocs.can.upload;
+    },
     canDelete: function canDelete() {
       return this.ecoDocs.can && this.ecoDocs.can["delete"];
     }
   },
-  created: function created() {},
+  created: function created() {
+    this.$eventBus.$on('reload-ecoDocs', this.getRCAs);
+  },
   mounted: function mounted() {
-    this.getEcoDocs();
+    this.getRCAs();
   },
   methods: {
-    getEcoDocs: function getEcoDocs() {
+    getRCAs: function getRCAs() {
       var _this = this;
 
       axios.get("/api/ecoDocs").then(function (response) {
+        console.log(response.data);
         _this.ecoDocs = response.data;
       });
     },
@@ -175,32 +225,98 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       try {
         var response = axios.post("/api/ecoDocs", formData, config).then(function (response) {
-          _this3.getEcoDocs();
+          _this3.getRCAs();
         });
       } catch (e) {
         console.log(e);
       }
     },
-    confirm: function confirm(file) {
+    faFile: function faFile(ext) {
+      var icon = ext == 'pdf' ? 'file-pdf' : ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'file-image' : ext == 'xls' || ext == 'xlsx' ? 'file-excel' : 'file';
+      var type = ext == 'pdf' ? 'has-text-info' : ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'has-text-warning' : ext == 'xls' || ext == 'xlsx' ? 'has-text-success' : 'has-text-primary';
+      return {
+        'icon': icon,
+        'type': type
+      };
+    },
+    openFile: function openFile(file) {
+      if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+        window.open('/storage/' + file.route, "_blank");
+      } else {
+        this.readFile(file);
+      }
+    },
+    readFile: function readFile(file) {
       var _this4 = this;
+
+      this.isLoading = true;
+      var params = {
+        'route': file.route,
+        'mime': file.mime
+      }; // console.log(params)
+
+      axios.get('/api/viewFile', {
+        params: params,
+        responseType: 'arraybuffer'
+      }).then(function (response) {
+        console.log(response);
+        var blob = new Blob([response.data], {
+          type: file.mime
+        }); // const objectUrl = window.URL.createObjectURL(blob)
+        // IE doesn't allow using a blob object directly as link href
+        // instead it is necessary to use msSaveOrOpenBlob
+
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(newBlob);
+          return;
+        }
+
+        var data = window.URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = data;
+        link.target = "_self";
+        link.open = file.basename;
+        link.click(); // setTimeout(function () {
+        //     // For Firefox it is necessary to delay revoking the ObjectURL
+        //     window.URL.revokeObjectURL(data)
+        // }, 100)
+
+        _this4.isLoading = false;
+
+        _this4.$buefy.toast.open({
+          message: 'El archivo se ha descargado exitosamente.',
+          type: 'is-success',
+          duration: 5000
+        });
+      })["catch"](function (error) {
+        console.log(error);
+        _this4.isLoading = false;
+
+        _this4.$buefy.toast.open({
+          message: 'Ha ocurrido un error. Favor contactar al administrador',
+          type: 'is-danger',
+          duration: 5000
+        });
+      });
+    },
+    confirmDelete: function confirmDelete(file) {
+      var _this5 = this;
 
       this.$buefy.dialog.confirm({
         message: 'Desea eliminar este archivo?',
         type: 'is-danger',
         onConfirm: function onConfirm() {
-          _this4.deleteFile(file.id);
+          axios["delete"]("/api/files/".concat(file.id)).then(function (response) {
+            console.log(response);
+
+            _this5.getRCAs();
+          });
         }
       });
-    },
-    deleteFile: function deleteFile(file_id) {
-      var _this5 = this;
-
-      axios["delete"]("/api/files/".concat(file_id)).then(function (response) {
-        console.log(response);
-
-        _this5.getEcoDocs();
-      });
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$eventBus.$off('reload-ecoDocs');
   }
 });
 
@@ -225,6 +341,43 @@ var render = function() {
     "div",
     { staticClass: "tile is-child box" },
     [
+      _c("div", { staticClass: "is-pulled-right" }, [
+        _vm.canUpload
+          ? _c("span", {}, [
+              _c(
+                "button",
+                {
+                  staticClass: "button",
+                  on: {
+                    click: function($event) {
+                      _vm.isUploadModalActive = true
+                    }
+                  }
+                },
+                [_vm._v("Subir archivos")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.canDelete
+          ? _c("span", {}, [
+              _c(
+                "button",
+                {
+                  staticClass: "button",
+                  class: _vm.edit && "is-danger",
+                  on: {
+                    click: function($event) {
+                      _vm.edit = !_vm.edit
+                    }
+                  }
+                },
+                [_vm._v("Editar")]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "title is-size-4" }, [
         _vm._v("Otros Documentos")
       ]),
@@ -270,6 +423,22 @@ var render = function() {
             },
             scopedSlots: _vm._u([
               {
+                key: "searchable",
+                fn: function(props) {
+                  return [
+                    _c("b-input", {
+                      model: {
+                        value: props.filters[props.column.field],
+                        callback: function($$v) {
+                          _vm.$set(props.filters, props.column.field, $$v)
+                        },
+                        expression: "props.filters[props.column.field]"
+                      }
+                    })
+                  ]
+                }
+              },
+              {
                 key: "header",
                 fn: function(ref) {
                   var column = ref.column
@@ -295,8 +464,42 @@ var render = function() {
                 key: "default",
                 fn: function(props) {
                   return [
-                    _c("div", { staticClass: "is-size-6" }, [
-                      _vm._v(_vm._s(props.row.basename))
+                    _c("a", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column is-1" },
+                        [
+                          _c("font-awesome-icon", {
+                            class: _vm.faFile(props.row.extension).type,
+                            attrs: {
+                              icon: [
+                                "fas",
+                                _vm.faFile(props.row.extension).icon
+                              ]
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "column" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "is-size-6",
+                            on: {
+                              click: function($event) {
+                                return _vm.openFile(props.row)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(props.row.basename))]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "is-size-7 has-text-dark" }, [
+                          _vm._v(_vm._s(props.row.size / 1000) + " kb")
+                        ])
+                      ])
                     ])
                   ]
                 }
@@ -317,15 +520,17 @@ var render = function() {
               {
                 key: "searchable",
                 fn: function(props) {
-                  return _c("b-input", {
-                    model: {
-                      value: props.filters[props.column.field],
-                      callback: function($$v) {
-                        _vm.$set(props.filters, props.column.field, $$v)
-                      },
-                      expression: "props.filters[props.column.field]"
-                    }
-                  })
+                  return [
+                    _c("b-input", {
+                      model: {
+                        value: props.filters[props.column.field],
+                        callback: function($$v) {
+                          _vm.$set(props.filters, props.column.field, $$v)
+                        },
+                        expression: "props.filters[props.column.field]"
+                      }
+                    })
+                  ]
                 }
               },
               {
@@ -354,32 +559,63 @@ var render = function() {
                 key: "default",
                 fn: function(props) {
                   return [
-                    _c("div", { staticClass: "is-size-7" }, [
-                      _vm._v(_vm._s(props.row.site.nem_site))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "is-size-7",
-                        attrs: {
-                          to: "/pop/" + props.row.site.pop.id,
-                          target: "_blank"
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "is-size-6" }, [
-                          _vm._v(_vm._s(props.row.site.pop.nombre))
-                        ])
-                      ]
-                    )
+                    props.row.site || props.row.pop
+                      ? _c(
+                          "div",
+                          { staticClass: "has-text-right" },
+                          [
+                            _c("div", { staticClass: "is-size-7" }, [
+                              _vm._v(
+                                _vm._s(
+                                  props.row.site
+                                    ? props.row.site.nem_site
+                                    : props.row.pop
+                                    ? props.row.pop.sites[0].nem_site
+                                    : ""
+                                )
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "is-size-7",
+                                attrs: {
+                                  to:
+                                    "/pop/" +
+                                    (props.row.site
+                                      ? props.row.site.pop_id
+                                      : props.row.pop
+                                      ? props.row.pop.id
+                                      : ""),
+                                  target: "_blank"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "is-size-6" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      props.row.site
+                                        ? props.row.site.pop.nombre
+                                        : props.row.pop
+                                        ? props.row.pop.sites[0].nombre
+                                        : ""
+                                    )
+                                  )
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e()
                   ]
                 }
               }
             ])
           }),
           _vm._v(" "),
-          _vm.canDelete
+          _vm.canDelete && _vm.edit
             ? _c("b-table-column", {
                 attrs: { field: "id", label: "", width: "10", numeric: "" },
                 scopedSlots: _vm._u(
@@ -391,15 +627,16 @@ var render = function() {
                           _c(
                             "button",
                             {
-                              staticClass: "button",
+                              staticClass: "button is-small",
                               on: {
                                 click: function($event) {
-                                  return _vm.confirm(props.row)
+                                  return _vm.confirmDelete(props.row)
                                 }
                               }
                             },
                             [
                               _c("font-awesome-icon", {
+                                staticClass: "is-size-7 has-text-danger",
                                 attrs: { icon: ["far", "trash-alt"] }
                               })
                             ],
@@ -411,7 +648,7 @@ var render = function() {
                   ],
                   null,
                   false,
-                  2799896185
+                  3709482748
                 )
               })
             : _vm._e(),
@@ -432,14 +669,36 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("p", [_vm._v("No hay archivos")])
+                  _c("p", [_vm._v("No hay archivos.")])
                 ]
               )
             ])
           ])
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      _vm.ecoDocs.can && _vm.ecoDocs.can.upload
+        ? _c(
+            "b-modal",
+            {
+              attrs: {
+                active: _vm.isUploadModalActive,
+                "has-modal-card": "",
+                "trap-focus": "",
+                "aria-role": "dialog",
+                "aria-modal": ""
+              },
+              on: {
+                "update:active": function($event) {
+                  _vm.isUploadModalActive = $event
+                }
+              }
+            },
+            [_c("modal-upload", { attrs: { user: _vm.user } })],
+            1
+          )
+        : _vm._e()
     ],
     1
   )

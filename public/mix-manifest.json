@@ -83,6 +83,7 @@
     "/chunks/pop/layout/modals/junction.js": "/chunks/pop/layout/modals/junction.js",
     "/chunks/pop/layout/modals/newAirConditioner.js": "/chunks/pop/layout/modals/newAirConditioner.js",
     "/chunks/pop/layout/modals/newBatteryBank.js": "/chunks/pop/layout/modals/newBatteryBank.js",
+    "/chunks/pop/layout/modals/newGeneratorSet.js": "/chunks/pop/layout/modals/newGeneratorSet.js",
     "/chunks/pop/layout/modals/newJunction.js": "/chunks/pop/layout/modals/newJunction.js",
     "/chunks/pop/layout/modals/newPowerRectifier.js": "/chunks/pop/layout/modals/newPowerRectifier.js",
     "/chunks/pop/layout/modals/newRoom.js": "/chunks/pop/layout/modals/newRoom.js",
@@ -115,6 +116,5 @@
     "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a.js": "/vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a.js",
     "/vendors~pdfmake.js": "/vendors~pdfmake.js",
     "/vendors~xlsx.js": "/vendors~xlsx.js",
-    "/xlsx.js": "/xlsx.js",
-    "/chunks/pop/layout/modals/newGeneratorSet.js": "/chunks/pop/layout/modals/newGeneratorSet.js"
+    "/xlsx.js": "/xlsx.js"
 }

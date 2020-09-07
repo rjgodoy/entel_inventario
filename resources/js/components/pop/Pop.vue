@@ -265,7 +265,7 @@
                 <div class="column is-2 has-background-white is-paddingless" style="border-left: solid 0.5px rgba(0,0,0,0.1)">
                     <section class="section">
                         <div class="columns is-multiline tile is-ancestor">
-                            <characteristics-side
+                            <characteristics
                                 :user="user"
                                 :pop="pop"
                                 :popClassification="popClassification"
@@ -297,8 +297,8 @@
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
             Sites: () => import(/* webpackChunkName: "chunks/pop/sites"*/'./Sites'),
-            // Characteristics: () => import(/* webpackChunkName: "chunks/pop/characteristics"*/'./Characteristics'),
-            CharacteristicsSide: () => import(/* webpackChunkName: "chunks/pop/characteristicsSide"*/'./CharacteristicsSide'),
+            Characteristics: () => import(/* webpackChunkName: "chunks/pop/characteristics"*/'./Characteristics'),
+            // CharacteristicsSide: () => import(/* webpackChunkName: "chunks/pop/characteristicsSide"*/'./CharacteristicsSide'),
             Layout: () => import(/* webpackChunkName: "chunks/pop/layout/layout"*/'./layout/Layout'),
             Power: () => import(/* webpackChunkName: "chunks/pop/power/power"*/'./power/Power'),
             Climate: () => import(/* webpackChunkName: "chunks/pop/climate/climate"*/'./climate/Climate'),

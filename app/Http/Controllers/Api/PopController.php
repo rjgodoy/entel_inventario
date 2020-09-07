@@ -6,6 +6,7 @@ use App\Exports\AllInfoPopsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Pop as PopResource;
 use App\Http\Resources\PopCollection;
+use App\Models\EnergySystem;
 use App\Models\EntelVip;
 use App\Models\GeneratorSet;
 use App\Models\Log;
@@ -267,6 +268,8 @@ class PopController extends Controller
             'rooms.air_conditioners.air_conditioner_chillers',
             'rooms.air_conditioners.air_conditioner_condensers',
             'protected_zones',
+            'energy_system',
+            'energy_responsable',
             'current_entel_vip',
             'current_office',
             'current_autonomy'
@@ -327,15 +330,32 @@ class PopController extends Controller
             $request->parameter => $request->value
         ]);
 
-        $boolean = $request->value ? 'SI' : 'NO';
-
-        // Busca el dato que se actualizó par incorporarlo en el Log
-        Log::create([
-            'pop_id' => $id,
-            'user_id' => $request->user_id,
-            'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
-            'description' => 'Se ha actualizado el parámetro "'. $request->parameter.'" a "'.$boolean.'"'
-        ]);
+        if($request->parameter != 'energy_system_id') {
+            $boolean = $request->value ? 'SI' : 'NO';
+            // Busca el dato que se actualizó par incorporarlo en el Log
+            Log::create([
+                'pop_id' => $id,
+                'user_id' => $request->user_id,
+                'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
+                'description' => 'Se ha actualizado el parámetro "'. $request->parameter.'" a "'.$boolean.'"'
+            ]);
+        } elseif ($request->parameter == 'energy_system_id') {
+            $es = EnergySystem::find($request->value);
+            Log::create([
+                'pop_id' => $id,
+                'user_id' => $request->user_id,
+                'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
+                'description' => 'Se ha actualizado el parámetro "Sistema de Energía" a "'.$es->system.'"'
+            ]);
+        } elseif ($request->parameter == 'energy_responsable_id') {
+            $es = EnergyResponsable::find($request->value);
+            Log::create([
+                'pop_id' => $id,
+                'user_id' => $request->user_id,
+                'log_type_id' => LogType::where('type', 'pop-update')->first()->id,
+                'description' => 'Se ha actualizado el parámetro "Responsable de Energía" a "'.$es->responsable.'"'
+            ]);
+        }
 
         return $request;
     }
@@ -421,10 +441,9 @@ class PopController extends Controller
                 $q->whereRaw($condition_crm)
                 ->whereRaw($condition_zona);
             })
-            ->orderBy('nem_site', 'desc')
             ->orderBy('classification_type_id', 'asc')
-            // ->orderBy('nombre_sitio', 'asc')
-            ->orderBy('state_id', 'asc')
+            ->orderBy('nombre', 'asc')
+            ->orderBy('nem_site', 'desc')
             ->paginate(10);
     
         return $sites;
@@ -478,7 +497,7 @@ class PopController extends Controller
         $condition_lloo = 'pops.localidad_obligatoria IN ('.$request->lloo.',1)';
         $condition_ranco = 'pops.ranco IN ('.$request->ranco.',1)';
         $condition_bafi = $bafi ? 'technology_type_id = 3 AND frequency = 3500' : '1 = 1';
-        $condition_offgrid = 'pops.offgrid IN ('.$request->offgrid.',1)';
+        $condition_offgrid = $request->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
         $condition_alba_project = 'pops.alba_project IN ('.$request->alba_project.',1)';
@@ -609,7 +628,7 @@ class PopController extends Controller
         $condition_lloo = 'pops.localidad_obligatoria IN ('.$request->lloo.',1)';
         $condition_ranco = 'pops.ranco IN ('.$request->ranco.',1)';
         $condition_bafi = $request->bafi ? 'technology_type_id = 3 AND frequency = 3500' : '1 = 1';
-        $condition_offgrid = 'pops.offgrid IN ('.$request->offgrid.',1)';
+        $condition_offgrid = $request->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
         

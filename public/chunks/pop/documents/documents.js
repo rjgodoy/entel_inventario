@@ -199,6 +199,17 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -258,20 +269,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('reload-files', this.getFiles);
   },
   mounted: function mounted() {
+    this.setFolderTab();
     this.getFolders();
     this.getFiles();
   },
   computed: {
-    folderTab: {
-      get: function get() {
-        return this.baseTabs[this.activeTab];
-      },
-      set: function set(val) {
-        this.bread = '';
-        this.currentFolderView.id = null;
-        this.getFolders();
-        this.getFiles();
-      }
+    folderTab: function folderTab() {
+      return this.baseTabs[this.activeTab];
     },
     baseTabs: function baseTabs() {
       return [{
@@ -331,6 +335,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     }
   },
   methods: {
+    setFolderTab: function setFolderTab() {
+      this.bread = '';
+      this.currentFolderView.id = null;
+      this.getFolders();
+      this.getFiles();
+    },
     selected: function selected(folder) {
       this.setBreadcrum(folder.name);
       this.parentViewId = this.currentFolderView.id;
@@ -374,9 +384,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         params: params
       }).then(function (response) {
         response.data.files.forEach(function (element) {
+          _this2.files.push(element);
+
           if (element.extension != 'jpg' && element.extension != 'png' && element.extension != 'jpeg' && element.extension != 'tiff') {
-            _this2.files.push(element);
-          } else {
             element.image = '/storage/' + element.route;
 
             _this2.photos.push(element);
@@ -564,8 +574,8 @@ var render = function() {
                   staticStyle: { "margin-bottom": "0px" },
                   attrs: { multiline: _vm.multiline, position: "is-centered" },
                   on: {
-                    change: function($event) {
-                      _vm.folderTab = _vm.activeTab
+                    input: function($event) {
+                      return _vm.setFolderTab()
                     }
                   },
                   model: {
@@ -961,83 +971,131 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "container" },
-                [
-                  _c(
-                    "b-carousel",
-                    {
-                      attrs: {
-                        autoplay: false,
-                        "with-carousel-list": "",
-                        indicator: false,
-                        overlay: _vm.gallery
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "list",
-                          fn: function(props) {
-                            return [
-                              _c("b-carousel-list", {
-                                attrs: {
-                                  data: _vm.photos,
-                                  config: _vm.al,
-                                  refresh: _vm.gallery,
-                                  "as-indicator": ""
-                                },
-                                on: {
-                                  switch: function($event) {
-                                    return props.switch($event, false)
-                                  }
-                                },
-                                model: {
-                                  value: props.active,
-                                  callback: function($$v) {
-                                    _vm.$set(props, "active", $$v)
-                                  },
-                                  expression: "props.active"
-                                }
-                              })
-                            ]
-                          }
-                        }
-                      ])
-                    },
-                    [
-                      _vm._l(_vm.photos, function(item, i) {
-                        return _c("b-carousel-item", { key: i }, [
-                          _c(
-                            "figure",
-                            {
-                              staticClass: "image",
-                              on: {
-                                click: function($event) {
-                                  return _vm.switchGallery(true)
-                                }
-                              }
+              _vm.photos.length
+                ? _c("div", [
+                    _c("hr"),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "container has-background-light" },
+                      [
+                        _c(
+                          "b-carousel",
+                          {
+                            attrs: {
+                              "icon-pack": "fas",
+                              "indicator-custom": "",
+                              autoplay: false,
+                              "with-carousel-list": "",
+                              indicator: false,
+                              overlay: _vm.gallery
                             },
-                            [_c("img", { attrs: { src: item.image } })]
-                          )
-                        ])
-                      }),
-                      _vm._v(" "),
-                      _vm.gallery
-                        ? _c("span", {
-                            staticClass: "modal-close is-large",
                             on: {
                               click: function($event) {
-                                return _vm.switchGallery(false)
+                                return _vm.switchGallery(true)
                               }
-                            }
-                          })
-                        : _vm._e()
-                    ],
-                    2
-                  )
-                ],
-                1
-              ),
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "list",
+                                  fn: function(props) {
+                                    return [
+                                      _c(
+                                        "b-carousel-list",
+                                        _vm._b(
+                                          {
+                                            attrs: {
+                                              data: _vm.photos,
+                                              "as-indicator": "",
+                                              "has-drag": true
+                                            },
+                                            on: {
+                                              switch: function($event) {
+                                                return props.switch(
+                                                  $event,
+                                                  false
+                                                )
+                                              }
+                                            },
+                                            model: {
+                                              value: props.active,
+                                              callback: function($$v) {
+                                                _vm.$set(props, "active", $$v)
+                                              },
+                                              expression: "props.active"
+                                            }
+                                          },
+                                          "b-carousel-list",
+                                          _vm.al,
+                                          false
+                                        )
+                                      )
+                                    ]
+                                  }
+                                }
+                              ],
+                              null,
+                              false,
+                              3179916388
+                            )
+                          },
+                          [
+                            _vm._l(_vm.photos, function(item, i) {
+                              return _c(
+                                "b-carousel-item",
+                                { key: i, staticClass: "has-text-centered" },
+                                [
+                                  _c("figure", { staticClass: "image" }, [
+                                    _c("img", {
+                                      staticStyle: {
+                                        "max-height": "800px",
+                                        width: "auto",
+                                        display: "block"
+                                      },
+                                      attrs: { src: item.image }
+                                    })
+                                  ])
+                                ]
+                              )
+                            }),
+                            _vm._v(" "),
+                            _vm.gallery
+                              ? _c("span", {
+                                  staticClass: "modal-close is-large",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.switchGallery(false)
+                                    }
+                                  }
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm._v(" "),
+                            _c("template", { slot: "overlay" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-centered has-text-white"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    Hello i'am overlay!\n                                "
+                                  )
+                                ]
+                              )
+                            ])
+                          ],
+                          2
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm.noFiles
                 ? _c("section", { staticClass: "section container" }, [
@@ -1127,6 +1185,16 @@ var staticRenderFns = [
         },
         [_vm._v("Documentos")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "block" }, [
+      _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
+        _vm._v("Visor de fotos")
+      ])
     ])
   }
 ]

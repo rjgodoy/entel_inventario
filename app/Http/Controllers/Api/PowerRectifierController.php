@@ -302,7 +302,7 @@ class PowerRectifierController extends Controller
             ]);
         }
 
-        if($reqeust->power_rectifier_modules_quantity && $request->power_rectifier_modules_capacities) {
+        if($request->power_rectifier_modules_quantity && $request->power_rectifier_modules_capacities) {
             if(!$powerRectifier->power_rectifier_modules->count()) {
                 for ($i=0; $i < $request->power_rectifier_modules_quantity ; $i++) { 
                     PowerRectifierModule::create([

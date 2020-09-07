@@ -115,7 +115,6 @@ class UpdatePops extends Command
                     'localidad_obligatoria' => $newPop->lloo700 || $newPop->lloo2600 ? 1 : 0
                 ]
             );
-            $site->state_id == 2 && !$site->deleted_at & $site->delete();
 
             // Insert Technologies
             $technology = Technology::withTrashed()->updateOrCreate(
@@ -130,7 +129,6 @@ class UpdatePops extends Command
                     'state_id' => $newPop->ran_device_status_id
                 ]
             );
-            $technology->state_id == 2 && !$technology->deleted_at & $technology->delete();
         }
 
         // Insert Room
@@ -142,6 +140,16 @@ class UpdatePops extends Command
                 'criticity' => 0,
                 'order' => 0
             ]);
+        }
+
+        $sitesDeleted = Site::where('state_id', 2)->get();
+        foreach ($sitesDeleted as $site) {
+            $site->delete();
+        }
+
+        $technologiesDeleted = Technology::where('state_id', 2)->get();
+        foreach ($technologiesDeleted as $technology) {
+            $technology->delete();
         }
             
 

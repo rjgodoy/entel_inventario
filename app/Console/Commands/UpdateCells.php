@@ -49,5 +49,6 @@ class UpdateCells extends Command
         Storage::disk('local')->put('file.csv', fopen($url, 'r'));
 
         (new CellsImport)->import('file.csv', null, \Maatwebsite\Excel\Excel::CSV);
+        
     }
 }

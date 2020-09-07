@@ -129,7 +129,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $condition_lloo = 'pops.localidad_obligatoria IN ('.$this->lloo.',1)';
             $condition_ranco = 'pops.ranco IN ('.$this->ranco.',1)';
             $condition_bafi = $this->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
-            $condition_offgrid = 'pops.offgrid IN ('.$this->offgrid.',1)';
+            $condition_offgrid = $this->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
@@ -291,7 +291,8 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 			'LOCALIDAD OBLIGATORIA',
 			'RAN CONSOLIDADO',
 	        
-	        'OFFGRID',
+	        'SISTEMA DE ENERGÍA',
+            'RESPONSABLE DE ENERGÍA',
 	        'PANEL SOLAR',
 	        'EOLICA',
             'BALIZA',
@@ -381,7 +382,8 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $pop->localidad_obligatoria ? 'SI' : 'NO',
             $pop->ranco ? 'SI' : 'NO',
 
-            $pop->offgrid ? 'SI' : 'NO',
+            $pop->energy_system ? $pop->energy_system : 'PENDIENTE',
+            $pop->energy_responsable ? $pop->energy_responsable : 'PENDIENTE',
             $pop->solar ? 'SI' : 'NO',
             $pop->eolica ? 'SI' : 'NO',
             $pop->beacon,
@@ -508,7 +510,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AH1:AK1',
+            'AH1:AL1',
             [
                 'font' => [
                     'size' => 11,
@@ -532,7 +534,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AL1:AN1',
+            'AM1:AO1',
             [
                 'font' => [
                     'size' => 11,
@@ -556,7 +558,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         );
 
         $event->sheet->styleCells(
-            'AO1',
+            'AP1',
             [
                 'font' => [
                     'size' => 11,

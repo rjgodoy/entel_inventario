@@ -121,7 +121,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $condition_lloo = 'localidad_obligatoria IN ('.$this->lloo.',1)';
             $condition_ranco = 'ranco IN ('.$this->ranco.',1)';
             $condition_bafi = $this->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
-            $condition_offgrid = 'pops.offgrid IN ('.$this->offgrid.',1)';
+            $condition_offgrid = $this->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
             
@@ -145,7 +145,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $site = Site::withTrashed()->with('pop.comuna.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies', 'pop.comsites')
+            $site = Site::withTrashed()->with('pop.comuna.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies', 'pop.comsites', 'pop.energy_system', 'pop.energy_responsable')
             	->where(function($p) use($text) {
                     if ($text) {
                         $p->where('nem_site', 'LIKE', "%$text%")
@@ -265,6 +265,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 	        'LOCALIDAD OBLIGATORIA',
 	        'RANCO',
 	        'BAFI',
+            'SISTEMA DE ENERGÍA',
+            'RESPONSABLE DE ENERGÍA',
 
             'TEC 2G 1900',
             'TEC 3G 900',
@@ -353,6 +355,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $site->pop->localidad_obligatoria ? 'SI' : 'NO',
             $site->pop->ranco ? 'SI' : 'NO',
             $bafi ? 'SI' : 'NO',
+            $site->pop->energy_system ? $site->pop->energy_system->system : 'PENDIENTE',
+            $site->pop->energy_responsable ? $site->pop->energy_responsable->responsable : 'PENDIENTE',
 
             $tech_2g1900,
             $tech_3g900,
@@ -460,7 +464,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'T1:AB1',
+            'T1:AD1',
             [
                 'font' => [
                     'size' => 11,
@@ -484,7 +488,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AC1:AI1',
+            'AE1:AK1',
             [
                 'font' => [
                     'size' => 11,
@@ -508,7 +512,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AJ1',
+            'AL1',
             [
                 'font' => [
                     'size' => 11,
@@ -532,7 +536,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AK1:AL1',
+            'AM1:AN1',
             [
                 'font' => [
                     'size' => 11,

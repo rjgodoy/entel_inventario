@@ -27,8 +27,6 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/registerRequest', 'Api\AdminController@registerRequest');
 
-Route::post('/login', 'AuthController@login');
-
 Route::middleware('auth:api')->group(function () {
 
 	### CAPACITY PLANNING ######################################################################
@@ -129,6 +127,9 @@ Route::middleware('auth:api')->group(function () {
 
 	// Transformers
 		Route::apiResource('transformers','Api\TransformerController');
+
+		Route::apiResource('energySystems','Api\EnergySystemController');
+		Route::apiResource('energyResponsables','Api\EnergyResponsableController');
 
 	// Clients Connection
 		Route::apiResource('junctions','Api\JunctionController');

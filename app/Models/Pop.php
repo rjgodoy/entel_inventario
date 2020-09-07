@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Autonomy;
+use App\Models\EnergySystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -125,6 +126,26 @@ class Pop extends Model
     public function logs()
     {
         return $this->hasMany(Log::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function energy_system()
+    {
+        return $this->belongsTo(EnergySystem::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function energy_responsable()
+    {
+        return $this->belongsTo(EnergyResponsable::class);
     }
 
     /**

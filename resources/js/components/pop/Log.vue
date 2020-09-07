@@ -10,11 +10,9 @@
 
                 <div class="timeline is-centered">
 
-                    <header class="timeline-header">
-                        <span class="tag is-medium is-smart">
-                            <div class="has-text-weight-bold">Creación: {{ createdDate }}</div>
-                        </span>
-                    </header>
+                    <!-- <header class="timeline-header">
+                        <span class="tag is-medium is-smart has-text-weight-bold">No hay mas registros en este PoP</span>
+                    </header> -->
 
                     <div v-if="!logs.length" class="timeline-item is-positive">
                         <div class="timeline-marker is-positive"></div>
@@ -45,7 +43,9 @@
                     </div>
                     
                     <header v-if="logs.length" class="timeline-header">
-                        <span class="tag is-medium is-smart has-text-weight-bold">No hay mas registros en este PoP</span>
+                        <span class="tag is-medium is-smart">
+                            <div class="has-text-weight-bold">Creación: {{ createdDate }}</div>
+                        </span>
                     </header>
                 </div>
 

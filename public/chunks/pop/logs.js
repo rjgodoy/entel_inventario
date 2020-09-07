@@ -731,14 +731,6 @@ var render = function() {
             "div",
             { staticClass: "timeline is-centered" },
             [
-              _c("header", { staticClass: "timeline-header" }, [
-                _c("span", { staticClass: "tag is-medium is-smart" }, [
-                  _c("div", { staticClass: "has-text-weight-bold" }, [
-                    _vm._v("Creación: " + _vm._s(_vm.createdDate))
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
               !_vm.logs.length
                 ? _c("div", { staticClass: "timeline-item is-positive" }, [
                     _c("div", { staticClass: "timeline-marker is-positive" }),
@@ -807,14 +799,11 @@ var render = function() {
               _vm._v(" "),
               _vm.logs.length
                 ? _c("header", { staticClass: "timeline-header" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass:
-                          "tag is-medium is-smart has-text-weight-bold"
-                      },
-                      [_vm._v("No hay mas registros en este PoP")]
-                    )
+                    _c("span", { staticClass: "tag is-medium is-smart" }, [
+                      _c("div", { staticClass: "has-text-weight-bold" }, [
+                        _vm._v("Creación: " + _vm._s(_vm.createdDate))
+                      ])
+                    ])
                   ])
                 : _vm._e()
             ],

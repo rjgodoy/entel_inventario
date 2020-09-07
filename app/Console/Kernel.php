@@ -57,6 +57,11 @@ class Kernel extends ConsoleKernel
             ->timezone('America/Santiago')
             ->at('04:30')
             ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+        $schedule->command('update:pop_resume')
+            ->daily()
+            ->timezone('America/Santiago')
+            ->at('07:00')
+            ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
         
     }
 

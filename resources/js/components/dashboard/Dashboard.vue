@@ -370,7 +370,7 @@
                                 </article>
 
                                 <article v-if="(this.currentTab !== 'critics') && (this.currentTab !== 'alba')">
-                                    <keep-alive>
+                                    <!-- <keep-alive> -->
                                     <pret-data-chart    
                                         :user="user"
                                         :bodyBackground="bodyBackground"
@@ -378,7 +378,7 @@
                                         :primaryText="primaryText"
                                         :secondaryText="secondaryText"
                                     ></pret-data-chart>
-                                    </keep-alive>
+                                    <!-- </keep-alive> -->
                                 </article>
                             </div>
                         </div>

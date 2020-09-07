@@ -203,8 +203,8 @@
                         'user_id': this.user.id,
                         'capacity': parseFloat(this.newPowerRectifierCapacity),
                         'power_rectifier_mode_id': this.power_rectifier_mode_id,
-                        'power_rectifier_modules_quantity': this.powerRectifierModulesQuantity,
-                        'power_rectifier_modules_capacities': this.powerRectifierModulesCapacity,
+                        'power_rectifier_modules_quantity': parseFloat(this.powerRectifierModulesQuantity),
+                        'power_rectifier_modules_capacities': parseFloat(this.powerRectifierModulesCapacity),
                         // 'generator_set_responsable_area_id': this.responsable_area_id,
                         // 'generator_set_topology_type_id': this.topology_id,
                         // 'generator_set_level_type_id': this.level_id

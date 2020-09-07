@@ -314,10 +314,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     Sites: function Sites() {
       return __webpack_require__.e(/*! import() | chunks/pop/sites */ "chunks/pop/sites").then(__webpack_require__.bind(null, /*! ./Sites */ "./resources/js/components/pop/Sites.vue"));
     },
-    // Characteristics: () => import(/* webpackChunkName: "chunks/pop/characteristics"*/'./Characteristics'),
-    CharacteristicsSide: function CharacteristicsSide() {
-      return __webpack_require__.e(/*! import() | chunks/pop/characteristicsSide */ "chunks/pop/characteristicsSide").then(__webpack_require__.bind(null, /*! ./CharacteristicsSide */ "./resources/js/components/pop/CharacteristicsSide.vue"));
+    Characteristics: function Characteristics() {
+      return __webpack_require__.e(/*! import() | chunks/pop/characteristics */ "chunks/pop/characteristics").then(__webpack_require__.bind(null, /*! ./Characteristics */ "./resources/js/components/pop/Characteristics.vue"));
     },
+    // CharacteristicsSide: () => import(/* webpackChunkName: "chunks/pop/characteristicsSide"*/'./CharacteristicsSide'),
     Layout: function Layout() {
       return __webpack_require__.e(/*! import() | chunks/pop/layout/layout */ "chunks/pop/layout/layout").then(__webpack_require__.bind(null, /*! ./layout/Layout */ "./resources/js/components/pop/layout/Layout.vue"));
     },
@@ -1546,7 +1546,7 @@ var render = function() {
                   "div",
                   { staticClass: "columns is-multiline tile is-ancestor" },
                   [
-                    _c("characteristics-side", {
+                    _c("characteristics", {
                       attrs: {
                         user: _vm.user,
                         pop: _vm.pop,

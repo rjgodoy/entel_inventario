@@ -2789,21 +2789,15 @@ var render = function() {
                         ? _c(
                             "article",
                             [
-                              _c(
-                                "keep-alive",
-                                [
-                                  _c("pret-data-chart", {
-                                    attrs: {
-                                      user: _vm.user,
-                                      bodyBackground: _vm.bodyBackground,
-                                      boxBackground: _vm.boxBackground,
-                                      primaryText: _vm.primaryText,
-                                      secondaryText: _vm.secondaryText
-                                    }
-                                  })
-                                ],
-                                1
-                              )
+                              _c("pret-data-chart", {
+                                attrs: {
+                                  user: _vm.user,
+                                  bodyBackground: _vm.bodyBackground,
+                                  boxBackground: _vm.boxBackground,
+                                  primaryText: _vm.primaryText,
+                                  secondaryText: _vm.secondaryText
+                                }
+                              })
                             ],
                             1
                           )

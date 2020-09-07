@@ -127,7 +127,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $condition_lloo = 'pops.localidad_obligatoria IN ('.$this->lloo.',1)';
             $condition_ranco = 'pops.ranco IN ('.$this->ranco.',1)';
             $condition_bafi = $this->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
-            $condition_offgrid = 'pops.offgrid IN ('.$this->offgrid.',1)';
+            $condition_offgrid = $this->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
             
@@ -151,7 +151,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites')
+            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites', 'energy_system', 'energy_responsable')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->where(function ($p) use ($text) {
                         if ($text) {
@@ -254,7 +254,8 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'VIP',
             'VIP ENTEL',
 
-            'OFFGRID',
+            'SISTEMA DE ENERGÍA',
+            'RESPONSABLE DE ENERGÍA',
             'PANEL SOLAR',
             'EOLICA',
             'BALIZA',
@@ -315,7 +316,8 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $pop->vip ? 'SI' : 'NO',
             $pop->current_entel_vip ? 'SI' : 'NO',
 
-            $pop->offgrid ? 'SI' : 'NO',
+            $pop->energy_system ? $pop->energy_system->system : 'PENDIENTE',
+            $pop->energy_responsable ? $pop->energy_responsable->responsable : 'PENDIENTE',
             $pop->solar ? 'SI' : 'NO',
             $pop->eolica ? 'SI' : 'NO',
             $pop->vertical_structures->first() ? ($pop->vertical_structures->first()->beacons->first() ? $pop->vertical_structures->first()->beacons->first()->beacon_type->type : null) : null,

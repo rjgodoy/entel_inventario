@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Log as LogResource;
-use App\Models\Log;
+use App\Http\Resources\EnergySystemCollection;
+use App\Models\EnergySystem;
 use Illuminate\Http\Request;
 
-class LogController extends Controller
+class EnergySystemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class LogController extends Controller
      */
     public function index()
     {
-        //
+        return new EnergySystemCollection(EnergySystem::all());
     }
 
     /**
@@ -38,8 +38,7 @@ class LogController extends Controller
      */
     public function show($id)
     {
-        $logs = Log::with('user', 'log_type')->where('pop_id', $id)->latest()->get();
-        return new LogResource($logs);
+        //
     }
 
     /**

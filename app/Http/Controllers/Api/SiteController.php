@@ -35,12 +35,12 @@ class SiteController extends Controller
                 SELECT      
                 @y:=YEAR(created_at) as year, 
                 @m:=MONTH(created_at) as month, 
-                COUNT(*) as q_new,
-                (SELECT COUNT(*) FROM entel_pops.sites WHERE YEAR(deleted_at) = @y AND MONTH(deleted_at) = @m) as q_deleted
+                COUNT(distinct id) as q_new,
+                (SELECT COUNT(distinct id) FROM entel_pops.sites WHERE YEAR(deleted_at) = @y AND MONTH(deleted_at) = @m) as q_deleted
                 FROM entel_pops.sites 
                 GROUP BY year, month
                 ORDER BY year desc, month desc
-                limit 3
+                limit 4
             "));
 
         return new SiteResource($data);

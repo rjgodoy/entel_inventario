@@ -8,7 +8,7 @@
         <div class="columns">
             <div class="column">
                 <div class="box">
-                    <b-tabs v-model="activeTab" :multiline="multiline" position="is-centered" @change="folderTab=activeTab" style="margin-bottom: 0px;">
+                    <b-tabs v-model="activeTab" :multiline="multiline" position="is-centered" @input="setFolderTab()" style="margin-bottom: 0px;">
                         <template v-for="(tab, index) in tabs">
                             <b-tab-item
                                 v-if="tab.displayed"
@@ -111,33 +111,44 @@
                         </div>
                     </div>
 
-                    <div class="container">
-                        <b-carousel
-                            :autoplay="false"
-                            with-carousel-list
-                            :indicator="false"
-                            :overlay="gallery">
-                            <b-carousel-item v-for="(item, i) in photos" :key="i">
-                                <figure @click="switchGallery(true)" class="image">
-                                    <img :src="item.image">
-                                </figure>
-                            </b-carousel-item>
-                            <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
-                            <template slot="list" slot-scope="props">
-                                <b-carousel-list
-                                    v-model="props.active"
-                                    :data="photos"
-                                    :config="al"
-                                    :refresh="gallery"
-                                    @switch="props.switch($event, false)"
-                                    as-indicator />
-                            </template>
-                            <!-- <template slot="overlay">
-                                <div class="has-text-centered has-text-white">
-                                    {{ item.basename }}
-                                </div>
-                            </template> -->
-                        </b-carousel>
+                    <div v-if="photos.length">
+                        <hr/>
+
+                        <div class="block">
+                            <div class="is-size-5 has-text-weight-semibold">Visor de fotos</div>
+                        </div>
+
+                        <div class="container has-background-light">
+                            <b-carousel
+                                icon-pack="fas"
+                                indicator-custom
+                                :autoplay="false"
+                                with-carousel-list
+                                :indicator="false"
+                                :overlay="gallery"
+                                @click="switchGallery(true)">
+                                <b-carousel-item v-for="(item, i) in photos" :key="i" class="has-text-centered">
+                                    <figure class="image">
+                                        <img :src="item.image" style="max-height: 800px; width: auto; display: block;">
+                                    </figure>
+                                </b-carousel-item>
+                                <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
+                                <template slot="list" slot-scope="props">
+                                    <b-carousel-list
+                                        v-model="props.active"
+                                        :data="photos"
+                                        v-bind="al"
+                                        @switch="props.switch($event, false)"
+                                        as-indicator
+                                        :has-drag="true" />
+                                </template>
+                                <template slot="overlay">
+                                    <div class="has-text-centered has-text-white">
+                                        Hello i'am overlay!
+                                    </div>
+                                </template>
+                            </b-carousel>
+                        </div>
                     </div>
 
                     <section v-if="noFiles" class="section container">
@@ -247,21 +258,14 @@ export default {
     },
 
     mounted() {
+        this.setFolderTab()
         this.getFolders()
         this.getFiles()
     },
 
     computed: {
-        folderTab: {
-            get: function() {
-                return this.baseTabs[this.activeTab]
-            },
-            set: function(val) {
-                this.bread = ''
-                this.currentFolderView.id = null
-                this.getFolders()
-                this.getFiles()
-            },
+        folderTab() {
+            return this.baseTabs[this.activeTab]
         },
 
         baseTabs() {
@@ -334,6 +338,12 @@ export default {
     },
     
     methods: {
+        setFolderTab() {
+            this.bread = ''
+            this.currentFolderView.id = null
+            this.getFolders()
+            this.getFiles()
+        },
 
         selected(folder) {
             this.setBreadcrum(folder.name)
@@ -374,12 +384,11 @@ export default {
             axios.get(`/api/files/${this.pop.id}`, { params })
             .then(response => {
                 response.data.files.forEach(element => {
+                    this.files.push(element)
                     if (element.extension != 'jpg' 
                         && element.extension != 'png' 
                         && element.extension != 'jpeg' 
                         && element.extension != 'tiff') {
-                        this.files.push(element)
-                    } else {
                         element.image = '/storage/'+element.route
                         this.photos.push(element)
                     }

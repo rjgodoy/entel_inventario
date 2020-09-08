@@ -469,7 +469,7 @@
 
             // ✅#################### Batteries
                 popAutonomy() {
-                    return this.room.pop.current_autonomy ? this.room.pop.current_autonomy.theoretical : 0
+                    return this.room.pop.current_battery_bank_autonomy ? this.room.pop.current_battery_bank_autonomy.theoretical : 0
                 },
 
                 batteriesTotalCapacity() {

@@ -9,7 +9,6 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VuePagination.vue */ "./resources/js/components/VuePagination.vue");
 //
 //
 //
@@ -71,47 +70,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// import { library } from "@fortawesome/fontawesome-svg-core";
-// import { faCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
-// import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-// library.add(faCircle, faSearch);
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    VuePagination: _VuePagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     RoomLights: function RoomLights() {
-      return __webpack_require__.e(/*! import() | chunks/capacity/roomLights */ "chunks/capacity/roomLights").then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
-    },
-    ModalRoom: function ModalRoom() {
-      return __webpack_require__.e(/*! import() | chunks/capacity/modals/modalRoom */ "chunks/capacity/modals/modalRoom").then(__webpack_require__.bind(null, /*! ./modals/ModalRoom */ "./resources/js/components/capacity/modals/ModalRoom.vue"));
+      return Promise.all(/*! import() | chunks/capacity/roomLights */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/capacity/roomLights~chunks/dashbo~0a787395"), __webpack_require__.e("chunks/capacity/roomLights")]).then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
     }
   },
-  props: ['user', 'user_permissions', 'roomsData'],
-  data: function data() {
-    return {};
-  },
-  computed: {},
-  created: function created() {},
-  mounted: function mounted() {},
+  props: ['user', 'roomsData'],
   methods: {
     orderedRooms: function orderedRooms(pop) {
       return _.orderBy(pop.rooms, 'order');
-    },
-    getRoomsData: function getRoomsData() {
-      this.$eventBus.$emit('reload-table');
     }
   }
 });
@@ -258,26 +226,6 @@ var render = function() {
           0
         )
       ]
-    ),
-    _vm._v(" "),
-    _c(
-      "nav",
-      {
-        staticClass: "pagination",
-        attrs: { role: "navigation", "aria-label": "pagination" }
-      },
-      [
-        _c("vue-pagination", {
-          staticClass: "has-text-white",
-          attrs: { pagination: _vm.roomsData, offset: 4 },
-          on: {
-            paginate: function($event) {
-              return _vm.getRoomsData()
-            }
-          }
-        })
-      ],
-      1
     )
   ])
 }
@@ -291,7 +239,8 @@ var staticRenderFns = [
         _c(
           "th",
           {
-            staticClass: "is-size-6 has-text-weight-semibold has-text-white",
+            staticClass:
+              "is-size-6 has-text-weight-semibold has-text-white has-text-left",
             attrs: { width: "25%" }
           },
           [_c("abbr", { attrs: { title: "id" } }, [_vm._v("POP")])]
@@ -300,12 +249,13 @@ var staticRenderFns = [
         _c(
           "th",
           {
-            staticClass: "is-size-6 has-text-weight-semibold has-text-white",
+            staticClass:
+              "is-size-6 has-text-weight-semibold has-text-white has-text-left",
             attrs: { width: "75%" }
           },
           [
             _c("div", { staticClass: "columns" }, [
-              _c("div", { staticClass: "column is-6" }, [
+              _c("div", { staticClass: "column is-4" }, [
                 _c("abbr", { attrs: { title: "Sala" } }, [_vm._v("SALA")])
               ]),
               _vm._v(" "),

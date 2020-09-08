@@ -3,7 +3,7 @@
         <section class="section has-background-light" style="padding: auto 0 auto 0;">
             <div class="columns">
                 <div class="column" style="margin-top: -24px; margin-bottom: -48px">
-                    <b-tabs v-model="activeTab" @input="setFolderTab()" type="is-toggle" expanded class="is-paddingless">
+                    <b-tabs v-model="activeTab" type="is-toggle" expanded class="is-paddingless">
                         <b-tab-item v-for="(tab, index) in tabs" :key="index" v-if="tab.displayed" :label="tab.label" ></b-tab-item>
                     </b-tabs>
                 </div>
@@ -120,6 +120,7 @@
                             </div>
                         </div>
                         
+
                         <div class="columns is-multiline" v-if="!edit">
                             <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
                                 <a class="box tile is-child" @click="selected(folder)">
@@ -186,7 +187,7 @@
                             <hr/>
 
                             <div class="block">
-                                <div class="is-size-5 has-text-weight-semibold">Visor de fotos</div>
+                                <div class="is-size-5 has-text-weight-semibold">Visor de documentos</div>
                             </div>
 
                             <div class="container has-background-light">
@@ -298,7 +299,7 @@ export default {
             folders: [],
             files: [],
             photos: [],
-            activeTab: 2,
+            activeTab: 0,
             showCam: true,
             multiline: true,
             isLoading: false,
@@ -355,6 +356,7 @@ export default {
     },
 
     mounted() {
+        this.setFolderTab()
         this.getSideFolders()
     },
 
@@ -366,70 +368,70 @@ export default {
         baseTabs() {
             return [
                 {
-                    id: 1,
+                    id: 0,
                     label: 'Informes',
                     content: 'Informes: Lorem ipsum dolor sit amet.',
                     displayed: true,
                     asideView: true
                 },
                 {
-                    id: 2,
+                    id: 1,
                     label: 'Documentos',
                     content: 'Documentos: Lorem ipsum dolor sit amet.',
                     displayed: true,
                     asideView: true
                 },
                 {
-                    id: 3,
+                    id: 2,
                     label: 'Fotos',
                     content: 'Fotos: Lorem ipsum dolor sit amet.',
                     displayed: true,
                     asideView: true
                 },
                 {
-                    id: 4,
+                    id: 3,
                     label: 'Construcción',
                     content: 'Construcción: Lorem ipsum dolor sit amet.',
                     displayed: true,
                     asideView: true
                 },
                 {
-                    id: 5,
+                    id: 4,
                     label: 'Obras Civiles',
                     content: 'Obras Civiles: Lorem ipsum dolor sit amet.',
                     displayed: true,
                     asideView: true
                 },
                 {
-                    id: 6,
+                    id: 5,
                     label: 'CAM',
                     content: 'CAM: Lorem ipsum dolor sit amet.',
                     displayed: true,
                     asideView: true
                 },
                 {
-                    id: 7,
+                    id: 6,
                     label: 'Levantamientos Ingeniería',
                     content: 'Levantamientos Ingeniería: Lorem ipsum dolor sit amet.',
                     displayed: true,
                     asideView: true
                 },
                 {
-                    id: 8,
+                    id: 7,
                     label: 'Gestión Ambiental',
                     content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
                     displayed: true,
                     asideView: true
                 },
                 {
-                    id: 9,
+                    id: 8,
                     label: 'Procedimientos',
                     content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
                     displayed: this.canViewProcedimientosTab,
                     asideView: false
                 },
                 {
-                    id: 10,
+                    id: 9,
                     label: 'Manuales',
                     content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
                     displayed: this.canViewManualesTab,
@@ -439,8 +441,7 @@ export default {
         },
 
         tabs() {
-            const tabs = [...this.baseTabs]
-            return tabs
+            return [...this.baseTabs]
         },
 
         noFiles() {
@@ -455,12 +456,28 @@ export default {
 
         isNewRootFolderModalActive(val) {
             val == false && this.getSideFolders()
+        },
+
+        activeTab(val) {
+            console.log(this.activeTab)
+            console.log(this.baseTabs[val])
+            this.setFolderTab()
         }
     },
     
     methods: {
         setFolderTab() {
+            // Reload the breadcrumb
             this.bread = ''
+
+            // Set files & folders to empty
+            this.folders = []
+            this.files = []
+            this.photos = []
+
+            // Get the files & folders if active tab is "Procedimientos" or "Manuales", else get side folders
+            this.activeTab == 8 || this.activeTab == 9 ? this.getFolders() : this.getSideFolders()
+
             this.currentFolderView= {
                 id: null,
                 parent_id: null
@@ -470,14 +487,9 @@ export default {
                 parent_id: null
             }
             this.meta.current_page = 1
-            this.baseTabs[this.activeTab] == 8 || this.baseTabs[this.activeTab] == 9 ? this.getFolders() : this.getSideFolders()
-            this.folders = []
-            this.files = []
-            this.photos = []
         },
 
         selectedSide(folder) {
-            
             this.currentFolderView = folder
             // this.folders.length && this.currentFolderView.parent_id ? this.setBreadcrum(folder.name) : this.bread = ''
             this.getFolders()

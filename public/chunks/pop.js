@@ -309,7 +309,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
-      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
+      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks/l~623db261"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
     },
     Sites: function Sites() {
       return __webpack_require__.e(/*! import() | chunks/pop/sites */ "chunks/pop/sites").then(__webpack_require__.bind(null, /*! ./Sites */ "./resources/js/components/pop/Sites.vue"));
@@ -334,13 +334,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/eco */ "chunks/pop/eco").then(__webpack_require__.bind(null, /*! ./Eco */ "./resources/js/components/pop/Eco.vue"));
     },
     Comsite: function Comsite() {
-      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
+      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks/l~623db261"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ./documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
     },
     Log: function Log() {
-      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
+      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks/l~623db261"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
     }
   },
   props: ['user'],

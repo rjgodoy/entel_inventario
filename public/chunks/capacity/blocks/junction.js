@@ -108,13 +108,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalJunction: function ModalJunction() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/junction */ "chunks/pop/layout/modals/junction").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalJunction */ "./resources/js/components/pop/layout/modals/ModalJunction.vue"));
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/junction */ "chunks/capacity/modals/junction").then(__webpack_require__.bind(null, /*! ../modals/ModalJunction */ "./resources/js/components/capacity/modals/ModalJunction.vue"));
     },
     ModalNewJunction: function ModalNewJunction() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newJunction */ "chunks/pop/layout/modals/newJunction").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalNewJunction */ "./resources/js/components/pop/layout/modals/ModalNewJunction.vue"));
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newJunction */ "chunks/pop/layout/modals/newJunction").then(__webpack_require__.bind(null, /*! ../modals/new/ModalNewJunction */ "./resources/js/components/capacity/modals/new/ModalNewJunction.vue"));
     }
   },
   props: ['junctions', 'can', 'user', 'pop'],
@@ -348,34 +350,60 @@ var render = function() {
           _c("div", { staticClass: "columns" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c("div", { staticClass: "column" }, [
-              _c(
-                "a",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.isNewJunctionModalActive = true
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "b-tag",
-                    {
-                      staticClass:
-                        "is-pulled-right is-link has-text-weight-light is-size-7"
-                    },
-                    [
-                      _c("font-awesome-icon", {
-                        attrs: { icon: ["fas", "plus"] }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ])
+            _c(
+              "div",
+              { staticClass: "column" },
+              [
+                _c(
+                  "b-dropdown",
+                  {
+                    staticClass: "is-pulled-right",
+                    attrs: { "aria-role": "list", position: "is-bottom-left" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "trigger",
+                        fn: function(ref) {
+                          var active = ref.active
+                          return _c(
+                            "button",
+                            { staticClass: "button is-default is-small" },
+                            [
+                              _c(
+                                "span",
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: { icon: ["fas", "ellipsis-v"] }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        }
+                      }
+                    ])
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "b-dropdown-item",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { "aria-role": "listitem" },
+                        on: {
+                          click: function($event) {
+                            _vm.isNewJunctionModalActive = true
+                          }
+                        }
+                      },
+                      [_vm._v("Agregar Empalme")]
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _vm.junctions.length

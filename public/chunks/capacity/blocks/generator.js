@@ -131,13 +131,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalGenerator: function ModalGenerator() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/generator */ "chunks/pop/layout/modals/generator").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalGenerator */ "./resources/js/components/pop/layout/modals/ModalGenerator.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/modals/generator */ "chunks/capacity/modals/generator").then(__webpack_require__.bind(null, /*! ../modals/ModalGenerator */ "./resources/js/components/capacity/modals/ModalGenerator.vue"));
     },
     ModalNewGeneratorSet: function ModalNewGeneratorSet() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newGeneratorSet */ "chunks/pop/layout/modals/newGeneratorSet").then(__webpack_require__.bind(null, /*! ../../pop/layout/modals/ModalNewGeneratorSet */ "./resources/js/components/pop/layout/modals/ModalNewGeneratorSet.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/modals/new/newGeneratorSet */ "chunks/capacity/modals/new/newGeneratorSet").then(__webpack_require__.bind(null, /*! ../modals/new/ModalNewGeneratorSet */ "./resources/js/components/capacity/modals/new/ModalNewGeneratorSet.vue"));
     }
   },
   props: ['generatorSets', 'can', 'user', 'pop'],
@@ -385,34 +387,60 @@ var render = function() {
           _c("div", { staticClass: "columns" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c("div", { staticClass: "column" }, [
-              _c(
-                "a",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.isNewGeneratorSetModalActive = true
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "b-tag",
-                    {
-                      staticClass:
-                        "is-pulled-right is-link has-text-weight-light is-size-7 is-light"
-                    },
-                    [
-                      _c("font-awesome-icon", {
-                        attrs: { icon: ["fas", "plus"] }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ])
+            _c(
+              "div",
+              { staticClass: "column" },
+              [
+                _c(
+                  "b-dropdown",
+                  {
+                    staticClass: "is-pulled-right",
+                    attrs: { "aria-role": "list", position: "is-bottom-left" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "trigger",
+                        fn: function(ref) {
+                          var active = ref.active
+                          return _c(
+                            "button",
+                            { staticClass: "button is-default is-small" },
+                            [
+                              _c(
+                                "span",
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: { icon: ["fas", "ellipsis-v"] }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        }
+                      }
+                    ])
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "b-dropdown-item",
+                      {
+                        staticClass: "is-size-6",
+                        attrs: { "aria-role": "listitem" },
+                        on: {
+                          click: function($event) {
+                            _vm.isNewGeneratorSetModalActive = true
+                          }
+                        }
+                      },
+                      [_vm._v("Agregar Grupo Electrógeno")]
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _vm.generatorSets.length

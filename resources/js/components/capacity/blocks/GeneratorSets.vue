@@ -8,11 +8,13 @@
                         <div class="is-size-6 has-text-weight-bold">GRUPOS ELECTROGENOS</div>
                     </div>
                     <div class="column">
-                        <a @click="isNewGeneratorSetModalActive = true">
-                            <b-tag class="is-pulled-right is-link has-text-weight-light is-size-7 is-light">
-                                <font-awesome-icon :icon="['fas', 'plus']" />
-                            </b-tag>
-                        </a>
+                        <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
+                            <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
+                                <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
+                            </button>
+
+                            <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewGeneratorSetModalActive = true">Agregar Grupo Electrógeno</b-dropdown-item>
+                        </b-dropdown>
                     </div>
                 </div>
 
@@ -123,8 +125,8 @@
 <script>
     export default {
         components: {
-            ModalGenerator: () => import(/* webpackChunkName: "chunks/pop/layout/modals/generator"*/'../../pop/layout/modals/ModalGenerator'),
-            ModalNewGeneratorSet: () => import(/* webpackChunkName: "chunks/pop/layout/modals/newGeneratorSet"*/'../../pop/layout/modals/ModalNewGeneratorSet'),
+            ModalGenerator: () => import(/* webpackChunkName: "chunks/capacity/modals/generator"*/'../modals/ModalGenerator'),
+            ModalNewGeneratorSet: () => import(/* webpackChunkName: "chunks/capacity/modals/new/newGeneratorSet"*/'../modals/new/ModalNewGeneratorSet'),
         },
 
         props : [
@@ -321,8 +323,6 @@
             // console.log(this.generatorSets)
             // this.getGeneratorSets()
         },
-
-        
 
         methods: {
 

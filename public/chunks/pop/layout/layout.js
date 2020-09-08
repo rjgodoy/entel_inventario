@@ -240,24 +240,20 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalJunction: function ModalJunction() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/junction */ "chunks/pop/layout/modals/junction").then(__webpack_require__.bind(null, /*! ./modals/ModalJunction */ "./resources/js/components/pop/layout/modals/ModalJunction.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/modals/junction */ "chunks/capacity/modals/junction").then(__webpack_require__.bind(null, /*! ../../capacity/modals/ModalJunction */ "./resources/js/components/capacity/modals/ModalJunction.vue"));
     },
     ModalGenerator: function ModalGenerator() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/generator */ "chunks/pop/layout/modals/generator").then(__webpack_require__.bind(null, /*! ./modals/ModalGenerator */ "./resources/js/components/pop/layout/modals/ModalGenerator.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/modals/generator */ "chunks/capacity/modals/generator").then(__webpack_require__.bind(null, /*! ../../capacity/modals/ModalGenerator */ "./resources/js/components/capacity/modals/ModalGenerator.vue"));
     },
     ModalPowerRectifier: function ModalPowerRectifier() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/powerRectifier */ "chunks/pop/layout/modals/powerRectifier").then(__webpack_require__.bind(null, /*! ./modals/ModalPowerRectifier */ "./resources/js/components/pop/layout/modals/ModalPowerRectifier.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/modals/powerRectifier */ "chunks/capacity/modals/powerRectifier").then(__webpack_require__.bind(null, /*! ../../capacity/modals/ModalPowerRectifier */ "./resources/js/components/capacity/modals/ModalPowerRectifier.vue"));
     },
     ModalAirConditioner: function ModalAirConditioner() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/airConditioner */ "chunks/pop/layout/modals/airConditioner").then(__webpack_require__.bind(null, /*! ./modals/ModalAirConditioner */ "./resources/js/components/pop/layout/modals/ModalAirConditioner.vue"));
-    },
-    CapacityChart: function CapacityChart() {
-      return Promise.all(/*! import() | chunks/pop/layout/capacityChart */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("chunks/pop/layout/capacityChart")]).then(__webpack_require__.bind(null, /*! ./CapacityChart */ "./resources/js/components/pop/layout/CapacityChart.vue"));
-    },
+      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/airConditioner */ "chunks/capacity/modals/airConditioner").then(__webpack_require__.bind(null, /*! ../../capacity/modals/ModalAirConditioner */ "./resources/js/components/capacity/modals/ModalAirConditioner.vue"));
+    } // CapacityChart: () => import(/* webpackChunkName: "chunks/pop/layout/capacityChart"*/'./CapacityChart'),
     // GrowingChart: () => import(/* webpackChunkName: "chunks/pop/layout/growingChart"*/'./GrowingChart'),
-    SpaceChart: function SpaceChart() {
-      return Promise.all(/*! import() | chunks/pop/infrastructure/SpaceChart */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("chunks/pop/infrastructure/SpaceChart")]).then(__webpack_require__.bind(null, /*! ../infrastructure/SpaceChart */ "./resources/js/components/pop/infrastructure/SpaceChart.vue"));
-    }
+    // SpaceChart: () => import(/* webpackChunkName: "chunks/pop/infrastructure/SpaceChart"*/'../infrastructure/SpaceChart')
+
   },
   props: ['user', 'pop', 'room_id'],
   data: function data() {

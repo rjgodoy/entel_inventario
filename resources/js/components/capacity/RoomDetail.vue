@@ -107,20 +107,20 @@
 
 <script>   
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck } from "@fortawesome/free-solid-svg-icons";
+    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faFolderOpen as farFolderOpen } from '@fortawesome/free-regular-svg-icons'
-    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck); 
+    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH); 
 
     export default {
         components: {
-            Capacity: () => import(/* webpackChunkName: "chunks/capacity/capacity"*/'./Capacity'),
-            Projection: () => import(/* webpackChunkName: "chunks/capacity/projection"*/'./Projection'),
-            // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./Requests'),
-            // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./Calculator'),
-            Layout: () => import(/* webpackChunkName: "chunks/capacity/layout"*/'./Layout'),
+            Capacity: () => import(/* webpackChunkName: "chunks/capacity/capacity"*/'./tabs/Capacity'),
+            Projection: () => import(/* webpackChunkName: "chunks/capacity/projection"*/'./tabs/Projection'),
+            // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
+            // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./tabs/Calculator'),
+            Layout: () => import(/* webpackChunkName: "chunks/capacity/layout"*/'./tabs/Layout'),
             Documents: () => import(/* webpackChunkName: "chunks/pop/documents/documents"*/'../pop/documents/Documents'),
-            ModalNewRoom: () => import(/* webpackChunkName: "chunks/pop/layout/modals/newRoom"*/'../pop/layout/modals/ModalNewRoom'),
+            ModalNewRoom: () => import(/* webpackChunkName: "chunks/capacity/modals/new/newRoom"*/'../capacity/modals/new/ModalNewRoom'),
         },
 
         props : [
@@ -680,7 +680,7 @@
             // },
 
             popAutonomy() {
-                return this.pop && this.pop.current_autonomy ? this.pop.current_autonomy.theoretical : 0
+                return this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
             },
 
             thresholds() {
@@ -814,9 +814,9 @@
 
 
             // Junctions
-            async getJunctions() {
+            getJunctions() {
                 // if(this.pop) {
-                await axios.get(`/api/popJunctions/${this.pop.id}`)
+                axios.get(`/api/popJunctions/${this.pop.id}`)
                 .then((response) => {
                     this.junctions = response.data.junctions
                     this.canEditJunctions = response.data.can
@@ -910,17 +910,15 @@
 
 
             // Generator Sets
-            async getGeneratorSets() {
-                // if(this.pop) {
-                    await axios.get(`/api/generatorSets/${this.pop.id}`)
-                    .then((response) => {
-                        this.generatorSets = response.data.generatorSets
-                        this.canEditGeneratorGroups = response.data.can
-                    })
-                    .catch((error) => {
-                        console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
-                    });
-                // }
+            getGeneratorSets() {
+                axios.get(`/api/generatorSets/${this.pop.id}`)
+                .then((response) => {
+                    this.generatorSets = response.data.generatorSets
+                    this.canEditGeneratorGroups = response.data.can
+                })
+                .catch((error) => {
+                    console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
+                });
             },
 
 

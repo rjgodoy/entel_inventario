@@ -8,11 +8,13 @@
                         <div class="is-size-6 has-text-weight-bold">EMPALMES</div>
                     </div>
                     <div class="column">
-                        <a @click="isNewJunctionModalActive = true">
-                            <b-tag class="is-pulled-right is-link has-text-weight-light is-size-7">
-                                <font-awesome-icon :icon="['fas', 'plus']" />
-                            </b-tag>
-                        </a>
+                        <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
+                            <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
+                                <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
+                            </button>
+
+                            <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewJunctionModalActive = true">Agregar Empalme</b-dropdown-item>
+                        </b-dropdown>
                     </div>
                 </div>
 
@@ -100,8 +102,8 @@
 <script>
     export default {
         components: {
-            ModalJunction: () => import(/* webpackChunkName: "chunks/pop/layout/modals/junction"*/'../../pop/layout/modals/ModalJunction'),
-            ModalNewJunction: () => import(/* webpackChunkName: "chunks/pop/layout/modals/newJunction"*/'../../pop/layout/modals/ModalNewJunction'),
+            ModalJunction: () => import(/* webpackChunkName: "chunks/pop/layout/modals/junction"*/'../modals/ModalJunction'),
+            ModalNewJunction: () => import(/* webpackChunkName: "chunks/pop/layout/modals/newJunction"*/'../modals/new/ModalNewJunction'),
         },
 
         props : [

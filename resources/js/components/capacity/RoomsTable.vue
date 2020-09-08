@@ -3,12 +3,12 @@
         <table class="table is-fullwidth has-background-black-ter has-text-white">
             <thead>
                 <tr class="">
-                    <th class="is-size-6 has-text-weight-semibold has-text-white has-text-left">
+                    <th class="is-size-6 has-text-weight-semibold has-text-white has-text-left" width="25%">
                         <abbr title="id">POP</abbr>
                     </th>
-                    <th class="is-size-6 has-text-weight-semibold has-text-white">
+                    <th class="is-size-6 has-text-weight-semibold has-text-white has-text-left" width="75%">
                         <div class="columns">
-                            <div class="column is-4 has-text-left">
+                            <div class="column is-4">
                                 <abbr title="Sala">SALA</abbr>
                             </div>
                             <div class="column has-text-centered">
@@ -34,7 +34,6 @@
                             </div>
                         </div>
                     </td>
-
                     <td class="">
                         <div class="field" v-for="room in orderedRooms(pop)" :key="room.id">
                             <div class="columns is-vcentered">
@@ -46,12 +45,10 @@
                                 </div>
 
                                 <div class="column">
-
                                     <RoomLights 
                                         :room=room
                                         :user=user
                                     />
-                                    
                                 </div>
                             </div>
                         </div>
@@ -59,57 +56,24 @@
                 </tr>    
             </tbody>
         </table>
-
-        <nav class="pagination" role="navigation" aria-label="pagination">
-            <vue-pagination  
-                class="has-text-white"
-                :pagination="roomsData"
-                @paginate="getRoomsData()"
-                :offset="4">
-            </vue-pagination>
-        </nav>
     </div>
 </template>
 
 <script>
-    // import { library } from "@fortawesome/fontawesome-svg-core";
-    // import { faCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
-    // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-    // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-    // library.add(faCircle, faSearch);
-
-    import VuePagination from '../VuePagination.vue';
     export default {
         components: {
-            VuePagination,
             RoomLights: () => import(/* webpackChunkName: "chunks/capacity/roomLights"*/'./RoomLights'),
-            ModalRoom: () => import(/* webpackChunkName: "chunks/capacity/modals/modalRoom"*/'./modals/ModalRoom')
         },
+
         props : [
             'user',
-            'user_permissions',
             'roomsData'
         ],
-        data() {
-            return {
-
-            }
-        },
-
-        computed: {
-        },
-
-        created() {
-        },
-
-        mounted() {
-        },
 
         methods: {
             orderedRooms: function (pop) {
                 return _.orderBy(pop.rooms, 'order')
             },
         },
-
     }
 </script>

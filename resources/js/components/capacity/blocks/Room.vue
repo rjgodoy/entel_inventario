@@ -775,10 +775,6 @@
             this.getPlaneDelegationTypes()
             this.getAirConditioners()
             this.getPlanes()
-            this.$emit('room-distribution', this.distribution);
-            this.$emit('room-surface', this.surface);
-            this.$emit('power-rectifier-data', this.powerRectifierData);
-            this.$emit('battery-data', this.batteryData);
         },
 
         computed: {
@@ -890,7 +886,7 @@
             },
 
             popAutonomy() {
-                return this.pop.current_autonomy ? this.pop.current_autonomy.theoretical : 0
+                return this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
             },
             
         },

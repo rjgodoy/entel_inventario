@@ -272,7 +272,8 @@ class PopController extends Controller
             'energy_responsable',
             'current_entel_vip',
             'current_office',
-            'current_autonomy'
+            'current_autonomy',
+            'current_battery_bank_autonomy'
             )
             ->where('id', $id)
             ->first();

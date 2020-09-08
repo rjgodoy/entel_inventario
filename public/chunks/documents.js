@@ -290,6 +290,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -324,7 +325,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       folders: [],
       files: [],
       photos: [],
-      activeTab: 2,
+      activeTab: 0,
       showCam: true,
       multiline: true,
       isLoading: false,
@@ -373,6 +374,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('reload-files', this.getFiles);
   },
   mounted: function mounted() {
+    this.setFolderTab();
     this.getSideFolders();
   },
   computed: {
@@ -381,61 +383,61 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     },
     baseTabs: function baseTabs() {
       return [{
-        id: 1,
+        id: 0,
         label: 'Informes',
         content: 'Informes: Lorem ipsum dolor sit amet.',
         displayed: true,
         asideView: true
       }, {
-        id: 2,
+        id: 1,
         label: 'Documentos',
         content: 'Documentos: Lorem ipsum dolor sit amet.',
         displayed: true,
         asideView: true
       }, {
-        id: 3,
+        id: 2,
         label: 'Fotos',
         content: 'Fotos: Lorem ipsum dolor sit amet.',
         displayed: true,
         asideView: true
       }, {
-        id: 4,
+        id: 3,
         label: 'Construcción',
         content: 'Construcción: Lorem ipsum dolor sit amet.',
         displayed: true,
         asideView: true
       }, {
-        id: 5,
+        id: 4,
         label: 'Obras Civiles',
         content: 'Obras Civiles: Lorem ipsum dolor sit amet.',
         displayed: true,
         asideView: true
       }, {
-        id: 6,
+        id: 5,
         label: 'CAM',
         content: 'CAM: Lorem ipsum dolor sit amet.',
         displayed: true,
         asideView: true
       }, {
-        id: 7,
+        id: 6,
         label: 'Levantamientos Ingeniería',
         content: 'Levantamientos Ingeniería: Lorem ipsum dolor sit amet.',
         displayed: true,
         asideView: true
       }, {
-        id: 8,
+        id: 7,
         label: 'Gestión Ambiental',
         content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
         displayed: true,
         asideView: true
       }, {
-        id: 9,
+        id: 8,
         label: 'Procedimientos',
         content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
         displayed: this.canViewProcedimientosTab,
         asideView: false
       }, {
-        id: 10,
+        id: 9,
         label: 'Manuales',
         content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
         displayed: this.canViewManualesTab,
@@ -443,9 +445,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       }];
     },
     tabs: function tabs() {
-      var tabs = _toConsumableArray(this.baseTabs);
-
-      return tabs;
+      return _toConsumableArray(this.baseTabs);
     },
     noFiles: function noFiles() {
       return !this.folders.length && !this.files.length && !this.photos.length;
@@ -457,11 +457,23 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     },
     isNewRootFolderModalActive: function isNewRootFolderModalActive(val) {
       val == false && this.getSideFolders();
+    },
+    activeTab: function activeTab(val) {
+      console.log(this.activeTab);
+      console.log(this.baseTabs[val]);
+      this.setFolderTab();
     }
   },
   methods: {
     setFolderTab: function setFolderTab() {
-      this.bread = '';
+      // Reload the breadcrumb
+      this.bread = ''; // Set files & folders to empty
+
+      this.folders = [];
+      this.files = [];
+      this.photos = []; // Get the files & folders if active tab is "Procedimientos" or "Manuales", else get side folders
+
+      this.activeTab == 8 || this.activeTab == 9 ? this.getFolders() : this.getSideFolders();
       this.currentFolderView = {
         id: null,
         parent_id: null
@@ -471,10 +483,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         parent_id: null
       };
       this.meta.current_page = 1;
-      this.baseTabs[this.activeTab] == 8 || this.baseTabs[this.activeTab] == 9 ? this.getFolders() : this.getSideFolders();
-      this.folders = [];
-      this.files = [];
-      this.photos = [];
     },
     selectedSide: function selectedSide(folder) {
       this.currentFolderView = folder; // this.folders.length && this.currentFolderView.parent_id ? this.setBreadcrum(folder.name) : this.bread = ''
@@ -749,11 +757,6 @@ var render = function() {
                 {
                   staticClass: "is-paddingless",
                   attrs: { type: "is-toggle", expanded: "" },
-                  on: {
-                    input: function($event) {
-                      return _vm.setFolderTab()
-                    }
-                  },
                   model: {
                     value: _vm.activeTab,
                     callback: function($$v) {
@@ -1607,7 +1610,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "block" }, [
       _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-        _vm._v("Visor de fotos")
+        _vm._v("Visor de documentos")
       ])
     ])
   }

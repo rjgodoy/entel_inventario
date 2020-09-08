@@ -33,9 +33,29 @@ class Pop extends Model
      *
      * @var array
      */
+    public function battery_bank_autonomies() 
+    {
+        return $this->hasMany(BatteryBankAutonomy::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function current_autonomy() 
     {
         return $this->hasOne(Autonomy::class)->latest();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_battery_bank_autonomy() 
+    {
+        return $this->hasOne(BatteryBankAutonomy::class)->latest();
     }
 
     /**

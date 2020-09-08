@@ -30,11 +30,13 @@ class RoomController extends Controller
                 'comuna.zona.crm', 
                 'sites', 
                 'rooms.pop.current_autonomy',
+                'rooms.pop.current_battery_bank_autonomy',
 
                 'junctions',
                 'generator_sets',
                 'power_rectifiers',
                 'current_autonomy',
+                'current_battery_bank_autonomy',
 
                 'rooms.pop.rooms.planes.power_rectifiers.power_rectifier_type', 
                 'rooms.pop.rooms.planes.power_rectifiers.power_rectifier_modules', 
@@ -134,6 +136,7 @@ class RoomController extends Controller
             'pop.junctions',
             'pop.generator_sets',
             'pop.current_autonomy',
+            'pop.current_battery_bank_autonomy',
 
             'pop.rooms.current_room_distribution',
             'pop.rooms.current_room_surface',
@@ -178,6 +181,11 @@ class RoomController extends Controller
 
             'current_fire_detection.fire_detection_type',
             'current_fire_detection.fire_extinction_type',
+
+            'power_rectifiers.plane',
+            'power_rectifiers.power_rectifier_type',
+            'power_rectifiers.power_rectifier_modules',
+            'power_rectifiers.power_rectifier_mode',
 
 
             'air_conditioners.air_conditioner_consumptions',

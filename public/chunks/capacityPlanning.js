@@ -64,73 +64,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -138,16 +71,11 @@ __webpack_require__.r(__webpack_exports__);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSearch"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    // VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
-    RoomLights: function RoomLights() {
-      return __webpack_require__.e(/*! import() | chunks/capacity/roomLights */ "chunks/capacity/roomLights").then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
-    },
-    ModalRoom: function ModalRoom() {
-      return __webpack_require__.e(/*! import() | chunks/capacity/modals/modalRoom */ "chunks/capacity/modals/modalRoom").then(__webpack_require__.bind(null, /*! ./modals/ModalRoom */ "./resources/js/components/capacity/modals/ModalRoom.vue"));
-    } // RoomsTable: () => import(/* webpackChunkName: "chunks/capacity/roomsTable"*/'./RoomsTable')
-
+    RoomsTable: function RoomsTable() {
+      return __webpack_require__.e(/*! import() | chunks/capacity/roomsTable */ "chunks/capacity/roomsTable").then(__webpack_require__.bind(null, /*! ./RoomsTable */ "./resources/js/components/capacity/RoomsTable.vue"));
+    }
   },
-  props: ['user', 'user_permissions'],
+  props: ['user'],
   data: function data() {
     return {
       crms: Array,
@@ -214,20 +142,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
-
-
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
 var _methods;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //
 //
@@ -340,25 +260,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheck"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisV"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisH"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
-      return Promise.all(/*! import() | chunks/capacity/capacity */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/pop/infrastructure/SpaceChar~ff23a29a"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity"), __webpack_require__.e("chunks/capacity/capacity~chunks/capacity/modals/capacity"), __webpack_require__.e("chunks/capacity/capacity")]).then(__webpack_require__.bind(null, /*! ./Capacity */ "./resources/js/components/capacity/Capacity.vue"));
+      return Promise.all(/*! import() | chunks/capacity/capacity */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks/l~623db261"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/capacity/roomLights~chunks/dashbo~0a787395"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("vendors~chunks/capacity/capacity"), __webpack_require__.e("chunks/capacity/capacity")]).then(__webpack_require__.bind(null, /*! ./tabs/Capacity */ "./resources/js/components/capacity/tabs/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~cfd7d504"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/modals/capacity~chunks/capacity/modals/projection~c~88966b2f"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./Projection */ "./resources/js/components/capacity/Projection.vue"));
+      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks/l~623db261"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/capacity/roomLights~chunks/dashbo~0a787395"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
     },
-    // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./Requests'),
-    // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./Calculator'),
+    // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
+    // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./tabs/Calculator'),
     Layout: function Layout() {
-      return __webpack_require__.e(/*! import() | chunks/capacity/layout */ "chunks/capacity/layout").then(__webpack_require__.bind(null, /*! ./Layout */ "./resources/js/components/capacity/Layout.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/layout */ "chunks/capacity/layout").then(__webpack_require__.bind(null, /*! ./tabs/Layout */ "./resources/js/components/capacity/tabs/Layout.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ../pop/documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
     },
     ModalNewRoom: function ModalNewRoom() {
-      return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newRoom */ "chunks/pop/layout/modals/newRoom").then(__webpack_require__.bind(null, /*! ../pop/layout/modals/ModalNewRoom */ "./resources/js/components/pop/layout/modals/ModalNewRoom.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/modals/new/newRoom */ "chunks/capacity/modals/new/newRoom").then(__webpack_require__.bind(null, /*! ../capacity/modals/new/ModalNewRoom */ "./resources/js/components/capacity/modals/new/ModalNewRoom.vue"));
     }
   },
   props: ['user'],
@@ -928,7 +848,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
     //     }
     // },
     popAutonomy: function popAutonomy() {
-      return this.pop && this.pop.current_autonomy ? this.pop.current_autonomy.theoretical : 0;
+      return this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0;
     },
     thresholds: function thresholds() {
       return {
@@ -1070,38 +990,17 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       });
     },
     // Junctions
-    getJunctions: function () {
-      var _getJunctions = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this18 = this;
+    getJunctions: function getJunctions() {
+      var _this18 = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
-                  _this18.junctions = response.data.junctions;
-                  _this18.canEditJunctions = response.data.can;
-                })["catch"](function (error) {
-                  console.log('Error al traer los datos de Empalmes: ' + error);
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getJunctions() {
-        return _getJunctions.apply(this, arguments);
-      }
-
-      return getJunctions;
-    }(),
+      // if(this.pop) {
+      axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
+        _this18.junctions = response.data.junctions;
+        _this18.canEditJunctions = response.data.can;
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Empalmes: ' + error);
+      }); // }
+    },
     powerA: function powerA(junction) {
       var latestProtectionRA = junction.latest_protection ? junction.latest_protection.regulada_a : 0;
       var latestMeasureRA_V = junction.latest_measurement ? junction.latest_measurement.r_a_volt_measure : 0;
@@ -1184,38 +1083,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       return powerRectifiersInRoom;
     },
     // Generator Sets
-    getGeneratorSets: function () {
-      var _getGeneratorSets = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this19 = this;
+    getGeneratorSets: function getGeneratorSets() {
+      var _this19 = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
-                  _this19.generatorSets = response.data.generatorSets;
-                  _this19.canEditGeneratorGroups = response.data.can;
-                })["catch"](function (error) {
-                  console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
-                });
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function getGeneratorSets() {
-        return _getGeneratorSets.apply(this, arguments);
-      }
-
-      return getGeneratorSets;
-    }(),
+      axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
+        _this19.generatorSets = response.data.generatorSets;
+        _this19.canEditGeneratorGroups = response.data.can;
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
+      });
+    },
     // Power Rectifiers
     getPlaneTypes: function getPlaneTypes() {
       var _this20 = this;
@@ -1596,235 +1473,71 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "box has-background-black-ter" }, [
-        _c("div", { staticClass: "field" }, [
-          _c("div", { staticClass: "control has-icons-left has-icons-right" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.searchText,
-                  expression: "searchText"
-                }
-              ],
-              staticClass:
-                "input is-rounded has-background-black-ter has-text-light",
-              attrs: {
-                type: "text",
-                "arial-label": "Buscar",
-                placeholder: "Buscar...",
-                autofocus: ""
-              },
-              domProps: { value: _vm.searchText },
-              on: {
-                keyup: _vm.getRoomsData,
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.searchText = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "box has-background-black-ter" },
+        [
+          _c("div", { staticClass: "field" }, [
             _c(
-              "span",
-              { staticClass: "icon is-small is-left" },
-              [_c("font-awesome-icon", { attrs: { icon: "search" } })],
-              1
-            ),
-            _vm._v(" "),
-            _c("span", { staticClass: "icon is-small is-right" }, [
-              _c("button", {
-                staticClass: "delete",
-                on: { click: _vm.clearSearch }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "field" }, [
-          _c(
-            "table",
-            {
-              staticClass:
-                "table is-fullwidth has-background-black-ter has-text-white"
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.roomsData.data, function(pop) {
-                  return _c("tr", { key: pop.id }, [
-                    _c("td", {}, [
-                      _c("div", {}, [
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "is-size-5 has-text-weight-bold has-text-white",
-                            attrs: { target: "_blank", href: "/pop/" + pop.id }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                        " +
-                                _vm._s(pop ? pop.nombre : "") +
-                                "\n                                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "is-size-6 has-text-weight-normal" },
-                          [
-                            _vm._v(
-                              "\n                                        Comuna de " +
-                                _vm._s(pop ? pop.comuna.nombre_comuna : "") +
-                                "\n                                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "is-size-7 has-text-weight-light" },
-                          [
-                            _vm._v(
-                              "\n                                        " +
-                                _vm._s(
-                                  pop
-                                    ? "Zona: " + pop.comuna.zona.nombre_zona
-                                    : ""
-                                ) +
-                                " - " +
-                                _vm._s(
-                                  pop
-                                    ? "CRM: " + pop.comuna.zona.crm.nombre_crm
-                                    : ""
-                                ) +
-                                "\n                                    "
-                            )
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      {},
-                      _vm._l(_vm.orderedRooms(pop), function(room) {
-                        return _c(
-                          "div",
-                          { key: room.id, staticClass: "field" },
-                          [
-                            _c("div", { staticClass: "columns is-vcentered" }, [
-                              _c(
-                                "div",
-                                { staticClass: "column is-4" },
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass:
-                                        " has-text-weight-bold has-text-white",
-                                      attrs: {
-                                        to: "/capacity/" + room.id,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _c("div", { staticClass: "is-size-5" }, [
-                                        _vm._v(_vm._s(room.name))
-                                      ]),
-                                      _vm._v(" "),
-                                      room.old_name
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "has-text-weight-light is-size-6"
-                                            },
-                                            [_vm._v(_vm._s(room.old_name))]
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "column" },
-                                [
-                                  _c("RoomLights", {
-                                    attrs: { room: room, user: _vm.user }
-                                  })
-                                ],
-                                1
-                              )
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  ])
+              "div",
+              { staticClass: "control has-icons-left has-icons-right" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.searchText,
+                      expression: "searchText"
+                    }
+                  ],
+                  staticClass:
+                    "input is-rounded has-background-black-ter has-text-light",
+                  attrs: {
+                    type: "text",
+                    "arial-label": "Buscar",
+                    placeholder: "Buscar...",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.searchText },
+                  on: {
+                    keyup: _vm.getRoomsData,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.searchText = $event.target.value
+                    }
+                  }
                 }),
-                0
-              )
-            ]
-          )
-        ])
-      ])
+                _vm._v(" "),
+                _c(
+                  "span",
+                  { staticClass: "icon is-small is-left" },
+                  [_c("font-awesome-icon", { attrs: { icon: "search" } })],
+                  1
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "icon is-small is-right" }, [
+                  _c("button", {
+                    staticClass: "delete",
+                    on: { click: _vm.clearSearch }
+                  })
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("RoomsTable", {
+            attrs: { roomsData: _vm.roomsData, user: _vm.user }
+          })
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", {}, [
-        _c(
-          "th",
-          {
-            staticClass:
-              "is-size-6 has-text-weight-semibold has-text-white has-text-left",
-            attrs: { width: "25%" }
-          },
-          [_c("abbr", { attrs: { title: "id" } }, [_vm._v("POP")])]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "is-size-6 has-text-weight-semibold has-text-white has-text-left",
-            attrs: { width: "75%" }
-          },
-          [
-            _c("div", { staticClass: "columns" }, [
-              _c("div", { staticClass: "column is-4" }, [
-                _c("abbr", { attrs: { title: "Sala" } }, [_vm._v("SALA")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "column has-text-centered" }, [
-                _c("abbr", { attrs: { title: "Estado / Disponibilidad" } }, [
-                  _vm._v("Estado / Disponibilidad")
-                ])
-              ])
-            ])
-          ]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

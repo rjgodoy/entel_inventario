@@ -115,6 +115,7 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('albaPopsMap', 'Api\DashboardApiController@albaPopsMap');
 
 		Route::apiResource('autonomies', 'Api\AutonomyController');
+		Route::apiResource('batteryBankAutonomies', 'Api\BatteryBankAutonomyController');
 
 	// Electric Lines
 		Route::apiResource('electricCompanies','Api\ElectricCompanyController');

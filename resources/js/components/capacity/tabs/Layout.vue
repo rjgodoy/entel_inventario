@@ -10,7 +10,10 @@
 
                 <div class="tile">
                     <div class="tile is-parent is-4">
-                        <div class="tile box is-child">
+                        <div class="tile box is-child has-background">
+                            <div class="is-box-background is-transparent-light" style="margin-top: -20px">
+                                <font-awesome-icon :icon="['fas', 'car-battery']" size="10x" class="is-pulled-right" style=""/>
+                            </div>
 
                             <div class="columns">
                                 <div class="column is-10">
@@ -37,14 +40,26 @@
                             :junctions="junctions"
                             :can="canEditJunctions"
                             :user="user"
+                            :totalJunctionsCapacity=totalJunctionsCapacity
+                            :totalUsedJunctionsCapacity=totalUsedJunctionsCapacity
+                            :totalAvailableJunctionsCapacity=totalAvailableJunctionsCapacity
                         />
                     </div>
                     <div class="tile" v-if="generatorSets.length">
                         <GeneratorSets 
                             :pop="pop"
                             :generatorSets="generatorSets"
-                            :can="canEditGeneratorGroups"
+                            :can="canEditGeneratorSets"
                             :user="user"
+                            :totalGeneratorSetsCapacity=totalGeneratorSetsCapacity
+                            :totalGeneratorSetsUsedCapacity=totalGeneratorSetsUsedCapacity
+                            :totalAvailableGeneratorSetsCapacity=totalAvailableGeneratorSetsCapacity
+                            :totalGeneratorSetsCapacityA=totalGeneratorSetsCapacityA
+                            :totalGeneratorSetsCapacityB=totalGeneratorSetsCapacityB
+                            :usedGeneratorSetsCapacityA=usedGeneratorSetsCapacityA
+                            :usedGeneratorSetsCapacityB=usedGeneratorSetsCapacityB
+                            :availableGeneratorSetsCapacityA=availableGeneratorSetsCapacityA
+                            :availableGeneratorSetsCapacityB=availableGeneratorSetsCapacityB
                         />
                     </div>
                     <div class="tile is-3">
@@ -63,6 +78,21 @@
                             :pop="pop"
                             :room="room"
                             :user="user"
+                            :planes=planes
+                            :planeTypes=planeTypes
+                            :airConditioners=airConditioners
+                            :canEditPowerRectifiers=canEditPowerRectifiers
+                            :canEditAirConditioners=canEditAirConditioners
+                            :canEditSurface=canEditSurface
+                            :canEditDistribution=canEditDistribution
+
+                            :totalSurface=totalSurface
+                            :usedSurface=usedSurface
+                            :availableSurface=availableSurface
+
+                            :totalDistributionCapacity=totalDistributionCapacity
+                            :usedDistributionCapacity=usedDistributionCapacity
+                            :availableDistributionCapacity=availableDistributionCapacity
                         />
                     </div>
                 </div>
@@ -90,20 +120,46 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
 
         props : [
             'user',
-            'room'
+            'room',
+            'junctions',
+            'generatorSets',
+            'planes',
+            'planeTypes',
+            'airConditioners',
+            'canEditJunctions',
+            'canEditGeneratorSets',
+            'canEditPowerRectifiers',
+            'canEditAirConditioners',
+            'canEditSurface',
+            'canEditDistribution',
+
+            'totalJunctionsCapacity',
+            'totalUsedJunctionsCapacity',
+            'totalAvailableJunctionsCapacity',
+
+            'totalGeneratorSetsCapacity',
+            'totalGeneratorSetsUsedCapacity',
+            'totalAvailableGeneratorSetsCapacity',
+            'totalGeneratorSetsCapacityA',
+            'totalGeneratorSetsCapacityB',
+            'usedGeneratorSetsCapacityA',
+            'usedGeneratorSetsCapacityB',
+            'availableGeneratorSetsCapacityA',
+            'availableGeneratorSetsCapacityB',
+
+            'totalSurface',
+            'usedSurface',
+            'availableSurface',
+
+            'totalDistributionCapacity',
+            'usedDistributionCapacity',
+            'availableDistributionCapacity',
         ],
 
         data() {
             return {
-                junctions: Object,
-                generatorSets: Object,
-
-                canEditJunctions: null,
-                canEditGeneratorGroups: null,
-
                 isEditMode: false,
                 newTheoreticalAutonomy: this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
-
             }
         },
 
@@ -115,50 +171,11 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
 
         watch: {
             room(val) {
-                this.getJunctions()
-                this.getGeneratorSets()
                 this.newTheoreticalAutonomy = this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
             }
         },
 
-        created() {
-            this.$eventBus.$on('junction-measurements-updated', this.getJunctions)
-            this.$eventBus.$on('generator-set-capacities-updated', this.getGeneratorSets)
-            this.$eventBus.$on('new-solar-panel', this.getJunctions)
-        },
-
-        mounted() {
-            this.getJunctions()
-            this.getGeneratorSets()
-        },
-
         methods: {
-            getJunctions() {
-                if(this.pop) {
-                    axios.get(`/api/popJunctions/${this.pop.id}`)
-                    .then((response) => {
-                        this.junctions = response.data.junctions
-                        this.canEditJunctions = response.data.can
-                    })
-                    .catch((error) => {
-                        console.log('Error al traer los datos de Empalmes: ' + error);
-                    });
-                }
-            },
-
-            getGeneratorSets() {
-                if(this.pop) {
-                    axios.get(`/api/generatorSets/${this.pop.id}`)
-                    .then((response) => {
-                        this.generatorSets = response.data.generatorSets
-                        this.canEditGeneratorGroups = response.data.can
-                    })
-                    .catch((error) => {
-                        console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
-                    });
-                }
-            },
-
             updateAutonomy() {
                 if(!this.isEditMode && this.pop && this.pop.current_battery_bank_autonomy && this.newTheoreticalAutonomy != this.pop.current_battery_bank_autonomy.theoretical) {
                     let params = {
@@ -167,16 +184,11 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
                     }
                     axios.post(`/api/batteryBankAutonomies`, params)
                     .then(response => {
-                        console.log(response.data)
+                        this.$eventBus.$emit('battery-autonomy')
+                        // console.log(response.data)
                     })
                 }
             }
         },
-
-        beforeDestroy() {
-            this.$eventBus.$off('junction-measurements-updated')
-            this.$eventBus.$off('generator-set-capacities-updated')
-            this.$eventBus.$off('new-solar-panel')
-        }
     }
 </script>

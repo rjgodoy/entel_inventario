@@ -110,6 +110,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalJunction: function ModalJunction() {
@@ -119,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newJunction */ "chunks/pop/layout/modals/newJunction").then(__webpack_require__.bind(null, /*! ../modals/new/ModalNewJunction */ "./resources/js/components/capacity/modals/new/ModalNewJunction.vue"));
     }
   },
-  props: ['junctions', 'can', 'user', 'pop'],
+  props: ['can', 'user', 'pop', 'junctions', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity'],
   data: function data() {
     return {
       junctionSelected: null,
@@ -127,120 +139,100 @@ __webpack_require__.r(__webpack_exports__);
       isNewJunctionModalActive: false
     };
   },
-  computed: {
-    responsable: function responsable() {
-      var area = 'Sin Información';
-      var id = null; // if (this.generatorSets.length) {
-      //     Object.keys(this.generatorSets).forEach(element => {
-      //         if(this.generatorSets[element].current_generator_responsable) {
-      //             switch(this.generatorSets[element].current_generator_responsable.generator_set_responsable_area_id) {
-      //                 case 1:
-      //                     id = 1
-      //                     area = this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
-      //                     break
-      //                 case 2:
-      //                     id = id == 1 ? id : 2
-      //                     arae = id == 1 ? area : this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
-      //                     break
-      //                 case 3:
-      //                     id = id == 1 || id == 2 ? id : 3
-      //                     area = id == 1 || id == 2 ? area : this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
-      //                     break
-      //                 default:
-      //                     break
-      //             }
-      //         }
-      //     })
-      // }
-
-      return {
-        'id': id,
-        'area': area
-      };
-    },
-    averageConsumptionPerPhotovoltaicGroup: function averageConsumptionPerPhotovoltaicGroup() {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
-      return 0;
-    },
-    totalCapacity: function totalCapacity() {
-      var _this = this;
-
-      var sum = 0;
-
-      if (this.junctions.length) {
-        Object.keys(this.junctions).forEach(function (element) {
-          sum = sum + (_this.powerA(_this.junctions[element]) + _this.powerB(_this.junctions[element])) * _this.junctions[element].use_factor + _this.photovoltaicCapacity(_this.junctions[element]);
-        });
-      }
-
-      return sum;
-    },
-    withoutBatteriesCapacity: function withoutBatteriesCapacity() {
-      var _this2 = this;
-
-      var sum = 0;
-
-      if (this.junctions.length) {
-        Object.keys(this.junctions).forEach(function (element) {
-          sum = sum + _this2.powerUsedA(_this2.junctions[element]) + _this2.powerUsedB(_this2.junctions[element]) + _this2.averageConsumptionPerPhotovoltaicGroup;
-        });
-      }
-
-      return sum;
-    },
-    withoutBatteriesDisponibility: function withoutBatteriesDisponibility() {
-      return this.totalCapacity - this.withoutBatteriesCapacity;
-    },
-    batteriesRecharge: function batteriesRecharge() {
-      var _this3 = this;
-
-      var total = 0;
-
-      if (this.pop.rooms && this.pop.rooms.length) {
-        Object.keys(this.pop.rooms).forEach(function (element) {
-          var room = _this3.pop.rooms[element];
-
-          if (room.power_rectifiers.length) {
-            Object.keys(room.planes).forEach(function (item) {
-              var roomPlane = room.planes[item];
-              total += _this3.batteryRechargePower(roomPlane);
-            });
-          }
-        });
-      }
-
-      return total;
-    },
-    totalUsedCapacity: function totalUsedCapacity() {
-      var _this4 = this;
-
-      var punctualConsumption = 0;
-
-      if (this.junctions.length) {
-        Object.keys(this.junctions).forEach(function (element) {
-          if (_this4.junctions[element].latest_measurement) {
-            punctualConsumption += _this4.junctions[element].latest_measurement.punctual_consumption;
-          }
-        });
-      }
-
-      return this.withoutBatteriesCapacity + this.batteriesRecharge + punctualConsumption;
-    },
-    totalDisponibility: function totalDisponibility() {
-      return this.totalCapacity - this.totalUsedCapacity;
-    },
-    usagePercent: function usagePercent() {
-      return this.totalCapacity != 0 ? this.totalUsedCapacity / this.totalCapacity : 0;
-    }
+  computed: {// responsable() {
+    //     let area = 'Sin Información'; let id = null;
+    //     // if (this.generatorSets.length) {
+    //     //     Object.keys(this.generatorSets).forEach(element => {
+    //     //         if(this.generatorSets[element].current_generator_responsable) {
+    //     //             switch(this.generatorSets[element].current_generator_responsable.generator_set_responsable_area_id) {
+    //     //                 case 1:
+    //     //                     id = 1
+    //     //                     area = this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
+    //     //                     break
+    //     //                 case 2:
+    //     //                     id = id == 1 ? id : 2
+    //     //                     arae = id == 1 ? area : this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
+    //     //                     break
+    //     //                 case 3:
+    //     //                     id = id == 1 || id == 2 ? id : 3
+    //     //                     area = id == 1 || id == 2 ? area : this.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area
+    //     //                     break
+    //     //                 default:
+    //     //                     break
+    //     //             }
+    //     //         }
+    //     //     })
+    //     // }
+    //     return {
+    //         'id': id,
+    //         'area': area
+    //     }
+    // },
+    // averageConsumptionPerPhotovoltaicGroup() {  // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+    //     return 0
+    // },
+    // totalCapacity(){
+    //     let sum = 0
+    //     if (this.junctions.length) {
+    //         Object.keys(this.junctions).forEach(element => {
+    //             sum = sum + (this.powerA(this.junctions[element]) + this.powerB(this.junctions[element])) * this.junctions[element].use_factor + this.photovoltaicCapacity(this.junctions[element])
+    //         })
+    //     }
+    //     return sum
+    // },
+    // withoutBatteriesCapacity() {
+    //     let sum = 0
+    //     if (this.junctions.length) {
+    //         Object.keys(this.junctions).forEach(element => {
+    //             sum = sum + this.powerUsedA(this.junctions[element]) + this.powerUsedB(this.junctions[element]) + this.averageConsumptionPerPhotovoltaicGroup
+    //         })
+    //     }
+    //     return sum
+    // },
+    // withoutBatteriesDisponibility() {
+    //     return this.totalCapacity - this.withoutBatteriesCapacity
+    // },
+    // batteriesRecharge() {
+    //     let total = 0
+    //     if(this.pop.rooms && this.pop.rooms.length) {
+    //         Object.keys(this.pop.rooms).forEach(element => {
+    //             let room = this.pop.rooms[element]
+    //             if(room.power_rectifiers.length) {
+    //                 Object.keys(room.planes).forEach(item => {
+    //                     let roomPlane = room.planes[item]
+    //                     total += this.batteryRechargePower(roomPlane)
+    //                 })
+    //             }
+    //         })
+    //     }
+    //     return total
+    // },
+    // totalUsedCapacity() {
+    //     let punctualConsumption = 0
+    //     if (this.junctions.length) {
+    //         Object.keys(this.junctions).forEach(element => {
+    //             if(this.junctions[element].latest_measurement) {
+    //                 punctualConsumption += this.junctions[element].latest_measurement.punctual_consumption
+    //             }
+    //         })
+    //     }
+    //     return this.withoutBatteriesCapacity + this.batteriesRecharge + punctualConsumption
+    // },
+    // totalDisponibility() {
+    //     return this.totalCapacity - this.totalUsedCapacity
+    // },
+    // usagePercent() {
+    //     return this.totalCapacity != 0 ? this.totalUsedCapacity / this.totalCapacity : 0
+    // }
   },
   watch: {
     junctions: function junctions(val) {
-      var _this5 = this;
+      var _this = this;
 
       if (val.length) {
         Object.keys(val).forEach(function (junction) {
-          if (_this5.junctionSelected && _this5.junctionSelected.id == val[junction].id) {
-            _this5.junctionSelected = val[junction];
+          if (_this.junctionSelected && _this.junctionSelected.id == val[junction].id) {
+            _this.junctionSelected = val[junction];
           }
         });
       }
@@ -250,76 +242,69 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {// console.log(this.generatorSets)
     // this.getGeneratorSets()
   },
-  methods: {
-    powerA: function powerA(junction) {
-      var latestProtectionRA = junction.latest_protection ? junction.latest_protection.regulada_a : 0;
-      var latestMeasureRA_V = junction.latest_measurement ? junction.latest_measurement.r_a_volt_measure : 0;
-
-      if (junction.junction_type_id == 2) {
-        return latestProtectionRA * latestMeasureRA_V / 1000;
-      } else {
-        return latestProtectionRA * 380 * Math.sqrt(3) / 1000;
-      }
-    },
-    powerB: function powerB(junction) {
-      var latestProtectionRB = junction.latest_protection ? junction.latest_protection.regulada_b : 0;
-
-      if (junction.junction_type_id == 2) {
-        return latestProtectionRB * 220 / 1000;
-      } else {
-        return latestProtectionRB * 380 * Math.sqrt(3) / 1000;
-      }
-    },
-    powerUsedA: function powerUsedA(junction) {
-      var latestMeasureRA_A = junction.latest_measurement ? junction.latest_measurement.r_a_amp_measure : 0;
-      var latestMeasureSA_A = junction.latest_measurement ? junction.latest_measurement.s_a_amp_measure : 0;
-      var latestMeasureTA_A = junction.latest_measurement ? junction.latest_measurement.t_a_amp_measure : 0;
-      var latestMeasureRA_V = junction.latest_measurement ? junction.latest_measurement.r_a_volt_measure : 0;
-      var latestMeasureSA_V = junction.latest_measurement ? junction.latest_measurement.s_a_volt_measure : 0;
-      var latestMeasureTA_V = junction.latest_measurement ? junction.latest_measurement.t_a_volt_measure : 0;
-
-      if (junction.junction_type_id == 2) {
-        return latestMeasureRA_A * latestMeasureRA_V / 1000;
-      } else {
-        return (latestMeasureRA_A * latestMeasureRA_V + latestMeasureSA_A * latestMeasureSA_V + latestMeasureTA_A * latestMeasureTA_V) / 1000;
-      }
-    },
-    powerUsedB: function powerUsedB(junction) {
-      var latestMeasureRB_A = junction.latest_measurement ? junction.latest_measurement.r_b_amp_measure : 0;
-      var latestMeasureSB_A = junction.latest_measurement ? junction.latest_measurement.s_b_amp_measure : 0;
-      var latestMeasureTB_A = junction.latest_measurement ? junction.latest_measurement.t_b_amp_measure : 0;
-      var latestMeasureRB_V = junction.latest_measurement ? junction.latest_measurement.r_b_volt_measure : 0;
-      var latestMeasureSB_V = junction.latest_measurement ? junction.latest_measurement.s_b_volt_measure : 0;
-      var latestMeasureTB_V = junction.latest_measurement ? junction.latest_measurement.t_b_volt_measure : 0;
-
-      if (junction.junction_type_id == 2) {
-        return latestMeasureRB_A * latestMeasureRB_V / 1000;
-      } else {
-        return (latestMeasureRB_A * latestMeasureRB_V + latestMeasureSB_A * latestMeasureSB_V + latestMeasureTB_A * latestMeasureTB_V) / 1000;
-      }
-    },
-    photovoltaicCapacity: function photovoltaicCapacity(junction) {
-      var capacity = 0;
-
-      if (junction.solar_panels.length) {
-        Object.keys(junction.solar_panels).forEach(function (element) {
-          var panel = junction.solar_panels[element];
-          capacity = capacity + panel.unit_capacity * panel.quantity;
-        });
-      }
-
-      return capacity / 1000;
-    },
-    batteryRechargePower: function batteryRechargePower(plane) {
-      return this.rechargeCurrent(plane) * plane.float_tension / 1000;
-    },
-    rechargeCurrent: function rechargeCurrent(plane) {
-      var current = 0;
-      Object.keys(plane.battery_banks).forEach(function (item) {
-        current += plane.battery_banks[item].capacity;
-      });
-      return plane.recharge_factor * current;
-    }
+  methods: {// powerA(junction) {
+    //     let latestProtectionRA = junction.latest_protection ? junction.latest_protection.regulada_a : 0
+    //     let latestMeasureRA_V = junction.latest_measurement ? junction.latest_measurement.r_a_volt_measure : 0
+    //     if (junction.junction_type_id == 2) {
+    //         return latestProtectionRA * latestMeasureRA_V / 1000
+    //     } else {
+    //         return latestProtectionRA * 380 * Math.sqrt(3) / 1000
+    //     }
+    // },
+    // powerB(junction) {
+    //     let latestProtectionRB = junction.latest_protection ? junction.latest_protection.regulada_b : 0
+    //     if (junction.junction_type_id == 2) {
+    //         return latestProtectionRB * 220 / 1000
+    //     } else {
+    //         return latestProtectionRB * 380 * Math.sqrt(3) / 1000
+    //     }
+    // },
+    // powerUsedA(junction){
+    //     let latestMeasureRA_A = junction.latest_measurement ? junction.latest_measurement.r_a_amp_measure : 0
+    //     let latestMeasureSA_A = junction.latest_measurement ? junction.latest_measurement.s_a_amp_measure : 0
+    //     let latestMeasureTA_A = junction.latest_measurement ? junction.latest_measurement.t_a_amp_measure : 0
+    //     let latestMeasureRA_V = junction.latest_measurement ? junction.latest_measurement.r_a_volt_measure : 0
+    //     let latestMeasureSA_V = junction.latest_measurement ? junction.latest_measurement.s_a_volt_measure : 0
+    //     let latestMeasureTA_V = junction.latest_measurement ? junction.latest_measurement.t_a_volt_measure : 0
+    //     if (junction.junction_type_id == 2) {
+    //         return latestMeasureRA_A * latestMeasureRA_V / 1000
+    //     } else {
+    //         return ( (latestMeasureRA_A * latestMeasureRA_V) + (latestMeasureSA_A * latestMeasureSA_V) + (latestMeasureTA_A * latestMeasureTA_V) ) / 1000
+    //     }
+    // },
+    // powerUsedB(junction){
+    //     let latestMeasureRB_A = junction.latest_measurement ? junction.latest_measurement.r_b_amp_measure : 0
+    //     let latestMeasureSB_A = junction.latest_measurement ? junction.latest_measurement.s_b_amp_measure : 0
+    //     let latestMeasureTB_A = junction.latest_measurement ? junction.latest_measurement.t_b_amp_measure : 0
+    //     let latestMeasureRB_V = junction.latest_measurement ? junction.latest_measurement.r_b_volt_measure : 0
+    //     let latestMeasureSB_V = junction.latest_measurement ? junction.latest_measurement.s_b_volt_measure : 0
+    //     let latestMeasureTB_V = junction.latest_measurement ? junction.latest_measurement.t_b_volt_measure : 0
+    //     if (junction.junction_type_id == 2) {
+    //         return latestMeasureRB_A * latestMeasureRB_V / 1000
+    //     } else {
+    //         return ( (latestMeasureRB_A * latestMeasureRB_V) + (latestMeasureSB_A * latestMeasureSB_V) + (latestMeasureTB_A * latestMeasureTB_V) ) / 1000
+    //     }
+    // },
+    // photovoltaicCapacity(junction) {
+    //     let capacity = 0
+    //     if (junction.solar_panels.length) {
+    //         Object.keys(junction.solar_panels).forEach(element => {
+    //             let panel = junction.solar_panels[element]
+    //             capacity = capacity + (panel.unit_capacity * panel.quantity)
+    //         })
+    //     }
+    //     return capacity / 1000
+    // },
+    // batteryRechargePower(plane) {
+    //     return this.rechargeCurrent(plane) * plane.float_tension / 1000
+    // },
+    // rechargeCurrent(plane) {
+    //     let current = 0
+    //     Object.keys(plane.battery_banks).forEach(item => {
+    //         current += plane.battery_banks[item].capacity
+    //     })
+    //     return plane.recharge_factor * current
+    // },
   },
   beforeDestroy: function beforeDestroy() {}
 });
@@ -345,7 +330,19 @@ var render = function() {
     "div",
     { staticClass: "tile is-parent" },
     [
-      _c("section", { staticClass: "tile box" }, [
+      _c("section", { staticClass: "tile box has-background" }, [
+        _c(
+          "div",
+          { staticClass: "is-box-background is-transparent-light" },
+          [
+            _c("font-awesome-icon", {
+              staticClass: "is-pulled-right",
+              attrs: { icon: ["fas", "bolt"], size: "10x" }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "tile is-vertical" }, [
           _c("div", { staticClass: "columns" }, [
             _vm._m(0),
@@ -396,7 +393,23 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Agregar Empalme")]
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "media" },
+                          [
+                            _c("font-awesome-icon", {
+                              staticClass: "media-left",
+                              attrs: { icon: ["fas", "plus"] }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "media-content" }, [
+                              _c("h3", [_vm._v("Nuevo Empalme")])
+                            ])
+                          ],
+                          1
+                        )
+                      ]
                     )
                   ],
                   1
@@ -450,7 +463,7 @@ var render = function() {
                                           _vm._v(
                                             _vm._s(
                                               _vm._f("numeral")(
-                                                _vm.totalCapacity,
+                                                _vm.totalJunctionsCapacity,
                                                 "0,0.0"
                                               )
                                             ) + "  "
@@ -493,7 +506,7 @@ var render = function() {
                                           _vm._v(
                                             _vm._s(
                                               _vm._f("numeral")(
-                                                _vm.totalUsedCapacity,
+                                                _vm.totalUsedJunctionsCapacity,
                                                 "0,0.0"
                                               )
                                             ) + "  "
@@ -536,7 +549,7 @@ var render = function() {
                                           _vm._v(
                                             _vm._s(
                                               _vm._f("numeral")(
-                                                _vm.totalDisponibility,
+                                                _vm.totalAvailableJunctionsCapacity,
                                                 "0,0.0"
                                               )
                                             ) + "  "
@@ -586,7 +599,7 @@ var render = function() {
                             "a",
                             {
                               staticClass:
-                                "box tile is-dark is-bold has-text-warning",
+                                "box tile is-dark is-bold has-text-warning has-background",
                               on: {
                                 click: function($event) {
                                   _vm.isJunctionModalActive = true
@@ -594,7 +607,28 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._m(1, true)]
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-box-background is-transparent"
+                                },
+                                [
+                                  _c("font-awesome-icon", {
+                                    staticClass: "is-pulled-right",
+                                    staticStyle: {
+                                      "margin-top": "-10px",
+                                      "margin-right": "15px"
+                                    },
+                                    attrs: { icon: ["fas", "bolt"], size: "4x" }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm._m(1, true)
+                            ]
                           )
                         ]
                       )
@@ -694,7 +728,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass:
-            "has-text-centered has-text-weight-light has-text-grey is-size-7"
+            "has-text-centered has-text-weight-light has-text-grey is-size-6"
         },
         [
           _c("div", { staticClass: "block" }, [

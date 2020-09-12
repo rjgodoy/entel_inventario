@@ -64,6 +64,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -144,130 +145,184 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
-var _methods;
+/* harmony import */ var _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
- // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisV"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisH"]);
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisV"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisH"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortUp"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSuperpowers"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSolarPanel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faShieldAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCarBattery"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFire"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
-      return Promise.all(/*! import() | chunks/capacity/capacity */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks/l~623db261"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/capacity/roomLights~chunks/dashbo~0a787395"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("vendors~chunks/capacity/capacity"), __webpack_require__.e("chunks/capacity/capacity")]).then(__webpack_require__.bind(null, /*! ./tabs/Capacity */ "./resources/js/components/capacity/tabs/Capacity.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/capacity */ "chunks/capacity/capacity").then(__webpack_require__.bind(null, /*! ./tabs/Capacity */ "./resources/js/components/capacity/tabs/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks/l~623db261"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/capacity/roomLights~chunks/dashbo~0a787395"), __webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
+      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks~efdab41a"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
     },
     // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
     // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./tabs/Calculator'),
@@ -321,30 +376,57 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       }],
       junctions: Object,
       generatorSets: Object,
-      planes: Array,
-      powerRectifiers: Array,
-      airConditioners: Array,
-      planeSelected: null,
-      powerRectifierSelected: null,
-      airConditionerSelected: null,
+      planes: Object,
+      planeTypes: Object,
+      airConditioners: Object,
+      canEditJunctions: null,
+      canEditGeneratorSets: null,
       canEditPowerRectifiers: null,
       canEditAirConditioners: null,
-      isPowerRectifierModalActive: false,
-      isAirConditionerModalActive: false,
-      isDistributionModalActive: false,
-      isSurfaceModalActive: false,
       isNewRoomModalActive: false,
-      totalPRCapacity: 0,
-      usedPRCapacity: 0,
-      availablePRCapacity: 0,
-      totalBatteryCapacity: 0,
-      usedBatteryCapacity: 0,
-      availableBatteryCapacity: 0,
       planeTypeId: 0,
-      planeTypes: []
+      record: false
     };
   },
+  created: function created() {
+    this.$eventBus.$on('room-data', this.getRoomData);
+    this.$eventBus.$on('room-distribution', this.getRoomData);
+    this.$eventBus.$on('room-surface', this.getRoomData);
+    this.$eventBus.$on('room-security', this.getRoomData);
+    this.$eventBus.$on('change-room', this.getRoomData);
+    this.$eventBus.$on('new-power-rectifier', this.getRoomData);
+    this.$eventBus.$on('new-junction', this.getRoomData);
+    this.$eventBus.$on('power-rectifier-updated', this.getRoomData);
+    this.$eventBus.$on('new-plane-updated', this.getRoomData);
+    this.$eventBus.$on('new-battery-bank', this.getRoomData);
+    this.$eventBus.$on('new-room', this.getRoomData);
+    this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
+    this.$eventBus.$on('new-solar-panel', this.getRoomData);
+    this.$eventBus.$on('junction-measurements-updated', this.getRoomData);
+    this.$eventBus.$on('generator-set-capacities-updated', this.getRoomData);
+    this.$eventBus.$on('battery-autonomy', this.getRoomData);
+  },
+  mounted: function mounted() {
+    this.getRoomData();
+  },
+  watch: {
+    totalCapacityBatteries: function totalCapacityBatteries() {
+      this.record ? this.recordCapacities() : this.record = true;
+    },
+    planeTypeId: function planeTypeId(value) {},
+    isEditMode: function isEditMode(val) {
+      if (val == false) {
+        this.getPlanes(); // this.$eventBus.$emit('room-data')
+      }
+    }
+  },
   computed: {
+    canEditSurface: function canEditSurface() {
+      return this.canEditPowerRectifiers || this.canEditJunctions || this.canEditAirConditioners;
+    },
+    canEditDistribution: function canEditDistribution() {
+      return this.canEditPowerRectifiers || this.canEditJunctions || this.canEditAirConditioners;
+    },
     capacityData: function capacityData() {
       return [{
         "title": "Empalme",
@@ -403,7 +485,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     currentTabComponent: function currentTabComponent() {
       return this.currentTab;
     },
-    // Junctions
+    // ########################################### Junctions
     responsable: function responsable() {
       var area = 'Sin Información';
       var id = null; // if (this.generatorSets.length) {
@@ -434,10 +516,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'area': area
       };
     },
-    averageConsumptionPerPhotovoltaicGroup: function averageConsumptionPerPhotovoltaicGroup() {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
-      return 0;
-    },
+    // Total
     totalJunctionsCapacity: function totalJunctionsCapacity() {
       var _this = this;
 
@@ -451,35 +530,48 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       return sum;
     },
-    withoutBatteriesCapacity: function withoutBatteriesCapacity() {
+    // Used
+    totalUsedJunctionsCapacity: function totalUsedJunctionsCapacity() {
       var _this2 = this;
+
+      var punctualConsumption = 0;
+
+      if (this.junctions.length) {
+        Object.keys(this.junctions).forEach(function (element) {
+          if (_this2.junctions[element].latest_measurement) {
+            punctualConsumption += _this2.junctions[element].latest_measurement.punctual_consumption;
+          }
+        });
+      }
+
+      return this.withoutBatteriesCapacity + this.batteriesRecharge + punctualConsumption;
+    },
+    withoutBatteriesCapacity: function withoutBatteriesCapacity() {
+      var _this3 = this;
 
       var sum = 0;
 
       if (this.junctions.length) {
         Object.keys(this.junctions).forEach(function (element) {
-          sum = sum + _this2.powerUsedA(_this2.junctions[element]) + _this2.powerUsedB(_this2.junctions[element]) + _this2.averageConsumptionPerPhotovoltaicGroup;
+          sum = sum + _this3.powerUsedA(_this3.junctions[element]) + _this3.powerUsedB(_this3.junctions[element]) + _this3.averageConsumptionPerPhotovoltaicGroup;
         });
       }
 
       return sum;
     },
-    withoutBatteriesDisponibility: function withoutBatteriesDisponibility() {
-      return this.totalJunctionsCapacity - this.withoutBatteriesCapacity;
-    },
     batteriesRecharge: function batteriesRecharge() {
-      var _this3 = this;
+      var _this4 = this;
 
       var total = 0;
 
       if (this.pop) {
         Object.keys(this.pop.rooms).forEach(function (element) {
-          var room = _this3.pop.rooms[element];
+          var room = _this4.pop.rooms[element];
 
           if (room.power_rectifiers.length) {
             Object.keys(room.planes).forEach(function (item) {
               var roomPlane = room.planes[item];
-              total += _this3.batteryRechargePower(roomPlane);
+              total += _this4.batteryRechargePower(roomPlane);
             });
           }
         });
@@ -487,64 +579,36 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       return total;
     },
-    totalUsedJunctionsCapacity: function totalUsedJunctionsCapacity() {
-      var _this4 = this;
-
-      var punctualConsumption = 0;
-
-      if (this.junctions.length) {
-        Object.keys(this.junctions).forEach(function (element) {
-          if (_this4.junctions[element].latest_measurement) {
-            punctualConsumption += _this4.junctions[element].latest_measurement.punctual_consumption;
-          }
-        });
-      }
-
-      return this.withoutBatteriesCapacity + this.batteriesRecharge + punctualConsumption;
+    averageConsumptionPerPhotovoltaicGroup: function averageConsumptionPerPhotovoltaicGroup() {
+      return 0;
     },
+    // Available
     totalAvailableJunctionsCapacity: function totalAvailableJunctionsCapacity() {
       return this.totalJunctionsCapacity - this.totalUsedJunctionsCapacity;
     },
-    usagePercent: function usagePercent() {
-      return this.totalJunctionsCapacity != 0 ? this.totalUsedJunctionsCapacity / this.totalJunctionsCapacity : 0;
-    },
-    // Generator Sets
-    generatorSetsResponsable: function generatorSetsResponsable() {
+    // withoutBatteriesDisponibility() {
+    //     return this.totalJunctionsCapacity - this.withoutBatteriesCapacity
+    // },
+    // usagePercent() {
+    //     return this.totalJunctionsCapacity != 0 ? this.totalUsedJunctionsCapacity / this.totalJunctionsCapacity : 0
+    // },
+    // #######################################################
+    // ###################################### Generator Sets
+    //Total
+    totalGeneratorSetsCapacity: function totalGeneratorSetsCapacity() {
       var _this5 = this;
 
-      var area = 'Sin Información';
-      var id = null;
+      var total = 0;
 
-      if (this.generatorSets.length) {
+      if (this.generatorSetsResponsable.id == 1) {
+        total = this.totalGeneratorSetsCapacityA + this.totalGeneratorSetsCapacityB;
+      } else {
         Object.keys(this.generatorSets).forEach(function (element) {
-          if (_this5.generatorSets[element].current_generator_responsable) {
-            switch (_this5.generatorSets[element].current_generator_responsable.generator_set_responsable_area_id) {
-              case 1:
-                id = 1;
-                area = _this5.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area;
-                break;
-
-              case 2:
-                id = id == 1 ? id : 2;
-                arae = id == 1 ? area : _this5.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area;
-                break;
-
-              case 3:
-                id = id == 1 || id == 2 ? id : 3;
-                area = id == 1 || id == 2 ? area : _this5.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area;
-                break;
-
-              default:
-                break;
-            }
-          }
+          total = _this5.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? _this5.generatorSets[0].current_generator_set_corp_disponibility.total_capacity : total;
         });
       }
 
-      return {
-        'id': id,
-        'area': area
-      };
+      return total;
     },
     totalGeneratorSetsCapacityA: function totalGeneratorSetsCapacityA() {
       var _this6 = this;
@@ -606,49 +670,60 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       return sum;
     },
-    totalGeneratorSetsCapacity: function totalGeneratorSetsCapacity() {
+    generatorSetsResponsable: function generatorSetsResponsable() {
       var _this8 = this;
+
+      var area = 'Sin Información';
+      var id = null;
+
+      if (this.generatorSets.length) {
+        Object.keys(this.generatorSets).forEach(function (element) {
+          if (_this8.generatorSets[element].current_generator_responsable) {
+            switch (_this8.generatorSets[element].current_generator_responsable.generator_set_responsable_area_id) {
+              case 1:
+                id = 1;
+                area = _this8.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area;
+                break;
+
+              case 2:
+                id = id == 1 ? id : 2;
+                arae = id == 1 ? area : _this8.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area;
+                break;
+
+              case 3:
+                id = id == 1 || id == 2 ? id : 3;
+                area = id == 1 || id == 2 ? area : _this8.generatorSets[element].current_generator_responsable.generator_set_responsable_area.area;
+                break;
+
+              default:
+                break;
+            }
+          }
+        });
+      }
+
+      return {
+        'id': id,
+        'area': area
+      };
+    },
+    // Used
+    totalGeneratorSetsUsedCapacity: function totalGeneratorSetsUsedCapacity() {
+      var _this9 = this;
 
       var total = 0;
 
       if (this.generatorSetsResponsable.id == 1) {
-        total = this.totalGeneratorSetsCapacityA + this.totalGeneratorSetsCapacityB;
+        total = this.usedGeneratorSetsCapacityA + this.usedGeneratorSetsCapacityB;
       } else {
         Object.keys(this.generatorSets).forEach(function (element) {
-          total = _this8.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? _this8.generatorSets[0].current_generator_set_corp_disponibility.total_capacity : total;
+          total = _this9.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? _this9.generatorSets[0].current_generator_set_corp_disponibility.used_capacity : total;
         });
       }
 
       return total;
     },
     usedGeneratorSetsCapacityA: function usedGeneratorSetsCapacityA() {
-      var _this9 = this;
-
-      var sum = 0;
-
-      if (this.generatorSets.length) {
-        Object.keys(this.generatorSets).forEach(function (element) {
-          var usedCapacity = _this9.generatorSets[element].current_generator_set_capacity ? _this9.generatorSets[element].current_generator_set_capacity.used_capacity : 0;
-
-          switch (_this9.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-            case 2:
-              sum = sum + usedCapacity;
-              break;
-
-            case 3:
-              sum = _this9.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum;
-              break;
-
-            default:
-              break;
-          }
-        });
-      }
-
-      return sum;
-    },
-    usedGeneratorSetsCapacityB: function usedGeneratorSetsCapacityB() {
       var _this10 = this;
 
       var sum = 0;
@@ -660,11 +735,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           switch (_this10.generatorSets[element].generator_set_topology_type_id) {
             case 1:
             case 2:
-            default:
+              sum = sum + usedCapacity;
               break;
 
             case 3:
-              sum = _this10.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum;
+              sum = _this10.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum;
+              break;
+
+            default:
               break;
           }
         });
@@ -672,27 +750,31 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       return sum;
     },
-    totalGeneratorSetsUsedCapacity: function totalGeneratorSetsUsedCapacity() {
+    usedGeneratorSetsCapacityB: function usedGeneratorSetsCapacityB() {
       var _this11 = this;
 
-      var total = 0;
+      var sum = 0;
 
-      if (this.generatorSetsResponsable.id == 1) {
-        total = this.usedGeneratorSetsCapacityA + this.usedGeneratorSetsCapacityB;
-      } else {
+      if (this.generatorSets.length) {
         Object.keys(this.generatorSets).forEach(function (element) {
-          total = _this11.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? _this11.generatorSets[0].current_generator_set_corp_disponibility.used_capacity : total;
+          var usedCapacity = _this11.generatorSets[element].current_generator_set_capacity ? _this11.generatorSets[element].current_generator_set_capacity.used_capacity : 0;
+
+          switch (_this11.generatorSets[element].generator_set_topology_type_id) {
+            case 1:
+            case 2:
+            default:
+              break;
+
+            case 3:
+              sum = _this11.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum;
+              break;
+          }
         });
       }
 
-      return total;
+      return sum;
     },
-    availableGeneratorSetsCapacityA: function availableGeneratorSetsCapacityA() {
-      return this.totalGeneratorSetsCapacityA - this.usedGeneratorSetsCapacityA;
-    },
-    availableGeneratorSetsCapacityB: function availableGeneratorSetsCapacityB() {
-      return this.totalGeneratorSetsCapacityB - this.usedGeneratorSetsCapacityB;
-    },
+    // Available
     totalAvailableGeneratorSetsCapacity: function totalAvailableGeneratorSetsCapacity() {
       var _this12 = this;
 
@@ -708,90 +790,45 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       return total;
     },
-    // Power Rectifiers
-    planeType: function planeType() {
-      var _this13 = this;
-
-      var type = 'Sin Información';
-
-      switch (this.planeTypeId) {
-        case 1:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this13.planeTypes[item].id == 1 && type == 'Sin Información' ? _this13.planeTypes[item].type : type;
-          });
-          break;
-
-        case 2:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this13.planeTypes[item].id == 2 && type == 'Sin Información' ? _this13.planeTypes[item].type : type;
-          });
-          break;
-
-        case 3:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this13.planeTypes[item].id == 3 && type == 'Sin Información' ? _this13.planeTypes[item].type : type;
-          });
-          break;
-
-        case 4:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this13.planeTypes[item].id == 4 && type == 'Sin Información' ? _this13.planeTypes[item].type : type;
-          });
-          break;
-
-        case 5:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this13.planeTypes[item].id == 5 && type == 'Sin Información' ? _this13.planeTypes[item].type : type;
-          });
-          break;
-
-        case 6:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this13.planeTypes[item].id == 6 && type == 'Sin Información' ? _this13.planeTypes[item].type : type;
-          });
-          break;
-
-        case 7:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this13.planeTypes[item].id == 7 && type == 'Sin Información' ? _this13.planeTypes[item].type : type;
-          });
-          break;
-
-        case 8:
-          Object.keys(this.planeTypes).forEach(function (item) {
-            type = _this13.planeTypes[item].id == 8 && type == 'Sin Información' ? _this13.planeTypes[item].type : type;
-          });
-          break;
-
-        default:
-          break;
-      }
-
-      return type;
+    availableGeneratorSetsCapacityA: function availableGeneratorSetsCapacityA() {
+      return this.totalGeneratorSetsCapacityA - this.usedGeneratorSetsCapacityA;
     },
+    availableGeneratorSetsCapacityB: function availableGeneratorSetsCapacityB() {
+      return this.totalGeneratorSetsCapacityB - this.usedGeneratorSetsCapacityB;
+    },
+    // #######################################################
+    // ###################################### Power Rectifiers
+    // Total
     totalCapacityRoom: function totalCapacityRoom() {
-      var _this14 = this;
+      var _this13 = this;
 
       var realRoomCapacity = 0;
       Object.keys(this.planes).forEach(function (element) {
-        var plane = _this14.planes[element];
-        realRoomCapacity += _this14.realPlaneCapacity(plane);
-      });
-      this.totalPRCapacity = realRoomCapacity;
+        var plane = _this13.planes[element];
+        realRoomCapacity += _this13.realPlaneCapacity(plane);
+      }); // this.totalPRCapacity = realRoomCapacity
+
       return realRoomCapacity;
     },
+    // Used
     usedCapacityRoom: function usedCapacityRoom() {
-      var _this15 = this;
+      var _this14 = this;
 
       var usedRoomCapacity = 0;
       Object.keys(this.planes).forEach(function (element) {
-        var plane = _this15.planes[element];
-        usedRoomCapacity += _this15.totalPower(plane);
-      });
-      this.usedPRCapacity = usedRoomCapacity;
+        var plane = _this14.planes[element];
+        usedRoomCapacity += _this14.totalPower(plane);
+      }); // this.usedPRCapacity = usedRoomCapacity
+
       return usedRoomCapacity;
     },
-    // Climate
+    // #######################################################
+    // ############################################# Batteries
+    popAutonomy: function popAutonomy() {
+      return this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0;
+    },
+    // #######################################################
+    // ###################################### Air Conditioners
     totalClimateCapacity: function totalClimateCapacity() {
       return this.room.current_air_conditioner_capacity ? this.room.current_air_conditioner_capacity.total_capacity : 0;
     },
@@ -801,7 +838,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     totalAvailableClimateCapacity: function totalAvailableClimateCapacity() {
       return this.totalClimateCapacity - this.usedClimateCapacity;
     },
-    // Distribution
+    // #######################################################
+    // ########################################## Distribution
     totalDistributionCapacity: function totalDistributionCapacity() {
       return this.room.current_room_distribution ? this.room.current_room_distribution.total_capacity : 0;
     },
@@ -811,7 +849,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     availableDistributionCapacity: function availableDistributionCapacity() {
       return this.totalDistributionCapacity - this.usedDistributionCapacity;
     },
-    // Surface
+    // #######################################################
+    // ############################################### Surface
     totalSurface: function totalSurface() {
       return this.room.current_room_surface ? this.room.current_room_surface.total_surface : 0;
     },
@@ -821,17 +860,72 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     availableSurface: function availableSurface() {
       return this.totalSurface - this.usedSurface;
     },
+    // #######################################################
+    planeType: function planeType() {
+      var _this15 = this;
+
+      var type = 'Sin Información';
+
+      switch (this.planeTypeId) {
+        case 1:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 1 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        case 2:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 2 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        case 3:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 3 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        case 4:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 4 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        case 5:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 5 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        case 6:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 6 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        case 7:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 7 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        case 8:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 8 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        default:
+          break;
+      }
+
+      return type;
+    },
     // detectionType() {
     //     return this.room.fire_detections ? this.room.fire_detections[0].fire_detection_type.type : 'No tiene'
     // },
     // extinctionType() {
     //     return this.room.fire_detections && this.room.fire_detections[0].fire_extinction_type ? this.room.fire_detections[0].fire_extinction_type.type : 'No tiene'
-    // },
-    // canEditDistribution() {
-    //     return this.canEditAirConditioners && this.canEditPowerRectifiers
-    // },
-    // canEditSurface() {
-    //     return this.canEditAirConditioners && this.canEditPowerRectifiers
     // },
     // powerRectifierData() {
     //     return {
@@ -847,9 +941,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     //         'availableBatteryCapacity': this.availableBatteryCapacity
     //     }
     // },
-    popAutonomy: function popAutonomy() {
-      return this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0;
-    },
     thresholds: function thresholds() {
       return {
         'junctions': {
@@ -942,35 +1033,32 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'id': id,
         'name': name
       };
-    }
-  },
-  watch: {
-    planeTypeId: function planeTypeId(value) {},
-    isEditMode: function isEditMode(val) {
-      if (val == false) {
-        this.getPlanes(); // this.$eventBus.$emit('room-data')
+    },
+    conditionsToRecord: function conditionsToRecord() {
+      var reducer = function reducer(accumulator, currentValue) {
+        return accumulator + currentValue;
+      };
+
+      var currentCapacities = [];
+
+      if (this.room.current_room_capacity) {
+        currentCapacities = [Math.round(this.room.current_room_capacity.battery_autonomy, 3), Math.round(this.room.current_room_capacity.junction_total, 3), Math.round(this.room.current_room_capacity.junction_used, 3), Math.round(this.room.current_room_capacity.junction_available, 3), Math.round(this.room.current_room_capacity.generator_set_total, 3), Math.round(this.room.current_room_capacity.generator_set_used, 3), Math.round(this.room.current_room_capacity.generator_set_available, 3), Math.round(this.room.current_room_capacity.power_rectifier_total, 3), Math.round(this.room.current_room_capacity.power_rectifier_used, 3), Math.round(this.room.current_room_capacity.power_rectifier_available, 3), Math.round(this.room.current_room_capacity.battery_total, 3), Math.round(this.room.current_room_capacity.battery_used, 3), Math.round(this.room.current_room_capacity.battery_available, 3), Math.round(this.room.current_room_capacity.distribution_total, 3), Math.round(this.room.current_room_capacity.distribution_used, 3), Math.round(this.room.current_room_capacity.distribution_available, 3), Math.round(this.room.current_room_capacity.climate_total, 3), Math.round(this.room.current_room_capacity.climate_used, 3), Math.round(this.room.current_room_capacity.climate_available, 3), Math.round(this.room.current_room_capacity.surface_total, 3), Math.round(this.room.current_room_capacity.surface_used, 3), Math.round(this.room.current_room_capacity.surface_available, 3)];
       }
+
+      var newCapacities = [Math.round(this.pop.current_battery_bank_autonomy && this.pop.current_battery_bank_autonomy.theoretical, 3), Math.round(this.totalJunctionsCapacity, 3), Math.round(this.totalUsedJunctionsCapacity, 3), Math.round(this.totalAvailableJunctionsCapacity, 3), Math.round(this.totalGeneratorSetsCapacity, 3), Math.round(this.totalGeneratorSetsUsedCapacity, 3), Math.round(this.totalAvailableGeneratorSetsCapacity, 3), Math.round(this.totalCapacityRoom, 3), Math.round(this.usedCapacityRoom, 3), Math.round(this.availableCapacityRoom(this.room), 3), Math.round(this.totalCapacityBatteries(this.room), 3), Math.round(this.usedCapacityBatteries(this.room), 3), Math.round(this.availableCapacityBatteries(this.room), 3), Math.round(this.totalClimateCapacity, 3), Math.round(this.usedClimateCapacity, 3), Math.round(this.totalAvailableClimateCapacity, 3), Math.round(this.totalDistributionCapacity, 3), Math.round(this.usedDistributionCapacity, 3), Math.round(this.availableDistributionCapacity, 3), Math.round(this.totalSurface, 3), Math.round(this.usedSurface, 3), Math.round(this.availableSurface, 3)];
+      var sumCurrentCapacities = currentCapacities.length ? currentCapacities.reduce(reducer) : 0;
+      var sumNewCapacities = newCapacities.reduce(reducer);
+      console.log(this.room.current_room_capacity);
+
+      if (!this.room.current_room_capacity || this.room.current_room_capacity && sumCurrentCapacities != sumNewCapacities) {
+        return true;
+      }
+
+      return false;
     }
   },
-  created: function created() {
-    this.$eventBus.$on('room-data', this.getRoomData);
-    this.$eventBus.$on('room-distribution', this.getRoomData);
-    this.$eventBus.$on('room-surface', this.getRoomData);
-    this.$eventBus.$on('room-security', this.getRoomData);
-    this.$eventBus.$on('change-room', this.getRoomData);
-    this.$eventBus.$on('new-power-rectifier', this.getRoomData);
-    this.$eventBus.$on('new-junction', this.getRoomData);
-    this.$eventBus.$on('power-rectifier-updated', this.getRoomData);
-    this.$eventBus.$on('new-plane-updated', this.getRoomData);
-    this.$eventBus.$on('new-battery-bank', this.getRoomData);
-    this.$eventBus.$on('new-room', this.getRoomData);
-    this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
-    this.$eventBus.$on('new-solar-panel', this.getRoomData);
-  },
-  mounted: function mounted() {
-    this.getRoomData();
-  },
-  methods: (_methods = {
+  methods: {
+    // Getters
     getRoomData: function getRoomData() {
       var _this17 = this;
 
@@ -982,14 +1070,15 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
         _this17.getGeneratorSets();
 
+        _this17.getPlanes();
+
         _this17.getPlaneTypes();
 
         _this17.getAirConditioners();
 
-        _this17.getPlanes();
+        _this17.record ? _this17.recordCapacities() : _this17.record = true;
       });
     },
-    // Junctions
     getJunctions: function getJunctions() {
       var _this18 = this;
 
@@ -1001,6 +1090,77 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         console.log('Error al traer los datos de Empalmes: ' + error);
       }); // }
     },
+    getGeneratorSets: function getGeneratorSets() {
+      var _this19 = this;
+
+      axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
+        _this19.generatorSets = response.data.generatorSets;
+        _this19.canEditGeneratorSets = response.data.can;
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
+      });
+    },
+    getPlanes: function getPlanes() {
+      var _this20 = this;
+
+      axios.get("/api/roomPlanes/".concat(this.room.id, "?plane_delegation_type_id=").concat(this.planeTypeId)).then(function (response) {
+        _this20.planes = response.data.planes;
+        _this20.canEditPowerRectifiers = response.data.can ? response.data.can : false;
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Empalmes: ' + error);
+      });
+    },
+    getPlaneTypes: function getPlaneTypes() {
+      var _this21 = this;
+
+      axios.get("/api/planeTypes").then(function (response) {
+        _this21.planeTypes = response.data.planes;
+      });
+    },
+    getAirConditioners: function getAirConditioners() {
+      var _this22 = this;
+
+      axios.get("/api/airConditioners/".concat(this.pop.id)).then(function (response) {
+        _this22.airConditioners = response.data.airConditioner;
+        _this22.canEditAirConditioners = response.data.can;
+      })["catch"](function (error) {
+        console.log('Error al traer los datos de Empalmes: ' + error);
+      });
+    },
+    recordCapacities: function recordCapacities() {
+      if (this.conditionsToRecord) {
+        var params = {
+          'room_id': this.room.id,
+          'battery_autonomy': this.pop.current_battery_bank_autonomy && this.pop.current_battery_bank_autonomy.theoretical,
+          'junction_total': this.totalJunctionsCapacity,
+          'junction_used': this.totalUsedJunctionsCapacity,
+          'junction_available': this.totalAvailableJunctionsCapacity,
+          'generator_set_total': this.totalGeneratorSetsCapacity,
+          'generator_set_used': this.totalGeneratorSetsUsedCapacity,
+          'generator_set_available': this.totalAvailableGeneratorSetsCapacity,
+          'power_rectifier_total': this.totalCapacityRoom,
+          'power_rectifier_used': this.usedCapacityRoom,
+          'power_rectifier_available': this.availableCapacityRoom(this.room),
+          'battery_total': this.totalCapacityBatteries(this.room),
+          'battery_used': this.usedCapacityBatteries(this.room),
+          'battery_available': this.availableCapacityBatteries(this.room),
+          'climate_total': this.totalClimateCapacity,
+          'climate_used': this.usedClimateCapacity,
+          'climate_available': this.totalAvailableClimateCapacity,
+          'distribution_total': this.totalDistributionCapacity,
+          'distribution_used': this.usedDistributionCapacity,
+          'distribution_available': this.availableDistributionCapacity,
+          'surface_total': this.totalSurface,
+          'surface_used': this.usedSurface,
+          'surface_available': this.availableSurface
+        };
+        axios.post('/api/roomCapacities', params).then(function (response) {
+          console.log(response.data);
+        });
+      }
+    },
+    // ########################################### Junctions
+    // Total
     powerA: function powerA(junction) {
       var latestProtectionRA = junction.latest_protection ? junction.latest_protection.regulada_a : 0;
       var latestMeasureRA_V = junction.latest_measurement ? junction.latest_measurement.r_a_volt_measure : 0;
@@ -1020,6 +1180,19 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         return latestProtectionRB * 380 * Math.sqrt(3) / 1000;
       }
     },
+    photovoltaicCapacity: function photovoltaicCapacity(junction) {
+      var capacity = 0;
+
+      if (junction.solar_panels.length) {
+        Object.keys(junction.solar_panels).forEach(function (element) {
+          var panel = junction.solar_panels[element];
+          capacity = capacity + panel.unit_capacity * panel.quantity;
+        });
+      }
+
+      return capacity / 1000;
+    },
+    // Used
     powerUsedA: function powerUsedA(junction) {
       var latestMeasureRA_A = junction.latest_measurement ? junction.latest_measurement.r_a_amp_measure : 0;
       var latestMeasureSA_A = junction.latest_measurement ? junction.latest_measurement.s_a_amp_measure : 0;
@@ -1048,18 +1221,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         return (latestMeasureRB_A * latestMeasureRB_V + latestMeasureSB_A * latestMeasureSB_V + latestMeasureTB_A * latestMeasureTB_V) / 1000;
       }
     },
-    photovoltaicCapacity: function photovoltaicCapacity(junction) {
-      var capacity = 0;
-
-      if (junction.solar_panels.length) {
-        Object.keys(junction.solar_panels).forEach(function (element) {
-          var panel = junction.solar_panels[element];
-          capacity = capacity + panel.unit_capacity * panel.quantity;
-        });
-      }
-
-      return capacity / 1000;
-    },
     batteryRechargePower: function batteryRechargePower(plane) {
       return this.rechargeCurrent(plane) * plane.float_tension / 1000;
     },
@@ -1069,6 +1230,246 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         current += plane.battery_banks[item].capacity;
       });
       return plane.recharge_factor * current;
+    },
+    // #####################################################
+    // ###################################### Generator Sets
+    // No hay funciones
+    // #####################################################
+    // #################################### Power Rectifiers
+    realPlaneCapacity: function realPlaneCapacity(plane) {
+      var currentRedundantModules = plane.current_redundant_modules;
+      var currentRedundantModulesCapacity = currentRedundantModules ? currentRedundantModules.capacity * currentRedundantModules.quantity : 0;
+      return this.installedCapacity(plane) - currentRedundantModulesCapacity;
+    },
+    installedCapacity: function installedCapacity(plane) {
+      var capacity = 0;
+      Object.keys(plane.power_rectifiers).forEach(function (element) {
+        var pr = plane.power_rectifiers[element];
+        Object.keys(pr.power_rectifier_modules).forEach(function (item) {
+          capacity += pr.power_rectifier_modules[item].capacity;
+        });
+      });
+      return capacity;
+    },
+    totalPower: function totalPower(plane) {
+      return this.chargeRealPower(plane) + this.batteryRechargePower(plane);
+    },
+    //Available
+    availableCapacityRoom: function availableCapacityRoom(room) {
+      var _this23 = this;
+
+      var availableRoomCapacity = 10000000;
+      var availableRoomCapacityA = 10000000;
+      var availableRoomCapacityB = 10000000;
+      Object.keys(this.planes).forEach(function (element) {
+        var plane = _this23.planes[element];
+
+        if (room.current_room_delegation) {
+          switch (room.current_room_delegation.plane_delegation_type_id) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+              availableRoomCapacity = _this23.availablePlaneCapacity(plane);
+              break;
+
+            case 5:
+            case 6:
+              if (availableRoomCapacity > _this23.availablePlaneCapacity(plane)) {
+                availableRoomCapacity = _this23.availablePlaneCapacity(plane);
+              }
+
+              break;
+
+            case 7:
+              if (availableRoomCapacityA > _this23.availablePlaneCapacity(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                availableRoomCapacityA = _this23.availablePlaneCapacity(plane); // i++
+              }
+
+              if (availableRoomCapacityB > _this23.availablePlaneCapacity(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                availableRoomCapacityB = _this23.availablePlaneCapacity(plane);
+              }
+
+              availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB;
+              break;
+
+            case 8:
+            default:
+              break;
+          }
+        }
+      });
+      availableRoomCapacity = availableRoomCapacity < 10000000 ? availableRoomCapacity : 0;
+      this.availablePRCapacity = availableRoomCapacity;
+      return availableRoomCapacity;
+    },
+    availablePlaneCapacity: function availablePlaneCapacity(plane) {
+      return this.realPlaneCapacity(plane) - this.totalPower(plane);
+    },
+    // #####################################################
+    // ########################################### Batteries
+    // Total
+    totalCapacityBatteries: function totalCapacityBatteries(room) {
+      var capacity = 0;
+
+      if (room.planes) {
+        Object.keys(room.planes).forEach(function (element) {
+          var plane = room.planes[element];
+          Object.keys(plane.battery_banks).forEach(function (item) {
+            capacity += plane.battery_banks[item].capacity;
+          });
+        });
+      }
+
+      var total = capacity * 48 / 1000 / this.popAutonomy; // this.totalBatteryCapacity = total
+
+      return total;
+    },
+    // Used
+    usedCapacityBatteries: function usedCapacityBatteries(room) {
+      var _this24 = this;
+
+      var used = 0;
+
+      if (room.planes) {
+        Object.keys(room.planes).forEach(function (element) {
+          var plane = room.planes[element];
+          used += _this24.chargeRealPower(plane);
+        });
+      } // this.usedBatteryCapacity = used
+
+
+      return used;
+    },
+    chargeRealPower: function chargeRealPower(plane) {
+      return plane.float_tension * plane.current / 1000;
+    },
+    // Available
+    availableCapacityBatteries: function availableCapacityBatteries(room) {
+      var _this25 = this;
+
+      var original = 10000000;
+      var available = original;
+      var availableA = original;
+      var availableB = original;
+
+      if (room.planes && room.current_room_delegation) {
+        // Object.keys(room.planes).forEach(element => {
+        //     let plane = room.planes[element]
+        //     if(available > this.availableBatteryCapacityPlane(plane)) {
+        //         available = this.availableBatteryCapacityPlane(plane)
+        //     }
+        // })
+        Object.keys(room.planes).forEach(function (item) {
+          var plane = room.planes[item];
+
+          switch (room.current_room_delegation.plane_delegation_type_id) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+              available = _this25.availableBatteryCapacityPlane(plane);
+              break;
+
+            case 5:
+            case 6:
+              if (available > _this25.availableBatteryCapacityPlane(plane)) {
+                available = _this25.availableBatteryCapacityPlane(plane);
+              }
+
+              break;
+
+            case 7:
+              if (availableA > _this25.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
+                availableA = _this25.availableBatteryCapacityPlane(plane);
+              }
+
+              if (availableB > _this25.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
+                availableB = _this25.availableBatteryCapacityPlane(plane);
+              }
+
+              available = availableA + availableB;
+              break;
+
+            case 8:
+            default:
+              break;
+          }
+        });
+
+        switch (room.current_room_delegation.plane_delegation_type_id) {
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+            available = available;
+            break;
+
+          case 5:
+          case 6:
+          case 7:
+            available = available * 2;
+            break;
+
+          case 8:
+          default:
+            break;
+        }
+      }
+
+      var total = available < 10000000 ? available : 0;
+      this.availableBatteryCapacity = total;
+      return total;
+    },
+    availableBatteryCapacityPlane: function availableBatteryCapacityPlane(plane) {
+      return this.batteryTotalCapacityPlane(plane) - this.chargeRealPower(plane);
+    },
+    batteryTotalCapacityPlane: function batteryTotalCapacityPlane(plane) {
+      var capacity = 0;
+      Object.keys(plane.battery_banks).forEach(function (item) {
+        capacity += plane.battery_banks[item].capacity;
+      });
+      return capacity * 48 / 1000 / this.popAutonomy;
+    },
+    // #####################################################
+    // powerRectifierBelongsToPlane(powerRectifier, plane) {
+    //     let bool = false
+    //     // if (plane.power_rectifiers) {
+    //         Object.keys(plane.power_rectifiers).forEach(element => {
+    //             let pr = plane.power_rectifiers[element]
+    //             bool = pr.id == powerRectifier.id && !bool ? true : bool
+    //         })
+    //     // }
+    //     return bool
+    // },
+    // nominalCapacity(plane) {
+    //     let capacity = 0
+    //     Object.keys(plane.power_rectifiers).forEach(element => {
+    //         capacity += plane.power_rectifiers[element].capacity
+    //     })
+    //     return capacity
+    // },
+    // totalCurrent(plane) {
+    //     return plane.current + this.rechargeCurrent(plane)
+    // },
+    // usePercentPlane(plane) {
+    //     return this.totalPower(plane) / this.realPlaneCapacity(plane)
+    // },
+    hasPlanes: function hasPlanes(room) {
+      var _this26 = this;
+
+      var bool = false;
+
+      if (this.planes) {
+        Object.keys(this.planes).forEach(function (element) {
+          var plane = _this26.planes[element];
+          Object.keys(plane.rooms).forEach(function (item) {
+            bool = !bool ? plane.rooms[item].id == room.id : bool;
+          });
+        });
+      }
+
+      return bool;
     },
     powerRectifiersInRoom: function powerRectifiersInRoom(room) {
       var powerRectifiersInRoom = 0;
@@ -1082,308 +1483,45 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       return powerRectifiersInRoom;
     },
-    // Generator Sets
-    getGeneratorSets: function getGeneratorSets() {
-      var _this19 = this;
+    batteryBanksInRoom: function batteryBanksInRoom(room) {
+      var batteryBanks = 0;
 
-      axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
-        _this19.generatorSets = response.data.generatorSets;
-        _this19.canEditGeneratorGroups = response.data.can;
-      })["catch"](function (error) {
-        console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
-      });
-    },
-    // Power Rectifiers
-    getPlaneTypes: function getPlaneTypes() {
-      var _this20 = this;
-
-      axios.get("/api/planeTypes").then(function (response) {
-        _this20.planeTypes = response.data.planes;
-      });
-    },
-    hasPlanes: function hasPlanes(room) {
-      var _this21 = this;
-
-      var bool = false;
-
-      if (this.planes) {
-        Object.keys(this.planes).forEach(function (element) {
-          var plane = _this21.planes[element];
-          Object.keys(plane.rooms).forEach(function (item) {
-            bool = !bool ? plane.rooms[item].id == room.id : bool;
-          });
+      if (room.planes) {
+        Object.keys(room.planes).forEach(function (element) {
+          var plane = room.planes[element];
+          batteryBanks += plane.battery_banks.length;
         });
       }
 
-      return bool;
-    },
-    powerRectifierBelongsToPlane: function powerRectifierBelongsToPlane(powerRectifier, plane) {
-      var bool = false; // if (plane.power_rectifiers) {
-
-      Object.keys(plane.power_rectifiers).forEach(function (element) {
-        var pr = plane.power_rectifiers[element];
-        bool = pr.id == powerRectifier.id && !bool ? true : bool;
-      }); // }
-
-      return bool;
+      return batteryBanks;
     },
     hasAirConditioners: function hasAirConditioners(room) {
-      var _this22 = this;
+      var _this27 = this;
 
       var bool = false;
 
       if (this.airConditioners) {
         Object.keys(this.airConditioners).forEach(function (element) {
-          bool = !bool ? _this22.airConditioners[element].room_id == room.id : bool;
+          bool = !bool ? _this27.airConditioners[element].room_id == room.id : bool;
         });
       }
 
       return bool;
     },
-    getPlanes: function getPlanes() {
-      var _this23 = this;
+    roomName: function roomName(room_id) {
+      var _this28 = this;
 
-      axios.get("/api/roomPlanes/".concat(this.room.id, "?plane_delegation_type_id=").concat(this.planeTypeId)).then(function (response) {
-        _this23.planes = response.data.planes;
-        _this23.canEditPowerRectifiers = response.data.can ? response.data.can : false;
-      })["catch"](function (error) {
-        console.log('Error al traer los datos de Empalmes: ' + error);
-      });
-    },
-    getAirConditioners: function getAirConditioners() {
-      var _this24 = this;
+      var name = '';
 
-      axios.get("/api/airConditioners/".concat(this.pop.id)).then(function (response) {
-        // console.log(response.data)
-        _this24.airConditioners = response.data.airConditioner;
-        _this24.canEditAirConditioners = response.data.can;
-      })["catch"](function (error) {
-        console.log('Error al traer los datos de Empalmes: ' + error);
-      });
-    },
-    nominalCapacity: function nominalCapacity(plane) {
-      var capacity = 0;
-      Object.keys(plane.power_rectifiers).forEach(function (element) {
-        capacity += plane.power_rectifiers[element].capacity;
-      });
-      return capacity;
-    },
-    installedCapacity: function installedCapacity(plane) {
-      var capacity = 0;
-      Object.keys(plane.power_rectifiers).forEach(function (element) {
-        var pr = plane.power_rectifiers[element];
-        Object.keys(pr.power_rectifier_modules).forEach(function (item) {
-          capacity += pr.power_rectifier_modules[item].capacity;
+      if (this.pop) {
+        Object.keys(this.pop.rooms).forEach(function (element) {
+          name = _this28.pop.rooms[element].id == room_id ? _this28.pop.rooms[element].name : name;
         });
-      });
-      return capacity;
-    },
-    chargeRealPower: function chargeRealPower(plane) {
-      return plane.float_tension * plane.current / 1000;
-    }
-  }, _defineProperty(_methods, "rechargeCurrent", function rechargeCurrent(plane) {
-    var current = 0;
-    Object.keys(plane.battery_banks).forEach(function (item) {
-      current += plane.battery_banks[item].capacity;
-    });
-    return plane.recharge_factor * current;
-  }), _defineProperty(_methods, "batteryRechargePower", function batteryRechargePower(plane) {
-    return this.rechargeCurrent(plane) * plane.float_tension / 1000;
-  }), _defineProperty(_methods, "totalCurrent", function totalCurrent(plane) {
-    return plane.current + this.rechargeCurrent(plane);
-  }), _defineProperty(_methods, "totalPower", function totalPower(plane) {
-    return this.chargeRealPower(plane) + this.batteryRechargePower(plane);
-  }), _defineProperty(_methods, "realPlaneCapacity", function realPlaneCapacity(plane) {
-    var currentRedundantModules = plane.current_redundant_modules;
-    var currentRedundantModulesCapacity = currentRedundantModules ? currentRedundantModules.capacity * currentRedundantModules.quantity : 0;
-    return this.installedCapacity(plane) - currentRedundantModulesCapacity;
-  }), _defineProperty(_methods, "availablePlaneCapacity", function availablePlaneCapacity(plane) {
-    return this.realPlaneCapacity(plane) - this.totalPower(plane);
-  }), _defineProperty(_methods, "usePercentPlane", function usePercentPlane(plane) {
-    return this.totalPower(plane) / this.realPlaneCapacity(plane);
-  }), _defineProperty(_methods, "batteryTotalCapacityPlane", function batteryTotalCapacityPlane(plane) {
-    var capacity = 0;
-    Object.keys(plane.battery_banks).forEach(function (item) {
-      capacity += plane.battery_banks[item].capacity;
-    });
-    return capacity * 48 / 1000 / this.popAutonomy;
-  }), _defineProperty(_methods, "availableBatteryCapacityPlane", function availableBatteryCapacityPlane(plane) {
-    return this.batteryTotalCapacityPlane(plane) - this.chargeRealPower(plane);
-  }), _defineProperty(_methods, "availableCapacityRoom", function availableCapacityRoom(room) {
-    var _this25 = this;
-
-    var availableRoomCapacity = 10000000;
-    var availableRoomCapacityA = 10000000;
-    var availableRoomCapacityB = 10000000;
-    Object.keys(this.planes).forEach(function (element) {
-      var plane = _this25.planes[element];
-
-      if (room.current_room_delegation) {
-        switch (room.current_room_delegation.plane_delegation_type_id) {
-          case 1:
-          case 2:
-          case 3:
-          case 4:
-            availableRoomCapacity = _this25.availablePlaneCapacity(plane);
-            break;
-
-          case 5:
-          case 6:
-            if (availableRoomCapacity > _this25.availablePlaneCapacity(plane)) {
-              availableRoomCapacity = _this25.availablePlaneCapacity(plane);
-            }
-
-            break;
-
-          case 7:
-            if (availableRoomCapacityA > _this25.availablePlaneCapacity(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
-              availableRoomCapacityA = _this25.availablePlaneCapacity(plane); // i++
-            }
-
-            if (availableRoomCapacityB > _this25.availablePlaneCapacity(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
-              availableRoomCapacityB = _this25.availablePlaneCapacity(plane);
-            }
-
-            availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB;
-            break;
-
-          case 8:
-          default:
-            break;
-        }
       }
-    });
-    availableRoomCapacity = availableRoomCapacity < 10000000 ? availableRoomCapacity : 0;
-    this.availablePRCapacity = availableRoomCapacity;
-    return availableRoomCapacity;
-  }), _defineProperty(_methods, "batteryBanksInRoom", function batteryBanksInRoom(room) {
-    var batteryBanks = 0;
 
-    if (room.planes) {
-      Object.keys(room.planes).forEach(function (element) {
-        var plane = room.planes[element];
-        batteryBanks += plane.battery_banks.length;
-      });
+      return name;
     }
-
-    return batteryBanks;
-  }), _defineProperty(_methods, "totalCapacityBatteries", function totalCapacityBatteries(room) {
-    var capacity = 0;
-
-    if (room.planes) {
-      Object.keys(room.planes).forEach(function (element) {
-        var plane = room.planes[element];
-        Object.keys(plane.battery_banks).forEach(function (item) {
-          capacity += plane.battery_banks[item].capacity;
-        });
-      });
-    }
-
-    var total = capacity * 48 / 1000 / this.popAutonomy;
-    this.totalBatteryCapacity = total;
-    return total;
-  }), _defineProperty(_methods, "usedCapacityBatteries", function usedCapacityBatteries(room) {
-    var _this26 = this;
-
-    var used = 0;
-
-    if (room.planes) {
-      Object.keys(room.planes).forEach(function (element) {
-        var plane = room.planes[element];
-        used += _this26.chargeRealPower(plane);
-      });
-    }
-
-    this.usedBatteryCapacity = used;
-    return used;
-  }), _defineProperty(_methods, "availableCapacityBatteries", function availableCapacityBatteries(room) {
-    var _this27 = this;
-
-    var original = 10000000;
-    var available = original;
-    var availableA = original;
-    var availableB = original;
-
-    if (room.planes && room.current_room_delegation) {
-      // Object.keys(room.planes).forEach(element => {
-      //     let plane = room.planes[element]
-      //     if(available > this.availableBatteryCapacityPlane(plane)) {
-      //         available = this.availableBatteryCapacityPlane(plane)
-      //     }
-      // })
-      Object.keys(room.planes).forEach(function (item) {
-        var plane = room.planes[item];
-
-        switch (room.current_room_delegation.plane_delegation_type_id) {
-          case 1:
-          case 2:
-          case 3:
-          case 4:
-            available = _this27.availableBatteryCapacityPlane(plane);
-            break;
-
-          case 5:
-          case 6:
-            if (available > _this27.availableBatteryCapacityPlane(plane)) {
-              available = _this27.availableBatteryCapacityPlane(plane);
-            }
-
-            break;
-
-          case 7:
-            if (availableA > _this27.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 1 || plane.plane_type_id == 2)) {
-              availableA = _this27.availableBatteryCapacityPlane(plane);
-            }
-
-            if (availableB > _this27.availableBatteryCapacityPlane(plane) && (plane.plane_type_id == 3 || plane.plane_type_id == 4)) {
-              availableB = _this27.availableBatteryCapacityPlane(plane);
-            }
-
-            available = availableA + availableB;
-            break;
-
-          case 8:
-          default:
-            break;
-        }
-      });
-
-      switch (room.current_room_delegation.plane_delegation_type_id) {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-          available = available;
-          break;
-
-        case 5:
-        case 6:
-        case 7:
-          available = available * 2;
-          break;
-
-        case 8:
-        default:
-          break;
-      }
-    }
-
-    var total = available < 10000000 ? available : 0;
-    this.availableBatteryCapacity = total;
-    return total;
-  }), _defineProperty(_methods, "roomName", function roomName(room_id) {
-    var _this28 = this;
-
-    var name = '';
-
-    if (this.pop) {
-      Object.keys(this.pop.rooms).forEach(function (element) {
-        name = _this28.pop.rooms[element].id == room_id ? _this28.pop.rooms[element].name : name;
-      });
-    }
-
-    return name;
-  }), _methods),
+  },
   beforeDestroy: function beforeDestroy() {
     this.$eventBus.$off('room-data');
     this.$eventBus.$off('room-distribution');
@@ -1398,6 +1536,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$off('new-room');
     this.$eventBus.$off('air-conditioner-capacity');
     this.$eventBus.$off('new-solar-panel');
+    this.$eventBus.$off('battery-autonomy');
   }
 });
 
@@ -1569,39 +1708,76 @@ var render = function() {
           staticClass: "modal-card-head has-background-white has-text-centered"
         },
         [
-          _c("div", { staticClass: "columns modal-card-title" }, [
+          _c("div", { staticClass: "columns modal-card-title is-vcentered" }, [
             _c(
               "div",
               { staticClass: "column is-2" },
               [
                 _vm.previewRoom.id
                   ? _c(
-                      "b-tag",
-                      { attrs: { type: "is-link", size: "is-small" } },
+                      "router-link",
+                      {
+                        staticClass: "button is-link is-inverted",
+                        staticStyle: { height: "auto" },
+                        attrs: {
+                          to: "/capacity/" + _vm.previewRoom.id,
+                          type: "button"
+                        },
+                        nativeOn: {
+                          click: function($event) {
+                            _vm.record = false
+                            _vm.getRoomData()
+                          }
+                        }
+                      },
                       [
-                        _c(
-                          "router-link",
-                          {
-                            attrs: { to: "/capacity/" + _vm.previewRoom.id },
-                            nativeOn: {
-                              click: function($event) {
-                                return _vm.getRoomData()
+                        _c("div", { staticClass: "columns is-vcentered" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "column",
+                              staticStyle: {
+                                "padding-left": "8px",
+                                "padding-right": "5px"
                               }
-                            }
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "has-text-weight-semibold is-size-6 has-text-white"
-                              },
-                              [_vm._v(_vm._s(_vm.previewRoom.name))]
-                            )
-                          ]
-                        )
-                      ],
-                      1
+                            },
+                            [
+                              _vm._v("\n                             "),
+                              _c("br"),
+                              _c("font-awesome-icon", {
+                                attrs: {
+                                  icon: ["fas", "sort-up"],
+                                  rotation: "270"
+                                }
+                              }),
+                              _c("br"),
+                              _vm._v(" \n                        ")
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "column",
+                              staticStyle: {
+                                "padding-left": "5px",
+                                "padding-right": "8px"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-semibold is-size-6"
+                                },
+                                [_vm._v(_vm._s(_vm.previewRoom.name))]
+                              )
+                            ]
+                          )
+                        ])
+                      ]
                     )
                   : _vm._e()
               ],
@@ -1651,32 +1827,69 @@ var render = function() {
               [
                 _vm.nextRoom.id
                   ? _c(
-                      "b-tag",
-                      { attrs: { type: "is-link", size: "is-small" } },
+                      "router-link",
+                      {
+                        staticClass: "button is-link is-inverted",
+                        staticStyle: { height: "auto" },
+                        attrs: {
+                          to: "/capacity/" + _vm.nextRoom.id,
+                          type: "button"
+                        },
+                        nativeOn: {
+                          click: function($event) {
+                            _vm.record = false
+                            _vm.getRoomData()
+                          }
+                        }
+                      },
                       [
-                        _c(
-                          "router-link",
-                          {
-                            attrs: { to: "/capacity/" + _vm.nextRoom.id },
-                            nativeOn: {
-                              click: function($event) {
-                                return _vm.getRoomData()
+                        _c("div", { staticClass: "columns is-vcentered" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "column",
+                              staticStyle: {
+                                "padding-left": "8px",
+                                "padding-right": "5px"
                               }
-                            }
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "has-text-weight-semibold is-size-6 has-text-white"
-                              },
-                              [_vm._v(_vm._s(_vm.nextRoom.name))]
-                            )
-                          ]
-                        )
-                      ],
-                      1
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "has-text-weight-semibold is-size-6"
+                                },
+                                [_vm._v(_vm._s(_vm.nextRoom.name))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "column",
+                              staticStyle: {
+                                "padding-left": "5px",
+                                "padding-right": "8px"
+                              }
+                            },
+                            [
+                              _vm._v("\n                             "),
+                              _c("br"),
+                              _c("font-awesome-icon", {
+                                attrs: {
+                                  icon: ["fas", "sort-up"],
+                                  rotation: "90"
+                                }
+                              }),
+                              _c("br"),
+                              _vm._v(" \n                        ")
+                            ],
+                            1
+                          )
+                        ])
+                      ]
                     )
                   : _vm._e()
               ],
@@ -1870,7 +2083,48 @@ var render = function() {
                       attrs: {
                         user: _vm.user,
                         room: _vm.room,
-                        pop: _vm.room.pop
+                        junctions: _vm.junctions,
+                        generatorSets: _vm.generatorSets,
+                        planes: _vm.planes,
+                        planeTypes: _vm.planeTypes,
+                        airConditioners: _vm.airConditioners,
+                        canEditJunctions: _vm.canEditJunctions,
+                        canEditGeneratorSets: _vm.canEditGeneratorSets,
+                        canEditPowerRectifiers: _vm.canEditPowerRectifiers,
+                        canEditAirConditioners: _vm.canEditAirConditioners,
+                        canEditSurface: _vm.canEditSurface,
+                        canEditDistribution: _vm.canEditDistribution,
+                        totalJunctionsCapacity: _vm.totalJunctionsCapacity,
+                        totalUsedJunctionsCapacity:
+                          _vm.totalUsedJunctionsCapacity,
+                        totalAvailableJunctionsCapacity:
+                          _vm.totalAvailableJunctionsCapacity,
+                        totalGeneratorSetsCapacity:
+                          _vm.totalGeneratorSetsCapacity,
+                        totalGeneratorSetsUsedCapacity:
+                          _vm.totalGeneratorSetsUsedCapacity,
+                        totalAvailableGeneratorSetsCapacity:
+                          _vm.totalAvailableGeneratorSetsCapacity,
+                        totalGeneratorSetsCapacityA:
+                          _vm.totalGeneratorSetsCapacityA,
+                        totalGeneratorSetsCapacityB:
+                          _vm.totalGeneratorSetsCapacityB,
+                        usedGeneratorSetsCapacityA:
+                          _vm.usedGeneratorSetsCapacityA,
+                        usedGeneratorSetsCapacityB:
+                          _vm.usedGeneratorSetsCapacityB,
+                        availableGeneratorSetsCapacityA:
+                          _vm.availableGeneratorSetsCapacityA,
+                        availableGeneratorSetsCapacityB:
+                          _vm.availableGeneratorSetsCapacityB,
+                        totalSurface: _vm.totalSurface,
+                        usedSurface: _vm.usedSurface,
+                        availableSurface: _vm.availableSurface,
+                        totalDistributionCapacity:
+                          _vm.totalDistributionCapacity,
+                        usedDistributionCapacity: _vm.usedDistributionCapacity,
+                        availableDistributionCapacity:
+                          _vm.availableDistributionCapacity
                       }
                     })
                   ],

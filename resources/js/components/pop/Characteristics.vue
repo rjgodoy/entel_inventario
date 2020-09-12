@@ -6,12 +6,12 @@
                 <!-- <div class=""> -->
                     <div class="column tile is-parent is-vertical" style="padding: 0px 24px 24px 24px;">
                         <div class="has-text-weight-bold is-size-5 has-text-left tile" style="padding-bottom: 24px;">CARACTERISTICAS NEGOCIO</div>
-                        <div class="tile is-child">
+                        <div class="">
 
-                            <div class="" style="padding: 10px;">
+                            <div class="" style="padding-left: 8px; padding-bottom: 16px">
                                 <div class="is-size-5 title has-text-weight-semibold has-text-grey-dark">Negocio Fijo</div>
 
-                                <div class="field" v-if="!isEditMode">
+                                <div class="field" style="padding-top: 0px; padding-bottom: 0px" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="pe_3g ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="pe_3g ? 'has-text-eco' : 'has-text-grey-light'"
@@ -76,7 +76,6 @@
                                     />
                                     <label :class="bafi ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">Banda Ancha Fija Inalámbrica (BAFI)</label>
                                 </div>
-
                             </div>
                         </div>
                     <!-- </div> -->
@@ -84,9 +83,8 @@
                         <!-- <hr/> -->
 
                     <!-- <div class="column tile is-parent"> -->
-                        <div class="tile is-child">
-                            
-                            <div class="" style="padding: 10px;">
+                        <div class="">
+                            <div class="" style="padding-left: 8px; padding-bottom: 0px; padding-top: 16px;">
                                 <div class="is-size-5 title has-text-weight-semibold has-text-grey-dark">Negocio Movil</div>
                                 <div class="field">
                                     <font-awesome-icon 
@@ -154,19 +152,18 @@
                                 <div class="field" v-if="isEditMode">
                                     <b-checkbox :value="ranco" @input="updateParameter('ranco', ranco)"><div class="is-size-6">RAN Consolidado (RANCO)</div></b-checkbox>
                                 </div>
-
                             </div>
                         </div>
                     <!-- </div> -->
 
-                        <hr/>
+                        <div class="is-divider is-light is-paddingless" />
 
                     <!-- <div class="column tile is-parent"> -->
                         <!-- <div class="has-text-weight-bold has-text-dark is-size-5 has-text-left tile" style="padding-bottom: 24px;">CARACTERISTICAS INFRAESTRUCTURA</div> -->
-                        <div class="tile is-child">
+                        <div class="">
 
                             <div class="is-size-5 title has-text-weight-semibold has-text-grey-dark">CARACTERISTICAS INFRAESTRUCTURA</div>
-                            <div class="" style="padding: 10px;">
+                            <div class="" style="padding-left: 8px;">
                                 
                                 <div class="field" v-if="!isEditMode">
                                     <div class="has-text-weight-semibold is-size-6">Sistema de energía</div>

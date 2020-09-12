@@ -1,7 +1,7 @@
 <template>
     <div class="modal-card">
         <header class="modal-card-head has-text-centered" style="background: rgba(255,255,255,0);">
-            <p class="modal-card-title has-text-white has-text-weight-bold">SUPERFICIE</p>
+            <p class="modal-card-title has-text-white has-text-weight-bold">EQUIPOS SEGURIDAD</p>
         </header>
         <section class="modal-card-body" style="background: rgba(255,255,255,0);">
             <section class="section is-paddingless">

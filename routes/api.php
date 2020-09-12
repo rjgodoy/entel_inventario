@@ -32,6 +32,7 @@ Route::middleware('auth:api')->group(function () {
 	### CAPACITY PLANNING ######################################################################
 	Route::group(['middleware' => 'role:developer,admin,engineer,engineer-admin,super-viewer'], function() {
 		Route::apiResource('rooms','Api\RoomController');
+		Route::apiResource('roomCapacities', 'Api\RoomCapacityController');
 
 		Route::get('capacityProjection','Api\RoomController@projection');
 

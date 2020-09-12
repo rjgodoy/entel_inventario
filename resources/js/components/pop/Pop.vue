@@ -289,10 +289,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle)
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
@@ -300,6 +300,7 @@
             Characteristics: () => import(/* webpackChunkName: "chunks/pop/characteristics"*/'./Characteristics'),
             // CharacteristicsSide: () => import(/* webpackChunkName: "chunks/pop/characteristicsSide"*/'./CharacteristicsSide'),
             Layout: () => import(/* webpackChunkName: "chunks/pop/layout/layout"*/'./layout/Layout'),
+            Vision: () => import(/* webpackChunkName: "chunks/pop/vision"*/'./Vision'),
             Power: () => import(/* webpackChunkName: "chunks/pop/power/power"*/'./power/Power'),
             Climate: () => import(/* webpackChunkName: "chunks/pop/climate/climate"*/'./climate/Climate'),
             Infrastructure: () => import(/* webpackChunkName: "chunks/pop/infrastructure/infrastructure"*/'./infrastructure/Infrastructure'),
@@ -581,6 +582,9 @@
 
             showTab(tab) {
                 if (tab.component == 'layout' && this.popCritical == 0) {
+                    return false
+                }
+                if (tab.component == 'vision' && this.pop.id != 42) {
                     return false
                 }
                 return true

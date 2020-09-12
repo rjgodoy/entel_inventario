@@ -86,6 +86,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalNewSolarPanel: function ModalNewSolarPanel() {
@@ -140,8 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var panels = [];
       Object.keys(this.junctions).forEach(function (element) {
-        console.log(_this2.junctions[element].solar_panels.length);
-
+        // console.log(this.junctions[element].solar_panels.length)
         if (_this2.junctions[element].solar_panels.length) {
           Object.keys(_this2.junctions[element].solar_panels).forEach(function (element) {
             panels.push(_this2.junctions[element].solar_panels);
@@ -174,7 +185,19 @@ var render = function() {
     "div",
     { staticClass: "tile is-parent" },
     [
-      _c("section", { staticClass: "tile box" }, [
+      _c("section", { staticClass: "tile box has-background" }, [
+        _c(
+          "div",
+          { staticClass: "is-box-background is-transparent-light" },
+          [
+            _c("font-awesome-icon", {
+              staticClass: "is-pulled-right",
+              attrs: { icon: ["fas", "solar-panel"], size: "10x" }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "tile is-vertical" }, [
           _c("div", { staticClass: "columns" }, [
             _vm._m(0),
@@ -225,7 +248,23 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Agregar Paneles Solares")]
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "media" },
+                          [
+                            _c("font-awesome-icon", {
+                              staticClass: "media-left",
+                              attrs: { icon: ["fas", "plus"] }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "media-content" }, [
+                              _c("h3", [_vm._v("Nuevos Paneles Solares")])
+                            ])
+                          ],
+                          1
+                        )
+                      ]
                     )
                   ],
                   1
@@ -331,14 +370,38 @@ var render = function() {
                                 "a",
                                 {
                                   staticClass:
-                                    "box tile is-dark is-bold has-text-warning",
+                                    "box tile is-dark is-bold has-text-warning has-background",
                                   on: {
                                     click: function($event) {
                                       _vm.isJunctionModalActive = true
                                     }
                                   }
                                 },
-                                [_vm._m(1, true)]
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-box-background is-transparent"
+                                    },
+                                    [
+                                      _c("font-awesome-icon", {
+                                        staticClass: "is-pulled-right",
+                                        staticStyle: {
+                                          "margin-top": "-10px",
+                                          "margin-right": "15px"
+                                        },
+                                        attrs: {
+                                          icon: ["fas", "solar-panel"],
+                                          size: "4x"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(1, true)
+                                ]
                               )
                             ]
                           )
@@ -419,7 +482,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass:
-            "has-text-centered has-text-weight-light has-text-grey is-size-7"
+            "has-text-centered has-text-weight-light has-text-grey is-size-6"
         },
         [
           _c("div", { staticClass: "block" }, [

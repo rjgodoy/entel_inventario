@@ -5,30 +5,39 @@
         </div>
 
         <div class="columns">
-            <div class="column is-4">
+            <!-- <div class="column is-4">
                 <div class="box">
                     <div class="has-text-centered has-text-dark is-size-5" style="padding-bottom: 20px;">Estado actual (%)</div>
-                    <!-- <capacity-chart
+                    <capacity-chart
                         :actualData="actualData"
-                    /> -->
-                    <!-- <polar-area-chart :width="400" :height="150"
+                    />
+                    <polar-area-chart :width="400" :height="150"
                         v-if="loaded"
                         :chart-data="chartData"
                         :options="options"
-                    ></polar-area-chart> -->
+                    ></polar-area-chart>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="column box is-dark is-bold">
-                <RoomLights 
-                    :room=room
-                    :user=user
-                />
+            <div class="column is-6">
+                <div class="box is-dark is-bold">
+                    <RoomLights 
+                        :room=room
+                        :user=user
+                    />
 
-                <div class="columns">
-                    <div class="column">
-                        <div class="box">
-                            <GaugeChart />
+                    <div class="columns">
+                        <div class="column">
+                            <div class="box">
+                                <GaugeChart 
+                                    :totalEnergy="totalEnergy"
+                                    :totalClimate="totalClimate"
+                                    :totalSurface="totalSurface"
+                                    :availableEnergy="availableEnergy"
+                                    :availableClimate="availableClimate"
+                                    :availableSurface="availableSurface"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,59 +57,33 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 library.add(faCircle);
 
 var numeral = require('numeral');
-import PolarAreaChart from '../../../constants/chartJs/PolarAreaChart.js'
-import CapacityChart from '../CapacityChart'
-import GaugeChart from '../GaugeChart'
 
 export default {
     components: {
         RoomLights: () => import(/* webpackChunkName: "chunks/capacity/roomLights"*/'../RoomLights'),
-        PolarAreaChart,
-        CapacityChart,
-        GaugeChart
+        GaugeChart: () => import(/* webpackChunkName: "chunks/capacity/gaugeChart"*/'../GaugeChart'),
     },
 
     props : [ 
-        // 'actualData', 
+        'totalEnergy',
+        'totalClimate',
+        'totalSurface',
+        'availableEnergy',
+        'availableClimate',
+        'availableSurface',
         'user', 
         'room'
     ],
 
     data() {
         return {
-            energy: 15,
-            climate: 5,
-            space: 6,
-            loaded: false,
-            chartData: [],
-            options: {
-                responsive: true,
-                legend: {
-                    position: 'right',
-                },
-                // title: {
-                //     display: true,
-                //     text: 'Chart.js Polar Area Chart'
-                // },
-                scale: {
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    reverse: false
-                },
-                animation: {
-                    animateRotate: false,
-                    animateScale: true
-                }
-            }
-
+            totalE: null,
+            totalC: null,
+            totalS: null,
+            availableE: null,
+            availableC: null,
+            availableS: null,
         }
-    },
-
-    watch: {
-        data() {
-            this.fillData()
-        },
     },
 
     computed: {
@@ -113,42 +96,40 @@ export default {
         }
     },
 
-    async mounted() {
-        this.fillData()
+    watch: {
+        totalEnergy(val){
+            // console.log(val)
+            this.totalE = val
+        },
+
+        totalClimate(val){
+            // console.log(val)
+            this.totalC = val
+        },
+
+        totalSurface(val){
+            // console.log(val)
+            this.totalS = val
+        },
+
+        availableEnergy(val){
+            // console.log(val)
+            this.availableE = val
+        },
+
+        availableClimate(val){
+            // console.log(val)
+            this.availableC = val
+        },
+
+        availableSurface(val){
+            // console.log(val)
+            this.availableS = val
+        },
+
     },
 
     methods: {
-        fillData() {
-            this.loaded = false
-
-            this.chartData = {
-                labels: ['Empalme', 'Generador', 'Rectificador', 'Baterías', 'Distribucion', 'Clima', 'Espacio'],
-                datasets: [{
-                    data: [
-                        // this.actualData.junction ? numeral((1 - this.actualData.junction) * 100).format('0,0') : null,
-                        // this.actualData.generator ? numeral((1 - this.actualData.generator) * 100).format('0,0') : null,
-                        // this.actualData.rectifier ? numeral((1 - this.actualData.rectifier) * 100).format('0,0') : null,
-                        // this.actualData.battery ? numeral((1 - this.actualData.battery) * 100).format('0,0') : null,
-                        // this.actualData.distribution ? numeral((1 - this.actualData.distribution) * 100).format('0,0') : null,
-                        // this.actualData.climate ? numeral((1 - this.actualData.climate) * 100).format('0,0') : null,
-                        // this.actualData.space ? numeral((1 - this.actualData.space) * 100).format('0,0') : null,
-                    ],
-                    backgroundColor: [
-                        'rgba(102, 183, 220, 0.5)',
-                        'rgba(104, 148, 220, 0.5)',
-                        'rgba(104, 113, 220, 0.5)',
-                        'rgba(118, 103, 220, 0.5)',
-                        'rgba(163, 103, 220, 0.5)',
-                        'rgba(199, 103, 220, 0.5)',
-                        'rgba(220, 103, 206, 0.5)',
-                    ],
-                    // label: 'My dataset' // for legend
-                }],
-                labels: ['Empalme', 'Generador', 'Rectificador', 'Baterías', 'Distribucion', 'Clima', 'Espacio'],
-            }
-
-            this.loaded = true
-        }
     }
 }
 </script>

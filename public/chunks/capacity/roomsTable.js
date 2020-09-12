@@ -73,7 +73,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     RoomLights: function RoomLights() {
-      return Promise.all(/*! import() | chunks/capacity/roomLights */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/capacity/roomLights~chunks/dashbo~0a787395"), __webpack_require__.e("chunks/capacity/roomLights")]).then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
+      return __webpack_require__.e(/*! import() | chunks/capacity/roomLights */ "chunks/capacity/roomLights").then(__webpack_require__.bind(null, /*! ./RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
     }
   },
   props: ['user', 'roomsData'],

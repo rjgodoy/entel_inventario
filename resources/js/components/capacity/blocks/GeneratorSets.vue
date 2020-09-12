@@ -1,6 +1,10 @@
 <template>
     <div class="tile is-parent">
-        <section class="tile box">
+        <section class="tile box has-background">
+            <div class="is-box-background is-transparent-light">
+                <font-awesome-icon :icon="['fas', 'charging-station']" size="10x" class="is-pulled-right" style=""/>
+            </div>
+
             <div class="tile is-vertical">
 
                 <div class="columns">
@@ -12,8 +16,14 @@
                             <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
                                 <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
                             </button>
-
-                            <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewGeneratorSetModalActive = true">Agregar Grupo Electrógeno</b-dropdown-item>
+                            <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewGeneratorSetModalActive = true">
+                                <div class="media">
+                                    <font-awesome-icon class="media-left" :icon="['fas', 'plus']" />
+                                    <div class="media-content">
+                                        <h3>Nuevo Grupo Electrógeno</h3>
+                                    </div>
+                                </div>
+                            </b-dropdown-item>
                         </b-dropdown>
                     </div>
                 </div>
@@ -83,8 +93,11 @@
                     <div class="tile is-parent">
                         <div class="columns tile is-multiline">
                             <div class="column tile is-parent is-6" v-for="generatorSet in generatorSets" :key="generatorSet.id">
-                                <a class="tile box is-dark is-bold has-text-warning" 
+                                <a class="tile box is-dark is-bold has-text-warning has-background" 
                                     @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
+                                    <div class="is-box-background is-transparent">
+                                        <font-awesome-icon :icon="['fas', 'charging-station']" size="4x" class="is-pulled-right" style="margin-top: -10px; margin-right: 15px"/>
+                                    </div>
                                     <div class="columns">
                                         <div class="column">
                                             <div class="has-text-weight-semibold is-size-6">Grupo Electrógeno</div>
@@ -130,10 +143,19 @@
         },
 
         props : [
-            'generatorSets',
             'can',
             'user',
-            'pop'
+            'pop',
+            'generatorSets',
+            'totalGeneratorSetsCapacity',
+            'totalGeneratorSetsUsedCapacity',
+            'totalAvailableGeneratorSetsCapacity',
+            'totalGeneratorSetsCapacityA',
+            'totalGeneratorSetsCapacityB',
+            'usedGeneratorSetsCapacityA',
+            'usedGeneratorSetsCapacityB',
+            'availableGeneratorSetsCapacityA',
+            'availableGeneratorSetsCapacityB'
         ],
 
         data() {
@@ -177,139 +199,139 @@
                 }
             },
 
-            totalGeneratorSetsCapacityA() {
-                let sum = 0; let res = 0; let div = 1; 
-                if (this.generatorSets.length) {
-                    Object.keys(this.generatorSets).forEach(element => {
-                        let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
-                        let capacity = primeCapacity * 0.8
+            // totalGeneratorSetsCapacityA() {
+            //     let sum = 0; let res = 0; let div = 1; 
+            //     if (this.generatorSets.length) {
+            //         Object.keys(this.generatorSets).forEach(element => {
+            //             let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
+            //             let capacity = primeCapacity * 0.8
 
-                        switch(this.generatorSets[element].generator_set_topology_type_id) {
-                            case 1:
-                                sum = sum + capacity
-                                break
-                            case 2:
-                                sum = sum + capacity
-                                res = res + capacity
-                                div = div++
-                                break
-                            case 3:
-                                sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum
-                                break
-                            default:
-                                break
-                        }
-                    })
-                }
-                return sum - (res / div)
-            },
+            //             switch(this.generatorSets[element].generator_set_topology_type_id) {
+            //                 case 1:
+            //                     sum = sum + capacity
+            //                     break
+            //                 case 2:
+            //                     sum = sum + capacity
+            //                     res = res + capacity
+            //                     div = div++
+            //                     break
+            //                 case 3:
+            //                     sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum
+            //                     break
+            //                 default:
+            //                     break
+            //             }
+            //         })
+            //     }
+            //     return sum - (res / div)
+            // },
 
-            totalGeneratorSetsCapacityB() {
-                let sum = 0
-                if (this.generatorSets.length) {
-                    Object.keys(this.generatorSets).forEach(element => {
-                        let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
-                        let capacity = primeCapacity * 0.8
+            // totalGeneratorSetsCapacityB() {
+            //     let sum = 0
+            //     if (this.generatorSets.length) {
+            //         Object.keys(this.generatorSets).forEach(element => {
+            //             let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
+            //             let capacity = primeCapacity * 0.8
 
-                        switch(this.generatorSets[element].generator_set_topology_type_id) {
-                            case 1:
-                            case 2:
-                            default:
-                                break
-                            case 3:
-                                sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum
-                                break
-                        }
-                    })
-                }
-                return sum
-            },
+            //             switch(this.generatorSets[element].generator_set_topology_type_id) {
+            //                 case 1:
+            //                 case 2:
+            //                 default:
+            //                     break
+            //                 case 3:
+            //                     sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum
+            //                     break
+            //             }
+            //         })
+            //     }
+            //     return sum
+            // },
 
-            totalGeneratorSetsCapacity() {
-                var total = 0
-                if (this.generatorSetsResponsable.id == 1) {
-                    total = this.totalGeneratorSetsCapacityA + this.totalGeneratorSetsCapacityB
-                } else {
-                    Object.keys(this.generatorSets).forEach(element => {
-                        total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.total_capacity : total
-                    })
-                }
-                return total
-            },
+            // totalGeneratorSetsCapacity() {
+            //     var total = 0
+            //     if (this.generatorSetsResponsable.id == 1) {
+            //         total = this.totalGeneratorSetsCapacityA + this.totalGeneratorSetsCapacityB
+            //     } else {
+            //         Object.keys(this.generatorSets).forEach(element => {
+            //             total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.total_capacity : total
+            //         })
+            //     }
+            //     return total
+            // },
 
-            usedGeneratorSetsCapacityA() {
-                let sum = 0
-                if (this.generatorSets.length) {
-                    Object.keys(this.generatorSets).forEach(element => {
-                        let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
+            // usedGeneratorSetsCapacityA() {
+            //     let sum = 0
+            //     if (this.generatorSets.length) {
+            //         Object.keys(this.generatorSets).forEach(element => {
+            //             let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
 
-                        switch(this.generatorSets[element].generator_set_topology_type_id) {
-                            case 1:
-                            case 2:
-                                sum = sum + usedCapacity
-                                break
-                            case 3:
-                                sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum
-                                break
-                            default:
-                                break
-                        }
-                    })
-                }
-                return sum
-            },
+            //             switch(this.generatorSets[element].generator_set_topology_type_id) {
+            //                 case 1:
+            //                 case 2:
+            //                     sum = sum + usedCapacity
+            //                     break
+            //                 case 3:
+            //                     sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum
+            //                     break
+            //                 default:
+            //                     break
+            //             }
+            //         })
+            //     }
+            //     return sum
+            // },
 
-            usedGeneratorSetsCapacityB() {
-                let sum = 0
-                if (this.generatorSets.length) {
-                    Object.keys(this.generatorSets).forEach(element => {
-                        let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
+            // usedGeneratorSetsCapacityB() {
+            //     let sum = 0
+            //     if (this.generatorSets.length) {
+            //         Object.keys(this.generatorSets).forEach(element => {
+            //             let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
 
-                        switch(this.generatorSets[element].generator_set_topology_type_id) {
-                            case 1:
-                            case 2:
-                            default:
-                                break
-                            case 3:
-                                sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum
-                                break
-                        }
-                    })
-                }
-                return sum
-            },
+            //             switch(this.generatorSets[element].generator_set_topology_type_id) {
+            //                 case 1:
+            //                 case 2:
+            //                 default:
+            //                     break
+            //                 case 3:
+            //                     sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum
+            //                     break
+            //             }
+            //         })
+            //     }
+            //     return sum
+            // },
 
-            totalGeneratorSetsUsedCapacity() {
-                var total = 0
-                if (this.generatorSetsResponsable.id == 1) {
-                    total = this.usedGeneratorSetsCapacityA + this.usedGeneratorSetsCapacityB
-                } else {
-                    Object.keys(this.generatorSets).forEach(element => {
-                        total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.used_capacity : total
-                    })
-                }
-                return total
-            },
+            // totalGeneratorSetsUsedCapacity() {
+            //     var total = 0
+            //     if (this.generatorSetsResponsable.id == 1) {
+            //         total = this.usedGeneratorSetsCapacityA + this.usedGeneratorSetsCapacityB
+            //     } else {
+            //         Object.keys(this.generatorSets).forEach(element => {
+            //             total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.used_capacity : total
+            //         })
+            //     }
+            //     return total
+            // },
 
-            availableGeneratorSetsCapacityA() {
-                return this.totalGeneratorSetsCapacityA - this.usedGeneratorSetsCapacityA
-            },
+            // availableGeneratorSetsCapacityA() {
+            //     return this.totalGeneratorSetsCapacityA - this.usedGeneratorSetsCapacityA
+            // },
 
-            availableGeneratorSetsCapacityB() {
-                return this.totalGeneratorSetsCapacityB - this.usedGeneratorSetsCapacityB
-            },
+            // availableGeneratorSetsCapacityB() {
+            //     return this.totalGeneratorSetsCapacityB - this.usedGeneratorSetsCapacityB
+            // },
 
-            totalAvailableGeneratorSetsCapacity() {
-                var total = 0
-                if (this.generatorSetsResponsable.id == 1) {
-                    total = this.availableGeneratorSetsCapacityA + this.availableGeneratorSetsCapacityB
-                } else {
-                    Object.keys(this.generatorSets).forEach(element => {
-                        total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.available_capacity : total
-                    })
-                }
-                return total
-            }
+            // totalAvailableGeneratorSetsCapacity() {
+            //     var total = 0
+            //     if (this.generatorSetsResponsable.id == 1) {
+            //         total = this.availableGeneratorSetsCapacityA + this.availableGeneratorSetsCapacityB
+            //     } else {
+            //         Object.keys(this.generatorSets).forEach(element => {
+            //             total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.available_capacity : total
+            //         })
+            //     }
+            //     return total
+            // }
 
         },
 
@@ -319,13 +341,5 @@
             }
         },
         
-        mounted() {
-            // console.log(this.generatorSets)
-            // this.getGeneratorSets()
-        },
-
-        methods: {
-
-        }
     }
 </script>

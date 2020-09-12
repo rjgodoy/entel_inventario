@@ -62,20 +62,35 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     PopMap: function PopMap() {
-      return Promise.all(/*! import() | chunks/maps/popMapView */[__webpack_require__.e("vendors~chunks/capacity/capacity~chunks/capacity/projection~chunks/capacity/roomLights~chunks/dashbo~0a787395"), __webpack_require__.e("chunks/maps/popMapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
+      return Promise.all(/*! import() | chunks/maps/popMapView */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("chunks/maps/popMapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
     }
   },
   props: ['user', 'pop', 'isEditMode', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
   data: function data() {
     return {
-      address: this.pop.direccion
+      address: this.pop.direccion,
+      latitude: this.pop.latitude,
+      longitude: this.pop.longitude
     };
   },
   mounted: function mounted() {},
   watch: {
+    pop: function pop(val) {
+      this.address = val.direccion;
+      this.latitude = val.latitude;
+      this.longitude = val.longitude;
+    },
     isEditMode: function isEditMode(val) {
-      if (this.address != this.pop.direccion) {
+      if (this.address != this.pop.direccion && val == false) {
         this.updateParameter('direccion', this.address);
+      }
+
+      if (this.latitude != this.pop.latitude && val == false) {
+        this.updateParameter('latitude', this.latitude);
+      }
+
+      if (this.longitude != this.pop.longitude && val == false) {
+        this.updateParameter('longitude', this.longitude);
       }
     }
   },
@@ -555,42 +570,74 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "column" }, [
-            _c("div", { staticClass: "level" }, [
-              _c("div", { staticClass: "level-item" }, [
-                _c(
-                  "div",
-                  { staticClass: "is-size-5 has-text-weight-semibold" },
-                  [
-                    _vm._v(
-                      _vm._s(_vm.pop.latitude) +
-                        "\n                                "
-                    ),
-                    _c(
-                      "p",
-                      { staticClass: "is-size-6 has-text-weight-light" },
-                      [_vm._v("Latitud")]
-                    )
-                  ]
-                )
-              ]),
+            _c("div", { staticClass: "columns is-vcentered" }, [
+              _c(
+                "div",
+                { staticClass: "column" },
+                [
+                  !_vm.isEditMode
+                    ? _c(
+                        "div",
+                        { staticClass: "is-size-5 has-text-weight-semibold" },
+                        [_vm._v(_vm._s(_vm.pop.latitude))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditMode
+                    ? _c("b-input", {
+                        staticClass: "is-size-5 has-text-weight-semibold",
+                        model: {
+                          value: _vm.latitude,
+                          callback: function($$v) {
+                            _vm.latitude = $$v
+                          },
+                          expression: "latitude"
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "is-size-6 has-text-weight-light" },
+                    [_vm._v("Latitud")]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "level-item" }, [
-                _c(
-                  "div",
-                  { staticClass: "is-size-5 has-text-weight-semibold" },
-                  [
-                    _vm._v(
-                      _vm._s(_vm.pop.longitude) +
-                        "\n                                "
-                    ),
-                    _c(
-                      "p",
-                      { staticClass: "is-size-6 has-text-weight-light" },
-                      [_vm._v("Longitud")]
-                    )
-                  ]
-                )
-              ])
+              _c(
+                "div",
+                { staticClass: "column" },
+                [
+                  !_vm.isEditMode
+                    ? _c(
+                        "div",
+                        { staticClass: "is-size-5 has-text-weight-semibold" },
+                        [_vm._v(_vm._s(_vm.pop.longitude))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEditMode
+                    ? _c("b-input", {
+                        staticClass: "is-size-5 has-text-weight-semibold",
+                        model: {
+                          value: _vm.longitude,
+                          callback: function($$v) {
+                            _vm.longitude = $$v
+                          },
+                          expression: "longitude"
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "is-size-6 has-text-weight-light" },
+                    [_vm._v("Longitud")]
+                  )
+                ],
+                1
+              )
             ])
           ])
         ])

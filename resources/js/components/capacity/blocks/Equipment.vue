@@ -40,20 +40,26 @@
 
             <div class="tile">
                 <div class="tile is-parent is-8">
-                    <div class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
+                    <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa">
                         <div class="tile is-vertical" >
 
                             <div class="columns">
                                 <div class="column">
                                     <div class="is-size-6 has-text-weight-bold">PLANOS</div>
                                 </div>
-                                <div class="column">
+                                <div class="column" v-if="canEditPowerRectifiers">
                                     <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
                                         <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
                                             <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
                                         </button>
-
-                                        <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewPowerRectifierModalActive = true; selectedPlane = null">Agregar Planta Rectificadora</b-dropdown-item>
+                                        <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewPowerRectifierModalActive = true; selectedPlane = null">
+                                            <div class="media">
+                                                <font-awesome-icon class="media-left" :icon="['fas', 'plus']" />
+                                                <div class="media-content">
+                                                    <h3>Nuevo Planta Rectificadora</h3>
+                                                </div>
+                                            </div>
+                                        </b-dropdown-item>
                                     </b-dropdown>
                                 </div>
                             </div>
@@ -61,7 +67,7 @@
                             <div class="tile is-parent" v-if="room.planes.length">
                                 <b-field label="CAPACIDAD SALA" label-position="on-border" class="tile has-text-grey-light">
 
-                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.01rem #aaa">
                                         <div class="tile columns is-vcentered">
                                             <div class="column tile is-vertical">
 
@@ -109,7 +115,7 @@
                             <div class="tile is-parent" v-if="room.planes.length">
                                 <div class="tile columns is-multiline">
                                     <div class="tile is-parent column is-6" v-for="plane in planes" :key="plane.id">
-                                        <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                        <div class="tile is-parent box is-shadowless" style="border: solid 0.01rem #aaa">
                                             <div class="tile is-vertical">
 
                                                 <div class="columns">
@@ -117,70 +123,91 @@
                                                         <div class="is-size-6 has-text-weight-bold">PLANO {{ plane.plane_type.type }}</div>
                                                     </div>
                                                     <div class="column">
-                                                        <b-dropdown v-if="canEditPowerRectifiers" aria-role="list" class="is-pulled-right" position="is-bottom-left">
-                                                            <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
-                                                                <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
-                                                            </button>
+                                                        <b-field class="is-pulled-right" grouped>
+                                                            <div class="has-text-centered">
+                                                                <b-tooltip position="is-bottom" type="is-dark" multilined>
+                                                                    <button class="button is-link is-small is-inverted">
+                                                                        <font-awesome-icon :icon="['fas', 'info-circle']" />
+                                                                    </button>
+                                                                    <template v-slot:content>
+                                                                        <div class="has-text-left" style="padding: 4px">
+                                                                            <div class="is-size-7">Capacidad nominal: {{ nominalCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                                            <div class="is-size-7">Capacidad instalada: {{ installedCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                                            <div class="is-size-7">Potencia real de carga: {{ chargeRealPower(plane) | numeral('0.0') }} <span class="is-size-7">%</span></div>
+                                                                            <div class="is-size-7">Corriente recarga: {{ rechargeCurrent(plane) | numeral('0,0.0') }} <span class="is-size-7">A</span></div>
+                                                                            <div class="is-size-7">Potencia recarga baterías: {{ batteryRechargePower(plane) | numeral('0,0.0') }} <span class="is-size-7">%</span></div>
+                                                                            <div class="is-size-7">Corriente total carga + baterías: {{ totalCurrent(plane) | numeral('0,0.0') }} <span class="is-size-7">A</span></div>
+                                                                            <div class="is-size-7">Potencia total carga + baterías: {{ totalPower(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                                            <div class="is-size-7">Capacidad real: {{ realPlaneCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                                            <div class="is-size-7">Capacidad disponible: {{ availablePlaneCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                                            <div class="is-size-7">Porcentaje Uso: {{ usePercentPlane(plane) | numeral('0,0.0%') }} <span class="is-size-7"></span></div>
 
-                                                            <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isEditPlaneModalActive = true; selectedPlane = plane">
-                                                                <div class="media">
-                                                                    <font-awesome-icon class="media-left" :icon="['fas', 'pencil-alt']" />
-                                                                    <div class="media-content">
-                                                                        <h3>Editar Plano</h3>
+                                                                            <div class="is-size-7">Capacidad baterias: {{ batteryTotalCapacityPlane(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                                            <div class="is-size-7">Utilizado baterias: {{ chargeRealPower(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                                            <div class="is-size-7">Disponible baterias: {{ availableBatteryCapacityPlane(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
+                                                                        </div>
+                                                                    </template>
+                                                                </b-tooltip>
+                                                            </div>
+                                                            <b-dropdown v-if="canEditPowerRectifiers" aria-role="list" position="is-bottom-left">
+                                                                <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
+                                                                    <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
+                                                                </button>
+
+                                                                <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isEditPlaneModalActive = true; selectedPlane = plane">
+                                                                    <div class="media">
+                                                                        <font-awesome-icon class="media-left" :icon="['fas', 'pencil-alt']" />
+                                                                        <div class="media-content">
+                                                                            <h3>Editar Plano</h3>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </b-dropdown-item>
-                                                            <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewPowerRectifierModalActive = true; selectedPlane = plane">
-                                                                <div class="media">
-                                                                    <font-awesome-icon class="media-left" :icon="['fas', 'plus']" />
-                                                                    <div class="media-content">
-                                                                        <h3>Agregar Planta Rectificadora</h3>
+                                                                </b-dropdown-item>
+                                                                <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewPowerRectifierModalActive = true; selectedPlane = plane">
+                                                                    <div class="media">
+                                                                        <font-awesome-icon class="media-left" :icon="['fas', 'plus']" />
+                                                                        <div class="media-content">
+                                                                            <h3>Nuevo Planta Rectificadora</h3>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </b-dropdown-item>
-                                                            <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewBatteryBankModalActive = true; selectedPlane = plane">
-                                                                <div class="media">
-                                                                    <font-awesome-icon class="media-left" :icon="['fas', 'plus']" />
-                                                                    <div class="media-content">
-                                                                        <h3>Agregar Banco Baterías</h3>
+                                                                </b-dropdown-item>
+                                                                <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewBatteryBankModalActive = true; selectedPlane = plane">
+                                                                    <div class="media">
+                                                                        <font-awesome-icon class="media-left" :icon="['fas', 'plus']" />
+                                                                        <div class="media-content">
+                                                                            <h3>Nuevo Banco Baterías</h3>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </b-dropdown-item>
-                                                        </b-dropdown>
+                                                                </b-dropdown-item>
+                                                            </b-dropdown>
+                                                        </b-field>
                                                     </div>
                                                 </div>
 
                                                 <div class="tile is-parent">
-                                                    <div class="box tile is-child">
-
-                                                        <div>
-                                                            <div class="is-size-7">Tensión de flote: {{ plane.float_tension }}</div>
-                                                            <div class="is-size-7">Corriente: {{ plane.current }}</div>
-                                                            <div class="is-size-7">Factor de recarga: {{ plane.recharge_factor }}</div>
+                                                    <b-field label="PARAMETROS PLANO" label-position="on-border" class="tile">
+                                                        <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa">
+                                                            <div class="tile columns is-vcentered">
+                                                                <div class="column is-4 has-text-centered">
+                                                                    <div class="has-text-weight-semibold is-size-6">
+                                                                        {{ plane.float_tension | numeral('0,0.0') }}  
+                                                                        <span class="is-size-7">V</span></div>
+                                                                    <div class="has-text-weight-normal is-size-7">Tensión de flote</div>
+                                                                </div>
+                                                                <div class="column is-4 has-text-centered">
+                                                                    <div class="has-text-weight-semibold is-size-6">
+                                                                        {{ plane.current | numeral('0,0.0') }}  
+                                                                        <span class="is-size-7">A</span></div>
+                                                                    <div class="has-text-weight-normal is-size-7">Corriente</div>
+                                                                </div>
+                                                                <div class="column is-4 has-text-centered">
+                                                                    <div class="has-text-weight-semibold is-size-6">
+                                                                        {{ plane.recharge_factor | numeral('0.0%') }}  
+                                                                    </div>
+                                                                    <div class="has-text-weight-normal is-size-7">Porcentaje de recarga</div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-
-                                                        <b-tooltip position="is-bottom" multilined>
-                                                            <button class="button is-primary">Más info</button>
-                                                            <template v-slot:content>
-                                                                <div class="is-size-7">Capacidad nominal: {{ nominalCapacity(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Capacidad instalada: {{ installedCapacity(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Potencia real de carga: {{ chargeRealPower(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Corriente recarga: {{ rechargeCurrent(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Potencia recarga baterías: {{ batteryRechargePower(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Corriente total carga + baterías: {{ totalCurrent(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Potencia total carga + baterías: {{ totalPower(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Capacidad real: {{ realPlaneCapacity(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Capacidad disponible: {{ availablePlaneCapacity(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Porcentaje Uso: {{ usePercentPlane(plane) * 100 | numeral('0,0.0') }}</div>
-
-                                                                <div class="is-size-7">Capacidad baterias: {{ batteryTotalCapacityPlane(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Utilizado baterias: {{ chargeRealPower(plane) | numeral('0,0.0') }}</div>
-                                                                <div class="is-size-7">Disponible baterias: {{ availableBatteryCapacityPlane(plane) | numeral('0,0.0') }}</div>
-
-                                                            </template>
-                                                        </b-tooltip>
-
-                                                    </div>
+                                                    </b-field>
                                                 </div>
 
                                                 <div class="tile is-parent" v-if="room.power_rectifiers.length">
@@ -193,7 +220,11 @@
                                                                         :key="powerRectifier.id" 
                                                                         
                                                                         v-if="powerRectifierBelongsToPlane(powerRectifier, plane)">
-                                                                        <a class="box is-dark is-bold has-text-warning" @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier">
+                                                                        <a class="box is-dark is-bold has-text-warning has-background" @click="isPowerRectifierModalActive = true; powerRectifierSelected = powerRectifier">
+                                                                            <div class="is-box-background is-transparent">
+                                                                                <font-awesome-icon :icon="['fab', 'superpowers']" size="4x" class="is-pulled-right" style="margin-top: -10px; margin-right: 15px"/>
+                                                                            </div>
+                                                                            
                                                                             <div class="field">
                                                                                 <div class="has-text-weight-normal is-size-7">PLANTA</div>
                                                                                 <span class="has-text-weight-bold is-size-6">{{ powerRectifier.power_rectifier_type.type }} {{ powerRectifier.power_rectifier_type.model }}
@@ -210,7 +241,7 @@
                                                 <!-- <div class="tile is-parent" v-if="canEditPowerRectifiers">
                                                     <div class="tile is-child has-text-centered">
                                                         <b-button class="is-default has-text-weight-light has-text-grey is-size-7">
-                                                            <a @click="isNewBatteryBankModalActive = true; selectedPlane = plane">Agregar Banco de Baterías</a>
+                                                            <a @click="isNewBatteryBankModalActive = true; selectedPlane = plane">Nuevo Banco de Baterías</a>
                                                         </b-button>
                                                     </div>
                                                 </div> -->
@@ -225,7 +256,10 @@
                                                                         :key="batteryBank.id" 
                                                                         
                                                                         v-if="batteryBankBelongsToPlane(batteryBank, plane)">
-                                                                        <a class="box is-dark is-bold has-text-warning" @click="isbatteryBankModalActive = true; batteryBankSelected = batteryBank">
+                                                                        <a class="box is-dark is-bold has-text-warning has-background" @click="isbatteryBankModalActive = true; batteryBankSelected = batteryBank">
+                                                                            <div class="is-box-background is-transparent">
+                                                                                <font-awesome-icon :icon="['fas', 'car-battery']" size="4x" class="is-pulled-right" style=""/>
+                                                                            </div>
                                                                             <div class="field">
                                                                                 <div class="has-text-weight-normal is-size-7">BANCO Nº {{ batteryBank.id }}</div>
                                                                                 <span class="has-text-weight-bold is-size-6">{{ batteryBank.battery_bank_brand.brand }} {{ batteryBank.battery_bank_brand.model }}
@@ -237,9 +271,7 @@
                                                             </div>
                                                         </div>
                                                     </b-field>
-                                                </div>
-
-                                                
+                                                </div>   
                                             </div>
                                         </div>
                                     </div> 
@@ -253,119 +285,93 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
 
                 <div class="tile is-parent">
-                    <div class="tile is-vertical">
-                        
-                        <div v-if="!canEditSurface" class="tile is-parent box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="is-size-6 has-text-weight-bold">CLIMA</div>
-                            <div class="tile is-parent is-vertical" v-if="room.current_air_conditioner_capacity">
-                                <div class="has-text-centered">
-                                    <div class="level">
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ totalAirConditionerCapacity | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> kW</span>
+                    <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa">
+                        <div class="tile is-vertical">
+
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="is-size-6 has-text-weight-bold">CLIMA</div>
+                                </div>
+                                <div class="column" v-if="canEditPowerRectifiers">
+                                    <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
+                                        <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
+                                            <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
+                                        </button>
+                                        <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewAirConditionerModalActive = true">
+                                            <div class="media">
+                                                <font-awesome-icon class="media-left" :icon="['fas', 'pencil-alt']" />
+                                                <div class="media-content">
+                                                    <h3>Editar Parámetros de Clima</h3>
                                                 </div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
                                             </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ usedAirConditionerCapacity | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> kW</span>
+                                        </b-dropdown-item>
+                                        <b-dropdown-item aria-role="listitem" class="is-size-6" @click="isNewAirConditionerModalActive = true">
+                                            <div class="media">
+                                                <font-awesome-icon class="media-left" :icon="['fas', 'plus']" />
+                                                <div class="media-content">
+                                                    <h3>Nuevo Equipo de Clima</h3>
                                                 </div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Utilizada</div>
                                             </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ availableAirConditionerCapacity | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> kW</span>
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
+                                        </b-dropdown-item>
+                                    </b-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="tile is-parent" v-if="room.current_air_conditioner_capacity">
+                                <b-field label="CAPACIDADES CLIMA" label-position="on-border" class="tile">
+                                    <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa">
+                                        <div class="tile columns is-vcentered">
+                                            <div class="column has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ totalAirConditionerCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Total</div>
+                                            </div>
+                                            <div class="column has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ usedAirConditionerCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Utilizado</div>
+                                            </div>
+                                            <div class="column has-text-centered">
+                                                <div class="has-text-weight-semibold is-size-6">{{ availableAirConditionerCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
+                                                <div class="has-text-weight-normal is-size-7">Disponible</div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </b-field>
                             </div>
-                            <div class="tile columns is-vcentered" v-if="!room.current_air_conditioner_capacity">
+
+                            <div class="tile is-parent columns is-vcentered" v-if="!room.current_air_conditioner_capacity">
                                 <div class="column">
                                     <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
                                         NO TIENE DATOS DE CLIMA
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <a v-if="canEditSurface" @click="isNewAirConditionerModalActive = true" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="is-size-6 has-text-weight-bold">CLIMA</div>
-                            <div class="tile is-parent is-vertical" v-if="room.current_air_conditioner_capacity">
-                                <div class="has-text-centered">
-                                    <div class="level">
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ totalAirConditionerCapacity | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> kW</span>
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
+                            <div class="tile is-parent" v-if="hasAirConditioners(room)">
+                                <div class="columns is-multiline tile">
+                                    <div class="tile is-child column is-3"
+                                        v-for="airConditioner in airConditioners" 
+                                        v-if="airConditioner.room_id == room.id" 
+                                        :key="airConditioner.id" >
+                                        <a class="box" @click="isAirConditionerModalActive = true; airConditionerSelected = airConditioner">
+                                            <div class="field">
+                                                <div class="has-text-weight-bold is-size-7">AIRE ACONDICIONADO</div>
+                                                <span class="has-text-weight-bold is-size-6">Nº {{ airConditioner.id }}</span>
                                             </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ usedAirConditionerCapacity | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> kW</span>
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Utilizado</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ availableAirConditionerCapacity | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> kW</span>
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tile columns is-vcentered" v-if="!room.current_air_conditioner_capacity">
+
+                            <div class="tile is-parent columns is-vcentered" v-if="!hasAirConditioners(room)">
                                 <div class="column">
                                     <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                        NO TIENE DATOS DE CLIMA
+                                        <div class="">NO TIENE EQUIPOS DE CLIMA</div>
                                     </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <div class="tile is-parent" v-if="hasAirConditioners(room)">
-                            <div class="columns is-multiline tile">
-                                <div class="tile is-child column is-3"
-                                    v-for="airConditioner in airConditioners" 
-                                    v-if="airConditioner.room_id == room.id" 
-                                    :key="airConditioner.id" >
-                                    <a class="box" @click="isAirConditionerModalActive = true; airConditionerSelected = airConditioner">
-                                        <div class="field">
-                                            <div class="has-text-weight-bold is-size-7">AIRE ACONDICIONADO</div>
-                                            <span class="has-text-weight-bold is-size-6">Nº {{ airConditioner.id }}</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tile columns is-vcentered" v-if="!hasAirConditioners(room)">
-                            <div class="column">
-                                <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                    <div class="">NO TIENE EQUIPOS DE CLIMA</div>
-                                    <b-tag class="is-default has-text-weight-light has-text-grey is-size-7">
-                                        <a @click="isNewAirConditionerModalActive = true">Agregar</a>
-                                    </b-tag>
                                 </div>
                             </div>
                         </div>
@@ -375,237 +381,33 @@
 
             <div class="tile">
                 <div class="tile is-parent">
-                    <b-field label="ESPACIO" label-position="on-border" class="tile">
-                        <div v-if="!canEditSurface" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-parent is-vertical" v-if="room.current_room_surface">
-                                <div class="has-text-centered">
-                                    <div class="level">
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ totalSurface | numeral("0,0.0") }}
-                                                    <!-- <span class="is-size-7"> m2</span> -->
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Espacio Total</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ usedSurface | numeral("0,0.0") }}
-                                                    <!-- <span class="is-size-7"> m2</span> -->
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Espacio Utilizada</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ availableSurface | numeral("0,0.0") }}
-                                                    <!-- <span class="is-size-7"> m2</span> -->
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Espacio Disponible</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tile columns is-vcentered" v-if="!room.current_room_surface">
-                                <div class="column">
-                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                        NO TIENE DATOS DE ESPACIO
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a v-if="canEditSurface" @click="isSurfaceModalActive = true" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-parent is-vertical" v-if="room.current_room_surface">
-                                <div class="has-text-centered">
-                                    <div class="level">
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ totalSurface | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> m2</span>
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Espacio Total</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ usedSurface | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> m2</span>
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Espacio Utilizado</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="has-text-weight-bold is-size-6">{{ availableSurface | numeral("0,0.0") }}
-                                                    <span class="is-size-7"> m2</span>
-                                                </div>
-                                                <div class="has-text-weight-normal is-size-7">Espacio Disponible</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tile columns is-vcentered" v-if="!room.current_room_surface">
-                                <div class="column">
-                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                        NO TIENE DATOS DE ESPACIO
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </b-field>
+                    <Surface 
+                        :canEditSurface=canEditSurface
+                        :room=room
+                        :user=user
+                        :totalSurface=totalSurface
+                        :usedSurface=usedSurface
+                        :availableSurface=availableSurface
+                    />
                 </div>
 
                 <div class="tile is-parent is-4">
-                    <b-field label="EQUIPOS SEGURIDAD" label-position="on-border" class="tile">
-                        <div v-if="!canEditSecurity" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-
-                            <div class="tile is-parent is-vertical" v-if="room.current_fire_detection">
-                                <b-field label="INCENDIO" label-position="on-border" class="tile has-text-grey-light">
-                                    <div class="tile box is-child is-shadowless" style="border: solid 0.1rem #cccccc">
-                                        <div class="level">
-                                            <div class="level-item">
-                                                <div class="">
-                                                    <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
-                                                    <div class="has-text-weight-normal is-size-7">Detección</div>
-                                                </div>
-                                            </div>
-                                            <div class="level-item">
-                                                <div class="">
-                                                    <div class="has-text-weight-bold is-size-6">{{ extinctionType }}</div>
-                                                    <div class="has-text-weight-normal is-size-7">Extinción</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </b-field>
-                            </div>
-
-                            <div class="tile columns is-vcentered" v-if="!room.current_fire_detection">
-                                <div class="column">
-                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                        NO TIENE EQUIPOS DE SEGURIDAD
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <a v-if="canEditSecurity" @click="isSecurityModalActive = true" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-parent is-vertical" v-if="room.current_fire_detection">
-                                <b-field label="INCENDIO" label-position="on-border" class="tile has-text-grey-light">
-                                    <div class="tile box is-child is-shadowless" style="border: solid 0.1rem #cccccc">
-                                        <div class="level">
-                                            <div class="level-item">
-                                                <div class="">
-                                                    <div class="has-text-weight-bold is-size-6">{{ detectionType }}</div>
-                                                    <div class="has-text-weight-normal is-size-7">Detección</div>
-                                                </div>
-                                            </div>
-                                            <div class="level-item">
-                                                <div class="">
-                                                    <div class="has-text-weight-bold is-size-6">{{ extinctionType }}</div>
-                                                    <div class="has-text-weight-normal is-size-7">Extinción</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </b-field>
-                            </div>
-
-                            <div class="tile columns is-vcentered" v-if="!room.current_fire_detection">
-                                <div class="column">
-                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                        NO TIENE EQUIPOS DE SEGURIDAD
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </b-field>
+                    <Security 
+                        :canEditSecurity=canEditSecurity
+                        :room=room
+                        :user=user
+                    />
                 </div>
 
                 <div class="tile is-parent">
-                    <b-field label="DISTRIBUCION" label-position="on-border" class="tile">
-                        <div v-if="!canEditDistribution" class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-parent is-vertical" v-if="room.current_room_distribution">
-                                <div class="tile">
-                                    <div class="tile is-child">
-                                        <div class="tile columns is-vcentered">
-                                            <div class="column">
-                                                <div class="level has-text-centered">
-                                                    <div class="level-item">
-                                                        <div class="">
-                                                            <div class="has-text-weight-bold is-size-6">{{ totalCapacity | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                            <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="level-item">
-                                                        <div class="">
-                                                            <div class="has-text-weight-bold is-size-6">{{ usedCapacity | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                            <div class="has-text-weight-normal is-size-7">Capacidad Utilizada</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="level-item">
-                                                        <div class="">
-                                                            <div class="has-text-weight-bold is-size-6">{{ availableCapacity | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                            <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tile columns is-vcentered" v-if="!room.current_room_distribution">
-                                <div class="column">
-                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                        NO TIENE DATOS DE DISTRIBUCION
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a v-if="canEditDistribution" 
-                            @click="isDistributionModalActive = true"
-                            class="tile box is-shadowless" style="border: solid 0.1rem #cccccc">
-                            <div class="tile is-parent is-vertical" v-if="room.current_room_distribution">
-                                <div class="tile is-child">
-                                    <div class="tile columns is-vcentered">
-                                        <div class="column">
-                                            <div class="level has-text-centered">
-                                                <div class="level-item">
-                                                    <div class="">
-                                                        <div class="has-text-weight-bold is-size-6">{{ totalCapacity | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                        <div class="has-text-weight-normal is-size-7">Capacidad Total</div>
-                                                    </div>
-                                                </div>
-                                                <div class="level-item">
-                                                    <div class="">
-                                                        <div class="has-text-weight-bold is-size-6">{{ usedCapacity | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                        <div class="has-text-weight-normal is-size-7">Capacidad Utilizada</div>
-                                                    </div>
-                                                </div>
-                                                <div class="level-item">
-                                                    <div class="">
-                                                        <div class="has-text-weight-bold is-size-6">{{ availableCapacity | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                        <div class="has-text-weight-normal is-size-7">Capacidad Disponible</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tile columns is-vcentered" v-if="!room.current_room_distribution">
-                                <div class="column">
-                                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
-                                        NO TIENE DATOS DE DISTRIBUCION
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </b-field>
+                    <Distribution
+                        :canEditDistribution=canEditDistribution
+                        :room=room
+                        :user=user
+                        :totalDistributionCapacity=totalDistributionCapacity
+                        :usedDistributionCapacity=usedDistributionCapacity
+                        :availableDistributionCapacity=availableDistributionCapacity
+                    />
                 </div>
             </div>
             
@@ -637,41 +439,7 @@
                     />
             </b-modal> -->
 
-            <b-modal :active.sync="isDistributionModalActive"
-                has-modal-card
-                trap-focus
-                aria-role="dialog"
-                aria-modal>
-                <modal-distribution
-                    :room="room"
-                    :user="user"
-                    :canEdit="canEditDistribution"
-                    />
-            </b-modal>
-
-            <b-modal :active.sync="isSurfaceModalActive"
-                has-modal-card
-                trap-focus
-                aria-role="dialog"
-                aria-modal>
-                <modal-surface
-                    :room="room"
-                    :user="user"
-                    :canEdit="canEditSurface"
-                    />
-            </b-modal>
-
-            <b-modal :active.sync="isSecurityModalActive"
-                has-modal-card
-                trap-focus
-                aria-role="dialog"
-                aria-modal>
-                <modal-security
-                    :room="room"
-                    :user="user"
-                    :canEdit="canEditSecurity"
-                    />
-            </b-modal>
+            
 
             <b-modal :active.sync="isNewPowerRectifierModalActive"
                 has-modal-card
@@ -728,14 +496,14 @@
 <script>
     export default {
         components: {
+            Surface: () => import(/* webpackChunkName: "chunks/capacity/surface"*/'./Surface'),
+            Security: () => import(/* webpackChunkName: "chunks/capacity/surface"*/'./Security'),
+            Distribution: () => import(/* webpackChunkName: "chunks/capacity/surface"*/'./Distribution'),
             ModalPowerRectifier: () => import(/* webpackChunkName: "chunks/capacity/modals/powerRectifier"*/'../modals/ModalPowerRectifier'),
             ModalAirConditioner: () => import(/* webpackChunkName: "chunks/capacity/modals/airConditioner"*/'../modals/ModalAirConditioner'),
             ModalNewPowerRectifier: () => import(/* webpackChunkName: "chunks/capacity/modals/new/newPowerRectifier"*/'../modals/new/ModalNewPowerRectifier'),
             ModalNewBatteryBank: () => import(/* webpackChunkName: "chunks/capacity/modals/new/newBatteryBank"*/'../modals/new/ModalNewBatteryBank'),
             ModalNewAirConditioner: () => import(/* webpackChunkName: "chunks/capacity/modals/new/newAirConditioner"*/'../modals/new/ModalNewAirConditioner'),
-            ModalDistribution: () => import(/* webpackChunkName: "chunks/capacity/modals/distribution"*/'../modals/ModalDistribution'),
-            ModalSurface: () => import(/* webpackChunkName: "chunks/capacity/modals/surface"*/'../modals/ModalSurface'),
-            ModalSecurity: () => import(/* webpackChunkName: "chunks/capacity/modals/surface"*/'../modals/ModalSecurity'),
             ModalEditPlane: () => import(/* webpackChunkName: "chunks/capacity/modals/editPlane"*/'../modals/ModalEditPlane'),
         },
 
@@ -743,6 +511,22 @@
             'room',
             'user',
             'pop',
+
+            // 'planes',
+            // 'planeTypes',
+            // 'airConditioners',
+            // 'canEditPowerRectifiers',
+            // 'canEditAirConditioners',
+            'canEditSurface',
+            'canEditDistribution',
+
+            'totalSurface',
+            'usedSurface',
+            'availableSurface',
+
+            'totalDistributionCapacity',
+            'usedDistributionCapacity',
+            'availableDistributionCapacity',
         ],
 
         data() {
@@ -816,55 +600,12 @@
                 return this.totalCapacity - this.usedCapacity
             },
 
-            distribution() {
-                return {
-                    'totalCapacity': this.totalCapacity,
-                    'usedCapacity': this.usedCapacity
-                }
-            },
-
-            surface() {
-                return {
-                    'totalSurface': this.totalSurface,
-                    'usedSurface': this.usedSurface
-                }
-            },
-
             airConditionerCapacity() {
                 return {
                     'totalSurface': this.totalSurface,
                     'usedSurface': this.usedSurface
                 }
             },
-
-            detectionType() {
-                return this.room.current_fire_detection ? this.room.current_fire_detection.fire_detection_type.type : 'No tiene'
-            },
-
-            extinctionType() {
-                return this.room.current_fire_detection && this.room.current_fire_detection.fire_extinction_type ? this.room.current_fire_detection.fire_extinction_type.type : 'No tiene'
-            },
-
-            canEditDistribution() {
-                return this.canEditAirConditioners && this.canEditPowerRectifiers
-            },
-
-            canEditSurface() {
-                return this.canEditAirConditioners && this.canEditPowerRectifiers
-            },
-
-            totalSurface() {
-                return this.room.current_room_surface ? this.room.current_room_surface.total_surface : 0
-            },
-
-            usedSurface() {
-                return this.room.current_room_surface ? this.room.current_room_surface.used_surface : 0
-            },
-
-            availableSurface() {
-                return this.totalSurface - this.usedSurface
-            },
-
 
             totalAirConditionerCapacity() {
                 return this.room.current_air_conditioner_capacity ? this.room.current_air_conditioner_capacity.total_capacity : 0
@@ -880,7 +621,7 @@
 
 
             canEditSecurity() {
-                return this.canEditAirConditioners && this.canEditPowerRectifiers
+                return this.canEditAirConditioners || this.canEditPowerRectifiers
             },
 
             powerRectifierData() {
@@ -1249,14 +990,14 @@
 
                 axios.put(`/api/roomPlaneDelegationType/${this.room.id}`, params)
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                 })
                 // this.$parent.close()
                 // this.$eventBus.$emit('junction-measurements-updated');
             },
 
             reload() {
-                console.log('reloaded')
+                // console.log('reloaded')
                 this.$eventBus.$emit('change-room')
             }    
         },

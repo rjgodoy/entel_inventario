@@ -1,6 +1,5 @@
 <template>
-    <div>
-
+    <div v-if="user.roles[0].id == 1 || user.roles[0].id == 2">
         <section class="section tile is-ancestor" style="padding-bottom: 0px">
             <div class="columns tile is-parent">
                 <div class="tile is-parent column">
@@ -67,9 +66,9 @@
 
                         <div v-if="newPop">
 
-                            <b-field>
+                            <!-- <b-field>
                                 <b-input placeholder="Código Planificación" type="text" v-model="pop_e_id"></b-input>
-                            </b-field>
+                            </b-field> -->
 
                             <b-field>
                                 <b-input placeholder="Nombre" type="text" v-model="nombre" required></b-input>
@@ -278,7 +277,7 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-checkbox 
-                                        v-model="offgrid"
+                                        v-model="energy_system"
                                         type="is-link">
                                         <div class="is-size-6">Offgrid</div>
                                     </b-checkbox>
@@ -310,7 +309,7 @@
         <div class="section columns" style="padding-top: 0">
             <div class="column"></div>
             <div class="column has-text-centered">
-                <button class="button is-link" @click="postNewPop">Crear nuevo Sitio</button>
+                <button class="button is-link" @click="postNewPop" :disabled="isDisabled">Crear nuevo Sitio</button>
             </div>
             <div class="column"></div>
         </div>
@@ -324,7 +323,7 @@
     import debounce from 'lodash/debounce'
     export default {
         props : [
-            'user'
+            'user',
         ],
 
         mounted() {
@@ -339,7 +338,7 @@
             return {
                 // Datos pop
                 nombre: '',
-                pop_e_id: '',
+                // pop_e_id: '',
                 direccion: '',
                 lat: '',
                 lon: '',
@@ -361,7 +360,7 @@
                 vip: false,
                 localidad_obligatoria: false,
                 ranco: false,
-                offgrid: false,
+                energy_system: false,
                 solar: false,
                 eolica: false,
 
@@ -416,7 +415,7 @@
         watch: {
             selectedPop(val) {
                 if (val) {
-                    this.pop_e_id = val.pop_e_id
+                    // this.pop_e_id = val.pop_e_id
                     this.nombre = val.nombre
                     this.direccion = val.direccion
                     this.selectedComuna = this.comunas.forEach(element => element.id == val.comuna_id && element)
@@ -425,7 +424,7 @@
                     this.selectedPopType = this.popTypes.forEach(element => element.id == val.pop_type_id && element)
                     this.selectedNetType = this.netTypes.forEach(element => element.id == val.net_type_id && element)
                 } else {
-                    this.pop_e_id = ''
+                    // this.pop_e_id = ''
                     this.nombre = ''
                     this.direccion = ''
                     this.selectedComuna = null
@@ -438,6 +437,13 @@
         },
 
         computed: {
+            isDisabled() {
+                if (this.nombre != '' && this.direccion != '' && this.lat != '' && this.lon != '' && this.nem != '' && this.siteName != '' && this.classificationType && this.attentionPriorityType && this.selectedComuna) {
+                    return false
+                }
+                return true
+            },
+
             site_type_id() {
                 return this.site_type_tab_id == 0 ? 1 : (this.site_type_tab_id == 1 ? 3 : (this.site_type_tab_id == 2 ? 4 : 5))
             },
@@ -583,8 +589,9 @@
             },
 
             postNewPop() {
+                this.isLoading = 1
                 let params = {
-                    'pop_e_id': this.pop_e_id.toUpperCase(),
+                    // 'pop_e_id': this.pop_e_id.toUpperCase(),
                     'nombre': this.nombre,
                     'direccion': this.direccion,
                     'comuna_id': this.comuna_id,
@@ -608,14 +615,60 @@
                     'vip': +this.vip,
                     'localidad_obligatoria': +this.localidad_obligatoria,
                     'ranco': +this.ranco,
-                    'offgrid': +this.offgrid,
+                    'energy_system': +this.energy_system,
                     'solar': +this.solar,
                     'eolica': +this.eolica,
                 }
                 axios.post('/api/pop', params)
                 .then(response => {
                     console.log(response.data)
+                    if (response.data === 'success') {
+                        this.$buefy.toast.open({
+                            message: 'El nuevo POP se ha ingresado correctamente.',
+                            type: 'is-success',
+                            duration: 3000
+                        })
+                        this.isLoading = 0
+                        this.clearInputs()
+                    }
                 })
+            },
+
+            clearInputs() {
+                this.nombre = ''
+                this.direccion = ''
+                this.lat = ''
+                this.lon = ''
+                this.site_type = 0
+                this.nem = ''
+                this.siteName = ''
+                this.site_type_tab_id = 0
+                this.pe_3g = false
+                this.mpls = false
+                this.olt = false
+                this.olt_3play = false
+                this.red_minima_n1 = false
+                this.red_minima_n2 = false
+                this.core = false
+                this.vip = false
+                this.localidad_obligatoria = false
+                this.ranco = false
+                this.energy_system = false
+                this.solar = false
+                this.eolica = false
+                this.name = ''
+                this.popType = ''
+                this.netType = ''
+                this.classificationType = ''
+                this.attentionPriorityType = ''
+
+                this.selectedPop = null
+                this.selectedComuna = null
+                this.selectedPopType = null
+                this.selectedNetType = null
+                this.selectedClassificationType = null
+                this.selectedAttentionPriorityType = null
+
             },
 
             getAsyncData: debounce(function (name) {

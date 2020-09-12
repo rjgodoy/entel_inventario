@@ -10,38 +10,50 @@ import c3 from 'c3'
 import * as d3 from 'd3'
 export default {
     props : [
-        // 'chartData'
+        'totalEnergy',
+        'totalClimate',
+        'totalSurface',
+        'availableEnergy',
+        'availableClimate',
+        'availableSurface',
     ],
     
     data() {
         return {
+            pEnergy: parseFloat(this.availableEnergy * 100 / this.totalEnergy),
+            pClimate: parseFloat(this.availableClimate * 100 / this.totalClimate),
+            pSurface: parseFloat(this.availableSurface * 100 / this.totalSurface),
+            totalE: null,
+            availableE: null,
             chart: '',
             data: {
                 columns: [
-                    ['data', 91.4]
+                    // ['Energía', 100],
+                    ['Clima', 100],
+                    ['Espacio', 100]
                 ],
                 type: 'gauge',
-                onclick: function (d, i) { console.log("onclick", d, i); },
-                onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-                onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+                // onclick: function (d, i) { console.log("onclick", d, i); },
+                // onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+                // onmouseout: function (d, i) { console.log("onmouseout", d, i); }
             },
             gauge: {
-        //        label: {
-        //            format: function(value, ratio) {
-        //                return value;
-        //            },
-        //            show: false // to turn off the min/max labels.
-        //        },
-        //    min: 0, // 0 is default, //can handle negative min e.g. vacuum / voltage / current flow / rate of change
-        //    max: 100, // 100 is default
-        //    units: ' %',
-        //    width: 39 // for adjusting arc thickness
+                label: {
+                    format: function(value, ratio) {
+                       return value;
+                    },
+                    show: false // to turn off the min/max labels.
+                },
+                min: 0, // 0 is default, //can handle negative min e.g. vacuum / voltage / current flow / rate of change
+                max: 100, // 100 is default
+                units: ' %',
+                width: 50 // for adjusting arc thickness
             },
             color: {
                 pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
                 threshold: {
-        //            unit: 'value', // percentage is default
-        //            max: 200, // 100 is default
+                    // unit: 'value', // percentage is default
+                    // max: 200, // 100 is default
                     values: [30, 60, 90, 100]
                 }
             },
@@ -51,8 +63,23 @@ export default {
         }
     },
 
+    computed: {
+
+    },
+
     mounted() {
-        this.graph()
+        // this.graph()
+    },
+
+    watch: {
+        totalEnergy(val) {
+            this.totalE = val
+            
+        },
+
+        availableEnergy(val) {
+            this.availableE = val
+        },
     },
 
     methods: {
@@ -73,36 +100,23 @@ export default {
             
             this.chart = chart;
 
-            setTimeout(function () {
-                chart.load({
-                    columns: [['data', 10]]
-                });
-            }, 1000);
+            // setTimeout(function () {
+            //     chart.load({
+            //         columns: [['Energía', this.energy]]
+            //     });
+            // }, 200);
 
             setTimeout(function () {
                 chart.load({
-                    columns: [['data', 50]]
+                    columns: [['Clima', this.pClimate]]
                 });
-            }, 2000);
+            }, 400);
 
             setTimeout(function () {
                 chart.load({
-                    columns: [['data', 70]]
+                    columns: [['Espacio', this.pSurface]]
                 });
-            }, 3000);
-
-            setTimeout(function () {
-                chart.load({
-                    columns: [['data', 0]]
-                });
-            }, 4000);
-
-            setTimeout(function () {
-                chart.load({
-                    columns: [['data', 100]]
-                });
-            }, 5000);
-
+            }, 600);
         }
     },
 

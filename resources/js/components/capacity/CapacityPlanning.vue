@@ -42,11 +42,12 @@
                     </div>
                 </div>
 
-                <RoomsTable :roomsData=roomsData :user=user />
-
+                <RoomsTable 
+                    :roomsData=roomsData 
+                    :user=user
+                    />
                
             </div>
-
         </div>
     </div>
 </template>

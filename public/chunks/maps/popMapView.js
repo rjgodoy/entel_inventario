@@ -455,7 +455,7 @@ var render = function() {
       ref: "map",
       staticClass: "map",
       staticStyle: {
-        "min-height": "788px",
+        "min-height": "800px",
         "/*min-height": "576px",
         "*/ height": "100%"
       },

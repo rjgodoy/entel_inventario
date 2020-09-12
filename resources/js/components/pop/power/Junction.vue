@@ -459,6 +459,8 @@
                 junctionConnectionId: this.junction.junction_connection_id,
                 junctionConnections: [],
 
+                // current_junction_total: this.junction.pop.room && this.junction.pop.room[0].current_room_capacity.junction_total,
+
                 isEditJunctionModalActive: false,
                 isEditMode: false,
                 clientNumber: this.junction.client_number,
@@ -470,6 +472,9 @@
 
         watch: {
             junction(val) {
+                if (this.junction.pop && this.junction.pop.rooms) {
+                    console.log(this.junction.pop.rooms[0].current_room_capacity)
+                }
                 this.junctionTypeId = val.junction_type_id,
                 this.junctionConnectionId = val.junction_connection_id,
                 this.clientNumber = val.client_number,
@@ -617,7 +622,7 @@
                 return capacity / 1000
             },
 
-            averageConsumptionPerPhotovoltaicGroup() {  // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
+            averageConsumptionPerPhotovoltaicGroup() {
                 return 0
             },
 
@@ -685,6 +690,9 @@
                     axios.put(`/api/junctionUpdateTypes/${this.junction.id}`, params).then(response => {
                         console.log(response.data)
                     })
+
+                    // Si el total, usado y disponible es distinto de lo que está en el original, guardar
+                    // if ()
                 } else {
                     console.log('change what you want!')
                 }

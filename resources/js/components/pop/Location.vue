@@ -27,16 +27,16 @@
                     </div>
 
                     <div class="column">
-                        <div class="level">
-                            <div class="level-item">
-                                <div class="is-size-5 has-text-weight-semibold">{{ pop.latitude }}
-                                    <p class="is-size-6 has-text-weight-light">Latitud</p>
-                                </div>
+                        <div class="columns is-vcentered">
+                            <div class="column">
+                                <div class="is-size-5 has-text-weight-semibold" v-if="!isEditMode">{{ pop.latitude }}</div>
+                                <b-input class="is-size-5 has-text-weight-semibold" v-model="latitude" v-if="isEditMode"></b-input>
+                                <div class="is-size-6 has-text-weight-light">Latitud</div>
                             </div>
-                            <div class="level-item">
-                                <div class="is-size-5 has-text-weight-semibold">{{ pop.longitude }}
-                                    <p class="is-size-6 has-text-weight-light">Longitud</p>
-                                </div>
+                            <div class="column">
+                                <div class="is-size-5 has-text-weight-semibold" v-if="!isEditMode">{{ pop.longitude }}</div>
+                                <b-input class="is-size-5 has-text-weight-semibold" v-model="longitude" v-if="isEditMode"></b-input>
+                                <div class="is-size-6 has-text-weight-light">Longitud</div>
                             </div>
                         </div>
                     </div>
@@ -64,16 +64,30 @@
         ],
         data() {
             return {
-                address: this.pop.direccion
+                address: this.pop.direccion,
+                latitude: this.pop.latitude,
+                longitude: this.pop.longitude
             }
         },
         mounted() {
         },
 
         watch: {
+            pop(val) {
+                this.address = val.direccion
+                this.latitude = val.latitude
+                this.longitude = val.longitude
+            },
+
             isEditMode(val){
-                if(this.address != this.pop.direccion) {
+                if(this.address != this.pop.direccion && val == false) {
                     this.updateParameter('direccion', this.address)
+                }
+                if(this.latitude != this.pop.latitude && val == false) {
+                    this.updateParameter('latitude', this.latitude)
+                }
+                if(this.longitude != this.pop.longitude && val == false) {
+                    this.updateParameter('longitude', this.longitude)
                 }
             }
         },

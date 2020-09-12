@@ -219,10 +219,10 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { faExclamationTriangle, faRandom, faMicrochip, faChargingStation, faGasPump, faEdit } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-library.add(farCheckCircle, faExclamationTriangle);
+library.add(farCheckCircle, faExclamationTriangle, faRandom, faMicrochip, faChargingStation, faGasPump, faEdit);
     // import LeaderLine from 'leader-line'
     export default {
         components: {

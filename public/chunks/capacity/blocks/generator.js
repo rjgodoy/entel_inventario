@@ -133,6 +133,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalGenerator: function ModalGenerator() {
@@ -142,7 +155,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/capacity/modals/new/newGeneratorSet */ "chunks/capacity/modals/new/newGeneratorSet").then(__webpack_require__.bind(null, /*! ../modals/new/ModalNewGeneratorSet */ "./resources/js/components/capacity/modals/new/ModalNewGeneratorSet.vue"));
     }
   },
-  props: ['generatorSets', 'can', 'user', 'pop'],
+  props: ['can', 'user', 'pop', 'generatorSets', 'totalGeneratorSetsCapacity', 'totalGeneratorSetsUsedCapacity', 'totalAvailableGeneratorSetsCapacity', 'totalGeneratorSetsCapacityA', 'totalGeneratorSetsCapacityB', 'usedGeneratorSetsCapacityA', 'usedGeneratorSetsCapacityB', 'availableGeneratorSetsCapacityA', 'availableGeneratorSetsCapacityB'],
   data: function data() {
     return {
       generatorSetSelected: null,
@@ -187,178 +200,133 @@ __webpack_require__.r(__webpack_exports__);
         'id': id,
         'area': area
       };
-    },
-    totalGeneratorSetsCapacityA: function totalGeneratorSetsCapacityA() {
-      var _this2 = this;
+    } // totalGeneratorSetsCapacityA() {
+    //     let sum = 0; let res = 0; let div = 1; 
+    //     if (this.generatorSets.length) {
+    //         Object.keys(this.generatorSets).forEach(element => {
+    //             let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
+    //             let capacity = primeCapacity * 0.8
+    //             switch(this.generatorSets[element].generator_set_topology_type_id) {
+    //                 case 1:
+    //                     sum = sum + capacity
+    //                     break
+    //                 case 2:
+    //                     sum = sum + capacity
+    //                     res = res + capacity
+    //                     div = div++
+    //                     break
+    //                 case 3:
+    //                     sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum
+    //                     break
+    //                 default:
+    //                     break
+    //             }
+    //         })
+    //     }
+    //     return sum - (res / div)
+    // },
+    // totalGeneratorSetsCapacityB() {
+    //     let sum = 0
+    //     if (this.generatorSets.length) {
+    //         Object.keys(this.generatorSets).forEach(element => {
+    //             let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
+    //             let capacity = primeCapacity * 0.8
+    //             switch(this.generatorSets[element].generator_set_topology_type_id) {
+    //                 case 1:
+    //                 case 2:
+    //                 default:
+    //                     break
+    //                 case 3:
+    //                     sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum
+    //                     break
+    //             }
+    //         })
+    //     }
+    //     return sum
+    // },
+    // totalGeneratorSetsCapacity() {
+    //     var total = 0
+    //     if (this.generatorSetsResponsable.id == 1) {
+    //         total = this.totalGeneratorSetsCapacityA + this.totalGeneratorSetsCapacityB
+    //     } else {
+    //         Object.keys(this.generatorSets).forEach(element => {
+    //             total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.total_capacity : total
+    //         })
+    //     }
+    //     return total
+    // },
+    // usedGeneratorSetsCapacityA() {
+    //     let sum = 0
+    //     if (this.generatorSets.length) {
+    //         Object.keys(this.generatorSets).forEach(element => {
+    //             let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
+    //             switch(this.generatorSets[element].generator_set_topology_type_id) {
+    //                 case 1:
+    //                 case 2:
+    //                     sum = sum + usedCapacity
+    //                     break
+    //                 case 3:
+    //                     sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum
+    //                     break
+    //                 default:
+    //                     break
+    //             }
+    //         })
+    //     }
+    //     return sum
+    // },
+    // usedGeneratorSetsCapacityB() {
+    //     let sum = 0
+    //     if (this.generatorSets.length) {
+    //         Object.keys(this.generatorSets).forEach(element => {
+    //             let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
+    //             switch(this.generatorSets[element].generator_set_topology_type_id) {
+    //                 case 1:
+    //                 case 2:
+    //                 default:
+    //                     break
+    //                 case 3:
+    //                     sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum
+    //                     break
+    //             }
+    //         })
+    //     }
+    //     return sum
+    // },
+    // totalGeneratorSetsUsedCapacity() {
+    //     var total = 0
+    //     if (this.generatorSetsResponsable.id == 1) {
+    //         total = this.usedGeneratorSetsCapacityA + this.usedGeneratorSetsCapacityB
+    //     } else {
+    //         Object.keys(this.generatorSets).forEach(element => {
+    //             total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.used_capacity : total
+    //         })
+    //     }
+    //     return total
+    // },
+    // availableGeneratorSetsCapacityA() {
+    //     return this.totalGeneratorSetsCapacityA - this.usedGeneratorSetsCapacityA
+    // },
+    // availableGeneratorSetsCapacityB() {
+    //     return this.totalGeneratorSetsCapacityB - this.usedGeneratorSetsCapacityB
+    // },
+    // totalAvailableGeneratorSetsCapacity() {
+    //     var total = 0
+    //     if (this.generatorSetsResponsable.id == 1) {
+    //         total = this.availableGeneratorSetsCapacityA + this.availableGeneratorSetsCapacityB
+    //     } else {
+    //         Object.keys(this.generatorSets).forEach(element => {
+    //             total = this.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? this.generatorSets[0].current_generator_set_corp_disponibility.available_capacity : total
+    //         })
+    //     }
+    //     return total
+    // }
 
-      var sum = 0;
-      var res = 0;
-      var div = 1;
-
-      if (this.generatorSets.length) {
-        Object.keys(this.generatorSets).forEach(function (element) {
-          var primeCapacity = _this2.generatorSets[element].current_generator_set_capacity ? _this2.generatorSets[element].current_generator_set_capacity.prime_capacity : 0;
-          var capacity = primeCapacity * 0.8;
-
-          switch (_this2.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-              sum = sum + capacity;
-              break;
-
-            case 2:
-              sum = sum + capacity;
-              res = res + capacity;
-              div = div++;
-              break;
-
-            case 3:
-              sum = _this2.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum;
-              break;
-
-            default:
-              break;
-          }
-        });
-      }
-
-      return sum - res / div;
-    },
-    totalGeneratorSetsCapacityB: function totalGeneratorSetsCapacityB() {
-      var _this3 = this;
-
-      var sum = 0;
-
-      if (this.generatorSets.length) {
-        Object.keys(this.generatorSets).forEach(function (element) {
-          var primeCapacity = _this3.generatorSets[element].current_generator_set_capacity ? _this3.generatorSets[element].current_generator_set_capacity.prime_capacity : 0;
-          var capacity = primeCapacity * 0.8;
-
-          switch (_this3.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-            case 2:
-            default:
-              break;
-
-            case 3:
-              sum = _this3.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum;
-              break;
-          }
-        });
-      }
-
-      return sum;
-    },
-    totalGeneratorSetsCapacity: function totalGeneratorSetsCapacity() {
-      var _this4 = this;
-
-      var total = 0;
-
-      if (this.generatorSetsResponsable.id == 1) {
-        total = this.totalGeneratorSetsCapacityA + this.totalGeneratorSetsCapacityB;
-      } else {
-        Object.keys(this.generatorSets).forEach(function (element) {
-          total = _this4.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? _this4.generatorSets[0].current_generator_set_corp_disponibility.total_capacity : total;
-        });
-      }
-
-      return total;
-    },
-    usedGeneratorSetsCapacityA: function usedGeneratorSetsCapacityA() {
-      var _this5 = this;
-
-      var sum = 0;
-
-      if (this.generatorSets.length) {
-        Object.keys(this.generatorSets).forEach(function (element) {
-          var usedCapacity = _this5.generatorSets[element].current_generator_set_capacity ? _this5.generatorSets[element].current_generator_set_capacity.used_capacity : 0;
-
-          switch (_this5.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-            case 2:
-              sum = sum + usedCapacity;
-              break;
-
-            case 3:
-              sum = _this5.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum;
-              break;
-
-            default:
-              break;
-          }
-        });
-      }
-
-      return sum;
-    },
-    usedGeneratorSetsCapacityB: function usedGeneratorSetsCapacityB() {
-      var _this6 = this;
-
-      var sum = 0;
-
-      if (this.generatorSets.length) {
-        Object.keys(this.generatorSets).forEach(function (element) {
-          var usedCapacity = _this6.generatorSets[element].current_generator_set_capacity ? _this6.generatorSets[element].current_generator_set_capacity.used_capacity : 0;
-
-          switch (_this6.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-            case 2:
-            default:
-              break;
-
-            case 3:
-              sum = _this6.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum;
-              break;
-          }
-        });
-      }
-
-      return sum;
-    },
-    totalGeneratorSetsUsedCapacity: function totalGeneratorSetsUsedCapacity() {
-      var _this7 = this;
-
-      var total = 0;
-
-      if (this.generatorSetsResponsable.id == 1) {
-        total = this.usedGeneratorSetsCapacityA + this.usedGeneratorSetsCapacityB;
-      } else {
-        Object.keys(this.generatorSets).forEach(function (element) {
-          total = _this7.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? _this7.generatorSets[0].current_generator_set_corp_disponibility.used_capacity : total;
-        });
-      }
-
-      return total;
-    },
-    availableGeneratorSetsCapacityA: function availableGeneratorSetsCapacityA() {
-      return this.totalGeneratorSetsCapacityA - this.usedGeneratorSetsCapacityA;
-    },
-    availableGeneratorSetsCapacityB: function availableGeneratorSetsCapacityB() {
-      return this.totalGeneratorSetsCapacityB - this.usedGeneratorSetsCapacityB;
-    },
-    totalAvailableGeneratorSetsCapacity: function totalAvailableGeneratorSetsCapacity() {
-      var _this8 = this;
-
-      var total = 0;
-
-      if (this.generatorSetsResponsable.id == 1) {
-        total = this.availableGeneratorSetsCapacityA + this.availableGeneratorSetsCapacityB;
-      } else {
-        Object.keys(this.generatorSets).forEach(function (element) {
-          total = _this8.generatorSets[element].current_generator_set_corp_disponibility && total == 0 ? _this8.generatorSets[0].current_generator_set_corp_disponibility.available_capacity : total;
-        });
-      }
-
-      return total;
-    }
   },
   watch: {
     generatorSets: function generatorSets(val) {// console.log(val)
     }
-  },
-  mounted: function mounted() {// console.log(this.generatorSets)
-    // this.getGeneratorSets()
-  },
-  methods: {}
+  }
 });
 
 /***/ }),
@@ -382,7 +350,19 @@ var render = function() {
     "div",
     { staticClass: "tile is-parent" },
     [
-      _c("section", { staticClass: "tile box" }, [
+      _c("section", { staticClass: "tile box has-background" }, [
+        _c(
+          "div",
+          { staticClass: "is-box-background is-transparent-light" },
+          [
+            _c("font-awesome-icon", {
+              staticClass: "is-pulled-right",
+              attrs: { icon: ["fas", "charging-station"], size: "10x" }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "tile is-vertical" }, [
           _c("div", { staticClass: "columns" }, [
             _vm._m(0),
@@ -433,7 +413,23 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Agregar Grupo Electrógeno")]
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "media" },
+                          [
+                            _c("font-awesome-icon", {
+                              staticClass: "media-left",
+                              attrs: { icon: ["fas", "plus"] }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "media-content" }, [
+                              _c("h3", [_vm._v("Nuevo Grupo Electrógeno")])
+                            ])
+                          ],
+                          1
+                        )
+                      ]
                     )
                   ],
                   1
@@ -769,7 +765,7 @@ var render = function() {
                             "a",
                             {
                               staticClass:
-                                "tile box is-dark is-bold has-text-warning",
+                                "tile box is-dark is-bold has-text-warning has-background",
                               on: {
                                 click: function($event) {
                                   _vm.isGeneratorModalActive = true
@@ -777,7 +773,31 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._m(1, true)]
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-box-background is-transparent"
+                                },
+                                [
+                                  _c("font-awesome-icon", {
+                                    staticClass: "is-pulled-right",
+                                    staticStyle: {
+                                      "margin-top": "-10px",
+                                      "margin-right": "15px"
+                                    },
+                                    attrs: {
+                                      icon: ["fas", "charging-station"],
+                                      size: "4x"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm._m(1, true)
+                            ]
                           )
                         ]
                       )

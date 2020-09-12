@@ -49,14 +49,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="has-background-black-bis">
     <div id="app">
         @auth
             <router-view
                 :last_data_counters='@json($last_data_counters)'
                 :app_name="'{{ config('app.name') }}'"
                 :user='@json(auth()->user())'
-                :user_permissions='@json(auth()->user()->permissions)'
+                :permissions='@json(auth()->user()->permissions)'
                 :last_updated_data='@json($last_updated_data)'
                 :is_dark_mode="'{{ $darkMode }}'"
             ></router-view>

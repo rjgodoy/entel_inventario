@@ -39,6 +39,26 @@ class Room extends Model
      *
      * @var array
      */
+    public function room_capacities() 
+    {
+        return $this->hasMany(RoomCapacity::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_room_capacity() 
+    {
+        return $this->hasOne(RoomCapacity::class)->latest();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function current_room_surface() 
     {
         return $this->hasOne(RoomSurface::class)->latest();

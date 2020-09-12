@@ -87,6 +87,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -108,13 +138,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/blocks/equipment */ "chunks/capacity/blocks/equipment").then(__webpack_require__.bind(null, /*! ../blocks/Equipment */ "./resources/js/components/capacity/blocks/Equipment.vue"));
     }
   },
-  props: ['user', 'room'],
+  props: ['user', 'room', 'junctions', 'generatorSets', 'planes', 'planeTypes', 'airConditioners', 'canEditJunctions', 'canEditGeneratorSets', 'canEditPowerRectifiers', 'canEditAirConditioners', 'canEditSurface', 'canEditDistribution', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity', 'totalGeneratorSetsCapacity', 'totalGeneratorSetsUsedCapacity', 'totalAvailableGeneratorSetsCapacity', 'totalGeneratorSetsCapacityA', 'totalGeneratorSetsCapacityB', 'usedGeneratorSetsCapacityA', 'usedGeneratorSetsCapacityB', 'availableGeneratorSetsCapacityA', 'availableGeneratorSetsCapacityB', 'totalSurface', 'usedSurface', 'availableSurface', 'totalDistributionCapacity', 'usedDistributionCapacity', 'availableDistributionCapacity'],
   data: function data() {
     return {
-      junctions: Object,
-      generatorSets: Object,
-      canEditJunctions: null,
-      canEditGeneratorGroups: null,
       isEditMode: false,
       newTheoreticalAutonomy: this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
     };
@@ -126,61 +152,24 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   },
   watch: {
     room: function room(val) {
-      this.getJunctions();
-      this.getGeneratorSets();
       this.newTheoreticalAutonomy = this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0;
     }
   },
-  created: function created() {
-    this.$eventBus.$on('junction-measurements-updated', this.getJunctions);
-    this.$eventBus.$on('generator-set-capacities-updated', this.getGeneratorSets);
-    this.$eventBus.$on('new-solar-panel', this.getJunctions);
-  },
-  mounted: function mounted() {
-    this.getJunctions();
-    this.getGeneratorSets();
-  },
   methods: {
-    getJunctions: function getJunctions() {
+    updateAutonomy: function updateAutonomy() {
       var _this = this;
 
-      if (this.pop) {
-        axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
-          _this.junctions = response.data.junctions;
-          _this.canEditJunctions = response.data.can;
-        })["catch"](function (error) {
-          console.log('Error al traer los datos de Empalmes: ' + error);
-        });
-      }
-    },
-    getGeneratorSets: function getGeneratorSets() {
-      var _this2 = this;
-
-      if (this.pop) {
-        axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
-          _this2.generatorSets = response.data.generatorSets;
-          _this2.canEditGeneratorGroups = response.data.can;
-        })["catch"](function (error) {
-          console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
-        });
-      }
-    },
-    updateAutonomy: function updateAutonomy() {
       if (!this.isEditMode && this.pop && this.pop.current_battery_bank_autonomy && this.newTheoreticalAutonomy != this.pop.current_battery_bank_autonomy.theoretical) {
         var params = {
           'pop_id': this.pop.id,
           'theoretical_autonomy': parseFloat(this.newTheoreticalAutonomy)
         };
         axios.post("/api/batteryBankAutonomies", params).then(function (response) {
-          console.log(response.data);
+          _this.$eventBus.$emit('battery-autonomy'); // console.log(response.data)
+
         });
       }
     }
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.$eventBus.$off('junction-measurements-updated');
-    this.$eventBus.$off('generator-set-capacities-updated');
-    this.$eventBus.$off('new-solar-panel');
   }
 });
 
@@ -216,8 +205,23 @@ var render = function() {
             _c("div", { staticClass: "tile is-parent is-4" }, [
               _c(
                 "div",
-                { staticClass: "tile box is-child" },
+                { staticClass: "tile box is-child has-background" },
                 [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "is-box-background is-transparent-light",
+                      staticStyle: { "margin-top": "-20px" }
+                    },
+                    [
+                      _c("font-awesome-icon", {
+                        staticClass: "is-pulled-right",
+                        attrs: { icon: ["fas", "car-battery"], size: "10x" }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
                   _c("div", { staticClass: "columns" }, [
                     _vm._m(1),
                     _vm._v(" "),
@@ -292,7 +296,11 @@ var render = function() {
                     pop: _vm.pop,
                     junctions: _vm.junctions,
                     can: _vm.canEditJunctions,
-                    user: _vm.user
+                    user: _vm.user,
+                    totalJunctionsCapacity: _vm.totalJunctionsCapacity,
+                    totalUsedJunctionsCapacity: _vm.totalUsedJunctionsCapacity,
+                    totalAvailableJunctionsCapacity:
+                      _vm.totalAvailableJunctionsCapacity
                   }
                 })
               ],
@@ -308,8 +316,26 @@ var render = function() {
                       attrs: {
                         pop: _vm.pop,
                         generatorSets: _vm.generatorSets,
-                        can: _vm.canEditGeneratorGroups,
-                        user: _vm.user
+                        can: _vm.canEditGeneratorSets,
+                        user: _vm.user,
+                        totalGeneratorSetsCapacity:
+                          _vm.totalGeneratorSetsCapacity,
+                        totalGeneratorSetsUsedCapacity:
+                          _vm.totalGeneratorSetsUsedCapacity,
+                        totalAvailableGeneratorSetsCapacity:
+                          _vm.totalAvailableGeneratorSetsCapacity,
+                        totalGeneratorSetsCapacityA:
+                          _vm.totalGeneratorSetsCapacityA,
+                        totalGeneratorSetsCapacityB:
+                          _vm.totalGeneratorSetsCapacityB,
+                        usedGeneratorSetsCapacityA:
+                          _vm.usedGeneratorSetsCapacityA,
+                        usedGeneratorSetsCapacityB:
+                          _vm.usedGeneratorSetsCapacityB,
+                        availableGeneratorSetsCapacityA:
+                          _vm.availableGeneratorSetsCapacityA,
+                        availableGeneratorSetsCapacityB:
+                          _vm.availableGeneratorSetsCapacityB
                       }
                     })
                   ],
@@ -340,7 +366,25 @@ var render = function() {
               { staticClass: "tile is-parent" },
               [
                 _c("Equipment", {
-                  attrs: { pop: _vm.pop, room: _vm.room, user: _vm.user }
+                  attrs: {
+                    pop: _vm.pop,
+                    room: _vm.room,
+                    user: _vm.user,
+                    planes: _vm.planes,
+                    planeTypes: _vm.planeTypes,
+                    airConditioners: _vm.airConditioners,
+                    canEditPowerRectifiers: _vm.canEditPowerRectifiers,
+                    canEditAirConditioners: _vm.canEditAirConditioners,
+                    canEditSurface: _vm.canEditSurface,
+                    canEditDistribution: _vm.canEditDistribution,
+                    totalSurface: _vm.totalSurface,
+                    usedSurface: _vm.usedSurface,
+                    availableSurface: _vm.availableSurface,
+                    totalDistributionCapacity: _vm.totalDistributionCapacity,
+                    usedDistributionCapacity: _vm.usedDistributionCapacity,
+                    availableDistributionCapacity:
+                      _vm.availableDistributionCapacity
+                  }
                 })
               ],
               1

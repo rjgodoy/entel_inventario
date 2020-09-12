@@ -208,7 +208,7 @@ class PopController extends Controller
             'localidad_obligatoria' => $request->localidad_obligatoria,
             'ranco' => $request->ranco,
             'vip' => $request->vip,
-            'offgrid' => $request->offgrid,
+            'energy_system_id' => $request->energy_system ? 2 : 1,
             'solar' => $request->solar,
             'eolica' => $request->eolica,
         ]);
@@ -239,7 +239,7 @@ class PopController extends Controller
             'order' => 0,
         ]);
 
-        return $pop;
+        return 'success';
     }
 
     /**

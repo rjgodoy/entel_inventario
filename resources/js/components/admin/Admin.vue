@@ -47,7 +47,7 @@
             AdminFiles: () => import(/* webpackChunkName: "chunks/admin/files"*/"./AdminFiles"),
         },
         props : [
-            'user'
+            'user',
         ],
         created() {
             this.getTabs()

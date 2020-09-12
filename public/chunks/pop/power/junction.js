@@ -464,6 +464,7 @@ __webpack_require__.r(__webpack_exports__);
       junctionTypes: [],
       junctionConnectionId: this.junction.junction_connection_id,
       junctionConnections: [],
+      // current_junction_total: this.junction.pop.room && this.junction.pop.room[0].current_room_capacity.junction_total,
       isEditJunctionModalActive: false,
       isEditMode: false,
       clientNumber: this.junction.client_number,
@@ -474,6 +475,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     junction: function junction(val) {
+      if (this.junction.pop && this.junction.pop.rooms) {
+        console.log(this.junction.pop.rooms[0].current_room_capacity);
+      }
+
       this.junctionTypeId = val.junction_type_id, this.junctionConnectionId = val.junction_connection_id, this.clientNumber = val.client_number, this.junctionNumber = val.junction_number, this.useFactor = val.use_factor, this.punctualConsumption = val.latest_measurement ? val.latest_measurement.punctual_consumption : 0;
     }
   },
@@ -628,7 +633,6 @@ __webpack_require__.r(__webpack_exports__);
       return capacity / 1000;
     },
     averageConsumptionPerPhotovoltaicGroup: function averageConsumptionPerPhotovoltaicGroup() {
-      // FALTA MEDICIONES DE PANELES FOTOVOLTAICOS
       return 0;
     },
     totalCapacity: function totalCapacity() {
@@ -689,7 +693,8 @@ __webpack_require__.r(__webpack_exports__);
         };
         axios.put("/api/junctionUpdateTypes/".concat(this.junction.id), params).then(function (response) {
           console.log(response.data);
-        });
+        }); // Si el total, usado y disponible es distinto de lo que está en el original, guardar
+        // if ()
       } else {
         console.log('change what you want!');
       }

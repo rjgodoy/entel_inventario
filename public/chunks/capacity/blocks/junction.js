@@ -131,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newJunction */ "chunks/pop/layout/modals/newJunction").then(__webpack_require__.bind(null, /*! ../modals/new/ModalNewJunction */ "./resources/js/components/capacity/modals/new/ModalNewJunction.vue"));
     }
   },
-  props: ['can', 'user', 'pop', 'junctions', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity'],
+  props: ['canEditJunctions', 'user', 'pop', 'junctions', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity'],
   data: function data() {
     return {
       junctionSelected: null,
@@ -347,76 +347,86 @@ var render = function() {
           _c("div", { staticClass: "columns" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "column" },
-              [
-                _c(
-                  "b-dropdown",
-                  {
-                    staticClass: "is-pulled-right",
-                    attrs: { "aria-role": "list", position: "is-bottom-left" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "trigger",
-                        fn: function(ref) {
-                          var active = ref.active
-                          return _c(
-                            "button",
-                            { staticClass: "button is-default is-small" },
-                            [
-                              _c(
-                                "span",
-                                [
-                                  _c("font-awesome-icon", {
-                                    attrs: { icon: ["fas", "ellipsis-v"] }
-                                  })
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        }
-                      }
-                    ])
-                  },
+            _vm.canEditJunctions
+              ? _c(
+                  "div",
+                  { staticClass: "column" },
                   [
-                    _vm._v(" "),
                     _c(
-                      "b-dropdown-item",
+                      "b-dropdown",
                       {
-                        staticClass: "is-size-6",
-                        attrs: { "aria-role": "listitem" },
-                        on: {
-                          click: function($event) {
-                            _vm.isNewJunctionModalActive = true
-                          }
-                        }
+                        staticClass: "is-pulled-right",
+                        attrs: {
+                          "aria-role": "list",
+                          position: "is-bottom-left"
+                        },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "trigger",
+                              fn: function(ref) {
+                                var active = ref.active
+                                return _c(
+                                  "button",
+                                  { staticClass: "button is-default is-small" },
+                                  [
+                                    _c(
+                                      "span",
+                                      [
+                                        _c("font-awesome-icon", {
+                                          attrs: { icon: ["fas", "ellipsis-v"] }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              }
+                            }
+                          ],
+                          null,
+                          false,
+                          1113762171
+                        )
                       },
                       [
+                        _vm._v(" "),
                         _c(
-                          "div",
-                          { staticClass: "media" },
+                          "b-dropdown-item",
+                          {
+                            staticClass: "is-size-6",
+                            attrs: { "aria-role": "listitem" },
+                            on: {
+                              click: function($event) {
+                                _vm.isNewJunctionModalActive = true
+                              }
+                            }
+                          },
                           [
-                            _c("font-awesome-icon", {
-                              staticClass: "media-left",
-                              attrs: { icon: ["fas", "plus"] }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-content" }, [
-                              _c("h3", [_vm._v("Nuevo Empalme")])
-                            ])
-                          ],
-                          1
+                            _c(
+                              "div",
+                              { staticClass: "media" },
+                              [
+                                _c("font-awesome-icon", {
+                                  staticClass: "media-left",
+                                  attrs: { icon: ["fas", "plus"] }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "media-content" }, [
+                                  _c("h3", [_vm._v("Nuevo Empalme")])
+                                ])
+                              ],
+                              1
+                            )
+                          ]
                         )
-                      ]
+                      ],
+                      1
                     )
                   ],
                   1
                 )
-              ],
-              1
-            )
+              : _vm._e()
           ]),
           _vm._v(" "),
           _vm.junctions.length
@@ -441,7 +451,10 @@ var render = function() {
                             {
                               staticClass:
                                 "tile box is-shadowless is-paddingless",
-                              staticStyle: { border: "solid 0.05rem black" }
+                              staticStyle: {
+                                border: "solid 0.05rem black",
+                                "background-color": "rgba(255, 255, 255, 0.8)"
+                              }
                             },
                             [
                               _c("div", { staticClass: "tile" }, [
@@ -637,12 +650,14 @@ var render = function() {
                   )
                 ])
               ])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.junctions.length
+            ? _c("div", { staticClass: "tile columns is-vcentered" }, [
+                _vm._m(2)
+              ])
             : _vm._e()
-        ]),
-        _vm._v(" "),
-        !_vm.junctions.length
-          ? _c("div", { staticClass: "tile columns is-vcentered" }, [_vm._m(2)])
-          : _vm._e()
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -665,7 +680,7 @@ var render = function() {
           _c("modal-junction", {
             attrs: {
               junction: _vm.junctionSelected,
-              can: _vm.can,
+              canEditJunctions: _vm.canEditJunctions,
               user: _vm.user
             }
           })

@@ -225,7 +225,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
-      { staticClass: "table is-fullwidth", class: _vm.boxBackground },
+      {
+        staticClass: "table is-fullwidth",
+        staticStyle: { "background-color": "rgba(0,0,0,0)" }
+      },
       [
         _c("thead", [
           _c("tr", { staticClass: "is-size-7" }, [

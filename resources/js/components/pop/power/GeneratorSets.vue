@@ -7,7 +7,7 @@
                 <div class="column is-2"></div>
                 <generator-set class="column is-8" 
                     :generatorSet="generatorSet"
-                    :can="can"
+                    :canEditGeneratorSets="canEditGeneratorSets"
                     :user="user"
                     :pop="pop"/>
                 <div class="column is-2"></div>
@@ -31,7 +31,7 @@
         data() {
             return {
                 generatorSets: Array,
-                can: null
+                canEditGeneratorSets: null
             }
         },
         
@@ -47,7 +47,7 @@
                 axios.get(`/api/generatorSets/${this.pop.id}`)
                 .then((response) => {
                     this.generatorSets = response.data.generatorSets
-                    this.can = response.data.can
+                    this.canEditGeneratorSets = response.data.can.update
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);

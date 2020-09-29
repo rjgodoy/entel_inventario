@@ -124,7 +124,7 @@ export default {
 </script>
 
 <style scoped>
-    @import './../../../../node_modules/c3/c3.min.css';
+    @import './../../../../../node_modules/c3/c3.min.css';
     /* .c3-region.projection {
         fill: green;
     } */

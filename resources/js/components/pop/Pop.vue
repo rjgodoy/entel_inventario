@@ -24,7 +24,10 @@
 
                         <div class="column is-5">
                             <div class="is-size-4">
-                                <h1 class="title">{{ pop.nombre }}</h1>
+                                <h1 class="title" v-if="!isEditMode || !noMovil">{{ pop.nombre }}</h1>
+
+                                <b-input class="is-size-5 has-text-weight-semibold" v-model="popName" v-if="isEditMode && noMovil"></b-input>
+
                                 <h2 class="subtitle" style="margin-bottom: 4px;">{{ popNems }}
                                     <span class="is-size-5" v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
                                     </span>
@@ -334,6 +337,8 @@
                 tabs: null,
                 currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'location',
 
+                popName: '',
+
                 isEmpty: false,
                 isBordered: false,
                 isStriped: true,
@@ -359,6 +364,22 @@
         },
 
         computed: {
+            noMovil() {
+                let bool = true
+                let i = 0
+                let m = 0
+                if (this.pop.sites) {
+                    Object.keys(this.pop.sites).forEach(site => {
+                        i++
+                        if (this.pop.sites[site].site_type_id == 2) {
+                            bool = false 
+                            m++
+                        }
+                    })
+                }
+                return i > 0 && i == m ? bool : true
+            },
+
             canViewLog() {
                 return this.user.roles[0].id == 1 
                     || this.user.roles[0].id == 2
@@ -572,7 +593,35 @@
             // }
         },
 
+        watch: {
+            isEditMode(val) {
+                if(this.popName != this.pop.nombre && val == false) {
+                    this.updateParameter('nombre', this.popName)
+                }
+            }
+        },
+
         methods: {
+            updateParameter(param, val) {
+                let params = {
+                    'parameter': param,
+                    'value': val,
+                    'user_id': this.user.id
+                }
+
+                axios.put(`/api/pop/${this.pop.id}`, params)
+                .then(response => {
+                    // console.log(response.data)
+                    this.$buefy.toast.open({
+                        message: 'Parámetro actualizado exitosamente.',
+                        type: 'is-success',
+                        duration: 2000
+                    })
+                    this.$eventBus.$emit('parameter-updated');
+                })
+                
+            },
+
             getTabs() {
                 axios.get(`/api/popMenu`).then((response) => {
                     // console.log(response.data.data)
@@ -594,6 +643,7 @@
                 axios.get(`/api/pop/${this.$route.params.id}`)
                 .then((response) => {
                     this.pop = response.data.data
+                    this.popName = this.pop.nombre
                 })
             },
 

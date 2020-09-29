@@ -10,11 +10,12 @@ import c3 from 'c3'
 import * as d3 from 'd3'
 export default {
     props : [
-        'chartData'
+        'room'
     ],
     
     data() {
         return {
+            chartData: Object,
             chart: '',
             data: {
                 x: 'x',
@@ -89,13 +90,13 @@ export default {
                     value: d3.format('.1%'),
                 }
             },
-            regions: [
-                { 
-                    start: moment().format('YYYY-MM') + '-01', 
-                    end: this.chartData[0].projected_at,
-                    // class: 'projection' 
-                },
-            ],
+            // regions: [
+            //     { 
+            //         start: moment().format('YYYY-MM') + '-01', 
+            //         end: this.chartData[0].created_at,
+            //         // class: 'projection' 
+            //     },
+            // ],
             zoom: {
                 enabled: true
             },
@@ -109,12 +110,20 @@ export default {
     },
 
     mounted() {
-        this.graph()
+        this.getChartData()
     },
 
     methods: {
+        getChartData() {
+            axios.get(`/api/roomCapacities/${this.room.id}`)
+            .then(response => {
+                this.chartData = response.data
+                this.graph()
+            })
+        },
 
         graph() {
+            console.log(this.chartData)
             var dates = ['x']
             var junctionData = ['Empalme']
             var generatorData = ['Generador']
@@ -124,14 +133,25 @@ export default {
             var climateData = ['Clima']
             var spaceData = ['Espacio']
 
-            this.chartData.forEach(element => { dates.push( element.projected_at ) });
-            this.chartData.forEach(element => { junctionData.push( element.junction ) });
-            this.chartData.forEach(element => { generatorData.push( element.generator ) });
-            this.chartData.forEach(element => { rectifierData.push( element.rectifier ) });
-            this.chartData.forEach(element => { batteryData.push( element.battery ) });
-            this.chartData.forEach(element => { distributionData.push( element.distribution ) });
-            this.chartData.forEach(element => { climateData.push( element.climate ) });
-            this.chartData.forEach(element => { spaceData.push( element.space ) });
+            if (this.chartData) {
+                Object.keys(this.chartData).forEach(element => { dates.push( this.chartData[element].created_at ) });
+                Object.keys(this.chartData).forEach(element => { junctionData.push( this.chartData[element].junction_available / this.chartData[element].junction_total ) });
+                Object.keys(this.chartData).forEach(element => { generatorData.push( this.chartData[element].generator_available / this.chartData[element].generator_total ) });
+                Object.keys(this.chartData).forEach(element => { rectifierData.push( this.chartData[element].rectifier_available / this.chartData[element].rectifier_total ) });
+                Object.keys(this.chartData).forEach(element => { batteryData.push( this.chartData[element].battery_available / this.chartData[element].battery_total ) });
+                Object.keys(this.chartData).forEach(element => { distributionData.push( this.chartData[element].distribution_available / this.chartData[element].distribution_total ) });
+                Object.keys(this.chartData).forEach(element => { climateData.push( this.chartData[element].climate_available / this.chartData[element].climate_total ) });
+                Object.keys(this.chartData).forEach(element => { spaceData.push( this.chartData[element].surface_available / this.chartData[element].surface_total ) });
+            }
+
+            // this.chartData.forEach(element => { dates.push( element.created_at ) });
+            // this.chartData.forEach(element => { junctionData.push( element.junction_available ) });
+            // this.chartData.forEach(element => { generatorData.push( element.generator_available ) });
+            // this.chartData.forEach(element => { rectifierData.push( element.rectifier_available ) });
+            // this.chartData.forEach(element => { batteryData.push( element.battery_available ) });
+            // this.chartData.forEach(element => { distributionData.push( element.distribution_available ) });
+            // this.chartData.forEach(element => { climateData.push( element.climate_available ) });
+            // this.chartData.forEach(element => { spaceData.push( element.surface_available ) });
 
             this.data.columns.push(dates)
             this.data.columns.push(junctionData)
@@ -160,7 +180,7 @@ export default {
 </script>
 
 <style scoped>
-    @import './../../../../node_modules/c3/c3.min.css';
+    @import './../../../../../node_modules/c3/c3.min.css';
     /* .c3-region.projection {
         fill: green;
     } */

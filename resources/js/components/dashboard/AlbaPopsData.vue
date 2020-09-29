@@ -4,7 +4,7 @@
             <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Proyecto Alba</div>
             <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ data.total | numeral('0,0') }}</div>
         </div>
-        <table class="table is-fullwidth" :class="boxBackground">
+        <table class="table is-fullwidth" style="background-color: rgba(0,0,0,0)">
             <thead>
                 <tr class="is-size-7">
                     <th class="has-text-left" :class="secondaryText"><abbr title="Nemónico">Nemónico</abbr></th>

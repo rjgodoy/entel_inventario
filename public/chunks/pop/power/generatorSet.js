@@ -304,9 +304,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['can', 'generatorSet', 'user'],
+  props: ['canEditGeneratorSets', 'generatorSet', 'user'],
   data: function data() {
     return {
       maintainers: [],
@@ -494,10 +499,9 @@ __webpack_require__.r(__webpack_exports__);
     saveChanges: function saveChanges() {
       var _this11 = this;
 
-      console.log(this.currentGeneratorResponsableAreaId);
-
+      // console.log(this.currentGeneratorResponsableAreaId)
       if (!this.isEditMode && (this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.generatorSet.generator_set_type_id != this.generator_set_type_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
-        console.log(this.currentGeneratorResponsableAreaId);
+        // console.log(this.currentGeneratorResponsableAreaId)
         var params = {
           'user_id': parseFloat(this.user.id),
           'generator_set_id': parseFloat(this.generatorSet.id),
@@ -508,14 +512,29 @@ __webpack_require__.r(__webpack_exports__);
           'generator_set_topology_type_id': parseFloat(this.topology_id),
           'generator_set_level_type_id': parseFloat(this.level_id),
           'generator_set_type_id': parseFloat(this.generator_set_type_id)
-        };
-        console.log(params);
-        axios.put("/api/generatorSets/".concat(this.generatorSet.id), params).then(function (response) {
-          console.log(response.data);
+        }; // console.log(params)
 
+        axios.put("/api/generatorSets/".concat(this.generatorSet.id), params).then(function (response) {
           _this11.$eventBus.$emit('generator-set-capacities-updated');
         });
       }
+    },
+    deleteGeneratorSet: function deleteGeneratorSet() {
+      var _this12 = this;
+
+      console.log(this.generatorSet);
+      this.$buefy.dialog.confirm({
+        message: "Confirma la eliminaci\xF3n del Grupo Electr\xF3geno de la sala?",
+        type: 'is-link',
+        onConfirm: function onConfirm() {
+          axios["delete"]("/api/generatorSets/".concat(_this12.generatorSet.id)).then(function (response) {
+            // console.log(response.data)
+            _this12.$parent.close();
+
+            _this12.$eventBus.$emit('generator-set-capacities-updated');
+          });
+        }
+      });
     }
   }
 });
@@ -991,12 +1010,12 @@ var render = function() {
                         [
                           _vm._v(
                             _vm._s(
-                              _vm.currentGeneratorGroup
+                              _vm.currentGeneratorGroup.power
                                 ? _vm.currentGeneratorGroup.power
                                 : "Sin información"
                             ) + " "
                           ),
-                          _vm.currentGeneratorGroup
+                          _vm.currentGeneratorGroup.power
                             ? _c("span", { staticClass: "is-size-7" }, [
                                 _vm._v("kW")
                               ])
@@ -1310,7 +1329,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm.can.update
+        _vm.canEditGeneratorSets
           ? _c(
               "div",
               { staticClass: "field has-text-centered" },
@@ -1344,7 +1363,29 @@ var render = function() {
                     )
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _vm.isEditMode
+                  ? _c(
+                      "b-button",
+                      {
+                        staticClass: "is-pulled-right",
+                        attrs: { type: "is-danger", size: "is-small" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteGeneratorSet()
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "trash"] }
+                        }),
+                        _vm._v("\n                   Eliminar\n            ")
+                      ],
+                      1
+                    )
+                  : _vm._e()
               ],
               1
             )

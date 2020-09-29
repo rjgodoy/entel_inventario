@@ -44,6 +44,15 @@
             </div>
             
         </div>
+        <div class="columns">
+            <div class="column">
+                <div class="box">
+                    <ProjectionChart
+                        :room="room"
+                    />
+                </div>
+            </div>
+        </div>
         
     </div>
     
@@ -61,7 +70,8 @@ var numeral = require('numeral');
 export default {
     components: {
         RoomLights: () => import(/* webpackChunkName: "chunks/capacity/roomLights"*/'../RoomLights'),
-        GaugeChart: () => import(/* webpackChunkName: "chunks/capacity/gaugeChart"*/'../GaugeChart'),
+        GaugeChart: () => import(/* webpackChunkName: "chunks/capacity/gaugeChart"*/'../charts/GaugeChart'),
+        ProjectionChart: () => import(/* webpackChunkName: "chunks/capacity/charts/projectionChart"*/'../charts/ProjectionChart')
     },
 
     props : [ 
@@ -72,7 +82,7 @@ export default {
         'availableClimate',
         'availableSurface',
         'user', 
-        'room'
+        'room',
     ],
 
     data() {

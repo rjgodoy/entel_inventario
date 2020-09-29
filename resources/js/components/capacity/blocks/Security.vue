@@ -8,10 +8,10 @@
 
                 <div class="tile is-parent is-vertical" v-if="room.current_fire_detection">
                     <b-field label="INCENDIO" label-position="on-border" class="has-text-grey-light">
-                        <div class="box is-shadowless has-background has-text-centered" style="border: solid 0.01rem #aaa">
-                            <div class="is-box-background is-transparent-light">
+                        <div class="box is-shadowless has-background has-text-centered" style="border: solid 0.01rem #aaa; background-color: rgba(255, 255, 255, 0.8)">
+                            <!-- <div class="is-box-background is-transparent-light">
                                 <font-awesome-icon :icon="['fas', 'fire']" size="4x" class="is-pulled-right" style=""/>
-                            </div>
+                            </div> -->
                             <div class="columns is-vcentered">
                                 <div class="column">
                                     <div class="">
@@ -45,10 +45,10 @@
                 </div>
                 <div class="tile is-parent is-vertical" v-if="room.current_fire_detection">
                     <b-field label="INCENDIO" label-position="on-border" class="has-text-grey-light">
-                        <div class="box is-shadowless has-background has-text-centered" style="border: solid 0.01rem #aaa">
-                            <div class="is-box-background is-transparent-light">
-                                <font-awesome-icon :icon="['fas', 'fire']" size="4x" class="is-pulled-right" style=""/>
-                            </div>
+                        <div class="box is-shadowless has-background has-text-centered" style="border: solid 0.01rem #aaa; background-color: rgba(255, 255, 255, 0.8)">
+                            <!-- <div class="is-box-background is-transparent-light">
+                                <font-awesome-icon :icon="['fas', 'fire']" size="5x" class="is-pulled-right" style="padding-right: 16px; margin-top: -10px"/>
+                            </div> -->
                             <div class="columns is-vcentered">
                                 <div class="column">
                                     <div class="">

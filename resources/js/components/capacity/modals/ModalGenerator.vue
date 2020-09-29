@@ -8,7 +8,7 @@
                 :generatorSet="generatorSet"
                 :pop="pop"
                 :user="user"
-                :can="can"
+                :canEditGeneratorSets="canEditGeneratorSets"
             />
         </section>
         <!-- <footer class="modal-card-foot" style="background: rgba(0,0,0,0)"> -->
@@ -25,7 +25,7 @@
         },
         props : [
             'pop',
-            'can',
+            'canEditGeneratorSets',
             'user',
             'generatorSet'
         ],

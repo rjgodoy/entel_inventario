@@ -62,6 +62,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -76,7 +85,10 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
       return __webpack_require__.e(/*! import() | chunks/capacity/roomLights */ "chunks/capacity/roomLights").then(__webpack_require__.bind(null, /*! ../RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
     },
     GaugeChart: function GaugeChart() {
-      return Promise.all(/*! import() | chunks/capacity/gaugeChart */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks~efdab41a"), __webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/capacity/gaugeChart")]).then(__webpack_require__.bind(null, /*! ../GaugeChart */ "./resources/js/components/capacity/GaugeChart.vue"));
+      return Promise.all(/*! import() | chunks/capacity/gaugeChart */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/capacity/gaugeChart")]).then(__webpack_require__.bind(null, /*! ../charts/GaugeChart */ "./resources/js/components/capacity/charts/GaugeChart.vue"));
+    },
+    ProjectionChart: function ProjectionChart() {
+      return Promise.all(/*! import() | chunks/capacity/charts/projectionChart */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("vendors~chunks/capacity/charts/projectionChart"), __webpack_require__.e("chunks/capacity/charts/projectionChart")]).then(__webpack_require__.bind(null, /*! ../charts/ProjectionChart */ "./resources/js/components/capacity/charts/ProjectionChart.vue"));
     }
   },
   props: ['totalEnergy', 'totalClimate', 'totalSurface', 'availableEnergy', 'availableClimate', 'availableSurface', 'user', 'room'],
@@ -176,6 +188,17 @@ var render = function() {
               ])
             ])
           ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column" }, [
+        _c(
+          "div",
+          { staticClass: "box" },
+          [_c("ProjectionChart", { attrs: { room: _vm.room } })],
           1
         )
       ])

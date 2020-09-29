@@ -10,7 +10,7 @@
                     <div class="tile is-child has-text-right">
                         <div class="has-text-weight-light is-size-7">Tipo Alimentación</div>
                         <div v-if="!isEditMode">
-                            <div class="has-text-weight-bold is-size-5">{{ planeDelegationType.type }}</div>
+                            <div class="has-text-weight-bold is-size-5">{{ planeDelegationType && planeDelegationType.type }}</div>
                         </div>
 
                         <div v-if="isEditMode">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="field">
                             <a @click="isEditMode=!isEditMode">
-                                <b-tag v-if="canEditSurface" :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small">
+                                <b-tag v-if="canEditPlaneTypes" :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small">
                                     {{ isEditMode ? 'Guardar' : 'Editar' }}
                                 </b-tag>
                             </a>
@@ -40,7 +40,10 @@
 
             <div class="tile">
                 <div class="tile is-parent is-8">
-                    <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa">
+                    <div class="tile box is-shadowless has-background" style="border: solid 0.01rem #aaa">
+                        <div class="is-box-background is-transparent-light">
+                            <font-awesome-icon :icon="['fas', 'bezier-curve']" size="10x" class="is-pulled-right" style=""/>
+                        </div>
                         <div class="tile is-vertical" >
 
                             <div class="columns">
@@ -64,10 +67,10 @@
                                 </div>
                             </div>
 
-                            <div class="tile is-parent" v-if="room.planes.length">
+                            <div class="tile is-parent" v-if="room.planes && room.planes.length">
                                 <b-field label="CAPACIDAD SALA" label-position="on-border" class="tile has-text-grey-light">
 
-                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.01rem #aaa">
+                                    <div class="tile is-parent box is-shadowless" style="border: solid 0.01rem #aaa; background-color: rgba(255, 255, 255, 0.8)">
                                         <div class="tile columns is-vcentered">
                                             <div class="column tile is-vertical">
 
@@ -112,10 +115,13 @@
                                 </b-field>
                             </div>
 
-                            <div class="tile is-parent" v-if="room.planes.length">
+                            <div class="tile is-parent" v-if="room.planes && room.planes.length">
                                 <div class="tile columns is-multiline">
                                     <div class="tile is-parent column is-6" v-for="plane in planes" :key="plane.id">
-                                        <div class="tile is-parent box is-shadowless" style="border: solid 0.01rem #aaa">
+                                        <div class="tile is-parent box is-shadowless has-background" style="border: solid 0.01rem #aaa">
+                                            <div class="is-box-background is-transparent-light">
+                                                <font-awesome-icon :icon="['fas', 'bezier-curve']" size="6x" class="is-pulled-right" style=""/>
+                                            </div>
                                             <div class="tile is-vertical">
 
                                                 <div class="columns">
@@ -125,12 +131,12 @@
                                                     <div class="column">
                                                         <b-field class="is-pulled-right" grouped>
                                                             <div class="has-text-centered">
-                                                                <b-tooltip position="is-bottom" type="is-dark" multilined>
-                                                                    <button class="button is-link is-small is-inverted">
+                                                                <b-tooltip position="is-left" type="is-dark" multilined>
+                                                                    <button class="button is-default is-small has-text-link">
                                                                         <font-awesome-icon :icon="['fas', 'info-circle']" />
                                                                     </button>
                                                                     <template v-slot:content>
-                                                                        <div class="has-text-left" style="padding: 4px">
+                                                                        <div class="has-text-left" style="padding: 4">
                                                                             <div class="is-size-7">Capacidad nominal: {{ nominalCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
                                                                             <div class="is-size-7">Capacidad instalada: {{ installedCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
                                                                             <div class="is-size-7">Potencia real de carga: {{ chargeRealPower(plane) | numeral('0.0') }} <span class="is-size-7">%</span></div>
@@ -185,7 +191,7 @@
 
                                                 <div class="tile is-parent">
                                                     <b-field label="PARAMETROS PLANO" label-position="on-border" class="tile">
-                                                        <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa">
+                                                        <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa; background-color: rgba(255, 255, 255, 0.8)">
                                                             <div class="tile columns is-vcentered">
                                                                 <div class="column is-4 has-text-centered">
                                                                     <div class="has-text-weight-semibold is-size-6">
@@ -238,14 +244,6 @@
                                                     </b-field>
                                                 </div>
 
-                                                <!-- <div class="tile is-parent" v-if="canEditPowerRectifiers">
-                                                    <div class="tile is-child has-text-centered">
-                                                        <b-button class="is-default has-text-weight-light has-text-grey is-size-7">
-                                                            <a @click="isNewBatteryBankModalActive = true; selectedPlane = plane">Nuevo Banco de Baterías</a>
-                                                        </b-button>
-                                                    </div>
-                                                </div> -->
-
                                                 <div class="tile is-parent" v-if="plane.battery_banks.length && room.power_rectifiers.length">
                                                     <b-field label="BANCOS BATERIAS" label-position="on-border" class="tile">
                                                         <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
@@ -290,7 +288,10 @@
                 </div>
 
                 <div class="tile is-parent">
-                    <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa">
+                    <div class="tile box is-shadowless has-background" style="border: solid 0.01rem #aaa">
+                        <div class="is-box-background is-transparent-light">
+                            <font-awesome-icon :icon="['fas', 'wind']" size="10x" class="is-pulled-right" style=""/>
+                        </div>
                         <div class="tile is-vertical">
 
                             <div class="columns">
@@ -324,7 +325,7 @@
 
                             <div class="tile is-parent" v-if="room.current_air_conditioner_capacity">
                                 <b-field label="CAPACIDADES CLIMA" label-position="on-border" class="tile">
-                                    <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa">
+                                    <div class="tile box is-shadowless" style="border: solid 0.01rem #aaa; background-color: rgba(255, 255, 255, 0.7)">
                                         <div class="tile columns is-vcentered">
                                             <div class="column has-text-centered">
                                                 <div class="has-text-weight-semibold is-size-6">{{ totalAirConditionerCapacity | numeral('0,0.0') }}  <span class="is-size-7">kW</span></div>
@@ -423,6 +424,20 @@
                 <modal-power-rectifier 
                     :powerRectifier="powerRectifierSelected"
                     :canEdit="canEditPowerRectifiers"
+                    :pop="pop"
+                    :user="user"
+                    />
+            </b-modal>
+
+            <b-modal :active.sync="isbatteryBankModalActive"
+                has-modal-card
+                trap-focus
+                aria-role="dialog"
+                aria-modal>
+                <modal-battery-bank 
+                    :batteryBank="batteryBankSelected"
+                    :pop="pop"
+                    :canEdit="canEditPowerRectifiers"
                     :user="user"
                     />
             </b-modal>
@@ -500,6 +515,7 @@
             Security: () => import(/* webpackChunkName: "chunks/capacity/surface"*/'./Security'),
             Distribution: () => import(/* webpackChunkName: "chunks/capacity/surface"*/'./Distribution'),
             ModalPowerRectifier: () => import(/* webpackChunkName: "chunks/capacity/modals/powerRectifier"*/'../modals/ModalPowerRectifier'),
+            ModalBatteryBank: () => import(/* webpackChunkName: "chunks/capacity/modals/powerRectifier"*/'../modals/ModalBatteryBank'),
             ModalAirConditioner: () => import(/* webpackChunkName: "chunks/capacity/modals/airConditioner"*/'../modals/ModalAirConditioner'),
             ModalNewPowerRectifier: () => import(/* webpackChunkName: "chunks/capacity/modals/new/newPowerRectifier"*/'../modals/new/ModalNewPowerRectifier'),
             ModalNewBatteryBank: () => import(/* webpackChunkName: "chunks/capacity/modals/new/newBatteryBank"*/'../modals/new/ModalNewBatteryBank'),
@@ -519,6 +535,7 @@
             // 'canEditAirConditioners',
             'canEditSurface',
             'canEditDistribution',
+            'canEditPlaneTypes',
 
             'totalSurface',
             'usedSurface',
@@ -537,12 +554,14 @@
 
                 planeSelected: null,
                 powerRectifierSelected: null,
+                batteryBankSelected: null,
                 airConditionerSelected: null,
 
                 canEditPowerRectifiers: null,
                 canEditAirConditioners: null,
 
                 isPowerRectifierModalActive: false,
+                isbatteryBankModalActive: false,
                 isAirConditionerModalActive: false,
                 isDistributionModalActive: false,
                 isSurfaceModalActive: false,
@@ -736,14 +755,16 @@
             },
 
             getPlanes() {
-                axios.get(`/api/roomPlanes/${this.room.id}?plane_delegation_type_id=${this.planeDelegationType.id}`)
-                .then((response) => {
-                    this.planes = response.data.planes
-                    this.canEditPowerRectifiers = response.data.can ? response.data.can.update : false
-                })
-                .catch((error) => {
-                    console.log('Error al traer los datos de Empalmes: ' + error);
-                });
+                if (this.planeDelegationType) {
+                    axios.get(`/api/roomPlanes/${this.room.id}?plane_delegation_type_id=${this.planeDelegationType.id}`)
+                    .then((response) => {
+                        this.planes = response.data.planes
+                        this.canEditPowerRectifiers = response.data.can ? response.data.can.update : false
+                    })
+                    .catch((error) => {
+                        console.log('Error al traer los datos de Empalmes: ' + error);
+                    });
+                }
             },
 
             getAirConditioners() {

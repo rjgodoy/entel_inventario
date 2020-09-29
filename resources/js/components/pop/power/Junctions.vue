@@ -7,7 +7,7 @@
                 <div class="column is-8">
                     <junction 
                         :junction="junction" 
-                        :can="can"
+                        :canEditJunctions="canEditJunctions"
                         :user="user"
                         :pop="pop"
                     />
@@ -32,7 +32,7 @@
             return {
                 junctions: Array,
                 consumoTablero: 45980,
-                can: null
+                canEditJunctions: null
             }
         },
         mounted() {
@@ -49,7 +49,7 @@
                 axios.get(`/api/junctions/${this.pop.id}`)
                 .then((response) => {
                     this.junctions = response.data.junction
-                    this.can = response.data.can
+                    this.canEditJunctions = response.data.can.update
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Empalmes: ' + error);

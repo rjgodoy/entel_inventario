@@ -10,7 +10,7 @@
                     <div class="column">
                         <div class="is-size-6 has-text-weight-bold">EMPALMES</div>
                     </div>
-                    <div class="column">
+                    <div class="column" v-if="canEditJunctions">
                         <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
                             <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
                                 <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
@@ -31,7 +31,7 @@
                     <div class="tile">
                         <div class="tile is-parent">
                             <b-field label="CAPACIDADES" label-position="on-border" class="tile">
-                                <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black">
+                                <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black; background-color: rgba(255, 255, 255, 0.8)">
 
                                     <div class="tile">
                                         <div class="tile is-parent">
@@ -77,12 +77,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="tile columns is-vcentered" v-if="!junctions.length">
-                <div class="column">
-                    <div class="has-text-centered has-text-weight-light has-text-grey is-size-6">
-                        <div class="block">NO TIENE EMPALMES REGISTRADOS</div>
+                <div class="tile columns is-vcentered" v-if="!junctions.length">
+                    <div class="column">
+                        <div class="has-text-centered has-text-weight-light has-text-grey is-size-6">
+                            <div class="block">NO TIENE EMPALMES REGISTRADOS</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
             aria-modal>
             <modal-junction 
                 :junction="junctionSelected"
-                :can="can"
+                :canEditJunctions="canEditJunctions"
                 :user="user"
                 />
         </b-modal>
@@ -119,7 +119,7 @@
         },
 
         props : [
-            'can',
+            'canEditJunctions',
             'user',
             'pop',
             'junctions',

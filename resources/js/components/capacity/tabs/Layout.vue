@@ -38,18 +38,18 @@
                         <Junctions 
                             :pop="pop"
                             :junctions="junctions"
-                            :can="canEditJunctions"
+                            :canEditJunctions="canEditJunctions"
                             :user="user"
                             :totalJunctionsCapacity=totalJunctionsCapacity
                             :totalUsedJunctionsCapacity=totalUsedJunctionsCapacity
                             :totalAvailableJunctionsCapacity=totalAvailableJunctionsCapacity
                         />
                     </div>
-                    <div class="tile" v-if="generatorSets.length">
+                    <div class="tile">
                         <GeneratorSets 
                             :pop="pop"
                             :generatorSets="generatorSets"
-                            :can="canEditGeneratorSets"
+                            :canEditGeneratorSets="canEditGeneratorSets"
                             :user="user"
                             :totalGeneratorSetsCapacity=totalGeneratorSetsCapacity
                             :totalGeneratorSetsUsedCapacity=totalGeneratorSetsUsedCapacity
@@ -66,7 +66,7 @@
                         <SolarPanels 
                             :pop="pop"
                             :junctions="junctions"
-                            :can="canEditJunctions"
+                            :canEditJunctions="canEditJunctions"
                             :user="user"
                         />
                     </div>
@@ -85,6 +85,7 @@
                             :canEditAirConditioners=canEditAirConditioners
                             :canEditSurface=canEditSurface
                             :canEditDistribution=canEditDistribution
+                            :canEditPlaneTypes=canEditPlaneTypes
 
                             :totalSurface=totalSurface
                             :usedSurface=usedSurface
@@ -105,10 +106,10 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, faExclamationTriangle, faPlug, faHome, faBezierCurve, faWind, faTrash } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farCheckCircle, faExclamationTriangle);
+library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farCheckCircle, faExclamationTriangle, faPlug, faHome, faBezierCurve, faWind, faTrash);
     // import LeaderLine from 'leader-line'
     export default {
         components: {
@@ -132,6 +133,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
             'canEditAirConditioners',
             'canEditSurface',
             'canEditDistribution',
+            'canEditPlaneTypes',
 
             'totalJunctionsCapacity',
             'totalUsedJunctionsCapacity',

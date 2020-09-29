@@ -6,7 +6,7 @@
                     <router-link
                         v-if="previewRoom.id"
                         :to="'/capacity/' + previewRoom.id"
-                        class="button is-link is-inverted" 
+                        class="button is-default has-text-link" 
                         @click.native="record = false; getRoomData()"
                         type="button"
                         style="height: auto;">
@@ -31,7 +31,7 @@
                     <router-link
                         v-if="nextRoom.id"
                         :to="'/capacity/' + nextRoom.id"
-                        class="button is-link is-inverted" 
+                        class="button has-text-link is-default" 
                         @click.native="record = false; getRoomData()"
                         type="button"
                         style="height: auto;">
@@ -49,15 +49,15 @@
         </header>
 
         <section class="section is-paddingless">
-            <div class="box">
+            <div class="has-background-white" style="padding: 12px;">
                 <div class="level">
                     <div class="level-item" v-for="data in capacityData" style="position: relative;">
                         <div class="">
                             <div class="is-size-6">
-                                <div class="has-text-weight-semibold" style="padding-bottom: 4px;">{{ data.title }}</div>
-                                <div class="">Total: {{ data.total | numeral('0,0.0') }}</div>
-                                <div class="">Utilizada: {{ data.used | numeral('0,0.0') }}</div>
-                                <div class="">Disponible: {{ data.available | numeral('0,0.0') }}</div>
+                                <div class="has-text-weight-semibold is-size-6" style="padding-bottom: 4px;">{{ data.title.toUpperCase() }}</div>
+                                <div class="is-size-6">Total: {{ data.total | numeral('0,0.0') }} <span class="is-size-7">{{ data.unit }}</span></div>
+                                <div class="is-size-6">Utilizada: {{ data.used | numeral('0,0.0') }} <span class="is-size-7">{{ data.unit }}</span></div>
+                                <div class="is-size-6">Disponible: {{ data.available | numeral('0,0.0') }} <span class="is-size-7">{{ data.unit }}</span></div>
                             </div>
                             <div class="block" style="padding-top: 8px;">
                                 <b-progress 
@@ -118,6 +118,7 @@
                             :canEditAirConditioners=canEditAirConditioners
                             :canEditSurface=canEditSurface
                             :canEditDistribution=canEditDistribution
+                            :canEditPlaneTypes=canEditPlaneTypes
 
                             :totalJunctionsCapacity=totalJunctionsCapacity
                             :totalUsedJunctionsCapacity=totalUsedJunctionsCapacity
@@ -146,7 +147,6 @@
                 </div>
 
             </div>
-            
         </section>
 
         <b-modal :active.sync="isNewRoomModalActive"
@@ -187,7 +187,7 @@
         data() {
             return {
                 room: '',
-                currentTab: 'layout',
+                currentTab: 'capacity',
                 tabs: [
                     {
                         "title": "Capacity",
@@ -233,10 +233,11 @@
                 planeTypes: Object,
                 airConditioners: Object,
 
-                canEditJunctions: null,
-                canEditGeneratorSets: null,
-                canEditPowerRectifiers: null,
-                canEditAirConditioners: null,
+                canEditJunctions: false,
+                canEditGeneratorSets: false,
+                canEditPowerRectifiers: false,
+                canEditAirConditioners: false,
+                canEditPlaneTypes: false,
 
                 isNewRoomModalActive: false,
 
@@ -301,7 +302,8 @@
                     "used": this.totalUsedJunctionsCapacity,
                     "available": this.totalAvailableJunctionsCapacity,
                     "isLoading": this.junctions.length && this.totalJunctionsCapacity == 0 ? true : false,
-                    "thresholds": this.thresholds.junctions
+                    "thresholds": this.thresholds.junctions,
+                    "unit": "kW"
                 },
                 {
                     "title": "Grupo Electrógeno",
@@ -309,7 +311,8 @@
                     "used": this.totalGeneratorSetsUsedCapacity,
                     "available": this.totalAvailableGeneratorSetsCapacity,
                     "isLoading": this.totalGeneratorSetsCapacity || !this.generatorSets.length == 0 ? false : true,
-                    "thresholds": this.thresholds.generatorSets
+                    "thresholds": this.thresholds.generatorSets,
+                    "unit": "kW"
                 },
                 {
                     "title": "Plantas Rectificadoras",
@@ -317,7 +320,8 @@
                     "used": this.usedCapacityRoom,
                     "available": this.availableCapacityRoom(this.room),
                     "isLoading": this.totalCapacityRoom || !this.powerRectifiersInRoom(this.room) ? false : true,
-                    "thresholds": this.thresholds.powerRectifiers
+                    "thresholds": this.thresholds.powerRectifiers,
+                    "unit": "kW"
                 },
                 {
                     "title": "Baterías",
@@ -325,7 +329,8 @@
                     "used": this.usedCapacityBatteries(this.room),
                     "available": this.availableCapacityBatteries(this.room),
                     "isLoading": this.totalCapacityBatteries(this.room) || !this.batteryBanksInRoom(this.room) ? false : true,
-                    "thresholds": this.thresholds.batteries
+                    "thresholds": this.thresholds.batteries,
+                    "unit": "kW"
                 },
                 {
                     "title": "Clima",
@@ -333,7 +338,8 @@
                     "used": this.usedClimateCapacity,
                     "available": this.totalAvailableClimateCapacity,
                     "isLoading": this.totalClimateCapacity && !this.usedClimateCapacity ? true : false,
-                    "thresholds": this.thresholds.climate
+                    "thresholds": this.thresholds.climate,
+                    "unit": "kW"
                 },
                 {
                     "title": "Distribución",
@@ -341,7 +347,8 @@
                     "used": this.usedDistributionCapacity,
                     "available": this.availableDistributionCapacity,
                     "isLoading": this.totalDistributionCapacity && !this.usedDistributionCapacity ? true : false,
-                    "thresholds": this.thresholds.disponibility
+                    "thresholds": this.thresholds.disponibility,
+                    "unit": "kW"
                 },
                 {
                     "title": "Espacio",
@@ -349,7 +356,8 @@
                     "used": this.usedSurface,
                     "available": this.availableSurface,
                     "isLoading": this.totalSurface && !this.usedSurface ? true : false,
-                    "thresholds": this.thresholds.surface
+                    "thresholds": this.thresholds.surface,
+                    "unit": "m2"
                 }]
             },
 
@@ -938,22 +946,21 @@
                 })
             },
             getJunctions() {
-                // if(this.pop) {
                 axios.get(`/api/popJunctions/${this.pop.id}`)
                 .then((response) => {
+                    console.log(response.data)
                     this.junctions = response.data.junctions
-                    this.canEditJunctions = response.data.can
+                    this.canEditJunctions = response.data.can.update
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Empalmes: ' + error);
                 });
-                // }
             },
             getGeneratorSets() {
                 axios.get(`/api/generatorSets/${this.pop.id}`)
                 .then((response) => {
                     this.generatorSets = response.data.generatorSets
-                    this.canEditGeneratorSets = response.data.can
+                    this.canEditGeneratorSets = response.data.can.update
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
@@ -963,7 +970,7 @@
                 axios.get(`/api/roomPlanes/${this.room.id}?plane_delegation_type_id=${this.planeTypeId}`)
                 .then((response) => {
                     this.planes = response.data.planes
-                    this.canEditPowerRectifiers = response.data.can ? response.data.can : false
+                    this.canEditPowerRectifiers = response.data.can.update
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Empalmes: ' + error);
@@ -972,13 +979,14 @@
             getPlaneTypes() {
                 axios.get(`/api/planeTypes`).then(response => {
                     this.planeTypes = response.data.planes
+                    this.canEditPlaneTypes = response.data.can.update
                 })
             },
             getAirConditioners() {
                 axios.get(`/api/airConditioners/${this.pop.id}`)
                 .then((response) => {
                     this.airConditioners = response.data.airConditioner
-                    this.canEditAirConditioners = response.data.can
+                    this.canEditAirConditioners = response.data.can.update
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Empalmes: ' + error);

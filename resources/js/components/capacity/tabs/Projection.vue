@@ -7,9 +7,9 @@
             <div class="column">
                 <div class="box">
                     <div class="has-text-centered has-text-dark is-size-5" style="padding-bottom: 20px;">Disponibilidad de Potencia</div>
-                    <ProjectionChart
+                    <!-- <ProjectionChart
                         :chartData="data"
-                    ></ProjectionChart>
+                    ></ProjectionChart> -->
                 </div>
                 <div class="box">
                     <b-field grouped group-multiline>
@@ -142,11 +142,11 @@ import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
 library.add(faTrashAlt, faPlus, farTrashAlt );
 
 var numeral = require('numeral');
-import ProjectionChart from '../ProjectionChart'
+// import ProjectionChart from '../ProjectionChart'
 
 export default {
     components: {
-        ProjectionChart
+        // ProjectionChart
     },
 
     props: [ 'data', 'user' ],

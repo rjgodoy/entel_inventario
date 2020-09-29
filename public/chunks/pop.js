@@ -301,6 +301,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -309,7 +312,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
-      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks~efdab41a"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
+      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
     },
     Sites: function Sites() {
       return __webpack_require__.e(/*! import() | chunks/pop/sites */ "chunks/pop/sites").then(__webpack_require__.bind(null, /*! ./Sites */ "./resources/js/components/pop/Sites.vue"));
@@ -322,7 +325,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/layout/layout */ "chunks/pop/layout/layout").then(__webpack_require__.bind(null, /*! ./layout/Layout */ "./resources/js/components/pop/layout/Layout.vue"));
     },
     Vision: function Vision() {
-      return Promise.all(/*! import() | chunks/pop/vision */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks~efdab41a"), __webpack_require__.e("chunks/pop/vision")]).then(__webpack_require__.bind(null, /*! ./Vision */ "./resources/js/components/pop/Vision.vue"));
+      return Promise.all(/*! import() | chunks/pop/vision */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("chunks/pop/vision")]).then(__webpack_require__.bind(null, /*! ./Vision */ "./resources/js/components/pop/Vision.vue"));
     },
     Power: function Power() {
       return __webpack_require__.e(/*! import() | chunks/pop/power/power */ "chunks/pop/power/power").then(__webpack_require__.bind(null, /*! ./power/Power */ "./resources/js/components/pop/power/Power.vue"));
@@ -337,13 +340,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/eco */ "chunks/pop/eco").then(__webpack_require__.bind(null, /*! ./Eco */ "./resources/js/components/pop/Eco.vue"));
     },
     Comsite: function Comsite() {
-      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks~efdab41a"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
+      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ./documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
     },
     Log: function Log() {
-      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks~efdab41a"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
+      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
     }
   },
   props: ['user'],
@@ -364,6 +367,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       logOpened: 0,
       tabs: null,
       currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'location',
+      popName: '',
       isEmpty: false,
       isBordered: false,
       isStriped: true,
@@ -385,6 +389,26 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.getTabs();
   },
   computed: {
+    noMovil: function noMovil() {
+      var _this = this;
+
+      var bool = true;
+      var i = 0;
+      var m = 0;
+
+      if (this.pop.sites) {
+        Object.keys(this.pop.sites).forEach(function (site) {
+          i++;
+
+          if (_this.pop.sites[site].site_type_id == 2) {
+            bool = false;
+            m++;
+          }
+        });
+      }
+
+      return i > 0 && i == m ? bool : true;
+    },
     canViewLog: function canViewLog() {
       return this.user.roles[0].id == 1 || this.user.roles[0].id == 2 || this.user.roles[0].id == 4 || this.user.roles[0].id == 6 || this.user.roles[0].id == 7 || this.user.roles[0].id == 8 ? true : false;
     },
@@ -604,13 +628,39 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     // }
 
   },
+  watch: {
+    isEditMode: function isEditMode(val) {
+      if (this.popName != this.pop.nombre && val == false) {
+        this.updateParameter('nombre', this.popName);
+      }
+    }
+  },
   methods: {
+    updateParameter: function updateParameter(param, val) {
+      var _this2 = this;
+
+      var params = {
+        'parameter': param,
+        'value': val,
+        'user_id': this.user.id
+      };
+      axios.put("/api/pop/".concat(this.pop.id), params).then(function (response) {
+        // console.log(response.data)
+        _this2.$buefy.toast.open({
+          message: 'Parámetro actualizado exitosamente.',
+          type: 'is-success',
+          duration: 2000
+        });
+
+        _this2.$eventBus.$emit('parameter-updated');
+      });
+    },
     getTabs: function getTabs() {
-      var _this = this;
+      var _this3 = this;
 
       axios.get("/api/popMenu").then(function (response) {
         // console.log(response.data.data)
-        _this.tabs = response.data.data;
+        _this3.tabs = response.data.data;
       });
     },
     showTab: function showTab(tab) {
@@ -625,10 +675,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return true;
     },
     getAllData: function getAllData() {
-      var _this2 = this;
+      var _this4 = this;
 
       axios.get("/api/pop/".concat(this.$route.params.id)).then(function (response) {
-        _this2.pop = response.data.data;
+        _this4.pop = response.data.data;
+        _this4.popName = _this4.pop.nombre;
       });
     },
     // Style mode
@@ -754,148 +805,170 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "column is-5" }, [
-                _c("div", { staticClass: "is-size-4" }, [
-                  _c("h1", { staticClass: "title" }, [
-                    _vm._v(_vm._s(_vm.pop.nombre))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "h2",
-                    {
-                      staticClass: "subtitle",
-                      staticStyle: { "margin-bottom": "4px" }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.popNems) +
-                          "\n                                "
-                      ),
-                      _vm.pop.sites && _vm.pop.sites.length > 2
-                        ? _c("span", { staticClass: "is-size-5" }, [
-                            _vm._v(" y "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "has-text-smart",
-                                on: {
-                                  click: function($event) {
-                                    _vm.currentTab = "sites"
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.pop.sites.length - 2) + " sitios"
-                                )
-                              ]
-                            ),
-                            _vm._v(" más.\n                                ")
-                          ])
-                        : _vm._e()
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.pop.current_office || _vm.pop.alba_project
-                    ? _c("div", [
-                        _vm.pop.current_office
-                          ? _c(
-                              "div",
-                              { staticStyle: { "padding-bottom": "4px" } },
-                              [
-                                _c(
-                                  "b-tag",
-                                  {
-                                    staticClass: "has-text-weight-semibold",
-                                    attrs: {
-                                      type: "is-link",
-                                      size: "is-medium"
+                _c(
+                  "div",
+                  { staticClass: "is-size-4" },
+                  [
+                    !_vm.isEditMode || !_vm.noMovil
+                      ? _c("h1", { staticClass: "title" }, [
+                          _vm._v(_vm._s(_vm.pop.nombre))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isEditMode && _vm.noMovil
+                      ? _c("b-input", {
+                          staticClass: "is-size-5 has-text-weight-semibold",
+                          model: {
+                            value: _vm.popName,
+                            callback: function($$v) {
+                              _vm.popName = $$v
+                            },
+                            expression: "popName"
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "h2",
+                      {
+                        staticClass: "subtitle",
+                        staticStyle: { "margin-bottom": "4px" }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.popNems) +
+                            "\n                                "
+                        ),
+                        _vm.pop.sites && _vm.pop.sites.length > 2
+                          ? _c("span", { staticClass: "is-size-5" }, [
+                              _vm._v(" y "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "has-text-smart",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.currentTab = "sites"
                                     }
-                                  },
-                                  [
-                                    _c("font-awesome-icon", {
-                                      staticStyle: { "padding-bottom": "2px" },
-                                      attrs: { icon: ["fas", "home"] }
-                                    }),
-                                    _vm._v(
-                                      "  OFICINA CRM\n                                    "
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.pop.alba_project
-                          ? _c(
-                              "div",
-                              { staticStyle: { "padding-top": "4px" } },
-                              [
-                                _c("div", {}, [
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.pop.sites.length - 2) + " sitios"
+                                  )
+                                ]
+                              ),
+                              _vm._v(" más.\n                                ")
+                            ])
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.pop.current_office || _vm.pop.alba_project
+                      ? _c("div", [
+                          _vm.pop.current_office
+                            ? _c(
+                                "div",
+                                { staticStyle: { "padding-bottom": "4px" } },
+                                [
                                   _c(
-                                    "div",
+                                    "b-tag",
+                                    {
+                                      staticClass: "has-text-weight-semibold",
+                                      attrs: {
+                                        type: "is-link",
+                                        size: "is-medium"
+                                      }
+                                    },
                                     [
-                                      _c(
-                                        "b-tooltip",
-                                        {
-                                          attrs: {
-                                            label: "Entel",
-                                            position: "is-bottom",
-                                            type: "is-black"
-                                          }
+                                      _c("font-awesome-icon", {
+                                        staticStyle: {
+                                          "padding-bottom": "2px"
                                         },
-                                        [
-                                          _c("div", [
-                                            _c("img", {
-                                              staticClass: "img-container",
-                                              staticStyle: { width: "32px" },
-                                              attrs: {
-                                                alt: "image",
-                                                src:
-                                                  "/img/iconografia/entel-logo-negativo.png"
-                                              }
-                                            })
-                                          ])
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-tooltip",
-                                        {
-                                          staticStyle: {
-                                            "padding-left": "8px"
-                                          },
-                                          attrs: {
-                                            label: "American Tower",
-                                            position: "is-bottom",
-                                            type: "is-black"
-                                          }
-                                        },
-                                        [
-                                          _c("div", [
-                                            _c("img", {
-                                              staticClass: "img-container",
-                                              staticStyle: { width: "36px" },
-                                              attrs: {
-                                                alt: "image",
-                                                src:
-                                                  "/img/logos/american_tower_logo_simple.png"
-                                              }
-                                            })
-                                          ])
-                                        ]
+                                        attrs: { icon: ["fas", "home"] }
+                                      }),
+                                      _vm._v(
+                                        "  OFICINA CRM\n                                    "
                                       )
                                     ],
                                     1
                                   )
-                                ])
-                              ]
-                            )
-                          : _vm._e()
-                      ])
-                    : _vm._e()
-                ])
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.pop.alba_project
+                            ? _c(
+                                "div",
+                                { staticStyle: { "padding-top": "4px" } },
+                                [
+                                  _c("div", {}, [
+                                    _c(
+                                      "div",
+                                      [
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            attrs: {
+                                              label: "Entel",
+                                              position: "is-bottom",
+                                              type: "is-black"
+                                            }
+                                          },
+                                          [
+                                            _c("div", [
+                                              _c("img", {
+                                                staticClass: "img-container",
+                                                staticStyle: { width: "32px" },
+                                                attrs: {
+                                                  alt: "image",
+                                                  src:
+                                                    "/img/iconografia/entel-logo-negativo.png"
+                                                }
+                                              })
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-tooltip",
+                                          {
+                                            staticStyle: {
+                                              "padding-left": "8px"
+                                            },
+                                            attrs: {
+                                              label: "American Tower",
+                                              position: "is-bottom",
+                                              type: "is-black"
+                                            }
+                                          },
+                                          [
+                                            _c("div", [
+                                              _c("img", {
+                                                staticClass: "img-container",
+                                                staticStyle: { width: "36px" },
+                                                attrs: {
+                                                  alt: "image",
+                                                  src:
+                                                    "/img/logos/american_tower_logo_simple.png"
+                                                }
+                                              })
+                                            ])
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
               ]),
               _vm._v(" "),
               _c(

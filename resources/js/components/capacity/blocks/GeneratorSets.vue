@@ -6,12 +6,11 @@
             </div>
 
             <div class="tile is-vertical">
-
                 <div class="columns">
                     <div class="column">
                         <div class="is-size-6 has-text-weight-bold">GRUPOS ELECTROGENOS</div>
                     </div>
-                    <div class="column">
+                    <div class="column" v-if="canEditGeneratorSets">
                         <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
                             <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
                                 <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
@@ -29,11 +28,10 @@
                 </div>
 
                 <div class="tile is-vertical" v-if="generatorSets.length">
-                    <div class="tile">
-
+                    <div class="tile is-parent">
                         <div class="tile is-parent" v-if="totalGeneratorSetsCapacityA">
                             <b-field label="CAPACIDADES PLANO A" label-position="on-border" class="tile">
-                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black; background-color: rgba(255, 255, 255, 0.8)">
                                     <div class="level tile">
                                         <div class="level-item">
                                             <div class="has-text-centered">
@@ -62,7 +60,7 @@
 
                         <div class="tile is-parent" v-if="totalGeneratorSetsCapacityB">
                             <b-field label="CAPACIDADES PLANO B" label-position="on-border" class="tile">
-                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black">
+                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black; background-color: rgba(255, 255, 255, 0.8)">
                                     <div class="level tile">
                                         <div class="level-item">
                                             <div class="has-text-centered">
@@ -108,6 +106,14 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="tile columns is-vcentered" v-if="!generatorSets.length">
+                    <div class="column">
+                        <div class="has-text-centered has-text-weight-light has-text-grey is-size-6">
+                            <div class="block">NO TIENE GRUPOS ELECTROGENOS</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </section>
@@ -118,7 +124,7 @@
             aria-modal >
             <modal-generator 
                 :generatorSet="generatorSetSelected"
-                :can="can"
+                :canEditGeneratorSets="canEditGeneratorSets"
                 :user="user"/>
         </b-modal>
 
@@ -143,10 +149,10 @@
         },
 
         props : [
-            'can',
             'user',
             'pop',
             'generatorSets',
+            'canEditGeneratorSets',
             'totalGeneratorSetsCapacity',
             'totalGeneratorSetsUsedCapacity',
             'totalAvailableGeneratorSetsCapacity',

@@ -47,6 +47,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -222,7 +226,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "column is-4" }, [
-    _c("article", { staticClass: "tile is-child box is-bold" }, [
+    _c("article", { staticClass: "tile is-child box is-bold has-background" }, [
+      _c(
+        "div",
+        { staticClass: "is-box-background is-transparent-light" },
+        [
+          _c("font-awesome-icon", {
+            staticClass: "is-pulled-right",
+            attrs: { icon: ["fas", "wind"], size: "10x" }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "columns" }, [
         _c(
           "div",

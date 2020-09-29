@@ -63,7 +63,8 @@ class RoomCapacityController extends Controller
      */
     public function show($id)
     {
-        // $capacities = RoomCapacity::where('room_id', $id)->latest()->first();
+        $data = RoomCapacity::where('room_id', $id)->latest()->limit(1)->get();
+        return $data;
     }
 
     /**

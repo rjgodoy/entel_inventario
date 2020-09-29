@@ -117,11 +117,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMicrochip"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faGasPump"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"]); // import LeaderLine from 'leader-line'
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMicrochip"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faGasPump"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlug"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWind"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrash"]); // import LeaderLine from 'leader-line'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -138,7 +139,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/blocks/equipment */ "chunks/capacity/blocks/equipment").then(__webpack_require__.bind(null, /*! ../blocks/Equipment */ "./resources/js/components/capacity/blocks/Equipment.vue"));
     }
   },
-  props: ['user', 'room', 'junctions', 'generatorSets', 'planes', 'planeTypes', 'airConditioners', 'canEditJunctions', 'canEditGeneratorSets', 'canEditPowerRectifiers', 'canEditAirConditioners', 'canEditSurface', 'canEditDistribution', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity', 'totalGeneratorSetsCapacity', 'totalGeneratorSetsUsedCapacity', 'totalAvailableGeneratorSetsCapacity', 'totalGeneratorSetsCapacityA', 'totalGeneratorSetsCapacityB', 'usedGeneratorSetsCapacityA', 'usedGeneratorSetsCapacityB', 'availableGeneratorSetsCapacityA', 'availableGeneratorSetsCapacityB', 'totalSurface', 'usedSurface', 'availableSurface', 'totalDistributionCapacity', 'usedDistributionCapacity', 'availableDistributionCapacity'],
+  props: ['user', 'room', 'junctions', 'generatorSets', 'planes', 'planeTypes', 'airConditioners', 'canEditJunctions', 'canEditGeneratorSets', 'canEditPowerRectifiers', 'canEditAirConditioners', 'canEditSurface', 'canEditDistribution', 'canEditPlaneTypes', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity', 'totalGeneratorSetsCapacity', 'totalGeneratorSetsUsedCapacity', 'totalAvailableGeneratorSetsCapacity', 'totalGeneratorSetsCapacityA', 'totalGeneratorSetsCapacityB', 'usedGeneratorSetsCapacityA', 'usedGeneratorSetsCapacityB', 'availableGeneratorSetsCapacityA', 'availableGeneratorSetsCapacityB', 'totalSurface', 'usedSurface', 'availableSurface', 'totalDistributionCapacity', 'usedDistributionCapacity', 'availableDistributionCapacity'],
   data: function data() {
     return {
       isEditMode: false,
@@ -295,7 +296,7 @@ var render = function() {
                   attrs: {
                     pop: _vm.pop,
                     junctions: _vm.junctions,
-                    can: _vm.canEditJunctions,
+                    canEditJunctions: _vm.canEditJunctions,
                     user: _vm.user,
                     totalJunctionsCapacity: _vm.totalJunctionsCapacity,
                     totalUsedJunctionsCapacity: _vm.totalUsedJunctionsCapacity,
@@ -307,41 +308,36 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm.generatorSets.length
-              ? _c(
-                  "div",
-                  { staticClass: "tile" },
-                  [
-                    _c("GeneratorSets", {
-                      attrs: {
-                        pop: _vm.pop,
-                        generatorSets: _vm.generatorSets,
-                        can: _vm.canEditGeneratorSets,
-                        user: _vm.user,
-                        totalGeneratorSetsCapacity:
-                          _vm.totalGeneratorSetsCapacity,
-                        totalGeneratorSetsUsedCapacity:
-                          _vm.totalGeneratorSetsUsedCapacity,
-                        totalAvailableGeneratorSetsCapacity:
-                          _vm.totalAvailableGeneratorSetsCapacity,
-                        totalGeneratorSetsCapacityA:
-                          _vm.totalGeneratorSetsCapacityA,
-                        totalGeneratorSetsCapacityB:
-                          _vm.totalGeneratorSetsCapacityB,
-                        usedGeneratorSetsCapacityA:
-                          _vm.usedGeneratorSetsCapacityA,
-                        usedGeneratorSetsCapacityB:
-                          _vm.usedGeneratorSetsCapacityB,
-                        availableGeneratorSetsCapacityA:
-                          _vm.availableGeneratorSetsCapacityA,
-                        availableGeneratorSetsCapacityB:
-                          _vm.availableGeneratorSetsCapacityB
-                      }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e(),
+            _c(
+              "div",
+              { staticClass: "tile" },
+              [
+                _c("GeneratorSets", {
+                  attrs: {
+                    pop: _vm.pop,
+                    generatorSets: _vm.generatorSets,
+                    canEditGeneratorSets: _vm.canEditGeneratorSets,
+                    user: _vm.user,
+                    totalGeneratorSetsCapacity: _vm.totalGeneratorSetsCapacity,
+                    totalGeneratorSetsUsedCapacity:
+                      _vm.totalGeneratorSetsUsedCapacity,
+                    totalAvailableGeneratorSetsCapacity:
+                      _vm.totalAvailableGeneratorSetsCapacity,
+                    totalGeneratorSetsCapacityA:
+                      _vm.totalGeneratorSetsCapacityA,
+                    totalGeneratorSetsCapacityB:
+                      _vm.totalGeneratorSetsCapacityB,
+                    usedGeneratorSetsCapacityA: _vm.usedGeneratorSetsCapacityA,
+                    usedGeneratorSetsCapacityB: _vm.usedGeneratorSetsCapacityB,
+                    availableGeneratorSetsCapacityA:
+                      _vm.availableGeneratorSetsCapacityA,
+                    availableGeneratorSetsCapacityB:
+                      _vm.availableGeneratorSetsCapacityB
+                  }
+                })
+              ],
+              1
+            ),
             _vm._v(" "),
             _c(
               "div",
@@ -351,7 +347,7 @@ var render = function() {
                   attrs: {
                     pop: _vm.pop,
                     junctions: _vm.junctions,
-                    can: _vm.canEditJunctions,
+                    canEditJunctions: _vm.canEditJunctions,
                     user: _vm.user
                   }
                 })
@@ -377,6 +373,7 @@ var render = function() {
                     canEditAirConditioners: _vm.canEditAirConditioners,
                     canEditSurface: _vm.canEditSurface,
                     canEditDistribution: _vm.canEditDistribution,
+                    canEditPlaneTypes: _vm.canEditPlaneTypes,
                     totalSurface: _vm.totalSurface,
                     usedSurface: _vm.usedSurface,
                     availableSurface: _vm.availableSurface,

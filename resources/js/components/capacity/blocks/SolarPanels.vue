@@ -1,7 +1,6 @@
 <template>
     <div class="tile is-parent">
         <section class="tile box has-background">
-
             <div class="is-box-background is-transparent-light">
                 <font-awesome-icon :icon="['fas', 'solar-panel']" size="10x" class="is-pulled-right" style=""/>
             </div>
@@ -11,7 +10,7 @@
                     <div class="column">
                         <div class="is-size-6 has-text-weight-bold">PANELES SOLARES</div>
                     </div>
-                    <div class="column">
+                    <div class="column" v-if="canEditJunctions">
                         <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
                             <button class="button is-default is-small" slot="trigger" slot-scope="{ active }">
                                 <span><font-awesome-icon :icon="['fas', 'ellipsis-v']" /></span>
@@ -31,7 +30,7 @@
                 <div class="tile is-vertical" v-if="hasSolarPanels()">
                     <div class="tile is-parent">
                         <b-field label="CAPACIDADES" label-position="on-border" class="tile">
-                            <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black">
+                            <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black; background-color: rgba(255, 255, 255, 0.8)">
                                 <div class="tile">
                                     <div class="tile is-parent">
                                         <div class="has-text-centered tile is-child">
@@ -95,7 +94,7 @@
 
         props : [
             'junctions',
-            'can',
+            'canEditJunctions',
             'user',
             'pop'
         ],

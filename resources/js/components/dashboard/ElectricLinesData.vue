@@ -1,6 +1,12 @@
 <template>
     <div class="column is-4">
-        <article class="tile is-child box is-bold" :class="boxBackground">
+        <article class="tile is-child box is-bold has-background" :class="boxBackground">
+            <div class="is-box-background is-transparent-light" style="margin-top: -44px">
+                <font-awesome-layers class="fa-10x is-pulled-right">
+                    <font-awesome-icon icon="grip-lines" transform="right-13"/>
+                    <font-awesome-icon icon="bolt" transform="shrink-2 left-2" :style="{ color: 'grey' }"/>
+                </font-awesome-layers>
+            </div>
             <div class="columns">
                 <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Lineas Eléctricas</div>
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>

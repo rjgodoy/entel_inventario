@@ -484,9 +484,9 @@ class PopController extends Controller
         $condition_core = $request->core ? 'classification_type_id = 1' : 'classification_type_id != 0';
         $condition_critic = $request->critic ? 'criticity = 1' : 'criticity IN (0,1)';
         $condition_red_minima = 
-            $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' : 
-            ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
-                ($request->red_minima_n2 ? 'sites.red_minima = 2' : 'sites.red_minima IN (0,1,2)')
+            $request->red_minima_n1 && $request->red_minima_n2 ? 'red_minima IN (1,2)' : 
+            ($request->red_minima_n1 ? 'red_minima = 1' : 
+                ($request->red_minima_n2 ? 'red_minima = 2' : 'red_minima IN (0,1,2)')
             );
 
         // POP
@@ -522,7 +522,7 @@ class PopController extends Controller
         $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
         $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
-            ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi) { 
+            ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi, $condition_red_minima) { 
                 $q->where(function ($p) use ($text) {
                     if ($text) {
                         $p->where('nem_site', 'LIKE', "%$text%")
@@ -540,7 +540,8 @@ class PopController extends Controller
                         $q;
                     }
                 })
-                ->whereRaw($condition_core);
+                ->whereRaw($condition_core)
+                ->whereRaw($condition_red_minima);
             })
             ->whereHas('rooms', function($r) use($condition_critic) {
                 $r->whereRaw($condition_critic);
@@ -614,9 +615,9 @@ class PopController extends Controller
         $condition_core = $request->core ? 'classification_type_id = 1' : 'classification_type_id != 0';
         $condition_critic = $request->critic ? 'criticity = 1' : 'criticity IS NOT NULL';
         $condition_red_minima = 
-            $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' : 
-            ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
-                ($request->red_minima_n2 ? 'sites.red_minima = 2' : 'sites.red_minima IN (0,1,2)')
+            $request->red_minima_n1 && $request->red_minima_n2 ? 'red_minima IN (1,2)' : 
+            ($request->red_minima_n1 ? 'red_minima = 1' : 
+                ($request->red_minima_n2 ? 'red_minima = 2' : 'red_minima IN (0,1,2)')
             );
         $bafi = $request->bafi;
 
@@ -654,7 +655,7 @@ class PopController extends Controller
         $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
         $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
-            ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi) { 
+            ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi, $condition_red_minima) { 
                 $q->where(function($p) use($text) {
                     if ($text) {
                         $p->where('nem_site', 'LIKE', "%$text%")
@@ -672,7 +673,8 @@ class PopController extends Controller
                         $q;
                     }
                 })
-                ->whereRaw($condition_core);
+                ->whereRaw($condition_core)
+                ->whereRaw($condition_red_minima);
             })
             ->whereHas('rooms', function($r) use($condition_critic) {
                 $r->whereRaw($condition_critic);

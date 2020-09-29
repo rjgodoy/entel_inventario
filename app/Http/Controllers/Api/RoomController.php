@@ -29,63 +29,7 @@ class RoomController extends Controller
         $pops = Pop::with(
                 'comuna.zona.crm', 
                 'sites', 
-                'rooms.pop.current_autonomy',
-                'rooms.pop.current_battery_bank_autonomy',
-
-                'junctions',
-                'generator_sets',
-                'power_rectifiers',
-                'current_autonomy',
-                'current_battery_bank_autonomy',
-
-                'rooms.pop.rooms.planes.power_rectifiers.power_rectifier_type', 
-                'rooms.pop.rooms.planes.power_rectifiers.power_rectifier_modules', 
-                'rooms.pop.rooms.planes.battery_banks.battery_bank_brand',
-                'rooms.pop.rooms.planes.power_rectifiers.power_rectifier_mode',
-                'rooms.pop.rooms.planes.current_redundant_modules',
-                'rooms.pop.rooms.planes.plane_type', 
-                
-                'rooms.pop.rooms.power_rectifiers.plane',
-                'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.power_rectifier_type',
-                'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.power_rectifier_modules',
-                'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.power_rectifier_mode',
-                'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.battery_banks.battery_bank_brand',
-                'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.current_redundant_modules',
-                'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.plane_type',
-                'rooms.pop.rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.plane',
-
-                'rooms.pop.rooms.current_fire_detection.fire_detection_type',
-                'rooms.pop.rooms.current_fire_detection.fire_extinction_type',
-
-                'rooms.planes.power_rectifiers.power_rectifier_type', 
-                'rooms.planes.power_rectifiers.power_rectifier_modules', 
-                'rooms.planes.battery_banks.battery_bank_brand',
-                'rooms.planes.power_rectifiers.power_rectifier_mode',
-                'rooms.planes.current_redundant_modules',
-                'rooms.planes.plane_type',
-
-                'rooms.power_rectifiers',
-                'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.power_rectifier_type',
-                'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.power_rectifier_modules',
-                'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.power_rectifier_mode',
-                'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.battery_banks.battery_bank_brand',
-                'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.current_redundant_modules',
-                'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.plane_type',
-                'rooms.current_room_delegation.plane_delegation_type.plane_types.planes.power_rectifiers.plane',
-
-                'rooms.current_fire_detection.fire_detection_type',
-                'rooms.current_fire_detection.fire_extinction_type',
-
-                'rooms.air_conditioners.air_conditioner_consumptions',
-                'rooms.air_conditioners.air_conditioner_brand.air_conditioner_type',
-                'rooms.air_conditioners.air_conditioner_chillers',
-                'rooms.air_conditioners.air_conditioner_condensers',
-
-
-                'rooms.current_room_distribution',
-                'rooms.current_room_surface',
-                'rooms.current_air_conditioner_capacity',
-                'rooms.current_room_capacity'
+                'rooms.current_room_capacity'                
             )
             ->whereHas('sites', function($q) use($text) {
                 if ($text) {

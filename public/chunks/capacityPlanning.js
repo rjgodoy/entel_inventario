@@ -322,7 +322,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/capacity */ "chunks/capacity/capacity").then(__webpack_require__.bind(null, /*! ./tabs/Capacity */ "./resources/js/components/capacity/tabs/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard~chunks/helpers~chunks~efdab41a"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
+      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
     },
     // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
     // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./tabs/Calculator'),
@@ -340,7 +340,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   data: function data() {
     return {
       room: '',
-      currentTab: 'layout',
+      currentTab: 'capacity',
       tabs: [{
         "title": "Capacity",
         "component": "capacity",
@@ -379,10 +379,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       planes: Object,
       planeTypes: Object,
       airConditioners: Object,
-      canEditJunctions: null,
-      canEditGeneratorSets: null,
-      canEditPowerRectifiers: null,
-      canEditAirConditioners: null,
+      canEditJunctions: false,
+      canEditGeneratorSets: false,
+      canEditPowerRectifiers: false,
+      canEditAirConditioners: false,
+      canEditPlaneTypes: false,
       isNewRoomModalActive: false,
       planeTypeId: 0,
       record: false
@@ -434,49 +435,56 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         "used": this.totalUsedJunctionsCapacity,
         "available": this.totalAvailableJunctionsCapacity,
         "isLoading": this.junctions.length && this.totalJunctionsCapacity == 0 ? true : false,
-        "thresholds": this.thresholds.junctions
+        "thresholds": this.thresholds.junctions,
+        "unit": "kW"
       }, {
         "title": "Grupo Electrógeno",
         "total": this.totalGeneratorSetsCapacity,
         "used": this.totalGeneratorSetsUsedCapacity,
         "available": this.totalAvailableGeneratorSetsCapacity,
         "isLoading": this.totalGeneratorSetsCapacity || !this.generatorSets.length == 0 ? false : true,
-        "thresholds": this.thresholds.generatorSets
+        "thresholds": this.thresholds.generatorSets,
+        "unit": "kW"
       }, {
         "title": "Plantas Rectificadoras",
         "total": this.totalCapacityRoom,
         "used": this.usedCapacityRoom,
         "available": this.availableCapacityRoom(this.room),
         "isLoading": this.totalCapacityRoom || !this.powerRectifiersInRoom(this.room) ? false : true,
-        "thresholds": this.thresholds.powerRectifiers
+        "thresholds": this.thresholds.powerRectifiers,
+        "unit": "kW"
       }, {
         "title": "Baterías",
         "total": this.totalCapacityBatteries(this.room),
         "used": this.usedCapacityBatteries(this.room),
         "available": this.availableCapacityBatteries(this.room),
         "isLoading": this.totalCapacityBatteries(this.room) || !this.batteryBanksInRoom(this.room) ? false : true,
-        "thresholds": this.thresholds.batteries
+        "thresholds": this.thresholds.batteries,
+        "unit": "kW"
       }, {
         "title": "Clima",
         "total": this.totalClimateCapacity,
         "used": this.usedClimateCapacity,
         "available": this.totalAvailableClimateCapacity,
         "isLoading": this.totalClimateCapacity && !this.usedClimateCapacity ? true : false,
-        "thresholds": this.thresholds.climate
+        "thresholds": this.thresholds.climate,
+        "unit": "kW"
       }, {
         "title": "Distribución",
         "total": this.totalDistributionCapacity,
         "used": this.usedDistributionCapacity,
         "available": this.availableDistributionCapacity,
         "isLoading": this.totalDistributionCapacity && !this.usedDistributionCapacity ? true : false,
-        "thresholds": this.thresholds.disponibility
+        "thresholds": this.thresholds.disponibility,
+        "unit": "kW"
       }, {
         "title": "Espacio",
         "total": this.totalSurface,
         "used": this.usedSurface,
         "available": this.availableSurface,
         "isLoading": this.totalSurface && !this.usedSurface ? true : false,
-        "thresholds": this.thresholds.surface
+        "thresholds": this.thresholds.surface,
+        "unit": "m2"
       }];
     },
     pop: function pop() {
@@ -1082,20 +1090,20 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     getJunctions: function getJunctions() {
       var _this18 = this;
 
-      // if(this.pop) {
       axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
+        console.log(response.data);
         _this18.junctions = response.data.junctions;
-        _this18.canEditJunctions = response.data.can;
+        _this18.canEditJunctions = response.data.can.update;
       })["catch"](function (error) {
         console.log('Error al traer los datos de Empalmes: ' + error);
-      }); // }
+      });
     },
     getGeneratorSets: function getGeneratorSets() {
       var _this19 = this;
 
       axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
         _this19.generatorSets = response.data.generatorSets;
-        _this19.canEditGeneratorSets = response.data.can;
+        _this19.canEditGeneratorSets = response.data.can.update;
       })["catch"](function (error) {
         console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
       });
@@ -1105,7 +1113,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       axios.get("/api/roomPlanes/".concat(this.room.id, "?plane_delegation_type_id=").concat(this.planeTypeId)).then(function (response) {
         _this20.planes = response.data.planes;
-        _this20.canEditPowerRectifiers = response.data.can ? response.data.can : false;
+        _this20.canEditPowerRectifiers = response.data.can.update;
       })["catch"](function (error) {
         console.log('Error al traer los datos de Empalmes: ' + error);
       });
@@ -1115,6 +1123,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       axios.get("/api/planeTypes").then(function (response) {
         _this21.planeTypes = response.data.planes;
+        _this21.canEditPlaneTypes = response.data.can.update;
       });
     },
     getAirConditioners: function getAirConditioners() {
@@ -1122,7 +1131,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       axios.get("/api/airConditioners/".concat(this.pop.id)).then(function (response) {
         _this22.airConditioners = response.data.airConditioner;
-        _this22.canEditAirConditioners = response.data.can;
+        _this22.canEditAirConditioners = response.data.can.update;
       })["catch"](function (error) {
         console.log('Error al traer los datos de Empalmes: ' + error);
       });
@@ -1717,7 +1726,7 @@ var render = function() {
                   ? _c(
                       "router-link",
                       {
-                        staticClass: "button is-link is-inverted",
+                        staticClass: "button is-default has-text-link",
                         staticStyle: { height: "auto" },
                         attrs: {
                           to: "/capacity/" + _vm.previewRoom.id,
@@ -1829,7 +1838,7 @@ var render = function() {
                   ? _c(
                       "router-link",
                       {
-                        staticClass: "button is-link is-inverted",
+                        staticClass: "button has-text-link is-default",
                         staticStyle: { height: "auto" },
                         attrs: {
                           to: "/capacity/" + _vm.nextRoom.id,
@@ -1900,96 +1909,117 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("section", { staticClass: "section is-paddingless" }, [
-        _c("div", { staticClass: "box" }, [
-          _c(
-            "div",
-            { staticClass: "level" },
-            _vm._l(_vm.capacityData, function(data) {
-              return _c(
-                "div",
-                {
-                  staticClass: "level-item",
-                  staticStyle: { position: "relative" }
-                },
-                [
-                  _c("div", {}, [
-                    _c("div", { staticClass: "is-size-6" }, [
+        _c(
+          "div",
+          {
+            staticClass: "has-background-white",
+            staticStyle: { padding: "12px" }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "level" },
+              _vm._l(_vm.capacityData, function(data) {
+                return _c(
+                  "div",
+                  {
+                    staticClass: "level-item",
+                    staticStyle: { position: "relative" }
+                  },
+                  [
+                    _c("div", {}, [
+                      _c("div", { staticClass: "is-size-6" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "has-text-weight-semibold is-size-6",
+                            staticStyle: { "padding-bottom": "4px" }
+                          },
+                          [_vm._v(_vm._s(data.title.toUpperCase()))]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "is-size-6" }, [
+                          _vm._v(
+                            "Total: " +
+                              _vm._s(_vm._f("numeral")(data.total, "0,0.0")) +
+                              " "
+                          ),
+                          _c("span", { staticClass: "is-size-7" }, [
+                            _vm._v(_vm._s(data.unit))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "is-size-6" }, [
+                          _vm._v(
+                            "Utilizada: " +
+                              _vm._s(_vm._f("numeral")(data.used, "0,0.0")) +
+                              " "
+                          ),
+                          _c("span", { staticClass: "is-size-7" }, [
+                            _vm._v(_vm._s(data.unit))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "is-size-6" }, [
+                          _vm._v(
+                            "Disponible: " +
+                              _vm._s(
+                                _vm._f("numeral")(data.available, "0,0.0")
+                              ) +
+                              " "
+                          ),
+                          _c("span", { staticClass: "is-size-7" }, [
+                            _vm._v(_vm._s(data.unit))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "div",
                         {
-                          staticClass: "has-text-weight-semibold",
-                          staticStyle: { "padding-bottom": "4px" }
+                          staticClass: "block",
+                          staticStyle: { "padding-top": "8px" }
                         },
-                        [_vm._v(_vm._s(data.title))]
-                      ),
-                      _vm._v(" "),
-                      _c("div", {}, [
-                        _vm._v(
-                          "Total: " +
-                            _vm._s(_vm._f("numeral")(data.total, "0,0.0"))
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", {}, [
-                        _vm._v(
-                          "Utilizada: " +
-                            _vm._s(_vm._f("numeral")(data.used, "0,0.0"))
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", {}, [
-                        _vm._v(
-                          "Disponible: " +
-                            _vm._s(_vm._f("numeral")(data.available, "0,0.0"))
-                        )
-                      ])
+                        [
+                          _c("b-progress", {
+                            attrs: {
+                              value: (data.available * 100) / data.total,
+                              "show-value": "",
+                              format: "percent",
+                              size: "is-small",
+                              type:
+                                data.available <= data.thresholds.critical
+                                  ? "is-danger"
+                                  : data.available <= data.thresholds.warning
+                                  ? "is-warning"
+                                  : "is-success"
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "block",
-                        staticStyle: { "padding-top": "8px" }
+                    _c("b-loading", {
+                      attrs: {
+                        "is-full-page": false,
+                        active: data.isLoading,
+                        "can-cancel": true
                       },
-                      [
-                        _c("b-progress", {
-                          attrs: {
-                            value: (data.available * 100) / data.total,
-                            "show-value": "",
-                            format: "percent",
-                            size: "is-small",
-                            type:
-                              data.available <= data.thresholds.critical
-                                ? "is-danger"
-                                : data.available <= data.thresholds.warning
-                                ? "is-warning"
-                                : "is-success"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("b-loading", {
-                    attrs: {
-                      "is-full-page": false,
-                      active: data.isLoading,
-                      "can-cancel": true
-                    },
-                    on: {
-                      "update:active": function($event) {
-                        return _vm.$set(data, "isLoading", $event)
+                      on: {
+                        "update:active": function($event) {
+                          return _vm.$set(data, "isLoading", $event)
+                        }
                       }
-                    }
-                  })
-                ],
-                1
-              )
-            }),
-            0
-          )
-        ])
+                    })
+                  ],
+                  1
+                )
+              }),
+              0
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -2094,6 +2124,7 @@ var render = function() {
                         canEditAirConditioners: _vm.canEditAirConditioners,
                         canEditSurface: _vm.canEditSurface,
                         canEditDistribution: _vm.canEditDistribution,
+                        canEditPlaneTypes: _vm.canEditPlaneTypes,
                         totalJunctionsCapacity: _vm.totalJunctionsCapacity,
                         totalUsedJunctionsCapacity:
                           _vm.totalUsedJunctionsCapacity,

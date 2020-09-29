@@ -5,7 +5,7 @@
             <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ data.total | numeral('0,0') }}</div>
         </div>
         <!-- <div style="min-height: 300px; max-height: 500px; overflow-y: scroll;"> -->
-            <table class="table is-fullwidth" :class="boxBackground">
+            <table class="table is-fullwidth" style="background-color: rgba(0,0,0,0)">
                 <thead>
                     <tr class="is-size-7">
                         <th class="has-text-left" :class="secondaryText"><abbr title="Nombre y dirección del POP">Nombre / Dirección</abbr></th>

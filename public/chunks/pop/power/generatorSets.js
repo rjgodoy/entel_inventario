@@ -38,7 +38,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       generatorSets: Array,
-      can: null
+      canEditGeneratorSets: null
     };
   },
   mounted: function mounted() {
@@ -51,7 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/generatorSets/".concat(this.pop.id)).then(function (response) {
         _this.generatorSets = response.data.generatorSets;
-        _this.can = response.data.can;
+        _this.canEditGeneratorSets = response.data.can.update;
       })["catch"](function (error) {
         console.log('Error al traer los datos de Plantas Rectificadoras: ' + error);
       });
@@ -92,7 +92,7 @@ var render = function() {
                   staticClass: "column is-8",
                   attrs: {
                     generatorSet: generatorSet,
-                    can: _vm.can,
+                    canEditGeneratorSets: _vm.canEditGeneratorSets,
                     user: _vm.user,
                     pop: _vm.pop
                   }

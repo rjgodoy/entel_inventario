@@ -46,6 +46,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -196,8 +202,37 @@ var render = function() {
   return _c("div", { staticClass: "column is-4" }, [
     _c(
       "article",
-      { staticClass: "tile is-child box is-bold", class: _vm.boxBackground },
+      {
+        staticClass: "tile is-child box is-bold has-background",
+        class: _vm.boxBackground
+      },
       [
+        _c(
+          "div",
+          {
+            staticClass: "is-box-background is-transparent-light",
+            staticStyle: { "margin-top": "-44px" }
+          },
+          [
+            _c(
+              "font-awesome-layers",
+              { staticClass: "fa-10x is-pulled-right" },
+              [
+                _c("font-awesome-icon", {
+                  attrs: { icon: "grip-lines", transform: "right-13" }
+                }),
+                _vm._v(" "),
+                _c("font-awesome-icon", {
+                  style: { color: "grey" },
+                  attrs: { icon: "bolt", transform: "shrink-2 left-2" }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "columns" }, [
           _c(
             "div",

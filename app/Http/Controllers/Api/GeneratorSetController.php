@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Exports\GeneratorSetsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GeneratorSet as GeneratorSetResource;
+use App\Models\GeneratorGroup;
+use App\Models\GeneratorMotor;
 use App\Models\GeneratorSet;
 use App\Models\GeneratorSetCapacity;
 use App\Models\GeneratorSetMaintainer;
 use App\Models\GeneratorSetResponsable;
+use App\Models\GeneratorTank;
+use App\Models\GeneratorTta;
 use App\Models\Log;
 use App\Models\TelecomCompany;
 use DB;
@@ -321,7 +325,20 @@ class GeneratorSetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $generatorSet = GeneratorSet::find($id);
+        $generatorSet->delete();
+
+        $generatorGroup = GeneratorGroup::where('generator_set_id', $id)->first();
+        $generatorGroup->delete();
+
+        $generatorTank = GeneratorTank::where('generator_set_id', $id)->first();
+        $generatorTank->delete();
+
+        $generatorMotor = GeneratorMotor::where('generator_set_id', $id)->first();
+        $generatorMotor->delete();
+
+        $generatorTta = GeneratorTta::where('generator_set_id', $id)->first();
+        $generatorTta->delete();
     }
 
     /**

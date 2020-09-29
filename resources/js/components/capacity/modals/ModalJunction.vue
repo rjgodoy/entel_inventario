@@ -6,7 +6,7 @@
         <section class="modal-card-body" style="background: rgba(0,0,0,0)">
             <junction
                 :junction="junction"
-                :can="can"
+                :canEditJunctions="canEditJunctions"
                 :user="user"
             />
         </section>
@@ -24,7 +24,7 @@
         },
 
         props : [
-            'can',
+            'canEditJunctions',
             'junction',
             'user'
         ],

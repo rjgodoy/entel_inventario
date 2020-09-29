@@ -351,7 +351,7 @@
                                     </div>
                                 </div>
 
-                                <button v-if="can.update & isEditMode" 
+                                <button v-if="canEditJunctions & isEditMode" 
                                     @click="isEditJunctionModalActive = true"
                                     class="button is-size-7 is-small is-fullwidth" 
                                     style="padding-top: 0px; padding-bottom: 0px;">
@@ -427,7 +427,7 @@
                         </span>
                     </b-progress>
 
-                    <div class="field has-text-centered" v-if="can.update">
+                    <div class="field has-text-centered" v-if="canEditJunctions">
                         <b-button :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
                             <font-awesome-icon :icon="['fas', 'edit']"/>
                             &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar parámetros de Empalme' }}
@@ -447,7 +447,7 @@
         },
 
         props : [
-            'can',
+            'canEditJunctions',
             'junction',
             'user'
         ],

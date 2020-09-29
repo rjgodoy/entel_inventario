@@ -165,7 +165,7 @@
                                     
                                     <div class="column">
                                         <div class="has-text-weight-light is-size-7">Potencia</div>
-                                        <div class="has-text-weight-semibold is-size-6">{{ currentGeneratorGroup ? currentGeneratorGroup.power : 'Sin información' }} <span class="is-size-7" v-if="currentGeneratorGroup">kW</span></div>
+                                        <div class="has-text-weight-semibold is-size-6">{{ currentGeneratorGroup.power ? currentGeneratorGroup.power : 'Sin información' }} <span class="is-size-7" v-if="currentGeneratorGroup.power">kW</span></div>
                                     </div>
 
                                     <!-- <div class="column has-text-centered">
@@ -280,10 +280,15 @@
                 </div>
             </div>
 
-            <div class="field has-text-centered" v-if="can.update">
+            <div class="field has-text-centered" v-if="canEditGeneratorSets">
                 <b-button :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
                     <font-awesome-icon :icon="['fas', 'edit']"/>
                     &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar parámetros de Grupo' }}
+                </b-button>
+
+                <b-button v-if="isEditMode" type="is-danger" size="is-small" @click="deleteGeneratorSet()" class="is-pulled-right">
+                    <font-awesome-icon :icon="['fas', 'trash']"/>
+                    &nbsp;&nbsp; Eliminar
                 </b-button>
             </div>
         </div>
@@ -299,7 +304,7 @@
         },
 
         props : [
-            'can',
+            'canEditGeneratorSets',
             'generatorSet',
             'user',
         ],
@@ -489,7 +494,7 @@
             },
 
             saveChanges() {
-                console.log(this.currentGeneratorResponsableAreaId)
+                // console.log(this.currentGeneratorResponsableAreaId)
                 if (!this.isEditMode && 
                     (this.primeCapacity != this.newPrimeCapacity || 
                     this.usedCapacity != this.newUsedCapacity || 
@@ -498,7 +503,7 @@
                     this.generatorSet.generator_set_level_type_id != this.level_id ||
                     this.generatorSet.generator_set_type_id != this.generator_set_type_id ||
                     this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
-                    console.log(this.currentGeneratorResponsableAreaId)
+                    // console.log(this.currentGeneratorResponsableAreaId)
                     let params = {
                         'user_id': parseFloat(this.user.id),
                         'generator_set_id': parseFloat(this.generatorSet.id),
@@ -510,12 +515,27 @@
                         'generator_set_level_type_id': parseFloat(this.level_id),
                         'generator_set_type_id': parseFloat(this.generator_set_type_id)
                     }
-                    console.log(params)
+                    // console.log(params)
                     axios.put(`/api/generatorSets/${this.generatorSet.id}`, params).then(response => {
-                        console.log(response.data)
                         this.$eventBus.$emit('generator-set-capacities-updated');
                     })
                 }
+            },
+
+            deleteGeneratorSet() {
+                console.log(this.generatorSet)
+                this.$buefy.dialog.confirm({
+                    message: `Confirma la eliminación del Grupo Electrógeno de la sala?`,
+                    type: 'is-link',
+                    onConfirm: () => {
+                        axios.delete(`/api/generatorSets/${this.generatorSet.id}`)
+                        .then(response => {
+                            // console.log(response.data)
+                            this.$parent.close()
+                            this.$eventBus.$emit('generator-set-capacities-updated')
+                        })
+                    }
+                })
             }
         }
     }

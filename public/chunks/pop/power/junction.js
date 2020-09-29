@@ -457,7 +457,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/pop/power/modals/editJunction */ "chunks/pop/power/modals/editJunction").then(__webpack_require__.bind(null, /*! ./modals/EditJunctionParameters */ "./resources/js/components/pop/power/modals/EditJunctionParameters.vue"));
     }
   },
-  props: ['can', 'junction', 'user'],
+  props: ['canEditJunctions', 'junction', 'user'],
   data: function data() {
     return {
       junctionTypeId: this.junction.junction_type_id,
@@ -1967,7 +1967,7 @@ var render = function() {
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.can.update & _vm.isEditMode
+                    _vm.canEditJunctions & _vm.isEditMode
                       ? _c(
                           "button",
                           {
@@ -2110,7 +2110,7 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm.can.update
+            _vm.canEditJunctions
               ? _c(
                   "div",
                   { staticClass: "field has-text-centered" },

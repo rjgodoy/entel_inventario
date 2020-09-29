@@ -97,14 +97,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalNewSolarPanel: function ModalNewSolarPanel() {
       return __webpack_require__.e(/*! import() | chunks/capacity/modals/new/newSolarPanel */ "chunks/capacity/modals/new/newSolarPanel").then(__webpack_require__.bind(null, /*! ../modals/new/ModalNewSolarPanel */ "./resources/js/components/capacity/modals/new/ModalNewSolarPanel.vue"));
     }
   },
-  props: ['junctions', 'can', 'user', 'pop'],
+  props: ['junctions', 'canEditJunctions', 'user', 'pop'],
   data: function data() {
     return {
       junctionSelected: null,
@@ -202,76 +201,86 @@ var render = function() {
           _c("div", { staticClass: "columns" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "column" },
-              [
-                _c(
-                  "b-dropdown",
-                  {
-                    staticClass: "is-pulled-right",
-                    attrs: { "aria-role": "list", position: "is-bottom-left" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "trigger",
-                        fn: function(ref) {
-                          var active = ref.active
-                          return _c(
-                            "button",
-                            { staticClass: "button is-default is-small" },
-                            [
-                              _c(
-                                "span",
-                                [
-                                  _c("font-awesome-icon", {
-                                    attrs: { icon: ["fas", "ellipsis-v"] }
-                                  })
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        }
-                      }
-                    ])
-                  },
+            _vm.canEditJunctions
+              ? _c(
+                  "div",
+                  { staticClass: "column" },
                   [
-                    _vm._v(" "),
                     _c(
-                      "b-dropdown-item",
+                      "b-dropdown",
                       {
-                        staticClass: "is-size-6",
-                        attrs: { "aria-role": "listitem" },
-                        on: {
-                          click: function($event) {
-                            _vm.isNewSolarPanelModalActive = true
-                          }
-                        }
+                        staticClass: "is-pulled-right",
+                        attrs: {
+                          "aria-role": "list",
+                          position: "is-bottom-left"
+                        },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "trigger",
+                              fn: function(ref) {
+                                var active = ref.active
+                                return _c(
+                                  "button",
+                                  { staticClass: "button is-default is-small" },
+                                  [
+                                    _c(
+                                      "span",
+                                      [
+                                        _c("font-awesome-icon", {
+                                          attrs: { icon: ["fas", "ellipsis-v"] }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              }
+                            }
+                          ],
+                          null,
+                          false,
+                          1113762171
+                        )
                       },
                       [
+                        _vm._v(" "),
                         _c(
-                          "div",
-                          { staticClass: "media" },
+                          "b-dropdown-item",
+                          {
+                            staticClass: "is-size-6",
+                            attrs: { "aria-role": "listitem" },
+                            on: {
+                              click: function($event) {
+                                _vm.isNewSolarPanelModalActive = true
+                              }
+                            }
+                          },
                           [
-                            _c("font-awesome-icon", {
-                              staticClass: "media-left",
-                              attrs: { icon: ["fas", "plus"] }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-content" }, [
-                              _c("h3", [_vm._v("Nuevos Paneles Solares")])
-                            ])
-                          ],
-                          1
+                            _c(
+                              "div",
+                              { staticClass: "media" },
+                              [
+                                _c("font-awesome-icon", {
+                                  staticClass: "media-left",
+                                  attrs: { icon: ["fas", "plus"] }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "media-content" }, [
+                                  _c("h3", [_vm._v("Nuevos Paneles Solares")])
+                                ])
+                              ],
+                              1
+                            )
+                          ]
                         )
-                      ]
+                      ],
+                      1
                     )
                   ],
                   1
                 )
-              ],
-              1
-            )
+              : _vm._e()
           ]),
           _vm._v(" "),
           _vm.hasSolarPanels()
@@ -295,7 +304,10 @@ var render = function() {
                           {
                             staticClass:
                               "tile box is-shadowless is-paddingless",
-                            staticStyle: { border: "solid 0.05rem black" }
+                            staticStyle: {
+                              border: "solid 0.05rem black",
+                              "background-color": "rgba(255, 255, 255, 0.8)"
+                            }
                           },
                           [
                             _c("div", { staticClass: "tile" }, [

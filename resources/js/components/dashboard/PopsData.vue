@@ -6,7 +6,7 @@
             <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.totalPops | numeral('0,0') }}</div>
         </div>
         
-        <table class="table is-fullwidth" :class="boxBackground">
+        <table class="table is-fullwidth" style="background-color: rgba(0,0,0,0)">
             <thead>
                 <tr class="is-size-7">
                     <th class="" :class="secondaryText">{{ selectedCrm == null ? 'CRM' : (selectedZona == null ? 'Zona' : 'Comuna') }}</th>

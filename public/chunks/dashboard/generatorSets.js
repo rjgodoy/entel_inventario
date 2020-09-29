@@ -47,6 +47,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -198,8 +202,23 @@ var render = function() {
   return _c("div", { staticClass: "column is-4" }, [
     _c(
       "article",
-      { staticClass: "tile is-child box is-bold", class: _vm.boxBackground },
+      {
+        staticClass: "tile is-child box is-bold has-background",
+        class: _vm.boxBackground
+      },
       [
+        _c(
+          "div",
+          { staticClass: "is-box-background is-transparent-light" },
+          [
+            _c("font-awesome-icon", {
+              staticClass: "is-pulled-right",
+              attrs: { icon: ["fas", "charging-station"], size: "10x" }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "columns" }, [
           _c(
             "div",

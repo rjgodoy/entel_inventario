@@ -353,20 +353,25 @@
 
                         <div class="tile">
                             <div class="tile is-parent is-vertical">
-                                <article class="tile is-child box" :class="boxBackground">
-                                <keep-alive>
-                                    <component :is="currentTabComponent"
-                                        :user="user"
-                                        :bodyBackground="bodyBackground"
-                                        :boxBackground="boxBackground"
-                                        :primaryText="primaryText"
-                                        :secondaryText="secondaryText"
-                                        :selectedCrm="this.selectedCrm"
-                                        :selectedZona="this.selectedZona"
-                                        :core="core"
-                                        :last_updated="currentLastUpdateData"
-                                    />
-                                </keep-alive>
+                                <article class="tile is-child box has-background" :class="boxBackground">
+                                    <div class="is-box-background is-transparent-light">
+                                        <font-awesome-icon 
+                                            :icon="['fas', currentIcon]" size="10x" class="is-pulled-right" style=""/>
+                                    </div>
+                                    <keep-alive>
+                                        <component :is="currentTabComponent"
+                                            class="animate__animated animate__fadeIn"
+                                            :user="user"
+                                            :bodyBackground="bodyBackground"
+                                            :boxBackground="boxBackground"
+                                            :primaryText="primaryText"
+                                            :secondaryText="secondaryText"
+                                            :selectedCrm="this.selectedCrm"
+                                            :selectedZona="this.selectedZona"
+                                            :core="core"
+                                            :last_updated="currentLastUpdateData"
+                                        />
+                                    </keep-alive>
                                 </article>
 
                                 <article v-if="(this.currentTab !== 'critics') && (this.currentTab !== 'alba')">
@@ -473,11 +478,11 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faCircle, faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch } from "@fortawesome/free-solid-svg-icons";
-    // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+    import { faCircle, faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch, faChargingStation, faWind, faBroadcastTower, faGripLines, faBolt } from "@fortawesome/free-solid-svg-icons";
+    import { faSuperpowers } from "@fortawesome/free-brands-svg-icons";
     // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-    library.add(faCircle, faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch);
+    library.add(faCircle, faTimesCircle, faMapMarkerAlt, faMapMarkedAlt, faInfoCircle, faServer, faSignal, faExclamationTriangle, faFileInvoiceDollar, faDownload, faSearch, faChargingStation, faSuperpowers, faWind, faBroadcastTower, faGripLines, faBolt);
 
     var moment = require('moment');
     import debounce from 'lodash/debounce'
@@ -669,6 +674,14 @@
         },
 
         computed: {
+            currentIcon() {
+                return this.currentTab == 'pops' ? 'map-marker-alt' : 
+                    (this.currentTab == 'sites' ? 'server' : 
+                        (this.currentTab == 'technologies' ? 'signal' : 
+                            (this.currentTab == 'critics' ? 'exclamation-triangle' : 
+                                (this.currentTab == 'sites' ? 'alba' : 'file-invoice-dollar'))))
+            },
+
             selectedPop() {
                 return this.selectedSite ? this.selectedSite.pop : null
             },

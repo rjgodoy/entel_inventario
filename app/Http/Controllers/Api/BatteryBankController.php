@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\BatteryBank;
+use App\Models\Log;
 use Illuminate\Http\Request;
 
 class BatteryBankController extends Controller
@@ -55,7 +56,18 @@ class BatteryBankController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $batteryBank = BatteryBank::find($id);
+        $batteryBank->update([
+            'capacity' => $request->capacity,
+            'battery_bank_brand_id' => $request->battery_bank_brand_id
+        ]);
+
+        Log::create([
+            'pop_id' => $request->pop_id,
+            'user_id' => $request->user_id,
+            'log_type_id' => 1,
+            'description' => 'Se ha actualizado los parametros del Banco de Baterías Nº '.$id.'.'
+        ]);
     }
 
     /**

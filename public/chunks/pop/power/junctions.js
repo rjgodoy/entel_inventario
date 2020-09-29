@@ -41,7 +41,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       junctions: Array,
       consumoTablero: 45980,
-      can: null
+      canEditJunctions: null
     };
   },
   mounted: function mounted() {
@@ -59,7 +59,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/junctions/".concat(this.pop.id)).then(function (response) {
         _this.junctions = response.data.junction;
-        _this.can = response.data.can;
+        _this.canEditJunctions = response.data.can.update;
       })["catch"](function (error) {
         console.log('Error al traer los datos de Empalmes: ' + error);
       });
@@ -103,7 +103,7 @@ var render = function() {
                   _c("junction", {
                     attrs: {
                       junction: junction,
-                      can: _vm.can,
+                      canEditJunctions: _vm.canEditJunctions,
                       user: _vm.user,
                       pop: _vm.pop
                     }

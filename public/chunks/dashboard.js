@@ -13,8 +13,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
-/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_4__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -494,11 +495,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
- // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-// import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMapMarkedAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faServer"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFileInvoiceDollar"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSearch"]);
+ // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMapMarkedAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faServer"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFileInvoiceDollar"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faDownload"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faChargingStation"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faSuperpowers"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faWind"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faGripLines"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBolt"]);
 
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
@@ -529,7 +535,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     // MapView,
     // ###### Charts ########
     PretDataChart: function PretDataChart() {
-      return Promise.all(/*! import() | chunks/dashboard/pretDataChart */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/capacity/projection~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/dashboard/pretDataChart")]).then(__webpack_require__.bind(null, /*! ./PretDataChart */ "./resources/js/components/dashboard/PretDataChart.vue"));
+      return Promise.all(/*! import() | chunks/dashboard/pretDataChart */[__webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/dashboard/pretDataChart")]).then(__webpack_require__.bind(null, /*! ./PretDataChart */ "./resources/js/components/dashboard/PretDataChart.vue"));
     },
     // RedCoreChart,
     // ###### Equipment #####
@@ -694,6 +700,9 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     }
   },
   computed: {
+    currentIcon: function currentIcon() {
+      return this.currentTab == 'pops' ? 'map-marker-alt' : this.currentTab == 'sites' ? 'server' : this.currentTab == 'technologies' ? 'signal' : this.currentTab == 'critics' ? 'exclamation-triangle' : this.currentTab == 'sites' ? 'alba' : 'file-invoice-dollar';
+    },
     selectedPop: function selectedPop() {
       return this.selectedSite ? this.selectedSite.pop : null;
     },
@@ -726,7 +735,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       this.selectedSite = this.selected;
       return this.searchText;
     },
-    getPops: lodash_debounce__WEBPACK_IMPORTED_MODULE_3___default()(function () {
+    getPops: lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default()(function () {
       var _this2 = this;
 
       var crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
@@ -917,7 +926,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     selectZona: function selectZona(zona) {
       this.selectedZona = this.selectedZona != zona ? zona : null;
     },
-    getAsyncData: lodash_debounce__WEBPACK_IMPORTED_MODULE_3___default()(function (text) {
+    getAsyncData: lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default()(function (text) {
       var _this6 = this;
 
       // String update
@@ -955,7 +964,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         _this6.isFetching = false;
       });
     }, 350),
-    getMoreAsyncData: lodash_debounce__WEBPACK_IMPORTED_MODULE_3___default()(function () {
+    getMoreAsyncData: lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default()(function () {
       this.getAsyncData(this.searchText);
     }, 50),
     clearSearch: function clearSearch() {
@@ -2756,15 +2765,35 @@ var render = function() {
                       _c(
                         "article",
                         {
-                          staticClass: "tile is-child box",
+                          staticClass: "tile is-child box has-background",
                           class: _vm.boxBackground
                         },
                         [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "is-box-background is-transparent-light"
+                            },
+                            [
+                              _c("font-awesome-icon", {
+                                staticClass: "is-pulled-right",
+                                attrs: {
+                                  icon: ["fas", _vm.currentIcon],
+                                  size: "10x"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
                           _c(
                             "keep-alive",
                             [
                               _c(_vm.currentTabComponent, {
                                 tag: "component",
+                                staticClass:
+                                  "animate__animated animate__fadeIn",
                                 attrs: {
                                   user: _vm.user,
                                   bodyBackground: _vm.bodyBackground,

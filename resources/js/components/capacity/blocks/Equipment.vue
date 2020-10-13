@@ -118,10 +118,10 @@
                             <div class="tile is-parent" v-if="room.planes && room.planes.length">
                                 <div class="tile columns is-multiline">
                                     <div class="tile is-parent column is-6" v-for="plane in planes" :key="plane.id">
-                                        <div class="tile is-parent box is-shadowless has-background" style="border: solid 0.01rem #aaa">
-                                            <div class="is-box-background is-transparent-light">
+                                        <div class="tile is-parent box is-shadowless" style="border: solid 0.1rem #aaa">
+                                            <!-- <div class="is-box-background is-transparent-light">
                                                 <font-awesome-icon :icon="['fas', 'bezier-curve']" size="6x" class="is-pulled-right" style=""/>
-                                            </div>
+                                            </div> -->
                                             <div class="tile is-vertical">
 
                                                 <div class="columns">

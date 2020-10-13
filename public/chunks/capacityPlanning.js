@@ -311,11 +311,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisV"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisH"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortUp"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSuperpowers"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSolarPanel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faShieldAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCarBattery"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFire"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisV"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisH"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortUp"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSuperpowers"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSolarPanel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faShieldAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCarBattery"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFire"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMap"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMap"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
@@ -325,7 +326,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
     },
     // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
-    // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./tabs/Calculator'),
+    Distribution: function Distribution() {
+      return __webpack_require__.e(/*! import() | chunks/capacity/distribution */ "chunks/capacity/distribution").then(__webpack_require__.bind(null, /*! ./tabs/Distribution */ "./resources/js/components/capacity/tabs/Distribution.vue"));
+    },
     Layout: function Layout() {
       return __webpack_require__.e(/*! import() | chunks/capacity/layout */ "chunks/capacity/layout").then(__webpack_require__.bind(null, /*! ./tabs/Layout */ "./resources/js/components/capacity/tabs/Layout.vue"));
     },
@@ -346,29 +349,29 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         "component": "capacity",
         "icon": "traffic-light",
         "icon_type": "fas"
-      }, {
-        "title": "Proyección",
-        "component": "projection",
-        "icon": "chart-line",
-        "icon_type": "fas"
       }, // {
+      //     "title": "Proyección",
+      //     "component": "projection",
+      //     "icon": "chart-line",
+      //     "icon_type": "fas"
+      // },
+      // {
       //     "title": "Reserva",
       //     "component": "requests",
       //     "icon": "file-invoice",
       //     "icon_type": "fas"
       // },
       {
-        "title": "Layout",
-        "component": "layout",
+        "title": "Distribución",
+        "component": "distribution",
         "icon": "bezier-curve",
         "icon_type": "fas"
-      }, // {
-      //     "title": "Calculador",
-      //     "component": "calculator",
-      //     "icon": "calculator",
-      //     "icon_type": "fas"
-      // },
-      {
+      }, {
+        "title": "Layout",
+        "component": "layout",
+        "icon": "map",
+        "icon_type": "far"
+      }, {
         "title": "Documentos",
         "component": "documents",
         "icon": "folder-open",
@@ -400,6 +403,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('power-rectifier-updated', this.getRoomData);
     this.$eventBus.$on('new-plane-updated', this.getRoomData);
     this.$eventBus.$on('new-battery-bank', this.getRoomData);
+    this.$eventBus.$on('new-generator-set', this.getRoomData);
     this.$eventBus.$on('new-room', this.getRoomData);
     this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
     this.$eventBus.$on('new-solar-panel', this.getRoomData);
@@ -1542,6 +1546,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$off('power-rectifier-updated');
     this.$eventBus.$off('new-plane-updated');
     this.$eventBus.$off('new-battery-bank');
+    this.$eventBus.$off('new-generator-set');
     this.$eventBus.$off('new-room');
     this.$eventBus.$off('air-conditioner-capacity');
     this.$eventBus.$off('new-solar-panel');
@@ -2113,6 +2118,7 @@ var render = function() {
                       attrs: {
                         user: _vm.user,
                         room: _vm.room,
+                        pop: _vm.room.pop,
                         junctions: _vm.junctions,
                         generatorSets: _vm.generatorSets,
                         planes: _vm.planes,

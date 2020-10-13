@@ -78,15 +78,14 @@
 
             register() {
                 const params = {
-                    'junction_id': this.junctionSelected.id,
-                    'unit_capacity': parseFloat(this.unit_capacity),
-                    'quantity': parseFloat(this.quantity),
+                    'generator_set_type_id': this.generatorSetType.id,
                     'user_id': this.user.id,
-                    'pop_id': this.junctionSelected.pop_id
+                    'pop_id': this.pop.id
                 }
 
                 axios.post('/api/generatorSets', params).then(response => {
                     console.log(response.data)
+                    this.$eventBus.$emit('new-generator-set')
                     this.$parent.close()
                 })
             },

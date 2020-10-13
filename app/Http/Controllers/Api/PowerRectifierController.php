@@ -181,6 +181,26 @@ class PowerRectifierController extends Controller
             $room->planes()->attach($plane_id);
         }
 
+        $rooms = Room::where('pop_id', $request->pop_id)->get();
+        foreach ($rooms as $thisRoom) {
+            $powerRect = PowerRectifier::where('room_id', $thisRoom->id)->get();
+
+            $planes = [];
+            foreach ($powerRect as $power) {
+                array_push($planes, $power->plane_id);
+            }
+
+            $popRooms = Room::where('pop_id', $thisRoom->pop_id)->get();
+
+            foreach ($popRooms as $pRoom) {
+                foreach ($planes as $planeId) {
+                    if(!$pRoom->planes()->where('plane_id', $planeId)->exists()) {
+                        $pRoom->planes()->attach($planeId);
+                    }
+                }
+            }            
+        }
+
         PowerRectifier::create([
             'pop_id' => $request->pop_id,
             'room_id' => $request->room_id,
@@ -338,6 +358,26 @@ class PowerRectifierController extends Controller
                     'description' => 'Se han actualizado los módulos de la planta ID '.$powerRectifier->id.'..'
                 ]);
             }
+        }
+
+        $rooms = Room::where('pop_id', $powerRectifier->pop_id)->get();
+        foreach ($rooms as $thisRoom) {
+            $powerRect = PowerRectifier::where('room_id', $thisRoom->id)->get();
+
+            $planes = [];
+            foreach ($powerRect as $power) {
+                array_push($planes, $power->plane_id);
+            }
+
+            $popRooms = Room::where('pop_id', $thisRoom->pop_id)->get();
+
+            foreach ($popRooms as $pRoom) {
+                foreach ($planes as $planeId) {
+                    if(!$pRoom->planes()->where('plane_id', $planeId)->exists()) {
+                        $pRoom->planes()->attach($planeId);
+                    }
+                }
+            }            
         }
 
         return $powerRectifier;

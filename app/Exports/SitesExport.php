@@ -66,7 +66,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         $this->mpls = $request->mpls ? $request->mpls : 0;
         $this->olt = $request->olt ? $request->olt : 0;
         $this->olt_3play = $request->olt_3play ? $request->olt_3play : 0;
-        // $this->red_minima = $request->red_minima_n1;
+        $this->red_minima_n1 = $request->red_minima_n1 ? $request->red_minima_n1 : 0;
+        $this->red_minima_n2 = $request->red_minima_n2 ? $request->red_minima_n2 : 0;
         $this->lloo = $request->lloo ? $request->lloo : 0;
         $this->ranco = $request->ranco ? $request->ranco : 0;
         $this->bafi = $request->bafi ? $request->bafi : 0;
@@ -105,11 +106,11 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $condition_zona = $this->zona_id != 0 ? 'id = '.$this->zona_id : 'id != '.$this->zona_id;
 
             $condition_critic = $this->critic ? 'criticity = 1' : 'criticity IS NOT NULL';
-            // $condition_red_minima = 
-            //     $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' : 
-            //     ($request->red_minima_n1 ? 'sites.red_minima = 1' : 
-            //         ($request->red_minima_n2 ? 'sites.red_minima = 2' : 'sites.red_minima IN (0,1,2)')
-            //     );
+            $condition_red_minima =
+                $this->red_minima_n1 && $this->red_minima_n2 ? 'red_minima IN (1,2)' :
+                ($this->red_minima_n1 ? 'red_minima = 1' :
+                    ($this->red_minima_n2 ? 'red_minima = 2' : 'red_minima IN (0,1,2)')
+                );
             $bafi = $this->bafi;
             
             // POP
@@ -212,6 +213,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                 ->whereRaw($condition_olt_3play)
                 ->whereRaw($condition_lloo)
                 ->whereRaw($condition_ranco)
+                ->whereRaw($condition_red_minima)
                 ->orderBy('pop_id', 'asc')
     	        ->get();
         }

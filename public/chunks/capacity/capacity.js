@@ -71,6 +71,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -109,33 +112,32 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
       }) ? true : false;
     }
   },
+  mounted: function mounted() {// 
+  },
   watch: {
+    // room(val) {
+    // },
     totalEnergy: function totalEnergy(val) {
-      // console.log(val)
       this.totalE = val;
     },
     totalClimate: function totalClimate(val) {
-      // console.log(val)
       this.totalC = val;
     },
     totalSurface: function totalSurface(val) {
-      // console.log(val)
       this.totalS = val;
     },
     availableEnergy: function availableEnergy(val) {
-      // console.log(val)
       this.availableE = val;
     },
     availableClimate: function availableClimate(val) {
-      // console.log(val)
       this.availableC = val;
     },
     availableSurface: function availableSurface(val) {
-      // console.log(val)
       this.availableS = val;
     }
   },
-  methods: {}
+  methods: {//
+  }
 });
 
 /***/ }),
@@ -198,7 +200,11 @@ var render = function() {
         _c(
           "div",
           { staticClass: "box" },
-          [_c("ProjectionChart", { attrs: { room: _vm.room } })],
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("ProjectionChart", { attrs: { room: _vm.room } })
+          ],
           1
         )
       ])
@@ -218,6 +224,20 @@ var staticRenderFns = [
             "column has-text-weight-semibold has-text-dark is-size-3 has-text-left"
         },
         [_vm._v("Dashobard")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "columns" }, [
+      _c(
+        "div",
+        {
+          staticClass: "column is-size-5 has-text-weight-semibold has-text-left"
+        },
+        [_vm._v("GRAFICO DE PROYECCIÓN")]
       )
     ])
   }

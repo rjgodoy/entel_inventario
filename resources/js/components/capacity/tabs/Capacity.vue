@@ -47,8 +47,11 @@
         <div class="columns">
             <div class="column">
                 <div class="box">
+                    <div class="columns">
+                        <div class="column is-size-5 has-text-weight-semibold has-text-left">GRAFICO DE PROYECCIÓN</div>
+                    </div>
                     <ProjectionChart
-                        :room="room"
+                        :room=room
                     />
                 </div>
             </div>
@@ -103,43 +106,27 @@ export default {
                 || this.user.roles[0].slug == 'developer'
                 || this.user.roles[0].slug == 'super-viewer' 
                 || this.user_permissions.find(element => element.slug == 'edit-air-conditioner') ? true : false
-        }
+        },
+    },
+
+    mounted() {
+        // 
     },
 
     watch: {
-        totalEnergy(val){
-            // console.log(val)
-            this.totalE = val
-        },
+        // room(val) {
 
-        totalClimate(val){
-            // console.log(val)
-            this.totalC = val
-        },
-
-        totalSurface(val){
-            // console.log(val)
-            this.totalS = val
-        },
-
-        availableEnergy(val){
-            // console.log(val)
-            this.availableE = val
-        },
-
-        availableClimate(val){
-            // console.log(val)
-            this.availableC = val
-        },
-
-        availableSurface(val){
-            // console.log(val)
-            this.availableS = val
-        },
-
+        // },
+        totalEnergy(val){ this.totalE = val },
+        totalClimate(val){ this.totalC = val },
+        totalSurface(val){  this.totalS = val },
+        availableEnergy(val){ this.availableE = val },
+        availableClimate(val){ this.availableC = val },
+        availableSurface(val){ this.availableS = val },
     },
 
     methods: {
+        //
     }
 }
 </script>

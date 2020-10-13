@@ -79,7 +79,7 @@
                 .then(response => {
                     console.log(response.data)
                     // this.getPopPowerRectifiersWithoutRoom()
-                    this.$eventBus.$emit('new-battery-bank')
+                    this.$eventBus.$emit('new-generator-set')
                     this.$parent.close()
                 })
             },

@@ -153,6 +153,16 @@ class Pop extends Model
      *
      * @var array
      */
+    public function layout() 
+    {
+        return $this->hasOne(PopLayout::class)->latest();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function energy_system()
     {
         return $this->belongsTo(EnergySystem::class);

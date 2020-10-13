@@ -4,99 +4,14 @@
             <div class="has-text-weight-semibold has-text-dark is-size-3 has-text-left">Layout</div>
         </div>
 
-        <div class="tile is-ancestor" style="padding-top: 24px;">
-
-            <div class="tile is-vertical">
-
-                <div class="tile">
-                    <div class="tile is-parent is-4">
-                        <div class="tile box is-child has-background">
-                            <div class="is-box-background is-transparent-light" style="margin-top: -20px">
-                                <font-awesome-icon :icon="['fas', 'car-battery']" size="10x" class="is-pulled-right" style=""/>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column is-10">
-                                    <div class="is-size-6 has-text-weight-bold">AUTONOMIA DE BATERÍAS DEL POP</div>
-                                </div>
-                                <div class="column" v-if="canEditJunctions">
-                                    <button class="button is-small is-pulled-right" :class="isEditMode ? 'is-success' : 'is-default'"
-                                        @click="isEditMode = !isEditMode; updateAutonomy()">
-                                        <font-awesome-icon :icon="isEditMode ? ['fas', 'check'] : ['fas', 'pencil-alt']" />
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div v-if="!isEditMode" class="is-size-4 has-text-weight-semibold">{{ newTheoreticalAutonomy }} <span class="is-size-5">hrs</span></div>
-                            <b-input v-if="isEditMode" v-model="newTheoreticalAutonomy"></b-input>
-                        </div>
+        <div class="" style="padding-top: 24px;">
+            <div class="">
+                <div class="">
+                    <div class="box" style="min-height: 960px">
+                        <iframe :src="'/storage/' + layoutPath" width="100%" style="height: 960px"></iframe>
                     </div>
                 </div>
 
-                <div class="tile">
-                    <div class="tile is-4">
-                        <Junctions 
-                            :pop="pop"
-                            :junctions="junctions"
-                            :canEditJunctions="canEditJunctions"
-                            :user="user"
-                            :totalJunctionsCapacity=totalJunctionsCapacity
-                            :totalUsedJunctionsCapacity=totalUsedJunctionsCapacity
-                            :totalAvailableJunctionsCapacity=totalAvailableJunctionsCapacity
-                        />
-                    </div>
-                    <div class="tile">
-                        <GeneratorSets 
-                            :pop="pop"
-                            :generatorSets="generatorSets"
-                            :canEditGeneratorSets="canEditGeneratorSets"
-                            :user="user"
-                            :totalGeneratorSetsCapacity=totalGeneratorSetsCapacity
-                            :totalGeneratorSetsUsedCapacity=totalGeneratorSetsUsedCapacity
-                            :totalAvailableGeneratorSetsCapacity=totalAvailableGeneratorSetsCapacity
-                            :totalGeneratorSetsCapacityA=totalGeneratorSetsCapacityA
-                            :totalGeneratorSetsCapacityB=totalGeneratorSetsCapacityB
-                            :usedGeneratorSetsCapacityA=usedGeneratorSetsCapacityA
-                            :usedGeneratorSetsCapacityB=usedGeneratorSetsCapacityB
-                            :availableGeneratorSetsCapacityA=availableGeneratorSetsCapacityA
-                            :availableGeneratorSetsCapacityB=availableGeneratorSetsCapacityB
-                        />
-                    </div>
-                    <div class="tile is-3">
-                        <SolarPanels 
-                            :pop="pop"
-                            :junctions="junctions"
-                            :canEditJunctions="canEditJunctions"
-                            :user="user"
-                        />
-                    </div>
-                </div>
-
-                <div class="tile">
-                    <div class="tile is-parent">
-                        <Equipment 
-                            :pop="pop"
-                            :room="room"
-                            :user="user"
-                            :planes=planes
-                            :planeTypes=planeTypes
-                            :airConditioners=airConditioners
-                            :canEditPowerRectifiers=canEditPowerRectifiers
-                            :canEditAirConditioners=canEditAirConditioners
-                            :canEditSurface=canEditSurface
-                            :canEditDistribution=canEditDistribution
-                            :canEditPlaneTypes=canEditPlaneTypes
-
-                            :totalSurface=totalSurface
-                            :usedSurface=usedSurface
-                            :availableSurface=availableSurface
-
-                            :totalDistributionCapacity=totalDistributionCapacity
-                            :usedDistributionCapacity=usedDistributionCapacity
-                            :availableDistributionCapacity=availableDistributionCapacity
-                        />
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -161,13 +76,18 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
         data() {
             return {
                 isEditMode: false,
-                newTheoreticalAutonomy: this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
+                newTheoreticalAutonomy: this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0,
+                
             }
         },
 
         computed: {
             pop() {
                 return this.room && this.room.pop
+            },
+
+            layoutPath() {
+                return this.pop.layout && this.pop.layout.file_path
             }
         },
 
@@ -190,7 +110,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
                         // console.log(response.data)
                     })
                 }
-            }
+            },
         },
     }
 </script>

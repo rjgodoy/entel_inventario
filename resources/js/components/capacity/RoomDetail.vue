@@ -105,6 +105,7 @@
                         <component :is="currentTabComponent"
                             :user="user"
                             :room="room"
+                            :pop="room.pop"
 
                             :junctions=junctions
                             :generatorSets=generatorSets
@@ -164,17 +165,17 @@
 
 <script>   
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire } from "@fortawesome/free-solid-svg-icons";
+    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap } from "@fortawesome/free-solid-svg-icons";
     import { faSuperpowers } from "@fortawesome/free-brands-svg-icons";
-    import { faFolderOpen as farFolderOpen } from '@fortawesome/free-regular-svg-icons'
-    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faSuperpowers, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire); 
+    import { faFolderOpen as farFolderOpen, faMap as farMap } from '@fortawesome/free-regular-svg-icons'
+    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faSuperpowers, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap, farMap); 
 
     export default {
         components: {
             Capacity: () => import(/* webpackChunkName: "chunks/capacity/capacity"*/'./tabs/Capacity'),
             Projection: () => import(/* webpackChunkName: "chunks/capacity/projection"*/'./tabs/Projection'),
             // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
-            // Calculator: () => import(/* webpackChunkName: "chunks/capacity/calculator"*/'./tabs/Calculator'),
+            Distribution: () => import(/* webpackChunkName: "chunks/capacity/distribution"*/'./tabs/Distribution'),
             Layout: () => import(/* webpackChunkName: "chunks/capacity/layout"*/'./tabs/Layout'),
             Documents: () => import(/* webpackChunkName: "chunks/pop/documents/documents"*/'../pop/documents/Documents'),
             ModalNewRoom: () => import(/* webpackChunkName: "chunks/capacity/modals/new/newRoom"*/'../capacity/modals/new/ModalNewRoom'),
@@ -195,12 +196,12 @@
                         "icon": "traffic-light",
                         "icon_type": "fas"
                     },
-                    {
-                        "title": "Proyección",
-                        "component": "projection",
-                        "icon": "chart-line",
-                        "icon_type": "fas"
-                    },
+                    // {
+                    //     "title": "Proyección",
+                    //     "component": "projection",
+                    //     "icon": "chart-line",
+                    //     "icon_type": "fas"
+                    // },
                     // {
                     //     "title": "Reserva",
                     //     "component": "requests",
@@ -208,17 +209,17 @@
                     //     "icon_type": "fas"
                     // },
                     {
-                        "title": "Layout",
-                        "component": "layout",
+                        "title": "Distribución",
+                        "component": "distribution",
                         "icon": "bezier-curve",
                         "icon_type": "fas"
                     },
-                    // {
-                    //     "title": "Calculador",
-                    //     "component": "calculator",
-                    //     "icon": "calculator",
-                    //     "icon_type": "fas"
-                    // },
+                    {
+                        "title": "Layout",
+                        "component": "layout",
+                        "icon": "map",
+                        "icon_type": "far"
+                    },
                     {
                         "title": "Documentos",
                         "component": "documents",
@@ -258,6 +259,7 @@
             this.$eventBus.$on('power-rectifier-updated', this.getRoomData)
             this.$eventBus.$on('new-plane-updated', this.getRoomData)
             this.$eventBus.$on('new-battery-bank', this.getRoomData)
+            this.$eventBus.$on('new-generator-set', this.getRoomData)
             this.$eventBus.$on('new-room', this.getRoomData)
             this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
             this.$eventBus.$on('new-solar-panel', this.getRoomData)
@@ -1390,6 +1392,7 @@
             this.$eventBus.$off('power-rectifier-updated')
             this.$eventBus.$off('new-plane-updated')
             this.$eventBus.$off('new-battery-bank')
+            this.$eventBus.$off('new-generator-set')
             this.$eventBus.$off('new-room')
             this.$eventBus.$off('air-conditioner-capacity');
             this.$eventBus.$off('new-solar-panel')

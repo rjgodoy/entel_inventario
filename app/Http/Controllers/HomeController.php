@@ -21,6 +21,7 @@ use App\Models\Pop;
 use App\Models\PowerRectifier;
 use App\Models\PsgTp;
 use App\Models\Role;
+use App\Models\Room;
 use App\Models\Site;
 use App\Models\Technology;
 use App\Models\User;
@@ -284,6 +285,9 @@ class HomeController extends Controller
      */
     public function apiPops(Request $request)
     {
+        $roles = Role::pluck('slug')->toArray();
+        $request->user()->authorizeRoles($roles);
+
         $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
         $token = 'a3QwEBesPKm9b2f';
         $hash = md5($now.''.$token);
@@ -293,6 +297,63 @@ class HomeController extends Controller
 
         (new CellsImport)->import('file.csv');
         dd('success');
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function roomPlanes(Request $request)
+    {
+        $roles = Role::pluck('slug')->toArray();
+        $request->user()->authorizeRoles($roles);
+
+        $rooms = Room::all();
+        foreach ($rooms as $room) {
+            $powerR = PowerRectifier::where('room_id', $room->id)->get();
+
+            $planes = [];
+            foreach ($powerR as $power) {
+                array_push($planes, $power->plane_id);
+            }
+
+            $popRooms = Room::where('pop_id', $room->pop_id)->get();
+
+            foreach ($popRooms as $pRoom) {
+                foreach ($planes as $plane_id) {
+                    if(!$pRoom->planes()->where('plane_id', $plane_id)->exists()) {
+                        $pRoom->planes()->attach($plane_id);
+                    }
+                }
+            }            
+        }
+        dd('done');
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function createPopRooms(Request $request)
+    {
+        $roles = Role::pluck('slug')->toArray();
+        $request->user()->authorizeRoles($roles);
+
+        // Insert Room
+        $popsWORoom = Pop::doesntHave('rooms')->get();
+        foreach ($popsWORoom as $pop) {
+            Room::create([
+                'pop_id' => $pop->id,
+                'name' => 'Sala 1.1',
+                'criticity' => 0,
+                'order' => 0
+            ]);
+        }
+        dd('done');
 
     }
 

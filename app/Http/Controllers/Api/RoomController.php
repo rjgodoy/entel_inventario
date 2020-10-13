@@ -102,6 +102,7 @@ class RoomController extends Controller
             'pop.rooms.power_rectifiers.power_rectifier_mode',
 
             'pop.rooms.current_room_capacity',
+            'pop.layout',
 
             'planes.power_rectifiers.power_rectifier_type', 
             'planes.power_rectifiers.power_rectifier_modules', 

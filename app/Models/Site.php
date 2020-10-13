@@ -66,7 +66,7 @@ class Site extends Model
 
     public function pop() 
     {
-        return $this->belongsTo(Pop::class);
+        return $this->belongsTo(Pop::class)->withTrashed();
     }
 
     public function site_type() 

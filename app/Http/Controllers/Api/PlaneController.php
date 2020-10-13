@@ -9,6 +9,7 @@ use App\Models\Plane;
 use App\Models\PlaneDelegationType;
 use App\Models\PlaneRedundantModule;
 use App\Models\PlaneType;
+use App\Models\Room;
 use App\Models\RoomDelegation;
 use Illuminate\Http\Request;
 
@@ -130,6 +131,21 @@ class PlaneController extends Controller
             'room_id' => $room_id,
             'plane_delegation_type_id' => $request->plane_delegation_type_id
         ]);
+
+        $room_id = 7;
+        $planes = Plane::whereHas('rooms', function($q) use($room_id) {
+            $q->whereHas('pop', function($p) {
+                $p->whereHas('room', function($r) {
+                    $r->where('id', $room_id);
+                });
+            })
+            ->where('id', $room_id);
+        })
+        ->get();
+
+
+        $room = Room::find($room_id);
+        $room->planes()->attach($plane_id);
 
         return $roomDelegation;
     }

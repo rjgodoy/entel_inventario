@@ -14,19 +14,19 @@
                             <div class="columns is-vcentered">
                                 <div class="column">
                                     <div class="">
-                                        <div class="has-text-weight-bold is-size-6">{{ totalSurface | numeral("0,0.0") }} <span class="is-size-7">kW</span></div>
+                                        <div class="has-text-weight-bold is-size-6">{{ totalSurface | numeral("0,0.0") }} <span class="is-size-7">un</span></div>
                                         <div class="has-text-weight-normal is-size-7">Espacio Total</div>
                                     </div>
                                 </div>
                                 <div class="column">
                                     <div class="">
-                                        <div class="has-text-weight-bold is-size-6">{{ usedSurface | numeral("0,0.0") }} <span class="is-size-7">kW</span></div>
+                                        <div class="has-text-weight-bold is-size-6">{{ usedSurface | numeral("0,0.0") }} <span class="is-size-7">un</span></div>
                                         <div class="has-text-weight-normal is-size-7">Espacio Utilizado</div>
                                     </div>
                                 </div>
                                 <div class="column">
                                     <div class="">
-                                        <div class="has-text-weight-bold is-size-6">{{ availableSurface | numeral("0,0.0") }} <span class="is-size-7">kW</span></div>
+                                        <div class="has-text-weight-bold is-size-6">{{ availableSurface | numeral("0,0.0") }} <span class="is-size-7">un</span></div>
                                         <div class="has-text-weight-normal is-size-7">Espacio Disponible</div>
                                     </div>
                                 </div>
@@ -57,19 +57,19 @@
                             <div class="columns is-vcentered">
                                 <div class="column">
                                     <div class="">
-                                        <div class="has-text-weight-bold is-size-6">{{ totalSurface | numeral("0,0.0") }} <span class="is-size-7">kW</span></div>
+                                        <div class="has-text-weight-bold is-size-6">{{ totalSurface | numeral("0,0.0") }} <span class="is-size-7">un</span></div>
                                         <div class="has-text-weight-normal is-size-7">Espacio Total</div>
                                     </div>
                                 </div>
                                 <div class="column">
                                     <div class="">
-                                        <div class="has-text-weight-bold is-size-6">{{ usedSurface | numeral("0,0.0") }} <span class="is-size-7">kW</span></div>
+                                        <div class="has-text-weight-bold is-size-6">{{ usedSurface | numeral("0,0.0") }} <span class="is-size-7">un</span></div>
                                         <div class="has-text-weight-normal is-size-7">Espacio Utilizado</div>
                                     </div>
                                 </div>
                                 <div class="column">
                                     <div class="">
-                                        <div class="has-text-weight-bold is-size-6">{{ availableSurface | numeral("0,0.0") }} <span class="is-size-7">kW</span></div>
+                                        <div class="has-text-weight-bold is-size-6">{{ availableSurface | numeral("0,0.0") }} <span class="is-size-7">un</span></div>
                                         <div class="has-text-weight-normal is-size-7">Espacio Disponible</div>
                                     </div>
                                 </div>

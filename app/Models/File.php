@@ -28,4 +28,9 @@ class File extends Model
     {
         return $this->belongsTo(Folder::class);
     }
+
+    public function layout() 
+    {
+        return $this->hasOne(PopLayout::class)->latest();
+    }
 }

@@ -132,7 +132,7 @@ class UpdatePops extends Command
         }
 
         // Insert Room
-        $popsWORoom = Pop::doesntHave('rooms');
+        $popsWORoom = Pop::doesntHave('rooms')->get();
         foreach ($popsWORoom as $pop) {
             Room::create([
                 'pop_id' => $pop->id,

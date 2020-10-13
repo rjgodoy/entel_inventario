@@ -200,7 +200,27 @@ class GeneratorSetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $generatorSet = GeneratorSet::create([
+            'pop_id' => $request->pop_id,
+            'generator_set_type_id' => $request->generator_set_type_id
+        ]);
+
+        $generatorGroup = GeneratorGroup::create([
+            'generator_set_id' => $generatorSet->id
+        ]);
+
+        $generatorTank = GeneratorTank::create([
+            'generator_set_id' => $generatorSet->id
+        ]);
+
+        $generatorMotor = GeneratorMotor::create([
+            'generator_set_id' => $generatorSet->id
+        ]);
+
+        $generatorTta = GeneratorTta::create([
+            'generator_set_id' => $generatorSet->id
+        ]);
+        return $request;
     }
 
     /**

@@ -33,91 +33,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -149,6 +64,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   computed: {
     pop: function pop() {
       return this.room && this.room.pop;
+    },
+    layoutPath: function layoutPath() {
+      return this.pop.layout && this.pop.layout.file_path;
     }
   },
   watch: {
@@ -194,202 +112,22 @@ var render = function() {
   return _c("section", {}, [
     _vm._m(0),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "tile is-ancestor",
-        staticStyle: { "padding-top": "24px" }
-      },
-      [
-        _c("div", { staticClass: "tile is-vertical" }, [
-          _c("div", { staticClass: "tile" }, [
-            _c("div", { staticClass: "tile is-parent is-4" }, [
-              _c(
-                "div",
-                { staticClass: "tile box is-child has-background" },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "is-box-background is-transparent-light",
-                      staticStyle: { "margin-top": "-20px" }
-                    },
-                    [
-                      _c("font-awesome-icon", {
-                        staticClass: "is-pulled-right",
-                        attrs: { icon: ["fas", "car-battery"], size: "10x" }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _vm.canEditJunctions
-                      ? _c("div", { staticClass: "column" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "button is-small is-pulled-right",
-                              class: _vm.isEditMode
-                                ? "is-success"
-                                : "is-default",
-                              on: {
-                                click: function($event) {
-                                  _vm.isEditMode = !_vm.isEditMode
-                                  _vm.updateAutonomy()
-                                }
-                              }
-                            },
-                            [
-                              _c("font-awesome-icon", {
-                                attrs: {
-                                  icon: _vm.isEditMode
-                                    ? ["fas", "check"]
-                                    : ["fas", "pencil-alt"]
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  !_vm.isEditMode
-                    ? _c(
-                        "div",
-                        { staticClass: "is-size-4 has-text-weight-semibold" },
-                        [
-                          _vm._v(_vm._s(_vm.newTheoreticalAutonomy) + " "),
-                          _c("span", { staticClass: "is-size-5" }, [
-                            _vm._v("hrs")
-                          ])
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isEditMode
-                    ? _c("b-input", {
-                        model: {
-                          value: _vm.newTheoreticalAutonomy,
-                          callback: function($$v) {
-                            _vm.newTheoreticalAutonomy = $$v
-                          },
-                          expression: "newTheoreticalAutonomy"
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "tile" }, [
-            _c(
-              "div",
-              { staticClass: "tile is-4" },
-              [
-                _c("Junctions", {
-                  attrs: {
-                    pop: _vm.pop,
-                    junctions: _vm.junctions,
-                    canEditJunctions: _vm.canEditJunctions,
-                    user: _vm.user,
-                    totalJunctionsCapacity: _vm.totalJunctionsCapacity,
-                    totalUsedJunctionsCapacity: _vm.totalUsedJunctionsCapacity,
-                    totalAvailableJunctionsCapacity:
-                      _vm.totalAvailableJunctionsCapacity
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tile" },
-              [
-                _c("GeneratorSets", {
-                  attrs: {
-                    pop: _vm.pop,
-                    generatorSets: _vm.generatorSets,
-                    canEditGeneratorSets: _vm.canEditGeneratorSets,
-                    user: _vm.user,
-                    totalGeneratorSetsCapacity: _vm.totalGeneratorSetsCapacity,
-                    totalGeneratorSetsUsedCapacity:
-                      _vm.totalGeneratorSetsUsedCapacity,
-                    totalAvailableGeneratorSetsCapacity:
-                      _vm.totalAvailableGeneratorSetsCapacity,
-                    totalGeneratorSetsCapacityA:
-                      _vm.totalGeneratorSetsCapacityA,
-                    totalGeneratorSetsCapacityB:
-                      _vm.totalGeneratorSetsCapacityB,
-                    usedGeneratorSetsCapacityA: _vm.usedGeneratorSetsCapacityA,
-                    usedGeneratorSetsCapacityB: _vm.usedGeneratorSetsCapacityB,
-                    availableGeneratorSetsCapacityA:
-                      _vm.availableGeneratorSetsCapacityA,
-                    availableGeneratorSetsCapacityB:
-                      _vm.availableGeneratorSetsCapacityB
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tile is-3" },
-              [
-                _c("SolarPanels", {
-                  attrs: {
-                    pop: _vm.pop,
-                    junctions: _vm.junctions,
-                    canEditJunctions: _vm.canEditJunctions,
-                    user: _vm.user
-                  }
-                })
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "tile" }, [
-            _c(
-              "div",
-              { staticClass: "tile is-parent" },
-              [
-                _c("Equipment", {
-                  attrs: {
-                    pop: _vm.pop,
-                    room: _vm.room,
-                    user: _vm.user,
-                    planes: _vm.planes,
-                    planeTypes: _vm.planeTypes,
-                    airConditioners: _vm.airConditioners,
-                    canEditPowerRectifiers: _vm.canEditPowerRectifiers,
-                    canEditAirConditioners: _vm.canEditAirConditioners,
-                    canEditSurface: _vm.canEditSurface,
-                    canEditDistribution: _vm.canEditDistribution,
-                    canEditPlaneTypes: _vm.canEditPlaneTypes,
-                    totalSurface: _vm.totalSurface,
-                    usedSurface: _vm.usedSurface,
-                    availableSurface: _vm.availableSurface,
-                    totalDistributionCapacity: _vm.totalDistributionCapacity,
-                    usedDistributionCapacity: _vm.usedDistributionCapacity,
-                    availableDistributionCapacity:
-                      _vm.availableDistributionCapacity
-                  }
-                })
-              ],
-              1
-            )
-          ])
+    _c("div", { staticStyle: { "padding-top": "24px" } }, [
+      _c("div", {}, [
+        _c("div", {}, [
+          _c(
+            "div",
+            { staticClass: "box", staticStyle: { "min-height": "960px" } },
+            [
+              _c("iframe", {
+                staticStyle: { height: "960px" },
+                attrs: { src: "/storage/" + _vm.layoutPath, width: "100%" }
+              })
+            ]
+          )
         ])
-      ]
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -406,16 +144,6 @@ var staticRenderFns = [
         },
         [_vm._v("Layout")]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-10" }, [
-      _c("div", { staticClass: "is-size-6 has-text-weight-bold" }, [
-        _vm._v("AUTONOMIA DE BATERÍAS DEL POP")
-      ])
     ])
   }
 ]

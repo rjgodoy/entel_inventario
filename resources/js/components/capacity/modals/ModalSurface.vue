@@ -12,7 +12,7 @@
                         <div class="level-item">
                             <div class="has-text-centered">
                                 <div class="is-size-6">Superficie Total</div>
-                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">{{ newTotalSurface | numeral("0,0.0") }} <span class="is-size-6">m2</span></div>
+                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">{{ newTotalSurface | numeral("0,0.0") }} <span class="is-size-6">un</span></div>
                                 <b-input v-if="isEditMode" type="number" class="has-text-weight-bold is-size-5" v-model="newTotalSurface"/>
                             </div>
                         </div>
@@ -20,7 +20,7 @@
                         <div class="level-item">
                             <div class="has-text-centered">
                                 <div class="is-size-6">Superficie Usada</div>
-                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">{{ newUsedSurface | numeral("0,0.0") }} <span class="is-size-6">m2</span></div>
+                                <div v-if="!isEditMode" class="has-text-weight-semibold is-size-5">{{ newUsedSurface | numeral("0,0.0") }} <span class="is-size-6">un</span></div>
                                 <b-input v-if="isEditMode" type="number" class="has-text-weight-bold is-size-5" v-model="newUsedSurface"/>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                             <div class="has-text-centered">
                                 <div class="is-size-6">Superficie Disponible</div>
                                 <div class="has-text-weight-semibold is-size-5">
-                                    {{ availableSurface | numeral("0,0.0") }} <span class="is-size-6">m2</span>
+                                    {{ availableSurface | numeral("0,0.0") }} <span class="is-size-6">un</span>
                                 </div>
                             </div>
                         </div>

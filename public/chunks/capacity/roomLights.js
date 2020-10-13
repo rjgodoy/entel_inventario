@@ -122,17 +122,17 @@ __webpack_require__.r(__webpack_exports__);
       totalAvailableSurface: this.room.current_room_capacity ? this.room.current_room_capacity.surface_available : 0
     };
   },
-  // watch: {
-  //     room(val) {
-  //         this.junctionsTotalAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.junction_available : 0
-  //         this.generatorSetTotalAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.generator_set_available : 0
-  //         this.powerRectifiersAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.power_rectifier_available : 0
-  //         this.batteriesAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.battery_available : 0
-  //         this.distributionAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.distribution_available : 0
-  //         this.totalAvailableClimateCapacity = val.current_room_capacity ? val.current_room_capacity.climate_available : 0
-  //         this.totalAvailableSurface = val.current_room_capacity ? val.current_room_capacity.surface_available : 0
-  //     },
-  // },
+  watch: {
+    room: function room(val) {
+      this.junctionsTotalAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.junction_available : 0;
+      this.generatorSetTotalAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.generator_set_available : 0;
+      this.powerRectifiersAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.power_rectifier_available : 0;
+      this.batteriesAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.battery_available : 0;
+      this.distributionAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.distribution_available : 0;
+      this.totalAvailableClimateCapacity = val.current_room_capacity ? val.current_room_capacity.climate_available : 0;
+      this.totalAvailableSurface = val.current_room_capacity ? val.current_room_capacity.surface_available : 0;
+    }
+  },
   computed: {
     totalCapacity: function totalCapacity() {
       var total = Math.min(this.totalAvailableEnergyCapacity, this.totalAvailableClimateCapacity);

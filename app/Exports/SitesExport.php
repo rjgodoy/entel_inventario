@@ -122,7 +122,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $condition_lloo = 'localidad_obligatoria IN ('.$this->lloo.',1)';
             $condition_ranco = 'ranco IN ('.$this->ranco.',1)';
             $condition_bafi = $this->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
-            $condition_offgrid = $this->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
+            $condition_offgrid = $this->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (1,2) OR pops.energy_system_id IS NULL';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
             

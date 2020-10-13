@@ -103,6 +103,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import { library } from "@fortawesome/fontawesome-svg-core";
 // import { faCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
@@ -205,19 +217,38 @@ var render = function() {
                 _c("font-awesome-icon", {
                   class:
                     _vm.totalAvailableEnergyCapacity <= 5 ||
-                    _vm.totalAvailableClimateCapacity <= 5 ||
-                    _vm.totalAvailableSurface <= 5
+                    _vm.totalAvailableClimateCapacity <= 5
                       ? "has-text-info"
                       : (_vm.totalAvailableEnergyCapacity > 5 &&
                           _vm.totalAvailableEnergyCapacity <= 10) ||
                         (_vm.totalAvailableClimateCapacity > 5 &&
-                          _vm.totalAvailableClimateCapacity <= 10) ||
-                        (_vm.totalAvailableSurface > 5 &&
-                          _vm.totalAvailableSurface <= 10)
+                          _vm.totalAvailableClimateCapacity <= 10)
                       ? "has-text-warning"
                       : "has-text-success",
                   attrs: { icon: "circle", size: "2x" }
-                })
+                }),
+                _vm._v(" "),
+                _c(
+                  "b-tooltip",
+                  {
+                    attrs: {
+                      label: "Tener en cuenta capacidad de espacio.",
+                      size: "is-small",
+                      type: "is-light",
+                      position: "is-right",
+                      multilined: ""
+                    }
+                  },
+                  [
+                    _vm.totalAvailableSurface <= 10 && _vm.totalCapacity > 10
+                      ? _c("font-awesome-icon", {
+                          staticClass: "has-text-warning",
+                          attrs: { icon: "exclamation-triangle", size: "1x" }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                )
               ],
               1
             ),

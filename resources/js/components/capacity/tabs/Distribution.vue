@@ -7,7 +7,6 @@
         <div class="tile is-ancestor" style="padding-top: 24px;">
 
             <div class="tile is-vertical">
-
                 <div class="tile">
                     <div class="tile is-parent is-4">
                         <div class="tile box is-child has-background">
@@ -99,9 +98,7 @@
                 </div>
             </div>
         </div>
-
     </section>
-        
 </template>
 
 <script>
@@ -161,19 +158,13 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
         data() {
             return {
                 isEditMode: false,
-                newTheoreticalAutonomy: this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
+                newTheoreticalAutonomy: this.room.pop && this.room.pop.current_battery_bank_autonomy ? this.room.pop.current_battery_bank_autonomy.theoretical : 0
             }
         },
 
         computed: {
             pop() {
                 return this.room && this.room.pop
-            }
-        },
-
-        watch: {
-            room(val) {
-                this.newTheoreticalAutonomy = this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
             }
         },
 

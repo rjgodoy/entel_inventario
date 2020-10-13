@@ -74,7 +74,8 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         $this->mpls = $request->mpls ? $request->mpls : 0;
         $this->olt = $request->olt ? $request->olt : 0;
         $this->olt_3play = $request->olt_3play ? $request->olt_3play : 0;
-        // $this->red_minima = $request->red_minima_n1;
+        $this->red_minima_n1 = $request->red_minima_n1 ? $request->red_minima_n1 : 0;
+        $this->red_minima_n2 = $request->red_minima_n2 ? $request->red_minima_n2 : 0;
         $this->lloo = $request->lloo ? $request->lloo : 0;
         $this->ranco = $request->ranco ? $request->ranco : 0;
         $this->bafi = $request->bafi ? $request->bafi : 0;
@@ -113,11 +114,11 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $condition_zona = $this->zona_id != 0 ? 'id = '.$this->zona_id : 'id != '.$this->zona_id;
 
             $condition_critic = $this->critic ? 'criticity = 1' : 'criticity IS NOT NULL';
-            // $condition_red_minima =
-            //     $request->red_minima_n1 && $request->red_minima_n2 ? 'sites.red_minima IN (1,2)' :
-            //     ($request->red_minima_n1 ? 'sites.red_minima = 1' :
-            //         ($request->red_minima_n2 ? 'sites.red_minima = 2' : 'sites.red_minima IN (0,1,2)')
-            //     );
+            $condition_red_minima =
+                $this->red_minima_n1 && $this->red_minima_n2 ? 'sites.red_minima IN (1,2)' :
+                ($this->red_minima_n1 ? 'sites.red_minima = 1' :
+                    ($this->red_minima_n2 ? 'sites.red_minima = 2' : 'sites.red_minima IN (0,1,2)')
+                );
             $bafi = $this->bafi;
 
             // POP
@@ -129,7 +130,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $condition_lloo = 'pops.localidad_obligatoria IN ('.$this->lloo.',1)';
             $condition_ranco = 'pops.ranco IN ('.$this->ranco.',1)';
             $condition_bafi = $this->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
-            $condition_offgrid = $this->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
+            $condition_offgrid = $this->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (1,2) OR pops.energy_system_id IS NULL';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';

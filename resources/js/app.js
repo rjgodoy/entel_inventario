@@ -32,10 +32,11 @@ Vue.use(AnimateCSS);
 
 
 // ########################## FontAwesome Libraries ########################
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import { dom } from '@fortawesome/fontawesome-svg-core'
 dom.watch()
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-layers', FontAwesomeLayers)
 // #########################################################################
 
 

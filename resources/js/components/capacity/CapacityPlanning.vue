@@ -54,10 +54,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
+    import { faCircle, faSearch, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faCircle, faSearch);
+    library.add(faCircle, faSearch, faExclamationTriangle);
 
     export default {
         components: {

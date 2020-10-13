@@ -10,8 +10,20 @@
                         <font-awesome-icon 
                             icon="circle"
                             size="2x" 
-                            :class="totalAvailableEnergyCapacity <= 5 || totalAvailableClimateCapacity <= 5 || totalAvailableSurface <= 5 ? 'has-text-info' : ((totalAvailableEnergyCapacity > 5 && totalAvailableEnergyCapacity <= 10) || (totalAvailableClimateCapacity > 5 && totalAvailableClimateCapacity <= 10) || (totalAvailableSurface > 5 && totalAvailableSurface <= 10) ? 'has-text-warning' : 'has-text-success')"
+                            :class="totalAvailableEnergyCapacity <= 5 || totalAvailableClimateCapacity <= 5 ? 'has-text-info' : ((totalAvailableEnergyCapacity > 5 && totalAvailableEnergyCapacity <= 10) || (totalAvailableClimateCapacity > 5 && totalAvailableClimateCapacity <= 10) ? 'has-text-warning' : 'has-text-success')"
                             />
+                        <b-tooltip
+                            label="Tener en cuenta capacidad de espacio."
+                            size="is-small"
+                            type="is-light"
+                            position="is-right"
+                            multilined>
+                            <font-awesome-icon v-if="totalAvailableSurface <= 10 && totalCapacity > 10"
+                                icon="exclamation-triangle"
+                                size="1x" 
+                                class="has-text-warning"
+                                />
+                        </b-tooltip>
                     </div>
                     <div class="has-text-centered has-text-white">
                         <div class=" is-size-5 has-text-weight-bold">

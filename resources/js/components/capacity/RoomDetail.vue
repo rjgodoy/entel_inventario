@@ -165,10 +165,10 @@
 
 <script>   
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap } from "@fortawesome/free-solid-svg-icons";
+    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
     import { faSuperpowers } from "@fortawesome/free-brands-svg-icons";
     import { faFolderOpen as farFolderOpen, faMap as farMap } from '@fortawesome/free-regular-svg-icons'
-    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faSuperpowers, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap, farMap); 
+    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faSuperpowers, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap, farMap, faExclamationTriangle); 
 
     export default {
         components: {
